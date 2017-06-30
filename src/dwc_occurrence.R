@@ -41,12 +41,11 @@ kable(head(raw_data))
 #' ## Create occurrence core
 #' 
 #' Map the source data to [Darwin Core Occurrence](http://rs.gbif.org/core/dwc_occurrence_2015-07-02.xml):
-
 raw_data %>%
-  arrange(raw_transmitter, raw_datetime) -> interim_data
+  arrange(raw_transmitter, raw_datetime) -> interim_occurrence
 
 #' Record-level terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   id = "TODO", # Use "id_pk" from DB
   type = "Event",
   # modified
@@ -67,10 +66,10 @@ interim_data %>% mutate(
   informationWithheld = "see metadata",
   # dataGeneralizations
   dynamicProperties = paste0(""), # Could contain, in json format: transmitter ID, receiver ID, animalproject, catch location, catch datetime, catchweight, catch length
-) -> interim_data
+) -> interim_occurrence
   
 #' Occurrence terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   occurrenceID = "TODO", # Use "id_pk" from DB
   # catalogNumber
   # recordNumber
@@ -92,10 +91,10 @@ interim_data %>% mutate(
   # associatedTaxa
   # otherCatalogNumbers
   # occurrenceRemarks
-) -> interim_data
+) -> interim_occurrence
   
 #' Organism terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   organismID = "TODO", # Should not be transmitterID, as that one can be replaced/reused. Find a good animalID
   # organismName
   # organismScope
@@ -103,12 +102,12 @@ interim_data %>% mutate(
   # associatedOrganisms
   # previousIdentifications
   # organismRemarks
-) -> interim_data
+) -> interim_occurrence
 
 #' MaterialSample terms: not used
 #' 
 #' Event terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   # eventID
   # parentEventID
   # fieldNumber
@@ -127,10 +126,10 @@ interim_data %>% mutate(
   # sampleSizeUnit
   # fieldNotes
   # eventRemarks
-) -> interim_data
+) -> interim_occurrence
 
 #' Location terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   locationID = raw_station_name,
   # higherGeographyID
   # higherGeography
@@ -175,14 +174,14 @@ interim_data %>% mutate(
   georeferenceSources = "GPS TODO", # Not always obtained by GPS, sometimes by map
   georeferenceVerificationStatus = "unverified",
   # georeferenceRemarks
-) -> interim_data
+) -> interim_occurrence
 
 #' GeologicalContext terms: not used
 #' 
 #' Identification terms: not used
 #' 
 #' Taxon terms:
-interim_data %>% mutate(
+interim_occurrence %>% mutate(
   # taxonID
   # scientificNameID
   # acceptedNameUsageID
@@ -219,10 +218,10 @@ interim_data %>% mutate(
   # taxonomicStatus
   # nomenclaturalStatus
   # taxonRemarks
-) -> interim_data
+) -> interim_occurrence
 
 #' Remove the original columns:
-interim_data %>%
+interim_occurrence %>%
   select(-one_of(raw_colnames)) -> occurrence
 
 #' Preview data:
