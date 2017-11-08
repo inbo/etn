@@ -20,4 +20,4 @@ print(mess)
 close(data_connect)
 
 # Save data as a CSV file:
-write.csv(table, "../data/raw/denormalized_observations.csv", quote = FALSE)
+write.csv(table, "../data/raw/denormalized_observations.csv", na = "", row.names = FALSE, fileEncoding = "UTF-8")
