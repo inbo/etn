@@ -6,6 +6,7 @@ output:
   md_document:
     variant: markdown_github
     pandoc_args: ["--atx-headers"]
+knit: (function(input_file, encoding) { rmarkdown::render(input_file, encoding = encoding, output_file = paste0("../reports/",sub(".Rmd", ".md", basename(input_file))))})
 ---
 
 # `r rmarkdown::metadata$title`
