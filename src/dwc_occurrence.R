@@ -1,6 +1,7 @@
-#' # Mapping fish tracking data to Darwin Core Occurrence
+#' # Darwin Core mapping for occurrence dataset
 #' 
 #' Peter Desmet
+#' 
 #' `r Sys.Date()`
 #' 
 #' ## Setup
@@ -8,19 +9,28 @@
 #+ configure_knitr, include = FALSE
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
+#' Set locale (so we use UTF-8 character encoding):
+# This works on Mac OS X, might not work on other OS
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
+
 #' Load libraries:
 library(tidyverse) # For data transformations
+
+# None core tidyverse packages:
+library(magrittr)  # For %<>% pipes
+
+# Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
 
 #' Set file paths (all paths should be relative to this script):
-raw_data_file = "../data/raw/20170516_etn_sample_detections_view.csv"
+raw_data_file = "../data/raw/denormalized_observations_50000.csv"
 processed_dwc_occurrence_file = "..data/processed/dwc_occurrence/occurrence.csv"
 
 #' ## Read data
 #' 
 #' Read the source data:
-raw_data <- read.csv(raw_data_file)
+raw_data <- read.csv(raw_data_file, fileEncoding = "UTF-8")
 
 #' Clean data somewhat:
 raw_data %>%
@@ -40,189 +50,199 @@ kable(head(raw_data))
 
 #' ## Create occurrence core
 #' 
-#' Map the source data to [Darwin Core Occurrence](http://rs.gbif.org/core/dwc_occurrence_2015-07-02.xml):
-raw_data %>%
-  arrange(raw_transmitter, raw_datetime) -> interim_occurrence
+#' ### Pre-processing
+occurrence <- raw_data
 
-#' Record-level terms:
-interim_occurrence %>% mutate(
-  id = "TODO", # Use "id_pk" from DB
-  type = "Event",
-  # modified
-  language = "en",
-  license = "http://creativecommons.org/publicdomain/zero/1.0/",
-  rightsHolder = "TODO", # Use "group" from animal project
-  accessRights = "http://www.inbo.be/en/norms-for-data-use",
-  # bibliographicCitation
-  # references
-  # institutionID
-  # collectionID
-  datasetID = "TODO", # Add DOI once available
-  institutionCode = "TODO", # To be defined
-  # collectionCode
-  datasetName = "TODO", # To be defined
-  # ownerInstitutionCode
-  basisOfRecord = "MachineObservation",
-  informationWithheld = "see metadata",
-  # dataGeneralizations
-  dynamicProperties = paste0(""), # Could contain, in json format: transmitter ID, receiver ID, animalproject, catch location, catch datetime, catchweight, catch length
-) -> interim_occurrence
-  
-#' Occurrence terms:
-interim_occurrence %>% mutate(
-  occurrenceID = "TODO", # Use "id_pk" from DB
-  # catalogNumber
-  # recordNumber
-  # recordedBy
-  # individualCount
-  # organismQuantity
-  # organismQuantityType
-  sex = "TODO", # Should be available for some animals
-  lifeStage = "TODO", # At time of tagging
-  # reproductiveCondition
-  # behavior
-  # establishmentMeans
-  # occurrenceStatus
-  # preparations
-  # disposition
-  # associatedMedia
-  # associatedReferences
-  # associatedSequences
-  # associatedTaxa
-  # otherCatalogNumbers
-  # occurrenceRemarks
-) -> interim_occurrence
-  
-#' Organism terms:
-interim_occurrence %>% mutate(
-  organismID = "TODO", # Should not be transmitterID, as that one can be replaced/reused. Find a good animalID
-  # organismName
-  # organismScope
-  # associatedOccurrences
-  # associatedOrganisms
-  # previousIdentifications
-  # organismRemarks
-) -> interim_occurrence
+#' Sort by transmitter and date:
+occurrence %<>% arrange(raw_transmitter, raw_datetime)
 
-#' MaterialSample terms: not used
+#' ### Term mapping
 #' 
-#' Event terms:
-interim_occurrence %>% mutate(
-  # eventID
-  # parentEventID
-  # fieldNumber
-  eventDate = raw_datetime, # Format in milliseconds: currently not used, but should be the case once VRL uploads are supported
-  # eventTime
-  # startDayOfYear
-  # endDayOfYear
-  # year
-  # month
-  # day
-  # verbatimEventDate
-  # habitat
-  samplingProtocol = "TODO", # Should be ID of datapaper
-  # samplingEffort
-  # sampleSizeValue
-  # sampleSizeUnit
-  # fieldNotes
-  # eventRemarks
-) -> interim_occurrence
+#' Map the source data to [Darwin Core Occurrence](http://rs.gbif.org/core/dwc_occurrence_2015-07-02.xml) (but in the classic Darwin Core order):
 
-#' Location terms:
-interim_occurrence %>% mutate(
-  locationID = raw_station_name,
-  # higherGeographyID
-  # higherGeography
-  # continent
-  waterBody = "TODO maybe", # Maybe provide, based on marine regions gazetteer
-  # islandGroup
-  # island
-  # country
-  countryCode = "TODO maybe", # Maybe provide
-  # stateProvince
-  # county
-  # municipality
-  # locality: Not useful to provide raw Dutch location names
-  # verbatimLocality
-  # minimumElevationInMeters
-  # maximumElevationInMeters
-  # verbatimElevation
-  # minimumDepthInMeters: Pressure tags collect depth info, but that info is not available in DB (until VRL files can be imported)
-  # maximumDepthInMeters
-  # verbatimDepth
-  # minimumDistanceAboveSurfaceInMeters
-  # maximumDistanceAboveSurfaceInMeters
-  # locationAccordingTo
-  # locationRemarks
-  decimalLatitude = sprintf("%.5f", round(raw_latitude, digits = 5)),
-  decimalLongitude = sprintf("%.5f", round(raw_longitude, digits = 5)),
-  geodeticDatum = "WGS84",
-  coordinateUncertaintyInMeters = "TODO", # Depends on area: sea / Westerscheldt: 200m on average, 500m extreme, while Albertkanaal: 2km
-  # coordinatePrecision
-  # pointRadiusSpatialFit
-  # verbatimCoordinates
-  # verbatimLatitude
-  # verbatimLongitude
-  # verbatimCoordinateSystem
-  # verbatimSRS
-  # footprintWKT
-  # footprintSRS
-  # footprintSpatialFit
-  # georeferencedBy
-  # georeferencedDate
-  # georeferenceProtocol
-  georeferenceSources = "GPS TODO", # Not always obtained by GPS, sometimes by map
-  georeferenceVerificationStatus = "unverified",
-  # georeferenceRemarks
-) -> interim_occurrence
+#' #### type
+occurrence %<>% mutate(type = "Event")
 
-#' GeologicalContext terms: not used
+#' #### modified
+#' #### language
+occurrence %<>% mutate(language = "en")
+
+#' #### license
+occurrence %<>% mutate(license = "http://creativecommons.org/publicdomain/zero/1.0/")
+
+#' #### rightsHolder
+#' #### accessRights
+occurrence %<>% mutate(accessRights = "http://www.inbo.be/en/norms-for-data-use")
+
+#' #### bibliographicCitation
+#' #### references
+#' #### institutionID
+#' #### collectionID
+#' #### datasetID
+#' #### institutionCode
+#' #### collectionCode
+#' #### datasetName
+#' #### ownerInstitutionCode
+#' #### basisOfRecord
+#' #### informationWithheld
+#' #### dataGeneralizations
+#' #### dynamicProperties
+#' #### occurrenceID
+#' #### catalogNumber
+#' #### recordNumber
+#' #### recordedBy
+#' #### individualCount
+#' #### organismQuantity
+#' #### organismQuantityType
+#' #### sex
+#' #### lifeStage
+#' #### reproductiveCondition
+#' #### behavior
+#' #### establishmentMeans
+#' #### occurrenceStatus
+#' #### preparations
+#' #### disposition
+#' #### associatedMedia
+#' #### associatedReferences
+#' #### associatedSequences
+#' #### associatedTaxa
+#' #### otherCatalogNumbers
+#' #### occurrenceRemarks
+#' #### organismID
+#' #### organismName
+#' #### organismScope
+#' #### associatedOccurrences
+#' #### associatedOrganisms
+#' #### previousIdentifications
+#' #### organismRemarks
+#' #### materialSampleID
+#' #### eventID
+#' #### parentEventID
+#' #### fieldNumber
+#' #### eventDate
+#' #### eventTime
+#' #### startDayOfYear
+#' #### endDayOfYear
+#' #### year
+#' #### month
+#' #### day
+#' #### verbatimEventDate
+#' #### habitat
+#' #### samplingProtocol
+#' #### sampleSizeValue
+#' #### sampleSizeUnit
+#' #### samplingEffort
+#' #### fieldNotes
+#' #### eventRemarks
+#' #### locationID
+#' #### higherGeographyID
+#' #### higherGeography
+#' #### continent
+#' #### waterBody
+#' #### islandGroup
+#' #### island
+#' #### country
+#' #### countryCode
+#' #### stateProvince
+#' #### county
+#' #### municipality
+#' #### locality
+#' #### verbatimLocality
+#' #### minimumElevationInMeters
+#' #### maximumElevationInMeters
+#' #### verbatimElevation
+#' #### minimumDepthInMeters
+#' #### maximumDepthInMeters
+#' #### verbatimDepth
+#' #### minimumDistanceAboveSurfaceInMeters
+#' #### maximumDistanceAboveSurfaceInMeters
+#' #### locationAccordingTo
+#' #### locationRemarks
+#' #### decimalLatitude
+#' #### decimalLongitude
+#' #### geodeticDatum
+#' #### coordinateUncertaintyInMeters
+#' #### coordinatePrecision
+#' #### pointRadiusSpatialFit
+#' #### verbatimCoordinates
+#' #### verbatimLatitude
+#' #### verbatimLongitude
+#' #### verbatimCoordinateSystem
+#' #### verbatimSRS
+#' #### footprintWKT
+#' #### footprintSRS
+#' #### footprintSpatialFit
+#' #### georeferencedBy
+#' #### georeferencedDate
+#' #### georeferenceProtocol
+#' #### georeferenceSources
+#' #### georeferenceVerificationStatus
+#' #### georeferenceRemarks
+#' #### geologicalContextID
+#' #### earliestEonOrLowestEonothem
+#' #### latestEonOrHighestEonothem
+#' #### earliestEraOrLowestErathem
+#' #### latestEraOrHighestErathem
+#' #### earliestPeriodOrLowestSystem
+#' #### latestPeriodOrHighestSystem
+#' #### earliestEpochOrLowestSeries
+#' #### latestEpochOrHighestSeries
+#' #### earliestAgeOrLowestStage
+#' #### latestAgeOrHighestStage
+#' #### lowestBiostratigraphicZone
+#' #### highestBiostratigraphicZone
+#' #### lithostratigraphicTerms
+#' #### group
+#' #### formation
+#' #### member
+#' #### bed
+#' #### identificationID
+#' #### identificationQualifier
+#' #### typeStatus
+#' #### identifiedBy
+#' #### dateIdentified
+#' #### identificationReferences
+#' #### identificationVerificationStatus
+#' #### identificationRemarks
+#' #### taxonID
+#' #### scientificNameID
+#' #### acceptedNameUsageID
+#' #### parentNameUsageID
+#' #### originalNameUsageID
+#' #### nameAccordingToID
+#' #### namePublishedInID
+#' #### taxonConceptID
+#' #### scientificName
+#' #### acceptedNameUsage
+#' #### parentNameUsage
+#' #### originalNameUsage
+#' #### nameAccordingTo
+#' #### namePublishedIn
+#' #### namePublishedInYear
+#' #### higherClassification
+#' #### kingdom
+#' #### phylum
+#' #### class
+#' #### order
+#' #### family
+#' #### genus
+#' #### subgenus
+#' #### specificEpithet
+#' #### infraspecificEpithet
+#' #### taxonRank
+#' #### verbatimTaxonRank
+#' #### scientificNameAuthorship
+#' #### vernacularName
+#' #### nomenclaturalCode
+#' #### taxonomicStatus
+#' #### nomenclaturalStatus
+#' #### taxonRemarks
 #' 
-#' Identification terms: not used
+#' ### Post-processing
 #' 
-#' Taxon terms:
-interim_occurrence %>% mutate(
-  # taxonID
-  # scientificNameID
-  # acceptedNameUsageID
-  # parentNameUsageID
-  # originalNameUsageID
-  # nameAccordingToID
-  # namePublishedInID
-  # taxonConceptID
-  scientificName = raw_scientific_name,
-  # acceptedNameUsage
-  # parentNameUsage
-  # originalNameUsage
-  # nameAccordingTo
-  # namePublishedIn
-  # namePublishedInYear
-  # higherClassification
-  kingdom = "Animalia",
-  # phylum
-  # class
-  # order
-  # family
-  # genus
-  # subgenus
-  # specificEpithet
-  # infraspecificEpithet
-  taxonRank = "species",
-  # verbatimTaxonRank
-  # scientificNameAuthorship
-  vernacularName = case_when(
-    .$raw_scientific_name == "Gadus morhua" ~ "Atlantic cod",
-    .$raw_scientific_name == "Anguilla anguilla" ~ "European eel"
-  )
-  # nomenclaturalCode
-  # taxonomicStatus
-  # nomenclaturalStatus
-  # taxonRemarks
-) -> interim_occurrence
-
 #' Remove the original columns:
-interim_occurrence %>%
-  select(-one_of(raw_colnames)) -> occurrence
+occurrence %<>% select(-one_of(raw_colnames))
 
 #' Preview data:
 kable(head(occurrence))
+
