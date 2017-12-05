@@ -728,6 +728,12 @@ length(deployment)
 
     ## [1] 27
 
+Remove `raw_` from column names:
+
+``` r
+colnames(deployment) %<>% str_replace_all(., "raw_", "")
+```
+
 Save to CSV:
 
 ``` r
@@ -870,6 +876,12 @@ length(tag_animal)
 ```
 
     ## [1] 60
+
+Remove `raw_` from column names:
+
+``` r
+colnames(tag_animal) %<>% str_replace_all(., "raw_", "")
+```
 
 Save to CSV:
 
