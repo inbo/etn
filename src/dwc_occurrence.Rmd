@@ -46,6 +46,8 @@ Set file paths (all paths should be relative to this script):
 ```{r}
 raw_data_file = "../data/input/denormalized_observations_50000.csv"
 dwc_occurrence_file = "../data/output/dwc_occurrence/occurrence.csv"
+deployment_file = "../data/output/temp/deployment.csv"
+tag_animal_file = "../data/output/temp/tag_animal.csv"
 ```
 
 ## Read data
@@ -156,7 +158,7 @@ Show mapped values:
 ```{r}
 occurrence %>% 
   select(raw_tag_owner_organization, rightsHolder) %>%
-  group_by(raw_tag_owner_organization, rightsHolder) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   arrange(raw_tag_owner_organization) %>%
   kable()
@@ -235,7 +237,7 @@ Show mapped values:
 ```{r}
 occurrence %>%
   select(raw_sex, sex) %>%
-  group_by(raw_sex, sex) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   arrange(raw_sex) %>%
   kable()
@@ -387,7 +389,7 @@ Show unique values:
 ```{r}
 occurrence %>%
   select(raw_scientific_name) %>%
-  group_by(raw_scientific_name) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   kable()
 ```
@@ -450,4 +452,204 @@ Save to CSV:
 
 ```{r}
 write.csv(occurrence, file = dwc_occurrence_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+## Create deployments export
+
+### Pre-processing
+
+Define deployment columns to group by:
+
+```{r}
+deployment_column_names <- c(
+  "raw_receiver",
+  "raw_station_name",
+  "raw_qc_flag",
+  "raw_file",
+  "raw_latitude",
+  "raw_longitude",
+  "raw_deployment_fk",
+  "raw_signal_to_noise_ratio",
+  "raw_detection_file_id",
+  "raw_deployment_station_name",
+  "raw_deployment_deploy_date_time",
+  "raw_deployment_location",
+  "raw_deployment_location_manager",
+  "raw_deployment_location_description",
+  "raw_deployment_deploy_lat",
+  "raw_deployment_deploy_long",
+  "raw_deployment_recoverr_lat",
+  "raw_deployment_recover_long",
+  "raw_deployment_intended_lat",
+  "raw_deployment_intended_long",
+#  "raw_deployment_bottom_depth",
+#  "raw_deployment_riser_length",
+#  "raw_deployment_instrument_depth",
+  "raw_receiver_serial_number",
+  "raw_receiver_model_number",
+  "raw_receiver_owner_organization",
+  "raw_receiver_status",
+  "raw_receiver_receiver_type",
+  "raw_receiver_manufacturer_fk"
+)
+```
+
+```{r}
+raw_data %>%
+  select(deployment_column_names) %>%
+  group_by_all() %>%
+  summarize(detections = n()) %>%
+  arrange(raw_receiver) -> deployment
+```
+
+### Post-processing
+
+Preview data:
+
+```{r}
+kable(head(deployment))
+```
+
+Number of records:
+
+```{r}
+length(deployment)
+```
+
+Save to CSV:
+
+```{r}
+write.csv(deployment, file = deployment_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+## Create tag/animal export
+
+### Pre-processing
+
+Define tag/animal columns to group by:
+
+```{r}
+tag_animal_column_names <- c(
+  "raw_transmitter",
+#  "raw_transmitter_name",
+#  "raw_transmitter_serial",
+#  "raw_sensor_value",
+#  "raw_sensor_unit",
+#  "raw_sensor2_value",
+#  "raw_sensor2_unit",
+  "raw_tag_type",
+  "raw_tag_model",
+  "raw_tag_code_space",
+  "raw_tag_owner_pi",
+  "raw_tag_owner_organization",
+  "raw_tag_min_delay",
+  "raw_tag_max_delay",
+  "raw_tag_frequency",
+  "raw_acoustic_tag_type",
+#  "raw_tag_sensor_type",
+#  "raw_tag_intercept",
+#  "raw_tag_slope",
+#  "raw_sensor_value_depth_meters",
+  "raw_person_id",
+  "raw_animal_id",
+  "raw_scientific_name",
+#  "raw_common_name",
+  "raw_length",
+  "raw_length_type",
+  "raw_length_units",
+  "raw_length2",
+  "raw_length2_type",
+  "raw_length2_units",
+  "raw_weight_units",
+#  "raw_age",
+#  "raw_age_units",  
+  "raw_sex",
+  "raw_life_stage",
+  "raw_capture_location",
+  "raw_capture_depth",
+  "raw_utc_release_date_time",
+  "raw_comments",
+#  "raw_est_tag_life",
+  "raw_wild_or_hatchery",
+#  "raw_stock",
+#  "raw_dna_sample_taken",
+  "raw_treatment_type",
+#  "raw_dissolved_oxygen",
+#  "raw_sedative",
+#  "raw_sedative_concentration",
+#  "raw_temperature_change",
+#  "raw_holding_temperature",
+#  "raw_preop_holding_period",
+#  "raw_post_op_holding_period",
+  "raw_surgery_location",
+  "raw_date_of_surgery",
+  "raw_anaesthetic",
+#  "raw_buffer",
+  "raw_anaesthetic_concentration",
+#  "raw_buffer_concentration_in_anaesthetic",
+#  "raw_anesthetic_concentration_in_recirculation",
+#  "raw_buffer_concentration_in_recirculation",
+  "raw_catched_date_time",
+  "raw_tag_fk",
+  "raw_capture_latitude",
+  "raw_capture_longitude",
+  "raw_release_latitude",
+  "raw_release_longitude",
+#  "raw_surgery_latitude",
+#  "raw_surgery_longitude",
+#  "raw_recapture_date",
+#  "raw_implant_type",
+#  "raw_implant_method",
+  "raw_date_modified",
+  "raw_date_created",
+  "raw_release_location",
+  "raw_length3",
+  "raw_length3_type",
+  "raw_length3_units",
+  "raw_length4",
+  "raw_length4_type",
+  "raw_length4_units",
+  "raw_weight",
+  "raw_end_date_tag",
+  "raw_capture_method",
+  "raw_project_fk",
+  "raw_animal_project",
+  "raw_animal_project_name",
+  "raw_animal_project_code",
+  "raw_animal_moratorium",
+  "raw_network_project",
+  "raw_network_project_name",
+  "raw_network_project_code",
+  "raw_network_moratorium"
+)
+```
+
+Group by tag/animal information:
+
+```{r}
+raw_data %>%
+  select(tag_animal_column_names) %>%
+  group_by_all() %>%
+  summarize(detections = n()) %>%
+  arrange(raw_transmitter) -> tag_animal
+```
+
+### Post-processing
+
+Preview data:
+
+```{r}
+kable(head(tag_animal))
+```
+
+Number of records:
+
+```{r}
+length(tag_animal)
+```
+
+Save to CSV:
+
+```{r}
+write.csv(tag_animal, file = tag_animal_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```

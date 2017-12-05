@@ -2,7 +2,7 @@
 
 By: Peter Desmet
 
-Date: 2017-11-30
+Date: 2017-12-05
 
 ## Setup
 
@@ -34,6 +34,8 @@ Set file paths (all paths should be relative to this script):
 ``` r
 raw_data_file = "../data/input/denormalized_observations_50000.csv"
 dwc_occurrence_file = "../data/output/dwc_occurrence/occurrence.csv"
+deployment_file = "../data/output/temp/deployment.csv"
+tag_animal_file = "../data/output/temp/tag_animal.csv"
 ```
 
 ## Read data
@@ -283,7 +285,7 @@ Show mapped values:
 ``` r
 occurrence %>% 
   select(raw_tag_owner_organization, rightsHolder) %>%
-  group_by(raw_tag_owner_organization, rightsHolder) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   arrange(raw_tag_owner_organization) %>%
   kable()
@@ -373,7 +375,7 @@ Show mapped values:
 ``` r
 occurrence %>%
   select(raw_sex, sex) %>%
-  group_by(raw_sex, sex) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   arrange(raw_sex) %>%
   kable()
@@ -557,7 +559,7 @@ Show unique values:
 ``` r
 occurrence %>%
   select(raw_scientific_name) %>%
-  group_by(raw_scientific_name) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
   kable()
 ```
@@ -651,4 +653,226 @@ Save to CSV:
 
 ``` r
 write.csv(occurrence, file = dwc_occurrence_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+## Create deployments export
+
+### Pre-processing
+
+Define deployment columns to group by:
+
+``` r
+deployment_column_names <- c(
+  "raw_receiver",
+  "raw_station_name",
+  "raw_qc_flag",
+  "raw_file",
+  "raw_latitude",
+  "raw_longitude",
+  "raw_deployment_fk",
+  "raw_signal_to_noise_ratio",
+  "raw_detection_file_id",
+  "raw_deployment_station_name",
+  "raw_deployment_deploy_date_time",
+  "raw_deployment_location",
+  "raw_deployment_location_manager",
+  "raw_deployment_location_description",
+  "raw_deployment_deploy_lat",
+  "raw_deployment_deploy_long",
+  "raw_deployment_recoverr_lat",
+  "raw_deployment_recover_long",
+  "raw_deployment_intended_lat",
+  "raw_deployment_intended_long",
+#  "raw_deployment_bottom_depth",
+#  "raw_deployment_riser_length",
+#  "raw_deployment_instrument_depth",
+  "raw_receiver_serial_number",
+  "raw_receiver_model_number",
+  "raw_receiver_owner_organization",
+  "raw_receiver_status",
+  "raw_receiver_receiver_type",
+  "raw_receiver_manufacturer_fk"
+)
+```
+
+``` r
+raw_data %>%
+  select(deployment_column_names) %>%
+  group_by_all() %>%
+  summarize(detections = n()) %>%
+  arrange(raw_receiver) -> deployment
+```
+
+### Post-processing
+
+Preview data:
+
+``` r
+kable(head(deployment))
+```
+
+| raw\_receiver | raw\_station\_name | raw\_qc\_flag | raw\_file                     |  raw\_latitude|  raw\_longitude|  raw\_deployment\_fk| raw\_signal\_to\_noise\_ratio | raw\_detection\_file\_id | raw\_deployment\_station\_name | raw\_deployment\_deploy\_date\_time | raw\_deployment\_location                      |  raw\_deployment\_location\_manager| raw\_deployment\_location\_description                             |  raw\_deployment\_deploy\_lat|  raw\_deployment\_deploy\_long|  raw\_deployment\_recoverr\_lat|  raw\_deployment\_recover\_long|  raw\_deployment\_intended\_lat|  raw\_deployment\_intended\_long|  raw\_receiver\_serial\_number| raw\_receiver\_model\_number | raw\_receiver\_owner\_organization | raw\_receiver\_status | raw\_receiver\_receiver\_type |  raw\_receiver\_manufacturer\_fk|  detections|
+|:--------------|:-------------------|:--------------|:------------------------------|--------------:|---------------:|--------------------:|:------------------------------|:-------------------------|:-------------------------------|:------------------------------------|:-----------------------------------------------|-----------------------------------:|:-------------------------------------------------------------------|-----------------------------:|------------------------------:|-------------------------------:|-------------------------------:|-------------------------------:|--------------------------------:|------------------------------:|:-----------------------------|:-----------------------------------|:----------------------|:------------------------------|--------------------------------:|-----------:|
+| VR2W-120095   | 120095             | NA            | VR2W\_120095\_20150609\_1.csv |       52.12614|        5.192450|                 1454| NA                            | NA                       | ma-2                           | 2015-03-02 00:00:00                 | LO stroomop stuw Borgharen, aan ingang vistrap |                                   7| LO stroomop stuw Borgharen, aan ingang vistrap                     |                      50.86547|                       5.697744|                        52.12614|                        5.192450|                              NA|                               NA|                         120095| VR2W                         | SVN                                | Active                | acoustic\_telemetry           |                                1|          42|
+| VR2W-120885   | 1 PPC              | NA            | VR2W\_120885\_20150415\_1.csv |       51.35334|        3.752230|                 1535| NA                            | NA                       | ws-PPC                         | 2015-02-10 00:00:00                 | 1 PPC                                          |                                   5| Paulinapolder                                                      |                      51.35334|                       3.752228|                        51.35334|                        3.752230|                        51.35334|                         3.752228|                         120885| VR2W                         | INBO                               | Active                | acoustic\_telemetry           |                                1|          44|
+| VR2W-120885   | ws-PPC             | NA            | VR2W\_120885\_20150909\_1.csv |       51.35334|        3.752230|                 1730| NA                            | NA                       | ws-PPC                         | 2015-04-15 00:00:00                 | 1 PPC                                          |                                   5| Paulinapolder                                                      |                      51.35334|                       3.752228|                        51.35334|                        3.752230|                        51.35334|                         3.752228|                         120885| VR2W                         | INBO                               | Active                | acoustic\_telemetry           |                                1|         270|
+| VR2W-120887   |                    | NA            | VR2W\_120887\_20150415\_1.csv |             NA|              NA|                 1533| NA                            | NA                       | ws-PPB                         | 2015-01-22 00:00:00                 | 2 PPB                                          |                                   5| Paulinapolder                                                      |                      51.35361|                       3.737641|                              NA|                              NA|                        51.35361|                         3.737641|                         120887| VR2W                         | INBO                               | Active                | acoustic\_telemetry           |                                1|          20|
+| VR2W-120887   | ws-PPB             | NA            | VR2W\_120887\_20150909\_1.csv |       51.35361|        3.737641|                 1732| NA                            | NA                       | ws-PPB                         | 2015-04-15 00:00:00                 | 2 PPB                                          |                                   5| Paulinapolder                                                      |                      51.35361|                       3.737641|                        51.35361|                        3.737641|                              NA|                               NA|                         120887| VR2W                         | INBO                               | Active                | acoustic\_telemetry           |                                1|         104|
+| VR2W-122320   |                    | NA            | VR2W\_122320\_20150107\_1.csv |             NA|              NA|                 1593| NA                            | NA                       | de-7                           | 2014-12-19 02:00:00                 | de-7                                           |                                  NA| RO Grote Vijver rond seinpaal 15 (enkel bij laag water bereikbaar) |                      50.99090|                       5.031077|                              NA|                              NA|                              NA|                               NA|                         122320| VR2W                         |                                    | Available             | acoustic\_telemetry           |                                1|         312|
+
+Number of records:
+
+``` r
+length(deployment)
+```
+
+    ## [1] 27
+
+Save to CSV:
+
+``` r
+write.csv(deployment, file = deployment_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+## Create tag/animal export
+
+### Pre-processing
+
+Define tag/animal columns to group by:
+
+``` r
+tag_animal_column_names <- c(
+  "raw_transmitter",
+#  "raw_transmitter_name",
+#  "raw_transmitter_serial",
+#  "raw_sensor_value",
+#  "raw_sensor_unit",
+#  "raw_sensor2_value",
+#  "raw_sensor2_unit",
+  "raw_tag_type",
+  "raw_tag_model",
+  "raw_tag_code_space",
+  "raw_tag_owner_pi",
+  "raw_tag_owner_organization",
+  "raw_tag_min_delay",
+  "raw_tag_max_delay",
+  "raw_tag_frequency",
+  "raw_acoustic_tag_type",
+#  "raw_tag_sensor_type",
+#  "raw_tag_intercept",
+#  "raw_tag_slope",
+#  "raw_sensor_value_depth_meters",
+  "raw_person_id",
+  "raw_animal_id",
+  "raw_scientific_name",
+#  "raw_common_name",
+  "raw_length",
+  "raw_length_type",
+  "raw_length_units",
+  "raw_length2",
+  "raw_length2_type",
+  "raw_length2_units",
+  "raw_weight_units",
+#  "raw_age",
+#  "raw_age_units",  
+  "raw_sex",
+  "raw_life_stage",
+  "raw_capture_location",
+  "raw_capture_depth",
+  "raw_utc_release_date_time",
+  "raw_comments",
+#  "raw_est_tag_life",
+  "raw_wild_or_hatchery",
+#  "raw_stock",
+#  "raw_dna_sample_taken",
+  "raw_treatment_type",
+#  "raw_dissolved_oxygen",
+#  "raw_sedative",
+#  "raw_sedative_concentration",
+#  "raw_temperature_change",
+#  "raw_holding_temperature",
+#  "raw_preop_holding_period",
+#  "raw_post_op_holding_period",
+  "raw_surgery_location",
+  "raw_date_of_surgery",
+  "raw_anaesthetic",
+#  "raw_buffer",
+  "raw_anaesthetic_concentration",
+#  "raw_buffer_concentration_in_anaesthetic",
+#  "raw_anesthetic_concentration_in_recirculation",
+#  "raw_buffer_concentration_in_recirculation",
+  "raw_catched_date_time",
+  "raw_tag_fk",
+  "raw_capture_latitude",
+  "raw_capture_longitude",
+  "raw_release_latitude",
+  "raw_release_longitude",
+#  "raw_surgery_latitude",
+#  "raw_surgery_longitude",
+#  "raw_recapture_date",
+#  "raw_implant_type",
+#  "raw_implant_method",
+  "raw_date_modified",
+  "raw_date_created",
+  "raw_release_location",
+  "raw_length3",
+  "raw_length3_type",
+  "raw_length3_units",
+  "raw_length4",
+  "raw_length4_type",
+  "raw_length4_units",
+  "raw_weight",
+  "raw_end_date_tag",
+  "raw_capture_method",
+  "raw_project_fk",
+  "raw_animal_project",
+  "raw_animal_project_name",
+  "raw_animal_project_code",
+  "raw_animal_moratorium",
+  "raw_network_project",
+  "raw_network_project_name",
+  "raw_network_project_code",
+  "raw_network_moratorium"
+)
+```
+
+Group by tag/animal information:
+
+``` r
+raw_data %>%
+  select(tag_animal_column_names) %>%
+  group_by_all() %>%
+  summarize(detections = n()) %>%
+  arrange(raw_transmitter) -> tag_animal
+```
+
+### Post-processing
+
+Preview data:
+
+``` r
+kable(head(tag_animal))
+```
+
+| raw\_transmitter | raw\_tag\_type | raw\_tag\_model | raw\_tag\_code\_space | raw\_tag\_owner\_pi | raw\_tag\_owner\_organization |  raw\_tag\_min\_delay|  raw\_tag\_max\_delay| raw\_tag\_frequency | raw\_acoustic\_tag\_type |  raw\_person\_id| raw\_animal\_id | raw\_scientific\_name |  raw\_length| raw\_length\_type | raw\_length\_units |  raw\_length2| raw\_length2\_type | raw\_length2\_units | raw\_weight\_units | raw\_sex | raw\_life\_stage | raw\_capture\_location    | raw\_capture\_depth | raw\_utc\_release\_date\_time | raw\_comments    | raw\_wild\_or\_hatchery | raw\_treatment\_type | raw\_surgery\_location    | raw\_date\_of\_surgery | raw\_anaesthetic | raw\_anaesthetic\_concentration | raw\_catched\_date\_time |  raw\_tag\_fk|  raw\_capture\_latitude|  raw\_capture\_longitude|  raw\_release\_latitude|  raw\_release\_longitude| raw\_date\_modified | raw\_date\_created  | raw\_release\_location    |  raw\_length3| raw\_length3\_type      | raw\_length3\_units |  raw\_length4| raw\_length4\_type     | raw\_length4\_units |  raw\_weight| raw\_end\_date\_tag | raw\_capture\_method |  raw\_project\_fk| raw\_animal\_project | raw\_animal\_project\_name | raw\_animal\_project\_code |  raw\_animal\_moratorium| raw\_network\_project | raw\_network\_project\_name | raw\_network\_project\_code |  raw\_network\_moratorium|  detections|
+|:-----------------|:---------------|:----------------|:----------------------|:--------------------|:------------------------------|---------------------:|---------------------:|:--------------------|:-------------------------|----------------:|:----------------|:----------------------|------------:|:------------------|:-------------------|-------------:|:-------------------|:--------------------|:-------------------|:---------|:-----------------|:--------------------------|:--------------------|:------------------------------|:-----------------|:------------------------|:---------------------|:--------------------------|:-----------------------|:-----------------|:--------------------------------|:-------------------------|-------------:|-----------------------:|------------------------:|-----------------------:|------------------------:|:--------------------|:--------------------|:--------------------------|-------------:|:------------------------|:--------------------|-------------:|:-----------------------|:--------------------|------------:|:--------------------|:---------------------|-----------------:|:---------------------|:---------------------------|:---------------------------|------------------------:|:----------------------|:----------------------------|:----------------------------|-------------------------:|-----------:|
+| A69-1601-13730   | internal       | V13-1x          | A69-1601-13730        | KLAAS DENEUDT       | VLAAMS INSTITUUT VOOR DE ZEE  |                    60|                   180| 069k                | animal                   |               30| A56             | Gadus morhua          |         38.0| total length      | cm                 |            NA|                    |                     |                    |          |                  | C05 Belwind               | NA                  | 2015-06-30 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     | C05 Belwind               | 2015-06-30             |                  |                                 | 2015-06-30 00:00:00      |           414|                      NA|                       NA|                      NA|                       NA| 2016-02-02 11:28:21 | 2016-02-02 11:28:21 | C05 Belwind               |            NA|                         |                     |            NA|                        |                     |           NA| 2016-06-24          | LINE FISHING         |                17| LifeWatch            | Phd Verhelst               | phd\_verhelst              |                        1| Westerschelde         | Westerschelde 2             | ws2                         |                         0|          83|
+| A69-1601-14870   | internal       | V13-1x          | A69-1601-14870        | JAN REUBENS         | VLAAMS INSTITUUT VOOR DE ZEE  |                   110|                   250| 069k                | animal                   |               30| A36             | Gadus morhua          |         47.0| total length      | cm                 |            NA|                    |                     |                    |          |                  | Spijkerplaat (thv Stella) | NA                  | 2015-02-12 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     | Spijkerplaat (thv Stella) | 2015-02-12             |                  |                                 | 2015-02-12 00:00:00      |           442|                      NA|                       NA|                      NA|                       NA| 2016-02-02 11:28:21 | 2016-02-02 11:28:21 | Spijkerplaat (thv Stella) |            NA|                         |                     |            NA|                        |                     |           NA| 2016-07-10          | LINE FISHING         |                17| LifeWatch            | Phd Verhelst               | phd\_verhelst              |                        1| Westerschelde         | Westerschelde 2             | ws2                         |                         0|          18|
+| A69-1601-14872   | internal       | V13-1x          | A69-1601-14872        | JAN REUBENS         | VLAAMS INSTITUUT VOOR DE ZEE  |                   110|                   250| 069k                | animal                   |               30| A38             | Gadus morhua          |         51.0| total length      | cm                 |            NA|                    |                     |                    |          |                  | Spijkerplaat (thv Stella) | NA                  | 2015-02-12 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     | Spijkerplaat (thv Stella) | 2015-02-12             |                  |                                 | 2015-02-12 00:00:00      |           444|                      NA|                       NA|                      NA|                       NA| 2016-02-02 11:28:21 | 2016-02-02 11:28:21 | Spijkerplaat (thv Stella) |            NA|                         |                     |            NA|                        |                     |           NA| 2016-07-10          | LINE FISHING         |                17| LifeWatch            | Phd Verhelst               | phd\_verhelst              |                        1| Westerschelde         | Westerschelde 2             | ws2                         |                         0|          39|
+| A69-1601-26448   | internal       | V13-1x          | A69-1601-26448        | ANS MOUTON          | INST. VOOR NATUUR-&           |                    80|                   160| 069k                | animal                   |               40|                 | Anguilla anguilla     |         82.6| total length      | cm                 |          43.0| pectoral fin       | mm                  | g                  | F        | FV               | Turbinefuik Ham           | NA                  | 2014-10-01 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     |                           |                        |                  |                                 | 2014-10-01 00:00:00      |           313|                51.09778|                 5.105165|                50.61468|                 5.604782| 2016-12-08 07:49:59 | 2016-02-02 11:28:21 | SA Grosse Batte Ourthe    |          11.7| horizontal eye diameter | mm                  |          11.6| verticale eye diameter | mm                  |         1102| 2019-01-30          |                      |                18| Albertkanaal         | Albertkanaal 2013          | albert2013                 |                        1| Albertkanaal          | Albertkanaal                | albert                      |                         0|           3|
+| A69-1601-26470   | internal       | V13-1x          | A69-1601-26470        | ANS MOUTON          | INST. VOOR NATUUR-&           |                    80|                   160| 069k                | animal                   |               40|                 | Anguilla anguilla     |         80.4| total length      | cm                 |          41.3| pectoral fin       | mm                  | g                  | F        | FV               | SO Genk afvoerriool       | NA                  | 2014-10-09 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     |                           |                        |                  |                                 | 2014-10-09 00:00:00      |           335|                50.93564|                 5.497009|                50.61468|                 5.604782| 2016-12-08 08:03:49 | 2016-02-02 11:28:21 | uitzet Genk SO1           |          10.5| horizontal eye diameter | mm                  |          10.0| verticale eye diameter | mm                  |          987| 2019-02-07          |                      |                18| Albertkanaal         | Albertkanaal 2013          | albert2013                 |                        1| Albertkanaal          | Albertkanaal                | albert                      |                         0|          64|
+| A69-1601-26481   | internal       | V13-1x          | A69-1601-26481        | ANS MOUTON          | INST. VOOR NATUUR-&           |                    80|                   160| 069k                | animal                   |               40|                 | Anguilla anguilla     |         77.5| total length      | cm                 |          38.9| pectoral fin       | mm                  | g                  | F        | FV               | Diepenbeek                | NA                  | 2014-10-14 00:00:00           | ; durif\_index : | wild                    | INTERNAL TAGGING     |                           |                        |                  |                                 | 2014-10-14 00:00:00      |           346|                      NA|                       NA|                50.61468|                 5.604782| 2016-12-08 08:22:04 | 2016-02-02 11:28:21 | Diepenbeek                |          10.4| horizontal eye diameter | mm                  |           9.3| verticale eye diameter | mm                  |          921| 2019-02-12          |                      |                18| Albertkanaal         | Albertkanaal 2013          | albert2013                 |                        1| Albertkanaal          | Albertkanaal                | albert                      |                         0|          70|
+
+Number of records:
+
+``` r
+length(tag_animal)
+```
+
+    ## [1] 60
+
+Save to CSV:
+
+``` r
+write.csv(tag_animal, file = tag_animal_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
