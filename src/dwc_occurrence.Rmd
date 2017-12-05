@@ -5,6 +5,7 @@ output:
   md_document:
     variant: markdown_github
     pandoc_args: ["--atx-headers"]
+    df_print: kable
 knit: (function(input_file, encoding) { rmarkdown::render(input_file, encoding = encoding, output_file = paste0("../reports/",sub(".Rmd", ".md", basename(input_file))))})
 ---
 
@@ -38,7 +39,6 @@ library(stringr)   # For string manipulation
 
 # Other packages
 library(janitor)   # For cleaning input data
-library(knitr)     # For nicer (kable) tables
 ```
 
 Set file paths (all paths should be relative to this script):
@@ -95,7 +95,7 @@ count(raw_data)
 Preview data:
 
 ```{r}
-kable(head(raw_data))
+head(raw_data)
 ```
 
 ## Create occurrence core
@@ -160,8 +160,7 @@ occurrence %>%
   select(raw_tag_owner_organization, rightsHolder) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_tag_owner_organization) %>%
-  kable()
+  arrange(raw_tag_owner_organization)
 ```
 
 #### accessRights
@@ -239,8 +238,7 @@ occurrence %>%
   select(raw_sex, sex) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_sex) %>%
-  kable()
+  arrange(raw_sex)
 ```
 
 #### lifeStage
@@ -322,8 +320,7 @@ Although there is location information available in the `deployment_location` fi
 occurrence %>%
   select(contains("deployment_location")) %>%
   unique() %>%
-  head() %>%
-  kable()
+  head()
 ```
 
 #### minimumDepthInMeters
@@ -338,8 +335,7 @@ There are several columns with coordinates information (listing percentage of `N
 occurrence %>%
   select(contains("_lat"), contains("_long")) %>% # Looking for _lat(itude) in column name
   select(order(colnames(.))) %>% # Order alphabetically
-  sapply(function(x) 100*mean(is.na(x))) %>%
-  kable()
+  sapply(function(x) 100*mean(is.na(x)))
 ```
 
 Of those the **deployment** coordinates of the receiver are the closest approximation of the position of the fish and always populated (no `NA`s in table above):
@@ -390,8 +386,7 @@ Show unique values:
 occurrence %>%
   select(raw_scientific_name) %>%
   group_by_all() %>%
-  summarize(records = n()) %>%
-  kable()
+  summarize(records = n())
 ```
 
 Map scientific name:
@@ -445,7 +440,7 @@ occurrence %<>% select(-one_of(raw_colnames))
 Preview data:
 
 ```{r}
-kable(head(occurrence))
+head(occurrence)
 ```
 
 Save to CSV:
@@ -507,7 +502,7 @@ raw_data %>%
 Preview data:
 
 ```{r}
-kable(head(deployment))
+head(deployment)
 ```
 
 Number of records:
@@ -645,7 +640,7 @@ raw_data %>%
 Preview data:
 
 ```{r}
-kable(head(tag_animal))
+head(tag_animal)
 ```
 
 Number of records:

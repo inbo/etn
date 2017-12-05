@@ -26,7 +26,6 @@ library(stringr)   # For string manipulation
 
 # Other packages
 library(janitor)   # For cleaning input data
-library(knitr)     # For nicer (kable) tables
 ```
 
 Set file paths (all paths should be relative to this script):
@@ -205,15 +204,14 @@ Number of records:
 count(raw_data)
 ```
 
-    ## # A tibble: 1 x 1
-    ##       n
-    ##   <int>
-    ## 1 50000
+|      n|
+|------:|
+|  50000|
 
 Preview data:
 
 ``` r
-kable(head(raw_data))
+head(raw_data)
 ```
 
 |  raw\_id| raw\_receiver | raw\_transmitter | raw\_transmitter\_name | raw\_transmitter\_serial | raw\_sensor\_value | raw\_sensor\_unit | raw\_sensor2\_value | raw\_sensor2\_unit | raw\_station\_name | raw\_datetime       |  raw\_id\_pk| raw\_qc\_flag | raw\_file                     |  raw\_latitude|  raw\_longitude|  raw\_deployment\_fk| raw\_signal\_to\_noise\_ratio | raw\_detection\_file\_id | raw\_tag\_type | raw\_tag\_model | raw\_tag\_code\_space | raw\_tag\_owner\_pi | raw\_tag\_owner\_organization |  raw\_tag\_min\_delay|  raw\_tag\_max\_delay| raw\_tag\_frequency | raw\_acoustic\_tag\_type | raw\_tag\_sensor\_type | raw\_tag\_intercept | raw\_tag\_slope | raw\_sensor\_value\_depth\_meters |  raw\_person\_id| raw\_animal\_id | raw\_scientific\_name | raw\_common\_name |  raw\_length| raw\_length\_type | raw\_length\_units |  raw\_length2| raw\_length2\_type | raw\_length2\_units | raw\_weight\_units | raw\_age | raw\_age\_units | raw\_sex | raw\_life\_stage | raw\_capture\_location                                                                                                           | raw\_capture\_depth | raw\_utc\_release\_date\_time | raw\_comments    | raw\_est\_tag\_life | raw\_wild\_or\_hatchery | raw\_stock | raw\_dna\_sample\_taken | raw\_treatment\_type | raw\_dissolved\_oxygen | raw\_sedative | raw\_sedative\_concentration | raw\_temperature\_change | raw\_holding\_temperature | raw\_preop\_holding\_period | raw\_post\_op\_holding\_period | raw\_surgery\_location | raw\_date\_of\_surgery | raw\_anaesthetic | raw\_buffer | raw\_anaesthetic\_concentration | raw\_buffer\_concentration\_in\_anaesthetic | raw\_anesthetic\_concentration\_in\_recirculation | raw\_buffer\_concentration\_in\_recirculation |  raw\_id\_pk\_1| raw\_catched\_date\_time |  raw\_tag\_fk|  raw\_capture\_latitude|  raw\_capture\_longitude|  raw\_release\_latitude|  raw\_release\_longitude| raw\_surgery\_latitude | raw\_surgery\_longitude | raw\_recapture\_date | raw\_implant\_type | raw\_implant\_method | raw\_date\_modified | raw\_date\_created  | raw\_release\_location |  raw\_length3| raw\_length3\_type | raw\_length3\_units |  raw\_length4| raw\_length4\_type | raw\_length4\_units |  raw\_weight| raw\_end\_date\_tag | raw\_capture\_method |  raw\_project\_fk| raw\_animal\_project | raw\_animal\_project\_name | raw\_animal\_project\_code |  raw\_animal\_moratorium| raw\_network\_project | raw\_network\_project\_name | raw\_network\_project\_code |  raw\_network\_moratorium| raw\_deployment\_station\_name | raw\_deployment\_deploy\_date\_time | raw\_deployment\_location                      |  raw\_deployment\_location\_manager| raw\_deployment\_location\_description         |  raw\_deployment\_deploy\_lat|  raw\_deployment\_deploy\_long|  raw\_deployment\_recoverr\_lat|  raw\_deployment\_recover\_long|  raw\_deployment\_intended\_lat|  raw\_deployment\_intended\_long| raw\_deployment\_bottom\_depth | raw\_deployment\_riser\_length | raw\_deployment\_instrument\_depth |  raw\_receiver\_serial\_number| raw\_receiver\_model\_number | raw\_receiver\_owner\_organization | raw\_receiver\_status | raw\_receiver\_receiver\_type |  raw\_receiver\_manufacturer\_fk|
@@ -287,8 +285,7 @@ occurrence %>%
   select(raw_tag_owner_organization, rightsHolder) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_tag_owner_organization) %>%
-  kable()
+  arrange(raw_tag_owner_organization)
 ```
 
 | raw\_tag\_owner\_organization | rightsHolder |  records|
@@ -377,8 +374,7 @@ occurrence %>%
   select(raw_sex, sex) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_sex) %>%
-  kable()
+  arrange(raw_sex)
 ```
 
 | raw\_sex | sex    |  records|
@@ -466,8 +462,7 @@ Although there is location information available in the `deployment_location` fi
 occurrence %>%
   select(contains("deployment_location")) %>%
   unique() %>%
-  head() %>%
-  kable()
+  head()
 ```
 
 |     | raw\_deployment\_location |  raw\_deployment\_location\_manager| raw\_deployment\_location\_description                             |
@@ -491,26 +486,23 @@ There are several columns with coordinates information (listing percentage of `N
 occurrence %>%
   select(contains("_lat"), contains("_long")) %>% # Looking for _lat(itude) in column name
   select(order(colnames(.))) %>% # Order alphabetically
-  sapply(function(x) 100*mean(is.na(x))) %>%
-  kable()
+  sapply(function(x) 100*mean(is.na(x)))
 ```
 
-|                                 |         |
-|:--------------------------------|--------:|
-| raw\_capture\_latitude          |   64.226|
-| raw\_capture\_longitude         |   64.226|
-| raw\_deployment\_deploy\_lat    |    0.000|
-| raw\_deployment\_deploy\_long   |    0.000|
-| raw\_deployment\_intended\_lat  |   99.332|
-| raw\_deployment\_intended\_long |   99.332|
-| raw\_deployment\_recover\_long  |   99.054|
-| raw\_deployment\_recoverr\_lat  |   99.054|
-| raw\_latitude                   |   99.054|
-| raw\_longitude                  |   99.054|
-| raw\_release\_latitude          |    0.280|
-| raw\_release\_longitude         |    0.280|
-| raw\_surgery\_latitude          |  100.000|
-| raw\_surgery\_longitude         |  100.000|
+    ##         raw_capture_latitude        raw_capture_longitude 
+    ##                       64.226                       64.226 
+    ##    raw_deployment_deploy_lat   raw_deployment_deploy_long 
+    ##                        0.000                        0.000 
+    ##  raw_deployment_intended_lat raw_deployment_intended_long 
+    ##                       99.332                       99.332 
+    ##  raw_deployment_recover_long  raw_deployment_recoverr_lat 
+    ##                       99.054                       99.054 
+    ##                 raw_latitude                raw_longitude 
+    ##                       99.054                       99.054 
+    ##         raw_release_latitude        raw_release_longitude 
+    ##                        0.280                        0.280 
+    ##         raw_surgery_latitude        raw_surgery_longitude 
+    ##                      100.000                      100.000
 
 Of those the **deployment** coordinates of the receiver are the closest approximation of the position of the fish and always populated (no `NA`s in table above):
 
@@ -560,8 +552,7 @@ Show unique values:
 occurrence %>%
   select(raw_scientific_name) %>%
   group_by_all() %>%
-  summarize(records = n()) %>%
-  kable()
+  summarize(records = n())
 ```
 
 | raw\_scientific\_name |  records|
@@ -611,10 +602,9 @@ occurrence %<>% filter(raw_scientific_name != "Sync tag")
 count(occurrence)
 ```
 
-    ## # A tibble: 1 x 1
-    ##       n
-    ##   <int>
-    ## 1 18139
+|      n|
+|------:|
+|  18139|
 
 Filter out records under a moratorium:
 
@@ -623,10 +613,9 @@ occurrence %<>% filter(raw_animal_moratorium == 1) # TODO: or was it network_mor
 count(occurrence)
 ```
 
-    ## # A tibble: 1 x 1
-    ##       n
-    ##   <int>
-    ## 1  4755
+|     n|
+|-----:|
+|  4755|
 
 Remove the original columns:
 
@@ -637,7 +626,7 @@ occurrence %<>% select(-one_of(raw_colnames))
 Preview data:
 
 ``` r
-kable(head(occurrence))
+head(occurrence)
 ```
 
 | type  | language | license                                             | rightsHolder | accessRights                               | datasetID | institutionCode | datasetName                                                                                                      | basisOfRecord      | informationWithheld | dynamicProperties                                          | occurrenceID           | sex | organismID | eventDate            | locationID | decimalLatitude | decimalLongitude | geodeticDatum | georeferenceSources | georeferenceVerificationStatus | scientificName | kingdom  | taxonRank |
@@ -708,7 +697,7 @@ raw_data %>%
 Preview data:
 
 ``` r
-kable(head(deployment))
+head(deployment)
 ```
 
 | raw\_receiver | raw\_station\_name | raw\_qc\_flag | raw\_file                     |  raw\_latitude|  raw\_longitude|  raw\_deployment\_fk| raw\_signal\_to\_noise\_ratio | raw\_detection\_file\_id | raw\_deployment\_station\_name | raw\_deployment\_deploy\_date\_time | raw\_deployment\_location                      |  raw\_deployment\_location\_manager| raw\_deployment\_location\_description                             |  raw\_deployment\_deploy\_lat|  raw\_deployment\_deploy\_long|  raw\_deployment\_recoverr\_lat|  raw\_deployment\_recover\_long|  raw\_deployment\_intended\_lat|  raw\_deployment\_intended\_long|  raw\_receiver\_serial\_number| raw\_receiver\_model\_number | raw\_receiver\_owner\_organization | raw\_receiver\_status | raw\_receiver\_receiver\_type |  raw\_receiver\_manufacturer\_fk|  detections|
@@ -857,7 +846,7 @@ raw_data %>%
 Preview data:
 
 ``` r
-kable(head(tag_animal))
+head(tag_animal)
 ```
 
 | raw\_transmitter | raw\_tag\_type | raw\_tag\_model | raw\_tag\_code\_space | raw\_tag\_owner\_pi | raw\_tag\_owner\_organization |  raw\_tag\_min\_delay|  raw\_tag\_max\_delay| raw\_tag\_frequency | raw\_acoustic\_tag\_type |  raw\_person\_id| raw\_animal\_id | raw\_scientific\_name |  raw\_length| raw\_length\_type | raw\_length\_units |  raw\_length2| raw\_length2\_type | raw\_length2\_units | raw\_weight\_units | raw\_sex | raw\_life\_stage | raw\_capture\_location    | raw\_capture\_depth | raw\_utc\_release\_date\_time | raw\_comments    | raw\_wild\_or\_hatchery | raw\_treatment\_type | raw\_surgery\_location    | raw\_date\_of\_surgery | raw\_anaesthetic | raw\_anaesthetic\_concentration | raw\_catched\_date\_time |  raw\_tag\_fk|  raw\_capture\_latitude|  raw\_capture\_longitude|  raw\_release\_latitude|  raw\_release\_longitude| raw\_date\_modified | raw\_date\_created  | raw\_release\_location    |  raw\_length3| raw\_length3\_type      | raw\_length3\_units |  raw\_length4| raw\_length4\_type     | raw\_length4\_units |  raw\_weight| raw\_end\_date\_tag | raw\_capture\_method |  raw\_project\_fk| raw\_animal\_project | raw\_animal\_project\_name | raw\_animal\_project\_code |  raw\_animal\_moratorium| raw\_network\_project | raw\_network\_project\_name | raw\_network\_project\_code |  raw\_network\_moratorium|  detections|
