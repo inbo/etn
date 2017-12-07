@@ -239,15 +239,10 @@ occurrence %>%
 
 #### lifeStage
 
-```{r eval = FALSE}
-occurrence %<>% mutate(recode(as.character(raw_life_stage),
-  "FV" = "?",
-  "FIII" = "?",
-  .default = "",
-  .missing = ""
-))
+As this information can change during the course of the tracking, it is not added to the occurrence data.
 
-# TODO: complete this information... or add it to individuals table.
+```{r}
+# TODO: verify if this is correct.
 ```
 
 #### organismID
