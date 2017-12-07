@@ -166,7 +166,8 @@ occurrence %<>% mutate(accessRights = "http://www.inbo.be/en/norms-for-data-use"
 #### datasetID
 
 ```{r}
-occurrence %<>% mutate(datasetID = "") # TODO: add DOI
+occurrence %<>% mutate(datasetID = "")
+# TODO: add DOI
 ```
 
 #### institutionCode
@@ -179,6 +180,7 @@ occurrence %<>% mutate(institutionCode = rightsHolder)
 
 ```{r}
 occurrence %<>% mutate(datasetName = "Acoustic telemetry tracking data of fish in the Scheldt river basin and the Belgian Part of the North Sea (BPNS)")
+# TODO: verify
 ```
 
 #### basisOfRecord
@@ -205,7 +207,7 @@ occurrence %<>% mutate(dynamicProperties = paste0(
 #### occurrenceID
 
 ```{r}
-occurrence %<>% mutate(occurrenceID = paste("otn", "lifewatch", raw_id_pk, sep = ":"))
+occurrence %<>% mutate(occurrenceID = paste("etn", "lifewatch", detections_id_pk, sep = ":")) # TODO: OTN or ETN?
 ```
 
 TEST: check for duplicate `occurrenceID`s (should be 0):
@@ -372,13 +374,15 @@ occurrence %<>% mutate(geodeticDatum = "WGS84")
 #### georeferenceSources
 
 ```{r}
-occurrence %<>% mutate(georeferenceSources = "GPS") # TODO: not always GPS, maybe drop term
+occurrence %<>% mutate(georeferenceSources = "GPS")
+# TODO: not always GPS, maybe drop term
 ```
 
 #### georeferenceVerificationStatus
 
 ```{r}
-occurrence %<>% mutate(georeferenceVerificationStatus = "unverified") # TODO: maybe drop term
+occurrence %<>% mutate(georeferenceVerificationStatus = "unverified")
+# TODO: maybe drop term
 ```
 
 #### scientificName
@@ -419,7 +423,8 @@ Some other higher classication terms could be populated, but with the limited nu
 #### taxonRank
 
 ```{r}
-occurrence %<>% mutate(taxonRank = "species") # TODO: all species?
+occurrence %<>% mutate(taxonRank = "species")
+# TODO: all species?
 ```
 
 #### vernacularName
