@@ -9,7 +9,7 @@ library(readr)
 pgcreds <- scan("./.pgpass", what="")
 
 # Read SQL query file:
-denorm_query <- read_file("denormalized_observations.sql")
+denorm_query <- read_file("../data_publication/src/denormalized_observations.sql")
 
 # Connect to database and execute string:
 data_connect <- odbcConnect("ETN", pgcreds[1], pgcreds[2])
@@ -20,4 +20,4 @@ print(mess)
 close(data_connect)
 
 # Save data as a CSV file:
-write.csv(table, "../data/raw/denormalized_observations.csv", na = "", row.names = FALSE, fileEncoding = "UTF-8")
+write.csv(table, "../data_publication/data/input/denormalized_observations.csv", na = "", row.names = FALSE, fileEncoding = "UTF-8")
