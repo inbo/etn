@@ -147,7 +147,7 @@ occurrence %<>% mutate(rightsHolder = recode(as.character(tags_owner_organizatio
 # TODO: was supposed to be animal project organization
 ```
 
-Show mapped values:
+TEST: Show mapped values:
 
 ```{r}
 occurrence %>% 
@@ -208,7 +208,7 @@ occurrence %<>% mutate(dynamicProperties = paste0(
 occurrence %<>% mutate(occurrenceID = paste("otn", "lifewatch", raw_id_pk, sep = ":"))
 ```
 
-Check for duplicate `occurrenceID`s (should be 0):
+TEST: check for duplicate `occurrenceID`s (should be 0):
 
 ```{r}
 anyDuplicated(occurrence$occurrenceID)
@@ -225,7 +225,7 @@ occurrence %<>% mutate(sex = recode(as.character(animals_sex),
 ))
 ```
 
-Show mapped values:
+TEST: Show mapped values:
 
 ```{r}
 occurrence %>%
@@ -292,6 +292,13 @@ The `deployments_station_name` is a fixed code for that deployment location. It 
 ```{r}
 occurrence %<>% mutate(locationID = deployments_station_name)
 ```
+
+TEST: Check `locationID` is not `NA` (should be 0):
+
+```{r}
+occurrence %>%
+  filter(is.na(locationID)) %>%
+  nrow()
 ```
 
 #### waterBody
@@ -443,7 +450,7 @@ Remove the original columns:
 occurrence %<>% select(-one_of(raw_colnames))
 ```
 
-Preview data:
+TEST: Preview data:
 
 ```{r}
 head(occurrence)
