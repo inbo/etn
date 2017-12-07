@@ -469,7 +469,7 @@ write.csv(occurrence, file = dwc_occurrence_file, na = "", row.names = FALSE, fi
 Define deployment columns to group by:
 
 ```{r}
-deployment_raw_column_names <- c(
+deployment_group_by <- c(
   "detections_receiver",
 #  "detections_station_name",
 #  "detections_qc_flag",
@@ -503,16 +503,17 @@ deployment_raw_column_names <- c(
 
 ```{r}
 raw_data %>%
-  select(deployment_raw_column_names) %>%
+  select(deployment_group_by) %>%
   group_by_all() %>%
   summarize(detections = n()) %>%
-  arrange(detections_receiver) -> deployment
+  arrange(deployments_station_name) %>%
+  data.frame() -> deployment # data.frame() required to get rid of groups info
 ```
 
-And `detections` to `deployment_raw_column_names` (makes it easier to remove them all later):
+Save column names as a list (makes it easier to remove them all later):
 
 ```{r}
-# deployment_raw_column_names <- c(deployment_raw_column_names, "detections")
+deployment_colnames <- colnames(deployment)
 ```
 
 Number of records:
