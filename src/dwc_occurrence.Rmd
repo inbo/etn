@@ -547,7 +547,7 @@ deployment %<>% mutate(locationID = deployments_station_name)
 #### startDate
 
 ```{r}
-deployment %<>% mutate(startDate = format(as.POSIXct(deployments_deploy_date_time), format = "%Y-%m-%dZ"))
+deployment %<>% mutate(startDate = format(as.POSIXct(deployments_deploy_date_time), format = "%Y-%m-%d"))
 # TODO: verify if UTC, does it ever contain correct hours?
 ```
 
