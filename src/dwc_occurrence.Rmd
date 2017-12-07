@@ -68,13 +68,7 @@ raw_data %>%
   clean_names() -> raw_data
 ```
 
-Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
-
-```{r}
-colnames(raw_data) <- paste0("raw_", colnames(raw_data))
-```
-
-Save those column names as a list (makes it easier to remove them all later):
+Save column names as a list (makes it easier to remove them all later):
 
 ```{r}
 raw_colnames <- colnames(raw_data)
@@ -109,7 +103,7 @@ occurrence <- raw_data
 Sort by transmitter and date:
 
 ```{r}
-occurrence %<>% arrange(raw_transmitter, raw_datetime)
+occurrence %<>% arrange(detections_transmitter, detections_datetime)
 ```
 
 ### Term mapping
@@ -139,7 +133,7 @@ occurrence %<>% mutate(license = "http://creativecommons.org/publicdomain/zero/1
 Organization who owns the tag (receiver network can be used by all):
 
 ```{r}
-occurrence %<>% mutate(rightsHolder = recode(as.character(raw_tag_owner_organization),
+occurrence %<>% mutate(rightsHolder = recode(as.character(tags_owner_organization),
   "EVINBO"                       = "INBO",
   "INST. VOOR NATUUR-&"          = "INBO",
   "INST. VOOR NATUUR-EN"         = "INBO",
@@ -157,10 +151,10 @@ Show mapped values:
 
 ```{r}
 occurrence %>% 
-  select(raw_tag_owner_organization, rightsHolder) %>%
+  select(tags_owner_organization, rightsHolder) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_tag_owner_organization)
+  arrange(tags_owner_organization)
 ```
 
 #### accessRights
@@ -203,8 +197,8 @@ occurrence %<>% mutate(informationWithheld = "see metadata")
 
 ```{r}
 occurrence %<>% mutate(dynamicProperties = paste0(
-  "{\"transmitter\":\"", raw_transmitter, "\", ",
-  "\"receiver\":\"", raw_receiver, "\"}"
+  "{\"transmitter\":\"", detections_transmitter, "\", ",
+  "\"receiver\":\"", detections_receiver, "\"}"
 ))
 ```
 
@@ -223,7 +217,7 @@ anyDuplicated(occurrence$occurrenceID)
 #### sex
 
 ```{r}
-occurrence %<>% mutate(sex = recode(as.character(raw_sex),
+occurrence %<>% mutate(sex = recode(as.character(animals_sex),
   "F" = "female",
   "M" = "male",
   .default = "",
@@ -235,10 +229,10 @@ Show mapped values:
 
 ```{r}
 occurrence %>%
-  select(raw_sex, sex) %>%
+  select(animals_sex, sex) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_sex)
+  arrange(animals_sex)
 ```
 
 #### lifeStage
@@ -257,8 +251,8 @@ occurrence %<>% mutate(recode(as.character(raw_life_stage),
 #### organismID
 
 ```{r}
-occurrence %<>% mutate(organismID = raw_animal_id) # TODO: This one is often NA
-# Transmitter would have been nicer
+occurrence %<>% mutate(organismID = animals_animal_id)
+# TODO: This one is often NA. detections_transmitter would have been nicer
 ```
 
 #### eventID
@@ -272,7 +266,8 @@ occurrence %<>% mutate(organismID = raw_animal_id) # TODO: This one is often NA
 `datetime` assumed to be UTC. For 3D analyses milliseconds will be required, but these won't be available in the source data until VRL imports are supported.
 
 ```{r}
-occurrence %<>% mutate(eventDate = format(as.POSIXct(raw_datetime), format = "%Y-%m-%dT%H:%M:%SZ")) # TODO: verify if UTC
+occurrence %<>% mutate(eventDate = format(as.POSIXct(detections_datetime), format = "%Y-%m-%dT%H:%M:%SZ"))
+# TODO: verify if UTC
 ```
 
 #### eventTime
@@ -285,19 +280,18 @@ occurrence %<>% mutate(eventDate = format(as.POSIXct(raw_datetime), format = "%Y
 
 ```{r}
 # TODO: refer to DOI of methodology paper? Can some information be derived from source data?
-# receiver_type: acoustic_telemetry, SVN, active
-# receiver_model_number: VR2W, NA, 122325
-# capture_method: NA, LINE FISHING, FYKE NETS
-# 
+# receivers_receiver_type: acoustic_telemetry, SVN, active
+# receivers_model_number: VR2W, NA, 122325
+# animals_capture_method: NA, LINE FISHING, FYKE NETS
 ```
 
 #### locationID
 
-The `station_name` is a fixed code for that deployment location. The `receiver` code is not adequate, as a receiver can be moved from one location to another.
+The `deployments_station_name` is a fixed code for that deployment location. It should always be populated. The `detections_receiver` code is not adequate, as a receiver can be moved from one location to another.
 
 ```{r}
-occurrence %<>% mutate(locationID = raw_deployment_station_name)
-# TODO: Should it be station_name (120095, S-3-1) or deployment_station_name (ma-2, s-3)?
+occurrence %<>% mutate(locationID = deployments_station_name)
+```
 ```
 
 #### waterBody
@@ -314,14 +308,16 @@ occurrence %<>% mutate(locationID = raw_deployment_station_name)
 
 #### locality
 
-Although there is location information available in the `deployment_location` fields, it not very useful to share these raw Dutch location names:
+There is location information available in the `deployments.location_` fields:
 
 ```{r}
 occurrence %>%
-  select(contains("deployment_location")) %>%
+  select(contains("deployments_location")) %>%
   unique() %>%
   head()
 ```
+
+But these raw Dutch location names are not very useful, so we don't include this information.
 
 #### minimumDepthInMeters
 
@@ -341,13 +337,13 @@ occurrence %>%
 Of those the **deployment** coordinates of the receiver are the closest approximation of the position of the fish and always populated (no `NA`s in table above):
 
 ```{r}
-occurrence %<>% mutate(decimalLatitude = sprintf("%.7f", round(raw_deployment_deploy_lat, digits = 7)))
+occurrence %<>% mutate(decimalLatitude = sprintf("%.7f", round(deployments_deploy_lat, digits = 7)))
 ```
 
 #### decimalLongitude
 
 ```{r}
-occurrence %<>% mutate(decimalLongitude = sprintf("%.7f", round(raw_deployment_deploy_long, digits = 7)))
+occurrence %<>% mutate(decimalLongitude = sprintf("%.7f", round(deployments_deploy_long, digits = 7)))
 ```
 
 #### geodeticDatum
@@ -361,9 +357,9 @@ occurrence %<>% mutate(geodeticDatum = "WGS84")
 ```{r}
 # Depends on area: sea / Westerscheldt: 200m on average, 500m extreme, while Albertkanaal: 2km
 # TODO: on which field should this be based?
-# network_project_code?
-# animal_project_code?
-# receiver?
+# network_project_project?
+# animal_project_project?
+# detections_receiver?
 ```
 
 #### georeferenceSources
@@ -380,19 +376,29 @@ occurrence %<>% mutate(georeferenceVerificationStatus = "unverified") # TODO: ma
 
 #### scientificName
 
-Show unique values:
+```{r}
+occurrence %<>% mutate(scientificName = animals_scientific_name)
+```
+
+TEST: Show unique values:
 
 ```{r}
 occurrence %>%
-  select(raw_scientific_name) %>%
+  select(animals_scientific_name) %>%
   group_by_all() %>%
   summarize(records = n())
 ```
 
-Map scientific name:
+Filter out records with `Sync tag` as scientific name:
 
 ```{r}
-occurrence %<>% mutate(scientificName = raw_scientific_name)
+occurrence %<>% filter(scientificName != "Sync tag")
+```
+
+Number of remaining occurrences:
+
+```{r}
+nrow(occurrence)
 ```
 
 #### kingdom
@@ -412,23 +418,23 @@ occurrence %<>% mutate(taxonRank = "species") # TODO: all species?
 #### vernacularName
 
 ```{r}
-# occurrence %<>% mutate(vernacularName = raw_common_name) # TODO: ever populated?
+# occurrence %<>% mutate(vernacularName = animals_common_name)
+# TODO: ever populated?
 ```
 
 ### Post-processing
 
-Filter out records with `Sync tag` as scientific name:
-
-```{r}
-occurrence %<>% filter(raw_scientific_name != "Sync tag")
-count(occurrence)
-```
-
 Filter out records under a moratorium:
 
 ```{r}
-occurrence %<>% filter(raw_animal_moratorium == 1) # TODO: or was it network_moratorium?
-count(occurrence)
+occurrence %<>% filter(animal_project_moratorium == 1)
+# TODO: or was it network_project_moratorium?
+```
+
+Number of remaining occurrences:
+
+```{r}
+nrow(occurrence)
 ```
 
 Remove the original columns:
@@ -457,35 +463,34 @@ Define deployment columns to group by:
 
 ```{r}
 deployment_column_names <- c(
-  "raw_receiver",
-  "raw_station_name",
-  "raw_qc_flag",
-  "raw_file",
-  "raw_latitude",
-  "raw_longitude",
-  "raw_deployment_fk",
-  "raw_signal_to_noise_ratio",
-  "raw_detection_file_id",
-  "raw_deployment_station_name",
-  "raw_deployment_deploy_date_time",
-  "raw_deployment_location",
-  "raw_deployment_location_manager",
-  "raw_deployment_location_description",
-  "raw_deployment_deploy_lat",
-  "raw_deployment_deploy_long",
-  "raw_deployment_recoverr_lat",
-  "raw_deployment_recover_long",
-  "raw_deployment_intended_lat",
-  "raw_deployment_intended_long",
-#  "raw_deployment_bottom_depth",
-#  "raw_deployment_riser_length",
-#  "raw_deployment_instrument_depth",
-  "raw_receiver_serial_number",
-  "raw_receiver_model_number",
-  "raw_receiver_owner_organization",
-  "raw_receiver_status",
-  "raw_receiver_receiver_type",
-  "raw_receiver_manufacturer_fk"
+  "detections_receiver",
+#  "detections_station_name",
+#  "detections_qc_flag",
+#  "detections_file", # Not really relevant for external user
+#  "detections_latitude",
+#  "detections_longitude",
+  "detections_deployment_fk",
+#  "detections_signal_to_noise_ratio",
+#  "detections_detection_file_id",
+  "deployments_station_name",
+  "deployments_deploy_date_time",
+#  "deployments_recover_date_time", # Not yet in view
+#  "deployments_location_name",
+#  "deployments_location_manager",
+#  "deployments_location_description",
+  "deployments_deploy_lat",
+  "deployments_deploy_long",
+#  "deployments_recover_lat",
+#  "deployments_recover_long",
+#  "deployments_intended_lat",
+#  "deployments_intended_long",
+#  "deployments_bottom_depth",
+#  "deployments_riser_length",
+#  "deployments_instrument_depth",
+#  "receivers_serial_number", # Is already part of receiver code
+#  "receivers_model_number", # Is already part of receiver code
+  "receivers_owner_organization",
+  "receivers_status"
 )
 ```
 
