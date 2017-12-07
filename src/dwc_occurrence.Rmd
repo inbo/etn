@@ -469,7 +469,7 @@ write.csv(occurrence, file = dwc_occurrence_file, na = "", row.names = FALSE, fi
 Define deployment columns to group by:
 
 ```{r}
-deployment_column_names <- c(
+deployment_raw_column_names <- c(
   "detections_receiver",
 #  "detections_station_name",
 #  "detections_qc_flag",
@@ -503,18 +503,16 @@ deployment_column_names <- c(
 
 ```{r}
 raw_data %>%
-  select(deployment_column_names) %>%
+  select(deployment_raw_column_names) %>%
   group_by_all() %>%
   summarize(detections = n()) %>%
-  arrange(raw_receiver) -> deployment
+  arrange(detections_receiver) -> deployment
 ```
 
-### Post-processing
-
-Preview data:
+And `detections` to `deployment_raw_column_names` (makes it easier to remove them all later):
 
 ```{r}
-head(deployment)
+# deployment_raw_column_names <- c(deployment_raw_column_names, "detections")
 ```
 
 Number of records:
@@ -523,10 +521,118 @@ Number of records:
 nrow(deployment)
 ```
 
-Remove `raw_` from column names:
+Preview data:
 
 ```{r}
-colnames(deployment) %<>% str_replace_all(., "raw_", "")
+head(deployment)
+```
+
+### Term mapping
+
+#### ID
+
+```{r}
+deployment %<>% mutate(id = detections_deployment_fk)
+```
+
+#### locationID
+
+Should be the same term as in the occurrence data, so both can be linked.
+
+```{r}
+deployment %<>% mutate(locationID = deployments_station_name)
+```
+
+#### startDate
+
+```{r}
+deployment %<>% mutate(startDate = format(as.POSIXct(deployments_deploy_date_time), format = "%Y-%m-%dZ"))
+# TODO: verify if UTC, does it ever contain correct hours?
+```
+
+#### endDate
+
+```{r}
+deployment %<>% mutate(endDate = "")
+# TODO: use correct field
+# TODO: verify if UTC, does it ever contain correct hours?
+```
+
+#### decimalLatitude
+
+```{r}
+deployment %<>% mutate(decimalLatitude = sprintf("%.7f", round(deployments_deploy_lat, digits = 7)))
+```
+
+#### decimalLongitude
+
+```{r}
+deployment %<>% mutate(decimalLongitude = sprintf("%.7f", round(deployments_deploy_long, digits = 7)))
+```
+
+#### receiver
+
+```{r}
+deployment %<>% mutate(receiver = detections_receiver)
+```
+
+#### receiverOwnerInstitutionCode
+
+```{r}
+deployment %<>% mutate(receiverOwnerInstitutionCode = recode(as.character(receivers_owner_organization),
+  "INBO"          = "INBO",
+  "VR2W"          = "",
+  "120095"        = "",
+  .default = "",
+  .missing = ""
+))
+
+# TODO: Define mapping
+```
+
+TEST: Show mapped values:
+
+```{r}
+deployment %>% 
+  select(receivers_owner_organization, receiverOwnerInstitutionCode) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>%
+  arrange(receivers_owner_organization)
+```
+
+#### receiverStatus
+
+```{r}
+deployment %<>% mutate(receiverStatus = recode(as.character(receivers_status),
+  "Active"        = "active",
+  "Available"     = "discontinued",
+  "VR2W"          = "",
+  "120095"        = "",
+  .default = "",
+  .missing = ""
+))
+
+# TODO: Define mapping
+```
+
+### Post-processing
+
+Number of records:
+
+```{r}
+nrow(deployment)
+```
+
+Remove the original columns:
+
+```{r}
+deployment %<>% select(-one_of(deployment_raw_column_names))
+```
+
+TEST: Preview data:
+
+```{r}
+head(deployment)
 ```
 
 Save to CSV:
