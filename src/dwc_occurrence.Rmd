@@ -83,7 +83,7 @@ raw_colnames
 Number of records:
 
 ```{r}
-count(raw_data)
+nrow(raw_data)
 ```
 
 Preview data:
@@ -513,7 +513,7 @@ head(deployment)
 Number of records:
 
 ```{r}
-length(deployment)
+nrow(deployment)
 ```
 
 Remove `raw_` from column names:
