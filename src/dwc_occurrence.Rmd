@@ -1,19 +1,16 @@
 ---
-title: "Darwin Core mapping for occurrence dataset"
+title: "Creating standardized exports of fish tracking data"
 author: Peter Desmet
+date: "`r Sys.Date()`"
 output:
-  md_document:
-    variant: markdown_github
-    pandoc_args: ["--atx-headers"]
-    df_print: kable
-knit: (function(input_file, encoding) { rmarkdown::render(input_file, encoding = encoding, output_file = paste0("../reports/",sub(".Rmd", ".md", basename(input_file))))})
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    theme: flatly
+    df_print: paged
+knit: (function(input_file, encoding) { rmarkdown::render(input_file, encoding = encoding, output_file = paste0("../docs/",sub(".Rmd", ".html", basename(input_file))))})
 ---
-
-# `r rmarkdown::metadata$title`
-
-By: `r rmarkdown::metadata$author`
-
-Date: `r Sys.Date()`
 
 ```{r configure_knitr, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -46,8 +43,8 @@ Set file paths (all paths should be relative to this script):
 ```{r}
 raw_data_file = "../data/input/denormalized_observations_50000.csv"
 dwc_occurrence_file = "../data/output/dwc_occurrence/occurrence.csv"
-deployment_file = "../data/output/temp/deployment.csv"
-tag_animal_file = "../data/output/temp/tag_animal.csv"
+deployment_file = "../data/output/metadata/deployment.csv"
+tag_animal_file = "../data/output/metadata/tag_animal.csv"
 ```
 
 ## Read data
