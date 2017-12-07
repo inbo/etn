@@ -627,7 +627,7 @@ nrow(deployment)
 Remove the original columns:
 
 ```{r}
-deployment %<>% select(-one_of(deployment_raw_column_names))
+deployment %<>% select(-one_of(deployment_colnames))
 ```
 
 TEST: Preview data:
@@ -648,99 +648,95 @@ write.csv(deployment, file = deployment_file, na = "", row.names = FALSE, fileEn
 
 Define tag/animal columns to group by:
 
-```{r}
-tag_animal_column_names <- c(
-  "raw_transmitter",
-#  "raw_transmitter_name",
-#  "raw_transmitter_serial",
-#  "raw_sensor_value",
-#  "raw_sensor_unit",
-#  "raw_sensor2_value",
-#  "raw_sensor2_unit",
-  "raw_tag_type",
-  "raw_tag_model",
-  "raw_tag_code_space",
-  "raw_tag_owner_pi",
-  "raw_tag_owner_organization",
-  "raw_tag_min_delay",
-  "raw_tag_max_delay",
-  "raw_tag_frequency",
-  "raw_acoustic_tag_type",
-#  "raw_tag_sensor_type",
-#  "raw_tag_intercept",
-#  "raw_tag_slope",
-#  "raw_sensor_value_depth_meters",
-  "raw_person_id",
-  "raw_animal_id",
-  "raw_scientific_name",
-#  "raw_common_name",
-  "raw_length",
-  "raw_length_type",
-  "raw_length_units",
-  "raw_length2",
-  "raw_length2_type",
-  "raw_length2_units",
-  "raw_weight_units",
-#  "raw_age",
-#  "raw_age_units",  
-  "raw_sex",
-  "raw_life_stage",
-  "raw_capture_location",
-  "raw_capture_depth",
-  "raw_utc_release_date_time",
-  "raw_comments",
-#  "raw_est_tag_life",
-  "raw_wild_or_hatchery",
-#  "raw_stock",
-#  "raw_dna_sample_taken",
-  "raw_treatment_type",
-#  "raw_dissolved_oxygen",
-#  "raw_sedative",
-#  "raw_sedative_concentration",
-#  "raw_temperature_change",
-#  "raw_holding_temperature",
-#  "raw_preop_holding_period",
-#  "raw_post_op_holding_period",
-  "raw_surgery_location",
-  "raw_date_of_surgery",
-  "raw_anaesthetic",
-#  "raw_buffer",
-  "raw_anaesthetic_concentration",
-#  "raw_buffer_concentration_in_anaesthetic",
-#  "raw_anesthetic_concentration_in_recirculation",
-#  "raw_buffer_concentration_in_recirculation",
-  "raw_catched_date_time",
-  "raw_tag_fk",
-  "raw_capture_latitude",
-  "raw_capture_longitude",
-  "raw_release_latitude",
-  "raw_release_longitude",
-#  "raw_surgery_latitude",
-#  "raw_surgery_longitude",
-#  "raw_recapture_date",
-#  "raw_implant_type",
-#  "raw_implant_method",
-  "raw_date_modified",
-  "raw_date_created",
-  "raw_release_location",
-  "raw_length3",
-  "raw_length3_type",
-  "raw_length3_units",
-  "raw_length4",
-  "raw_length4_type",
-  "raw_length4_units",
-  "raw_weight",
-  "raw_end_date_tag",
-  "raw_capture_method",
-  "raw_project_fk",
-  "raw_animal_project",
-  "raw_animal_project_name",
-  "raw_animal_project_code",
-  "raw_animal_moratorium",
-  "raw_network_project",
-  "raw_network_project_name",
-  "raw_network_project_code",
-  "raw_network_moratorium"
+```{r eval}
+tag_animal_group_by <- c(
+  "detections_transmitter",
+#  "detections_transmitter_name",
+#  "detections_transmitter_serial",
+#  "detections_sensor_value",
+#  "detections_sensor_unit",
+#  "detections_sensor2_value",
+#  "detections_sensor2_unit",
+  "tags_type",
+  "tags_model",
+  "tags_tag_code_space",
+  "tags_owner_pi",
+  "tags_owner_organization",
+  "tags_min_delay",
+  "tags_max_delay",
+  "tags_frequency",
+  "tags_acoustic_tag_type",
+#  "tags_sensor_type",
+#  "tags_intercept",
+#  "tags_slope",
+#  "calc_sensor_value_depth_meters",
+  "animals_person_id",
+  "animals_animal_id",
+  "animals_scientific_name",
+#  "animals_common_name",
+  "animals_length",
+  "animals_length_type",
+  "animals_length_units",
+  "animals_length2",
+  "animals_length2_type",
+  "animals_length2_units",
+  "animals_weight_units",
+#  "animals_age",
+#  "animals_age_units",
+  "animals_sex",
+  "animals_life_stage",
+  "animals_capture_location",
+  "animals_capture_depth",
+  "animals_utc_release_date_time",
+  "animals_comments",
+#  "animals_est_tag_life",
+  "animals_wild_or_hatchery",
+#  "animals_stock",
+#  "animals_dna_sample_taken",
+  "animals_treatment_type",
+#  "animals_dissolved_oxygen",
+#  "animals_sedative",
+#  "animals_sedative_concentration",
+#  "animals_temperature_change",
+#  "animals_holding_temperature",
+#  "animals_preop_holding_period",
+#  "animals_post_op_holding_period",
+  "animals_surgery_location",
+  "animals_date_of_surgery",
+  "animals_anaesthetic",
+#  "animals_buffer",
+  "animals_anaesthetic_concentration",
+#  "animals_buffer_concentration_in_anaesthetic",
+#  "animals_anesthetic_concentration_in_recirculation",
+#  "animals_buffer_concentration_in_recirculation",
+  "animals_catched_date_time",
+  "animals_tag_fk",
+  "animals_capture_latitude",
+  "animals_capture_longitude",
+  "animals_release_latitude",
+  "animals_release_longitude",
+#  "animals_surgery_latitude",
+#  "animals_surgery_longitude",
+#  "animals_recapture_date",
+#  "animals_implant_type",
+#  "animals_implant_method",
+  "animals_date_modified",
+  "animals_date_created",
+  "animals_release_location",
+  "animals_length3",
+  "animals_length3_type",
+  "animals_length3_units",
+  "animals_length4",
+  "animals_length4_type",
+  "animals_length4_units",
+  "animals_weight",
+  "animals_end_date_tag",
+  "animals_capture_method",
+  "animals_project_fk",
+  "animal_project_project",
+  "animal_project_name",
+  "animal_project_projectcode",
+  "animal_project_moratorium"
 )
 ```
 
@@ -748,30 +744,36 @@ Group by tag/animal information:
 
 ```{r}
 raw_data %>%
-  select(tag_animal_column_names) %>%
+  select(tag_animal_group_by) %>%
   group_by_all() %>%
   summarize(detections = n()) %>%
-  arrange(raw_transmitter) -> tag_animal
+  arrange(detections_transmitter) -> tag_animal
+```
+
+### Term mapping
+
+```{r}
+# TODO: Needs to be done
 ```
 
 ### Post-processing
 
-Preview data:
-
-```{r}
-head(tag_animal)
-```
-
 Number of records:
 
 ```{r}
-length(tag_animal)
+nrow(tag_animal)
 ```
 
-Remove `raw_` from column names:
+Remove the original columns:
+
+```{r eval=FALSE}
+tag_animal %<>% select(-one_of(tag_animal_colnames))
+```
+
+TEST: Preview data:
 
 ```{r}
-colnames(tag_animal) %<>% str_replace_all(., "raw_", "")
+head(tag_animal)
 ```
 
 Save to CSV:
