@@ -410,7 +410,7 @@ nrow(occurrence)
 #### kingdom
 
 ```{r}
-occurrence %<>% mutate(kingdom = "animalia")
+occurrence %<>% mutate(kingdom = "Animalia")
 ```
 
 Some other higher classication terms could be populated, but with the limited number of species it's not really useful as extra filters.
