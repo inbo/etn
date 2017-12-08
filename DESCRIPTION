@@ -2,7 +2,7 @@ Package: etn
 Title: Access and Process Data from the European Tracking Network
 Version: 0.1.0
 Authors@R: c(
-    person("Peter", "Desmet", email = "peter.desmet@inbo.be", role = "aut")
+    person("Peter", "Desmet", email = "peter.desmet@inbo.be", role = "aut"),
     person("Stijn", "Van Hoey", email = "stijn.vanhoey@inbo.be", role = "aut"))
 Description: Package with functions to access and process data from the European Tracking Network hosted by VLIZ.
 Depends: R (>= 3.4.2)
