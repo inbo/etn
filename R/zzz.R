@@ -17,7 +17,7 @@ check_connection  <- function(connection) {
 #' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
 #' check_null_or_value("animal", c("animal", "network"), "project_type")
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
-#' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type") # TODO
+#' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
 check_null_or_value <- function(arg, options = NULL, arg_name) {
   if (!is.null(arg)) {
     assert_that(all(arg %in% options),
