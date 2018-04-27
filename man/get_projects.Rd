@@ -7,6 +7,7 @@
 get_projects(connection, project_type = NULL)
 }
 \arguments{
+
 \item{connection}{A connection to the ETN database.}
 
 \item{project_type}{(string) animal or network.}
