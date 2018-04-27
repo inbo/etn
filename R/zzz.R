@@ -6,10 +6,12 @@ check_connection  <- function(connection) {
 
 #' Valid input is either NULL or option of list
 #'
-#' @param arg
-#' @param options
-#' @param arg_name
-#' @return
+#' @param arg The input argument provided by the user.
+#' @param options A vector of valid inputs for the argument.
+#' @param arg_name The name of the argument used in the function to test.
+#'
+#' @return If no error, TRUE.
+#'
 #' @export
 #'
 #' @examples

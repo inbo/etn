@@ -1,21 +1,22 @@
-# projects_view
-
-
 #' Get project overview
 #'
-#' When no project_type ...
+#' Get an overview of the
 #'
-#'
-#' @param connection
+#' @param connection connection to the ETN database
 #' @param project_type animal | network
 #'
 #' @return data.frame
+#'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
 #' @examples
+#' \dontrun(
+#' get_projects()
+#' get_projects(project_type = "animal")
+#' )
 get_projects <- function(connection, project_type = NULL) {
 
   check_connection(connection)
