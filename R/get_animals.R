@@ -1,16 +1,17 @@
 #' Get animals data
 #'
-#' ...
+#' This function retrieves all or a subset of animals data.
 #'
-#' @param connection
-#' @param network_project
-#' @param animal_project
-#' @param scientific_name
+#' @param connection A valid connection to ETN database.
+#' @param network_project (string) One or more network projects.
+#' @param animal_project (string) One or more animal projects.
+#' @param scientific_name (string) One or more scientific names.
 #'
-#' @return
+#' @return A data.frame.
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # all animals
 #' animals <- get_animals(con)
 #'
@@ -18,6 +19,7 @@
 #' animals <- get_animals(con, network_project = "demer",
 #'                        scientific_name = c("Rutilus rutilus",
 #'                        "Squalius cephalus"))
+#' }
 get_animals <- function(connection,
                         network_project = NULL,
                         animal_project = NULL,
@@ -69,7 +71,12 @@ get_animals <- function(connection,
 
 }
 
-#' support function to get unique set of scientific names
+#' Support function to get unique set of scientific names
+#'
+#' This function retrieves all unique scientific names
+#' @param connection A valid connection to ETN database.
+#'
+#' @return A vector of all scientific names present in vliz.animals_view.
 scientific_names <- function(connection) {
 
   query <- glue_sql(
