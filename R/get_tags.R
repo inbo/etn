@@ -17,7 +17,7 @@ get_tags <- function(connection,
       FROM vliz.tags
         LEFT JOIN vliz.animal_tag_release ON (animal_tag_release.tag_fk = tags.id_pk)
         LEFT JOIN vliz.animals_view animals ON (animals.id_pk = animal_tag_release.animal_fk)
-      WHERE projectcode IN ({project*}) OR projectcode IS NULL",
+      WHERE projectcode IN ({project*})",
     project = animal_project,
     .con = connection
   )
