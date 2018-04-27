@@ -21,18 +21,11 @@ get_animals <- function(connection,
   if (is.null(animal_project)) {
     animal_project = valid_animals
   }
-
-  # see https://github.com/inbo/etn/issues/18
-  projects <- data.frame(projectcode = c(network_project, animal_project),
-                         stringsAsFactors = FALSE)
-  project_names <- get_projects(connection) %>%
-    select(projectcode, name) %>%
-    right_join(projects, by = "projectcode") %>%
-    pull(name)
+  project_names <- unique(c(network_project, animal_project))
 
   animals_query <- glue_sql(
     "SELECT * FROM vliz.animals_view
-    WHERE projectname IN ({projects*})",
+    WHERE projectcode IN ({projects*})",
     projects = project_names,
     .con = connection
   )
