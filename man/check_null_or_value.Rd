@@ -6,7 +6,6 @@
 \usage{
 check_null_or_value(arg, options = NULL, arg_name)
 }
-
 \arguments{
 \item{arg}{The input argument provided by the user.}
 
@@ -17,7 +16,9 @@ check_null_or_value(arg, options = NULL, arg_name)
 \value{
 If no error, TRUE.
 }
-
+\description{
+Valid input is either NULL or option of list
+}
 \examples{
 check_null_or_value("ddsf", c("animal", "network"), "project_type")
 check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")

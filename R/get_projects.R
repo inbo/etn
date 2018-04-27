@@ -3,7 +3,7 @@
 #' Get an overview of the projects available on ETN database.
 #'
 #' @param connection A connection to the ETN database.
-#' @param project_type (string) animal or network.
+#' @param project_type (string) Either animal or network.
 #'
 #' @return A data.frame.
 #'
@@ -13,10 +13,10 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @examples
-#' \dontrun(
+#' \dontrun{
 #' get_projects()
 #' get_projects(project_type = "animal")
-#' )
+#' }
 get_projects <- function(connection, project_type = NULL) {
 
   check_connection(connection)

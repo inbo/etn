@@ -2,13 +2,11 @@
 % Please edit documentation in R/connect_to_etn.R
 \name{connect_to_etn}
 \alias{connect_to_etn}
-
 \title{Provide connection to the database with the user credentials.}
 \usage{
 connect_to_etn(username, password)
 }
 \arguments{
-
 \item{username}{(string) username to use for the  connection.}
 
 \item{password}{(string) password to use for the connection.}

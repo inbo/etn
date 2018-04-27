@@ -9,7 +9,7 @@
 #' @importFrom DBI dbConnect
 #' @importFrom odbc odbc
 connect_to_etn <-function(username, password) {
-  conn <- dbConnect(odbc::odbc(), ETN_ODBC_DSN,
+  conn <- DBI::dbConnect(odbc::odbc(), ETN_ODBC_DSN,
                     UID = paste("", tolower(username), "", sep = ""),
                     PWD = paste("", password, "", sep = ""))
   return(conn)
