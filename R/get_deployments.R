@@ -25,6 +25,8 @@ receiver_status_vocabulary <- c("Available", "Lost", "Broken",
 #' # Deployments subset of projects and receiver status
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"),
 #'                 receiver_status = "Active")
+#' # Deployments subset of receiver status
+#' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #' }
 get_deployments <- function(connection,
                             network_project = NULL,
