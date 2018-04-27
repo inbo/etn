@@ -1,16 +1,12 @@
-
-receiver_status_vocabulary <- c("Available", "Lost", "Broken",
-                                "Active", "Returned to manufacturer")
-
 #' Get deployments data
 #'
-#' ...
+#' This function retrieves all or specific deployments data.
 #'
 #' @param connection A valid connection
-#' @param network_project One or more network projects
-#' @param receiver_status One or more receiver status
+#' @param network_project (string) One or more network projects
+#' @param receiver_status (string) One or more receiver status
 #'
-#' @return data.frame
+#' @return A data.frame
 #'
 #' @export
 #'
@@ -56,3 +52,6 @@ get_deployments <- function(connection,
   deployments <- dbGetQuery(connection, deployments_query)
   deployments
 }
+
+receiver_status_vocabulary <- c("Available", "Lost", "Broken",
+                                "Active", "Returned to manufacturer")
