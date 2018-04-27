@@ -2,11 +2,11 @@
 #'
 #' This function retrieves all or specific deployments data.
 #'
-#' @param connection A valid connection
-#' @param network_project (string) One or more network projects
-#' @param receiver_status (string) One or more receiver status
+#' @param connection A valid connection with the ETN database.
+#' @param network_project (string) One or more network projects.
+#' @param receiver_status (string) One or more receiver status.
 #'
-#' @return A data.frame
+#' @return A data.frame.
 #'
 #' @export
 #'
@@ -15,13 +15,13 @@
 #' # All deployments
 #' get_deployments(con)
 #'
-#' # Deployments is a  subset of projects
+#' # Deployments of a subset of projects
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"))
 #'
-#' # Deployments is a subset of projects and receiver status
+#' # Deployments of a subset of projects and receiver status
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"),
 #'                 receiver_status = "Active")
-#' # Deployments is a subset of receiver status
+#' # Deployments of a subset of receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #' }
 get_deployments <- function(connection,
