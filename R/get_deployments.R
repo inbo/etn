@@ -6,26 +6,26 @@ receiver_status_vocabulary <- c("Available", "Lost", "Broken",
 #'
 #' ...
 #'
-#' @param connection
-#' @param network_project
-#' @param receiver_status
+#' @param connection A valid connection
+#' @param network_project One or more network projects
+#' @param receiver_status One or more receiver status
 #'
 #' @return data.frame
 #'
 #' @export
 #'
 #' @examples
-#' \notrun{
+#' \dontrun{
 #' # All deployments
 #' get_deployments(con)
 #'
-#' # Deployments subset of projects
+#' # Deployments is a  subset of projects
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"))
 #'
-#' # Deployments subset of projects and receiver status
+#' # Deployments is a subset of projects and receiver status
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"),
 #'                 receiver_status = "Active")
-#' # Deployments subset of receiver status
+#' # Deployments is a subset of receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #' }
 get_deployments <- function(connection,
