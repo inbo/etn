@@ -26,9 +26,9 @@ connect_to_etn <-function(username, password) {
                               readOnlyOptimize=TRUE)
     return(conn)
   } else if (current_system == "Linux") {
-    conn <- odbcConnect(ETN_ODBC_DSN,
-                        paste("",tolower(username),"", sep=""),
-                        paste("",password,"", sep=""))
+    conn <- dbConnect(odbc::odbc(), ETN_ODBC_DSN,
+                     UID = paste("",tolower(username),"", sep=""),
+                     PWD = paste("",password,"", sep=""))
     return(conn)
   }
 }
