@@ -2,6 +2,7 @@
 
 export(check_null_or_value)
 export(connect_to_etn)
+export(get_animals)
 export(get_deployments)
 export(get_projects)
 importFrom(DBI,dbConnect)

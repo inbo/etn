@@ -1,21 +1,21 @@
-
-ETN_SERVER<-"dppg.vliz.be"
-ETN_ODBC_DSN<-"ETN"
-ETN_DBNAME<-"ETN"
-
-#' Provide connection to the database with the user credentials
+#' Provide connection to the database with the user credentials.
 #'
-#' @param username char username to use the connection
-#' @param password char password to use the connection
+#' @param username (string) username to use for the  connection.
+#' @param password (string) password to use for the connection.
 #'
-#' @return conn ODBC connection to the database
+#' @return conn ODBC connection to ETN database.
 #' @export
 #'
 #' @importFrom DBI dbConnect
 #' @importFrom odbc odbc
 connect_to_etn <-function(username, password) {
-  conn <- dbConnect(odbc::odbc(), ETN_ODBC_DSN,
+  conn <- DBI::dbConnect(odbc::odbc(), ETN_ODBC_DSN,
                     UID = paste("", tolower(username), "", sep = ""),
                     PWD = paste("", password, "", sep = ""))
   return(conn)
 }
+
+#' ETN database informations
+ETN_SERVER<-"dppg.vliz.be"
+ETN_ODBC_DSN<-"ETN"
+ETN_DBNAME<-"ETN"

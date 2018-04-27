@@ -2,18 +2,18 @@
 % Please edit documentation in R/connect_to_etn.R
 \name{connect_to_etn}
 \alias{connect_to_etn}
-\title{Provide connection to the database with the user credentials}
+\title{Provide connection to the database with the user credentials.}
 \usage{
 connect_to_etn(username, password)
 }
 \arguments{
-\item{username}{char username to use the connection}
+\item{username}{(string) username to use for the  connection.}
 
-\item{password}{char password to use the connection}
+\item{password}{(string) password to use for the connection.}
 }
 \value{
-conn ODBC connection to the database
+conn ODBC connection to ETN database.
 }
 \description{
-Provide connection to the database with the user credentials
+Provide connection to the database with the user credentials.
 }

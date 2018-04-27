@@ -7,19 +7,19 @@
 get_projects(connection, project_type = NULL)
 }
 \arguments{
-\item{connection}{connection to the ETN database}
+\item{connection}{A connection to the ETN database.}
 
-\item{project_type}{animal | network}
+\item{project_type}{(string) Either animal or network.}
 }
 \value{
-data.frame
+A data.frame.
 }
 \description{
-Get an overview of the
+Get an overview of the projects available on ETN database.
 }
 \examples{
-\dontrun(
+\dontrun{
 get_projects()
 get_projects(project_type = "animal")
-)
+}
 }
