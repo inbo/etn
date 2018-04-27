@@ -12,7 +12,9 @@ ETN_DBNAME<-"ETN"
 #' @return conn ODBC connection to the database
 #' @export
 #'
-#' @importFrom RODBC odbcDriverConnect odbcConnect
+#' @importFrom RODBC odbcDriverConnect
+#' @importFrom DBI dbConnect
+#' @importFrom odbc odbc
 connect_to_etn <-function(username, password) {
 
   current_system <- Sys.info()[['sysname']]
@@ -21,14 +23,14 @@ connect_to_etn <-function(username, password) {
     conn_string <- paste('driver={PostgreSQL Unicode(x64)};server=', ETN_SERVER,
                          ';username=', tolower(username),
                          ';password=', password,
-                         ';database=', ETN_DBNAME, sep="");
+                         ';database=', ETN_DBNAME, sep = "");
     conn <- odbcDriverConnect(cnnstr,
-                              readOnlyOptimize=TRUE)
+                              readOnlyOptimize = TRUE)
     return(conn)
   } else if (current_system == "Linux") {
-    conn <- odbcConnect(ETN_ODBC_DSN,
-                        paste("",tolower(username),"", sep=""),
-                        paste("",password,"", sep=""))
+    conn <- dbConnect(odbc::odbc(), ETN_ODBC_DSN,
+                      UID = paste("", tolower(username), "", sep = ""),
+                      PWD = paste("", password, "", sep = ""))
     return(conn)
   }
 }

@@ -1,3 +1,4 @@
+# vliz.animals_view
 
 get_animals <- function(connection,
                         netwerk_project = NULL,
@@ -6,7 +7,7 @@ get_animals <- function(connection,
   NULL
 
   # mainquery <- "
-  #   SELECT * from vliz.detections_view
+  #   SELECT * from vliz.animals_view  # or animals table?
   #   WHERE datetime  >= ? and datetime <= ?
   #   "
   # data <- data.frame(start_date, end_date)
