@@ -1,3 +1,20 @@
+#' Get tags metadata
+#'
+#' At the moment, only tags that can be linked to a projectcode are returned to
+#' the user.
+#'
+#' @param connection
+#' @param animal_project
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   get_tags(con)
+#'   get_tags(con, animal_project = c("phd_reubens"))
+#' }
+
 get_tags <- function(connection,
                      animal_project = NULL) {
 
