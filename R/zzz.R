@@ -1,5 +1,3 @@
-
-
 check_connection  <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database.")
@@ -10,7 +8,7 @@ check_connection  <- function(connection) {
 #'
 #' @param arg
 #' @param options
-#'
+#' @param arg_name
 #' @return
 #' @export
 #'
