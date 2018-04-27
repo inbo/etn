@@ -2,6 +2,30 @@
 receiver_status_vocabulary <- c("Available", "Lost", "Broken",
                                 "Active", "Returned to manufacturer")
 
+#' Get deployments data
+#'
+#' ...
+#'
+#' @param connection
+#' @param network_project
+#' @param receiver_status
+#'
+#' @return data.frame
+#'
+#' @export
+#'
+#' @examples
+#' \notrun{
+#' # All deployments
+#' get_deployments(con)
+#'
+#' # Deployments subset of projects
+#' get_deployments(con, network_project = c("zeeschelde", "ws1"))
+#'
+#' # Deployments subset of projects and receiver status
+#' get_deployments(con, network_project = c("zeeschelde", "ws1"),
+#'                 receiver_status = "Active")
+#' }
 get_deployments <- function(connection,
                             network_project = NULL,
                             receiver_status = NULL) {
