@@ -22,8 +22,8 @@ check_connection  <- function(connection) {
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type") # TODO
 check_null_or_value <- function(arg, options = NULL, arg_name) {
   if (!is.null(arg)) {
-    assert_that(arg %in% options,
-        msg = glue("{arg} is not a valid input value for {arg_name} input argument.
+    assert_that(all(arg %in% options),
+        msg = glue("Not valid input value(s) for {arg_name} input argument.
                     Valid inputs are: {options*}.",
                    .transformer = collapse_transformer(sep = ", ",
                                                        last = " and ")
