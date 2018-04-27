@@ -1,4 +1,6 @@
-#' Get deployments data
+#' Get animals data
+#'
+#' ...
 #'
 #' @param connection
 #' @param network_project
@@ -9,7 +11,13 @@
 #' @export
 #'
 #' @examples
+#' # all animals
 #' animals <- get_animals(con)
+#'
+#' # all animals of the Demer project with given scientific name
+#' animals <- get_animals(con, network_project = "demer",
+#'                        scientific_name = c("Rutilus rutilus",
+#'                        "Squalius cephalus"))
 get_animals <- function(connection,
                         network_project = NULL,
                         animal_project = NULL,
