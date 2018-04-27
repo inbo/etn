@@ -1,9 +1,26 @@
-# vliz.deployments_view
 
+receiver_status_vocabulary <- c("Available", "Lost", "Broken",
+                                "Active", "Returned to manufacturer")
 
 get_deployments <- function(connection,
-                            netwerk-project = NULL,
-                            active = NULL) {
-  NULL
+                            network_project = NULL,
+                            receiver_status = NULL) {
 
+  check_connection(connection)
+  valid_networks <- get_projects(connection, project_type = "network") %>%
+    pull(projectcode)
+  check_null_or_value(network_project, valid_networks, "network_project")
+  check_null_or_value(receiver_status, receiver_status_vocabulary,
+                      "receiver_status")
+  if (is.null(receiver_status)) {
+    receiver_status = receiver_status_vocabulary
+  }
+
+  deployments_query <- glue_sql(
+    "SELECT * FROM vliz.deployments_view
+    WHERE receiver_status IN {receiver_status*}",
+    .con = connection
+  )
+  deployments <- dbGetQuery(connection, deployments_query)
+  deployments
 }
