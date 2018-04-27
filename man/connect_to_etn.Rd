@@ -10,8 +10,6 @@ connect_to_etn(username, password)
 \item{username}{char username to use the connection}
 
 \item{password}{char password to use the connection}
-
-\item{server}{char VLIZ server name of the ETN data}
 }
 \value{
 conn ODBC connection to the database

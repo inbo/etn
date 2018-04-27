@@ -6,6 +6,16 @@
 \usage{
 check_null_or_value(arg, options = NULL, arg_name)
 }
+\arguments{
+\item{arg}{The input argument provided by the user.}
+
+\item{options}{A vector of valid inputs for the argument.}
+
+\item{arg_name}{The name of the argument used in the function to test.}
+}
+\value{
+If no error, TRUE.
+}
 \description{
 Valid input is either NULL or option of list
 }

@@ -7,11 +7,19 @@
 get_projects(connection, project_type = NULL)
 }
 \arguments{
+\item{connection}{connection to the ETN database}
+
 \item{project_type}{animal | network}
 }
 \value{
 data.frame
 }
 \description{
-When no project_type ...
+Get an overview of the
+}
+\examples{
+\dontrun(
+get_projects()
+get_projects(project_type = "animal")
+)
 }

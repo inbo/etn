@@ -7,26 +7,30 @@
 get_deployments(connection, network_project = NULL, receiver_status = NULL)
 }
 \arguments{
-\item{receiver_status}{}
+\item{connection}{A valid connection with the ETN database.}
+
+\item{network_project}{(string) One or more network projects.}
+
+\item{receiver_status}{(string) One or more receiver status.}
 }
 \value{
-data.frame
+A data.frame.
 }
 \description{
-...
+This function retrieves all or specific deployments data.
 }
 \examples{
-\\notrun{
+\dontrun{
 # All deployments
 get_deployments(con)
 
-# Deployments subset of projects
+# Deployments of a subset of projects
 get_deployments(con, network_project = c("zeeschelde", "ws1"))
 
-# Deployments subset of projects and receiver status
+# Deployments of a subset of projects and receiver status
 get_deployments(con, network_project = c("zeeschelde", "ws1"),
                 receiver_status = "Active")
-# Deployments subset of receiver status
+# Deployments of a subset of receiver status
 get_deployments(con, receiver_status = c("Broken", "Lost"))
 }
 }
