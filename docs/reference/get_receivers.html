@@ -148,14 +148,16 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
+
 <span class='co'># Get all receivers data</span>
-<span class='fu'>get_receivers</span>(<span class='no'>connection</span>)
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>)
 
 <span class='co'># Get receivers data filtered on a single network project</span>
-<span class='fu'>get_receivers</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
 
 <span class='co'># Get receivers data filtered on a multiple network projects</span>
-<span class='fu'>get_receivers</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"demer"</span>, <span class='st'>"dijle"</span>))
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"demer"</span>, <span class='st'>"dijle"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
