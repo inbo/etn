@@ -1,6 +1,7 @@
 #' Get deployments data
 #'
-#' Retrieve all or specific deployments data.
+#' Get all or specific, filtered by network project and/or the status of the
+#' receiver, deployments data.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
@@ -12,7 +13,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull
+#' @importFrom dplyr pull %>%
 #'
 #' @examples
 #' \dontrun{
@@ -25,6 +26,7 @@
 #' # Deployments of a subset of projects and receiver status
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"),
 #'                 receiver_status = "Active")
+#'
 #' # Deployments of a subset of receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #' }
