@@ -30,6 +30,19 @@ get_detections <- function(connection, network_project = NULL,
   }
 
   # check the start- and enddate inputs
+  if (is.null(start_date)) {
+    # use an arbitrary early date for this project
+    start_date <- check_datetime("1970", "start_date")
+  } else {
+    start_date <- check_datetime(start_date, "start_date")
+  }
+
+  if (is.null(end_date)) {
+    # use today
+    end_date <- as.character(Sys.Date())
+  } else {
+    end_date <- check_datetime(end_date, "end_date")
+  }
 
   # check the station inputs
 
@@ -42,21 +55,18 @@ get_detections <- function(connection, network_project = NULL,
     "SELECT * FROM vliz.detections_view
     WHERE network_project_code IN ({network_project*})
       AND animal_project_code IN ({animal_project*})
-    LIMIT 100",
+      AND datetime > {start_date}
+      AND datetime < {end_date}
+    LIMIT {nrows}",
     network_project = network_project,
     animal_project = animal_project,
+    start_date = start_date,
+    end_date = end_date,
+    nrows = as.character(limit),
     .con = connection
   )
   detections <- dbGetQuery(connection, detections_query)
   detections
 
-
-  # mainquery <- "
-  #   SELECT * from vliz.detections_view
-  #   WHERE datetime  >= ? and datetime <= ? AND
-  #         ...
-  #   "
-  # data <- data.frame(start_date, end_date)
-  # sqlExecute(connection, mainquery, data, fetch = TRUE)
-
 }
+
