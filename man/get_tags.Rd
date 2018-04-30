@@ -15,7 +15,7 @@ get_tags(connection, animal_project = NULL)
 A data.frame.
 }
 \description{
-Get the metadate about the transmitter tags. At the moment, only tags that
+Get the metadata about the transmitter tags. At the moment, only tags that
 can be linked to a projectcode are returned to the user.
 }
 \examples{
