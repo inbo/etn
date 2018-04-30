@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr filter %>%
+#' @importFrom dplyr filter_ %>%
 #'
 #' @examples
 #' \dontrun{
@@ -37,7 +37,7 @@ get_projects <- function(connection, project_type = NULL) {
   projects <- dbGetQuery(connection, projects)
 
   if (!is.null(project_type)) {
-    projects <- projects %>% filter(type == project_type)
+    projects <- projects %>% filter_("type" == project_type)
   }
   projects
 }

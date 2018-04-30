@@ -43,14 +43,14 @@ get_animals <- function(connection,
   # valid inputs on network projects
   valid_network_projects <- get_projects(connection,
                                          project_type = "network") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(network_project, valid_network_projects,
                       "network_project")
 
   # valid inputs on animal projects
   valid_animals_projects <- get_projects(connection,
                                          project_type = "animal") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(animal_project, valid_animals_projects,
                       "animal_project")
 
@@ -89,6 +89,9 @@ get_animals <- function(connection,
 #' This function retrieves all unique scientific names
 #' @param connection A valid connection to ETN database.
 #'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
 #' @return A vector of all scientific names present in vliz.animals_view.
 scientific_names <- function(connection) {
 
@@ -97,7 +100,6 @@ scientific_names <- function(connection) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data %>%
-    pull(scientific_name)
+  data$scientific_name
 }
 

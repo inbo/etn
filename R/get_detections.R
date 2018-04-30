@@ -53,7 +53,7 @@ get_detections <- function(connection, network_project = NULL,
 
   # check the network project inputs
   valid_network_projects <- get_projects(connection, project_type = "network") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(network_project, valid_network_projects, "network_project")
   if (is.null(network_project)) {
     network_project = valid_network_projects
@@ -61,7 +61,7 @@ get_detections <- function(connection, network_project = NULL,
 
   # check the animal project inputs
   valid_animal_projects <- get_projects(connection, project_type = "animal") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(animal_project,  valid_animal_projects, "animal_project")
   if (is.null(animal_project)) {
     animal_project = valid_animal_projects
@@ -140,7 +140,6 @@ get_detections <- function(connection, network_project = NULL,
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
 #'
 #' @return A vector of all deployment_station_names present in vliz.deployments.
 deployment_station_names <- function(connection) {
@@ -150,8 +149,7 @@ deployment_station_names <- function(connection) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data %>%
-    pull(station_name)
+  data$station_name
 }
 
 #' Support function to get unique set of transmitters (tag_code_space)
@@ -164,7 +162,6 @@ deployment_station_names <- function(connection) {
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
 #'
 #' @return A vector of all transmitter present in vliz.tags.
 transmitters <- function(connection) {
@@ -174,7 +171,6 @@ transmitters <- function(connection) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data %>%
-    pull(tag_code_space)
+  data$tag_code_space
 }
 

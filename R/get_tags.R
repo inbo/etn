@@ -31,7 +31,7 @@ get_tags <- function(connection,
   # valid inputs on animal projects
   valid_animals_projects <-
     get_projects(connection, project_type = "animal") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(animal_project,  valid_animals_projects, "animal_project")
   if (is.null(animal_project)) {
     animal_project = valid_animals_projects
