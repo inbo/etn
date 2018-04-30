@@ -1,6 +1,7 @@
 #' Get deployments data
 #'
-#' This function retrieves all or specific deployments data.
+#' Get all or specific, filtered by network project and/or the status of the
+#' receiver, deployments data.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
@@ -9,6 +10,10 @@
 #' @return A data.frame.
 #'
 #' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#' @importFrom dplyr pull %>%
 #'
 #' @examples
 #' \dontrun{
@@ -21,6 +26,7 @@
 #' # Deployments of a subset of projects and receiver status
 #' get_deployments(con, network_project = c("zeeschelde", "ws1"),
 #'                 receiver_status = "Active")
+#'
 #' # Deployments of a subset of receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #' }
@@ -30,7 +36,7 @@ get_deployments <- function(connection,
 
   check_connection(connection)
   valid_networks <- get_projects(connection, project_type = "network") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(network_project, valid_networks, "network_project")
   check_null_or_value(receiver_status, receiver_status_vocabulary,
                       "receiver_status")

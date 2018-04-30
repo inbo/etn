@@ -1,7 +1,7 @@
 #' Get tags metadata
 #'
-#' At the moment, only tags that can be linked to a projectcode are returned to
-#' the user.
+#' Get the metadata about the transmitter tags. At the moment, only tags that
+#' can be linked to a projectcode are returned to the user.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param animal_project (string) One or more animal projects.
@@ -12,14 +12,17 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull
+#' @importFrom dplyr pull %>%
 #'
 #' @examples
 #' \dontrun{
-#'   get_tags(con)
-#'   get_tags(con, animal_project = c("phd_reubens"))
+#' # Get the metadata of all transmitter tags
+#' get_tags(con)
+#'
+#' # Get the metadata of the tags linked to specific project(s)
+#' get_tags(con, animal_project = "phd_reubens")
+#' get_tags(con, animal_project = c("phd_reubens", "2013_albertkanaal"))
 #' }
-
 get_tags <- function(connection,
                      animal_project = NULL) {
 
@@ -28,7 +31,7 @@ get_tags <- function(connection,
   # valid inputs on animal projects
   valid_animals_projects <-
     get_projects(connection, project_type = "animal") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(animal_project,  valid_animals_projects, "animal_project")
   if (is.null(animal_project)) {
     animal_project = valid_animals_projects

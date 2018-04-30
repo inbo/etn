@@ -1,6 +1,7 @@
 #' Get animals data
 #'
-#' This function retrieves all or a subset of animals data.
+#' Get all or a subset of animals data. Filter options are the network
+#' project(s), the animal project(s) and/or the scientific name of the animals.
 #'
 #' @param connection A valid connection to ETN database.
 #' @param network_project (string) One or more network projects.
@@ -8,12 +9,24 @@
 #' @param scientific_name (string) One or more scientific names.
 #'
 #' @return A data.frame.
+#'
 #' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#' @importFrom dplyr pull %>%
 #'
 #' @examples
 #' \dontrun{
 #' # all animals
 #' animals <- get_animals(con)
+#'
+#' # all animals of the Demer project
+#' animals <- get_animals(con, network_project = "demer")
+#'
+#' # all animals of all projects with given scientific name
+#' animals <- get_animals(con, scientific_name = c("Rutilus rutilus",
+#'                        "Squalius cephalus"))
 #'
 #' # all animals of the Demer project with given scientific name
 #' animals <- get_animals(con, network_project = "demer",
@@ -30,14 +43,14 @@ get_animals <- function(connection,
   # valid inputs on network projects
   valid_network_projects <- get_projects(connection,
                                          project_type = "network") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(network_project, valid_network_projects,
                       "network_project")
 
   # valid inputs on animal projects
   valid_animals_projects <- get_projects(connection,
                                          project_type = "animal") %>%
-    pull(projectcode)
+    pull("projectcode")
   check_null_or_value(animal_project, valid_animals_projects,
                       "animal_project")
 
@@ -76,6 +89,9 @@ get_animals <- function(connection,
 #' This function retrieves all unique scientific names
 #' @param connection A valid connection to ETN database.
 #'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
 #' @return A vector of all scientific names present in vliz.animals_view.
 scientific_names <- function(connection) {
 
@@ -84,7 +100,6 @@ scientific_names <- function(connection) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data %>%
-    pull(scientific_name)
+  data$scientific_name
 }
 

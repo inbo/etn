@@ -17,7 +17,8 @@ get_deployments(connection, network_project = NULL, receiver_status = NULL)
 A data.frame.
 }
 \description{
-This function retrieves all or specific deployments data.
+Get all or specific, filtered by network project and/or the status of the
+receiver, deployments data.
 }
 \examples{
 \dontrun{
@@ -30,6 +31,7 @@ get_deployments(con, network_project = c("zeeschelde", "ws1"))
 # Deployments of a subset of projects and receiver status
 get_deployments(con, network_project = c("zeeschelde", "ws1"),
                 receiver_status = "Active")
+
 # Deployments of a subset of receiver status
 get_deployments(con, receiver_status = c("Broken", "Lost"))
 }

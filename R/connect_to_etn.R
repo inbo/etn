@@ -1,9 +1,11 @@
-#' Provide connection to the database with the user credentials.
+#' Provide connection to the database using user credentials username and
+#' password.
 #'
-#' @param username (string) username to use for the  connection.
-#' @param password (string) password to use for the connection.
+#' @param username (character) Username to use for the  connection.
+#' @param password (character) Password to use for the connection.
 #'
 #' @return conn ODBC connection to ETN database.
+#'
 #' @export
 #'
 #' @importFrom DBI dbConnect
