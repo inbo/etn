@@ -1,3 +1,53 @@
-# reference: functions
+navbar:
+  title: ETN data access
+  type: default
+  left:
+  - icon: fa-home fa-lg
+    href: index.html
+  - text: Tutorials
+    href: articles/index.html
+    menu:
+    - text: Access data and metadata from etn
+      href: articles/access-etn-data.html
+  - text: Functions
+    href: reference/index.html
+  - text: Contributing
+    href: contributing.html
+  right:
+  - icon: fa-twitter fa-lg
+    href: https://twitter.com/lifewatchinbo
+  - icon: fa-github fa-lg
+    href: https://github.com/inbo/etn
 
-# articles: vignettes
+home:
+  links:
+  - text: Developed by Lifewatch INBO
+    href: https://lifewatch.inbo.be
+  - text: Check the online lifewatch data explorer
+    href: http://rshiny.lifewatch.be/ETN data/
+
+reference:
+  - title: "Connect to the database"
+    contents:
+      - connect_to_etn
+  - title: "Main metadata access functionalities"
+    desc: "Get access to metadata"
+    contents:
+      - get_projects
+      - get_receivers
+      - get_deployments
+      - get_animals
+      - get_tags
+  - title: "Main detection data access functionality"
+    desc: "Get access to raw detections data"
+    contents:
+      - get_detections
+
+articles:
+  - title: "Tutorial on the main downloading functionalities"
+    contents:
+    - access-etn-data
+
+template:
+  params:
+    bootswatch: yeti
