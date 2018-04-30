@@ -3,7 +3,7 @@
 #' Get an overview of the projects available on ETN database.
 #'
 #' @param connection A valid connection with the ETN database.
-#' @param project_type (string) Either animal or network.
+#' @param project_type (string) Either \code{animal} or \code{network}.
 #'
 #' @return A data.frame.
 #'
@@ -11,11 +11,18 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
+#' @importFrom dplyr filter
 #'
 #' @examples
 #' \dontrun{
+#' # Get a list of all projects
 #' get_projects()
+#'
+#' # Get a list of all animal projects
 #' get_projects(project_type = "animal")
+#'
+#' # Get a list of all network projects
+#' get_projects(project_type = "network")
 #' }
 get_projects <- function(connection, project_type = NULL) {
 
