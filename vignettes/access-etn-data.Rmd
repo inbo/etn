@@ -27,7 +27,7 @@ library(etn)
 
 When not installed, do not forget to install the package using the `devtools` package:
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE, echo=TRUE}
 # install.packages("devtools")
 devtools::install_github("inbo/etn")
 ```
