@@ -1,3 +1,6 @@
+
+MAX_PRINT <- 20
+
 check_connection  <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database.")
@@ -21,10 +24,20 @@ check_connection  <- function(connection) {
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
 check_null_or_value <- function(arg, options = NULL, arg_name) {
+  # dropna
+  options <- options[!is.na(options)]
+
+  # suppress too long messages
+  if (length(options) > MAX_PRINT) {
+    options_to_print <- c(options[1:MAX_PRINT], "others..")
+  } else {
+    options_to_print <- options
+  }
+  # provide user message
   if (!is.null(arg)) {
     assert_that(all(arg %in% options),
         msg = glue("Not valid input value(s) for {arg_name} input argument.
-                    Valid inputs are: {options*}.",
+                    Valid inputs are: {options_to_print*}.",
                    .transformer = collapse_transformer(sep = ", ",
                                                        last = " and ")
                    )
@@ -43,3 +56,38 @@ collapse_transformer <- function(regex = "[*]$", ...) {
     collapse(res, ...)
   }
 }
+
+#' Check if the string input can be converted to a date
+#'
+#' Returns FALSE or the cleaned character version of the date
+#'
+#' (acknowledgments to micstr/isdate.R)
+#'
+#' @param datetime string representation of a date
+#'
+#' @return FALSE | character
+#'
+#' @importFrom glue glue
+#' @importFrom lubridate parse_date-time
+#'
+#' @examples
+#' check_datetime("1985-11-21")
+#' check_datetime("1985-11")
+#' check_datetime("1985")
+#' check_datetime("1985-04-31")  # invalid date
+#' check_datetime("01-03-1973")  # invalid format
+check_datetime <- function(datetime, date_name = "start_date") {
+  parsed <- tryCatch(
+    parse_date_time(datetime, orders = c("ymd", "ym", "y")),
+    warning = function(warning) {
+      if (grepl("No formats found", warning$message)) {
+        stop(glue("The given {date_name}, {datetime}, is not in a valid ",
+                  "date format. Use a ymd format or shorter, ",
+                  "e.g. 2012-11-21, 2012-11 or 2012."))
+      } else {
+        stop(glue("The given {date_name}, {datetime} can not be interpreted",
+                  "as a valid date."))
+      } })
+  as.character(parsed)
+}
+
