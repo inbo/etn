@@ -18,6 +18,8 @@
 #'
 #' @examples
 #' \dontrun{
+#' con <- connect_to_etn(your_username, your_password)
+#'
 #' # all animals
 #' animals <- get_animals(con)
 #'

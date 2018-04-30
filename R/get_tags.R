@@ -17,6 +17,8 @@
 #'
 #' @examples
 #' \dontrun{
+#' con <- connect_to_etn(your_username, your_password)
+#'
 #' # Get the metadata of all transmitter tags
 #' get_tags(con)
 #'

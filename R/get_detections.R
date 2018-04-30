@@ -32,6 +32,8 @@
 #'
 #' @examples
 #' \dontrun{
+#' con <- connect_to_etn(your_username, your_password)
+#'
 #' # Get detection data filtered by the start year
 #' get_detections(con, start_date = "2017", limit = 100)
 #'
