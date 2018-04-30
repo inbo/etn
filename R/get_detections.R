@@ -50,7 +50,14 @@ get_detections <- function(connection, network_project = NULL,
   if (is.null(station_name)) {
     station_name = valid_station_names
   }
-  # check the tags inputs
+
+  # check the transmitter tags inputs
+  valid_transmitters <- transmitters(connection)
+  check_null_or_value(transmitter, valid_transmitters,
+                      "transmitter")
+  if (is.null(transmitter)) {
+    transmitter = valid_transmitters
+  }
 
   # check the limit input
   assert_that(is.number(limit))
@@ -61,11 +68,13 @@ get_detections <- function(connection, network_project = NULL,
       AND animal_project_code IN ({animal_project*})
       AND datetime > {start_date}
       AND datetime < {end_date}
+      AND transmitter IN ({transmitter*})
     LIMIT {nrows}",
     network_project = network_project,
     animal_project = animal_project,
     start_date = start_date,
     end_date = end_date,
+    transmitter = transmitter,
     nrows = as.character(limit),
     .con = connection
   )
@@ -91,5 +100,25 @@ station_names <- function(connection) {
   data <- dbGetQuery(connection, query)
   data %>%
     pull(station_name)
+}
+
+#' Support function to get unique set of transmitters (tag_code_space)
+#'
+#' This function retrieves all unique transmitters
+#'
+#' @param connection A valid connection to ETN database.
+#'
+#' @export
+#'
+#' @return A vector of all transmitter present in vliz.tags.
+transmitters <- function(connection) {
+
+  query <- glue_sql(
+    "SELECT DISTINCT tag_code_space FROM vliz.tags",
+    .con = connection
+  )
+  data <- dbGetQuery(connection, query)
+  data %>%
+    pull(tag_code_space)
 }
 
