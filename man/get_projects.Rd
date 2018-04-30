@@ -7,9 +7,9 @@
 get_projects(connection, project_type = NULL)
 }
 \arguments{
-\item{connection}{A connection to the ETN database.}
+\item{connection}{A valid connection with the ETN database.}
 
-\item{project_type}{(string) Either animal or network.}
+\item{project_type}{(string) Either \code{animal} or \code{network}.}
 }
 \value{
 A data.frame.
@@ -19,7 +19,13 @@ Get an overview of the projects available on ETN database.
 }
 \examples{
 \dontrun{
+# Get a list of all projects
 get_projects()
+
+# Get a list of all animal projects
 get_projects(project_type = "animal")
+
+# Get a list of all network projects
+get_projects(project_type = "network")
 }
 }

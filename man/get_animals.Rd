@@ -20,12 +20,20 @@ get_animals(connection, network_project = NULL, animal_project = NULL,
 A data.frame.
 }
 \description{
-This function retrieves all or a subset of animals data.
+Get all or a subset of animals data. Filter options are the network
+project(s), the animal project(s) and/or the scientific name of the animals.
 }
 \examples{
 \dontrun{
 # all animals
 animals <- get_animals(con)
+
+# all animals of the Demer project
+animals <- get_animals(con, network_project = "demer")
+
+# all animals of all projects with given scientific name
+animals <- get_animals(con, scientific_name = c("Rutilus rutilus",
+                       "Squalius cephalus"))
 
 # all animals of the Demer project with given scientific name
 animals <- get_animals(con, network_project = "demer",
