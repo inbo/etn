@@ -30,15 +30,18 @@ con <- connect_to_etn(your_username, your_password)
 # all animals
 animals <- get_animals(con)
 
-# all animals of the Demer project
-animals <- get_animals(con, network_project = "demer")
+# all animals of the "2012_leopoldkanaal" project
+animals <- get_animals(con, animal_project = "2012_leopoldkanaal")
+
+# all animals of the "2012_leopoldkanaal" and "phd_reubens"
+get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
 
 # all animals of all projects with given scientific name
 animals <- get_animals(con, scientific_name = c("Rutilus rutilus",
                        "Squalius cephalus"))
 
-# all animals of the Demer project with given scientific name
-animals <- get_animals(con, network_project = "demer",
+# all animals of the Leopold project with given scientific name
+animals <- get_animals(con, animal_project = "2012_leopoldkanaal",
                        scientific_name = c("Rutilus rutilus",
                        "Squalius cephalus"))
 }
