@@ -89,9 +89,14 @@ get_detections <- function(connection, network_project = NULL,
     transmitter = valid_transmitters
   }
 
-  # check the limit input - remark: LIMIT NULL is in postgres LIMIT ALL
-  if (!is.null(limit)) {
+  # check the limit input
+  if (is.null(limit)) {
+    sub_query <- glue_sql("LIMIT ALL", .con = connection)
+  } else {
     assert_that(is.number(limit))
+    sub_query <- glue_sql("LIMIT {limit}",
+                          limit = as.character(limit),
+                          .con = connection)
   }
 
   detections_query <- glue_sql(
@@ -102,14 +107,14 @@ get_detections <- function(connection, network_project = NULL,
       AND datetime < {end_date}
       AND deployment_station_name IN ({station_name*})
       AND transmitter IN ({transmitter*})
-    LIMIT {nrows}",
+    {sub_query}",
     network_project = network_project,
     animal_project = animal_project,
     start_date = start_date,
     end_date = end_date,
     station_name = deployment_station_name,
     transmitter = transmitter,
-    nrows = as.character(limit),
+    nrows = limit,
     .con = connection
   )
   detections <- dbGetQuery(connection, detections_query)
