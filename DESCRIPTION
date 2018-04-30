@@ -22,4 +22,8 @@ Imports:
         rlang
 URL: https://github.com/inbo/etn
 BugReports: https://github.com/inbo/etn/issues
-Suggests: testthat
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
