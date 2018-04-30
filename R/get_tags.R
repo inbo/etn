@@ -3,11 +3,16 @@
 #' At the moment, only tags that can be linked to a projectcode are returned to
 #' the user.
 #'
-#' @param connection
-#' @param animal_project
+#' @param connection A valid connection with the ETN database.
+#' @param animal_project (string) One or more animal projects.
 #'
-#' @return
+#' @return A data.frame.
+#'
 #' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#' @importFrom dplyr pull
 #'
 #' @examples
 #' \dontrun{
