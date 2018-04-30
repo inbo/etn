@@ -104,7 +104,7 @@ check_datetime <- function(datetime, date_name = "start_date") {
                   "date format. Use a ymd format or shorter, ",
                   "e.g. 2012-11-21, 2012-11 or 2012."))
       } else {
-        stop(glue("The given {date_name}, {datetime} can not be interpreted",
+        stop(glue("The given {date_name}, {datetime} can not be interpreted ",
                   "as a valid date."))
       } })
   as.character(parsed)
