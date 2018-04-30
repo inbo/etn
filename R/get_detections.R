@@ -61,8 +61,10 @@ get_detections <- function(connection, network_project = NULL,
     transmitter = valid_transmitters
   }
 
-  # check the limit input
-  assert_that(is.number(limit))
+  # check the limit input - remark: LIMIT NULL is in postgres LIMIT ALL
+  if (!is.null(limit)) {
+    assert_that(is.number(limit))
+  }
 
   detections_query <- glue_sql(
     "SELECT * FROM vliz.detections_view
