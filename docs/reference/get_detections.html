@@ -185,6 +185,8 @@ records are downloaded.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
+
 <span class='co'># Get detection data filtered by the start year</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 

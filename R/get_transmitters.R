@@ -1,7 +1,7 @@
-#' Get tags metadata
+#' Get transmitter metadata
 #'
-#' Get the metadata about the transmitter tags. At the moment, only tags that
-#' can be linked to a projectcode are returned to the user.
+#' Get the metadata about the transmitter tags. At the moment, only
+#' transmitters that can be linked to a projectcode are returned to the user.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param animal_project (string) One or more animal projects.
@@ -20,13 +20,13 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get the metadata of all transmitter tags
-#' get_tags(con)
+#' get_transmitters(con)
 #'
 #' # Get the metadata of the tags linked to specific project(s)
-#' get_tags(con, animal_project = "phd_reubens")
-#' get_tags(con, animal_project = c("phd_reubens", "2013_albertkanaal"))
+#' get_transmitters(con, animal_project = "phd_reubens")
+#' get_transmitters(con, animal_project = c("phd_reubens", "2013_albertkanaal"))
 #' }
-get_tags <- function(connection,
+get_transmitters <- function(connection,
                      animal_project = NULL) {
 
   check_connection(connection)
@@ -40,7 +40,7 @@ get_tags <- function(connection,
     animal_project = valid_animals_projects
   }
 
-  tags_query <- glue_sql("
+  transmitters_query <- glue_sql("
       SELECT tags.*, animals.projectcode
       FROM vliz.tags
         LEFT JOIN vliz.animal_tag_release ON (animal_tag_release.tag_fk = tags.id_pk)
@@ -49,7 +49,7 @@ get_tags <- function(connection,
     project = animal_project,
     .con = connection
   )
-  tags <- dbGetQuery(connection, tags_query)
-  tags
+  transmitters <- dbGetQuery(connection, transmitters_query)
+  transmitters
 
 }

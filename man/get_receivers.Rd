@@ -19,13 +19,15 @@ Get all or specific, filtered on network project, receiver data.
 }
 \examples{
 \dontrun{
+con <- connect_to_etn(your_username, your_password)
+
 # Get all receivers data
-get_receivers(connection)
+get_receivers(con)
 
 # Get receivers data filtered on a single network project
-get_receivers(connection, network_project = "demer")
+get_receivers(con, network_project = "demer")
 
 # Get receivers data filtered on a multiple network projects
-get_receivers(connection, network_project = c("demer", "dijle"))
+get_receivers(con, network_project = c("demer", "dijle"))
 }
 }

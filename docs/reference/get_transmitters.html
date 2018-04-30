@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get animals data — get_animals • etn</title>
+<title>Get transmitter metadata — get_transmitters • etn</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,10 +28,10 @@
 
 
 
-<meta property="og:title" content="Get animals data — get_animals" />
+<meta property="og:title" content="Get transmitter metadata — get_transmitters" />
 
-<meta property="og:description" content="Get all or a subset of animals data. Filter options are the network
-project(s), the animal project(s) and/or the scientific name of the animals." />
+<meta property="og:description" content="Get the metadata about the transmitter tags. At the moment, only
+transmitters that can be linked to a projectcode are returned to the user." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,39 +116,30 @@ project(s), the animal project(s) and/or the scientific name of the animals." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get animals data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_animals.R'><code>R/get_animals.R</code></a></small>
-    <div class="hidden name"><code>get_animals.Rd</code></div>
+    <h1>Get transmitter metadata</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_transmitters.R'><code>R/get_transmitters.R</code></a></small>
+    <div class="hidden name"><code>get_transmitters.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get all or a subset of animals data. Filter options are the network
-project(s), the animal project(s) and/or the scientific name of the animals.</p>
+    <p>Get the metadata about the transmitter tags. At the moment, only
+transmitters that can be linked to a projectcode are returned to the user.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_animals</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_transmitters</span>(<span class='no'>connection</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection to ETN database.</p></td>
-    </tr>
-    <tr>
-      <th>network_project</th>
-      <td><p>(string) One or more network projects.</p></td>
+      <td><p>A valid connection with the ETN database.</p></td>
     </tr>
     <tr>
       <th>animal_project</th>
       <td><p>(string) One or more animal projects.</p></td>
-    </tr>
-    <tr>
-      <th>scientific_name</th>
-      <td><p>(string) One or more scientific names.</p></td>
     </tr>
     </table>
     
@@ -161,20 +152,12 @@ project(s), the animal project(s) and/or the scientific name of the animals.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># all animals</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>)
+<span class='co'># Get the metadata of all transmitter tags</span>
+<span class='fu'>get_transmitters</span>(<span class='no'>con</span>)
 
-<span class='co'># all animals of the Demer project</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
-
-<span class='co'># all animals of all projects with given scientific name</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Rutilus rutilus"</span>,
-                       <span class='st'>"Squalius cephalus"</span>))
-
-<span class='co'># all animals of the Demer project with given scientific name</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>,
-                       <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Rutilus rutilus"</span>,
-                       <span class='st'>"Squalius cephalus"</span>))
+<span class='co'># Get the metadata of the tags linked to specific project(s)</span>
+<span class='fu'>get_transmitters</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>)
+<span class='fu'>get_transmitters</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"phd_reubens"</span>, <span class='st'>"2013_albertkanaal"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

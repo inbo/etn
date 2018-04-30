@@ -19,13 +19,15 @@ Get an overview of the projects available on ETN database.
 }
 \examples{
 \dontrun{
+con <- connect_to_etn(your_username, your_password)
+
 # Get a list of all projects
-get_projects()
+get_projects(con)
 
 # Get a list of all animal projects
-get_projects(project_type = "animal")
+get_projects(con, project_type = "animal")
 
 # Get a list of all network projects
-get_projects(project_type = "network")
+get_projects(con, project_type = "network")
 }
 }

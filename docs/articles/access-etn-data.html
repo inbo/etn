@@ -3198,8 +3198,8 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <div id="transmitter-overview" class="section level3">
 <h3 class="hasAnchor">
 <a href="#transmitter-overview" class="anchor"></a>Transmitter overview</h3>
-<p>The transmitters/tags metadata can be accessed by the <code>get_tags</code> function, with the option to subset on the animal project names:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_tags &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_tags.html">get_tags</a></span>(my_con, <span class="dt">animal_project =</span> <span class="st">"phd_reubens"</span>)
+<p>The transmitters/tags metadata can be accessed by the <code>get_transmitters</code> function, with the option to subset on the animal project names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_tags &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_transmitters.html">get_transmitters</a></span>(my_con, <span class="dt">animal_project =</span> <span class="st">"phd_reubens"</span>)
 knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="kw">head</span>(my_tags, <span class="dv">10</span>)) <span class="co"># print 10 first</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">

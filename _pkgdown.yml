@@ -37,7 +37,7 @@ reference:
       - get_receivers
       - get_deployments
       - get_animals
-      - get_tags
+      - get_transmitters
   - title: "Main detection data access functionality"
     desc: "Get access to raw detections data"
     contents:

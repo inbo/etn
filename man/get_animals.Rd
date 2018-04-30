@@ -25,6 +25,8 @@ project(s), the animal project(s) and/or the scientific name of the animals.
 }
 \examples{
 \dontrun{
+con <- connect_to_etn(your_username, your_password)
+
 # all animals
 animals <- get_animals(con)
 
