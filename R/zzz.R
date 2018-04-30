@@ -5,6 +5,8 @@ MAX_PRINT <- 20
 #'
 #' @param connection A valid connection with the ETN database.
 #'
+#' @importFrom methods is
+#'
 check_connection  <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database.")
@@ -23,11 +25,13 @@ check_connection  <- function(connection) {
 #' @importFrom glue glue
 #'
 #' @examples
+#' \dontrun{
 #' check_null_or_value("ddsf", c("animal", "network"), "project_type")
 #' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
 #' check_null_or_value("animal", c("animal", "network"), "project_type")
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
+#' }
 check_null_or_value <- function(arg, options = NULL, arg_name) {
   # dropna
   options <- options[!is.na(options)]
@@ -52,6 +56,13 @@ check_null_or_value <- function(arg, options = NULL, arg_name) {
   }
 }
 
+
+#' Support function for printing option help message
+#'
+#' @param regex A regular expression to parse
+#' @param ... Additional arguments passed to the collapse
+#'
+#' @importFrom glue evaluate collapse
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
@@ -68,18 +79,22 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #' (acknowledgments to micstr/isdate.R)
 #'
 #' @param datetime A character representation of a date.
+#' @param date_name Informative description to user about type of date
 #'
 #' @return FALSE | character
+#'
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time
 #'
 #' @examples
+#' \dontrun{
 #' check_datetime("1985-11-21")
 #' check_datetime("1985-11")
 #' check_datetime("1985")
 #' check_datetime("1985-04-31")  # invalid date
 #' check_datetime("01-03-1973")  # invalid format
+#' }
 check_datetime <- function(datetime, date_name = "start_date") {
   parsed <- tryCatch(
     parse_date_time(datetime, orders = c("ymd", "ym", "y")),
