@@ -34,3 +34,20 @@ testthat::test_that("check_null_or_value with network_type", {
                                   valid_network_projects,
                                   "network_project"))
 })
+
+valid_animal_projects <- get_projects(connection = con,
+                                       project_type = "animal") %>%
+  pull("projectcode")
+
+testthat::test_that("check_null_or_value with animal_type", {
+  expect_error(check_null_or_value("I am not an animal project",
+                                   valid_animal_projects,
+                                   "animal_project"))
+  expect_true(check_null_or_value(c("2012_leopoldkanaal", "phd_reubens"),
+                                  valid_animal_projects,
+                                  "animal_project"))
+  expect_true(check_null_or_value(NULL,
+                                  valid_animal_projects,
+                                  "animal_project"))
+})
+
