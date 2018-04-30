@@ -36,7 +36,6 @@ get_detections <- function(connection, network_project = NULL,
   } else {
     start_date <- check_datetime(start_date, "start_date")
   }
-
   if (is.null(end_date)) {
     # use today
     end_date <- as.character(Sys.Date())
@@ -45,7 +44,12 @@ get_detections <- function(connection, network_project = NULL,
   }
 
   # check the station inputs
-
+  valid_station_names <- station_names(connection)
+  check_null_or_value(station_name, valid_station_names,
+                      "station_name")
+  if (is.null(station_name)) {
+    station_name = valid_station_names
+  }
   # check the tags inputs
 
   # check the limit input
@@ -68,5 +72,24 @@ get_detections <- function(connection, network_project = NULL,
   detections <- dbGetQuery(connection, detections_query)
   detections
 
+}
+
+#' Support function to get unique set of deployment_station_name
+#'
+#' This function retrieves all unique deployment_station_name
+#' @param connection A valid connection to ETN database.
+#'
+#' @export
+#'
+#' @return A vector of all deployment_station_names present in vliz.deployments.
+station_names <- function(connection) {
+
+  query <- glue_sql(
+    "SELECT DISTINCT station_name FROM vliz.deployments",
+    .con = connection
+  )
+  data <- dbGetQuery(connection, query)
+  data %>%
+    pull(station_name)
 }
 
