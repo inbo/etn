@@ -27,6 +27,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
+#' @importFrom rlang .data
 #' @importFrom assertthat assert_that is.number
 #'
 #' @examples
@@ -53,7 +54,7 @@ get_detections <- function(connection, network_project = NULL,
 
   # check the network project inputs
   valid_network_projects <- get_projects(connection, project_type = "network") %>%
-    pull("projectcode")
+    pull(.data$projectcode)
   check_null_or_value(network_project, valid_network_projects, "network_project")
   if (is.null(network_project)) {
     network_project = valid_network_projects
@@ -61,7 +62,7 @@ get_detections <- function(connection, network_project = NULL,
 
   # check the animal project inputs
   valid_animal_projects <- get_projects(connection, project_type = "animal") %>%
-    pull("projectcode")
+    pull(.data$projectcode)
   check_null_or_value(animal_project,  valid_animal_projects, "animal_project")
   if (is.null(animal_project)) {
     animal_project = valid_animal_projects

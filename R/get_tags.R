@@ -13,6 +13,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
@@ -31,7 +32,7 @@ get_tags <- function(connection,
   # valid inputs on animal projects
   valid_animals_projects <-
     get_projects(connection, project_type = "animal") %>%
-    pull("projectcode")
+    pull(.data$projectcode)
   check_null_or_value(animal_project,  valid_animals_projects, "animal_project")
   if (is.null(animal_project)) {
     animal_project = valid_animals_projects
