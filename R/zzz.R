@@ -1,6 +1,10 @@
 
 MAX_PRINT <- 20
 
+#' Support function to check the validity of the database connection
+#'
+#' @param connection A valid connection with the ETN database.
+#'
 check_connection  <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database.")
@@ -15,7 +19,8 @@ check_connection  <- function(connection) {
 #'
 #' @return If no error, TRUE.
 #'
-#' @export
+#' @importFrom assertthat assert_that
+#' @importFrom glue glue
 #'
 #' @examples
 #' check_null_or_value("ddsf", c("animal", "network"), "project_type")
@@ -59,11 +64,10 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 
 #' Check if the string input can be converted to a date
 #'
-#' Returns FALSE or the cleaned character version of the date
-#'
+#' Returns FALSE or the cleaned character version of the date.
 #' (acknowledgments to micstr/isdate.R)
 #'
-#' @param datetime string representation of a date
+#' @param datetime A character representation of a date.
 #'
 #' @return FALSE | character
 #'
