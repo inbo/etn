@@ -1,18 +1,46 @@
-# detections_view
-
-# RODBCext
-# https://cran.r-project.org/web/packages/RODBCext/vignettes/Parameterized_SQL_queries.html
-
-#   if("All" %in% projectlist) projectlist=NULL
-#   if("All" %in% tagprojectlist) tagprojectlist=NULL
-
-
+#' Get raw detections data
+#'
+#' Download the raw detections data, with optional filters for the project,
+#' the start- and enddate, the deployment station name and the transmitter/tag
+#' identifier. Use the \code{limit} option to limit the data size.
+#'
+#' @param connection connection to the ETN database
+#' @param network_project (character) One or more network projects.
+#' @param animal_project (character) One or more animal projects.
+#' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
+#' definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
+#' as well.
+#' @param end_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
+#' definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
+#' as well.
+#' @param deployment_station_name (character) One or more deployment station
+#' names.
+#' @param transmitter (character) One or more transmitter identifiers, also
+#' referred to as `tag_code_space` identifiers
+#' @param limit (integer) Limit the number of records to download. If NULL, all
+#' records are downloaded.
+#'
+#' @return data.frame
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_detections(con, start_date = "2017", limit = 100)
+#' get_detections(con, animal_project = c("phd_reubens"),
+#'                start_date = "2011", end_date = "2012",
+#'                limit = 10)
+#' get_detections(con, deployment_station_name = c("Tsost"),
+#'                limit = 100)
+#' get_detections(con, transmitter = "A69-1601-28281",
+#'                limit = 100)
+#' get_detections(con, transmitter = c("A69-1303-65301"),
+#'                limit = 50)
+#' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
-                           end_date = NULL, station = NULL,
-                           tags = NULL, limit = 100) {
                            end_date = NULL, deployment_station_name = NULL,
-                           transmitter = NULL, limit = 100) {
+                           transmitter = NULL, limit = NULL) {
   check_connection(connection)
 
   # check the network project inputs
@@ -31,7 +59,7 @@ get_detections <- function(connection, network_project = NULL,
     animal_project = valid_animal_projects
   }
 
-  # check the start- and enddate inputs
+  # check the start- and end date inputs
   if (is.null(start_date)) {
     # use an arbitrary early date for this project
     start_date <- check_datetime("1970", "start_date")
