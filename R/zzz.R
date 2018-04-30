@@ -1,3 +1,6 @@
+
+MAX_PRINT <- 20
+
 check_connection  <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database.")
@@ -21,10 +24,20 @@ check_connection  <- function(connection) {
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
 check_null_or_value <- function(arg, options = NULL, arg_name) {
+  # dropna
+  options <- options[!is.na(options)]
+
+  # suppress too long messages
+  if (length(options) > MAX_PRINT) {
+    options_to_print <- c(options[1:MAX_PRINT], "others..")
+  } else {
+    options_to_print <- options
+  }
+  # provide user message
   if (!is.null(arg)) {
     assert_that(all(arg %in% options),
         msg = glue("Not valid input value(s) for {arg_name} input argument.
-                    Valid inputs are: {options*}.",
+                    Valid inputs are: {options_to_print*}.",
                    .transformer = collapse_transformer(sep = ", ",
                                                        last = " and ")
                    )
