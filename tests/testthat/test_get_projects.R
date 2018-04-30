@@ -15,8 +15,15 @@ testthat::test_that("check_input_get_projects", {
                fixed = TRUE)
 })
 
+prjcts <- get_projects(con)
+prjcts_animal <- get_projects(con, project_type = "animal")
+prjcts_network <- get_projects(con, project_type = "network")
+
 testthat::test_that("check_output_connection", {
-  prjcts <- get_projects(con)
   expect_is(prjcts, "data.frame")
-  prjcts_animal <- get_projects(con, project_type = "animal")
+  expect_is(prjcts_animal, "data.frame")
+  expect_gte(nrow(prjcts), nrow(prjcts_animal))
+  expect_gte(nrow(prjcts), nrow(prjcts_network))
+  expect_equivalent(nrow(prjcts),
+                    nrow(prjcts_network) + nrow(prjcts_animal))
 })
