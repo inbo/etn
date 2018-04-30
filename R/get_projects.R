@@ -2,7 +2,7 @@
 #'
 #' Get an overview of the projects available on ETN database.
 #'
-#' @param connection A connection to the ETN database.
+#' @param connection A valid connection with the ETN database.
 #' @param project_type (string) Either animal or network.
 #'
 #' @return A data.frame.
