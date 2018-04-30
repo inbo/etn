@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter %>%
 #'
 #' @examples
 #' \dontrun{
