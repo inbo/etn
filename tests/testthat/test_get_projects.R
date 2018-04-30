@@ -11,7 +11,8 @@ testthat::test_that("check_input_connection", {
                      "argument.\nValid inputs are: animal and network."),
                fixed = TRUE)
   expect_error(get_projects(con, prj_type = "bad_project_type"),
-               "unused argument (prj_type = \"bad_project_type\")")
+               "unused argument (prj_type = \"bad_project_type\")",
+               fixed = TRUE)
 })
 
 testthat::test_that("check_output_connection", {
