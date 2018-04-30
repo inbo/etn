@@ -72,7 +72,7 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #' @return FALSE | character
 #'
 #' @importFrom glue glue
-#' @importFrom lubridate parse_date-time
+#' @importFrom lubridate parse_date_time
 #'
 #' @examples
 #' check_datetime("1985-11-21")
