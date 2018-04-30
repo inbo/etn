@@ -10,6 +10,8 @@ testthat::test_that("check_input_connection", {
                paste("Not valid input value(s) for project_type input",
                      "argument.\nValid inputs are: animal and network."),
                fixed = TRUE)
+  expect_error(get_projects(con, prj_type = "bad_project_type"),
+               "unused argument (prj_type = \"bad_project_type\")")
 })
 
 testthat::test_that("check_output_connection", {
