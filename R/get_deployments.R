@@ -1,6 +1,6 @@
 #' Get deployments data
 #'
-#' This function retrieves all or specific deployments data.
+#' Retrieve all or specific deployments data.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
@@ -9,6 +9,10 @@
 #' @return A data.frame.
 #'
 #' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#' @importFrom dplyr pull
 #'
 #' @examples
 #' \dontrun{
