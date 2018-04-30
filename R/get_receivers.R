@@ -1,15 +1,20 @@
-
 #' Get receiver data
 #'
-#' @param connection
-#' @param network_project
+#' @param connection A valid connection with the ETN database.
+#' @param network_project (string) One or more network projects.
 #'
-#' @return
+#' @return A data.frame.
+#'
 #' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#' @importFrom dplyr pull
 #'
 #' @examples
 #' \dontrun{
 #' get_receivers(connection)
+#' get_receivers(connection, network_project = "demer")
 #' get_receivers(connection, network_project = c("demer", "dijle"))
 #' }
 get_receivers <- function(connection,
