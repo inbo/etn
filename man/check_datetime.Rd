@@ -8,6 +8,8 @@ check_datetime(datetime, date_name = "start_date")
 }
 \arguments{
 \item{datetime}{A character representation of a date.}
+
+\item{date_name}{Informative description to user about type of date}
 }
 \value{
 FALSE | character
@@ -17,9 +19,11 @@ Returns FALSE or the cleaned character version of the date.
 (acknowledgments to micstr/isdate.R)
 }
 \examples{
+\dontrun{
 check_datetime("1985-11-21")
 check_datetime("1985-11")
 check_datetime("1985")
 check_datetime("1985-04-31")  # invalid date
 check_datetime("01-03-1973")  # invalid format
+}
 }

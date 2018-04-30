@@ -20,9 +20,11 @@ If no error, TRUE.
 Valid input is either NULL or option of list
 }
 \examples{
+\dontrun{
 check_null_or_value("ddsf", c("animal", "network"), "project_type")
 check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
 check_null_or_value("animal", c("animal", "network"), "project_type")
 check_null_or_value(NULL, c("animal", "network"), "project_type")
 check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
+}
 }
