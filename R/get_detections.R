@@ -11,6 +11,8 @@ get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
                            end_date = NULL, station = NULL,
                            tags = NULL, limit = 100) {
+                           end_date = NULL, deployment_station_name = NULL,
+                           transmitter = NULL, limit = 100) {
   check_connection(connection)
 
   # check the network project inputs
@@ -44,11 +46,11 @@ get_detections <- function(connection, network_project = NULL,
   }
 
   # check the station inputs
-  valid_station_names <- station_names(connection)
-  check_null_or_value(station_name, valid_station_names,
-                      "station_name")
-  if (is.null(station_name)) {
-    station_name = valid_station_names
+  valid_deployment_station_names <- deployment_station_names(connection)
+  check_null_or_value(deployment_station_name, valid_deployment_station_names,
+                      "deployment_station_name")
+  if (is.null(deployment_station_name)) {
+    deployment_station_name = valid_deployment_station_names
   }
 
   # check the transmitter tags inputs
@@ -68,12 +70,14 @@ get_detections <- function(connection, network_project = NULL,
       AND animal_project_code IN ({animal_project*})
       AND datetime > {start_date}
       AND datetime < {end_date}
+      AND deployment_station_name IN ({station_name*})
       AND transmitter IN ({transmitter*})
     LIMIT {nrows}",
     network_project = network_project,
     animal_project = animal_project,
     start_date = start_date,
     end_date = end_date,
+    station_name = deployment_station_name,
     transmitter = transmitter,
     nrows = as.character(limit),
     .con = connection
@@ -91,7 +95,7 @@ get_detections <- function(connection, network_project = NULL,
 #' @export
 #'
 #' @return A vector of all deployment_station_names present in vliz.deployments.
-station_names <- function(connection) {
+deployment_station_names <- function(connection) {
 
   query <- glue_sql(
     "SELECT DISTINCT station_name FROM vliz.deployments",
