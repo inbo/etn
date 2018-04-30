@@ -130,10 +130,10 @@ Remark: currently these names are NOT yet verified with a taxonomic backbone as 
 
 ### Transmitter overview
 
-The transmitters/tags metadata can be accessed by the `get_tags` function, with the option to subset on the animal project names:
+The transmitters/tags metadata can be accessed by the `get_transmitters` function, with the option to subset on the animal project names:
 
 ```{r}
-my_tags <- get_tags(my_con, animal_project = "phd_reubens")
+my_tags <- get_transmitters(my_con, animal_project = "phd_reubens")
 knitr::kable(head(my_tags, 10)) # print 10 first
 ```
 
