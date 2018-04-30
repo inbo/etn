@@ -14,9 +14,12 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
+#' con <- connect_to_etn(your_username, your_password)
+#'
 #' # All deployments
 #' get_deployments(con)
 #'
@@ -36,10 +39,10 @@ get_deployments <- function(connection,
 
   check_connection(connection)
   valid_networks <- get_projects(connection, project_type = "network") %>%
-    pull("projectcode")
+    pull(.data$projectcode)
   check_null_or_value(network_project, valid_networks, "network_project")
   check_null_or_value(receiver_status, receiver_status_vocabulary,
-                      "receiver_status")
+                      .data$receiver_status)
   if (is.null(network_project)) {
     network_project = valid_networks
   }

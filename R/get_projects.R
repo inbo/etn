@@ -11,18 +11,21 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr filter_ %>%
+#' @importFrom dplyr filter %>%
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
+#' con <- connect_to_etn(your_username, your_password)
+#'
 #' # Get a list of all projects
-#' get_projects()
+#' get_projects(con)
 #'
 #' # Get a list of all animal projects
-#' get_projects(project_type = "animal")
+#' get_projects(con, project_type = "animal")
 #'
 #' # Get a list of all network projects
-#' get_projects(project_type = "network")
+#' get_projects(con, project_type = "network")
 #' }
 get_projects <- function(connection, project_type = NULL) {
 
@@ -37,7 +40,8 @@ get_projects <- function(connection, project_type = NULL) {
   projects <- dbGetQuery(connection, projects)
 
   if (!is.null(project_type)) {
-    projects <- projects %>% filter_("type" == project_type)
+    projects <- projects %>% filter(.data$type == project_type)
+
   }
   projects
 }

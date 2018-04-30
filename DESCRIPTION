@@ -18,7 +18,8 @@ Imports:
         dplyr,
         assertthat,
         lubridate,
-        methods
+        methods,
+        rlang
 URL: https://github.com/inbo/etn
 BugReports: https://github.com/inbo/etn/issues
 Suggests: testthat
