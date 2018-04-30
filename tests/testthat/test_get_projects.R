@@ -3,7 +3,7 @@ context("check_get_projects")
 # Valid connection
 con <- connect_to_etn(username, password)
 
-testthat::test_that("check_input_connection", {
+testthat::test_that("check_input_get_projects", {
   expect_error(get_projects("I am not a connection"),
                "Not a connection object to database.")
   expect_error(get_projects(con, project_type = "bad_project_type"),
