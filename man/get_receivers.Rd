@@ -12,7 +12,7 @@ get_receivers(connection, network_project = NULL)
 \item{network_project}{(string) One or more network projects.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get all or specific, filtered on network project, receiver data.

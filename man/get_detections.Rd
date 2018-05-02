@@ -33,7 +33,7 @@ referred to as `tag_code_space` identifiers}
 records are downloaded.}
 }
 \value{
-data.frame
+A tibble (tidyverse data.frame).
 }
 \description{
 Get the raw detections data, with optional filters for the project,

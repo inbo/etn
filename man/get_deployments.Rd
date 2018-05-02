@@ -14,7 +14,7 @@ get_deployments(connection, network_project = NULL, receiver_status = NULL)
 \item{receiver_status}{(string) One or more receiver status.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get all or specific, filtered by network project and/or the status of the
