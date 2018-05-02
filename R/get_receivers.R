@@ -5,7 +5,7 @@
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -13,6 +13,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -50,5 +51,5 @@ get_receivers <- function(connection,
                               .con = connection
   )
   receivers <- dbGetQuery(connection, receivers_query)
-  receivers
+  as_tibble(receivers)
 }

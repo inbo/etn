@@ -19,7 +19,8 @@ Imports:
         assertthat,
         lubridate,
         methods,
-        rlang
+        rlang,
+        tibble
 URL: https://github.com/inbo/etn
 BugReports: https://github.com/inbo/etn/issues
 Suggests: 

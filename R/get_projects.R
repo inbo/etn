@@ -5,7 +5,7 @@
 #' @param connection A valid connection with the ETN database.
 #' @param project_type (string) Either \code{animal} or \code{network}.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -13,6 +13,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr filter %>%
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -43,5 +44,5 @@ get_projects <- function(connection, project_type = NULL) {
     projects <- projects %>% filter(.data$type == project_type)
 
   }
-  projects
+  as_tibble(projects)
 }

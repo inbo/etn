@@ -7,7 +7,7 @@
 #' @param network_project (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -15,6 +15,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -59,7 +60,7 @@ get_deployments <- function(connection,
     .con = connection
   )
   deployments <- dbGetQuery(connection, deployments_query)
-  deployments
+  as_tibble(deployments)
 }
 
 receiver_status_vocabulary <- c("Available", "Lost", "Broken",

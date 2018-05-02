@@ -6,7 +6,7 @@
 #' @param connection A valid connection with the ETN database.
 #' @param animal_project (string) One or more animal projects.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -14,6 +14,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -50,6 +51,6 @@ get_transmitters <- function(connection,
     .con = connection
   )
   transmitters <- dbGetQuery(connection, transmitters_query)
-  transmitters
+  as_tibble(transmitters)
 
 }
