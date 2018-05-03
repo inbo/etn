@@ -1,5 +1,5 @@
 navbar:
-  title: ETN data access
+  title: ~
   type: default
   left:
   - text: Tutorials
@@ -13,16 +13,17 @@ navbar:
     href: contributing.html
   right:
   - icon: fa-twitter fa-lg
-    href: https://twitter.com/lifewatchinbo
+    href: https://twitter.com/LifeWatchINBO
   - icon: fa-github fa-lg
     href: https://github.com/inbo/etn
 
 home:
   links:
-  - text: Developed by Lifewatch INBO
-    href: https://lifewatch.inbo.be
-  - text: Check the online lifewatch data explorer
+  - text: Visit the LifeWatch data explorer
     href: http://rshiny.lifewatch.be/ETN data/
+  - text: Get to know our team
+    href: https://lifewatch.inbo.be
+
 
 reference:
   - title: "Connect to the database"
