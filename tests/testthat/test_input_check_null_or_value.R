@@ -1,4 +1,10 @@
-context("input_check_null_or_value")
+context("input_test_null_or_value")
+
+# Valid connection
+con <- connect_to_etn(
+  username = Sys.getenv("userid"),
+  password = Sys.getenv("pwd")
+)
 
 testthat::test_that("check_null_or_value with project_type", {
   expect_error(check_null_or_value("ani",

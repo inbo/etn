@@ -1,7 +1,10 @@
 context("check_get_projects")
 
 # Valid connection
-con <- connect_to_etn(username, password)
+con <- connect_to_etn(
+  username = Sys.getenv("userid"),
+  password = Sys.getenv("pwd")
+)
 
 testthat::test_that("check_input_get_projects", {
   expect_error(get_projects("I am not a connection"),
