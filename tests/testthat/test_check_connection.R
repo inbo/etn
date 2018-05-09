@@ -1,8 +1,7 @@
 context("check_connection")
 
-user <- rstudioapi::askForPassword("Username")
-pwd <- rstudioapi::askForPassword("Password")
-con <- connect_to_etn(username, password)
+# Valid connection
+con <- connect_to_etn(username = Sys.getenv("userid"), password = Sys.getenv("pwd"))
 
 testthat::test_that("check_connection", {
   expect_error(check_connection("I am not a connection"))

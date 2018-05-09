@@ -1,5 +1,11 @@
 context("check_get_animals")
 
+# Valid connection
+con <- connect_to_etn(
+  username = Sys.getenv("userid"),
+  password = Sys.getenv("pwd")
+)
+
 test1 <- get_animals(con, network_project = "thornton")
 test2 <- get_animals(con, network_project = NULL)
 test3 <- get_animals(con, animal_project = "2012_leopoldkanaal")
@@ -21,18 +27,18 @@ testthat::test_that("check_get_animals", {
   expect_gte(nrow(test1), nrow(test2))
   expect_identical(animals_test4,
                    test4 %>%
-                     distinct(scientific_name) %>%
-                     pull(scientific_name))
+                     dplyr::distinct(scientific_name) %>%
+                     dplyr::pull(scientific_name))
   expect_true(all(projects_test4 %in% (test5 %>%
-                 distinct(projectcode) %>%
-                 pull(projectcode))))
+                                         dplyr::distinct(projectcode) %>%
+                                         dplyr::pull(projectcode))))
   expect_identical(test6 %>%
-                     distinct(scientific_name) %>%
-                     pull(scientific_name),
+                     dplyr::distinct(scientific_name) %>%
+                     dplyr::pull(scientific_name),
                    animals_test6)
   expect_identical(test6 %>%
-                     distinct(projectcode) %>%
-                     pull(projectcode),
+                     dplyr::distinct(projectcode) %>%
+                     dplyr::pull(projectcode),
                    projects_test6)
 })
 
