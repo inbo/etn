@@ -41,6 +41,3 @@ testthat::test_that("check_get_animals", {
                      dplyr::pull(projectcode),
                    projects_test6)
 })
-
-
-
