@@ -24,7 +24,16 @@ testthat::test_that("check_get_animals", {
                "Not a connection object to database.")
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
-  expect_gte(nrow(test2), nrow(test1))
+  expect_gte(nrow(test1), nrow(test2))
+  expect_gte(nrow(test1), nrow(test3))
+  expect_gte(nrow(test1), nrow(test4))
+  expect_gte(nrow(test4), nrow(test3))
+  expect_gte(nrow(test1), nrow(test5))
+  expect_gte(nrow(test5), nrow(test6))
+  expect_equal(ncol(test1), ncol(test2))
+  expect_equal(ncol(test2), ncol(test3))
+  expect_equal(ncol(test3), ncol(test4))
+  expect_equal(ncol(test5), ncol(test6))
   expect_identical(animals_test4,
                    test4 %>%
                      dplyr::distinct(scientific_name) %>%
