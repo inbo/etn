@@ -6,8 +6,8 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-test1 <- get_animals(con, network_project = "thornton")
-test2 <- get_animals(con, network_project = NULL)
+test1 <- get_animals(con, network_project = NULL)
+test2 <- get_animals(con, network_project = "thornton")
 test3 <- get_animals(con, animal_project = "2012_leopoldkanaal")
 
 projects_test4 <- c("2012_leopoldkanaal", "phd_reubens")
