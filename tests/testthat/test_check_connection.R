@@ -8,3 +8,4 @@ testthat::test_that("check_connection", {
   expect_true(check_connection(con))
   expect_true(isClass(con, "PostgreSQL"))
 })
+
