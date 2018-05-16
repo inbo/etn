@@ -1,4 +1,4 @@
-context("check_get_animals")
+context("test_get_animals")
 
 # Valid connection
 con <- connect_to_etn(

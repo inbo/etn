@@ -1,4 +1,4 @@
-context("check_get_projects")
+context("test_get_projects")
 
 # Valid connection
 con <- connect_to_etn(

@@ -1,4 +1,4 @@
-context("input_test_null_or_value")
+context("test_input_null_or_value")
 
 # Valid connection
 con <- connect_to_etn(

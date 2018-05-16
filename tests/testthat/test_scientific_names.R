@@ -1,4 +1,4 @@
-context("check_scientific_names")
+context("test_scientific_names")
 
 # Valid connection
 con <- connect_to_etn(
