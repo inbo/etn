@@ -25,6 +25,7 @@ prjcts_network <- get_projects(con, project_type = "network")
 testthat::test_that("check_output_connection", {
   expect_is(prjcts, "data.frame")
   expect_is(prjcts_animal, "data.frame")
+  expect_is(prjcts_network, "data.frame")
   expect_gte(nrow(prjcts), nrow(prjcts_animal))
   expect_gte(nrow(prjcts), nrow(prjcts_network))
   expect_equivalent(nrow(prjcts),
