@@ -29,6 +29,12 @@
 #' # all animals of the 2012_leopoldkanaal and phd_reubens
 #' get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
 #'
+#' #all animals of the thornton network project
+#' get_animals(con, network_project = "thornton")
+#'
+#' #all animals of the thornton and leopold network project
+#' get_animals(con, network_project = c("thornton", "leopold"))
+#'
 #' # all animals of all projects with given scientific name
 #' animals <- get_animals(con,
 #'                        scientific_name = c("Gadus morhua",
