@@ -19,9 +19,13 @@ projects_test6 <- "phd_reubens"
 test6 <- get_animals(con, animal_project = "phd_reubens",
                      scientific_name = animals_test6)
 
-testthat::test_that("check_get_animals", {
+testthat::test_that("test_input_get_animals", {
   expect_error(get_animals("I am not a connection"),
                "Not a connection object to database.")
+})
+
+
+testthat::test_that("test_output_get_animals", {
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
   expect_gte(nrow(test1), nrow(test2))

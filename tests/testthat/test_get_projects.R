@@ -6,7 +6,7 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-testthat::test_that("check_input_get_projects", {
+testthat::test_that("test_input_get_projects", {
   expect_error(get_projects("I am not a connection"),
                "Not a connection object to database.")
   expect_error(get_projects(con, project_type = "bad_project_type"),
@@ -22,7 +22,7 @@ prjcts <- get_projects(con)
 prjcts_animal <- get_projects(con, project_type = "animal")
 prjcts_network <- get_projects(con, project_type = "network")
 
-testthat::test_that("check_output_connection", {
+testthat::test_that("test_output_get_projects", {
   expect_is(prjcts, "data.frame")
   expect_is(prjcts_animal, "data.frame")
   expect_is(prjcts_network, "data.frame")
@@ -30,4 +30,6 @@ testthat::test_that("check_output_connection", {
   expect_gte(nrow(prjcts), nrow(prjcts_network))
   expect_equivalent(nrow(prjcts),
                     nrow(prjcts_network) + nrow(prjcts_animal))
+  expect_equal(ncol(prjcts), ncol(prjcts_animal))
+  expect_equal(ncol(prjcts_animal), ncol(prjcts_network))
 })

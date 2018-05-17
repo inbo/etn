@@ -8,11 +8,18 @@ con <- connect_to_etn(
 
 test1 <- get_transmitters(con)
 test2 <- get_transmitters(con, animal_project = "phd_reubens")
-test3 <- get_transmitters(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+test3 <- get_transmitters(con, animal_project = c("phd_reubens",
+                                                  "2012_leopoldkanaal"))
 
-testthat::test_that("test_get_transmitters", {
+testthat::test_that("test_input_get_transmitters", {
   expect_error(get_transmitters("I am not a connection"),
                "Not a connection object to database.")
+  expect_error(get_transmitters(con, animal_project = "very_bad_project"))
+  expect_error(get_transmitters(con, animal_project = c("phd_reubens",
+                                                        "very_bad_project")))
+})
+
+testthat::test_that("test_output_get_transmitters", {
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
   expect_is(test3, "data.frame")
