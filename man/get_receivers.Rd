@@ -25,9 +25,9 @@ con <- connect_to_etn(your_username, your_password)
 get_receivers(con)
 
 # Get receivers data filtered on a single network project
-get_receivers(con, network_project = "demer")
+get_receivers(con, network_project = "thornton")
 
 # Get receivers data filtered on a multiple network projects
-get_receivers(con, network_project = c("demer", "dijle"))
+get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
 }
 }
