@@ -18,5 +18,7 @@ testthat::test_that("check_input_get_receivers", {
   expect_gte(nrow(test1), nrow(test2))
   expect_gte(nrow(test1), nrow(test3))
   expect_gte(nrow(test3), nrow(test2))
+  expect_equal(ncol(test1), ncol(test2))
+  expect_equal(ncol(test2), ncol(test3))
 })
 
