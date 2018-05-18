@@ -59,6 +59,6 @@ get_detections(con, animal_project = "phd_reubens",
                deployment_station_name = c("R03", "R05"), limit = 100)
 
 # Get detection data for specific transmitter
-get_detections(con, transmitter = "A69-1601-28281")
+get_detections(con, transmitter = "A69-1303-65302")
 }
 }
