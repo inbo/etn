@@ -36,8 +36,8 @@ records are downloaded.}
 data.frame
 }
 \description{
-Get the raw detections data, with optional filters for the project,
-the start- and enddate, the deployment station name and the transmitter/tag
+Get the raw detections data, with optional filters for the project, the
+start- and enddate, the deployment station name and the transmitter/tag
 identifier. Use the \code{limit} option to limit the data size.
 }
 \examples{
@@ -47,15 +47,18 @@ con <- connect_to_etn(your_username, your_password)
 # Get detection data filtered by the start year
 get_detections(con, start_date = "2017", limit = 100)
 
-# Get detection data within time frame for specific animal project
+# Get detection data within time frame for specific animal project and
+# network project
 get_detections(con, animal_project = "phd_reubens",
-               start_date = "2011-01-28", end_date = "2011-02-01")
+               network_project = "thornton", start_date = "2011-01-28",
+               end_date = "2011-02-01")
 
-# Get detection data for specific animal project and station names
+# Get detection data for specific animal project and station names and a
+# limit about the number of returned records
 get_detections(con, animal_project = "phd_reubens",
                deployment_station_name = c("R03", "R05"), limit = 100)
 
 # Get detection data for specific transmitter
-get_detections(con, transmitter = "A69-1601-28281", limit = 100)
+get_detections(con, transmitter = "A69-1601-28281")
 }
 }
