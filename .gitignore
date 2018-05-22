@@ -1,7 +1,6 @@
 # History files
 .Rhistory
 .Rapp.history
-
 # Session Data files
 .RData
 # Example code in package build process
@@ -28,6 +27,5 @@ vignettes/*.pdf
 .Rproj.user
 pgpass
 inst/doc
-
 # Environmental files
-.Renviron
+.Renviron*
