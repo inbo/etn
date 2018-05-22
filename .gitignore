@@ -28,3 +28,6 @@ vignettes/*.pdf
 .Rproj.user
 pgpass
 inst/doc
+
+# Environmental files
+.Renviron

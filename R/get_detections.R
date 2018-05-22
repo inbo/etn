@@ -1,24 +1,24 @@
 #' Get raw detections data
 #'
-#' Get the raw detections data, with optional filters for the project,
-#' the start- and enddate, the deployment station name and the transmitter/tag
+#' Get the raw detections data, with optional filters for the project, the
+#' start- and enddate, the deployment station name and the transmitter/tag
 #' identifier. Use the \code{limit} option to limit the data size.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (character) One or more network projects.
 #' @param animal_project (character) One or more animal projects.
 #' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#' definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-#' as well.
+#'   definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
+#'   as well.
 #' @param end_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#' definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-#' as well.
+#'   definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
+#'   as well.
 #' @param deployment_station_name (character) One or more deployment station
-#' names.
+#'   names.
 #' @param transmitter (character) One or more transmitter identifiers, also
-#' referred to as `tag_code_space` identifiers
+#'   referred to as `tag_code_space` identifiers
 #' @param limit (integer) Limit the number of records to download. If NULL, all
-#' records are downloaded.
+#'   records are downloaded.
 #'
 #' @return data.frame
 #'
@@ -37,16 +37,19 @@
 #' # Get detection data filtered by the start year
 #' get_detections(con, start_date = "2017", limit = 100)
 #'
-#' # Get detection data within time frame for specific animal project
+#' # Get detection data within time frame for specific animal project and
+#' # network project
 #' get_detections(con, animal_project = "phd_reubens",
-#'                start_date = "2011-01-28", end_date = "2011-02-01")
+#'                network_project = "thornton", start_date = "2011-01-28",
+#'                end_date = "2011-02-01")
 #'
-#' # Get detection data for specific animal project and station names
+#' # Get detection data for specific animal project and station names and a
+#' # limit about the number of returned records
 #' get_detections(con, animal_project = "phd_reubens",
 #'                deployment_station_name = c("R03", "R05"), limit = 100)
 #'
 #' # Get detection data for specific transmitter
-#' get_detections(con, transmitter = "A69-1601-28281", limit = 100)
+#' get_detections(con, transmitter = "A69-1303-65302")
 #' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,

@@ -23,17 +23,26 @@
 #' # all animals
 #' animals <- get_animals(con)
 #'
-#' # all animals of the Demer project
-#' animals <- get_animals(con, network_project = "demer")
+#' # all animals of the 2012_leopoldkanaal project
+#' animals <- get_animals(con, animal_project = "2012_leopoldkanaal")
+#'
+#' # all animals of the 2012_leopoldkanaal and phd_reubens
+#' get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
+#'
+#' #all animals of the thornton network project
+#' get_animals(con, network_project = "thornton")
+#'
+#' #all animals of the thornton and leopold network project
+#' get_animals(con, network_project = c("thornton", "leopold"))
 #'
 #' # all animals of all projects with given scientific name
-#' animals <- get_animals(con, scientific_name = c("Rutilus rutilus",
-#'                        "Squalius cephalus"))
+#' animals <- get_animals(con,
+#'                        scientific_name = c("Gadus morhua",
+#'                                            "Sentinel"))
 #'
-#' # all animals of the Demer project with given scientific name
-#' animals <- get_animals(con, network_project = "demer",
-#'                        scientific_name = c("Rutilus rutilus",
-#'                        "Squalius cephalus"))
+#' # all animals of the phd_reubens project with given scientific name
+#' animals <- get_animals(con, animal_project = "phd_reubens",
+#'                        scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection,
                         network_project = NULL,

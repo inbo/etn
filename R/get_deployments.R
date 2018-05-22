@@ -24,14 +24,14 @@
 #' get_deployments(con)
 #'
 #' # Deployments of a subset of projects
-#' get_deployments(con, network_project = c("zeeschelde", "ws1"))
-#'
-#' # Deployments of a subset of projects and receiver status
-#' get_deployments(con, network_project = c("zeeschelde", "ws1"),
-#'                 receiver_status = "Active")
+#' get_deployments(con, network_project = c("thornton", "leopold"))
 #'
 #' # Deployments of a subset of receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
+#'
+#' # Deployments of a subset of projects and receiver status
+#' get_deployments(con, network_project = "thornton",
+#'                 receiver_status = "Active")
 #' }
 get_deployments <- function(connection,
                             network_project = NULL,

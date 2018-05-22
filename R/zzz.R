@@ -26,11 +26,28 @@ check_connection  <- function(connection) {
 #'
 #' @examples
 #' \dontrun{
+#' # Invalid inputs for project_type
 #' check_null_or_value("ddsf", c("animal", "network"), "project_type")
 #' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
+#'
+#' #Valid inputs for project_type
 #' check_null_or_value("animal", c("animal", "network"), "project_type")
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
+#'
+#'
+#' # check network projects
+#' valid_network_projects <- get_projects(connection = con,
+#'                                        project_type = "network") %>%
+#'                                        pull("projectcode")
+#' check_null_or_value(c("thornton", "leopold"),
+#'                     valid_network_projects, "network_project")
+#' # check animal projects
+#' valid_animal_projects <- get_projects(connection = con,
+#'                                       project_type = "animal") %>%
+#'                                       pull("projectcode")
+#' check_null_or_value(c("2012_leopoldkanaal", "phd_reubens"),
+#'                     valid_animal_projects, "animal_project")
 #' }
 check_null_or_value <- function(arg, options = NULL, arg_name) {
   # dropna
@@ -104,7 +121,7 @@ check_datetime <- function(datetime, date_name = "start_date") {
                   "date format. Use a ymd format or shorter, ",
                   "e.g. 2012-11-21, 2012-11 or 2012."))
       } else {
-        stop(glue("The given {date_name}, {datetime} can not be interpreted",
+        stop(glue("The given {date_name}, {datetime} can not be interpreted ",
                   "as a valid date."))
       } })
   as.character(parsed)

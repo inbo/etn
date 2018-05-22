@@ -27,6 +27,6 @@ get_transmitters(con)
 
 # Get the metadata of the tags linked to specific project(s)
 get_transmitters(con, animal_project = "phd_reubens")
-get_transmitters(con, animal_project = c("phd_reubens", "2013_albertkanaal"))
+get_transmitters(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 }
 }

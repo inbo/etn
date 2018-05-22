@@ -22,10 +22,10 @@
 #' get_receivers(con)
 #'
 #' # Get receivers data filtered on a single network project
-#' get_receivers(con, network_project = "demer")
+#' get_receivers(con, network_project = "thornton")
 #'
 #' # Get receivers data filtered on a multiple network projects
-#' get_receivers(con, network_project = c("demer", "dijle"))
+#' get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
 #' }
 get_receivers <- function(connection,
                           network_project = NULL) {
