@@ -28,6 +28,7 @@ testthat::test_that("test_input_get_deployments", {
 
 
 testthat::test_that("test_output_get_deployments", {
+  library(dplyr)
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
   expect_is(test3, "data.frame")
