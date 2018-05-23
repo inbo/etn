@@ -49,15 +49,18 @@ test2 <- get_detections(con, start_date = start_date, limit = 2)
 animal_project <- "phd_reubens"
 network_project <- "thornton"
 limit <- 5
+transmitter <- "A69-1303-65302"
+
 test3<- get_detections(con, animal_project = animal_project,
                        network_project = network_project, start_date = start_date,
-                       end_date = end_date, limit = 5)
+                       end_date = end_date, limit = 5,
+                       transmitter = transmitter)
 deployment_station_name <- "R03"
 test4 <- get_detections(con, animal_project = animal_project,
                         network_project = network_project,
                         deployment_station_name = deployment_station_name,
-                        limit = 5)
-transmitter <- "A69-1601-28281"
+                        limit = 5, transmitter = transmitter)
+
 test5 <- get_detections(con, transmitter = transmitter, limit = 5)
 testthat::test_that("test_output_get_detections", {
   expect_equal(nrow(test1), 5)
