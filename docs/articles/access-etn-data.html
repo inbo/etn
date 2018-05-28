@@ -35,12 +35,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -62,7 +56,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://twitter.com/lifewatchinbo">
+  <a href="https://twitter.com/LifeWatchINBO">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -88,7 +82,7 @@
       <h1>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2018-04-30</h4>
+            <h4 class="date">2018-05-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/access-etn-data.Rmd"><code>vignettes/access-etn-data.Rmd</code></a></small>
       <div class="hidden name"><code>access-etn-data.Rmd</code></div>
@@ -111,12 +105,12 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <h2 class="hasAnchor">
 <a href="#the-database-connection" class="anchor"></a>The database connection</h2>
 <p>In order to access the data, the first step is always to connect with your user credentials (as received by VLIZ) to the database.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_con &lt;-<span class="st"> </span><span class="kw"><a href="../reference/connect_to_etn.html">connect_to_etn</a></span>(<span class="kw">Sys.getenv</span>(<span class="st">"username"</span>),
-                         <span class="kw">Sys.getenv</span>(<span class="st">"password"</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_con &lt;-<span class="st"> </span><span class="kw"><a href="../reference/connect_to_etn.html">connect_to_etn</a></span>(<span class="kw">Sys.getenv</span>(<span class="st">"userid"</span>),
+                         <span class="kw">Sys.getenv</span>(<span class="st">"pwd"</span>))
 my_con
 <span class="co">#&gt; &lt;OdbcConnection&gt; stijn.vanhoey@inbo.be@dppg.vliz.be</span>
 <span class="co">#&gt;   Database: ETN</span>
-<span class="co">#&gt;   PostgreSQL Version: 9.6.8</span></code></pre></div>
+<span class="co">#&gt;   PostgreSQL Version: 9.6.9</span></code></pre></div>
 <p>Remark that for this example, we <a href="http://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables">load the user credentials as environmental variables</a> by saving an <code>.Renviron</code> file in the home directory with the username and password stored. Other options are available as well, as explained <a href="http://db.rstudio.com/best-practices/managing-credentials/">here</a>.</p>
 <p>Once the connection established, the <code>get_*</code> functions can be used to effectively access the data. Each of these functions have a (valid database) connection as first input.</p>
 <p>Notice, that you can find the <code>get_*</code>-functions inside Rstudio by typing: <code>etn::get_*</code> + TAB button.</p>
@@ -169,66 +163,6 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
-<td align="right">616</td>
-<td align="left">rangetest</td>
-<td align="left">rangetest</td>
-<td align="left">animal</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">1</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="right">7</td>
-<td align="left">Demer</td>
-<td align="left">demer</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5879</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">12</td>
-<td align="left">Dijle</td>
-<td align="left">dijle</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5880</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="right">630</td>
-<td align="left">DTU-Test</td>
-<td align="left">DTUtest</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">14</td>
-<td align="left">Albertkanaal</td>
-<td align="left">albert</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5876</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
 <td align="right">620</td>
 <td align="left">Noordzeekanaal</td>
 <td align="left">Noordzeekanaal</td>
@@ -240,27 +174,87 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
-<td align="right">613</td>
-<td align="left">Westerschelde 1</td>
-<td align="left">ws1</td>
+<tr class="even">
+<td align="right">617</td>
+<td align="left">PC4C</td>
+<td align="left">pc4c</td>
 <td align="left">network</td>
-<td align="left">NA</td>
+<td align="left">2017-07-03</td>
 <td align="left">NA</td>
 <td align="left">0</td>
-<td align="right">5844</td>
+<td align="right">5848</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">625</td>
+<td align="left">Deveron 2016</td>
+<td align="left">Deveron</td>
+<td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5913</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="right">615</td>
-<td align="left">Westerschelde 3</td>
-<td align="left">ws3</td>
+<td align="right">626</td>
+<td align="left">Moray Firth 2016</td>
+<td align="left">MorayFirth</td>
 <td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5914</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">627</td>
+<td align="left">Aberdeen 2017</td>
+<td align="left">Aberdeen</td>
+<td align="left">network</td>
+<td align="left">2017-08-01</td>
+<td align="left">2017-12-22</td>
+<td align="left">0</td>
+<td align="right">5915</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">628</td>
+<td align="left">Conon 2017</td>
+<td align="left">Conon</td>
+<td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5916</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">629</td>
+<td align="left">Skye 2017</td>
+<td align="left">Skye</td>
+<td align="left">network</td>
+<td align="left">2017-04-01</td>
+<td align="left">2017-08-15</td>
+<td align="left">0</td>
+<td align="right">5917</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">599</td>
+<td align="left">Homarus</td>
+<td align="left">homarus</td>
+<td align="left">animal</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">0</td>
-<td align="right">5854</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -308,54 +302,6 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
-<td align="right">7</td>
-<td align="left">Demer</td>
-<td align="left">demer</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5879</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="right">12</td>
-<td align="left">Dijle</td>
-<td align="left">dijle</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5880</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">630</td>
-<td align="left">DTU-Test</td>
-<td align="left">DTUtest</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="right">14</td>
-<td align="left">Albertkanaal</td>
-<td align="left">albert</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5876</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
 <td align="right">620</td>
 <td align="left">Noordzeekanaal</td>
 <td align="left">Noordzeekanaal</td>
@@ -368,30 +314,6 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="right">613</td>
-<td align="left">Westerschelde 1</td>
-<td align="left">ws1</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5844</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">615</td>
-<td align="left">Westerschelde 3</td>
-<td align="left">ws3</td>
-<td align="left">network</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">0</td>
-<td align="right">5854</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
 <td align="right">617</td>
 <td align="left">PC4C</td>
 <td align="left">pc4c</td>
@@ -400,6 +322,78 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="left">NA</td>
 <td align="left">0</td>
 <td align="right">5848</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">625</td>
+<td align="left">Deveron 2016</td>
+<td align="left">Deveron</td>
+<td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5913</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">626</td>
+<td align="left">Moray Firth 2016</td>
+<td align="left">MorayFirth</td>
+<td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5914</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">627</td>
+<td align="left">Aberdeen 2017</td>
+<td align="left">Aberdeen</td>
+<td align="left">network</td>
+<td align="left">2017-08-01</td>
+<td align="left">2017-12-22</td>
+<td align="left">0</td>
+<td align="right">5915</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">628</td>
+<td align="left">Conon 2017</td>
+<td align="left">Conon</td>
+<td align="left">network</td>
+<td align="left">2016-04-01</td>
+<td align="left">2016-07-01</td>
+<td align="left">0</td>
+<td align="right">5916</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">629</td>
+<td align="left">Skye 2017</td>
+<td align="left">Skye</td>
+<td align="left">network</td>
+<td align="left">2017-04-01</td>
+<td align="left">2017-08-15</td>
+<td align="left">0</td>
+<td align="right">5917</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="left">Maas</td>
+<td align="left">maas</td>
+<td align="left">network</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">0</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -4080,7 +4074,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 
 
       <footer><div class="copyright">
-  <p>Developed by Stijn Van Hoey, Damiano Oldoni, Peter Desmet.</p>
+  <p>Developed by <a href="https://twitter.com/SVanHoey">Stijn Van Hoey</a>, <a href="https://twitter.com/damianozingaro">Damiano Oldoni</a>.</p>
 </div>
 
 <div class="pkgdown">

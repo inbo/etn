@@ -65,13 +65,7 @@ receiver, deployments data." />
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
@@ -93,7 +87,7 @@ receiver, deployments data." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/lifewatchinbo">
+  <a href="https://twitter.com/LifeWatchINBO">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -160,14 +154,14 @@ receiver, deployments data.</p>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>)
 
 <span class='co'># Deployments of a subset of projects</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"zeeschelde"</span>, <span class='st'>"ws1"</span>))
-
-<span class='co'># Deployments of a subset of projects and receiver status</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"zeeschelde"</span>, <span class='st'>"ws1"</span>),
-                <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"thornton"</span>, <span class='st'>"leopold"</span>))
 
 <span class='co'># Deployments of a subset of receiver status</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
+
+<span class='co'># Deployments of a subset of projects and receiver status</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>,
+                <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -185,7 +179,7 @@ receiver, deployments data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Stijn Van Hoey, Damiano Oldoni, Peter Desmet.</p>
+  <p>Developed by <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>.</p>
 </div>
 
 <div class="pkgdown">
