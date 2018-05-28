@@ -30,8 +30,8 @@
 
 <meta property="og:title" content="Get raw detections data — get_detections" />
 
-<meta property="og:description" content="Get the raw detections data, with optional filters for the project,
-the start- and enddate, the deployment station name and the transmitter/tag
+<meta property="og:description" content="Get the raw detections data, with optional filters for the project, the
+start- and enddate, the deployment station name and the transmitter/tag
 identifier. Use the limit option to limit the data size." />
 <meta name="twitter:card" content="summary" />
 
@@ -66,13 +66,7 @@ identifier. Use the limit option to limit the data size." />
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
@@ -94,7 +88,7 @@ identifier. Use the limit option to limit the data size." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/lifewatchinbo">
+  <a href="https://twitter.com/LifeWatchINBO">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -124,8 +118,8 @@ identifier. Use the limit option to limit the data size." />
 
     <div class="ref-description">
     
-    <p>Get the raw detections data, with optional filters for the project,
-the start- and enddate, the deployment station name and the transmitter/tag
+    <p>Get the raw detections data, with optional filters for the project, the
+start- and enddate, the deployment station name and the transmitter/tag
 identifier. Use the <code>limit</code> option to limit the data size.</p>
     
     </div>
@@ -190,16 +184,19 @@ records are downloaded.</p></td>
 <span class='co'># Get detection data filtered by the start year</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 
-<span class='co'># Get detection data within time frame for specific animal project</span>
+<span class='co'># Get detection data within time frame for specific animal project and</span>
+<span class='co'># network project</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
-               <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2011-01-28"</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>)
+               <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2011-01-28"</span>,
+               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>)
 
-<span class='co'># Get detection data for specific animal project and station names</span>
+<span class='co'># Get detection data for specific animal project and station names and a</span>
+<span class='co'># limit about the number of returned records</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
                <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"R03"</span>, <span class='st'>"R05"</span>), <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 
 <span class='co'># Get detection data for specific transmitter</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='st'>"A69-1601-28281"</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -217,7 +214,7 @@ records are downloaded.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Stijn Van Hoey, Damiano Oldoni, Peter Desmet.</p>
+  <p>Developed by <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>.</p>
 </div>
 
 <div class="pkgdown">
