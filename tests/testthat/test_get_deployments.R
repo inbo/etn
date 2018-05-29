@@ -13,7 +13,7 @@ test3 <- get_deployments(con, network_project = c("thornton",
 test4 <- get_deployments(con, receiver_status = "Broken")
 test5 <- get_deployments(con, receiver_status = c("Broken", "Lost"))
 test6 <- get_deployments(con, network_project = "thornton",
-                         active_only = FALSE)
+                         open_only = FALSE)
 
 testthat::test_that("test_input_get_deployments", {
   expect_error(get_transmitters("I am not a connection"),
