@@ -6,6 +6,8 @@
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
+#' @param active_only (logical) Default TRUE, returning only those deployments
+#' that are currently open. If FALSE, all deployments are returned.
 #'
 #' @return A data.frame.
 #'
@@ -13,7 +15,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
+#' @importFrom dplyr pull %>% filter
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -35,7 +37,8 @@
 #' }
 get_deployments <- function(connection,
                             network_project = NULL,
-                            receiver_status = NULL) {
+                            receiver_status = NULL,
+                            active_only = TRUE) {
 
   check_connection(connection)
   valid_networks <- get_projects(connection, project_type = "network") %>%
@@ -59,7 +62,11 @@ get_deployments <- function(connection,
     .con = connection
   )
   deployments <- dbGetQuery(connection, deployments_query)
-  deployments
+  if (active_only) {
+    deployments %>% filter(is.na(recover_date_time))
+  } else {
+    deployments
+  }
 }
 
 receiver_status_vocabulary <- c("Available", "Lost", "Broken",
