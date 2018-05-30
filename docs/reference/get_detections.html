@@ -126,7 +126,8 @@ identifier. Use the <code>limit</code> option to limit the data size.</p>
 
     <pre class="usage"><span class='fu'>get_detections</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +167,14 @@ names.</p></td>
 referred to as `tag_code_space` identifiers</p></td>
     </tr>
     <tr>
+      <th>receiver</th>
+      <td><p>(character) One or more receiver identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>scientific_name</th>
+      <td><p>(character) One or more scientific names.</p></td>
+    </tr>
+    <tr>
       <th>limit</th>
       <td><p>(integer) Limit the number of records to download. If NULL, all
 records are downloaded.</p></td>
@@ -197,6 +206,14 @@ records are downloaded.</p></td>
 
 <span class='co'># Get detection data for specific transmitter</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>)
+
+<span class='co'># Get detection data for specific receiver during specific time period</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='st'>"VR2W-122360"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
+               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>)
+<span class='co'># Get detection data for a specific species during a given period</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Anguilla anguilla"</span>,
+               <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
+               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
