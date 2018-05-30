@@ -122,7 +122,8 @@ receiver, deployments data.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_deployments</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_deployments</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +140,12 @@ receiver, deployments data.</p>
       <th>receiver_status</th>
       <td><p>(string) One or more receiver status.</p></td>
     </tr>
+    <tr>
+      <th>open_only</th>
+      <td><p>(logical) Default TRUE, returning only those deployments
+that are currently open (i.e. no end date defined. If FALSE, all deployments
+are returned.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -150,16 +157,19 @@ receiver, deployments data.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># All deployments</span>
+<span class='co'># All open deployments</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>)
 
-<span class='co'># Deployments of a subset of projects</span>
+<span class='co'># All deployments (also deployments with an end date)</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># Open deployments of a subset of projects</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"thornton"</span>, <span class='st'>"leopold"</span>))
 
-<span class='co'># Deployments of a subset of receiver status</span>
+<span class='co'># Open deployments of a subset of receiver status</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
 
-<span class='co'># Deployments of a subset of projects and receiver status</span>
+<span class='co'># Open deployments of a subset of projects and receiver status</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>,
                 <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
 <span class='co'># }</span></pre>

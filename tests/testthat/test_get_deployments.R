@@ -12,6 +12,8 @@ test3 <- get_deployments(con, network_project = c("thornton",
                                                   "leopold"))
 test4 <- get_deployments(con, receiver_status = "Broken")
 test5 <- get_deployments(con, receiver_status = c("Broken", "Lost"))
+test6 <- get_deployments(con, network_project = "thornton",
+                         open_only = FALSE)
 
 testthat::test_that("test_input_get_deployments", {
   expect_error(get_transmitters("I am not a connection"),
@@ -50,6 +52,8 @@ testthat::test_that("test_output_get_deployments", {
              test5 %>% distinct(receiver_status) %>% nrow())
   expect_gte(test5 %>% distinct(receiver_status) %>% nrow(),
              test4 %>% distinct(receiver_status) %>% nrow())
+  expect_gte(test6 %>% nrow(),
+             test2 %>% nrow())
   expect_gte(test1 %>% distinct(projectcode) %>% nrow(),
              test2 %>% distinct(projectcode) %>% nrow())
   expect_gte(test3 %>% distinct(projectcode) %>% nrow(),
@@ -68,4 +72,7 @@ testthat::test_that("test_output_get_deployments", {
   expect_true(test4 %>% distinct(receiver_status) %>% pull() == "Broken")
   expect_true(all(test5 %>% distinct(receiver_status) %>% pull() %in% c("Broken",
                                                                   "Lost")))
+  expect_true(all(test2 %>% select(recover_date_time) %>% is.na()))
+  # excluding outside function is the same as conditional TRUE
+  expect_equal(nrow(test6 %>% filter(is.na(recover_date_time))), nrow(test2))
 })
