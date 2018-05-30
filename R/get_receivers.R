@@ -42,9 +42,12 @@ get_receivers <- function(connection,
   }
 
   receivers_query <- glue_sql("
-      SELECT DISTINCT receivers.* , deployments.projectcode
+      SELECT DISTINCT receivers.* ,
+        deployments.projectcode,
+        etn_group.name as owner_organisation
       FROM vliz.receivers
         JOIN vliz.deployments_view deployments ON (receivers.id_pk = deployments.receiver_fk)
+        JOIN vliz.etn_group AS etn_group ON (receivers.owner_group_fk = etn_group.id_pk)
       WHERE projectcode IN ({project*})",
                               project = network_project,
                               .con = connection
@@ -56,7 +59,7 @@ get_receivers <- function(connection,
   # combine the individual network projects in a single row:
   receivers %>%
     group_by(id_pk) %>%
-    mutate(projectcode  = paste(projectcode, collapse =",")) %>%
+    mutate(projectcode = paste(projectcode, collapse = ",")) %>%
     ungroup() %>%
     distinct()
 }
