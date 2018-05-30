@@ -60,6 +60,7 @@ get_receivers <- function(connection,
   receivers %>%
     group_by(id_pk) %>%
     mutate(projectcode = paste(projectcode, collapse = ",")) %>%
+    rename(network_projectcode = projectcode) %>%
     ungroup() %>%
     distinct()
 }

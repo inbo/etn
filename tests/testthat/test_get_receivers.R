@@ -28,5 +28,6 @@ testthat::test_that("test_output_get_receivers", {
   expect_equal(ncol(test1), ncol(test2))
   expect_equal(ncol(test2), ncol(test3))
   expect_true("owner_organisation" %in% colnames(test1))
+  expect_true("network_projectcode" %in% colnames(test1))
 })
 
