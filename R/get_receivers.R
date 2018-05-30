@@ -50,5 +50,13 @@ get_receivers <- function(connection,
                               .con = connection
   )
   receivers <- dbGetQuery(connection, receivers_query)
-  receivers
+
+  # we still have multiple records of receivers, as project codes are coupled to
+  # deployments and a receiver can have multiple deployments aka projects.
+  # combine the individual network projects in a single row:
+  receivers %>%
+    group_by(id_pk) %>%
+    mutate(projectcode  = paste(projectcode, collapse =",")) %>%
+    ungroup() %>%
+    distinct()
 }
