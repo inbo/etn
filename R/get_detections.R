@@ -18,6 +18,7 @@
 #' @param transmitter (character) One or more transmitter identifiers, also
 #'   referred to as `tag_code_space` identifiers
 #' @param receiver (character) One or more receiver identifiers.
+#' @param scientific_name (character) One or more scientific names.
 #' @param limit (integer) Limit the number of records to download. If NULL, all
 #'   records are downloaded.
 #'
@@ -54,12 +55,17 @@
 #'
 #' # Get detection data for specific receiver during specific time period
 #' get_detections(con, receiver = "VR2W-122360", start_date = "2015-12-03",
-#'                end_date = "2015-12-05", limit = 10)
+#'                end_date = "2015-12-05")
+#' # Get detection data for a specific species during a given period
+#' get_detections(con, scientific_name = "Anguilla anguilla",
+#'                start_date = "2015-12-03",
+#'                end_date = "2015-12-05")
 #' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
                            end_date = NULL, deployment_station_name = NULL,
-                           transmitter = NULL, receiver = NULL, limit = NULL) {
+                           transmitter = NULL, receiver = NULL,
+                           scientific_name = NULL, limit = NULL) {
   check_connection(connection)
 
   # check the network project inputs
@@ -117,6 +123,13 @@ get_detections <- function(connection, network_project = NULL,
     receiver = valid_receivers
   }
 
+  # valid scientific names
+  valid_animals <- scientific_names(connection)
+  check_null_or_value(scientific_name, valid_animals, "scientific_name")
+  if (is.null(scientific_name)) {
+    scientific_name = valid_animals
+  }
+
   # check the limit input
   if (is.null(limit)) {
     sub_query <- glue_sql("LIMIT ALL", .con = connection)
@@ -136,6 +149,7 @@ get_detections <- function(connection, network_project = NULL,
       AND deployment_station_name IN ({station_name*})
       AND transmitter IN ({transmitter*})
       AND receiver IN ({receiver*})
+      AND scientific_name IN ({scientific_names*})
     {sub_query}",
     network_project = network_project,
     animal_project = animal_project,
@@ -144,6 +158,7 @@ get_detections <- function(connection, network_project = NULL,
     station_name = deployment_station_name,
     transmitter = transmitter,
     receiver = receiver,
+    scientific_names = scientific_name,
     nrows = limit,
     .con = connection
   )
