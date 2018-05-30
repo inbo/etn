@@ -64,17 +64,17 @@ scientific_name <- "Anguilla anguilla"
 
 test3<- get_detections(con, animal_project = animal_project,
                        network_project = network_project, start_date = start_date,
-                       end_date = end_date, limit = 5,
+                       end_date = end_date, limit = limit,
                        transmitter = transmitter)
 deployment_station_name <- "R03"
 test4 <- get_detections(con, animal_project = animal_project,
                         network_project = network_project,
                         deployment_station_name = deployment_station_name,
-                        limit = 5, transmitter = transmitter)
+                        limit = limit, transmitter = transmitter)
 
-test5 <- get_detections(con, transmitter = transmitter, limit = 5)
-test6 <- get_detections(con, receiver = receiver, limit = 5)
-test7 <- get_detections(con, scientific_name = scientific_name, limit = 5)
+test5 <- get_detections(con, transmitter = transmitter, limit = limit)
+test6 <- get_detections(con, receiver = receiver, limit = limit)
+test7 <- get_detections(con, scientific_name = scientific_name, limit = limit)
 
 testthat::test_that("test_output_get_detections", {
   expect_equal(nrow(test1), 5)
