@@ -17,6 +17,7 @@
 #'   names.
 #' @param transmitter (character) One or more transmitter identifiers, also
 #'   referred to as `tag_code_space` identifiers
+#' @param receiver (character) One or more receiver identifiers.
 #' @param limit (integer) Limit the number of records to download. If NULL, all
 #'   records are downloaded.
 #'
@@ -50,11 +51,15 @@
 #'
 #' # Get detection data for specific transmitter
 #' get_detections(con, transmitter = "A69-1303-65302")
+#'
+#' # Get detection data for specific receiver during specific time period
+#' get_detections(con, receiver = "VR2W-122360", start_date = "2015-12-03",
+#'                end_date = "2015-12-05", limit = 10)
 #' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
                            end_date = NULL, deployment_station_name = NULL,
-                           transmitter = NULL, limit = NULL) {
+                           transmitter = NULL, receiver = NULL, limit = NULL) {
   check_connection(connection)
 
   # check the network project inputs
@@ -103,6 +108,15 @@ get_detections <- function(connection, network_project = NULL,
     transmitter = valid_transmitters
   }
 
+  # check the receiver inputs
+  valid_receivers <- get_receivers(connection) %>%
+    pull(.data$receiver)
+  check_null_or_value(receiver, valid_receivers,
+                      "receiver")
+  if (is.null(receiver)) {
+    receiver = valid_receivers
+  }
+
   # check the limit input
   if (is.null(limit)) {
     sub_query <- glue_sql("LIMIT ALL", .con = connection)
@@ -121,6 +135,7 @@ get_detections <- function(connection, network_project = NULL,
       AND datetime < {end_date}
       AND deployment_station_name IN ({station_name*})
       AND transmitter IN ({transmitter*})
+      AND receiver IN ({receiver*})
     {sub_query}",
     network_project = network_project,
     animal_project = animal_project,
@@ -128,6 +143,7 @@ get_detections <- function(connection, network_project = NULL,
     end_date = end_date,
     station_name = deployment_station_name,
     transmitter = transmitter,
+    receiver = receiver,
     nrows = limit,
     .con = connection
   )
