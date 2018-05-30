@@ -6,7 +6,8 @@
 \usage{
 get_detections(connection, network_project = NULL, animal_project = NULL,
   start_date = NULL, end_date = NULL, deployment_station_name = NULL,
-  transmitter = NULL, limit = NULL)
+  transmitter = NULL, receiver = NULL, scientific_name = NULL,
+  limit = NULL)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
@@ -28,6 +29,10 @@ names.}
 
 \item{transmitter}{(character) One or more transmitter identifiers, also
 referred to as `tag_code_space` identifiers}
+
+\item{receiver}{(character) One or more receiver identifiers.}
+
+\item{scientific_name}{(character) One or more scientific names.}
 
 \item{limit}{(integer) Limit the number of records to download. If NULL, all
 records are downloaded.}
@@ -60,5 +65,13 @@ get_detections(con, animal_project = "phd_reubens",
 
 # Get detection data for specific transmitter
 get_detections(con, transmitter = "A69-1303-65302")
+
+# Get detection data for specific receiver during specific time period
+get_detections(con, receiver = "VR2W-122360", start_date = "2015-12-03",
+               end_date = "2015-12-05")
+# Get detection data for a specific species during a given period
+get_detections(con, scientific_name = "Anguilla anguilla",
+               start_date = "2015-12-03",
+               end_date = "2015-12-05")
 }
 }
