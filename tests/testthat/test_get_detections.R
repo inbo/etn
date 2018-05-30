@@ -45,6 +45,7 @@ testthat::test_that("test_input_get_detections", {
                               animal_project = "phd_reubens",
                               network_project = "thornton",
                               receiver = c("superraar")))
+  expect_error(get_detections(con, scientific_name = c("I am not an animal")))
 })
 
 
@@ -59,6 +60,7 @@ network_project <- "thornton"
 limit <- 5
 transmitter <- "A69-1303-65302"
 receiver <- "VR2W-122360"
+scientific_name <- "Anguilla anguilla"
 
 test3<- get_detections(con, animal_project = animal_project,
                        network_project = network_project, start_date = start_date,
@@ -72,6 +74,7 @@ test4 <- get_detections(con, animal_project = animal_project,
 
 test5 <- get_detections(con, transmitter = transmitter, limit = 5)
 test6 <- get_detections(con, receiver = receiver, limit = 5)
+test7 <- get_detections(con, scientific_name = scientific_name, limit = 5)
 
 testthat::test_that("test_output_get_detections", {
   expect_equal(nrow(test1), 5)
@@ -112,5 +115,8 @@ testthat::test_that("test_output_get_detections", {
   expect_true(test6 %>%
                 distinct(receiver) %>%
                 pull() == receiver)
+  expect_true(test7 %>%
+                distinct(scientific_name) %>%
+                pull() == scientific_name)
 })
 
