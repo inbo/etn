@@ -4,7 +4,8 @@
 \alias{get_deployments}
 \title{Get deployments data}
 \usage{
-get_deployments(connection, network_project = NULL, receiver_status = NULL)
+get_deployments(connection, network_project = NULL, receiver_status = NULL,
+  open_only = TRUE)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
@@ -12,6 +13,10 @@ get_deployments(connection, network_project = NULL, receiver_status = NULL)
 \item{network_project}{(string) One or more network projects.}
 
 \item{receiver_status}{(string) One or more receiver status.}
+
+\item{open_only}{(logical) Default TRUE, returning only those deployments
+that are currently open (i.e. no end date defined. If FALSE, all deployments
+are returned.}
 }
 \value{
 A data.frame.
@@ -24,16 +29,19 @@ receiver, deployments data.
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# All deployments
+# All open deployments
 get_deployments(con)
 
-# Deployments of a subset of projects
+# All deployments (also deployments with an end date)
+get_deployments(con, open_only = FALSE)
+
+# Open deployments of a subset of projects
 get_deployments(con, network_project = c("thornton", "leopold"))
 
-# Deployments of a subset of receiver status
+# Open deployments of a subset of receiver status
 get_deployments(con, receiver_status = c("Broken", "Lost"))
 
-# Deployments of a subset of projects and receiver status
+# Open deployments of a subset of projects and receiver status
 get_deployments(con, network_project = "thornton",
                 receiver_status = "Active")
 }
