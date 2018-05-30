@@ -42,7 +42,7 @@ get_receivers <- function(connection,
   }
 
   receivers_query <- glue_sql("
-      SELECT receivers.* , deployments.projectcode
+      SELECT DISTINCT receivers.* , deployments.projectcode
       FROM vliz.receivers
         JOIN vliz.deployments_view deployments ON (receivers.id_pk = deployments.receiver_fk)
       WHERE projectcode IN ({project*})",
