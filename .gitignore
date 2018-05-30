@@ -29,3 +29,5 @@ pgpass
 inst/doc
 # Environmental files
 .Renviron*
+# custom material for personal tests
+draft
