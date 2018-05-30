@@ -6,7 +6,7 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-testthat::test_that("test_input_get_etections", {
+testthat::test_that("test_input_get_detections", {
   expect_error(get_detections("I am not a connection"),
                "Not a connection object to database.")
   expect_error(get_detections(con, network_project = "very_bad_project"))
@@ -37,6 +37,14 @@ testthat::test_that("test_input_get_etections", {
                               animal_project = "phd_reubens",
                               network_project = "thornton",
                               deployment_station_name = c("R03","no_way")))
+  expect_error(get_detections(con,
+                              animal_project = "phd_reubens",
+                              network_project = "thornton",
+                              transmitter = c("R03","no_way")))
+  expect_error(get_detections(con,
+                              animal_project = "phd_reubens",
+                              network_project = "thornton",
+                              receiver = c("superraar")))
 })
 
 
@@ -50,6 +58,7 @@ animal_project <- "phd_reubens"
 network_project <- "thornton"
 limit <- 5
 transmitter <- "A69-1303-65302"
+receiver <- "VR2W-122360"
 
 test3<- get_detections(con, animal_project = animal_project,
                        network_project = network_project, start_date = start_date,
@@ -62,6 +71,8 @@ test4 <- get_detections(con, animal_project = animal_project,
                         limit = 5, transmitter = transmitter)
 
 test5 <- get_detections(con, transmitter = transmitter, limit = 5)
+test6 <- get_detections(con, receiver = receiver, limit = 5)
+
 testthat::test_that("test_output_get_detections", {
   expect_equal(nrow(test1), 5)
   expect_equal(nrow(test2), 2)
@@ -98,5 +109,8 @@ testthat::test_that("test_output_get_detections", {
   expect_true(test5 %>%
                 distinct(transmitter) %>%
                 pull() == transmitter)
+  expect_true(test6 %>%
+                distinct(receiver) %>%
+                pull() == receiver)
 })
 
