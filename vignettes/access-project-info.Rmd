@@ -62,14 +62,12 @@ get_projects(my_con) %>% select(name, projectcode)
 ```{r couple_projectcode_to_projectname_short, echo = FALSE}
 get_projects(my_con) %>% 
   select(name, projectcode) %>%
-  head(n = 10) %>%  # print 10 first
-  knitr::kable()
+  head(n = 10)  # print 10 first
 ```
 
 Finally, please notice that neither project names nor project codes are unique as shown in the case of project `"ARAISOLA01"`:
 
 ```{r not_uniqueness_example}
 get_projects(my_con) %>%
-  filter(name == "ARAISOLA01") %>%
-  knitr::kable() 
+  filter(name == "ARAISOLA01")
 ```
