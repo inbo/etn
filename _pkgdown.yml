@@ -5,8 +5,10 @@ navbar:
   - text: Tutorials
     href: articles/index.html
     menu:
-    - text: Access data and metadata from etn
-      href: articles/access-etn-data.html
+    - text: Introduction to main functions of the ETN package
+      href: articles/etn-overview.html
+    - text: Get project information
+      href: articles/access-project-info.html
   - text: Functions
     href: reference/index.html
   - text: Contributing
@@ -33,26 +35,21 @@ authors:
     href: https://twitter.com/peterdesmet
 
 reference:
-  - title: "Connect to the database"
+  - title: Connect to the database
     contents:
       - connect_to_etn
-  - title: "Main metadata access functionalities"
-    desc: "Get access to metadata"
+  - title: Main metadata access functionalities
+    desc: Get access to metadata 
     contents:
       - get_projects
       - get_receivers
       - get_deployments
       - get_animals
       - get_transmitters
-  - title: "Main detection data access functionality"
-    desc: "Get access to raw detections data"
+  - title: Main detection data access functionality
+    desc: Get access to raw detections data
     contents:
       - get_detections
-
-articles:
-  - title: "Tutorial on the main downloading functionalities"
-    contents:
-    - access-etn-data
 
 template:
   params:

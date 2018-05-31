@@ -1,5 +1,5 @@
 ---
-title: "Access ETN data using the etn R package"
+title: "Introduction to main functions of the ETN package"
 author: "Stijn Van Hoey"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 The `etn` package provides a set of `get_*`-based functions to access the ETN data and metadata. In this vignette a quick overview of these main functions is given. As the access to data is linked to specific user profiles, keep in mind that the results can be different for other users.
 
 To start, load the package:
+
 ```{r}
 library(etn)
 ```
@@ -152,5 +153,3 @@ knitr::kable(head(my_detections, 10)) # print 10 first
 The date level can be defined on month (e.g. `"2011-01"`) or year (e.g. `"2011"`) level as well. Finally, for explorative reasons, a hard maximum limit of records to request can help to have a quick glance on the expected data.
 
 See more exampled in the function help (remember the `?get_detections`).
-
-
