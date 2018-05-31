@@ -2,8 +2,8 @@
 title: "Introduction to main functions of the ETN package"
 author: "Stijn Van Hoey"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-  html_document:
+output:
+  rmarkdown::html_vignette:
     df_print: paged
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
