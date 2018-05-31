@@ -128,98 +128,26 @@ animals <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <p>What if you have no clue about the project code you are interested in?</p>
 <p>Run <code><a href="../reference/get_projects.html">get_projects()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_projects.html">get_projects</a></span>(my_con) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(name, projectcode)</code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">name</th>
-<th align="left">projectcode</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Lifewatch</td>
-<td align="left">cpod-lifewatch</td>
-</tr>
-<tr class="even">
-<td align="left">Lifewatch</td>
-<td align="left">lifewatch</td>
-</tr>
-<tr class="odd">
-<td align="left">Noordzeekanaal</td>
-<td align="left">Noordzeekanaal</td>
-</tr>
-<tr class="even">
-<td align="left">PC4C</td>
-<td align="left">pc4c</td>
-</tr>
-<tr class="odd">
-<td align="left">Deveron 2016</td>
-<td align="left">Deveron</td>
-</tr>
-<tr class="even">
-<td align="left">Moray Firth 2016</td>
-<td align="left">MorayFirth</td>
-</tr>
-<tr class="odd">
-<td align="left">Aberdeen 2017</td>
-<td align="left">Aberdeen</td>
-</tr>
-<tr class="even">
-<td align="left">Conon 2017</td>
-<td align="left">Conon</td>
-</tr>
-<tr class="odd">
-<td align="left">Skye 2017</td>
-<td align="left">Skye</td>
-</tr>
-<tr class="even">
-<td align="left">Homarus</td>
-<td align="left">homarus</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt;                name    projectcode
+#&gt; 1         Lifewatch cpod-lifewatch
+#&gt; 2         Lifewatch      lifewatch
+#&gt; 3    Noordzeekanaal Noordzeekanaal
+#&gt; 4              PC4C           pc4c
+#&gt; 5      Deveron 2016        Deveron
+#&gt; 6  Moray Firth 2016     MorayFirth
+#&gt; 7     Aberdeen 2017       Aberdeen
+#&gt; 8        Conon 2017          Conon
+#&gt; 9         Skye 2017           Skye
+#&gt; 10          Homarus        homarus</code></pre>
 <p>Finally, please notice that neither project names nor project codes are unique as shown in the case of project <code>"ARAISOLA01"</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_projects.html">get_projects</a></span>(my_con) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(name <span class="op">==</span><span class="st"> "ARAISOLA01"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>() </code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="right">id</th>
-<th align="left">name</th>
-<th align="left">projectcode</th>
-<th align="left">type</th>
-<th align="left">startdate</th>
-<th align="left">enddate</th>
-<th align="left">moratorium</th>
-<th align="right">imis_dataset_id</th>
-<th align="right">latitude</th>
-<th align="right">longitude</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">646</td>
-<td align="left">ARAISOLA01</td>
-<td align="left">ARAISOLA01</td>
-<td align="left">animal</td>
-<td align="left">2004-03-01</td>
-<td align="left">2004-06-30</td>
-<td align="left">0</td>
-<td align="right">5930</td>
-<td align="right">38.213</td>
-<td align="right">13.23539</td>
-</tr>
-<tr class="even">
-<td align="right">650</td>
-<td align="left">ARAISOLA01</td>
-<td align="left">ARAISOLA01</td>
-<td align="left">network</td>
-<td align="left">2004-03-01</td>
-<td align="left">2004-06-30</td>
-<td align="left">0</td>
-<td align="right">5930</td>
-<td align="right">38.213</td>
-<td align="right">13.23539</td>
-</tr>
-</tbody>
-</table>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(name <span class="op">==</span><span class="st"> "ARAISOLA01"</span>)
+<span class="co">#&gt;    id       name projectcode    type  startdate    enddate moratorium</span>
+<span class="co">#&gt; 1 646 ARAISOLA01  ARAISOLA01  animal 2004-03-01 2004-06-30          0</span>
+<span class="co">#&gt; 2 650 ARAISOLA01  ARAISOLA01 network 2004-03-01 2004-06-30          0</span>
+<span class="co">#&gt;   imis_dataset_id latitude longitude</span>
+<span class="co">#&gt; 1            5930   38.213  13.23539</span>
+<span class="co">#&gt; 2            5930   38.213  13.23539</span></code></pre></div>
 </div>
   </div>
 
