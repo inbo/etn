@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Many functions of the `etn` package accept project-related parameters like `animal_project` and `network_project`. In the ETN database there are two fields to identify a project called `projectcode` and `projectname`:
+Many functions of the `etn` package accept project-related parameters like `animal_project` and `network_project`. In the ETN database there are two fields to identify a project, namely `projectcode` and `projectname`:
 
 ```{r show_name_and_code}
 library(etn)
@@ -47,11 +47,11 @@ animals %>% distinct(projectcode) %>% pull()
 animals %>% distinct(projectname) %>% pull()
 ```
 
-The are many reasons for using the code of a project instead of its name. Project codes are typically shorter, therefore faster to write, while project names are longer and more informative. The presence of spaces in the project names can also easily lead to mistyping errors.
+The are many reasons for using the code of a project instead of its name. Project codes are typically shorter, therefore faster to write, while project names are longer and more informative. The presence of spaces in the project names can also easily lead to typos.
 
 ## How to find a project code
 
-What if you have no clue about the project code you interested to?
+What if you have no clue about the project code you are interested in?
 
 Run `get_projects()`:
 
@@ -65,7 +65,6 @@ get_projects(my_con) %>%
   head(n = 10) %>%  # print 10 first
   knitr::kable()
 ```
-
 
 Finally, please notice that neither project names nor project codes are unique as shown in the case of project `"ARAISOLA01"`:
 
