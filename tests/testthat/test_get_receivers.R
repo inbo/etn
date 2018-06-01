@@ -22,10 +22,12 @@ testthat::test_that("test_output_get_receivers", {
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
   expect_is(test3, "data.frame")
-  expect_gte(nrow(test1), nrow(test2))
+  expect_gt(nrow(test1), nrow(test2))
   expect_gte(nrow(test1), nrow(test3))
   expect_gte(nrow(test3), nrow(test2))
   expect_equal(ncol(test1), ncol(test2))
   expect_equal(ncol(test2), ncol(test3))
+  expect_true("owner_organisation" %in% colnames(test1))
+  expect_true("network_projectcode" %in% colnames(test1))
 })
 
