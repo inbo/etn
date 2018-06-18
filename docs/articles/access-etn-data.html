@@ -8,8 +8,8 @@
 <title>Access ETN data using the etn R package • etn</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Access ETN data using the etn R package">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Access ETN data using the etn R package">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -82,7 +82,7 @@
       <h1>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2018-05-30</h4>
+            <h4 class="date">2018-06-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/access-etn-data.Rmd"><code>vignettes/access-etn-data.Rmd</code></a></small>
       <div class="hidden name"><code>access-etn-data.Rmd</code></div>
@@ -136,6 +136,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <th align="right">imis_dataset_id</th>
 <th align="right">latitude</th>
 <th align="right">longitude</th>
+<th align="left">project_type</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -149,6 +150,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">cpod</td>
 </tr>
 <tr class="even">
 <td align="right">3</td>
@@ -161,6 +163,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">620</td>
@@ -173,6 +176,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5881</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">617</td>
@@ -185,6 +189,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5848</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">625</td>
@@ -197,6 +202,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5913</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">626</td>
@@ -209,6 +215,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5914</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">627</td>
@@ -221,6 +228,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5915</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">628</td>
@@ -233,6 +241,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5916</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">629</td>
@@ -245,6 +254,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5917</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">599</td>
@@ -257,6 +267,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 </tbody>
 </table>
@@ -275,6 +286,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <th align="right">imis_dataset_id</th>
 <th align="right">latitude</th>
 <th align="right">longitude</th>
+<th align="left">project_type</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -288,6 +300,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">cpod</td>
 </tr>
 <tr class="even">
 <td align="right">3</td>
@@ -300,6 +313,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">620</td>
@@ -312,6 +326,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5881</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">617</td>
@@ -324,6 +339,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5848</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">625</td>
@@ -336,6 +352,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5913</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">626</td>
@@ -348,6 +365,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5914</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">627</td>
@@ -360,6 +378,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5915</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">628</td>
@@ -372,6 +391,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5916</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="odd">
 <td align="right">629</td>
@@ -384,6 +404,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">5917</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 <tr class="even">
 <td align="right">13</td>
@@ -396,6 +417,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="left">acoustic_telemetry</td>
 </tr>
 </tbody>
 </table>
@@ -912,7 +934,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">1121</td>
 <td align="left">VR2W-123821</td>
 <td align="right">NA</td>
-<td align="left">Lost</td>
+<td align="left">Available</td>
 <td align="left">acoustic_telemetry</td>
 <td align="right">1</td>
 <td align="right">7</td>
@@ -1083,7 +1105,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <tr class="even">
 <td align="left">123821</td>
 <td align="left">VR2W-123821</td>
-<td align="left">Lost</td>
+<td align="left">Available</td>
 </tr>
 <tr class="odd">
 <td align="left">127733</td>
@@ -2740,6 +2762,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <th align="right">owner_group_fk</th>
 <th align="left">thelma_converted_code</th>
 <th align="right">financing_project_fk</th>
+<th align="right">acceleration_on_sec_step1</th>
+<th align="right">acceleration_on_sec_step2</th>
+<th align="right">acceleration_on_sec_step3</th>
+<th align="left">min_delay_step4</th>
+<th align="left">max_delay_step4</th>
+<th align="left">power_step4</th>
+<th align="right">duration_step4</th>
+<th align="right">acceleration_on_sec_step4</th>
+<th align="left">range</th>
+<th align="left">units</th>
+<th align="left">accelerometer_algoritm</th>
+<th align="right">accelerometer_samples_per_second</th>
+<th align="right">sensor_transmit_ratio</th>
 <th align="left">projectcode</th>
 </tr></thead>
 <tbody>
@@ -2776,6 +2811,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">6</td>
 <td align="left">NA</td>
 <td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
 <tr class="even">
@@ -2810,6 +2858,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">6</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
@@ -2846,6 +2907,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">6</td>
 <td align="left">NA</td>
 <td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
 <tr class="even">
@@ -2880,6 +2954,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">6</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
@@ -2916,6 +3003,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">6</td>
 <td align="left">NA</td>
 <td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
 <tr class="even">
@@ -2950,6 +3050,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">6</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
@@ -2986,6 +3099,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">6</td>
 <td align="left">NA</td>
 <td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
 <tr class="even">
@@ -3020,6 +3146,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">6</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
@@ -3056,6 +3195,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">6</td>
 <td align="left">NA</td>
 <td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
 <tr class="even">
@@ -3090,6 +3242,19 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <td align="right">NA</td>
 <td align="right">6</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">phd_reubens</td>
 </tr>
