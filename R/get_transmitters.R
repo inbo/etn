@@ -1,10 +1,13 @@
 #' Get transmitter metadata
 #'
-#' Get the metadata about the transmitter tags. At the moment, only
-#' transmitters that can be linked to a projectcode are returned to the user.
+#' Get the metadata about the transmitter tags. At the moment, only transmitters
+#' that can be linked to a projectcode are returned to the user. By default,
+#' only animal tags are returned.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param animal_project (string) One or more animal projects.
+#' @param include_reference_tags (logical) Include reference tags (not-animal
+#'   tags). Default: FALSE.
 #'
 #' @return A data.frame.
 #'
@@ -19,15 +22,19 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get the metadata of all transmitter tags
+#' # Get the metadata of all transmitter animal tags
 #' get_transmitters(con)
+#'
+#' # Get the metadata of all transmitter tags
+#' get_transmitters(con, include_reference_tags = TRUE)
 #'
 #' # Get the metadata of the tags linked to specific project(s)
 #' get_transmitters(con, animal_project = "phd_reubens")
 #' get_transmitters(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
 get_transmitters <- function(connection,
-                     animal_project = NULL) {
+                     animal_project = NULL,
+                     include_reference_tags = FALSE) {
 
   check_connection(connection)
 
@@ -50,6 +57,10 @@ get_transmitters <- function(connection,
     .con = connection
   )
   transmitters <- dbGetQuery(connection, transmitters_query)
-  transmitters
 
+  if (include_reference_tags) {
+    transmitters
+  } else {
+    transmitters %>% filter(acoustic_tag_type == "animal")
+  }
 }
