@@ -1,3 +1,3 @@
-library(trias)
+library(etn)
 
 test_check("etn")
