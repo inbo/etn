@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% group_by
+#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct
 #' @importFrom rlang .data
 #'
 #' @examples
