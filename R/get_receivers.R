@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
+#' @importFrom dplyr pull %>% group_by
 #' @importFrom rlang .data
 #'
 #' @examples
