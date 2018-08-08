@@ -67,7 +67,7 @@ get_deployments <- function(connection,
   )
   deployments <- dbGetQuery(connection, deployments_query)
   if (open_only) {
-    deployments %>% filter(is.na(recover_date_time))
+    deployments %>% filter(is.na(.data$recover_date_time))
   } else {
     deployments
   }

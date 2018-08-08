@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
+#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -58,9 +58,9 @@ get_receivers <- function(connection,
   # deployments and a receiver can have multiple deployments aka projects.
   # combine the individual network projects in a single row:
   receivers %>%
-    group_by(id_pk) %>%
-    mutate(projectcode = paste(projectcode, collapse = ",")) %>%
-    rename(network_projectcode = projectcode) %>%
+    group_by(.data$id_pk) %>%
+    mutate(projectcode = paste(.data$projectcode, collapse = ",")) %>%
+    rename(network_projectcode = .data$projectcode) %>%
     ungroup() %>%
     distinct()
 }

@@ -61,6 +61,6 @@ get_transmitters <- function(connection,
   if (include_reference_tags) {
     transmitters
   } else {
-    transmitters %>% filter(acoustic_tag_type == "animal")
+    transmitters %>% filter(.data$acoustic_tag_type == "animal")
   }
 }

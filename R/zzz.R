@@ -79,14 +79,14 @@ check_null_or_value <- function(arg, options = NULL, arg_name) {
 #' @param regex A regular expression to parse
 #' @param ... Additional arguments passed to the collapse
 #'
-#' @importFrom glue evaluate collapse
+#' @importFrom glue glue_collapse
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
       code <- sub(regex, "", code)
     }
-    res <- evaluate(code, envir)
-    collapse(res, ...)
+    res <- eval(parse(text = code), envir)
+    glue_collapse(res, ...)
   }
 }
 
