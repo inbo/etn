@@ -204,10 +204,10 @@ deployment_station_names <- function(connection) {
 transmitters <- function(connection) {
 
   query <- glue_sql(
-    "SELECT DISTINCT tag_code_space FROM vliz.tags",
+    "SELECT DISTINCT tag_full_id FROM vliz.tags",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$tag_code_space
+  data$tag_full_id
 }
 
