@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
+^contributing\.md$
+^draft$
