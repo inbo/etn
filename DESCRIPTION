@@ -1,31 +1,31 @@
 Package: etn
 Title: Access and Process Data from the European Tracking Network
 Version: 0.1.0
-Authors@R: c(
-    person("Stijn", "Van Hoey", email = "stijn.vanhoey@inbo.be", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6413-3185")),
-    person("Damiano", "Oldoni", email = "damiano.oldoni@inbo.be", role = "aut", comment = c(ORCID = "0000-0003-3445-7562")),
-    person("Peter", "Desmet", email = "peter.desmet@inbo.be", role = "ctb", comment = c(ORCID = "0000-0002-8442-8025"))
-    )
 Description: Package with functions to access and process data from the European
     Tracking Network hosted by VLIZ.
+Authors@R: c(
+    person("Stijn", "Van Hoey", role = c("aut", "cre"), email = "stijn.vanhoey@inbo.be", comment = c(ORCID = "0000-0001-6413-3185")),
+    person("Damiano", "Oldoni", role = "aut", email = "damiano.oldoni@inbo.be", comment = c(ORCID = "0000-0003-3445-7562")),
+    person("Peter", "Desmet", role = "ctb", email = "peter.desmet@inbo.be", comment = c(ORCID = "0000-0002-8442-8025"))
+    )
 License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn
 BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 3.4.2)
 Imports:
-    DBI,
-    odbc,
-    glue,
-    dplyr,
     assertthat,
+    DBI,
+    dplyr,
+    glue,
     lubridate,
     methods,
+    odbc,
     rlang
-Suggests: 
-    testthat,
-    knitr
+Suggests:
+    knitr,
+    testthat
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1
