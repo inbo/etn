@@ -37,8 +37,8 @@ devtools::install_github("inbo/etn")
 In order to access the data, the first step is always to connect with your user credentials (as received by VLIZ) to the database. 
 
 ```{r}
-my_con <- connect_to_etn(Sys.getenv("username"),
-                         Sys.getenv("password"))
+my_con <- connect_to_etn(Sys.getenv("userid"),
+                         Sys.getenv("pwd"))
 my_con
 ```
 

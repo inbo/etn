@@ -11,7 +11,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
+#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct
 #' @importFrom rlang .data
 #' @importFrom tibble as_tibble
 #'
@@ -23,10 +23,10 @@
 #' get_receivers(con)
 #'
 #' # Get receivers data filtered on a single network project
-#' get_receivers(con, network_project = "demer")
+#' get_receivers(con, network_project = "thornton")
 #'
 #' # Get receivers data filtered on a multiple network projects
-#' get_receivers(con, network_project = c("demer", "dijle"))
+#' get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
 #' }
 get_receivers <- function(connection,
                           network_project = NULL) {
@@ -43,13 +43,28 @@ get_receivers <- function(connection,
   }
 
   receivers_query <- glue_sql("
-      SELECT receivers.* , deployments.projectcode
+      SELECT DISTINCT receivers.* ,
+        deployments.projectcode,
+        etn_group.name as owner_organisation
       FROM vliz.receivers
         JOIN vliz.deployments_view deployments ON (receivers.id_pk = deployments.receiver_fk)
+        JOIN vliz.etn_group AS etn_group ON (receivers.owner_group_fk = etn_group.id_pk)
       WHERE projectcode IN ({project*})",
                               project = network_project,
                               .con = connection
   )
   receivers <- dbGetQuery(connection, receivers_query)
+
+  # we still have multiple records of receivers, as project codes are coupled to
+  # deployments and a receiver can have multiple deployments aka projects.
+  # combine the individual network projects in a single row:
+  receivers %>%
+    group_by(.data$id_pk) %>%
+    mutate(projectcode = paste(.data$projectcode, collapse = ",")) %>%
+    rename(network_projectcode = .data$projectcode) %>%
+    ungroup() %>%
+    distinct()
+
   as_tibble(receivers)
+
 }

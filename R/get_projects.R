@@ -30,6 +30,8 @@
 #' }
 get_projects <- function(connection, project_type = NULL) {
 
+  animal_network <- project_type
+
   check_connection(connection)
   check_null_or_value(project_type, c("animal", "network"),
                       "project_type")
@@ -41,7 +43,7 @@ get_projects <- function(connection, project_type = NULL) {
   projects <- dbGetQuery(connection, projects)
 
   if (!is.null(project_type)) {
-    projects <- projects %>% filter(.data$type == project_type)
+    projects <- projects %>% filter(.data$type == animal_network)
 
   }
   as_tibble(projects)

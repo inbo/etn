@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -33,6 +35,7 @@
 <meta property="og:description" content="Get all or specific, filtered by network project and/or the status of the
 receiver, deployments data." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -65,13 +68,7 @@ receiver, deployments data." />
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
@@ -93,7 +90,7 @@ receiver, deployments data." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/lifewatchinbo">
+  <a href="https://twitter.com/LifeWatchINBO">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -128,7 +125,8 @@ receiver, deployments data.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_deployments</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_deployments</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,6 +143,12 @@ receiver, deployments data.</p>
       <th>receiver_status</th>
       <td><p>(string) One or more receiver status.</p></td>
     </tr>
+    <tr>
+      <th>open_only</th>
+      <td><p>(logical) Default TRUE, returning only those deployments
+that are currently open (i.e. no end date defined. If FALSE, all deployments
+are returned.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -156,18 +160,21 @@ receiver, deployments data.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># All deployments</span>
+<span class='co'># All open deployments</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>)
 
-<span class='co'># Deployments of a subset of projects</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"zeeschelde"</span>, <span class='st'>"ws1"</span>))
+<span class='co'># All deployments (also deployments with an end date)</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'># Deployments of a subset of projects and receiver status</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"zeeschelde"</span>, <span class='st'>"ws1"</span>),
-                <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
+<span class='co'># Open deployments of a subset of projects</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"thornton"</span>, <span class='st'>"leopold"</span>))
 
-<span class='co'># Deployments of a subset of receiver status</span>
+<span class='co'># Open deployments of a subset of receiver status</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
+
+<span class='co'># Open deployments of a subset of projects and receiver status</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>,
+                <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -185,7 +192,7 @@ receiver, deployments data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Stijn Van Hoey, Damiano Oldoni, Peter Desmet.</p>
+  <p>Developed by <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>.</p>
 </div>
 
 <div class="pkgdown">

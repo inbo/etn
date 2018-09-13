@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -33,6 +35,7 @@
 <meta property="og:description" content="Get all or a subset of animals data. Filter options are the network
 project(s), the animal project(s) and/or the scientific name of the animals." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -65,13 +68,7 @@ project(s), the animal project(s) and/or the scientific name of the animals." />
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
@@ -93,7 +90,7 @@ project(s), the animal project(s) and/or the scientific name of the animals." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/lifewatchinbo">
+  <a href="https://twitter.com/LifeWatchINBO">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -164,17 +161,26 @@ project(s), the animal project(s) and/or the scientific name of the animals.</p>
 <span class='co'># all animals</span>
 <span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>)
 
-<span class='co'># all animals of the Demer project</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
+<span class='co'># all animals of the 2012_leopoldkanaal project</span>
+<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"2012_leopoldkanaal"</span>)
+
+<span class='co'># all animals of the 2012_leopoldkanaal and phd_reubens</span>
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"2012_leopoldkanaal"</span>, <span class='st'>"phd_reubens"</span>))
+
+<span class='co'>#all animals of the thornton network project</span>
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>)
+
+<span class='co'>#all animals of the thornton and leopold network project</span>
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"thornton"</span>, <span class='st'>"leopold"</span>))
 
 <span class='co'># all animals of all projects with given scientific name</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Rutilus rutilus"</span>,
-                       <span class='st'>"Squalius cephalus"</span>))
+<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>,
+                       <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Gadus morhua"</span>,
+                                           <span class='st'>"Sentinel"</span>))
 
-<span class='co'># all animals of the Demer project with given scientific name</span>
-<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"demer"</span>,
-                       <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Rutilus rutilus"</span>,
-                       <span class='st'>"Squalius cephalus"</span>))
+<span class='co'># all animals of the phd_reubens project with given scientific name</span>
+<span class='no'>animals</span> <span class='kw'>&lt;-</span> <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
+                       <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Gadus morhua"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -192,7 +198,7 @@ project(s), the animal project(s) and/or the scientific name of the animals.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Stijn Van Hoey, Damiano Oldoni, Peter Desmet.</p>
+  <p>Developed by <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>.</p>
 </div>
 
 <div class="pkgdown">
