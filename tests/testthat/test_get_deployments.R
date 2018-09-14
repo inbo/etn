@@ -65,8 +65,8 @@ testthat::test_that("test_output_get_deployments", {
   expect_true(test2 %>% distinct(projectcode) %>% pull() == "thornton")
   expect_true(all(test3 %>% distinct(projectcode) %>% pull() %in% c("thornton",
                                                                   "leopold")))
-  expect_true(all(test3 %>% distinct(receiver_status) %>% pull() %in%
-                    (test2 %>% distinct(receiver_status) %>% pull())))
+  expect_true(all(test2 %>% distinct(receiver_status) %>% pull() %in%
+                    (test3 %>% distinct(receiver_status) %>% pull())))
   expect_true(all(test3 %>% distinct(receiver_status) %>% pull() %in%
                     (test1 %>% distinct(receiver_status) %>% pull())))
   expect_true(test4 %>% distinct(receiver_status) %>% pull() == "Broken")
