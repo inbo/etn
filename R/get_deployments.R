@@ -68,9 +68,7 @@ get_deployments <- function(connection,
   )
   deployments <- dbGetQuery(connection, deployments_query)
   if (open_only) {
-    deployments %>% filter(is.na(.data$recover_date_time))
-  } else {
-    deployments
+    deployments <- deployments %>% filter(is.na(.data$recover_date_time))
   }
 
   as_tibble(deployments)
