@@ -7,7 +7,7 @@
 #' @param network_project (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
 #' @param open_only (logical) Default TRUE, returning only those deployments
-#' that are currently open (i.e. no end date defined. If FALSE, all deployments
+#' that are currently open (i.e. no end date defined). If FALSE, all deployments
 #' are returned.
 #'
 #' @return A tibble (tidyverse data.frame).
