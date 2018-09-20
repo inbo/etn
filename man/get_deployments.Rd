@@ -19,7 +19,7 @@ that are currently open (i.e. no end date defined. If FALSE, all deployments
 are returned.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get all or specific, filtered by network project and/or the status of the

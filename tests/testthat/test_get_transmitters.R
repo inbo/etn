@@ -36,7 +36,7 @@ testthat::test_that("test_output_get_transmitters", {
   expect_equal(ncol(test1), ncol(test3))
   expect_equal(ncol(test3), ncol(test2))
   expect_equal(ncol(test4), ncol(test2))
-  expect_equal(test1 %>%
+  expect_equal(test2 %>%
                  distinct(acoustic_tag_type) %>%
-                 pull(), "animal")
+                 pull(), c("sentinel","animal"))
 })

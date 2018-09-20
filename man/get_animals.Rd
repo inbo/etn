@@ -17,7 +17,7 @@ get_animals(connection, network_project = NULL, animal_project = NULL,
 \item{scientific_name}{(string) One or more scientific names.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get all or a subset of animals data. Filter options are the network

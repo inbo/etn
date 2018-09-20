@@ -21,7 +21,8 @@ Imports:
     assertthat,
     lubridate,
     methods,
-    rlang
+    rlang,
+    tibble
 Suggests: 
     testthat,
     knitr
