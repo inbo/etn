@@ -6,6 +6,48 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
+# Valid column names
+valid_col_names_detections <- c(
+  "receiver",
+  "transmitter",
+  "transmitter_name",
+  "transmitter_serial",
+  "sensor_value",
+  "sensor_unit",
+  "sensor2_value",
+  "sensor2_unit",
+  "station_name",
+  "datetime",
+  "id_pk",
+  "qc_flag",
+  "file","latitude",
+  "longitude",
+  "deployment_fk",
+  "scientific_name",
+  "location_name",
+  "deployment_station_name",
+  "deploy_date_time",
+  "animal_project_name",
+  "animal_project_code",
+  "animal_moratorium",
+  "network_project_name",
+  "network_project_code",
+  "network_moratorium",
+  "signal_to_noise_ratio",
+  "detection_file_id",
+  "tag_sensor_type",
+  "tag_intercept",
+  "tag_slope",
+  "sensor_value_depth_meters",
+  "tag_owner_organization",
+  "animal_id_pk",
+  "animal_common_name",
+  "animal_sex",
+  "deployment_lat",
+  "deployment_long",
+  "sensor_value_acceleration"
+)
+
 testthat::test_that("test_input_get_detections", {
   expect_error(get_detections("I am not a connection"),
                "Not a connection object to database.")
@@ -77,12 +119,22 @@ test6 <- get_detections(con, receiver = receiver, limit = limit)
 test7 <- get_detections(con, scientific_name = scientific_name, limit = limit)
 
 testthat::test_that("test_output_get_detections", {
+  library(dplyr)
+  expect_is(test1, "data.frame")
+  expect_is(test2, "data.frame")
+  expect_is(test3, "data.frame")
+  expect_is(test4, "data.frame")
+  expect_is(test5, "data.frame")
+  expect_true(all(names(test1) %in% valid_col_names_detections))
+  expect_true(all(valid_col_names_detections %in% names(test1)))
   expect_equal(nrow(test1), 5)
   expect_equal(nrow(test2), 2)
-  expect_equal(ncol(test1), ncol(test2))
-  expect_equal(ncol(test2), ncol(test3))
-  expect_equal(ncol(test3), ncol(test4))
-  expect_equal(ncol(test4), ncol(test5))
+  expect_equal(names(test1), names(test2))
+  expect_equal(names(test1), names(test3))
+  expect_equal(names(test1), names(test4))
+  expect_equal(names(test1), names(test5))
+  expect_equal(names(test1), names(test6))
+  expect_equal(names(test1), names(test7))
   expect_true(test1 %>%
                  select(datetime) %>%
                  summarize(min_datetime = min(datetime)) %>%
@@ -119,4 +171,3 @@ testthat::test_that("test_output_get_detections", {
                 distinct(scientific_name) %>%
                 pull() == scientific_name)
 })
-
