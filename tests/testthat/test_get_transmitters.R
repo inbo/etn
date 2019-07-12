@@ -55,7 +55,8 @@ valid_col_names_transmitters <- c(
   "sensor_transmit_ratio",
   "tag_full_id",
   "status",
-  "projectcode"
+  "projectcode",
+  "owner_organization"
 )
 
 test1 <- get_transmitters(con)
@@ -92,5 +93,6 @@ testthat::test_that("test_output_get_transmitters", {
   expect_equal(names(test1), names(test4))
   expect_equal(test2 %>%
                  distinct(acoustic_tag_type) %>%
-                 pull(), c("sentinel","animal"))
+                 arrange() %>%
+                 pull(), c("animal","sentinel"))
 })
