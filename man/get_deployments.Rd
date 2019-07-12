@@ -4,8 +4,8 @@
 \alias{get_deployments}
 \title{Get deployments data}
 \usage{
-get_deployments(connection, network_project = NULL, receiver_status = NULL,
-  open_only = TRUE)
+get_deployments(connection, network_project = NULL,
+  receiver_status = NULL, open_only = TRUE)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
@@ -15,7 +15,7 @@ get_deployments(connection, network_project = NULL, receiver_status = NULL,
 \item{receiver_status}{(string) One or more receiver status.}
 
 \item{open_only}{(logical) Default TRUE, returning only those deployments
-that are currently open (i.e. no end date defined. If FALSE, all deployments
+that are currently open (i.e. no end date defined). If FALSE, all deployments
 are returned.}
 }
 \value{
