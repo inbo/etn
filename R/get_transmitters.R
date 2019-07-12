@@ -49,13 +49,14 @@ get_transmitters <- function(connection,
   }
 
   transmitters_query <- glue_sql("
-      SELECT tags.*, animals.projectcode
+      SELECT tags.*, animals.projectcode, etn_group.name as owner_organization
       FROM vliz.tags
         LEFT JOIN vliz.animal_tag_release ON (animal_tag_release.tag_fk = tags.id_pk)
         LEFT JOIN vliz.animals_view animals ON (animals.id_pk = animal_tag_release.animal_fk)
+        LEFT JOIN vliz.etn_group  ON (tags.owner_group_fk = etn_group.id_pk)
       WHERE projectcode IN ({project*})",
-    project = animal_project,
-    .con = connection
+                                     project = animal_project,
+                                     .con = connection
   )
   transmitters <- dbGetQuery(connection, transmitters_query)
 
