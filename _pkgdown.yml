@@ -13,7 +13,7 @@ navbar:
     href: contributing.html
   right:
   - icon: fa-twitter fa-lg
-    href: https://twitter.com/LifeWatchINBO
+    href: https://twitter.com/oscibio
   - icon: fa-github fa-lg
     href: https://github.com/inbo/etn
 
@@ -22,7 +22,7 @@ home:
   - text: Visit the LifeWatch data explorer
     href: http://rshiny.lifewatch.be/ETN data/
   - text: Get to know our team
-    href: https://lifewatch.inbo.be
+    href: https://oscibio.inbo.be
 
 authors:
   Stijn Van Hoey:
