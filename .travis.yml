@@ -4,6 +4,10 @@ cache: packages
 r_github_packages:
   - r-lib/pkgdown
 
+before_script:
+  - Rscript -e "Sys.setenv(userid = '$ETN_USER')"
+  - Rscript -e "Sys.setenv(pwd = '$ETN_PASSWORD')"
+
 after_success:
   - Rscript -e "pkgdown::build_site(preview = FALSE)"
 
