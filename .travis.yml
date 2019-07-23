@@ -1,0 +1,17 @@
+language: r
+cache: packages
+
+r_github_packages:
+  - r-lib/pkgdown
+
+after_success:
+  - Rscript -e "pkgdown::build_site(preview = FALSE)"
+
+deploy:
+  provider: pages
+  local_dir: docs
+  skip_cleanup: true
+  keep_history: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
