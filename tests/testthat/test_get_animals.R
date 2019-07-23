@@ -75,7 +75,16 @@ valid_col_names_animals <- c(
 "animal_tag_release_id_pk",
 "thelma_converted_code",
 "projectcode",
-"tag_full_id"
+"tag_full_id",
+"principal_investigator",
+"owner_organization",
+"id_code",
+"type",
+"model",
+"serial_number",
+"activation_date",
+"name",
+"manufacturer"
 )
 
 test1 <- get_animals(con, network_project = NULL)
