@@ -9,7 +9,7 @@
 #' @param include_reference_tags (logical) Include reference tags (not-animal
 #'   tags). Default: FALSE.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -17,6 +17,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -58,9 +59,12 @@ get_transmitters <- function(connection,
   )
   transmitters <- dbGetQuery(connection, transmitters_query)
 
-  if (include_reference_tags) {
+    if (include_reference_tags) {
     transmitters
   } else {
     transmitters %>% filter(.data$acoustic_tag_type == "animal")
   }
+
+  as_tibble(transmitters)
+
 }

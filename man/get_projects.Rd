@@ -12,7 +12,7 @@ get_projects(connection, project_type = NULL)
 \item{project_type}{(string) Either \code{animal} or \code{network}.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get an overview of the projects available on ETN database.

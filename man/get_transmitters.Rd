@@ -16,7 +16,7 @@ get_transmitters(connection, animal_project = NULL,
 tags). Default: FALSE.}
 }
 \value{
-A data.frame.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get the metadata about the transmitter tags. At the moment, only transmitters

@@ -1,3 +1,7 @@
+template:
+  params:
+    bootswatch: yeti
+
 navbar:
   title: ~
   type: default
@@ -53,7 +57,3 @@ articles:
   - title: "Tutorial on the main downloading functionalities"
     contents:
     - access-etn-data
-
-template:
-  params:
-    bootswatch: yeti

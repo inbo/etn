@@ -5,7 +5,7 @@
 #' @param connection A valid connection with the ETN database.
 #' @param network_project (string) One or more network projects.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -13,6 +13,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -63,4 +64,7 @@ get_receivers <- function(connection,
     rename(network_projectcode = .data$projectcode) %>%
     ungroup() %>%
     distinct()
+
+  as_tibble(receivers)
+
 }

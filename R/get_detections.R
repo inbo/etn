@@ -22,7 +22,7 @@
 #' @param limit (integer) Limit the number of records to download. If NULL, all
 #'   records are downloaded.
 #'
-#' @return data.frame
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -31,6 +31,7 @@
 #' @importFrom dplyr pull %>%
 #' @importFrom rlang .data
 #' @importFrom assertthat assert_that is.number
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -163,7 +164,7 @@ get_detections <- function(connection, network_project = NULL,
     .con = connection
   )
   detections <- dbGetQuery(connection, detections_query)
-  detections
+  as_tibble(detections)
 
 }
 

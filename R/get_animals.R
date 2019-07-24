@@ -8,13 +8,14 @@
 #' @param animal_project (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>%
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -91,7 +92,7 @@ get_animals <- function(connection,
   )
 
   animals <- dbGetQuery(connection, animals_query)
-  animals
+  as_tibble(animals)
 
 }
 

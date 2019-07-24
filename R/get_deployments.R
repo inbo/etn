@@ -7,10 +7,10 @@
 #' @param network_project (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
 #' @param open_only (logical) Default TRUE, returning only those deployments
-#' that are currently open (i.e. no end date defined. If FALSE, all deployments
+#' that are currently open (i.e. no end date defined). If FALSE, all deployments
 #' are returned.
 #'
-#' @return A data.frame.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
@@ -18,6 +18,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>% filter
 #' @importFrom rlang .data
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -67,10 +68,11 @@ get_deployments <- function(connection,
   )
   deployments <- dbGetQuery(connection, deployments_query)
   if (open_only) {
-    deployments %>% filter(is.na(.data$recover_date_time))
-  } else {
-    deployments
+    deployments <- deployments %>% filter(is.na(.data$recover_date_time))
   }
+
+  as_tibble(deployments)
+
 }
 
 receiver_status_vocabulary <- c("Available", "Lost", "Broken",
