@@ -2,32 +2,6 @@ template:
   params:
     bootswatch: yeti
 
-navbar:
-  title: ~
-  type: default
-  left:
-  - text: Tutorials
-    href: articles/index.html
-    menu:
-    - text: Access data and metadata from etn
-      href: articles/access-etn-data.html
-  - text: Functions
-    href: reference/index.html
-  - text: Contributing
-    href: contributing.html
-  right:
-  - icon: fa-twitter fa-lg
-    href: https://twitter.com/LifeWatchINBO
-  - icon: fa-github fa-lg
-    href: https://github.com/inbo/etn
-
-home:
-  links:
-  - text: Visit the LifeWatch data explorer
-    href: http://rshiny.lifewatch.be/ETN data/
-  - text: Get to know our team
-    href: https://lifewatch.inbo.be
-
 authors:
   Stijn Van Hoey:
     href: https://twitter.com/SVanHoey
@@ -35,6 +9,13 @@ authors:
     href: https://twitter.com/damianozingaro
   Peter Desmet:
     href: https://twitter.com/peterdesmet
+
+home:
+  links:
+  - text: Visit the LifeWatch data explorer
+    href: http://rshiny.lifewatch.be/ETN data/
+  - text: Get to know our team
+    href: https://oscibio.inbo.be
 
 reference:
   - title: "Connect to the database"
@@ -52,8 +33,3 @@ reference:
     desc: "Get access to raw detections data"
     contents:
       - get_detections
-
-articles:
-  - title: "Tutorial on the main downloading functionalities"
-    contents:
-    - access-etn-data
