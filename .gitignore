@@ -1,33 +1,46 @@
 # History files
 .Rhistory
 .Rapp.history
+
 # Session Data files
 .RData
+
 # Example code in package build process
 *-Ex.R
+
 # Output files from R CMD build
 /*.tar.gz
+
 # Output files from R CMD check
 /*.Rcheck/
+
 # RStudio files
 .Rproj.user/
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
+
 # knitr and R markdown default cache directories
 /*_cache/
 /cache/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+.Rproj.user
+
+# pkgdown website is not yet built by travis on gh-pages
+# /docs/
+
 # Mac OS X
 .DS_Store
-.Rproj.user
+
+# Other
 pgpass
 inst/doc
-# Environmental files
 .Renviron*
-# custom material for personal tests
 draft
