@@ -16,6 +16,7 @@
 
 # RStudio files
 .Rproj.user/
+.Rproj.user
 
 # produced vignettes
 vignettes/*.html
@@ -28,10 +29,12 @@ vignettes/*.pdf
 /*_cache/
 /cache/
 
+# Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
+rsconnect/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
-.Rproj.user
 
 # pkgdown website is not yet built by travis on gh-pages
 # /docs/
