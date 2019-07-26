@@ -9,7 +9,7 @@ etn is an open source project, maintained by people who care. We are not directl
 [new_issue]: https://github.com/inbo/etn/issues/new
 [website]: https://inbo.github.io/etn
 [citation]: https://inbo.github.io/etn/authors.html
-[email]: maintainer_email
+[email]: damiano.oldoni@inbo.be
 
 ## Code of conduct
 

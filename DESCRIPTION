@@ -4,9 +4,9 @@ Version: 0.1.0
 Description: Package with functions to access and process data from the European
     Tracking Network hosted by VLIZ.
 Authors@R: c(
-    person("Stijn", "Van Hoey", role = c("aut", "cre"), email = "stijn.vanhoey@inbo.be", comment = c(ORCID = "0000-0001-6413-3185")),
-    person("Damiano", "Oldoni", role = "aut", email = "damiano.oldoni@inbo.be", comment = c(ORCID = "0000-0003-3445-7562")),
-    person("Peter", "Desmet", role = "ctb", email = "peter.desmet@inbo.be", comment = c(ORCID = "0000-0002-8442-8025"))
+    person("Damiano", "Oldoni", role = c("aut", "cre"), email = "damiano.oldoni@inbo.be", comment = c(ORCID = "0000-0003-3445-7562")),
+    person("Stijn", "Van Hoey", role = c("aut"), email = "stijnvanhoey@gmail.com", comment = c(ORCID = "0000-0001-6413-3185")),
+    person("Peter", "Desmet", role = c("ctb"), email = "peter.desmet@inbo.be", comment = c(ORCID = "0000-0002-8442-8025"))
     )
 License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn
