@@ -1,10 +1,9 @@
 #' Get animals data
 #'
-#' Get all or a subset of animals data. Filter options are the network
-#' project(s), the animal project(s) and/or the scientific name of the animals.
+#' Get all or a subset of animals data. Filter options are the animal project(s)
+#' and/or the scientific name of the animals.
 #'
 #' @param connection A valid connection to ETN database.
-#' @param network_project (string) One or more network projects.
 #' @param animal_project (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
@@ -29,12 +28,6 @@
 #'
 #' # all animals of the 2012_leopoldkanaal and phd_reubens
 #' get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
-#'
-#' #all animals of the thornton network project
-#' get_animals(con, network_project = "thornton")
-#'
-#' #all animals of the thornton and leopold network project
-#' get_animals(con, network_project = c("thornton", "leopold"))
 #'
 #' # all animals of all projects with given scientific name
 #' animals <- get_animals(con,

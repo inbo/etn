@@ -4,13 +4,10 @@
 \alias{get_animals}
 \title{Get animals data}
 \usage{
-get_animals(connection, network_project = NULL, animal_project = NULL,
-  scientific_name = NULL)
+get_animals(connection, animal_project = NULL, scientific_name = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to ETN database.}
-
-\item{network_project}{(string) One or more network projects.}
 
 \item{animal_project}{(string) One or more animal projects.}
 
@@ -20,8 +17,8 @@ get_animals(connection, network_project = NULL, animal_project = NULL,
 A tibble (tidyverse data.frame).
 }
 \description{
-Get all or a subset of animals data. Filter options are the network
-project(s), the animal project(s) and/or the scientific name of the animals.
+Get all or a subset of animals data. Filter options are the animal project(s)
+and/or the scientific name of the animals.
 }
 \examples{
 \dontrun{
@@ -35,12 +32,6 @@ animals <- get_animals(con, animal_project = "2012_leopoldkanaal")
 
 # all animals of the 2012_leopoldkanaal and phd_reubens
 get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
-
-#all animals of the thornton network project
-get_animals(con, network_project = "thornton")
-
-#all animals of the thornton and leopold network project
-get_animals(con, network_project = c("thornton", "leopold"))
 
 # all animals of all projects with given scientific name
 animals <- get_animals(con,
