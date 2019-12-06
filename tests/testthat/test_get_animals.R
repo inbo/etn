@@ -78,7 +78,7 @@ valid_col_names_animals <- c(
 "tag_full_id"
 )
 
-test1 <- get_animals(con, network_project = NULL)
+test1 <- get_animals(con)
 test2 <- get_animals(con, animal_project = "phd_reubens")
 test3 <- get_animals(con, animal_project = "2012_leopoldkanaal")
 
