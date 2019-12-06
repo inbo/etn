@@ -46,18 +46,10 @@
 #'                        scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection,
-                        network_project = NULL,
                         animal_project = NULL,
                         scientific_name = NULL) {
 
   check_connection(connection)
-
-  # valid inputs on network projects
-  valid_network_projects <- get_projects(connection,
-                                         project_type = "network") %>%
-    pull("projectcode")
-  check_null_or_value(network_project, valid_network_projects,
-                      "network_project")
 
   # valid inputs on animal projects
   valid_animals_projects <- get_projects(connection,
@@ -70,13 +62,9 @@ get_animals <- function(connection,
   valid_animals <- scientific_names(connection)
   check_null_or_value(scientific_name, valid_animals, "scientific_name")
 
-  if (is.null(network_project)) {
-    network_project = valid_network_projects
-  }
   if (is.null(animal_project)) {
     animal_project = valid_animals_projects
   }
-  project_names <- unique(c(network_project, animal_project))
 
   if (is.null(scientific_name)) {
     scientific_name = valid_animals
@@ -86,7 +74,7 @@ get_animals <- function(connection,
     "SELECT * FROM vliz.animals_view
     WHERE projectcode IN ({projects*})
     AND scientific_name IN ({animals*})",
-    projects = project_names,
+    projects = animal_project,
     animals = scientific_name,
     .con = connection
   )
