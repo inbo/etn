@@ -18,7 +18,8 @@ valid_col_names_projects <- c(
   "imis_dataset_id",
   "latitude","longitude",
   "context_type",
-  "principal_investigator"
+  "principal_investigator",
+  "telemtry_type"
 )
 
 testthat::test_that("test_input_get_projects", {

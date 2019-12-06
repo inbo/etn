@@ -52,6 +52,9 @@ testthat::test_that("check_null_or_value with animal_type", {
   expect_true(check_null_or_value(c("2012_leopoldkanaal", "phd_reubens"),
                                   valid_animal_projects,
                                   "animal_project"))
+  expect_true(check_null_or_value("2011_rivierprik",
+                                  valid_animal_projects,
+                                  "animal_project"))
   expect_true(check_null_or_value(NULL,
                                   valid_animal_projects,
                                   "animal_project"))
