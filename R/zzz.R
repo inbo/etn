@@ -25,6 +25,8 @@ check_connection  <- function(connection) {
 #'
 #' @return If no error, TRUE.
 #'
+#' @keywords internal
+#'
 #' @noRd
 #'
 #' @importFrom assertthat assert_that
