@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://inbo.github.io/etn/index.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/connect_to_etn.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_animals.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_deployments.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_detections.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_projects.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_receivers.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/get_transmitters.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/reference/transmitters.html</loc>
+  </url>
+  <url>
+    <loc>https://inbo.github.io/etn/articles/access-etn-data.html</loc>
+  </url>
+</urlset>
