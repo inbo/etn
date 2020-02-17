@@ -174,7 +174,9 @@ get_detections <- function(connection, network_project = NULL,
 #'
 #' @param connection A valid connection to ETN database.
 #'
-#' @export
+#' @keywords internal
+#'
+#' @noRd
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery

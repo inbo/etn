@@ -82,6 +82,10 @@ get_animals <- function(connection,
 #' This function retrieves all unique scientific names
 #' @param connection A valid connection to ETN database.
 #'
+#' @keywords internal
+#'
+#' @noRd
+#'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
