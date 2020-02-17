@@ -4,10 +4,18 @@
 \alias{get_detections}
 \title{Get raw detections data}
 \usage{
-get_detections(connection, network_project = NULL,
-  animal_project = NULL, start_date = NULL, end_date = NULL,
-  deployment_station_name = NULL, transmitter = NULL,
-  receiver = NULL, scientific_name = NULL, limit = NULL)
+get_detections(
+  connection,
+  network_project = NULL,
+  animal_project = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  deployment_station_name = NULL,
+  transmitter = NULL,
+  receiver = NULL,
+  scientific_name = NULL,
+  limit = NULL
+)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}

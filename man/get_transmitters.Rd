@@ -4,8 +4,11 @@
 \alias{get_transmitters}
 \title{Get transmitter metadata}
 \usage{
-get_transmitters(connection, animal_project = NULL,
-  include_reference_tags = FALSE)
+get_transmitters(
+  connection,
+  animal_project = NULL,
+  include_reference_tags = FALSE
+)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
