@@ -5,6 +5,10 @@ MAX_PRINT <- 20
 #'
 #' @param connection A valid connection with the ETN database.
 #'
+#' @keywords internal
+#'
+#' @noRd
+#'
 #' @importFrom methods is
 #'
 check_connection  <- function(connection) {
@@ -20,6 +24,8 @@ check_connection  <- function(connection) {
 #' @param arg_name The name of the argument used in the function to test.
 #'
 #' @return If no error, TRUE.
+#'
+#' @noRd
 #'
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
@@ -79,6 +85,10 @@ check_null_or_value <- function(arg, options = NULL, arg_name) {
 #' @param regex A regular expression to parse
 #' @param ... Additional arguments passed to the collapse
 #'
+#' @keywords internal
+#'
+#' @noRd
+#'
 #' @importFrom glue glue_collapse
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
@@ -100,6 +110,9 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #'
 #' @return FALSE | character
 #'
+#' @keywords internal
+#'
+#' @noRd
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time
@@ -126,4 +139,3 @@ check_datetime <- function(datetime, date_name = "start_date") {
       } })
   as.character(parsed)
 }
-
