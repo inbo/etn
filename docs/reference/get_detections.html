@@ -8,10 +8,12 @@
 
 <title>Get raw detections data — get_detections • etn</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,12 +34,14 @@
 
 
 
-<meta property="og:title" content="Get raw detections data — get_detections" />
 
+<meta property="og:title" content="Get raw detections data — get_detections" />
 <meta property="og:description" content="Get the raw detections data, with optional filters for the project, the
 start- and enddate, the deployment station name and the transmitter/tag
 identifier. Use the limit option to limit the data size." />
+<meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -96,7 +100,6 @@ identifier. Use the limit option to limit the data size." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/inbo/etn">
@@ -123,18 +126,24 @@ identifier. Use the limit option to limit the data size." />
     </div>
 
     <div class="ref-description">
-    
     <p>Get the raw detections data, with optional filters for the project, the
 start- and enddate, the deployment station name and the transmitter/tag
 identifier. Use the <code>limit</code> option to limit the data size.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>get_detections</span>(<span class='no'>connection</span>, <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>get_detections</span>(
+  <span class='no'>connection</span>,
+  <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -186,11 +195,10 @@ referred to as `tag_code_space` identifiers</p></td>
 records are downloaded.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble (tidyverse data.frame).</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -226,9 +234,7 @@ records are downloaded.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

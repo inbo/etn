@@ -4,8 +4,12 @@
 \alias{get_deployments}
 \title{Get deployments data}
 \usage{
-get_deployments(connection, network_project = NULL,
-  receiver_status = NULL, open_only = TRUE)
+get_deployments(
+  connection,
+  network_project = NULL,
+  receiver_status = NULL,
+  open_only = TRUE
+)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
