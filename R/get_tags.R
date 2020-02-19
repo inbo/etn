@@ -1,4 +1,4 @@
-#' Get transmitter metadata
+#' Get tag metadata
 #'
 #' Get the metadata about the tags. At the moment, only tags
 #' that can be linked to a projectcode are returned to the user. By default,
@@ -23,17 +23,17 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get the metadata of all animal transmitters
-#' get_transmitters(con)
+#' # Get the metadata of all animal tags
+#' get_tags(con)
 #'
-#' # Get the metadata of all transmitters, including reference tags
-#' get_transmitters(con, include_reference_tags = TRUE)
+#' # Get the metadata of all tags, including reference tags
+#' get_tags(con, include_reference_tags = TRUE)
 #'
-#' # Get the metadata of the transmitters linked to specific project(s)
-#' get_transmitters(con, animal_project = "phd_reubens")
-#' get_transmitters(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+#' # Get the metadata of the tags linked to specific project(s)
+#' get_tags(con, animal_project = "phd_reubens")
+#' get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
-get_transmitters <- function(connection,
+get_tags <- function(connection,
                      animal_project = NULL,
                      include_reference_tags = FALSE) {
 
@@ -48,7 +48,7 @@ get_transmitters <- function(connection,
     animal_project = valid_animals_projects
   }
 
-  transmitters_query <- glue_sql("
+  tags_query <- glue_sql("
     SELECT tags.*
     FROM vliz.tags_view2 AS tags
       LEFT JOIN vliz.animals_view2 AS animals
@@ -56,13 +56,13 @@ get_transmitters <- function(connection,
     WHERE animals.animal_project_code IN ({animal_project*})
     ", .con = connection
   )
-  transmitters <- dbGetQuery(connection, transmitters_query)
+  tags <- dbGetQuery(connection, tags_query)
 
   if (include_reference_tags) {
-    transmitters
+    tags
   } else {
-    transmitters %>% filter(.data$type == "animal")
+    tags %>% filter(.data$type == "animal")
   }
 
-  as_tibble(transmitters)
+  as_tibble(tags)
 }

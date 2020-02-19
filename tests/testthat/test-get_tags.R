@@ -1,5 +1,3 @@
-context("test_get_transmitters")
-
 # Valid connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
@@ -7,7 +5,7 @@ con <- connect_to_etn(
 )
 
 # valid column names
-valid_col_names_transmitters <- c(
+valid_col_names_tags <- c(
   "pk",
   "tag_id",
   "tag_id_alternative",
@@ -55,31 +53,31 @@ valid_col_names_transmitters <- c(
   "step4_acceleration_duration"
 )
 
-test1 <- get_transmitters(con)
-test2 <- get_transmitters(con, animal_project = "phd_reubens")
-test3 <- get_transmitters(con, animal_project = c("phd_reubens",
+test1 <- get_tags(con)
+test2 <- get_tags(con, animal_project = "phd_reubens")
+test3 <- get_tags(con, animal_project = c("phd_reubens",
                                                   "2012_leopoldkanaal"))
-test4 <- get_transmitters(con,
+test4 <- get_tags(con,
                           animal_project = "phd_reubens",
                           include_reference_tags = TRUE)
 
-testthat::test_that("test_input_get_transmitters", {
-  expect_error(get_transmitters("I am not a connection"),
+testthat::test_that("test_input_get_tags", {
+  expect_error(get_tags("I am not a connection"),
                "Not a connection object to database.")
-  expect_error(get_transmitters(con, animal_project = "very_bad_project"))
-  expect_error(get_transmitters(con, animal_project = c("phd_reubens",
+  expect_error(get_tags(con, animal_project = "very_bad_project"))
+  expect_error(get_tags(con, animal_project = c("phd_reubens",
                                                         "very_bad_project")))
-  expect_error(get_transmitters(con, include_reference_tags = "not logical"))
+  expect_error(get_tags(con, include_reference_tags = "not logical"))
 })
 
-testthat::test_that("test_output_get_transmitters", {
+testthat::test_that("test_output_get_tags", {
   library(dplyr)
   expect_is(test1, "data.frame")
   expect_is(test2, "data.frame")
   expect_is(test3, "data.frame")
   expect_is(test4, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_transmitters))
-  expect_true(all(valid_col_names_transmitters %in% names(test1)))
+  expect_true(all(names(test1) %in% valid_col_names_tags))
+  expect_true(all(valid_col_names_tags %in% names(test1)))
   expect_gte(nrow(test1), nrow(test2))
   expect_gte(nrow(test1), nrow(test3))
   expect_gte(nrow(test3), nrow(test2))
