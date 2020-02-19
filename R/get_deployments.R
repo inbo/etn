@@ -1,14 +1,12 @@
-#' Get deployments data
+#' Get deployment metadata
 #'
-#' Get all or specific, filtered by network project and/or the status of the
-#' receiver, deployments data.
+#' Get metadata for deployments, with options to filter on network project,
+#' receiver status and/or open deployments.
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #' @param network_project (string) One or more network projects.
-#' @param receiver_status (string) One or more receiver status.
-#' @param open_only (logical) Default TRUE, returning only those deployments
-#' that are currently open (i.e. no end date defined). If FALSE, all deployments
-#' are returned.
+#' @param open_only (logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
+#'   `TRUE`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -24,27 +22,27 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # All open deployments
+#' # Get all open deployments
 #' get_deployments(con)
 #'
-#' # All deployments (also deployments with an end date)
+#' # Get all deployments (including those with an end date)
 #' get_deployments(con, open_only = FALSE)
 #'
-#' # Open deployments of a subset of projects
+#' # Get open deployments from specific network project(s)
 #' get_deployments(con, network_project = c("thornton", "leopold"))
 #'
-#' # Open deployments of a subset of receiver status
+#' # Get open deployments with a specific receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #'
-#' # Open deployments of a subset of projects and receiver status
-#' get_deployments(con, network_project = "thornton",
-#'                 receiver_status = "Active")
+#' # Get open deployments from a specific project from active receivers
+#' get_deployments(con, network_project = "thornton", receiver_status = "Active")
 #' }
 get_deployments <- function(connection,
                             network_project = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {
-
+  receiver_status_vocabulary <- c("Available", "Lost", "Broken",
+                                  "Active", "Returned to manufacturer")
   check_connection(connection)
   valid_networks <- get_projects(connection, project_type = "network") %>%
     pull(.data$projectcode)
@@ -58,13 +56,15 @@ get_deployments <- function(connection,
     receiver_status = receiver_status_vocabulary
   }
 
-  deployments_query <- glue_sql(
-    "SELECT * FROM vliz.deployments_view
-    WHERE receiver_status IN ({status*})
-    AND projectcode IN ({project*})",
-    status = receiver_status,
-    project = network_project,
-    .con = connection
+  deployments_query <- glue_sql("
+    SELECT deployments.*,
+      receivers.status AS receiver_status
+    FROM vliz.deployments_view2 AS deployments
+      LEFT JOIN vliz.receivers_view2 AS receivers
+      ON deployments.receiver_id = receivers.receiver_id
+    WHERE receivers.status IN ({receiver_status*})
+      AND deployments.network_project_code IN ({network_project*})
+    ", .con = connection
   )
   deployments <- dbGetQuery(connection, deployments_query)
   if (open_only) {
@@ -72,8 +72,4 @@ get_deployments <- function(connection,
   }
 
   as_tibble(deployments)
-
 }
-
-receiver_status_vocabulary <- c("Available", "Lost", "Broken",
-                                "Active", "Returned to manufacturer")
