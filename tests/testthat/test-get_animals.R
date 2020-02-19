@@ -1,11 +1,11 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
 
-# Valid column names
-valid_col_names_animals <- c(
+# Expected column names
+expected_col_names_animals <- c(
   "pk",
   "animal_id",
   "animal_project_code",
@@ -71,18 +71,19 @@ valid_col_names_animals <- c(
   "comments"
 )
 
-test1 <- get_animals(con)
-test2 <- get_animals(con, animal_project = "phd_reubens")
-test3 <- get_animals(con, animal_project = "2013_albertkanaal")
+project1 <- "phd_reubens"
+project2 <- "2013_albertkanaal"
+projects_multiple <- c("phd_reubens", "2013_albertkanaal")
+name1 <- "Gadus morhua"
+names_multiple <- c("Gadus morhua", "Sentinel", "Anguilla anguilla")
 
-projects_test4 <- c("phd_reubens", "2013_albertkanaal")
-test4 <- get_animals(con, animal_project = projects_test4)
-animals_test5 <- c("Gadus morhua", "Sentinel", "Anguilla anguilla")
-test5 <- get_animals(con, scientific_name = animals_test5)
-animals_test6 <- c("Gadus morhua")
-projects_test6 <- "phd_reubens"
-test6 <- get_animals(con, animal_project = projects_test6,
-                     scientific_name = animals_test6)
+animals_all <- get_animals(con)
+animals_project1 <- get_animals(con, animal_project = project1)
+animals_project2 <- get_animals(con, animal_project = project2)
+animals_projects_multiple <- get_animals(con, animal_project = projects_multiple)
+animals_names_multiple <- get_animals(con, scientific_name = names_multiple)
+animals_project1_name1 <- get_animals(con, animal_project = project1,
+                     scientific_name = name1)
 
 testthat::test_that("test_input_get_animals", {
   expect_error(get_animals("I am not a connection"),
@@ -92,59 +93,35 @@ testthat::test_that("test_input_get_animals", {
 
 testthat::test_that("test_output_get_animals", {
   library(dplyr)
-  expect_is(test1, "data.frame")
-  expect_is(test2, "data.frame")
-  expect_is(test3, "data.frame")
-  expect_is(test4, "data.frame")
-  expect_is(test5, "data.frame")
-  expect_is(test6, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_animals))
-  expect_true(all(valid_col_names_animals %in% names(test1)))
-  expect_gte(nrow(test1), nrow(test2))
-  expect_gte(nrow(test1), nrow(test3))
-  expect_gte(nrow(test1), nrow(test4))
-  expect_gte(nrow(test1), nrow(test5))
-  expect_gte(nrow(test1), nrow(test6))
-  expect_equal(nrow(test3), 309)
-  expect_equal(names(test1), names(test2))
-  expect_equal(names(test1), names(test3))
-  expect_equal(names(test1), names(test4))
-  expect_equal(names(test1), names(test5))
-  expect_equal(names(test1), names(test6))
-  expect_gte(test1 %>%
-               distinct(scientific_name) %>%
-               pull() %>%
-               length(),
-             test4 %>%
-               distinct(scientific_name) %>%
-               pull() %>%
-               length()
-  )
-  expect_lte(test4 %>%
-                     distinct(scientific_name) %>%
-                     pull() %>%
-                     length(),
-                   (test2 %>%
-                      distinct(scientific_name) %>%
-                      pull() %>%
-                      length() +
-                    test3 %>%
-                      distinct(scientific_name) %>%
-                      pull() %>%
-                      length())
-  )
-  expect_true(all(projects_test4 %in% (test5 %>%
-                                         distinct(animal_project_code) %>%
-                                         pull()))
-  )
-  expect_identical(test6 %>%
-                     distinct(scientific_name) %>%
-                     pull(scientific_name),
-                   animals_test6
-  )
-  expect_identical(test6 %>%
-                     distinct(animal_project_code) %>%
-                     pull(animal_project_code),
-                   projects_test6
-  )
+  expect_is(animals_all, "data.frame")
+  expect_is(animals_project1, "data.frame")
+  expect_is(animals_project2, "data.frame")
+  expect_is(animals_projects_multiple, "data.frame")
+  expect_is(animals_names_multiple, "data.frame")
+  expect_is(animals_project1_name1, "data.frame")
+  expect_true(all(names(animals_all) %in% expected_col_names_animals))
+  expect_true(all(expected_col_names_animals %in% names(animals_all)))
+  expect_gte(nrow(animals_all), nrow(animals_project1))
+  expect_gte(nrow(animals_all), nrow(animals_project2))
+  expect_gte(nrow(animals_all), nrow(animals_projects_multiple))
+  expect_gte(nrow(animals_all), nrow(animals_names_multiple))
+  expect_gte(nrow(animals_all), nrow(animals_project1_name1))
+  expect_equal(nrow(animals_project2), 309)
+  expect_equal(names(animals_all), names(animals_project1))
+  expect_equal(names(animals_all), names(animals_project2))
+  expect_equal(names(animals_all), names(animals_projects_multiple))
+  expect_equal(names(animals_all), names(animals_names_multiple))
+  expect_equal(names(animals_all), names(animals_project1_name1))
+  expect_gte(animals_all %>% distinct(scientific_name) %>% pull() %>% length(),
+             animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length())
+  expect_lte(animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length(),
+             (animals_project1 %>% distinct(scientific_name) %>% pull() %>% length() +
+              animals_project2 %>% distinct(scientific_name) %>% pull() %>% length()))
+  expect_true(all(projects_multiple %in%
+              (animals_names_multiple %>% distinct(animal_project_code) %>% pull())))
+  expect_identical(animals_project1_name1 %>% distinct(scientific_name) %>% pull(scientific_name),
+                   c(name1))
+  expect_identical(animals_project1_name1 %>% distinct(animal_project_code) %>% pull(animal_project_code),
+                   c(project1))
+  # expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
 })

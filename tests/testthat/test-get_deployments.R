@@ -1,11 +1,11 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
 
-# valid column names
-valid_col_names_deployments <- c(
+# Expected column names
+expected_col_names_deployments <- c(
   "receiver",
   "receiver_status",
   "projectname",
@@ -59,17 +59,18 @@ valid_col_names_deployments <- c(
   "activation_datetime",
   "valid_data_until_datetime"
 )
-test1 <- get_deployments(con)
-test2 <- get_deployments(con, network_project = "thornton")
-test3 <- get_deployments(con, network_project = c("thornton",
+
+deployments_all <- get_deployments(con)
+deployments_project1 <- get_deployments(con, network_project = "thornton")
+deployments_projects_multiple <- get_deployments(con, network_project = c("thornton",
                                                   "leopold"))
-test4 <- get_deployments(con, receiver_status = "Broken")
-test5 <- get_deployments(con, receiver_status = c("Broken", "Lost"))
-test6 <- get_deployments(con, network_project = "thornton",
+deployments_status1 <- get_deployments(con, receiver_status = "Broken")
+deployments_status_multiple <- get_deployments(con, receiver_status = c("Broken", "Lost"))
+deployments_project1_openfalse <- get_deployments(con, network_project = "thornton",
                          open_only = FALSE)
 
 testthat::test_that("test_input_get_deployments", {
-  expect_error(get_transmitters("I am not a connection"),
+  expect_error(get_deployments("I am not a connection"),
                "Not a connection object to database.")
   expect_error(get_deployments(con, network_project = "very_bad_project"))
   expect_error(get_deployments(con, network_project = c("thornton",
@@ -84,51 +85,51 @@ testthat::test_that("test_input_get_deployments", {
 
 testthat::test_that("test_output_get_deployments", {
   library(dplyr)
-  expect_is(test1, "data.frame")
-  expect_is(test2, "data.frame")
-  expect_is(test3, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_deployments))
-  expect_true(all(valid_col_names_deployments %in% names(test1)))
-  expect_gte(nrow(test1), nrow(test2))
-  expect_gte(nrow(test1), nrow(test3))
-  expect_gte(nrow(test3), nrow(test2))
-  expect_gte(nrow(test5), nrow(test4))
-  expect_equal(names(test1), names(test2))
-  expect_equal(names(test1), names(test3))
-  expect_equal(names(test1), names(test4))
-  expect_equal(names(test1), names(test5))
-  expect_equal(names(test1), names(test6))
-  expect_gte(test1 %>% distinct(receiver_status) %>% nrow(),
-             test2 %>% distinct(receiver_status) %>% nrow())
-  expect_gte(test3 %>% distinct(receiver_status) %>% nrow(),
-             test2 %>% distinct(receiver_status) %>% nrow())
-  expect_gte(test1 %>% distinct(receiver_status) %>% nrow(),
-             test3 %>% distinct(receiver_status) %>% nrow())
-  expect_gte(test1 %>% distinct(receiver_status) %>% nrow(),
-             test5 %>% distinct(receiver_status) %>% nrow())
-  expect_gte(test5 %>% distinct(receiver_status) %>% nrow(),
-             test4 %>% distinct(receiver_status) %>% nrow())
-  expect_gte(test6 %>% nrow(),
-             test2 %>% nrow())
-  expect_gte(test1 %>% distinct(projectcode) %>% nrow(),
-             test2 %>% distinct(projectcode) %>% nrow())
-  expect_gte(test3 %>% distinct(projectcode) %>% nrow(),
-             test2 %>% distinct(projectcode) %>% nrow())
-  expect_gte(test1 %>% distinct(projectcode) %>% nrow(),
-             test5 %>% distinct(projectcode) %>% nrow())
-  expect_gte(test5 %>% distinct(projectcode) %>% nrow(),
-             test4 %>% distinct(projectcode) %>% nrow())
-  expect_true(test2 %>% distinct(projectcode) %>% pull() == "thornton")
-  expect_true(all(test3 %>% distinct(projectcode) %>% pull() %in% c("thornton",
+  expect_is(deployments_all, "data.frame")
+  expect_is(deployments_project1, "data.frame")
+  expect_is(deployments_projects_multiple, "data.frame")
+  expect_true(all(names(deployments_all) %in% expected_col_names_deployments))
+  expect_true(all(expected_col_names_deployments %in% names(deployments_all)))
+  expect_gte(nrow(deployments_all), nrow(deployments_project1))
+  expect_gte(nrow(deployments_all), nrow(deployments_projects_multiple))
+  expect_gte(nrow(deployments_projects_multiple), nrow(deployments_project1))
+  expect_gte(nrow(deployments_status_multiple), nrow(deployments_status1))
+  expect_equal(names(deployments_all), names(deployments_project1))
+  expect_equal(names(deployments_all), names(deployments_projects_multiple))
+  expect_equal(names(deployments_all), names(deployments_status1))
+  expect_equal(names(deployments_all), names(deployments_status_multiple))
+  expect_equal(names(deployments_all), names(deployments_project1_openfalse))
+  expect_gte(deployments_all %>% distinct(receiver_status) %>% nrow(),
+             deployments_project1 %>% distinct(receiver_status) %>% nrow())
+  expect_gte(deployments_projects_multiple %>% distinct(receiver_status) %>% nrow(),
+             deployments_project1 %>% distinct(receiver_status) %>% nrow())
+  expect_gte(deployments_all %>% distinct(receiver_status) %>% nrow(),
+             deployments_projects_multiple %>% distinct(receiver_status) %>% nrow())
+  expect_gte(deployments_all %>% distinct(receiver_status) %>% nrow(),
+             deployments_status_multiple %>% distinct(receiver_status) %>% nrow())
+  expect_gte(deployments_status_multiple %>% distinct(receiver_status) %>% nrow(),
+             deployments_status1 %>% distinct(receiver_status) %>% nrow())
+  expect_gte(deployments_project1_openfalse %>% nrow(),
+             deployments_project1 %>% nrow())
+  expect_gte(deployments_all %>% distinct(projectcode) %>% nrow(),
+             deployments_project1 %>% distinct(projectcode) %>% nrow())
+  expect_gte(deployments_projects_multiple %>% distinct(projectcode) %>% nrow(),
+             deployments_project1 %>% distinct(projectcode) %>% nrow())
+  expect_gte(deployments_all %>% distinct(projectcode) %>% nrow(),
+             deployments_status_multiple %>% distinct(projectcode) %>% nrow())
+  expect_gte(deployments_status_multiple %>% distinct(projectcode) %>% nrow(),
+             deployments_status1 %>% distinct(projectcode) %>% nrow())
+  expect_true(deployments_project1 %>% distinct(projectcode) %>% pull() == "thornton")
+  expect_true(all(deployments_projects_multiple %>% distinct(projectcode) %>% pull() %in% c("thornton",
                                                                   "leopold")))
-  expect_true(all(test2 %>% distinct(receiver_status) %>% pull() %in%
-                    (test3 %>% distinct(receiver_status) %>% pull())))
-  expect_true(all(test3 %>% distinct(receiver_status) %>% pull() %in%
-                    (test1 %>% distinct(receiver_status) %>% pull())))
-  expect_true(test4 %>% distinct(receiver_status) %>% pull() == "Broken")
-  expect_true(all(test5 %>% distinct(receiver_status) %>% pull() %in% c("Broken",
+  expect_true(all(deployments_project1 %>% distinct(receiver_status) %>% pull() %in%
+                    (deployments_projects_multiple %>% distinct(receiver_status) %>% pull())))
+  expect_true(all(deployments_projects_multiple %>% distinct(receiver_status) %>% pull() %in%
+                    (deployments_all %>% distinct(receiver_status) %>% pull())))
+  expect_true(deployments_status1 %>% distinct(receiver_status) %>% pull() == "Broken")
+  expect_true(all(deployments_status_multiple %>% distinct(receiver_status) %>% pull() %in% c("Broken",
                                                                   "Lost")))
-  expect_true(all(test2 %>% select(recover_date_time) %>% is.na()))
+  expect_true(all(deployments_project1 %>% select(recover_date_time) %>% is.na()))
   # excluding outside function is the same as conditional TRUE
-  expect_equal(nrow(test6 %>% filter(is.na(recover_date_time))), nrow(test2))
+  expect_equal(nrow(deployments_project1_openfalse %>% filter(is.na(recover_date_time))), nrow(deployments_project1))
 })

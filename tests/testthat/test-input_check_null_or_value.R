@@ -1,8 +1,16 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
+
+valid_network_projects <- get_projects(connection = con,
+                                       project_type = "network") %>%
+  pull("projectcode")
+
+valid_animal_projects <- get_projects(connection = con,
+                                      project_type = "animal") %>%
+  pull("projectcode")
 
 testthat::test_that("check_null_or_value with project_type", {
   expect_error(check_null_or_value("ani",
@@ -22,11 +30,6 @@ testthat::test_that("check_null_or_value with project_type", {
                                   c("animal", "network"), "project_type"))
 })
 
-
-valid_network_projects <- get_projects(connection = con,
-                                       project_type = "network") %>%
-  pull("projectcode")
-
 testthat::test_that("check_null_or_value with network_type", {
   expect_error(check_null_or_value("I am not a network project",
                                    valid_network_projects,
@@ -38,10 +41,6 @@ testthat::test_that("check_null_or_value with network_type", {
                                   valid_network_projects,
                                   "network_project"))
 })
-
-valid_animal_projects <- get_projects(connection = con,
-                                       project_type = "animal") %>%
-  pull("projectcode")
 
 testthat::test_that("check_null_or_value with animal_type", {
   expect_error(check_null_or_value("I am not an animal project",

@@ -1,4 +1,4 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")

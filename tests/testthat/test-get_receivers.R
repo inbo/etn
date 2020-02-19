@@ -1,11 +1,11 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
 
-# Valid column names
-valid_col_names_receivers <- c(
+# Expected column names
+expected_col_names_receivers <- c(
   "pk",
   "receiver_id",
   "network_project_code",
@@ -35,9 +35,9 @@ valid_col_names_receivers <- c(
   "ar_tilt_after_deploy"
 )
 
-test1 <- get_receivers(con)
-test2 <- get_receivers(con, network_project = "thornton")
-test3 <- get_receivers(con, network_project = c("thornton", "leopold"))
+receivers_all <- get_receivers(con)
+receivers_project1 <- get_receivers(con, network_project = "thornton")
+receivers_projects_multiple <- get_receivers(con, network_project = c("thornton", "leopold"))
 
 testthat::test_that("test_input_get_receivers", {
   expect_error(get_receivers("I am not a connection"),
@@ -48,16 +48,16 @@ testthat::test_that("test_input_get_receivers", {
 })
 
 testthat::test_that("test_output_get_receivers", {
-  expect_is(test1, "data.frame")
-  expect_is(test2, "data.frame")
-  expect_is(test3, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_receivers))
-  expect_true(all(valid_col_names_receivers %in% names(test1)))
-  expect_gt(nrow(test1), nrow(test2))
-  expect_gte(nrow(test1), nrow(test3))
-  expect_gte(nrow(test3), nrow(test2))
-  expect_equal(nrow(test1), nrow(test1 %>% distinct(pk)))
-  expect_equal(nrow(test1), nrow(test1 %>% distinct(receiver_id)))
-  expect_equal(names(test1), names(test2))
-  expect_equal(names(test1), names(test3))
+  expect_is(receivers_all, "data.frame")
+  expect_is(receivers_project1, "data.frame")
+  expect_is(receivers_projects_multiple, "data.frame")
+  expect_true(all(names(receivers_all) %in% expected_col_names_receivers))
+  expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
+  expect_gt(nrow(receivers_all), nrow(receivers_project1))
+  expect_gte(nrow(receivers_all), nrow(receivers_projects_multiple))
+  expect_gte(nrow(receivers_projects_multiple), nrow(receivers_project1))
+  expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(pk)))
+  expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(receiver_id)))
+  expect_equal(names(receivers_all), names(receivers_project1))
+  expect_equal(names(receivers_all), names(receivers_projects_multiple))
 })

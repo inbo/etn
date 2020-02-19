@@ -1,11 +1,11 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
 
-# Valid column names
-valid_col_names_detections <- c(
+# Expected column names
+expected_col_names_detections <- c(
   "receiver",
   "transmitter",
   "transmitter_name",
@@ -45,6 +45,32 @@ valid_col_names_detections <- c(
   "deployment_long",
   "sensor_value_acceleration"
 )
+
+start_date <- "2011"
+end_date <- "2011-02-01"
+start <- check_datetime(start_date, "start_date")
+end <- check_datetime(end_date, "end_date")
+limit <- 5
+animal_project <- "phd_reubens"
+network_project <- "thornton"
+transmitter <- "A69-1303-65302"
+receiver <- "VR2W-122360"
+scientific_name <- "Anguilla anguilla"
+deployment_station_name <- "R03"
+
+detections_limit5 <- get_detections(con, start_date = start_date, limit = 5)
+detections_start_end <- get_detections(con, animal_project = animal_project,
+                       network_project = network_project, start_date = start_date,
+                       end_date = end_date, limit = limit,
+                       transmitter = transmitter)
+detections_station <- get_detections(con, animal_project = animal_project,
+                        network_project = network_project,
+                        deployment_station_name = deployment_station_name,
+                        limit = limit, transmitter = transmitter)
+
+detections_transmitter <- get_detections(con, transmitter = transmitter, limit = limit)
+detections_receiver <- get_detections(con, receiver = receiver, limit = limit)
+detections_name <- get_detections(con, scientific_name = scientific_name, limit = limit)
 
 testthat::test_that("test_input_get_detections", {
   expect_error(get_detections("I am not a connection"),
@@ -88,84 +114,49 @@ testthat::test_that("test_input_get_detections", {
   expect_error(get_detections(con, scientific_name = c("I am not an animal")))
 })
 
-
-start_date <- "2011"
-end_date <- "2011-02-01"
-start <- check_datetime(start_date, "start_date")
-end <- check_datetime(end_date, "end_date")
-test1 <- get_detections(con, start_date = start_date, limit = 5)
-test2 <- get_detections(con, start_date = start_date, limit = 2)
-animal_project <- "phd_reubens"
-network_project <- "thornton"
-limit <- 5
-transmitter <- "A69-1303-65302"
-receiver <- "VR2W-122360"
-scientific_name <- "Anguilla anguilla"
-
-test3<- get_detections(con, animal_project = animal_project,
-                       network_project = network_project, start_date = start_date,
-                       end_date = end_date, limit = limit,
-                       transmitter = transmitter)
-deployment_station_name <- "R03"
-test4 <- get_detections(con, animal_project = animal_project,
-                        network_project = network_project,
-                        deployment_station_name = deployment_station_name,
-                        limit = limit, transmitter = transmitter)
-
-test5 <- get_detections(con, transmitter = transmitter, limit = limit)
-test6 <- get_detections(con, receiver = receiver, limit = limit)
-test7 <- get_detections(con, scientific_name = scientific_name, limit = limit)
-
 testthat::test_that("test_output_get_detections", {
   library(dplyr)
-  expect_is(test1, "data.frame")
-  expect_is(test2, "data.frame")
-  expect_is(test3, "data.frame")
-  expect_is(test4, "data.frame")
-  expect_is(test5, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_detections))
-  expect_true(all(valid_col_names_detections %in% names(test1)))
-  expect_equal(nrow(test1), 5)
-  expect_equal(nrow(test2), 2)
-  expect_equal(names(test1), names(test2))
-  expect_equal(names(test1), names(test3))
-  expect_equal(names(test1), names(test4))
-  expect_equal(names(test1), names(test5))
-  expect_equal(names(test1), names(test6))
-  expect_equal(names(test1), names(test7))
-  expect_true(test1 %>%
+  expect_is(detections_limit5, "data.frame")
+  expect_is(detections_start_end, "data.frame")
+  expect_is(detections_station, "data.frame")
+  expect_is(detections_transmitter, "data.frame")
+  expect_true(all(names(detections_limit5) %in% expected_col_names_detections))
+  expect_true(all(expected_col_names_detections %in% names(detections_limit5)))
+  expect_equal(nrow(detections_limit5), 5)
+  expect_equal(names(detections_limit5), names(detections_start_end))
+  expect_equal(names(detections_limit5), names(detections_station))
+  expect_equal(names(detections_limit5), names(detections_transmitter))
+  expect_equal(names(detections_limit5), names(detections_receiver))
+  expect_equal(names(detections_limit5), names(detections_name))
+  expect_true(detections_limit5 %>%
                  select(datetime) %>%
                  summarize(min_datetime = min(datetime)) %>%
                  pull(min_datetime) > start)
-  expect_true(test2 %>%
+  expect_true(detections_start_end %>%
                 select(datetime) %>%
                 summarize(min_datetime = min(datetime)) %>%
                 pull(min_datetime) > start)
-  expect_true(test3 %>%
-                select(datetime) %>%
-                summarize(min_datetime = min(datetime)) %>%
-                pull(min_datetime) > start)
-  expect_true(test3 %>%
+  expect_true(detections_start_end %>%
                 select(datetime) %>%
                 summarize(max_datetime = max(datetime)) %>%
                 pull(max_datetime) < end)
-  expect_true(test3 %>%
+  expect_true(detections_start_end %>%
                 distinct(animal_project_code) %>%
                 pull() == animal_project)
-  expect_true(test3 %>%
+  expect_true(detections_start_end %>%
                 distinct(network_project_code) %>%
                 pull() == network_project)
-  expect_lte(test3 %>% nrow(), limit)
-  expect_true(test4 %>%
+  expect_lte(detections_start_end %>% nrow(), limit)
+  expect_true(detections_station %>%
                 distinct(deployment_station_name) %>%
                 pull() == deployment_station_name)
-  expect_true(test5 %>%
+  expect_true(detections_transmitter %>%
                 distinct(transmitter) %>%
                 pull() == transmitter)
-  expect_true(test6 %>%
+  expect_true(detections_receiver %>%
                 distinct(receiver) %>%
                 pull() == receiver)
-  expect_true(test7 %>%
+  expect_true(detections_name %>%
                 distinct(scientific_name) %>%
                 pull() == scientific_name)
 })

@@ -1,11 +1,11 @@
-# Valid connection
+# Connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
 )
 
-# valid column names
-valid_col_names_tags <- c(
+# Expected column names
+expected_col_names_tags <- c(
   "pk",
   "tag_id",
   "tag_id_alternative",
@@ -53,12 +53,11 @@ valid_col_names_tags <- c(
   "step4_acceleration_duration"
 )
 
-test1 <- get_tags(con)
-test2 <- get_tags(con, animal_project = "phd_reubens")
-test3 <- get_tags(con, animal_project = c("phd_reubens",
+tags_all <- get_tags(con)
+tags_project1 <- get_tags(con, animal_project = "phd_reubens")
+tags_projects_multiple <- get_tags(con, animal_project = c("phd_reubens",
                                                   "2012_leopoldkanaal"))
-test4 <- get_tags(con,
-                          animal_project = "phd_reubens",
+tags_project1_ref <- get_tags(con, animal_project = "phd_reubens",
                           include_reference_tags = TRUE)
 
 testthat::test_that("test_input_get_tags", {
@@ -72,20 +71,21 @@ testthat::test_that("test_input_get_tags", {
 
 testthat::test_that("test_output_get_tags", {
   library(dplyr)
-  expect_is(test1, "data.frame")
-  expect_is(test2, "data.frame")
-  expect_is(test3, "data.frame")
-  expect_is(test4, "data.frame")
-  expect_true(all(names(test1) %in% valid_col_names_tags))
-  expect_true(all(valid_col_names_tags %in% names(test1)))
-  expect_gte(nrow(test1), nrow(test2))
-  expect_gte(nrow(test1), nrow(test3))
-  expect_gte(nrow(test3), nrow(test2))
-  expect_gte(nrow(test4), nrow(test2))
-  expect_equal(names(test1), names(test2))
-  expect_equal(names(test1), names(test3))
-  expect_equal(names(test1), names(test4))
-  expect_equal(test2 %>%
-                 distinct(type) %>%
-                 arrange() %>% pull(), c("animal","sentinel"))
+  expect_is(tags_all, "data.frame")
+  expect_is(tags_project1, "data.frame")
+  expect_is(tags_projects_multiple, "data.frame")
+  expect_is(tags_project1_ref, "data.frame")
+  expect_true(all(names(tags_all) %in% expected_col_names_tags))
+  expect_true(all(expected_col_names_tags %in% names(tags_all)))
+  expect_gte(nrow(tags_all), nrow(tags_project1))
+  expect_gte(nrow(tags_all), nrow(tags_projects_multiple))
+  expect_gte(nrow(tags_projects_multiple), nrow(tags_project1))
+  expect_gte(nrow(tags_project1_ref), nrow(tags_project1))
+  expect_equal(names(tags_all), names(tags_project1))
+  expect_equal(names(tags_all), names(tags_projects_multiple))
+  expect_equal(names(tags_all), names(tags_project1_ref))
+  expect_equal(tags_project1 %>% distinct(type) %>% arrange() %>% pull(),
+               c("animal","sentinel"))
+  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(pk)))
+  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id)))
 })
