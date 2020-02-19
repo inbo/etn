@@ -1,5 +1,3 @@
-context("test_get_projects")
-
 # Valid connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),

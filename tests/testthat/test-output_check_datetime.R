@@ -1,5 +1,3 @@
-context("test_output_check_datetime")
-
 testthat::test_that("check_datetime", {
   expect_true(check_datetime("1985-11-21") == "1985-11-21")
   expect_true(check_datetime("1985-11") == "1985-11-01")

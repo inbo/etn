@@ -1,5 +1,3 @@
-context("test_get_detections")
-
 # Valid connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),

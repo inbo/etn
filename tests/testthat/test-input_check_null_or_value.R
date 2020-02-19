@@ -1,5 +1,3 @@
-context("test_input_null_or_value")
-
 # Valid connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),

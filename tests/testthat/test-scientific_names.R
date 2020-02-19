@@ -1,5 +1,3 @@
-context("test_scientific_names")
-
 # Valid connection
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
