@@ -31,10 +31,10 @@ get_animals(con)
 get_animals(con, animal_project = "2012_leopoldkanaal")
 get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
 
-# Get animals with specific scientific names (across all projects)
+# Get animals of specific species (across all projects)
 get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
 
-# Get animals with a specific scientific name from a specific project
+# Get animals of a specific species from a specific project
 get_animals(con, animal_project = "phd_reubens", scientific_name = "Gadus morhua")
 }
 }
