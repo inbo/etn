@@ -1,26 +1,24 @@
-#' Get raw detections data
+#' Get detections data
 #'
-#' Get the raw detections data, with optional filters for the project, the
-#' start- and enddate, the deployment station name and the transmitter/tag
-#' identifier. Use the \code{limit} option to limit the data size.
+#' Get detections data, with options to filter on animal project, network
+#' project, start- and enddate, deployment station name and/or tag identifier.
+#' Use `limit` to limit the number of returned records
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param network_project (character) One or more network projects.
 #' @param animal_project (character) One or more animal projects.
 #' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#'   definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-#'   as well.
+#'   selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+#'   well.
 #' @param end_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#'   definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-#'   as well.
-#' @param deployment_station_name (character) One or more deployment station
-#'   names.
-#' @param transmitter (character) One or more transmitter identifiers, also
-#'   referred to as `tag_code_space` identifiers
-#' @param receiver (character) One or more receiver identifiers.
+#'   selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+#'   well.
+#' @param station_name (character) One or more deployment station names.
+#' @param tag_id (character) One or more tag identifiers.
+#' @param receiver_id (character) One or more receiver identifiers.
 #' @param scientific_name (character) One or more scientific names.
-#' @param limit (integer) Limit the number of records to download. If NULL, all
-#'   records are downloaded.
+#' @param limit (integer) The number of records to return (useful for testing
+#'   purposes).
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -37,35 +35,34 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get detection data filtered by the start year
+#' # Get detections filtered by start year and limited to 100 records
 #' get_detections(con, start_date = "2017", limit = 100)
 #'
-#' # Get detection data within time frame for specific animal project and
+#' # Get detections within a time frame for a specific animal project and
 #' # network project
 #' get_detections(con, animal_project = "phd_reubens",
 #'                network_project = "thornton", start_date = "2011-01-28",
 #'                end_date = "2011-02-01")
 #'
-#' # Get detection data for specific animal project and station names and a
-#' # limit about the number of returned records
+#' # Get detections for a specific animal project at specific stations
 #' get_detections(con, animal_project = "phd_reubens",
-#'                deployment_station_name = c("R03", "R05"), limit = 100)
+#'                station_name = c("R03", "R05"))
 #'
-#' # Get detection data for specific transmitter
-#' get_detections(con, transmitter = "A69-1303-65302")
+#' # Get detectios for a specific tag
+#' get_detections(con, tag_id = "A69-1303-65302")
 #'
-#' # Get detection data for specific receiver during specific time period
-#' get_detections(con, receiver = "VR2W-122360", start_date = "2015-12-03",
+#' # Get detections for a specific receiver during a specific time period
+#' get_detections(con, receiver_id = "VR2W-122360", start_date = "2015-12-03",
 #'                end_date = "2015-12-05")
-#' # Get detection data for a specific species during a given period
+#' # Get detections for a specific species during a given period
 #' get_detections(con, scientific_name = "Anguilla anguilla",
 #'                start_date = "2015-12-03",
 #'                end_date = "2015-12-05")
 #' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
-                           end_date = NULL, deployment_station_name = NULL,
-                           transmitter = NULL, receiver = NULL,
+                           end_date = NULL, station_name = NULL,
+                           tag_id = NULL, receiver_id = NULL,
                            scientific_name = NULL, limit = NULL) {
   check_connection(connection)
 
@@ -88,50 +85,50 @@ get_detections <- function(connection, network_project = NULL,
   # check the start- and end date inputs
   if (is.null(start_date)) {
     # use an arbitrary early date for this project
-    start_date <- check_datetime("1970", "start_date")
+    start_date <- check_date_time("1970", "start_date")
   } else {
-    start_date <- check_datetime(start_date, "start_date")
+    start_date <- check_date_time(start_date, "start_date")
   }
   if (is.null(end_date)) {
     # use today
     end_date <- as.character(Sys.Date())
   } else {
-    end_date <- check_datetime(end_date, "end_date")
+    end_date <- check_date_time(end_date, "end_date")
   }
 
-  # check the station inputs
-  valid_deployment_station_names <- deployment_station_names(connection)
-  check_null_or_value(deployment_station_name, valid_deployment_station_names,
-                      "deployment_station_name")
-  if (is.null(deployment_station_name)) {
-    deployment_station_name = valid_deployment_station_names
+  # Check the station inputs
+  valid_station_names <- station_names(connection)
+  check_null_or_value(station_name, valid_station_names,
+                      "station_name")
+  if (is.null(station_name)) {
+    station_name = valid_station_names
   }
 
-  # check the transmitter tags inputs
-  valid_transmitters <- transmitters(connection)
-  check_null_or_value(transmitter, valid_transmitters,
-                      "transmitter")
-  if (is.null(transmitter)) {
-    transmitter = valid_transmitters
+  # Check the tags inputs
+  valid_tags <- tag_ids(connection)
+  check_null_or_value(tag_id, valid_tags,
+                      "tag_id")
+  if (is.null(tag_id)) {
+    tag_id = valid_tags
   }
 
-  # check the receiver inputs
+  # Check the receiver inputs
   valid_receivers <- get_receivers(connection) %>%
-    pull(.data$receiver)
-  check_null_or_value(receiver, valid_receivers,
-                      "receiver")
-  if (is.null(receiver)) {
-    receiver = valid_receivers
+    pull(.data$receiver_id)
+  check_null_or_value(receiver_id, valid_receivers,
+                      "receiver_id")
+  if (is.null(receiver_id)) {
+    receiver_id = valid_receivers
   }
 
-  # valid scientific names
+  # Valid scientific names
   valid_animals <- scientific_names(connection)
   check_null_or_value(scientific_name, valid_animals, "scientific_name")
   if (is.null(scientific_name)) {
     scientific_name = valid_animals
   }
 
-  # check the limit input
+  # Check the limit input
   if (is.null(limit)) {
     sub_query <- glue_sql("LIMIT ALL", .con = connection)
   } else {
@@ -141,74 +138,66 @@ get_detections <- function(connection, network_project = NULL,
                           .con = connection)
   }
 
-  detections_query <- glue_sql(
-    "SELECT * FROM vliz.detections_view
+  detections_query <- glue_sql("
+    SELECT *
+    FROM vliz.detections_view2
     WHERE network_project_code IN ({network_project*})
       AND animal_project_code IN ({animal_project*})
-      AND datetime > {start_date}
-      AND datetime < {end_date}
-      AND deployment_station_name IN ({station_name*})
-      AND transmitter IN ({transmitter*})
-      AND receiver IN ({receiver*})
-      AND scientific_name IN ({scientific_names*})
-    {sub_query}",
-    network_project = network_project,
-    animal_project = animal_project,
-    start_date = start_date,
-    end_date = end_date,
-    station_name = deployment_station_name[!is.na(deployment_station_name)],
-    transmitter = transmitter,
-    receiver = receiver,
-    scientific_names = scientific_name,
+      AND date_time > {start_date}
+      AND date_time < {end_date}
+      AND station_name IN ({station_name*})
+      AND tag_id IN ({tag_id*})
+      AND receiver_id IN ({receiver_id*})
+      AND scientific_name IN ({scientific_name*})
+    {sub_query}
+    ",
     nrows = limit,
     .con = connection
   )
   detections <- dbGetQuery(connection, detections_query)
   as_tibble(detections)
-
 }
 
-#' Support function to get unique set of deployment_station_name
+#' Support function to get unique set of station_names
 #'
-#' Get unique deployment_station_name
+#' Get unique station_names
 #'
-#' @param connection A valid connection to ETN database.
+#' @param connection A valid connection to the ETN database.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all deployment_station_names present in vliz.deployments.
-deployment_station_names <- function(connection) {
+#' @return A vector of all station_names present in vliz.deployments_view2.
+station_names <- function(connection) {
 
-  query <- glue_sql(
-    "SELECT DISTINCT station_name FROM vliz.deployments",
-    .con = connection
+  query <- glue_sql("
+    SELECT DISTINCT station_name FROM vliz.deployments_view2
+    ", .con = connection
   )
   data <- dbGetQuery(connection, query)
   data$station_name
 }
 
-#' Support function to get unique set of transmitters (tag_code_space)
+#' Support function to get unique set of tag_ids
 #'
-#' Get unique transmitters
+#' Get unique tag_ids
 #'
-#' @param connection A valid connection to ETN database.
+#' @param connection A valid connection to the ETN database.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all transmitter present in vliz.tags.
-transmitters <- function(connection) {
+#' @return A vector of all tags present in vliz.tags_view2.
+tag_ids <- function(connection) {
 
-  query <- glue_sql(
-    "SELECT DISTINCT tag_full_id FROM vliz.tags",
-    .con = connection
+  query <- glue_sql("
+    SELECT DISTINCT tag_id FROM vliz.tags_view2
+    ", .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$tag_full_id
+  data$tag_id
 }
-
