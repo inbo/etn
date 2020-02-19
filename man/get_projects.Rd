@@ -7,7 +7,7 @@
 get_projects(connection, project_type = NULL)
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
 \item{project_type}{(string) Either \code{animal} or \code{network}.}
 }
@@ -22,13 +22,13 @@ projects.
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get metadata for all projects
-projects <- get_projects(con)
+# Get all projects
+get_projects(con)
 
-# Get metadata for all animal projects
-projects <- get_projects(con, project_type = "animal")
+# Get all animal projects
+get_projects(con, project_type = "animal")
 
-# Get metadata for all network projects
-projects <- get_projects(con, project_type = "network")
+# Get all network projects
+get_projects(con, project_type = "network")
 }
 }

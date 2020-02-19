@@ -4,7 +4,7 @@
 #' start- and enddate, the deployment station name and the transmitter/tag
 #' identifier. Use the \code{limit} option to limit the data size.
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #' @param network_project (character) One or more network projects.
 #' @param animal_project (character) One or more animal projects.
 #' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date

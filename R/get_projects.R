@@ -3,7 +3,7 @@
 #' Get metadata for projects, with option to filter on animal or network
 #' projects.
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #' @param project_type (string) Either `animal` or `network`.
 #'
 #' @return A tibble (tidyverse data.frame).
@@ -20,14 +20,14 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get metadata for all projects
-#' projects <- get_projects(con)
+#' # Get all projects
+#' get_projects(con)
 #'
-#' # Get metadata for all animal projects
-#' projects <- get_projects(con, project_type = "animal")
+#' # Get all animal projects
+#' get_projects(con, project_type = "animal")
 #'
-#' # Get metadata for all network projects
-#' projects <- get_projects(con, project_type = "network")
+#' # Get all network projects
+#' get_projects(con, project_type = "network")
 #' }
 get_projects <- function(connection, project_type = NULL) {
 

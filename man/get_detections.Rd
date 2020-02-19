@@ -18,7 +18,7 @@ get_detections(
 )
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
 \item{network_project}{(character) One or more network projects.}
 
@@ -36,7 +36,7 @@ as well.}
 names.}
 
 \item{transmitter}{(character) One or more transmitter identifiers, also
-referred to as `tag_code_space` identifiers}
+referred to as \code{tag_code_space} identifiers}
 
 \item{receiver}{(character) One or more receiver identifiers.}
 

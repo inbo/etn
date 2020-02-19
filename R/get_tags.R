@@ -22,15 +22,15 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get metadata for all (animal) tags
-#' tags <- get_tags(con)
+#' # Get all (animal) tags
+#' get_tags(con)
 #'
-#' # Get metadata for all tags, including reference tags
-#' tags <- get_tags(con, include_reference_tags = TRUE)
+#' # Get all tags, including reference tags
+#' get_tags(con, include_reference_tags = TRUE)
 #'
-#' # Get metadata for tags linked to specific project(s)
-#' tags <- get_tags(con, animal_project = "phd_reubens")
-#' tags <- get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+#' # Get tags linked to specific animal project(s)
+#' get_tags(con, animal_project = "phd_reubens")
+#' get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
 get_tags <- function(connection,
                      animal_project = NULL,

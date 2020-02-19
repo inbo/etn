@@ -2,7 +2,7 @@
 #'
 #' Get metadata for receivers, with option to filter on network project.
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #' @param network_project (string) One or more network projects.
 #'
 #' @return A tibble (tidyverse data.frame).
@@ -19,12 +19,12 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get metadata for all receivers
-#' receivers <- get_receivers(con)
+#' # Get all receivers
+#' get_receivers(con)
 #'
-#' # Get metadata for receivers linked to specific network project(s)
-#' receivers <- get_receivers(con, network_project = "thornton")
-#' receivers <- get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
+#' # Get receivers linked to specific network project(s)
+#' get_receivers(con, network_project = "thornton")
+#' get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
 #' }
 get_receivers <- function(connection,
                           network_project = NULL) {
