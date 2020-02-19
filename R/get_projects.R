@@ -1,9 +1,10 @@
-#' Get project overview
+#' Get project metadata
 #'
-#' Get an overview of the projects available on ETN database.
+#' Get metadata for projects, with option to filter on animal or network
+#' projects.
 #'
 #' @param connection A valid connection with the ETN database.
-#' @param project_type (string) Either \code{animal} or \code{network}.
+#' @param project_type (string) Either `animal` or `network`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -19,14 +20,14 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get a list of all projects
-#' get_projects(con)
+#' # Get metadata for all projects
+#' projects <- get_projects(con)
 #'
-#' # Get a list of all animal projects
-#' get_projects(con, project_type = "animal")
+#' # Get metadata for all animal projects
+#' projects <- get_projects(con, project_type = "animal")
 #'
-#' # Get a list of all network projects
-#' get_projects(con, project_type = "network")
+#' # Get metadata for all network projects
+#' projects <- get_projects(con, project_type = "network")
 #' }
 get_projects <- function(connection, project_type = NULL) {
 
@@ -36,9 +37,9 @@ get_projects <- function(connection, project_type = NULL) {
   check_null_or_value(project_type, c("animal", "network"),
                       "project_type")
 
-  projects <- glue_sql(
-    "SELECT * FROM vliz.projects_view",
-    .con = connection
+  projects <- glue_sql("
+    SELECT * FROM vliz.projects_view
+    ", .con = connection
   )
   projects <- dbGetQuery(connection, projects)
 

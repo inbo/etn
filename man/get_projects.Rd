@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_projects.R
 \name{get_projects}
 \alias{get_projects}
-\title{Get project overview}
+\title{Get project metadata}
 \usage{
 get_projects(connection, project_type = NULL)
 }
@@ -15,19 +15,20 @@ get_projects(connection, project_type = NULL)
 A tibble (tidyverse data.frame).
 }
 \description{
-Get an overview of the projects available on ETN database.
+Get metadata for projects, with option to filter on animal or network
+projects.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get a list of all projects
-get_projects(con)
+# Get metadata for all projects
+projects <- get_projects(con)
 
-# Get a list of all animal projects
-get_projects(con, project_type = "animal")
+# Get metadata for all animal projects
+projects <- get_projects(con, project_type = "animal")
 
-# Get a list of all network projects
-get_projects(con, project_type = "network")
+# Get metadata for all network projects
+projects <- get_projects(con, project_type = "network")
 }
 }

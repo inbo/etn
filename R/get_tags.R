@@ -1,13 +1,12 @@
 #' Get tag metadata
 #'
-#' Get the metadata about the tags. At the moment, only tags
-#' that can be linked to a projectcode are returned to the user. By default,
-#' only animal tags are returned.
+#' Get metadata for tags. Only returns tags that can be linked to an animal (and
+#' thus an animal project). By default, reference tags are excluded.
 #'
 #' @param connection A valid connection with the ETN database.
 #' @param animal_project (string) One or more animal projects.
-#' @param include_reference_tags (logical) Include reference tags (not-animal
-#'   tags). Default: FALSE.
+#' @param include_reference_tags (logical) Include reference tags. Default:
+#'   `FALSE`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -23,15 +22,15 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get the metadata of all animal tags
-#' get_tags(con)
+#' # Get metadata for all (animal) tags
+#' tags <- get_tags(con)
 #'
-#' # Get the metadata of all tags, including reference tags
-#' get_tags(con, include_reference_tags = TRUE)
+#' # Get metadata for all tags, including reference tags
+#' tags <- get_tags(con, include_reference_tags = TRUE)
 #'
-#' # Get the metadata of the tags linked to specific project(s)
-#' get_tags(con, animal_project = "phd_reubens")
-#' get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+#' # Get metadata for tags linked to specific project(s)
+#' tags <- get_tags(con, animal_project = "phd_reubens")
+#' tags <- get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
 get_tags <- function(connection,
                      animal_project = NULL,

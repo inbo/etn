@@ -1,7 +1,7 @@
-#' Get animals data
+#' Get animal metadata
 #'
-#' Get all or a subset of animals data. Filter options are the animal project(s)
-#' and/or the scientific name of the animals.
+#' Get metadata for animals, with options to filter on animal project and/or
+#' scientific name.
 #'
 #' @param connection A valid connection to ETN database.
 #' @param animal_project (string) One or more animal projects.
@@ -20,23 +20,18 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # all animals
+#' # Get metadata for all animals
 #' animals <- get_animals(con)
 #'
-#' # all animals of the 2012_leopoldkanaal project
+#' # Get metadata for animals linked to specific project(s)
 #' animals <- get_animals(con, animal_project = "2012_leopoldkanaal")
+#' animals <- get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
 #'
-#' # all animals of the 2012_leopoldkanaal and phd_reubens
-#' get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
+#' # Get metadata for animals with specific scientific names (across all projects)
+#' animals <- get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
 #'
-#' # all animals of all projects with given scientific name
-#' animals <- get_animals(con,
-#'                        scientific_name = c("Gadus morhua",
-#'                                            "Sentinel"))
-#'
-#' # all animals of the phd_reubens project with given scientific name
-#' animals <- get_animals(con, animal_project = "phd_reubens",
-#'                        scientific_name = "Gadus morhua")
+#' # Get metadata for animals with specific scientific name for specific project
+#' animals <- get_animals(con, animal_project = "phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection,
                         animal_project = NULL,

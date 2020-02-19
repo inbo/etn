@@ -11,28 +11,27 @@ get_tags(connection, animal_project = NULL, include_reference_tags = FALSE)
 
 \item{animal_project}{(string) One or more animal projects.}
 
-\item{include_reference_tags}{(logical) Include (non-animal borne) reference
-tags. Default: FALSE.}
+\item{include_reference_tags}{(logical) Include reference tags. Default:
+\code{FALSE}.}
 }
 \value{
 A tibble (tidyverse data.frame).
 }
 \description{
-Get metadata of tags. Only tags that can be linked to an animal (and thus an
-\code{animal_project_code}) are returned to the user. By default, reference tags
-are excluded.
+Get metadata for tags. Only returns tags that can be linked to an animal (and
+thus an animal project). By default, reference tags are excluded.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get metadata of all (animal) tags
+# Get metadata for all (animal) tags
 tags <- get_tags(con)
 
-# Get metadata of all tags, including reference tags
+# Get metadata for all tags, including reference tags
 tags <- get_tags(con, include_reference_tags = TRUE)
 
-# Get metadata of tags linked to specific project(s)
+# Get metadata for tags linked to specific project(s)
 tags <- get_tags(con, animal_project = "phd_reubens")
 tags <- get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 }
