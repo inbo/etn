@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_receivers.R
 \name{get_receivers}
 \alias{get_receivers}
-\title{Get receiver data}
+\title{Get receiver metadata}
 \usage{
 get_receivers(connection, network_project = NULL)
 }
@@ -15,19 +15,17 @@ get_receivers(connection, network_project = NULL)
 A tibble (tidyverse data.frame).
 }
 \description{
-Get all or specific, filtered on network project, receiver data.
+Get metadata for receivers, with option to filter on network project.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get all receivers data
-get_receivers(con)
+# Get metadata for all receivers
+receivers <- get_receivers(con)
 
-# Get receivers data filtered on a single network project
-get_receivers(con, network_project = "thornton")
-
-# Get receivers data filtered on a multiple network projects
-get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
+# Get metadata for receivers linked to specific network project(s)
+receivers <- get_receivers(con, network_project = "thornton")
+receivers <- get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
 }
 }
