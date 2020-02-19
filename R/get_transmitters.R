@@ -1,6 +1,6 @@
 #' Get transmitter metadata
 #'
-#' Get the metadata about the transmitter tags. At the moment, only transmitters
+#' Get the metadata about the tags. At the moment, only tags
 #' that can be linked to a projectcode are returned to the user. By default,
 #' only animal tags are returned.
 #'
@@ -23,13 +23,13 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get the metadata of all transmitter animal tags
+#' # Get the metadata of all animal transmitters
 #' get_transmitters(con)
 #'
-#' # Get the metadata of all transmitter tags
+#' # Get the metadata of all transmitters, including reference tags
 #' get_transmitters(con, include_reference_tags = TRUE)
 #'
-#' # Get the metadata of the tags linked to specific project(s)
+#' # Get the metadata of the transmitters linked to specific project(s)
 #' get_transmitters(con, animal_project = "phd_reubens")
 #' get_transmitters(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
@@ -49,22 +49,20 @@ get_transmitters <- function(connection,
   }
 
   transmitters_query <- glue_sql("
-      SELECT tags.*, animals.projectcode
-      FROM vliz.tags
-        LEFT JOIN vliz.animal_tag_release ON (animal_tag_release.tag_fk = tags.id_pk)
-        LEFT JOIN vliz.animals_view animals ON (animals.id_pk = animal_tag_release.animal_fk)
-      WHERE projectcode IN ({project*})",
-    project = animal_project,
-    .con = connection
+    SELECT tags.*
+    FROM vliz.tags_view2 AS tags
+      LEFT JOIN vliz.animals_view2 AS animals
+      ON animals.tag_fk = tags.pk
+    WHERE animals.animal_project_code IN ({animal_project*})
+    ", .con = connection
   )
   transmitters <- dbGetQuery(connection, transmitters_query)
 
-    if (include_reference_tags) {
+  if (include_reference_tags) {
     transmitters
   } else {
-    transmitters %>% filter(.data$acoustic_tag_type == "animal")
+    transmitters %>% filter(.data$type == "animal")
   }
 
   as_tibble(transmitters)
-
 }
