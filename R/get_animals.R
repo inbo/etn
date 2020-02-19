@@ -63,18 +63,16 @@ get_animals <- function(connection,
     scientific_name = valid_animals
   }
 
-  animals_query <- glue_sql(
-    "SELECT * FROM vliz.animals_view
-    WHERE projectcode IN ({projects*})
-    AND scientific_name IN ({animals*})",
-    projects = animal_project,
-    animals = scientific_name,
-    .con = connection
+  animals_query <- glue_sql("
+    SELECT *
+    FROM vliz.animals_view2
+    WHERE animal_project_code IN ({animal_project*})
+      AND scientific_name IN ({scientific_name*})
+    ", .con = connection
   )
 
   animals <- dbGetQuery(connection, animals_query)
   as_tibble(animals)
-
 }
 
 #' Support function to get unique set of scientific names
@@ -88,11 +86,11 @@ get_animals <- function(connection,
 #' @return A vector of all scientific names present in vliz.animals_view.
 scientific_names <- function(connection) {
 
-  query <- glue_sql(
-    "SELECT DISTINCT scientific_name FROM vliz.animals_view ",
-    .con = connection
+  query <- glue_sql("
+    SELECT DISTINCT scientific_name
+    FROM vliz.animals_view2
+    ", .con = connection
   )
   data <- dbGetQuery(connection, query)
   data$scientific_name
 }
-
