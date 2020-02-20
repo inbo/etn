@@ -40,24 +40,32 @@
 #'
 #' # Get detections within a time frame for a specific animal project and
 #' # network project
-#' get_detections(con, animal_project = "phd_reubens",
-#'                network_project = "thornton", start_date = "2011-01-28",
-#'                end_date = "2011-02-01")
+#' get_detections(con,
+#'   animal_project = "phd_reubens",
+#'   network_project = "thornton", start_date = "2011-01-28",
+#'   end_date = "2011-02-01"
+#' )
 #'
 #' # Get detections for a specific animal project at specific stations
-#' get_detections(con, animal_project = "phd_reubens",
-#'                station_name = c("R03", "R05"))
+#' get_detections(con,
+#'   animal_project = "phd_reubens",
+#'   station_name = c("R03", "R05")
+#' )
 #'
 #' # Get detectios for a specific tag
 #' get_detections(con, tag_id = "A69-1303-65302")
 #'
 #' # Get detections for a specific receiver during a specific time period
-#' get_detections(con, receiver_id = "VR2W-122360", start_date = "2015-12-03",
-#'                end_date = "2015-12-05")
+#' get_detections(con,
+#'   receiver_id = "VR2W-122360", start_date = "2015-12-03",
+#'   end_date = "2015-12-05"
+#' )
 #' # Get detections for a specific species during a given period
-#' get_detections(con, scientific_name = "Anguilla anguilla",
-#'                start_date = "2015-12-03",
-#'                end_date = "2015-12-05")
+#' get_detections(con,
+#'   scientific_name = "Anguilla anguilla",
+#'   start_date = "2015-12-03",
+#'   end_date = "2015-12-05"
+#' )
 #' }
 get_detections <- function(connection, network_project = NULL,
                            animal_project = NULL, start_date = NULL,
@@ -71,15 +79,15 @@ get_detections <- function(connection, network_project = NULL,
     pull(.data$projectcode)
   check_null_or_value(network_project, valid_network_projects, "network_project")
   if (is.null(network_project)) {
-    network_project = valid_network_projects
+    network_project <- valid_network_projects
   }
 
   # check the animal project inputs
   valid_animal_projects <- get_projects(connection, project_type = "animal") %>%
     pull(.data$projectcode)
-  check_null_or_value(animal_project,  valid_animal_projects, "animal_project")
+  check_null_or_value(animal_project, valid_animal_projects, "animal_project")
   if (is.null(animal_project)) {
-    animal_project = valid_animal_projects
+    animal_project <- valid_animal_projects
   }
 
   # check the start- and end date inputs
@@ -98,34 +106,40 @@ get_detections <- function(connection, network_project = NULL,
 
   # Check the station inputs
   valid_station_names <- station_names(connection)
-  check_null_or_value(station_name, valid_station_names,
-                      "station_name")
+  check_null_or_value(
+    station_name, valid_station_names,
+    "station_name"
+  )
   if (is.null(station_name)) {
-    station_name = valid_station_names
+    station_name <- valid_station_names
   }
 
   # Check the tags inputs
   valid_tags <- tag_ids(connection)
-  check_null_or_value(tag_id, valid_tags,
-                      "tag_id")
+  check_null_or_value(
+    tag_id, valid_tags,
+    "tag_id"
+  )
   if (is.null(tag_id)) {
-    tag_id = valid_tags
+    tag_id <- valid_tags
   }
 
   # Check the receiver inputs
   valid_receivers <- get_receivers(connection) %>%
     pull(.data$receiver_id)
-  check_null_or_value(receiver_id, valid_receivers,
-                      "receiver_id")
+  check_null_or_value(
+    receiver_id, valid_receivers,
+    "receiver_id"
+  )
   if (is.null(receiver_id)) {
-    receiver_id = valid_receivers
+    receiver_id <- valid_receivers
   }
 
   # Valid scientific names
   valid_animals <- scientific_names(connection)
   check_null_or_value(scientific_name, valid_animals, "scientific_name")
   if (is.null(scientific_name)) {
-    scientific_name = valid_animals
+    scientific_name <- valid_animals
   }
 
   # Check the limit input
@@ -134,8 +148,9 @@ get_detections <- function(connection, network_project = NULL,
   } else {
     assert_that(is.number(limit))
     sub_query <- glue_sql("LIMIT {limit}",
-                          limit = as.character(limit),
-                          .con = connection)
+      limit = as.character(limit),
+      .con = connection
+    )
   }
 
   detections_query <- glue_sql("
@@ -171,11 +186,9 @@ get_detections <- function(connection, network_project = NULL,
 #'
 #' @return A vector of all station_names present in vliz.deployments_view2.
 station_names <- function(connection) {
-
   query <- glue_sql("
     SELECT DISTINCT station_name FROM vliz.deployments_view2
-    ", .con = connection
-  )
+    ", .con = connection)
   data <- dbGetQuery(connection, query)
   data$station_name
 }
@@ -193,11 +206,9 @@ station_names <- function(connection) {
 #'
 #' @return A vector of all tags present in vliz.tags_view2.
 tag_ids <- function(connection) {
-
   query <- glue_sql("
     SELECT DISTINCT tag_id FROM vliz.tags_view2
-    ", .con = connection
-  )
+    ", .con = connection)
   data <- dbGetQuery(connection, query)
   data$tag_id
 }

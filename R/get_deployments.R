@@ -41,19 +41,23 @@ get_deployments <- function(connection,
                             network_project = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {
-  receiver_status_vocabulary <- c("Available", "Lost", "Broken",
-                                  "Active", "Returned to manufacturer")
+  receiver_status_vocabulary <- c(
+    "Available", "Lost", "Broken",
+    "Active", "Returned to manufacturer"
+  )
   check_connection(connection)
   valid_networks <- get_projects(connection, project_type = "network") %>%
     pull(.data$projectcode)
   check_null_or_value(network_project, valid_networks, "network_project")
-  check_null_or_value(receiver_status, receiver_status_vocabulary,
-                      .data$receiver_status)
+  check_null_or_value(
+    receiver_status, receiver_status_vocabulary,
+    .data$receiver_status
+  )
   if (is.null(network_project)) {
-    network_project = valid_networks
+    network_project <- valid_networks
   }
   if (is.null(receiver_status)) {
-    receiver_status = receiver_status_vocabulary
+    receiver_status <- receiver_status_vocabulary
   }
 
   deployments_query <- glue_sql("
@@ -64,8 +68,7 @@ get_deployments <- function(connection,
       ON deployments.receiver_id = receivers.receiver_id
     WHERE receivers.status IN ({receiver_status*})
       AND deployments.network_project_code IN ({network_project*})
-    ", .con = connection
-  )
+    ", .con = connection)
   deployments <- dbGetQuery(connection, deployments_query)
   if (open_only) {
     deployments <- deployments %>% filter(is.na(.data$recover_date_time))

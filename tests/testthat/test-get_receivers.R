@@ -40,11 +40,15 @@ receivers_project1 <- get_receivers(con, network_project = "thornton")
 receivers_projects_multiple <- get_receivers(con, network_project = c("thornton", "leopold"))
 
 testthat::test_that("test_input_get_receivers", {
-  expect_error(get_receivers("I am not a connection"),
-               "Not a connection object to database.")
+  expect_error(
+    get_receivers("I am not a connection"),
+    "Not a connection object to database."
+  )
   expect_error(get_receivers(con, network_project = "very_bad_project"))
-  expect_error(get_receivers(con, network_project = c("thornton",
-                                                      "very_bad_project")))
+  expect_error(get_receivers(con, network_project = c(
+    "thornton",
+    "very_bad_project"
+  )))
 })
 
 testthat::test_that("test_output_get_receivers", {

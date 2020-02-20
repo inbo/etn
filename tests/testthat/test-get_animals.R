@@ -82,12 +82,16 @@ animals_project1 <- get_animals(con, animal_project = project1)
 animals_project2 <- get_animals(con, animal_project = project2)
 animals_projects_multiple <- get_animals(con, animal_project = projects_multiple)
 animals_names_multiple <- get_animals(con, scientific_name = names_multiple)
-animals_project1_name1 <- get_animals(con, animal_project = project1,
-                     scientific_name = name1)
+animals_project1_name1 <- get_animals(con,
+  animal_project = project1,
+  scientific_name = name1
+)
 
 testthat::test_that("test_input_get_animals", {
-  expect_error(get_animals("I am not a connection"),
-               "Not a connection object to database.")
+  expect_error(
+    get_animals("I am not a connection"),
+    "Not a connection object to database."
+  )
 })
 
 
@@ -112,16 +116,24 @@ testthat::test_that("test_output_get_animals", {
   expect_equal(names(animals_all), names(animals_projects_multiple))
   expect_equal(names(animals_all), names(animals_names_multiple))
   expect_equal(names(animals_all), names(animals_project1_name1))
-  expect_gte(animals_all %>% distinct(scientific_name) %>% pull() %>% length(),
-             animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length())
-  expect_lte(animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length(),
-             (animals_project1 %>% distinct(scientific_name) %>% pull() %>% length() +
-              animals_project2 %>% distinct(scientific_name) %>% pull() %>% length()))
+  expect_gte(
+    animals_all %>% distinct(scientific_name) %>% pull() %>% length(),
+    animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length()
+  )
+  expect_lte(
+    animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length(),
+    (animals_project1 %>% distinct(scientific_name) %>% pull() %>% length() +
+      animals_project2 %>% distinct(scientific_name) %>% pull() %>% length())
+  )
   expect_true(all(projects_multiple %in%
-              (animals_names_multiple %>% distinct(animal_project_code) %>% pull())))
-  expect_identical(animals_project1_name1 %>% distinct(scientific_name) %>% pull(scientific_name),
-                   c(name1))
-  expect_identical(animals_project1_name1 %>% distinct(animal_project_code) %>% pull(animal_project_code),
-                   c(project1))
+    (animals_names_multiple %>% distinct(animal_project_code) %>% pull())))
+  expect_identical(
+    animals_project1_name1 %>% distinct(scientific_name) %>% pull(scientific_name),
+    c(name1)
+  )
+  expect_identical(
+    animals_project1_name1 %>% distinct(animal_project_code) %>% pull(animal_project_code),
+    c(project1)
+  )
   # expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
 })

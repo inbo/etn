@@ -36,26 +36,28 @@
 get_animals <- function(connection,
                         animal_project = NULL,
                         scientific_name = NULL) {
-
   check_connection(connection)
 
   # valid inputs on animal projects
   valid_animals_projects <- get_projects(connection,
-                                         project_type = "animal") %>%
+    project_type = "animal"
+  ) %>%
     pull("projectcode")
-  check_null_or_value(animal_project, valid_animals_projects,
-                      "animal_project")
+  check_null_or_value(
+    animal_project, valid_animals_projects,
+    "animal_project"
+  )
 
   # valid scientific names
   valid_animals <- scientific_names(connection)
   check_null_or_value(scientific_name, valid_animals, "scientific_name")
 
   if (is.null(animal_project)) {
-    animal_project = valid_animals_projects
+    animal_project <- valid_animals_projects
   }
 
   if (is.null(scientific_name)) {
-    scientific_name = valid_animals
+    scientific_name <- valid_animals
   }
 
   animals_query <- glue_sql("
@@ -63,8 +65,7 @@ get_animals <- function(connection,
     FROM vliz.animals_view2
     WHERE animal_project_code IN ({animal_project*})
       AND scientific_name IN ({scientific_name*})
-    ", .con = connection
-  )
+    ", .con = connection)
 
   animals <- dbGetQuery(connection, animals_query)
   as_tibble(animals)
@@ -80,12 +81,10 @@ get_animals <- function(connection,
 #'
 #' @return A vector of all scientific names present in vliz.animals_view.
 scientific_names <- function(connection) {
-
   query <- glue_sql("
     SELECT DISTINCT scientific_name
     FROM vliz.animals_view2
-    ", .con = connection
-  )
+    ", .con = connection)
   data <- dbGetQuery(connection, query)
   data$scientific_name
 }

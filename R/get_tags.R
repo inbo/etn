@@ -35,16 +35,15 @@
 get_tags <- function(connection,
                      animal_project = NULL,
                      include_reference_tags = FALSE) {
-
   check_connection(connection)
 
   # valid inputs on animal projects
   valid_animals_projects <-
     get_projects(connection, project_type = "animal") %>%
     pull(.data$projectcode)
-  check_null_or_value(animal_project,  valid_animals_projects, "animal_project")
+  check_null_or_value(animal_project, valid_animals_projects, "animal_project")
   if (is.null(animal_project)) {
-    animal_project = valid_animals_projects
+    animal_project <- valid_animals_projects
   }
 
   tags_query <- glue_sql("
@@ -53,8 +52,7 @@ get_tags <- function(connection,
       LEFT JOIN vliz.animals_view2 AS animals
       ON animals.tag_fk = tags.pk
     WHERE animals.animal_project_code IN ({animal_project*})
-    ", .con = connection
-  )
+    ", .con = connection)
   tags <- dbGetQuery(connection, tags_query)
 
   if (include_reference_tags) {

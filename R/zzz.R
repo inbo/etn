@@ -9,7 +9,8 @@ MAX_PRINT <- 20
 #'
 check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
-              msg = "Not a connection object to database.")
+    msg = "Not a connection object to database."
+  )
   assert_that(connection@info$dbname == "ETN")
 }
 
@@ -30,24 +31,32 @@ check_connection <- function(connection) {
 #' check_null_or_value("ddsf", c("animal", "network"), "project_type")
 #' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
 #'
-#' #Valid inputs for project_type
+#' # Valid inputs for project_type
 #' check_null_or_value("animal", c("animal", "network"), "project_type")
 #' check_null_or_value(NULL, c("animal", "network"), "project_type")
 #' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
 #'
 #'
 #' # check network projects
-#' valid_network_projects <- get_projects(connection = con,
-#'                                        project_type = "network") %>%
-#'                                        pull("projectcode")
-#' check_null_or_value(c("thornton", "leopold"),
-#'                     valid_network_projects, "network_project")
+#' valid_network_projects <- get_projects(
+#'   connection = con,
+#'   project_type = "network"
+#' ) %>%
+#'   pull("projectcode")
+#' check_null_or_value(
+#'   c("thornton", "leopold"),
+#'   valid_network_projects, "network_project"
+#' )
 #' # check animal projects
-#' valid_animal_projects <- get_projects(connection = con,
-#'                                       project_type = "animal") %>%
-#'                                       pull("projectcode")
-#' check_null_or_value(c("2012_leopoldkanaal", "phd_reubens"),
-#'                     valid_animal_projects, "animal_project")
+#' valid_animal_projects <- get_projects(
+#'   connection = con,
+#'   project_type = "animal"
+#' ) %>%
+#'   pull("projectcode")
+#' check_null_or_value(
+#'   c("2012_leopoldkanaal", "phd_reubens"),
+#'   valid_animal_projects, "animal_project"
+#' )
 #' }
 check_null_or_value <- function(arg, options = NULL, arg_name) {
   # dropna
@@ -62,12 +71,14 @@ check_null_or_value <- function(arg, options = NULL, arg_name) {
   # provide user message
   if (!is.null(arg)) {
     assert_that(all(arg %in% options),
-        msg = glue("Not valid input value(s) for {arg_name} input argument.
+      msg = glue("Not valid input value(s) for {arg_name} input argument.
                     Valid inputs are: {options_to_print*}.",
-                   .transformer = collapse_transformer(sep = ", ",
-                                                       last = " and ")
-                   )
+        .transformer = collapse_transformer(
+          sep = ", ",
+          last = " and "
         )
+      )
+    )
   } else {
     TRUE
   }
@@ -109,20 +120,26 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #' check_date_time("1985-11-21")
 #' check_date_time("1985-11")
 #' check_date_time("1985")
-#' check_date_time("1985-04-31")  # invalid date
-#' check_date_time("01-03-1973")  # invalid format
+#' check_date_time("1985-04-31") # invalid date
+#' check_date_time("01-03-1973") # invalid format
 #' }
 check_date_time <- function(date_time, date_name = "start_date") {
   parsed <- tryCatch(
     parse_date_time(date_time, orders = c("ymd", "ym", "y")),
     warning = function(warning) {
       if (grepl("No formats found", warning$message)) {
-        stop(glue("The given {date_name}, {date_time}, is not in a valid ",
-                  "date format. Use a ymd format or shorter, ",
-                  "e.g. 2012-11-21, 2012-11 or 2012."))
+        stop(glue(
+          "The given {date_name}, {date_time}, is not in a valid ",
+          "date format. Use a ymd format or shorter, ",
+          "e.g. 2012-11-21, 2012-11 or 2012."
+        ))
       } else {
-        stop(glue("The given {date_name}, {date_time} can not be interpreted ",
-                  "as a valid date."))
-      } })
+        stop(glue(
+          "The given {date_name}, {date_time} can not be interpreted ",
+          "as a valid date."
+        ))
+      }
+    }
+  )
   as.character(parsed)
 }
