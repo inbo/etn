@@ -93,9 +93,9 @@ For example, selecting only the columns `serial_number`, `receiver` and `status`
 
 ```{r}
 ws_receivers %>% 
-  select(serial_number, receiver, status) %>%
   head(10) %>%  # print 10 first
   knitr::kable() 
+  select(receiver_id_serial_number, receiver_id, status) %>%
 ```
 
 ### Deployments overview
