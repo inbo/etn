@@ -2,7 +2,7 @@ pandoc: 2.3.1
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  access-etn-data: access-etn-data.html
+  etn: etn.html
 urls:
   reference: https://inbo.github.io/etn/reference
   article: https://inbo.github.io/etn/articles

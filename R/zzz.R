@@ -1,9 +1,8 @@
+# SUPPORT FUNCTIONS
 
-MAX_PRINT <- 20
-
-#' Support function to check the validity of the database connection
+#' Check the validity of the database connection
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #'
 #' @keywords internal
 #'
@@ -11,13 +10,18 @@ MAX_PRINT <- 20
 #'
 #' @importFrom methods is
 #'
-check_connection  <- function(connection) {
+#' @keywords internal
+check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
-              msg = "Not a connection object to database.")
+              msg = "Not a connection object to database."
+  )
   assert_that(connection@info$dbname == "ETN")
 }
 
-#' Valid input is either NULL or option of list
+#' Check input value against list of provided values
+#'
+#' Will return error message if an input value cannot be found in list of provided
+#' values. NULL values are allowed.
 #'
 #' @param arg The input argument provided by the user.
 #' @param options A vector of valid inputs for the argument.
@@ -32,57 +36,49 @@ check_connection  <- function(connection) {
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
 #'
+#' @keywords internal
+#'
 #' @examples
 #' \dontrun{
+#' # Valid inputs for project_type
+#' check_value("animal", c("animal", "network"), "project_type")
+#' check_value(NULL, c("animal", "network"), "project_type")
+#' check_value(c("animal", "network"), c("animal", "network"), "project_type")
+#'
 #' # Invalid inputs for project_type
-#' check_null_or_value("ddsf", c("animal", "network"), "project_type")
-#' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
-#'
-#' #Valid inputs for project_type
-#' check_null_or_value("animal", c("animal", "network"), "project_type")
-#' check_null_or_value(NULL, c("animal", "network"), "project_type")
-#' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
-#'
-#'
-#' # check network projects
-#' valid_network_projects <- get_projects(connection = con,
-#'                                        project_type = "network") %>%
-#'                                        pull("projectcode")
-#' check_null_or_value(c("thornton", "leopold"),
-#'                     valid_network_projects, "network_project")
-#' # check animal projects
-#' valid_animal_projects <- get_projects(connection = con,
-#'                                       project_type = "animal") %>%
-#'                                       pull("projectcode")
-#' check_null_or_value(c("2012_leopoldkanaal", "phd_reubens"),
-#'                     valid_animal_projects, "animal_project")
+#' check_value("ddsf", c("animal", "network"), "project_type")
 #' }
-check_null_or_value <- function(arg, options = NULL, arg_name) {
-  # dropna
+check_value <- function(arg, options = NULL, arg_name) {
+  max_print <- 20
+
+  # Drop NA
   options <- options[!is.na(options)]
 
-  # suppress too long messages
-  if (length(options) > MAX_PRINT) {
-    options_to_print <- c(options[1:MAX_PRINT], "others..")
+  # Suppress long messages
+  if (length(options) > max_print) {
+    options_to_print <- c(options[1:max_print], "others..")
   } else {
     options_to_print <- options
   }
-  # provide user message
+  # Provide user message
   if (!is.null(arg)) {
-    assert_that(all(arg %in% options),
-        msg = glue("Not valid input value(s) for {arg_name} input argument.
-                    Valid inputs are: {options_to_print*}.",
-                   .transformer = collapse_transformer(sep = ", ",
-                                                       last = " and ")
-                   )
+    assert_that(
+      all(arg %in% options),
+      msg = glue(
+        "Not valid input value(s) for {arg_name} input argument.
+        Valid inputs are: {options_to_print*}.",
+        .transformer = collapse_transformer(
+          sep = ", ",
+          last = " and "
         )
+      )
+    )
   } else {
     TRUE
   }
 }
 
-
-#' Support function for printing option help message
+#' Print list of options
 #'
 #' @param regex A regular expression to parse
 #' @param ... Additional arguments passed to the collapse
@@ -92,6 +88,8 @@ check_null_or_value <- function(arg, options = NULL, arg_name) {
 #' @noRd
 #'
 #' @importFrom glue glue_collapse
+#'
+#' @keywords internal
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
@@ -104,40 +102,44 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 
 #' Check if the string input can be converted to a date
 #'
-#' Returns FALSE or the cleaned character version of the date.
-#' (acknowledgments to micstr/isdate.R)
+#' Returns FALSE or the cleaned character version of the date
+#' (acknowledgments to micstr/isdate.R).
 #'
-#' @param datetime A character representation of a date.
-#' @param date_name Informative description to user about type of date
+#' @param date_time A character representation of a date.
+#' @param date_name Informative description to user about type of date.
 #'
 #' @return FALSE | character
-#'
-#' @keywords internal
-#'
-#' @noRd
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time
 #'
+#' @keywords internal
+#'
 #' @examples
 #' \dontrun{
-#' check_datetime("1985-11-21")
-#' check_datetime("1985-11")
-#' check_datetime("1985")
-#' check_datetime("1985-04-31")  # invalid date
-#' check_datetime("01-03-1973")  # invalid format
+#' check_date_time("1985-11-21")
+#' check_date_time("1985-11")
+#' check_date_time("1985")
+#' check_date_time("1985-04-31") # invalid date
+#' check_date_time("01-03-1973") # invalid format
 #' }
-check_datetime <- function(datetime, date_name = "start_date") {
+check_date_time <- function(date_time, date_name = "start_date") {
   parsed <- tryCatch(
-    parse_date_time(datetime, orders = c("ymd", "ym", "y")),
+    parse_date_time(date_time, orders = c("ymd", "ym", "y")),
     warning = function(warning) {
       if (grepl("No formats found", warning$message)) {
-        stop(glue("The given {date_name}, {datetime}, is not in a valid ",
-                  "date format. Use a ymd format or shorter, ",
-                  "e.g. 2012-11-21, 2012-11 or 2012."))
+        stop(glue(
+          "The given {date_name}, {date_time}, is not in a valid ",
+          "date format. Use a ymd format or shorter, ",
+          "e.g. 2012-11-21, 2012-11 or 2012."
+        ))
       } else {
-        stop(glue("The given {date_name}, {datetime} can not be interpreted ",
-                  "as a valid date."))
-      } })
+        stop(glue(
+          "The given {date_name}, {date_time} can not be interpreted ",
+          "as a valid date."
+        ))
+      }
+    }
+  )
   as.character(parsed)
 }

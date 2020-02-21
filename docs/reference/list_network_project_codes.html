@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get transmitter metadata — get_transmitters • etn</title>
+<title>List all available network project codes — list_network_project_codes • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,8 @@
 
 
 
-<meta property="og:title" content="Get transmitter metadata — get_transmitters" />
-<meta property="og:description" content="Get the metadata about the transmitter tags. At the moment, only transmitters
-that can be linked to a projectcode are returned to the user. By default,
-only animal tags are returned." />
+<meta property="og:title" content="List all available network project codes — list_network_project_codes" />
+<meta property="og:description" content="List all available network project codes" />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -79,7 +77,7 @@ only animal tags are returned." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
       </span>
     </div>
 
@@ -92,19 +90,10 @@ only animal tags are returned." />
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/etn.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/access-etn-data.html">Access ETN data using the etn R package</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -127,66 +116,36 @@ only animal tags are returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get transmitter metadata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_transmitters.R'><code>R/get_transmitters.R</code></a></small>
-    <div class="hidden name"><code>get_transmitters.Rd</code></div>
+    <h1>List all available network project codes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_network_project_codes.R'><code>R/list_network_project_codes.R</code></a></small>
+    <div class="hidden name"><code>list_network_project_codes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the metadata about the transmitter tags. At the moment, only transmitters
-that can be linked to a projectcode are returned to the user. By default,
-only animal tags are returned.</p>
+    <p>List all available network project codes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_transmitters</span>(
-  <span class='no'>connection</span>,
-  <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>include_reference_tags</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>list_network_project_codes</span>(<span class='no'>connection</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection with the ETN database.</p></td>
-    </tr>
-    <tr>
-      <th>animal_project</th>
-      <td><p>(string) One or more animal projects.</p></td>
-    </tr>
-    <tr>
-      <th>include_reference_tags</th>
-      <td><p>(logical) Include reference tags (not-animal
-tags). Default: FALSE.</p></td>
+      <td><p>A valid connection to the ETN database.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame).</p>
+    <p>A vector of all unique <code>project_code</code> of <code>type="network"</code> present in <code>projects</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
-
-<span class='co'># Get the metadata of all transmitter animal tags</span>
-<span class='fu'>get_transmitters</span>(<span class='no'>con</span>)
-
-<span class='co'># Get the metadata of all transmitter tags</span>
-<span class='fu'>get_transmitters</span>(<span class='no'>con</span>, <span class='kw'>include_reference_tags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Get the metadata of the tags linked to specific project(s)</span>
-<span class='fu'>get_transmitters</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>)
-<span class='fu'>get_transmitters</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"phd_reubens"</span>, <span class='st'>"2012_leopoldkanaal"</span>))
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -195,7 +154,7 @@ tags). Default: FALSE.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>.</p>
+  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/peterdesmet'>Peter Desmet</a>.</p>
 </div>
 
 <div class="pkgdown">

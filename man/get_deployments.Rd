@@ -2,51 +2,49 @@
 % Please edit documentation in R/get_deployments.R
 \name{get_deployments}
 \alias{get_deployments}
-\title{Get deployments data}
+\title{Get deployment metadata}
 \usage{
 get_deployments(
   connection,
-  network_project = NULL,
+  network_project_code = NULL,
   receiver_status = NULL,
   open_only = TRUE
 )
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
-\item{network_project}{(string) One or more network projects.}
+\item{network_project_code}{(string) One or more network projects.}
 
 \item{receiver_status}{(string) One or more receiver status.}
 
-\item{open_only}{(logical) Default TRUE, returning only those deployments
-that are currently open (i.e. no end date defined). If FALSE, all deployments
-are returned.}
+\item{open_only}{(logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
+\code{TRUE}.}
 }
 \value{
 A tibble (tidyverse data.frame).
 }
 \description{
-Get all or specific, filtered by network project and/or the status of the
-receiver, deployments data.
+Get metadata for deployments, with options to filter on network project,
+receiver status and/or open deployments.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# All open deployments
+# Get all open deployments
 get_deployments(con)
 
-# All deployments (also deployments with an end date)
+# Get all deployments (including those with an end date)
 get_deployments(con, open_only = FALSE)
 
-# Open deployments of a subset of projects
-get_deployments(con, network_project = c("thornton", "leopold"))
+# Get open deployments from specific network project(s)
+get_deployments(con, network_project_code = c("thornton", "leopold"))
 
-# Open deployments of a subset of receiver status
+# Get open deployments with a specific receiver status
 get_deployments(con, receiver_status = c("Broken", "Lost"))
 
-# Open deployments of a subset of projects and receiver status
-get_deployments(con, network_project = "thornton",
-                receiver_status = "Active")
+# Get open deployments from a specific project from active receivers
+get_deployments(con, network_project_code = "thornton", receiver_status = "Active")
 }
 }

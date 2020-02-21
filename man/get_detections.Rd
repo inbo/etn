@@ -2,84 +2,89 @@
 % Please edit documentation in R/get_detections.R
 \name{get_detections}
 \alias{get_detections}
-\title{Get raw detections data}
+\title{Get detections data}
 \usage{
 get_detections(
   connection,
-  network_project = NULL,
-  animal_project = NULL,
+  network_project_code = NULL,
+  animal_project_code = NULL,
   start_date = NULL,
   end_date = NULL,
-  deployment_station_name = NULL,
-  transmitter = NULL,
-  receiver = NULL,
+  station_name = NULL,
+  tag_id = NULL,
+  receiver_id = NULL,
   scientific_name = NULL,
   limit = NULL
 )
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
-\item{network_project}{(character) One or more network projects.}
+\item{network_project_code}{(character) One or more network projects.}
 
-\item{animal_project}{(character) One or more animal projects.}
+\item{animal_project_code}{(character) One or more animal projects.}
 
 \item{start_date}{(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-as well.}
+selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+well.}
 
 \item{end_date}{(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-as well.}
+selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+well.}
 
-\item{deployment_station_name}{(character) One or more deployment station
-names.}
+\item{station_name}{(character) One or more deployment station names.}
 
-\item{transmitter}{(character) One or more transmitter identifiers, also
-referred to as `tag_code_space` identifiers}
+\item{tag_id}{(character) One or more tag identifiers.}
 
-\item{receiver}{(character) One or more receiver identifiers.}
+\item{receiver_id}{(character) One or more receiver identifiers.}
 
 \item{scientific_name}{(character) One or more scientific names.}
 
-\item{limit}{(integer) Limit the number of records to download. If NULL, all
-records are downloaded.}
+\item{limit}{(integer) The number of records to return (useful for testing
+purposes).}
 }
 \value{
 A tibble (tidyverse data.frame).
 }
 \description{
-Get the raw detections data, with optional filters for the project, the
-start- and enddate, the deployment station name and the transmitter/tag
-identifier. Use the \code{limit} option to limit the data size.
+Get detections data, with options to filter on animal project, network
+project, start- and enddate, deployment station name and/or tag identifier.
+Use \code{limit} to limit the number of returned records
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get detection data filtered by the start year
+# Get detections filtered by start year and limited to 100 records
 get_detections(con, start_date = "2017", limit = 100)
 
-# Get detection data within time frame for specific animal project and
+# Get detections within a time frame for a specific animal project and
 # network project
-get_detections(con, animal_project = "phd_reubens",
-               network_project = "thornton", start_date = "2011-01-28",
-               end_date = "2011-02-01")
+get_detections(con,
+  animal_project_code = "phd_reubens",
+  network_project_code = "thornton", start_date = "2011-01-28",
+  end_date = "2011-02-01"
+)
 
-# Get detection data for specific animal project and station names and a
-# limit about the number of returned records
-get_detections(con, animal_project = "phd_reubens",
-               deployment_station_name = c("R03", "R05"), limit = 100)
+# Get detections for a specific animal project at specific stations
+get_detections(con,
+  animal_project_code = "phd_reubens",
+  station_name = c("R03", "R05")
+)
 
-# Get detection data for specific transmitter
-get_detections(con, transmitter = "A69-1303-65302")
+# Get detectios for a specific tag
+get_detections(con, tag_id = "A69-1303-65302")
 
-# Get detection data for specific receiver during specific time period
-get_detections(con, receiver = "VR2W-122360", start_date = "2015-12-03",
-               end_date = "2015-12-05")
-# Get detection data for a specific species during a given period
-get_detections(con, scientific_name = "Anguilla anguilla",
-               start_date = "2015-12-03",
-               end_date = "2015-12-05")
+# Get detections for a specific receiver during a specific time period
+get_detections(con,
+  receiver_id = "VR2W-122360", start_date = "2015-12-03",
+  end_date = "2015-12-05"
+)
+# Get detections for a specific species during a given period
+get_detections(con,
+  scientific_name = "Anguilla anguilla",
+  start_date = "2015-12-03",
+  end_date = "2015-12-05"
+)
 }
 }

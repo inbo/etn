@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get raw detections data — get_detections • etn</title>
+<title>Get detections data — get_detections • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,10 @@
 
 
 
-<meta property="og:title" content="Get raw detections data — get_detections" />
-<meta property="og:description" content="Get the raw detections data, with optional filters for the project, the
-start- and enddate, the deployment station name and the transmitter/tag
-identifier. Use the limit option to limit the data size." />
+<meta property="og:title" content="Get detections data — get_detections" />
+<meta property="og:description" content="Get detections data, with options to filter on animal project, network
+project, start- and enddate, deployment station name and/or tag identifier.
+Use limit to limit the number of returned records" />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -79,7 +79,7 @@ identifier. Use the limit option to limit the data size." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
       </span>
     </div>
 
@@ -92,19 +92,10 @@ identifier. Use the limit option to limit the data size." />
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/etn.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/access-etn-data.html">Access ETN data using the etn R package</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -127,26 +118,26 @@ identifier. Use the limit option to limit the data size." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get raw detections data</h1>
+    <h1>Get detections data</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_detections.R'><code>R/get_detections.R</code></a></small>
     <div class="hidden name"><code>get_detections.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the raw detections data, with optional filters for the project, the
-start- and enddate, the deployment station name and the transmitter/tag
-identifier. Use the <code>limit</code> option to limit the data size.</p>
+    <p>Get detections data, with options to filter on animal project, network
+project, start- and enddate, deployment station name and/or tag identifier.
+Use <code>limit</code> to limit the number of returned records</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_detections</span>(
   <span class='no'>connection</span>,
-  <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -156,40 +147,38 @@ identifier. Use the <code>limit</code> option to limit the data size.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection with the ETN database.</p></td>
+      <td><p>A valid connection to the ETN database.</p></td>
     </tr>
     <tr>
-      <th>network_project</th>
+      <th>network_project_code</th>
       <td><p>(character) One or more network projects.</p></td>
     </tr>
     <tr>
-      <th>animal_project</th>
+      <th>animal_project_code</th>
       <td><p>(character) One or more animal projects.</p></td>
     </tr>
     <tr>
       <th>start_date</th>
       <td><p>(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-as well.</p></td>
+selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+well.</p></td>
     </tr>
     <tr>
       <th>end_date</th>
       <td><p>(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-definition on month (e.g. 2018-03) or year (e.g. 2018) level are supported
-as well.</p></td>
+selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
+well.</p></td>
     </tr>
     <tr>
-      <th>deployment_station_name</th>
-      <td><p>(character) One or more deployment station
-names.</p></td>
+      <th>station_name</th>
+      <td><p>(character) One or more deployment station names.</p></td>
     </tr>
     <tr>
-      <th>transmitter</th>
-      <td><p>(character) One or more transmitter identifiers, also
-referred to as `tag_code_space` identifiers</p></td>
+      <th>tag_id</th>
+      <td><p>(character) One or more tag identifiers.</p></td>
     </tr>
     <tr>
-      <th>receiver</th>
+      <th>receiver_id</th>
       <td><p>(character) One or more receiver identifiers.</p></td>
     </tr>
     <tr>
@@ -198,8 +187,8 @@ referred to as `tag_code_space` identifiers</p></td>
     </tr>
     <tr>
       <th>limit</th>
-      <td><p>(integer) Limit the number of records to download. If NULL, all
-records are downloaded.</p></td>
+      <td><p>(integer) The number of records to return (useful for testing
+purposes).</p></td>
     </tr>
     </table>
 
@@ -211,30 +200,37 @@ records are downloaded.</p></td>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># Get detection data filtered by the start year</span>
+<span class='co'># Get detections filtered by start year and limited to 100 records</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 
-<span class='co'># Get detection data within time frame for specific animal project and</span>
+<span class='co'># Get detections within a time frame for a specific animal project and</span>
 <span class='co'># network project</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
-               <span class='kw'>network_project</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2011-01-28"</span>,
-               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>)
+<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
+  <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2011-01-28"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>
+)
 
-<span class='co'># Get detection data for specific animal project and station names and a</span>
-<span class='co'># limit about the number of returned records</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>animal_project</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
-               <span class='kw'>deployment_station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R03"</span>, <span class='st'>"R05"</span>), <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='co'># Get detections for a specific animal project at specific stations</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
+  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R03"</span>, <span class='st'>"R05"</span>)
+)
 
-<span class='co'># Get detection data for specific transmitter</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>transmitter</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>)
+<span class='co'># Get detectios for a specific tag</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>)
 
-<span class='co'># Get detection data for specific receiver during specific time period</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>receiver</span> <span class='kw'>=</span> <span class='st'>"VR2W-122360"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
-               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>)
-<span class='co'># Get detection data for a specific species during a given period</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Anguilla anguilla"</span>,
-               <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
-               <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>)
+<span class='co'># Get detections for a specific receiver during a specific time period</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-122360"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>
+)
+<span class='co'># Get detections for a specific species during a given period</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+  <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Anguilla anguilla"</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>
+)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -251,7 +247,7 @@ records are downloaded.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>.</p>
+  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/peterdesmet'>Peter Desmet</a>.</p>
 </div>
 
 <div class="pkgdown">

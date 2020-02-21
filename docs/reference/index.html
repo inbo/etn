@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
       </span>
     </div>
 
@@ -89,19 +89,10 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/etn.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/access-etn-data.html">Access ETN data using the etn R package</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -147,14 +138,13 @@
         <td>
           <p><code><a href="connect_to_etn.html">connect_to_etn()</a></code> </p>
         </td>
-        <td><p>Provide connection to the database using user credentials username and
-password.</p></td>
+        <td><p>Connect to the database using username and password.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-main-metadata-access-functionalities" class="hasAnchor"><a href="#section-main-metadata-access-functionalities" class="anchor"></a>Main metadata access functionalities</h2>
-          <p class="section-desc"><p>Get access to metadata</p></p>
+          <h2 id="section-get-metadata" class="hasAnchor"><a href="#section-get-metadata" class="anchor"></a>Get metadata</h2>
+          <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
@@ -162,37 +152,37 @@ password.</p></td>
         <td>
           <p><code><a href="get_projects.html">get_projects()</a></code> </p>
         </td>
-        <td><p>Get project overview</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_receivers.html">get_receivers()</a></code> </p>
-        </td>
-        <td><p>Get receiver data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_deployments.html">get_deployments()</a></code> </p>
-        </td>
-        <td><p>Get deployments data</p></td>
+        <td><p>Get project metadata</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_animals.html">get_animals()</a></code> </p>
         </td>
-        <td><p>Get animals data</p></td>
+        <td><p>Get animal metadata</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_transmitters.html">get_transmitters()</a></code> </p>
+          <p><code><a href="get_tags.html">get_tags()</a></code> </p>
         </td>
-        <td><p>Get transmitter metadata</p></td>
+        <td><p>Get tag metadata</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_deployments.html">get_deployments()</a></code> </p>
+        </td>
+        <td><p>Get deployment metadata</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_receivers.html">get_receivers()</a></code> </p>
+        </td>
+        <td><p>Get receiver metadata</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-main-detection-data-access-functionality" class="hasAnchor"><a href="#section-main-detection-data-access-functionality" class="anchor"></a>Main detection data access functionality</h2>
-          <p class="section-desc"><p>Get access to raw detections data</p></p>
+          <h2 id="section-get-detections-data" class="hasAnchor"><a href="#section-get-detections-data" class="anchor"></a>Get detections data</h2>
+          <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
@@ -200,7 +190,51 @@ password.</p></td>
         <td>
           <p><code><a href="get_detections.html">get_detections()</a></code> </p>
         </td>
-        <td><p>Get raw detections data</p></td>
+        <td><p>Get detections data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-list-parameter-options" class="hasAnchor"><a href="#section-list-parameter-options" class="anchor"></a>List parameter options</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="list_animal_project_codes.html">list_animal_project_codes()</a></code> </p>
+        </td>
+        <td><p>List all available animal project codes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_network_project_codes.html">list_network_project_codes()</a></code> </p>
+        </td>
+        <td><p>List all available network project codes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_receiver_ids.html">list_receiver_ids()</a></code> </p>
+        </td>
+        <td><p>List all available network receiver ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_scientific_names.html">list_scientific_names()</a></code> </p>
+        </td>
+        <td><p>List all available scientific names</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_station_names.html">list_station_names()</a></code> </p>
+        </td>
+        <td><p>List all available station names</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_tag_ids.html">list_tag_ids()</a></code> </p>
+        </td>
+        <td><p>List all available tag ids</p></td>
       </tr>
     </tbody>
     </table>
@@ -210,8 +244,9 @@ password.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-connect-to-the-database">Connect to the database</a></li>
-      <li><a href="#section-main-metadata-access-functionalities">Main metadata access functionalities</a></li>
-      <li><a href="#section-main-detection-data-access-functionality">Main detection data access functionality</a></li>
+      <li><a href="#section-get-metadata">Get metadata</a></li>
+      <li><a href="#section-get-detections-data">Get detections data</a></li>
+      <li><a href="#section-list-parameter-options">List parameter options</a></li>
     </ul>
   </div>
 </div>
@@ -219,7 +254,7 @@ password.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>.</p>
+  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/peterdesmet'>Peter Desmet</a>.</p>
 </div>
 
 <div class="pkgdown">

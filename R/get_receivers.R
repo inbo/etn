@@ -1,9 +1,9 @@
-#' Get receiver data
+#' Get receiver metadata
 #'
-#' Get all or specific, filtered on network project, receiver data.
+#' Get metadata for receivers, with option to filter on network project.
 #'
-#' @param connection A valid connection with the ETN database.
-#' @param network_project (string) One or more network projects.
+#' @param connection A valid connection to the ETN database.
+#' @param network_project_code (string) One or more network projects.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -19,52 +19,45 @@
 #' \dontrun{
 #' con <- connect_to_etn(your_username, your_password)
 #'
-#' # Get all receivers data
+#' # Get all receivers
 #' get_receivers(con)
 #'
-#' # Get receivers data filtered on a single network project
-#' get_receivers(con, network_project = "thornton")
-#'
-#' # Get receivers data filtered on a multiple network projects
-#' get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
+#' # Get receivers linked to specific network project(s)
+#' get_receivers(con, network_project_code = "thornton")
+#' get_receivers(con, network_project_code = c("thornton", "2012_leopoldkanaal"))
 #' }
 get_receivers <- function(connection,
-                          network_project = NULL) {
+                          network_project_code = NULL) {
+  # Check connection
   check_connection(connection)
 
-  # valid inputs on animal projects
-  valid_network_projects <-
-    get_projects(connection, project_type = "network") %>%
-    pull(.data$projectcode)
-  check_null_or_value(network_project,  valid_network_projects,
-                      "network_project")
-  if (is.null(network_project)) {
-    network_project = valid_network_projects
+  # Check network_project_code
+  if (is.null(network_project_code)) {
+    network_project_code_query <- "True"
+  } else {
+    valid_network_project_codes <- list_network_project_codes(connection)
+    check_value(network_project_code, valid_network_project_codes, "network_project_code")
+    network_project_code_query <- glue_sql("network_project_code IN ({network_project_code*})", .con = connection)
   }
 
-  receivers_query <- glue_sql("
-      SELECT DISTINCT receivers.* ,
-        deployments.projectcode,
-        etn_group.name as owner_organisation
-      FROM vliz.receivers
-        JOIN vliz.deployments_view deployments ON (receivers.id_pk = deployments.receiver_fk)
-        JOIN vliz.etn_group AS etn_group ON (receivers.owner_group_fk = etn_group.id_pk)
-      WHERE projectcode IN ({project*})",
-                              project = network_project,
-                              .con = connection
-  )
-  receivers <- dbGetQuery(connection, receivers_query)
+  # Build query
+  query <- glue_sql("
+    SELECT *
+    FROM vliz.receivers_view2
+    WHERE
+      {network_project_code_query}
+    ", .con = connection)
+  receivers <- dbGetQuery(connection, query)
 
-  # we still have multiple records of receivers, as project codes are coupled to
+  # We still have multiple records of receivers, as project codes are coupled to
   # deployments and a receiver can have multiple deployments aka projects.
   # combine the individual network projects in a single row:
-  receivers %>%
-    group_by(.data$id_pk) %>%
-    mutate(projectcode = paste(.data$projectcode, collapse = ",")) %>%
-    rename(network_projectcode = .data$projectcode) %>%
-    ungroup() %>%
-    distinct()
+  # receivers %>%
+  #   group_by(.data$id_pk) %>%
+  #   mutate(projectcode = paste(.data$projectcode, collapse = ",")) %>%
+  #   rename(network_project_codecode = .data$projectcode) %>%
+  #   ungroup() %>%
+  #   distinct()
 
   as_tibble(receivers)
-
 }

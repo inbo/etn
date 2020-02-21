@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_projects.R
 \name{get_projects}
 \alias{get_projects}
-\title{Get project overview}
+\title{Get project metadata}
 \usage{
 get_projects(connection, project_type = NULL)
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
 \item{project_type}{(string) Either \code{animal} or \code{network}.}
 }
@@ -15,19 +15,20 @@ get_projects(connection, project_type = NULL)
 A tibble (tidyverse data.frame).
 }
 \description{
-Get an overview of the projects available on ETN database.
+Get metadata for projects, with option to filter on animal or network
+projects.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get a list of all projects
+# Get all projects
 get_projects(con)
 
-# Get a list of all animal projects
+# Get all animal projects
 get_projects(con, project_type = "animal")
 
-# Get a list of all network projects
+# Get all network projects
 get_projects(con, project_type = "network")
 }
 }

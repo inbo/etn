@@ -2,14 +2,14 @@
 % Please edit documentation in R/get_animals.R
 \name{get_animals}
 \alias{get_animals}
-\title{Get animals data}
+\title{Get animal metadata}
 \usage{
-get_animals(connection, animal_project = NULL, scientific_name = NULL)
+get_animals(connection, animal_project_code = NULL, scientific_name = NULL)
 }
 \arguments{
-\item{connection}{A valid connection to ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 
-\item{animal_project}{(string) One or more animal projects.}
+\item{animal_project_code}{(string) One or more animal projects.}
 
 \item{scientific_name}{(string) One or more scientific names.}
 }
@@ -17,29 +17,24 @@ get_animals(connection, animal_project = NULL, scientific_name = NULL)
 A tibble (tidyverse data.frame).
 }
 \description{
-Get all or a subset of animals data. Filter options are the animal project(s)
-and/or the scientific name of the animals.
+Get metadata for animals, with options to filter on animal project and/or
+scientific name.
 }
 \examples{
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# all animals
-animals <- get_animals(con)
+# Get all animals
+get_animals(con)
 
-# all animals of the 2012_leopoldkanaal project
-animals <- get_animals(con, animal_project = "2012_leopoldkanaal")
+# Get animals from specific animal project(s)
+get_animals(con, animal_project_code = "2012_leopoldkanaal")
+get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
 
-# all animals of the 2012_leopoldkanaal and phd_reubens
-get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
+# Get animals of specific species (across all projects)
+get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
 
-# all animals of all projects with given scientific name
-animals <- get_animals(con,
-                       scientific_name = c("Gadus morhua",
-                                           "Sentinel"))
-
-# all animals of the phd_reubens project with given scientific name
-animals <- get_animals(con, animal_project = "phd_reubens",
-                       scientific_name = "Gadus morhua")
+# Get animals of a specific species from a specific project
+get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
 }
 }

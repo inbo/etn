@@ -23,15 +23,16 @@ reference:
   - title: "Connect to the database"
     contents:
       - connect_to_etn
-  - title: "Main metadata access functionalities"
-    desc: "Get access to metadata"
+  - title: "Get metadata"
     contents:
       - get_projects
-      - get_receivers
-      - get_deployments
       - get_animals
-      - get_transmitters
-  - title: "Main detection data access functionality"
-    desc: "Get access to raw detections data"
+      - get_tags
+      - get_deployments
+      - get_receivers
+  - title: "Get detections data"
     contents:
       - get_detections
+  - title: "List parameter options"
+    contents:
+      - starts_with("list_")

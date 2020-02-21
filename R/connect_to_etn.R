@@ -1,23 +1,22 @@
-#' Provide connection to the database using user credentials username and
-#' password.
+#' Connect to the database using username and password.
 #'
-#' @param username (character) Username to use for the  connection.
+#' @param username (character) Username to use for the connection.
 #' @param password (character) Password to use for the connection.
 #'
-#' @return conn ODBC connection to ETN database.
+#' @return con ODBC connection to ETN database.
 #'
 #' @export
 #'
 #' @importFrom DBI dbConnect
 #' @importFrom odbc odbc
-connect_to_etn <-function(username, password) {
-  conn <- DBI::dbConnect(odbc::odbc(), ETN_ODBC_DSN,
-                    UID = paste("", tolower(username), "", sep = ""),
-                    PWD = paste("", password, "", sep = ""))
-  return(conn)
-}
+connect_to_etn <- function(username, password) {
+  ETN_ODBC_DSN <- "ETN"
+  # ETN_SERVER <- "dppg.vliz.be"
+  # ETN_DBNAME <- "ETN"
 
-#' ETN database informations
-ETN_SERVER<-"dppg.vliz.be"
-ETN_ODBC_DSN<-"ETN"
-ETN_DBNAME<-"ETN"
+  con <- DBI::dbConnect(odbc::odbc(), ETN_ODBC_DSN,
+    UID = paste("", tolower(username), "", sep = ""),
+    PWD = paste("", password, "", sep = "")
+  )
+  return(con)
+}
