@@ -33,6 +33,6 @@ reference:
   - title: "Get detections data"
     contents:
       - get_detections
-  - title: "List available parameter options"
+  - title: "List parameter options"
     contents:
       - starts_with("list_")
