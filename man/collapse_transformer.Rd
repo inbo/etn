@@ -14,3 +14,4 @@ collapse_transformer(regex = "[*]$", ...)
 \description{
 Print list of options
 }
+\keyword{internal}

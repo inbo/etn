@@ -31,3 +31,4 @@ check_value(c("animal", "network"), c("animal", "network"), "project_type")
 check_value("ddsf", c("animal", "network"), "project_type")
 }
 }
+\keyword{internal}

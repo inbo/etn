@@ -6,6 +6,7 @@
 #'
 #' @importFrom methods is
 #'
+#' @keywords internal
 check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
               msg = "Not a connection object to database."
@@ -26,6 +27,8 @@ check_connection <- function(connection) {
 #'
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
+#'
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -73,6 +76,8 @@ check_value <- function(arg, options = NULL, arg_name) {
 #' @param ... Additional arguments passed to the collapse
 #'
 #' @importFrom glue glue_collapse
+#'
+#' @keywords internal
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
@@ -95,6 +100,8 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time
+#'
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -125,23 +132,6 @@ check_date_time <- function(date_time, date_name = "start_date") {
   as.character(parsed)
 }
 
-#' Get list of unique available network_project_code
-#'
-#' @param connection A valid connection to the ETN database.
-#'
-#' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#'
-#' @return A vector of all network_project_code present in vliz.projects.
-network_projects <- function(connection) {
-  query <- glue_sql("SELECT DISTINCT projectcode FROM vliz.projects WHERE type = 'network'",
-                    .con = connection)
-  data <- dbGetQuery(connection, query)
-  data$projectcode
-}
-
 #' Get list of unique available animal_project_code
 #'
 #' @param connection A valid connection to the ETN database.
@@ -159,7 +149,7 @@ animal_projects <- function(connection) {
   data$projectcode
 }
 
-#' Get list of unique available station_name
+#' Get list of unique available network_project_code
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -168,12 +158,29 @@ animal_projects <- function(connection) {
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all station_name present in vliz.deployments_view2.
-station_names <- function(connection) {
-  query <- glue_sql("SELECT DISTINCT station_name FROM vliz.deployments_view2",
+#' @return A vector of all network_project_code present in vliz.projects.
+network_projects <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT projectcode FROM vliz.projects WHERE type = 'network'",
                     .con = connection)
   data <- dbGetQuery(connection, query)
-  data$station_name
+  data$projectcode
+}
+
+#' Get list of unique available scientific_name
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all scientific_name present in vliz.animals_view2.
+scientific_names <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT scientific_name FROM vliz.animals_view2",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$scientific_name
 }
 
 #' Get list of unique available tag_id
@@ -210,7 +217,7 @@ receiver_ids <- function(connection) {
   data$receiver_id
 }
 
-#' Get list of unique available scientific_name
+#' Get list of unique available station_name
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -219,10 +226,10 @@ receiver_ids <- function(connection) {
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all scientific_name present in vliz.animals_view2.
-scientific_names <- function(connection) {
-  query <- glue_sql("SELECT DISTINCT scientific_name FROM vliz.animals_view2",
+#' @return A vector of all station_name present in vliz.deployments_view2.
+station_names <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT station_name FROM vliz.deployments_view2",
                     .con = connection)
   data <- dbGetQuery(connection, query)
-  data$scientific_name
+  data$station_name
 }

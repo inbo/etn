@@ -27,3 +27,4 @@ check_date_time("1985-04-31") # invalid date
 check_date_time("01-03-1973") # invalid format
 }
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ check_connection(connection)
 \description{
 Check the validity of the database connection
 }
+\keyword{internal}
