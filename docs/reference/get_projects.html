@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get project overview — get_projects • etn</title>
+<title>Get project metadata — get_projects • etn</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -35,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Get project overview — get_projects" />
-<meta property="og:description" content="Get an overview of the projects available on ETN database." />
+<meta property="og:title" content="Get project metadata — get_projects" />
+<meta property="og:description" content="Get metadata for projects, with option to filter on animal or network
+projects." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -70,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
       </span>
     </div>
 
@@ -83,19 +91,10 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/etn.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/access-etn-data.html">Access ETN data using the etn R package</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -118,13 +117,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get project overview</h1>
+    <h1>Get project metadata</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_projects.R'><code>R/get_projects.R</code></a></small>
     <div class="hidden name"><code>get_projects.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get an overview of the projects available on ETN database.</p>
+    <p>Get metadata for projects, with option to filter on animal or network
+projects.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_projects</span>(<span class='no'>connection</span>, <span class='kw'>project_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -134,7 +134,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection with the ETN database.</p></td>
+      <td><p>A valid connection to the ETN database.</p></td>
     </tr>
     <tr>
       <th>project_type</th>
@@ -150,13 +150,13 @@
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># Get a list of all projects</span>
+<span class='co'># Get all projects</span>
 <span class='fu'>get_projects</span>(<span class='no'>con</span>)
 
-<span class='co'># Get a list of all animal projects</span>
+<span class='co'># Get all animal projects</span>
 <span class='fu'>get_projects</span>(<span class='no'>con</span>, <span class='kw'>project_type</span> <span class='kw'>=</span> <span class='st'>"animal"</span>)
 
-<span class='co'># Get a list of all network projects</span>
+<span class='co'># Get all network projects</span>
 <span class='fu'>get_projects</span>(<span class='no'>con</span>, <span class='kw'>project_type</span> <span class='kw'>=</span> <span class='st'>"network"</span>)
 }</div></pre>
   </div>
@@ -174,7 +174,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>.</p>
+  <p>Developed by <a href='https://twitter.com/damianozingaro'>Damiano Oldoni</a>, <a href='https://twitter.com/SVanHoey'>Stijn Van Hoey</a>, <a href='https://twitter.com/peterdesmet'>Peter Desmet</a>.</p>
 </div>
 
 <div class="pkgdown">
