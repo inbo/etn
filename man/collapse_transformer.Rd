@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{collapse_transformer}
 \alias{collapse_transformer}
-\title{Support function for printing option help message}
+\title{Print list of options}
 \usage{
 collapse_transformer(regex = "[*]$", ...)
 }
@@ -12,5 +12,5 @@ collapse_transformer(regex = "[*]$", ...)
 \item{...}{Additional arguments passed to the collapse}
 }
 \description{
-Support function for printing option help message
+Print list of options
 }

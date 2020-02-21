@@ -1,20 +1,22 @@
+# SUPPORT FUNCTIONS
 
-MAX_PRINT <- 20
-
-#' Support function to check the validity of the database connection
+#' Check the validity of the database connection
 #'
-#' @param connection A valid connection with the ETN database.
+#' @param connection A valid connection to the ETN database.
 #'
 #' @importFrom methods is
 #'
 check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
-    msg = "Not a connection object to database."
+              msg = "Not a connection object to database."
   )
   assert_that(connection@info$dbname == "ETN")
 }
 
-#' Valid input is either NULL or option of list
+#' Check input value against a list of provided values
+#'
+#' Will return error message if an input value cannot be found in list of provided
+#' values. NULL values are allowed.
 #'
 #' @param arg The input argument provided by the user.
 #' @param options A vector of valid inputs for the argument.
@@ -66,7 +68,7 @@ check_value <- function(arg, options = NULL, arg_name) {
 }
 
 
-#' Support function for printing option help message
+#' Print list of options
 #'
 #' @param regex A regular expression to parse
 #' @param ... Additional arguments passed to the collapse
@@ -84,14 +86,13 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 
 #' Check if the string input can be converted to a date
 #'
-#' Returns FALSE or the cleaned character version of the date.
-#' (acknowledgments to micstr/isdate.R)
+#' Returns FALSE or the cleaned character version of the date
+#' (acknowledgments to micstr/isdate.R).
 #'
 #' @param date_time A character representation of a date.
 #' @param date_name Informative description to user about type of date.
 #'
 #' @return FALSE | character
-#'
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time
@@ -123,4 +124,106 @@ check_date_time <- function(date_time, date_name = "start_date") {
     }
   )
   as.character(parsed)
+}
+
+#' Get a list of unique available network_project_code
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all network_project_code present in vliz.projects.
+network_projects <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT projectcode FROM vliz.projects WHERE type = 'network'",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$projectcode
+}
+
+#' Get a list of unique available animal_project_code
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all animal_project_code present in vliz.projects.
+animal_projects <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT projectcode FROM vliz.projects WHERE type = 'animal'",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$projectcode
+}
+
+#' Get a list of unique available station_name
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all station_name present in vliz.deployments_view2.
+station_names <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT station_name FROM vliz.deployments_view2",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$station_name
+}
+
+#' Get a list of unique available tag_id
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all tag_id present in vliz.tags_view2.
+tag_ids <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT tag_id FROM vliz.tags_view2",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$tag_id
+}
+
+#' Get a list of unique available receiver_id
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all receiver_id present in vliz.receivers_view2.
+receiver_ids <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT receiver_id FROM vliz.receivers_view2",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$receiver_id
+}
+
+#' Get a list of unique available scientific_name
+#'
+#' @param connection A valid connection to the ETN database.
+#'
+#' @export
+#'
+#' @importFrom glue glue_sql
+#' @importFrom DBI dbGetQuery
+#'
+#' @return A vector of all scientific_name present in vliz.animals_view2.
+scientific_names <- function(connection) {
+  query <- glue_sql("SELECT DISTINCT scientific_name FROM vliz.animals_view2",
+                    .con = connection)
+  data <- dbGetQuery(connection, query)
+  data$scientific_name
 }

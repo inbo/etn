@@ -2,13 +2,13 @@
 % Please edit documentation in R/zzz.R
 \name{check_connection}
 \alias{check_connection}
-\title{Support function to check the validity of the database connection}
+\title{Check the validity of the database connection}
 \usage{
 check_connection(connection)
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A valid connection to the ETN database.}
 }
 \description{
-Support function to check the validity of the database connection
+Check the validity of the database connection
 }

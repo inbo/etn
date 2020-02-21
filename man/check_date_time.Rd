@@ -15,15 +15,15 @@ check_date_time(date_time, date_name = "start_date")
 FALSE | character
 }
 \description{
-Returns FALSE or the cleaned character version of the date.
-(acknowledgments to micstr/isdate.R)
+Returns FALSE or the cleaned character version of the date
+(acknowledgments to micstr/isdate.R).
 }
 \examples{
 \dontrun{
 check_date_time("1985-11-21")
 check_date_time("1985-11")
 check_date_time("1985")
-check_date_time("1985-04-31")  # invalid date
-check_date_time("01-03-1973")  # invalid format
+check_date_time("1985-04-31") # invalid date
+check_date_time("01-03-1973") # invalid format
 }
 }
