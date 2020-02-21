@@ -27,52 +27,33 @@ check_connection <- function(connection) {
 #'
 #' @examples
 #' \dontrun{
-#' # Invalid inputs for project_type
-#' check_null_or_value("ddsf", c("animal", "network"), "project_type")
-#' check_null_or_value("ddsf", c("animal", "network", "sea"), "project_type")
-#'
 #' # Valid inputs for project_type
-#' check_null_or_value("animal", c("animal", "network"), "project_type")
-#' check_null_or_value(NULL, c("animal", "network"), "project_type")
-#' check_null_or_value(c("animal", "network"), c("animal", "network"), "project_type")
+#' check_value("animal", c("animal", "network"), "project_type")
+#' check_value(NULL, c("animal", "network"), "project_type")
+#' check_value(c("animal", "network"), c("animal", "network"), "project_type")
 #'
-#'
-#' # check network projects
-#' valid_network_projects <- get_projects(
-#'   connection = con,
-#'   project_type = "network"
-#' ) %>%
-#'   pull("projectcode")
-#' check_null_or_value(
-#'   c("thornton", "leopold"),
-#'   valid_network_projects, "network_project"
-#' )
-#' # check animal projects
-#' valid_animal_projects <- get_projects(
-#'   connection = con,
-#'   project_type = "animal"
-#' ) %>%
-#'   pull("projectcode")
-#' check_null_or_value(
-#'   c("2012_leopoldkanaal", "phd_reubens"),
-#'   valid_animal_projects, "animal_project"
-#' )
+#' # Invalid inputs for project_type
+#' check_value("ddsf", c("animal", "network"), "project_type")
 #' }
-check_null_or_value <- function(arg, options = NULL, arg_name) {
-  # dropna
+check_value <- function(arg, options = NULL, arg_name) {
+  max_print <- 20
+
+  # Drop NA
   options <- options[!is.na(options)]
 
-  # suppress too long messages
-  if (length(options) > MAX_PRINT) {
-    options_to_print <- c(options[1:MAX_PRINT], "others..")
+  # Suppress long messages
+  if (length(options) > max_print) {
+    options_to_print <- c(options[1:max_print], "others..")
   } else {
     options_to_print <- options
   }
-  # provide user message
+  # Provide user message
   if (!is.null(arg)) {
-    assert_that(all(arg %in% options),
-      msg = glue("Not valid input value(s) for {arg_name} input argument.
-                    Valid inputs are: {options_to_print*}.",
+    assert_that(
+      all(arg %in% options),
+      msg = glue(
+        "Not valid input value(s) for {arg_name} input argument.
+        Valid inputs are: {options_to_print*}.",
         .transformer = collapse_transformer(
           sep = ", ",
           last = " and "
