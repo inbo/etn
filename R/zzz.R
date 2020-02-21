@@ -4,6 +4,10 @@
 #'
 #' @param connection A valid connection to the ETN database.
 #'
+#' @keywords internal
+#'
+#' @noRd
+#'
 #' @importFrom methods is
 #'
 #' @keywords internal
@@ -24,6 +28,10 @@ check_connection <- function(connection) {
 #' @param arg_name The name of the argument used in the function to test.
 #'
 #' @return If no error, TRUE.
+#'
+#' @keywords internal
+#'
+#' @noRd
 #'
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
@@ -74,6 +82,10 @@ check_value <- function(arg, options = NULL, arg_name) {
 #'
 #' @param regex A regular expression to parse
 #' @param ... Additional arguments passed to the collapse
+#'
+#' @keywords internal
+#'
+#' @noRd
 #'
 #' @importFrom glue glue_collapse
 #'
