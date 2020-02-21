@@ -3,8 +3,8 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-valid_network_projects <- list_network_project_ids(con)
-valid_animal_projects <- list_animal_project_ids(con)
+valid_network_projects <- list_network_project_codes(con)
+valid_animal_projects <- list_animal_project_codes(con)
 
 testthat::test_that("check_value with project_type", {
   expect_error(check_value(

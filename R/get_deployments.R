@@ -49,9 +49,9 @@ get_deployments <- function(connection,
   if (is.null(network_project_code)) {
     network_project_code_query <- "True"
   } else {
-    valid_network_project_codes <- network_project_codes(connection)
+    valid_network_project_codes <- list_network_project_codes(connection)
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
-    network_project_code_query <- glue_sql("deployments.network_project_code_code IN ({network_project_code*})", .con = connection)
+    network_project_code_query <- glue_sql("deployments.network_project_code IN ({network_project_code*})", .con = connection)
   }
 
   # Check receiver_status

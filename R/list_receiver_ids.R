@@ -8,7 +8,7 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @return A vector of all unique `receiver_id` present in `receivers`.
-receiver_ids <- function(connection) {
+list_receiver_ids <- function(connection) {
   query <- glue_sql("SELECT DISTINCT receiver_id FROM vliz.receivers_view2",
     .con = connection
   )

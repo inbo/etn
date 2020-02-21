@@ -44,7 +44,7 @@ get_tags <- function(connection,
   } else {
     valid_animal_project_codes <- list_animal_project_codes(connection)
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql("animal_project_code_code IN ({animal_project_code*})", .con = connection)
+    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
   }
 
   # Build query
