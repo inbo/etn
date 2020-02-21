@@ -14,9 +14,9 @@ expected_col_names_projects <- c(
   "enddate",
   "moratorium",
   "imis_dataset_id",
-  "latitude", "longitude",
   "context_type",
-  "principal_investigator",
+  "latitude",
+  "longitude",
   "telemtry_type"
 )
 
