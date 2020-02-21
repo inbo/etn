@@ -2,9 +2,7 @@
 title: "Access ETN data using the etn R package"
 author: "Stijn Van Hoey"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    df_print: paged
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -42,7 +40,6 @@ In order to access the data, the first step is always to connect with your user 
 ```{r}
 my_con <- connect_to_etn(Sys.getenv("userid"),
                          Sys.getenv("pwd"))
-my_con
 ```
 
 Remark that for this example, we [load the user credentials as environmental variables](http://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables) by saving an `.Renviron` file in the home directory with the username and password stored. Other options are available as well, as explained [here](http://db.rstudio.com/best-practices/managing-credentials/).
