@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^_pkgdown\.yml$
+.Rhistory
 ^docs$
-^contributing\.md$
-^draft$
+^_pkgdown\.yml$
+^pkgdown$
+.gitignore
+.github
