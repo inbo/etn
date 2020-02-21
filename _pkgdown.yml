@@ -23,14 +23,6 @@ reference:
   - title: "Connect to the database"
     contents:
       - connect_to_etn
-  - title: "List available options"
-    contents:
-      - animal_projects
-      - network_projects
-      - scientific_names
-      - tag_ids
-      - receiver_ids
-      - station_names
   - title: "Get metadata"
     contents:
       - get_projects
@@ -41,3 +33,6 @@ reference:
   - title: "Get detections data"
     contents:
       - get_detections
+  - title: "List available parameter options"
+    contents:
+      - starts_with("list_")
