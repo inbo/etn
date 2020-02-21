@@ -6,7 +6,7 @@
 \usage{
 get_deployments(
   connection,
-  network_project = NULL,
+  network_project_code = NULL,
   receiver_status = NULL,
   open_only = TRUE
 )
@@ -14,7 +14,7 @@ get_deployments(
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
-\item{network_project}{(string) One or more network projects.}
+\item{network_project_code}{(string) One or more network projects.}
 
 \item{receiver_status}{(string) One or more receiver status.}
 
@@ -39,12 +39,12 @@ get_deployments(con)
 get_deployments(con, open_only = FALSE)
 
 # Get open deployments from specific network project(s)
-get_deployments(con, network_project = c("thornton", "leopold"))
+get_deployments(con, network_project_code = c("thornton", "leopold"))
 
 # Get open deployments with a specific receiver status
 get_deployments(con, receiver_status = c("Broken", "Lost"))
 
 # Get open deployments from a specific project from active receivers
-get_deployments(con, network_project = "thornton", receiver_status = "Active")
+get_deployments(con, network_project_code = "thornton", receiver_status = "Active")
 }
 }

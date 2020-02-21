@@ -53,13 +53,13 @@ expected_col_names_tags <- c(
 )
 
 tags_all <- get_tags(con)
-tags_project1 <- get_tags(con, animal_project = "phd_reubens")
-tags_projects_multiple <- get_tags(con, animal_project = c(
+tags_project1 <- get_tags(con, animal_project_code = "phd_reubens")
+tags_projects_multiple <- get_tags(con, animal_project_code = c(
   "phd_reubens",
   "2012_leopoldkanaal"
 ))
 tags_project1_ref <- get_tags(con,
-  animal_project = "phd_reubens",
+  animal_project_code = "phd_reubens",
   include_reference_tags = TRUE
 )
 
@@ -68,8 +68,8 @@ testthat::test_that("test_input_get_tags", {
     get_tags("I am not a connection"),
     "Not a connection object to database."
   )
-  expect_error(get_tags(con, animal_project = "very_bad_project"))
-  expect_error(get_tags(con, animal_project = c(
+  expect_error(get_tags(con, animal_project_code = "very_bad_project"))
+  expect_error(get_tags(con, animal_project_code = c(
     "phd_reubens",
     "very_bad_project"
   )))

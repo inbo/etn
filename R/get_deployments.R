@@ -4,7 +4,7 @@
 #' receiver status and/or open deployments.
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param network_project (string) One or more network projects.
+#' @param network_project_code (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
 #' @param open_only (logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
 #'   `TRUE`.
@@ -30,28 +30,28 @@
 #' get_deployments(con, open_only = FALSE)
 #'
 #' # Get open deployments from specific network project(s)
-#' get_deployments(con, network_project = c("thornton", "leopold"))
+#' get_deployments(con, network_project_code = c("thornton", "leopold"))
 #'
 #' # Get open deployments with a specific receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #'
 #' # Get open deployments from a specific project from active receivers
-#' get_deployments(con, network_project = "thornton", receiver_status = "Active")
+#' get_deployments(con, network_project_code = "thornton", receiver_status = "Active")
 #' }
 get_deployments <- function(connection,
-                            network_project = NULL,
+                            network_project_code = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {
   # Check connection
   check_connection(connection)
 
-  # Check network_project
-  if (is.null(network_project)) {
-    network_project_query <- "True"
+  # Check network_project_code
+  if (is.null(network_project_code)) {
+    network_project_code_query <- "True"
   } else {
-    valid_network_projects <- network_projects(connection)
-    check_value(network_project, valid_network_projects, "network_project")
-    network_project_query <- glue_sql("deployments.network_project_code IN ({network_project*})", .con = connection)
+    valid_network_project_codes <- network_project_codes(connection)
+    check_value(network_project_code, valid_network_project_codes, "network_project_code")
+    network_project_code_query <- glue_sql("deployments.network_project_code_code IN ({network_project_code*})", .con = connection)
   }
 
   # Check receiver_status
@@ -71,7 +71,7 @@ get_deployments <- function(connection,
       LEFT JOIN vliz.receivers_view2 AS receivers
       ON deployments.receiver_id = receivers.receiver_id
     WHERE
-      {network_project_query}
+      {network_project_code_query}
       AND {receiver_status_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)

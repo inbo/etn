@@ -44,14 +44,14 @@ station_name <- "R03"
 
 detections_limit5 <- get_detections(con, start_date = start_date, limit = 5)
 detections_start_end <- get_detections(con,
-  animal_project = animal_project,
-  network_project = network_project, start_date = start_date,
+  animal_project_code = animal_project,
+  network_project_code = network_project, start_date = start_date,
   end_date = end_date, limit = limit,
   tag_id = tag_id
 )
 detections_station <- get_detections(con,
-  animal_project = animal_project,
-  network_project = network_project,
+  animal_project_code = animal_project,
+  network_project_code = network_project,
   station_name = station_name,
   limit = limit, tag_id = tag_id
 )
@@ -65,52 +65,52 @@ testthat::test_that("test_input_get_detections", {
     get_detections("I am not a connection"),
     "Not a connection object to database."
   )
-  expect_error(get_detections(con, network_project = "very_bad_project"))
-  expect_error(get_detections(con, network_project = c(
+  expect_error(get_detections(con, network_project_code = "very_bad_project"))
+  expect_error(get_detections(con, network_project_code = c(
     "thornton",
     "very_bad_project"
   )))
   expect_error(get_detections(con,
-    animal_project = "very_bad_project",
-    network_project = "thornton"
+    animal_project_code = "very_bad_project",
+    network_project_code = "thornton"
   ))
   expect_error(get_detections(con,
-    animal_project = c("phd_reubens", "i_am_bad"),
-    network_project = "thornton"
+    animal_project_code = c("phd_reubens", "i_am_bad"),
+    network_project_code = "thornton"
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     start_date = "bad_date"
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     start_date = "2011", end_date = "bad_brrrr"
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     start_date = "2011", end_date = "bad_brrrr"
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     station_name = "no_way"
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     station_name = c("R03", "no_way")
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     tag_id = c("R03", "no_way")
   ))
   expect_error(get_detections(con,
-    animal_project = "phd_reubens",
-    network_project = "thornton",
+    animal_project_code = "phd_reubens",
+    network_project_code = "thornton",
     receiver_id = c("superraar")
   ))
   expect_error(get_detections(con, scientific_name = c("I am not an animal")))
@@ -128,7 +128,7 @@ testthat::test_that("test_output_get_detections", {
   expect_equal(names(detections_limit5), names(detections_start_end))
   expect_equal(names(detections_limit5), names(detections_station))
   expect_equal(names(detections_limit5), names(detections_tag))
-  #  expect_equal(names(detections_limit5), names(detections_receiver))
+  # expect_equal(names(detections_limit5), names(detections_receiver))
   expect_equal(names(detections_limit5), names(detections_name))
   expect_true(detections_limit5 %>%
     select(date_time) %>%

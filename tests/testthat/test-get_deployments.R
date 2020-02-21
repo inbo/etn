@@ -47,15 +47,15 @@ expected_col_names_deployments <- c(
 )
 
 deployments_all <- get_deployments(con)
-deployments_project1 <- get_deployments(con, network_project = "thornton")
-deployments_projects_multiple <- get_deployments(con, network_project = c(
+deployments_project1 <- get_deployments(con, network_project_code = "thornton")
+deployments_projects_multiple <- get_deployments(con, network_project_code = c(
   "thornton",
   "leopold"
 ))
 deployments_status1 <- get_deployments(con, receiver_status = "Broken")
 deployments_status_multiple <- get_deployments(con, receiver_status = c("Broken", "Lost"))
 deployments_project1_openfalse <- get_deployments(con,
-  network_project = "thornton",
+  network_project_code = "thornton",
   open_only = FALSE
 )
 
@@ -64,17 +64,17 @@ testthat::test_that("test_input_get_deployments", {
     get_deployments("I am not a connection"),
     "Not a connection object to database."
   )
-  expect_error(get_deployments(con, network_project = "very_bad_project"))
-  expect_error(get_deployments(con, network_project = c(
+  expect_error(get_deployments(con, network_project_code = "very_bad_project"))
+  expect_error(get_deployments(con, network_project_code = c(
     "thornton",
     "very_bad_project"
   )))
   expect_error(get_deployments(con,
-    network_project = "thornton",
+    network_project_code = "thornton",
     receiver_status = "very_bad_receiver_status"
   ))
   expect_error(get_deployments(con,
-    network_project = "thornton",
+    network_project_code = "thornton",
     receiver_status = c(
       "Broken",
       "very_bad_receiver_status"

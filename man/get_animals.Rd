@@ -4,12 +4,12 @@
 \alias{get_animals}
 \title{Get animal metadata}
 \usage{
-get_animals(connection, animal_project = NULL, scientific_name = NULL)
+get_animals(connection, animal_project_code = NULL, scientific_name = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
-\item{animal_project}{(string) One or more animal projects.}
+\item{animal_project_code}{(string) One or more animal projects.}
 
 \item{scientific_name}{(string) One or more scientific names.}
 }
@@ -28,13 +28,13 @@ con <- connect_to_etn(your_username, your_password)
 get_animals(con)
 
 # Get animals from specific animal project(s)
-get_animals(con, animal_project = "2012_leopoldkanaal")
-get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
+get_animals(con, animal_project_code = "2012_leopoldkanaal")
+get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
 
 # Get animals of specific species (across all projects)
 get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
 
 # Get animals of a specific species from a specific project
-get_animals(con, animal_project = "phd_reubens", scientific_name = "Gadus morhua")
+get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
 }
 }

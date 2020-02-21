@@ -3,7 +3,7 @@
 #' Get metadata for receivers, with option to filter on network project.
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param network_project (string) One or more network projects.
+#' @param network_project_code (string) One or more network projects.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -23,21 +23,21 @@
 #' get_receivers(con)
 #'
 #' # Get receivers linked to specific network project(s)
-#' get_receivers(con, network_project = "thornton")
-#' get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
+#' get_receivers(con, network_project_code = "thornton")
+#' get_receivers(con, network_project_code = c("thornton", "2012_leopoldkanaal"))
 #' }
 get_receivers <- function(connection,
-                          network_project = NULL) {
+                          network_project_code = NULL) {
   # Check connection
   check_connection(connection)
 
-  # Check network_project
-  if (is.null(network_project)) {
-    network_project_query <- "True"
+  # Check network_project_code
+  if (is.null(network_project_code)) {
+    network_project_code_query <- "True"
   } else {
-    valid_network_projects <- network_projects(connection)
-    check_value(network_project, valid_network_projects, "network_project")
-    network_project_query <- glue_sql("network_project_code IN ({network_project*})", .con = connection)
+    valid_network_project_codes <- list_network_project_codes(connection)
+    check_value(network_project_code, valid_network_project_codes, "network_project_code")
+    network_project_code_query <- glue_sql("network_project_code_code IN ({network_project_code*})", .con = connection)
   }
 
   # Build query
@@ -45,7 +45,7 @@ get_receivers <- function(connection,
     SELECT *
     FROM vliz.receivers_view2
     WHERE
-      {network_project_query}
+      {network_project_code_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
 
@@ -55,7 +55,7 @@ get_receivers <- function(connection,
   # receivers %>%
   #   group_by(.data$id_pk) %>%
   #   mutate(projectcode = paste(.data$projectcode, collapse = ",")) %>%
-  #   rename(network_projectcode = .data$projectcode) %>%
+  #   rename(network_project_codecode = .data$projectcode) %>%
   #   ungroup() %>%
   #   distinct()
 

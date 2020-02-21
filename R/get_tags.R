@@ -4,7 +4,7 @@
 #' thus an animal project). By default, reference tags are excluded.
 #'
 #' @param connection A valid connection with the ETN database.
-#' @param animal_project (string) One or more animal projects.
+#' @param animal_project_code (string) One or more animal projects.
 #' @param include_reference_tags (logical) Include reference tags. Default:
 #'   `FALSE`.
 #'
@@ -29,22 +29,22 @@
 #' get_tags(con, include_reference_tags = TRUE)
 #'
 #' # Get tags linked to specific animal project(s)
-#' get_tags(con, animal_project = "phd_reubens")
-#' get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+#' get_tags(con, animal_project_code = "phd_reubens")
+#' get_tags(con, animal_project_code = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
 get_tags <- function(connection,
-                     animal_project = NULL,
+                     animal_project_code = NULL,
                      include_reference_tags = FALSE) {
   # Check connection
   check_connection(connection)
 
-  # Check animal_project
-  if (is.null(animal_project)) {
-    animal_project_query <- "True"
+  # Check animal_project_code
+  if (is.null(animal_project_code)) {
+    animal_project_code_query <- "True"
   } else {
-    valid_animal_projects <- animal_projects(connection)
-    check_value(animal_project, valid_animal_projects, "animal_project")
-    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
+    valid_animal_project_codes <- list_animal_project_codes(connection)
+    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code_query <- glue_sql("animal_project_code_code IN ({animal_project_code*})", .con = connection)
   }
 
   # Build query
@@ -54,7 +54,7 @@ get_tags <- function(connection,
       LEFT JOIN vliz.animals_view2 AS animals
       ON animals.tag_fk = tags.pk
     WHERE
-      {animal_project_query}
+      {animal_project_code_query}
     ", .con = connection)
   tags <- dbGetQuery(connection, query)
 

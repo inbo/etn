@@ -77,12 +77,12 @@ name1 <- "Gadus morhua"
 names_multiple <- c("Gadus morhua", "Sentinel", "Anguilla anguilla")
 
 animals_all <- get_animals(con)
-animals_project1 <- get_animals(con, animal_project = project1)
-animals_project2 <- get_animals(con, animal_project = project2)
-animals_projects_multiple <- get_animals(con, animal_project = projects_multiple)
+animals_project1 <- get_animals(con, animal_project_code = project1)
+animals_project2 <- get_animals(con, animal_project_code = project2)
+animals_projects_multiple <- get_animals(con, animal_project_code = projects_multiple)
 animals_names_multiple <- get_animals(con, scientific_name = names_multiple)
 animals_project1_name1 <- get_animals(con,
-  animal_project = project1,
+  animal_project_code = project1,
   scientific_name = name1
 )
 

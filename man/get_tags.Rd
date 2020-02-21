@@ -4,12 +4,16 @@
 \alias{get_tags}
 \title{Get tag metadata}
 \usage{
-get_tags(connection, animal_project = NULL, include_reference_tags = FALSE)
+get_tags(
+  connection,
+  animal_project_code = NULL,
+  include_reference_tags = FALSE
+)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
 
-\item{animal_project}{(string) One or more animal projects.}
+\item{animal_project_code}{(string) One or more animal projects.}
 
 \item{include_reference_tags}{(logical) Include reference tags. Default:
 \code{FALSE}.}
@@ -32,7 +36,7 @@ get_tags(con)
 get_tags(con, include_reference_tags = TRUE)
 
 # Get tags linked to specific animal project(s)
-get_tags(con, animal_project = "phd_reubens")
-get_tags(con, animal_project = c("phd_reubens", "2012_leopoldkanaal"))
+get_tags(con, animal_project_code = "phd_reubens")
+get_tags(con, animal_project_code = c("phd_reubens", "2012_leopoldkanaal"))
 }
 }

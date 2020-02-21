@@ -4,7 +4,7 @@
 #' scientific name.
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param animal_project (string) One or more animal projects.
+#' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
 #' @return A tibble (tidyverse data.frame).
@@ -24,35 +24,35 @@
 #' get_animals(con)
 #'
 #' # Get animals from specific animal project(s)
-#' get_animals(con, animal_project = "2012_leopoldkanaal")
-#' get_animals(con, animal_project = c("2012_leopoldkanaal", "phd_reubens"))
+#' get_animals(con, animal_project_code = "2012_leopoldkanaal")
+#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
 #'
 #' # Get animals of specific species (across all projects)
 #' get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(con, animal_project = "phd_reubens", scientific_name = "Gadus morhua")
+#' get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection,
-                        animal_project = NULL,
+                        animal_project_code = NULL,
                         scientific_name = NULL) {
   # Check connection
   check_connection(connection)
 
-  # Check animal project
-  if (is.null(animal_project)) {
-    animal_project_query <- "True"
+  # Check animal_project_code
+  if (is.null(animal_project_code)) {
+    animal_project_code_query <- "True"
   } else {
-    valid_animal_projects <- animal_projects(connection)
-    check_value(animal_project, valid_animal_projects, "animal_project")
-    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
+    valid_animal_project_codes <- list_animal_project_codes(connection)
+    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code_query <- glue_sql("animal_project_code_code IN ({animal_project_code*})", .con = connection)
   }
 
   # Check scientific_name
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name_ids <- scientific_names(connection)
+    scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql("scientific_name IN ({scientific_name*})", .con = connection)
   }
@@ -62,7 +62,7 @@ get_animals <- function(connection,
     SELECT *
     FROM vliz.animals_view2
     WHERE
-      {animal_project_query}
+      {animal_project_code_query}
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)

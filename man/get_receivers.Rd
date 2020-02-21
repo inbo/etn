@@ -4,12 +4,12 @@
 \alias{get_receivers}
 \title{Get receiver metadata}
 \usage{
-get_receivers(connection, network_project = NULL)
+get_receivers(connection, network_project_code = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
-\item{network_project}{(string) One or more network projects.}
+\item{network_project_code}{(string) One or more network projects.}
 }
 \value{
 A tibble (tidyverse data.frame).
@@ -25,7 +25,7 @@ con <- connect_to_etn(your_username, your_password)
 get_receivers(con)
 
 # Get receivers linked to specific network project(s)
-get_receivers(con, network_project = "thornton")
-get_receivers(con, network_project = c("thornton", "2012_leopoldkanaal"))
+get_receivers(con, network_project_code = "thornton")
+get_receivers(con, network_project_code = c("thornton", "2012_leopoldkanaal"))
 }
 }

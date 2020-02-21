@@ -5,8 +5,8 @@
 #' Use `limit` to limit the number of returned records
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param network_project (character) One or more network projects.
-#' @param animal_project (character) One or more animal projects.
+#' @param network_project_code (character) One or more network projects.
+#' @param animal_project_code (character) One or more animal projects.
 #' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
 #'   selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
 #'   well.
@@ -41,14 +41,14 @@
 #' # Get detections within a time frame for a specific animal project and
 #' # network project
 #' get_detections(con,
-#'   animal_project = "phd_reubens",
-#'   network_project = "thornton", start_date = "2011-01-28",
+#'   animal_project_code = "phd_reubens",
+#'   network_project_code = "thornton", start_date = "2011-01-28",
 #'   end_date = "2011-02-01"
 #' )
 #'
 #' # Get detections for a specific animal project at specific stations
 #' get_detections(con,
-#'   animal_project = "phd_reubens",
+#'   animal_project_code = "phd_reubens",
 #'   station_name = c("R03", "R05")
 #' )
 #'
@@ -67,30 +67,30 @@
 #'   end_date = "2015-12-05"
 #' )
 #' }
-get_detections <- function(connection, network_project = NULL,
-                           animal_project = NULL, start_date = NULL,
+get_detections <- function(connection, network_project_code = NULL,
+                           animal_project_code = NULL, start_date = NULL,
                            end_date = NULL, station_name = NULL,
                            tag_id = NULL, receiver_id = NULL,
                            scientific_name = NULL, limit = NULL) {
   # Check connection
   check_connection(connection)
 
-  # Check network_project
-  if (is.null(network_project)) {
-    network_project_query <- "True"
+  # Check network_project_code
+  if (is.null(network_project_code)) {
+    network_project_code_query <- "True"
   } else {
-    valid_network_projects <- network_projects(connection)
-    check_value(network_project, valid_network_projects, "network_project")
-    network_project_query <- glue_sql("network_project_code IN ({network_project*})", .con = connection)
+    valid_network_project_codes <- list_network_project_codes(connection)
+    check_value(network_project_code, valid_network_project_codes, "network_project_code")
+    network_project_code_query <- glue_sql("network_project_code_code IN ({network_project_code*})", .con = connection)
   }
 
-  # Check animal_project
-  if (is.null(animal_project)) {
-    animal_project_query <- "True"
+  # Check animal_project_code
+  if (is.null(animal_project_code)) {
+    animal_project_code_query <- "True"
   } else {
-    valid_animal_projects <- animal_projects(connection)
-    check_value(animal_project, valid_animal_projects, "animal_project")
-    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
+    valid_animal_project_codes <- list_animal_project_codes(connection)
+    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
   }
 
   # Check start_date
@@ -113,7 +113,7 @@ get_detections <- function(connection, network_project = NULL,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    valid_station_names <- station_names(connection)
+    valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
     station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)
   }
@@ -122,7 +122,7 @@ get_detections <- function(connection, network_project = NULL,
   if (is.null(tag_id)) {
     tag_id_query <- "True"
   } else {
-    valid_tag_ids <- tag_ids(connection)
+    valid_tag_ids <- list_tag_ids(connection)
     check_value(tag_id, valid_tag_ids, "tag_id")
     tag_id_query <- glue_sql("tag_id IN ({tag_id*})", .con = connection)
   }
@@ -131,7 +131,7 @@ get_detections <- function(connection, network_project = NULL,
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- receiver_ids(connection)
+    valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
     receiver_id_query <- glue_sql("receiver_id IN ({receiver_id*})", .con = connection)
   }
@@ -140,7 +140,7 @@ get_detections <- function(connection, network_project = NULL,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name_ids <- scientific_names(connection)
+    scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql("scientific_name IN ({scientific_name*})", .con = connection)
   }
@@ -158,8 +158,8 @@ get_detections <- function(connection, network_project = NULL,
     SELECT *
     FROM vliz.detections_view2
     WHERE
-      {network_project_query}
-      AND {animal_project_query}
+      {network_project_code_query}
+      AND {animal_project_code_query}
       AND {start_date_query}
       AND {end_date_query}
       AND {station_name_query}

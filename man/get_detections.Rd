@@ -6,8 +6,8 @@
 \usage{
 get_detections(
   connection,
-  network_project = NULL,
-  animal_project = NULL,
+  network_project_code = NULL,
+  animal_project_code = NULL,
   start_date = NULL,
   end_date = NULL,
   station_name = NULL,
@@ -20,9 +20,9 @@ get_detections(
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
-\item{network_project}{(character) One or more network projects.}
+\item{network_project_code}{(character) One or more network projects.}
 
-\item{animal_project}{(character) One or more animal projects.}
+\item{animal_project_code}{(character) One or more animal projects.}
 
 \item{start_date}{(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
 selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
@@ -61,14 +61,14 @@ get_detections(con, start_date = "2017", limit = 100)
 # Get detections within a time frame for a specific animal project and
 # network project
 get_detections(con,
-  animal_project = "phd_reubens",
-  network_project = "thornton", start_date = "2011-01-28",
+  animal_project_code = "phd_reubens",
+  network_project_code = "thornton", start_date = "2011-01-28",
   end_date = "2011-02-01"
 )
 
 # Get detections for a specific animal project at specific stations
 get_detections(con,
-  animal_project = "phd_reubens",
+  animal_project_code = "phd_reubens",
   station_name = c("R03", "R05")
 )
 
