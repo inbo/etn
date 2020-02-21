@@ -60,23 +60,31 @@ get_detections(con, start_date = "2017", limit = 100)
 
 # Get detections within a time frame for a specific animal project and
 # network project
-get_detections(con, animal_project = "phd_reubens",
-               network_project = "thornton", start_date = "2011-01-28",
-               end_date = "2011-02-01")
+get_detections(con,
+  animal_project = "phd_reubens",
+  network_project = "thornton", start_date = "2011-01-28",
+  end_date = "2011-02-01"
+)
 
 # Get detections for a specific animal project at specific stations
-get_detections(con, animal_project = "phd_reubens",
-               station_name = c("R03", "R05"))
+get_detections(con,
+  animal_project = "phd_reubens",
+  station_name = c("R03", "R05")
+)
 
 # Get detectios for a specific tag
 get_detections(con, tag_id = "A69-1303-65302")
 
 # Get detections for a specific receiver during a specific time period
-get_detections(con, receiver_id = "VR2W-122360", start_date = "2015-12-03",
-               end_date = "2015-12-05")
+get_detections(con,
+  receiver_id = "VR2W-122360", start_date = "2015-12-03",
+  end_date = "2015-12-05"
+)
 # Get detections for a specific species during a given period
-get_detections(con, scientific_name = "Anguilla anguilla",
-               start_date = "2015-12-03",
-               end_date = "2015-12-05")
+get_detections(con,
+  scientific_name = "Anguilla anguilla",
+  start_date = "2015-12-03",
+  end_date = "2015-12-05"
+)
 }
 }

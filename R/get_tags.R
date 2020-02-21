@@ -35,26 +35,31 @@
 get_tags <- function(connection,
                      animal_project = NULL,
                      include_reference_tags = FALSE) {
+  # Check connection
   check_connection(connection)
 
-  # valid inputs on animal projects
-  valid_animals_projects <-
-    get_projects(connection, project_type = "animal") %>%
-    pull(.data$projectcode)
-  check_null_or_value(animal_project, valid_animals_projects, "animal_project")
+  # Check animal_project
   if (is.null(animal_project)) {
-    animal_project <- valid_animals_projects
+    animal_project_query <- "True"
+  } else {
+    valid_animal_projects <- animal_projects(connection)
+    check_value(animal_project, valid_animal_projects, "animal_project")
+    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
   }
 
-  tags_query <- glue_sql("
+  # Build query
+  query <- glue_sql("
     SELECT tags.*
     FROM vliz.tags_view2 AS tags
       LEFT JOIN vliz.animals_view2 AS animals
       ON animals.tag_fk = tags.pk
-    WHERE animals.animal_project_code IN ({animal_project*})
-    ", .con = connection)
-  tags <- dbGetQuery(connection, tags_query)
+    WHERE
+      {animal_project_query}
+    ", .con = connection
+  )
+  tags <- dbGetQuery(connection, query)
 
+  # Filter on reference tags
   if (include_reference_tags) {
     tags
   } else {

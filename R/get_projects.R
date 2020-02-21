@@ -30,21 +30,25 @@
 #' get_projects(con, project_type = "network")
 #' }
 get_projects <- function(connection, project_type = NULL) {
-  animal_network <- project_type
-
+  # Check connection
   check_connection(connection)
-  check_null_or_value(
-    project_type, c("animal", "network"),
-    "project_type"
-  )
 
-  projects <- glue_sql("
-    SELECT * FROM vliz.projects_view
-    ", .con = connection)
-  projects <- dbGetQuery(connection, projects)
-
-  if (!is.null(project_type)) {
-    projects <- projects %>% filter(.data$type == animal_network)
+  # Check project type
+  if (is.null(project_type)) {
+    project_type_query <- "True"
+  } else {
+    check_value(project_type, c("animal", "network"), "project_type")
+    project_type_query <- glue_sql("type IN ({project_type*})", .con = connection)
   }
+
+  # Build query
+  query <- glue_sql("
+    SELECT *
+    FROM vliz.projects
+    WHERE
+      {project_type_query}
+    ", .con = connection
+  )
+  projects <- dbGetQuery(connection, query)
   as_tibble(projects)
 }

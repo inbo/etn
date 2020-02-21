@@ -36,55 +36,36 @@
 get_animals <- function(connection,
                         animal_project = NULL,
                         scientific_name = NULL) {
+  # Check connection
   check_connection(connection)
 
-  # valid inputs on animal projects
-  valid_animals_projects <- get_projects(connection,
-    project_type = "animal"
-  ) %>%
-    pull("projectcode")
-  check_null_or_value(
-    animal_project, valid_animals_projects,
-    "animal_project"
-  )
-
-  # valid scientific names
-  valid_animals <- scientific_names(connection)
-  check_null_or_value(scientific_name, valid_animals, "scientific_name")
-
+  # Check animal project
   if (is.null(animal_project)) {
-    animal_project <- valid_animals_projects
+    animal_project_query <- "True"
+  } else {
+    valid_animal_projects <- animal_projects(connection)
+    check_value(animal_project, valid_animal_projects, "animal_project")
+    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
   }
 
+  # Check scientific_name
   if (is.null(scientific_name)) {
-    scientific_name <- valid_animals
+    scientific_name_query <- "True"
+  } else {
+    scientific_name_ids <- scientific_names(connection)
+    check_value(scientific_name, scientific_name_ids, "scientific_name")
+    scientific_name_query <- glue_sql("scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  animals_query <- glue_sql("
+  # Build query
+  query <- glue_sql("
     SELECT *
     FROM vliz.animals_view2
-    WHERE animal_project_code IN ({animal_project*})
-      AND scientific_name IN ({scientific_name*})
-    ", .con = connection)
-
-  animals <- dbGetQuery(connection, animals_query)
+    WHERE
+      {animal_project_query}
+      AND {scientific_name_query}
+    ", .con = connection
+  )
+  animals <- dbGetQuery(connection, query)
   as_tibble(animals)
-}
-
-#' Support function to get unique set of scientific names
-#'
-#' This function retrieves all unique scientific names
-#' @param connection A valid connection to ETN database.
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#'
-#' @return A vector of all scientific names present in vliz.animals_view.
-scientific_names <- function(connection) {
-  query <- glue_sql("
-    SELECT DISTINCT scientific_name
-    FROM vliz.animals_view2
-    ", .con = connection)
-  data <- dbGetQuery(connection, query)
-  data$scientific_name
 }

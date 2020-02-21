@@ -72,143 +72,103 @@ get_detections <- function(connection, network_project = NULL,
                            end_date = NULL, station_name = NULL,
                            tag_id = NULL, receiver_id = NULL,
                            scientific_name = NULL, limit = NULL) {
+  # Check connection
   check_connection(connection)
 
-  # check the network project inputs
-  valid_network_projects <- get_projects(connection, project_type = "network") %>%
-    pull(.data$projectcode)
-  check_null_or_value(network_project, valid_network_projects, "network_project")
+  # Check network_project
   if (is.null(network_project)) {
-    network_project <- valid_network_projects
+    network_project_query <- "True"
+  } else {
+    valid_network_projects <- network_projects(connection)
+    check_value(network_project, valid_network_projects, "network_project")
+    network_project_query <- glue_sql("network_project_code IN ({network_project*})", .con = connection)
   }
 
-  # check the animal project inputs
-  valid_animal_projects <- get_projects(connection, project_type = "animal") %>%
-    pull(.data$projectcode)
-  check_null_or_value(animal_project, valid_animal_projects, "animal_project")
+  # Check animal_project
   if (is.null(animal_project)) {
-    animal_project <- valid_animal_projects
+    animal_project_query <- "True"
+  } else {
+    valid_animal_projects <- animal_projects(connection)
+    check_value(animal_project, valid_animal_projects, "animal_project")
+    animal_project_query <- glue_sql("animal_project_code IN ({animal_project*})", .con = connection)
   }
 
-  # check the start- and end date inputs
+  # Check start_date
   if (is.null(start_date)) {
-    # use an arbitrary early date for this project
-    start_date <- check_date_time("1970", "start_date")
+    start_date_query <- "True"
   } else {
     start_date <- check_date_time(start_date, "start_date")
+    start_date_query <- glue_sql("date_time >= {start_date}", .con = connection)
   }
+
+  # Check end_date
   if (is.null(end_date)) {
-    # use today
-    end_date <- as.character(Sys.Date())
+    end_date_query <- "True"
   } else {
     end_date <- check_date_time(end_date, "end_date")
+    end_date_query <- glue_sql("date_time <= {end_date}", .con = connection)
   }
 
-  # Check the station inputs
-  valid_station_names <- station_names(connection)
-  check_null_or_value(
-    station_name, valid_station_names,
-    "station_name"
-  )
+  # Check station_name
   if (is.null(station_name)) {
-    station_name <- valid_station_names
+    station_name_query <- "True"
+  } else {
+    valid_station_names <- station_names(connection)
+    check_value(station_name, valid_station_names, "station_name")
+    station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)
   }
 
-  # Check the tags inputs
-  valid_tags <- tag_ids(connection)
-  check_null_or_value(
-    tag_id, valid_tags,
-    "tag_id"
-  )
+  # Check tag_id
   if (is.null(tag_id)) {
-    tag_id <- valid_tags
+    tag_id_query <- "True"
+  } else {
+    valid_tag_ids <- tag_ids(connection)
+    check_value(tag_id, valid_tag_ids, "tag_id")
+    tag_id_query <- glue_sql("tag_id IN ({tag_id*})", .con = connection)
   }
 
-  # Check the receiver inputs
-  valid_receivers <- get_receivers(connection) %>%
-    pull(.data$receiver_id)
-  check_null_or_value(
-    receiver_id, valid_receivers,
-    "receiver_id"
-  )
+  # Check receiver_id
   if (is.null(receiver_id)) {
-    receiver_id <- valid_receivers
+    receiver_id_query <- "True"
+  } else {
+    valid_receiver_ids <- receiver_ids(connection)
+    check_value(receiver_id, valid_receiver_ids, "receiver_id")
+    receiver_id_query <- glue_sql("receiver_id IN ({receiver_id*})", .con = connection)
   }
 
-  # Valid scientific names
-  valid_animals <- scientific_names(connection)
-  check_null_or_value(scientific_name, valid_animals, "scientific_name")
+  # Check scientific_name
   if (is.null(scientific_name)) {
-    scientific_name <- valid_animals
+    scientific_name_query <- "True"
+  } else {
+    scientific_name_ids <- scientific_names(connection)
+    check_value(scientific_name, scientific_name_ids, "scientific_name")
+    scientific_name_query <- glue_sql("scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  # Check the limit input
+  # Check limit
   if (is.null(limit)) {
-    sub_query <- glue_sql("LIMIT ALL", .con = connection)
+    limit_query <- glue_sql("LIMIT ALL", .con = connection)
   } else {
     assert_that(is.number(limit))
-    sub_query <- glue_sql("LIMIT {limit}",
-      limit = as.character(limit),
-      .con = connection
-    )
+    limit_query <- glue_sql("LIMIT {as.character(limit)}", .con = connection)
   }
 
-  detections_query <- glue_sql("
+  # Build query
+  query <- glue_sql("
     SELECT *
     FROM vliz.detections_view2
-    WHERE network_project_code IN ({network_project*})
-      AND animal_project_code IN ({animal_project*})
-      AND date_time > {start_date}
-      AND date_time < {end_date}
-      AND station_name IN ({station_name*})
-      AND tag_id IN ({tag_id*})
-      AND receiver_id IN ({receiver_id*})
-      AND scientific_name IN ({scientific_name*})
-    {sub_query}
-    ",
-    nrows = limit,
-    .con = connection
+    WHERE
+      {network_project_query}
+      AND {animal_project_query}
+      AND {start_date_query}
+      AND {end_date_query}
+      AND {station_name_query}
+      AND {tag_id_query}
+      AND {receiver_id_query}
+      AND {scientific_name_query}
+    {limit_query}
+    ", .con = connection
   )
-  detections <- dbGetQuery(connection, detections_query)
+  detections <- dbGetQuery(connection, query)
   as_tibble(detections)
-}
-
-#' Support function to get unique set of station_names
-#'
-#' Get unique station_names
-#'
-#' @param connection A valid connection to the ETN database.
-#'
-#' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#'
-#' @return A vector of all station_names present in vliz.deployments_view2.
-station_names <- function(connection) {
-  query <- glue_sql("
-    SELECT DISTINCT station_name FROM vliz.deployments_view2
-    ", .con = connection)
-  data <- dbGetQuery(connection, query)
-  data$station_name
-}
-
-#' Support function to get unique set of tag_ids
-#'
-#' Get unique tag_ids
-#'
-#' @param connection A valid connection to the ETN database.
-#'
-#' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#'
-#' @return A vector of all tags present in vliz.tags_view2.
-tag_ids <- function(connection) {
-  query <- glue_sql("
-    SELECT DISTINCT tag_id FROM vliz.tags_view2
-    ", .con = connection)
-  data <- dbGetQuery(connection, query)
-  data$tag_id
 }

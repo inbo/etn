@@ -28,28 +28,29 @@
 #' }
 get_receivers <- function(connection,
                           network_project = NULL) {
+  # Check connection
   check_connection(connection)
 
-  # Valid inputs on network projects
-  valid_network_projects <-
-    get_projects(connection, project_type = "network") %>%
-    pull(.data$projectcode)
-  check_null_or_value(
-    network_project, valid_network_projects,
-    "network_project"
-  )
+  # Check network_project
   if (is.null(network_project)) {
-    network_project <- valid_network_projects
+    network_project_query <- "True"
+  } else {
+    valid_network_projects <- network_projects(connection)
+    check_value(network_project, valid_network_projects, "network_project")
+    network_project_query <- glue_sql("network_project_code IN ({network_project*})", .con = connection)
   }
 
-  receivers_query <- glue_sql("
+  # Build query
+  query <- glue_sql("
     SELECT *
     FROM vliz.receivers_view2
-    WHERE network_project_code IN ({network_project*})
-    ", .con = connection)
-  receivers <- dbGetQuery(connection, receivers_query)
+    WHERE
+      {network_project_query}
+    ", .con = connection
+  )
+  receivers <- dbGetQuery(connection, query)
 
-  # we still have multiple records of receivers, as project codes are coupled to
+  # We still have multiple records of receivers, as project codes are coupled to
   # deployments and a receiver can have multiple deployments aka projects.
   # combine the individual network projects in a single row:
   # receivers %>%

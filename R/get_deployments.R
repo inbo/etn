@@ -5,6 +5,7 @@
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param network_project (string) One or more network projects.
+#' @param receiver_status (string) One or more receiver status.
 #' @param open_only (logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
 #'   `TRUE`.
 #'
@@ -41,35 +42,42 @@ get_deployments <- function(connection,
                             network_project = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {
-  receiver_status_vocabulary <- c(
-    "Available", "Lost", "Broken",
-    "Active", "Returned to manufacturer"
-  )
+  # Check connection
   check_connection(connection)
-  valid_networks <- get_projects(connection, project_type = "network") %>%
-    pull(.data$projectcode)
-  check_null_or_value(network_project, valid_networks, "network_project")
-  check_null_or_value(
-    receiver_status, receiver_status_vocabulary,
-    .data$receiver_status
-  )
+
+  # Check network_project
   if (is.null(network_project)) {
-    network_project <- valid_networks
-  }
-  if (is.null(receiver_status)) {
-    receiver_status <- receiver_status_vocabulary
+    network_project_query <- "True"
+  } else {
+    valid_network_projects <- network_projects(connection)
+    check_value(network_project, valid_network_projects, "network_project")
+    network_project_query <- glue_sql("deployments.network_project_code IN ({network_project*})", .con = connection)
   }
 
-  deployments_query <- glue_sql("
+  # Check receiver_status
+  if (is.null(receiver_status)) {
+    receiver_status_query <- "True"
+  } else {
+    valid_receiver_status <- c("Available", "Lost", "Broken", "Active", "Returned to manufacturer")
+    check_value(receiver_status, valid_receiver_status, "receiver_status")
+    receiver_status_query <- glue_sql("receivers.status IN ({receiver_status*})", .con = connection)
+  }
+
+  # Build query
+  query <- glue_sql("
     SELECT deployments.*,
       receivers.status AS receiver_status
     FROM vliz.deployments_view2 AS deployments
       LEFT JOIN vliz.receivers_view2 AS receivers
       ON deployments.receiver_id = receivers.receiver_id
-    WHERE receivers.status IN ({receiver_status*})
-      AND deployments.network_project_code IN ({network_project*})
-    ", .con = connection)
-  deployments <- dbGetQuery(connection, deployments_query)
+    WHERE
+      {network_project_query}
+      AND {receiver_status_query}
+    ", .con = connection
+  )
+  deployments <- dbGetQuery(connection, query)
+
+  # Filter on open deployments
   if (open_only) {
     deployments <- deployments %>% filter(is.na(.data$recover_date_time))
   }
