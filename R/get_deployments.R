@@ -73,8 +73,7 @@ get_deployments <- function(connection,
     WHERE
       {network_project_query}
       AND {receiver_status_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   deployments <- dbGetQuery(connection, query)
 
   # Filter on open deployments

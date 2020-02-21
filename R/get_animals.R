@@ -64,8 +64,7 @@ get_animals <- function(connection,
     WHERE
       {animal_project_query}
       AND {scientific_name_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   animals <- dbGetQuery(connection, query)
   as_tibble(animals)
 }

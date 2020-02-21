@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{station_names}
 \alias{station_names}
-\title{Get a list of unique available station_name}
+\title{Get list of unique available station_name}
 \usage{
 station_names(connection)
 }
@@ -13,5 +13,5 @@ station_names(connection)
 A vector of all station_name present in vliz.deployments_view2.
 }
 \description{
-Get a list of unique available station_name
+Get list of unique available station_name
 }

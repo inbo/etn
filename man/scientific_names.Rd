@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{scientific_names}
 \alias{scientific_names}
-\title{Get a list of unique available scientific_name}
+\title{Get list of unique available scientific_name}
 \usage{
 scientific_names(connection)
 }
@@ -13,5 +13,5 @@ scientific_names(connection)
 A vector of all scientific_name present in vliz.animals_view2.
 }
 \description{
-Get a list of unique available scientific_name
+Get list of unique available scientific_name
 }

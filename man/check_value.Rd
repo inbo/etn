@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{check_value}
 \alias{check_value}
-\title{Check input value against a list of provided values}
+\title{Check input value against list of provided values}
 \usage{
 check_value(arg, options = NULL, arg_name)
 }

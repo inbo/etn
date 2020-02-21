@@ -13,7 +13,7 @@ check_connection <- function(connection) {
   assert_that(connection@info$dbname == "ETN")
 }
 
-#' Check input value against a list of provided values
+#' Check input value against list of provided values
 #'
 #' Will return error message if an input value cannot be found in list of provided
 #' values. NULL values are allowed.
@@ -66,7 +66,6 @@ check_value <- function(arg, options = NULL, arg_name) {
     TRUE
   }
 }
-
 
 #' Print list of options
 #'
@@ -126,7 +125,7 @@ check_date_time <- function(date_time, date_name = "start_date") {
   as.character(parsed)
 }
 
-#' Get a list of unique available network_project_code
+#' Get list of unique available network_project_code
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -143,7 +142,7 @@ network_projects <- function(connection) {
   data$projectcode
 }
 
-#' Get a list of unique available animal_project_code
+#' Get list of unique available animal_project_code
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -160,7 +159,7 @@ animal_projects <- function(connection) {
   data$projectcode
 }
 
-#' Get a list of unique available station_name
+#' Get list of unique available station_name
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -177,7 +176,7 @@ station_names <- function(connection) {
   data$station_name
 }
 
-#' Get a list of unique available tag_id
+#' Get list of unique available tag_id
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -194,7 +193,7 @@ tag_ids <- function(connection) {
   data$tag_id
 }
 
-#' Get a list of unique available receiver_id
+#' Get list of unique available receiver_id
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -211,7 +210,7 @@ receiver_ids <- function(connection) {
   data$receiver_id
 }
 
-#' Get a list of unique available scientific_name
+#' Get list of unique available scientific_name
 #'
 #' @param connection A valid connection to the ETN database.
 #'

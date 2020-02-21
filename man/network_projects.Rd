@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{network_projects}
 \alias{network_projects}
-\title{Get a list of unique available network_project_code}
+\title{Get list of unique available network_project_code}
 \usage{
 network_projects(connection)
 }
@@ -13,5 +13,5 @@ network_projects(connection)
 A vector of all network_project_code present in vliz.projects.
 }
 \description{
-Get a list of unique available network_project_code
+Get list of unique available network_project_code
 }

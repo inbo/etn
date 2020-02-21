@@ -167,8 +167,7 @@ get_detections <- function(connection, network_project = NULL,
       AND {receiver_id_query}
       AND {scientific_name_query}
     {limit_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   detections <- dbGetQuery(connection, query)
   as_tibble(detections)
 }

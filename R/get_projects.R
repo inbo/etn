@@ -47,8 +47,7 @@ get_projects <- function(connection, project_type = NULL) {
     FROM vliz.projects
     WHERE
       {project_type_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   projects <- dbGetQuery(connection, query)
   as_tibble(projects)
 }

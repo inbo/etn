@@ -46,8 +46,7 @@ get_receivers <- function(connection,
     FROM vliz.receivers_view2
     WHERE
       {network_project_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   receivers <- dbGetQuery(connection, query)
 
   # We still have multiple records of receivers, as project codes are coupled to

@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{animal_projects}
 \alias{animal_projects}
-\title{Get a list of unique available animal_project_code}
+\title{Get list of unique available animal_project_code}
 \usage{
 animal_projects(connection)
 }
@@ -13,5 +13,5 @@ animal_projects(connection)
 A vector of all animal_project_code present in vliz.projects.
 }
 \description{
-Get a list of unique available animal_project_code
+Get list of unique available animal_project_code
 }

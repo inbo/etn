@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{tag_ids}
 \alias{tag_ids}
-\title{Get a list of unique available tag_id}
+\title{Get list of unique available tag_id}
 \usage{
 tag_ids(connection)
 }
@@ -13,5 +13,5 @@ tag_ids(connection)
 A vector of all tag_id present in vliz.tags_view2.
 }
 \description{
-Get a list of unique available tag_id
+Get list of unique available tag_id
 }

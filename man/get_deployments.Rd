@@ -16,6 +16,8 @@ get_deployments(
 
 \item{network_project}{(string) One or more network projects.}
 
+\item{receiver_status}{(string) One or more receiver status.}
+
 \item{open_only}{(logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
 \code{TRUE}.}
 }

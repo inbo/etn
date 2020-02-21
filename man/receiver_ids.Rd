@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{receiver_ids}
 \alias{receiver_ids}
-\title{Get a list of unique available receiver_id}
+\title{Get list of unique available receiver_id}
 \usage{
 receiver_ids(connection)
 }
@@ -13,5 +13,5 @@ receiver_ids(connection)
 A vector of all receiver_id present in vliz.receivers_view2.
 }
 \description{
-Get a list of unique available receiver_id
+Get list of unique available receiver_id
 }

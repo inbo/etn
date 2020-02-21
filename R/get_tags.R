@@ -55,8 +55,7 @@ get_tags <- function(connection,
       ON animals.tag_fk = tags.pk
     WHERE
       {animal_project_query}
-    ", .con = connection
-  )
+    ", .con = connection)
   tags <- dbGetQuery(connection, query)
 
   # Filter on reference tags
