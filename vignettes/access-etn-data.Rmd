@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 The `etn` package provides a set of `get_*`-based functions to access the ETN data and metadata. In this vignette a quick overview of these main functions is given. As the access to data is linked to specific user profiles, keep in mind that the results can be different for other users.
 
 To start, load the package:
+
 ```{r}
 library(etn)
 ```
@@ -130,11 +131,11 @@ Remark: currently these names are NOT yet verified with a taxonomic backbone as 
 
 ### Transmitter overview
 
-The transmitters/tags metadata can be accessed by the `get_transmitters` function, with the option to subset on the animal project names:
+The transmitters/tags metadata can be accessed by the `get_tags` function, with the option to subset on the animal project names:
 
 ```{r}
-my_tags <- get_transmitters(my_con, animal_project = "phd_reubens")
 knitr::kable(head(my_tags, 10)) # print 10 first
+my_tags <- get_tags(my_con, animal_project = "phd_reubens")
 ```
 
 ## Detections data
@@ -152,5 +153,3 @@ knitr::kable(head(my_detections, 10)) # print 10 first
 The date level can be defined on month (e.g. `"2011-01"`) or year (e.g. `"2011"`) level as well. Finally, for explorative reasons, a hard maximum limit of records to request can help to have a quick glance on the expected data.
 
 See more exampled in the function help (remember the `?get_detections`).
-
-
