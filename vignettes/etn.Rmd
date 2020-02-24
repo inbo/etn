@@ -68,18 +68,18 @@ head(my_network_projects, 10) # print 10 first
 
 ### Receiver overview
 
-A network project typically considers multiple receivers that are placed on specific locations to lay out the network. To get an overview of the receivers or those linked to specific projects, use the `get_receivers` function:
+A network project typically considers multiple receivers that are placed on specific locations to lay out the network. To get an overview of receivers deployments linked to specific projects, use the `get_deployments` function:
 
 ```{r}
-ws3_receivers <- get_receivers(my_con, network_project_code = "ws3")
-head(ws3_receivers, 10) # print 10 first
+ws3_deployments <- get_deployments(my_con, network_project_code = "ws3")
+head(ws3_deployments, 10) # print 10 first
 ```
 
 You can also define multiple (network) projects at the same time, by combining them in a vector:
 
 ```{r}
-ws_receivers <- get_receivers(my_con, network_project_code = c("ws1", "ws3"))
-head(ws_receivers, 10) # print 10 first
+ws_deployments <- get_deployments(my_con, network_project_code = c("ws1", "ws3"))
+head(ws_deployments, 10) # print 10 first
 ```
 
 When a number of columns is not useful to your specific purpose, remember that the output is a `data.frame`, which can be filtered and subsetted conveniently with for example the [dplyr](http://dplyr.tidyverse.org/) functions. 
@@ -91,8 +91,8 @@ library(dplyr)
 For example, selecting only the columns `serial_number`, `receiver` and `status`:
 
 ```{r}
-ws_receivers %>% 
-  select(receiver_id_serial_number, receiver_id, status) %>%
+ws_deployments %>% 
+  select(receiver_id, receiver_status) %>%
   head(10)  # print 10 first
 ```
 
