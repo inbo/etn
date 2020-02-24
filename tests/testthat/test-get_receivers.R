@@ -7,7 +7,6 @@ con <- connect_to_etn(
 expected_col_names_receivers <- c(
   "pk",
   "receiver_id",
-  "network_project_code",
   "application_type",
   "telemetry_type",
   "manufacturer",
@@ -35,32 +34,18 @@ expected_col_names_receivers <- c(
 )
 
 receivers_all <- get_receivers(con)
-receivers_project1 <- get_receivers(con, network_project_code = "thornton")
-receivers_projects_multiple <- get_receivers(con, network_project_code = c("thornton", "leopold"))
 
 testthat::test_that("test_input_get_receivers", {
   expect_error(
     get_receivers("I am not a connection"),
     "Not a connection object to database."
   )
-  expect_error(get_receivers(con, network_project_code = "very_bad_project"))
-  expect_error(get_receivers(con, network_project_code = c(
-    "thornton",
-    "very_bad_project"
-  )))
 })
 
 testthat::test_that("test_output_get_receivers", {
   expect_is(receivers_all, "data.frame")
-  expect_is(receivers_project1, "data.frame")
-  expect_is(receivers_projects_multiple, "data.frame")
   expect_true(all(names(receivers_all) %in% expected_col_names_receivers))
   expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
-  expect_gt(nrow(receivers_all), nrow(receivers_project1))
-  expect_gte(nrow(receivers_all), nrow(receivers_projects_multiple))
-  expect_gte(nrow(receivers_projects_multiple), nrow(receivers_project1))
   expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(pk)))
   expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(receiver_id)))
-  expect_equal(names(receivers_all), names(receivers_project1))
-  expect_equal(names(receivers_all), names(receivers_projects_multiple))
 })
