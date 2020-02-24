@@ -57,4 +57,5 @@ testthat::test_that("test_output_get_projects", {
   expect_equal(names(projects_all), names(projects_animal))
   expect_equal(names(projects_animal), names(projects_network))
   expect_equal(nrow(projects_all), nrow(projects_all %>% distinct(pk)))
+  # expect_equal(nrow(projects_all), nrow(projects_all %>% distinct(project_code)))
 })
