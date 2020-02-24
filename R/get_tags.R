@@ -32,7 +32,7 @@
 #' get_tags(con, animal_project_code = "phd_reubens")
 #' get_tags(con, animal_project_code = c("phd_reubens", "2012_leopoldkanaal"))
 #' }
-get_tags <- function(connection,
+get_tags <- function(connection = con,
                      animal_project_code = NULL,
                      include_reference_tags = FALSE) {
   # Check connection

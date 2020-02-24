@@ -21,7 +21,7 @@
 #' # Get all receivers
 #' get_receivers(con)
 #' }
-get_receivers <- function(connection) {
+get_receivers <- function(connection = con) {
   # Check connection
   check_connection(connection)
 

@@ -38,8 +38,7 @@ devtools::install_github("inbo/etn")
 In order to access the data, the first step is always to connect with your user credentials (as received by VLIZ) to the database. 
 
 ```{r}
-my_con <- connect_to_etn(Sys.getenv("userid"),
-                         Sys.getenv("pwd"))
+con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
 ```
 
 Remark that for this example, we [load the user credentials as environmental variables](http://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables) by saving an `.Renviron` file in the home directory with the username and password stored. Other options are available as well, as explained [here](http://db.rstudio.com/best-practices/managing-credentials/).
@@ -55,14 +54,14 @@ Notice, that you can find the `get_*`-functions inside Rstudio by typing: `etn::
 To get a full overview of the projects you have access to, use the function `get_projects()`:
 
 ```{r projects}
-my_projects <- get_projects(my_con)
+my_projects <- get_projects(con)
 head(my_projects, 10) # print 10 first
 ```
 
 As projects are defined both on the level of the `animal` as well as the `network`, a column `type` is available that defines the type of project (`animal` or `network`). Still, one can also directly subset by adding the type as input argument, e.g. for network:
 
 ```{r my_animal_projects}
-my_network_projects <- get_projects(my_con, project_type = "network")
+my_network_projects <- get_projects(con, project_type = "network")
 head(my_network_projects, 10) # print 10 first
 ```
 
@@ -71,14 +70,14 @@ head(my_network_projects, 10) # print 10 first
 A network project typically considers multiple receivers that are placed on specific locations to lay out the network. To get an overview of receivers deployments linked to specific projects, use the `get_deployments` function:
 
 ```{r}
-ws3_deployments <- get_deployments(my_con, network_project_code = "ws3")
+ws3_deployments <- get_deployments(con, network_project_code = "ws3")
 head(ws3_deployments, 10) # print 10 first
 ```
 
 You can also define multiple (network) projects at the same time, by combining them in a vector:
 
 ```{r}
-ws_deployments <- get_deployments(my_con, network_project_code = c("ws1", "ws3"))
+ws_deployments <- get_deployments(con, network_project_code = c("ws1", "ws3"))
 head(ws_deployments, 10) # print 10 first
 ```
 
@@ -101,7 +100,7 @@ ws_deployments %>%
 Receivers are deployed for a specific period and this deployment information can be accessed as well with the command `get_deployments`. Filtering on the network project is similar to `get_receivers` and as the information about the receiver `status` is crucial, the function provides an additional argument to query based on the receiver status. Getting an overview of the lost and broken receivers of a specific project:
 
 ```{r}
-my_deployments <- get_deployments(my_con, network_project_code = "ws1", 
+my_deployments <- get_deployments(con, network_project_code = "ws1", 
                                   receiver_status = c("Broken", "Lost"))
 head(my_deployments, 10) # print 10 first 
 ```
@@ -113,14 +112,14 @@ Within an animal project, multiple animals are provided with a transmitter. The 
 As such, selecting the animals metadata for the `2012_leopoldkanaal` project:
 
 ```{r}
-my_animals <- get_animals(my_con, animal_project_code = "2012_leopoldkanaal")
+my_animals <- get_animals(con, animal_project_code = "2012_leopoldkanaal")
 head(my_animals, 10) # print 10 first
 ```
 
 When interested in specific species, add the scientific name as argument.
 
 ```{r}
-my_animals <- get_animals(my_con, animal_project_code = "phd_reubens",
+my_animals <- get_animals(con, animal_project_code = "phd_reubens",
                        scientific_name = "Sentinel")
 head(my_animals, 10) # print 10 first
 ```
@@ -132,7 +131,7 @@ Remark: currently these names are NOT yet verified with a taxonomic backbone as 
 The transmitters/tags metadata can be accessed by the `get_tags` function, with the option to subset on the animal project names:
 
 ```{r}
-my_tags <- get_tags(my_con, animal_project_code = "phd_reubens")
+my_tags <- get_tags(con, animal_project_code = "phd_reubens")
 head(my_tags, 10) # print 10 first
 ```
 
@@ -143,7 +142,7 @@ The raw detections are the core for any type of analysis and access is provided 
 To narrow down the data request, filters are provided on animal/network project name, the deployment station name and the transmitter identifier to narrow. Furthermore, as these data sets can be large, some additional time-based filters are provided with a `start_date` and an `end_date`: 
 
 ```{r}
-my_detections <- get_detections(my_con, animal_project_code = "phd_reubens", 
+my_detections <- get_detections(con, animal_project_code = "phd_reubens", 
                                 start_date = "2011-01-28", end_date = "2011-02-01")
 head(my_detections, 10) # print 10 first
 ```

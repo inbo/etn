@@ -8,7 +8,7 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @return A vector of all unique `project_code` of `project_type="network"` present in `projects`.
-list_network_project_codes <- function(connection) {
+list_network_project_codes <- function(connection = con) {
   query <- glue_sql("SELECT DISTINCT project_code FROM vliz.projects_view2 WHERE project_type = 'network'",
     .con = connection
   )

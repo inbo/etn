@@ -8,7 +8,7 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @return A vector of all unique `station_name` present in `deployments`.
-list_station_names <- function(connection) {
+list_station_names <- function(connection = con) {
   query <- glue_sql("SELECT DISTINCT station_name FROM vliz.deployments_view2",
     .con = connection
   )

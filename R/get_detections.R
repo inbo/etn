@@ -67,7 +67,7 @@
 #'   end_date = "2015-12-05"
 #' )
 #' }
-get_detections <- function(connection, network_project_code = NULL,
+get_detections <- function(connection = con, network_project_code = NULL,
                            animal_project_code = NULL, start_date = NULL,
                            end_date = NULL, station_name = NULL,
                            tag_id = NULL, receiver_id = NULL,

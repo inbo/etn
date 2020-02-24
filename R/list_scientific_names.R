@@ -8,7 +8,7 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @return A vector of all unique `scientific_name` present in `animals`.
-list_scientific_names <- function(connection) {
+list_scientific_names <- function(connection = con) {
   query <- glue_sql("SELECT DISTINCT scientific_name FROM vliz.animals_view2",
     .con = connection
   )
