@@ -5,18 +5,19 @@ con <- connect_to_etn(
 
 # Expected column names
 expected_col_names_projects <- c(
-  "id",
-  "name",
-  "projectcode",
-  "type",
-  "startdate",
-  "enddate",
-  "moratorium",
-  "imis_dataset_id",
+  "pk",
+  "project_code",
+  "project_type",
   "context_type",
+  "telemetry_type",
+  "project_name",
+  "principal_investigator",
+  "start_date",
+  "end_date",
   "latitude",
   "longitude",
-  "telemtry_type"
+  "moratorium",
+  "imis_dataset_id"
 )
 
 projects_all <- get_projects(con)
@@ -55,5 +56,5 @@ testthat::test_that("test_output_get_projects", {
   )
   expect_equal(names(projects_all), names(projects_animal))
   expect_equal(names(projects_animal), names(projects_network))
-  expect_equal(nrow(projects_all), nrow(projects_all %>% distinct(id)))
+  expect_equal(nrow(projects_all), nrow(projects_all %>% distinct(pk)))
 })
