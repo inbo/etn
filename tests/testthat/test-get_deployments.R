@@ -47,58 +47,76 @@ expected_col_names_deployments <- c(
 )
 
 deployments_all <- get_deployments(con)
-deployments_project1 <- get_deployments(con, network_project_code = "thornton")
-deployments_projects_multiple <- get_deployments(con, network_project_code = c(
-  "thornton",
-  "leopold"
-))
-deployments_status1 <- get_deployments(con, receiver_status = "Broken")
-deployments_status_multiple <- get_deployments(con, receiver_status = c("Broken", "Lost"))
-deployments_project1_openfalse <- get_deployments(con,
+deployments_project1 <- get_deployments(
+  con,
+  network_project_code = "thornton"
+)
+deployments_projects_multiple <- get_deployments(
+  con,
+  network_project_code = c("thornton", "leopold")
+)
+deployments_status1 <- get_deployments(
+  con,
+  receiver_status = "Broken"
+)
+deployments_status_multiple <- get_deployments(
+  con,
+  receiver_status = c("Broken", "Lost")
+)
+deployments_project1_openfalse <- get_deployments(
+  con,
   network_project_code = "thornton",
   open_only = FALSE
 )
 
 testthat::test_that("test_input_get_deployments", {
-  expect_error(
-    get_deployments("I am not a connection"),
+  expect_error(get_deployments("I am not a connection"),
     "Not a connection object to database."
   )
-  expect_error(get_deployments(con, network_project_code = "very_bad_project"))
-  expect_error(get_deployments(con, network_project_code = c(
-    "thornton",
-    "very_bad_project"
-  )))
-  expect_error(get_deployments(con,
+  expect_error(get_deployments(
+    con,
+    network_project_code = "very_bad_project"
+  ))
+  expect_error(get_deployments(
+    con,
+    network_project_code = c("thornton", "very_bad_project")
+  ))
+  expect_error(get_deployments(
+    con,
     network_project_code = "thornton",
     receiver_status = "very_bad_receiver_status"
   ))
-  expect_error(get_deployments(con,
+  expect_error(get_deployments(
+    con,
     network_project_code = "thornton",
-    receiver_status = c(
-      "Broken",
-      "very_bad_receiver_status"
-    )
+    receiver_status = c("Broken", "very_bad_receiver_status")
   ))
 })
 
 
 testthat::test_that("test_output_get_deployments", {
-  library(dplyr)
+  # Output type
   expect_is(deployments_all, "data.frame")
   expect_is(deployments_project1, "data.frame")
   expect_is(deployments_projects_multiple, "data.frame")
+
+  # Col names
   expect_true(all(names(deployments_all) %in% expected_col_names_deployments))
   expect_true(all(expected_col_names_deployments %in% names(deployments_all)))
-  expect_gte(nrow(deployments_all), nrow(deployments_project1))
-  expect_gte(nrow(deployments_all), nrow(deployments_projects_multiple))
-  expect_gte(nrow(deployments_projects_multiple), nrow(deployments_project1))
-  expect_gte(nrow(deployments_status_multiple), nrow(deployments_status1))
   expect_equal(names(deployments_all), names(deployments_project1))
   expect_equal(names(deployments_all), names(deployments_projects_multiple))
   expect_equal(names(deployments_all), names(deployments_status1))
   expect_equal(names(deployments_all), names(deployments_status_multiple))
   expect_equal(names(deployments_all), names(deployments_project1_openfalse))
+
+  # Number of records
+  expect_gte(nrow(deployments_all), nrow(deployments_project1))
+  expect_gte(nrow(deployments_all), nrow(deployments_projects_multiple))
+  expect_gte(nrow(deployments_projects_multiple), nrow(deployments_project1))
+  expect_gte(nrow(deployments_status_multiple), nrow(deployments_status1))
+  expect_gte(nrow(deployments_project1_openfalse), nrow(deployments_project1))
+
+  # receiver_status
   expect_gte(
     deployments_all %>% distinct(receiver_status) %>% nrow(),
     deployments_project1 %>% distinct(receiver_status) %>% nrow()
@@ -119,10 +137,17 @@ testthat::test_that("test_output_get_deployments", {
     deployments_status_multiple %>% distinct(receiver_status) %>% nrow(),
     deployments_status1 %>% distinct(receiver_status) %>% nrow()
   )
-  expect_gte(
-    deployments_project1_openfalse %>% nrow(),
-    deployments_project1 %>% nrow()
-  )
+  expect_true(all(deployments_project1 %>% distinct(receiver_status) %>% pull() %in%
+                    (deployments_projects_multiple %>% distinct(receiver_status) %>% pull())))
+  expect_true(all(deployments_projects_multiple %>% distinct(receiver_status) %>% pull() %in%
+                    (deployments_all %>% distinct(receiver_status) %>% pull())))
+  expect_true(deployments_status1 %>% distinct(receiver_status) %>% pull() == "Broken")
+  expect_true(all(deployments_status_multiple %>% distinct(receiver_status) %>% pull() %in% c(
+    "Broken",
+    "Lost"
+  )))
+
+  # network_project_code
   expect_gte(
     deployments_all %>% distinct(network_project_code) %>% nrow(),
     deployments_project1 %>% distinct(network_project_code) %>% nrow()
@@ -144,16 +169,9 @@ testthat::test_that("test_output_get_deployments", {
     "thornton",
     "leopold"
   )))
-  expect_true(all(deployments_project1 %>% distinct(receiver_status) %>% pull() %in%
-    (deployments_projects_multiple %>% distinct(receiver_status) %>% pull())))
-  expect_true(all(deployments_projects_multiple %>% distinct(receiver_status) %>% pull() %in%
-    (deployments_all %>% distinct(receiver_status) %>% pull())))
-  expect_true(deployments_status1 %>% distinct(receiver_status) %>% pull() == "Broken")
-  expect_true(all(deployments_status_multiple %>% distinct(receiver_status) %>% pull() %in% c(
-    "Broken",
-    "Lost"
-  )))
+
+  # Open ended date
   expect_true(all(deployments_project1 %>% select(recover_date_time) %>% is.na()))
-  # excluding outside function is the same as conditional TRUE
+  # Excluding outside function is the same as conditional TRUE
   expect_equal(nrow(deployments_project1_openfalse %>% filter(is.na(recover_date_time))), nrow(deployments_project1))
 })

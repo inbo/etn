@@ -36,16 +36,20 @@ expected_col_names_receivers <- c(
 receivers_all <- get_receivers(con)
 
 testthat::test_that("test_input_get_receivers", {
-  expect_error(
-    get_receivers("I am not a connection"),
+  expect_error(get_receivers("I am not a connection"),
     "Not a connection object to database."
   )
 })
 
 testthat::test_that("test_output_get_receivers", {
+  # Output type
   expect_is(receivers_all, "data.frame")
+
+  # Col names
   expect_true(all(names(receivers_all) %in% expected_col_names_receivers))
   expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
+
+  # Unique IDs
   expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(pk)))
   expect_equal(nrow(receivers_all), nrow(receivers_all %>% distinct(receiver_id)))
 })
