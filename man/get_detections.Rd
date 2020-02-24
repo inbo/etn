@@ -72,7 +72,7 @@ get_detections(con,
   station_name = c("R03", "R05")
 )
 
-# Get detectios for a specific tag
+# Get detections for a specific tag
 get_detections(con, tag_id = "A69-1303-65302")
 
 # Get detections for a specific receiver during a specific time period
