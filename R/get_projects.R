@@ -38,13 +38,13 @@ get_projects <- function(connection, project_type = NULL) {
     project_type_query <- "True"
   } else {
     check_value(project_type, c("animal", "network"), "project_type")
-    project_type_query <- glue_sql("type IN ({project_type*})", .con = connection)
+    project_type_query <- glue_sql("project_type IN ({project_type*})", .con = connection)
   }
 
   # Build query
   query <- glue_sql("
     SELECT *
-    FROM vliz.projects
+    FROM vliz.projects_view2
     WHERE
       {project_type_query}
     ", .con = connection)
