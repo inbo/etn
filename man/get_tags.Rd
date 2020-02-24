@@ -5,7 +5,7 @@
 \title{Get tag metadata}
 \usage{
 get_tags(
-  connection,
+  connection = con,
   animal_project_code = NULL,
   include_reference_tags = FALSE
 )

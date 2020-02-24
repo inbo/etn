@@ -4,7 +4,7 @@
 \alias{list_animal_project_codes}
 \title{List all available animal project codes}
 \usage{
-list_animal_project_codes(connection)
+list_animal_project_codes(connection = con)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

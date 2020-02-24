@@ -4,7 +4,7 @@
 \alias{list_network_project_codes}
 \title{List all available network project codes}
 \usage{
-list_network_project_codes(connection)
+list_network_project_codes(connection = con)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

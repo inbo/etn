@@ -4,7 +4,7 @@
 \alias{get_projects}
 \title{Get project metadata}
 \usage{
-get_projects(connection, project_type = NULL)
+get_projects(connection = con, project_type = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

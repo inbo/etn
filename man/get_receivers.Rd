@@ -4,10 +4,12 @@
 \alias{get_receivers}
 \title{Get receiver metadata}
 \usage{
-get_receivers(connection)
+get_receivers(connection = con)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
+
+\item{receiver_id}{(string) One or more receiver ids.}
 }
 \value{
 A tibble (tidyverse data.frame).

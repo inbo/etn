@@ -5,7 +5,7 @@
 \title{Get deployment metadata}
 \usage{
 get_deployments(
-  connection,
+  connection = con,
   network_project_code = NULL,
   receiver_status = NULL,
   open_only = TRUE
@@ -18,8 +18,8 @@ get_deployments(
 
 \item{receiver_status}{(string) One or more receiver status.}
 
-\item{open_only}{(logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
-\code{TRUE}.}
+\item{open_only}{(logical) Restrict to deployments that are currently open
+(i.e. no end date defined). Default: \code{TRUE}.}
 }
 \value{
 A tibble (tidyverse data.frame).
