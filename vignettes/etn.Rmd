@@ -128,17 +128,16 @@ Remark: currently these names are NOT yet verified with a taxonomic backbone as 
 
 ### Transmitter overview
 
-The transmitters/tags metadata can be accessed by the `get_tags` function, with the option to subset on the animal project names:
+The transmitters/tags metadata can be accessed by the `get_tags` function:
 
 ```{r}
-my_tags <- get_tags(con, animal_project_code = "phd_reubens")
+my_tags <- get_tags(con)
 head(my_tags, 10) # print 10 first
 ```
 
 ## Detections data
 
 The raw detections are the core for any type of analysis and access is provided by the `get_detections` function. Different filters are available which you can explore by typing `?get_detections` in the console. 
-
 To narrow down the data request, filters are provided on animal/network project name, the deployment station name and the transmitter identifier to narrow. Furthermore, as these data sets can be large, some additional time-based filters are provided with a `start_date` and an `end_date`: 
 
 ```{r}

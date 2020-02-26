@@ -52,10 +52,13 @@ expected_col_names_tags <- c(
   "step4_acceleration_duration"
 )
 
+tag1 <- "A69-1303-65313" # A sentinel tag with 2 records
+tag_multiple <- c("A69-1601-1705", "A69-1601-1707")
+
 tags_all <- get_tags(con)
 tags_all_ref <- get_tags(con, include_ref_tags = TRUE)
-tags_tag1 <- get_tags(con, tag_id = "A69-1303-65313") # A sentinel tag with 2 records
-tags_tag_multiple <- get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
+tags_tag1 <- get_tags(con, tag_id = tag1)
+tags_tag_multiple <- get_tags(con, tag_id = tag_multiple)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -97,11 +100,11 @@ testthat::test_that("Test number of records", {
 testthat::test_that("Test if data is filtered on paramater", {
   expect_equal(
     tags_tag1 %>% distinct(tag_id) %>% pull(),
-    c("A69-1303-65313")
+    c(tag1)
   )
   expect_equal(
     tags_tag_multiple %>% distinct(tag_id) %>% arrange(tag_id) %>% pull(),
-    c("A69-1601-1705", "A69-1601-1707")
+    tag_multiple
   )
 })
 

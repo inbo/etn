@@ -1,6 +1,6 @@
 #' Get tag metadata
 #'
-#' Get metadata for tags, with option to filter on tag_id. By default, reference
+#' Get metadata for tags, with option to filter on tag id. By default, reference
 #' tags are excluded.
 #'
 #' @param connection A valid connection with the ETN database.
