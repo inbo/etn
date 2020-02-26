@@ -29,7 +29,8 @@
 #' # Get all network projects
 #' get_projects(con, project_type = "network")
 #' }
-get_projects <- function(connection, project_type = NULL) {
+get_projects <- function(connection = con,
+                         project_type = NULL) {
   # Check connection
   check_connection(connection)
 

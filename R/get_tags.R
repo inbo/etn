@@ -1,11 +1,11 @@
 #' Get tag metadata
 #'
-#' Get metadata for tags. Only returns tags that can be linked to an animal (and
-#' thus an animal project). By default, reference tags are excluded.
+#' Get metadata for tags, with option to filter on tag id. By default, reference
+#' tags are excluded.
 #'
 #' @param connection A valid connection with the ETN database.
-#' @param animal_project_code (string) One or more animal projects.
-#' @param include_reference_tags (logical) Include reference tags. Default:
+#' @param tag_id (string) One or more tag ids.
+#' @param include_ref_tags (logical) Include reference tags. Default:
 #'   `FALSE`.
 #'
 #' @return A tibble (tidyverse data.frame).
@@ -26,43 +26,42 @@
 #' get_tags(con)
 #'
 #' # Get all tags, including reference tags
-#' get_tags(con, include_reference_tags = TRUE)
+#' get_tags(con, include_ref_tags = TRUE)
 #'
-#' # Get tags linked to specific animal project(s)
-#' get_tags(con, animal_project_code = "phd_reubens")
-#' get_tags(con, animal_project_code = c("phd_reubens", "2012_leopoldkanaal"))
+#' # Get specific tags (will automatically set include_ref_tags = TRUE)
+#' get_tags(con, tag_id = "A69-1303-65313")
+#' get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
 #' }
-get_tags <- function(connection,
-                     animal_project_code = NULL,
-                     include_reference_tags = FALSE) {
+get_tags <- function(connection = con,
+                     tag_id = NULL,
+                     include_ref_tags = FALSE) {
   # Check connection
   check_connection(connection)
 
-  # Check animal_project_code
-  if (is.null(animal_project_code)) {
-    animal_project_code_query <- "True"
+  # Check tag_id
+  if (is.null(tag_id)) {
+    tag_id_query <- "True"
   } else {
-    valid_animal_project_codes <- list_animal_project_codes(connection)
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
+    valid_tag_ids <- list_tag_ids(connection)
+    check_value(tag_id, valid_tag_ids, "tag_id")
+    tag_id_query <- glue_sql("tag_id IN ({tag_id*})", .con = connection)
+    include_ref_tags <- TRUE
   }
 
   # Build query
   query <- glue_sql("
-    SELECT tags.*
-    FROM vliz.tags_view2 AS tags
-      LEFT JOIN vliz.animals_view2 AS animals
-      ON animals.tag_fk = tags.pk
+    SELECT *
+    FROM vliz.tags_view2
     WHERE
-      {animal_project_code_query}
+      {tag_id_query}
     ", .con = connection)
   tags <- dbGetQuery(connection, query)
 
   # Filter on reference tags
-  if (include_reference_tags) {
+  if (include_ref_tags) {
     tags
   } else {
-    tags %>% filter(.data$type == "animal")
+    tags <- tags %>% filter(.data$type == "animal")
   }
 
   as_tibble(tags)

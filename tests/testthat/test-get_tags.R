@@ -52,49 +52,63 @@ expected_col_names_tags <- c(
   "step4_acceleration_duration"
 )
 
-tags_all <- get_tags(con)
-tags_project1 <- get_tags(con, animal_project_code = "phd_reubens")
-tags_projects_multiple <- get_tags(con, animal_project_code = c(
-  "phd_reubens",
-  "2012_leopoldkanaal"
-))
-tags_project1_ref <- get_tags(con,
-  animal_project_code = "phd_reubens",
-  include_reference_tags = TRUE
-)
+tag1 <- "A69-1303-65313" # A sentinel tag with 2 records
+tag_multiple <- c("A69-1601-1705", "A69-1601-1707")
 
-testthat::test_that("test_input_get_tags", {
+tags_all <- get_tags(con)
+tags_all_ref <- get_tags(con, include_ref_tags = TRUE)
+tags_tag1 <- get_tags(con, tag_id = tag1)
+tags_tag_multiple <- get_tags(con, tag_id = tag_multiple)
+
+testthat::test_that("Test input", {
   expect_error(
-    get_tags("I am not a connection"),
+    get_tags("not_a_connection"),
     "Not a connection object to database."
   )
-  expect_error(get_tags(con, animal_project_code = "very_bad_project"))
-  expect_error(get_tags(con, animal_project_code = c(
-    "phd_reubens",
-    "very_bad_project"
-  )))
-  expect_error(get_tags(con, include_reference_tags = "not logical"))
+  expect_error(
+    get_tags(con, tag_id = "not_a_tag_id")
+  )
+  expect_error(
+    get_tags(con, tag_id = c("A69-1601-1705", "not_a_tag_id"))
+  )
+  expect_error(
+    get_tags(con, include_ref_tags = "not_a_logical")
+  )
 })
 
-testthat::test_that("test_output_get_tags", {
-  library(dplyr)
+testthat::test_that("Test output type", {
   expect_is(tags_all, "data.frame")
-  expect_is(tags_project1, "data.frame")
-  expect_is(tags_projects_multiple, "data.frame")
-  expect_is(tags_project1_ref, "data.frame")
+  expect_is(tags_all_ref, "data.frame")
+  expect_is(tags_tag1, "data.frame")
+  expect_is(tags_tag_multiple, "data.frame")
+})
+
+testthat::test_that("Test column names", {
   expect_true(all(names(tags_all) %in% expected_col_names_tags))
   expect_true(all(expected_col_names_tags %in% names(tags_all)))
-  expect_gte(nrow(tags_all), nrow(tags_project1))
-  expect_gte(nrow(tags_all), nrow(tags_projects_multiple))
-  expect_gte(nrow(tags_projects_multiple), nrow(tags_project1))
-  expect_gte(nrow(tags_project1_ref), nrow(tags_project1))
-  expect_equal(names(tags_all), names(tags_project1))
-  expect_equal(names(tags_all), names(tags_projects_multiple))
-  expect_equal(names(tags_all), names(tags_project1_ref))
+  expect_equal(names(tags_all), names(tags_all_ref))
+  expect_equal(names(tags_all), names(tags_tag1))
+  expect_equal(names(tags_all), names(tags_tag_multiple))
+})
+
+testthat::test_that("Test number of records", {
+  expect_gt(nrow(tags_all_ref), nrow(tags_all))
+  expect_equal(nrow(tags_tag1), 2)
+  expect_equal(nrow(tags_tag_multiple), 2)
+})
+
+testthat::test_that("Test if data is filtered on paramater", {
   expect_equal(
-    tags_project1 %>% distinct(type) %>% arrange() %>% pull(),
-    c("animal", "sentinel")
+    tags_tag1 %>% distinct(tag_id) %>% pull(),
+    c(tag1)
   )
-  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(pk)))
-  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id)))
+  expect_equal(
+    tags_tag_multiple %>% distinct(tag_id) %>% arrange(tag_id) %>% pull(),
+    tag_multiple
+  )
+})
+
+testthat::test_that("Test unique ids", {
+  expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(pk)))
+  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id))) # This is not the case
 })

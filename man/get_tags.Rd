@@ -4,26 +4,22 @@
 \alias{get_tags}
 \title{Get tag metadata}
 \usage{
-get_tags(
-  connection,
-  animal_project_code = NULL,
-  include_reference_tags = FALSE
-)
+get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 }
 \arguments{
 \item{connection}{A valid connection with the ETN database.}
 
-\item{animal_project_code}{(string) One or more animal projects.}
+\item{tag_id}{(string) One or more tag ids.}
 
-\item{include_reference_tags}{(logical) Include reference tags. Default:
+\item{include_ref_tags}{(logical) Include reference tags. Default:
 \code{FALSE}.}
 }
 \value{
 A tibble (tidyverse data.frame).
 }
 \description{
-Get metadata for tags. Only returns tags that can be linked to an animal (and
-thus an animal project). By default, reference tags are excluded.
+Get metadata for tags, with option to filter on tag id. By default, reference
+tags are excluded.
 }
 \examples{
 \dontrun{
@@ -33,10 +29,10 @@ con <- connect_to_etn(your_username, your_password)
 get_tags(con)
 
 # Get all tags, including reference tags
-get_tags(con, include_reference_tags = TRUE)
+get_tags(con, include_ref_tags = TRUE)
 
-# Get tags linked to specific animal project(s)
-get_tags(con, animal_project_code = "phd_reubens")
-get_tags(con, animal_project_code = c("phd_reubens", "2012_leopoldkanaal"))
+# Get specific tags (will automatically set include_ref_tags = TRUE)
+get_tags(con, tag_id = "A69-1303-65313")
+get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
 }
 }

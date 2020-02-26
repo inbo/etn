@@ -4,7 +4,11 @@
 \alias{get_animals}
 \title{Get animal metadata}
 \usage{
-get_animals(connection, animal_project_code = NULL, scientific_name = NULL)
+get_animals(
+  connection = con,
+  animal_project_code = NULL,
+  scientific_name = NULL
+)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

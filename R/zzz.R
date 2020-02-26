@@ -13,7 +13,7 @@
 #' @keywords internal
 check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
-              msg = "Not a connection object to database."
+    msg = "Not a connection object to database."
   )
   assert_that(connection@info$dbname == "ETN")
 }
@@ -65,7 +65,7 @@ check_value <- function(arg, options = NULL, arg_name) {
     assert_that(
       all(arg %in% options),
       msg = glue(
-        "Not valid input value(s) for {arg_name} input argument.
+        "Invalid value(s) for {arg_name} argument.
         Valid inputs are: {options_to_print*}.",
         .transformer = collapse_transformer(
           sep = ", ",
@@ -130,7 +130,7 @@ check_date_time <- function(date_time, date_name = "start_date") {
       if (grepl("No formats found", warning$message)) {
         stop(glue(
           "The given {date_name}, {date_time}, is not in a valid ",
-          "date format. Use a ymd format or shorter, ",
+          "date format. Use a yyyy-mm-dd format or shorter, ",
           "e.g. 2012-11-21, 2012-11 or 2012."
         ))
       } else {

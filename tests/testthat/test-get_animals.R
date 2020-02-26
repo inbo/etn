@@ -72,67 +72,87 @@ expected_col_names_animals <- c(
 
 project1 <- "phd_reubens"
 project2 <- "2013_albertkanaal"
-projects_multiple <- c("phd_reubens", "2013_albertkanaal")
-name1 <- "Gadus morhua"
-names_multiple <- c("Gadus morhua", "Sentinel", "Anguilla anguilla")
+project_multiple <- c("2013_albertkanaal", "phd_reubens")
+sciname1 <- "Gadus morhua"
+sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
 
 animals_all <- get_animals(con)
 animals_project1 <- get_animals(con, animal_project_code = project1)
 animals_project2 <- get_animals(con, animal_project_code = project2)
-animals_projects_multiple <- get_animals(con, animal_project_code = projects_multiple)
-animals_names_multiple <- get_animals(con, scientific_name = names_multiple)
-animals_project1_name1 <- get_animals(con,
-  animal_project_code = project1,
-  scientific_name = name1
-)
+animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
+animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
+animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
 
-testthat::test_that("test_input_get_animals", {
+testthat::test_that("Test input", {
   expect_error(
-    get_animals("I am not a connection"),
+    get_animals("not_a_connection"),
     "Not a connection object to database."
+  )
+  expect_error(
+    get_animals(con, network_project_code = "not_a_project")
+  )
+  expect_error(
+    get_animals(con, network_project_code = c("thornton", "not_a_project"))
   )
 })
 
-
-testthat::test_that("test_output_get_animals", {
-  library(dplyr)
+testthat::test_that("Test output type", {
   expect_is(animals_all, "data.frame")
   expect_is(animals_project1, "data.frame")
   expect_is(animals_project2, "data.frame")
-  expect_is(animals_projects_multiple, "data.frame")
-  expect_is(animals_names_multiple, "data.frame")
-  expect_is(animals_project1_name1, "data.frame")
+  expect_is(animals_project_multiple, "data.frame")
+  expect_is(animals_sciname_multiple, "data.frame")
+  expect_is(animals_project1_sciname1, "data.frame")
+})
+
+testthat::test_that("Test column names", {
   expect_true(all(names(animals_all) %in% expected_col_names_animals))
   expect_true(all(expected_col_names_animals %in% names(animals_all)))
-  expect_gte(nrow(animals_all), nrow(animals_project1))
-  expect_gte(nrow(animals_all), nrow(animals_project2))
-  expect_gte(nrow(animals_all), nrow(animals_projects_multiple))
-  expect_gte(nrow(animals_all), nrow(animals_names_multiple))
-  expect_gte(nrow(animals_all), nrow(animals_project1_name1))
-  expect_equal(nrow(animals_project2), 309)
   expect_equal(names(animals_all), names(animals_project1))
   expect_equal(names(animals_all), names(animals_project2))
-  expect_equal(names(animals_all), names(animals_projects_multiple))
-  expect_equal(names(animals_all), names(animals_names_multiple))
-  expect_equal(names(animals_all), names(animals_project1_name1))
-  expect_gte(
-    animals_all %>% distinct(scientific_name) %>% pull() %>% length(),
-    animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length()
-  )
-  expect_lte(
-    animals_projects_multiple %>% distinct(scientific_name) %>% pull() %>% length(),
-    (animals_project1 %>% distinct(scientific_name) %>% pull() %>% length() +
-      animals_project2 %>% distinct(scientific_name) %>% pull() %>% length())
-  )
-  expect_true(all(projects_multiple %in%
-    (animals_names_multiple %>% distinct(animal_project_code) %>% pull())))
-  expect_identical(
-    animals_project1_name1 %>% distinct(scientific_name) %>% pull(scientific_name),
-    c(name1)
-  )
-  expect_identical(
-    animals_project1_name1 %>% distinct(animal_project_code) %>% pull(animal_project_code),
+  expect_equal(names(animals_all), names(animals_project_multiple))
+  expect_equal(names(animals_all), names(animals_sciname_multiple))
+  expect_equal(names(animals_all), names(animals_project1_sciname1))
+})
+
+testthat::test_that("Test number of records", {
+  expect_equal(nrow(animals_project2), 309)
+  expect_gt(nrow(animals_all), nrow(animals_project1))
+  expect_gt(nrow(animals_all), nrow(animals_project2))
+  expect_gt(nrow(animals_all), nrow(animals_project_multiple))
+  expect_equal(nrow(animals_project_multiple), nrow(animals_project1) + nrow(animals_project2))
+  expect_gt(nrow(animals_all), nrow(animals_sciname_multiple))
+  expect_gt(nrow(animals_all), nrow(animals_project1_sciname1))
+  expect_gt(nrow(animals_project1), nrow(animals_project1_sciname1))
+})
+
+testthat::test_that("Test if data is filtered on paramater", {
+  expect_equal(
+    animals_project1 %>% distinct(animal_project_code) %>% pull(),
     c(project1)
   )
-  # expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+  expect_equal(
+    animals_project2 %>% distinct(animal_project_code) %>% pull(),
+    c(project2)
+  )
+  expect_equal(
+    animals_project_multiple %>% distinct(animal_project_code) %>% arrange(animal_project_code) %>% pull(),
+    c(project_multiple)
+  )
+  expect_equal(
+    animals_sciname_multiple %>% distinct(scientific_name) %>% arrange(scientific_name) %>% pull(),
+    c(sciname_multiple)
+  )
+  expect_equal(
+    animals_project1_sciname1 %>% distinct(animal_project_code) %>% pull(),
+    c(project1)
+  )
+  expect_equal(
+    animals_project1_sciname1 %>% distinct(scientific_name) %>% pull(),
+    c(sciname1)
+  )
 })
+
+# testthat::test_that("Test unique ids", {
+#   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+# })

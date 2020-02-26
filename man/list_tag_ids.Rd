@@ -4,7 +4,7 @@
 \alias{list_tag_ids}
 \title{List all available tag ids}
 \usage{
-list_tag_ids(connection)
+list_tag_ids(connection = con)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

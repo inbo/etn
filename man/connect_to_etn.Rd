@@ -17,3 +17,8 @@ con ODBC connection to ETN database.
 \description{
 Connect to the database using username and password.
 }
+\examples{
+\dontrun{
+con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+}
+}

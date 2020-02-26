@@ -4,16 +4,18 @@
 \alias{get_receivers}
 \title{Get receiver metadata}
 \usage{
-get_receivers(connection)
+get_receivers(connection = con, receiver_id = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
+
+\item{receiver_id}{(string) One or more receiver ids.}
 }
 \value{
 A tibble (tidyverse data.frame).
 }
 \description{
-Get metadata for receivers.
+Get metadata for receivers, with option to filter on receiver id.
 }
 \examples{
 \dontrun{
@@ -21,5 +23,9 @@ con <- connect_to_etn(your_username, your_password)
 
 # Get all receivers
 get_receivers(con)
+
+# Get specific receivers
+get_receivers(con, receiver_id = "VR2-4842c")
+get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 }
 }

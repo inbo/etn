@@ -6,8 +6,8 @@
 #' @param connection A valid connection to the ETN database.
 #' @param network_project_code (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
-#' @param open_only (logical) Restrict to deployments that are currently open (i.e. no end date defined).  Default:
-#'   `TRUE`.
+#' @param open_only (logical) Restrict to deployments that are currently open
+#'   (i.e. no end date defined). Default: `TRUE`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -30,15 +30,15 @@
 #' get_deployments(con, open_only = FALSE)
 #'
 #' # Get open deployments from specific network project(s)
-#' get_deployments(con, network_project_code = c("thornton", "leopold"))
+#' get_deployments(con, network_project_code = c("ws1", "ws2"))
 #'
 #' # Get open deployments with a specific receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #'
 #' # Get open deployments from a specific project from active receivers
-#' get_deployments(con, network_project_code = "thornton", receiver_status = "Active")
+#' get_deployments(con, network_project_code = "ws1", receiver_status = "Active")
 #' }
-get_deployments <- function(connection,
+get_deployments <- function(connection = con,
                             network_project_code = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {

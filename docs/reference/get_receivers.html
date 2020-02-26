@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Get receiver metadata — get_receivers" />
-<meta property="og:description" content="Get metadata for receivers, with option to filter on network project." />
+<meta property="og:description" content="Get metadata for receivers, with option to filter on receiver id." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9101</span>
       </span>
     </div>
 
@@ -122,10 +122,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Get metadata for receivers, with option to filter on network project.</p>
+    <p>Get metadata for receivers, with option to filter on receiver id.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_receivers</span>(<span class='no'>connection</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_receivers</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,8 +135,8 @@
       <td><p>A valid connection to the ETN database.</p></td>
     </tr>
     <tr>
-      <th>network_project_code</th>
-      <td><p>(string) One or more network projects.</p></td>
+      <th>receiver_id</th>
+      <td><p>(string) One or more receiver ids.</p></td>
     </tr>
     </table>
 
@@ -151,9 +151,9 @@
 <span class='co'># Get all receivers</span>
 <span class='fu'>get_receivers</span>(<span class='no'>con</span>)
 
-<span class='co'># Get receivers linked to specific network project(s)</span>
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>)
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"thornton"</span>, <span class='st'>"2012_leopoldkanaal"</span>))
+<span class='co'># Get specific receivers</span>
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2-4842c"</span>)
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"VR2AR-545719"</span>, <span class='st'>"VR2AR-545720"</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

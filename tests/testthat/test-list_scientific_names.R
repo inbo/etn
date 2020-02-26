@@ -3,7 +3,7 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-testthat::test_that("check_list_scientific_names", {
+testthat::test_that("Test output", {
   expect_is(list_scientific_names(con), "character")
   expect_false(any(duplicated(list_scientific_names(con))))
   expect_true("Anguilla anguilla" %in% list_scientific_names(con))

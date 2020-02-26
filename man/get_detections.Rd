@@ -5,7 +5,7 @@
 \title{Get detections data}
 \usage{
 get_detections(
-  connection,
+  connection = con,
   network_project_code = NULL,
   animal_project_code = NULL,
   start_date = NULL,
@@ -14,7 +14,7 @@ get_detections(
   tag_id = NULL,
   receiver_id = NULL,
   scientific_name = NULL,
-  limit = NULL
+  limit = TRUE
 )
 }
 \arguments{
@@ -40,8 +40,8 @@ well.}
 
 \item{scientific_name}{(character) One or more scientific names.}
 
-\item{limit}{(integer) The number of records to return (useful for testing
-purposes).}
+\item{limit}{(logical) Limit the number of returned records to 100 (useful for testing
+purposes). Default: \code{TRUE}.}
 }
 \value{
 A tibble (tidyverse data.frame).
@@ -55,36 +55,49 @@ Use \code{limit} to limit the number of returned records
 \dontrun{
 con <- connect_to_etn(your_username, your_password)
 
-# Get detections filtered by start year and limited to 100 records
-get_detections(con, start_date = "2017", limit = 100)
+# Get detections filtered by start year, limited to 100 records by default
+get_detections(con, start_date = "2017")
 
 # Get detections within a time frame for a specific animal project and
 # network project
-get_detections(con,
+get_detections(
+  con,
   animal_project_code = "phd_reubens",
   network_project_code = "thornton", start_date = "2011-01-28",
-  end_date = "2011-02-01"
+  end_date = "2011-02-01",
+  limit = FALSE
 )
 
 # Get detections for a specific animal project at specific stations
-get_detections(con,
+get_detections(
+  con,
   animal_project_code = "phd_reubens",
-  station_name = c("R03", "R05")
+  station_name = c("R03", "R05"),
+  limit = FALSE
 )
 
 # Get detections for a specific tag
-get_detections(con, tag_id = "A69-1303-65302")
+get_detections(
+  con,
+  tag_id = "A69-1303-65302",
+  limit = FALSE
+)
 
 # Get detections for a specific receiver during a specific time period
-get_detections(con,
-  receiver_id = "VR2W-122360", start_date = "2015-12-03",
-  end_date = "2015-12-05"
+get_detections(
+  con,
+  receiver_id = "VR2W-122360",
+  start_date = "2015-12-03",
+  end_date = "2015-12-05",
+  limit = FALSE
 )
 # Get detections for a specific species during a given period
-get_detections(con,
+get_detections(
+  con,
   scientific_name = "Anguilla anguilla",
   start_date = "2015-12-03",
-  end_date = "2015-12-05"
+  end_date = "2015-12-05",
+  limit = FALSE
 )
 }
 }

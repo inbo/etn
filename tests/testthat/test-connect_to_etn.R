@@ -3,8 +3,8 @@ con <- connect_to_etn(
   password = Sys.getenv("pwd")
 )
 
-testthat::test_that("check_connection", {
-  expect_error(check_connection("I am not a connection"))
+testthat::test_that("Test connection", {
+  expect_error(check_connection("not_a_connection"))
   expect_true(check_connection(con))
   expect_true(isClass(con, "PostgreSQL"))
 })

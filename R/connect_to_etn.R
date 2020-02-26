@@ -9,7 +9,13 @@
 #'
 #' @importFrom DBI dbConnect
 #' @importFrom odbc odbc
-connect_to_etn <- function(username, password) {
+#'
+#' @examples
+#' \dontrun{
+#' con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+#' }
+connect_to_etn <- function(username,
+                           password) {
   ETN_ODBC_DSN <- "ETN"
   # ETN_SERVER <- "dppg.vliz.be"
   # ETN_DBNAME <- "ETN"

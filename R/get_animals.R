@@ -33,7 +33,7 @@
 #' # Get animals of a specific species from a specific project
 #' get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
 #' }
-get_animals <- function(connection,
+get_animals <- function(connection = con,
                         animal_project_code = NULL,
                         scientific_name = NULL) {
   # Check connection

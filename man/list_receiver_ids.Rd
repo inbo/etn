@@ -4,7 +4,7 @@
 \alias{list_receiver_ids}
 \title{List all available network receiver ids}
 \usage{
-list_receiver_ids(connection)
+list_receiver_ids(connection = con)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}

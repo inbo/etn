@@ -8,7 +8,7 @@
 #' @importFrom DBI dbGetQuery
 #'
 #' @return A vector of all unique `tag_id` present in `tags`.
-list_tag_ids <- function(connection) {
+list_tag_ids <- function(connection = con) {
   query <- glue_sql("SELECT DISTINCT tag_id FROM vliz.tags_view2",
     .con = connection
   )
