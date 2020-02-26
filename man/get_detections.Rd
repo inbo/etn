@@ -80,7 +80,8 @@ get_detections(
 get_detections(
   con,
   tag_id = "A69-1303-65302",
-  limit = FALSE)
+  limit = FALSE
+)
 
 # Get detections for a specific receiver during a specific time period
 get_detections(
