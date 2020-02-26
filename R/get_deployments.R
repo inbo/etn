@@ -30,13 +30,13 @@
 #' get_deployments(con, open_only = FALSE)
 #'
 #' # Get open deployments from specific network project(s)
-#' get_deployments(con, network_project_code = c("thornton", "leopold"))
+#' get_deployments(con, network_project_code = c("ws1", "ws2"))
 #'
 #' # Get open deployments with a specific receiver status
 #' get_deployments(con, receiver_status = c("Broken", "Lost"))
 #'
 #' # Get open deployments from a specific project from active receivers
-#' get_deployments(con, network_project_code = "thornton", receiver_status = "Active")
+#' get_deployments(con, network_project_code = "ws1", receiver_status = "Active")
 #' }
 get_deployments <- function(connection = con,
                             network_project_code = NULL,
