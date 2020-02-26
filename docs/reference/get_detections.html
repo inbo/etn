@@ -79,7 +79,7 @@ Use limit to limit the number of returned records" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9093</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9101</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@ Use <code>limit</code> to limit the number of returned records</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_detections</span>(
-  <span class='no'>connection</span>,
+  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
   <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -139,7 +139,7 @@ Use <code>limit</code> to limit the number of returned records</p>
   <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -187,8 +187,8 @@ well.</p></td>
     </tr>
     <tr>
       <th>limit</th>
-      <td><p>(integer) The number of records to return (useful for testing
-purposes).</p></td>
+      <td><p>(logical) Limit the number of returned records to 100 (useful for testing
+purposes). Default: <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
@@ -200,36 +200,49 @@ purposes).</p></td>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
 
-<span class='co'># Get detections filtered by start year and limited to 100 records</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='co'># Get detections filtered by start year, limited to 100 records by default</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>)
 
 <span class='co'># Get detections within a time frame for a specific animal project and</span>
 <span class='co'># network project</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+<span class='fu'>get_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
   <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='st'>"thornton"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2011-01-28"</span>,
-  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2011-02-01"</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 
 <span class='co'># Get detections for a specific animal project at specific stations</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+<span class='fu'>get_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"phd_reubens"</span>,
-  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R03"</span>, <span class='st'>"R05"</span>)
+  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R03"</span>, <span class='st'>"R05"</span>),
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 
-<span class='co'># Get detectios for a specific tag</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>)
+<span class='co'># Get detections for a specific tag</span>
+<span class='fu'>get_detections</span>(
+  <span class='no'>con</span>,
+  <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65302"</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='co'># Get detections for a specific receiver during a specific time period</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>,
-  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-122360"</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
-  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>
+<span class='fu'>get_detections</span>(
+  <span class='no'>con</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-122360"</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 <span class='co'># Get detections for a specific species during a given period</span>
-<span class='fu'>get_detections</span>(<span class='no'>con</span>,
+<span class='fu'>get_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Anguilla anguilla"</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-03"</span>,
-  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-12-05"</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 }</div></pre>
   </div>
