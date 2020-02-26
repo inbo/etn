@@ -117,8 +117,8 @@ testthat::test_that("Test column names", {
 
 testthat::test_that("Test number of records", {
   expect_equal(nrow(detections_limit), 100)
-  expect_gte(nrow(detections_start_end), nrow(detections_limit))
-  expect_gte(nrow(detections_station), nrow(detections_limit))
+  expect_gt(nrow(detections_start_end), nrow(detections_limit))
+  expect_gt(nrow(detections_station), nrow(detections_limit))
   expect_lte(nrow(detections_tag), nrow(detections_limit))
   expect_lte(nrow(detections_receiver), nrow(detections_limit))
   expect_lte(nrow(detections_sciname), nrow(detections_limit))

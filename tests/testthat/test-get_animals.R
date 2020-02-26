@@ -117,11 +117,13 @@ testthat::test_that("Test column names", {
 
 testthat::test_that("Test number of records", {
   expect_equal(nrow(animals_project2), 309)
-  expect_gte(nrow(animals_all), nrow(animals_project1))
-  expect_gte(nrow(animals_all), nrow(animals_project2))
-  expect_gte(nrow(animals_all), nrow(animals_project_multiple))
-  expect_gte(nrow(animals_all), nrow(animals_sciname_multiple))
-  expect_gte(nrow(animals_all), nrow(animals_project1_sciname1))
+  expect_gt(nrow(animals_all), nrow(animals_project1))
+  expect_gt(nrow(animals_all), nrow(animals_project2))
+  expect_gt(nrow(animals_all), nrow(animals_project_multiple))
+  expect_equal(nrow(animals_project_multiple), nrow(animals_project1) + nrow(animals_project2))
+  expect_gt(nrow(animals_all), nrow(animals_sciname_multiple))
+  expect_gt(nrow(animals_all), nrow(animals_project1_sciname1))
+  expect_gt(nrow(animals_project1), nrow(animals_project1_sciname1))
 })
 
 testthat::test_that("Test if data is filtered on paramater", {

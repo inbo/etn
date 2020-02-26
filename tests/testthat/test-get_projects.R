@@ -60,10 +60,7 @@ testthat::test_that("Test column names", {
 testthat::test_that("Test number of records", {
   expect_gte(nrow(projects_all), nrow(projects_animal))
   expect_gte(nrow(projects_all), nrow(projects_network))
-  expect_equal(
-    nrow(projects_all),
-    nrow(projects_network) + nrow(projects_animal)
-  )
+  expect_equal(nrow(projects_all), nrow(projects_network) + nrow(projects_animal))
 })
 
 testthat::test_that("Test unique ids", {

@@ -97,10 +97,10 @@ testthat::test_that("Test column names", {
 })
 
 testthat::test_that("Test number of records", {
-  expect_gte(nrow(deployments_all), nrow(deployments_project1))
-  expect_gte(nrow(deployments_all), nrow(deployments_project_multiple))
-  expect_gte(nrow(deployments_project_multiple), nrow(deployments_project1))
-  expect_gte(nrow(deployments_status_multiple), nrow(deployments_status1))
+  expect_gt(nrow(deployments_all), nrow(deployments_project1))
+  expect_gt(nrow(deployments_all), nrow(deployments_project_multiple))
+  expect_gt(nrow(deployments_project_multiple), nrow(deployments_project1))
+  expect_gt(nrow(deployments_status_multiple), nrow(deployments_status1))
   expect_gte(nrow(deployments_project1_openfalse), nrow(deployments_project1))
 })
 
