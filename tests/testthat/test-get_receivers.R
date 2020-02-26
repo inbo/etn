@@ -33,22 +33,54 @@ expected_col_names_receivers <- c(
   "ar_tilt_after_deploy"
 )
 
+receiver1 <- "VR2-4842c"
+receiver_multiple <- c("VR2AR-545719", "VR2AR-545720")
+
 receivers_all <- get_receivers(con)
+receivers_receiver1 <- get_receivers(con, receiver_id = receiver1)
+receivers_receiver_multiple <- get_receivers(con, receiver_id = receiver_multiple)
 
 testthat::test_that("Test input", {
   expect_error(
     get_receivers("not_a_connection"),
     "Not a connection object to database."
   )
+  expect_error(
+    get_receivers(con, receiver_id = "not_a_receiver_id")
+  )
+  expect_error(
+    get_receivers(con, receiver_id = c("VR2AR-545719", "not_a_receiver_id"))
+  )
 })
 
 testthat::test_that("Test output type", {
   expect_is(receivers_all, "data.frame")
+  expect_is(receivers_receiver1, "data.frame")
+  expect_is(receivers_receiver_multiple, "data.frame")
 })
 
 testthat::test_that("Test column names", {
   expect_true(all(names(receivers_all) %in% expected_col_names_receivers))
   expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
+  expect_equal(names(receivers_all), names(receivers_receiver1))
+  expect_equal(names(receivers_all), names(receivers_receiver_multiple))
+})
+
+testthat::test_that("Test number of records", {
+  expect_gt(nrow(receivers_all), nrow(receivers_receiver1))
+  expect_equal(nrow(receivers_receiver1), 1)
+  expect_equal(nrow(receivers_receiver_multiple), 2)
+})
+
+testthat::test_that("Test if data is filtered on paramater", {
+  expect_equal(
+    receivers_receiver1 %>% distinct(receiver_id) %>% pull(),
+    c(receiver1)
+  )
+  expect_equal(
+    receivers_receiver_multiple %>% distinct(receiver_id) %>% arrange(receiver_id) %>% pull(),
+    receiver_multiple
+  )
 })
 
 testthat::test_that("Test unique ids", {
