@@ -80,11 +80,16 @@
 #'   limit = FALSE
 #' )
 #' }
-get_detections <- function(connection = con, network_project_code = NULL,
-                           animal_project_code = NULL, start_date = NULL,
-                           end_date = NULL, station_name = NULL,
-                           tag_id = NULL, receiver_id = NULL,
-                           scientific_name = NULL, limit = TRUE) {
+get_detections <- function(connection = con,
+                           network_project_code = NULL,
+                           animal_project_code = NULL,
+                           start_date = NULL,
+                           end_date = NULL,
+                           station_name = NULL,
+                           tag_id = NULL,
+                           receiver_id = NULL,
+                           scientific_name = NULL,
+                           limit = TRUE) {
   # Check connection
   check_connection(connection)
 
