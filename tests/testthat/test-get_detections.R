@@ -8,6 +8,7 @@ expected_col_names_detections <- c(
   "pk",
   "date_time",
   "receiver_id",
+  "application_type",
   "network_project_code",
   "tag_id",
   "tag_fk",

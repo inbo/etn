@@ -8,7 +8,7 @@ expected_col_names_projects <- c(
   "pk",
   "project_code",
   "project_type",
-  "context_type",
+  "application_type",
   "telemetry_type",
   "project_name",
   "principal_investigator",

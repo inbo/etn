@@ -7,6 +7,7 @@ con <- connect_to_etn(
 expected_col_names_deployments <- c(
   "pk",
   "receiver_id",
+  "application_type",
   "network_project_code",
   "station_name",
   "station_description",
