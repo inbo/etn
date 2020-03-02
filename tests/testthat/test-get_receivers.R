@@ -35,10 +35,12 @@ expected_col_names_receivers <- c(
 
 receiver1 <- "VR2-4842c"
 receiver_multiple <- c("VR2AR-545719", "VR2AR-545720")
+application1 <- "cpod"
 
 receivers_all <- get_receivers(con)
 receivers_receiver1 <- get_receivers(con, receiver_id = receiver1)
 receivers_receiver_multiple <- get_receivers(con, receiver_id = receiver_multiple)
+receivers_application1 <- get_receivers(con, application_type = application1)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -51,12 +53,16 @@ testthat::test_that("Test input", {
   expect_error(
     get_receivers(con, receiver_id = c("VR2AR-545719", "not_a_receiver_id"))
   )
+  expect_error(
+    get_receivers(con, application_type = "not_an_application_type")
+  )
 })
 
 testthat::test_that("Test output type", {
   expect_is(receivers_all, "data.frame")
   expect_is(receivers_receiver1, "data.frame")
   expect_is(receivers_receiver_multiple, "data.frame")
+  expect_is(receivers_application1, "data.frame")
 })
 
 testthat::test_that("Test column names", {
@@ -64,12 +70,14 @@ testthat::test_that("Test column names", {
   expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
   expect_equal(names(receivers_all), names(receivers_receiver1))
   expect_equal(names(receivers_all), names(receivers_receiver_multiple))
+  expect_equal(names(receivers_all), names(receivers_application1))
 })
 
 testthat::test_that("Test number of records", {
   expect_gt(nrow(receivers_all), nrow(receivers_receiver1))
   expect_equal(nrow(receivers_receiver1), 1)
   expect_equal(nrow(receivers_receiver_multiple), 2)
+  expect_gt(nrow(receivers_all), nrow(receivers_application1))
 })
 
 testthat::test_that("Test if data is filtered on paramater", {
@@ -80,6 +88,10 @@ testthat::test_that("Test if data is filtered on paramater", {
   expect_equal(
     receivers_receiver_multiple %>% distinct(receiver_id) %>% arrange(receiver_id) %>% pull(),
     receiver_multiple
+  )
+  expect_equal(
+    receivers_application1 %>% distinct(application_type) %>% pull(),
+    application1
   )
 })
 

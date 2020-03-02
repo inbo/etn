@@ -4,6 +4,7 @@
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param receiver_id (string) One or more receiver ids.
+#' @param application_type (string) Either `cpod` or `acoustic_telemetry`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -27,7 +28,8 @@
 #' get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 #' }
 get_receivers <- function(connection = con,
-                          receiver_id = NULL) {
+                          receiver_id = NULL,
+                          application_type = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -40,11 +42,20 @@ get_receivers <- function(connection = con,
     receiver_id_query <- glue_sql("receiver_id IN ({receiver_id*})", .con = connection)
   }
 
+  # Check application_type
+  if (is.null(application_type)) {
+    application_type_query <- "True"
+  } else {
+    check_value(application_type, c("acoustic_telemetry", "cpod"), "application_type")
+    application_type_query <- glue_sql("application_type IN ({application_type*})", .con = connection)
+  }
+
   # Build query
   query <- glue_sql("
     SELECT * FROM vliz.receivers_view2
     WHERE
       {receiver_id_query}
+      AND {application_type_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
   as_tibble(receivers)
