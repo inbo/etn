@@ -47,12 +47,14 @@ expected_col_names_deployments <- c(
   "receiver_status" # This field comes from join with receivers
 )
 
+application1 <- "cpod"
 project1 <- "ws1"
 project_multiple <- c("ws1", "ws2")
 status1 <- "Broken"
 status_multiple <- c("Broken", "Lost")
 
 deployments_all <- get_deployments(con)
+deployments_application1 <- get_deployments(con, application_type = application1)
 deployments_project1 <- get_deployments(con, network_project_code = project1)
 deployments_project_multiple <- get_deployments(con, network_project_code = project_multiple)
 deployments_status1 <- get_deployments(con, receiver_status = status1)
@@ -63,6 +65,9 @@ testthat::test_that("Test input", {
   expect_error(
     get_deployments("not_a_connection"),
     "Not a connection object to database."
+  )
+  expect_error(
+    get_deployments(con, application_type = "not_an_application_type")
   )
   expect_error(
     get_deployments(con, network_project_code = "not_a_project")
@@ -80,6 +85,7 @@ testthat::test_that("Test input", {
 
 testthat::test_that("Test output type", {
   expect_is(deployments_all, "data.frame")
+  expect_is(deployments_application1, "data.frame")
   expect_is(deployments_project1, "data.frame")
   expect_is(deployments_project_multiple, "data.frame")
   expect_is(deployments_status1, "data.frame")
@@ -90,6 +96,7 @@ testthat::test_that("Test output type", {
 testthat::test_that("Test column names", {
   expect_true(all(names(deployments_all) %in% expected_col_names_deployments))
   expect_true(all(expected_col_names_deployments %in% names(deployments_all)))
+  expect_equal(names(deployments_all), names(deployments_application1))
   expect_equal(names(deployments_all), names(deployments_project1))
   expect_equal(names(deployments_all), names(deployments_project_multiple))
   expect_equal(names(deployments_all), names(deployments_status1))
@@ -98,6 +105,7 @@ testthat::test_that("Test column names", {
 })
 
 testthat::test_that("Test number of records", {
+  expect_gt(nrow(deployments_all), nrow(deployments_application1))
   expect_gt(nrow(deployments_all), nrow(deployments_project1))
   expect_gt(nrow(deployments_all), nrow(deployments_project_multiple))
   expect_gt(nrow(deployments_project_multiple), nrow(deployments_project1))
@@ -106,6 +114,10 @@ testthat::test_that("Test number of records", {
 })
 
 testthat::test_that("Test if data is filtered on paramater", {
+  expect_equal(
+    deployments_application1 %>% distinct(application_type) %>% pull(),
+    c(application1)
+  )
   expect_equal(
     deployments_project1 %>% distinct(network_project_code) %>% pull(),
     c(project1)

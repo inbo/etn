@@ -4,6 +4,7 @@
 #' receiver status and/or open deployments.
 #'
 #' @param connection A valid connection to the ETN database.
+#' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #' @param network_project_code (string) One or more network projects.
 #' @param receiver_status (string) One or more receiver status.
 #' @param open_only (logical) Restrict to deployments that are currently open
@@ -39,11 +40,20 @@
 #' get_deployments(con, network_project_code = "ws1", receiver_status = "Active")
 #' }
 get_deployments <- function(connection = con,
+                            application_type = NULL,
                             network_project_code = NULL,
                             receiver_status = NULL,
                             open_only = TRUE) {
   # Check connection
   check_connection(connection)
+
+  # Check application_type
+  if (is.null(application_type)) {
+    application_type_query <- "True"
+  } else {
+    check_value(application_type, c("acoustic_telemetry", "cpod"), "application_type")
+    application_type_query <- glue_sql("deployments.application_type IN ({application_type*})", .con = connection)
+  }
 
   # Check network_project_code
   if (is.null(network_project_code)) {
@@ -72,6 +82,7 @@ get_deployments <- function(connection = con,
       ON deployments.receiver_id = receivers.receiver_id
     WHERE
       {network_project_code_query}
+      AND {application_type_query}
       AND {receiver_status_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)

@@ -4,7 +4,7 @@
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param receiver_id (string) One or more receiver ids.
-#' @param application_type (string) Either `cpod` or `acoustic_telemetry`.
+#' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'

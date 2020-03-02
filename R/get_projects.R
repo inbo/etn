@@ -4,8 +4,8 @@
 #' projects.
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param project_type (string) Either `animal` or `network`.
-#' @param application_type (string) Either `cpod` or `acoustic_telemetry`.
+#' @param project_type (string) `animal` or `network`.
+#' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
