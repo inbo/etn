@@ -5,6 +5,7 @@
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param project_type (string) Either `animal` or `network`.
+#' @param application_type (string) Either `cpod` or `acoustic_telemetry`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -30,16 +31,25 @@
 #' get_projects(con, project_type = "network")
 #' }
 get_projects <- function(connection = con,
-                         project_type = NULL) {
+                         project_type = NULL,
+                         application_type = NULL) {
   # Check connection
   check_connection(connection)
 
-  # Check project type
+  # Check project_type
   if (is.null(project_type)) {
     project_type_query <- "True"
   } else {
     check_value(project_type, c("animal", "network"), "project_type")
     project_type_query <- glue_sql("project_type IN ({project_type*})", .con = connection)
+  }
+
+  # Check application_type
+  if (is.null(application_type)) {
+    application_type_query <- "True"
+  } else {
+    check_value(application_type, c("acoustic_telemetry", "cpod"), "application_type")
+    application_type_query <- glue_sql("application_type IN ({application_type*})", .con = connection)
   }
 
   # Build query
@@ -48,7 +58,8 @@ get_projects <- function(connection = con,
     FROM vliz.projects_view2
     WHERE
       {project_type_query}
-    ", .con = connection)
+      AND {application_type_query}
+  ", .con = connection)
   projects <- dbGetQuery(connection, query)
   as_tibble(projects)
 }

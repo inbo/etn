@@ -23,6 +23,7 @@ expected_col_names_projects <- c(
 projects_all <- get_projects(con)
 projects_animal <- get_projects(con, project_type = "animal")
 projects_network <- get_projects(con, project_type = "network")
+projects_cpod <- get_projects(con, application_type = "cpod")
 
 testthat::test_that("Test input", {
   expect_error(
@@ -38,9 +39,7 @@ testthat::test_that("Test input", {
     fixed = TRUE
   )
   expect_error(
-    get_projects(con, prj_type = "not_a_project_type"),
-    "unused argument (prj_type = \"not_a_project_type\")",
-    fixed = TRUE
+    get_projects(con, application_type = "not_an_application_type")
   )
 })
 
@@ -48,19 +47,37 @@ testthat::test_that("Test output type", {
   expect_is(projects_all, "data.frame")
   expect_is(projects_animal, "data.frame")
   expect_is(projects_network, "data.frame")
+  expect_is(projects_cpod, "data.frame")
 })
 
 testthat::test_that("Test column names", {
   expect_true(all(names(projects_all) %in% expected_col_names_projects))
   expect_true(all(expected_col_names_projects %in% names(projects_all)))
   expect_equal(names(projects_all), names(projects_animal))
-  expect_equal(names(projects_animal), names(projects_network))
+  expect_equal(names(projects_all), names(projects_network))
+  expect_equal(names(projects_all), names(projects_cpod))
 })
 
 testthat::test_that("Test number of records", {
-  expect_gte(nrow(projects_all), nrow(projects_animal))
-  expect_gte(nrow(projects_all), nrow(projects_network))
+  expect_gt(nrow(projects_all), nrow(projects_animal))
+  expect_gt(nrow(projects_all), nrow(projects_network))
   expect_equal(nrow(projects_all), nrow(projects_network) + nrow(projects_animal))
+  expect_gt(nrow(projects_all), nrow(projects_cpod))
+})
+
+testthat::test_that("Test if data is filtered on paramater", {
+  expect_equal(
+    projects_animal %>% distinct(project_type) %>% pull(),
+    c("animal")
+  )
+  expect_equal(
+    projects_network %>% distinct(project_type) %>% pull(),
+    c("network")
+  )
+  expect_equal(
+    projects_cpod %>% distinct(application_type) %>% pull(),
+    c("cpod")
+  )
 })
 
 testthat::test_that("Test unique ids", {
