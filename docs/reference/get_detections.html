@@ -79,7 +79,7 @@ Use limit to limit the number of returned records" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9101</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9104</span>
       </span>
     </div>
 
@@ -131,6 +131,7 @@ Use <code>limit</code> to limit the number of returned records</p>
 
     <pre class="usage"><span class='fu'>get_detections</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -148,6 +149,10 @@ Use <code>limit</code> to limit the number of returned records</p>
     <tr>
       <th>connection</th>
       <td><p>A valid connection to the ETN database.</p></td>
+    </tr>
+    <tr>
+      <th>application_type</th>
+      <td><p>(string) <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
     </tr>
     <tr>
       <th>network_project_code</th>
@@ -202,6 +207,9 @@ purposes). Default: <code>TRUE</code>.</p></td>
 
 <span class='co'># Get detections filtered by start year, limited to 100 records by default</span>
 <span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2017"</span>)
+
+<span class='co'># Get detections for a specific application type, limited to 100 records</span>
+<span class='fu'>get_detections</span>(<span class='no'>con</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='st'>"acoustic_telemetry"</span>)
 
 <span class='co'># Get detections within a time frame for a specific animal project and</span>
 <span class='co'># network project</span>

@@ -1,6 +1,6 @@
 Package: etn
 Title: Access and Process Data from the European Tracking Network
-Version: 0.1.0.9101
+Version: 0.1.0.9104
 Description: Package with functions to access and process data from the European
     Tracking Network hosted by VLIZ.
 Authors@R: c(

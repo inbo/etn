@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9101</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9104</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <h1>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2020-02-26</h4>
+            <h4 class="date">2020-03-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn.Rmd"><code>vignettes/etn.Rmd</code></a></small>
       <div class="hidden name"><code>etn.Rmd</code></div>
@@ -118,18 +118,18 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">my_projects &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_projects.html">get_projects</a></span>(con)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(my_projects, <span class="dv">10</span>) <span class="co"># print 10 first</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; # A tibble: 10 x 13</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;       pk project_code project_type context_type telemetry_type project_name</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;       </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  1   638 cpod-lifewa… network      cpod         &lt;NA&gt;           Lifewatch   </span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;  2     3 lifewatch    network      acoustic_te… &lt;NA&gt;           Lifewatch   </span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;  3   611 testvr2ar    network      acoustic_te… &lt;NA&gt;           Test VR2AR  </span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;  4   596 flatfish     animal       acoustic_te… &lt;NA&gt;           Flatfish    </span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;  5   617 pc4c         network      acoustic_te… &lt;NA&gt;           PC4C        </span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;  6   625 Deveron      network      acoustic_te… &lt;NA&gt;           Deveron 2016</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;  7   626 MorayFirth   network      acoustic_te… &lt;NA&gt;           Moray Firth…</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt;  8   627 Aberdeen     network      acoustic_te… &lt;NA&gt;           Aberdeen 20…</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;  9   606 codnoise     animal       acoustic_te… &lt;NA&gt;           CodNoise    </span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 10   628 Conon        network      acoustic_te… &lt;NA&gt;           Conon 2017  </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;       pk project_code project_type application_type telemetry_type project_name</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  1   638 cpod-lifewa… network      cpod             &lt;NA&gt;           Lifewatch   </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;  2     3 lifewatch    network      acoustic_teleme… &lt;NA&gt;           Lifewatch   </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;  3   611 testvr2ar    network      acoustic_teleme… &lt;NA&gt;           Test VR2AR  </span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;  4   596 flatfish     animal       acoustic_teleme… &lt;NA&gt;           Flatfish    </span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;  5   617 pc4c         network      acoustic_teleme… &lt;NA&gt;           PC4C        </span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;  6   625 Deveron      network      acoustic_teleme… &lt;NA&gt;           Deveron 2016</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;  7   626 MorayFirth   network      acoustic_teleme… &lt;NA&gt;           Moray Firth…</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt;  8   627 Aberdeen     network      acoustic_teleme… &lt;NA&gt;           Aberdeen 20…</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;  9   606 codnoise     animal       acoustic_teleme… &lt;NA&gt;           CodNoise    </span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 10   628 Conon        network      acoustic_teleme… &lt;NA&gt;           Conon 2017  </span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; # … with 7 more variables: principal_investigator &lt;chr&gt;, start_date &lt;date&gt;,</span></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; #   end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, moratorium &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; #   imis_dataset_id &lt;int&gt;</span></a></code></pre></div>
@@ -137,18 +137,18 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">my_network_projects &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_projects.html">get_projects</a></span>(con, <span class="dt">project_type =</span> <span class="st">"network"</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(my_network_projects, <span class="dv">10</span>) <span class="co"># print 10 first</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 10 x 13</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;       pk project_code project_type context_type telemetry_type project_name</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;       </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  1   638 cpod-lifewa… network      cpod         &lt;NA&gt;           Lifewatch   </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  2     3 lifewatch    network      acoustic_te… &lt;NA&gt;           Lifewatch   </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  3   611 testvr2ar    network      acoustic_te… &lt;NA&gt;           Test VR2AR  </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  4   617 pc4c         network      acoustic_te… &lt;NA&gt;           PC4C        </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  5   625 Deveron      network      acoustic_te… &lt;NA&gt;           Deveron 2016</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  6   626 MorayFirth   network      acoustic_te… &lt;NA&gt;           Moray Firth…</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  7   627 Aberdeen     network      acoustic_te… &lt;NA&gt;           Aberdeen 20…</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  8   628 Conon        network      acoustic_te… &lt;NA&gt;           Conon 2017  </span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  9   629 Skye         network      acoustic_te… &lt;NA&gt;           Skye 2017   </span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 10    13 maas         network      acoustic_te… &lt;NA&gt;           Maas        </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;       pk project_code project_type application_type telemetry_type project_name</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  1   638 cpod-lifewa… network      cpod             &lt;NA&gt;           Lifewatch   </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  2     3 lifewatch    network      acoustic_teleme… &lt;NA&gt;           Lifewatch   </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  3   611 testvr2ar    network      acoustic_teleme… &lt;NA&gt;           Test VR2AR  </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  4   617 pc4c         network      acoustic_teleme… &lt;NA&gt;           PC4C        </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  5   625 Deveron      network      acoustic_teleme… &lt;NA&gt;           Deveron 2016</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  6   626 MorayFirth   network      acoustic_teleme… &lt;NA&gt;           Moray Firth…</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  7   627 Aberdeen     network      acoustic_teleme… &lt;NA&gt;           Aberdeen 20…</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  8   628 Conon        network      acoustic_teleme… &lt;NA&gt;           Conon 2017  </span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  9   629 Skye         network      acoustic_teleme… &lt;NA&gt;           Skye 2017   </span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 10    13 maas         network      acoustic_teleme… &lt;NA&gt;           Maas        </span></a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; # … with 7 more variables: principal_investigator &lt;chr&gt;, start_date &lt;date&gt;,</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; #   end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, moratorium &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; #   imis_dataset_id &lt;int&gt;</span></a></code></pre></div>
@@ -159,59 +159,61 @@
 <p>A network project typically considers multiple receivers that are placed on specific locations to lay out the network. To get an overview of receivers deployments linked to specific projects, use the <code>get_deployments</code> function:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ws3_deployments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_deployments.html">get_deployments</a></span>(con, <span class="dt">network_project_code =</span> <span class="st">"ws3"</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ws3_deployments, <span class="dv">10</span>) <span class="co"># print 10 first</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # A tibble: 6 x 39</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;      pk receiver_id network_project… station_name station_descrip…</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1  6173 VR2W-127731 ws3              ws-53A       53A             </span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 2  6177 VR2W-127725 ws3              ws-HW6       ws_HW6          </span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3  6178 VR2W-127735 ws3              ws-42A       42A             </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 4  6179 VR2W-127734 ws3              ws-55        55              </span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 5  6180 VR2W-127737 ws3              ws-53        53              </span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 6  6182 VR2W-115439 ws3              ws-F42       F42             </span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; # … with 34 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; #   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; #   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; #   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; #   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; #   valid_data_until_date_time &lt;dttm&gt;, sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # A tibble: 6 x 40</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;      pk receiver_id application_type network_project… station_name</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1  6173 VR2W-127731 acoustic_teleme… ws3              ws-53A      </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 2  6177 VR2W-127725 acoustic_teleme… ws3              ws-HW6      </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3  6178 VR2W-127735 acoustic_teleme… ws3              ws-42A      </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 4  6179 VR2W-127734 acoustic_teleme… ws3              ws-55       </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 5  6180 VR2W-127737 acoustic_teleme… ws3              ws-53       </span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 6  6182 VR2W-115439 acoustic_teleme… ws3              ws-F42      </span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; #   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; #   bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; #   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; #   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; #   recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;, download_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; #   download_file_name &lt;chr&gt;, valid_data_until_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; #   sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
 <p>You can also define multiple (network) projects at the same time, by combining them in a vector:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ws_deployments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_deployments.html">get_deployments</a></span>(con, <span class="dt">network_project_code =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ws1"</span>, <span class="st">"ws3"</span>))</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ws_deployments, <span class="dv">10</span>) <span class="co"># print 10 first</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # A tibble: 10 x 39</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;       pk receiver_id network_project… station_name station_descrip…</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  1  3978 VR2W-123826 ws1              ws-W7        W7              </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  2  6020 VR2W-123815 ws1              ws-W6        W-6             </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  3  6026 VR2W-123832 ws1              ws-OG10      OG-10           </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;  4  6029 VR2Tx-4807… ws1              ws-W7        W7              </span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;  5  6030 VR2Tx-4800… ws1              ws-WN2       WN-2            </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;  6  6032 VR2Tx-4807… ws1              ws-DL12      DL-12           </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;  7  6033 VR2W-123831 ws1              ws-OGDL      OGDL            </span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;  8  6036 VR2W-123819 ws1              ws-SP3       SP-2            </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  9  6038 VR2W-123821 ws1              ws-GVWSP     GVW-SP          </span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 10  6039 VR2W-131002 ws1              ws-TRAWL     TRAWL           </span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; # … with 34 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; #   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; #   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; #   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; #   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; #   valid_data_until_date_time &lt;dttm&gt;, sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # A tibble: 10 x 40</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;       pk receiver_id application_type network_project… station_name</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  1  3978 VR2W-123826 acoustic_teleme… ws1              ws-W7       </span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  2  6020 VR2W-123815 acoustic_teleme… ws1              ws-W6       </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  3  6026 VR2W-123832 acoustic_teleme… ws1              ws-OG10     </span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;  4  6029 VR2Tx-4807… acoustic_teleme… ws1              ws-W7       </span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;  5  6030 VR2Tx-4800… acoustic_teleme… ws1              ws-WN2      </span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;  6  6032 VR2Tx-4807… acoustic_teleme… ws1              ws-DL12     </span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;  7  6033 VR2W-123831 acoustic_teleme… ws1              ws-OGDL     </span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;  8  6036 VR2W-123819 acoustic_teleme… ws1              ws-SP3      </span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  9  6038 VR2W-123821 acoustic_teleme… ws1              ws-GVWSP    </span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 10  6039 VR2W-131002 acoustic_teleme… ws1              ws-TRAWL    </span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; #   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; #   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; #   bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; #   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; #   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; #   recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;, download_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; #   download_file_name &lt;chr&gt;, valid_data_until_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; #   sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
 <p>When a number of columns is not useful to your specific purpose, remember that the output is a <code>data.frame</code>, which can be filtered and subsetted conveniently with for example the <a href="http://dplyr.tidyverse.org/">dplyr</a> functions.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; </span></a>
@@ -247,24 +249,25 @@
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">my_deployments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_deployments.html">get_deployments</a></span>(con, <span class="dt">network_project_code =</span> <span class="st">"ws1"</span>, </a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">                                  <span class="dt">receiver_status =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Broken"</span>, <span class="st">"Lost"</span>))</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(my_deployments, <span class="dv">10</span>) <span class="co"># print 10 first </span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; # A tibble: 1 x 39</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;      pk receiver_id network_project… station_name station_descrip…</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 1  3978 VR2W-123826 ws1              ws-W7        W7              </span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; # … with 34 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; #   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; #   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; #   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; #   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; #   valid_data_until_date_time &lt;dttm&gt;, sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; # A tibble: 1 x 40</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;      pk receiver_id application_type network_project… station_name</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 1  3978 VR2W-123826 acoustic_teleme… ws1              ws-W7       </span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; #   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; #   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; #   bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; #   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; #   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; #   recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;, download_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; #   download_file_name &lt;chr&gt;, valid_data_until_date_time &lt;dttm&gt;,</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; #   sync_date_time &lt;dttm&gt;, time_drift &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; #   ar_battery_installation_date &lt;dttm&gt;, ar_confirm &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; #   transmit_profile &lt;chr&gt;, transmit_power_output &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; #   log_temperature_stats_period &lt;int&gt;, log_temperature_sample_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; #   log_tilt_sample_period &lt;int&gt;, log_noise_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; #   log_noise_sample_period &lt;int&gt;, log_depth_stats_period &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; #   log_depth_sample_period &lt;int&gt;, comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></a></code></pre></div>
 </div>
 <div id="animals-overview" class="section level3">
 <h3 class="hasAnchor">
@@ -388,26 +391,26 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">my_detections &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_detections.html">get_detections</a></span>(con, <span class="dt">animal_project_code =</span> <span class="st">"phd_reubens"</span>, </a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">                                <span class="dt">start_date =</span> <span class="st">"2011-01-28"</span>, <span class="dt">end_date =</span> <span class="st">"2011-02-01"</span>)</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(my_detections, <span class="dv">10</span>) <span class="co"># print 10 first</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; # A tibble: 10 x 23</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt;        pk date_time           receiver_id network_project… tag_id tag_fk</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt;     &lt;int&gt; &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;   &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt;  1 1.92e7 2011-01-31 16:44:19 VR2W-110784 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt;  2 1.92e7 2011-01-31 16:54:23 VR2W-110784 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt;  3 1.94e7 2011-01-28 05:35:14 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt;  4 1.94e7 2011-01-28 11:07:22 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt;  5 1.94e7 2011-01-28 11:17:26 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt;  6 1.94e7 2011-01-28 11:37:33 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">#&gt;  7 1.94e7 2011-01-28 11:47:37 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt;  8 1.94e7 2011-01-28 11:57:41 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt;  9 1.94e7 2011-01-28 12:07:45 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt; 10 1.94e7 2011-01-28 12:17:49 VR2W-106253 thornton         A69-1…     67</span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">#&gt; # … with 17 more variables: animal_id &lt;chr&gt;, animal_fk &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">#&gt; #   animal_project_code &lt;chr&gt;, scientific_name &lt;chr&gt;, station_name &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, sensor_type &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">#&gt; #   sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_value_depth &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt; #   sensor_value_acceleration &lt;dbl&gt;, sensor_value_temperature &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; #   signal_to_noise_ratio &lt;int&gt;, source_file &lt;chr&gt;, qc_flag &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">#&gt; #   deployment_fk &lt;int&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; # A tibble: 10 x 24</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt;        pk date_time           receiver_id application_type network_project…</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt;     &lt;int&gt; &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;           </span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt;  1 1.92e7 2011-01-31 16:44:19 VR2W-110784 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt;  2 1.92e7 2011-01-31 16:54:23 VR2W-110784 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt;  3 1.94e7 2011-01-28 05:35:14 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt;  4 1.94e7 2011-01-28 11:07:22 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt;  5 1.94e7 2011-01-28 11:17:26 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt;  6 1.94e7 2011-01-28 11:37:33 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">#&gt;  7 1.94e7 2011-01-28 11:47:37 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt;  8 1.94e7 2011-01-28 11:57:41 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt;  9 1.94e7 2011-01-28 12:07:45 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt; 10 1.94e7 2011-01-28 12:17:49 VR2W-106253 acoustic_teleme… thornton        </span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">#&gt; # … with 19 more variables: tag_id &lt;chr&gt;, tag_fk &lt;int&gt;, animal_id &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">#&gt; #   animal_fk &lt;int&gt;, animal_project_code &lt;chr&gt;, scientific_name &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; #   station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">#&gt; #   sensor_type &lt;chr&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt; #   sensor_value_depth &lt;dbl&gt;, sensor_value_acceleration &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; #   sensor_value_temperature &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">#&gt; #   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_fk &lt;int&gt;</span></a></code></pre></div>
 <p>The date level can be defined on month (e.g. <code>"2011-01"</code>) or year (e.g. <code>"2011"</code>) level as well. Finally, for explorative reasons, a hard maximum limit of records to request can help to have a quick glance on the expected data.</p>
 <p>See more exampled in the function help (remember the <code><a href="../reference/get_detections.html">?get_detections</a></code>).</p>
 </div>

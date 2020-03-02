@@ -78,7 +78,7 @@ receiver status and/or open deployments." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9101</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9104</span>
       </span>
     </div>
 
@@ -129,6 +129,7 @@ receiver status and/or open deployments.</p>
 
     <pre class="usage"><span class='fu'>get_deployments</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
@@ -140,6 +141,10 @@ receiver status and/or open deployments.</p>
     <tr>
       <th>connection</th>
       <td><p>A valid connection to the ETN database.</p></td>
+    </tr>
+    <tr>
+      <th>application_type</th>
+      <td><p>(string) <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
     </tr>
     <tr>
       <th>network_project_code</th>
@@ -169,6 +174,9 @@ receiver status and/or open deployments.</p>
 
 <span class='co'># Get all deployments (including those with an end date)</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># Get open deployments for a specific application type</span>
+<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='st'>"cpod"</span>)
 
 <span class='co'># Get open deployments from specific network project(s)</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ws1"</span>, <span class='st'>"ws2"</span>))
