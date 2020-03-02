@@ -26,11 +26,10 @@
 #' # Get specific receivers
 #' get_receivers(con, receiver_id = "VR2-4842c")
 #' get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
-#' }
 #'
 #' # Get receivers for a specific application type
 #' get_receivers(con, application_type = "cpod")
-#'
+#' }
 get_receivers <- function(connection = con,
                           receiver_id = NULL,
                           application_type = NULL) {
