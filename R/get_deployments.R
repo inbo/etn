@@ -30,6 +30,9 @@
 #' # Get all deployments (including those with an end date)
 #' get_deployments(con, open_only = FALSE)
 #'
+#' # Get open deployments for a specific application type
+#' get_deployments(con, application_type = "cpod")
+#'
 #' # Get open deployments from specific network project(s)
 #' get_deployments(con, network_project_code = c("ws1", "ws2"))
 #'
@@ -81,8 +84,8 @@ get_deployments <- function(connection = con,
       LEFT JOIN vliz.receivers_view2 AS receivers
       ON deployments.receiver_id = receivers.receiver_id
     WHERE
-      {network_project_code_query}
-      AND {application_type_query}
+      {application_type_query}
+      AND {network_project_code_query}
       AND {receiver_status_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)

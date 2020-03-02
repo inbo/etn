@@ -4,12 +4,14 @@
 \alias{get_projects}
 \title{Get project metadata}
 \usage{
-get_projects(connection = con, project_type = NULL)
+get_projects(connection = con, project_type = NULL, application_type = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
-\item{project_type}{(string) Either \code{animal} or \code{network}.}
+\item{project_type}{(string) \code{animal} or \code{network}.}
+
+\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
 A tibble (tidyverse data.frame).
@@ -30,5 +32,8 @@ get_projects(con, project_type = "animal")
 
 # Get all network projects
 get_projects(con, project_type = "network")
+
+# Get projects for a specific application type
+get_projects(con, application_type = "cpod")
 }
 }

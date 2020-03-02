@@ -29,6 +29,9 @@
 #'
 #' # Get all network projects
 #' get_projects(con, project_type = "network")
+#'
+#' # Get projects for a specific application type
+#' get_projects(con, application_type = "cpod")
 #' }
 get_projects <- function(connection = con,
                          project_type = NULL,

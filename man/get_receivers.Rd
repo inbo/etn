@@ -4,12 +4,14 @@
 \alias{get_receivers}
 \title{Get receiver metadata}
 \usage{
-get_receivers(connection = con, receiver_id = NULL)
+get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
 
 \item{receiver_id}{(string) One or more receiver ids.}
+
+\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
 A tibble (tidyverse data.frame).
@@ -28,4 +30,8 @@ get_receivers(con)
 get_receivers(con, receiver_id = "VR2-4842c")
 get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 }
+
+# Get receivers for a specific application type
+get_receivers(con, application_type = "cpod")
+
 }

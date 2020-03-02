@@ -6,6 +6,7 @@
 \usage{
 get_detections(
   connection = con,
+  application_type = NULL,
   network_project_code = NULL,
   animal_project_code = NULL,
   start_date = NULL,
@@ -19,6 +20,8 @@ get_detections(
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
+
+\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 
 \item{network_project_code}{(character) One or more network projects.}
 
@@ -57,6 +60,9 @@ con <- connect_to_etn(your_username, your_password)
 
 # Get detections filtered by start year, limited to 100 records by default
 get_detections(con, start_date = "2017")
+
+# Get detections for a specific application type, limited to 100 records
+get_detections(con, application_type = "acoustic_telemetry")
 
 # Get detections within a time frame for a specific animal project and
 # network project

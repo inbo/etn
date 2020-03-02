@@ -39,6 +39,9 @@
 #' # Get detections filtered by start year, limited to 100 records by default
 #' get_detections(con, start_date = "2017")
 #'
+#' # Get detections for a specific application type, limited to 100 records
+#' get_detections(con, application_type = "acoustic_telemetry")
+#'
 #' # Get detections within a time frame for a specific animal project and
 #' # network project
 #' get_detections(

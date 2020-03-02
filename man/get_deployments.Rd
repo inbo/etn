@@ -6,6 +6,7 @@
 \usage{
 get_deployments(
   connection = con,
+  application_type = NULL,
   network_project_code = NULL,
   receiver_status = NULL,
   open_only = TRUE
@@ -13,6 +14,8 @@ get_deployments(
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
+
+\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 
 \item{network_project_code}{(string) One or more network projects.}
 
@@ -37,6 +40,9 @@ get_deployments(con)
 
 # Get all deployments (including those with an end date)
 get_deployments(con, open_only = FALSE)
+
+# Get open deployments for a specific application type
+get_deployments(con, application_type = "cpod")
 
 # Get open deployments from specific network project(s)
 get_deployments(con, network_project_code = c("ws1", "ws2"))
