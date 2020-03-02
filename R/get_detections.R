@@ -5,6 +5,7 @@
 #' Use `limit` to limit the number of returned records
 #'
 #' @param connection A valid connection to the ETN database.
+#' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #' @param network_project_code (character) One or more network projects.
 #' @param animal_project_code (character) One or more animal projects.
 #' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
@@ -81,6 +82,7 @@
 #' )
 #' }
 get_detections <- function(connection = con,
+                           application_type = NULL,
                            network_project_code = NULL,
                            animal_project_code = NULL,
                            start_date = NULL,
@@ -92,6 +94,14 @@ get_detections <- function(connection = con,
                            limit = TRUE) {
   # Check connection
   check_connection(connection)
+
+  # Check application_type
+  if (is.null(application_type)) {
+    application_type_query <- "True"
+  } else {
+    check_value(application_type, c("acoustic_telemetry", "cpod"), "application_type")
+    application_type_query <- glue_sql("application_type IN ({application_type*})", .con = connection)
+  }
 
   # Check network_project_code
   if (is.null(network_project_code)) {
@@ -175,7 +185,8 @@ get_detections <- function(connection = con,
     SELECT *
     FROM vliz.detections_view2
     WHERE
-      {network_project_code_query}
+      {application_type_query}
+      AND {network_project_code_query}
       AND {animal_project_code_query}
       AND {start_date_query}
       AND {end_date_query}
