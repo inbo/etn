@@ -153,6 +153,6 @@ testthat::test_that("Test if data is filtered on paramater", {
   )
 })
 
-# testthat::test_that("Test unique ids", {
-#   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
-# })
+testthat::test_that("Test unique ids", {
+  expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+})
