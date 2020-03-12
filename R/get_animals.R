@@ -7,14 +7,16 @@
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with a single row per animal. It
+#'   means that tag related information is collapsed in comma separated string.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
-#' @importFrom tibble as_tibble
+#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup as_tibble
+#' @importFrom stringr str_starts
+#' @importFrom tidyselect all_of
 #'
 #' @examples
 #' \dontrun{
@@ -66,5 +68,14 @@ get_animals <- function(connection = con,
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
+
+  # Compact tag info (one row = one animal even if multiple tags are linked to)
+  tag_cols <- names(animals)[str_starts(names(animals), "tag")]
+  animals <-
+    animals %>%
+    group_by_at(vars(-all_of(tag_cols))) %>%
+    summarize_at(vars(all_of(tag_cols)), paste, collapse = ",") %>%
+    ungroup()
+
   as_tibble(animals)
 }

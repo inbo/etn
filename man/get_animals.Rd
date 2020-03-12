@@ -18,7 +18,8 @@ get_animals(
 \item{scientific_name}{(string) One or more scientific names.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with a single row per animal. It
+means that tag related information is collapsed in comma separated string.
 }
 \description{
 Get metadata for animals, with options to filter on animal project and/or
