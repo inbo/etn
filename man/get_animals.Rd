@@ -19,7 +19,7 @@ get_animals(
 }
 \value{
 A tibble (tidyverse data.frame) with a single row per animal. It
-means that tag related information is collapsed in comma separated string.
+means that tag related information is collapsed in comma separated strings.
 }
 \description{
 Get metadata for animals, with options to filter on animal project and/or

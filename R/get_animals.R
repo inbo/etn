@@ -8,7 +8,7 @@
 #' @param scientific_name (string) One or more scientific names.
 #'
 #' @return A tibble (tidyverse data.frame) with a single row per animal. It
-#'   means that tag related information is collapsed in comma separated string.
+#'   means that tag related information is collapsed in comma separated strings.
 #'
 #' @export
 #'
