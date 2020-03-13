@@ -160,11 +160,15 @@ testthat::test_that("Test if data is filtered on paramater", {
 
 testthat::test_that("Test unique ids and collapsing tag information", {
   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
-  has_comma <- map_lgl(tag_col_names,
-                       function(x) {
-                         str_detect(string = (df_multiple_tags %>%
-                                                pull(!! x)),
-                                    pattern = ",")
-                         })
+  has_comma <- map_lgl(
+    tag_col_names,
+    function(x) {
+      str_detect(
+        string = (df_multiple_tags %>%
+          pull(!!x)),
+        pattern = ","
+      )
+    }
+  )
   expect_true(all(has_comma))
 })
