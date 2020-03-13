@@ -26,7 +26,8 @@ Imports:
     tidyselect
 Suggests:
     knitr,
-    testthat
+    testthat,
+    purrr
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
