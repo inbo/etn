@@ -73,6 +73,7 @@ expected_col_names_animals <- c(
 project1 <- "phd_reubens"
 project2 <- "2013_albertkanaal"
 project_multiple <- c("2013_albertkanaal", "phd_reubens")
+animal_pk_multiple_tags <- 2369
 sciname1 <- "Gadus morhua"
 sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
 
@@ -82,6 +83,10 @@ animals_project2 <- get_animals(con, animal_project_code = project2)
 animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
 animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
 animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
+df_multiple_tags <- animals_all %>%
+  filter(pk == 2827) %>%
+  select(starts_with("tag"))
+tag_col_names <- names(df_multiple_tags)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -153,6 +158,13 @@ testthat::test_that("Test if data is filtered on paramater", {
   )
 })
 
-testthat::test_that("Test unique ids", {
+testthat::test_that("Test unique ids and collapsing tag information", {
   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+  has_comma <- map_lgl(tag_col_names,
+                       function(x) {
+                         str_detect(string = (df_multiple_tags %>%
+                                                pull(!! x)),
+                                    pattern = ",")
+                         })
+  expect_true(all(has_comma))
 })
