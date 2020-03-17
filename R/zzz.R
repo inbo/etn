@@ -115,6 +115,8 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' check_date_time("1985-11-21")
