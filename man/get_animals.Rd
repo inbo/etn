@@ -18,12 +18,13 @@ get_animals(
 \item{scientific_name}{(string) One or more scientific names.}
 }
 \value{
-A tibble (tidyverse data.frame) with a single row per animal. It
-means that tag related information is collapsed in comma separated strings.
+A tibble (tidyverse data.frame).
 }
 \description{
 Get metadata for animals, with options to filter on animal project and/or
-scientific name.
+scientific name. Associated tag information is available in columns starting
+with \code{tag}. If multiple tags are associated with a single animal, the
+information is comma-separated.
 }
 \examples{
 \dontrun{
