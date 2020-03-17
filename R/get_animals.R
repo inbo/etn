@@ -15,7 +15,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup
+#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup mutate_at select
 #'
 #' @examples
 #' \dontrun{
@@ -79,6 +79,7 @@ get_animals <- function(connection = con,
     group_by_at(other_cols) %>%
     summarize_at(tag_cols, paste, collapse = ",") %>%
     ungroup() %>%
+    mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>%
     select(names(animals))
 
   animals
