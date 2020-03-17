@@ -76,9 +76,7 @@ get_animals <- function(connection = con,
 
   animals <-
     animals %>%
-    group_by_at(other_cols)
-  animals <-
-    animals %>%
+    group_by_at(other_cols) %>%
     summarize_at(tag_cols, paste, collapse = ",") %>%
     ungroup() %>%
     select(names(animals))
