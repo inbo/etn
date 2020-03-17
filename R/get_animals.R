@@ -16,7 +16,6 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup as_tibble
-#' @importFrom tidyselect all_of
 #'
 #' @examples
 #' \dontrun{
@@ -73,10 +72,14 @@ get_animals <- function(connection = con,
   tag_cols <- names(animals)[
     substr(names(animals), start = 1, stop = 3) == "tag"
   ]
+  other_cols <- names(animals)[!names(animals) %in% tag_cols]
+
   animals <-
     animals %>%
-    group_by_at(vars(-all_of(tag_cols))) %>%
-    summarize_at(vars(all_of(tag_cols)), paste, collapse = ",") %>%
+    group_by_at(other_cols)
+  animals <-
+    animals %>%
+    summarize_at(tag_cols, paste, collapse = ",") %>%
     ungroup() %>%
     select(names(animals))
 
