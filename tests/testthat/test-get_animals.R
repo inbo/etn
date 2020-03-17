@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_animals <- c(
+expected_col_names <- c(
   "pk",
   "animal_id",
   "animal_project_code",
@@ -111,13 +111,12 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(animals_all) %in% expected_col_names_animals))
-  expect_true(all(expected_col_names_animals %in% names(animals_all)))
-  expect_equal(names(animals_all), names(animals_project1))
-  expect_equal(names(animals_all), names(animals_project2))
-  expect_equal(names(animals_all), names(animals_project_multiple))
-  expect_equal(names(animals_all), names(animals_sciname_multiple))
-  expect_equal(names(animals_all), names(animals_project1_sciname1))
+  expect_equal(names(animals_all), expected_col_names)
+  expect_equal(names(animals_project1), expected_col_names)
+  expect_equal(names(animals_project2), expected_col_names)
+  expect_equal(names(animals_project_multiple), expected_col_names)
+  expect_equal(names(animals_sciname_multiple), expected_col_names)
+  expect_equal(names(animals_project1_sciname1), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {

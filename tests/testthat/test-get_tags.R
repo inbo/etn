@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_tags <- c(
+expected_col_names <- c(
   "pk",
   "tag_id",
   "tag_id_alternative",
@@ -84,11 +84,10 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(tags_all) %in% expected_col_names_tags))
-  expect_true(all(expected_col_names_tags %in% names(tags_all)))
-  expect_equal(names(tags_all), names(tags_all_ref))
-  expect_equal(names(tags_all), names(tags_tag1))
-  expect_equal(names(tags_all), names(tags_tag_multiple))
+  expect_equal(names(tags_all), expected_col_names)
+  expect_equal(names(tags_all_ref), expected_col_names)
+  expect_equal(names(tags_tag1), expected_col_names)
+  expect_equal(names(tags_tag_multiple), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {
