@@ -22,12 +22,10 @@ Imports:
     methods,
     odbc,
     rlang,
-    stringr,
     tidyselect
 Suggests:
     knitr,
-    testthat,
-    purrr
+    testthat
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
