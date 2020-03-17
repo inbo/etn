@@ -77,7 +77,8 @@ get_animals <- function(connection = con,
     animals %>%
     group_by_at(vars(-all_of(tag_cols))) %>%
     summarize_at(vars(all_of(tag_cols)), paste, collapse = ",") %>%
-    ungroup()
+    ungroup() %>%
+    select(names(animals))
 
   as_tibble(animals)
 }
