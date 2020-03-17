@@ -1,14 +1,15 @@
 #' Get animal metadata
 #'
 #' Get metadata for animals, with options to filter on animal project and/or
-#' scientific name.
+#' scientific name. Associated tag information is available in columns starting
+#' with `tag`. If multiple tags are associated with a single animal, the
+#' information is comma-separated.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame) with a single row per animal. It
-#'   means that tag related information is collapsed in comma separated strings.
+#' @return A tibble (tidyverse data.frame).
 #'
 #' @export
 #'
