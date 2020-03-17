@@ -15,7 +15,6 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup as_tibble
-#' @importFrom stringr str_starts
 #' @importFrom tidyselect all_of
 #'
 #' @examples
@@ -70,7 +69,9 @@ get_animals <- function(connection = con,
   animals <- dbGetQuery(connection, query)
 
   # Compact tag info (one row = one animal even if multiple tags are linked to)
-  tag_cols <- names(animals)[str_starts(names(animals), "tag")]
+  tag_cols <- names(animals)[
+    substr(names(animals), start = 1, stop = 3) == "tag"
+  ]
   animals <-
     animals %>%
     group_by_at(vars(-all_of(tag_cols))) %>%
