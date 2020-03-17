@@ -15,7 +15,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup as_tibble
+#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
@@ -81,5 +81,5 @@ get_animals <- function(connection = con,
     ungroup() %>%
     select(names(animals))
 
-  as_tibble(animals)
+  animals
 }
