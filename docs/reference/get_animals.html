@@ -44,7 +44,9 @@
 
 <meta property="og:title" content="Get animal metadata — get_animals" />
 <meta property="og:description" content="Get metadata for animals, with options to filter on animal project and/or
-scientific name." />
+scientific name. Associated tag information is available in columns starting
+with tag. If multiple tags are associated with a single animal, the
+information is comma-separated." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -124,7 +126,9 @@ scientific name." />
 
     <div class="ref-description">
     <p>Get metadata for animals, with options to filter on animal project and/or
-scientific name.</p>
+scientific name. Associated tag information is available in columns starting
+with <code>tag</code>. If multiple tags are associated with a single animal, the
+information is comma-separated.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_animals</span>(
@@ -152,8 +156,7 @@ scientific name.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame) with a single row per animal. It
-means that tag related information is collapsed in comma separated strings.</p>
+    <p>A tibble (tidyverse data.frame).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
