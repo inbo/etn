@@ -68,19 +68,17 @@ get_animals <- function(connection = con,
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
 
-  # Compact tag info (one row = one animal even if multiple tags are linked to)
-  tag_cols <- names(animals)[
-    substr(names(animals), start = 1, stop = 3) == "tag"
-  ]
-  other_cols <- names(animals)[!names(animals) %in% tag_cols]
+  # Collapse tag information, to obtain one row = one animal
+  tag_cols <- animals %>% select(starts_with("tag")) %>% names()
+  other_cols <- animals %>% select(-starts_with("tag")) %>% names()
 
   animals <-
     animals %>%
     group_by_at(other_cols) %>%
-    summarize_at(tag_cols, paste, collapse = ",") %>%
+    summarize_at(tag_cols, paste, collapse = ",") %>% # Collapse multiple tags by comma
     ungroup() %>%
-    mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>%
-    select(names(animals))
+    mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
+    select(names(animals)) # Use the original column order
 
   animals
 }
