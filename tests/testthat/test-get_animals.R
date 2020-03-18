@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_animals <- c(
+expected_col_names <- c(
   "pk",
   "animal_id",
   "animal_project_code",
@@ -69,10 +69,18 @@ expected_col_names_animals <- c(
   "holding_temperature",
   "comments"
 )
+tag_col_names <- c(
+  "tag_id",
+  "tag_fk",
+  "tagger",
+  "tagging_type",
+  "tagging_methodology"
+)
 
 project1 <- "phd_reubens"
 project2 <- "2013_albertkanaal"
 project_multiple <- c("2013_albertkanaal", "phd_reubens")
+animal_pk_multiple_tags <- 2369
 sciname1 <- "Gadus morhua"
 sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
 
@@ -82,6 +90,7 @@ animals_project2 <- get_animals(con, animal_project_code = project2)
 animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
 animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
 animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
+animals_tag_multiple <- animals_all %>% filter(pk == 2827)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -106,13 +115,12 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(animals_all) %in% expected_col_names_animals))
-  expect_true(all(expected_col_names_animals %in% names(animals_all)))
-  expect_equal(names(animals_all), names(animals_project1))
-  expect_equal(names(animals_all), names(animals_project2))
-  expect_equal(names(animals_all), names(animals_project_multiple))
-  expect_equal(names(animals_all), names(animals_sciname_multiple))
-  expect_equal(names(animals_all), names(animals_project1_sciname1))
+  expect_equal(names(animals_all), expected_col_names)
+  expect_equal(names(animals_project1), expected_col_names)
+  expect_equal(names(animals_project2), expected_col_names)
+  expect_equal(names(animals_project_multiple), expected_col_names)
+  expect_equal(names(animals_sciname_multiple), expected_col_names)
+  expect_equal(names(animals_project1_sciname1), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {
@@ -153,6 +161,13 @@ testthat::test_that("Test if data is filtered on paramater", {
   )
 })
 
-# testthat::test_that("Test unique ids", {
-#   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
-# })
+testthat::test_that("Test unique ids and collapsed tag information", {
+  expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+
+  has_comma <- apply(
+    animals_tag_multiple %>% select(tag_col_names),
+    MARGIN = 2,
+    function(x) grepl(pattern = ",", x = x)
+  )
+  expect_true(all(has_comma))
+})

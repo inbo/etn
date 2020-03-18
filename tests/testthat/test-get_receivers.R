@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_receivers <- c(
+expected_col_names <- c(
   "pk",
   "receiver_id",
   "application_type",
@@ -66,11 +66,10 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(receivers_all) %in% expected_col_names_receivers))
-  expect_true(all(expected_col_names_receivers %in% names(receivers_all)))
-  expect_equal(names(receivers_all), names(receivers_receiver1))
-  expect_equal(names(receivers_all), names(receivers_receiver_multiple))
-  expect_equal(names(receivers_all), names(receivers_application1))
+  expect_equal(names(receivers_all), expected_col_names)
+  expect_equal(names(receivers_receiver1), expected_col_names)
+  expect_equal(names(receivers_receiver_multiple), expected_col_names)
+  expect_equal(names(receivers_application1), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {

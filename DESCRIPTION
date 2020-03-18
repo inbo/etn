@@ -1,6 +1,6 @@
 Package: etn
 Title: Access and Process Data from the European Tracking Network
-Version: 0.1.0.9104
+Version: 0.1.0.9106
 Description: Package with functions to access and process data from the European
     Tracking Network hosted by VLIZ.
 Authors@R: c(
@@ -21,8 +21,7 @@ Imports:
     lubridate,
     methods,
     odbc,
-    rlang,
-    tibble
+    rlang
 Suggests:
     knitr,
     testthat
@@ -30,4 +29,4 @@ LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

@@ -90,9 +90,9 @@ library(dplyr)
 For example, selecting only the columns `serial_number`, `receiver` and `status`:
 
 ```{r}
-ws_deployments %>% 
+ws_deployments %>%
   select(receiver_id, receiver_status) %>%
-  head(10)  # print 10 first
+  head(10) # print 10 first
 ```
 
 ### Deployments overview
@@ -100,9 +100,11 @@ ws_deployments %>%
 Receivers are deployed for a specific period and this deployment information can be accessed as well with the command `get_deployments`. Filtering on the network project is similar to `get_receivers` and as the information about the receiver `status` is crucial, the function provides an additional argument to query based on the receiver status. Getting an overview of the lost and broken receivers of a specific project:
 
 ```{r}
-my_deployments <- get_deployments(con, network_project_code = "ws1", 
-                                  receiver_status = c("Broken", "Lost"))
-head(my_deployments, 10) # print 10 first 
+my_deployments <- get_deployments(con,
+  network_project_code = "ws1",
+  receiver_status = c("Broken", "Lost")
+)
+head(my_deployments, 10) # print 10 first
 ```
 
 ### Animals overview
@@ -119,8 +121,10 @@ head(my_animals, 10) # print 10 first
 When interested in specific species, add the scientific name as argument.
 
 ```{r}
-my_animals <- get_animals(con, animal_project_code = "phd_reubens",
-                       scientific_name = "Sentinel")
+my_animals <- get_animals(con,
+  animal_project_code = "phd_reubens",
+  scientific_name = "Sentinel"
+)
 head(my_animals, 10) # print 10 first
 ```
 
@@ -141,8 +145,10 @@ The raw detections are the core for any type of analysis and access is provided 
 To narrow down the data request, filters are provided on animal/network project name, the deployment station name and the transmitter identifier to narrow. Furthermore, as these data sets can be large, some additional time-based filters are provided with a `start_date` and an `end_date`: 
 
 ```{r}
-my_detections <- get_detections(con, animal_project_code = "phd_reubens", 
-                                start_date = "2011-01-28", end_date = "2011-02-01")
+my_detections <- get_detections(con,
+  animal_project_code = "phd_reubens",
+  start_date = "2011-01-28", end_date = "2011-02-01"
+)
 head(my_detections, 10) # print 10 first
 ```
 

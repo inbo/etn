@@ -1,7 +1,9 @@
 #' Get animal metadata
 #'
 #' Get metadata for animals, with options to filter on animal project and/or
-#' scientific name.
+#' scientific name. Associated tag information is available in columns starting
+#' with `tag`. If multiple tags are associated with a single animal, the
+#' information is comma-separated.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param animal_project_code (string) One or more animal projects.
@@ -13,8 +15,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
-#' @importFrom tibble as_tibble
+#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup mutate_at select
 #'
 #' @examples
 #' \dontrun{
@@ -66,5 +67,18 @@ get_animals <- function(connection = con,
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
-  as_tibble(animals)
+
+  # Collapse tag information, to obtain one row = one animal
+  tag_cols <- animals %>% select(starts_with("tag")) %>% names()
+  other_cols <- animals %>% select(-starts_with("tag")) %>% names()
+
+  animals <-
+    animals %>%
+    group_by_at(other_cols) %>%
+    summarize_at(tag_cols, paste, collapse = ",") %>% # Collapse multiple tags by comma
+    ungroup() %>%
+    mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
+    select(names(animals)) # Use the original column order
+
+  animals
 }

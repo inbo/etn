@@ -27,10 +27,9 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>%
+#' @importFrom dplyr pull %>% as_tibble
 #' @importFrom rlang .data
 #' @importFrom assertthat assert_that is.number
-#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{

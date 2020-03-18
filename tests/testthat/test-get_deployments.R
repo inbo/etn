@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_deployments <- c(
+expected_col_names <- c(
   "pk",
   "receiver_id",
   "application_type",
@@ -94,14 +94,13 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(deployments_all) %in% expected_col_names_deployments))
-  expect_true(all(expected_col_names_deployments %in% names(deployments_all)))
-  expect_equal(names(deployments_all), names(deployments_application1))
-  expect_equal(names(deployments_all), names(deployments_project1))
-  expect_equal(names(deployments_all), names(deployments_project_multiple))
-  expect_equal(names(deployments_all), names(deployments_status1))
-  expect_equal(names(deployments_all), names(deployments_status_multiple))
-  expect_equal(names(deployments_all), names(deployments_project1_openfalse))
+  expect_equal(names(deployments_all), expected_col_names)
+  expect_equal(names(deployments_application1), expected_col_names)
+  expect_equal(names(deployments_project1), expected_col_names)
+  expect_equal(names(deployments_project_multiple), expected_col_names)
+  expect_equal(names(deployments_status1), expected_col_names)
+  expect_equal(names(deployments_status_multiple), expected_col_names)
+  expect_equal(names(deployments_project1_openfalse), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {

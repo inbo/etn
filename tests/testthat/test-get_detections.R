@@ -4,7 +4,7 @@ con <- connect_to_etn(
 )
 
 # Expected column names
-expected_col_names_detections <- c(
+expected_col_names <- c(
   "pk",
   "date_time",
   "receiver_id",
@@ -113,14 +113,13 @@ testthat::test_that("Test output type", {
 })
 
 testthat::test_that("Test column names", {
-  expect_true(all(names(detections_limit) %in% expected_col_names_detections))
-  expect_true(all(expected_col_names_detections %in% names(detections_limit)))
-  expect_equal(names(detections_limit), names(detections_application1))
-  expect_equal(names(detections_limit), names(detections_start_end1))
-  expect_equal(names(detections_limit), names(detections_station1))
-  expect_equal(names(detections_limit), names(detections_tag1))
-  expect_equal(names(detections_limit), names(detections_receiver1))
-  expect_equal(names(detections_limit), names(detections_sciname1))
+  expect_equal(names(detections_limit), expected_col_names)
+  expect_equal(names(detections_application1), expected_col_names)
+  expect_equal(names(detections_start_end1), expected_col_names)
+  expect_equal(names(detections_station1), expected_col_names)
+  expect_equal(names(detections_tag1), expected_col_names)
+  expect_equal(names(detections_receiver1), expected_col_names)
+  expect_equal(names(detections_sciname1), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {

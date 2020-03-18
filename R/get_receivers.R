@@ -12,9 +12,8 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct
+#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct as_tibble
 #' @importFrom rlang .data
-#' @importFrom tibble as_tibble
 #'
 #' @examples
 #' \dontrun{
