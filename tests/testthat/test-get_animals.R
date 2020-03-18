@@ -69,6 +69,13 @@ expected_col_names <- c(
   "holding_temperature",
   "comments"
 )
+tag_col_names <- c(
+  "tag_id",
+  "tag_fk",
+  "tagger",
+  "tagging_type",
+  "tagging_methodology"
+)
 
 project1 <- "phd_reubens"
 project2 <- "2013_albertkanaal"
@@ -83,10 +90,7 @@ animals_project2 <- get_animals(con, animal_project_code = project2)
 animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
 animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
 animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
-df_multiple_tags <- animals_all %>%
-  filter(pk == 2827) %>%
-  select(starts_with("tag"))
-tag_col_names <- names(df_multiple_tags)
+animals_tag_multiple <- animals_all %>% filter(pk == 2827)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -157,10 +161,13 @@ testthat::test_that("Test if data is filtered on paramater", {
   )
 })
 
-testthat::test_that("Test unique ids and collapsing tag information", {
+testthat::test_that("Test unique ids and collapsed tag information", {
   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
-  has_comma <- apply(df_multiple_tags,
-                     MARGIN = 2,
-                     function(x) grepl(pattern = ",", x = x))
+
+  has_comma <- apply(
+    animals_tag_multiple %>% select(tag_col_names),
+    MARGIN = 2,
+    function(x) grepl(pattern = ",", x = x)
+  )
   expect_true(all(has_comma))
 })
