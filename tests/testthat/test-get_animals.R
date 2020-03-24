@@ -13,6 +13,7 @@ expected_col_names <- c(
   "scientific_name",
   "common_name",
   "aphia_id",
+  "animal_label",
   "animal_nickname",
   "tagger",
   "capture_date_time",
@@ -163,6 +164,7 @@ testthat::test_that("Test if data is filtered on paramater", {
 
 testthat::test_that("Test unique ids and collapsed tag information", {
   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
+  expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(animal_id)))
 
   has_comma <- apply(
     animals_tag_multiple %>% select(tag_col_names),
