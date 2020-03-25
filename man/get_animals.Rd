@@ -6,12 +6,15 @@
 \usage{
 get_animals(
   connection = con,
+  animal_id = NULL,
   animal_project_code = NULL,
   scientific_name = NULL
 )
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
+
+\item{animal_id}{(integer) One or more animal ids.}
 
 \item{animal_project_code}{(string) One or more animal projects.}
 
@@ -32,6 +35,10 @@ con <- connect_to_etn(your_username, your_password)
 
 # Get all animals
 get_animals(con)
+
+# Get specific animals
+get_animals(con, animal_id = 304)
+get_animals(con, animal_id = c(304, 305))
 
 # Get animals from specific animal project(s)
 get_animals(con, animal_project_code = "2012_leopoldkanaal")
