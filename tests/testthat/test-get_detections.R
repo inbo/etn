@@ -13,7 +13,6 @@ expected_col_names <- c(
   "tag_id",
   "tag_fk",
   "animal_id",
-  "animal_fk",
   "animal_project_code",
   "scientific_name",
   "station_name",
