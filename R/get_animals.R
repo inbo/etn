@@ -6,6 +6,7 @@
 #' information is comma-separated.
 #'
 #' @param connection A valid connection to the ETN database.
+#' @param animal_id (integer) One or more animal ids.
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
@@ -24,6 +25,11 @@
 #' # Get all animals
 #' get_animals(con)
 #'
+#' # Get specific animals
+#' get_animals(con, animal_id = 2824)
+#' get_animals(con, animal_id = "2824") # String values work as well
+#' get_animals(con, animal_id = c(2824, 2825, 2827))
+#'
 #' # Get animals from specific animal project(s)
 #' get_animals(con, animal_project_code = "2012_leopoldkanaal")
 #' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
@@ -35,10 +41,21 @@
 #' get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection = con,
+                        animal_id = NULL,
                         animal_project_code = NULL,
                         scientific_name = NULL) {
   # Check connection
   check_connection(connection)
+
+  # Check animal_id
+  if (is.null(animal_id)) {
+    animal_id_query <- "True"
+  } else {
+    valid_animal_ids <- list_animal_ids(connection)
+    check_value(animal_id, valid_animal_ids, "animal_id")
+    animal_id_query <- glue_sql("animal_id IN ({animal_id*})", .con = connection)
+    # animal_id_query seems to work correctly with integers or strings: 'animal_id IN (\'304\')'
+  }
 
   # Check animal_project_code
   if (is.null(animal_project_code)) {
@@ -63,7 +80,8 @@ get_animals <- function(connection = con,
     SELECT *
     FROM vliz.animals_view2
     WHERE
-      {animal_project_code_query}
+      {animal_id_query}
+      AND {animal_project_code_query}
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
