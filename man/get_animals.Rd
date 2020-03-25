@@ -37,8 +37,9 @@ con <- connect_to_etn(your_username, your_password)
 get_animals(con)
 
 # Get specific animals
-get_animals(con, animal_id = 304)
-get_animals(con, animal_id = c(304, 305))
+get_animals(con, animal_id = 2824)
+get_animals(con, animal_id = "2824") # String values work as well
+get_animals(con, animal_id = c(2824, 2825, 2827))
 
 # Get animals from specific animal project(s)
 get_animals(con, animal_project_code = "2012_leopoldkanaal")

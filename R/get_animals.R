@@ -26,8 +26,9 @@
 #' get_animals(con)
 #'
 #' # Get specific animals
-#' get_animals(con, animal_id = 304)
-#' get_animals(con, animal_id = c(304, 305))
+#' get_animals(con, animal_id = 2824)
+#' get_animals(con, animal_id = "2824") # String values work as well
+#' get_animals(con, animal_id = c(2824, 2825, 2827))
 #'
 #' # Get animals from specific animal project(s)
 #' get_animals(con, animal_project_code = "2012_leopoldkanaal")
@@ -53,6 +54,7 @@ get_animals <- function(connection = con,
     valid_animal_ids <- list_animal_ids(connection)
     check_value(animal_id, valid_animal_ids, "animal_id")
     animal_id_query <- glue_sql("animal_id IN ({animal_id*})", .con = connection)
+    # animal_id_query seems to work correctly with integers or strings: 'animal_id IN (\'304\')'
   }
 
   # Check animal_project_code
