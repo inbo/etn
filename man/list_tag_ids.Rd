@@ -10,7 +10,7 @@ list_tag_ids(connection = con)
 \item{connection}{A valid connection to the ETN database.}
 }
 \value{
-A vector of all unique \code{tag_id} present in \code{tags}.
+A vector of all unique \code{tag_id} present in \code{tags_view2}.
 }
 \description{
 List all available tag ids

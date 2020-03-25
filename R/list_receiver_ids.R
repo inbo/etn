@@ -1,4 +1,4 @@
-#' List all available network receiver ids
+#' List all available receiver ids
 #'
 #' @param connection A valid connection to the ETN database.
 #'
@@ -7,7 +7,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all unique `receiver_id` present in `receivers`.
+#' @return A vector of all unique `receiver_id` present in `receivers_view2`.
 list_receiver_ids <- function(connection = con) {
   query <- glue_sql("SELECT DISTINCT receiver_id FROM vliz.receivers_view2",
     .con = connection

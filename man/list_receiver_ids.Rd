@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_receiver_ids.R
 \name{list_receiver_ids}
 \alias{list_receiver_ids}
-\title{List all available network receiver ids}
+\title{List all available receiver ids}
 \usage{
 list_receiver_ids(connection = con)
 }
@@ -10,8 +10,8 @@ list_receiver_ids(connection = con)
 \item{connection}{A valid connection to the ETN database.}
 }
 \value{
-A vector of all unique \code{receiver_id} present in \code{receivers}.
+A vector of all unique \code{receiver_id} present in \code{receivers_view2}.
 }
 \description{
-List all available network receiver ids
+List all available receiver ids
 }
