@@ -106,6 +106,9 @@ testthat::test_that("Test input", {
     get_animals(con, animal_id = "not_an_animal")
   )
   expect_error(
+    get_animals(con, animal_id = 20.2) # Not an integer
+  )
+  expect_error(
     get_animals(con, network_project_code = "not_a_project")
   )
   expect_error(
