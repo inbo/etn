@@ -80,7 +80,7 @@ information is comma-separated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9106</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9116</span>
       </span>
     </div>
 
@@ -133,6 +133,7 @@ information is comma-separated.</p>
 
     <pre class="usage"><span class='fu'>get_animals</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -143,6 +144,10 @@ information is comma-separated.</p>
     <tr>
       <th>connection</th>
       <td><p>A valid connection to the ETN database.</p></td>
+    </tr>
+    <tr>
+      <th>animal_id</th>
+      <td><p>(integer) One or more animal ids.</p></td>
     </tr>
     <tr>
       <th>animal_project_code</th>
@@ -164,6 +169,11 @@ information is comma-separated.</p>
 
 <span class='co'># Get all animals</span>
 <span class='fu'>get_animals</span>(<span class='no'>con</span>)
+
+<span class='co'># Get specific animals</span>
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fl'>2824</span>)
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='st'>"2824"</span>) <span class='co'># String values work as well</span>
+<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2824</span>, <span class='fl'>2825</span>, <span class='fl'>2827</span>))
 
 <span class='co'># Get animals from specific animal project(s)</span>
 <span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2012_leopoldkanaal"</span>)
