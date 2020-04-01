@@ -112,7 +112,7 @@ testthat::test_that("Test number of records", {
   expect_gte(nrow(deployments_project1_openfalse), nrow(deployments_project1))
 })
 
-testthat::test_that("Test if data is filtered on paramater", {
+testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     deployments_application1 %>% distinct(application_type) %>% pull(),
     c(application1)

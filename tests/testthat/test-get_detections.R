@@ -142,7 +142,7 @@ testthat::test_that("Test date range", {
   )
 })
 
-testthat::test_that("Test if data is filtered on paramater", {
+testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     detections_application1 %>% distinct(application_type) %>% pull(),
     c(application1)

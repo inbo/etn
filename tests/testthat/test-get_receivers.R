@@ -79,7 +79,7 @@ testthat::test_that("Test number of records", {
   expect_gt(nrow(receivers_all), nrow(receivers_application1))
 })
 
-testthat::test_that("Test if data is filtered on paramater", {
+testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     receivers_receiver1 %>% distinct(receiver_id) %>% pull(),
     c(receiver1)

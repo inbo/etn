@@ -96,7 +96,7 @@ testthat::test_that("Test number of records", {
   expect_equal(nrow(tags_tag_multiple), 2)
 })
 
-testthat::test_that("Test if data is filtered on paramater", {
+testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     tags_tag1 %>% distinct(tag_id) %>% pull(),
     c(tag1)

@@ -152,7 +152,7 @@ testthat::test_that("Test number of records", {
   expect_gt(nrow(animals_project1), nrow(animals_project1_sciname1))
 })
 
-testthat::test_that("Test if data is filtered on paramater", {
+testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     animals_animal1 %>% distinct(animal_id) %>% pull(),
     c(animal1)
