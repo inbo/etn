@@ -2,7 +2,7 @@
 #'
 #' Get detections data, with options to filter on animal project, network
 #' project, start- and enddate, deployment station name and/or tag identifier.
-#' Use `limit` to limit the number of returned records
+#' Use `limit` to limit the number of returned records.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
@@ -19,7 +19,7 @@
 #' @param receiver_id (character) One or more receiver identifiers.
 #' @param scientific_name (character) One or more scientific names.
 #' @param limit (logical) Limit the number of returned records to 100 (useful for testing
-#'   purposes). Default: `TRUE`.
+#'   purposes). Default: `FALSE`.
 #'
 #' @return A tibble (tidyverse data.frame).
 #'
@@ -47,23 +47,20 @@
 #'   con,
 #'   animal_project_code = "phd_reubens",
 #'   network_project_code = "thornton", start_date = "2011-01-28",
-#'   end_date = "2011-02-01",
-#'   limit = FALSE
+#'   end_date = "2011-02-01"
 #' )
 #'
 #' # Get detections for a specific animal project at specific stations
 #' get_detections(
 #'   con,
 #'   animal_project_code = "phd_reubens",
-#'   station_name = c("R03", "R05"),
-#'   limit = FALSE
+#'   station_name = c("R03", "R05")
 #' )
 #'
 #' # Get detections for a specific tag
 #' get_detections(
 #'   con,
-#'   tag_id = "A69-1303-65302",
-#'   limit = FALSE
+#'   tag_id = "A69-1303-65302"
 #' )
 #'
 #' # Get detections for a specific receiver during a specific time period
@@ -71,16 +68,14 @@
 #'   con,
 #'   receiver_id = "VR2W-122360",
 #'   start_date = "2015-12-03",
-#'   end_date = "2015-12-05",
-#'   limit = FALSE
+#'   end_date = "2015-12-05"
 #' )
 #' # Get detections for a specific species during a given period
 #' get_detections(
 #'   con,
 #'   scientific_name = "Anguilla anguilla",
 #'   start_date = "2015-12-03",
-#'   end_date = "2015-12-05",
-#'   limit = FALSE
+#'   end_date = "2015-12-05"
 #' )
 #' }
 get_detections <- function(connection = con,
@@ -93,7 +88,7 @@ get_detections <- function(connection = con,
                            tag_id = NULL,
                            receiver_id = NULL,
                            scientific_name = NULL,
-                           limit = TRUE) {
+                           limit = FALSE) {
   # Check connection
   check_connection(connection)
 
