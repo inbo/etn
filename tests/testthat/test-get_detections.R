@@ -47,12 +47,12 @@ detections_application1 <- get_detections(con, application_type = application1)
 detections_start_end1 <- get_detections(
   con,
   animal_project_code = animal_project1, network_project_code = network_project1,
-  start_date = start_date1, end_date = end_date1, tag_id = tag1, limit = FALSE
+  start_date = start_date1, end_date = end_date1, tag_id = tag1
 )
 detections_station1 <- get_detections(
   con,
   animal_project_code = animal_project1, network_project_code = network_project1,
-  station_name = station1, tag_id = tag1, limit = FALSE
+  station_name = station1, tag_id = tag1
 )
 detections_tag1 <- get_detections(con, tag_id = tag1, limit = TRUE)
 detections_receiver1 <- get_detections(con, receiver_id = receiver1, limit = TRUE)
