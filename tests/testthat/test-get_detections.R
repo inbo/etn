@@ -43,7 +43,9 @@ receiver1 <- "VR2W-122360"
 sciname1 <- "Anguilla anguilla"
 
 detections_limit <- get_detections(con, limit = TRUE)
-detections_application1 <- get_detections(con, application_type = application1)
+detections_application1 <- get_detections(
+  con, application_type = application1, limit = TRUE
+)
 detections_start_end1 <- get_detections(
   con,
   animal_project_code = animal_project1, network_project_code = network_project1,
