@@ -56,12 +56,14 @@ get_projects <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.projects_view2
+    SELECT
+      *
+    FROM
+      vliz.projects_view2
     WHERE
       {project_type_query}
       AND {application_type_query}
-  ", .con = connection)
+    ", .con = connection)
   projects <- dbGetQuery(connection, query)
   as_tibble(projects)
 }

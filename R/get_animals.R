@@ -77,8 +77,10 @@ get_animals <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.animals_view2
+    SELECT
+      *
+    FROM
+      vliz.animals_view2
     WHERE
       {animal_id_query}
       AND {animal_project_code_query}

@@ -184,8 +184,10 @@ get_detections <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.detections_view2
+    SELECT
+      *
+    FROM
+      vliz.detections_view2
     WHERE
       {application_type_query}
       AND {network_project_code_query}

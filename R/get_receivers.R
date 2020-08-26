@@ -54,7 +54,10 @@ get_receivers <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT * FROM vliz.receivers_view2
+    SELECT
+      *
+    FROM
+      vliz.receivers_view2
     WHERE
       {receiver_id_query}
       AND {application_type_query}

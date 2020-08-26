@@ -77,9 +77,11 @@ get_deployments <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT deployments.*,
+    SELECT
+      deployments.*,
       receivers.status AS receiver_status
-    FROM vliz.deployments_view2 AS deployments
+    FROM
+      vliz.deployments_view2 AS deployments
       LEFT JOIN vliz.receivers_view2 AS receivers
       ON deployments.receiver_id = receivers.receiver_id
     WHERE

@@ -49,8 +49,10 @@ get_tags <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.tags_view2
+    SELECT
+      *
+    FROM
+      vliz.tags_view2
     WHERE
       {tag_id_query}
     ", .con = connection)
