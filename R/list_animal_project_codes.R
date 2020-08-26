@@ -16,6 +16,8 @@ list_animal_project_codes <- function(connection = con) {
       vliz.projects_view2
     WHERE
       project_type = 'animal'
+    ORDER BY
+      project_code
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)

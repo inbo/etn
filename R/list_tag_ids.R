@@ -14,6 +14,8 @@ list_tag_ids <- function(connection = con) {
       tag_id
     FROM
       vliz.tags_view2
+    ORDER BY
+      tag_id
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)

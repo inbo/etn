@@ -14,6 +14,8 @@ list_scientific_names <- function(connection = con) {
       scientific_name
     FROM
       vliz.animals_view2
+    ORDER BY
+      scientific_name
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)

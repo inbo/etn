@@ -14,6 +14,8 @@ list_station_names <- function(connection = con) {
       station_name
     FROM
       vliz.deployments_view2
+    ORDER BY
+      station_name
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)

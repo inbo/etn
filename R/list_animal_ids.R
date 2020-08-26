@@ -14,6 +14,8 @@ list_animal_ids <- function(connection = con) {
       animal_id
     FROM
       vliz.animals_view2
+    ORDER BY
+      animal_id
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)

@@ -14,6 +14,8 @@ list_receiver_ids <- function(connection = con) {
       receiver_id
     FROM
       vliz.receivers_view2
+    ORDER BY
+      receiver_id
     ", .con = connection
   )
   data <- dbGetQuery(connection, query)
