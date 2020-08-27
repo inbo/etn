@@ -10,7 +10,8 @@
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for animals, sorted by
+#'   `release_date_time` and `tag_id`.
 #'
 #' @export
 #'
@@ -100,5 +101,8 @@ get_animals <- function(connection = con,
     mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
     select(names(animals)) # Use the original column order
 
-  animals
+  # Sort data
+  animals <- animals %>% arrange(release_date_time, tag_id)
+
+  as_tibble(animals) # Is already a tibble, but added if code above changes
 }
