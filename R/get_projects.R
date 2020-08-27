@@ -7,7 +7,8 @@
 #' @param project_type (string) `animal` or `network`.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with project metadata, sorted by
+#'   `project_code`.
 #'
 #' @export
 #'
@@ -65,5 +66,9 @@ get_projects <- function(connection = con,
       AND {application_type_query}
     ", .con = connection)
   projects <- dbGetQuery(connection, query)
+
+  # Sort data
+  projects <- projects %>% arrange(project_code)
+
   as_tibble(projects)
 }
