@@ -15,7 +15,8 @@ get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with metadata for tags, sorted by
+\code{tag_id}.
 }
 \description{
 Get metadata for tags, with option to filter on tag id. By default, reference

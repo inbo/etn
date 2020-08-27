@@ -8,7 +8,8 @@
 #' @param include_ref_tags (logical) Include reference tags. Default:
 #'   `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for tags, sorted by
+#'   `tag_id`.
 #'
 #' @export
 #'
@@ -64,6 +65,9 @@ get_tags <- function(connection = con,
   } else {
     tags <- tags %>% filter(.data$type == "animal")
   }
+
+  # Sort data
+  tags <- tags %>% arrange(tags)
 
   as_tibble(tags)
 }
