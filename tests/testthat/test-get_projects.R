@@ -44,10 +44,10 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(projects_all, "data.frame")
-  expect_is(projects_animal, "data.frame")
-  expect_is(projects_network, "data.frame")
-  expect_is(projects_cpod, "data.frame")
+  expect_is(projects_all, "tbl_df")
+  expect_is(projects_animal, "tbl_df")
+  expect_is(projects_network, "tbl_df")
+  expect_is(projects_cpod, "tbl_df")
 })
 
 testthat::test_that("Test column names", {

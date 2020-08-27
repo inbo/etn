@@ -59,10 +59,10 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(receivers_all, "data.frame")
-  expect_is(receivers_receiver1, "data.frame")
-  expect_is(receivers_receiver_multiple, "data.frame")
-  expect_is(receivers_application1, "data.frame")
+  expect_is(receivers_all, "tbl_df")
+  expect_is(receivers_receiver1, "tbl_df")
+  expect_is(receivers_receiver_multiple, "tbl_df")
+  expect_is(receivers_application1, "tbl_df")
 })
 
 testthat::test_that("Test column names", {

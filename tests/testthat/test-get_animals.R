@@ -117,15 +117,15 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(animals_all, "data.frame")
-  expect_is(animals_animal1, "data.frame")
-  expect_is(animals_animal_multiple, "data.frame")
-  expect_is(animals_animal_multiple_text, "data.frame")
-  expect_is(animals_animal_tag_multiple, "data.frame")
-  expect_is(animals_project1, "data.frame")
-  expect_is(animals_project_multiple, "data.frame")
-  expect_is(animals_sciname_multiple, "data.frame")
-  expect_is(animals_project1_sciname1, "data.frame")
+  expect_is(animals_all, "tbl_df")
+  expect_is(animals_animal1, "tbl_df")
+  expect_is(animals_animal_multiple, "tbl_df")
+  expect_is(animals_animal_multiple_text, "tbl_df")
+  expect_is(animals_animal_tag_multiple, "tbl_df")
+  expect_is(animals_project1, "tbl_df")
+  expect_is(animals_project_multiple, "tbl_df")
+  expect_is(animals_sciname_multiple, "tbl_df")
+  expect_is(animals_project1_sciname1, "tbl_df")
 })
 
 testthat::test_that("Test column names", {

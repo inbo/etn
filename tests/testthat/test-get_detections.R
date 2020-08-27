@@ -104,13 +104,13 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(detections_limit, "data.frame")
-  expect_is(detections_application1, "data.frame")
-  expect_is(detections_start_end1, "data.frame")
-  expect_is(detections_station1, "data.frame")
-  expect_is(detections_tag1, "data.frame")
-  expect_is(detections_receiver1, "data.frame")
-  expect_is(detections_sciname1, "data.frame")
+  expect_is(detections_limit, "tbl_df")
+  expect_is(detections_application1, "tbl_df")
+  expect_is(detections_start_end1, "tbl_df")
+  expect_is(detections_station1, "tbl_df")
+  expect_is(detections_tag1, "tbl_df")
+  expect_is(detections_receiver1, "tbl_df")
+  expect_is(detections_sciname1, "tbl_df")
 })
 
 testthat::test_that("Test column names", {
