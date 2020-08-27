@@ -18,10 +18,11 @@
 #' @param tag_id (character) One or more tag identifiers.
 #' @param receiver_id (character) One or more receiver identifiers.
 #' @param scientific_name (character) One or more scientific names.
-#' @param limit (logical) Limit the number of returned records to 100 (useful for testing
-#'   purposes). Default: `FALSE`.
+#' @param limit (logical) Limit the number of returned records to 100 (useful
+#'  for testing purposes). Default: `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with detections, sorted by `tag_id`
+#'   and `date_time`.
 #'
 #' @export
 #'
@@ -196,5 +197,9 @@ get_detections <- function(connection = con,
     {limit_query}
     ", .con = connection)
   detections <- dbGetQuery(connection, query)
+
+  # Sort data (faster than in SQL)
+  detections <- detections %>% arrange(tag_id, date_time)
+
   as_tibble(detections)
 }

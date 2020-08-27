@@ -43,11 +43,12 @@ well.}
 
 \item{scientific_name}{(character) One or more scientific names.}
 
-\item{limit}{(logical) Limit the number of returned records to 100 (useful for testing
-purposes). Default: \code{FALSE}.}
+\item{limit}{(logical) Limit the number of returned records to 100 (useful
+for testing purposes). Default: \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with detections, sorted by \code{tag_id}
+and \code{date_time}.
 }
 \description{
 Get detections data, with options to filter on animal project, network
