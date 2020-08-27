@@ -6,7 +6,8 @@
 #' @param receiver_id (string) One or more receiver ids.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for receivers, sorted
+#'   by `receiver_id`.
 #'
 #' @export
 #'
@@ -63,5 +64,9 @@ get_receivers <- function(connection = con,
       AND {application_type_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
+
+  # Sort data
+  receivers <- receivers %>% arrange(receiver_id)
+
   as_tibble(receivers)
 }
