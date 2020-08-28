@@ -67,7 +67,7 @@ get_tags <- function(connection = con,
   }
 
   # Sort data
-  tags <- tags %>% arrange(tags)
+  tags <- tags %>% arrange(tag_id)
 
   as_tibble(tags)
 }
