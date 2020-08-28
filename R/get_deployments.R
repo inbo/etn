@@ -10,7 +10,8 @@
 #' @param open_only (logical) Restrict to deployments that are currently open
 #'   (i.e. no end date defined). Default: `TRUE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for deployments,
+#'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.
 #'
 #' @export
 #'
@@ -95,6 +96,10 @@ get_deployments <- function(connection = con,
   if (open_only) {
     deployments <- deployments %>% filter(is.na(.data$recover_date_time))
   }
+
+  # Sort data
+  deployments <- deployments %>%
+    arrange(network_project_code, station_name, deploy_date_time)
 
   as_tibble(deployments)
 }
