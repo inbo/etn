@@ -22,7 +22,7 @@ get_animals(
 }
 \value{
 A tibble (tidyverse data.frame) with metadata for animals, sorted by
-\code{release_date_time} and \code{tag_id}.
+\code{animal_project_code}, \code{release_date_time} and \code{tag_id}.
 }
 \description{
 Get metadata for animals, with options to filter on animal project and/or

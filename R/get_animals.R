@@ -11,7 +11,7 @@
 #' @param scientific_name (string) One or more scientific names.
 #'
 #' @return A tibble (tidyverse data.frame) with metadata for animals, sorted by
-#'   `release_date_time` and `tag_id`.
+#'   `animal_project_code`, `release_date_time` and `tag_id`.
 #'
 #' @export
 #'
@@ -102,7 +102,7 @@ get_animals <- function(connection = con,
     select(names(animals)) # Use the original column order
 
   # Sort data
-  animals <- animals %>% arrange(release_date_time, tag_id)
+  animals <- animals %>% arrange(animal_project_code, release_date_time, tag_id)
 
   as_tibble(animals) # Is already a tibble, but added if code above changes
 }
