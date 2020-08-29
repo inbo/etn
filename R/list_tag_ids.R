@@ -9,15 +9,10 @@
 #'
 #' @return A vector of all unique `tag_id` present in `tags_view2`.
 list_tag_ids <- function(connection = con) {
-  query <- glue_sql("
-    SELECT DISTINCT
-      tag_id
-    FROM
-      vliz.tags_view2
-    ORDER BY
-      tag_id
-    ", .con = connection
+  query <- glue_sql(
+    "SELECT DISTINCT tag_id FROM vliz.tags_view2",
+    .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$tag_id
+  data$tag_id %>% stringr::str_sort(numeric = TRUE)
 }

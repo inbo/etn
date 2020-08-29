@@ -9,15 +9,10 @@
 #'
 #' @return A vector of all unique `receiver_id` present in `receivers_view2`.
 list_receiver_ids <- function(connection = con) {
-  query <- glue_sql("
-    SELECT DISTINCT
-      receiver_id
-    FROM
-      vliz.receivers_view2
-    ORDER BY
-      receiver_id
-    ", .con = connection
+  query <- glue_sql(
+    "SELECT DISTINCT receiver_id FROM vliz.receivers_view2 ORDER BY receiver_id",
+    .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$receiver_id
+  data$receiver_id %>% stringr::str_sort(numeric = TRUE)
 }

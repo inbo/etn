@@ -21,7 +21,8 @@ Imports:
     lubridate,
     methods,
     odbc,
-    rlang
+    rlang,
+    stringr
 Suggests:
     knitr,
     testthat
