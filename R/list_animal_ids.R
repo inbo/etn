@@ -9,15 +9,10 @@
 #'
 #' @return A vector of all unique `animal_id` present in `animals_view2`.
 list_animal_ids <- function(connection = con) {
-  query <- glue_sql("
-    SELECT DISTINCT
-      animal_id
-    FROM
-      vliz.animals_view2
-    ORDER BY
-      animal_id
-    ", .con = connection
+  query <- glue_sql(
+    "SELECT DISTINCT animal_id FROM vliz.animals_view2",
+    .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$animal_id
+  data$animal_id %>% sort()
 }
