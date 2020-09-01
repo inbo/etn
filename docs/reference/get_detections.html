@@ -82,7 +82,7 @@ Use limit to limit the number of returned records." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9120</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9123</span>
       </span>
     </div>
 
@@ -195,14 +195,15 @@ well.</p></td>
     </tr>
     <tr>
       <th>limit</th>
-      <td><p>(logical) Limit the number of returned records to 100 (useful for testing
-purposes). Default: <code>FALSE</code>.</p></td>
+      <td><p>(logical) Limit the number of returned records to 100 (useful
+for testing purposes). Default: <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame).</p>
+    <p>A tibble (tidyverse data.frame) with detections, sorted by <code>tag_id</code>
+and <code>date_time</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
