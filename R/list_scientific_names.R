@@ -14,5 +14,6 @@ list_scientific_names <- function(connection = con) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$scientific_name %>% sort()
+
+  sort(data$scientific_name)
 }

@@ -14,5 +14,6 @@ list_animal_ids <- function(connection = con) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$animal_id %>% sort()
+
+  sort(data$animal_id)
 }

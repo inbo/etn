@@ -6,6 +6,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
+#' @importFrom stringr str_sort
 #'
 #' @return A vector of all unique `tag_id` present in `tags_view2`.
 list_tag_ids <- function(connection = con) {
@@ -14,5 +15,6 @@ list_tag_ids <- function(connection = con) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$tag_id %>% stringr::str_sort(numeric = TRUE)
+
+  str_sort(data$tag_id, numeric = TRUE)
 }

@@ -6,6 +6,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
+#' @importFrom stringr str_sort
 #'
 #' @return A vector of all unique `receiver_id` present in `receivers_view2`.
 list_receiver_ids <- function(connection = con) {
@@ -14,5 +15,6 @@ list_receiver_ids <- function(connection = con) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$receiver_id %>% stringr::str_sort(numeric = TRUE)
+
+  str_sort(data$receiver_id, numeric = TRUE)
 }

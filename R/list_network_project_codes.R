@@ -14,5 +14,6 @@ list_network_project_codes <- function(connection = con) {
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$project_code %>% sort()
+
+  sort(data$project_code)
 }
