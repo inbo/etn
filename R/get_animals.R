@@ -101,7 +101,13 @@ get_animals <- function(connection = con,
     select(names(animals)) # Use the original column order
 
   # Sort data
-  animals <- animals %>% arrange(animal_project_code, release_date_time, tag_id)
+  animals <-
+    animals %>%
+    arrange(
+      animal_project_code,
+      release_date_time,
+      factor(tag_id, levels = list_tag_ids(connection))
+    )
 
   as_tibble(animals) # Is already a tibble, but added if code above changes
 }

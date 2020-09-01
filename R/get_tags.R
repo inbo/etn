@@ -38,10 +38,10 @@ get_tags <- function(connection = con,
   check_connection(connection)
 
   # Check tag_id
+  valid_tag_ids <- list_tag_ids(connection)
   if (is.null(tag_id)) {
     tag_id_query <- "True"
   } else {
-    valid_tag_ids <- list_tag_ids(connection)
     check_value(tag_id, valid_tag_ids, "tag_id")
     tag_id_query <- glue_sql("tag_id IN ({tag_id*})", .con = connection)
     include_ref_tags <- TRUE
@@ -66,7 +66,9 @@ get_tags <- function(connection = con,
   }
 
   # Sort data
-  tags <- tags %>% arrange(tag_id)
+  tags <-
+    tags %>%
+    arrange(factor(tag_id, levels = valid_tag_ids)) # valid_tag_ids defined above
 
   as_tibble(tags)
 }

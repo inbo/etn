@@ -36,10 +36,10 @@ get_receivers <- function(connection = con,
   check_connection(connection)
 
   # Check receiver_id
+  valid_receiver_ids <- list_receiver_ids(connection)
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
     receiver_id_query <- glue_sql("receiver_id IN ({receiver_id*})", .con = connection)
   }
@@ -65,7 +65,9 @@ get_receivers <- function(connection = con,
   receivers <- dbGetQuery(connection, query)
 
   # Sort data
-  receivers <- receivers %>% arrange(receiver_id)
+  receivers <-
+    receivers %>%
+    arrange(factor(receiver_id, levels = valid_receiver_ids)) # valid_receiver_ids defined above
 
   as_tibble(receivers)
 }

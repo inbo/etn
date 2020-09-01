@@ -197,7 +197,12 @@ get_detections <- function(connection = con,
   detections <- dbGetQuery(connection, query)
 
   # Sort data (faster than in SQL)
-  detections <- detections %>% arrange(tag_id, date_time)
+  detections <-
+    detections %>%
+    arrange(
+      factor(tag_id, levels = list_tag_ids(connection)),
+      date_time
+    )
 
   as_tibble(detections)
 }

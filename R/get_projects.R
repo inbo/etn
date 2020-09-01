@@ -67,7 +67,9 @@ get_projects <- function(connection = con,
   projects <- dbGetQuery(connection, query)
 
   # Sort data
-  projects <- projects %>% arrange(project_code)
+  projects <-
+    projects %>%
+    arrange(project_code)
 
   as_tibble(projects)
 }
