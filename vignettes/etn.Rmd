@@ -87,7 +87,7 @@ When a number of columns is not useful to your specific purpose, remember that t
 library(dplyr)
 ```
 
-For example, selecting only the columns `serial_number`, `receiver` and `status`:
+For example, selecting only the columns `receiver_id` and `receiver_status`:
 
 ```{r}
 ws_deployments %>%
@@ -147,11 +147,13 @@ To narrow down the data request, filters are provided on animal/network project 
 ```{r}
 my_detections <- get_detections(con,
   animal_project_code = "phd_reubens",
-  start_date = "2011-01-28", end_date = "2011-02-01"
+  start_date = "2011-01-28",
+  end_date = "2011-02-01",
+  limit = TRUE # Limit number of records for this example
 )
 head(my_detections, 10) # print 10 first
 ```
 
 The date level can be defined on month (e.g. `"2011-01"`) or year (e.g. `"2011"`) level as well. Finally, for explorative reasons, a hard maximum limit of records to request can help to have a quick glance on the expected data.
 
-See more exampled in the function help (remember the `?get_detections`).
+See more examples in the function help (remember the `?get_detections`).
