@@ -17,7 +17,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup mutate_at select
+#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
@@ -92,7 +92,6 @@ get_animals <- function(connection = con,
   # Collapse tag information, to obtain one row = one animal
   tag_cols <- animals %>% select(starts_with("tag")) %>% names()
   other_cols <- animals %>% select(-starts_with("tag")) %>% names()
-
   animals <-
     animals %>%
     group_by_at(other_cols) %>%

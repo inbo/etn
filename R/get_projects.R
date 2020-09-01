@@ -14,8 +14,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr filter %>% as_tibble
-#' @importFrom rlang .data
+#' @importFrom dplyr %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
