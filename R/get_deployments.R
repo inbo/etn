@@ -10,13 +10,14 @@
 #' @param open_only (logical) Restrict to deployments that are currently open
 #'   (i.e. no end date defined). Default: `TRUE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for deployments,
+#'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% filter as_tibble
+#' @importFrom dplyr %>% arrange as_tibble filter
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -77,9 +78,11 @@ get_deployments <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT deployments.*,
+    SELECT
+      deployments.*,
       receivers.status AS receiver_status
-    FROM vliz.deployments_view2 AS deployments
+    FROM
+      vliz.deployments_view2 AS deployments
       LEFT JOIN vliz.receivers_view2 AS receivers
       ON deployments.receiver_id = receivers.receiver_id
     WHERE
@@ -93,6 +96,15 @@ get_deployments <- function(connection = con,
   if (open_only) {
     deployments <- deployments %>% filter(is.na(.data$recover_date_time))
   }
+
+  # Sort data
+  deployments <-
+    deployments %>%
+    arrange(
+      network_project_code,
+      factor(station_name, levels = list_station_names(connection)),
+      deploy_date_time
+    )
 
   as_tibble(deployments)
 }

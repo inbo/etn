@@ -25,7 +25,8 @@ get_deployments(
 (i.e. no end date defined). Default: \code{TRUE}.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with metadata for deployments,
+sorted by \code{network_project_code}, \code{station_name} and \code{deploy_date_time}.
 }
 \description{
 Get metadata for deployments, with options to filter on network project,

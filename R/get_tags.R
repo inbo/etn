@@ -8,14 +8,14 @@
 #' @param include_ref_tags (logical) Include reference tags. Default:
 #'   `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for tags, sorted by
+#'   `tag_id`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% as_tibble
-#' @importFrom rlang .data
+#' @importFrom dplyr %>% arrange as_tibble filter
 #'
 #' @examples
 #' \dontrun{
@@ -38,10 +38,10 @@ get_tags <- function(connection = con,
   check_connection(connection)
 
   # Check tag_id
+  valid_tag_ids <- list_tag_ids(connection)
   if (is.null(tag_id)) {
     tag_id_query <- "True"
   } else {
-    valid_tag_ids <- list_tag_ids(connection)
     check_value(tag_id, valid_tag_ids, "tag_id")
     tag_id_query <- glue_sql("tag_id IN ({tag_id*})", .con = connection)
     include_ref_tags <- TRUE
@@ -49,8 +49,10 @@ get_tags <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.tags_view2
+    SELECT
+      *
+    FROM
+      vliz.tags_view2
     WHERE
       {tag_id_query}
     ", .con = connection)
@@ -62,6 +64,11 @@ get_tags <- function(connection = con,
   } else {
     tags <- tags %>% filter(.data$type == "animal")
   }
+
+  # Sort data
+  tags <-
+    tags %>%
+    arrange(factor(tag_id, levels = valid_tag_ids)) # valid_tag_ids defined above
 
   as_tibble(tags)
 }

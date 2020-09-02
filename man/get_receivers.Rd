@@ -14,7 +14,8 @@ get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with metadata for receivers, sorted
+by \code{receiver_id}.
 }
 \description{
 Get metadata for receivers, with option to filter on receiver id.

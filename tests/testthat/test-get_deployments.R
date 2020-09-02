@@ -84,13 +84,13 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(deployments_all, "data.frame")
-  expect_is(deployments_application1, "data.frame")
-  expect_is(deployments_project1, "data.frame")
-  expect_is(deployments_project_multiple, "data.frame")
-  expect_is(deployments_status1, "data.frame")
-  expect_is(deployments_status_multiple, "data.frame")
-  expect_is(deployments_project1_openfalse, "data.frame")
+  expect_is(deployments_all, "tbl_df")
+  expect_is(deployments_application1, "tbl_df")
+  expect_is(deployments_project1, "tbl_df")
+  expect_is(deployments_project_multiple, "tbl_df")
+  expect_is(deployments_status1, "tbl_df")
+  expect_is(deployments_status_multiple, "tbl_df")
+  expect_is(deployments_project1_openfalse, "tbl_df")
 })
 
 testthat::test_that("Test column names", {

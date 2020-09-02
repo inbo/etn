@@ -14,7 +14,8 @@ get_projects(connection = con, project_type = NULL, application_type = NULL)
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame).
+A tibble (tidyverse data.frame) with project metadata, sorted by
+\code{project_code}.
 }
 \description{
 Get metadata for projects, with option to filter on animal or network

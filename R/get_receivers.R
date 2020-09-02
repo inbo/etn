@@ -6,14 +6,14 @@
 #' @param receiver_id (string) One or more receiver ids.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for receivers, sorted
+#'   by `receiver_id`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% group_by mutate rename ungroup distinct as_tibble
-#' @importFrom rlang .data
+#' @importFrom dplyr %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -36,10 +36,10 @@ get_receivers <- function(connection = con,
   check_connection(connection)
 
   # Check receiver_id
+  valid_receiver_ids <- list_receiver_ids(connection)
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
     receiver_id_query <- glue_sql("receiver_id IN ({receiver_id*})", .con = connection)
   }
@@ -54,11 +54,20 @@ get_receivers <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT * FROM vliz.receivers_view2
+    SELECT
+      *
+    FROM
+      vliz.receivers_view2
     WHERE
       {receiver_id_query}
       AND {application_type_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
+
+  # Sort data
+  receivers <-
+    receivers %>%
+    arrange(factor(receiver_id, levels = valid_receiver_ids)) # valid_receiver_ids defined above
+
   as_tibble(receivers)
 }

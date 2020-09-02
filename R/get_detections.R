@@ -18,18 +18,17 @@
 #' @param tag_id (character) One or more tag identifiers.
 #' @param receiver_id (character) One or more receiver identifiers.
 #' @param scientific_name (character) One or more scientific names.
-#' @param limit (logical) Limit the number of returned records to 100 (useful for testing
-#'   purposes). Default: `FALSE`.
+#' @param limit (logical) Limit the number of returned records to 100 (useful
+#'  for testing purposes). Default: `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with detections, sorted by `tag_id`
+#'   and `date_time`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% as_tibble
-#' @importFrom rlang .data
-#' @importFrom assertthat assert_that is.number
+#' @importFrom dplyr %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -179,8 +178,10 @@ get_detections <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.detections_view2
+    SELECT
+      *
+    FROM
+      vliz.detections_view2
     WHERE
       {application_type_query}
       AND {network_project_code_query}
@@ -194,5 +195,14 @@ get_detections <- function(connection = con,
     {limit_query}
     ", .con = connection)
   detections <- dbGetQuery(connection, query)
+
+  # Sort data (faster than in SQL)
+  detections <-
+    detections %>%
+    arrange(
+      factor(tag_id, levels = list_tag_ids(connection)),
+      date_time
+    )
+
   as_tibble(detections)
 }

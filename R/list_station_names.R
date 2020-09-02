@@ -6,12 +6,15 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
+#' @importFrom stringr str_sort
 #'
 #' @return A vector of all unique `station_name` present in `deployments_view2`.
 list_station_names <- function(connection = con) {
-  query <- glue_sql("SELECT DISTINCT station_name FROM vliz.deployments_view2",
+  query <- glue_sql(
+    "SELECT DISTINCT station_name FROM vliz.deployments_view2",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$station_name
+
+  str_sort(data$station_name, numeric = TRUE)
 }

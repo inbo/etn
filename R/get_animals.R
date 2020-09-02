@@ -10,13 +10,14 @@
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with metadata for animals, sorted by
+#'   `animal_project_code`, `release_date_time` and `tag_id`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr pull %>% vars group_by_at summarize_at ungroup mutate_at select
+#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
@@ -77,8 +78,10 @@ get_animals <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.animals_view2
+    SELECT
+      *
+    FROM
+      vliz.animals_view2
     WHERE
       {animal_id_query}
       AND {animal_project_code_query}
@@ -89,7 +92,6 @@ get_animals <- function(connection = con,
   # Collapse tag information, to obtain one row = one animal
   tag_cols <- animals %>% select(starts_with("tag")) %>% names()
   other_cols <- animals %>% select(-starts_with("tag")) %>% names()
-
   animals <-
     animals %>%
     group_by_at(other_cols) %>%
@@ -98,5 +100,14 @@ get_animals <- function(connection = con,
     mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
     select(names(animals)) # Use the original column order
 
-  animals
+  # Sort data
+  animals <-
+    animals %>%
+    arrange(
+      animal_project_code,
+      release_date_time,
+      factor(tag_id, levels = list_tag_ids(connection))
+    )
+
+  as_tibble(animals) # Is already a tibble, but added if code above changes
 }

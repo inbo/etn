@@ -9,9 +9,11 @@
 #'
 #' @return A vector of all unique `scientific_name` present in `animals_view2`.
 list_scientific_names <- function(connection = con) {
-  query <- glue_sql("SELECT DISTINCT scientific_name FROM vliz.animals_view2",
+  query <- glue_sql(
+    "SELECT DISTINCT scientific_name FROM vliz.animals_view2 ORDER BY scientific_name",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
-  data$scientific_name
+
+  sort(data$scientific_name)
 }

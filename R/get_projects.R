@@ -7,14 +7,14 @@
 #' @param project_type (string) `animal` or `network`.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame).
+#' @return A tibble (tidyverse data.frame) with project metadata, sorted by
+#'   `project_code`.
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr filter %>% as_tibble
-#' @importFrom rlang .data
+#' @importFrom dplyr %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -56,12 +56,20 @@ get_projects <- function(connection = con,
 
   # Build query
   query <- glue_sql("
-    SELECT *
-    FROM vliz.projects_view2
+    SELECT
+      *
+    FROM
+      vliz.projects_view2
     WHERE
       {project_type_query}
       AND {application_type_query}
-  ", .con = connection)
+    ", .con = connection)
   projects <- dbGetQuery(connection, query)
+
+  # Sort data
+  projects <-
+    projects %>%
+    arrange(project_code)
+
   as_tibble(projects)
 }

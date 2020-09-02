@@ -77,10 +77,10 @@ testthat::test_that("Test input", {
 })
 
 testthat::test_that("Test output type", {
-  expect_is(tags_all, "data.frame")
-  expect_is(tags_all_ref, "data.frame")
-  expect_is(tags_tag1, "data.frame")
-  expect_is(tags_tag_multiple, "data.frame")
+  expect_is(tags_all, "tbl_df")
+  expect_is(tags_all_ref, "tbl_df")
+  expect_is(tags_tag1, "tbl_df")
+  expect_is(tags_tag_multiple, "tbl_df")
 })
 
 testthat::test_that("Test column names", {
