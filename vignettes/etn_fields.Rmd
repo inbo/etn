@@ -1,0 +1,42 @@
+---
+title: "ETN database fields"
+author: "Peter Desmet"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ETN database fields}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(jsonlite)
+library(formattable)
+```
+
+```{r include=FALSE}
+# read metadata from json
+json <- fromJSON(system.file("extdata", "etn_fields.json", package = "etn"))
+etn_fields <- data.frame(json)
+```
+
+```{r include=FALSE}
+# rearrange and rename
+etn_fields <-
+  etn_fields %>%
+  arrange(field_name) %>%
+  rename(definition = name)
+```
+
+```{r echo=FALSE}
+formattable(
+  etn_fields,
+  align = c("l","l")
+)
+```
+
