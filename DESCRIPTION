@@ -24,6 +24,7 @@ Imports:
     rlang,
     stringr
 Suggests:
+    formattable,
     knitr,
     testthat
 LazyData: true
