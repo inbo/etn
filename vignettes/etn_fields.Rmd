@@ -1,10 +1,10 @@
 ---
 title: "ETN database fields"
-author: "Peter Desmet"
+author: "Peter Desmet & Filip Waumans"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ETN database fields}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
