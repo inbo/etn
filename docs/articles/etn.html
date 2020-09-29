@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9123</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9126</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/etn_fields.html">ETN database fields</a>
+      <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
   </ul>
 </li>
@@ -92,7 +92,7 @@
       <h1 data-toc-skip>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2020-09-11</h4>
+            <h4 class="date">2020-09-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn.Rmd"><code>vignettes/etn.Rmd</code></a></small>
       <div class="hidden name"><code>etn.Rmd</code></div>
@@ -129,7 +129,7 @@
 <p>To get a full overview of the projects you have access to, use the function <code><a href="../reference/get_projects.html">get_projects()</a></code>:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">my_projects</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_projects.html">get_projects</a></span>(<span class="no">con</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_projects</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 10 x 13</span>
+<span class="co">#&gt; # A tibble: 10 x 15</span>
 <span class="co">#&gt;       pk project_code project_type application_type telemetry_type</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;         </span>
 <span class="co">#&gt;  1   794 2004_Gudena  network      acoustic_teleme… Acoustic      </span>
@@ -142,14 +142,15 @@
 <span class="co">#&gt;  8    21 2014_demer   animal       acoustic_teleme… Acoustic      </span>
 <span class="co">#&gt;  9   819 2014_Nene    network      acoustic_teleme… Acoustic      </span>
 <span class="co">#&gt; 10   671 2015_Albert… animal       acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt; # … with 8 more variables: project_name &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 10 more variables: project_name &lt;chr&gt;,</span>
+<span class="co">#&gt; #   coordinating_organization &lt;chr&gt;, principal_investigator &lt;chr&gt;,</span>
 <span class="co">#&gt; #   principal_investigator_email &lt;chr&gt;, start_date &lt;date&gt;,</span>
 <span class="co">#&gt; #   end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, moratorium &lt;chr&gt;,</span>
 <span class="co">#&gt; #   imis_dataset_id &lt;int&gt;</span></pre></body></html></div>
 <p>As projects are defined both on the level of the <code>animal</code> as well as the <code>network</code>, a column <code>type</code> is available that defines the type of project (<code>animal</code> or <code>network</code>). Still, one can also directly subset by adding the type as input argument, e.g. for network:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">my_network_projects</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_projects.html">get_projects</a></span>(<span class="no">con</span>, <span class="kw">project_type</span> <span class="kw">=</span> <span class="st">"network"</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_network_projects</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 10 x 13</span>
+<span class="co">#&gt; # A tibble: 10 x 15</span>
 <span class="co">#&gt;       pk project_code project_type application_type telemetry_type</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;         </span>
 <span class="co">#&gt;  1   794 2004_Gudena  network      acoustic_teleme… Acoustic      </span>
@@ -161,8 +162,9 @@
 <span class="co">#&gt;  7   773 2016_Diacci… network      acoustic_teleme… PIT           </span>
 <span class="co">#&gt;  8   763 2017_Fremur  network      acoustic_teleme… Acoustic      </span>
 <span class="co">#&gt;  9   764 2019_Groten… network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt; 10   627 Aberdeen     network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt; # … with 8 more variables: project_name &lt;chr&gt;,</span>
+<span class="co">#&gt; 10   837 2020_PhD_Wi… network      acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt; # … with 10 more variables: project_name &lt;chr&gt;,</span>
+<span class="co">#&gt; #   coordinating_organization &lt;chr&gt;, principal_investigator &lt;chr&gt;,</span>
 <span class="co">#&gt; #   principal_investigator_email &lt;chr&gt;, start_date &lt;date&gt;,</span>
 <span class="co">#&gt; #   end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, moratorium &lt;chr&gt;,</span>
 <span class="co">#&gt; #   imis_dataset_id &lt;int&gt;</span></pre></body></html></div>
@@ -446,7 +448,7 @@
 <span class="co">#&gt; #   animal_project_code &lt;chr&gt;, scientific_name &lt;chr&gt;, station_name &lt;chr&gt;,</span>
 <span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, sensor_type &lt;chr&gt;,</span>
 <span class="co">#&gt; #   sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_value_depth &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   sensor_value_acceleration &lt;dbl&gt;, sensor_value_temperature &lt;chr&gt;,</span>
+<span class="co">#&gt; #   sensor_value_acceleration &lt;dbl&gt;, sensor_value_temperature &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   signal_to_noise_ratio &lt;int&gt;, source_file &lt;chr&gt;, qc_flag &lt;chr&gt;,</span>
 <span class="co">#&gt; #   deployment_fk &lt;int&gt;</span></pre></body></html></div>
 <p>The date level can be defined on month (e.g. <code>"2011-01"</code>) or year (e.g. <code>"2011"</code>) level as well. Finally, for explorative reasons, a hard maximum limit of records to request can help to have a quick glance on the expected data.</p>

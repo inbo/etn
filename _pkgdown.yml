@@ -28,8 +28,8 @@ reference:
       - get_projects
       - get_animals
       - get_tags
-      - get_deployments
       - get_receivers
+      - get_deployments
   - title: "Get detections data"
     contents:
       - get_detections
