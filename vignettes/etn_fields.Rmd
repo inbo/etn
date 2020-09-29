@@ -95,20 +95,20 @@ Related function: `get_tags()`.
 view_table("tags_view2")
 ```
 
-## Deployments
-
-Related function: `get_deployments()`.
-
-```{r echo=FALSE}
-view_table("deployments_view2")
-```
-
 ## Receivers
 
 Related function: `get_receivers()`.
 
 ```{r echo=FALSE}
 view_table("receivers_view2")
+```
+
+## Deployments
+
+Related function: `get_deployments()`.
+
+```{r echo=FALSE}
+view_table("deployments_view2")
 ```
 
 ## Detections
