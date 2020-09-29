@@ -11,6 +11,8 @@ expected_col_names <- c(
   "application_type",
   "telemetry_type",
   "project_name",
+  "coordinating_organization",
+  "principal_investigator",
   "principal_investigator_email",
   "start_date",
   "end_date",
