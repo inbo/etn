@@ -14,18 +14,44 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r include=FALSE}
-library(tidyverse)
 library(etn)
+library(tidyverse)
+library(glue)
 library(DBI)
 library(kableExtra)
 ```
 
 ```{r include=FALSE}
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+query <- glue_sql("
+    SELECT
+      viewname,
+      field,
+      definition,
+      example,
+      CASE
+        WHEN datatype = 'character varying' THEN 'character'
+        WHEN datatype = 'text' THEN 'character'
+        WHEN datatype = 'double precision' THEN 'double'
+        WHEN datatype = 'timestamp without time zone' THEN 'datetime'
+        WHEN datatype = 'smallint' THEN 'integer'
+        ELSE datatype
+      END AS datatype,
+      \"order\"
+    FROM
+      vliz.field_definitions
+    ORDER BY
+      viewname,
+      \"order\"
+    ", .con = connection)
 etn_fields <- dbGetQuery(con, "SELECT * FROM vliz.field_definitions")
 ```
 
-Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as in issue (see the [contributing guide](../.github/CONTRIBUTING.md)).
+```{r include=FALSE}
+write_csv(etn_fields, "../inst/extdata/etn_fields.csv", na = "")
+```
+
+Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the [contributing guide](../.github/CONTRIBUTING.md)). The definitions are also available as a [csv file](https://github.com/inbo/etn/blob/master/inst/extdata/etn_fields.csv).
 
 ```{r include=FALSE}
 # Create helper function to display tables for each view
@@ -43,15 +69,7 @@ view_table <- function(view_name) {
     # Wrap "field" in backticks
     mutate(field = if_else(!is.na(field), paste0("`", field, "`"), field)) %>%
     # Convert "NA" to empty strings
-    mutate(across(everything(), ~ replace_na(., ""))) %>%
-    # Rename data types
-    mutate(`data type` = recode(`data type`,
-      "character varying" = "character",
-      "text" = "character",
-      "double precision" = "double",
-      "timestamp without time zone" = "datetime",
-      "smallint" = "integer"
-    ))
+    mutate(across(everything(), ~ replace_na(., "")))
   
   view_kable <-
     kable(view_data) %>%

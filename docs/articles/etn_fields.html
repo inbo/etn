@@ -92,7 +92,7 @@
       <h1 data-toc-skip>ETN field definitions</h1>
                         <h4 class="author">Peter Desmet &amp; Filip Waumans</h4>
             
-            <h4 class="date">2020-09-29</h4>
+            <h4 class="date">2020-10-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn_fields.Rmd"><code>vignettes/etn_fields.Rmd</code></a></small>
       <div class="hidden name"><code>etn_fields.Rmd</code></div>
@@ -101,7 +101,7 @@
 
     
     
-<p>Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as in issue (see the <a href="../CONTRIBUTING.html">contributing guide</a>).</p>
+<p>Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the <a href="../CONTRIBUTING.html">contributing guide</a>). The definitions are also available as a <a href="https://github.com/inbo/etn/blob/master/inst/extdata/etn_fields.csv">csv file</a>.</p>
 <div id="projects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#projects" class="anchor"></a>Projects</h2>
@@ -118,94 +118,10 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>principal_investigator</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>imis_dataset_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>moratorium</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-boolean
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>latitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>end_date</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-date
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>start_date</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-date
-</td>
-</tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
 <code>pk</code>
@@ -292,6 +208,18 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>principal_investigator</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
 <code>principal_investigator_email</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -300,6 +228,78 @@ character
 </td>
 <td style="text-align:left;width: 10%; ">
 character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>start_date</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>end_date</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>latitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>longitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>moratorium</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+boolean
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>imis_dataset_id</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
 </td>
 </tr>
 </tbody>
@@ -321,419 +321,25 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>sedative</code>
+<code>pk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Name of sedative used if applicable.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: aquacalm
 </td>
 <td style="text-align:left;width: 10%; ">
-character
+integer
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>age</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Weight of animal that carries tag, in units specified in ‘Age units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: integer; as in: 2
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>weight_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Units of weight.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: g
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>weight</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Weight of animal that carries tag, in units specified in ‘Weight units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: 806.9
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length4_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Units of quaternary length.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: mm
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length4</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Quaternary length measurement, depending on ‘Length4 type’, in units specified in ‘Length4 units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in 46.73
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length4_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Specify type of quaternary size measurement (e.g. width).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: pectoral fin length
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length3_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Units of tertiary length.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: mm
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length3</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tertiary length measurement, depending on ‘Length3 type’, in units specified in ‘Length3 units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: 7.23
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length3_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Specify type of tertiary size measurement (e.g. width).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: vertical eye diameter
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length2_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Units of secondary length.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: mm
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length2</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Secondary length measurement, depending on ‘Length2 type’, in units specified in ‘Length2 units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: 9.50
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length2_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Specify type of secondary size measurement (e.g. width).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: horizontal eye diameter
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length1_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Units of length.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: cm
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length1</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Length of animal that carries tag, depending on ‘Length type’, in units specified in ‘Length units’.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: 46.00
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>length1_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: total length
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>recapture_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-If applicable, date of recapture of the tagged animal.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-07-10T12:00:00Z
-</td>
-<td style="text-align:left;width: 10%; ">
-datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>release_longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Longitude of release location. Note: in the western hemisphere all longitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: ddd.ddddd; as in: 2.59020
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>release_latitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: dd.ddddd; as in: 51.36324
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>release_location</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: Reefballs C-Power
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>release_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date and time that tagged animal was released, in UTC.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: yyyy-mm-ddThh:mm:ssZ; as in: 2016-04-04T12:30:00Z
-</td>
-<td style="text-align:left;width: 10%; ">
-datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_temperature_change</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: degrees celsius; as in: 5ºC
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_depth</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Water depth at which the animal was caught.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: metres; format free text; as in: 25 m
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_method</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Name of the method and materials used to capture animal.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: line fishing
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: ddd.ddddd; as in: 2.59020
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_latitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: dd.ddddd; as in: 51.36324
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_location</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: Reefballs C-Power
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>capture_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date and time that animal was caught, in 24h UTC. Datetime fields should follow the ISO-8601 format.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z
-</td>
-<td style="text-align:left;width: 10%; ">
-datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tagger</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Person conducting tagging
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: Pieterjan Verhelst
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_nickname</code>
+<code>animal_project_code</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
@@ -745,13 +351,53 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_label</code>
+<code>tag_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Identification code that uniquely identifies each animal, as specified by the researcher.
+Select a tag. A tag code space will only appear here after adding the tag metadata in the tab ‘Tags’.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: A82
+as in: A69-9004-2210
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>tag_fk</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>scientific_name</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Scientific name of animal that carries the tag.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Gadus morhua
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>common_name</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+The species’ common English name.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Atlantic cod
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -773,13 +419,13 @@ integer
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>common_name</code>
+<code>animal_label</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-The species’ common English name.
+Identification code that uniquely identifies each animal, as specified by the researcher.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: Atlantic cod
+as in: A82
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -787,47 +433,7 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>scientific_name</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Scientific name of animal that carries the tag.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: Gadus morhua
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_fk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Select a tag. A tag code space will only appear here after adding the tag metadata in the tab ‘Tags’.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: A69-9004-2210
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_project_code</code>
+<code>animal_nickname</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
@@ -839,36 +445,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>tagger</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Person conducting tagging
 </td>
 <td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>dna_sample</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Indicates whether the animal that carries the acoustic tag is also sampled for DNA.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: y or n; as in: y
+as in: Pieterjan Verhelst
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -876,94 +459,10 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>tagging_methodology</code>
+<code>capture_date_time</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Describe method and materials used to attach tag to animal.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures.
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tagging_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Indicates how tag was attached to animal (e.g. <code>internal</code>, <code>external</code>, <code>oral</code>, <code>gastric</code>, <code>subcutaneous</code>, etc.).
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: internal
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>treatment_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: Control
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>surgery_longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: dd.ddddd; as in: 2.59020
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>surgery_latitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: dd.ddddd; as in: 51.36324
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>surgery_location</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Short name of surgery location (i.e. hatchery name).
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: onboard RV
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>surgery_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date that surgery was conducted. Date fields should follow the ISO-8601 format.
+Date and time that animal was caught, in 24h UTC. Datetime fields should follow the ISO-8601 format.
 </td>
 <td style="text-align:left;width: 25%; ">
 format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z
@@ -974,13 +473,13 @@ datetime
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>stock</code>
+<code>capture_location</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Water body of origin. Can enter unknown or not applicable.
+Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: Southern Bight
+format: free text; as in: Reefballs C-Power
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -988,13 +487,41 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>wild_or_hatchery</code>
+<code>capture_latitude</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Origin of animal that carries the tag. Enter <code>wild</code>, <code>hatchery</code> or <code>unknown</code>.
+Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: wild
+format: dd.ddddd; as in: 51.36324
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>capture_longitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: ddd.ddddd; as in: 2.59020
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>capture_method</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of the method and materials used to capture animal.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: line fishing
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1002,13 +529,321 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>life_stage</code>
+<code>capture_depth</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.
+Water depth at which the animal was caught.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: FV
+units: metres; format free text; as in: 25 m
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>capture_temperature_change</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: degrees celsius; as in: 5ºC
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>release_date_time</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Date and time that tagged animal was released, in UTC.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: yyyy-mm-ddThh:mm:ssZ; as in: 2016-04-04T12:30:00Z
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>release_location</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Reefballs C-Power
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>release_latitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: dd.ddddd; as in: 51.36324
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>release_longitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Longitude of release location. Note: in the western hemisphere all longitudes must be negative.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: ddd.ddddd; as in: 2.59020
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>recapture_date_time</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+If applicable, date of recapture of the tagged animal.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-07-10T12:00:00Z
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length1_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: total length
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length1</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Length of animal that carries tag, depending on ‘Length type’, in units specified in ‘Length units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: 46.00
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length1_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of length.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: cm
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length2_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Specify type of secondary size measurement (e.g. width).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: horizontal eye diameter
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length2</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Secondary length measurement, depending on ‘Length2 type’, in units specified in ‘Length2 units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: 9.50
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length2_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of secondary length.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: mm
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length3_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Specify type of tertiary size measurement (e.g. width).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: vertical eye diameter
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length3</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tertiary length measurement, depending on ‘Length3 type’, in units specified in ‘Length3 units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: 7.23
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length3_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of tertiary length.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: mm
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length4_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Specify type of quaternary size measurement (e.g. width).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: pectoral fin length
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length4</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Quaternary length measurement, depending on ‘Length4 type’, in units specified in ‘Length4 units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in 46.73
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>length4_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of quaternary length.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: mm
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>weight</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Weight of animal that carries tag, in units specified in ‘Weight units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: 806.9
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>weight_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of weight.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: g
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>age</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Weight of animal that carries tag, in units specified in ‘Age units’.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: integer; as in: 2
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>age_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Units of age.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: durif index
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1030,13 +865,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>comments</code>
+<code>life_stage</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Any comments deemed to have scientific relevance by the tagger.
+Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.
 </td>
 <td style="text-align:left;width: 25%; ">
-format: free text
+as in: FV
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1044,13 +879,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>age_unit</code>
+<code>wild_or_hatchery</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Units of age.
+Origin of animal that carries the tag. Enter <code>wild</code>, <code>hatchery</code> or <code>unknown</code>.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: durif index
+as in: wild
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1058,13 +893,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>holding_temperature</code>
+<code>stock</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond
+Water body of origin. Can enter unknown or not applicable.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: degrees celsius; as in: 5ºC
+as in: Southern Bight
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1072,13 +907,27 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>post_surgery_holding_period</code>
+<code>surgery_date_time</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Time the animal is held after surgery until release.
+Date that surgery was conducted. Date fields should follow the ISO-8601 format.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: hours; as in: 2
+format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>surgery_location</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Short name of surgery location (i.e. hatchery name).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: onboard RV
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1086,13 +935,41 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>pre_surgery_holding_period</code>
+<code>surgery_latitude</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Time that animal is held prior to surgery.
+Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: hours; as in: 0.5
+format: dd.ddddd; as in: 51.36324
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>surgery_longitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: dd.ddddd; as in: 2.59020
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>treatment_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: Control
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1100,13 +977,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>dissolved_oxygen</code>
+<code>tagging_type</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-This measure is the lowest oxygen level the fish will experience during the surgery.
+Indicates how tag was attached to animal (e.g. <code>internal</code>, <code>external</code>, <code>oral</code>, <code>gastric</code>, <code>subcutaneous</code>, etc.).
 </td>
 <td style="text-align:left;width: 25%; ">
-format: free text; as in: 6 mg/l
+as in: internal
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1114,13 +991,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>buffer_concentration_in_recirculation</code>
+<code>tagging_methodology</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Concentration of buffer in recirculation bath.
+Describe method and materials used to attach tag to animal.
 </td>
 <td style="text-align:left;width: 25%; ">
-format: free text; as in: 0.1 ml/l
+as in: inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures.
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1128,10 +1005,80 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>anaesthetic_concentration_in_recirculation</code>
+<code>dna_sample</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Concentration of anaesthetic in recirculation bath.
+Indicates whether the animal that carries the acoustic tag is also sampled for DNA.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: y or n; as in: y
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sedative</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of sedative used if applicable.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: aquacalm
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sedative_concentration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Concentration of sedative.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: 0.5 ml/l
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>anaesthetic</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of anaesthetic used if applicable.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Clove oil
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>buffer</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of buffer used if applicable.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Sodium Bicarbonate
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>anaesthetic_concentration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Concentration of anaesthetic.
 </td>
 <td style="text-align:left;width: 25%; ">
 format: free text; as in: 0.5 ml/l
@@ -1156,10 +1103,10 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>anaesthetic_concentration</code>
+<code>anaesthetic_concentration_in_recirculation</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Concentration of anaesthetic.
+Concentration of anaesthetic in recirculation bath.
 </td>
 <td style="text-align:left;width: 25%; ">
 format: free text; as in: 0.5 ml/l
@@ -1170,13 +1117,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>buffer</code>
+<code>buffer_concentration_in_recirculation</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Name of buffer used if applicable.
+Concentration of buffer in recirculation bath.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: Sodium Bicarbonate
+format: free text; as in: 0.1 ml/l
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1184,13 +1131,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>anaesthetic</code>
+<code>dissolved_oxygen</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Name of anaesthetic used if applicable.
+This measure is the lowest oxygen level the fish will experience during the surgery.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: Clove oil
+format: free text; as in: 6 mg/l
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1198,16 +1145,69 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>sedative_concentration</code>
+<code>pre_surgery_holding_period</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Concentration of sedative.
+Time that animal is held prior to surgery.
 </td>
 <td style="text-align:left;width: 25%; ">
-format: free text; as in: 0.5 ml/l
+units: hours; as in: 0.5
 </td>
 <td style="text-align:left;width: 10%; ">
 character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>post_surgery_holding_period</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Time the animal is held after surgery until release.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: hours; as in: 2
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>holding_temperature</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond
+</td>
+<td style="text-align:left;width: 25%; ">
+units: degrees celsius; as in: 5ºC
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>comments</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Any comments deemed to have scientific relevance by the tagger.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
 </td>
 </tr>
 </tbody>
@@ -1229,199 +1229,31 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_range</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Maximum range of sensor.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 34
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_intercept</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Raw value of intercept, as used for sensor calibration.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: -0.6065
-</td>
-<td style="text-align:left;width: 10%; ">
-numeric
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_slope</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Raw value of slope, as used for sensor calibration.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: double; as in: 0.1516
-</td>
-<td style="text-align:left;width: 10%; ">
-numeric
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Type of tag sensor. Predefined options: <code>P</code>, <code>T</code> or <code>A</code>. P = pressure, T = temperature, A = acceleration.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: P
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>battery_estimated_end_date</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: yyyy-mm-ddT; as in: 2017-06-27T
-</td>
-<td style="text-align:left;width: 10%; ">
-datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>battery_estimated_life</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Estimated duration of time during which the tag will be transmitting.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: days; as in: 90
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>activation_date</code>
+<code>pk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
 <td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
-datetime
+integer
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>status</code>
+<code>telemetry_type</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Current status of the tag. Three options: <code>available</code>, <code>active</code> or <code>ended</code>.
+Type of tag attached to animal. Some possible options are: acoustic, SAT, PSAT, PIT, DST, ADST, pDST
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: active
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_id_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-In the case of an acoustic tag or Vemco mobile transceiver, this is the identification code transmitted by the tag, which is available from the tag manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 1450
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_id_protocol</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tag code space of the detected tag.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: <code>S256</code> or <code>A69-1105</code>
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>serial_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Serial number assigned by tag manufacturer to uniquely identify tag.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 1036912
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Type of acoustic tag. Predefined options: <code>animal</code>, <code>built-in</code>, <code>sentinel</code> or <code>range</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: animal
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>frequency</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Frequency at which the tag emits a signal.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: Hz; as in: 069k
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>model</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tag model number as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: V9-6L
+as in: acoustic
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1443,13 +1275,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>telemetry_type</code>
+<code>model</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Type of tag attached to animal. Some possible options are: acoustic, SAT, PSAT, PIT, DST, ADST, pDST
+Tag model number as provided by the manufacturer.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: acoustic
+as in: V9-6L
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1457,10 +1289,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>frequency</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Frequency at which the tag emits a signal.
 </td>
 <td style="text-align:left;width: 25%; ">
+units: Hz; as in: 069k
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1468,10 +1303,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>type</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Type of acoustic tag. Predefined options: <code>animal</code>, <code>built-in</code>, <code>sentinel</code> or <code>range</code>.
 </td>
 <td style="text-align:left;width: 25%; ">
+as in: animal
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1479,14 +1317,420 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
+<code>serial_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Serial number assigned by tag manufacturer to uniquely identify tag.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 1036912
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>tag_id_protocol</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tag code space of the detected tag.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: <code>S256</code> or <code>A69-1105</code>
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>tag_id_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+In the case of an acoustic tag or Vemco mobile transceiver, this is the identification code transmitted by the tag, which is available from the tag manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 1450
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>status</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Current status of the tag. Three options: <code>available</code>, <code>active</code> or <code>ended</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: active
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>activation_date</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
 <td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>battery_estimated_life</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Estimated duration of time during which the tag will be transmitting.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: days; as in: 90
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>battery_estimated_end_date</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: yyyy-mm-ddT; as in: 2017-06-27T
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Type of tag sensor. Predefined options: <code>P</code>, <code>T</code> or <code>A</code>. P = pressure, T = temperature, A = acceleration.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: P
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_slope</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Raw value of slope, as used for sensor calibration.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: 0.1516
+</td>
+<td style="text-align:left;width: 10%; ">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_intercept</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Raw value of intercept, as used for sensor calibration.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: double; as in: -0.6065
+</td>
+<td style="text-align:left;width: 10%; ">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_range</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Maximum range of sensor.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 34
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_transmit_ratio</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 1
 </td>
 <td style="text-align:left;width: 10%; ">
 integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>accelerometer_algorithm</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Activity
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>accelerometer_samples_per_second</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10 Hertz (10 measurements/s).
+</td>
+<td style="text-align:left;width: 25%; ">
+units: Hertz; as in: 5
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>owner_organization</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Group owner of the tag. Use the exact group name to which the tag belongs.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: VLIZ
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>owner_pi</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+First and last name of the Principal Investigator for the project.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: Jan Reubens
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>financing_project</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tag financing project.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: project
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_min_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Minimum delay between the pings transmitted by the tag for step 1.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 30
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_max_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Maximum delay between the pings transmitted by the tag for step 1.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 60
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_power</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Acoustic power level. <code>H</code> or <code>L</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Duration of step 1.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: days; as in: 120
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_acceleration_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Time window over which acceleration is sampled (in seconds).
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds, as in: 37
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step2_min_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Minimum delay between the pings transmitted by the tag for step 2.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 30
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step2_max_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Maximum delay between the pings transmitted by the tag for step 2.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 60
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step2_power</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Acoustic power level. <code>H</code> or <code>L</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: L
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step2_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Duration of step 2.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: days; as in: 120
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step2_acceleration_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Time window over which acceleration is sampled (in seconds).
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds, as in: 37
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step3_min_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Minimum delay between the pings transmitted by the tag for step 3.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 30
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step3_max_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Maximum delay between the pings transmitted by the tag for step 3.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 60
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step3_power</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Acoustic power level. <code>H</code> or <code>L</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
 </td>
 </tr>
 <tr>
@@ -1495,6 +1739,76 @@ integer
 </td>
 <td style="text-align:left;width: 40%; ">
 Duration of step 3.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: days; as in: 360
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step3_acceleration_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Time window over which acceleration is sampled (in seconds).
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds, as in: 37
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step4_min_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Minimum delay between the pings transmitted by the tag for step 4.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 30
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step4_max_delay</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Maximum delay between the pings transmitted by the tag for step 4.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; as in: 60
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step4_power</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Acoustic power level. <code>H</code> or <code>L</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step4_duration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Duration of step 4.
 </td>
 <td style="text-align:left;width: 25%; ">
 units: days; as in: 360
@@ -1519,27 +1833,10 @@ integer
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>step4_duration</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Duration of step 4.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: days; as in: 360
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step4_power</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Acoustic power level. <code>H</code> or <code>L</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: H
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1547,310 +1844,14 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>step4_max_delay</code>
+<code>tag_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Maximum delay between the pings transmitted by the tag for step 4.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: seconds; as in: 60
 </td>
 <td style="text-align:left;width: 10%; ">
 character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step4_min_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Minimum delay between the pings transmitted by the tag for step 4.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 30
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step3_acceleration_duration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Time window over which acceleration is sampled (in seconds).
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds, as in: 37
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step3_power</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Acoustic power level. <code>H</code> or <code>L</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: H
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step3_max_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Maximum delay between the pings transmitted by the tag for step 3.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 60
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step3_min_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Minimum delay between the pings transmitted by the tag for step 3.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 30
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step2_acceleration_duration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Time window over which acceleration is sampled (in seconds).
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds, as in: 37
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step2_duration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Duration of step 2.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: days; as in: 120
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step2_power</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Acoustic power level. <code>H</code> or <code>L</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: L
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step2_max_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Maximum delay between the pings transmitted by the tag for step 2.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 60
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step2_min_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Minimum delay between the pings transmitted by the tag for step 2.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 30
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_acceleration_duration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Time window over which acceleration is sampled (in seconds).
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds, as in: 37
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_duration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Duration of step 1.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: days; as in: 120
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_power</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Acoustic power level. <code>H</code> or <code>L</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: H
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_max_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Maximum delay between the pings transmitted by the tag for step 1.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 60
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_min_delay</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Minimum delay between the pings transmitted by the tag for step 1.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; as in: 30
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>financing_project</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tag financing project.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: project
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>owner_pi</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-First and last name of the Principal Investigator for the project.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: Jan Reubens
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>owner_organization</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Group owner of the tag. Use the exact group name to which the tag belongs.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: VLIZ
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>accelerometer_samples_per_second</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10 Hertz (10 measurements/s).
-</td>
-<td style="text-align:left;width: 25%; ">
-units: Hertz; as in: 5
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>accelerometer_algorithm</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: Activity
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_transmit_ratio</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 1
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
 </td>
 </tr>
 </tbody>
@@ -1872,10 +1873,22 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>pk</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
 <code>receiver_id</code>
@@ -1892,305 +1905,11 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
+<code>application_type</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
 <td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_tilt_after_deploy</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tilt after deploy of receiver
-</td>
-<td style="text-align:left;width: 25%; ">
-format: integer; as in: 1003
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_tilt_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tilt code of the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: B
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_disable_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to disable the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: H
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_release_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to release the release; differs among release models.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: A; as in: 12345
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_enable_code_address</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to enable the release; differs among release models.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: G; as in: 68
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_ping_rate</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Ping rate of the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; format: integer; as in: 1
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_reply_frequency</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Frequency at which the release sends data.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: kHz; as in: 10
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_receive_frequency</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Interrogate or receive frequency at which the release receives data.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: kHz; as in: 7.75
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_interrogate_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: integer; as in: 1003
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_voltage_at_deploy</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Voltage reported by an acoustic release as near as possible to the time of deployment.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: volt; format: double; as in: 12.2
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_battery_estimated_life</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: months; format: integer; as in: 12
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_serial_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Serial number of the acoustic release as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 48635
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_model_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Model number of the acoustic release as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 867
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>built_in_tag_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tag full ID of the receiver’s built in tag.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: A69-1601-60508
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>financing_project</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Receiver financing project.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: project
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>owner_organization</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Affiliation of the Principal Investigator for the project.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: VLIZ
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>battery_estimated_life</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Expected duration for which the battery will provide adequate power for proper functioning of the receiver.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: months; format: integer; as in: 12
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>status</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Current status of receiver. Predefined options: <code>Active</code>, <code>Available</code>, <code>Broken</code>, <code>Lost</code> or <code>Returned to manufacturer</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: <code>Active</code> or <code>Lost</code>
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>modem_address</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is
-</td>
-<td style="text-align:left;width: 25%; ">
-format: 3-digit code from 001 to 249; as in 121
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>receiver_id_serial_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Serial number assigned by receiver manufacturer to uniquely identify receiver.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 106252
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>receiver_id_model</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Receiver model number as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: VR2W
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2212,6 +1931,300 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>receiver_id_model</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Receiver model number as provided by the manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: VR2W
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>receiver_id_serial_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Serial number assigned by receiver manufacturer to uniquely identify receiver.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 106252
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>modem_address</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is
+</td>
+<td style="text-align:left;width: 25%; ">
+format: 3-digit code from 001 to 249; as in 121
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>status</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Current status of receiver. Predefined options: <code>Active</code>, <code>Available</code>, <code>Broken</code>, <code>Lost</code> or <code>Returned to manufacturer</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: <code>Active</code> or <code>Lost</code>
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>battery_estimated_life</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Expected duration for which the battery will provide adequate power for proper functioning of the receiver.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: months; format: integer; as in: 12
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>owner_organization</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Affiliation of the Principal Investigator for the project.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: VLIZ
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>financing_project</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Receiver financing project.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: project
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>built_in_tag_id</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tag full ID of the receiver’s built in tag.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: A69-1601-60508
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_model_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Model number of the acoustic release as provided by the manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 867
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_serial_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Serial number of the acoustic release as provided by the manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 48635
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_battery_estimated_life</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: months; format: integer; as in: 12
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_voltage_at_deploy</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Voltage reported by an acoustic release as near as possible to the time of deployment.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: volt; format: double; as in: 12.2
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_interrogate_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: integer; as in: 1003
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_receive_frequency</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Interrogate or receive frequency at which the release receives data.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: kHz; as in: 7.75
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_reply_frequency</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Frequency at which the release sends data.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: kHz; as in: 10
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_ping_rate</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Ping rate of the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; format: integer; as in: 1
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_enable_code_address</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to enable the release; differs among release models.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: G; as in: 68
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_release_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to release the release; differs among release models.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: A; as in: 12345
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_disable_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to disable the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_tilt_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tilt code of the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: B
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_tilt_after_deploy</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tilt after deploy of receiver
+</td>
+<td style="text-align:left;width: 25%; ">
+format: integer; as in: 1003
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
@@ -2219,18 +2232,6 @@ character
 </td>
 <td style="text-align:left;width: 10%; ">
 unknown
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>application_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-character
 </td>
 </tr>
 </tbody>
@@ -2252,24 +2253,10 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>time_drift</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Displayed difference in time between the instrument’s clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: hh:mm:ssZ; as in: 12:00:00Z
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
 <code>pk</code>
@@ -2630,6 +2617,20 @@ datetime
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>time_drift</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Displayed difference in time between the instrument’s clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: hh:mm:ssZ; as in: 12:00:00Z
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
 <code>ar_battery_installation_date</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -2815,100 +2816,10 @@ definition
 example
 </th>
 <th style="text-align:left;">
-data type
+datatype
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_depth</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-sensorValueDepthMeters
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_acceleration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-SENSOR_VALUE_ACCELERATION
-</td>
-<td style="text-align:left;width: 25%; ">
-as in:
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_temperature</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>signal_to_noise_ratio</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>source_file</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Name of the detection file.
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>qc_flag</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Identifies whether there are quality check issues for the given detection.
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-boolean
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>deployment_fk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
 <code>pk</code>
@@ -3113,6 +3024,96 @@ Unit of measured sensor value.
 </td>
 <td style="text-align:left;width: 10%; ">
 character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_value_depth</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+sensorValueDepthMeters
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_value_acceleration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+SENSOR_VALUE_ACCELERATION
+</td>
+<td style="text-align:left;width: 25%; ">
+as in:
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_value_temperature</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>signal_to_noise_ratio</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>source_file</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of the detection file.
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>qc_flag</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Identifies whether there are quality check issues for the given detection.
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+boolean
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>deployment_fk</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
 </td>
 </tr>
 </tbody>
