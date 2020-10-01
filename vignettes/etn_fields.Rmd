@@ -22,7 +22,7 @@ library(kableExtra)
 
 ```{r include=FALSE}
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
-etn_fields <- dbGetQuery(con, "SELECT * FROM vliz.datapaper_metadata_fields")
+etn_fields <- dbGetQuery(con, "SELECT * FROM vliz.field_definitions")
 ```
 
 Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as in issue (see the [contributing guide](../.github/CONTRIBUTING.md)).
@@ -34,13 +34,10 @@ view_table <- function(view_name) {
     etn_fields %>%
     # Filter on view
     filter(viewname == view_name) %>%
+    # Order by order (should already be done by query)
+    arrange(order) %>%
     # Select columns
-    select(field, definition, unit_definition, database_data_type) %>%
-    # Rename some columns
-    rename(
-      example = unit_definition,
-      `data type` = database_data_type
-    ) %>%
+    select(field, definition, example, datatype) %>%
     # Convert quotes to backticks, so examples are shown as markdown monospaced code
     mutate(across(everything(), ~ str_replace_all(., "\"", "`"))) %>%
     # Wrap "field" in backticks
