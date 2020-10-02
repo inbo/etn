@@ -48,10 +48,10 @@ etn_fields <- dbGetQuery(con, "SELECT * FROM vliz.field_definitions")
 ```
 
 ```{r include=FALSE}
-write_csv(etn_fields, "../inst/extdata/etn_fields.csv", na = "")
+write_csv(etn_fields, "../inst/assets/etn_fields.csv", na = "")
 ```
 
-Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the [contributing guide](../.github/CONTRIBUTING.md)). The definitions are also available as a [csv file](https://github.com/inbo/etn/blob/master/inst/extdata/etn_fields.csv).
+Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the [contributing guide](../.github/CONTRIBUTING.md)). The definitions are also available as a [csv file](https://github.com/inbo/etn/blob/master/inst/assets/etn_fields.csv).
 
 ```{r include=FALSE}
 # Create helper function to display tables for each view
