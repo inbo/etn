@@ -44,7 +44,7 @@ query <- glue_sql("
       viewname,
       \"order\"
     ", .con = connection)
-etn_fields <- dbGetQuery(con, "SELECT * FROM vliz.field_definitions")
+etn_fields <- dbGetQuery(con, query)
 ```
 
 ```{r include=FALSE}
