@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
       <h1 data-toc-skip>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2020-10-01</h4>
+            <h4 class="date">2020-10-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn.Rmd"><code>vignettes/etn.Rmd</code></a></small>
       <div class="hidden name"><code>etn.Rmd</code></div>
@@ -175,17 +175,17 @@
 <p>A network project typically considers multiple receivers that are placed on specific locations to lay out the network. To get an overview of receivers deployments linked to specific projects, use the <code>get_deployments</code> function:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">ws3_deployments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_deployments.html">get_deployments</a></span>(<span class="no">con</span>, <span class="kw">network_project_code</span> <span class="kw">=</span> <span class="st">"ws3"</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ws3_deployments</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 7 x 40</span>
+<span class="co">#&gt; # A tibble: 7 x 39</span>
 <span class="co">#&gt;      pk receiver_id application_type network_project… station_name</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
-<span class="co">#&gt; 1  9458 VR2W-127735 acoustic_teleme… ws3              ws-42A      </span>
+<span class="co">#&gt; 1 10017 VR2W-127735 acoustic_teleme… ws3              ws-42A      </span>
 <span class="co">#&gt; 2  6180 VR2W-127737 acoustic_teleme… ws3              ws-53       </span>
-<span class="co">#&gt; 3  9457 VR2W-127731 acoustic_teleme… ws3              ws-53A      </span>
-<span class="co">#&gt; 4  9447 VR2W-127734 acoustic_teleme… ws3              ws-55       </span>
-<span class="co">#&gt; 5  9453 VR2W-115439 acoustic_teleme… ws3              ws-F42      </span>
-<span class="co">#&gt; 6  9446 VR2W-127722 acoustic_teleme… ws3              ws-F53      </span>
-<span class="co">#&gt; 7  9456 VR2W-127725 acoustic_teleme… ws3              ws-HW6      </span>
-<span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;,</span>
+<span class="co">#&gt; 3 10022 VR2W-127032 acoustic_teleme… ws3              ws-53A      </span>
+<span class="co">#&gt; 4 10020 VR2W-127734 acoustic_teleme… ws3              ws-55       </span>
+<span class="co">#&gt; 5 10004 VR2W-115439 acoustic_teleme… ws3              ws-F42      </span>
+<span class="co">#&gt; 6 10015 VR2W-127722 acoustic_teleme… ws3              ws-F53      </span>
+<span class="co">#&gt; 7 10016 VR2W-127725 acoustic_teleme… ws3              ws-HW6      </span>
+<span class="co">#&gt; # … with 34 more variables: station_description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
@@ -201,11 +201,11 @@
 <span class="co">#&gt; #   log_temperature_sample_period &lt;int&gt;, log_tilt_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_noise_stats_period &lt;int&gt;, log_noise_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_depth_stats_period &lt;int&gt;, log_depth_sample_period &lt;int&gt;,</span>
-<span class="co">#&gt; #   comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   comments &lt;chr&gt;</span></pre></body></html></div>
 <p>You can also define multiple (network) projects at the same time, by combining them in a vector:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ws_deployments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_deployments.html">get_deployments</a></span>(<span class="no">con</span>, <span class="kw">network_project_code</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ws1"</span>, <span class="st">"ws3"</span>))
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ws_deployments</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 10 x 40</span>
+<span class="co">#&gt; # A tibble: 10 x 39</span>
 <span class="co">#&gt;       pk receiver_id application_type network_project… station_name</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
 <span class="co">#&gt;  1  9511 VR2W-136469 acoustic_teleme… ws1              ws-DL7      </span>
@@ -218,7 +218,7 @@
 <span class="co">#&gt;  8  9490 VR2W-134900 acoustic_teleme… ws1              ws-STEEN    </span>
 <span class="co">#&gt;  9  9491 VR2W-131002 acoustic_teleme… ws1              ws-TRAWL    </span>
 <span class="co">#&gt; 10  6020 VR2W-123815 acoustic_teleme… ws1              ws-W6       </span>
-<span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 34 more variables: station_description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
@@ -234,7 +234,7 @@
 <span class="co">#&gt; #   log_temperature_sample_period &lt;int&gt;, log_tilt_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_noise_stats_period &lt;int&gt;, log_noise_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_depth_stats_period &lt;int&gt;, log_depth_sample_period &lt;int&gt;,</span>
-<span class="co">#&gt; #   comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   comments &lt;chr&gt;</span></pre></body></html></div>
 <p>When a number of columns is not useful to your specific purpose, remember that the output is a <code>data.frame</code>, which can be filtered and subsetted conveniently with for example the <a href="http://dplyr.tidyverse.org/">dplyr</a> functions.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="co">#&gt; </span>
@@ -245,40 +245,49 @@
 <span class="co">#&gt; The following objects are masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span></pre></body></html></div>
-<p>For example, selecting only the columns <code>receiver_id</code> and <code>receiver_status</code>:</p>
+<p>For example, selecting only the columns <code>receiver_id</code> and <code>station_name</code>:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">ws_deployments</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">receiver_id</span>, <span class="no">receiver_status</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">receiver_id</span>, <span class="no">station_name</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">10</span>) <span class="co"># print 10 first</span>
 <span class="co">#&gt; # A tibble: 10 x 2</span>
-<span class="co">#&gt;    receiver_id receiver_status</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;          </span>
-<span class="co">#&gt;  1 VR2W-136469 Active         </span>
-<span class="co">#&gt;  2 VR2W-136466 Active         </span>
-<span class="co">#&gt;  3 VR2W-123821 Lost           </span>
-<span class="co">#&gt;  4 VR2W-114258 Active         </span>
-<span class="co">#&gt;  5 VR2W-123832 Active         </span>
-<span class="co">#&gt;  6 VR2W-123831 Active         </span>
-<span class="co">#&gt;  7 VR2W-136465 Active         </span>
-<span class="co">#&gt;  8 VR2W-134900 Active         </span>
-<span class="co">#&gt;  9 VR2W-131002 Active         </span>
-<span class="co">#&gt; 10 VR2W-123815 Lost</span></pre></body></html></div>
+<span class="co">#&gt;    receiver_id station_name</span>
+<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;       </span>
+<span class="co">#&gt;  1 VR2W-136469 ws-DL7      </span>
+<span class="co">#&gt;  2 VR2W-136466 ws-DL9      </span>
+<span class="co">#&gt;  3 VR2W-123821 ws-GVWSP    </span>
+<span class="co">#&gt;  4 VR2W-114258 ws-GVWSP    </span>
+<span class="co">#&gt;  5 VR2W-123832 ws-OG10     </span>
+<span class="co">#&gt;  6 VR2W-123831 ws-OGDL     </span>
+<span class="co">#&gt;  7 VR2W-136465 ws-SP3      </span>
+<span class="co">#&gt;  8 VR2W-134900 ws-STEEN    </span>
+<span class="co">#&gt;  9 VR2W-131002 ws-TRAWL    </span>
+<span class="co">#&gt; 10 VR2W-123815 ws-W6</span></pre></body></html></div>
 </div>
 <div id="deployments-overview" class="section level3">
 <h3 class="hasAnchor">
 <a href="#deployments-overview" class="anchor"></a>Deployments overview</h3>
-<p>Receivers are deployed for a specific period and this deployment information can be accessed as well with the command <code>get_deployments</code>. Filtering on the network project is similar to <code>get_receivers</code> and as the information about the receiver <code>status</code> is crucial, the function provides an additional argument to query based on the receiver status. Getting an overview of the lost and broken receivers of a specific project:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">my_deployments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_deployments.html">get_deployments</a></span>(<span class="no">con</span>,
-  <span class="kw">network_project_code</span> <span class="kw">=</span> <span class="st">"ws1"</span>,
-  <span class="kw">receiver_status</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Broken"</span>, <span class="st">"Lost"</span>)
-)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_deployments</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 3 x 40</span>
+<p>Receivers are deployed for a specific period and this deployment information can be accessed as well with the command <code>get_deployments</code>. To know the status of each receiver, join with information from <code><a href="../reference/get_receivers.html">get_receivers()</a></code>:</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">my_deployments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_deployments.html">get_deployments</a></span>(<span class="no">con</span>, <span class="kw">network_project_code</span> <span class="kw">=</span> <span class="st">"ws1"</span>)
+
+<span class="co"># Get list of receivers</span>
+<span class="no">receiver_ids</span> <span class="kw">&lt;-</span> <span class="no">my_deployments</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span>(<span class="no">receiver_id</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>()
+
+<span class="co"># Find receivers that are broken or lost</span>
+<span class="no">broken_receiver_ids</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="../reference/get_receivers.html">get_receivers</a></span>(<span class="no">con</span>, <span class="kw">receiver_id</span> <span class="kw">=</span> <span class="no">receiver_ids</span>, <span class="kw">status</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Broken"</span>, <span class="st">"Lost"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="no">receiver_id</span>)
+
+<span class="co"># Filter deployments on those with broken or lost receivers</span>
+<span class="no">my_deployments</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">receiver_id</span> <span class="kw">%in%</span> <span class="no">broken_receiver_ids</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="co"># print 10 first</span>
+<span class="co">#&gt; # A tibble: 3 x 39</span>
 <span class="co">#&gt;      pk receiver_id application_type network_project… station_name</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
 <span class="co">#&gt; 1  6038 VR2W-123821 acoustic_teleme… ws1              ws-GVWSP    </span>
 <span class="co">#&gt; 2  6020 VR2W-123815 acoustic_teleme… ws1              ws-W6       </span>
 <span class="co">#&gt; 3  3978 VR2W-123826 acoustic_teleme… ws1              ws-W7       </span>
-<span class="co">#&gt; # … with 35 more variables: station_description &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 34 more variables: station_description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
@@ -294,7 +303,7 @@
 <span class="co">#&gt; #   log_temperature_sample_period &lt;int&gt;, log_tilt_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_noise_stats_period &lt;int&gt;, log_noise_sample_period &lt;int&gt;,</span>
 <span class="co">#&gt; #   log_depth_stats_period &lt;int&gt;, log_depth_sample_period &lt;int&gt;,</span>
-<span class="co">#&gt; #   comments &lt;chr&gt;, receiver_status &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   comments &lt;chr&gt;</span></pre></body></html></div>
 </div>
 <div id="animals-overview" class="section level3">
 <h3 class="hasAnchor">

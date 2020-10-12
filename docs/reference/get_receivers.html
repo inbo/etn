@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Get receiver metadata — get_receivers" />
-<meta property="og:description" content="Get metadata for receivers, with option to filter on receiver id." />
+<meta property="og:description" content="Get metadata for receivers, with options to filter results." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
       </span>
     </div>
 
@@ -137,10 +137,15 @@
     </div>
 
     <div class="ref-description">
-    <p>Get metadata for receivers, with option to filter on receiver id.</p>
+    <p>Get metadata for receivers, with options to filter results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_receivers</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_receivers</span>(
+  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +161,10 @@
     <tr>
       <th>application_type</th>
       <td><p>(string) <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
+    </tr>
+    <tr>
+      <th>status</th>
+      <td><p>(string) One or more statuses, e.g. <code>Available</code> or <code>Broken</code>.</p></td>
     </tr>
     </table>
 
@@ -177,6 +186,9 @@ by <code>receiver_id</code>.</p>
 
 <span class='co'># Get receivers for a specific application type</span>
 <span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='st'>"cpod"</span>)
+
+<span class='co'># Get receivers with a specific status</span>
+<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
