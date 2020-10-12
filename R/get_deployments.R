@@ -1,7 +1,6 @@
 #' Get deployment metadata
 #'
-#' Get metadata for deployments, with options to filter on network project,
-#' receiver status and/or open deployments.
+#' Get metadata for deployments, with options to filter results.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.

@@ -29,8 +29,7 @@ A tibble (tidyverse data.frame) with metadata for deployments,
 sorted by \code{network_project_code}, \code{station_name} and \code{deploy_date_time}.
 }
 \description{
-Get metadata for deployments, with options to filter on network project,
-receiver status and/or open deployments.
+Get metadata for deployments, with options to filter results.
 }
 \examples{
 \dontrun{

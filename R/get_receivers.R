@@ -1,6 +1,6 @@
 #' Get receiver metadata
 #'
-#' Get metadata for receivers, with option to filter on receiver id.
+#' Get metadata for receivers, with options to filter results.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param receiver_id (string) One or more receiver ids.

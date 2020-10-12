@@ -18,7 +18,7 @@ A tibble (tidyverse data.frame) with metadata for receivers, sorted
 by \code{receiver_id}.
 }
 \description{
-Get metadata for receivers, with option to filter on receiver id.
+Get metadata for receivers, with options to filter results.
 }
 \examples{
 \dontrun{
