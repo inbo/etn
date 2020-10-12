@@ -18,8 +18,7 @@ A tibble (tidyverse data.frame) with project metadata, sorted by
 \code{project_code}.
 }
 \description{
-Get metadata for projects, with option to filter on animal or network
-projects.
+Get metadata for projects, with options to filter results.
 }
 \examples{
 \dontrun{

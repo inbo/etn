@@ -19,7 +19,7 @@ A tibble (tidyverse data.frame) with metadata for tags, sorted by
 \code{tag_id}.
 }
 \description{
-Get metadata for tags, with option to filter on tag id. By default, reference
+Get metadata for tags, with options to filter results. By default, reference
 tags are excluded.
 }
 \examples{

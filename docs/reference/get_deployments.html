@@ -47,8 +47,7 @@
 
 
 <meta property="og:title" content="Get deployment metadata — get_deployments" />
-<meta property="og:description" content="Get metadata for deployments, with options to filter on network project,
-receiver status and/or open deployments." />
+<meta property="og:description" content="Get metadata for deployments, with options to filter results." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -81,7 +80,7 @@ receiver status and/or open deployments." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
       </span>
     </div>
 
@@ -138,15 +137,13 @@ receiver status and/or open deployments." />
     </div>
 
     <div class="ref-description">
-    <p>Get metadata for deployments, with options to filter on network project,
-receiver status and/or open deployments.</p>
+    <p>Get metadata for deployments, with options to filter results.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_deployments</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
   <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
@@ -164,10 +161,6 @@ receiver status and/or open deployments.</p>
     <tr>
       <th>network_project_code</th>
       <td><p>(string) One or more network projects.</p></td>
-    </tr>
-    <tr>
-      <th>receiver_status</th>
-      <td><p>(string) One or more receiver status.</p></td>
     </tr>
     <tr>
       <th>open_only</th>
@@ -196,12 +189,6 @@ sorted by <code>network_project_code</code>, <code>station_name</code> and <code
 
 <span class='co'># Get open deployments from specific network project(s)</span>
 <span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ws1"</span>, <span class='st'>"ws2"</span>))
-
-<span class='co'># Get open deployments with a specific receiver status</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
-
-<span class='co'># Get open deployments from a specific project from active receivers</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='st'>"ws1"</span>, <span class='kw'>receiver_status</span> <span class='kw'>=</span> <span class='st'>"Active"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

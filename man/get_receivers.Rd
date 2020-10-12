@@ -4,7 +4,12 @@
 \alias{get_receivers}
 \title{Get receiver metadata}
 \usage{
-get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
+get_receivers(
+  connection = con,
+  receiver_id = NULL,
+  application_type = NULL,
+  status = NULL
+)
 }
 \arguments{
 \item{connection}{A valid connection to the ETN database.}
@@ -12,13 +17,15 @@ get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 \item{receiver_id}{(string) One or more receiver ids.}
 
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
+
+\item{status}{(string) One or more statuses, e.g. \code{Available} or \code{Broken}.}
 }
 \value{
 A tibble (tidyverse data.frame) with metadata for receivers, sorted
 by \code{receiver_id}.
 }
 \description{
-Get metadata for receivers, with option to filter on receiver id.
+Get metadata for receivers, with options to filter results.
 }
 \examples{
 \dontrun{
@@ -33,5 +40,8 @@ get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 
 # Get receivers for a specific application type
 get_receivers(con, application_type = "cpod")
+
+# Get receivers with a specific status
+get_receivers(con, status = c("Broken", "Lost"))
 }
 }

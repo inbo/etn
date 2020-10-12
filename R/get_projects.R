@@ -1,7 +1,6 @@
 #' Get project metadata
 #'
-#' Get metadata for projects, with option to filter on animal or network
-#' projects.
+#' Get metadata for projects, with options to filter results.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param project_type (string) `animal` or `network`.

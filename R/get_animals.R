@@ -1,9 +1,8 @@
 #' Get animal metadata
 #'
-#' Get metadata for animals, with options to filter on animal project and/or
-#' scientific name. Associated tag information is available in columns starting
-#' with `tag`. If multiple tags are associated with a single animal, the
-#' information is comma-separated.
+#' Get metadata for animals, with options to filter results. Associated tag
+#' information is available in columns starting with `tag`. If multiple tags
+#' are associated with a single animal, the information is comma-separated.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param animal_id (integer) One or more animal ids.
@@ -90,8 +89,12 @@ get_animals <- function(connection = con,
   animals <- dbGetQuery(connection, query)
 
   # Collapse tag information, to obtain one row = one animal
-  tag_cols <- animals %>% select(starts_with("tag")) %>% names()
-  other_cols <- animals %>% select(-starts_with("tag")) %>% names()
+  tag_cols <- animals %>%
+    select(starts_with("tag")) %>%
+    names()
+  other_cols <- animals %>%
+    select(-starts_with("tag")) %>%
+    names()
   animals <-
     animals %>%
     group_by_at(other_cols) %>%

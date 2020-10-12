@@ -87,24 +87,33 @@ When a number of columns is not useful to your specific purpose, remember that t
 library(dplyr)
 ```
 
-For example, selecting only the columns `receiver_id` and `receiver_status`:
+For example, selecting only the columns `receiver_id` and `station_name`:
 
 ```{r}
 ws_deployments %>%
-  select(receiver_id, receiver_status) %>%
+  select(receiver_id, station_name) %>%
   head(10) # print 10 first
 ```
 
 ### Deployments overview
 
-Receivers are deployed for a specific period and this deployment information can be accessed as well with the command `get_deployments`. Filtering on the network project is similar to `get_receivers` and as the information about the receiver `status` is crucial, the function provides an additional argument to query based on the receiver status. Getting an overview of the lost and broken receivers of a specific project:
+Receivers are deployed for a specific period and this deployment information can be accessed as well with the command `get_deployments`. To know the status of each receiver, join with information from `get_receivers()`:
 
 ```{r}
-my_deployments <- get_deployments(con,
-  network_project_code = "ws1",
-  receiver_status = c("Broken", "Lost")
-)
-head(my_deployments, 10) # print 10 first
+my_deployments <- get_deployments(con, network_project_code = "ws1")
+
+# Get list of receivers
+receiver_ids <- my_deployments %>% distinct(receiver_id) %>% pull()
+
+# Find receivers that are broken or lost
+broken_receiver_ids <-
+  get_receivers(con, receiver_id = receiver_ids, status = c("Broken", "Lost")) %>%
+  pull(receiver_id)
+
+# Filter deployments on those with broken or lost receivers
+my_deployments %>%
+  filter(receiver_id %in% broken_receiver_ids) %>%
+  head() # print 10 first
 ```
 
 ### Animals overview

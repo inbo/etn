@@ -51,9 +51,8 @@ A tibble (tidyverse data.frame) with detections, sorted by \code{tag_id}
 and \code{date_time}.
 }
 \description{
-Get detections data, with options to filter on animal project, network
-project, start- and enddate, deployment station name and/or tag identifier.
-Use \code{limit} to limit the number of returned records.
+Get detections data, with options to filter results. Use \code{limit} to limit
+the number of returned records.
 }
 \examples{
 \dontrun{
