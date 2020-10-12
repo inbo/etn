@@ -5,6 +5,7 @@
 #' @param connection A valid connection to the ETN database.
 #' @param receiver_id (string) One or more receiver ids.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
+#' @param status (string) One or more statuses, e.g. `Available` or `Broken`.
 #'
 #' @return A tibble (tidyverse data.frame) with metadata for receivers, sorted
 #'   by `receiver_id`.
@@ -28,10 +29,14 @@
 #'
 #' # Get receivers for a specific application type
 #' get_receivers(con, application_type = "cpod")
+#'
+#' # Get receivers with a specific status
+#' get_receivers(con, status = c("Broken", "Lost"))
 #' }
 get_receivers <- function(connection = con,
                           receiver_id = NULL,
-                          application_type = NULL) {
+                          application_type = NULL,
+                          status = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -52,6 +57,15 @@ get_receivers <- function(connection = con,
     application_type_query <- glue_sql("application_type IN ({application_type*})", .con = connection)
   }
 
+  # Check status
+  if (is.null(status)) {
+    status_query <- "True"
+  } else {
+    valid_status <- c("Active", "Available", "Broken", "Lost", "Returned to manufacturer")
+    check_value(status, valid_status, "status")
+    status_query <- glue_sql("status IN ({status*})", .con = connection)
+  }
+
   # Build query
   query <- glue_sql("
     SELECT
@@ -61,6 +75,7 @@ get_receivers <- function(connection = con,
     WHERE
       {receiver_id_query}
       AND {application_type_query}
+      AND {status_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
 

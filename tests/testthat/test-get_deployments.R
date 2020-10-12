@@ -43,22 +43,17 @@ expected_col_names <- c(
   "log_noise_sample_period",
   "log_depth_stats_period",
   "log_depth_sample_period",
-  "comments",
-  "receiver_status" # This field comes from join with receivers
+  "comments"
 )
 
 application1 <- "cpod"
 project1 <- "ws1"
 project_multiple <- c("ws1", "ws2")
-status1 <- "Broken"
-status_multiple <- c("Broken", "Lost")
 
 deployments_all <- get_deployments(con)
 deployments_application1 <- get_deployments(con, application_type = application1)
 deployments_project1 <- get_deployments(con, network_project_code = project1)
 deployments_project_multiple <- get_deployments(con, network_project_code = project_multiple)
-deployments_status1 <- get_deployments(con, receiver_status = status1)
-deployments_status_multiple <- get_deployments(con, receiver_status = status_multiple)
 deployments_project1_openfalse <- get_deployments(con, network_project_code = project1, open_only = FALSE)
 
 testthat::test_that("Test input", {
@@ -75,12 +70,6 @@ testthat::test_that("Test input", {
   expect_error(
     get_deployments(con, network_project_code = c("thornton", "not_a_project"))
   )
-  expect_error(
-    get_deployments(con, network_project_code = "thornton", receiver_status = "not_a_receiver_status")
-  )
-  expect_error(
-    get_deployments(con, network_project_code = "thornton", receiver_status = c("Broken", "not_a_receiver_status"))
-  )
 })
 
 testthat::test_that("Test output type", {
@@ -88,8 +77,6 @@ testthat::test_that("Test output type", {
   expect_is(deployments_application1, "tbl_df")
   expect_is(deployments_project1, "tbl_df")
   expect_is(deployments_project_multiple, "tbl_df")
-  expect_is(deployments_status1, "tbl_df")
-  expect_is(deployments_status_multiple, "tbl_df")
   expect_is(deployments_project1_openfalse, "tbl_df")
 })
 
@@ -98,8 +85,6 @@ testthat::test_that("Test column names", {
   expect_equal(names(deployments_application1), expected_col_names)
   expect_equal(names(deployments_project1), expected_col_names)
   expect_equal(names(deployments_project_multiple), expected_col_names)
-  expect_equal(names(deployments_status1), expected_col_names)
-  expect_equal(names(deployments_status_multiple), expected_col_names)
   expect_equal(names(deployments_project1_openfalse), expected_col_names)
 })
 
@@ -108,7 +93,6 @@ testthat::test_that("Test number of records", {
   expect_gt(nrow(deployments_all), nrow(deployments_project1))
   expect_gt(nrow(deployments_all), nrow(deployments_project_multiple))
   expect_gt(nrow(deployments_project_multiple), nrow(deployments_project1))
-  expect_gt(nrow(deployments_status_multiple), nrow(deployments_status1))
   expect_gte(nrow(deployments_project1_openfalse), nrow(deployments_project1))
 })
 
@@ -124,14 +108,6 @@ testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     deployments_project_multiple %>% distinct(network_project_code) %>% arrange(network_project_code) %>% pull(),
     project_multiple
-  )
-  expect_equal(
-    deployments_status1 %>% distinct(receiver_status) %>% pull(),
-    c(status1)
-  )
-  expect_equal(
-    deployments_status_multiple %>% distinct(receiver_status) %>% arrange(receiver_status) %>% pull(),
-    status_multiple
   )
   expect_equal(
     deployments_project1_openfalse %>% distinct(network_project_code) %>% pull(),

@@ -8,7 +8,6 @@ get_deployments(
   connection = con,
   application_type = NULL,
   network_project_code = NULL,
-  receiver_status = NULL,
   open_only = TRUE
 )
 }
@@ -18,8 +17,6 @@ get_deployments(
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 
 \item{network_project_code}{(string) One or more network projects.}
-
-\item{receiver_status}{(string) One or more receiver status.}
 
 \item{open_only}{(logical) Restrict to deployments that are currently open
 (i.e. no end date defined). Default: \code{TRUE}.}
@@ -46,11 +43,5 @@ get_deployments(con, application_type = "cpod")
 
 # Get open deployments from specific network project(s)
 get_deployments(con, network_project_code = c("ws1", "ws2"))
-
-# Get open deployments with a specific receiver status
-get_deployments(con, receiver_status = c("Broken", "Lost"))
-
-# Get open deployments from a specific project from active receivers
-get_deployments(con, network_project_code = "ws1", receiver_status = "Active")
 }
 }
