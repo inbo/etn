@@ -1,0 +1,901 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "animals",
+      "path": "animals.csv",
+      "profile": "tabular-data-resource",
+      "encoding": "utf-8",
+      "format": "csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "pk",
+            "type": "integer"
+          },
+          {
+            "name": "animal_id",
+            "type": "integer"
+          },
+          {
+            "name": "animal_project_code",
+            "type": "string"
+          },
+          {
+            "name": "tag_id",
+            "type": "string"
+          },
+          {
+            "name": "tag_fk",
+            "type": "integer"
+          },
+          {
+            "name": "scientific_name",
+            "type": "string"
+          },
+          {
+            "name": "common_name",
+            "type": "string"
+          },
+          {
+            "name": "aphia_id",
+            "type": "integer"
+          },
+          {
+            "name": "animal_label",
+            "type": "string"
+          },
+          {
+            "name": "animal_nickname",
+            "type": "string"
+          },
+          {
+            "name": "tagger",
+            "type": "string"
+          },
+          {
+            "name": "capture_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "capture_location",
+            "type": "string"
+          },
+          {
+            "name": "capture_latitude",
+            "type": "number"
+          },
+          {
+            "name": "capture_longitude",
+            "type": "number"
+          },
+          {
+            "name": "capture_method",
+            "type": "string"
+          },
+          {
+            "name": "capture_depth",
+            "type": "string"
+          },
+          {
+            "name": "capture_temperature_change",
+            "type": "string"
+          },
+          {
+            "name": "release_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "release_location",
+            "type": "string"
+          },
+          {
+            "name": "release_latitude",
+            "type": "number"
+          },
+          {
+            "name": "release_longitude",
+            "type": "number"
+          },
+          {
+            "name": "recapture_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "length1_type",
+            "type": "string"
+          },
+          {
+            "name": "length1",
+            "type": "number"
+          },
+          {
+            "name": "length1_unit",
+            "type": "string"
+          },
+          {
+            "name": "length2_type",
+            "type": "string"
+          },
+          {
+            "name": "length2",
+            "type": "number"
+          },
+          {
+            "name": "length2_unit",
+            "type": "string"
+          },
+          {
+            "name": "length3_type",
+            "type": "string"
+          },
+          {
+            "name": "length3",
+            "type": "number"
+          },
+          {
+            "name": "length3_unit",
+            "type": "string"
+          },
+          {
+            "name": "length4_type",
+            "type": "string"
+          },
+          {
+            "name": "length4",
+            "type": "number"
+          },
+          {
+            "name": "length4_unit",
+            "type": "string"
+          },
+          {
+            "name": "weight",
+            "type": "number"
+          },
+          {
+            "name": "weight_unit",
+            "type": "string"
+          },
+          {
+            "name": "age",
+            "type": "number"
+          },
+          {
+            "name": "age_unit",
+            "type": "string"
+          },
+          {
+            "name": "sex",
+            "type": "string"
+          },
+          {
+            "name": "life_stage",
+            "type": "string"
+          },
+          {
+            "name": "wild_or_hatchery",
+            "type": "string"
+          },
+          {
+            "name": "stock",
+            "type": "string"
+          },
+          {
+            "name": "surgery_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "surgery_location",
+            "type": "string"
+          },
+          {
+            "name": "surgery_latitude",
+            "type": "number"
+          },
+          {
+            "name": "surgery_longitude",
+            "type": "number"
+          },
+          {
+            "name": "treatment_type",
+            "type": "string"
+          },
+          {
+            "name": "tagging_type",
+            "type": "string"
+          },
+          {
+            "name": "tagging_methodology",
+            "type": "string"
+          },
+          {
+            "name": "dna_sample",
+            "type": "string"
+          },
+          {
+            "name": "sedative",
+            "type": "string"
+          },
+          {
+            "name": "sedative_concentration",
+            "type": "string"
+          },
+          {
+            "name": "anaesthetic",
+            "type": "string"
+          },
+          {
+            "name": "buffer",
+            "type": "string"
+          },
+          {
+            "name": "anaesthetic_concentration",
+            "type": "string"
+          },
+          {
+            "name": "buffer_concentration_in_anaesthetic",
+            "type": "string"
+          },
+          {
+            "name": "anaesthetic_concentration_in_recirculation",
+            "type": "string"
+          },
+          {
+            "name": "buffer_concentration_in_recirculation",
+            "type": "string"
+          },
+          {
+            "name": "dissolved_oxygen",
+            "type": "string"
+          },
+          {
+            "name": "pre_surgery_holding_period",
+            "type": "string"
+          },
+          {
+            "name": "post_surgery_holding_period",
+            "type": "string"
+          },
+          {
+            "name": "holding_temperature",
+            "type": "string"
+          },
+          {
+            "name": "comments",
+            "type": "string"
+          }
+        ],
+        "primaryKey": "pk",
+        "foreignKeys": [
+          {
+            "fields": "tag_id",
+            "reference": {
+              "resource": "tags",
+              "fields": "tag_id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "tags",
+      "path": "tags.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "pk",
+            "type": "integer"
+          },
+          {
+            "name": "tag_id",
+            "type": "string"
+          },
+          {
+            "name": "tag_id_alternative",
+            "type": "string"
+          },
+          {
+            "name": "telemetry_type",
+            "type": "string"
+          },
+          {
+            "name": "manufacturer",
+            "type": "string"
+          },
+          {
+            "name": "model",
+            "type": "string"
+          },
+          {
+            "name": "frequency",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "name": "serial_number",
+            "type": "string"
+          },
+          {
+            "name": "tag_id_protocol",
+            "type": "string"
+          },
+          {
+            "name": "tag_id_code",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "activation_date",
+            "type": "datetime"
+          },
+          {
+            "name": "battery_estimated_life",
+            "type": "string"
+          },
+          {
+            "name": "battery_estimated_end_date",
+            "type": "datetime"
+          },
+          {
+            "name": "sensor_type",
+            "type": "string"
+          },
+          {
+            "name": "sensor_slope",
+            "type": "number"
+          },
+          {
+            "name": "sensor_intercept",
+            "type": "number"
+          },
+          {
+            "name": "sensor_range",
+            "type": "string"
+          },
+          {
+            "name": "sensor_transmit_ratio",
+            "type": "integer"
+          },
+          {
+            "name": "accelerometer_algorithm",
+            "type": "string"
+          },
+          {
+            "name": "accelerometer_samples_per_second",
+            "type": "integer"
+          },
+          {
+            "name": "owner_organization",
+            "type": "string"
+          },
+          {
+            "name": "owner_pi",
+            "type": "string"
+          },
+          {
+            "name": "financing_project",
+            "type": "string"
+          },
+          {
+            "name": "step1_min_delay",
+            "type": "string"
+          },
+          {
+            "name": "step1_max_delay",
+            "type": "string"
+          },
+          {
+            "name": "step1_power",
+            "type": "string"
+          },
+          {
+            "name": "step1_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step1_acceleration_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step2_min_delay",
+            "type": "string"
+          },
+          {
+            "name": "step2_max_delay",
+            "type": "string"
+          },
+          {
+            "name": "step2_power",
+            "type": "string"
+          },
+          {
+            "name": "step2_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step2_acceleration_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step3_min_delay",
+            "type": "string"
+          },
+          {
+            "name": "step3_max_delay",
+            "type": "string"
+          },
+          {
+            "name": "step3_power",
+            "type": "string"
+          },
+          {
+            "name": "step3_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step3_acceleration_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step4_min_delay",
+            "type": "string"
+          },
+          {
+            "name": "step4_max_delay",
+            "type": "string"
+          },
+          {
+            "name": "step4_power",
+            "type": "string"
+          },
+          {
+            "name": "step4_duration",
+            "type": "integer"
+          },
+          {
+            "name": "step4_acceleration_duration",
+            "type": "integer"
+          }
+        ],
+        "primaryKey": "pk"
+      }
+    },
+    {
+      "name": "receivers",
+      "path": "receivers.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "pk",
+            "type": "integer"
+          },
+          {
+            "name": "receiver_id",
+            "type": "string"
+          },
+          {
+            "name": "application_type",
+            "type": "string"
+          },
+          {
+            "name": "telemetry_type",
+            "type": "string"
+          },
+          {
+            "name": "manufacturer",
+            "type": "string"
+          },
+          {
+            "name": "receiver_id_model",
+            "type": "string"
+          },
+          {
+            "name": "receiver_id_serial_number",
+            "type": "string"
+          },
+          {
+            "name": "modem_address",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "battery_estimated_life",
+            "type": "string"
+          },
+          {
+            "name": "owner_organization",
+            "type": "string"
+          },
+          {
+            "name": "financing_project",
+            "type": "string"
+          },
+          {
+            "name": "built_in_tag_id",
+            "type": "string"
+          },
+          {
+            "name": "ar_model_number",
+            "type": "string"
+          },
+          {
+            "name": "ar_serial_number",
+            "type": "string"
+          },
+          {
+            "name": "ar_battery_estimated_life",
+            "type": "string"
+          },
+          {
+            "name": "ar_voltage_at_deploy",
+            "type": "string"
+          },
+          {
+            "name": "ar_interrogate_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_receive_frequency",
+            "type": "string"
+          },
+          {
+            "name": "ar_reply_frequency",
+            "type": "string"
+          },
+          {
+            "name": "ar_ping_rate",
+            "type": "string"
+          },
+          {
+            "name": "ar_enable_code_address",
+            "type": "string"
+          },
+          {
+            "name": "ar_release_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_disable_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_tilt_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_tilt_after_deploy",
+            "type": "string"
+          }
+        ],
+        "primaryKey": "pk"
+      }
+    },
+    {
+      "name": "deployments",
+      "path": "deployments.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "pk",
+            "type": "integer"
+          },
+          {
+            "name": "receiver_id",
+            "type": "string"
+          },
+          {
+            "name": "application_type",
+            "type": "string"
+          },
+          {
+            "name": "network_project_code",
+            "type": "string"
+          },
+          {
+            "name": "station_name",
+            "type": "string"
+          },
+          {
+            "name": "station_description",
+            "type": "string"
+          },
+          {
+            "name": "station_manager",
+            "type": "string"
+          },
+          {
+            "name": "deploy_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "deploy_latitude",
+            "type": "number"
+          },
+          {
+            "name": "deploy_longitude",
+            "type": "number"
+          },
+          {
+            "name": "intended_latitude",
+            "type": "number"
+          },
+          {
+            "name": "intended_longitude",
+            "type": "number"
+          },
+          {
+            "name": "mooring_type",
+            "type": "string"
+          },
+          {
+            "name": "bottom_depth",
+            "type": "string"
+          },
+          {
+            "name": "riser_length",
+            "type": "string"
+          },
+          {
+            "name": "deploy_depth",
+            "type": "string"
+          },
+          {
+            "name": "battery_installation_date",
+            "type": "datetime"
+          },
+          {
+            "name": "battery_estimated_end_date",
+            "type": "datetime"
+          },
+          {
+            "name": "activation_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "recover_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "recover_latitude",
+            "type": "number"
+          },
+          {
+            "name": "recover_longitude",
+            "type": "number"
+          },
+          {
+            "name": "download_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "download_file_name",
+            "type": "string"
+          },
+          {
+            "name": "valid_data_until_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "sync_date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "time_drift",
+            "type": "string"
+          },
+          {
+            "name": "ar_battery_installation_date",
+            "type": "datetime"
+          },
+          {
+            "name": "ar_confirm",
+            "type": "string"
+          },
+          {
+            "name": "transmit_profile",
+            "type": "string"
+          },
+          {
+            "name": "transmit_power_output",
+            "type": "string"
+          },
+          {
+            "name": "log_temperature_stats_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_temperature_sample_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_tilt_sample_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_noise_stats_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_noise_sample_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_depth_stats_period",
+            "type": "integer"
+          },
+          {
+            "name": "log_depth_sample_period",
+            "type": "integer"
+          },
+          {
+            "name": "comments",
+            "type": "string"
+          }
+        ],
+        "primaryKey": "pk",
+        "foreignKeys": [
+          {
+            "fields": "receiver_id",
+            "reference": {
+              "resource": "receivers",
+              "fields": "receiver_id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "detections",
+      "path": "detections.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "pk",
+            "type": "integer"
+          },
+          {
+            "name": "date_time",
+            "type": "datetime"
+          },
+          {
+            "name": "receiver_id",
+            "type": "string"
+          },
+          {
+            "name": "application_type",
+            "type": "string"
+          },
+          {
+            "name": "network_project_code",
+            "type": "string"
+          },
+          {
+            "name": "tag_id",
+            "type": "string"
+          },
+          {
+            "name": "tag_fk",
+            "type": "integer"
+          },
+          {
+            "name": "animal_id",
+            "type": "integer"
+          },
+          {
+            "name": "animal_project_code",
+            "type": "string"
+          },
+          {
+            "name": "scientific_name",
+            "type": "string"
+          },
+          {
+            "name": "station_name",
+            "type": "string"
+          },
+          {
+            "name": "deploy_latitude",
+            "type": "number"
+          },
+          {
+            "name": "deploy_longitude",
+            "type": "number"
+          },
+          {
+            "name": "sensor_type",
+            "type": "string"
+          },
+          {
+            "name": "sensor_value",
+            "type": "number"
+          },
+          {
+            "name": "sensor_unit",
+            "type": "string"
+          },
+          {
+            "name": "sensor_value_depth",
+            "type": "number"
+          },
+          {
+            "name": "sensor_value_acceleration",
+            "type": "number"
+          },
+          {
+            "name": "sensor_value_temperature",
+            "type": "number"
+          },
+          {
+            "name": "signal_to_noise_ratio",
+            "type": "string"
+          },
+          {
+            "name": "source_file",
+            "type": "string"
+          },
+          {
+            "name": "qc_flag",
+            "type": "boolean"
+          },
+          {
+            "name": "deployment_fk",
+            "type": "integer"
+          }
+        ],
+        "primaryKey": "pk",
+        "foreignKeys": [
+          {
+            "fields": "receiver_id",
+            "reference": {
+              "resource": "receivers",
+              "fields": "receiver_id"
+            }
+          },
+          {
+            "fields": "tag_id",
+            "reference": {
+              "resource": "tags",
+              "fields": "tag_id"
+            }
+          },
+          {
+            "fields": "animal_id",
+            "reference": {
+              "resource": "animals",
+              "fields": "animal_id"
+            }
+          },
+          {
+            "fields": "deployment_fk",
+            "reference": {
+              "resource": "deployments",
+              "fields": "pk"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
