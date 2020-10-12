@@ -16,13 +16,11 @@
 #' }
 connect_to_etn <- function(username,
                            password) {
-  ETN_ODBC_DSN <- "ETN"
-  # ETN_SERVER <- "dppg.vliz.be"
-  # ETN_DBNAME <- "ETN"
+  etb_odbc_dsn <- "ETN"
 
-  con <- DBI::dbConnect(odbc::odbc(), ETN_ODBC_DSN,
-    UID = paste("", tolower(username), "", sep = ""),
-    PWD = paste("", password, "", sep = "")
+  con <- DBI::dbConnect(odbc::odbc(), etb_odbc_dsn,
+    uid = paste("", tolower(username), "", sep = ""),
+    pwd = paste("", password, "", sep = "")
   )
   return(con)
 }
