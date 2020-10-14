@@ -42,6 +42,7 @@
 #'
 #' @importFrom glue glue
 #' @importFrom dplyr %>% arrange distinct filter group_by mutate pull select tibble
+#' @importFrom readr write_csv
 #'
 #' @examples
 #' \dontrun{
