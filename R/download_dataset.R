@@ -45,7 +45,24 @@
 #'
 #' @examples
 #' \dontrun{
-#' ...
+#' # Download data for the 2014_demer animal project (all scientific names)
+#' download_dataset(con, animal_project_code = "2014_demer")
+#' #> Downloading data to directory "2014_demer":
+#' #> * (1/6): downloading animals.csv
+#' #> * (2/6): downloading tags.csv
+#' #> * (3/6): downloading detections.csv
+#' #> * (4/6): downloading deployments.csv
+#' #> * (5/6): downloading receivers.csv
+#' #> * (6/6): adding datapackage.json as file metadata
+#' #>
+#' #> Summary statistics for dataset "2014_demer":
+#' #> * number of animals:           16
+#' #> * number of tags:              16
+#' #> * number of detections:        237064
+#' #> * number of deployments:       939
+#' #> * number of receivers:         179
+#' #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
+#' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
 #' }
 download_dataset <- function(connection = con,
                         animal_project_code = NULL,
