@@ -65,9 +65,9 @@
 #' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
 #' }
 download_dataset <- function(connection = con,
-                        animal_project_code = NULL,
-                        directory = animal_project_code,
-                        scientific_name = NULL) {
+                             animal_project_code = NULL,
+                             directory = animal_project_code,
+                             scientific_name = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -101,7 +101,7 @@ download_dataset <- function(connection = con,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
-  write_csv(animals, paste(directory, "animals.csv", sep="/"), na = "")
+  write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
 
   # TAGS
   message("* (2/6): downloading tags.csv")
@@ -115,7 +115,7 @@ download_dataset <- function(connection = con,
     tag_id = tag_ids,
     include_ref_tags = TRUE # TODO: should this be the default?
   )
-  write_csv(tags, paste(directory, "tags.csv", sep="/"), na = "")
+  write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
@@ -126,7 +126,7 @@ download_dataset <- function(connection = con,
     scientific_name = scientific_name,
     limit = FALSE
   )
-  write_csv(detections, paste(directory, "detections.csv", sep="/"), na = "")
+  write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
@@ -146,7 +146,7 @@ download_dataset <- function(connection = con,
   deployments <-
     deployments %>%
     mutate(comments = str_replace_all(comments, "[\r\n]+", " "))
-  write_csv(deployments, paste(directory, "deployments.csv", sep="/"), na = "")
+  write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
 
   # RECEIVERS
   message("* (5/6): downloading receivers.csv")
@@ -159,7 +159,7 @@ download_dataset <- function(connection = con,
     con,
     receiver_id = receiver_ids
   )
-  write_csv(receivers, paste(directory, "receivers.csv", sep="/"), na = "")
+  write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
@@ -204,13 +204,13 @@ download_dataset <- function(connection = con,
     distinct(deployment_fk) %>%
     pull()
 
-  if(length(animals_multiple_tags) > 0) {
+  if (length(animals_multiple_tags) > 0) {
     warning("Animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
   }
-  if(length(tags_multiple_animals) > 0) {
+  if (length(tags_multiple_animals) > 0) {
     warning("Tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
   }
-  if(length(orphaned_deployments) > 0) {
+  if (length(orphaned_deployments) > 0) {
     warning("Deployments without network project: ", paste(orphaned_deployments, collapse = ", "))
   }
 }
