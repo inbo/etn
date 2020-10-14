@@ -90,8 +90,14 @@ get_animals <- function(connection = con,
   animals <- dbGetQuery(connection, query)
 
   # Collapse tag information, to obtain one row = one animal
-  tag_cols <- animals %>% select(starts_with("tag")) %>% names()
-  other_cols <- animals %>% select(-starts_with("tag")) %>% names()
+  tag_cols <-
+    animals %>%
+    select(starts_with("tag")) %>%
+    names()
+  other_cols <-
+    animals %>%
+    select(-starts_with("tag")) %>%
+    names()
   animals <-
     animals %>%
     group_by_at(other_cols) %>%
