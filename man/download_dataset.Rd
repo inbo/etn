@@ -6,7 +6,7 @@
 \usage{
 download_dataset(
   connection = con,
-  animal_project_code = NULL,
+  animal_project_code,
   directory = animal_project_code,
   scientific_name = NULL
 )

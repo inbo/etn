@@ -32,12 +32,13 @@
 #' `frictionless validate datapackage.json` on the command line using
 #' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param animal_project_code (string) Animal project you want to download data
-#'   for.
-#' @param directory (string) Relative path to local download directory. Default:
-#'   directory named after animal project code.
-#' @param scientific_name (string) One or more scientific names to filter upon.
+#' @param connection A valid connection to the ETN database. Defaults to `con`.
+#' @param animal_project_code String. Animal project you want to download data
+#'   for. Required.
+#' @param directory String. Relative path to local download directory.
+#'   Defaults to creating a directory named after animal project code.
+#' @param scientific_name String. One or more scientific names to filter upon.
+#'   Defaults to no filter.
 #'
 #' @export
 #'
@@ -67,14 +68,14 @@
 #' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
 #' }
 download_dataset <- function(connection = con,
-                             animal_project_code = NULL,
+                             animal_project_code,
                              directory = animal_project_code,
                              scientific_name = NULL) {
   # Check connection
   check_connection(connection)
 
   # Check animal_project_code
-  if (is.null(animal_project_code)) {
+  if (missing(animal_project_code) || is.null(animal_project_code)) {
     stop("Please provide an animal_project_code")
   } else {
     valid_animal_project_codes <- list_animal_project_codes(connection)
