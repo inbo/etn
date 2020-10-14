@@ -35,7 +35,8 @@
 #' @param connection A valid connection to the ETN database.
 #' @param animal_project_code (string) Animal project you want to download data
 #'   for.
-#' @param directory (string) Path to local download directory.
+#' @param directory (string) Relative path to local download directory. Default:
+#'   directory named after animal project code.
 #' @param scientific_name (string) One or more scientific names to filter upon.
 #'
 #' @export
