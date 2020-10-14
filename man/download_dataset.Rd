@@ -12,15 +12,16 @@ download_dataset(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A valid connection to the ETN database. Defaults to \code{con}.}
 
-\item{animal_project_code}{(string) Animal project you want to download data
-for.}
+\item{animal_project_code}{String. Animal project you want to download data
+for. Required.}
 
-\item{directory}{(string) Relative path to local download directory. Default:
-directory named after animal project code.}
+\item{directory}{String. Relative path to local download directory.
+Defaults to creating a directory named after animal project code.}
 
-\item{scientific_name}{(string) One or more scientific names to filter upon.}
+\item{scientific_name}{String. One or more scientific names to filter upon.
+Defaults to no filter.}
 }
 \description{
 Download all data related to an \strong{animal project} as a data package that can
