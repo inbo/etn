@@ -1,6 +1,6 @@
-#' Get tag metadata
+#' Get tag data
 #'
-#' Get metadata for tags, with option to filter on tag id. By default, reference
+#' Get data for tags, with option to filter on tag id. By default, reference
 #' tags are excluded.
 #'
 #' @param connection A valid connection with the ETN database.
@@ -8,7 +8,7 @@
 #' @param include_ref_tags (logical) Include reference tags. Default:
 #'   `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for tags, sorted by
+#' @return A tibble (tidyverse data.frame) with data for tags, sorted by
 #'   `tag_id`.
 #'
 #' @export

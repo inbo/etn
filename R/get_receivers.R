@@ -1,13 +1,13 @@
-#' Get receiver metadata
+#' Get receiver data
 #'
-#' Get metadata for receivers, with option to filter on receiver id.
+#' Get data for receivers, with option to filter on receiver id.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param receiver_id (string) One or more receiver ids.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for receivers, sorted
-#'   by `receiver_id`.
+#' @return A tibble (tidyverse data.frame) with data for receivers, sorted by
+#'   `receiver_id`.
 #'
 #' @export
 #'

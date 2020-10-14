@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_projects.R
 \name{get_projects}
 \alias{get_projects}
-\title{Get project metadata}
+\title{Get project data}
 \usage{
 get_projects(connection = con, project_type = NULL, application_type = NULL)
 }
@@ -14,12 +14,11 @@ get_projects(connection = con, project_type = NULL, application_type = NULL)
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame) with project metadata, sorted by
+A tibble (tidyverse data.frame) with project data, sorted by
 \code{project_code}.
 }
 \description{
-Get metadata for projects, with option to filter on animal or network
-projects.
+Get data for projects, with option to filter on animal or network projects.
 }
 \examples{
 \dontrun{

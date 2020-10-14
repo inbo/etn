@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_deployments.R
 \name{get_deployments}
 \alias{get_deployments}
-\title{Get deployment metadata}
+\title{Get deployment data}
 \usage{
 get_deployments(
   connection = con,
@@ -25,11 +25,11 @@ get_deployments(
 (i.e. no end date defined). Default: \code{TRUE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for deployments,
+A tibble (tidyverse data.frame) with data for deployments,
 sorted by \code{network_project_code}, \code{station_name} and \code{deploy_date_time}.
 }
 \description{
-Get metadata for deployments, with options to filter on network project,
+Get data for deployments, with options to filter on network project,
 receiver status and/or open deployments.
 }
 \examples{

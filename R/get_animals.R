@@ -1,6 +1,6 @@
-#' Get animal metadata
+#' Get animal data
 #'
-#' Get metadata for animals, with options to filter on animal project and/or
+#' Get data for animals, with options to filter on animal project and/or
 #' scientific name. Associated tag information is available in columns starting
 #' with `tag`. If multiple tags are associated with a single animal, the
 #' information is comma-separated.
@@ -10,7 +10,7 @@
 #' @param animal_project_code (string) One or more animal projects.
 #' @param scientific_name (string) One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for animals, sorted by
+#' @return A tibble (tidyverse data.frame) with data for animals, sorted by
 #'   `animal_project_code`, `release_date_time` and `tag_id`.
 #'
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_animals.R
 \name{get_animals}
 \alias{get_animals}
-\title{Get animal metadata}
+\title{Get animal data}
 \usage{
 get_animals(
   connection = con,
@@ -21,11 +21,11 @@ get_animals(
 \item{scientific_name}{(string) One or more scientific names.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for animals, sorted by
+A tibble (tidyverse data.frame) with data for animals, sorted by
 \code{animal_project_code}, \code{release_date_time} and \code{tag_id}.
 }
 \description{
-Get metadata for animals, with options to filter on animal project and/or
+Get data for animals, with options to filter on animal project and/or
 scientific name. Associated tag information is available in columns starting
 with \code{tag}. If multiple tags are associated with a single animal, the
 information is comma-separated.

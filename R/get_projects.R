@@ -1,13 +1,12 @@
-#' Get project metadata
+#' Get project data
 #'
-#' Get metadata for projects, with option to filter on animal or network
-#' projects.
+#' Get data for projects, with option to filter on animal or network projects.
 #'
 #' @param connection A valid connection to the ETN database.
 #' @param project_type (string) `animal` or `network`.
 #' @param application_type (string) `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame) with project metadata, sorted by
+#' @return A tibble (tidyverse data.frame) with project data, sorted by
 #'   `project_code`.
 #'
 #' @export

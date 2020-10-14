@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_tags.R
 \name{get_tags}
 \alias{get_tags}
-\title{Get tag metadata}
+\title{Get tag data}
 \usage{
 get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 }
@@ -15,11 +15,11 @@ get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for tags, sorted by
+A tibble (tidyverse data.frame) with data for tags, sorted by
 \code{tag_id}.
 }
 \description{
-Get metadata for tags, with option to filter on tag id. By default, reference
+Get data for tags, with option to filter on tag id. By default, reference
 tags are excluded.
 }
 \examples{

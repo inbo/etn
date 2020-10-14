@@ -1,6 +1,6 @@
-#' Get deployment metadata
+#' Get deployment data
 #'
-#' Get metadata for deployments, with options to filter on network project,
+#' Get data for deployments, with options to filter on network project,
 #' receiver status and/or open deployments.
 #'
 #' @param connection A valid connection to the ETN database.
@@ -10,7 +10,7 @@
 #' @param open_only (logical) Restrict to deployments that are currently open
 #'   (i.e. no end date defined). Default: `TRUE`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for deployments,
+#' @return A tibble (tidyverse data.frame) with data for deployments,
 #'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.
 #'
 #' @export

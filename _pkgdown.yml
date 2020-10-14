@@ -23,16 +23,14 @@ reference:
   - title: "Connect to the database"
     contents:
       - connect_to_etn
-  - title: "Get metadata"
+  - title: "Get data"
     contents:
       - get_projects
       - get_animals
       - get_tags
-      - get_receivers
-      - get_deployments
-  - title: "Get detections data"
-    contents:
       - get_detections
+      - get_deployments
+      - get_receivers
   - title: "List parameter options"
     contents:
       - starts_with("list_")

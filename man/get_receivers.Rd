@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_receivers.R
 \name{get_receivers}
 \alias{get_receivers}
-\title{Get receiver metadata}
+\title{Get receiver data}
 \usage{
 get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 }
@@ -14,11 +14,11 @@ get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 \item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for receivers, sorted
-by \code{receiver_id}.
+A tibble (tidyverse data.frame) with data for receivers, sorted by
+\code{receiver_id}.
 }
 \description{
-Get metadata for receivers, with option to filter on receiver id.
+Get data for receivers, with option to filter on receiver id.
 }
 \examples{
 \dontrun{
