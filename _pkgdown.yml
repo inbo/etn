@@ -31,6 +31,9 @@ reference:
       - get_detections
       - get_deployments
       - get_receivers
+  - title: "Download dataset"
+    contents:
+      - download_dataset
   - title: "List parameter options"
     contents:
       - starts_with("list_")
