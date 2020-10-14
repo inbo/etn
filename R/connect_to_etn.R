@@ -1,4 +1,6 @@
-#' Connect to the database using username and password.
+#' Connect to the ETN database
+#'
+#' Connect to the ETN database using username and password.
 #'
 #' @param username (character) Username to use for the connection.
 #' @param password (character) Password to use for the connection.
