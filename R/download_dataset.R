@@ -1,13 +1,42 @@
-#' Download data for publication
+#' Download data package
 #'
-#' ...
+#' Download all data related to an **animal project** as a data package that can
+#' be deposited in a research data repository. Includes option to filter on
+#' scientific names.
+#'
+#' The data are downloaded as a
+#' **[Frictionless Data Package](https://frictionlessdata.io/data-package/)**
+#' containing:
+#'
+#' file | description
+#' --- | ---
+#' `animals.csv` | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by `get_animals()`.
+#' `tags.csv` | Tags associated with the selected animals, as returned by `get_tags()`.
+#' `detections.csv` | Detections for the selected animals, as returned by `get_detections()`.
+#' `deployments.csv` | Deployments for the `network_project_code`(s) found in detections, as returned by `get_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
+#' `receivers.csv` | Receivers for the selected deployments, as returned by `get_receivers()`.
+#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
+#'
+#' The function will report the number of records per csv file, as well as the
+#' included scientific names and network projects. Warnings will be raised for:
+#'
+#' - Animals with multiple tags
+#' - Tags associated with multiple animals
+#' - Deployments without network project: these deployments will not be listed
+#' in `deployments.csv` and will therefore raise a foreign key validation error.
+#'
+#' **Important**: The data are downloaded _as is_ from the database, i.e. no
+#' quality or consistency checks are performed by this function. We therefore
+#' recommend to verify the data before publication. A consistency check can be
+#' performed by validation tools of the Frictionless Framework, e.g.
+#' `frictionless validate datapackage.json` on the command line using
+#' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
 #' @param connection A valid connection to the ETN database.
-#' @param animal_project_code (string) Animal project to download data from.
+#' @param animal_project_code (string) Animal project you want to download data
+#'   for.
 #' @param directory (string) Path to local download directory.
-#' @param scientific_name (string) One or more scientific names to filter on.
-#'
-#' @return ...
+#' @param scientific_name (string) One or more scientific names to filter upon.
 #'
 #' @export
 #'
