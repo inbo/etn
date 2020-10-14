@@ -2,10 +2,10 @@
 #'
 #' Connect to the ETN database using username and password.
 #'
-#' @param username (character) Username to use for the connection.
-#' @param password (character) Password to use for the connection.
+#' @param username Character. Username to use for the connection. Required.
+#' @param password Character. Password to use for the connection. Required.
 #'
-#' @return con ODBC connection to ETN database.
+#' @return ODBC connection to ETN database.
 #'
 #' @export
 #'

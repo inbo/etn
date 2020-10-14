@@ -7,11 +7,11 @@
 get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{tag_id}{(string) One or more tag ids.}
+\item{tag_id}{Character (vector). One or more tag ids.}
 
-\item{include_ref_tags}{(logical) Include reference tags. Default:
+\item{include_ref_tags}{Logical. Include reference tags. Defaults to
 \code{FALSE}.}
 }
 \value{

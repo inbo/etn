@@ -13,16 +13,17 @@ get_deployments(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
+\item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
-\item{network_project_code}{(string) One or more network projects.}
+\item{network_project_code}{Character (vector). One or more network
+projects.}
 
-\item{receiver_status}{(string) One or more receiver status.}
+\item{receiver_status}{Character (vector). One or more receiver status.}
 
-\item{open_only}{(logical) Restrict to deployments that are currently open
-(i.e. no end date defined). Default: \code{TRUE}.}
+\item{open_only}{Logical. Restrict deployments to those that are currently
+open (i.e. no end date defined). Defaults to \code{TRUE}.}
 }
 \value{
 A tibble (tidyverse data.frame) with data for deployments,

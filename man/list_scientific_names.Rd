@@ -7,7 +7,7 @@
 list_scientific_names(connection = con)
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A vector of all unique \code{scientific_name} present in \code{animals_view2}.

@@ -3,12 +3,13 @@
 #' Get data for deployments, with options to filter on network project,
 #' receiver status and/or open deployments.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
-#' @param network_project_code (string) One or more network projects.
-#' @param receiver_status (string) One or more receiver status.
-#' @param open_only (logical) Restrict to deployments that are currently open
-#'   (i.e. no end date defined). Default: `TRUE`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
+#' @param network_project_code Character (vector). One or more network
+#'   projects.
+#' @param receiver_status Character (vector). One or more receiver status.
+#' @param open_only Logical. Restrict deployments to those that are currently
+#'   open (i.e. no end date defined). Defaults to `TRUE`.
 #'
 #' @return A tibble (tidyverse data.frame) with data for deployments,
 #'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.

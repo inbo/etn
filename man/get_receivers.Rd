@@ -7,11 +7,11 @@
 get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{receiver_id}{(string) One or more receiver ids.}
+\item{receiver_id}{Character (vector). One or more receiver ids.}
 
-\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
+\item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
 A tibble (tidyverse data.frame) with data for receivers, sorted by

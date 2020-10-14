@@ -1,6 +1,6 @@
 #' List all available animal ids
 #'
-#' @param connection A valid connection to the ETN database.
+#' @param connection A connection to the ETN database. Defaults to `con`.
 #'
 #' @export
 #'

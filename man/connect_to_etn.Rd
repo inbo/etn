@@ -7,12 +7,12 @@
 connect_to_etn(username, password)
 }
 \arguments{
-\item{username}{(character) Username to use for the connection.}
+\item{username}{Character. Username to use for the connection. Required.}
 
-\item{password}{(character) Password to use for the connection.}
+\item{password}{Character. Password to use for the connection. Required.}
 }
 \value{
-con ODBC connection to ETN database.
+ODBC connection to ETN database.
 }
 \description{
 Connect to the ETN database using username and password.

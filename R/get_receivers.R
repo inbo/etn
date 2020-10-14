@@ -2,9 +2,9 @@
 #'
 #' Get data for receivers, with option to filter on receiver id.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param receiver_id (string) One or more receiver ids.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param receiver_id Character (vector). One or more receiver ids.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #'
 #' @return A tibble (tidyverse data.frame) with data for receivers, sorted by
 #'   `receiver_id`.

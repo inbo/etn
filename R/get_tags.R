@@ -3,9 +3,9 @@
 #' Get data for tags, with option to filter on tag id. By default, reference
 #' tags are excluded.
 #'
-#' @param connection A valid connection with the ETN database.
-#' @param tag_id (string) One or more tag ids.
-#' @param include_ref_tags (logical) Include reference tags. Default:
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param tag_id Character (vector). One or more tag ids.
+#' @param include_ref_tags Logical. Include reference tags. Defaults to
 #'   `FALSE`.
 #'
 #' @return A tibble (tidyverse data.frame) with data for tags, sorted by

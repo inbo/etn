@@ -12,13 +12,13 @@ get_animals(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{animal_id}{(integer) One or more animal ids.}
+\item{animal_id}{Integer (vector). One or more animal ids.}
 
-\item{animal_project_code}{(string) One or more animal projects.}
+\item{animal_project_code}{Character (vector). One or more animal projects.}
 
-\item{scientific_name}{(string) One or more scientific names.}
+\item{scientific_name}{Character (vector). One or more scientific names.}
 }
 \value{
 A tibble (tidyverse data.frame) with data for animals, sorted by
