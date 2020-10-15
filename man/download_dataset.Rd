@@ -49,7 +49,10 @@ included scientific names and network projects. Warnings will be raised for:
 \item Animals with multiple tags
 \item Tags associated with multiple animals
 \item Deployments without network project: these deployments will not be listed
-in \code{deployments.csv} and will therefore raise a foreign key validation error.
+in \code{deployments.csv} and will therefore raise a foreign key validation
+error.
+\item Duplicate detections: detections with the duplicate \code{pk}. These are
+removed by the function before downloading.
 }
 
 \strong{Important}: The data are downloaded \emph{as is} from the database, i.e. no

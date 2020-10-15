@@ -23,7 +23,10 @@
 #' - Animals with multiple tags
 #' - Tags associated with multiple animals
 #' - Deployments without network project: these deployments will not be listed
-#' in `deployments.csv` and will therefore raise a foreign key validation error.
+#'   in `deployments.csv` and will therefore raise a foreign key validation
+#'   error.
+#' - Duplicate detections: detections with the duplicate `pk`. These are
+#'   removed by the function before downloading.
 #'
 #' **Important**: The data are downloaded _as is_ from the database, i.e. no
 #' quality or consistency checks are performed by this function. We therefore
@@ -129,6 +132,11 @@ download_dataset <- function(connection = con,
     scientific_name = scientific_name,
     limit = FALSE
   )
+  # Keep unique records
+  detections_orig_count <- nrow(detections)
+  detections <-
+    detections %>%
+    distinct(pk, .keep_all = TRUE)
   write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
 
   # DEPLOYMENTS
@@ -207,13 +215,18 @@ download_dataset <- function(connection = con,
     distinct(deployment_fk) %>%
     pull()
 
+  duplicate_detections_count <- detections_orig_count - nrow(detections)
+
   if (length(animals_multiple_tags) > 0) {
-    warning("Animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
+    warning("Found animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
   }
   if (length(tags_multiple_animals) > 0) {
-    warning("Tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
+    warning("Found tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
   }
   if (length(orphaned_deployments) > 0) {
-    warning("Deployments without network project: ", paste(orphaned_deployments, collapse = ", "))
+    warning("Found deployments without network project: ", paste(orphaned_deployments, collapse = ", "))
+  }
+  if (duplicate_detections_count > 0) {
+    warning("Found and removed duplicate detections found: ", duplicate_detections_count, " detections")
   }
 }
