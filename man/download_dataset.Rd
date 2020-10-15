@@ -7,8 +7,8 @@
 download_dataset(
   connection = con,
   animal_project_code,
-  directory = animal_project_code,
-  scientific_name = NULL
+  scientific_name = NULL,
+  directory = animal_project_code
 )
 }
 \arguments{
@@ -17,17 +17,18 @@ download_dataset(
 \item{animal_project_code}{Character. Animal project you want to download
 data for. Required.}
 
-\item{directory}{Character. Relative path to local download directory.
-Defaults to creating a directory named after animal project code.}
-
 \item{scientific_name}{Character (vector). One or more scientific names.
 Defaults to no filter (i.e. include all scientific names, including
 reference tags).}
+
+\item{directory}{Character. Relative path to local download directory.
+Defaults to creating a directory named after animal project code. Existing
+files of the same name will be overwritten.}
 }
 \description{
 Download all data related to an \strong{animal project} as a data package that can
-be deposited in a research data repository. Includes option to filter on
-scientific names.
+be deposited in a research data repository. Includes options to filter on
+scientific names and define download directory.
 }
 \details{
 The data are downloaded as a

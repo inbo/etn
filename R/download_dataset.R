@@ -1,8 +1,8 @@
 #' Download data package
 #'
 #' Download all data related to an **animal project** as a data package that can
-#' be deposited in a research data repository. Includes option to filter on
-#' scientific names.
+#' be deposited in a research data repository. Includes options to filter on
+#' scientific names and define download directory.
 #'
 #' The data are downloaded as a
 #' **[Frictionless Data Package](https://frictionlessdata.io/data-package/)**
@@ -38,11 +38,12 @@
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_project_code Character. Animal project you want to download
 #'   data for. Required.
-#' @param directory Character. Relative path to local download directory.
-#'   Defaults to creating a directory named after animal project code.
 #' @param scientific_name Character (vector). One or more scientific names.
 #'   Defaults to no filter (i.e. include all scientific names, including
 #'   reference tags).
+#' @param directory Character. Relative path to local download directory.
+#'   Defaults to creating a directory named after animal project code. Existing
+#'   files of the same name will be overwritten.
 #'
 #' @export
 #'
@@ -74,8 +75,8 @@
 #' }
 download_dataset <- function(connection = con,
                              animal_project_code,
-                             directory = animal_project_code,
-                             scientific_name = NULL) {
+                             scientific_name = NULL,
+                             directory = animal_project_code) {
   # Check connection
   check_connection(connection)
 
@@ -87,17 +88,20 @@ download_dataset <- function(connection = con,
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
   }
 
-  # Check directory
-  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
-
   # Check scientific_name
   if (!is.null(scientific_name)) {
     scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, scientific_name_ids, "scientific_name")
   }
 
+  # Check directory
+  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
+
   # Start downloading
-  message(glue("Downloading data to directory \"{directory}\":"))
+  message(glue(
+    "Downloading data to directory \"{directory}\":
+    (existing files of the same name will be overwritten)"
+  ))
 
   # ANIMALS
   message("* (1/6): downloading animals.csv")
