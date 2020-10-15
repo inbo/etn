@@ -36,11 +36,15 @@ expected_col_names <- c(
 receiver1 <- "VR2-4842c"
 receiver_multiple <- c("VR2AR-545719", "VR2AR-545720")
 application1 <- "cpod"
+status1 <- "Broken"
+status_multiple <- c("Broken", "Lost")
 
 receivers_all <- get_receivers(con)
 receivers_receiver1 <- get_receivers(con, receiver_id = receiver1)
 receivers_receiver_multiple <- get_receivers(con, receiver_id = receiver_multiple)
 receivers_application1 <- get_receivers(con, application_type = application1)
+receivers_status1 <- get_receivers(con, status = status1)
+receivers_status_multiple <- get_receivers(con, status = status_multiple)
 
 testthat::test_that("Test input", {
   expect_error(
@@ -56,6 +60,12 @@ testthat::test_that("Test input", {
   expect_error(
     get_receivers(con, application_type = "not_an_application_type")
   )
+  expect_error(
+    get_receivers(con, status = "not_a_status")
+  )
+  expect_error(
+    get_receivers(con, status = c("Broken", "not_a_status"))
+  )
 })
 
 testthat::test_that("Test output type", {
@@ -63,6 +73,8 @@ testthat::test_that("Test output type", {
   expect_is(receivers_receiver1, "tbl_df")
   expect_is(receivers_receiver_multiple, "tbl_df")
   expect_is(receivers_application1, "tbl_df")
+  expect_is(receivers_status1, "tbl_df")
+  expect_is(receivers_status_multiple, "tbl_df")
 })
 
 testthat::test_that("Test column names", {
@@ -70,6 +82,8 @@ testthat::test_that("Test column names", {
   expect_equal(names(receivers_receiver1), expected_col_names)
   expect_equal(names(receivers_receiver_multiple), expected_col_names)
   expect_equal(names(receivers_application1), expected_col_names)
+  expect_equal(names(receivers_status1), expected_col_names)
+  expect_equal(names(receivers_status_multiple), expected_col_names)
 })
 
 testthat::test_that("Test number of records", {
@@ -77,6 +91,8 @@ testthat::test_that("Test number of records", {
   expect_equal(nrow(receivers_receiver1), 1)
   expect_equal(nrow(receivers_receiver_multiple), 2)
   expect_gt(nrow(receivers_all), nrow(receivers_application1))
+  expect_gt(nrow(receivers_all), nrow(receivers_status1))
+  expect_gte(nrow(receivers_status_multiple), nrow(receivers_status1))
 })
 
 testthat::test_that("Test if data is filtered on parameter", {
@@ -91,6 +107,14 @@ testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     receivers_application1 %>% distinct(application_type) %>% pull(),
     application1
+  )
+  expect_equal(
+    receivers_status1 %>% distinct(status) %>% pull(),
+    c(status1)
+  )
+  expect_equal(
+    receivers_status_multiple %>% distinct(status) %>% arrange(status) %>% pull(),
+    status_multiple
   )
 })
 

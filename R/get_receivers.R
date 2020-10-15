@@ -1,10 +1,11 @@
 #' Get receiver data
 #'
-#' Get data for receivers, with option to filter on receiver id.
+#' Get data for receivers, with options to filter results.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param receiver_id Character (vector). One or more receiver ids.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
+#' @param status (string) One or more statuses, e.g. `Available` or `Broken`.
 #'
 #' @return A tibble with receivers data, sorted by `receiver_id`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -28,10 +29,14 @@
 #'
 #' # Get receivers for a specific application type
 #' get_receivers(con, application_type = "cpod")
+#'
+#' # Get receivers with a specific status
+#' get_receivers(con, status = c("Broken", "Lost"))
 #' }
 get_receivers <- function(connection = con,
                           receiver_id = NULL,
-                          application_type = NULL) {
+                          application_type = NULL,
+                          status = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -52,6 +57,15 @@ get_receivers <- function(connection = con,
     application_type_query <- glue_sql("application_type IN ({application_type*})", .con = connection)
   }
 
+  # Check status
+  if (is.null(status)) {
+    status_query <- "True"
+  } else {
+    valid_status <- c("Active", "Available", "Broken", "Lost", "Returned to manufacturer")
+    check_value(status, valid_status, "status")
+    status_query <- glue_sql("status IN ({status*})", .con = connection)
+  }
+
   # Build query
   query <- glue_sql("
     SELECT
@@ -61,6 +75,7 @@ get_receivers <- function(connection = con,
     WHERE
       {receiver_id_query}
       AND {application_type_query}
+      AND {status_query}
     ", .con = connection)
   receivers <- dbGetQuery(connection, query)
 

@@ -1,6 +1,6 @@
 #' Get project data
 #'
-#' Get data for projects, with option to filter on animal or network projects.
+#' Get data for projects, with options to filter results.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param project_type Character. `animal` or `network`.

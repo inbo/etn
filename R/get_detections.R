@@ -1,8 +1,7 @@
 #' Get detections data
 #'
-#' Get detections data, with options to filter on animal project, network
-#' project, start- and enddate, deployment station name and/or tag identifier.
-#' Use `limit` to limit the number of returned records.
+#' Get detections data, with options to filter results. Use `limit` to limit
+#' the number of returned records.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.

@@ -4,7 +4,12 @@
 \alias{get_receivers}
 \title{Get receiver data}
 \usage{
-get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
+get_receivers(
+  connection = con,
+  receiver_id = NULL,
+  application_type = NULL,
+  status = NULL
+)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
@@ -33,5 +38,8 @@ get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 
 # Get receivers for a specific application type
 get_receivers(con, application_type = "cpod")
+
+# Get receivers with a specific status
+get_receivers(con, status = c("Broken", "Lost"))
 }
 }

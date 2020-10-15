@@ -1,9 +1,8 @@
 #' Get animal data
 #'
-#' Get data for animals, with options to filter on animal project and/or
-#' scientific name. Associated tag information is available in columns starting
-#' with `tag`. If multiple tags are associated with a single animal, the
-#' information is comma-separated.
+#' Get data for animals, with options to filter results. Associated tag 
+#' information is available in columns starting with `tag`. If multiple tags 
+#' are associated with a single animal, the information is comma-separated.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal ids.

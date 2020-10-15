@@ -54,9 +54,8 @@ See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get detections data, with options to filter on animal project, network
-project, start- and enddate, deployment station name and/or tag identifier.
-Use \code{limit} to limit the number of returned records.
+Get detections data, with options to filter results. Use \code{limit} to limit
+the number of returned records.
 }
 \examples{
 \dontrun{
