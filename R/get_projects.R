@@ -1,13 +1,13 @@
-#' Get project metadata
+#' Get project data
 #'
-#' Get metadata for projects, with options to filter results.
+#' Get data for projects, with options to filter results.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param project_type (string) `animal` or `network`.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param project_type Character. `animal` or `network`.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame) with project metadata, sorted by
-#'   `project_code`.
+#' @return A tibble with project data, sorted by `project_code`. See also
+#'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

@@ -2,20 +2,20 @@
 % Please edit documentation in R/connect_to_etn.R
 \name{connect_to_etn}
 \alias{connect_to_etn}
-\title{Connect to the database using username and password.}
+\title{Connect to the ETN database}
 \usage{
 connect_to_etn(username, password)
 }
 \arguments{
-\item{username}{(character) Username to use for the connection.}
+\item{username}{Character. Username to use for the connection. Required.}
 
-\item{password}{(character) Password to use for the connection.}
+\item{password}{Character. Password to use for the connection. Required.}
 }
 \value{
-con ODBC connection to ETN database.
+ODBC connection to ETN database.
 }
 \description{
-Connect to the database using username and password.
+Connect to the ETN database using username and password.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_animals.R
 \name{get_animals}
 \alias{get_animals}
-\title{Get animal metadata}
+\title{Get animal data}
 \usage{
 get_animals(
   connection = con,
@@ -12,20 +12,21 @@ get_animals(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{animal_id}{(integer) One or more animal ids.}
+\item{animal_id}{Integer (vector). One or more animal ids.}
 
-\item{animal_project_code}{(string) One or more animal projects.}
+\item{animal_project_code}{Character (vector). One or more animal projects.}
 
-\item{scientific_name}{(string) One or more scientific names.}
+\item{scientific_name}{Character (vector). One or more scientific names.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for animals, sorted by
-\code{animal_project_code}, \code{release_date_time} and \code{tag_id}.
+A tibble with animals data, sorted by \code{animal_project_code},
+\code{release_date_time} and \code{tag_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get metadata for animals, with options to filter results. Associated tag
+Get data for animals, with options to filter results. Associated tag
 information is available in columns starting with \code{tag}. If multiple tags
 are associated with a single animal, the information is comma-separated.
 }

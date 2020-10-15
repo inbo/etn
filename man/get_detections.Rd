@@ -19,36 +19,39 @@ get_detections(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
+\item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
-\item{network_project_code}{(character) One or more network projects.}
+\item{network_project_code}{Character (vector). One or more network
+projects.}
 
-\item{animal_project_code}{(character) One or more animal projects.}
+\item{animal_project_code}{Character (vector). One or more animal projects.}
 
-\item{start_date}{(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-well.}
+\item{start_date}{Character. Date in ISO 8601 format, e.g. \code{2018-01-01}.
+Date selection on month (e.g. \code{2018-03}) or year (e.g. \code{2018}) are
+supported as well.}
 
-\item{end_date}{(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-well.}
+\item{end_date}{Character. Date in ISO 8601 format, e.g. \code{2018-01-01}.
+Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
+supported as well.}
 
-\item{station_name}{(character) One or more deployment station names.}
+\item{station_name}{Character (vector). One or more deployment station
+names.}
 
-\item{tag_id}{(character) One or more tag identifiers.}
+\item{tag_id}{Character (vector). One or more tag identifiers.}
 
-\item{receiver_id}{(character) One or more receiver identifiers.}
+\item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
-\item{scientific_name}{(character) One or more scientific names.}
+\item{scientific_name}{Character (vector). One or more scientific names.}
 
-\item{limit}{(logical) Limit the number of returned records to 100 (useful
-for testing purposes). Default: \code{FALSE}.}
+\item{limit}{Logical. Limit the number of returned records to 100 (useful
+for testing purposes). Defaults to \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with detections, sorted by \code{tag_id}
-and \code{date_time}.
+A tibble with detections data, sorted by \code{tag_id} and \code{date_time}.
+See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get detections data, with options to filter results. Use \code{limit} to limit

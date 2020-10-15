@@ -1,16 +1,17 @@
-#' Get animal metadata
+#' Get animal data
 #'
-#' Get metadata for animals, with options to filter results. Associated tag
-#' information is available in columns starting with `tag`. If multiple tags
+#' Get data for animals, with options to filter results. Associated tag 
+#' information is available in columns starting with `tag`. If multiple tags 
 #' are associated with a single animal, the information is comma-separated.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param animal_id (integer) One or more animal ids.
-#' @param animal_project_code (string) One or more animal projects.
-#' @param scientific_name (string) One or more scientific names.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param animal_id Integer (vector). One or more animal ids.
+#' @param animal_project_code Character (vector). One or more animal projects.
+#' @param scientific_name Character (vector). One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for animals, sorted by
-#'   `animal_project_code`, `release_date_time` and `tag_id`.
+#' @return A tibble with animals data, sorted by `animal_project_code`,
+#' `release_date_time` and `tag_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'
@@ -89,10 +90,12 @@ get_animals <- function(connection = con,
   animals <- dbGetQuery(connection, query)
 
   # Collapse tag information, to obtain one row = one animal
-  tag_cols <- animals %>%
+  tag_cols <-
+    animals %>%
     select(starts_with("tag")) %>%
     names()
-  other_cols <- animals %>%
+  other_cols <-
+    animals %>%
     select(-starts_with("tag")) %>%
     names()
   animals <-

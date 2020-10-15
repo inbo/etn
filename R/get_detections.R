@@ -3,25 +3,28 @@
 #' Get detections data, with options to filter results. Use `limit` to limit
 #' the number of returned records.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
-#' @param network_project_code (character) One or more network projects.
-#' @param animal_project_code (character) One or more animal projects.
-#' @param start_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#'   selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-#'   well.
-#' @param end_date (character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-#'   selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-#'   well.
-#' @param station_name (character) One or more deployment station names.
-#' @param tag_id (character) One or more tag identifiers.
-#' @param receiver_id (character) One or more receiver identifiers.
-#' @param scientific_name (character) One or more scientific names.
-#' @param limit (logical) Limit the number of returned records to 100 (useful
-#'  for testing purposes). Default: `FALSE`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
+#' @param network_project_code Character (vector). One or more network
+#'   projects.
+#' @param animal_project_code Character (vector). One or more animal projects.
+#' @param start_date Character. Date in ISO 8601 format, e.g. `2018-01-01`.
+#'   Date selection on month (e.g. `2018-03`) or year (e.g. `2018`) are
+#'   supported as well.
+#' @param end_date Character. Date in ISO 8601 format, e.g. `2018-01-01`.
+#'   Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
+#'   supported as well.
+#' @param station_name Character (vector). One or more deployment station
+#'   names.
+#' @param tag_id Character (vector). One or more tag identifiers.
+#' @param receiver_id Character (vector). One or more receiver identifiers.
+#' @param scientific_name Character (vector). One or more scientific names.
+#' @param limit Logical. Limit the number of returned records to 100 (useful
+#'  for testing purposes). Defaults to `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame) with detections, sorted by `tag_id`
-#'   and `date_time`.
+#' @return A tibble with detections data, sorted by `tag_id` and `date_time`.
+#'  See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

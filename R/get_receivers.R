@@ -1,14 +1,14 @@
-#' Get receiver metadata
+#' Get receiver data
 #'
-#' Get metadata for receivers, with options to filter results.
+#' Get data for receivers, with options to filter results.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param receiver_id (string) One or more receiver ids.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
-#' @param status (string) One or more statuses, e.g. `Available` or `Broken`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param receiver_id Character (vector). One or more receiver ids.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
+#' @param status Character. One or more statuses, e.g. `Available` or `Broken`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for receivers, sorted
-#'   by `receiver_id`.
+#' @return A tibble with receivers data, sorted by `receiver_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

@@ -1,15 +1,15 @@
-#' Get tag metadata
+#' Get tag data
 #'
-#' Get metadata for tags, with options to filter results. By default, reference
+#' Get data for tags, with options to filter results. By default, reference
 #' tags are excluded.
 #'
-#' @param connection A valid connection with the ETN database.
-#' @param tag_id (string) One or more tag ids.
-#' @param include_ref_tags (logical) Include reference tags. Default:
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param tag_id Character (vector). One or more tag ids.
+#' @param include_ref_tags Logical. Include reference tags. Defaults to
 #'   `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for tags, sorted by
-#'   `tag_id`.
+#' @return A tibble with tags data, sorted by `tag_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

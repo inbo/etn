@@ -1,15 +1,17 @@
-#' Get deployment metadata
+#' Get deployment data
 #'
-#' Get metadata for deployments, with options to filter results.
+#' Get data for deployments, with options to filter results.
 #'
-#' @param connection A valid connection to the ETN database.
-#' @param application_type (string) `acoustic_telemetry` or `cpod`.
-#' @param network_project_code (string) One or more network projects.
-#' @param open_only (logical) Restrict to deployments that are currently open
-#'   (i.e. no end date defined). Default: `TRUE`.
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param application_type Character. `acoustic_telemetry` or `cpod`.
+#' @param network_project_code Character (vector). One or more network
+#'   projects.
+#' @param open_only Logical. Restrict deployments to those that are currently
+#'   open (i.e. no end date defined). Defaults to `TRUE`.
 #'
-#' @return A tibble (tidyverse data.frame) with metadata for deployments,
-#'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.
+#' @return A tibble with deployments data, sorted by `network_project_code`,
+#'  `station_name` and `deploy_date_time`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

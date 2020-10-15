@@ -2,7 +2,7 @@
 
 #' Check the validity of the database connection
 #'
-#' @param connection A valid connection to the ETN database.
+#' @param connection A connection to the ETN database. Defaults to `con`.
 #'
 #' @keywords internal
 #'
@@ -23,11 +23,12 @@ check_connection <- function(connection) {
 #' Will return error message if an input value cannot be found in list of provided
 #' values. NULL values are allowed.
 #'
-#' @param arg The input argument provided by the user.
-#' @param options A vector of valid inputs for the argument.
-#' @param arg_name The name of the argument used in the function to test.
+#' @param arg Character. The input argument provided by the user.
+#' @param options Character vector of valid inputs for the argument.
+#' @param arg_name Character. The name of the argument used in the function to
+#'   test.
 #'
-#' @return If no error, TRUE.
+#' @return If no error, `TRUE`.
 #'
 #' @keywords internal
 #'
@@ -80,8 +81,8 @@ check_value <- function(arg, options = NULL, arg_name) {
 
 #' Print list of options
 #'
-#' @param regex A regular expression to parse
-#' @param ... Additional arguments passed to the collapse
+#' @param regex Character. A regular expression to parse.
+#' @param ... Additional arguments passed to the collapse.
 #'
 #' @keywords internal
 #'
@@ -102,13 +103,14 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 
 #' Check if the string input can be converted to a date
 #'
-#' Returns FALSE or the cleaned character version of the date
+#' Returns `FALSE`` or the cleaned character version of the date
 #' (acknowledgments to micstr/isdate.R).
 #'
-#' @param date_time A character representation of a date.
-#' @param date_name Informative description to user about type of date.
+#' @param date_time Character. A character representation of a date.
+#' @param date_name Character. Informative description to user about type of
+#'   date.
 #'
-#' @return FALSE | character
+#' @return `FALSE` | character
 #'
 #' @importFrom glue glue
 #' @importFrom lubridate parse_date_time

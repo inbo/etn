@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_receivers.R
 \name{get_receivers}
 \alias{get_receivers}
-\title{Get receiver metadata}
+\title{Get receiver data}
 \usage{
 get_receivers(
   connection = con,
@@ -12,20 +12,20 @@ get_receivers(
 )
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{receiver_id}{(string) One or more receiver ids.}
+\item{receiver_id}{Character (vector). One or more receiver ids.}
 
-\item{application_type}{(string) \code{acoustic_telemetry} or \code{cpod}.}
+\item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
-\item{status}{(string) One or more statuses, e.g. \code{Available} or \code{Broken}.}
+\item{status}{Character. One or more statuses, e.g. \code{Available} or \code{Broken}.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for receivers, sorted
-by \code{receiver_id}.
+A tibble with receivers data, sorted by \code{receiver_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get metadata for receivers, with options to filter results.
+Get data for receivers, with options to filter results.
 }
 \examples{
 \dontrun{

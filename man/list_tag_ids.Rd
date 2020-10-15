@@ -7,7 +7,7 @@
 list_tag_ids(connection = con)
 }
 \arguments{
-\item{connection}{A valid connection to the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A vector of all unique \code{tag_id} present in \code{tags_view2}.

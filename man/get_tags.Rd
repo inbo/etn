@@ -2,24 +2,24 @@
 % Please edit documentation in R/get_tags.R
 \name{get_tags}
 \alias{get_tags}
-\title{Get tag metadata}
+\title{Get tag data}
 \usage{
 get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 }
 \arguments{
-\item{connection}{A valid connection with the ETN database.}
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{tag_id}{(string) One or more tag ids.}
+\item{tag_id}{Character (vector). One or more tag ids.}
 
-\item{include_ref_tags}{(logical) Include reference tags. Default:
+\item{include_ref_tags}{Logical. Include reference tags. Defaults to
 \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with metadata for tags, sorted by
-\code{tag_id}.
+A tibble with tags data, sorted by \code{tag_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get metadata for tags, with options to filter results. By default, reference
+Get data for tags, with options to filter results. By default, reference
 tags are excluded.
 }
 \examples{
