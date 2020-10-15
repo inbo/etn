@@ -5,7 +5,7 @@
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param receiver_id Character (vector). One or more receiver ids.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
-#' @param status (string) One or more statuses, e.g. `Available` or `Broken`.
+#' @param status Character. One or more statuses, e.g. `Available` or `Broken`.
 #'
 #' @return A tibble with receivers data, sorted by `receiver_id`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).

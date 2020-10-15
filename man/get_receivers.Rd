@@ -18,7 +18,7 @@ get_receivers(
 
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
-\item{status}{(string) One or more statuses, e.g. \code{Available} or \code{Broken}.}
+\item{status}{Character. One or more statuses, e.g. \code{Available} or \code{Broken}.}
 }
 \value{
 A tibble with receivers data, sorted by \code{receiver_id}. See also
