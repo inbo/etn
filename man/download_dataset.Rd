@@ -27,8 +27,8 @@ files of the same name will be overwritten.}
 }
 \description{
 Download all data related to an \strong{animal project} as a data package that can
-be deposited in a research data repository. Includes options to filter on
-scientific names and define download directory.
+be deposited in a research data repository. Includes option to filter on
+scientific names.
 }
 \details{
 The data are downloaded as a
@@ -53,7 +53,7 @@ included scientific names and network projects. Warnings will be raised for:
 in \code{deployments.csv} and will therefore raise a foreign key validation
 error.
 \item Duplicate detections: detections with the duplicate \code{pk}. These are
-removed by the function before downloading.
+removed by the function in \code{detections.csv}.
 }
 
 \strong{Important}: The data are downloaded \emph{as is} from the database, i.e. no

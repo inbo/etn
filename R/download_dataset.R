@@ -1,8 +1,8 @@
 #' Download data package
 #'
 #' Download all data related to an **animal project** as a data package that can
-#' be deposited in a research data repository. Includes options to filter on
-#' scientific names and define download directory.
+#' be deposited in a research data repository. Includes option to filter on
+#' scientific names.
 #'
 #' The data are downloaded as a
 #' **[Frictionless Data Package](https://frictionlessdata.io/data-package/)**
@@ -26,7 +26,7 @@
 #'   in `deployments.csv` and will therefore raise a foreign key validation
 #'   error.
 #' - Duplicate detections: detections with the duplicate `pk`. These are
-#'   removed by the function before downloading.
+#'   removed by the function in `detections.csv`.
 #'
 #' **Important**: The data are downloaded _as is_ from the database, i.e. no
 #' quality or consistency checks are performed by this function. We therefore
