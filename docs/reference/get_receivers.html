@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get receiver metadata — get_receivers • etn</title>
+<title>Get receiver data — get_receivers • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get receiver metadata — get_receivers" />
-<meta property="og:description" content="Get metadata for receivers, with options to filter results." />
+<meta property="og:title" content="Get receiver data — get_receivers" />
+<meta property="og:description" content="Get data for receivers, with options to filter results." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9132</span>
       </span>
     </div>
 
@@ -131,13 +131,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get receiver metadata</h1>
+    <h1>Get receiver data</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_receivers.R'><code>R/get_receivers.R</code></a></small>
     <div class="hidden name"><code>get_receivers.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get metadata for receivers, with options to filter results.</p>
+    <p>Get data for receivers, with options to filter results.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_receivers</span>(
@@ -152,26 +152,26 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection to the ETN database.</p></td>
+      <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
       <th>receiver_id</th>
-      <td><p>(string) One or more receiver ids.</p></td>
+      <td><p>Character (vector). One or more receiver ids.</p></td>
     </tr>
     <tr>
       <th>application_type</th>
-      <td><p>(string) <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
+      <td><p>Character. <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
     </tr>
     <tr>
       <th>status</th>
-      <td><p>(string) One or more statuses, e.g. <code>Available</code> or <code>Broken</code>.</p></td>
+      <td><p>Character. One or more statuses, e.g. <code>Available</code> or <code>Broken</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame) with metadata for receivers, sorted
-by <code>receiver_id</code>.</p>
+    <p>A tibble with receivers data, sorted by <code>receiver_id</code>. See also
+<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

@@ -81,7 +81,7 @@ the number of returned records." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9132</span>
       </span>
     </div>
 
@@ -161,59 +161,62 @@ the number of returned records.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection to the ETN database.</p></td>
+      <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
       <th>application_type</th>
-      <td><p>(string) <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
+      <td><p>Character. <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
     </tr>
     <tr>
       <th>network_project_code</th>
-      <td><p>(character) One or more network projects.</p></td>
+      <td><p>Character (vector). One or more network
+projects.</p></td>
     </tr>
     <tr>
       <th>animal_project_code</th>
-      <td><p>(character) One or more animal projects.</p></td>
+      <td><p>Character (vector). One or more animal projects.</p></td>
     </tr>
     <tr>
       <th>start_date</th>
-      <td><p>(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-well.</p></td>
+      <td><p>Character. Date in ISO 8601 format, e.g. <code>2018-01-01</code>.
+Date selection on month (e.g. <code>2018-03</code>) or year (e.g. <code>2018</code>) are
+supported as well.</p></td>
     </tr>
     <tr>
       <th>end_date</th>
-      <td><p>(character) Date in ISO 8601 format, e.g. 2018-01-01. Date
-selection on month (e.g. 2018-03) or year (e.g. 2018) are supported as
-well.</p></td>
+      <td><p>Character. Date in ISO 8601 format, e.g. <code>2018-01-01</code>.
+Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
+supported as well.</p></td>
     </tr>
     <tr>
       <th>station_name</th>
-      <td><p>(character) One or more deployment station names.</p></td>
+      <td><p>Character (vector). One or more deployment station
+names.</p></td>
     </tr>
     <tr>
       <th>tag_id</th>
-      <td><p>(character) One or more tag identifiers.</p></td>
+      <td><p>Character (vector). One or more tag identifiers.</p></td>
     </tr>
     <tr>
       <th>receiver_id</th>
-      <td><p>(character) One or more receiver identifiers.</p></td>
+      <td><p>Character (vector). One or more receiver identifiers.</p></td>
     </tr>
     <tr>
       <th>scientific_name</th>
-      <td><p>(character) One or more scientific names.</p></td>
+      <td><p>Character (vector). One or more scientific names.</p></td>
     </tr>
     <tr>
       <th>limit</th>
-      <td><p>(logical) Limit the number of returned records to 100 (useful
-for testing purposes). Default: <code>FALSE</code>.</p></td>
+      <td><p>Logical. Limit the number of returned records to 100 (useful
+for testing purposes). Defaults to <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame) with detections, sorted by <code>tag_id</code>
-and <code>date_time</code>.</p>
+    <p>A tibble with detections data, sorted by <code>tag_id</code> and <code>date_time</code>.
+See also
+<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get animal metadata — get_animals • etn</title>
+<title>Get animal data — get_animals • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get animal metadata — get_animals" />
-<meta property="og:description" content="Get metadata for animals, with options to filter results. Associated tag
+<meta property="og:title" content="Get animal data — get_animals" />
+<meta property="og:description" content="Get data for animals, with options to filter results. Associated tag
 information is available in columns starting with tag. If multiple tags
 are associated with a single animal, the information is comma-separated." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
@@ -82,7 +82,7 @@ are associated with a single animal, the information is comma-separated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9131</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9132</span>
       </span>
     </div>
 
@@ -133,13 +133,13 @@ are associated with a single animal, the information is comma-separated." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get animal metadata</h1>
+    <h1>Get animal data</h1>
     <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_animals.R'><code>R/get_animals.R</code></a></small>
     <div class="hidden name"><code>get_animals.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get metadata for animals, with options to filter results. Associated tag
+    <p>Get data for animals, with options to filter results. Associated tag
 information is available in columns starting with <code>tag</code>. If multiple tags
 are associated with a single animal, the information is comma-separated.</p>
     </div>
@@ -156,26 +156,27 @@ are associated with a single animal, the information is comma-separated.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>connection</th>
-      <td><p>A valid connection to the ETN database.</p></td>
+      <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
       <th>animal_id</th>
-      <td><p>(integer) One or more animal ids.</p></td>
+      <td><p>Integer (vector). One or more animal ids.</p></td>
     </tr>
     <tr>
       <th>animal_project_code</th>
-      <td><p>(string) One or more animal projects.</p></td>
+      <td><p>Character (vector). One or more animal projects.</p></td>
     </tr>
     <tr>
       <th>scientific_name</th>
-      <td><p>(string) One or more scientific names.</p></td>
+      <td><p>Character (vector). One or more scientific names.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble (tidyverse data.frame) with metadata for animals, sorted by
-<code>animal_project_code</code>, <code>release_date_time</code> and <code>tag_id</code>.</p>
+    <p>A tibble with animals data, sorted by <code>animal_project_code</code>,
+<code>release_date_time</code> and <code>tag_id</code>. See also
+<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

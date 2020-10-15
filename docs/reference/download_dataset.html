@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get tag data — get_tags • etn</title>
+<title>Download data package — download_dataset • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,10 @@
 
 
 
-<meta property="og:title" content="Get tag data — get_tags" />
-<meta property="og:description" content="Get data for tags, with options to filter results. By default, reference
-tags are excluded." />
+<meta property="og:title" content="Download data package — download_dataset" />
+<meta property="og:description" content="Download all data related to an animal project as a data package that can
+be deposited in a research data repository. Includes option to filter on
+scientific names." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -132,17 +133,23 @@ tags are excluded." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get tag data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_tags.R'><code>R/get_tags.R</code></a></small>
-    <div class="hidden name"><code>get_tags.Rd</code></div>
+    <h1>Download data package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/download_dataset.R'><code>R/download_dataset.R</code></a></small>
+    <div class="hidden name"><code>download_dataset.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get data for tags, with options to filter results. By default, reference
-tags are excluded.</p>
+    <p>Download all data related to an <strong>animal project</strong> as a data package that can
+be deposited in a research data repository. Includes option to filter on
+scientific names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_tags</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_ref_tags</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>download_dataset</span>(
+  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='no'>animal_project_code</span>,
+  <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='no'>animal_project_code</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,34 +159,78 @@ tags are excluded.</p>
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
-      <th>tag_id</th>
-      <td><p>Character (vector). One or more tag ids.</p></td>
+      <th>animal_project_code</th>
+      <td><p>Character. Animal project you want to download
+data for. Required.</p></td>
     </tr>
     <tr>
-      <th>include_ref_tags</th>
-      <td><p>Logical. Include reference tags. Defaults to
-<code>FALSE</code>.</p></td>
+      <th>scientific_name</th>
+      <td><p>Character (vector). One or more scientific names.
+Defaults to no filter (i.e. include all scientific names, including
+reference tags).</p></td>
+    </tr>
+    <tr>
+      <th>directory</th>
+      <td><p>Character. Relative path to local download directory.
+Defaults to creating a directory named after animal project code. Existing
+files of the same name will be overwritten.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A tibble with tags data, sorted by <code>tag_id</code>. See also
-<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
+    <p>The data are downloaded as a
+<strong><a href='https://frictionlessdata.io/data-package/'>Frictionless Data Package</a></strong>
+containing:</p><table class='table'>
+<tr><td>file</td><td>description</td></tr>
+<tr><td><code>animals.csv</code></td><td>Animals related to an <code>animal_project_code</code>, optionally filtered on <code>scientific_name</code>(s), as returned by <code><a href='get_animals.html'>get_animals()</a></code>.</td></tr>
+<tr><td><code>tags.csv</code></td><td>Tags associated with the selected animals, as returned by <code><a href='get_tags.html'>get_tags()</a></code>.</td></tr>
+<tr><td><code>detections.csv</code></td><td>Detections for the selected animals, as returned by <code><a href='get_detections.html'>get_detections()</a></code>.</td></tr>
+<tr><td><code>deployments.csv</code></td><td>Deployments for the <code>network_project_code</code>(s) found in detections, as returned by <code><a href='get_deployments.html'>get_deployments()</a></code>. This allows users to see when receivers were deployed, even if these did not detect the selected animals.</td></tr>
+<tr><td><code>receivers.csv</code></td><td>Receivers for the selected deployments, as returned by <code><a href='get_receivers.html'>get_receivers()</a></code>.</td></tr>
+<tr><td><code>datapackage.json</code></td><td>A <a href='https://specs.frictionlessdata.io/table-schema/'>Frictionless Table Schema</a> metadata file describing the fields and relations of the above csv files. This file is copied from <a href='https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json'>here</a> and can be used to validate the data package.</td></tr>
+</table>
+
+
+
+<p>The function will report the number of records per csv file, as well as the
+included scientific names and network projects. Warnings will be raised for:</p><ul>
+<li><p>Animals with multiple tags</p></li>
+<li><p>Tags associated with multiple animals</p></li>
+<li><p>Deployments without network project: these deployments will not be listed
+in <code>deployments.csv</code> and will therefore raise a foreign key validation
+error.</p></li>
+<li><p>Duplicate detections: detections with the duplicate <code>pk</code>. These are
+removed by the function in <code>detections.csv</code>.</p></li>
+</ul>
+
+<p><strong>Important</strong>: The data are downloaded <em>as is</em> from the database, i.e. no
+quality or consistency checks are performed by this function. We therefore
+recommend to verify the data before publication. A consistency check can be
+performed by validation tools of the Frictionless Framework, e.g.
+<code>frictionless validate datapackage.json</code> on the command line using
+<a href='https://github.com/frictionlessdata/frictionless-py'>frictionless-py</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
-
-<span class='co'># Get all (animal) tags</span>
-<span class='fu'>get_tags</span>(<span class='no'>con</span>)
-
-<span class='co'># Get all tags, including reference tags</span>
-<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>include_ref_tags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Get specific tags (will automatically set include_ref_tags = TRUE)</span>
-<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1303-65313"</span>)
-<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A69-1601-1705"</span>, <span class='st'>"A69-1601-1707"</span>))
+<span class='co'># Download data for the 2014_demer animal project (all scientific names)</span>
+<span class='fu'>download_dataset</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
+<span class='co'>#&gt; Downloading data to directory "2014_demer":</span>
+<span class='co'>#&gt; * (1/6): downloading animals.csv</span>
+<span class='co'>#&gt; * (2/6): downloading tags.csv</span>
+<span class='co'>#&gt; * (3/6): downloading detections.csv</span>
+<span class='co'>#&gt; * (4/6): downloading deployments.csv</span>
+<span class='co'>#&gt; * (5/6): downloading receivers.csv</span>
+<span class='co'>#&gt; * (6/6): adding datapackage.json as file metadata</span>
+<span class='co'>#&gt;</span>
+<span class='co'>#&gt; Summary statistics for dataset "2014_demer":</span>
+<span class='co'>#&gt; * number of animals:           16</span>
+<span class='co'>#&gt; * number of tags:              16</span>
+<span class='co'>#&gt; * number of detections:        237064</span>
+<span class='co'>#&gt; * number of deployments:       939</span>
+<span class='co'>#&gt; * number of receivers:         179</span>
+<span class='co'>#&gt; * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus</span>
+<span class='co'>#&gt; * included network projects:   albert, demer, dijle, no_info, zeeschelde</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
