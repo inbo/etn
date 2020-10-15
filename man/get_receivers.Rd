@@ -14,8 +14,8 @@ get_receivers(connection = con, receiver_id = NULL, application_type = NULL)
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame) with data for receivers, sorted by
-\code{receiver_id}.
+A tibble with receivers data, sorted by \code{receiver_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get data for receivers, with option to filter on receiver id.

@@ -10,8 +10,9 @@
 #' @param animal_project_code Character (vector). One or more animal projects.
 #' @param scientific_name Character (vector). One or more scientific names.
 #'
-#' @return A tibble (tidyverse data.frame) with data for animals, sorted by
-#'   `animal_project_code`, `release_date_time` and `tag_id`.
+#' @return A tibble with animals data, sorted by `animal_project_code`,
+#' `release_date_time` and `tag_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

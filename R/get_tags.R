@@ -8,8 +8,8 @@
 #' @param include_ref_tags Logical. Include reference tags. Defaults to
 #'   `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame) with data for tags, sorted by
-#'   `tag_id`.
+#' @return A tibble with tags data, sorted by `tag_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

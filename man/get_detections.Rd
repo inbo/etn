@@ -49,8 +49,9 @@ names.}
 for testing purposes). Defaults to \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with detections, sorted by \code{tag_id}
-and \code{date_time}.
+A tibble with detections data, sorted by \code{tag_id} and \code{date_time}.
+See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get detections data, with options to filter on animal project, network

@@ -26,8 +26,9 @@ projects.}
 open (i.e. no end date defined). Defaults to \code{TRUE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with data for deployments,
-sorted by \code{network_project_code}, \code{station_name} and \code{deploy_date_time}.
+A tibble with deployments data, sorted by \code{network_project_code},
+\code{station_name} and \code{deploy_date_time}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get data for deployments, with options to filter on network project,

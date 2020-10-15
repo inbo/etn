@@ -6,8 +6,8 @@
 #' @param receiver_id Character (vector). One or more receiver ids.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame) with data for receivers, sorted by
-#'   `receiver_id`.
+#' @return A tibble with receivers data, sorted by `receiver_id`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

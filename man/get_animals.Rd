@@ -21,8 +21,9 @@ get_animals(
 \item{scientific_name}{Character (vector). One or more scientific names.}
 }
 \value{
-A tibble (tidyverse data.frame) with data for animals, sorted by
-\code{animal_project_code}, \code{release_date_time} and \code{tag_id}.
+A tibble with animals data, sorted by \code{animal_project_code},
+\code{release_date_time} and \code{tag_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get data for animals, with options to filter on animal project and/or

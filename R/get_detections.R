@@ -23,8 +23,9 @@
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'  for testing purposes). Defaults to `FALSE`.
 #'
-#' @return A tibble (tidyverse data.frame) with detections, sorted by `tag_id`
-#'   and `date_time`.
+#' @return A tibble with detections data, sorted by `tag_id` and `date_time`.
+#'  See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

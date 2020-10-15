@@ -14,8 +14,8 @@ get_projects(connection = con, project_type = NULL, application_type = NULL)
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 }
 \value{
-A tibble (tidyverse data.frame) with project data, sorted by
-\code{project_code}.
+A tibble with project data, sorted by \code{project_code}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get data for projects, with option to filter on animal or network projects.

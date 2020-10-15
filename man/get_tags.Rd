@@ -15,8 +15,8 @@ get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
 \code{FALSE}.}
 }
 \value{
-A tibble (tidyverse data.frame) with data for tags, sorted by
-\code{tag_id}.
+A tibble with tags data, sorted by \code{tag_id}. See also
+\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
 Get data for tags, with option to filter on tag id. By default, reference

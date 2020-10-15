@@ -6,8 +6,8 @@
 #' @param project_type Character. `animal` or `network`.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #'
-#' @return A tibble (tidyverse data.frame) with project data, sorted by
-#'   `project_code`.
+#' @return A tibble with project data, sorted by `project_code`. See also
+#'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'

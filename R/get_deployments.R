@@ -11,8 +11,9 @@
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `TRUE`.
 #'
-#' @return A tibble (tidyverse data.frame) with data for deployments,
-#'   sorted by `network_project_code`, `station_name` and `deploy_date_time`.
+#' @return A tibble with deployments data, sorted by `network_project_code`,
+#'  `station_name` and `deploy_date_time`. See also
+#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'
