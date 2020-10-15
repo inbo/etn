@@ -57,6 +57,7 @@
 #' # Download data for the 2014_demer animal project (all scientific names)
 #' download_dataset(con, animal_project_code = "2014_demer")
 #' #> Downloading data to directory "2014_demer":
+#' #> (existing files of the same name will be overwritten)
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
 #' #> * (3/6): downloading detections.csv
