@@ -19,8 +19,6 @@ get_deployments(
 \item{network_project_code}{Character (vector). One or more network
 projects.}
 
-\item{receiver_status}{Character (vector). One or more receiver status.}
-
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{TRUE}.}
 }
@@ -30,8 +28,7 @@ A tibble with deployments data, sorted by \code{network_project_code},
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for deployments, with options to filter on network project,
-receiver status and/or open deployments.
+Get data for deployments, with options to filter results.
 }
 \examples{
 \dontrun{

@@ -18,7 +18,7 @@ A tibble with project data, sorted by \code{project_code}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for projects, with option to filter on animal or network projects.
+Get data for projects, with options to filter results.
 }
 \examples{
 \dontrun{

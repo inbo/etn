@@ -17,13 +17,15 @@ get_receivers(
 \item{receiver_id}{Character (vector). One or more receiver ids.}
 
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
+
+\item{status}{(string) One or more statuses, e.g. \code{Available} or \code{Broken}.}
 }
 \value{
 A tibble with receivers data, sorted by \code{receiver_id}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for receivers, with option to filter on receiver id.
+Get data for receivers, with options to filter results.
 }
 \examples{
 \dontrun{

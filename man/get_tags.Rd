@@ -19,7 +19,7 @@ A tibble with tags data, sorted by \code{tag_id}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for tags, with option to filter on tag id. By default, reference
+Get data for tags, with options to filter results. By default, reference
 tags are excluded.
 }
 \examples{
