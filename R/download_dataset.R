@@ -84,9 +84,7 @@ download_dataset <- function(connection = con,
   }
 
   # Check directory
-  if (!dir.exists(directory)) {
-    dir.create(directory)
-  }
+  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
 
   # Check scientific_name
   if (!is.null(scientific_name)) {
