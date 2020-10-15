@@ -44,8 +44,9 @@
 #' @export
 #'
 #' @importFrom glue glue
-#' @importFrom dplyr %>% arrange distinct filter group_by mutate pull select tibble
+#' @importFrom dplyr %>% arrange distinct filter group_by mutate n pull select
 #' @importFrom readr write_csv
+#' @importFrom stringr str_replace_all
 #'
 #' @examples
 #' \dontrun{
