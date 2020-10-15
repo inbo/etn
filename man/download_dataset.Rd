@@ -68,7 +68,7 @@ performed by validation tools of the Frictionless Framework, e.g.
 # Download data for the 2014_demer animal project (all scientific names)
 download_dataset(con, animal_project_code = "2014_demer")
 #> Downloading data to directory "2014_demer":
-#> (existing files of the same name will be overwritten)
+#> (existing files with the same name will be overwritten)
 #> * (1/6): downloading animals.csv
 #> * (2/6): downloading tags.csv
 #> * (3/6): downloading detections.csv
@@ -84,5 +84,9 @@ download_dataset(con, animal_project_code = "2014_demer")
 #> * number of receivers:         179
 #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
 #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
+#>
+#> Warning message:
+#> In download_dataset(animal_project_code = "2014_demer") :
+#>   Found deployments without network project: 1383, 1382, 1384
 }
 }

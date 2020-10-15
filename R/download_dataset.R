@@ -57,7 +57,7 @@
 #' # Download data for the 2014_demer animal project (all scientific names)
 #' download_dataset(con, animal_project_code = "2014_demer")
 #' #> Downloading data to directory "2014_demer":
-#' #> (existing files of the same name will be overwritten)
+#' #> (existing files with the same name will be overwritten)
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
 #' #> * (3/6): downloading detections.csv
@@ -73,6 +73,10 @@
 #' #> * number of receivers:         179
 #' #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
 #' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
+#' #>
+#' #> Warning message:
+#' #> In download_dataset(animal_project_code = "2014_demer") :
+#' #>   Found deployments without network project: 1383, 1382, 1384
 #' }
 download_dataset <- function(connection = con,
                              animal_project_code,
@@ -101,7 +105,7 @@ download_dataset <- function(connection = con,
   # Start downloading
   message(glue(
     "Downloading data to directory \"{directory}\":
-    (existing files of the same name will be overwritten)"
+    (existing files with the same name will be overwritten)"
   ))
 
   # ANIMALS
@@ -216,7 +220,7 @@ download_dataset <- function(connection = con,
 
   orphaned_deployments <-
     detections %>%
-    filter(network_project_code %in% c("no info", "none")) %>%
+    filter(network_project_code %in% c("no_info", "none")) %>%
     distinct(deployment_fk) %>%
     pull()
 
