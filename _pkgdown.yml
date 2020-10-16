@@ -5,12 +5,12 @@ template:
     bootswatch: yeti
 
 authors:
-  Stijn Van Hoey:
-    href: https://twitter.com/SVanHoey
-  Damiano Oldoni:
-    href: https://twitter.com/damianozingaro
   Peter Desmet:
     href: https://twitter.com/peterdesmet
+  Damiano Oldoni:
+    href: https://twitter.com/damianozingaro
+  Stijn Van Hoey:
+    href: https://twitter.com/SVanHoey
 
 home:
   links:
@@ -31,7 +31,7 @@ reference:
       - get_detections
       - get_deployments
       - get_receivers
-  - title: "Download dataset"
+  - title: "Download data"
     contents:
       - download_dataset
   - title: "List parameter options"
