@@ -136,7 +136,7 @@ download_dataset <- function(connection = con,
   tags <- get_tags(
     connection = con,
     tag_id = tag_ids,
-    include_ref_tags = TRUE # TODO: should this be the default?
+    include_ref_tags = TRUE
   )
   write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
 
