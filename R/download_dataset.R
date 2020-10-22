@@ -126,7 +126,13 @@ download_dataset <- function(connection = con,
   tag_ids <-
     animals %>%
     distinct(tag_id) %>%
-    pull()
+    pull() %>%
+    # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
+    # all tags and split them again on comma
+    paste(collapse = ",") %>%
+    strsplit("\\,") %>%
+    unlist() %>%
+    unique()
   tags <- get_tags(
     connection = con,
     tag_id = tag_ids,
