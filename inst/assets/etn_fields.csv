@@ -184,8 +184,8 @@ tags_view2,battery_estimated_end_date,"Estimated date at which tag will stop tra
 Date fields should follow the ISO-8601 format.",format: yyyy-mm-ddT; as in: 2017-06-27T,datetime,15
 tags_view2,sensor_type,"Type of tag sensor. Predefined options: ""P"", ""T"" or ""A"".
 P = pressure, T = temperature, A = acceleration.",as in: P,character,16
-tags_view2,sensor_slope,"Raw value of slope, as used for sensor calibration.",format: double; as in: 0.1516,numeric,17
-tags_view2,sensor_intercept,"Raw value of intercept, as used for sensor calibration.",format: double; as in: -0.6065,numeric,18
+tags_view2,sensor_slope,"Raw value of slope, as used for sensor calibration.",format: double; as in: 0.1516,double,17
+tags_view2,sensor_intercept,"Raw value of intercept, as used for sensor calibration.",format: double; as in: -0.6065,double,18
 tags_view2,sensor_range,Maximum range of sensor.,as in: 34,character,19
 tags_view2,sensor_transmit_ratio,"Ratio of transmission between sensors present.
 If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.",as in: 1,integer,20

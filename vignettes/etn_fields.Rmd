@@ -33,6 +33,7 @@ query <- glue_sql("
         WHEN datatype = 'character varying' THEN 'character'
         WHEN datatype = 'text' THEN 'character'
         WHEN datatype = 'double precision' THEN 'double'
+        WHEN datatype = 'numeric' THEN 'double'
         WHEN datatype = 'timestamp without time zone' THEN 'datetime'
         WHEN datatype = 'smallint' THEN 'integer'
         ELSE datatype
