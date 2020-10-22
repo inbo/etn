@@ -82,6 +82,8 @@ download_dataset(con, animal_project_code = "2014_demer")
 #> * number of detections:        237064
 #> * number of deployments:       939
 #> * number of receivers:         179
+#> * first date of detection:     2014-04-18
+#> * last date of detection:      2018-09-15
 #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
 #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
 #>

@@ -71,6 +71,8 @@
 #' #> * number of detections:        237064
 #' #> * number of deployments:       939
 #' #> * number of receivers:         179
+#' #> * first date of detection:     2014-04-18
+#' #> * last date of detection:      2018-09-15
 #' #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
 #' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
 #' #>
@@ -200,6 +202,8 @@ download_dataset <- function(connection = con,
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
+  message("* first date of detection:     ", detections %>% summarize(min(as.Date(date_time))) %>% pull())
+  message("* last date of detection:      ", detections %>% summarize(max(as.Date(date_time))) %>% pull())
   message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
   message("* included network projects:   ", paste(network_project_codes, collapse = ", "))
   message("")
