@@ -471,8 +471,8 @@
       }
     },
     {
-      "name": "receivers",
-      "path": "receivers.csv",
+      "name": "detections",
+      "path": "detections.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
@@ -483,6 +483,10 @@
             "type": "integer"
           },
           {
+            "name": "date_time",
+            "type": "datetime"
+          },
+          {
             "name": "receiver_id",
             "type": "string"
           },
@@ -491,99 +495,113 @@
             "type": "string"
           },
           {
-            "name": "telemetry_type",
+            "name": "network_project_code",
             "type": "string"
           },
           {
-            "name": "manufacturer",
+            "name": "tag_id",
             "type": "string"
           },
           {
-            "name": "receiver_id_model",
+            "name": "tag_fk",
+            "type": "integer"
+          },
+          {
+            "name": "animal_id",
+            "type": "integer"
+          },
+          {
+            "name": "animal_project_code",
             "type": "string"
           },
           {
-            "name": "receiver_id_serial_number",
+            "name": "scientific_name",
             "type": "string"
           },
           {
-            "name": "modem_address",
+            "name": "station_name",
             "type": "string"
           },
           {
-            "name": "status",
+            "name": "deploy_latitude",
+            "type": "number"
+          },
+          {
+            "name": "deploy_longitude",
+            "type": "number"
+          },
+          {
+            "name": "sensor_type",
             "type": "string"
           },
           {
-            "name": "battery_estimated_life",
+            "name": "sensor_value",
+            "type": "number"
+          },
+          {
+            "name": "sensor_unit",
             "type": "string"
           },
           {
-            "name": "owner_organization",
+            "name": "sensor_value_depth",
+            "type": "number"
+          },
+          {
+            "name": "sensor_value_acceleration",
+            "type": "number"
+          },
+          {
+            "name": "sensor_value_temperature",
+            "type": "number"
+          },
+          {
+            "name": "signal_to_noise_ratio",
+            "type": "integer"
+          },
+          {
+            "name": "source_file",
             "type": "string"
           },
           {
-            "name": "financing_project",
-            "type": "string"
+            "name": "qc_flag",
+            "type": "boolean"
           },
           {
-            "name": "built_in_tag_id",
-            "type": "string"
-          },
-          {
-            "name": "ar_model_number",
-            "type": "string"
-          },
-          {
-            "name": "ar_serial_number",
-            "type": "string"
-          },
-          {
-            "name": "ar_battery_estimated_life",
-            "type": "string"
-          },
-          {
-            "name": "ar_voltage_at_deploy",
-            "type": "string"
-          },
-          {
-            "name": "ar_interrogate_code",
-            "type": "string"
-          },
-          {
-            "name": "ar_receive_frequency",
-            "type": "string"
-          },
-          {
-            "name": "ar_reply_frequency",
-            "type": "string"
-          },
-          {
-            "name": "ar_ping_rate",
-            "type": "string"
-          },
-          {
-            "name": "ar_enable_code_address",
-            "type": "string"
-          },
-          {
-            "name": "ar_release_code",
-            "type": "string"
-          },
-          {
-            "name": "ar_disable_code",
-            "type": "string"
-          },
-          {
-            "name": "ar_tilt_code",
-            "type": "string"
-          },
-          {
-            "name": "ar_tilt_after_deploy",
-            "type": "string"
+            "name": "deployment_fk",
+            "type": "integer"
           }
         ],
-        "primaryKey": "pk"
+        "primaryKey": "pk",
+        "foreignKeys": [
+          {
+            "fields": "receiver_id",
+            "reference": {
+              "resource": "receivers",
+              "fields": "receiver_id"
+            }
+          },
+          {
+            "fields": "tag_id",
+            "reference": {
+              "resource": "tags",
+              "fields": "tag_id"
+            }
+          },
+          {
+            "fields": "animal_id",
+            "reference": {
+              "resource": "animals",
+              "fields": "animal_id"
+            }
+          },
+          {
+            "fields": "deployment_fk",
+            "reference": {
+              "resource": "deployments",
+              "fields": "pk"
+            }
+          }
+        ]
       }
     },
     {
@@ -764,8 +782,8 @@
       }
     },
     {
-      "name": "detections",
-      "path": "detections.csv",
+      "name": "receivers",
+      "path": "receivers.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
@@ -776,10 +794,6 @@
             "type": "integer"
           },
           {
-            "name": "date_time",
-            "type": "datetime"
-          },
-          {
             "name": "receiver_id",
             "type": "string"
           },
@@ -788,113 +802,99 @@
             "type": "string"
           },
           {
-            "name": "network_project_code",
+            "name": "telemetry_type",
             "type": "string"
           },
           {
-            "name": "tag_id",
+            "name": "manufacturer",
             "type": "string"
           },
           {
-            "name": "tag_fk",
-            "type": "integer"
-          },
-          {
-            "name": "animal_id",
-            "type": "integer"
-          },
-          {
-            "name": "animal_project_code",
+            "name": "receiver_id_model",
             "type": "string"
           },
           {
-            "name": "scientific_name",
+            "name": "receiver_id_serial_number",
             "type": "string"
           },
           {
-            "name": "station_name",
+            "name": "modem_address",
             "type": "string"
           },
           {
-            "name": "deploy_latitude",
-            "type": "number"
-          },
-          {
-            "name": "deploy_longitude",
-            "type": "number"
-          },
-          {
-            "name": "sensor_type",
+            "name": "status",
             "type": "string"
           },
           {
-            "name": "sensor_value",
-            "type": "number"
-          },
-          {
-            "name": "sensor_unit",
+            "name": "battery_estimated_life",
             "type": "string"
           },
           {
-            "name": "sensor_value_depth",
-            "type": "number"
-          },
-          {
-            "name": "sensor_value_acceleration",
-            "type": "number"
-          },
-          {
-            "name": "sensor_value_temperature",
-            "type": "number"
-          },
-          {
-            "name": "signal_to_noise_ratio",
+            "name": "owner_organization",
             "type": "string"
           },
           {
-            "name": "source_file",
+            "name": "financing_project",
             "type": "string"
           },
           {
-            "name": "qc_flag",
-            "type": "boolean"
+            "name": "built_in_tag_id",
+            "type": "string"
           },
           {
-            "name": "deployment_fk",
-            "type": "integer"
+            "name": "ar_model_number",
+            "type": "string"
+          },
+          {
+            "name": "ar_serial_number",
+            "type": "string"
+          },
+          {
+            "name": "ar_battery_estimated_life",
+            "type": "string"
+          },
+          {
+            "name": "ar_voltage_at_deploy",
+            "type": "string"
+          },
+          {
+            "name": "ar_interrogate_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_receive_frequency",
+            "type": "string"
+          },
+          {
+            "name": "ar_reply_frequency",
+            "type": "string"
+          },
+          {
+            "name": "ar_ping_rate",
+            "type": "string"
+          },
+          {
+            "name": "ar_enable_code_address",
+            "type": "string"
+          },
+          {
+            "name": "ar_release_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_disable_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_tilt_code",
+            "type": "string"
+          },
+          {
+            "name": "ar_tilt_after_deploy",
+            "type": "string"
           }
         ],
-        "primaryKey": "pk",
-        "foreignKeys": [
-          {
-            "fields": "receiver_id",
-            "reference": {
-              "resource": "receivers",
-              "fields": "receiver_id"
-            }
-          },
-          {
-            "fields": "tag_id",
-            "reference": {
-              "resource": "tags",
-              "fields": "tag_id"
-            }
-          },
-          {
-            "fields": "animal_id",
-            "reference": {
-              "resource": "animals",
-              "fields": "animal_id"
-            }
-          },
-          {
-            "fields": "deployment_fk",
-            "reference": {
-              "resource": "deployments",
-              "fields": "pk"
-            }
-          }
-        ]
+        "primaryKey": "pk"
       }
     }
   ]
