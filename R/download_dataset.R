@@ -246,6 +246,6 @@ download_dataset <- function(connection = con,
     warning("Found deployments without network project: ", paste(orphaned_deployments, collapse = ", "))
   }
   if (duplicate_detections_count > 0) {
-    warning("Found and removed duplicate detections found: ", duplicate_detections_count, " detections")
+    warning("Found and removed duplicate detections: ", duplicate_detections_count, " detections")
   }
 }
