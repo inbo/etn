@@ -556,7 +556,7 @@
           },
           {
             "name": "signal_to_noise_ratio",
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "source_file",
