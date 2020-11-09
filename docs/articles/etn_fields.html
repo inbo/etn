@@ -92,7 +92,7 @@
       <h1 data-toc-skip>ETN field definitions</h1>
                         <h4 class="author">Peter Desmet &amp; Filip Waumans</h4>
             
-            <h4 class="date">2020-10-22</h4>
+            <h4 class="date">2020-11-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn_fields.Rmd"><code>vignettes/etn_fields.Rmd</code></a></small>
       <div class="hidden name"><code>etn_fields.Rmd</code></div>
@@ -328,6 +328,18 @@ datatype
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
 <code>pk</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>animal_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
@@ -1199,17 +1211,6 @@ format: free text
 character
 </td>
 </tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1245,6 +1246,32 @@ as in: 1
 </td>
 <td style="text-align:left;width: 10%; ">
 integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>tag_id</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>tag_id_alternative</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Converted Code
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: A69-0001-00001
+</td>
+<td style="text-align:left;width: 10%; ">
+character
 </td>
 </tr>
 <tr>
@@ -1571,20 +1598,6 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>step1_power</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Acoustic power level. <code>H</code> or <code>L</code>.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: H
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
 <code>step1_duration</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -1595,6 +1608,20 @@ units: days; as in: 120
 </td>
 <td style="text-align:left;width: 10%; ">
 integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>step1_power</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Acoustic power level. <code>H</code> or <code>L</code>.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
 </td>
 </tr>
 <tr>
@@ -1830,29 +1857,6 @@ integer
 </td>
 <td style="text-align:left;width: 10%; ">
 datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-character
 </td>
 </tr>
 </tbody>

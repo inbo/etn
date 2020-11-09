@@ -1,175 +1,177 @@
 viewname,field,definition,example,datatype,order
-animals_view2,pk,"",,integer,46
-animals_view2,animal_project_code,,,character,48
-animals_view2,tag_id,Select a tag. A tag code space will only appear here after adding the tag metadata in the tab 'Tags'.,as in: A69-9004-2210,character,49
-animals_view2,tag_fk,,,integer,50
-animals_view2,scientific_name,Scientific name of animal that carries the tag.,as in: Gadus morhua,character,51
-animals_view2,common_name,The species' common English name.,as in: Atlantic cod,character,52
-animals_view2,aphia_id,Aphia Id,format: integer; as in: 2,integer,53
-animals_view2,animal_label,"Identification code that uniquely identifies each animal, as specified by the researcher.",as in: A82,character,54
-animals_view2,animal_nickname,,,character,55
-animals_view2,tagger,Person conducting tagging,as in: Pieterjan Verhelst,character,56
+animals_view2,pk,"",,integer,1
+animals_view2,animal_id,,,integer,2
+animals_view2,animal_project_code,,,character,3
+animals_view2,tag_id,Select a tag. A tag code space will only appear here after adding the tag metadata in the tab 'Tags'.,as in: A69-9004-2210,character,4
+animals_view2,tag_fk,,,integer,5
+animals_view2,scientific_name,Scientific name of animal that carries the tag.,as in: Gadus morhua,character,6
+animals_view2,common_name,The species' common English name.,as in: Atlantic cod,character,7
+animals_view2,aphia_id,Aphia Id,format: integer; as in: 2,integer,8
+animals_view2,animal_label,"Identification code that uniquely identifies each animal, as specified by the researcher.",as in: A82,character,9
+animals_view2,animal_nickname,,,character,10
+animals_view2,tagger,Person conducting tagging,as in: Pieterjan Verhelst,character,11
 animals_view2,capture_date_time,"Date and time that animal was caught, in 24h UTC.
-Datetime fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,57
-animals_view2,capture_location,"Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.",format: free text; as in: Reefballs C-Power,character,58
-animals_view2,capture_latitude,Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,59
-animals_view2,capture_longitude,Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.,format: ddd.ddddd; as in: 2.59020,double,60
-animals_view2,capture_method,Name of the method and materials used to capture animal.,format: free text; as in: line fishing,character,61
-animals_view2,capture_depth,Water depth at which the animal was caught.,units: metres; format free text; as in: 25 m,character,62
-animals_view2,capture_temperature_change,Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.,units: degrees celsius; as in: 5ºC,character,63
-animals_view2,release_date_time,"Date and time that tagged animal was released, in UTC.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2016-04-04T12:30:00Z,datetime,64
-animals_view2,release_location,"Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.",as in: Reefballs C-Power,character,65
-animals_view2,release_latitude,Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,66
-animals_view2,release_longitude,Longitude of release location. Note: in the western hemisphere all longitudes must be negative.,format: ddd.ddddd; as in: 2.59020,double,67
-animals_view2,recapture_date_time,"If applicable, date of recapture of the tagged animal.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-07-10T12:00:00Z,datetime,68
-animals_view2,length1_type,"Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).",format: free text; as in: total length,character,69
-animals_view2,length1,"Length of animal that carries tag, depending on 'Length type', in units specified in 'Length units'.",format: double; as in: 46.00,double,70
-animals_view2,length1_unit,Units of length.,as in: cm,character,71
-animals_view2,length2_type,Specify type of secondary size measurement (e.g. width).,format: free text; as in: horizontal eye diameter,character,72
-animals_view2,length2,"Secondary length measurement, depending on 'Length2 type', in units specified in 'Length2 units'.",format: double; as in: 9.50,double,73
-animals_view2,length2_unit,Units of secondary length.,as in: mm,character,74
-animals_view2,length3_type,Specify type of tertiary size measurement (e.g. width).,format: free text; as in: vertical eye diameter,character,75
-animals_view2,length3,"Tertiary length measurement, depending on 'Length3 type', in units specified in 'Length3 units'.",format: double; as in: 7.23,double,76
-animals_view2,length3_unit,Units of tertiary length.,as in: mm,character,77
-animals_view2,length4_type,Specify type of quaternary size measurement (e.g. width).,format: free text; as in: pectoral fin length,character,78
-animals_view2,length4,"Quaternary length measurement, depending on 'Length4 type', in units specified in 'Length4 units'.",format: double; as in 46.73,double,79
-animals_view2,length4_unit,Units of quaternary length.,as in: mm,character,80
-animals_view2,weight,"Weight of animal that carries tag, in units specified in 'Weight units'.",format: double; as in: 806.9,double,81
-animals_view2,weight_unit,Units of weight.,as in: g,character,82
-animals_view2,age,"Weight of animal that carries tag, in units specified in 'Age units'.",format: integer; as in: 2,double,83
-animals_view2,age_unit,Units of age.,as in: durif index,character,84
-animals_view2,sex,"Sex of animal. ""M"" or ""F"". Can enter unknown (""U"").",as in: M,character,85
-animals_view2,life_stage,"Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.",as in: FV,character,86
-animals_view2,wild_or_hatchery,"Origin of animal that carries the tag.  Enter ""wild"", ""hatchery"" or ""unknown"".",as in: wild,character,87
-animals_view2,stock,Water body of origin. Can enter unknown or not applicable.,as in: Southern Bight,character,88
+Datetime fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,12
+animals_view2,capture_location,"Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.",format: free text; as in: Reefballs C-Power,character,13
+animals_view2,capture_latitude,Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,14
+animals_view2,capture_longitude,Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.,format: ddd.ddddd; as in: 2.59020,double,15
+animals_view2,capture_method,Name of the method and materials used to capture animal.,format: free text; as in: line fishing,character,16
+animals_view2,capture_depth,Water depth at which the animal was caught.,units: metres; format free text; as in: 25 m,character,17
+animals_view2,capture_temperature_change,Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.,units: degrees celsius; as in: 5ºC,character,18
+animals_view2,release_date_time,"Date and time that tagged animal was released, in UTC.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2016-04-04T12:30:00Z,datetime,19
+animals_view2,release_location,"Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.",as in: Reefballs C-Power,character,20
+animals_view2,release_latitude,Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,21
+animals_view2,release_longitude,Longitude of release location. Note: in the western hemisphere all longitudes must be negative.,format: ddd.ddddd; as in: 2.59020,double,22
+animals_view2,recapture_date_time,"If applicable, date of recapture of the tagged animal.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-07-10T12:00:00Z,datetime,23
+animals_view2,length1_type,"Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).",format: free text; as in: total length,character,24
+animals_view2,length1,"Length of animal that carries tag, depending on 'Length type', in units specified in 'Length units'.",format: double; as in: 46.00,double,25
+animals_view2,length1_unit,Units of length.,as in: cm,character,26
+animals_view2,length2_type,Specify type of secondary size measurement (e.g. width).,format: free text; as in: horizontal eye diameter,character,27
+animals_view2,length2,"Secondary length measurement, depending on 'Length2 type', in units specified in 'Length2 units'.",format: double; as in: 9.50,double,28
+animals_view2,length2_unit,Units of secondary length.,as in: mm,character,29
+animals_view2,length3_type,Specify type of tertiary size measurement (e.g. width).,format: free text; as in: vertical eye diameter,character,30
+animals_view2,length3,"Tertiary length measurement, depending on 'Length3 type', in units specified in 'Length3 units'.",format: double; as in: 7.23,double,31
+animals_view2,length3_unit,Units of tertiary length.,as in: mm,character,32
+animals_view2,length4_type,Specify type of quaternary size measurement (e.g. width).,format: free text; as in: pectoral fin length,character,33
+animals_view2,length4,"Quaternary length measurement, depending on 'Length4 type', in units specified in 'Length4 units'.",format: double; as in 46.73,double,34
+animals_view2,length4_unit,Units of quaternary length.,as in: mm,character,35
+animals_view2,weight,"Weight of animal that carries tag, in units specified in 'Weight units'.",format: double; as in: 806.9,double,36
+animals_view2,weight_unit,Units of weight.,as in: g,character,37
+animals_view2,age,"Weight of animal that carries tag, in units specified in 'Age units'.",format: integer; as in: 2,double,38
+animals_view2,age_unit,Units of age.,as in: durif index,character,39
+animals_view2,sex,"Sex of animal. ""M"" or ""F"". Can enter unknown (""U"").",as in: M,character,40
+animals_view2,life_stage,"Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.",as in: FV,character,41
+animals_view2,wild_or_hatchery,"Origin of animal that carries the tag.  Enter ""wild"", ""hatchery"" or ""unknown"".",as in: wild,character,42
+animals_view2,stock,Water body of origin. Can enter unknown or not applicable.,as in: Southern Bight,character,43
 animals_view2,surgery_date_time,"Date that surgery was conducted.
-Date fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,89
-animals_view2,surgery_location,Short name of surgery location (i.e. hatchery name).,format: free text; as in: onboard RV,character,90
-animals_view2,surgery_latitude,Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,91
-animals_view2,surgery_longitude,Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.,format: dd.ddddd; as in: 2.59020,double,92
-animals_view2,treatment_type,"Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).",format: free text; as in: Control,character,93
-animals_view2,tagging_type,"Indicates how tag was attached to animal (e.g. ""internal"", ""external"", ""oral"", ""gastric"", ""subcutaneous"", etc.).",as in: internal,character,94
-animals_view2,tagging_methodology,Describe method and materials used to attach tag to animal.,"as in: inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures.",character,95
-animals_view2,dna_sample,Indicates whether the animal that carries the acoustic tag is also sampled for DNA.,format: y or n; as in: y,character,96
-animals_view2,sedative,Name of sedative used if applicable.,as in: aquacalm,character,97
-animals_view2,sedative_concentration,Concentration of sedative.,format: free text; as in: 0.5 ml/l,character,98
-animals_view2,anaesthetic,Name of anaesthetic used if applicable.,as in: Clove oil,character,99
-animals_view2,buffer,Name of buffer used if applicable.,as in: Sodium Bicarbonate,character,100
-animals_view2,anaesthetic_concentration,Concentration of anaesthetic.,format: free text; as in: 0.5 ml/l,character,101
-animals_view2,buffer_concentration_in_anaesthetic,Concentration of buffer in anaesthetic.,format: free text; as in: 0.1 ml/l,character,102
-animals_view2,anaesthetic_concentration_in_recirculation,Concentration of anaesthetic in recirculation bath.,format: free text; as in: 0.5 ml/l,character,103
-animals_view2,buffer_concentration_in_recirculation,Concentration of buffer in recirculation bath.,format: free text; as in: 0.1 ml/l,character,104
-animals_view2,dissolved_oxygen,This measure is the lowest oxygen level the fish will experience during the surgery.,format: free text; as in: 6 mg/l,character,105
-animals_view2,pre_surgery_holding_period,Time that animal is held prior to surgery.,units: hours; as in: 0.5,character,106
-animals_view2,post_surgery_holding_period,Time the animal is held after surgery until release.,units: hours; as in: 2,character,107
-animals_view2,holding_temperature,"This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond",units: degrees celsius; as in: 5ºC,character,108
-animals_view2,comments,Any comments deemed to have scientific relevance by the tagger.,format: free text,character,109
-animals_view2,,,,integer,
-deployments_view2,pk,,,integer,136
-deployments_view2,receiver_id,Receiver ID linked to the deployment. Composed by 'Model number'-'Serial number'.,as in: VR2W-101578,character,137
-deployments_view2,application_type,,,character,138
-deployments_view2,network_project_code,,,character,139
-deployments_view2,station_name,Name of the station where the deployment of the receiver takes place. Related to a specific latitude and longitude.,format: free text; as in: OH6,character,140
-deployments_view2,station_description,"Name of receiver location. The location name serves as an additional descriptive name of the receiver station. It can refer to a specific nearby point of land, town, island, or body of water that identifies this receiver location.",as in: upstream weir,character,141
-deployments_view2,station_manager,Name of the person or institution managing the location.,as in: Jan Reubens,character,142
+Date fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,44
+animals_view2,surgery_location,Short name of surgery location (i.e. hatchery name).,format: free text; as in: onboard RV,character,45
+animals_view2,surgery_latitude,Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,46
+animals_view2,surgery_longitude,Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.,format: dd.ddddd; as in: 2.59020,double,47
+animals_view2,treatment_type,"Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).",format: free text; as in: Control,character,48
+animals_view2,tagging_type,"Indicates how tag was attached to animal (e.g. ""internal"", ""external"", ""oral"", ""gastric"", ""subcutaneous"", etc.).",as in: internal,character,49
+animals_view2,tagging_methodology,Describe method and materials used to attach tag to animal.,"as in: inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures.",character,50
+animals_view2,dna_sample,Indicates whether the animal that carries the acoustic tag is also sampled for DNA.,format: y or n; as in: y,character,51
+animals_view2,sedative,Name of sedative used if applicable.,as in: aquacalm,character,52
+animals_view2,sedative_concentration,Concentration of sedative.,format: free text; as in: 0.5 ml/l,character,53
+animals_view2,anaesthetic,Name of anaesthetic used if applicable.,as in: Clove oil,character,54
+animals_view2,buffer,Name of buffer used if applicable.,as in: Sodium Bicarbonate,character,55
+animals_view2,anaesthetic_concentration,Concentration of anaesthetic.,format: free text; as in: 0.5 ml/l,character,56
+animals_view2,buffer_concentration_in_anaesthetic,Concentration of buffer in anaesthetic.,format: free text; as in: 0.1 ml/l,character,57
+animals_view2,anaesthetic_concentration_in_recirculation,Concentration of anaesthetic in recirculation bath.,format: free text; as in: 0.5 ml/l,character,58
+animals_view2,buffer_concentration_in_recirculation,Concentration of buffer in recirculation bath.,format: free text; as in: 0.1 ml/l,character,59
+animals_view2,dissolved_oxygen,This measure is the lowest oxygen level the fish will experience during the surgery.,format: free text; as in: 6 mg/l,character,60
+animals_view2,pre_surgery_holding_period,Time that animal is held prior to surgery.,units: hours; as in: 0.5,character,61
+animals_view2,post_surgery_holding_period,Time the animal is held after surgery until release.,units: hours; as in: 2,character,62
+animals_view2,holding_temperature,"This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond",units: degrees celsius; as in: 5ºC,character,63
+animals_view2,comments,Any comments deemed to have scientific relevance by the tagger.,format: free text,character,64
+deployments_view2,pk,,,integer,1
+deployments_view2,receiver_id,Receiver ID linked to the deployment. Composed by 'Model number'-'Serial number'.,as in: VR2W-101578,character,2
+deployments_view2,application_type,,,character,3
+deployments_view2,network_project_code,,,character,4
+deployments_view2,station_name,Name of the station where the deployment of the receiver takes place. Related to a specific latitude and longitude.,format: free text; as in: OH6,character,5
+deployments_view2,station_description,"Name of receiver location. The location name serves as an additional descriptive name of the receiver station. It can refer to a specific nearby point of land, town, island, or body of water that identifies this receiver location.",as in: upstream weir,character,6
+deployments_view2,station_manager,Name of the person or institution managing the location.,as in: Jan Reubens,character,7
 deployments_view2,deploy_date_time,"Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint.
-Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,143
-deployments_view2,deploy_latitude,"Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,144
-deployments_view2,deploy_longitude,"Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",format: ddd.ddddd; as in: 2.59020,double,145
-deployments_view2,intended_latitude,"Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,146
-deployments_view2,intended_longitude,"Longitude of the intended deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",format: ddd.ddddd; as in: 2.59020,double,147
-deployments_view2,mooring_type,"Type of mooring to which the receiver is attached. Predefined options: ""surface-buoy"", ""surface-wind-turbine"" or ""bottom-mooring"".","as in: ""surface-wind-turbine"", ""surface-buoy"" or ""bottom-mooring""",character,148
-deployments_view2,bottom_depth,Depth at deployment location as recorded by the vessel's depth sounder.,units: metres; format: integer; as in: 25,character,149
-deployments_view2,riser_length,Length from the anchor to the topmost float or structure of the mooring assembly.,units: metres; format: integer; as in: 10,character,150
-deployments_view2,deploy_depth,Depth of the instrument.,units: metres; format: integer; as in: 20,character,151
-deployments_view2,battery_installation_date,Date when the receiver was fitted with fresh batteries.,format: yyyy-mm-dd; as in: 2017-06-27,datetime,152
-deployments_view2,battery_estimated_end_date,Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).,format: yyyy-mm-dd hh:mm; as in: 2017-06-04 00:00,datetime,153
-deployments_view2,activation_date_time,"Date and time the receiver was activated, in 24-hour UTC.",format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00,datetime,154
-deployments_view2,recover_date_time,"Date and time that the equipment was recovered, in 24-hour UTC. ISO-8601 format (e.g. 2017-01-01T12:07:23Z).",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,155
-deployments_view2,recover_latitude,"Latitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central latitude of the recovery sea.",format: dd.ddddd; as in: 51.36324,double,156
-deployments_view2,recover_longitude,"Longitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central longitude of the recovery sea",format: ddd.ddddd; as in: 2.59020,double,157
-deployments_view2,download_date_time,"Date and time that data were downloaded, in 24-hour UTC.",format: yyyy-mm-dd hh:mm; as in: 2017-06-27 12:00,datetime,158
-deployments_view2,download_file_name,"Were data downloaded? Yes or no. If no, please add comment.",format: y or n; as in: y,character,159
-deployments_view2,valid_data_until_date_time,"Date and time until which valid data was recorded, in 24-hour UTC.",format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00,datetime,160
-deployments_view2,sync_date_time,"Date and time when a receiver's clock is synchronized to correct UTC, in 24-hour UTC. ISO-8601 format (e.g. 2017-01-01T12:07:23Z).",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,161
-deployments_view2,time_drift,Displayed difference in time between the instrument's clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.,format: hh:mm:ssZ; as in: 12:00:00Z,character,162
-deployments_view2,ar_battery_installation_date,"Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.",format: yyyy-mm-dd; as in: 2017-06-27,datetime,163
-deployments_view2,ar_confirm,Did the acoustic release report a confirmed release? Yes or no.,format: y or n; as in: y,character,164
-deployments_view2,transmit_profile,"Predefined options: ""Range test(random)"", ""Range test(90s)"" or ""Sync"".",as in: Sync,character,165
-deployments_view2,transmit_power_output,"Predefined options: ""Low"", ""Medium"", ""High"", ""Very high"".",as in: High,character,166
-deployments_view2,log_temperature_stats_period,"Time interval between the recording of temperature statistic, as calculated from sample values.",units: seconds; format: integer; as in: 3600,integer,167
-deployments_view2,log_temperature_sample_period,"Time interval between the sample values of temperature. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 21600,integer,168
-deployments_view2,log_tilt_sample_period,Time interval between the sample values of tilt. This field is specific to VR2AR receivers.,units: seconds; format: integer; as in: 600,integer,169
-deployments_view2,log_noise_stats_period,"Time interval between the recording of noise statistic, as calculated from sample values.",units: seconds; format: integer; as in: 600,integer,170
-deployments_view2,log_noise_sample_period,"Time interval between the sample values of noise. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 600,integer,171
-deployments_view2,log_depth_stats_period,"Time interval between the recording of depth statistic, as calculated from sample values.",units: seconds; format: integer; as in: 600,integer,172
-deployments_view2,log_depth_sample_period,"Time interval between the sample values of depth. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 3600,integer,173
-deployments_view2,comments,Any comments deemed to have scientific relevance by the tagger.,format: free text,character,174
-detections_view2,pk,Technical identifier of the detection record in the database.,,integer,175
-detections_view2,date_time,Date and time at which the tagged animal was detected at the receiver. Information from detection file.,format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,176
-detections_view2,receiver_id,"Receiver name, composed of 'Model number'-'Serial number'. Info comes from 'Detection_table'.",as in: VR2W-103255,character,177
-detections_view2,application_type,,,character,178
-detections_view2,network_project_code,Code of the network project linked to this detection.,,character,179
-detections_view2,tag_id,Tag ID of the detected tag. As in: A69-1010-12345,,character,180
-detections_view2,tag_fk,,,integer,181
-detections_view2,animal_id,,,integer,182
-detections_view2,animal_project_code,Code of the animal project linked to this detection.,,character,183
-detections_view2,scientific_name,Scientific name of the animal that carries the tag.,"as in: ""Anguilla anguilla"" or ""Gadus morhua""",character,184
-detections_view2,station_name,"Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.","",character,185
-detections_view2,deploy_latitude,,,double,186
-detections_view2,deploy_longitude,,,double,187
-detections_view2,sensor_type,,,character,188
-detections_view2,sensor_value,Value recorded by the tag sensor.,as in: 35 or 0.13,double,189
-detections_view2,sensor_unit,Unit of measured sensor value.,"",character,190
-detections_view2,sensor_value_depth,sensorValueDepthMeters,,double,191
-detections_view2,sensor_value_acceleration,SENSOR_VALUE_ACCELERATION,as in:,double,192
-detections_view2,sensor_value_temperature,,,double,193
-detections_view2,signal_to_noise_ratio,Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.,,integer,194
-detections_view2,source_file,Name of the detection file.,,character,195
-detections_view2,qc_flag,Identifies whether there are quality check issues for the given detection.,,boolean,196
-detections_view2,deployment_fk,,,integer,197
-projects_view2,pk,,,integer,198
-projects_view2,project_code,,,character,199
-projects_view2,project_type,,,character,200
-projects_view2,application_type,,,character,201
-projects_view2,telemetry_type,,,character,202
-projects_view2,project_name,,,character,203
-projects_view2,coordinating_organization,,,character,204
-projects_view2,principal_investigator,,,character,205
-projects_view2,principal_investigator_email,,,character,206
-projects_view2,start_date,,,date,207
-projects_view2,end_date,,,date,208
-projects_view2,latitude,,,double,209
-projects_view2,longitude,,,double,210
-projects_view2,moratorium,,,boolean,211
-projects_view2,imis_dataset_id,,,integer,212
-receivers_view2,pk,,,integer,110
-receivers_view2,receiver_id,The receiver name is composed of 'Model number'-'Serial number'.,as in: VR2W-120620,character,111
-receivers_view2,application_type,,,character,112
-receivers_view2,manufacturer,"Name of receiver manufacturer. Predefined options: ""VEMCO"", ""CHELONIA"" or ""THELMA"".",as in: Vemco,character,114
-receivers_view2,receiver_id_model,Receiver model number as provided by the manufacturer.,as in: VR2W,character,115
-receivers_view2,receiver_id_serial_number,Serial number assigned by receiver manufacturer to uniquely identify receiver.,as in: 106252,character,116
-receivers_view2,modem_address,"This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is",format: 3-digit code from 001 to 249; as in 121,character,117
-receivers_view2,status,"Current status of receiver. Predefined options: ""Active"", ""Available"", ""Broken"", ""Lost"" or ""Returned to manufacturer"".","as in: ""Active"" or ""Lost""",character,118
-receivers_view2,battery_estimated_life,Expected duration for which the battery will provide adequate power for proper functioning of the receiver.,units: months; format: integer; as in: 12,character,119
-receivers_view2,owner_organization,Affiliation of the Principal Investigator for the project.,as in: VLIZ,character,120
-receivers_view2,financing_project,Receiver financing project.,as in: project,character,121
-receivers_view2,built_in_tag_id,Tag full ID of the receiver's built in tag.,as in: A69-1601-60508,character,122
-receivers_view2,ar_model_number,Model number of the acoustic release as provided by the manufacturer.,as in: 867,character,123
-receivers_view2,ar_serial_number,Serial number of the acoustic release as provided by the manufacturer.,as in: 48635,character,124
-receivers_view2,ar_battery_estimated_life,Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.,units: months; format: integer; as in: 12,character,125
-receivers_view2,ar_voltage_at_deploy,Voltage reported by an acoustic release as near as possible to the time of deployment.,units: volt; format: double; as in: 12.2,character,126
-receivers_view2,ar_interrogate_code,"Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.",format: integer; as in: 1003,character,127
-receivers_view2,ar_receive_frequency,Interrogate or receive frequency at which the release receives data.,units: kHz; as in: 7.75,character,128
-receivers_view2,ar_reply_frequency,Frequency at which the release sends data.,units: kHz; as in: 10,character,129
-receivers_view2,ar_ping_rate,Ping rate of the release. ,units: seconds; format: integer; as in: 1,character,130
-receivers_view2,ar_enable_code_address,Code used to enable the release; differs among release models. ,format: free text; as in: G; as in: 68,character,131
-receivers_view2,ar_release_code,Code used to release the release; differs among release models.,format: free text; as in: A; as in: 12345,character,132
-receivers_view2,ar_disable_code,Code used to disable the release.,format: free text; as in: H,character,133
-receivers_view2,ar_tilt_code,Tilt code of the release.,format: free text; as in: B,character,134
-receivers_view2,ar_tilt_after_deploy,Tilt after deploy of receiver,format: integer; as in: 1003,character,135
+Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,8
+deployments_view2,deploy_latitude,"Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,9
+deployments_view2,deploy_longitude,"Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",format: ddd.ddddd; as in: 2.59020,double,10
+deployments_view2,intended_latitude,"Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,11
+deployments_view2,intended_longitude,"Longitude of the intended deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",format: ddd.ddddd; as in: 2.59020,double,12
+deployments_view2,mooring_type,"Type of mooring to which the receiver is attached. Predefined options: ""surface-buoy"", ""surface-wind-turbine"" or ""bottom-mooring"".","as in: ""surface-wind-turbine"", ""surface-buoy"" or ""bottom-mooring""",character,13
+deployments_view2,bottom_depth,Depth at deployment location as recorded by the vessel's depth sounder.,units: metres; format: integer; as in: 25,character,14
+deployments_view2,riser_length,Length from the anchor to the topmost float or structure of the mooring assembly.,units: metres; format: integer; as in: 10,character,15
+deployments_view2,deploy_depth,Depth of the instrument.,units: metres; format: integer; as in: 20,character,16
+deployments_view2,battery_installation_date,Date when the receiver was fitted with fresh batteries.,format: yyyy-mm-dd; as in: 2017-06-27,datetime,17
+deployments_view2,battery_estimated_end_date,Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).,format: yyyy-mm-dd hh:mm; as in: 2017-06-04 00:00,datetime,18
+deployments_view2,activation_date_time,"Date and time the receiver was activated, in 24-hour UTC.",format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00,datetime,19
+deployments_view2,recover_date_time,"Date and time that the equipment was recovered, in 24-hour UTC. ISO-8601 format (e.g. 2017-01-01T12:07:23Z).",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,20
+deployments_view2,recover_latitude,"Latitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central latitude of the recovery sea.",format: dd.ddddd; as in: 51.36324,double,21
+deployments_view2,recover_longitude,"Longitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central longitude of the recovery sea",format: ddd.ddddd; as in: 2.59020,double,22
+deployments_view2,download_date_time,"Date and time that data were downloaded, in 24-hour UTC.",format: yyyy-mm-dd hh:mm; as in: 2017-06-27 12:00,datetime,23
+deployments_view2,download_file_name,"Were data downloaded? Yes or no. If no, please add comment.",format: y or n; as in: y,character,24
+deployments_view2,valid_data_until_date_time,"Date and time until which valid data was recorded, in 24-hour UTC.",format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00,datetime,25
+deployments_view2,sync_date_time,"Date and time when a receiver's clock is synchronized to correct UTC, in 24-hour UTC. ISO-8601 format (e.g. 2017-01-01T12:07:23Z).",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,26
+deployments_view2,time_drift,Displayed difference in time between the instrument's clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.,format: hh:mm:ssZ; as in: 12:00:00Z,character,27
+deployments_view2,ar_battery_installation_date,"Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.",format: yyyy-mm-dd; as in: 2017-06-27,datetime,28
+deployments_view2,ar_confirm,Did the acoustic release report a confirmed release? Yes or no.,format: y or n; as in: y,character,29
+deployments_view2,transmit_profile,"Predefined options: ""Range test(random)"", ""Range test(90s)"" or ""Sync"".",as in: Sync,character,30
+deployments_view2,transmit_power_output,"Predefined options: ""Low"", ""Medium"", ""High"", ""Very high"".",as in: High,character,31
+deployments_view2,log_temperature_stats_period,"Time interval between the recording of temperature statistic, as calculated from sample values.",units: seconds; format: integer; as in: 3600,integer,32
+deployments_view2,log_temperature_sample_period,"Time interval between the sample values of temperature. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 21600,integer,33
+deployments_view2,log_tilt_sample_period,Time interval between the sample values of tilt. This field is specific to VR2AR receivers.,units: seconds; format: integer; as in: 600,integer,34
+deployments_view2,log_noise_stats_period,"Time interval between the recording of noise statistic, as calculated from sample values.",units: seconds; format: integer; as in: 600,integer,35
+deployments_view2,log_noise_sample_period,"Time interval between the sample values of noise. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 600,integer,36
+deployments_view2,log_depth_stats_period,"Time interval between the recording of depth statistic, as calculated from sample values.",units: seconds; format: integer; as in: 600,integer,37
+deployments_view2,log_depth_sample_period,"Time interval between the sample values of depth. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",units: seconds; format: integer; as in: 3600,integer,38
+deployments_view2,comments,Any comments deemed to have scientific relevance by the tagger.,format: free text,character,39
+detections_view2,pk,Technical identifier of the detection record in the database.,,integer,1
+detections_view2,date_time,Date and time at which the tagged animal was detected at the receiver. Information from detection file.,format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,2
+detections_view2,receiver_id,"Receiver name, composed of 'Model number'-'Serial number'. Info comes from 'Detection_table'.",as in: VR2W-103255,character,3
+detections_view2,application_type,,,character,4
+detections_view2,network_project_code,Code of the network project linked to this detection.,,character,5
+detections_view2,tag_id,Tag ID of the detected tag. As in: A69-1010-12345,,character,6
+detections_view2,tag_fk,,,integer,7
+detections_view2,animal_id,,,integer,8
+detections_view2,animal_project_code,Code of the animal project linked to this detection.,,character,9
+detections_view2,scientific_name,Scientific name of the animal that carries the tag.,"as in: ""Anguilla anguilla"" or ""Gadus morhua""",character,10
+detections_view2,station_name,"Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.","",character,11
+detections_view2,deploy_latitude,,,double,12
+detections_view2,deploy_longitude,,,double,13
+detections_view2,sensor_type,,,character,14
+detections_view2,sensor_value,Value recorded by the tag sensor.,as in: 35 or 0.13,double,15
+detections_view2,sensor_unit,Unit of measured sensor value.,"",character,16
+detections_view2,sensor_value_depth,sensorValueDepthMeters,,double,17
+detections_view2,sensor_value_acceleration,SENSOR_VALUE_ACCELERATION,as in:,double,18
+detections_view2,sensor_value_temperature,,,double,19
+detections_view2,signal_to_noise_ratio,Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.,,integer,20
+detections_view2,source_file,Name of the detection file.,,character,21
+detections_view2,qc_flag,Identifies whether there are quality check issues for the given detection.,,boolean,22
+detections_view2,deployment_fk,,,integer,23
+projects_view2,pk,,,integer,1
+projects_view2,project_code,,,character,2
+projects_view2,project_type,,,character,3
+projects_view2,application_type,,,character,4
+projects_view2,telemetry_type,,,character,5
+projects_view2,project_name,,,character,6
+projects_view2,coordinating_organization,,,character,7
+projects_view2,principal_investigator,,,character,8
+projects_view2,principal_investigator_email,,,character,9
+projects_view2,start_date,,,date,10
+projects_view2,end_date,,,date,11
+projects_view2,latitude,,,double,12
+projects_view2,longitude,,,double,13
+projects_view2,moratorium,,,boolean,14
+projects_view2,imis_dataset_id,,,integer,15
+receivers_view2,pk,,,integer,1
+receivers_view2,receiver_id,The receiver name is composed of 'Model number'-'Serial number'.,as in: VR2W-120620,character,2
+receivers_view2,application_type,,,character,3
+receivers_view2,manufacturer,"Name of receiver manufacturer. Predefined options: ""VEMCO"", ""CHELONIA"" or ""THELMA"".",as in: Vemco,character,4
+receivers_view2,receiver_id_model,Receiver model number as provided by the manufacturer.,as in: VR2W,character,5
+receivers_view2,receiver_id_serial_number,Serial number assigned by receiver manufacturer to uniquely identify receiver.,as in: 106252,character,6
+receivers_view2,modem_address,"This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is",format: 3-digit code from 001 to 249; as in 121,character,7
+receivers_view2,status,"Current status of receiver. Predefined options: ""Active"", ""Available"", ""Broken"", ""Lost"" or ""Returned to manufacturer"".","as in: ""Active"" or ""Lost""",character,8
+receivers_view2,battery_estimated_life,Expected duration for which the battery will provide adequate power for proper functioning of the receiver.,units: months; format: integer; as in: 12,character,9
+receivers_view2,owner_organization,Affiliation of the Principal Investigator for the project.,as in: VLIZ,character,10
+receivers_view2,financing_project,Receiver financing project.,as in: project,character,11
+receivers_view2,built_in_tag_id,Tag full ID of the receiver's built in tag.,as in: A69-1601-60508,character,12
+receivers_view2,ar_model_number,Model number of the acoustic release as provided by the manufacturer.,as in: 867,character,13
+receivers_view2,ar_serial_number,Serial number of the acoustic release as provided by the manufacturer.,as in: 48635,character,14
+receivers_view2,ar_battery_estimated_life,Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.,units: months; format: integer; as in: 12,character,15
+receivers_view2,ar_voltage_at_deploy,Voltage reported by an acoustic release as near as possible to the time of deployment.,units: volt; format: double; as in: 12.2,character,16
+receivers_view2,ar_interrogate_code,"Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.",format: integer; as in: 1003,character,17
+receivers_view2,ar_receive_frequency,Interrogate or receive frequency at which the release receives data.,units: kHz; as in: 7.75,character,18
+receivers_view2,ar_reply_frequency,Frequency at which the release sends data.,units: kHz; as in: 10,character,19
+receivers_view2,ar_ping_rate,Ping rate of the release. ,units: seconds; format: integer; as in: 1,character,20
+receivers_view2,ar_enable_code_address,Code used to enable the release; differs among release models. ,format: free text; as in: G; as in: 68,character,21
+receivers_view2,ar_release_code,Code used to release the release; differs among release models.,format: free text; as in: A; as in: 12345,character,22
+receivers_view2,ar_disable_code,Code used to disable the release.,format: free text; as in: H,character,23
+receivers_view2,ar_tilt_code,Tilt code of the release.,format: free text; as in: B,character,24
+receivers_view2,ar_tilt_after_deploy,Tilt after deploy of receiver,format: integer; as in: 1003,character,25
 receivers_view2,,,,unknown,
 tags_view2,pk,Primary Key linked to the tag. This field is automatically generated by the database when a new entry is made.,as in: 1,integer,1
+tags_view2,tag_id,,,character,2
+tags_view2,tag_id_alternative,Converted Code,as in: A69-0001-00001,character,3
 tags_view2,telemetry_type,"Type of tag attached to animal. Some possible options are: acoustic, SAT, PSAT, PIT, DST, ADST, pDST",as in: acoustic,character,4
 tags_view2,manufacturer,"Name of tag manufacturer. Predefined options: ""VEMCO"", ""CHELONIA"" or ""THELMA"".",as in: VEMCO,character,5
 tags_view2,model,Tag model number as provided by the manufacturer.,as in: V9-6L,character,6
@@ -198,8 +200,8 @@ tags_view2,owner_pi,First and last name of the Principal Investigator for the pr
 tags_view2,financing_project,Tag financing project.,as in: project,character,25
 tags_view2,step1_min_delay,Minimum delay between the pings transmitted by the tag for step 1.,units: seconds; as in: 30,character,26
 tags_view2,step1_max_delay,Maximum delay between the pings transmitted by the tag for step 1.,units: seconds; as in: 60,character,27
-tags_view2,step1_power,"Acoustic power level. ""H"" or ""L"".",as in: H,character,28
-tags_view2,step1_duration,Duration of step 1.,units: days; as in: 120,integer,29
+tags_view2,step1_duration,Duration of step 1.,units: days; as in: 120,integer,28
+tags_view2,step1_power,"Acoustic power level. ""H"" or ""L"".",as in: H,character,29
 tags_view2,step1_acceleration_duration,Time window over which acceleration is sampled (in seconds).,"units: seconds, as in: 37",integer,30
 tags_view2,step2_min_delay,Minimum delay between the pings transmitted by the tag for step 2.,units: seconds; as in: 30,character,31
 tags_view2,step2_max_delay,Maximum delay between the pings transmitted by the tag for step 2.,units: seconds; as in: 60,character,32
@@ -217,5 +219,3 @@ tags_view2,step4_power,"Acoustic power level. ""H"" or ""L"".",as in: H,characte
 tags_view2,step4_duration,Duration of step 4.,units: days; as in: 360,integer,44
 tags_view2,step4_acceleration_duration,Time window over which acceleration is sampled (in seconds).,"units: seconds, as in: 37",integer,45
 tags_view2,,,,datetime,
-tags_view2,,,,character,
-tags_view2,tag_id,,,character,
