@@ -200,8 +200,8 @@ tags_view2,owner_pi,First and last name of the Principal Investigator for the pr
 tags_view2,financing_project,Tag financing project.,as in: project,character,25
 tags_view2,step1_min_delay,Minimum delay between the pings transmitted by the tag for step 1.,units: seconds; as in: 30,character,26
 tags_view2,step1_max_delay,Maximum delay between the pings transmitted by the tag for step 1.,units: seconds; as in: 60,character,27
-tags_view2,step1_duration,Duration of step 1.,units: days; as in: 120,integer,28
-tags_view2,step1_power,"Acoustic power level. ""H"" or ""L"".",as in: H,character,29
+tags_view2,step1_power,"Acoustic power level. ""H"" or ""L"".",as in: H,character,28
+tags_view2,step1_duration,Duration of step 1.,units: days; as in: 120,integer,29
 tags_view2,step1_acceleration_duration,Time window over which acceleration is sampled (in seconds).,"units: seconds, as in: 37",integer,30
 tags_view2,step2_min_delay,Minimum delay between the pings transmitted by the tag for step 2.,units: seconds; as in: 30,character,31
 tags_view2,step2_max_delay,Maximum delay between the pings transmitted by the tag for step 2.,units: seconds; as in: 60,character,32
