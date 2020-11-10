@@ -127,18 +127,6 @@ my_animals <- get_animals(con, animal_project_code = "2012_leopoldkanaal")
 head(my_animals, 10) # print 10 first
 ```
 
-When interested in specific species, add the scientific name as argument.
-
-```{r}
-my_animals <- get_animals(con,
-  animal_project_code = "phd_reubens",
-  scientific_name = "Sentinel"
-)
-head(my_animals, 10) # print 10 first
-```
-
-Remark: currently these names are NOT yet verified with a taxonomic backbone as this is not yet done for the names of the database managed by VLIZ. Support will be added when the database names are as well.
-
 ### Transmitter overview
 
 The transmitters/tags metadata can be accessed by the `get_tags` function:
@@ -155,7 +143,7 @@ To narrow down the data request, filters are provided on animal/network project 
 
 ```{r}
 my_detections <- get_detections(con,
-  animal_project_code = "phd_reubens",
+  animal_project_code = "2010_phd_reubens",
   start_date = "2011-01-28",
   end_date = "2011-02-01",
   limit = TRUE # Limit number of records for this example
