@@ -92,7 +92,7 @@
       <h1 data-toc-skip>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2020-10-22</h4>
+            <h4 class="date">2020-11-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn.Rmd"><code>vignettes/etn.Rmd</code></a></small>
       <div class="hidden name"><code>etn.Rmd</code></div>
@@ -133,15 +133,15 @@
 <span class="co">#&gt;       pk project_code project_type application_type telemetry_type</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;         </span>
 <span class="co">#&gt;  1   794 2004_Gudena  network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  2   761 2011_Loire   network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  3    20 2011_rivier… animal       acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  4   755 2011_Warnow  network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  5    15 2012_leopol… animal       acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  6    18 2013_albert… animal       acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  7   758 2013_Foyle   network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  8    21 2014_demer   animal       acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt;  9   819 2014_Nene    network      acoustic_teleme… Acoustic      </span>
-<span class="co">#&gt; 10   671 2015_Albert… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  2    16 2010_phd_re… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  3   841 2010_phd_re… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  4   761 2011_Loire   network      acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  5    20 2011_rivier… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  6   755 2011_Warnow  network      acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  7    15 2012_leopol… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  8    18 2013_albert… animal       acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt;  9   758 2013_Foyle   network      acoustic_teleme… Acoustic      </span>
+<span class="co">#&gt; 10    21 2014_demer   animal       acoustic_teleme… Acoustic      </span>
 <span class="co">#&gt; # … with 10 more variables: project_name &lt;chr&gt;,</span>
 <span class="co">#&gt; #   coordinating_organization &lt;chr&gt;, principal_investigator &lt;chr&gt;,</span>
 <span class="co">#&gt; #   principal_investigator_email &lt;chr&gt;, start_date &lt;date&gt;,</span>
@@ -348,55 +348,12 @@
 <span class="co">#&gt; #   buffer_concentration_in_recirculation &lt;chr&gt;, dissolved_oxygen &lt;chr&gt;,</span>
 <span class="co">#&gt; #   pre_surgery_holding_period &lt;chr&gt;, post_surgery_holding_period &lt;chr&gt;,</span>
 <span class="co">#&gt; #   holding_temperature &lt;chr&gt;, comments &lt;chr&gt;</span></pre></body></html></div>
-<p>When interested in specific species, add the scientific name as argument.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">my_animals</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_animals.html">get_animals</a></span>(<span class="no">con</span>,
-  <span class="kw">animal_project_code</span> <span class="kw">=</span> <span class="st">"phd_reubens"</span>,
-  <span class="kw">scientific_name</span> <span class="kw">=</span> <span class="st">"Sentinel"</span>
-)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_animals</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 10 x 64</span>
-<span class="co">#&gt;       pk animal_id animal_project_… tag_id tag_fk scientific_name</span>
-<span class="co">#&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;          </span>
-<span class="co">#&gt;  1   733       733 phd_reubens      A69-1… 67     Sentinel       </span>
-<span class="co">#&gt;  2   734       734 phd_reubens      A69-1… 68     Sentinel       </span>
-<span class="co">#&gt;  3  2159      2159 phd_reubens      A69-1… 68     Sentinel       </span>
-<span class="co">#&gt;  4   746       746 phd_reubens      A69-1… 84     Sentinel       </span>
-<span class="co">#&gt;  5   747       747 phd_reubens      A69-1… 85     Sentinel       </span>
-<span class="co">#&gt;  6   748       748 phd_reubens      A69-1… 86     Sentinel       </span>
-<span class="co">#&gt;  7   749       749 phd_reubens      A69-1… 87     Sentinel       </span>
-<span class="co">#&gt;  8   750       750 phd_reubens      A69-1… 88     Sentinel       </span>
-<span class="co">#&gt;  9   751       751 phd_reubens      A69-1… 89     Sentinel       </span>
-<span class="co">#&gt; 10   752       752 phd_reubens      A69-1… 90     Sentinel       </span>
-<span class="co">#&gt; # … with 58 more variables: common_name &lt;chr&gt;, aphia_id &lt;int&gt;,</span>
-<span class="co">#&gt; #   animal_label &lt;chr&gt;, animal_nickname &lt;chr&gt;, tagger &lt;chr&gt;,</span>
-<span class="co">#&gt; #   capture_date_time &lt;dttm&gt;, capture_location &lt;chr&gt;,</span>
-<span class="co">#&gt; #   capture_latitude &lt;dbl&gt;, capture_longitude &lt;dbl&gt;, capture_method &lt;chr&gt;,</span>
-<span class="co">#&gt; #   capture_depth &lt;chr&gt;, capture_temperature_change &lt;chr&gt;,</span>
-<span class="co">#&gt; #   release_date_time &lt;dttm&gt;, release_location &lt;chr&gt;,</span>
-<span class="co">#&gt; #   release_latitude &lt;dbl&gt;, release_longitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   recapture_date_time &lt;dttm&gt;, length1_type &lt;chr&gt;, length1 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   length1_unit &lt;chr&gt;, length2_type &lt;chr&gt;, length2 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   length2_unit &lt;chr&gt;, length3_type &lt;chr&gt;, length3 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   length3_unit &lt;chr&gt;, length4_type &lt;chr&gt;, length4 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   length4_unit &lt;chr&gt;, weight &lt;dbl&gt;, weight_unit &lt;chr&gt;, age &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   age_unit &lt;chr&gt;, sex &lt;chr&gt;, life_stage &lt;chr&gt;, wild_or_hatchery &lt;chr&gt;,</span>
-<span class="co">#&gt; #   stock &lt;chr&gt;, surgery_date_time &lt;dttm&gt;, surgery_location &lt;chr&gt;,</span>
-<span class="co">#&gt; #   surgery_latitude &lt;dbl&gt;, surgery_longitude &lt;dbl&gt;, treatment_type &lt;chr&gt;,</span>
-<span class="co">#&gt; #   tagging_type &lt;chr&gt;, tagging_methodology &lt;chr&gt;, dna_sample &lt;chr&gt;,</span>
-<span class="co">#&gt; #   sedative &lt;chr&gt;, sedative_concentration &lt;chr&gt;, anaesthetic &lt;chr&gt;,</span>
-<span class="co">#&gt; #   buffer &lt;chr&gt;, anaesthetic_concentration &lt;chr&gt;,</span>
-<span class="co">#&gt; #   buffer_concentration_in_anaesthetic &lt;chr&gt;,</span>
-<span class="co">#&gt; #   anaesthetic_concentration_in_recirculation &lt;chr&gt;,</span>
-<span class="co">#&gt; #   buffer_concentration_in_recirculation &lt;chr&gt;, dissolved_oxygen &lt;chr&gt;,</span>
-<span class="co">#&gt; #   pre_surgery_holding_period &lt;chr&gt;, post_surgery_holding_period &lt;chr&gt;,</span>
-<span class="co">#&gt; #   holding_temperature &lt;chr&gt;, comments &lt;chr&gt;</span></pre></body></html></div>
-<p>Remark: currently these names are NOT yet verified with a taxonomic backbone as this is not yet done for the names of the database managed by VLIZ. Support will be added when the database names are as well.</p>
 </div>
 <div id="transmitter-overview" class="section level3">
 <h3 class="hasAnchor">
 <a href="#transmitter-overview" class="anchor"></a>Transmitter overview</h3>
 <p>The transmitters/tags metadata can be accessed by the <code>get_tags</code> function:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">my_tags</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_tags.html">get_tags</a></span>(<span class="no">con</span>)
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">my_tags</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_tags.html">get_tags</a></span>(<span class="no">con</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">my_tags</span>, <span class="fl">10</span>) <span class="co"># print 10 first</span>
 <span class="co">#&gt; # A tibble: 10 x 45</span>
 <span class="co">#&gt;       pk tag_id tag_id_alternat… telemetry_type manufacturer model</span>
@@ -433,8 +390,8 @@
 <h2 class="hasAnchor">
 <a href="#detections-data" class="anchor"></a>Detections data</h2>
 <p>The raw detections are the core for any type of analysis and access is provided by the <code>get_detections</code> function. Different filters are available which you can explore by typing <code><a href="../reference/get_detections.html">?get_detections</a></code> in the console. To narrow down the data request, filters are provided on animal/network project name, the deployment station name and the transmitter identifier to narrow. Furthermore, as these data sets can be large, some additional time-based filters are provided with a <code>start_date</code> and an <code>end_date</code>:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">my_detections</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_detections.html">get_detections</a></span>(<span class="no">con</span>,
-  <span class="kw">animal_project_code</span> <span class="kw">=</span> <span class="st">"phd_reubens"</span>,
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">my_detections</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_detections.html">get_detections</a></span>(<span class="no">con</span>,
+  <span class="kw">animal_project_code</span> <span class="kw">=</span> <span class="st">"2010_phd_reubens"</span>,
   <span class="kw">start_date</span> <span class="kw">=</span> <span class="st">"2011-01-28"</span>,
   <span class="kw">end_date</span> <span class="kw">=</span> <span class="st">"2011-02-01"</span>,
   <span class="kw">limit</span> <span class="kw">=</span> <span class="fl">TRUE</span> <span class="co"># Limit number of records for this example</span>
@@ -443,16 +400,16 @@
 <span class="co">#&gt; # A tibble: 10 x 23</span>
 <span class="co">#&gt;        pk date_time           receiver_id application_type network_project…</span>
 <span class="co">#&gt;     &lt;int&gt; &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt;  1 1.94e7 2011-01-28 05:35:14 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  2 1.94e7 2011-01-28 11:07:22 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  3 1.94e7 2011-01-28 11:17:26 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  4 1.94e7 2011-01-28 11:37:33 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  5 1.94e7 2011-01-28 11:47:37 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  6 1.94e7 2011-01-28 11:57:41 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  7 1.94e7 2011-01-28 12:07:45 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  8 1.94e7 2011-01-28 12:17:49 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt;  9 1.94e7 2011-01-28 17:49:55 VR2W-106253 acoustic_teleme… thornton        </span>
-<span class="co">#&gt; 10 1.94e7 2011-01-28 17:59:59 VR2W-106253 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  1 2.01e7 2011-01-29 02:49:33 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  2 2.01e7 2011-01-29 03:00:28 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  3 2.01e7 2011-01-30 17:30:52 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  4 2.01e7 2011-01-30 17:40:27 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  5 2.01e7 2011-01-30 18:00:01 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  6 2.01e7 2011-01-30 18:25:51 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  7 2.01e7 2011-01-31 03:48:31 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  8 2.01e7 2011-01-31 05:08:15 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt;  9 2.01e7 2011-01-31 05:11:49 VR2W-110781 acoustic_teleme… thornton        </span>
+<span class="co">#&gt; 10 2.01e7 2011-01-31 05:27:38 VR2W-110781 acoustic_teleme… thornton        </span>
 <span class="co">#&gt; # … with 18 more variables: tag_id &lt;chr&gt;, tag_fk &lt;int&gt;, animal_id &lt;int&gt;,</span>
 <span class="co">#&gt; #   animal_project_code &lt;chr&gt;, scientific_name &lt;chr&gt;, station_name &lt;chr&gt;,</span>
 <span class="co">#&gt; #   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, sensor_type &lt;chr&gt;,</span>

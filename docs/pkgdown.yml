@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   etn: etn.html
   etn_fields: etn_fields.html
-last_built: 2020-10-22T16:08Z
+last_built: 2020-11-10T09:16Z
 urls:
   reference: https://inbo.github.io/etn/reference
   article: https://inbo.github.io/etn/articles
