@@ -48,7 +48,7 @@
 #' @export
 #'
 #' @importFrom glue glue
-#' @importFrom dplyr %>% arrange distinct filter group_by mutate n pull select
+#' @importFrom dplyr %>% arrange distinct filter group_by mutate n pull select summarize
 #' @importFrom readr write_csv
 #' @importFrom stringr str_detect str_replace_all
 #'
