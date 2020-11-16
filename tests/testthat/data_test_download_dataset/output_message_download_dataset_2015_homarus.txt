@@ -1,0 +1,20 @@
+Downloading data to directory "./temp_download":
+(existing files with the same name will be overwritten)
+* (1/6): downloading animals.csv
+* (2/6): downloading tags.csv
+* (3/6): downloading detections.csv
+* (4/6): downloading deployments.csv
+* (5/6): downloading receivers.csv
+* (6/6): adding datapackage.json as file metadata
+
+Summary statistics for dataset "2015_homarus":
+* number of animals:           2
+* number of tags:              2
+* number of detections:        22265
+* number of deployments:       348
+* number of receivers:         101
+* first date of detection:     2015-03-05
+* last date of detection:      2015-04-03
+* included scientific names:   Homarus gammarus
+* included network projects:   bpns
+
