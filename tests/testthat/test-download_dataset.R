@@ -54,7 +54,9 @@ test_that("Downloading the data package returns desired message and files", {
   # Assert
 
   # Function creates the expected files
-  expect_true(all(sort(list.files("temp_download/")) == sort(files_to_create)))
+  expect_true(
+    all(sort(list.files(dir_to_download_data)) == sort(files_to_create))
+  )
 
   # Function returns the expected output message
   expect_true(
