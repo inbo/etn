@@ -82,8 +82,8 @@ animal1 <- 2824
 animal_multiple <- c(2824, 2825)
 animal_multiple_text <- c(2824, "2825")
 animal_tag_multiple <- 2827 # Has 2 associated tags
-project1 <- "phd_reubens"
-project_multiple <- c("2013_albertkanaal", "phd_reubens")
+project1 <- "2010_phd_reubens"
+project_multiple <- c("2013_albertkanaal", "2010_phd_reubens")
 sciname1 <- "Gadus morhua"
 sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
 
