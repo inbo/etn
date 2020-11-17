@@ -172,6 +172,7 @@ get_detections <- function(connection = con,
   }
 
   # Check limit
+  assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
     limit_query <- glue_sql("LIMIT 100", .con = connection)
   } else {
