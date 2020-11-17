@@ -31,6 +31,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom assertthat assert_that
 #'
 #' @examples
 #' \dontrun{
