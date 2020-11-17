@@ -21,6 +21,7 @@ Imports:
     lubridate,
     methods,
     odbc,
+    readr,
     rlang,
     stringr
 Suggests:
