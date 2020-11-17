@@ -105,7 +105,7 @@ testthat::test_that("It's possible to select by network project code(s)", {
 })
 
 
-testthat::test_that("Error is returned for a wrong network_project_code", {
+testthat::test_that("Error is returned for a wrong animal_project_code", {
   bad_project_name <- "not_a_project"
   expect_error(
     get_detections(con, animal_project_code = bad_project_name)
