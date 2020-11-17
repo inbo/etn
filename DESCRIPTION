@@ -25,8 +25,12 @@ Imports:
     stringr
 Suggests:
     formattable,
+    kableExtra,
     knitr,
-    testthat
+    mockery,
+    rmarkdown,
+    testthat,
+    tidyr
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
