@@ -1,3 +1,5 @@
+library(mockery)
+
 con <- connect_to_etn(
   username = Sys.getenv("userid"),
   password = Sys.getenv("pwd")
@@ -30,6 +32,16 @@ test_that("Downloading the data package returns desired message and files", {
   output_message_2015_homarus <- c(
     paste0(output_message_2015_homarus[1], output_message_2015_homarus[2]),
     output_message_2015_homarus[3:length(output_message_2015_homarus)])
+
+
+  # Read csv with detections for stubbing (getting detections takes too long)
+  detections_2015_homarus <- read.csv(
+    "./data_test_download_dataset/2015_homarus_detections_stubbed.csv",
+    header = TRUE,
+    stringsAsFactors = FALSE)
+
+  # Stub download_dataset() out by mocking the get_detections() step
+  stub(download_dataset, "get_detections", detections_2015_homarus)
 
 
   # Act
