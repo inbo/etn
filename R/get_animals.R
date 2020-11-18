@@ -17,7 +17,8 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select summarize_at ungroup
+#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select
+#'   starts_with summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
