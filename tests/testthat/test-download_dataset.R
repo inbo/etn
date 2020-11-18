@@ -39,7 +39,7 @@ test_that("Downloading the data package returns desired message and files", {
     stringsAsFactors = FALSE)
 
   # Stub download_dataset() out by mocking the get_detections() step
-  stub(download_dataset, "get_detections", detections_2015_homarus)
+  mockery::stub(download_dataset, "get_detections", detections_2015_homarus)
 
 
   # Act
