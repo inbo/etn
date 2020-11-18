@@ -125,7 +125,7 @@ download_dataset <- function(connection = con,
   # Select on tags associated with animals
   tag_ids <-
     animals %>%
-    distinct(tag_id) %>%
+    distinct(.data$tag_id) %>%
     pull() %>%
     # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
     # all tags and split them again on comma
@@ -153,7 +153,7 @@ download_dataset <- function(connection = con,
   detections_orig_count <- nrow(detections)
   detections <-
     detections %>%
-    distinct(pk, .keep_all = TRUE)
+    distinct(.data$pk, .keep_all = TRUE)
   write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
 
   # DEPLOYMENTS
@@ -162,8 +162,8 @@ download_dataset <- function(connection = con,
   # including those without detections for animal_project_code
   network_project_codes <-
     detections %>%
-    distinct(network_project_code) %>%
-    arrange(network_project_code) %>%
+    distinct(.data$network_project_code) %>%
+    arrange(.data$network_project_code) %>%
     pull()
   deployments <- get_deployments(
     connection = connection,
@@ -173,7 +173,7 @@ download_dataset <- function(connection = con,
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments %>%
-    mutate(comments = str_replace_all(comments, "[\r\n]+", " "))
+    mutate(comments = str_replace_all(.data$comments, "[\r\n]+", " "))
   write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
 
   # RECEIVERS
@@ -181,7 +181,7 @@ download_dataset <- function(connection = con,
   # Select on receivers associated with deployments
   receiver_ids <-
     deployments %>%
-    distinct(receiver_id) %>%
+    distinct(.data$receiver_id) %>%
     pull()
   receivers <- get_receivers(
     connection = connection,
@@ -197,8 +197,8 @@ download_dataset <- function(connection = con,
   # Create summary stats
   scientific_names <-
     animals %>%
-    distinct(scientific_name) %>%
-    arrange(scientific_name) %>%
+    distinct(.data$scientific_name) %>%
+    arrange(.data$scientific_name) %>%
     pull()
 
   message("")
@@ -208,8 +208,8 @@ download_dataset <- function(connection = con,
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
-  message("* first date of detection:     ", detections %>% summarize(min(as.Date(date_time))) %>% pull())
-  message("* last date of detection:      ", detections %>% summarize(max(as.Date(date_time))) %>% pull())
+  message("* first date of detection:     ", detections %>% summarize(min(as.Date(.data$date_time))) %>% pull())
+  message("* last date of detection:      ", detections %>% summarize(max(as.Date(.data$date_time))) %>% pull())
   message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
   message("* included network projects:   ", paste(network_project_codes, collapse = ", "))
   message("")
@@ -217,21 +217,21 @@ download_dataset <- function(connection = con,
   # Create warnings
   animals_multiple_tags <-
     animals %>%
-    filter(str_detect(tag_id, ",")) %>%
-    distinct(animal_id) %>% # Should be unique already
+    filter(str_detect(.data$tag_id, ",")) %>%
+    distinct(.data$animal_id) %>% # Should be unique already
     pull()
 
   tags_multiple_animals <-
     animals %>%
-    group_by(tag_id) %>%
+    group_by(.data$tag_id) %>%
     filter(n() > 1) %>%
-    distinct(tag_id) %>%
+    distinct(.data$tag_id) %>%
     pull()
 
   orphaned_deployments <-
     detections %>%
-    filter(network_project_code %in% c("no_info", "none")) %>%
-    distinct(deployment_fk) %>%
+    filter(.data$network_project_code %in% c("no_info", "none")) %>%
+    distinct(.data$deployment_fk) %>%
     pull()
 
   duplicate_detections_count <- detections_orig_count - nrow(detections)

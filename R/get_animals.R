@@ -110,9 +110,9 @@ get_animals <- function(connection = con,
   animals <-
     animals %>%
     arrange(
-      animal_project_code,
-      release_date_time,
-      factor(tag_id, levels = list_tag_ids(connection))
+      .data$animal_project_code,
+      .data$release_date_time,
+      factor(.data$tag_id, levels = list_tag_ids(connection))
     )
 
   as_tibble(animals) # Is already a tibble, but added if code above changes

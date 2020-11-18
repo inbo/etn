@@ -68,7 +68,7 @@ get_projects <- function(connection = con,
   # Sort data
   projects <-
     projects %>%
-    arrange(project_code)
+    arrange(.data$project_code)
 
   as_tibble(projects)
 }

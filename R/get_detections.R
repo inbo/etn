@@ -204,8 +204,8 @@ get_detections <- function(connection = con,
   detections <-
     detections %>%
     arrange(
-      factor(tag_id, levels = list_tag_ids(connection)),
-      date_time
+      factor(.data$tag_id, levels = list_tag_ids(connection)),
+      .data$date_time
     )
 
   as_tibble(detections)
