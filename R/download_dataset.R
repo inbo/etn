@@ -114,7 +114,7 @@ download_dataset <- function(connection = con,
   message("* (1/6): downloading animals.csv")
   # Select on animal_project_code and scientific_name
   animals <- get_animals(
-    connection = con,
+    connection = connection,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
@@ -134,7 +134,7 @@ download_dataset <- function(connection = con,
     unlist() %>%
     unique()
   tags <- get_tags(
-    connection = con,
+    connection = connection,
     tag_id = tag_ids,
     include_ref_tags = TRUE
   )
@@ -144,7 +144,7 @@ download_dataset <- function(connection = con,
   message("* (3/6): downloading detections.csv")
   # Select on animal_project_code and scientific_name
   detections <- get_detections(
-    connection = con,
+    connection = connection,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name,
     limit = FALSE
@@ -166,7 +166,7 @@ download_dataset <- function(connection = con,
     arrange(network_project_code) %>%
     pull()
   deployments <- get_deployments(
-    connection = con,
+    connection = connection,
     network_project_code = network_project_codes,
     open_only = FALSE
   )
@@ -184,7 +184,7 @@ download_dataset <- function(connection = con,
     distinct(receiver_id) %>%
     pull()
   receivers <- get_receivers(
-    con,
+    connection = connection,
     receiver_id = receiver_ids
   )
   write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
