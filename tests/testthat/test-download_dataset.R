@@ -44,11 +44,11 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Act
 
-  evaluate_download_2015_homarus <- evaluate_promise(
+  evaluate_download_2015_homarus <- evaluate_promise({
     download_dataset(connection = con,
                      animal_project_code = "2015_homarus",
                      directory = dir_to_download_data)
-  )
+  })
 
 
   # Assert
