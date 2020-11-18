@@ -15,7 +15,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r include=FALSE}
 library(etn)
-library(tidyverse)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(stringr)
 library(glue)
 library(DBI)
 library(kableExtra)
