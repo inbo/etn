@@ -65,9 +65,9 @@ performed by validation tools of the Frictionless Framework, e.g.
 }
 \examples{
 \dontrun{
-# Download data for the 2014_demer animal project (all scientific names)
-download_dataset(con, animal_project_code = "2014_demer")
-#> Downloading data to directory "2014_demer":
+# Download data for the 2012_leopoldkanaal animal project (all scientific names)
+download_dataset(con, animal_project_code = "2012_leopoldkanaal")
+#> Downloading data to directory "2012_leopoldkanaal":
 #> (existing files with the same name will be overwritten)
 #> * (1/6): downloading animals.csv
 #> * (2/6): downloading tags.csv
@@ -75,20 +75,18 @@ download_dataset(con, animal_project_code = "2014_demer")
 #> * (4/6): downloading deployments.csv
 #> * (5/6): downloading receivers.csv
 #> * (6/6): adding datapackage.json as file metadata
-#>
-#> Summary statistics for dataset "2014_demer":
-#> * number of animals:           16
-#> * number of tags:              16
-#> * number of detections:        237064
-#> * number of deployments:       939
-#> * number of receivers:         179
-#> * first date of detection:     2014-04-18
-#> * last date of detection:      2018-09-15
-#> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
-#> * included network projects:   albert, demer, dijle, no_info, zeeschelde
-#>
+#> Summary statistics for dataset "2012_leopoldkanaal":
+#> * number of animals:           104
+#> * number of tags:              103
+#> * number of detections:        2215839
+#> * number of deployments:       1581
+#> * number of receivers:         273
+#> * first date of detection:     2012-07-03
+#> * last date of detection:      2020-09-28
+#> * included scientific names:   Anguilla anguilla
+#> * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde
 #> Warning message:
-#> In download_dataset(animal_project_code = "2014_demer") :
-#>   Found deployments without network project: 1383, 1382, 1384
+#> In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :
+#> Found tags associated with multiple animals: A69-1601-29925
 }
 }

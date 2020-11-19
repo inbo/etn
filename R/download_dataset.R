@@ -54,9 +54,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Download data for the 2014_demer animal project (all scientific names)
-#' download_dataset(con, animal_project_code = "2014_demer")
-#' #> Downloading data to directory "2014_demer":
+#' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
+#' download_dataset(con, animal_project_code = "2012_leopoldkanaal")
+#' #> Downloading data to directory "2012_leopoldkanaal":
 #' #> (existing files with the same name will be overwritten)
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
@@ -64,21 +64,21 @@
 #' #> * (4/6): downloading deployments.csv
 #' #> * (5/6): downloading receivers.csv
 #' #> * (6/6): adding datapackage.json as file metadata
-#' #>
-#' #> Summary statistics for dataset "2014_demer":
-#' #> * number of animals:           16
-#' #> * number of tags:              16
-#' #> * number of detections:        237064
-#' #> * number of deployments:       939
-#' #> * number of receivers:         179
-#' #> * first date of detection:     2014-04-18
-#' #> * last date of detection:      2018-09-15
-#' #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
-#' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
-#' #>
+
+#' #> Summary statistics for dataset "2012_leopoldkanaal":
+#' #> * number of animals:           104
+#' #> * number of tags:              103
+#' #> * number of detections:        2215839
+#' #> * number of deployments:       1581
+#' #> * number of receivers:         273
+#' #> * first date of detection:     2012-07-03
+#' #> * last date of detection:      2020-09-28
+#' #> * included scientific names:   Anguilla anguilla
+#' #> * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde
+
 #' #> Warning message:
-#' #> In download_dataset(animal_project_code = "2014_demer") :
-#' #>   Found deployments without network project: 1383, 1382, 1384
+#' #> In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :
+#' #> Found tags associated with multiple animals: A69-1601-29925
 #' }
 download_dataset <- function(connection = con,
                              animal_project_code,
@@ -208,8 +208,13 @@ download_dataset <- function(connection = con,
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
-  message("* first date of detection:     ", detections %>% summarize(min(as.Date(.data$date_time))) %>% pull())
-  message("* last date of detection:      ", detections %>% summarize(max(as.Date(.data$date_time))) %>% pull())
+  if (nrow(detections) > 0) {
+    message("* first date of detection:     ", detections %>% summarize(min(as.Date(.data$date_time))) %>% pull())
+    message("* last date of detection:      ", detections %>% summarize(max(as.Date(.data$date_time))) %>% pull())
+  } else {
+    message("* first date of detection:     ", NA)
+    message("* last date of detection:      ", NA)
+  }
   message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
   message("* included network projects:   ", paste(network_project_codes, collapse = ", "))
   message("")
