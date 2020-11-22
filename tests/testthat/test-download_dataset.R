@@ -33,14 +33,18 @@ test_that("Downloading the data package returns desired message and files", {
 
 
   # Read csv with detections for stubbing (getting detections takes too long)
+  zip::unzip(
+    zipfile = paste0("./data_test_download_dataset/",
+                     "2015_homarus_detections_stubbed.zip"),
+    exdir = "./data_test_download_dataset/")
   detections_2015_homarus <- read.csv(
-    "./data_test_download_dataset/2015_homarus_detections_stubbed.csv",
+    file = "./data_test_download_dataset/detections.csv",
     header = TRUE,
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE
+  )
 
   # Stub download_dataset() out by mocking the get_detections() step
   mockery::stub(download_dataset, "get_detections", detections_2015_homarus)
-
 
   # Act
 
@@ -77,4 +81,5 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Remove generated files and directories after test
   unlink(dir_to_download_data, recursive = TRUE)
+  unlink("./data_test_download_dataset/detections.csv")
 })
