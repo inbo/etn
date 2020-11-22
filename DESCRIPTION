@@ -28,11 +28,9 @@ Suggests:
     formattable,
     kableExtra,
     knitr,
-    mockery,
     rmarkdown,
     testthat,
-    tidyr,
-    zip
+    tidyr
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr

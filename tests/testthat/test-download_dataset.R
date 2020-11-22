@@ -32,20 +32,6 @@ test_that("Downloading the data package returns desired message and files", {
     output_message_2015_homarus[3:length(output_message_2015_homarus)])
 
 
-  # Read csv with detections for stubbing (getting detections takes too long)
-  zip::unzip(
-    zipfile = paste0("./data_test_download_dataset/",
-                     "2015_homarus_detections_stubbed.zip"),
-    exdir = "./data_test_download_dataset/")
-  detections_2015_homarus <- read.csv(
-    file = "./data_test_download_dataset/detections.csv",
-    header = TRUE,
-    stringsAsFactors = FALSE
-  )
-
-  # Stub download_dataset() out by mocking the get_detections() step
-  mockery::stub(download_dataset, "get_detections", detections_2015_homarus)
-
   # Act
 
   evaluate_download_2015_homarus <- evaluate_promise({
