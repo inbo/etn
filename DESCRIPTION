@@ -31,7 +31,8 @@ Suggests:
     mockery,
     rmarkdown,
     testthat,
-    tidyr
+    tidyr,
+    zip
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
