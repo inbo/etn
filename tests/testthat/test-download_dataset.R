@@ -4,42 +4,33 @@ con <- connect_to_etn(
 )
 
 test_that("Downloading the data package returns desired message and files", {
-
   # Arrange
-
   dir_to_download_data <- "./temp_download"
   dir.create(dir_to_download_data, recursive = TRUE, showWarnings = TRUE)
-
-  # list files will be create
-  files_to_create <- c("animals.csv",
-                       "tags.csv",
-                       "detections.csv",
-                       "deployments.csv",
-                       "receivers.csv",
-                       "datapackage.json")
-
-  # read target message
-  output_message_2015_homarus <- readLines(
-    paste0("./data_test_download_dataset",
-           "/output_message_download_dataset_2015_homarus.txt")
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
   )
-
-  # Shape target message
-  output_message_2015_homarus <- paste0(
-    output_message_2015_homarus, "\n")
-  output_message_2015_homarus <- c(
-    paste0(output_message_2015_homarus[1], output_message_2015_homarus[2]),
-    output_message_2015_homarus[3:length(output_message_2015_homarus)])
-
+  message_2015_homarus <- readLines(
+    "./test-download_dataset-message.txt"
+  )
+  # Process output message
+  message_2015_homarus <- paste0(
+    message_2015_homarus, "\n")
+  message_2015_homarus <- c(
+    paste0(message_2015_homarus[1], message_2015_homarus[2]),
+    message_2015_homarus[3:length(message_2015_homarus)])
 
   # Act
-
   evaluate_download_2015_homarus <- evaluate_promise({
     download_dataset(connection = con,
                      animal_project_code = "2015_homarus",
                      directory = dir_to_download_data)
   })
-
 
   # Assert
 
@@ -50,9 +41,7 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Function returns the expected output message
   expect_true(
-    all(
-      evaluate_download_2015_homarus$messages ==
-        output_message_2015_homarus)
+    all(evaluate_download_2015_homarus$messages == message_2015_homarus)
   )
 
   # Function returns no warnings (character of length 0)
@@ -63,7 +52,6 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Function returns no output
   expect_true(evaluate_download_2015_homarus$output == "")
-
 
   # Remove generated files and directories after test
   unlink(dir_to_download_data, recursive = TRUE)
