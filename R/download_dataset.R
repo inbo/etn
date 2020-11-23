@@ -54,9 +54,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Download data for the 2014_demer animal project (all scientific names)
-#' download_dataset(con, animal_project_code = "2014_demer")
-#' #> Downloading data to directory "2014_demer":
+#' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
+#' download_dataset(con, animal_project_code = "2012_leopoldkanaal")
+#' #> Downloading data to directory "2012_leopoldkanaal":
 #' #> (existing files with the same name will be overwritten)
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
@@ -64,21 +64,21 @@
 #' #> * (4/6): downloading deployments.csv
 #' #> * (5/6): downloading receivers.csv
 #' #> * (6/6): adding datapackage.json as file metadata
-#' #>
-#' #> Summary statistics for dataset "2014_demer":
-#' #> * number of animals:           16
-#' #> * number of tags:              16
-#' #> * number of detections:        237064
-#' #> * number of deployments:       939
-#' #> * number of receivers:         179
-#' #> * first date of detection:     2014-04-18
-#' #> * last date of detection:      2018-09-15
-#' #> * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
-#' #> * included network projects:   albert, demer, dijle, no_info, zeeschelde
-#' #>
+
+#' #> Summary statistics for dataset "2012_leopoldkanaal":
+#' #> * number of animals:           104
+#' #> * number of tags:              103
+#' #> * number of detections:        2215839
+#' #> * number of deployments:       1581
+#' #> * number of receivers:         273
+#' #> * first date of detection:     2012-07-03
+#' #> * last date of detection:      2020-09-28
+#' #> * included scientific names:   Anguilla anguilla
+#' #> * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde
+
 #' #> Warning message:
-#' #> In download_dataset(animal_project_code = "2014_demer") :
-#' #>   Found deployments without network project: 1383, 1382, 1384
+#' #> In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :
+#' #> Found tags associated with multiple animals: A69-1601-29925
 #' }
 download_dataset <- function(connection = con,
                              animal_project_code,
@@ -114,7 +114,7 @@ download_dataset <- function(connection = con,
   message("* (1/6): downloading animals.csv")
   # Select on animal_project_code and scientific_name
   animals <- get_animals(
-    connection = con,
+    connection = connection,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
@@ -125,7 +125,7 @@ download_dataset <- function(connection = con,
   # Select on tags associated with animals
   tag_ids <-
     animals %>%
-    distinct(tag_id) %>%
+    distinct(.data$tag_id) %>%
     pull() %>%
     # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
     # all tags and split them again on comma
@@ -134,7 +134,7 @@ download_dataset <- function(connection = con,
     unlist() %>%
     unique()
   tags <- get_tags(
-    connection = con,
+    connection = connection,
     tag_id = tag_ids,
     include_ref_tags = TRUE
   )
@@ -144,7 +144,7 @@ download_dataset <- function(connection = con,
   message("* (3/6): downloading detections.csv")
   # Select on animal_project_code and scientific_name
   detections <- get_detections(
-    connection = con,
+    connection = connection,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name,
     limit = FALSE
@@ -153,7 +153,7 @@ download_dataset <- function(connection = con,
   detections_orig_count <- nrow(detections)
   detections <-
     detections %>%
-    distinct(pk, .keep_all = TRUE)
+    distinct(.data$pk, .keep_all = TRUE)
   write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
 
   # DEPLOYMENTS
@@ -162,18 +162,18 @@ download_dataset <- function(connection = con,
   # including those without detections for animal_project_code
   network_project_codes <-
     detections %>%
-    distinct(network_project_code) %>%
-    arrange(network_project_code) %>%
+    distinct(.data$network_project_code) %>%
+    arrange(.data$network_project_code) %>%
     pull()
   deployments <- get_deployments(
-    connection = con,
+    connection = connection,
     network_project_code = network_project_codes,
     open_only = FALSE
   )
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments %>%
-    mutate(comments = str_replace_all(comments, "[\r\n]+", " "))
+    mutate(comments = str_replace_all(.data$comments, "[\r\n]+", " "))
   write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
 
   # RECEIVERS
@@ -181,10 +181,10 @@ download_dataset <- function(connection = con,
   # Select on receivers associated with deployments
   receiver_ids <-
     deployments %>%
-    distinct(receiver_id) %>%
+    distinct(.data$receiver_id) %>%
     pull()
   receivers <- get_receivers(
-    con,
+    connection = connection,
     receiver_id = receiver_ids
   )
   write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
@@ -197,8 +197,8 @@ download_dataset <- function(connection = con,
   # Create summary stats
   scientific_names <-
     animals %>%
-    distinct(scientific_name) %>%
-    arrange(scientific_name) %>%
+    distinct(.data$scientific_name) %>%
+    arrange(.data$scientific_name) %>%
     pull()
 
   message("")
@@ -208,8 +208,13 @@ download_dataset <- function(connection = con,
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
-  message("* first date of detection:     ", detections %>% summarize(min(as.Date(date_time))) %>% pull())
-  message("* last date of detection:      ", detections %>% summarize(max(as.Date(date_time))) %>% pull())
+  if (nrow(detections) > 0) {
+    message("* first date of detection:     ", detections %>% summarize(min(as.Date(.data$date_time))) %>% pull())
+    message("* last date of detection:      ", detections %>% summarize(max(as.Date(.data$date_time))) %>% pull())
+  } else {
+    message("* first date of detection:     ", NA)
+    message("* last date of detection:      ", NA)
+  }
   message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
   message("* included network projects:   ", paste(network_project_codes, collapse = ", "))
   message("")
@@ -217,21 +222,21 @@ download_dataset <- function(connection = con,
   # Create warnings
   animals_multiple_tags <-
     animals %>%
-    filter(str_detect(tag_id, ",")) %>%
-    distinct(animal_id) %>% # Should be unique already
+    filter(str_detect(.data$tag_id, ",")) %>%
+    distinct(.data$animal_id) %>% # Should be unique already
     pull()
 
   tags_multiple_animals <-
     animals %>%
-    group_by(tag_id) %>%
+    group_by(.data$tag_id) %>%
     filter(n() > 1) %>%
-    distinct(tag_id) %>%
+    distinct(.data$tag_id) %>%
     pull()
 
   orphaned_deployments <-
     detections %>%
-    filter(network_project_code %in% c("no_info", "none")) %>%
-    distinct(deployment_fk) %>%
+    filter(.data$network_project_code %in% c("no_info", "none")) %>%
+    distinct(.data$deployment_fk) %>%
     pull()
 
   duplicate_detections_count <- detections_orig_count - nrow(detections)

@@ -82,8 +82,8 @@ animal1 <- 2824
 animal_multiple <- c(2824, 2825)
 animal_multiple_text <- c(2824, "2825")
 animal_tag_multiple <- 2827 # Has 2 associated tags
-project1 <- "phd_reubens"
-project_multiple <- c("2013_albertkanaal", "phd_reubens")
+project1 <- "2010_phd_reubens"
+project_multiple <- c("2010_phd_reubens", "2013_albertkanaal")
 sciname1 <- "Gadus morhua"
 sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
 
@@ -145,11 +145,11 @@ testthat::test_that("Test number of records", {
   expect_equal(nrow(animals_animal_multiple), 2)
   expect_equal(nrow(animals_animal_multiple_text), 2)
   expect_equal(nrow(animals_animal_tag_multiple), 1) # Rows should be collapsed
-  expect_equal(nrow(animals_project1), 68)
+  expect_equal(nrow(animals_project1), 41)
   expect_gt(nrow(animals_all), nrow(animals_project_multiple))
   expect_gt(nrow(animals_all), nrow(animals_sciname_multiple))
   expect_gt(nrow(animals_all), nrow(animals_project1_sciname1))
-  expect_gt(nrow(animals_project1), nrow(animals_project1_sciname1))
+  expect_gte(nrow(animals_project1), nrow(animals_project1_sciname1))
 })
 
 testthat::test_that("Test if data is filtered on parameter", {

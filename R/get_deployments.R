@@ -81,9 +81,9 @@ get_deployments <- function(connection = con,
   deployments <-
     deployments %>%
     arrange(
-      network_project_code,
-      factor(station_name, levels = list_station_names(connection)),
-      deploy_date_time
+      .data$network_project_code,
+      factor(.data$station_name, levels = list_station_names(connection)),
+      .data$deploy_date_time
     )
 
   as_tibble(deployments)

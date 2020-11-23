@@ -21,12 +21,16 @@ Imports:
     lubridate,
     methods,
     odbc,
+    readr,
     rlang,
     stringr
 Suggests:
     formattable,
+    kableExtra,
     knitr,
-    testthat
+    rmarkdown,
+    testthat,
+    tidyr
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr

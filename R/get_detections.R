@@ -31,6 +31,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom assertthat assert_that
 #'
 #' @examples
 #' \dontrun{
@@ -172,6 +173,7 @@ get_detections <- function(connection = con,
   }
 
   # Check limit
+  assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
     limit_query <- glue_sql("LIMIT 100", .con = connection)
   } else {
@@ -202,8 +204,8 @@ get_detections <- function(connection = con,
   detections <-
     detections %>%
     arrange(
-      factor(tag_id, levels = list_tag_ids(connection)),
-      date_time
+      factor(.data$tag_id, levels = list_tag_ids(connection)),
+      .data$date_time
     )
 
   as_tibble(detections)

@@ -17,7 +17,8 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select summarize_at ungroup
+#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select
+#'   starts_with summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
@@ -110,9 +111,9 @@ get_animals <- function(connection = con,
   animals <-
     animals %>%
     arrange(
-      animal_project_code,
-      release_date_time,
-      factor(tag_id, levels = list_tag_ids(connection))
+      .data$animal_project_code,
+      .data$release_date_time,
+      factor(.data$tag_id, levels = list_tag_ids(connection))
     )
 
   as_tibble(animals) # Is already a tibble, but added if code above changes

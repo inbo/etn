@@ -41,7 +41,7 @@ testthat::test_that("Test input for animal_project", {
     check_value("2011_rivierprik", valid_animal_projects, "animal_project")
   )
   expect_true(
-    check_value(c("2012_leopoldkanaal", "phd_reubens"), valid_animal_projects, "animal_project")
+    check_value(c("2012_leopoldkanaal", "2010_phd_reubens"), valid_animal_projects, "animal_project")
   )
   expect_error(
     check_value(c("2012_leopoldkanaal", "not_an_animal_project"), valid_animal_projects, "animal_project")
