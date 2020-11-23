@@ -31,16 +31,16 @@ expected_col_names <- c(
 )
 
 application1 <- "acoustic_telemetry" # No "cpod" data at time of writing
-start_date1 <- "2011"
-end_date1 <- "2011-02-01"
+start_date1 <- "2016"
+end_date1 <- "2016-06-18"
 start_date1_full <- as.POSIXct(check_date_time(start_date1, "start_date1"), tz = "UTC")
 end_date1_full <- as.POSIXct(check_date_time(end_date1, "end_date1"), tz = "UTC")
-station1 <- "R03"
-animal_project1 <- "phd_reubens"
-network_project1 <- "thornton"
-tag1 <- "A69-1303-65302"
-receiver1 <- "VR2W-122360"
-sciname1 <- "Anguilla anguilla"
+station1 <- "s-6"
+animal_project1 <- "2014_demer"
+network_project1 <- "zeeschelde"
+tag1 <- "A69-1601-26530"
+receiver1 <- "VR2W-112286"
+sciname1 <- "Silurus glanis"
 
 detections_limit <- get_detections(con, limit = TRUE)
 detections_application1 <- get_detections(
@@ -54,7 +54,7 @@ detections_start_end1 <- get_detections(
 detections_station1 <- get_detections(
   con,
   animal_project_code = animal_project1, network_project_code = network_project1,
-  station_name = station1, tag_id = tag1
+  station_name = station1
 )
 detections_tag1 <- get_detections(con, tag_id = tag1, limit = TRUE)
 detections_receiver1 <- get_detections(con, receiver_id = receiver1, limit = TRUE)
@@ -168,10 +168,6 @@ testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
     detections_station1 %>% distinct(network_project_code) %>% pull(),
     c(network_project1)
-  )
-  expect_equal(
-    detections_station1 %>% distinct(tag_id) %>% pull(),
-    c(tag1)
   )
   expect_equal(
     detections_station1 %>% distinct(station_name) %>% pull(),
