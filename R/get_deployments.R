@@ -5,7 +5,7 @@
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #' @param network_project_code Character (vector). One or more network
-#'   projects.
+#'   projects. Case-insensitive.
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `TRUE`.
 #'
@@ -55,6 +55,7 @@ get_deployments <- function(connection = con,
   if (is.null(network_project_code)) {
     network_project_code_query <- "True"
   } else {
+    network_project_code <- tolower(network_project_code)
     valid_network_project_codes <- list_network_project_codes(connection)
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
     network_project_code_query <- glue_sql("deployments.network_project_code IN ({network_project_code*})", .con = connection)
