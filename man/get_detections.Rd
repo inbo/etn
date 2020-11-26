@@ -24,9 +24,10 @@ get_detections(
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
 \item{network_project_code}{Character (vector). One or more network
-projects.}
+projects. Case-insensitive.}
 
-\item{animal_project_code}{Character (vector). One or more animal projects.}
+\item{animal_project_code}{Character (vector). One or more animal projects.
+Case-insensitive.}
 
 \item{start_date}{Character. Date in ISO 8601 format, e.g. \code{2018-01-01}.
 Date selection on month (e.g. \code{2018-03}) or year (e.g. \code{2018}) are
@@ -37,7 +38,7 @@ Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
 supported as well.}
 
 \item{station_name}{Character (vector). One or more deployment station
-names.}
+names. Case-insensitive.}
 
 \item{tag_id}{Character (vector). One or more tag identifiers.}
 

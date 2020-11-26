@@ -10,7 +10,8 @@ list_station_names(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{station_name} present in \code{deployments_view2}.
+A vector of all unique \code{station_name}  (lowercased) present in
+\code{deployments_view2}.
 }
 \description{
 List all available station names
