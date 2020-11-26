@@ -108,7 +108,7 @@ get_detections <- function(connection = con,
     network_project_code_query <- "True"
   } else {
     network_project_code <- tolower(network_project_code)
-    valid_network_project_codes <- list_network_project_codes(connection)
+    valid_network_project_codes <- tolower(list_network_project_codes(connection))
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
     network_project_code_query <- glue_sql("network_project_code IN ({network_project_code*})", .con = connection)
   }
@@ -118,7 +118,7 @@ get_detections <- function(connection = con,
     animal_project_code_query <- "True"
   } else {
     animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- list_animal_project_codes(connection)
+    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
   }
@@ -144,7 +144,7 @@ get_detections <- function(connection = con,
     station_name_query <- "True"
   } else {
     station_name <- tolower(station_name)
-    valid_station_names <- list_station_names(connection)
+    valid_station_names <- tolower(list_station_names(connection))
     check_value(station_name, valid_station_names, "station_name")
     station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)
   }

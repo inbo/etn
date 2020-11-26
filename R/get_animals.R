@@ -65,7 +65,7 @@ get_animals <- function(connection = con,
     animal_project_code_query <- "True"
   } else {
     animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- list_animal_project_codes(connection)
+    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
   }

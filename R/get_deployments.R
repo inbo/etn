@@ -56,7 +56,7 @@ get_deployments <- function(connection = con,
     network_project_code_query <- "True"
   } else {
     network_project_code <- tolower(network_project_code)
-    valid_network_project_codes <- list_network_project_codes(connection)
+    valid_network_project_codes <- tolower(list_network_project_codes(connection))
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
     network_project_code_query <- glue_sql("deployments.network_project_code IN ({network_project_code*})", .con = connection)
   }
