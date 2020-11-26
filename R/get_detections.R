@@ -110,7 +110,10 @@ get_detections <- function(connection = con,
     network_project_code <- tolower(network_project_code)
     valid_network_project_codes <- tolower(list_network_project_codes(connection))
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
-    network_project_code_query <- glue_sql("network_project_code IN ({network_project_code*})", .con = connection)
+    network_project_code_query <- glue_sql(
+      "LOWER(network_project_code) IN ({network_project_code*})",
+      .con = connection
+    )
   }
 
   # Check animal_project_code
@@ -120,7 +123,10 @@ get_detections <- function(connection = con,
     animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
+    animal_project_code_query <- glue_sql(
+      "LOWER(animal_project_code) IN ({animal_project_code*})",
+      .con = connection
+    )
   }
 
   # Check start_date
@@ -146,7 +152,10 @@ get_detections <- function(connection = con,
     station_name <- tolower(station_name)
     valid_station_names <- tolower(list_station_names(connection))
     check_value(station_name, valid_station_names, "station_name")
-    station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)
+    station_name_query <- glue_sql(
+      "LOWER(station_name) IN ({station_name*})",
+      .con = connection
+    )
   }
 
   # Check tag_id
