@@ -8,6 +8,7 @@
 #' @param network_project_code Character (vector). One or more network
 #'   projects.
 #' @param animal_project_code Character (vector). One or more animal projects.
+#'   Case-insensitive.
 #' @param start_date Character. Date in ISO 8601 format, e.g. `2018-01-01`.
 #'   Date selection on month (e.g. `2018-03`) or year (e.g. `2018`) are
 #'   supported as well.
@@ -115,6 +116,7 @@ get_detections <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
+    animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- list_animal_project_codes(connection)
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)

@@ -1,12 +1,13 @@
 #' Get animal data
 #'
-#' Get data for animals, with options to filter results. Associated tag 
-#' information is available in columns starting with `tag`. If multiple tags 
+#' Get data for animals, with options to filter results. Associated tag
+#' information is available in columns starting with `tag`. If multiple tags
 #' are associated with a single animal, the information is comma-separated.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal ids.
 #' @param animal_project_code Character (vector). One or more animal projects.
+#'   Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
 #'
 #' @return A tibble with animals data, sorted by `animal_project_code`,
@@ -63,6 +64,7 @@ get_animals <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
+    animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- list_animal_project_codes(connection)
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
