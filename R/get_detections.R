@@ -15,7 +15,7 @@
 #'   Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
 #'   supported as well.
 #' @param station_name Character (vector). One or more deployment station
-#'   names.
+#'   names. Case-insensitive.
 #' @param tag_id Character (vector). One or more tag identifiers.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -140,6 +140,7 @@ get_detections <- function(connection = con,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
+    station_name <- tolower(station_name)
     valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
     station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)

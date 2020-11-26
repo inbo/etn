@@ -8,11 +8,14 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom stringr str_sort
 #'
-#' @return A vector of all unique `station_name` present in `deployments_view2`.
+#' @return A vector of all unique `station_name`  (lowercased) present in
+#'   `deployments_view2`.
 list_station_names <- function(connection = con) {
-  query <- glue_sql(
-    "SELECT DISTINCT station_name FROM vliz.deployments_view2",
-    .con = connection
+  query <- glue_sql("
+    SELECT
+      DISTINCT LOWER(station_name) AS station_name
+    FROM vliz.deployments_view2
+    ", .con = connection
   )
   data <- dbGetQuery(connection, query)
 
