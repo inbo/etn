@@ -53,6 +53,7 @@ project_multiple <- c("ws1", "ws2")
 deployments_all <- get_deployments(con)
 deployments_application1 <- get_deployments(con, application_type = application1)
 deployments_project1 <- get_deployments(con, network_project_code = project1)
+deployments_project1_uppercase <- get_deployments(con, network_project_code = toupper(project1))
 deployments_project_multiple <- get_deployments(con, network_project_code = project_multiple)
 deployments_project1_openfalse <- get_deployments(con, network_project_code = project1, open_only = FALSE)
 
@@ -94,6 +95,10 @@ testthat::test_that("Test number of records", {
   expect_gt(nrow(deployments_all), nrow(deployments_project_multiple))
   expect_gt(nrow(deployments_project_multiple), nrow(deployments_project1))
   expect_gte(nrow(deployments_project1_openfalse), nrow(deployments_project1))
+})
+
+testthat::test_that("Argument network_project_code is case-insensitive", {
+  expect_equal(deployments_project1, deployments_project1_uppercase)
 })
 
 testthat::test_that("Test if data is filtered on parameter", {
