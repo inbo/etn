@@ -11,8 +11,8 @@ Summary statistics for dataset "2015_homarus":
 * number of animals:           2
 * number of tags:              2
 * number of detections:        22265
-* number of deployments:       349
-* number of receivers:         102
+* number of deployments:       363
+* number of receivers:         104
 * first date of detection:     2015-03-05
 * last date of detection:      2015-04-03
 * included scientific names:   Homarus gammarus
