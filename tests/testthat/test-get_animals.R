@@ -85,7 +85,7 @@ animal_tag_multiple <- 2827 # Has 2 associated tags
 project1 <- "2010_phd_reubens"
 project_multiple <- c("2010_phd_reubens", "2013_albertkanaal")
 sciname1 <- "Gadus morhua"
-sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
+sciname_multiple <- c("Anguilla anguilla", "Gadus morhua")
 
 animals_all <- get_animals(con)
 animals_animal1 <- get_animals(con, animal_id = animal1)
