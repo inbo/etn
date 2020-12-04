@@ -83,7 +83,6 @@ animal_multiple <- c(2824, 2825)
 animal_multiple_text <- c(2824, "2825")
 animal_tag_multiple <- 2827 # Has 2 associated tags
 project1 <- "2010_phd_reubens"
-project1_uppercase <- "2010_PHD_REUBENS"
 project_multiple <- c("2010_phd_reubens", "2013_albertkanaal")
 sciname1 <- "Gadus morhua"
 sciname_multiple <- c("Anguilla anguilla", "Gadus morhua")
@@ -94,6 +93,7 @@ animals_animal_multiple <- get_animals(con, animal_id = animal_multiple)
 animals_animal_multiple_text <- get_animals(con, animal_id = animal_multiple_text)
 animals_animal_tag_multiple <- get_animals(con, animal_id = animal_tag_multiple)
 animals_project1 <- get_animals(con, animal_project_code = project1)
+animals_project1_uppercase <- get_animals(con, animal_project_code = toupper(project1))
 animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
 animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
 animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
