@@ -35,13 +35,13 @@
 #'
 #' # Get animals from specific animal project(s)
 #' get_animals(con, animal_project_code = "2012_leopoldkanaal")
-#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
+#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
+#' get_animals(con, scientific_name = c("Gadus morhua", "Sync tag"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
+#' get_animals(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
