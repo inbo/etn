@@ -82,7 +82,7 @@ scientific names." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9132</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9140</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ scientific names." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,7 +116,7 @@ scientific names." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/inbo/etn/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -213,9 +213,9 @@ performed by validation tools of the Frictionless Framework, e.g.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Download data for the 2014_demer animal project (all scientific names)</span>
-<span class='fu'>download_dataset</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
-<span class='co'>#&gt; Downloading data to directory "2014_demer":</span>
+<span class='co'># Download data for the 2012_leopoldkanaal animal project (all scientific names)</span>
+<span class='fu'>download_dataset</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2012_leopoldkanaal"</span>)
+<span class='co'>#&gt; Downloading data to directory "2012_leopoldkanaal":</span>
 <span class='co'>#&gt; (existing files with the same name will be overwritten)</span>
 <span class='co'>#&gt; * (1/6): downloading animals.csv</span>
 <span class='co'>#&gt; * (2/6): downloading tags.csv</span>
@@ -223,21 +223,19 @@ performed by validation tools of the Frictionless Framework, e.g.
 <span class='co'>#&gt; * (4/6): downloading deployments.csv</span>
 <span class='co'>#&gt; * (5/6): downloading receivers.csv</span>
 <span class='co'>#&gt; * (6/6): adding datapackage.json as file metadata</span>
-<span class='co'>#&gt;</span>
-<span class='co'>#&gt; Summary statistics for dataset "2014_demer":</span>
-<span class='co'>#&gt; * number of animals:           16</span>
-<span class='co'>#&gt; * number of tags:              16</span>
-<span class='co'>#&gt; * number of detections:        237064</span>
-<span class='co'>#&gt; * number of deployments:       939</span>
-<span class='co'>#&gt; * number of receivers:         179</span>
-<span class='co'>#&gt; * first date of detection:     2014-04-18</span>
-<span class='co'>#&gt; * last date of detection:      2018-09-15</span>
-<span class='co'>#&gt; * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus</span>
-<span class='co'>#&gt; * included network projects:   albert, demer, dijle, no_info, zeeschelde</span>
-<span class='co'>#&gt;</span>
+<span class='co'>#&gt; Summary statistics for dataset "2012_leopoldkanaal":</span>
+<span class='co'>#&gt; * number of animals:           104</span>
+<span class='co'>#&gt; * number of tags:              103</span>
+<span class='co'>#&gt; * number of detections:        2215839</span>
+<span class='co'>#&gt; * number of deployments:       1581</span>
+<span class='co'>#&gt; * number of receivers:         273</span>
+<span class='co'>#&gt; * first date of detection:     2012-07-03</span>
+<span class='co'>#&gt; * last date of detection:      2020-09-28</span>
+<span class='co'>#&gt; * included scientific names:   Anguilla anguilla</span>
+<span class='co'>#&gt; * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde</span>
 <span class='co'>#&gt; Warning message:</span>
-<span class='co'>#&gt; In download_dataset(animal_project_code = "2014_demer") :</span>
-<span class='co'>#&gt;   Found deployments without network project: 1383, 1382, 1384</span>
+<span class='co'>#&gt; In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :</span>
+<span class='co'>#&gt; Found tags associated with multiple animals: A69-1601-29925</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
