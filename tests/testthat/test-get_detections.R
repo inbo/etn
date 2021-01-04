@@ -48,12 +48,34 @@ detections_application1 <- get_detections(
 )
 detections_start_end1 <- get_detections(
   con,
-  animal_project_code = animal_project1, network_project_code = network_project1,
-  start_date = start_date1, end_date = end_date1, tag_id = tag1
+  animal_project_code = animal_project1,
+  network_project_code = network_project1,
+  start_date = start_date1,
+  end_date = end_date1,
+  tag_id = tag1
 )
 detections_station1 <- get_detections(
   con,
-  animal_project_code = animal_project1, network_project_code = network_project1,
+  animal_project_code = animal_project1,
+  network_project_code = network_project1,
+  station_name = station1
+)
+detections_station1_uppercase <- get_detections(
+  con,
+  animal_project_code = animal_project1,
+  network_project_code = network_project1,
+  station_name = toupper(station1)
+)
+detections_station1_network_uppercase <- get_detections(
+  con,
+  animal_project_code = animal_project1,
+  network_project_code = toupper(network_project1),
+  station_name = station1
+)
+detections_station1_animal_uppercase <- get_detections(
+  con,
+  animal_project_code = toupper(animal_project1),
+  network_project_code = network_project1,
   station_name = station1
 )
 detections_tag1 <- get_detections(con, tag_id = tag1, limit = TRUE)
@@ -131,6 +153,12 @@ testthat::test_that("Test number of records", {
   expect_gte(nrow(detections_limit), nrow(detections_tag1))
   expect_gte(nrow(detections_limit), nrow(detections_receiver1))
   expect_gte(nrow(detections_limit), nrow(detections_sciname1))
+})
+
+testthat::test_that("Animal/network project and station are case-insensitive", {
+  expect_equal(detections_station1, detections_station1_uppercase)
+  expect_equal(detections_station1, detections_station1_animal_uppercase)
+  expect_equal(detections_station1, detections_station1_network_uppercase)
 })
 
 testthat::test_that("Test date range", {

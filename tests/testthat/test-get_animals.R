@@ -85,7 +85,7 @@ animal_tag_multiple <- 2827 # Has 2 associated tags
 project1 <- "2010_phd_reubens"
 project_multiple <- c("2010_phd_reubens", "2013_albertkanaal")
 sciname1 <- "Gadus morhua"
-sciname_multiple <- c("Anguilla anguilla", "Gadus morhua", "Sentinel")
+sciname_multiple <- c("Anguilla anguilla", "Gadus morhua")
 
 animals_all <- get_animals(con)
 animals_animal1 <- get_animals(con, animal_id = animal1)
@@ -93,6 +93,7 @@ animals_animal_multiple <- get_animals(con, animal_id = animal_multiple)
 animals_animal_multiple_text <- get_animals(con, animal_id = animal_multiple_text)
 animals_animal_tag_multiple <- get_animals(con, animal_id = animal_tag_multiple)
 animals_project1 <- get_animals(con, animal_project_code = project1)
+animals_project1_uppercase <- get_animals(con, animal_project_code = toupper(project1))
 animals_project_multiple <- get_animals(con, animal_project_code = project_multiple)
 animals_sciname_multiple <- get_animals(con, scientific_name = sciname_multiple)
 animals_project1_sciname1 <- get_animals(con, animal_project_code = project1, scientific_name = sciname1)
@@ -150,6 +151,10 @@ testthat::test_that("Test number of records", {
   expect_gt(nrow(animals_all), nrow(animals_sciname_multiple))
   expect_gt(nrow(animals_all), nrow(animals_project1_sciname1))
   expect_gte(nrow(animals_project1), nrow(animals_project1_sciname1))
+})
+
+testthat::test_that("Argument animal_project_code is case-insensitive", {
+  expect_equal(animals_project1, animals_project1_uppercase)
 })
 
 testthat::test_that("Test if data is filtered on parameter", {

@@ -1,12 +1,13 @@
 #' Get animal data
 #'
-#' Get data for animals, with options to filter results. Associated tag 
-#' information is available in columns starting with `tag`. If multiple tags 
+#' Get data for animals, with options to filter results. Associated tag
+#' information is available in columns starting with `tag`. If multiple tags
 #' are associated with a single animal, the information is comma-separated.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal ids.
 #' @param animal_project_code Character (vector). One or more animal projects.
+#'   Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
 #'
 #' @return A tibble with animals data, sorted by `animal_project_code`,
@@ -34,13 +35,13 @@
 #'
 #' # Get animals from specific animal project(s)
 #' get_animals(con, animal_project_code = "2012_leopoldkanaal")
-#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "phd_reubens"))
+#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals(con, scientific_name = c("Gadus morhua", "Sentinel"))
+#' get_animals(con, scientific_name = c("Gadus morhua", "Sync tag"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(con, animal_project_code = "phd_reubens", scientific_name = "Gadus morhua")
+#' get_animals(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
@@ -63,9 +64,13 @@ get_animals <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
-    valid_animal_project_codes <- list_animal_project_codes(connection)
+    animal_project_code <- tolower(animal_project_code)
+    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
+    animal_project_code_query <- glue_sql(
+      "LOWER(animal_project_code) IN ({animal_project_code*})",
+      .con = connection
+    )
   }
 
   # Check scientific_name

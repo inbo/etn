@@ -16,7 +16,8 @@ get_animals(
 
 \item{animal_id}{Integer (vector). One or more animal ids.}
 
-\item{animal_project_code}{Character (vector). One or more animal projects.}
+\item{animal_project_code}{Character (vector). One or more animal projects.
+Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
 }

@@ -6,8 +6,9 @@
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param application_type Character. `acoustic_telemetry` or `cpod`.
 #' @param network_project_code Character (vector). One or more network
-#'   projects.
+#'   projects. Case-insensitive.
 #' @param animal_project_code Character (vector). One or more animal projects.
+#'   Case-insensitive.
 #' @param start_date Character. Date in ISO 8601 format, e.g. `2018-01-01`.
 #'   Date selection on month (e.g. `2018-03`) or year (e.g. `2018`) are
 #'   supported as well.
@@ -15,7 +16,7 @@
 #'   Date selection on month (e.g. 2018-03) or year (e.g. 2018) are
 #'   supported as well.
 #' @param station_name Character (vector). One or more deployment station
-#'   names.
+#'   names. Case-insensitive.
 #' @param tag_id Character (vector). One or more tag identifiers.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -106,18 +107,26 @@ get_detections <- function(connection = con,
   if (is.null(network_project_code)) {
     network_project_code_query <- "True"
   } else {
-    valid_network_project_codes <- list_network_project_codes(connection)
+    network_project_code <- tolower(network_project_code)
+    valid_network_project_codes <- tolower(list_network_project_codes(connection))
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
-    network_project_code_query <- glue_sql("network_project_code IN ({network_project_code*})", .con = connection)
+    network_project_code_query <- glue_sql(
+      "LOWER(network_project_code) IN ({network_project_code*})",
+      .con = connection
+    )
   }
 
   # Check animal_project_code
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
-    valid_animal_project_codes <- list_animal_project_codes(connection)
+    animal_project_code <- tolower(animal_project_code)
+    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql("animal_project_code IN ({animal_project_code*})", .con = connection)
+    animal_project_code_query <- glue_sql(
+      "LOWER(animal_project_code) IN ({animal_project_code*})",
+      .con = connection
+    )
   }
 
   # Check start_date
@@ -140,9 +149,13 @@ get_detections <- function(connection = con,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    valid_station_names <- list_station_names(connection)
+    station_name <- tolower(station_name)
+    valid_station_names <- tolower(list_station_names(connection))
     check_value(station_name, valid_station_names, "station_name")
-    station_name_query <- glue_sql("station_name IN ({station_name*})", .con = connection)
+    station_name_query <- glue_sql(
+      "LOWER(station_name) IN ({station_name*})",
+      .con = connection
+    )
   }
 
   # Check tag_id

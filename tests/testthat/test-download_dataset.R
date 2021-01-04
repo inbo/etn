@@ -6,7 +6,7 @@ con <- connect_to_etn(
 test_that("Downloading the data package returns desired message and files", {
   # Arrange
   dir_to_download_data <- "./temp_download"
-  dir.create(dir_to_download_data, recursive = TRUE, showWarnings = TRUE)
+  dir.create(dir_to_download_data, recursive = TRUE, showWarnings = FALSE)
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -15,20 +15,20 @@ test_that("Downloading the data package returns desired message and files", {
     "receivers.csv",
     "datapackage.json"
   )
-  message_2015_homarus <- readLines(
+  message_2014_demer <- readLines(
     "./test-download_dataset-message.txt"
   )
   # Process output message
-  message_2015_homarus <- paste0(
-    message_2015_homarus, "\n")
-  message_2015_homarus <- c(
-    paste0(message_2015_homarus[1], message_2015_homarus[2]),
-    message_2015_homarus[3:length(message_2015_homarus)])
+  message_2014_demer <- paste0(
+    message_2014_demer, "\n")
+  message_2014_demer <- c(
+    paste0(message_2014_demer[1], message_2014_demer[2]),
+    message_2014_demer[3:length(message_2014_demer)])
 
   # Act
-  evaluate_download_2015_homarus <- evaluate_promise({
+  evaluate_download_2014_demer <- evaluate_promise({
     download_dataset(connection = con,
-                     animal_project_code = "2015_homarus",
+                     animal_project_code = "2014_demer",
                      directory = dir_to_download_data)
   })
 
@@ -41,17 +41,17 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Function returns the expected output message
   expect_true(
-    all(evaluate_download_2015_homarus$messages == message_2015_homarus)
+    all(evaluate_download_2014_demer$messages == message_2014_demer)
   )
 
   # Function returns no warnings (character of length 0)
-  expect_true(length(evaluate_download_2015_homarus$warnings) == 0)
+  expect_true(length(evaluate_download_2014_demer$warnings) == 0)
 
   # Function returns no result
-  expect_null(evaluate_download_2015_homarus$result)
+  expect_null(evaluate_download_2014_demer$result)
 
   # Function returns no output
-  expect_true(evaluate_download_2015_homarus$output == "")
+  expect_true(evaluate_download_2014_demer$output == "")
 
   # Remove generated files and directories after test
   unlink(dir_to_download_data, recursive = TRUE)

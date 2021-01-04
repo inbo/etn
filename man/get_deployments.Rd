@@ -17,7 +17,7 @@ get_deployments(
 \item{application_type}{Character. \code{acoustic_telemetry} or \code{cpod}.}
 
 \item{network_project_code}{Character (vector). One or more network
-projects.}
+projects. Case-insensitive.}
 
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{TRUE}.}
