@@ -194,7 +194,7 @@ If for example both a T and P sensor are present and T transmits twice as often 
 tags_view2,accelerometer_algorithm,There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.,as in: Activity,character,21
 tags_view2,accelerometer_samples_per_second,"Number of acceleration samples taken on each axis per second.
 Sampling rate can be 5 Hertz (5 measurements/s) or 10 
-Hertz (10 measurements/s).",units: Hertz; as in: 5,integer,22
+Hertz (10 measurements/s).",units: Hertz; as in: 5,double,22
 tags_view2,owner_organization,Group owner of the tag. Use the exact group name to which the tag belongs.,as in: VLIZ,character,23
 tags_view2,owner_pi,First and last name of the Principal Investigator for the project.,as in: Jan Reubens,character,24
 tags_view2,financing_project,Tag financing project.,as in: project,character,25
