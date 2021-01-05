@@ -10,8 +10,7 @@ animals_view2,aphia_id,Aphia Id,format: integer; as in: 2,integer,8
 animals_view2,animal_label,"Identification code that uniquely identifies each animal, as specified by the researcher.",as in: A82,character,9
 animals_view2,animal_nickname,,,character,10
 animals_view2,tagger,Person conducting tagging,as in: Pieterjan Verhelst,character,11
-animals_view2,capture_date_time,"Date and time that animal was caught, in 24h UTC.
-Datetime fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,12
+animals_view2,capture_date_time,"Date and time that animal was caught, in 24h UTC. Datetime fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,12
 animals_view2,capture_location,"Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.",format: free text; as in: Reefballs C-Power,character,13
 animals_view2,capture_latitude,Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,14
 animals_view2,capture_longitude,Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.,format: ddd.ddddd; as in: 2.59020,double,15
@@ -41,10 +40,9 @@ animals_view2,age,"Weight of animal that carries tag, in units specified in 'Age
 animals_view2,age_unit,Units of age.,as in: durif index,character,39
 animals_view2,sex,"Sex of animal. ""M"" or ""F"". Can enter unknown (""U"").",as in: M,character,40
 animals_view2,life_stage,"Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.",as in: FV,character,41
-animals_view2,wild_or_hatchery,"Origin of animal that carries the tag.  Enter ""wild"", ""hatchery"" or ""unknown"".",as in: wild,character,42
+animals_view2,wild_or_hatchery,"Origin of animal that carries the tag. Enter ""wild"", ""hatchery"" or ""unknown"".",as in: wild,character,42
 animals_view2,stock,Water body of origin. Can enter unknown or not applicable.,as in: Southern Bight,character,43
-animals_view2,surgery_date_time,"Date that surgery was conducted.
-Date fields should follow the ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,44
+animals_view2,surgery_date_time,Date that surgery was conducted. Date fields should follow the ISO-8601 format.,format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,44
 animals_view2,surgery_location,Short name of surgery location (i.e. hatchery name).,format: free text; as in: onboard RV,character,45
 animals_view2,surgery_latitude,Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.,format: dd.ddddd; as in: 51.36324,double,46
 animals_view2,surgery_longitude,Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.,format: dd.ddddd; as in: 2.59020,double,47
@@ -72,8 +70,7 @@ deployments_view2,network_project_code,,,character,4
 deployments_view2,station_name,Name of the station where the deployment of the receiver takes place. Related to a specific latitude and longitude.,format: free text; as in: OH6,character,5
 deployments_view2,station_description,"Name of receiver location. The location name serves as an additional descriptive name of the receiver station. It can refer to a specific nearby point of land, town, island, or body of water that identifies this receiver location.",as in: upstream weir,character,6
 deployments_view2,station_manager,Name of the person or institution managing the location.,as in: Jan Reubens,character,7
-deployments_view2,deploy_date_time,"Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint.
-Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,8
+deployments_view2,deploy_date_time,"Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint. Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,datetime,8
 deployments_view2,deploy_latitude,"Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,9
 deployments_view2,deploy_longitude,"Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",format: ddd.ddddd; as in: 2.59020,double,10
 deployments_view2,intended_latitude,"Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",format: dd.ddddd; as in: 51.36324,double,11
@@ -162,8 +159,8 @@ receivers_view2,ar_voltage_at_deploy,Voltage reported by an acoustic release as 
 receivers_view2,ar_interrogate_code,"Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.",format: integer; as in: 1003,character,17
 receivers_view2,ar_receive_frequency,Interrogate or receive frequency at which the release receives data.,units: kHz; as in: 7.75,character,18
 receivers_view2,ar_reply_frequency,Frequency at which the release sends data.,units: kHz; as in: 10,character,19
-receivers_view2,ar_ping_rate,Ping rate of the release. ,units: seconds; format: integer; as in: 1,character,20
-receivers_view2,ar_enable_code_address,Code used to enable the release; differs among release models. ,format: free text; as in: G; as in: 68,character,21
+receivers_view2,ar_ping_rate,Ping rate of the release.,units: seconds; format: integer; as in: 1,character,20
+receivers_view2,ar_enable_code_address,Code used to enable the release; differs among release models.,format: free text; as in: G; as in: 68,character,21
 receivers_view2,ar_release_code,Code used to release the release; differs among release models.,format: free text; as in: A; as in: 12345,character,22
 receivers_view2,ar_disable_code,Code used to disable the release.,format: free text; as in: H,character,23
 receivers_view2,ar_tilt_code,Tilt code of the release.,format: free text; as in: B,character,24
@@ -182,19 +179,14 @@ tags_view2,tag_id_protocol,Tag code space of the detected tag.,"as in: ""S256"" 
 tags_view2,tag_id_code,"In the case of an acoustic tag or Vemco mobile transceiver, this is the identification code transmitted by the tag, which is available from the tag manufacturer.",as in: 1450,character,11
 tags_view2,status,"Current status of the tag. Three options: ""available"", ""active"" or ""ended"".",as in: active,character,12
 tags_view2,battery_estimated_life,Estimated duration of time during which the tag will be transmitting.,units: days; as in: 90,character,14
-tags_view2,battery_estimated_end_date,"Estimated date at which tag will stop transmitting. 
-Date fields should follow the ISO-8601 format.",format: yyyy-mm-ddT; as in: 2017-06-27T,datetime,15
-tags_view2,sensor_type,"Type of tag sensor. Predefined options: ""P"", ""T"" or ""A"".
-P = pressure, T = temperature, A = acceleration.",as in: P,character,16
+tags_view2,battery_estimated_end_date,Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.,format: yyyy-mm-ddT; as in: 2017-06-27T,datetime,15
+tags_view2,sensor_type,"Type of tag sensor. Predefined options: ""P"", ""T"" or ""A"". P = pressure, T = temperature, A = acceleration.",as in: P,character,16
 tags_view2,sensor_slope,"Raw value of slope, as used for sensor calibration.",format: double; as in: 0.1516,double,17
 tags_view2,sensor_intercept,"Raw value of intercept, as used for sensor calibration.",format: double; as in: -0.6065,double,18
 tags_view2,sensor_range,Maximum range of sensor.,as in: 34,character,19
-tags_view2,sensor_transmit_ratio,"Ratio of transmission between sensors present.
-If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.",as in: 1,integer,20
+tags_view2,sensor_transmit_ratio,"Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.",as in: 1,integer,20
 tags_view2,accelerometer_algorithm,There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.,as in: Activity,character,21
-tags_view2,accelerometer_samples_per_second,"Number of acceleration samples taken on each axis per second.
-Sampling rate can be 5 Hertz (5 measurements/s) or 10 
-Hertz (10 measurements/s).",units: Hertz; as in: 5,double,22
+tags_view2,accelerometer_samples_per_second,Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10 Hertz (10 measurements/s).,units: Hertz; as in: 5,double,22
 tags_view2,owner_organization,Group owner of the tag. Use the exact group name to which the tag belongs.,as in: VLIZ,character,23
 tags_view2,owner_pi,First and last name of the Principal Investigator for the project.,as in: Jan Reubens,character,24
 tags_view2,financing_project,Tag financing project.,as in: project,character,25

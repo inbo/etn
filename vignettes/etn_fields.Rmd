@@ -30,8 +30,8 @@ query <- glue_sql("
     SELECT
       viewname,
       field,
-      definition,
-      example,
+      trim(regexp_replace(definition, '[\\s+]+', ' ', 'g')) AS definition,
+      trim(regexp_replace(example, '[\\s+]+', ' ', 'g')) AS example,
       CASE
         WHEN datatype = 'character varying' THEN 'character'
         WHEN datatype = 'text' THEN 'character'
