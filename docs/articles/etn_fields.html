@@ -92,7 +92,7 @@
       <h1 data-toc-skip>ETN field definitions</h1>
                         <h4 class="author">Peter Desmet &amp; Filip Waumans</h4>
             
-            <h4 class="date">2021-01-04</h4>
+            <h4 class="date">2021-01-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn_fields.Rmd"><code>vignettes/etn_fields.Rmd</code></a></small>
       <div class="hidden name"><code>etn_fields.Rmd</code></div>
@@ -1862,10 +1862,10 @@ datetime
 </tbody>
 </table>
 </div>
-<div id="receivers" class="section level2">
+<div id="detections" class="section level2">
 <h2 class="hasAnchor">
-<a href="#receivers" class="anchor"></a>Receivers</h2>
-<p>Related function: <code><a href="../reference/get_receivers.html">get_receivers()</a></code>.</p>
+<a href="#detections" class="anchor"></a>Detections</h2>
+<p>Related function: <code><a href="../reference/get_detections.html">get_detections()</a></code>.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1887,6 +1887,7 @@ datatype
 <code>pk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Technical identifier of the detection record in the database.
 </td>
 <td style="text-align:left;width: 25%; ">
 </td>
@@ -1896,13 +1897,27 @@ integer
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
+<code>date_time</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Date and time at which the tagged animal was detected at the receiver. Information from detection file.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z
+</td>
+<td style="text-align:left;width: 10%; ">
+datetime
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
 <code>receiver_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-The receiver name is composed of ‘Model number’-‘Serial number’.
+Receiver name, composed of ‘Model number’-‘Serial number’. Info comes from ‘Detection_table’.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: VR2W-120620
+as in: VR2W-103255
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1922,13 +1937,12 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>manufacturer</code>
+<code>network_project_code</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Name of receiver manufacturer. Predefined options: <code>VEMCO</code>, <code>CHELONIA</code> or <code>THELMA</code>.
+Code of the network project linked to this detection.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: Vemco
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1936,13 +1950,12 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>receiver_id_model</code>
+<code>tag_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Receiver model number as provided by the manufacturer.
+Tag ID of the detected tag. As in: A69-1010-12345
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: VR2W
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1950,13 +1963,36 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>receiver_id_serial_number</code>
+<code>tag_fk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Serial number assigned by receiver manufacturer to uniquely identify receiver.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: 106252
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>animal_id</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>animal_project_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code of the animal project linked to this detection.
+</td>
+<td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1964,13 +2000,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>modem_address</code>
+<code>scientific_name</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is
+Scientific name of the animal that carries the tag.
 </td>
 <td style="text-align:left;width: 25%; ">
-format: 3-digit code from 001 to 249; as in 121
+as in: <code>Anguilla anguilla</code> or <code>Gadus morhua</code>
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1978,13 +2014,12 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>status</code>
+<code>station_name</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Current status of receiver. Predefined options: <code>Active</code>, <code>Available</code>, <code>Broken</code>, <code>Lost</code> or <code>Returned to manufacturer</code>.
+Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: <code>Active</code> or <code>Lost</code>
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -1992,13 +2027,35 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>battery_estimated_life</code>
+<code>deploy_latitude</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Expected duration for which the battery will provide adequate power for proper functioning of the receiver.
 </td>
 <td style="text-align:left;width: 25%; ">
-units: months; format: integer; as in: 12
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>deploy_longitude</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_type</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2006,13 +2063,26 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>owner_organization</code>
+<code>sensor_value</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Affiliation of the Principal Investigator for the project.
+Value recorded by the tag sensor.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: VLIZ
+as in: 35 or 0.13
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_unit</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Unit of measured sensor value.
+</td>
+<td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2020,13 +2090,64 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>financing_project</code>
+<code>sensor_value_depth</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Receiver financing project.
+sensorValueDepthMeters
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: project
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_value_acceleration</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+SENSOR_VALUE_ACCELERATION
+</td>
+<td style="text-align:left;width: 25%; ">
+as in:
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>sensor_value_temperature</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+double
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>signal_to_noise_ratio</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.
+</td>
+<td style="text-align:left;width: 25%; ">
+</td>
+<td style="text-align:left;width: 10%; ">
+integer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>source_file</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Name of the detection file.
+</td>
+<td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2034,209 +2155,27 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>built_in_tag_id</code>
+<code>qc_flag</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Tag full ID of the receiver’s built in tag.
+Identifies whether there are quality check issues for the given detection.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: A69-1601-60508
 </td>
 <td style="text-align:left;width: 10%; ">
-character
+boolean
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_model_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Model number of the acoustic release as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 867
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_serial_number</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Serial number of the acoustic release as provided by the manufacturer.
-</td>
-<td style="text-align:left;width: 25%; ">
-as in: 48635
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_battery_estimated_life</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: months; format: integer; as in: 12
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_voltage_at_deploy</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Voltage reported by an acoustic release as near as possible to the time of deployment.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: volt; format: double; as in: 12.2
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_interrogate_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: integer; as in: 1003
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_receive_frequency</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Interrogate or receive frequency at which the release receives data.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: kHz; as in: 7.75
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_reply_frequency</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Frequency at which the release sends data.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: kHz; as in: 10
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_ping_rate</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Ping rate of the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-units: seconds; format: integer; as in: 1
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_enable_code_address</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to enable the release; differs among release models.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: G; as in: 68
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_release_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to release the release; differs among release models.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: A; as in: 12345
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_disable_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code used to disable the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: H
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_tilt_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tilt code of the release.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: free text; as in: B
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>ar_tilt_after_deploy</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Tilt after deploy of receiver
-</td>
-<td style="text-align:left;width: 25%; ">
-format: integer; as in: 1003
-</td>
-<td style="text-align:left;width: 10%; ">
-character
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
+<code>deployment_fk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
 <td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
-unknown
+integer
 </td>
 </tr>
 </tbody>
@@ -2805,10 +2744,10 @@ character
 </tbody>
 </table>
 </div>
-<div id="detections" class="section level2">
+<div id="receivers" class="section level2">
 <h2 class="hasAnchor">
-<a href="#detections" class="anchor"></a>Detections</h2>
-<p>Related function: <code><a href="../reference/get_detections.html">get_detections()</a></code>.</p>
+<a href="#receivers" class="anchor"></a>Receivers</h2>
+<p>Related function: <code><a href="../reference/get_receivers.html">get_receivers()</a></code>.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -2830,7 +2769,6 @@ datatype
 <code>pk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Technical identifier of the detection record in the database.
 </td>
 <td style="text-align:left;width: 25%; ">
 </td>
@@ -2840,27 +2778,13 @@ integer
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date and time at which the tagged animal was detected at the receiver. Information from detection file.
-</td>
-<td style="text-align:left;width: 25%; ">
-format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z
-</td>
-<td style="text-align:left;width: 10%; ">
-datetime
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
 <code>receiver_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Receiver name, composed of ‘Model number’-‘Serial number’. Info comes from ‘Detection_table’.
+The receiver name is composed of ‘Model number’-‘Serial number’.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: VR2W-103255
+as in: VR2W-120620
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2880,12 +2804,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>network_project_code</code>
+<code>manufacturer</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Code of the network project linked to this detection.
+Name of receiver manufacturer. Predefined options: <code>VEMCO</code>, <code>CHELONIA</code> or <code>THELMA</code>.
 </td>
 <td style="text-align:left;width: 25%; ">
+as in: Vemco
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2893,12 +2818,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_id</code>
+<code>receiver_id_model</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Tag ID of the detected tag. As in: A69-1010-12345
+Receiver model number as provided by the manufacturer.
 </td>
 <td style="text-align:left;width: 25%; ">
+as in: VR2W
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2906,36 +2832,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_fk</code>
+<code>receiver_id_serial_number</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Serial number assigned by receiver manufacturer to uniquely identify receiver.
 </td>
 <td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_project_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Code of the animal project linked to this detection.
-</td>
-<td style="text-align:left;width: 25%; ">
+as in: 106252
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2943,13 +2846,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>scientific_name</code>
+<code>modem_address</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Scientific name of the animal that carries the tag.
+This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: <code>Anguilla anguilla</code> or <code>Gadus morhua</code>
+format: 3-digit code from 001 to 249; as in 121
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2957,12 +2860,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>station_name</code>
+<code>status</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.
+Current status of receiver. Predefined options: <code>Active</code>, <code>Available</code>, <code>Broken</code>, <code>Lost</code> or <code>Returned to manufacturer</code>.
 </td>
 <td style="text-align:left;width: 25%; ">
+as in: <code>Active</code> or <code>Lost</code>
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -2970,35 +2874,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>deploy_latitude</code>
+<code>battery_estimated_life</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Expected duration for which the battery will provide adequate power for proper functioning of the receiver.
 </td>
 <td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>deploy_longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
+units: months; format: integer; as in: 12
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -3006,26 +2888,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value</code>
+<code>owner_organization</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Value recorded by the tag sensor.
+Affiliation of the Principal Investigator for the project.
 </td>
 <td style="text-align:left;width: 25%; ">
-as in: 35 or 0.13
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_unit</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Unit of measured sensor value.
-</td>
-<td style="text-align:left;width: 25%; ">
+as in: VLIZ
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -3033,64 +2902,13 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_depth</code>
+<code>financing_project</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-sensorValueDepthMeters
+Receiver financing project.
 </td>
 <td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_acceleration</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-SENSOR_VALUE_ACCELERATION
-</td>
-<td style="text-align:left;width: 25%; ">
-as in:
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>sensor_value_temperature</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-double
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>signal_to_noise_ratio</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.
-</td>
-<td style="text-align:left;width: 25%; ">
-</td>
-<td style="text-align:left;width: 10%; ">
-integer
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>source_file</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Name of the detection file.
-</td>
-<td style="text-align:left;width: 25%; ">
+as in: project
 </td>
 <td style="text-align:left;width: 10%; ">
 character
@@ -3098,27 +2916,209 @@ character
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>qc_flag</code>
+<code>built_in_tag_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
-Identifies whether there are quality check issues for the given detection.
+Tag full ID of the receiver’s built in tag.
 </td>
 <td style="text-align:left;width: 25%; ">
+as in: A69-1601-60508
 </td>
 <td style="text-align:left;width: 10%; ">
-boolean
+character
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>deployment_fk</code>
+<code>ar_model_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Model number of the acoustic release as provided by the manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 867
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_serial_number</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Serial number of the acoustic release as provided by the manufacturer.
+</td>
+<td style="text-align:left;width: 25%; ">
+as in: 48635
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_battery_estimated_life</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: months; format: integer; as in: 12
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_voltage_at_deploy</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Voltage reported by an acoustic release as near as possible to the time of deployment.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: volt; format: double; as in: 12.2
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_interrogate_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: integer; as in: 1003
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_receive_frequency</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Interrogate or receive frequency at which the release receives data.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: kHz; as in: 7.75
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_reply_frequency</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Frequency at which the release sends data.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: kHz; as in: 10
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_ping_rate</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Ping rate of the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+units: seconds; format: integer; as in: 1
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_enable_code_address</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to enable the release; differs among release models.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: G; as in: 68
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_release_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to release the release; differs among release models.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: A; as in: 12345
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_disable_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Code used to disable the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: H
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_tilt_code</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tilt code of the release.
+</td>
+<td style="text-align:left;width: 25%; ">
+format: free text; as in: B
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
+<code>ar_tilt_after_deploy</code>
+</td>
+<td style="text-align:left;width: 40%; ">
+Tilt after deploy of receiver
+</td>
+<td style="text-align:left;width: 25%; ">
+format: integer; as in: 1003
+</td>
+<td style="text-align:left;width: 10%; ">
+character
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 25%; word-break: break-word">
 </td>
 <td style="text-align:left;width: 40%; ">
 </td>
 <td style="text-align:left;width: 25%; ">
 </td>
 <td style="text-align:left;width: 10%; ">
-integer
+unknown
 </td>
 </tr>
 </tbody>
