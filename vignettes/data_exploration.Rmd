@@ -218,13 +218,13 @@ n_active_days_deployments_silurus <-
 n_active_days_deployments_silurus
 ```
 
-Proportion of active days:
+Relative detection duration, i.e. number of days with at least one detection divided by deployment duration:
 
 ```{r}
 n_active_days_deployments_silurus %>%
   left_join(deployments_silurus_duration,
             by = c("deployment_fk" = "pk", "station_name")) %>%
-  mutate(relative_detection_duration = n_days / duration) %>%
+  mutate(relative_detection_duration = n_days / as.numeric(duration)) %>%
   select(deployment_fk, station_name, relative_detection_duration)
 ```
 
