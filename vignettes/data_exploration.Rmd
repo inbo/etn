@@ -1,11 +1,10 @@
 ---
 title: "Data exploration"
-author: 
-  - Damiano Oldoni
+author: "Damiano Oldoni"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Access ETN data using the etn R package}
+  %\VignetteIndexEntry{Explore ETN data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
