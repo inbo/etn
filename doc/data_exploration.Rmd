@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-In this vignette we show a typical workflow using `etn` package to retrieve data, the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection) to perform basic data exploration and some other packages for visualization (`leaflet`) and date-time data (`lubridate`).
+In this vignette we show a typical workflow using `etn` package to retrieve data and the [`tidyverse`](https://www.tidyverse.org/) R pacakges collection to perform basic data exploration.
 
 To start, load the `etn`package:
 
@@ -32,7 +32,7 @@ and connect with your user credentials (as received by VLIZ) to the database:
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
 ```
 
-We also load other packages:
+We also load other packages for data exploration:
 
 ```{r load_other_pkgs, message=FALSE}
 library(dplyr)
