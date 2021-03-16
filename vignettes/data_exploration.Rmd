@@ -35,8 +35,10 @@ con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
 We also load other packages for data exploration:
 
 ```{r load_other_pkgs, message=FALSE}
-library(tidyverse)
+library(dplyr)
 library(lubridate)
+library(leaflet)
+library(htmltools)
 ```
 
 ## Select project(s) of interest
