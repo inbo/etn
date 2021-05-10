@@ -171,9 +171,11 @@ leaflet(deployments_silurus) %>%
 Sometimes it's interesting to know the number of detections per deployment:
 
 ```{r n_detections_per_deployment}
-detections_silurus %>%
+n_detect_deploy <- 
+  detections_silurus %>%
   group_by(deployment_fk, station_name) %>%
   count()
+n_detect_deploy
 ```
 
 More information about the specific deployments can be retrieved by `get_deployments()` function. First we get the network projects involved: 
@@ -228,5 +230,39 @@ n_active_days_deployments_silurus %>%
             by = c("deployment_fk" = "pk", "station_name")) %>%
   mutate(relative_detection_duration = n_days / as.numeric(duration)) %>%
   select(deployment_fk, station_name, relative_detection_duration)
+```
+
+### Data visualization
+
+The package `leaflet` is very useful to create maps.
+
+We start creating a map of the involved deployments showing the station name and deployment ID:
+
+```{r map_deployments}
+leaflet(deployments_silurus) %>%
+  addTiles() %>%
+  addMarkers(lng = ~deploy_longitude,
+             lat = ~deploy_latitude,
+             popup = ~htmlEscape(paste0(station_name, " (", deployment_fk, ")")))
+```
+
+In the previous section we calculated the number of detections per deployment, `n_detect_deploy`. We can visualize such information on a map by retrieving first the geographical coordinates of the deployments:
+
+```{r leaflet_n_detections_ Wels_catfish}
+n_detect_deploy %>%
+  left_join(deployments_silurus %>%
+                select(deployment_fk, 
+                       deploy_latitude,
+                       deploy_longitude),
+              by = "deployment_fk") %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~deploy_longitude,
+             lat = ~deploy_latitude,
+             radius = ~log(n),
+             opacity = 0.8,
+             stroke = FALSE,
+             ) %>% 
+  addLegend(title = "Number of detections")
 ```
 
