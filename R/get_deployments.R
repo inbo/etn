@@ -69,7 +69,7 @@ get_deployments <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.deployments_view2 AS deployments
+      acoustic.deployments_view2 AS deployments
     WHERE
       {application_type_query}
       AND {network_project_code_query}

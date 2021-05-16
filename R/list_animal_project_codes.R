@@ -11,7 +11,7 @@
 #'   present in `projects_view2`.
 list_animal_project_codes <- function(connection = con) {
   query <- glue_sql(
-    "SELECT DISTINCT project_code FROM vliz.projects_view2 WHERE project_type = 'animal'",
+    "SELECT DISTINCT project_code FROM acoustic.projects_view2 WHERE project_type = 'animal'",
     .con = connection
   )
   data <- dbGetQuery(connection, query)

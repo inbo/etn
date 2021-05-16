@@ -52,7 +52,7 @@ get_tags <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.tags_view2
+      acoustic.tags_view2
     WHERE
       {tag_id_query}
     ", .con = connection)
