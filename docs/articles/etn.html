@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9140</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
       <h1 data-toc-skip>Access ETN data using the etn R package</h1>
                         <h4 class="author">Stijn Van Hoey</h4>
             
-            <h4 class="date">2021-01-04</h4>
+            <h4 class="date">2021-05-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn.Rmd"><code>vignettes/etn.Rmd</code></a></small>
       <div class="hidden name"><code>etn.Rmd</code></div>
@@ -109,7 +109,7 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">etn</span>)</pre></body></html></div>
 <p>When not installed, do not forget to install the package using the <code>devtools</code> package:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"inbo/etn"</span>)</pre></body></html></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"inbo/etn"</span>)</pre></body></html></div>
 </div>
 <div id="the-database-connection" class="section level2">
 <h2 class="hasAnchor">
@@ -204,16 +204,16 @@
 <span class="co">#&gt; # A tibble: 10 x 39</span>
 <span class="co">#&gt;       pk receiver_id application_type network_project… station_name</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
-<span class="co">#&gt;  1 10722 VR2W-136469 acoustic_teleme… ws1              ws-DL7      </span>
-<span class="co">#&gt;  2  9512 VR2W-136466 acoustic_teleme… ws1              ws-DL9      </span>
-<span class="co">#&gt;  3 11527 VR2W-134897 acoustic_teleme… ws1              ws-DL9      </span>
-<span class="co">#&gt;  4  6038 VR2W-123821 acoustic_teleme… ws1              ws-GVWSP    </span>
-<span class="co">#&gt;  5  9488 VR2W-114258 acoustic_teleme… ws1              ws-GVWSP    </span>
-<span class="co">#&gt;  6 10343 VR2W-123832 acoustic_teleme… ws1              ws-OG10     </span>
-<span class="co">#&gt;  7 10342 VR2W-123831 acoustic_teleme… ws1              ws-OGDL     </span>
-<span class="co">#&gt;  8 10720 VR2W-136465 acoustic_teleme… ws1              ws-SP3      </span>
-<span class="co">#&gt;  9  9490 VR2W-134900 acoustic_teleme… ws1              ws-STEEN    </span>
-<span class="co">#&gt; 10 10344 VR2W-131002 acoustic_teleme… ws1              ws-TRAWL    </span>
+<span class="co">#&gt;  1 12345 VR2W-136469 acoustic_teleme… ws1              ws-DL7      </span>
+<span class="co">#&gt;  2 12348 VR2W-134897 acoustic_teleme… ws1              ws-DL9      </span>
+<span class="co">#&gt;  3  9488 VR2W-114258 acoustic_teleme… ws1              ws-GVWSP    </span>
+<span class="co">#&gt;  4 10343 VR2W-123832 acoustic_teleme… ws1              ws-OG10     </span>
+<span class="co">#&gt;  5 12344 VR2W-123831 acoustic_teleme… ws1              ws-OGDL     </span>
+<span class="co">#&gt;  6 12340 VR2W-134900 acoustic_teleme… ws1              ws-STEEN    </span>
+<span class="co">#&gt;  7 12343 VR2W-131002 acoustic_teleme… ws1              ws-TRAWL    </span>
+<span class="co">#&gt;  8  6020 VR2W-123815 acoustic_teleme… ws1              ws-W6       </span>
+<span class="co">#&gt;  9 12341 VR2W-136467 acoustic_teleme… ws1              ws-W6       </span>
+<span class="co">#&gt; 10 12346 VR2W-122334 acoustic_teleme… ws1              ws-W7       </span>
 <span class="co">#&gt; # … with 34 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span>
 <span class="co">#&gt; #   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span>
@@ -247,15 +247,15 @@
 <span class="co">#&gt;    receiver_id station_name</span>
 <span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;       </span>
 <span class="co">#&gt;  1 VR2W-136469 ws-DL7      </span>
-<span class="co">#&gt;  2 VR2W-136466 ws-DL9      </span>
-<span class="co">#&gt;  3 VR2W-134897 ws-DL9      </span>
-<span class="co">#&gt;  4 VR2W-123821 ws-GVWSP    </span>
-<span class="co">#&gt;  5 VR2W-114258 ws-GVWSP    </span>
-<span class="co">#&gt;  6 VR2W-123832 ws-OG10     </span>
-<span class="co">#&gt;  7 VR2W-123831 ws-OGDL     </span>
-<span class="co">#&gt;  8 VR2W-136465 ws-SP3      </span>
-<span class="co">#&gt;  9 VR2W-134900 ws-STEEN    </span>
-<span class="co">#&gt; 10 VR2W-131002 ws-TRAWL</span></pre></body></html></div>
+<span class="co">#&gt;  2 VR2W-134897 ws-DL9      </span>
+<span class="co">#&gt;  3 VR2W-114258 ws-GVWSP    </span>
+<span class="co">#&gt;  4 VR2W-123832 ws-OG10     </span>
+<span class="co">#&gt;  5 VR2W-123831 ws-OGDL     </span>
+<span class="co">#&gt;  6 VR2W-134900 ws-STEEN    </span>
+<span class="co">#&gt;  7 VR2W-131002 ws-TRAWL    </span>
+<span class="co">#&gt;  8 VR2W-123815 ws-W6       </span>
+<span class="co">#&gt;  9 VR2W-136467 ws-W6       </span>
+<span class="co">#&gt; 10 VR2W-122334 ws-W7</span></pre></body></html></div>
 </div>
 <div id="deployments-overview" class="section level3">
 <h3 class="hasAnchor">
@@ -275,13 +275,10 @@
 <span class="no">my_deployments</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">receiver_id</span> <span class="kw">%in%</span> <span class="no">broken_receiver_ids</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="co"># print 10 first</span>
-<span class="co">#&gt; # A tibble: 4 x 39</span>
+<span class="co">#&gt; # A tibble: 1 x 39</span>
 <span class="co">#&gt;      pk receiver_id application_type network_project… station_name</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
-<span class="co">#&gt; 1  9512 VR2W-136466 acoustic_teleme… ws1              ws-DL9      </span>
-<span class="co">#&gt; 2  9488 VR2W-114258 acoustic_teleme… ws1              ws-GVWSP    </span>
-<span class="co">#&gt; 3  9486 VR2W-131978 acoustic_teleme… ws1              ws-W7       </span>
-<span class="co">#&gt; 4  9494 VR2W-134894 acoustic_teleme… ws1              ws-WN2      </span>
+<span class="co">#&gt; 1  6020 VR2W-123815 acoustic_teleme… ws1              ws-W6       </span>
 <span class="co">#&gt; # … with 34 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span>
 <span class="co">#&gt; #   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span>
@@ -349,16 +346,16 @@
 <span class="co">#&gt; # A tibble: 10 x 45</span>
 <span class="co">#&gt;       pk tag_id tag_id_alternat… telemetry_type manufacturer model frequency</span>
 <span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt;  1    68 A69-1… R64K-65303       Acoustic       VEMCO        V13-… 069k     </span>
-<span class="co">#&gt;  2 13964 A69-1… &lt;NA&gt;             Acoustic       VEMCO        V7-2x &lt;NA&gt;     </span>
-<span class="co">#&gt;  3 13926 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  4 13927 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  5 13928 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  6 13929 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  7 13930 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  8 13931 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt;  9 13932 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
-<span class="co">#&gt; 10 13933 A69-1… &lt;NA&gt;             acoustic       VEMCO        V16-… 069k     </span>
+<span class="co">#&gt;  1 15666 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  2 15631 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  3 15515 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  4 15636 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  5 15680 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  6 15656 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  7 15681 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  8 15682 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt;  9 15683 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
+<span class="co">#&gt; 10 15684 416kH… &lt;NA&gt;             acoustic       LOTEK        L-AM… 416.7    </span>
 <span class="co">#&gt; # … with 38 more variables: type &lt;chr&gt;, serial_number &lt;chr&gt;,</span>
 <span class="co">#&gt; #   tag_id_protocol &lt;chr&gt;, tag_id_code &lt;chr&gt;, status &lt;chr&gt;,</span>
 <span class="co">#&gt; #   activation_date &lt;dttm&gt;, battery_estimated_life &lt;chr&gt;,</span>

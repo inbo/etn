@@ -71,7 +71,7 @@ get_receivers <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.receivers_view2
+      acoustic.receivers_view2
     WHERE
       {receiver_id_query}
       AND {application_type_query}

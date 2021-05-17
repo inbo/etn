@@ -58,7 +58,7 @@ get_projects <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.projects_view2
+      acoustic.projects_view2
     WHERE
       {project_type_query}
       AND {application_type_query}

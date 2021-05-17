@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9140</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
       </span>
     </div>
 
@@ -95,6 +95,9 @@
 </h1></div>
 <!-- badges: start -->
 
+<p class="alert alert-warning">
+The ETN data model was changed to support more types of tracking data. This R package has not yet been updated to reflect those changes and is currently using a <strong>legacy version of the database</strong> that does not include updates since 2021-04-28.
+</p>
 <p>This package provides functionality to access and process data from the <a href="http://www.lifewatch.be/etn/">European Tracking Network (ETN)</a> database hosted by the Flanders Marine Institute (VLIZ) as part of the Flemish contribution to LifeWatch. ETN data is subject to the <a href="http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf">ETN data policy</a> and can be:</p>
 <ul>
 <li>restricted: under moratorium and only accessible to logged-in data owners/collaborators</li>
@@ -106,7 +109,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install this package from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"inbo/etn"</span>)</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"inbo/etn"</span>)</pre></div>
 <p>And then load with:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">etn</span>)</pre></div>
 </div>

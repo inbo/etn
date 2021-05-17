@@ -198,7 +198,7 @@ get_detections <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.detections_view2
+      acoustic.detections_view2
     WHERE
       {application_type_query}
       AND {network_project_code_query}
