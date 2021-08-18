@@ -22,16 +22,16 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get all (animal) tags
-#' get_tags(con)
+#' get_tags_old(con)
 #'
 #' # Get all tags, including reference tags
-#' get_tags(con, include_ref_tags = TRUE)
+#' get_tags_old(con, include_ref_tags = TRUE)
 #'
 #' # Get specific tags (will automatically set include_ref_tags = TRUE)
-#' get_tags(con, tag_id = "A69-1303-65313")
-#' get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
+#' get_tags_old(con, tag_id = "A69-1303-65313")
+#' get_tags_old(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
 #' }
-get_tags <- function(connection = con,
+get_tags_old <- function(connection = con,
                      tag_id = NULL,
                      include_ref_tags = FALSE) {
   # Check connection

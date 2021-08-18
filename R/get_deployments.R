@@ -25,18 +25,18 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get all open deployments
-#' get_deployments(con)
+#' get_deployments_old(con)
 #'
 #' # Get all deployments (including those with an end date)
-#' get_deployments(con, open_only = FALSE)
+#' get_deployments_old(con, open_only = FALSE)
 #'
 #' # Get open deployments for a specific application type
-#' get_deployments(con, application_type = "cpod")
+#' get_deployments_old(con, application_type = "cpod")
 #'
 #' # Get open deployments from specific network project(s)
-#' get_deployments(con, network_project_code = c("ws1", "ws2"))
+#' get_deployments_old(con, network_project_code = c("ws1", "ws2"))
 #' }
-get_deployments <- function(connection = con,
+get_deployments_old <- function(connection = con,
                             application_type = NULL,
                             network_project_code = NULL,
                             open_only = TRUE) {

@@ -39,14 +39,14 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get detections filtered by start year, limited to 100 records by default
-#' get_detections(con, start_date = "2017")
+#' get_detections_old(con, start_date = "2017")
 #'
 #' # Get detections for a specific application type, limited to 100 records
-#' get_detections(con, application_type = "acoustic_telemetry")
+#' get_detections_old(con, application_type = "acoustic_telemetry")
 #'
 #' # Get detections within a time frame for a specific animal project and
 #' # network project
-#' get_detections(
+#' get_detections_old(
 #'   con,
 #'   animal_project_code = "phd_reubens",
 #'   network_project_code = "thornton", start_date = "2011-01-28",
@@ -54,34 +54,34 @@
 #' )
 #'
 #' # Get detections for a specific animal project at specific stations
-#' get_detections(
+#' get_detections_old(
 #'   con,
 #'   animal_project_code = "phd_reubens",
 #'   station_name = c("R03", "R05")
 #' )
 #'
 #' # Get detections for a specific tag
-#' get_detections(
+#' get_detections_old(
 #'   con,
 #'   tag_id = "A69-1303-65302"
 #' )
 #'
 #' # Get detections for a specific receiver during a specific time period
-#' get_detections(
+#' get_detections_old(
 #'   con,
 #'   receiver_id = "VR2W-122360",
 #'   start_date = "2015-12-03",
 #'   end_date = "2015-12-05"
 #' )
 #' # Get detections for a specific species during a given period
-#' get_detections(
+#' get_detections_old(
 #'   con,
 #'   scientific_name = "Anguilla anguilla",
 #'   start_date = "2015-12-03",
 #'   end_date = "2015-12-05"
 #' )
 #' }
-get_detections <- function(connection = con,
+get_detections_old <- function(connection = con,
                            application_type = NULL,
                            network_project_code = NULL,
                            animal_project_code = NULL,

@@ -55,7 +55,7 @@
 #' @examples
 #' \dontrun{
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
-#' download_dataset(con, animal_project_code = "2012_leopoldkanaal")
+#' download_dataset_old(con, animal_project_code = "2012_leopoldkanaal")
 #' #> Downloading data to directory "2012_leopoldkanaal":
 #' #> (existing files with the same name will be overwritten)
 #' #> * (1/6): downloading animals.csv
@@ -77,10 +77,10 @@
 #' #> * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde
 
 #' #> Warning message:
-#' #> In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :
+#' #> In download_dataset_old(con, animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: A69-1601-29925
 #' }
-download_dataset <- function(connection = con,
+download_dataset_old <- function(connection = con,
                              animal_project_code,
                              scientific_name = NULL,
                              directory = animal_project_code) {
