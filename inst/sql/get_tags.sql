@@ -6,7 +6,7 @@ SELECT
 -- tag_id_alternative
   acoustic_tag.thelma_converted_code AS TAG_ID_ALTERNATIVE,
 -- telemetry_type
-  'acoustic' AS TELEMETRY_TYPE,
+  'acoustic' AS TELEMETRY_TYPE, -- Not acoustic_tag.type_tbd
 -- manufacturer
   manufacturer.project AS MANUFACTURER, -- Not acoustic_tag.manufacturer_fk_tbd
 -- model
@@ -14,7 +14,7 @@ SELECT
 -- frequency
   acoustic_tag.frequency AS FREQUENCY,
 -- type
-  acoustic_tag.type_tbd AS TYPE,
+  tag_type.name AS TYPE, -- Actual type, not acoustic_tag.acoustic_tag_type_tbd
 -- serial_number
   tag.serial_number AS SERIAL_NUMBER, -- Not acoustic_tag.serial_number_tbd
 -- tag_id_protocol
@@ -22,17 +22,13 @@ SELECT
 -- tag_id_code
   acoustic_tag.id_code AS TAG_ID_CODE,
 -- status
-  acoustic_tag.status_tbd AS STATUS,
-  tag.tag_device_status_fk AS TAG_STATUS,
+  tag_status.name AS STATUS, -- Not acoustic_tag.status_tbd
 -- activation_date
-  acoustic_tag.activation_date_tbd AS ACTIVATION_DATE,
-  tag.activation_date AS TAG_ACTIVATION_DATE,
+  tag.activation_date AS ACTIVATION_DATE, -- Not acoustic_tag.activation_date_tbd
 -- battery_estimated_life
-  acoustic_tag.estimated_lifetime_tbd AS BATTERY_ESTIMATED_LIFE,
-  tag.battery_estimated_lifetime AS TAG_ESTIMATED_LIFETIME,
+  tag.battery_estimated_lifetime AS BATTERY_ESTIMATED_LIFE, -- Not acoustic_tag.estimated_lifetime_tbd
 -- battery_estimated_end_date
-  acoustic_tag.end_date_tbd AS BATTERY_ESTIMATED_END_DATE,
-  tag.battery_estimated_end_date AS TAG_ESTIMATED_ENDDATE,
+  tag.battery_estimated_end_date AS BATTERY_ESTIMATED_END_DATE, -- Not acoustic_tag.end_date_tbd
 -- sensor_type
   acoustic_tag.sensor_type AS SENSOR_TYPE,
 -- sensor_slope
@@ -47,16 +43,12 @@ SELECT
   acoustic_tag.accelerometer_algoritm AS ACCELEROMETER_ALGORITHM,
 -- accelerometer_samples_per_second
   acoustic_tag.accelerometer_samples_per_second AS ACCELEROMETER_SAMPLES_PER_SECOND,
-  acoustic_tag.accelerometer_samples_per_second AS accelerometerSamplesPerSecond_2,
 -- owner_organization
-  acoustic_tag.owner_group_fk_tbd AS OWNER_ORGANIZATION,
-  tag.owner_group_fk AS OWNER_ORGANIZATION_2,
+  owner_organization.name AS OWNER_ORGANIZATION, -- Not acoustic_tag.owner_group_fk_tbd
 -- owner_pi
-  acoustic_tag.owner_pi_tbd AS OWNER_PI,
-  tag.owner_pi AS PI,
+  tag.owner_pi AS OWNER_PI, -- Not acoustic_tag.owner_pi_tbd
 -- financing_project
-  acoustic_tag.financing_project_fk_tbd AS FINANCING_PROJECT,
-  tag.financing_project_fk AS FINANCING_PROJECT_2,
+  financing_project.projectcode AS FINANCING_PROJECT, -- Not acoustic_tag.financing_project_fk_tbd
 -- step1_min_delay
   acoustic_tag.min_delay AS STEP1_MIN_DELAY,
 -- step1_max_delay
@@ -103,3 +95,11 @@ FROM common.tag_device AS tag
     ON tag.id_pk = acoustic_tag.tag_device_fk
   LEFT JOIN common.manufacturer AS manufacturer
     ON tag.manufacturer_fk = manufacturer.id_pk
+  LEFT JOIN common.tag_device_type AS tag_type
+    ON tag.tag_device_type_fk = tag_type.id_pk
+  LEFT JOIN common.tag_device_status AS tag_status
+    ON tag.tag_device_status_fk = tag_status.id_pk
+  LEFT JOIN common.etn_group AS owner_organization
+    ON tag.owner_group_fk = owner_organization.id_pk
+  LEFT JOIN common.projects AS financing_project
+    ON tag.financing_project_fk = financing_project.id
