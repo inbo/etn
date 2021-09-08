@@ -5,11 +5,10 @@ con <- connect_to_etn(
 
 # Expected column names
 expected_col_names <- c(
-  "pk",
   "animal_id",
   "animal_project_code",
-  "tag_id",
-  "tag_fk",
+  "tag_serial_number",
+  "tag_type",
   "scientific_name",
   "common_name",
   "aphia_id",
@@ -71,8 +70,8 @@ expected_col_names <- c(
   "comments"
 )
 tag_col_names <- c(
-  "tag_id",
-  "tag_fk",
+  "tag_serial_number",
+  "tag_type",
   "tagger",
   "tagging_type",
   "tagging_methodology"
@@ -81,7 +80,7 @@ tag_col_names <- c(
 animal1 <- 2824
 animal_multiple <- c(2824, 2825)
 animal_multiple_text <- c(2824, "2825")
-animal_tag_multiple <- 2827 # Has 2 associated tags
+animal_tag_multiple <- 5841 # Has 2 associated tags
 project1 <- "2010_phd_reubens"
 project_multiple <- c("2010_phd_reubens", "2013_albertkanaal")
 sciname1 <- "Gadus morhua"
@@ -197,7 +196,6 @@ testthat::test_that("Test if data is filtered on parameter", {
 })
 
 testthat::test_that("Test unique ids and collapsed tag information", {
-  expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(pk)))
   expect_equal(nrow(animals_all), nrow(animals_all %>% distinct(animal_id)))
 
   has_comma <- apply(
