@@ -88,7 +88,10 @@ get_animals <- function(connection = con,
       animal.id_pk AS animal_id,
       animal_project.projectcode AS animal_project_code,
       tag.serial_number AS tag_serial_number,
-      tag_type.name AS tag_type,
+      CASE
+        WHEN tag_type.name = 'id-tag' THEN 'acoustic'
+        WHEN tag_type.name = 'sensor-tag' THEN 'archival'
+      END AS tag_type,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
