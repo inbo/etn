@@ -2,6 +2,7 @@
 
 export(connect_to_etn)
 export(download_dataset_old)
+export(get_animals)
 export(get_animals_old)
 export(get_deployments_old)
 export(get_detections_old)
