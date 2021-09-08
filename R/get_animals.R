@@ -26,22 +26,22 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get all animals
-#' get_animals_old(con)
+#' get_animals(con)
 #'
 #' # Get specific animals
-#' get_animals_old(con, animal_id = 2824)
-#' get_animals_old(con, animal_id = "2824") # String values work as well
-#' get_animals_old(con, animal_id = c(2824, 2825, 2827))
+#' get_animals(con, animal_id = 2824)
+#' get_animals(con, animal_id = "2824") # String values work as well
+#' get_animals(con, animal_id = c(2824, 2825, 2827))
 #'
 #' # Get animals from specific animal project(s)
-#' get_animals_old(con, animal_project_code = "2012_leopoldkanaal")
-#' get_animals_old(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
+#' get_animals(con, animal_project_code = "2012_leopoldkanaal")
+#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals_old(con, scientific_name = c("Gadus morhua", "Sync tag"))
+#' get_animals(con, scientific_name = c("Gadus morhua", "Sync tag"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals_old(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
+#' get_animals(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
