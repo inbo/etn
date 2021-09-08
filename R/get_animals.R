@@ -56,7 +56,7 @@ get_animals <- function(connection = con,
   } else {
     valid_animal_ids <- list_animal_ids(connection)
     check_value(animal_id, valid_animal_ids, "animal_id")
-    animal_id_query <- glue_sql("animal_id IN ({animal_id*})", .con = connection)
+    animal_id_query <- glue_sql("animal.id_pk IN ({animal_id*})", .con = connection)
     # animal_id_query seems to work correctly with integers or strings: 'animal_id IN (\'304\')'
   }
 
@@ -68,7 +68,7 @@ get_animals <- function(connection = con,
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql(
-      "LOWER(animal_project_code) IN ({animal_project_code*})",
+      "LOWER(animal_project.projectcode) IN ({animal_project_code*})",
       .con = connection
     )
   }
@@ -79,7 +79,7 @@ get_animals <- function(connection = con,
   } else {
     scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, scientific_name_ids, "scientific_name")
-    scientific_name_query <- glue_sql("scientific_name IN ({scientific_name*})", .con = connection)
+    scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
   # Build query
