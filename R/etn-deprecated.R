@@ -13,3 +13,10 @@ get_transmitters <- function(...) {
   .Deprecated("get_tags")
   get_tags(...)
 }
+
+#' @rdname etn-deprecated
+#' @export
+list_tag_ids <- function(...) {
+  .Deprecated("list_acoustic_tag_ids")
+  list_acoustic_tag_ids(...)
+}

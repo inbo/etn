@@ -3,6 +3,7 @@
 \name{etn-deprecated}
 \alias{etn-deprecated}
 \alias{get_transmitters}
+\alias{list_tag_ids}
 \title{Deprecated functions in etn}
 \usage{
 get_transmitters(...)
