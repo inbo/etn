@@ -5,17 +5,16 @@ con <- connect_to_etn(
 
 # Expected column names
 expected_col_names <- c(
-  "pk",
+  "tag_serial_number",
+  "tag_type",
   "tag_id",
-  "tag_id_alternative",
-  "telemetry_type",
+  "acoustic_tag_id",
+  "acoustic_tag_id_alternative",
   "manufacturer",
   "model",
   "frequency",
-  "type",
-  "serial_number",
-  "tag_id_protocol",
-  "tag_id_code",
+  "acoustic_tag_id_protocol",
+  "acoustic_tag_id_code",
   "status",
   "activation_date",
   "battery_estimated_life",
@@ -55,24 +54,24 @@ expected_col_names <- c(
 tag1 <- "A69-1303-65313" # A sentinel tag with 2 records
 tag_multiple <- c("A69-1601-1705", "A69-1601-1707")
 
-tags_all <- get_tags(con)
-tags_all_ref <- get_tags(con, include_ref_tags = TRUE)
-tags_tag1 <- get_tags(con, tag_id = tag1)
-tags_tag_multiple <- get_tags(con, tag_id = tag_multiple)
+tags_all <- get_acoustic_tags(con)
+tags_all_ref <- get_acoustic_tags(con, include_ref_tags = TRUE)
+tags_tag1 <- get_acoustic_tags(con, acoustic_tag_id = tag1)
+tags_tag_multiple <- get_acoustic_tags(con, acoustic_tag_id = tag_multiple)
 
 testthat::test_that("Test input", {
   expect_error(
-    get_tags("not_a_connection"),
+    get_acoustic_tags("not_a_connection"),
     "Not a connection object to database."
   )
   expect_error(
-    get_tags(con, tag_id = "not_a_tag_id")
+    get_acoustic_tags(con, acoustic_tag_id = "not_a_tag_id")
   )
   expect_error(
-    get_tags(con, tag_id = c("A69-1601-1705", "not_a_tag_id"))
+    get_acoustic_tags(con, acoustic_tag_id = c("A69-1601-1705", "not_a_tag_id"))
   )
   expect_error(
-    get_tags(con, include_ref_tags = "not_a_logical")
+    get_acoustic_tags(con, include_ref_tags = "not_a_logical")
   )
 })
 
@@ -98,16 +97,16 @@ testthat::test_that("Test number of records", {
 
 testthat::test_that("Test if data is filtered on parameter", {
   expect_equal(
-    tags_tag1 %>% distinct(tag_id) %>% pull(),
+    tags_tag1 %>% distinct(acoustic_tag_id) %>% pull(),
     c(tag1)
   )
   expect_equal(
-    tags_tag_multiple %>% distinct(tag_id) %>% arrange(tag_id) %>% pull(),
+    tags_tag_multiple %>% distinct(acoustic_tag_id) %>% arrange(acoustic_tag_id) %>% pull(),
     tag_multiple
   )
 })
 
 testthat::test_that("Test unique ids", {
-  expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(pk)))
-  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id))) # This is not the case
+  expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id)))
+  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_serial_number))) # This is not the case
 })
