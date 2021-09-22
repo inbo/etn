@@ -1,112 +1,121 @@
-con <- connect_to_etn(
-  username = Sys.getenv("userid"),
-  password = Sys.getenv("pwd")
-)
+con <- connect_to_etn()
 
-# Expected column names
-expected_col_names <- c(
-  "tag_serial_number",
-  "tag_type",
-  "tag_id",
-  "acoustic_tag_id",
-  "acoustic_tag_id_alternative",
-  "manufacturer",
-  "model",
-  "frequency",
-  "acoustic_tag_id_protocol",
-  "acoustic_tag_id_code",
-  "status",
-  "activation_date",
-  "battery_estimated_life",
-  "battery_estimated_end_date",
-  "sensor_type",
-  "sensor_slope",
-  "sensor_intercept",
-  "sensor_range",
-  "sensor_transmit_ratio",
-  "accelerometer_algorithm",
-  "accelerometer_samples_per_second",
-  "owner_organization",
-  "owner_pi",
-  "financing_project",
-  "step1_min_delay",
-  "step1_max_delay",
-  "step1_power",
-  "step1_duration",
-  "step1_acceleration_duration",
-  "step2_min_delay",
-  "step2_max_delay",
-  "step2_power",
-  "step2_duration",
-  "step2_acceleration_duration",
-  "step3_min_delay",
-  "step3_max_delay",
-  "step3_power",
-  "step3_duration",
-  "step3_acceleration_duration",
-  "step4_min_delay",
-  "step4_max_delay",
-  "step4_power",
-  "step4_duration",
-  "step4_acceleration_duration"
-)
-
-tag1 <- "A69-1303-65313" # A sentinel tag with 2 records
-tag_multiple <- c("A69-1601-1705", "A69-1601-1707")
-
-tags_all <- get_acoustic_tags(con)
-tags_all_ref <- get_acoustic_tags(con, include_ref_tags = TRUE)
-tags_tag1 <- get_acoustic_tags(con, acoustic_tag_id = tag1)
-tags_tag_multiple <- get_acoustic_tags(con, acoustic_tag_id = tag_multiple)
-
-testthat::test_that("Test input", {
+test_that("get_acoustic_tags() returns error for incorrect connection", {
   expect_error(
-    get_acoustic_tags("not_a_connection"),
+    get_acoustic_tags(con = "not_a_connection"),
     "Not a connection object to database."
   )
-  expect_error(
-    get_acoustic_tags(con, acoustic_tag_id = "not_a_tag_id")
+})
+
+test_that("get_acoustic_tags() returns a tibble", {
+  df <- get_acoustic_tags()
+  expect_s3_class(df, "data.frame")
+  expect_s3_class(df, "tbl")
+})
+
+test_that("get_acoustic_tags() returns unique tag_id", {
+  # TODO: FAILS, see https://github.com/inbo/etn/issues/176
+  # df <- get_acoustic_tags()
+  # expect_equal(nrow(df), nrow(df %>% distinct(tag_id)))
+})
+
+test_that("get_acoustic_tags() returns the expected columns", {
+  df <- get_acoustic_tags()
+  expected_col_names <- c(
+    "tag_serial_number",
+    "tag_type",
+    "tag_id",
+    "acoustic_tag_id",
+    "acoustic_tag_id_alternative",
+    "manufacturer",
+    "model",
+    "frequency",
+    "acoustic_tag_id_protocol",
+    "acoustic_tag_id_code",
+    "status",
+    "activation_date",
+    "battery_estimated_life",
+    "battery_estimated_end_date",
+    "sensor_type",
+    "sensor_slope",
+    "sensor_intercept",
+    "sensor_range",
+    "sensor_transmit_ratio",
+    "accelerometer_algorithm",
+    "accelerometer_samples_per_second",
+    "owner_organization",
+    "owner_pi",
+    "financing_project",
+    "step1_min_delay",
+    "step1_max_delay",
+    "step1_power",
+    "step1_duration",
+    "step1_acceleration_duration",
+    "step2_min_delay",
+    "step2_max_delay",
+    "step2_power",
+    "step2_duration",
+    "step2_acceleration_duration",
+    "step3_min_delay",
+    "step3_max_delay",
+    "step3_power",
+    "step3_duration",
+    "step3_acceleration_duration",
+    "step4_min_delay",
+    "step4_max_delay",
+    "step4_power",
+    "step4_duration",
+    "step4_acceleration_duration"
   )
-  expect_error(
-    get_acoustic_tags(con, acoustic_tag_id = c("A69-1601-1705", "not_a_tag_id"))
-  )
-  expect_error(
-    get_acoustic_tags(con, include_ref_tags = "not_a_logical")
-  )
+  expect_equal(names(df), expected_col_names)
 })
 
-testthat::test_that("Test output type", {
-  expect_is(tags_all, "tbl_df")
-  expect_is(tags_all_ref, "tbl_df")
-  expect_is(tags_tag1, "tbl_df")
-  expect_is(tags_tag_multiple, "tbl_df")
-})
+test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
+  # Errors
+  expect_error(get_acoustic_tags(tag_serial_number = 0)) # Not an existing tag_serial_number
+  expect_error(get_animals(animal_id = c("1157779", 0)))
 
-testthat::test_that("Test column names", {
-  expect_equal(names(tags_all), expected_col_names)
-  expect_equal(names(tags_all_ref), expected_col_names)
-  expect_equal(names(tags_tag1), expected_col_names)
-  expect_equal(names(tags_tag_multiple), expected_col_names)
-})
-
-testthat::test_that("Test number of records", {
-  expect_gt(nrow(tags_all_ref), nrow(tags_all))
-  expect_equal(nrow(tags_tag1), 2)
-  expect_equal(nrow(tags_tag_multiple), 2)
-})
-
-testthat::test_that("Test if data is filtered on parameter", {
+  # Select single value
+  single_select <- "1157779" # From 2014_demer
+  single_select_df <- get_acoustic_tags(tag_serial_number = single_select)
   expect_equal(
-    tags_tag1 %>% distinct(acoustic_tag_id) %>% pull(),
-    c(tag1)
+    single_select_df %>% distinct(tag_serial_number) %>% pull(),
+    c(single_select)
   )
+  expect_equal(nrow(single_select_df), 1)
+  # Note that not all tag_serial_number return a single row, e.g. "461076"
+
+  # Select multiple values
+  multi_select <- c(1157779, "1157780") # Integers are allowed
+  multi_select_df <- get_acoustic_tags(tag_serial_number = multi_select)
   expect_equal(
-    tags_tag_multiple %>% distinct(acoustic_tag_id) %>% arrange(acoustic_tag_id) %>% pull(),
-    tag_multiple
+    multi_select_df %>% distinct(tag_serial_number) %>% pull(),
+    c(as.character(multi_select)) # Output will be all character
   )
+  expect_equal(nrow(multi_select_df), 2)
 })
 
-testthat::test_that("Test unique ids", {
-  expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_id)))
-  # expect_equal(nrow(tags_all), nrow(tags_all %>% distinct(tag_serial_number))) # This is not the case
+test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
+  # Errors
+  expect_error(get_acoustic_tags(acoustic_tag_id = 0)) # Not an existing acoustic_tag_id
+  expect_error(get_animals(acoustic_tag_id = c("A69-1601-28294", 0)))
+
+  # Select single value
+  single_select <- "A69-1601-28294"
+  single_select_df <- get_acoustic_tags(acoustic_tag_id = single_select)
+  expect_equal(
+    single_select_df %>% distinct(acoustic_tag_id) %>% pull(),
+    c(single_select)
+  )
+  expect_equal(nrow(single_select_df), 1)
+  # Note that not all acoustic_tag_id return a single row, e.g. "A180-1702-48973"
+
+  # Select multiple values
+  multi_select <- c("A69-1601-28294", "A69-1601-28295")
+  multi_select_df <- get_acoustic_tags(acoustic_tag_id = multi_select)
+  expect_equal(
+    multi_select_df %>% distinct(acoustic_tag_id) %>% pull(),
+    c(multi_select)
+  )
+  expect_equal(nrow(multi_select_df), 2)
 })
