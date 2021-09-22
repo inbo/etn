@@ -1,7 +1,4 @@
-con <- connect_to_etn(
-  username = Sys.getenv("userid"),
-  password = Sys.getenv("pwd")
-)
+con <- connect_to_etn()
 
 test_that("get_animals() returns error for incorrect connection", {
   expect_error(
@@ -167,6 +164,20 @@ test_that("get_animals() allows selecting on scientific_name", {
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df)) # Expect more records
+})
+
+test_that("get_animals() allows to exclude non-animals", {
+  # Errors
+  expect_error(get_animals(exclude_non_animals = "not_a_logical"))
+
+  # Non-animals do are excluded from results
+  non_animals <- c("Built-in", "Plastic", "Range tag", "Sync tag")
+  expect_equal(
+    get_animals(exclude_non_animals = TRUE) %>%
+      filter(scientific_name %in% non_animals) %>%
+      nrow(),
+    0
+  )
 })
 
 test_that("get_animals() allows selecting on multiple parameters", {

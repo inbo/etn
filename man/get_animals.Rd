@@ -8,7 +8,8 @@ get_animals(
   connection = con,
   animal_id = NULL,
   animal_project_code = NULL,
-  scientific_name = NULL
+  scientific_name = NULL,
+  exclude_non_animals = FALSE
 )
 }
 \arguments{
@@ -20,6 +21,9 @@ get_animals(
 Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
+
+\item{exclude_non_animals}{Logical, \code{FALSE} by default. Exclude records with
+non-animal scientific names such as "Built-in" or "Sync tag".}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},
@@ -33,24 +37,26 @@ are associated with a single animal, the information is comma-separated.
 }
 \examples{
 \dontrun{
-con <- connect_to_etn(your_username, your_password)
+con <- connect_to_etn()
 
 # Get all animals
 get_animals(con)
 
 # Get specific animals
-get_animals(con, animal_id = 2824)
-get_animals(con, animal_id = "2824") # String values work as well
-get_animals(con, animal_id = c(2824, 2825, 2827))
+get_animals(con, animal_id = 384) # Or string value "384"
+get_animals(con, animal_id = c(384, 385, 2827))
 
 # Get animals from specific animal project(s)
-get_animals(con, animal_project_code = "2012_leopoldkanaal")
-get_animals(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
+get_animals(con, animal_project_code = "2014_demer")
+get_animals(con, animal_project_code = c("2014_demer", "2015_dijle"))
 
 # Get animals of specific species (across all projects)
-get_animals(con, scientific_name = c("Gadus morhua", "Sync tag"))
+get_animals(con, scientific_name = c("Silurus glanis", "Petromyzon marinus"))
 
 # Get animals of a specific species from a specific project
-get_animals(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
+get_animals(con, animal_project_code = "2014_demer", scientific_name = "Silurus glanis")
+
+# Exclude non-animals (e.g. Sync tag)
+get_animals(exclude_non_animals = TRUE)
 }
 }

@@ -9,6 +9,8 @@
 #' @param animal_project_code Character (vector). One or more animal projects.
 #'   Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
+#' @param exclude_non_animals Logical, `FALSE` by default. Exclude records with
+#'   non-animal scientific names such as "Built-in" or "Sync tag".
 #'
 #' @return A tibble with animals data, sorted by `animal_project_code`,
 #' `release_date_time` and `tag_serial_number`. See also
@@ -23,7 +25,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' con <- connect_to_etn(your_username, your_password)
+#' con <- connect_to_etn()
 #'
 #' # Get all animals
 #' get_animals(con)
@@ -41,11 +43,15 @@
 #'
 #' # Get animals of a specific species from a specific project
 #' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Silurus glanis")
+#'
+#' # Exclude non-animals (e.g. Sync tag)
+#' get_animals(exclude_non_animals = TRUE)
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
                         animal_project_code = NULL,
-                        scientific_name = NULL) {
+                        scientific_name = NULL,
+                        exclude_non_animals = FALSE) {
   # Check connection
   check_connection(connection)
 
@@ -165,6 +171,12 @@ get_animals <- function(connection = con,
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
+
+  # Exclude non animals (not the default)
+  non_animals <- c("Built-in", "Plastic", "Range tag", "Sync tag")
+  if (exclude_non_animals) {
+    animals <- animals %>% filter(!.data$scientific_name %in% non_animals)
+  }
 
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
