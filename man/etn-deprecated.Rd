@@ -7,9 +7,9 @@
 \alias{list_tag_ids}
 \title{Deprecated functions in etn}
 \usage{
-get_tags(...)
+get_tags(connection = con, tag_id, ...)
 
-get_transmitters(...)
+get_transmitters(connection = con, tag_id, ...)
 
 list_tag_ids(...)
 }

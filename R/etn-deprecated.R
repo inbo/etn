@@ -9,16 +9,16 @@ NULL
 
 #' @rdname etn-deprecated
 #' @export
-get_tags <- function(...) {
+get_tags <- function(connection = con, tag_id, ...) {
   .Deprecated("get_acoustic_tags")
-  get_acoustic_tags(...)
+  get_acoustic_tags(acoustic_tag_id = tag_id)
 }
 
 #' @rdname etn-deprecated
 #' @export
-get_transmitters <- function(...) {
+get_transmitters <- function(connection = con, tag_id, ...) {
   .Deprecated("get_acoustic_tags")
-  get_acoustic_tags(...)
+  get_acoustic_tags(acoustic_tag_id = tag_id)
 }
 
 #' @rdname etn-deprecated
