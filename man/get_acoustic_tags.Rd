@@ -7,8 +7,7 @@
 get_acoustic_tags(
   connection = con,
   tag_serial_number = NULL,
-  acoustic_tag_id = NULL,
-  include_ref_tags = FALSE
+  acoustic_tag_id = NULL
 )
 }
 \arguments{
@@ -17,30 +16,25 @@ get_acoustic_tags(
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
-
-\item{include_ref_tags}{Logical. Include reference tags. Defaults to
-\code{FALSE}.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for acoustic tags, with options to filter results. By default,
-reference tags are excluded.
+Get data for acoustic tags, with options to filter results.
 }
 \examples{
 \dontrun{
-con <- connect_to_etn(your_username, your_password)
+# Set default connection variable
+con <- connect_to_etn()
 
 # Get all acoustic tags
-get_tags(con)
+get_acoustic_tags()
 
-# Get all acoustic tags, including reference tags
-get_tags(con, include_ref_tags = TRUE)
-
-# Get specific acoustic tags (will automatically set include_ref_tags = TRUE)
-get_tags(con, tag_id = "A69-1303-65313")
-get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
+# Get specific acoustic tags
+get_acoustic_tags(tag_serial_number = "1157779")
+get_acoustic_tags(acoustic_tag_id = "A69-1601-28294")
+get_acoustic_tags(acoustic_tag_id = c("A69-1601-28294", "A69-1601-28295"))
 }
 }

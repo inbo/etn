@@ -1,13 +1,10 @@
 #' Get acoustic tag data
 #'
-#' Get data for acoustic tags, with options to filter results. By default,
-#' reference tags are excluded.
+#' Get data for acoustic tags, with options to filter results.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
-#' @param include_ref_tags Logical. Include reference tags. Defaults to
-#'   `FALSE`.
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -16,26 +13,24 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble filter
+#' @importFrom dplyr %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
-#' con <- connect_to_etn(your_username, your_password)
+#' # Set default connection variable
+#' con <- connect_to_etn()
 #'
 #' # Get all acoustic tags
-#' get_tags(con)
+#' get_acoustic_tags()
 #'
-#' # Get all acoustic tags, including reference tags
-#' get_tags(con, include_ref_tags = TRUE)
-#'
-#' # Get specific acoustic tags (will automatically set include_ref_tags = TRUE)
-#' get_tags(con, tag_id = "A69-1303-65313")
-#' get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
+#' # Get specific acoustic tags
+#' get_acoustic_tags(tag_serial_number = "1157779")
+#' get_acoustic_tags(acoustic_tag_id = "A69-1601-28294")
+#' get_acoustic_tags(acoustic_tag_id = c("A69-1601-28294", "A69-1601-28295"))
 #' }
 get_acoustic_tags <- function(connection = con,
                               tag_serial_number = NULL,
-                              acoustic_tag_id = NULL,
-                              include_ref_tags = FALSE) {
+                              acoustic_tag_id = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -44,6 +39,7 @@ get_acoustic_tags <- function(connection = con,
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
+    tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
     tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
     include_ref_tags <- TRUE
@@ -128,13 +124,6 @@ get_acoustic_tags <- function(connection = con,
       AND {acoustic_tag_id_query}
     ", .con = connection)
   tags <- dbGetQuery(connection, query)
-
-  # Filter on reference tags
-  #if (include_ref_tags) {
-  #  tags
-  #} else {
-  #  tags <- tags %>% filter(.data$type == "animal")
-  #}
 
   # Sort data
   tags <-
