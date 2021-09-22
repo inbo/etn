@@ -2,24 +2,24 @@ con <- connect_to_etn()
 
 test_that("get_animals() returns error for incorrect connection", {
   expect_error(
-    get_animals("not_a_connection"),
+    get_animals(con = "not_a_connection"),
     "Not a connection object to database."
   )
 })
 
 test_that("get_animals() returns a tibble", {
-  animals <- get_animals()
-  expect_s3_class(animals, "data.frame")
-  expect_s3_class(animals, "tbl")
+  df <- get_animals()
+  expect_s3_class(df, "data.frame")
+  expect_s3_class(df, "tbl")
 })
 
 test_that("get_animals() returns unique animal_id", {
-  animals <- get_animals()
-  expect_equal(nrow(animals), nrow(animals %>% distinct(animal_id)))
+  df <- get_animals()
+  expect_equal(nrow(df), nrow(df %>% distinct(animal_id)))
 })
 
 test_that("get_animals() returns the expected columns", {
-  animals <- get_animals()
+  df <- get_animals()
   expected_col_names <- c(
     "animal_id",
     "animal_project_code",
@@ -85,14 +85,14 @@ test_that("get_animals() returns the expected columns", {
     "holding_temperature",
     "comments"
   )
-  expect_equal(names(animals), expected_col_names)
+  expect_equal(names(df), expected_col_names)
 })
 
 test_that("get_animals() allows selecting on animal_id", {
   # Errors
   expect_error(get_animals(animal_id = 0)) # Not an existing animal_id
   expect_error(get_animals(animal_id = c(384, 0)))
-  expect_error(get_animals(con, animal_id = 20.2)) # Not an integer
+  expect_error(get_animals(animal_id = 20.2)) # Not an integer
 
   # Select single value
   single_select <- 384
