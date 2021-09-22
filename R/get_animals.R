@@ -29,19 +29,18 @@
 #' get_animals(con)
 #'
 #' # Get specific animals
-#' get_animals(con, animal_id = 2824)
-#' get_animals(con, animal_id = "2824") # String values work as well
-#' get_animals(con, animal_id = c(2824, 2825, 2827))
+#' get_animals(con, animal_id = 384) # Or string value "384"
+#' get_animals(con, animal_id = c(384, 385, 2827))
 #'
 #' # Get animals from specific animal project(s)
-#' get_animals(con, animal_project_code = "2012_leopoldkanaal")
-#' get_animals(con, animal_project_code = c("2012_leopoldkanaal", "2010_phd_reubens"))
+#' get_animals(con, animal_project_code = "2014_demer")
+#' get_animals(con, animal_project_code = c("2014_demer", "2015_dijle"))
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals(con, scientific_name = c("Gadus morhua", "Sync tag"))
+#' get_animals(con, scientific_name = c("Silurus glanis", "Petromyzon marinus"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(con, animal_project_code = "2010_phd_reubens", scientific_name = "Gadus morhua")
+#' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Silurus glanis")
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
