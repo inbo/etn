@@ -9,8 +9,8 @@
 #' @param animal_project_code Character (vector). One or more animal projects.
 #'   Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
-#' @param exclude_non_animals Logical, `FALSE` by default. Exclude records with
-#'   non-animal scientific names such as "Built-in" or "Sync tag".
+#' @param exclude_non_animals Logical. Exclude records with non-animal
+#' scientific names such as "Built-in" or "Sync tag". Defaults to `FALSE`.
 #'
 #' @return A tibble with animals data, sorted by `animal_project_code`,
 #' `release_date_time` and `tag_serial_number`. See also
@@ -20,29 +20,30 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble group_by_at mutate_at select
+#' @importFrom dplyr %>% arrange as_tibble filter group_by_at mutate_at select
 #'   starts_with summarize_at ungroup
 #'
 #' @examples
 #' \dontrun{
+#' # Set default connection variable
 #' con <- connect_to_etn()
 #'
 #' # Get all animals
-#' get_animals(con)
+#' get_animals()
 #'
 #' # Get specific animals
-#' get_animals(con, animal_id = 384) # Or string value "384"
-#' get_animals(con, animal_id = c(384, 385, 2827))
+#' get_animals(animal_id = 384) # Or string value "384"
+#' get_animals(animal_id = c(384, 385, 2827))
 #'
 #' # Get animals from specific animal project(s)
-#' get_animals(con, animal_project_code = "2014_demer")
-#' get_animals(con, animal_project_code = c("2014_demer", "2015_dijle"))
+#' get_animals(animal_project_code = "2014_demer")
+#' get_animals(animal_project_code = c("2014_demer", "2015_dijle"))
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals(con, scientific_name = c("Silurus glanis", "Petromyzon marinus"))
+#' get_animals(scientific_name = c("Silurus glanis", "Petromyzon marinus"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Silurus glanis")
+#' get_animals(animal_project_code = "2014_demer", scientific_name = "Silurus glanis")
 #'
 #' # Exclude non-animals (e.g. Sync tag)
 #' get_animals(exclude_non_animals = TRUE)
