@@ -71,6 +71,13 @@ test_that("get_acoustic_tags() returns the expected columns", {
   expect_equal(names(df), expected_col_names)
 })
 
+test_that("get_acoustic_tags() return tags of type 'acoustic'", {
+  expect_equal(
+    get_acoustic_tags() %>% distinct(tag_type) %>% pull(),
+    "acoustic"
+  )
+})
+
 test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
   # Errors
   expect_error(get_acoustic_tags(tag_serial_number = "0")) # Not an existing tag_serial_number
