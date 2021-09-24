@@ -1,7 +1,7 @@
 #' Get acoustic tag data
 #'
 #' Get data for acoustic tags, with options to filter results. Note that there
-#' can be multiple records (`acoustic_tag_id`) per physical tag
+#' can be multiple records (`acoustic_tag_id`) per tag device
 #' (`tag_serial_number`).
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.

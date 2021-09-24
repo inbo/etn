@@ -23,7 +23,7 @@ A tibble with tags data, sorted by \code{tag_serial_number}. See also
 }
 \description{
 Get data for acoustic tags, with options to filter results. Note that there
-can be multiple records (\code{acoustic_tag_id}) per physical tag
+can be multiple records (\code{acoustic_tag_id}) per tag device
 (\code{tag_serial_number}).
 }
 \examples{
