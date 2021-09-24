@@ -108,7 +108,7 @@ test_that("get_animals() allows selecting on animal_id", {
   multi_select <- c(384, "385") # Characters are allowed
   multi_select_df <- get_animals(animal_id = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(animal_id) %>% pull(),
+    multi_select_df %>% distinct(animal_id) %>% pull() %>% sort(),
     c(as.integer(multi_select)) # Output will be all integer
   )
   expect_equal(nrow(multi_select_df), 2)
@@ -137,7 +137,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
   multi_select <- c("2014_demer", "2015_dijle")
   multi_select_df <- get_animals(animal_project_code = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(animal_project_code) %>% pull(),
+    multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df)) # Expect more records
@@ -158,10 +158,10 @@ test_that("get_animals() allows selecting on scientific_name", {
   )
 
   # Select multiple values
-  multi_select <- c("Silurus glanis", "Petromyzon marinus")
+  multi_select <- c("Petromyzon marinus", "Silurus glanis")
   multi_select_df <- get_animals(scientific_name = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(scientific_name) %>% pull(),
+    multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df)) # Expect more records
