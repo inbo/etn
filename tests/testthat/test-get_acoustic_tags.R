@@ -24,6 +24,7 @@ test_that("get_acoustic_tags() returns the expected columns", {
   expected_col_names <- c(
     "tag_serial_number",
     "tag_type",
+    "tag_subtype",
     "tag_id",
     "acoustic_tag_id",
     "acoustic_tag_id_alternative",

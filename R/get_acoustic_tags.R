@@ -63,6 +63,7 @@ get_acoustic_tags <- function(connection = con,
         WHEN tag_type.name = 'id-tag' THEN 'acoustic'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
       END AS tag_type, -- Not acoustic_tag.type_tbd
+      tag_subtype.name AS tag_subtype,
       tag.id_pk AS tag_id,
       acoustic_tag.tag_full_id AS acoustic_tag_id,
       acoustic_tag.thelma_converted_code AS acoustic_tag_id_alternative,
@@ -112,6 +113,8 @@ get_acoustic_tags <- function(connection = con,
         ON tag.manufacturer_fk = manufacturer.id_pk
       LEFT JOIN common.tag_device_type AS tag_type
         ON tag.tag_device_type_fk = tag_type.id_pk
+      LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
+        ON tag.acoustic_tag_subtype_fk = tag_subtype.id_pk
       LEFT JOIN common.tag_device_status AS tag_status
         ON tag.tag_device_status_fk = tag_status.id_pk
       LEFT JOIN common.etn_group AS owner_organization

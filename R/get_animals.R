@@ -98,6 +98,7 @@ get_animals <- function(connection = con,
         WHEN tag_type.name = 'id-tag' THEN 'acoustic'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
       END AS tag_type,
+      tag_subtype.name AS tag_subtype,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
@@ -164,6 +165,8 @@ get_animals <- function(connection = con,
         ON animal_with_tag.tag_device_fk = tag.id_pk
       LEFT JOIN common.tag_device_type AS tag_type
         ON tag.tag_device_type_fk = tag_type.id_pk
+      LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
+        ON tag.acoustic_tag_subtype_fk = tag_subtype.id_pk
       LEFT JOIN common.projects AS animal_project
         ON animal.project_fk = animal_project.id
     WHERE

@@ -25,6 +25,7 @@ test_that("get_animals() returns the expected columns", {
     "animal_project_code",
     "tag_serial_number",
     "tag_type",
+    "tag_subtype",
     "scientific_name",
     "common_name",
     "aphia_id",
