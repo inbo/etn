@@ -22,7 +22,9 @@ A tibble with tags data, sorted by \code{tag_serial_number}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for acoustic tags, with options to filter results.
+Get data for acoustic tags, with options to filter results. Note that there
+can be multiple records (\code{acoustic_tag_id}) per physical tag
+(\code{tag_serial_number}).
 }
 \examples{
 \dontrun{

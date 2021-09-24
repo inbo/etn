@@ -1,6 +1,8 @@
 #' Get acoustic tag data
 #'
-#' Get data for acoustic tags, with options to filter results.
+#' Get data for acoustic tags, with options to filter results. Note that there
+#' can be multiple records (`acoustic_tag_id`) per physical tag
+#' (`tag_serial_number`).
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
@@ -131,7 +133,8 @@ get_acoustic_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(tag_serial_number, levels = valid_tag_serial_numbers)) # valid_tag_serial_numbers defined above
+    arrange(factor(tag_serial_number, levels = valid_tag_serial_numbers))
+    # valid_tag_serial_numbers defined above
 
   as_tibble(tags)
 }
