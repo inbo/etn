@@ -92,11 +92,11 @@ test_that("get_animals() returns the expected columns", {
 test_that("get_animals() allows selecting on animal_id", {
   # Errors
   expect_error(get_animals(animal_id = 0)) # Not an existing animal_id
-  expect_error(get_animals(animal_id = c(384, 0)))
+  expect_error(get_animals(animal_id = c(305, 0)))
   expect_error(get_animals(animal_id = 20.2)) # Not an integer
 
   # Select single value
-  single_select <- 384
+  single_select <- 305
   single_select_df <- get_animals(animal_id = single_select)
   expect_equal(
     single_select_df %>% distinct(animal_id) %>% pull(),
@@ -105,7 +105,7 @@ test_that("get_animals() allows selecting on animal_id", {
   expect_equal(nrow(single_select_df), 1)
 
   # Select multiple values
-  multi_select <- c(384, "385") # Characters are allowed
+  multi_select <- c(304, "305") # Characters are allowed
   multi_select_df <- get_animals(animal_id = multi_select)
   expect_equal(
     multi_select_df %>% distinct(animal_id) %>% pull() %>% sort(),
@@ -146,11 +146,11 @@ test_that("get_animals() allows selecting on animal_project_code", {
 test_that("get_animals() allows selecting on scientific_name", {
   # Errors
   expect_error(get_animals(scientific_name = "not_a_sciname"))
-  expect_error(get_animals(scientific_name = "silurus glanis")) # Case sensitive
-  expect_error(get_animals(scientific_name = c("Silurus glanis", "not_a_sciname")))
+  expect_error(get_animals(scientific_name = "rutilus rutilus")) # Case sensitive
+  expect_error(get_animals(scientific_name = c("Rutilus rutilus", "not_a_sciname")))
 
   # Select single value
-  single_select <- "Silurus glanis"
+  single_select <- "Rutilus rutilus"
   single_select_df <- get_animals(scientific_name = single_select)
   expect_equal(
     single_select_df %>% distinct(scientific_name) %>% pull(),
@@ -158,7 +158,7 @@ test_that("get_animals() allows selecting on scientific_name", {
   )
 
   # Select multiple values
-  multi_select <- c("Petromyzon marinus", "Silurus glanis")
+  multi_select <- c("Rutilus rutilus", "Silurus glanis")
   multi_select_df <- get_animals(scientific_name = multi_select)
   expect_equal(
     multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
@@ -184,10 +184,10 @@ test_that("get_animals() allows to exclude non-animals", {
 test_that("get_animals() allows selecting on multiple parameters", {
   multiple_parameters_df <- get_animals(
     animal_project_code = "2014_demer",
-    scientific_name = "Silurus glanis"
+    scientific_name = "Rutilus rutilus"
   )
-  # There are 9 Silurus glanis records in 2014_demer
-  expect_equal(nrow(multiple_parameters_df), 9)
+  # There are 2 Rutilus rutilus records in 2014_demer
+  expect_equal(nrow(multiple_parameters_df), 2)
 })
 
 test_that("get_animals() collapses multiple associated tags to one row", {

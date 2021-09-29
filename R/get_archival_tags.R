@@ -6,7 +6,8 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
-#' @param archival_tag_id Character (vector). One or more archival tag ids.
+#' @param archival_tag_id Character (vector). One or more archival tag
+#'   identifiers.
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).

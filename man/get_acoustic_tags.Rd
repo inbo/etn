@@ -15,7 +15,8 @@ get_acoustic_tags(
 
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
 
-\item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
+\item{acoustic_tag_id}{Character (vector). One or more acoustic tag
+identifiers.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also
@@ -35,8 +36,8 @@ con <- connect_to_etn()
 get_acoustic_tags()
 
 # Get specific acoustic tags
-get_acoustic_tags(tag_serial_number = "1157779")
-get_acoustic_tags(acoustic_tag_id = "A69-1601-28294")
-get_acoustic_tags(acoustic_tag_id = c("A69-1601-28294", "A69-1601-28295"))
+get_acoustic_tags(tag_serial_number = "1187450")
+get_acoustic_tags(acoustic_tag_id = "A69-1601-16130")
+get_acoustic_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 }
 }

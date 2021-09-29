@@ -6,7 +6,8 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
-#' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
+#' @param acoustic_tag_id Character (vector). One or more acoustic tag
+#'   identifiers.
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -26,9 +27,9 @@
 #' get_acoustic_tags()
 #'
 #' # Get specific acoustic tags
-#' get_acoustic_tags(tag_serial_number = "1157779")
-#' get_acoustic_tags(acoustic_tag_id = "A69-1601-28294")
-#' get_acoustic_tags(acoustic_tag_id = c("A69-1601-28294", "A69-1601-28295"))
+#' get_acoustic_tags(tag_serial_number = "1187450")
+#' get_acoustic_tags(acoustic_tag_id = "A69-1601-16130")
+#' get_acoustic_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 #' }
 get_acoustic_tags <- function(connection = con,
                               tag_serial_number = NULL,

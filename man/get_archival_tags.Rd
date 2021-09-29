@@ -15,7 +15,8 @@ get_archival_tags(
 
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
 
-\item{archival_tag_id}{Character (vector). One or more archival tag ids.}
+\item{archival_tag_id}{Character (vector). One or more archival tag
+identifiers.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also

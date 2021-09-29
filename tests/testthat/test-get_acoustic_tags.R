@@ -81,10 +81,10 @@ test_that("get_acoustic_tags() return tags of type 'acoustic'", {
 test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
   # Errors
   expect_error(get_acoustic_tags(tag_serial_number = "0")) # Not an existing tag_serial_number
-  expect_error(get_animals(animal_id = c("1157779", "0")))
+  expect_error(get_animals(animal_id = c("1187450", "0")))
 
   # Select single value
-  single_select <- "1157779" # From 2014_demer
+  single_select <- "1187450" # From 2014_demer
   single_select_df <- get_acoustic_tags(tag_serial_number = single_select)
   expect_equal(
     single_select_df %>% distinct(tag_serial_number) %>% pull(),
@@ -94,7 +94,7 @@ test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
   # Note that not all tag_serial_number return a single row, e.g. "461076"
 
   # Select multiple values
-  multi_select <- c(1157779, "1157780") # Integers are allowed
+  multi_select <- c(1187449, "1187450") # Integers are allowed
   multi_select_df <- get_acoustic_tags(tag_serial_number = multi_select)
   expect_equal(
     multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
@@ -106,10 +106,10 @@ test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
 test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
   # Errors
   expect_error(get_acoustic_tags(acoustic_tag_id = "0")) # Not an existing acoustic_tag_id
-  expect_error(get_animals(acoustic_tag_id = c("A69-1601-28294", "0")))
+  expect_error(get_animals(acoustic_tag_id = c("A69-1601-16130", "0")))
 
   # Select single value
-  single_select <- "A69-1601-28294" # From 2014_demer
+  single_select <- "A69-1601-16130" # From 2014_demer
   single_select_df <- get_acoustic_tags(acoustic_tag_id = single_select)
   expect_equal(
     single_select_df %>% distinct(acoustic_tag_id) %>% pull(),
@@ -119,7 +119,7 @@ test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
   # Note that not all acoustic_tag_id return a single row, e.g. "A180-1702-48973"
 
   # Select multiple values
-  multi_select <- c("A69-1601-28294", "A69-1601-28295")
+  multi_select <- c("A69-1601-16129", "A69-1601-16130")
   multi_select_df <- get_acoustic_tags(acoustic_tag_id = multi_select)
   expect_equal(
     multi_select_df %>% distinct(acoustic_tag_id) %>% pull() %>% sort(),
