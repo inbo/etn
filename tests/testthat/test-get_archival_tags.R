@@ -25,7 +25,6 @@ test_that("get_archival_tags() returns the expected columns", {
     "manufacturer",
     "model",
     "frequency",
-    "archival_tag_id_protocol",
     "status",
     "activation_date",
     "battery_estimated_life",

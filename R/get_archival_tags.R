@@ -73,8 +73,6 @@ get_archival_tags <- function(connection = con,
       manufacturer.project AS manufacturer,
       tag.model AS model,
       archival_tag.frequency AS frequency,
-      archival_tag.protocol AS archival_tag_id_protocol,
-      -- archival_tag.id_code AS archival_tag_id_code: see higher as archival_tag_id
       tag_status.name AS status,
       tag.activation_date AS activation_date,
       tag.battery_estimated_lifetime AS battery_estimated_life,
