@@ -38,10 +38,10 @@ get_acoustic_tags <- function(connection = con,
   check_connection(connection)
 
   # Check tag_serial_number
-  valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
+    valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
     tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
@@ -49,10 +49,10 @@ get_acoustic_tags <- function(connection = con,
   }
 
   # Check acoustic_tag_id
-  valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
   if (is.null(acoustic_tag_id)) {
     acoustic_tag_id_query <- "True"
   } else {
+    valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
     acoustic_tag_id_query <- glue_sql("acoustic_tag.tag_full_id IN ({acoustic_tag_id*})", .con = connection)
     include_ref_tags <- TRUE
@@ -134,8 +134,7 @@ get_acoustic_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(tag_serial_number, levels = valid_tag_serial_numbers))
-    # valid_tag_serial_numbers defined above
+    arrange(factor(tag_serial_number, levels = list_tag_serial_numbers(connection)))
 
   as_tibble(tags)
 }

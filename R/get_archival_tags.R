@@ -38,10 +38,10 @@ get_archival_tags <- function(connection = con,
   check_connection(connection)
 
   # Check tag_serial_number
-  valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
+    valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
     tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
@@ -49,10 +49,10 @@ get_archival_tags <- function(connection = con,
   }
 
   # Check archival_tag_id
-  valid_archival_tag_ids <- list_archival_tag_ids(connection)
   if (is.null(archival_tag_id)) {
     archival_tag_id_query <- "True"
   } else {
+    valid_archival_tag_ids <- list_archival_tag_ids(connection)
     archival_tag_id <- as.character(archival_tag_id) # Cast to character
     check_value(archival_tag_id, valid_archival_tag_ids, "archival_tag_id")
     archival_tag_id_query <- glue_sql("archival_tag.id_code IN ({archival_tag_id*})", .con = connection)
