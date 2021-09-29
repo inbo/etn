@@ -43,34 +43,34 @@
 #' get_acoustic_detections(animal_project_code = "2014_demer")
 #'
 #' # Get 2014 acoustic detections from that animal project
-#' get_detections(
+#' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
 #'   start_date = "2014",
 #'   end_date = "2015",
 #' )
 #'
 #' # Get April 2014 acoustic detections from that animal project
-#' get_detections(
+#' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
 #'   start_date = "2014-04",
 #'   end_date = "2014-05",
 #' )
 #'
 #' # Get April 24, 2014 acoustic detections from that animal project
-#' get_detections(
+#' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
 #'   start_date = "2014-04-24",
 #'   end_date = "2014-04-25",
 #' )
 #'
 #' # Get acoustic detections for a specific tag at two specific stations
-#' get_detections(
+#' get_acoustic_detections(
 #'   acoustic_tag_id = "A69-1601-16130",
 #'   station_name = c("de-9", "de-10")
 #' )
 #'
 #' # Get acoustic detections for a specific species, receiver and network project
-#' get_detections(
+#' get_acoustic_detections(
 #'   scientific_name = "Rutilus rutilus",
 #'   receiver_id = "VR2W-124070",
 #'   network_project_code = "demer"
@@ -137,8 +137,8 @@ get_acoustic_detections <- function(connection = con,
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  # Check animal_project_code
-  if (is.null(animal_project_code)) {
+  # Check network_project_code
+  if (is.null(network_project_code)) {
     network_project_code_query <- "True"
   } else {
     network_project_code <- tolower(network_project_code)
