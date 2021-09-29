@@ -111,6 +111,8 @@ get_archival_tags <- function(connection = con,
     FROM common.tag_device AS tag
       LEFT JOIN archive.sensor AS archival_tag
         ON tag.id_pk = archival_tag.device_tag_fk -- Not tag_device_fk
+        LEFT JOIN archive.sensor_type AS sensor_type
+          ON archival_tag.sensor_type_fk = sensor_type.id_pk
       LEFT JOIN common.manufacturer AS manufacturer
         ON tag.manufacturer_fk = manufacturer.id_pk
       LEFT JOIN common.tag_device_type AS tag_type
@@ -124,8 +126,6 @@ get_archival_tags <- function(connection = con,
       LEFT JOIN common.projects AS financing_project
         ON tag.financing_project_fk = financing_project.id
 
-      LEFT JOIN archive.sensor_type AS sensor_type
-        ON archival_tag.sensor_type_fk = sensor_type.id_pk
     WHERE
       tag_type.name = 'sensor-tag'
       AND {tag_serial_number_query}
@@ -136,8 +136,7 @@ get_archival_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(tag_serial_number, levels = valid_tag_serial_numbers))
-    # valid_tag_serial_numbers defined above
+    arrange(factor(tag_serial_number, levels = list_tag_serial_numbers(connection)))
 
   as_tibble(tags)
 }

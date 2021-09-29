@@ -161,12 +161,12 @@ get_animals <- function(connection = con,
     FROM common.animal_release AS animal
       LEFT JOIN common.animal_release_tag_device AS animal_with_tag
         ON animal.id_pk = animal_with_tag.animal_release_fk
-      LEFT JOIN common.tag_device AS tag
-        ON animal_with_tag.tag_device_fk = tag.id_pk
-      LEFT JOIN common.tag_device_type AS tag_type
-        ON tag.tag_device_type_fk = tag_type.id_pk
-      LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
-        ON tag.acoustic_tag_subtype_fk = tag_subtype.id_pk
+        LEFT JOIN common.tag_device AS tag
+          ON animal_with_tag.tag_device_fk = tag.id_pk
+          LEFT JOIN common.tag_device_type AS tag_type
+            ON tag.tag_device_type_fk = tag_type.id_pk
+          LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
+            ON tag.acoustic_tag_subtype_fk = tag_subtype.id_pk
       LEFT JOIN common.projects AS animal_project
         ON animal.project_fk = animal_project.id
     WHERE
