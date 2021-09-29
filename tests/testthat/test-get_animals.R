@@ -91,7 +91,7 @@ test_that("get_animals() returns the expected columns", {
 
 test_that("get_animals() allows selecting on animal_id", {
   # Errors
-  expect_error(get_animals(animal_id = 0)) # Not an existing animal_id
+  expect_error(get_animals(animal_id = 0)) # Not an existing value
   expect_error(get_animals(animal_id = c(305, 0)))
   expect_error(get_animals(animal_id = 20.2)) # Not an integer
 
@@ -126,6 +126,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
     single_select_df %>% distinct(animal_project_code) %>% pull(),
     c(single_select)
   )
+  expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
   expect_equal(
@@ -140,7 +141,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
     multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
-  expect_gt(nrow(multi_select_df), nrow(single_select_df)) # Expect more records
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
 test_that("get_animals() allows selecting on scientific_name", {
@@ -156,6 +157,7 @@ test_that("get_animals() allows selecting on scientific_name", {
     single_select_df %>% distinct(scientific_name) %>% pull(),
     c(single_select)
   )
+  expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
   multi_select <- c("Rutilus rutilus", "Silurus glanis")
@@ -164,7 +166,7 @@ test_that("get_animals() allows selecting on scientific_name", {
     multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
     c(multi_select)
   )
-  expect_gt(nrow(multi_select_df), nrow(single_select_df)) # Expect more records
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
 test_that("get_animals() allows to exclude non-animals", {

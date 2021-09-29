@@ -80,7 +80,7 @@ test_that("get_acoustic_tags() return tags of type 'acoustic'", {
 
 test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
   # Errors
-  expect_error(get_acoustic_tags(tag_serial_number = "0")) # Not an existing tag_serial_number
+  expect_error(get_acoustic_tags(tag_serial_number = "0")) # Not an existing value
   expect_error(get_acoustic_tags(tag_serial_number = c("1187450", "0")))
 
   # Select single value
@@ -105,8 +105,8 @@ test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
 
 test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
   # Errors
-  expect_error(get_acoustic_tags(acoustic_tag_id = "0")) # Not an existing acoustic_tag_id
-  expect_error(get_acoustic_tags(acoustic_tag_id = c("A69-1601-16130", "0")))
+  expect_error(get_acoustic_tags(acoustic_tag_id = "not_a_tag_id"))
+  expect_error(get_acoustic_tags(acoustic_tag_id = c("A69-1601-16130", "not_a_tag_id")))
 
   # Select single value
   single_select <- "A69-1601-16130" # From 2014_demer

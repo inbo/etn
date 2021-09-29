@@ -71,7 +71,7 @@ test_that("get_archival_tags() return tags of type 'archival'", {
 
 test_that("get_archival_tags() allows selecting on tag_serial_number", {
   # Errors
-  expect_error(get_archival_tags(tag_serial_number = "0")) # Not an existing tag_serial_number
+  expect_error(get_archival_tags(tag_serial_number = "0")) # Not an existing value
   expect_error(get_archival_tags(tag_serial_number = c("1292638", "0")))
 
   # Select single value
@@ -95,7 +95,7 @@ test_that("get_archival_tags() allows selecting on tag_serial_number", {
 
 test_that("get_archival_tags() allows selecting on archival_tag_id", {
   # Errors
-  expect_error(get_archival_tags(archival_tag_id = "0")) # Not an existing archival_tag_id
+  expect_error(get_archival_tags(archival_tag_id = "0")) # Not an existing value
   expect_error(get_archival_tags(archival_tag_id = c("3638", "0")))
 
   # Select single value
