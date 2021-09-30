@@ -42,25 +42,25 @@
 #' # Get all acoustic detections from a specific animal project
 #' get_acoustic_detections(animal_project_code = "2014_demer")
 #'
-#' # Get 2014 acoustic detections from that animal project
+#' # Get 2015 acoustic detections from that animal project
 #' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
-#'   start_date = "2014",
-#'   end_date = "2015",
+#'   start_date = "2015",
+#'   end_date = "2016",
 #' )
 #'
-#' # Get April 2014 acoustic detections from that animal project
+#' # Get April 2015 acoustic detections from that animal project
 #' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
-#'   start_date = "2014-04",
-#'   end_date = "2014-05",
+#'   start_date = "2015-04",
+#'   end_date = "2015-05",
 #' )
 #'
-#' # Get April 24, 2014 acoustic detections from that animal project
+#' # Get April 24, 2015 acoustic detections from that animal project
 #' get_acoustic_detections(
 #'   animal_project_code = "2014_demer",
-#'   start_date = "2014-04-24",
-#'   end_date = "2014-04-25",
+#'   start_date = "2015-04-24",
+#'   end_date = "2015-04-25",
 #' )
 #'
 #' # Get acoustic detections for a specific tag at two specific stations

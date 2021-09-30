@@ -47,19 +47,34 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   expect_error(get_acoustic_detections(start_date = "not_a_date"))
   expect_error(get_acoustic_detections(end_date = "not_a_date"))
 
-  # Start year
-  start_year <- "2014"
-  # Start month
-  start_month <- "2014-04"
-  # Start day
-  start_day <- "2014-04-24"
+  # 2014_demer contains data from 2014-04-18 15:45:00 UTC to 2018-09-15 19:40:51 UTC
 
-  # End year
-  end_year <- "2015"
-  # End month
-  end_month <- "2014-05"
-  # End day
-  end_day <- "2014-04-25"
+  # Start date (inclusive) <= min(date_time)
+  start_year_df <- get_acoustic_detections(start_date = "2015", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(start_year_df$date_time))
+  start_month_df <- get_acoustic_detections(start_date = "2015-04", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(start_month_df$date_time))
+  start_day_df <- get_acoustic_detections(start_date = "2015-04-24", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(start_day_df$date_time))
+
+  # End date (exclusive) > max(date_time)
+  end_year_df <- get_acoustic_detections(end_date = "2016", animal_project_code = "2014_demer")
+  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(end_year_df$date_time))
+  end_month_df <- get_acoustic_detections(end_date = "2015-05", animal_project_code = "2014_demer")
+  expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(end_month_df$date_time))
+  end_day_df <- get_acoustic_detections(end_date = "2015-04-25", animal_project_code = "2014_demer")
+  expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(end_day_df$date_time))
+
+  # Between
+  between_year_df <- get_acoustic_detections(start_date= "2015", end_date = "2016", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(between_year_df$date_time))
+  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(between_year_df$date_time))
+  between_month_df <- get_acoustic_detections(start_date = "2015-04", end_date = "2015-05", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(between_month_df$date_time))
+  expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(between_month_df$date_time))
+  between_day_df <- get_acoustic_detections(start_date = "2015-04-24", end_date = "2015-04-25", animal_project_code = "2014_demer")
+  expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(between_day_df$date_time))
+  expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(between_day_df$date_time))
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
@@ -102,8 +117,8 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(animal_project_code = "2014_demer"),
-    get_acoustic_detections(animal_project_code = "2014_DEMER")
+    get_acoustic_detections(animal_project_code = "2014_demer", limit = TRUE),
+    get_acoustic_detections(animal_project_code = "2014_DEMER", limit = TRUE)
   )
 
   # Select multiple values
@@ -157,8 +172,8 @@ test_that("get_acoustic_detections() allows selecting on network_project_code", 
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(network_project_code = "demer"),
-    get_acoustic_detections(network_project_code = "DEMER")
+    get_acoustic_detections(network_project_code = "demer", limit = TRUE),
+    get_acoustic_detections(network_project_code = "DEMER", limit = TRUE)
   )
 
   # Select multiple values
@@ -210,7 +225,7 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
-  multi_select <- c("de-9", "de-10")
+  multi_select <- c("de-10", "de-9") # Not that sort() will put de-10 before de-9
   multi_select_df <- get_acoustic_detections(station_name = multi_select)
   expect_equal(
     multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),
