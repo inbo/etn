@@ -1,7 +1,8 @@
 df <- data.frame(
   chr_col = c("A", "B,C", "C,A","D"),
   num_col = c(1,2,2,3),
-  dot_sep_col = c("A", "B.C", "C.A","D"))
+  dot_sep_col = c("A", "B.C", "C.A","D"),
+  stringsAsFactors = FALSE)
 
 testthat::test_that("test input list_values", {
   ## test .data
@@ -30,7 +31,8 @@ testthat::test_that("test input list_values", {
                "invalid column value")
   # column must be an integer equal or less than number of columns
   expect_error(list_values(df, 5),
-               "column number exceeds the number of columns of .data (3)")
+               "column number exceeds the number of columns of .data (3)",
+               fixed = TRUE)
 
   # test split
   # split must be a character
