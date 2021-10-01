@@ -21,14 +21,16 @@ a vector of the same type as the given column
 \description{
 This function extracts all distinct values from a given column of a
 data.frame. If the select column contains characters, multiple values in the
-same row are split.
+same row are split. An informative message about the number of unique values
+is also returned.
 }
 \examples{
 \dontrun{
 df <- data.frame(
   chr_col = c("A", "B,C", "C,A","D"),
   num_col = c(1,2,2,3),
-  dot_sep_col = c("A", "B.C", "C.A","D"))
+  dot_sep_col = c("A", "B.C", "C.A","D"),
+  stringsAsFactors = FALSE)
 # split by comma  (default)
 list_values(df, chr_col) # same as
 list_values(df, chr_col, split = ",")

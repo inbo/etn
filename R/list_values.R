@@ -2,7 +2,8 @@
 #'
 #' This function extracts all distinct values from a given column of a
 #' data.frame. If the select column contains characters, multiple values in the
-#' same row are split.
+#' same row are split. An informative message about the number of unique values
+#' is also returned.
 #'
 #' @param .data A data frame, data frame extension (e.g. a tibble)
 #' @param column unquoted or quoted column name or column position
@@ -22,7 +23,8 @@
 #' df <- data.frame(
 #'   chr_col = c("A", "B,C", "C,A","D"),
 #'   num_col = c(1,2,2,3),
-#'   dot_sep_col = c("A", "B.C", "C.A","D"))
+#'   dot_sep_col = c("A", "B.C", "C.A","D"),
+#'   stringsAsFactors = FALSE)
 #' # split by comma  (default)
 #' list_values(df, chr_col) # same as
 #' list_values(df, chr_col, split = ",")
@@ -53,6 +55,8 @@ list_values <- function(.data, column, split = ",") {
                            "of .data ({n_col_df})"))
     # extract values
     values <- .data[,col_number]
+    # extract column name
+    col_name <- names(.data)[col_number]
   } else {
     #check column name
     col_name <- as.character(arguments$column)
@@ -74,5 +78,12 @@ list_values <- function(.data, column, split = ",") {
   if (is.character(values))
     # extract all values by splitting strings using split value
     values <- unlist(strsplit(x = values, split = split))
-  return(unique(values))
+
+  # remove duplicates, unique values only
+  values <- unique(values)
+
+  # return a message on console
+  message(glue("{length(values)} unique {col_name} values"))
+
+  return(values)
 }
