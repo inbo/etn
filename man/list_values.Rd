@@ -2,45 +2,48 @@
 % Please edit documentation in R/list_values.R
 \name{list_values}
 \alias{list_values}
-\title{Get all distinct values from a specific column of a data.frame}
+\title{List all unique values from a data.frame column}
 \usage{
 list_values(.data, column, split = ",")
 }
 \arguments{
-\item{.data}{A data frame, data frame extension (e.g. a tibble)}
+\item{.data}{Data frame. Data.frame to select column from.}
 
-\item{column}{unquoted or quoted column name or column position}
+\item{column}{Character or integer. Quoted or unqoted column name or column
+position.}
 
-\item{split}{character vector containing regular expression(s) to use for
-splitting. \code{split} is internally passed to argument \code{split} of base R
-function \code{strsplit()}. Default: \code{","} (comma-separated values)}
+\item{split}{Character (vector). Character or regular expression(s) passed
+to \code{\link[=strsplit]{strsplit()}} to split column values before returning unique values.
+Defaults to \verb{,}.}
 }
 \value{
-a vector of the same type as the given column
+A vector of the same type as the given column.
 }
 \description{
-This function extracts all distinct values from a given column of a
-data.frame. If the select column contains characters, multiple values in the
-same row are split. An informative message about the number of unique values
-is also returned.
+Get a vector with all unique values found in a given column of a data.frame.
+Concatenated values (\verb{A,B}) in the column can be returned as single values
+(\code{A} and \code{B}).
 }
 \examples{
 \dontrun{
-df <- data.frame(
-  chr_col = c("A", "B,C", "C,A","D"),
-  num_col = c(1,2,2,3),
-  dot_sep_col = c("A", "B.C", "C.A","D"),
-  stringsAsFactors = FALSE)
-# split by comma  (default)
-list_values(df, chr_col) # same as
-list_values(df, chr_col, split = ",")
-# access column by column position
-list_values(df, 1)
-# split by dot (regex expression: "\\.")
-list_values(df, dot_sep_col, split = "\\\\.")
-# non character column
-list_values(df, num_col)
-# list_values can be added to a pipe
-df \%>\% list_values(chr_col)
+# List unique scientific_name from a dataframe containing animal information
+df <- get_animals(animal_project_code = "2014_demer")
+list_values(df, "scientific_name")
+
+# Or using pipe and unquoted column name
+df \%>\% list_values(scientific_name)
+
+# Or using column position
+df \%>\% list_values(df, 6)
+
+# tag_serial_number contains comma-separated values
+df <- get_animals(animal_id = 2825, 2827)
+df$tag_serial_number
+
+# Comma-seperated values are split by default
+list_values(df, tag_serial_number)
+
+# They are not split using another split expression (here ".")
+list_values(df, tag_serial_number, split = "\\\\.")
 }
 }
