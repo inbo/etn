@@ -2,10 +2,19 @@
 % Please edit documentation in R/etn-deprecated.R
 \name{etn-deprecated}
 \alias{etn-deprecated}
+\alias{get_detections}
+\alias{get_tags}
 \alias{get_transmitters}
+\alias{list_tag_ids}
 \title{Deprecated functions in etn}
 \usage{
-get_transmitters(...)
+get_detections(connection = con, tag_id, ...)
+
+get_tags(connection = con, tag_id, ...)
+
+get_transmitters(connection = con, tag_id, ...)
+
+list_tag_ids(...)
 }
 \description{
 The functions listed below are deprecated or renamed and will be defunct in
