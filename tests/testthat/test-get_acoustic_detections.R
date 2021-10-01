@@ -23,6 +23,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
   expected_col_names <- c(
     "detection_id",
     "date_time",
+    "tag_serial_number",
     "acoustic_tag_id",
     "animal_project_code",
     "animal_id",
@@ -34,6 +35,8 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "deploy_longitude",
     "sensor_value",
     "sensor_unit",
+    "sensor2_value",
+    "sensor2_unit",
     "signal_to_noise_ratio",
     "source_file",
     "qc_flag",
