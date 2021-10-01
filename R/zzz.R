@@ -169,6 +169,7 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #' @noRd
 #'
 #' @examples
+#' \dontrun{
 #' df <- data.frame(
 #'   chr_col = c("A", "B,C", "C,A","D"),
 #'   num_col = c(1,2,2,3),
@@ -182,6 +183,9 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #' list_values(df, dot_sep_col, split = "\\.")
 #' # non character column
 #' list_values(df, num_col)
+#' # list_values can be added to a pipe
+#' df %>% list_values(chr_col)
+#' }
 list_values <- function(.data, column, split = ",") {
   # check .data
   assert_that(is.data.frame(.data))
