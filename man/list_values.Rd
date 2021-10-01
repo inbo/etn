@@ -34,16 +34,16 @@ list_values(df, "scientific_name")
 df \%>\% list_values(scientific_name)
 
 # Or using column position
-df \%>\% list_values(df, 6)
+df \%>\% list_values(6)
 
-# tag_serial_number contains comma-separated values
-df <- get_animals(animal_id = 2825, 2827)
+# tag_serial_number can contain comma-separated values
+df <- get_animals(animal_id = 5841)
 df$tag_serial_number
 
-# Comma-seperated values are split by default
+# list_values() will split those and return unique values
 list_values(df, tag_serial_number)
 
-# They are not split using another split expression (here ".")
+# Another expression can be defined to split values (here ".")
 list_values(df, tag_serial_number, split = "\\\\.")
 }
 }
