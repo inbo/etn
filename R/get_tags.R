@@ -1,13 +1,13 @@
-#' Get acoustic tag data
+#' Get tag data
 #'
-#' Get data for acoustic tags, with options to filter results. Note that there
+#' Get data for tags, with options to filter results. Note that there
 #' can be multiple records (`acoustic_tag_id`) per tag device
 #' (`tag_serial_number`).
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag
-#'   identifiers.
+#'   identifiers (i.e. identifier for detections).
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -23,17 +23,17 @@
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
-#' # Get all acoustic tags
-#' get_acoustic_tags()
+#' # Get all tags
+#' get_tags()
 #'
-#' # Get specific acoustic tags
-#' get_acoustic_tags(tag_serial_number = "1187450")
-#' get_acoustic_tags(acoustic_tag_id = "A69-1601-16130")
-#' get_acoustic_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
+#' # Get specific tags
+#' get_tags(tag_serial_number = "1187450")
+#' get_tags(acoustic_tag_id = "A69-1601-16130")
+#' get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 #' }
-get_acoustic_tags <- function(connection = con,
-                              tag_serial_number = NULL,
-                              acoustic_tag_id = NULL) {
+get_tags <- function(connection = con,
+                     tag_serial_number = NULL,
+                     acoustic_tag_id = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -53,63 +53,155 @@ get_acoustic_tags <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql("acoustic_tag.tag_full_id IN ({acoustic_tag_id*})", .con = connection)
+    acoustic_tag_id_query <- glue_sql("combined_tag.tag_full_id IN ({acoustic_tag_id*})", .con = connection)
   }
 
   # Build query
   query <- glue_sql("
+    WITH combined_tag AS (
+      SELECT
+        -- id_pk,
+        tag_device_fk,
+        tag_full_id,
+        thelma_converted_code,
+        tag_code_space AS protocol,
+        id_code,
+        frequency,
+        sensor_type,
+        slope,
+        intercept,
+        range,
+        sensor_transmit_ratio,
+        accelerometer_algoritm,
+        accelerometer_samples_per_second,
+        min_delay,
+        max_delay,
+        power,
+        duration_step1,
+        acceleration_on_sec_step1,
+        min_delay_step2,
+        max_delay_step2,
+        power_step2,
+        duration_step2,
+        acceleration_on_sec_step2,
+        min_delay_step3,
+        max_delay_step3,
+        power_step3,
+        duration_step3,
+        acceleration_on_sec_step3,
+        min_delay_step4,
+        max_delay_step4,
+        power_step4,
+        duration_step4,
+        acceleration_on_sec_step4
+        -- file,
+        -- units,
+        -- external_id
+      FROM
+        acoustic.tags
+      UNION
+      SELECT
+        -- id_pk,
+        device_tag_fk AS tag_device_fk,
+        CASE
+          WHEN sensor_full_id IS NOT NULL THEN sensor_full_id
+          WHEN protocol IS NOT NULL AND id_code IS NOT NULL THEN CONCAT(protocol, '-', id_code)
+        END AS tag_full_id,
+        NULL AS thelma_converted_code,
+        protocol,
+        id_code,
+        frequency,
+        sensor_type.description AS sensor_type,
+        slope,
+        intercept,
+        range,
+        sensor_transmit_ratio,
+        accelerometer_algoritm,
+        accelerometer_samples_per_second,
+        min_delay,
+        max_delay,
+        power,
+        duration_step1,
+        acceleration_on_sec_step1,
+        min_delay_step2,
+        max_delay_step2,
+        power_step2,
+        duration_step2,
+        acceleration_on_sec_step2,
+        min_delay_step3,
+        max_delay_step3,
+        power_step3,
+        duration_step3,
+        acceleration_on_sec_step3,
+        min_delay_step4,
+        max_delay_step4,
+        power_step4,
+        duration_step4,
+        acceleration_on_sec_step4
+        -- resolution
+        -- unit
+        -- accurency
+        -- range_min
+        -- range_max
+      FROM
+        archive.sensor AS archival_tag
+        LEFT JOIN archive.sensor_type AS sensor_type
+          ON archival_tag.sensor_type_fk = sensor_type.id_pk
+    )
+
     SELECT
-      tag.serial_number AS tag_serial_number, -- Not acoustic_tag.serial_number_tbd
+      tag.serial_number AS tag_serial_number,
       CASE
         WHEN tag_type.name = 'id-tag' THEN 'acoustic'
+        WHEN tag_type.name = 'sensor-tag' AND tag_full_id IS NOT NULL THEN 'acoustic,archival'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
-      END AS tag_type, -- Not acoustic_tag.type_tbd
+      END AS tag_type,
       tag_subtype.name AS tag_subtype,
-      tag.id_pk AS tag_id,
-      acoustic_tag.tag_full_id AS acoustic_tag_id,
-      acoustic_tag.thelma_converted_code AS acoustic_tag_id_alternative,
-      manufacturer.project AS manufacturer, -- Not acoustic_tag.manufacturer_fk_tbd
-      tag.model AS model, -- Not acoustic_tag.model_tbd
-      acoustic_tag.frequency AS frequency,
-      acoustic_tag.tag_code_space AS acoustic_tag_id_protocol,
-      acoustic_tag.id_code AS acoustic_tag_id_code,
-      tag_status.name AS status, -- Not acoustic_tag.status_tbd
-      tag.activation_date AS activation_date, -- Not acoustic_tag.activation_date_tbd
-      tag.battery_estimated_lifetime AS battery_estimated_life, -- Not acoustic_tag.estimated_lifetime_tbd
-      tag.battery_estimated_end_date AS battery_estimated_end_date, -- Not acoustic_tag.end_date_tbd
-      acoustic_tag.sensor_type AS sensor_type,
-      acoustic_tag.slope AS sensor_slope,
-      acoustic_tag.intercept AS sensor_intercept,
-      acoustic_tag.range AS sensor_range,
-      acoustic_tag.sensor_transmit_ratio AS sensor_transmit_ratio,
-      acoustic_tag.accelerometer_algoritm AS accelerometer_algorithm,
-      acoustic_tag.accelerometer_samples_per_second AS accelerometer_samples_per_second,
-      owner_organization.name AS owner_organization, -- Not acoustic_tag.owner_group_fk_tbd
-      tag.owner_pi AS owner_pi, -- Not acoustic_tag.owner_pi_tbd
-      financing_project.projectcode AS financing_project, -- Not acoustic_tag.financing_project_fk_tbd
-      acoustic_tag.min_delay AS step1_min_delay,
-      acoustic_tag.max_delay AS step1_max_delay,
-      acoustic_tag.power AS step1_power,
-      acoustic_tag.duration_step1 AS step1_duration,
-      acoustic_tag.acceleration_on_sec_step1 AS step1_acceleration_duration,
-      acoustic_tag.min_delay_step2 AS step2_min_delay,
-      acoustic_tag.max_delay_step2 AS step2_max_delay,
-      acoustic_tag.power_step2 AS step2_power,
-      acoustic_tag.duration_step2 AS step2_duration,
-      acoustic_tag.acceleration_on_sec_step2 AS step2_acceleration_duration,
-      acoustic_tag.min_delay_step3 AS step3_min_delay,
-      acoustic_tag.max_delay_step3 AS step3_max_delay,
-      acoustic_tag.power_step3 AS step3_power,
-      acoustic_tag.duration_step3 AS step3_duration,
-      acoustic_tag.acceleration_on_sec_step3 AS step3_acceleration_duration,
-      acoustic_tag.min_delay_step4 AS step4_min_delay,
-      acoustic_tag.max_delay_step4 AS step4_max_delay,
-      acoustic_tag.power_step4 AS step4_power,
-      acoustic_tag.duration_step4 AS step4_duration,
-      acoustic_tag.acceleration_on_sec_step4 AS step4_acceleration_duration
+      combined_tag.tag_full_id AS acoustic_tag_id,
+      combined_tag.thelma_converted_code AS acoustic_tag_id_alternative,
+      manufacturer.project AS manufacturer,
+      tag.model AS model,
+      combined_tag.frequency AS frequency,
+      -- combined_tag.protocol AS acoustic_tag_id_protocol,
+      -- combined_tag.id_code AS acoustic_tag_id_code,
+      tag_status.name AS status,
+      tag.activation_date AS activation_date,
+      tag.battery_estimated_lifetime AS battery_estimated_life,
+      tag.battery_estimated_end_date AS battery_estimated_end_date,
+      combined_tag.sensor_type AS sensor_type,
+      combined_tag.slope AS sensor_slope,
+      combined_tag.intercept AS sensor_intercept,
+      combined_tag.range AS sensor_range,
+      combined_tag.sensor_transmit_ratio AS sensor_transmit_ratio,
+      combined_tag.accelerometer_algoritm AS accelerometer_algorithm,
+      combined_tag.accelerometer_samples_per_second AS accelerometer_samples_per_second,
+      owner_organization.name AS owner_organization,
+      tag.owner_pi AS owner_pi,
+      financing_project.projectcode AS financing_project,
+      combined_tag.min_delay AS step1_min_delay,
+      combined_tag.max_delay AS step1_max_delay,
+      combined_tag.power AS step1_power,
+      combined_tag.duration_step1 AS step1_duration,
+      combined_tag.acceleration_on_sec_step1 AS step1_acceleration_duration,
+      combined_tag.min_delay_step2 AS step2_min_delay,
+      combined_tag.max_delay_step2 AS step2_max_delay,
+      combined_tag.power_step2 AS step2_power,
+      combined_tag.duration_step2 AS step2_duration,
+      combined_tag.acceleration_on_sec_step2 AS step2_acceleration_duration,
+      combined_tag.min_delay_step3 AS step3_min_delay,
+      combined_tag.max_delay_step3 AS step3_max_delay,
+      combined_tag.power_step3 AS step3_power,
+      combined_tag.duration_step3 AS step3_duration,
+      combined_tag.acceleration_on_sec_step3 AS step3_acceleration_duration,
+      combined_tag.min_delay_step4 AS step4_min_delay,
+      combined_tag.max_delay_step4 AS step4_max_delay,
+      combined_tag.power_step4 AS step4_power,
+      combined_tag.duration_step4 AS step4_duration,
+      combined_tag.acceleration_on_sec_step4 AS step4_acceleration_duration,
+      tag.id_pk AS tag_device_id
     FROM common.tag_device AS tag
-      LEFT JOIN acoustic.tags AS acoustic_tag
-        ON tag.id_pk = acoustic_tag.tag_device_fk
+      LEFT JOIN combined_tag
+        ON tag.id_pk = combined_tag.tag_device_fk
       LEFT JOIN common.manufacturer AS manufacturer
         ON tag.manufacturer_fk = manufacturer.id_pk
       LEFT JOIN common.tag_device_type AS tag_type
@@ -123,8 +215,7 @@ get_acoustic_tags <- function(connection = con,
       LEFT JOIN common.projects AS financing_project
         ON tag.financing_project_fk = financing_project.id
     WHERE
-      tag_type.name = 'id-tag'
-      AND {tag_serial_number_query}
+      {tag_serial_number_query}
       AND {acoustic_tag_id_query}
     ", .con = connection)
   tags <- dbGetQuery(connection, query)

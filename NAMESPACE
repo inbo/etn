@@ -3,7 +3,6 @@
 export(connect_to_etn)
 export(download_dataset_old)
 export(get_acoustic_detections)
-export(get_acoustic_tags)
 export(get_animals)
 export(get_archival_tags)
 export(get_deployments_old)
