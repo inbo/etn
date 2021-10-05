@@ -144,6 +144,31 @@ test_that("get_animals() allows selecting on animal_project_code", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
+test_that("get_animals() allows selecting on tag_serial_number", {
+  # Errors
+  expect_error(get_animals(tag_serial_number = "0")) # Not an existing value
+  expect_error(get_animals(tag_serial_number = c("1187450", "0")))
+
+  # Select single value
+  single_select <- "1187450" # From 2014_demer
+  single_select_df <- get_animals(tag_serial_number = single_select)
+  expect_equal(
+    single_select_df %>% distinct(tag_serial_number) %>% pull(),
+    c(single_select)
+  )
+  expect_equal(nrow(single_select_df), 1)
+  # Note that not all tag_serial_number return a single row, e.g. "1119796"
+
+  # Select multiple values
+  multi_select <- c(1187449, "1187450") # Integers are allowed
+  multi_select_df <- get_animals(tag_serial_number = multi_select)
+  expect_equal(
+    multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
+    c(as.character(multi_select)) # Output will be all character
+  )
+  expect_equal(nrow(multi_select_df), 2)
+})
+
 test_that("get_animals() allows selecting on scientific_name", {
   # Errors
   expect_error(get_animals(scientific_name = "not_a_sciname"))
