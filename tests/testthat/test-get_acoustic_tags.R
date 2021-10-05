@@ -8,7 +8,7 @@ test_that("get_acoustic_tags() returns error for incorrect connection", {
 })
 
 test_that("get_acoustic_tags() returns a tibble", {
-  df <- get_acoustic_tags()
+  df <- get_acoustic_tags(con)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
@@ -20,7 +20,7 @@ test_that("get_acoustic_tags() returns unique tag_id", {
 })
 
 test_that("get_acoustic_tags() returns the expected columns", {
-  df <- get_acoustic_tags()
+  df <- get_acoustic_tags(con)
   expected_col_names <- c(
     "tag_serial_number",
     "tag_type",
@@ -73,19 +73,19 @@ test_that("get_acoustic_tags() returns the expected columns", {
 
 test_that("get_acoustic_tags() return tags of type 'acoustic'", {
   expect_equal(
-    get_acoustic_tags() %>% distinct(tag_type) %>% pull(),
+    get_acoustic_tags(con) %>% distinct(tag_type) %>% pull(),
     "acoustic"
   )
 })
 
 test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
   # Errors
-  expect_error(get_acoustic_tags(tag_serial_number = "0")) # Not an existing value
-  expect_error(get_acoustic_tags(tag_serial_number = c("1187450", "0")))
+  expect_error(get_acoustic_tags(con, tag_serial_number = "0")) # Not an existing value
+  expect_error(get_acoustic_tags(con, tag_serial_number = c("1187450", "0")))
 
   # Select single value
   single_select <- "1187450" # From 2014_demer
-  single_select_df <- get_acoustic_tags(tag_serial_number = single_select)
+  single_select_df <- get_acoustic_tags(con, tag_serial_number = single_select)
   expect_equal(
     single_select_df %>% distinct(tag_serial_number) %>% pull(),
     c(single_select)
@@ -95,7 +95,7 @@ test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
 
   # Select multiple values
   multi_select <- c(1187449, "1187450") # Integers are allowed
-  multi_select_df <- get_acoustic_tags(tag_serial_number = multi_select)
+  multi_select_df <- get_acoustic_tags(con, tag_serial_number = multi_select)
   expect_equal(
     multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
     c(as.character(multi_select)) # Output will be all character
@@ -105,12 +105,12 @@ test_that("get_acoustic_tags() allows selecting on tag_serial_number", {
 
 test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
   # Errors
-  expect_error(get_acoustic_tags(acoustic_tag_id = "not_a_tag_id"))
-  expect_error(get_acoustic_tags(acoustic_tag_id = c("A69-1601-16130", "not_a_tag_id")))
+  expect_error(get_acoustic_tags(con, acoustic_tag_id = "not_a_tag_id"))
+  expect_error(get_acoustic_tags(con, acoustic_tag_id = c("A69-1601-16130", "not_a_tag_id")))
 
   # Select single value
   single_select <- "A69-1601-16130" # From 2014_demer
-  single_select_df <- get_acoustic_tags(acoustic_tag_id = single_select)
+  single_select_df <- get_acoustic_tags(con, acoustic_tag_id = single_select)
   expect_equal(
     single_select_df %>% distinct(acoustic_tag_id) %>% pull(),
     c(single_select)
@@ -120,7 +120,7 @@ test_that("get_acoustic_tags() allows selecting on acoustic_tag_id", {
 
   # Select multiple values
   multi_select <- c("A69-1601-16129", "A69-1601-16130")
-  multi_select_df <- get_acoustic_tags(acoustic_tag_id = multi_select)
+  multi_select_df <- get_acoustic_tags(con, acoustic_tag_id = multi_select)
   expect_equal(
     multi_select_df %>% distinct(acoustic_tag_id) %>% pull() %>% sort(),
     c(multi_select)

@@ -1,7 +1,4 @@
-con <- connect_to_etn(
-  username = Sys.getenv("userid"),
-  password = Sys.getenv("pwd")
-)
+con <- connect_to_etn()
 
 testthat::test_that("Test output", {
   expect_is(list_receiver_ids(con), "character")

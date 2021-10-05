@@ -27,7 +27,7 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Act
   evaluate_download_2014_demer <- evaluate_promise({
-    download_dataset(connection = con,
+    download_dataset_old(connection = con,
                      animal_project_code = "2014_demer",
                      directory = dir_to_download_data)
   })
