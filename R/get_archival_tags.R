@@ -45,7 +45,6 @@ get_archival_tags <- function(connection = con,
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
     tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
-    include_ref_tags <- TRUE
   }
 
   # Check archival_tag_id
@@ -56,7 +55,6 @@ get_archival_tags <- function(connection = con,
     archival_tag_id <- as.character(archival_tag_id) # Cast to character
     check_value(archival_tag_id, valid_archival_tag_ids, "archival_tag_id")
     archival_tag_id_query <- glue_sql("archival_tag.id_code IN ({archival_tag_id*})", .con = connection)
-    include_ref_tags <- TRUE
   }
 
   # Build query
