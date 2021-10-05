@@ -1,4 +1,4 @@
-# SUPPORT FUNCTIONS
+# HELPER FUNCTIONS
 
 #' Check the validity of the database connection
 #'
@@ -6,11 +6,7 @@
 #'
 #' @keywords internal
 #'
-#' @noRd
-#'
 #' @importFrom methods is
-#'
-#' @keywords internal
 check_connection <- function(connection) {
   assert_that(is(connection, "PostgreSQL"),
     msg = "Not a connection object to database."
@@ -32,12 +28,8 @@ check_connection <- function(connection) {
 #'
 #' @keywords internal
 #'
-#' @noRd
-#'
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
-#'
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -86,11 +78,7 @@ check_value <- function(arg, options = NULL, arg_name) {
 #'
 #' @keywords internal
 #'
-#' @noRd
-#'
 #' @importFrom glue glue_collapse
-#'
-#' @keywords internal
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
