@@ -231,10 +231,10 @@ test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- df %>% filter(!str_detect(tag_type, ",")) # Remove multiple associated tags
   expect_equal(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
-    c("", "acoustic", "acoustic-archival", "archival")
+    c("", "acoustic", "acoustic-archival") # "archival" currently not in data
   )
   expect_equal(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),
-    c("", "animal", "built-in", "sentinel") # "range" not yet in data
+    c("", "animal", "built-in", "sentinel") # "range" currently not in data
   )
 })
