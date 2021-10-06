@@ -26,6 +26,7 @@ test_that("get_animals() returns the expected columns", {
     "tag_serial_number",
     "tag_type",
     "tag_subtype",
+    "acoustic_tag_id",
     "scientific_name",
     "common_name",
     "aphia_id",
@@ -210,10 +211,11 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 
   expect_equal(nrow(animal_two_tags_df), 1) # Rows should be collapsed
 
-  # Columns starting with tag_ are collapsed with comma
+  # Columns starting with tag_ and acoustic_tag_id are collapsed with comma
   tag_col_names <- c(
     "tag_serial_number",
     "tag_type",
+    "acoustic_tag_id",
     "tagger",
     "tagging_type",
     "tagging_methodology"

@@ -31,8 +31,9 @@ A tibble with animals data, sorted by \code{animal_project_code},
 }
 \description{
 Get data for animals, with options to filter results. Associated tag
-information is available in columns starting with \code{tag}. If multiple tags
-are associated with a single animal, the information is comma-separated.
+information is available in columns starting with \code{tag} and
+\code{acoustic_tag_id}. If multiple tags are associated with a single animal,
+the information is comma-separated.
 }
 \examples{
 \dontrun{

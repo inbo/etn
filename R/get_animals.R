@@ -1,8 +1,9 @@
 #' Get animal data
 #'
 #' Get data for animals, with options to filter results. Associated tag
-#' information is available in columns starting with `tag`. If multiple tags
-#' are associated with a single animal, the information is comma-separated.
+#' information is available in columns starting with `tag` and
+#' `acoustic_tag_id`. If multiple tags are associated with a single animal,
+#' the information is comma-separated.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal identifiers.
@@ -108,6 +109,7 @@ get_animals <- function(connection = con,
       tag.tag_serial_number AS tag_serial_number,
       tag.tag_type AS tag_type,
       tag.tag_subtype AS tag_subtype,
+      tag.acoustic_tag_id AS acoustic_tag_id,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
@@ -185,11 +187,11 @@ get_animals <- function(connection = con,
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
     animals %>%
-    select(starts_with("tag")) %>%
+    select(starts_with("tag"), acoustic_tag_id) %>%
     names()
   other_cols <-
     animals %>%
-    select(-starts_with("tag")) %>%
+    select(-starts_with("tag"), -acoustic_tag_id) %>%
     names()
   animals <-
     animals %>%
