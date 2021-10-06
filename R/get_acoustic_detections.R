@@ -111,7 +111,7 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql("acoustic_tag.tag_full_id IN ({acoustic_tag_id*})", .con = connection)
+    acoustic_tag_id_query <- glue_sql("detection.transmitter IN ({acoustic_tag_id*})", .con = connection)
     include_ref_tags <- TRUE
   }
 
@@ -182,10 +182,26 @@ get_acoustic_detections <- function(connection = con,
 
   # Build query
   query <- glue_sql("
+    WITH tag AS (
+      SELECT
+        tag_device_fk,
+        tag_full_id AS acoustic_tag_id
+      FROM
+        acoustic.tags
+      UNION
+      SELECT
+        device_tag_fk AS tag_device_fk,
+        CASE
+          WHEN protocol IS NOT NULL AND id_code IS NOT NULL THEN CONCAT(protocol, '-', id_code)
+        END AS acoustic_tag_id
+      FROM
+        archive.sensor AS archival_tag
+    )
+
     SELECT
       detection.id_pk AS detection_id,
       detection.datetime AS date_time,
-      tag.serial_number AS tag_serial_number, -- Not detection.transmitter_serial
+      tag_device.serial_number AS tag_serial_number, -- Not detection.transmitter_serial
       detection.transmitter AS acoustic_tag_id,
       animal_project.projectcode AS animal_project_code,
       animal.id_pk AS animal_id,
@@ -205,12 +221,12 @@ get_acoustic_detections <- function(connection = con,
       detection.qc_flag AS qc_flag,
       detection.deployment_fk AS deployment_id
     FROM acoustic.detections AS detection
-      LEFT JOIN acoustic.tags AS acoustic_tag
-        ON detection.transmitter = acoustic_tag.tag_full_id
-        LEFT JOIN common.tag_device AS tag
-          ON acoustic_tag.tag_device_fk = tag.id_pk
+      LEFT JOIN tag AS tag
+        ON detection.transmitter = tag.acoustic_tag_id
+        LEFT JOIN common.tag_device AS tag_device
+          ON tag.tag_device_fk = tag_device.id_pk
           LEFT JOIN common.animal_release_tag_device AS animal_with_tag
-            ON tag.id_pk = animal_with_tag.tag_device_fk
+            ON tag_device.id_pk = animal_with_tag.tag_device_fk
             LEFT JOIN common.animal_release AS animal
               ON animal_with_tag.animal_release_fk = animal.id_pk
               LEFT JOIN common.projects AS animal_project
