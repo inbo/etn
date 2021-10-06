@@ -156,7 +156,12 @@ get_tags <- function(connection = con,
         WHEN tag_type.name = 'sensor-tag' AND tag_full_id IS NOT NULL THEN 'acoustic,archival'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
       END AS tag_type,
-      tag_subtype.name AS tag_subtype,
+      CASE
+        WHEN tag_subtype.name = 'animal' THEN 'animal'
+        WHEN tag_subtype.name = 'built-in tag' THEN 'built-in'
+        WHEN tag_subtype.name = 'range tag' THEN 'range'
+        WHEN tag_subtype.name = 'sentinel tag' THEN 'sentinel'
+      END AS tag_subtype,
       combined_tag.tag_full_id AS acoustic_tag_id,
       combined_tag.thelma_converted_code AS acoustic_tag_id_alternative,
       manufacturer.project AS manufacturer,

@@ -113,7 +113,12 @@ get_animals <- function(connection = con,
         WHEN tag_type.name = 'id-tag' THEN 'acoustic'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
       END AS tag_type,
-      tag_subtype.name AS tag_subtype,
+      CASE
+        WHEN tag_subtype.name = 'animal' THEN 'animal'
+        WHEN tag_subtype.name = 'built-in tag' THEN 'built-in'
+        WHEN tag_subtype.name = 'range tag' THEN 'range'
+        WHEN tag_subtype.name = 'sentinel tag' THEN 'sentinel'
+      END AS tag_subtype,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
