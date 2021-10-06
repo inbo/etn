@@ -161,6 +161,17 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
   expect_equal(nrow(multi_select_df), 2)
 })
 
+test_that("get_tags() allows selecting on multiple parameters", {
+  multiple_parameters_df <- get_tags(
+    con,
+    tag_serial_number = "1187450",
+    tag_type = "acoustic",
+    tag_subtype = "animal",
+    acoustic_tag_id = "A69-1601-16130"
+  )
+  expect_equal(nrow(multiple_parameters_df), 1)
+})
+
 test_that("get_tags() can return multiple rows for a single tag", {
   # A sentinel tag with temp + pressure sensor
   tag_1_df <- get_tags(con, tag_serial_number = 1292638)

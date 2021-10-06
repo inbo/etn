@@ -5,7 +5,7 @@ con <- connect_to_etn(
 
 valid_animal_projects <- list_animal_project_codes(con)
 
-testthat::test_that("Test input for project_type", {
+test_that("Test input for project_type", {
   expect_error(
     check_value("not_a_project_type", c("animal", "network"), "project_type"),
     paste0(
@@ -33,7 +33,7 @@ testthat::test_that("Test input for project_type", {
   )
 })
 
-testthat::test_that("Test input for animal_project", {
+test_that("Test input for animal_project", {
   expect_error(
     check_value("not_an_animal_project", valid_animal_projects, "animal_project")
   )

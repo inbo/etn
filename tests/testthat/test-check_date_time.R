@@ -1,4 +1,4 @@
-testthat::test_that("Test input", {
+test_that("Test input", {
   expect_true(check_date_time("1985-11-21") == "1985-11-21")
   expect_true(check_date_time("1985-11") == "1985-11-01")
   expect_true(check_date_time("1985") == "1985-01-01")
