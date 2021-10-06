@@ -273,6 +273,6 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
   expect_gt(nrow(acoustic_archival_df), 0)
   expect_equal(
     acoustic_archival_df %>% distinct(tag_serial_number) %>% pull(),
-    1400185
+    "1400185"
   )
 })
