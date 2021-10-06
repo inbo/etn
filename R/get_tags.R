@@ -6,8 +6,12 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
+#' @param tag_type Character (vector). `acoustic` or `archival`. Some tags are
+#'   both, find those with `acoustic-archival`.
+#' @param tag_subtype Character (vector). `animal`, `built-in`, `range` or
+#'   `sentinel`.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag
-#'   identifiers (i.e. identifier for detections).
+#'   identifiers. These are the identifiers found in acoustic detections.
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -26,12 +30,20 @@
 #' # Get all tags
 #' get_tags()
 #'
+#' # Get archival tags, including acoustic-archival
+#' get_tags(tag_type = c("archival", "acoustic-archival"))
+#'
+#' # Get tags of specific subtype
+#' get_tags(tag_subtype = c("built-in", "range"))
+#'
 #' # Get specific tags
 #' get_tags(tag_serial_number = "1187450")
 #' get_tags(acoustic_tag_id = "A69-1601-16130")
 #' get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 #' }
 get_tags <- function(connection = con,
+                     tag_type = NULL,
+                     tag_subtype = NULL,
                      tag_serial_number = NULL,
                      acoustic_tag_id = NULL) {
   # Check connection
@@ -44,7 +56,25 @@ get_tags <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
+    tag_serial_number_query <- glue_sql("tag_serial_number IN ({tag_serial_number*})", .con = connection)
+  }
+
+  # Check tag_type
+  if (is.null(tag_type)) {
+    tag_type_query <- "True"
+  } else {
+    valid_tag_types <- c("acoustic", "archival", "acoustic-archival")
+    check_value(tag_type, valid_tag_types, "tag_type")
+    tag_type_query <- glue_sql("tag_type IN ({tag_type*})", .con = connection)
+  }
+
+  # Check tag_subtype
+  if (is.null(tag_subtype)) {
+    tag_subtype_query <- "True"
+  } else {
+    valid_tag_subtypes <- c("animal", "built-in", "range", "sentinel")
+    check_value(tag_subtype, valid_tag_subtypes, "tag_subtype")
+    tag_subtype_query <- glue_sql("tag_subtype IN ({tag_subtype*})", .con = connection)
   }
 
   # Check acoustic_tag_id
@@ -53,12 +83,13 @@ get_tags <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql("combined_tag.tag_full_id IN ({acoustic_tag_id*})", .con = connection)
+    acoustic_tag_id_query <- glue_sql("acoustic_tag_id IN ({acoustic_tag_id*})", .con = connection)
   }
 
   # Build query
   query <- glue_sql("
-    WITH combined_tag AS (
+    WITH
+    combined_tag AS (
       SELECT
         -- id_pk,
         tag_device_fk,
@@ -99,7 +130,9 @@ get_tags <- function(connection = con,
         -- external_id
       FROM
         acoustic.tags
+
       UNION
+
       SELECT
         -- id_pk,
         device_tag_fk AS tag_device_fk,
@@ -149,11 +182,12 @@ get_tags <- function(connection = con,
           ON archival_tag.sensor_type_fk = sensor_type.id_pk
     )
 
+    SELECT * FROM (
     SELECT
       tag.serial_number AS tag_serial_number,
       CASE
         WHEN tag_type.name = 'id-tag' THEN 'acoustic'
-        WHEN tag_type.name = 'sensor-tag' AND tag_full_id IS NOT NULL THEN 'acoustic,archival'
+        WHEN tag_type.name = 'sensor-tag' AND tag_full_id IS NOT NULL THEN 'acoustic-archival'
         WHEN tag_type.name = 'sensor-tag' THEN 'archival'
       END AS tag_type,
       CASE
@@ -219,8 +253,11 @@ get_tags <- function(connection = con,
         ON tag.owner_group_fk = owner_organization.id_pk
       LEFT JOIN common.projects AS financing_project
         ON tag.financing_project_fk = financing_project.id
+    ) AS tag -- Subquery needed to allow where clause on tag_type, tag_subtype
     WHERE
       {tag_serial_number_query}
+      AND {tag_type_query}
+      AND {tag_subtype_query}
       AND {acoustic_tag_id_query}
     ", .con = connection)
   tags <- dbGetQuery(connection, query)
