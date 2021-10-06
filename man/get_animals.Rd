@@ -9,8 +9,7 @@ get_animals(
   animal_id = NULL,
   tag_serial_number = NULL,
   animal_project_code = NULL,
-  scientific_name = NULL,
-  exclude_non_animals = FALSE
+  scientific_name = NULL
 )
 }
 \arguments{
@@ -24,9 +23,6 @@ get_animals(
 Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
-
-\item{exclude_non_animals}{Logical. Exclude records with non-animal
-scientific names such as "Built-in" or "Sync tag". Defaults to \code{FALSE}.}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},
@@ -62,8 +58,5 @@ get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
 
 # Get animals of a specific species from a specific project
 get_animals(animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
-
-# Exclude non-animals (e.g. Sync tag)
-get_animals(exclude_non_animals = TRUE)
 }
 }

@@ -194,20 +194,6 @@ test_that("get_animals() allows selecting on scientific_name", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-test_that("get_animals() allows to exclude non-animals", {
-  # Errors
-  expect_error(get_animals(exclude_non_animals = "not_a_logical"))
-
-  # Non-animals do are excluded from results
-  non_animals <- c("Built-in", "Plastic", "Range tag", "Sync tag")
-  expect_equal(
-    get_animals(exclude_non_animals = TRUE) %>%
-      filter(scientific_name %in% non_animals) %>%
-      nrow(),
-    0
-  )
-})
-
 test_that("get_animals() allows selecting on multiple parameters", {
   multiple_parameters_df <- get_animals(
     animal_project_code = "2014_demer",
