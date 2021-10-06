@@ -47,7 +47,7 @@ test_that("list_values() returns error for incorrect input", {
   )
 })
 
-testthat::test_that("list_values() returns a vector with unique values", {
+test_that("list_values() returns a vector with unique values", {
   # Output has right class
   expect_is(list_values(df, chr_col), class = "character")
   expect_is(list_values(df, num_col), class = "numeric")
