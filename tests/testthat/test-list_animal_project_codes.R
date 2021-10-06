@@ -5,6 +5,6 @@ test_that("list_animal_project_codes() returns unique list of values", {
   expect_false(any(duplicated(list_animal_project_codes(con))))
   expect_true("2014_demer" %in% list_animal_project_codes(con))
 
-  # Don't expect network projects
+  # Should not include network projects
   expect_false("demer" %in% list_animal_project_codes(con))
 })

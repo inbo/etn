@@ -173,21 +173,21 @@ test_that("get_tags() allows selecting on multiple parameters", {
 })
 
 test_that("get_tags() can return multiple rows for a single tag", {
-  # A sentinel tag with temp + pressure sensor
-  tag_1_df <- get_tags(con, tag_serial_number = 1292638)
-  expect_equal(nrow(tag_1_df), 2) # 2 rows: temp + pressure
+  # A sentinel acoustic-archival tag with pressure + temperature sensor
+  tag_1_df <- get_tags(con, tag_serial_number = 1400185)
+  expect_equal(nrow(tag_1_df), 2) # 2 rows: presure + temperature
   expect_equal(
     tag_1_df %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     as_tibble(data.frame(
       tag_type = "acoustic-archival",
       tag_subtype = "sentinel",
-      sensor_type = c("temperature", "pressure"),
-      acoustic_tag_id = c("A69-9006-3638", "A69-9006-3639"),
+      sensor_type = c("pressure", "temperature"),
+      acoustic_tag_id = c("A69-9006-11100", "A69-9006-11099"),
       stringsAsFactors = FALSE
     ))
   )
 
-  # A built-in tag with two protocols: https://github.com/inbo/etn/issues/177#issuecomment-925578186
+  # A built-in acoustic tag with two protocols: https://github.com/inbo/etn/issues/177#issuecomment-925578186
   tag_2_df <- get_tags(con, tag_serial_number = 461076)
   expect_equal(nrow(tag_2_df), 2) # 2 rows: H170 + A180
   expect_equal(

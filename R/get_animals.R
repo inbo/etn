@@ -21,6 +21,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr %>% arrange as_tibble filter group_by_at mutate_at select
 #'   starts_with summarize_at ungroup
+#' @importFrom readr read_file
 #'
 #' @examples
 #' \dontrun{
@@ -85,7 +86,7 @@ get_animals <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql("tag.serial_number IN ({tag_serial_number*})", .con = connection)
+    tag_serial_number_query <- glue_sql("tag.tag_serial_number IN ({tag_serial_number*})", .con = connection)
   }
 
   # Check scientific_name
@@ -97,22 +98,16 @@ get_animals <- function(connection = con,
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
+  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+
   # Build query
   query <- glue_sql("
     SELECT
       animal.id_pk AS animal_id,
       animal_project.projectcode AS animal_project_code,
-      tag.serial_number AS tag_serial_number,
-      CASE
-        WHEN tag_type.name = 'id-tag' THEN 'acoustic'
-        WHEN tag_type.name = 'sensor-tag' THEN 'archival'
-      END AS tag_type,
-      CASE
-        WHEN tag_subtype.name = 'animal' THEN 'animal'
-        WHEN tag_subtype.name = 'built-in tag' THEN 'built-in'
-        WHEN tag_subtype.name = 'range tag' THEN 'range'
-        WHEN tag_subtype.name = 'sentinel tag' THEN 'sentinel'
-      END AS tag_subtype,
+      tag.tag_serial_number AS tag_serial_number,
+      tag.tag_type AS tag_type,
+      tag.tag_subtype AS tag_subtype,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
@@ -175,12 +170,8 @@ get_animals <- function(connection = con,
     FROM common.animal_release AS animal
       LEFT JOIN common.animal_release_tag_device AS animal_with_tag
         ON animal.id_pk = animal_with_tag.animal_release_fk
-        LEFT JOIN common.tag_device AS tag
-          ON animal_with_tag.tag_device_fk = tag.id_pk
-          LEFT JOIN common.tag_device_type AS tag_type
-            ON tag.tag_device_type_fk = tag_type.id_pk
-          LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
-            ON tag.acoustic_tag_subtype_fk = tag_subtype.id_pk
+        LEFT JOIN ({tag_query}) AS tag
+          ON animal_with_tag.tag_device_fk = tag.tag_device_fk
       LEFT JOIN common.projects AS animal_project
         ON animal.project_fk = animal_project.id
     WHERE
