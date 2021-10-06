@@ -194,20 +194,6 @@ test_that("get_animals() allows selecting on scientific_name", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-test_that("get_animals() allows to exclude non-animals", {
-  # Errors
-  expect_error(get_animals(con, exclude_non_animals = "not_a_logical"))
-
-  # Non-animals do are excluded from results
-  non_animals <- c("Built-in", "Plastic", "Range tag", "Sync tag")
-  expect_equal(
-    get_animals(con, exclude_non_animals = TRUE) %>%
-      filter(scientific_name %in% non_animals) %>%
-      nrow(),
-    0
-  )
-})
-
 test_that("get_animals() allows selecting on multiple parameters", {
   multiple_parameters_df <- get_animals(
     con,
@@ -238,4 +224,17 @@ test_that("get_animals() collapses multiple associated tags to one row", {
     function(x) grepl(pattern = ",", x = x)
   )
   expect_true(all(has_comma))
+})
+
+test_that("get_animals() returns correct tag_type and tag_subtype", {
+  df <- get_animals(con)
+  df <- df %>% filter(!str_detect(tag_type, ",")) # Remove multiple associated tags
+  expect_equal(
+    df %>% distinct(tag_type) %>% pull() %>% sort(),
+    c("", "acoustic", "acoustic-archival", "archival")
+  )
+  expect_equal(
+    df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+    c("", "animal", "built-in", "sentinel") # "range" not yet in data
+  )
 })

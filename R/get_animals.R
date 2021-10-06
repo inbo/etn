@@ -10,8 +10,6 @@
 #'   Case-insensitive.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param scientific_name Character (vector). One or more scientific names.
-#' @param exclude_non_animals Logical. Exclude records with non-animal
-#' scientific names such as "Built-in" or "Sync tag". Defaults to `FALSE`.
 #'
 #' @return A tibble with animals data, sorted by `animal_project_code`,
 #' `release_date_time` and `tag_serial_number`. See also
@@ -48,16 +46,12 @@
 #'
 #' # Get animals of a specific species from a specific project
 #' get_animals(animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
-#'
-#' # Exclude non-animals (e.g. Sync tag)
-#' get_animals(exclude_non_animals = TRUE)
 #' }
 get_animals <- function(connection = con,
                         animal_id = NULL,
                         tag_serial_number = NULL,
                         animal_project_code = NULL,
-                        scientific_name = NULL,
-                        exclude_non_animals = FALSE) {
+                        scientific_name = NULL) {
   # Check connection
   check_connection(connection)
 
@@ -196,12 +190,6 @@ get_animals <- function(connection = con,
       AND {scientific_name_query}
     ", .con = connection)
   animals <- dbGetQuery(connection, query)
-
-  # Exclude non animals (not the default)
-  non_animals <- c("Built-in", "Plastic", "Range tag", "Sync tag")
-  if (exclude_non_animals) {
-    animals <- animals %>% filter(!.data$scientific_name %in% non_animals)
-  }
 
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
