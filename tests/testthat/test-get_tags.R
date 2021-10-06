@@ -76,7 +76,7 @@ test_that("get_tags() allows selecting on tag_serial_number", {
     c(single_select)
   )
   expect_equal(nrow(single_select_df), 1)
-  # Note that not all tag_serial_number return a single row, e.g. "461076"
+  # Note that not all tag_serial_number return a single row, see further test
 
   # Select multiple values
   multi_select <- c(1187449, "1187450") # Integers are allowed
@@ -159,4 +159,34 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
     c(multi_select)
   )
   expect_equal(nrow(multi_select_df), 2)
+})
+
+test_that("get_tags() can return multiple rows for a single tag", {
+  # A sentinel tag with temp + pressure sensor
+  tag_1_df <- get_tags(con, tag_serial_number = 1292638)
+  expect_equal(nrow(tag_1_df), 2) # 2 rows: temp + pressure
+  expect_equal(
+    tag_1_df %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    as_tibble(data.frame(
+      tag_type = "acoustic-archival",
+      tag_subtype = "sentinel",
+      sensor_type = c("temperature", "pressure"),
+      acoustic_tag_id = c("A69-9006-3638", "A69-9006-3639"),
+      stringsAsFactors = FALSE
+    ))
+  )
+
+  # A built-in tag with two protocols: https://github.com/inbo/etn/issues/177#issuecomment-925578186
+  tag_2_df <- get_tags(con, tag_serial_number = 461076)
+  expect_equal(nrow(tag_2_df), 2) # 2 rows: H170 + A180
+  expect_equal(
+    tag_2_df %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    as_tibble(data.frame(
+      tag_type = "acoustic",
+      tag_subtype = "built-in",
+      sensor_type = NA_character_,
+      acoustic_tag_id = c("H170-1802-62076", "A180-1702-62076"),
+      stringsAsFactors = FALSE
+    ))
+  )
 })
