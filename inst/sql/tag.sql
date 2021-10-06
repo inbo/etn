@@ -39,7 +39,6 @@ FROM
         device_tag_fk AS tag_device_fk,
         sensor_type.description AS sensor_type,
         CASE
-          WHEN sensor_full_id IS NOT NULL THEN sensor_full_id
           WHEN protocol IS NOT NULL AND id_code IS NOT NULL THEN CONCAT(protocol, '-', id_code)
         END AS acoustic_tag_id,
         NULL AS thelma_converted_code,
