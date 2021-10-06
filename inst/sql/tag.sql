@@ -1,5 +1,4 @@
-/* Creates unified tag table by querying common.tag_device joined with union of
-acoustic.tag + archive.sensor, adding controlled vocabulary for tag_type and tag_subtype.*/
+/* Unified tag table with controlled tag_type, tag_subtype */
 SELECT
   tag_device.serial_number AS tag_serial_number,
   CASE

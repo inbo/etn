@@ -21,6 +21,7 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom readr read_file
 #'
 #' @examples
 #' \dontrun{

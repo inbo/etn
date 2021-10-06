@@ -21,6 +21,7 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom dplyr %>% arrange as_tibble filter group_by_at mutate_at select
 #'   starts_with summarize_at ungroup
+#' @importFrom readr read_file
 #'
 #' @examples
 #' \dontrun{
