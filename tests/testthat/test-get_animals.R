@@ -224,3 +224,16 @@ test_that("get_animals() collapses multiple associated tags to one row", {
   )
   expect_true(all(has_comma))
 })
+
+test_that("get_animals() returns correct tag_type and tag_subtype", {
+  df <- get_animals(con)
+  df <- df %>% filter(!str_detect(tag_type, ",")) # Remove multiple associated tags
+  expect_equal(
+    df %>% distinct(tag_type) %>% pull() %>% sort(),
+    c("", "acoustic", "acoustic-archival", "archival")
+  )
+  expect_equal(
+    df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+    c("", "animal", "built-in", "sentinel") # "range" not yet in data
+  )
+})

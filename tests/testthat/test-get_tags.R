@@ -190,3 +190,15 @@ test_that("get_tags() can return multiple rows for a single tag", {
     ))
   )
 })
+
+test_that("get_tags() returns correct tag_type and tag_subtype", {
+  df <- get_tags(con)
+  expect_equal(
+    df %>% distinct(tag_type) %>% pull() %>% sort(),
+    c("acoustic", "acoustic-archival", "archival")
+  )
+  expect_equal(
+    df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+    c("animal", "built-in", "range", "sentinel")
+  )
+})
