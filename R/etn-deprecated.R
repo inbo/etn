@@ -9,6 +9,13 @@ NULL
 
 #' @rdname etn-deprecated
 #' @export
+get_deployments <- function(...) {
+  .Deprecated("get_acoustic_deployments")
+  get_acoustic_deployments(...)
+}
+
+#' @rdname etn-deprecated
+#' @export
 get_detections <- function(connection = con, tag_id, ...) {
   .Deprecated("get_acoustic_detections")
   get_acoustic_detections(acoustic_tag_id = tag_id)
