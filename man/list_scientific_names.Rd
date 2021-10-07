@@ -10,7 +10,8 @@ list_scientific_names(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{scientific_name} present in \code{animals_view2}.
+A vector of all unique \code{scientific_name} present in
+\code{common.animal_release}.
 }
 \description{
 List all available scientific names

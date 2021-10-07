@@ -7,14 +7,14 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all unique `project_code` of `project_type="network"`
-#'   present in `projects_view2`.
+#' @return A vector of all unique `projectcode` of `type="network"` in
+#'   `common.projects`.
 list_network_project_codes <- function(connection = con) {
   query <- glue_sql(
-    "SELECT DISTINCT project_code FROM acoustic.projects_view2 WHERE project_type = 'network'",
+    "SELECT DISTINCT projectcode FROM common.projects WHERE type = 'network'",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
 
-  sort(data$project_code)
+  sort(data$projectcode)
 }
