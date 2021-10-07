@@ -191,9 +191,7 @@ get_acoustic_detections <- function(connection = con,
       UNION
       SELECT
         device_tag_fk AS tag_device_fk,
-        CASE
-          WHEN protocol IS NOT NULL AND id_code IS NOT NULL THEN CONCAT(protocol, '-', id_code)
-        END AS acoustic_tag_id
+        sensor_full_id AS acoustic_tag_id
       FROM
         archive.sensor AS archival_tag
     )
