@@ -21,19 +21,19 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get all receivers
-#' get_receivers(con)
+#' get_receivers_old(con)
 #'
 #' # Get specific receivers
-#' get_receivers(con, receiver_id = "VR2-4842c")
-#' get_receivers(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
+#' get_receivers_old(con, receiver_id = "VR2-4842c")
+#' get_receivers_old(con, receiver_id = c("VR2AR-545719", "VR2AR-545720"))
 #'
 #' # Get receivers for a specific application type
-#' get_receivers(con, application_type = "cpod")
+#' get_receivers_old(con, application_type = "cpod")
 #'
 #' # Get receivers with a specific status
-#' get_receivers(con, status = c("Broken", "Lost"))
+#' get_receivers_old(con, status = c("Broken", "Lost"))
 #' }
-get_receivers <- function(connection = con,
+get_receivers_old <- function(connection = con,
                           receiver_id = NULL,
                           application_type = NULL,
                           status = NULL) {
@@ -71,7 +71,7 @@ get_receivers <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.receivers_view2
+      acoustic.receivers_view2
     WHERE
       {receiver_id_query}
       AND {application_type_query}

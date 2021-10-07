@@ -28,24 +28,17 @@ library(kableExtra)
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
 query <- glue_sql("
     SELECT
-      viewname,
-      field,
-      trim(regexp_replace(definition, '[\\s+]+', ' ', 'g')) AS definition,
-      trim(regexp_replace(example, '[\\s+]+', ' ', 'g')) AS example,
-      CASE
-        WHEN datatype = 'character varying' THEN 'character'
-        WHEN datatype = 'text' THEN 'character'
-        WHEN datatype = 'double precision' THEN 'double'
-        WHEN datatype = 'numeric' THEN 'double'
-        WHEN datatype = 'timestamp without time zone' THEN 'datetime'
-        WHEN datatype = 'smallint' THEN 'integer'
-        ELSE datatype
-      END AS datatype,
-      \"order\"
+      data_format_field_views_definition AS view,
+      lower(field_name) AS field,
+      trim(regexp_replace(field_definition, '[\\s+]+', ' ', 'g')) AS definition,
+      trim(regexp_replace(field_units_format_description, '[\\s+]+', ' ', 'g')) AS example,
+      order_field_definitions AS \"order\"
     FROM
-      vliz.field_definitions
+      app.field_metadata
+    WHERE
+      data_format_field_views_definition IS NOT NULL
     ORDER BY
-      viewname,
+      view,
       \"order\"
     ", .con = connection)
 etn_fields <- dbGetQuery(con, query)
@@ -63,11 +56,11 @@ view_table <- function(view_name) {
   view_data <-
     etn_fields %>%
     # Filter on view
-    filter(viewname == view_name) %>%
+    filter(view == view_name) %>%
     # Order by order (should already be done by query)
     arrange(order) %>%
     # Select columns
-    select(field, definition, example, datatype) %>%
+    select(field, definition, example) %>%
     # Convert quotes to backticks, so examples are shown as markdown monospaced code
     mutate(across(everything(), ~ str_replace_all(., "\"", "`"))) %>%
     # Wrap "field" in backticks
@@ -82,9 +75,7 @@ view_table <- function(view_name) {
     # definition
     column_spec(2, width = "40%") %>%
     # example
-    column_spec(3, width = "25%") %>%
-    # data type
-    column_spec(4, width = "10%")
+    column_spec(3, width = "35%")
   
   return(view_kable)
 }

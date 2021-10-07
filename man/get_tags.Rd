@@ -4,36 +4,54 @@
 \alias{get_tags}
 \title{Get tag data}
 \usage{
-get_tags(connection = con, tag_id = NULL, include_ref_tags = FALSE)
+get_tags(
+  connection = con,
+  tag_type = NULL,
+  tag_subtype = NULL,
+  tag_serial_number = NULL,
+  acoustic_tag_id = NULL
+)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 
-\item{tag_id}{Character (vector). One or more tag ids.}
+\item{tag_type}{Character (vector). \code{acoustic} or \code{archival}. Some tags are
+both, find those with \code{acoustic-archival}.}
 
-\item{include_ref_tags}{Logical. Include reference tags. Defaults to
-\code{FALSE}.}
+\item{tag_subtype}{Character (vector). \code{animal}, \verb{built-in}, \code{range} or
+\code{sentinel}.}
+
+\item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
+
+\item{acoustic_tag_id}{Character (vector). One or more acoustic tag
+identifiers. These are the identifiers found in acoustic detections.}
 }
 \value{
-A tibble with tags data, sorted by \code{tag_id}. See also
+A tibble with tags data, sorted by \code{tag_serial_number}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
-Get data for tags, with options to filter results. By default, reference
-tags are excluded.
+Get data for tags, with options to filter results. Note that there
+can be multiple records (\code{acoustic_tag_id}) per tag device
+(\code{tag_serial_number}).
 }
 \examples{
 \dontrun{
-con <- connect_to_etn(your_username, your_password)
+# Set default connection variable
+con <- connect_to_etn()
 
-# Get all (animal) tags
-get_tags(con)
+# Get all tags
+get_tags()
 
-# Get all tags, including reference tags
-get_tags(con, include_ref_tags = TRUE)
+# Get archival tags, including acoustic-archival
+get_tags(tag_type = c("archival", "acoustic-archival"))
 
-# Get specific tags (will automatically set include_ref_tags = TRUE)
-get_tags(con, tag_id = "A69-1303-65313")
-get_tags(con, tag_id = c("A69-1601-1705", "A69-1601-1707"))
+# Get tags of specific subtype
+get_tags(tag_subtype = c("built-in", "range"))
+
+# Get specific tags
+get_tags(tag_serial_number = "1187450")
+get_tags(acoustic_tag_id = "A69-1601-16130")
+get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 }
 }

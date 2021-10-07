@@ -27,7 +27,7 @@ test_that("Downloading the data package returns desired message and files", {
 
   # Act
   evaluate_download_2014_demer <- evaluate_promise({
-    download_dataset(connection = con,
+    download_dataset_old(connection = con,
                      animal_project_code = "2014_demer",
                      directory = dir_to_download_data)
   })
@@ -50,8 +50,9 @@ test_that("Downloading the data package returns desired message and files", {
   # Function returns no result
   expect_null(evaluate_download_2014_demer$result)
 
-  # Function returns no output
-  expect_true(evaluate_download_2014_demer$output == "")
+  # Function returns a verbose output of length 1
+  expect_equal(length(evaluate_download_2014_demer$output), 1)
+  expect_true(evaluate_download_2014_demer$output[1] != "")
 
   # Remove generated files and directories after test
   unlink(dir_to_download_data, recursive = TRUE)

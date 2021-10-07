@@ -20,18 +20,18 @@
 #' con <- connect_to_etn(your_username, your_password)
 #'
 #' # Get all projects
-#' get_projects(con)
+#' get_projects_old(con)
 #'
 #' # Get all animal projects
-#' get_projects(con, project_type = "animal")
+#' get_projects_old(con, project_type = "animal")
 #'
 #' # Get all network projects
-#' get_projects(con, project_type = "network")
+#' get_projects_old(con, project_type = "network")
 #'
 #' # Get projects for a specific application type
-#' get_projects(con, application_type = "cpod")
+#' get_projects_old(con, application_type = "cpod")
 #' }
-get_projects <- function(connection = con,
+get_projects_old <- function(connection = con,
                          project_type = NULL,
                          application_type = NULL) {
   # Check connection
@@ -58,7 +58,7 @@ get_projects <- function(connection = con,
     SELECT
       *
     FROM
-      vliz.projects_view2
+      acoustic.projects_view2
     WHERE
       {project_type_query}
       AND {application_type_query}

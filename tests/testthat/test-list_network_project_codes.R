@@ -1,11 +1,10 @@
-con <- connect_to_etn(
-  username = Sys.getenv("userid"),
-  password = Sys.getenv("pwd")
-)
+con <- connect_to_etn()
 
-testthat::test_that("Test output", {
+test_that("list_network_project_codes() returns unique list of values", {
   expect_is(list_network_project_codes(con), "character")
   expect_false(any(duplicated(list_network_project_codes(con))))
-  expect_true("thornton" %in% list_network_project_codes(con))
-  expect_false("phd_reubens" %in% list_network_project_codes(con))
+  expect_true("demer" %in% list_network_project_codes(con))
+
+  # Should not include animal projects
+  expect_false("2014_demer" %in% list_network_project_codes(con))
 })
