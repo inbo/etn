@@ -4,6 +4,7 @@
 \alias{etn-deprecated}
 \alias{get_deployments}
 \alias{get_detections}
+\alias{get_receivers}
 \alias{get_transmitters}
 \alias{list_tag_ids}
 \title{Deprecated functions in etn}
@@ -11,6 +12,8 @@
 get_deployments(...)
 
 get_detections(connection = con, tag_id, ...)
+
+get_receivers(...)
 
 get_transmitters(connection = con, tag_id, ...)
 
