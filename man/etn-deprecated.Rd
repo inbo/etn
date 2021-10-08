@@ -5,18 +5,22 @@
 \alias{get_deployments}
 \alias{get_detections}
 \alias{get_receivers}
-\alias{get_transmitters}
 \alias{list_network_project_codes}
 \alias{list_tag_ids}
 \title{Deprecated functions in etn}
 \usage{
-get_deployments(...)
+get_deployments(connection = con, network_project_code = NULL, ...)
 
-get_detections(connection = con, tag_id, ...)
+get_detections(
+  connection = con,
+  tag_id = NULL,
+  network_project_code = NULL,
+  ...
+)
+
+get_projects(connection = con, project_type, application_type)
 
 get_receivers(...)
-
-get_transmitters(connection = con, tag_id, ...)
 
 list_network_project_codes(...)
 

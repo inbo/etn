@@ -9,16 +9,20 @@ NULL
 
 #' @rdname etn-deprecated
 #' @export
-get_deployments <- function(...) {
+get_deployments <- function(connection = con, network_project_code = NULL, ...) {
   .Deprecated("get_acoustic_deployments")
-  get_acoustic_deployments(...)
+  get_acoustic_deployments(acoustic_project_code = network_project_code, ...)
 }
 
 #' @rdname etn-deprecated
 #' @export
-get_detections <- function(connection = con, tag_id, ...) {
+get_detections <- function(connection = con, tag_id = NULL, network_project_code = NULL, ...) {
   .Deprecated("get_acoustic_detections")
-  get_acoustic_detections(acoustic_tag_id = tag_id)
+  get_acoustic_detections(acoustic_tag_id = tag_id, acoustic_project_code = network_project_code, ...)
+}
+
+#' @rdname etn-deprecated
+#' @export
 }
 
 #' @rdname etn-deprecated
@@ -26,13 +30,6 @@ get_detections <- function(connection = con, tag_id, ...) {
 get_receivers <- function(...) {
   .Deprecated("get_acoustic_receivers")
   get_acoustic_receivers(...)
-}
-
-#' @rdname etn-deprecated
-#' @export
-get_transmitters <- function(connection = con, tag_id, ...) {
-  .Deprecated("get_acoustic_tags")
-  get_acoustic_tags(acoustic_tag_id = tag_id)
 }
 
 #' @rdname etn-deprecated
