@@ -4,6 +4,7 @@
 \alias{etn-deprecated}
 \alias{get_deployments}
 \alias{get_detections}
+\alias{get_projects}
 \alias{get_receivers}
 \alias{list_network_project_codes}
 \alias{list_tag_ids}
