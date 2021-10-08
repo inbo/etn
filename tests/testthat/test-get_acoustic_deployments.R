@@ -158,6 +158,17 @@ test_that("get_acoustic_deployments() allows selecting on open deployments only"
   expect_true(all(is.na(open_only_df$recover_date_time)))
 })
 
+test_that("get_acoustic_deployments() allows selecting on multiple parameters", {
+  multiple_parameters_df <- get_acoustic_deployments(
+    con,
+    receiver_id = "VR2W-124070",
+    network_project_code = "demer",
+    station_name = "de-9",
+    open_only = FALSE
+  )
+  expect_gt(nrow(multiple_parameters_df), 0)
+})
+
 test_that("get_acoustic_deployments() does not return cpod deployments", {
   # POD-3330 is a cpod receiver
   df <- get_acoustic_deployments(con, receiver_id = "POD-3330")
