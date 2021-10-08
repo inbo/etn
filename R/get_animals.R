@@ -94,8 +94,8 @@ get_animals <- function(connection = con,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name_ids <- list_scientific_names(connection)
-    check_value(scientific_name, scientific_name_ids, "scientific_name")
+    valid_scientific_name_ids <- list_scientific_names(connection)
+    check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
