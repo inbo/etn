@@ -265,7 +265,7 @@ test_that("get_acoustic_detections() allows selecting on multiple parameters", {
 })
 
 test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags", {
-  acoustic_df <- get_acoustic_detections(acoustic_tag_id = "A69-1601-16130")
+  acoustic_df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1601-16130")
   expect_gt(nrow(acoustic_df), 0)
 
   # A sentinel acoustic-archival tag with pressure + temperature sensor
