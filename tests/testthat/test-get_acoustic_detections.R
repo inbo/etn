@@ -276,3 +276,20 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
     "1400185"
   )
 })
+
+test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
+  # acoustic_tag_id A69-1601-29925 (tag_serial_number = 1145373) is associated
+  # with two animals:
+  # - 393: 2012_leopoldkanaal from 2012-08-21 14:27:00 to 2012-12-10
+  # - 394: 2012_leopoldkanaal from 2012-12-14 13:30:00 to open
+  # Detections should be joined with acoustic_tag_id AND datetime, so that they
+  # are not duplicated. Note: for df_393 we use a start_date to limit records.
+  df_393 <- get_acoustic_detections(con, acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-01", end_date = "2012-12-10")
+  df_394 <- get_acoustic_detections(con, acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-14")
+
+  # Should not return duplicates
+  expect_equal(nrow(df_393), nrow(df_393 %>% distinct(detection_id)))
+  expect_equal(df_393 %>% distinct(animal_id) %>% pull, 393)
+  expect_equal(nrow(df_394), nrow(df_394 %>% distinct(detection_id)))
+  expect_equal(df_394 %>% distinct(animal_id) %>% pull, 394)
+})
