@@ -26,6 +26,7 @@ FROM
         tag_full_id AS acoustic_tag_id,
         thelma_converted_code,
         frequency,
+        NULL AS resolution, NULL AS unit, NULL AS accurency, NULL AS range_min, NULL AS range_max,
         slope, intercept, range, sensor_transmit_ratio, accelerometer_algoritm, accelerometer_samples_per_second,
         min_delay, max_delay, power, duration_step1, acceleration_on_sec_step1,
         min_delay_step2, max_delay_step2, power_step2, duration_step2, acceleration_on_sec_step2,
@@ -41,12 +42,13 @@ FROM
         sensor_full_id AS acoustic_tag_id,
         NULL AS thelma_converted_code,
         frequency,
+        resolution, unit, accurency, range_min, range_max,
         slope, intercept, range, sensor_transmit_ratio, accelerometer_algoritm, accelerometer_samples_per_second,
         min_delay, max_delay, power, duration_step1, acceleration_on_sec_step1,
         min_delay_step2, max_delay_step2, power_step2, duration_step2, acceleration_on_sec_step2,
         min_delay_step3, max_delay_step3, power_step3, duration_step3, acceleration_on_sec_step3,
         min_delay_step4, max_delay_step4, power_step4, duration_step4, acceleration_on_sec_step4
-        -- id_pk, protocol, id_code, resolution, unit, accurency, range_min, range_max
+        -- id_pk, protocol, id_code
       FROM
         archive.sensor AS archival_tag
         LEFT JOIN archive.sensor_type AS sensor_type
