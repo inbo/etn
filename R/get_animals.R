@@ -170,7 +170,7 @@ get_animals <- function(connection = con,
       animal.post_op_holding_period AS post_surgery_holding_period,
       animal.holding_temperature AS holding_temperature,
       animal.comments AS comments
-    FROM common.animal_release AS animal
+    FROM common.animal_release_limited AS animal
       LEFT JOIN common.animal_release_tag_device AS animal_with_tag
         ON animal.id_pk = animal_with_tag.animal_release_fk
         LEFT JOIN ({tag_query}) AS tag

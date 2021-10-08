@@ -14,7 +14,7 @@ SELECT
   END AS tag_subtype,
   tag_union.*
 FROM
-  common.tag_device AS tag_device
+  common.tag_device_limited AS tag_device
     LEFT JOIN common.tag_device_type AS tag_type
       ON tag_device.tag_device_type_fk = tag_type.id_pk
     LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype

@@ -10,4 +10,4 @@ SELECT
     WHEN status = 'Returned to manufacturer' THEN 'returned'
   END AS controlled_status
 FROM
-  acoustic.receivers
+  acoustic.receivers_limited
