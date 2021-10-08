@@ -37,6 +37,13 @@ get_transmitters <- function(connection = con, tag_id, ...) {
 
 #' @rdname etn-deprecated
 #' @export
+list_network_project_codes <- function(...) {
+  .Deprecated("list_acoustic_project_codes")
+  list_acoustic_project_codes(...)
+}
+
+#' @rdname etn-deprecated
+#' @export
 list_tag_ids <- function(...) {
   .Deprecated("list_acoustic_tag_ids")
   list_acoustic_tag_ids(...)

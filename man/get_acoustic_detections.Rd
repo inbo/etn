@@ -11,7 +11,7 @@ get_acoustic_detections(
   acoustic_tag_id = NULL,
   animal_project_code = NULL,
   scientific_name = NULL,
-  network_project_code = NULL,
+  acoustic_project_code = NULL,
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE
@@ -33,8 +33,8 @@ codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
 
-\item{network_project_code}{Character (vector). One or more network project
-codes. Case-insensitive.}
+\item{acoustic_project_code}{Character (vector). One or more acoustic
+project codes. Case-insensitive.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
@@ -91,11 +91,11 @@ get_acoustic_detections(
   station_name = c("de-9", "de-10")
 )
 
-# Get acoustic detections for a specific species, receiver and network project
+# Get acoustic detections for a specific species, receiver and acoustic project
 get_acoustic_detections(
   scientific_name = "Rutilus rutilus",
   receiver_id = "VR2W-124070",
-  network_project_code = "demer"
+  acoustic_project_code = "demer"
 )
 }
 }

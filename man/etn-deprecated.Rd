@@ -6,6 +6,7 @@
 \alias{get_detections}
 \alias{get_receivers}
 \alias{get_transmitters}
+\alias{list_network_project_codes}
 \alias{list_tag_ids}
 \title{Deprecated functions in etn}
 \usage{
@@ -16,6 +17,8 @@ get_detections(connection = con, tag_id, ...)
 get_receivers(...)
 
 get_transmitters(connection = con, tag_id, ...)
+
+list_network_project_codes(...)
 
 list_tag_ids(...)
 }

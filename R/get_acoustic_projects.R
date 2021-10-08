@@ -38,7 +38,7 @@ get_acoustic_projects <- function(connection = con,
     acoustic_project_code_query <- "True"
   } else {
     acoustic_project_code <- tolower(acoustic_project_code)
-    valid_acoustic_project_codes <- tolower(list_network_project_codes(connection))
+    valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
     check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
     acoustic_project_code_query <- glue_sql(
       "LOWER(project.project_code) IN ({acoustic_project_code*})",

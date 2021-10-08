@@ -7,7 +7,7 @@
 get_acoustic_deployments(
   connection = con,
   receiver_id = NULL,
-  network_project_code = NULL,
+  acoustic_project_code = NULL,
   station_name = NULL,
   open_only = FALSE
 )
@@ -17,8 +17,8 @@ get_acoustic_deployments(
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
-\item{network_project_code}{Character (vector). One or more network project
-codes. Case-insensitive.}
+\item{acoustic_project_code}{Character (vector). One or more acoustic
+project codes. Case-insensitive.}
 
 \item{station_name}{Character (vector). One or more deployment station
 names. Case-insensitive.}
@@ -28,7 +28,7 @@ open (i.e. no end date defined). Defaults to \code{FALSE}.}
 }
 \value{
 A tibble with acoustic deployment data, sorted by
-\code{network_project_code}, \code{station_name} and \code{deploy_date_time}. See also
+\code{acoustic_project_code}, \code{station_name} and \code{deploy_date_time}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
 }
 \description{
@@ -49,8 +49,8 @@ get_acoustic_deployments(receiver_id = "VR2W-124070")
 # Get open acoustic deployments for a specific receiver
 get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
 
-# Get acoustic deployments for a specific network project
-get_acoustic_deployments(con, network_project_code = "demer")
+# Get acoustic deployments for a specific acoustic project
+get_acoustic_deployments(con, acoustic_project_code = "demer")
 
 # Get acoustic deployments for two specific stations
 get_acoustic_deployments(con, station_name = c("de-9", "de-10"))

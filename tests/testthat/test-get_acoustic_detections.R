@@ -28,7 +28,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "animal_project_code",
     "animal_id",
     "scientific_name",
-    "network_project_code",
+    "acoustic_project_code",
     "receiver_id",
     "station_name",
     "deploy_latitude",
@@ -159,31 +159,31 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-test_that("get_acoustic_detections() allows selecting on network_project_code", {
+test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
   # Errors
-  expect_error(get_acoustic_detections(con, network_project_code = "not_a_project"))
-  expect_error(get_acoustic_detections(con, network_project_code = c("demer", "not_a_project")))
+  expect_error(get_acoustic_detections(con, acoustic_project_code = "not_a_project"))
+  expect_error(get_acoustic_detections(con, acoustic_project_code = c("demer", "not_a_project")))
 
   # Select single value
   single_select <- "demer"
-  single_select_df <- get_acoustic_detections(con, network_project_code = single_select)
+  single_select_df <- get_acoustic_detections(con, acoustic_project_code = single_select)
   expect_equal(
-    single_select_df %>% distinct(network_project_code) %>% pull(),
+    single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(con, network_project_code = "demer", limit = TRUE),
-    get_acoustic_detections(con, network_project_code = "DEMER", limit = TRUE)
+    get_acoustic_detections(con, acoustic_project_code = "demer", limit = TRUE),
+    get_acoustic_detections(con, acoustic_project_code = "DEMER", limit = TRUE)
   )
 
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <- get_acoustic_detections(con, network_project_code = multi_select)
+  multi_select_df <- get_acoustic_detections(con, acoustic_project_code = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(network_project_code) %>% pull() %>% sort(),
+    multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -244,7 +244,7 @@ test_that("get_acoustic_detections() allows to limit to 100 records", {
   # Limit
   expect_equal(nrow(get_acoustic_detections(con, limit = TRUE)), 100)
   expect_equal(
-    nrow(get_acoustic_detections(con, network_project_code = "demer", limit = TRUE)),
+    nrow(get_acoustic_detections(con, acoustic_project_code = "demer", limit = TRUE)),
     100
   )
 })
@@ -257,7 +257,7 @@ test_that("get_acoustic_detections() allows selecting on multiple parameters", {
     acoustic_tag_id = "A69-1601-16130",
     animal_project_code = "2014_demer",
     scientific_name = "Rutilus rutilus",
-    network_project_code = "demer",
+    acoustic_project_code = "demer",
     receiver_id = "VR2W-124070",
     station_name = "de-9"
   )
