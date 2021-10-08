@@ -8,6 +8,7 @@ get_acoustic_deployments(
   connection = con,
   receiver_id = NULL,
   network_project_code = NULL,
+  station_name = NULL,
   open_only = FALSE
 )
 }
@@ -18,6 +19,9 @@ get_acoustic_deployments(
 
 \item{network_project_code}{Character (vector). One or more network
 projects. Case-insensitive.}
+
+\item{station_name}{Character (vector). One or more deployment station
+names. Case-insensitive.}
 
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{FALSE}.}
@@ -39,10 +43,16 @@ con <- connect_to_etn()
 # Get all acoustic deployments
 get_acoustic_deployments()
 
-# Get open acoustic deployments (i.e. no end date)
-get_acoustic_deployments(open_only = TRUE)
+# Get acoustic deployments for a specific receiver
+get_acoustic_deployments(receiver_id = "VR2W-124070")
 
-# Get all deployments for a specific network project
+# Get open acoustic deployments for a specific receiver
+get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
+
+# Get acoustic deployments for a specific network project
 get_acoustic_deployments(con, network_project_code = "demer")
+
+# Get acoustic deployments for two specific stations
+get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
 }
 }

@@ -117,6 +117,30 @@ test_that("get_acoustic_deployments() allows selecting on network_project_code",
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
+test_that("get_acoustic_deployments() allows selecting on station_name", {
+  # Errors
+  expect_error(get_acoustic_deployments(con, station_name = "not_a_station_name"))
+  expect_error(get_acoustic_deployments(con, station_name = c("de-9", "not_a_station_name")))
+
+  # Select single value
+  single_select <- "de-9" # From demer
+  single_select_df <- get_acoustic_deployments(con, station_name = single_select)
+  expect_equal(
+    single_select_df %>% distinct(station_name) %>% pull(),
+    c(single_select)
+  )
+  expect_gt(nrow(single_select_df), 0)
+
+  # Select multiple values
+  multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
+  multi_select_df <- get_acoustic_deployments(con, station_name = multi_select)
+  expect_equal(
+    multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),
+    c(multi_select)
+  )
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
+})
+
 test_that("get_acoustic_deployments() allows selecting on open deployments only", {
   # Errors
   expect_error(get_acoustic_deployments(con, open_only = "not_a_logical"))

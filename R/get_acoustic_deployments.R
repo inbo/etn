@@ -7,6 +7,8 @@
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param network_project_code Character (vector). One or more network
 #'   projects. Case-insensitive.
+#' @param station_name Character (vector). One or more deployment station
+#'   names. Case-insensitive.
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `FALSE`.
 #'
@@ -35,12 +37,16 @@
 #' # Get open acoustic deployments for a specific receiver
 #' get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
 #'
-#' # Get all deployments for a specific network project
+#' # Get acoustic deployments for a specific network project
 #' get_acoustic_deployments(con, network_project_code = "demer")
+#'
+#' # Get acoustic deployments for two specific stations
+#' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
 #' }
 get_acoustic_deployments <- function(connection = con,
                                      receiver_id = NULL,
                                      network_project_code = NULL,
+                                     station_name = NULL,
                                      open_only = FALSE) {
   # Check connection
   check_connection(connection)
@@ -63,6 +69,19 @@ get_acoustic_deployments <- function(connection = con,
     check_value(network_project_code, valid_network_project_codes, "network_project_code")
     network_project_code_query <- glue_sql(
       "LOWER(network_project.projectcode) IN ({network_project_code*})",
+      .con = connection
+    )
+  }
+
+  # Check station_name
+  if (is.null(station_name)) {
+    station_name_query <- "True"
+  } else {
+    station_name <- tolower(station_name)
+    valid_station_names <- tolower(list_station_names(connection))
+    check_value(station_name, valid_station_names, "station_name")
+    station_name_query <- glue_sql(
+      "LOWER(dep.station_name) IN ({station_name*})",
       .con = connection
     )
   }
@@ -133,6 +152,7 @@ get_acoustic_deployments <- function(connection = con,
       dep.deployment_type = 'acoustic_telemetry'
       AND {receiver_id_query}
       AND {network_project_code_query}
+      AND {station_name_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)
 
