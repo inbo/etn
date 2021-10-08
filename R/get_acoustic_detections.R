@@ -206,7 +206,7 @@ get_acoustic_detections <- function(connection = con,
       animal.scientific_name AS scientific_name,
       network_project.projectcode AS network_project_code,
       detection.receiver AS receiver_id,
-      deployment.station_name AS deploy_station_name,
+      deployment.station_name AS station_name,
       deployment.deploy_lat AS deploy_latitude,
       deployment.deploy_long AS deploy_longitude,
       -- sensor_type?
