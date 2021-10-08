@@ -133,3 +133,9 @@ test_that("get_acoustic_deployments() allows selecting on open deployments only"
   expect_lt(nrow(open_only_df), nrow(all_df))
   expect_true(all(is.na(open_only_df$recover_date_time)))
 })
+
+test_that("get_acoustic_deployments() does not return cpod deployments", {
+  # POD-3330 is a cpod receiver
+  df <- get_acoustic_deployments(con, receiver_id = "POD-3330")
+  expect_equal(nrow(df), 0)
+})
