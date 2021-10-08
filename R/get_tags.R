@@ -20,7 +20,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom dplyr .data %>% arrange as_tibble
 #' @importFrom readr read_file
 #'
 #' @examples
@@ -105,6 +105,11 @@ get_tags <- function(connection = con,
       tag_device.activation_date AS activation_date,
       tag_device.battery_estimated_lifetime AS battery_estimated_life,
       tag_device.battery_estimated_end_date AS battery_estimated_end_date,
+      tag.resolution AS resolution,
+      tag.unit AS unit,
+      tag.accurency AS accuracy,
+      tag.range_min AS range_min,
+      tag.range_max AS range_max,
       tag.slope AS sensor_slope,
       tag.intercept AS sensor_intercept,
       tag.range AS sensor_range,
@@ -157,7 +162,7 @@ get_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(tag_serial_number, levels = list_tag_serial_numbers(connection)))
+    arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection)))
 
   as_tibble(tags)
 }

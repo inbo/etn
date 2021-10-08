@@ -20,7 +20,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble filter group_by_at mutate_at select
+#' @importFrom dplyr .data %>% arrange as_tibble group_by_at mutate_at select
 #'   starts_with summarize_at ungroup
 #' @importFrom readr read_file
 #'
@@ -94,8 +94,8 @@ get_animals <- function(connection = con,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name_ids <- list_scientific_names(connection)
-    check_value(scientific_name, scientific_name_ids, "scientific_name")
+    valid_scientific_name_ids <- list_scientific_names(connection)
+    check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
@@ -110,6 +110,7 @@ get_animals <- function(connection = con,
       tag.tag_type AS tag_type,
       tag.tag_subtype AS tag_subtype,
       tag.acoustic_tag_id AS acoustic_tag_id,
+      tag.thelma_converted_code AS acoustic_tag_id_alternative,
       animal.scientific_name AS scientific_name,
       animal.common_name AS common_name,
       animal.aphia_id AS aphia_id,
@@ -187,11 +188,11 @@ get_animals <- function(connection = con,
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
     animals %>%
-    select(starts_with("tag"), acoustic_tag_id) %>%
+    select(starts_with("tag"), starts_with("acoustic_tag_id")) %>%
     names()
   other_cols <-
     animals %>%
-    select(-starts_with("tag"), -acoustic_tag_id) %>%
+    select(-starts_with("tag"), -starts_with("acoustic_tag_id")) %>%
     names()
   animals <-
     animals %>%

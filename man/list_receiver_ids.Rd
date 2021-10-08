@@ -10,7 +10,7 @@ list_receiver_ids(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{receiver_id} present in \code{receivers_view2}.
+A vector of all unique \code{receiver} present in \code{acoustic.receivers}.
 }
 \description{
 List all available receiver ids

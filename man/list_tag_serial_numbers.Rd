@@ -10,7 +10,8 @@ list_tag_serial_numbers(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{tag_serial_numbers} present in \code{common.tag_device}.
+A vector of all unique \code{tag_serial_numbers} present in
+\code{common.tag_device}.
 }
 \description{
 List all available tag serial numbers

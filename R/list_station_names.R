@@ -8,10 +8,11 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom stringr str_sort
 #'
-#' @return A vector of all unique `station_name` present in `deployments_view2`.
+#' @return A vector of all unique `station_name` present in
+#'   `acoustic.deployments`.
 list_station_names <- function(connection = con) {
   query <- glue_sql(
-    "SELECT DISTINCT station_name FROM acoustic.deployments_view2",
+    "SELECT DISTINCT station_name FROM acoustic.deployments",
     .con = connection
   )
   data <- dbGetQuery(connection, query)

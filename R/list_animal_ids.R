@@ -7,13 +7,13 @@
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #'
-#' @return A vector of all unique `animal_id` present in `animals_view2`.
+#' @return A vector of all unique `id_pk` present in `common.animal_release`.
 list_animal_ids <- function(connection = con) {
   query <- glue_sql(
-    "SELECT DISTINCT animal_id FROM acoustic.animals_view2",
+    "SELECT DISTINCT id_pk FROM common.animal_release",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
 
-  sort(data$animal_id)
+  sort(data$id_pk)
 }

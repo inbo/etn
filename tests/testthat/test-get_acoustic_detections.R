@@ -228,7 +228,7 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
-  multi_select <- c("de-10", "de-9") # Not that sort() will put de-10 before de-9
+  multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
   multi_select_df <- get_acoustic_detections(con, station_name = multi_select)
   expect_equal(
     multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),

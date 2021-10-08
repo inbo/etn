@@ -8,7 +8,8 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom stringr str_sort
 #'
-#' @return A vector of all unique `tag_serial_numbers` present in `common.tag_device`.
+#' @return A vector of all unique `tag_serial_numbers` present in
+#'   `common.tag_device`.
 list_tag_serial_numbers <- function(connection = con) {
   query <- glue_sql(
     "SELECT DISTINCT serial_number FROM common.tag_device",

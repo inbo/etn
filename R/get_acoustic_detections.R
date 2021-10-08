@@ -20,15 +20,15 @@
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'   for testing purposes). Defaults to `FALSE`.
 #'
-#' @return A tibble with detections data, sorted by `acoustic_tag_id` and `date_time`.
-#'  See also
+#' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
+#'  and `date_time`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom dplyr .data %>% arrange as_tibble
 #' @importFrom assertthat assert_that
 #'
 #' @examples
@@ -132,8 +132,8 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name_ids <- list_scientific_names(connection)
-    check_value(scientific_name, scientific_name_ids, "scientific_name")
+    valid_scientific_name_ids <- list_scientific_names(connection)
+    check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 

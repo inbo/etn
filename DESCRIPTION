@@ -22,7 +22,6 @@ Imports:
     methods,
     odbc,
     readr,
-    rlang,
     stringr
 Suggests:
     formattable,

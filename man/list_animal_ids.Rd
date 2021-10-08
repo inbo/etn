@@ -10,7 +10,7 @@ list_animal_ids(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{animal_id} present in \code{animals_view2}.
+A vector of all unique \code{id_pk} present in \code{common.animal_release}.
 }
 \description{
 List all available animal ids
