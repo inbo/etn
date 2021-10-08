@@ -6,12 +6,15 @@
 \usage{
 get_acoustic_deployments(
   connection = con,
+  receiver_id = NULL,
   network_project_code = NULL,
   open_only = FALSE
 )
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+
+\item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{network_project_code}{Character (vector). One or more network
 projects. Case-insensitive.}

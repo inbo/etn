@@ -4,6 +4,7 @@
 #' results.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param network_project_code Character (vector). One or more network
 #'   projects. Case-insensitive.
 #' @param open_only Logical. Restrict deployments to those that are currently
@@ -28,17 +29,30 @@
 #' # Get all acoustic deployments
 #' get_acoustic_deployments()
 #'
-#' # Get open acoustic deployments (i.e. no end date)
-#' get_acoustic_deployments(open_only = TRUE)
+#' # Get acoustic deployments for a specific receiver
+#' get_acoustic_deployments(receiver_id = "VR2W-124070")
+#'
+#' # Get open acoustic deployments for a specific receiver
+#' get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
 #'
 #' # Get all deployments for a specific network project
 #' get_acoustic_deployments(con, network_project_code = "demer")
 #' }
 get_acoustic_deployments <- function(connection = con,
+                                     receiver_id = NULL,
                                      network_project_code = NULL,
                                      open_only = FALSE) {
   # Check connection
   check_connection(connection)
+
+  # Check receiver_id
+  if (is.null(receiver_id)) {
+    receiver_id_query <- "True"
+  } else {
+    valid_receiver_ids <- list_receiver_ids(connection)
+    check_value(receiver_id, valid_receiver_ids, "receiver_id")
+    receiver_id_query <- glue_sql("receiver.receiver IN ({receiver_id*})", .con = connection)
+  }
 
   # Check network_project_code
   if (is.null(network_project_code)) {
@@ -117,6 +131,7 @@ get_acoustic_deployments <- function(connection = con,
         ON dep.project_fk = network_project.id
     WHERE
       dep.deployment_type = 'acoustic_telemetry'
+      AND {receiver_id_query}
       AND {network_project_code_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)

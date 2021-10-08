@@ -63,6 +63,30 @@ test_that("get_acoustic_deployments() returns the expected columns", {
   expect_equal(names(df), expected_col_names)
 })
 
+test_that("get_acoustic_deployments() allows selecting on receiver_id", {
+  # Errors
+  expect_error(get_acoustic_deployments(con, receiver_id = "not_a_receiver_id"))
+  expect_error(get_acoustic_deployments(con, receiver_id = c("VR2W-124070", "not_a_receiver_id")))
+
+  # Select single value
+  single_select <- "VR2W-124070" # From demer
+  single_select_df <- get_acoustic_deployments(con, receiver_id = single_select)
+  expect_equal(
+    single_select_df %>% distinct(receiver_id) %>% pull(),
+    c(single_select)
+  )
+  expect_gt(nrow(single_select_df), 0)
+
+  # Select multiple values
+  multi_select <- c("VR2W-124070", "VR2W-124078")
+  multi_select_df <- get_acoustic_deployments(con, receiver_id = multi_select)
+  expect_equal(
+    multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
+    c(multi_select)
+  )
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
+})
+
 test_that("get_acoustic_deployments() allows selecting on network_project_code", {
   # Errors
   expect_error(get_acoustic_deployments(con, network_project_code = "not_a_project"))
