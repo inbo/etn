@@ -13,7 +13,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom dplyr .data %>% arrange as_tibble
 #'
 #' @examples
 #' \dontrun{
@@ -68,7 +68,7 @@ get_projects_old <- function(connection = con,
   # Sort data
   projects <-
     projects %>%
-    arrange(.data$project_code)
+    arrange(project_code)
 
   as_tibble(projects)
 }

@@ -20,7 +20,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom dplyr .data %>% arrange as_tibble
 #' @importFrom readr read_file
 #'
 #' @examples
@@ -162,7 +162,7 @@ get_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(tag_serial_number, levels = list_tag_serial_numbers(connection)))
+    arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection)))
 
   as_tibble(tags)
 }

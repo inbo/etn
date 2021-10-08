@@ -20,8 +20,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble filter
-#' @importFrom rlang .data
+#' @importFrom dplyr .data %>% arrange as_tibble filter
 #'
 #' @examples
 #' \dontrun{

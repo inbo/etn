@@ -14,7 +14,7 @@
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
-#' @importFrom dplyr %>% arrange as_tibble
+#' @importFrom dplyr .data %>% arrange as_tibble
 #' @importFrom readr read_file
 #'
 #' @examples
@@ -106,7 +106,7 @@ get_acoustic_receivers <- function(connection = con,
   # Sort data
   receivers <-
     receivers %>%
-    arrange(receiver_id)
+    arrange(.data$receiver_id)
 
   as_tibble(receivers)
 }
