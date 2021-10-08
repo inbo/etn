@@ -27,6 +27,7 @@ test_that("get_animals() returns the expected columns", {
     "tag_type",
     "tag_subtype",
     "acoustic_tag_id",
+    "acoustic_tag_id_alternative",
     "scientific_name",
     "common_name",
     "aphia_id",
@@ -216,6 +217,7 @@ test_that("get_animals() collapses multiple associated tags to one row", {
     "tag_serial_number",
     "tag_type",
     "acoustic_tag_id",
+    "acoustic_tag_id_alternative",
     "tagger",
     "tagging_type",
     "tagging_methodology"
