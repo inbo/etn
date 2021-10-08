@@ -9,11 +9,11 @@
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
-#' @param animal_project_code Character (vector). One or more animal projects.
-#'   Case-insensitive.
+#' @param animal_project_code Character (vector). One or more animal project
+#'   codes. Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
-#' @param network_project_code Character (vector). One or more network
-#'   projects. Case-insensitive.
+#' @param network_project_code Character (vector). One or more network project
+#'   codes. Case-insensitive.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names. Case-insensitive.

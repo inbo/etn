@@ -28,13 +28,13 @@ get_acoustic_detections(
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
 
-\item{animal_project_code}{Character (vector). One or more animal projects.
-Case-insensitive.}
+\item{animal_project_code}{Character (vector). One or more animal project
+codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
 
-\item{network_project_code}{Character (vector). One or more network
-projects. Case-insensitive.}
+\item{network_project_code}{Character (vector). One or more network project
+codes. Case-insensitive.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 

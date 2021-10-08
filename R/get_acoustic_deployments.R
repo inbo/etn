@@ -5,8 +5,8 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
-#' @param network_project_code Character (vector). One or more network
-#'   projects. Case-insensitive.
+#' @param network_project_code Character (vector). One or more network project
+#'   codes. Case-insensitive.
 #' @param station_name Character (vector). One or more deployment station
 #'   names. Case-insensitive.
 #' @param open_only Logical. Restrict deployments to those that are currently

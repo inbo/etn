@@ -17,8 +17,8 @@ get_acoustic_deployments(
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
-\item{network_project_code}{Character (vector). One or more network
-projects. Case-insensitive.}
+\item{network_project_code}{Character (vector). One or more network project
+codes. Case-insensitive.}
 
 \item{station_name}{Character (vector). One or more deployment station
 names. Case-insensitive.}
