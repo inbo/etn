@@ -23,7 +23,7 @@ test_that("get_acoustic_deployments() returns the expected columns", {
   expected_col_names <- c(
     "deployment_id",
     "receiver_id",
-    "network_project_code",
+    "acoustic_project_code",
     "station_name",
     "station_description",
     "station_manager",
@@ -87,31 +87,31 @@ test_that("get_acoustic_deployments() allows selecting on receiver_id", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-test_that("get_acoustic_deployments() allows selecting on network_project_code", {
+test_that("get_acoustic_deployments() allows selecting on acoustic_project_code", {
   # Errors
-  expect_error(get_acoustic_deployments(con, network_project_code = "not_a_project"))
-  expect_error(get_acoustic_deployments(con, network_project_code = c("demer", "not_a_project")))
+  expect_error(get_acoustic_deployments(con, acoustic_project_code = "not_a_project"))
+  expect_error(get_acoustic_deployments(con, acoustic_project_code = c("demer", "not_a_project")))
 
   # Select single value
   single_select <- "demer"
-  single_select_df <- get_acoustic_deployments(con, network_project_code = single_select)
+  single_select_df <- get_acoustic_deployments(con, acoustic_project_code = single_select)
   expect_equal(
-    single_select_df %>% distinct(network_project_code) %>% pull(),
+    single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_deployments(con, network_project_code = "demer"),
-    get_acoustic_deployments(con, network_project_code = "DEMER")
+    get_acoustic_deployments(con, acoustic_project_code = "demer"),
+    get_acoustic_deployments(con, acoustic_project_code = "DEMER")
   )
 
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <- get_acoustic_deployments(con, network_project_code = multi_select)
+  multi_select_df <- get_acoustic_deployments(con, acoustic_project_code = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(network_project_code) %>% pull() %>% sort(),
+    multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -145,15 +145,15 @@ test_that("get_acoustic_deployments() allows selecting on open deployments only"
   # Errors
   expect_error(get_acoustic_deployments(con, open_only = "not_a_logical"))
 
-  # ws1 is an open ended network project
-  all_df <- get_acoustic_deployments(con, network_project_code = "ws1", open_only = FALSE)
+  # ws1 is an open ended acoustic project
+  all_df <- get_acoustic_deployments(con, acoustic_project_code = "ws1", open_only = FALSE)
 
   # Default returns all
-  default_df <- get_acoustic_deployments(con, network_project_code = "ws1")
+  default_df <- get_acoustic_deployments(con, acoustic_project_code = "ws1")
   expect_equal(default_df, all_df)
 
   # Open only returns deployments with no end date
-  open_only_df <- get_acoustic_deployments(con, network_project_code = "ws1", open_only = TRUE)
+  open_only_df <- get_acoustic_deployments(con, acoustic_project_code = "ws1", open_only = TRUE)
   expect_lt(nrow(open_only_df), nrow(all_df))
   expect_true(all(is.na(open_only_df$recover_date_time)))
 })
@@ -162,7 +162,7 @@ test_that("get_acoustic_deployments() allows selecting on multiple parameters", 
   multiple_parameters_df <- get_acoustic_deployments(
     con,
     receiver_id = "VR2W-124070",
-    network_project_code = "demer",
+    acoustic_project_code = "demer",
     station_name = "de-9",
     open_only = FALSE
   )

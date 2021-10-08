@@ -1,4 +1,4 @@
-#' List all available animal project codes
+#' List all available cpod project codes
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #'
@@ -8,12 +8,12 @@
 #' @importFrom DBI dbGetQuery
 #' @importFrom readr read_file
 #'
-#' @return A vector of all unique `project_code` of `type = "animal"` in
+#' @return A vector of all unique `project_code` of `type = "cpod"` in
 #'   `project.sql`.
-list_animal_project_codes <- function(connection = con) {
+list_cpod_project_codes <- function(connection = con) {
   project_query <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
   query <- glue_sql(
-    "SELECT DISTINCT project_code FROM ({project_query}) AS project WHERE project_type = 'animal'",
+    "SELECT DISTINCT project_code FROM ({project_query}) AS project WHERE project_type = 'cpod'",
     .con = connection
   )
   data <- dbGetQuery(connection, query)

@@ -7,8 +7,8 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal identifiers.
-#' @param animal_project_code Character (vector). One or more animal projects.
-#'   Case-insensitive.
+#' @param animal_project_code Character (vector). One or more animal project
+#'   codes. Case-insensitive.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param scientific_name Character (vector). One or more scientific names.
 #'

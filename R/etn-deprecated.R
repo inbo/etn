@@ -9,16 +9,35 @@ NULL
 
 #' @rdname etn-deprecated
 #' @export
-get_deployments <- function(...) {
+get_deployments <- function(connection = con, network_project_code = NULL, ...) {
   .Deprecated("get_acoustic_deployments")
-  get_acoustic_deployments(...)
+  get_acoustic_deployments(acoustic_project_code = network_project_code, ...)
 }
 
 #' @rdname etn-deprecated
 #' @export
-get_detections <- function(connection = con, tag_id, ...) {
+get_detections <- function(connection = con, tag_id = NULL, network_project_code = NULL, ...) {
   .Deprecated("get_acoustic_detections")
-  get_acoustic_detections(acoustic_tag_id = tag_id)
+  get_acoustic_detections(acoustic_tag_id = tag_id, acoustic_project_code = network_project_code, ...)
+}
+
+#' @rdname etn-deprecated
+#' @export
+get_projects <- function(connection = con, project_type, application_type) {
+  .Deprecated("get_animal_projects, get_acoustic_projects or get_cpod_projects")
+  if (!missing("project_type")) {
+    if (project_type == "network") {
+      get_acoustic_projects()
+    } else {
+      get_animal_projects()
+    }
+  } else if (!missing("application_type")) {
+    if (application_type == "cpod") {
+      get_cpod_projects()
+    }
+  } else {
+    get_animal_projects()
+  }
 }
 
 #' @rdname etn-deprecated
@@ -30,9 +49,9 @@ get_receivers <- function(...) {
 
 #' @rdname etn-deprecated
 #' @export
-get_transmitters <- function(connection = con, tag_id, ...) {
-  .Deprecated("get_acoustic_tags")
-  get_acoustic_tags(acoustic_tag_id = tag_id)
+list_network_project_codes <- function(...) {
+  .Deprecated("list_acoustic_project_codes")
+  list_acoustic_project_codes(...)
 }
 
 #' @rdname etn-deprecated

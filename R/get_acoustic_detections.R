@@ -9,11 +9,11 @@
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
-#' @param animal_project_code Character (vector). One or more animal projects.
-#'   Case-insensitive.
+#' @param animal_project_code Character (vector). One or more animal project
+#'   codes. Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
-#' @param network_project_code Character (vector). One or more network
-#'   projects. Case-insensitive.
+#' @param acoustic_project_code Character (vector). One or more acoustic
+#'   project codes. Case-insensitive.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names. Case-insensitive.
@@ -69,11 +69,11 @@
 #'   station_name = c("de-9", "de-10")
 #' )
 #'
-#' # Get acoustic detections for a specific species, receiver and network project
+#' # Get acoustic detections for a specific species, receiver and acoustic project
 #' get_acoustic_detections(
 #'   scientific_name = "Rutilus rutilus",
 #'   receiver_id = "VR2W-124070",
-#'   network_project_code = "demer"
+#'   acoustic_project_code = "demer"
 #' )
 #' }
 get_acoustic_detections <- function(connection = con,
@@ -82,7 +82,7 @@ get_acoustic_detections <- function(connection = con,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
-                                    network_project_code = NULL,
+                                    acoustic_project_code = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE) {
@@ -137,15 +137,15 @@ get_acoustic_detections <- function(connection = con,
     scientific_name_query <- glue_sql("det.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  # Check network_project_code
-  if (is.null(network_project_code)) {
-    network_project_code_query <- "True"
+  # Check acoustic_project_code
+  if (is.null(acoustic_project_code)) {
+    acoustic_project_code_query <- "True"
   } else {
-    network_project_code <- tolower(network_project_code)
-    valid_network_project_codes <- tolower(list_network_project_codes(connection))
-    check_value(network_project_code, valid_network_project_codes, "network_project_code")
-    network_project_code_query <- glue_sql(
-      "LOWER(det.network_project_code) IN ({network_project_code*})",
+    acoustic_project_code <- tolower(acoustic_project_code)
+    valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
+    check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
+    acoustic_project_code_query <- glue_sql(
+      "LOWER(det.network_project_code) IN ({acoustic_project_code*})",
       .con = connection
     )
   }
@@ -201,13 +201,21 @@ get_acoustic_detections <- function(connection = con,
       det.datetime AS date_time,
       tag_device.serial_number AS tag_serial_number, -- Not det.transmitter_serial
       det.transmitter AS acoustic_tag_id,
+      -- animal_project.projectcode AS animal_project_code,
       det.animal_project_code AS animal_project_code, -- exclusive to detections_limited
+      -- animal.id_pk AS animal_id,
       det.animal_id_pk AS animal_id, -- exclusive to detections_limited
+      -- animal.scientific_name AS scientific_name,
       det.scientific_name AS scientific_name, -- exclusive to detections_limited
-      det.network_project_code AS network_project_code, -- exclusive to detections_limited
+      -- network_project.projectcode AS acoustic_project_code,
+      det.network_project_code AS acoustic_project_code, -- exclusive to detections_limited
+      -- detection.receiver AS receiver_id,
       det.receiver AS receiver_id,
+      -- deployment.station_name AS station_name,
       det.deployment_station_name AS station_name, -- exclusive to detections_limited, from deployment, not det.station_name
+      -- deployment.deploy_lat AS deploy_latitude,
       det.deployment_lat AS deploy_latitude, -- exclusive to detections_limited, from deployment, not det.latitude
+      -- deployment.deploy_long AS deploy_longitude,
       det.deployment_long AS deploy_longitude, -- exclusive to detections_limited, from deployment, not det.longitude
       det.sensor_value AS sensor_value,
       det.sensor_unit AS sensor_unit,
@@ -233,7 +241,7 @@ get_acoustic_detections <- function(connection = con,
       AND {acoustic_tag_id_query}
       AND {animal_project_code_query}
       AND {scientific_name_query}
-      AND {network_project_code_query}
+      AND {acoustic_project_code_query}
       AND {receiver_id_query}
       AND {station_name_query}
       {limit_query}

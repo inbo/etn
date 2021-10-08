@@ -232,7 +232,7 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 
 test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- get_animals(con)
-  df <- df %>% filter(!str_detect(tag_type, ",")) # Remove multiple associated tags
+  df <- df %>% filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
   expect_equal(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
     c("", "acoustic", "acoustic-archival") # "archival" currently not in data

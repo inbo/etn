@@ -19,8 +19,8 @@ get_animals(
 
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
 
-\item{animal_project_code}{Character (vector). One or more animal projects.
-Case-insensitive.}
+\item{animal_project_code}{Character (vector). One or more animal project
+codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
 }

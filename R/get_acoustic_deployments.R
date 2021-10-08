@@ -5,15 +5,15 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
-#' @param network_project_code Character (vector). One or more network
-#'   projects. Case-insensitive.
+#' @param acoustic_project_code Character (vector). One or more acoustic
+#'   project codes. Case-insensitive.
 #' @param station_name Character (vector). One or more deployment station
 #'   names. Case-insensitive.
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `FALSE`.
 #'
 #' @return A tibble with acoustic deployment data, sorted by
-#'   `network_project_code`, `station_name` and `deploy_date_time`. See also
+#'   `acoustic_project_code`, `station_name` and `deploy_date_time`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @export
@@ -36,15 +36,15 @@
 #' # Get open acoustic deployments for a specific receiver
 #' get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
 #'
-#' # Get acoustic deployments for a specific network project
-#' get_acoustic_deployments(con, network_project_code = "demer")
+#' # Get acoustic deployments for a specific acoustic project
+#' get_acoustic_deployments(con, acoustic_project_code = "demer")
 #'
 #' # Get acoustic deployments for two specific stations
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
 #' }
 get_acoustic_deployments <- function(connection = con,
                                      receiver_id = NULL,
-                                     network_project_code = NULL,
+                                     acoustic_project_code = NULL,
                                      station_name = NULL,
                                      open_only = FALSE) {
   # Check connection
@@ -59,15 +59,15 @@ get_acoustic_deployments <- function(connection = con,
     receiver_id_query <- glue_sql("receiver.receiver IN ({receiver_id*})", .con = connection)
   }
 
-  # Check network_project_code
-  if (is.null(network_project_code)) {
-    network_project_code_query <- "True"
+  # Check acoustic_project_code
+  if (is.null(acoustic_project_code)) {
+    acoustic_project_code_query <- "True"
   } else {
-    network_project_code <- tolower(network_project_code)
-    valid_network_project_codes <- tolower(list_network_project_codes(connection))
-    check_value(network_project_code, valid_network_project_codes, "network_project_code")
-    network_project_code_query <- glue_sql(
-      "LOWER(network_project.projectcode) IN ({network_project_code*})",
+    acoustic_project_code <- tolower(acoustic_project_code)
+    valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
+    check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
+    acoustic_project_code_query <- glue_sql(
+      "LOWER(network_project.projectcode) IN ({acoustic_project_code*})",
       .con = connection
     )
   }
@@ -90,7 +90,7 @@ get_acoustic_deployments <- function(connection = con,
     SELECT
       dep.id_pk AS deployment_id,
       receiver.receiver AS receiver_id,
-      network_project.projectcode AS network_project_code, -- Not dep.project
+      network_project.projectcode AS acoustic_project_code, -- Not dep.project
       dep.station_name AS station_name,
       location_name AS station_description,
       location_manager AS station_manager,
@@ -150,7 +150,7 @@ get_acoustic_deployments <- function(connection = con,
     WHERE
       dep.deployment_type = 'acoustic_telemetry'
       AND {receiver_id_query}
-      AND {network_project_code_query}
+      AND {acoustic_project_code_query}
       AND {station_name_query}
     ", .con = connection)
   deployments <- dbGetQuery(connection, query)
@@ -164,7 +164,7 @@ get_acoustic_deployments <- function(connection = con,
   deployments <-
     deployments %>%
     arrange(
-      .data$network_project_code,
+      .data$acoustic_project_code,
       factor(.data$station_name, levels = list_station_names(connection)),
       .data$deploy_date_time
     )
