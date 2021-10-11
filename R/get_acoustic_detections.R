@@ -180,7 +180,7 @@ get_acoustic_detections <- function(connection = con,
     limit_query <- glue_sql("LIMIT ALL}", .con = connection)
   }
 
-  acoustic_tag_id_query <- glue_sql(read_file(
+  acoustic_tag_id_sql <- glue_sql(read_file(
     system.file("sql", "acoustic_tag_id.sql", package = "etn")),
     .con = connection
   )
@@ -225,10 +225,10 @@ get_acoustic_detections <- function(connection = con,
       -- det.gain
       -- external_id
     FROM acoustic.detections AS det
-      LEFT JOIN ({acoustic_tag_id_query}) AS tag
-        ON det.transmitter = tag.acoustic_tag_id
+      LEFT JOIN ({acoustic_tag_id_sql}) AS acoustic_tag_id
+        ON det.transmitter = acoustic_tag_id.acoustic_tag_id
         LEFT JOIN common.tag_device AS tag_device
-          ON tag.tag_device_fk = tag_device.id_pk
+          ON acoustic_tag_id.tag_device_fk = tag_device.id_pk
           LEFT JOIN common.animal_release_tag_device AS animal_with_tag
             ON tag_device.id_pk = animal_with_tag.tag_device_fk
             LEFT JOIN common.animal_release AS animal

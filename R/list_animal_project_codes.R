@@ -11,9 +11,9 @@
 #' @return A vector of all unique `project_code` of `type = "animal"` in
 #'   `project.sql`.
 list_animal_project_codes <- function(connection = con) {
-  project_query <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
+  project_sql <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
   query <- glue_sql(
-    "SELECT DISTINCT project_code FROM ({project_query}) AS project WHERE project_type = 'animal'",
+    "SELECT DISTINCT project_code FROM ({project_sql}) AS project WHERE project_type = 'animal'",
     .con = connection
   )
   data <- dbGetQuery(connection, query)

@@ -99,7 +99,7 @@ get_animals <- function(connection = con,
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
 
   # Build query
   query <- glue_sql("
@@ -181,7 +181,7 @@ get_animals <- function(connection = con,
     FROM common.animal_release_limited AS animal
       LEFT JOIN common.animal_release_tag_device AS animal_with_tag
         ON animal.id_pk = animal_with_tag.animal_release_fk
-        LEFT JOIN ({tag_query}) AS tag
+        LEFT JOIN ({tag_sql}) AS tag
           ON animal_with_tag.tag_device_fk = tag.tag_device_fk
       LEFT JOIN common.projects AS animal_project
         ON animal.project_fk = animal_project.id

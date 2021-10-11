@@ -87,7 +87,7 @@ get_tags <- function(connection = con,
     acoustic_tag_id_query <- glue_sql("tag.acoustic_tag_id IN ({acoustic_tag_id*})", .con = connection)
   }
 
-  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
 
   # Build query
   query <- glue_sql("
@@ -148,7 +148,7 @@ get_tags <- function(connection = con,
       -- tag_device.order_number
       -- tag_device.device_internal_memory
       -- tag_device.external_id
-    FROM ({tag_query}) AS tag
+    FROM ({tag_sql}) AS tag
       LEFT JOIN common.tag_device AS tag_device
         ON tag.tag_device_fk = tag_device.id_pk
         LEFT JOIN common.manufacturer AS manufacturer
