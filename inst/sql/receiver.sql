@@ -1,4 +1,4 @@
-/* Receiver table with controlled status */
+/* Receivers with controlled status */
 SELECT
   *,
   CASE

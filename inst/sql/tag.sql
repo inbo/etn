@@ -1,4 +1,4 @@
-/* Unified tag table with controlled tag_type, tag_subtype */
+/* Unified tags with controlled tag_type, tag_subtype */
 SELECT
   tag_device.serial_number AS tag_serial_number,
   CASE

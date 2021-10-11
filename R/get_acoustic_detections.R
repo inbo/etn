@@ -180,19 +180,13 @@ get_acoustic_detections <- function(connection = con,
     limit_query <- glue_sql("LIMIT ALL}", .con = connection)
   }
 
+  acoustic_tag_id_query <- glue_sql(read_file(
+    system.file("sql", "acoustic_tag_id.sql", package = "etn")),
+    .con = connection
+  )
+
   # Build query
   query <- glue_sql("
-    WITH tag AS (
-      SELECT tag_device_fk, tag_full_id AS acoustic_tag_id
-      FROM acoustic.tags
-      UNION
-      SELECT tag_device_fk, thelma_converted_code AS acoustic_tag_id
-      FROM acoustic.tags
-      UNION
-      SELECT device_tag_fk AS tag_device_fk, sensor_full_id AS acoustic_tag_id
-      FROM archive.sensor AS archival_tag
-    )
-
     SELECT
       det.id_pk AS detection_id,
       det.datetime AS date_time,
@@ -231,7 +225,7 @@ get_acoustic_detections <- function(connection = con,
       -- det.gain
       -- external_id
     FROM acoustic.detections AS det
-      LEFT JOIN tag AS tag
+      LEFT JOIN ({acoustic_tag_id_query}) AS tag
         ON det.transmitter = tag.acoustic_tag_id
         LEFT JOIN common.tag_device AS tag_device
           ON tag.tag_device_fk = tag_device.id_pk

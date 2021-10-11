@@ -1,4 +1,4 @@
-/* Project table with controlled type */
+/* Projects with controlled type */
 SELECT
   project.id AS project_id,
   project.projectcode AS project_code,
