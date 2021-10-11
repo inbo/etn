@@ -99,7 +99,7 @@ get_animals <- function(connection = con,
     scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
   }
 
-  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
 
   # Build query
   query <- glue_sql("
@@ -150,7 +150,7 @@ get_animals <- function(connection = con,
       animal.wild_or_hatchery AS wild_or_hatchery,
       animal.stock AS stock,
       animal.date_of_surgery AS surgery_date_time,
-      animal.surgery_Location AS surgery_location,
+      animal.surgery_location AS surgery_location,
       animal.surgery_latitude AS surgery_latitude,
       animal.surgery_longitude AS surgery_longitude,
       animal.treatment_type AS treatment_type,
@@ -163,17 +163,25 @@ get_animals <- function(connection = con,
       animal.buffer AS buffer,
       animal.anaesthetic_concentration AS anaesthetic_concentration,
       animal.buffer_concentration_in_anaesthetic AS buffer_concentration_in_anaesthetic,
-      animal.anesthetic_concentration_In_recirculation AS anaesthetic_concentration_in_recirculation,
+      animal.anesthetic_concentration_in_recirculation AS anaesthetic_concentration_in_recirculation,
       animal.buffer_concentration_in_recirculation AS buffer_concentration_in_recirculation,
       animal.dissolved_oxygen AS dissolved_oxygen,
       animal.preop_holding_period AS pre_surgery_holding_period,
       animal.post_op_holding_period AS post_surgery_holding_period,
       animal.holding_temperature AS holding_temperature,
       animal.comments AS comments
-    FROM common.animal_release AS animal
+      -- animal.project: animal.project_fk instead
+      -- animal.person_id
+      -- animal.est_tag_life
+      -- animal.date_modified
+      -- animal.date_created
+      -- animal.end_date_tag
+      -- animal.post_op_holding_period_new
+      -- animal.external_id
+    FROM common.animal_release_limited AS animal
       LEFT JOIN common.animal_release_tag_device AS animal_with_tag
         ON animal.id_pk = animal_with_tag.animal_release_fk
-        LEFT JOIN ({tag_query}) AS tag
+        LEFT JOIN ({tag_sql}) AS tag
           ON animal_with_tag.tag_device_fk = tag.tag_device_fk
       LEFT JOIN common.projects AS animal_project
         ON animal.project_fk = animal_project.id

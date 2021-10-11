@@ -46,14 +46,14 @@ get_animal_projects <- function(connection = con,
     )
   }
 
-  project_query <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
+  project_sql <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
 
   # Build query
   query <- glue_sql("
     SELECT
       project.*
     FROM
-      ({project_query}) AS project
+      ({project_sql}) AS project
     WHERE
       project_type = 'animal'
       AND {animal_project_code_query}
