@@ -278,14 +278,21 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
 })
 
 test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alternative", {
-  # "A69-1105-155" is an acoustic_tag_id_alternative that is NOT used as acoustic_tag_id
-  # get_acoustic_detections() should return records for this alternative id
-  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-155")), 0)
+  # The following acoustic_tag_ids only occur as acoustic_tag_id_alternative
+
+  # A69-1105-26 (tag_serial_number = 1734026) is associated with
+  # animal 5902 (2017_Fremur) with release date 2017-12-01 00:00
+  # Almost all its detections are from after that date
+  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-26")), 0)
+
+  # A69-1105-155 (tag_serial_number = 1712155) is associated with
+  # animal 4140 (OTN-Skjerstadfjorden) with release date 2017-05-31 01:00
+  # All detections are from before that date, so it should return 0
+  expect_equal(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-155")), 0)
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
-  # acoustic_tag_id A69-1601-29925 (tag_serial_number = 1145373) is associated
-  # with two animals:
+  # A69-1601-29925 (tag_serial_number = 1145373) is associated with two animals:
   # - 393: 2012_leopoldkanaal from 2012-08-21 14:27:00 to 2012-12-10
   # - 394: 2012_leopoldkanaal from 2012-12-14 13:30:00 to open
   # Detections should be joined with acoustic_tag_id AND datetime, so that they
@@ -301,8 +308,7 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range of the animal", {
-  # acoustic_tag_id A69-1601-29920 (tag_serial_number = 1145368) is associated
-  # with two animals:
+  # A69-1601-29920 (tag_serial_number = 1145368) is associated with two animals:
   # - 388: 2012_leopoldkanaal from 2012-08-21 10:46:00 to 2013-09-03
   # - 389: 2013_albertkanaal from 2014-10-09 00:00:00 to open
 
