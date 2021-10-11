@@ -336,4 +336,8 @@ test_that("get_acoustic_detections() does not return detections out of date rang
   expect_equal(nrow(post_range_df), 0)
 })
 
+test_that("get_acoustic_detections() can return detections not (yet) associated with an animal", {
+  # A180-1702-49684 (tag_serial_number = 1317386) is an "acoustic / animal" tag
+  # not yet associated with an animal. It should return detections
+  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
