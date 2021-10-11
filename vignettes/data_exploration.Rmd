@@ -1,5 +1,5 @@
 ---
-title: "Explore ETN data"
+title: "Explore ETN acoustic data"
 author: "Damiano Oldoni"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-In this vignette we show a typical workflow using `etn` package to retrieve data, the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection) to perform basic data exploration and some other packages for visualization (`leaflet`) and date-time data (`lubridate`).
+In this vignette we show a typical workflow using `etn` package to retrieve acoustic telemetry data and the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection)  to perform basic data exploration. We will also use ome other packages: [`lubridate`](https://lubridate.tidyverse.org/) to handle date-time data and [`leaflet`](https://rstudio.github.io/leaflet/) and [`htmltools`](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
 
 To start, load the `etn`package:
 
@@ -32,13 +32,13 @@ and connect with your user credentials (as received by VLIZ) to the database:
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
 ```
 
-We also load other packages:
+We also load the other packages:
 
 ```{r load_other_pkgs, message=FALSE}
-library(dplyr)
-library(lubridate)
-library(leaflet)
-library(htmltools)
+library(dplyr)  #to do datascience
+library(lubridate)  #to handle date-time data
+library(leaflet)  # to create interactive maps
+library(htmltools)  # to write HTML in R
 ```
 
 ## Select project(s) of interest
