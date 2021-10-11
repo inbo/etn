@@ -22,10 +22,10 @@
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
-#' # Get all acoustic receivers()
+#' # Get all acoustic receivers
 #' get_acoustic_receivers()
 #'
-#' # Get lost and broken acoustic receivers()
+#' # Get lost and broken acoustic receivers
 #' get_acoustic_receivers(status = c("lost", "broken"))
 #'
 #' # Get a specific acoustic receiver

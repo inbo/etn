@@ -9,7 +9,7 @@
 #' @importFrom stringr str_sort
 #' @importFrom readr read_file
 #'
-#' @return A vector of all unique `acoustic_tag_id` present in `tags`.
+#' @return A vector of all unique `acoustic_tag_id` present in `tag.sql`.
 list_acoustic_tag_ids <- function(connection = con) {
   tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
   query <- glue_sql(

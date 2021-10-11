@@ -10,8 +10,8 @@ list_animal_project_codes(connection = con)
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
-A vector of all unique \code{projectcode} of \code{type="animal"} in
-\code{common.projects}.
+A vector of all unique \code{project_code} of \code{type = "animal"} in
+\code{project.sql}.
 }
 \description{
 List all available animal project codes
