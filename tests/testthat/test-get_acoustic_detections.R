@@ -277,6 +277,12 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
   )
 })
 
+test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alternative", {
+  # "A69-1105-155" is an acoustic_tag_id_alternative that is NOT used as acoustic_tag_id
+  # get_acoustic_detections() should return records for this alternative id
+  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-155")), 0)
+})
+
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
   # acoustic_tag_id A69-1601-29925 (tag_serial_number = 1145373) is associated
   # with two animals:
