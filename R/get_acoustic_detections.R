@@ -240,7 +240,14 @@ get_acoustic_detections <- function(connection = con,
       LEFT JOIN common.projects AS network_project
         ON deployment.project_fk = network_project.id
     WHERE
-      {start_date_query}
+      (
+        animal.id_pk IS NULL
+        OR (
+          det.datetime >= animal.utc_release_date_time
+          AND (det.datetime <= animal.recapture_date OR animal.recapture_date IS NULL)
+        )
+      )
+      AND {start_date_query}
       AND {end_date_query}
       AND {acoustic_tag_id_query}
       AND {animal_project_code_query}
