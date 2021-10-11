@@ -280,15 +280,27 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
 test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alternative", {
   # The following acoustic_tag_ids only occur as acoustic_tag_id_alternative
 
-  # A69-1105-26 (tag_serial_number = 1734026) is associated with
-  # animal 5902 (2017_Fremur) with release date 2017-12-01 00:00
-  # Almost all its detections are from after that date
+  # A69-1105-26 (tag_serial_number = 1734026) is associated with animal
+  # - 5902 (2017_Fremur) from 2017-12-01 00:00 to open
+  # Almost all its detections are from after the release date
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-26")), 0)
 
-  # A69-1105-155 (tag_serial_number = 1712155) is associated with
-  # animal 4140 (OTN-Skjerstadfjorden) with release date 2017-05-31 01:00
-  # All detections are from before that date, so it should return 0
+  # A69-1105-155 (tag_serial_number = 1712155) is associated with animal
+  # - 4140 (OTN-Skjerstadfjorden) from 2017-05-31 01:00 to open
+  # All detections are from before the release date, so it should return 0
   expect_equal(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-155")), 0)
+})
+
+test_that("get_acoustic_detections() does not return duplicate detections across acoustic_id and acoustic_id_alternative", {
+  # A69-1105-100 is used as acoustic_tag_id once and acoustic_tag_id_alternative twice:
+  # tag_serial_number | acoustic_tag_id | acoustic_tag_id_alt | animal | release_date     | animal_project
+  # 1634100           | S256-100        | A69-1105-100        | 4282   | 2016-10-19 01:00 | OTN-Skjerstadfjorden
+  # 1645100           | S256-100        | A69-1105-100        | 3911   | 2017-03-29 15:30 | OTN-Tosenfjorden
+  # 1228004           | A69-1105-100    | S256-100            | 720    | 2015-12-01 00:00 | 2013 Albertkanaal
+
+  # Expect no duplicates
+  df <- get_acoustic_detections(acoustic_tag_id = "A69-1105-100")
+  expect_equal(nrow(df), nrow(df %>% distinct(detection_id))) # TODO: https://github.com/inbo/etn/issues/216
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
