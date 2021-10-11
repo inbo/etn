@@ -307,13 +307,19 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   expect_equal(df_394 %>% distinct(animal_id) %>% pull, 394)
 })
 
-test_that("get_acoustic_detections() does not return detections out of date range of the animal", {
-  # A69-1601-29920 (tag_serial_number = 1145368) is associated with two animals:
-  # - 388: 2012_leopoldkanaal from 2012-08-21 10:46:00 to 2013-09-03
-  # - 389: 2013_albertkanaal from 2014-10-09 00:00:00 to open
+test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
+  # A69-1303-20695 (tag_serial_number = 1097335) is associated with animal
+  # 637 (2010_phd_reubens) from 2010-08-09 13:00:00 to 2011-05-19 00:00:00
+  in_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", start_date = "2010-08-09", end_date = "2011-05-19")
+  pre_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", end_date = "2010-08-09")
+  post_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", start_date = "2011-05-19")
 
-  df_pre_388 <- get_acoustic_detections(con, acoustic_tag_id = "A69-1601-29920", end = "2012-08-21")
-  expect_equal(nrow(df_pre_388), 0)
-  df_between_388_389 <- get_acoustic_detections(con, acoustic_tag_id = "A69-1601-29920", start = "2013-09-03", end = "2014-10-09")
-  expect_equal(nrow(df_pre_388), 0)
+  # Expect detections within range
+  expect_gt(nrow(in_range_df), 0)
+
+  # Expect no detections outside range
+  expect_equal(nrow(pre_range_df), 0)
+  expect_equal(nrow(post_range_df), 0)
+})
+
 })
