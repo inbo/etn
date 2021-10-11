@@ -84,8 +84,8 @@ get_acoustic_receivers <- function(connection = con,
       receiver.ar_disable_code AS ar_disable_code,
       receiver.ar_tilt_code AS ar_tilt_code,
       receiver.ar_tilt_after_deploy AS ar_tilt_after_deploy
-      -- id_pk
-      -- external_id
+      -- receiver.id_pk
+      -- receiver.external_id
     FROM
       ({receiver_query}) AS receiver
       LEFT JOIN common.manufacturer AS manufacturer

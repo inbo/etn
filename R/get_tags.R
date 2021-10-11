@@ -140,6 +140,14 @@ get_tags <- function(connection = con,
       tag.duration_step4 AS step4_duration,
       tag.acceleration_on_sec_step4 AS step4_acceleration_duration,
       tag_device.id_pk AS tag_device_id
+      -- tag_device.qc_migration
+      -- tag_device.archive_floating
+      -- tag_device.archive_weight
+      -- tag_device.archive_length
+      -- tag_device.archive_diameter
+      -- tag_device.order_number
+      -- tag_device.device_internal_memory
+      -- tag_device.external_id
     FROM ({tag_query}) AS tag
       LEFT JOIN common.tag_device AS tag_device
         ON tag.tag_device_fk = tag_device.id_pk

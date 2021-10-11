@@ -199,7 +199,7 @@ get_acoustic_detections <- function(connection = con,
     SELECT
       det.id_pk AS detection_id,
       det.datetime AS date_time,
-      tag_device.serial_number AS tag_serial_number, -- Not det.transmitter_serial
+      tag_device.serial_number AS tag_serial_number,
       det.transmitter AS acoustic_tag_id,
       -- animal_project.projectcode AS animal_project_code,
       det.animal_project_code AS animal_project_code, -- exclusive to detections_limited
@@ -212,11 +212,11 @@ get_acoustic_detections <- function(connection = con,
       -- detection.receiver AS receiver_id,
       det.receiver AS receiver_id,
       -- deployment.station_name AS station_name,
-      det.deployment_station_name AS station_name, -- exclusive to detections_limited, from deployment, not det.station_name
+      det.deployment_station_name AS station_name, -- exclusive to detections_limited, from deployment
       -- deployment.deploy_lat AS deploy_latitude,
-      det.deployment_lat AS deploy_latitude, -- exclusive to detections_limited, from deployment, not det.latitude
+      det.deployment_lat AS deploy_latitude, -- exclusive to detections_limited, from deployment
       -- deployment.deploy_long AS deploy_longitude,
-      det.deployment_long AS deploy_longitude, -- exclusive to detections_limited, from deployment, not det.longitude
+      det.deployment_long AS deploy_longitude, -- exclusive to detections_limited, from deployment
       det.sensor_value AS sensor_value,
       det.sensor_unit AS sensor_unit,
       det.sensor2_value AS sensor2_value,
@@ -226,6 +226,10 @@ get_acoustic_detections <- function(connection = con,
       det.qc_flag AS qc_flag,
       det.deployment_fk AS deployment_id
       -- det.transmitter_name
+      -- det.transmitter_serial: via tag_device instead
+      -- det.station_name: deployment.station_name instead
+      -- det.latitude: deployment.deploy_lat instead
+      -- det.longitude: deployment.deploy_long instead
       -- det.detection_file_id
       -- det.receiver_serial
       -- det.gain
