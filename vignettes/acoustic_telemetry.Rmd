@@ -80,7 +80,7 @@ all_my_projects %>%
 To list all available animal project codes as a vector, you can use `list_animal_project_codes()`, one of the etn functions in the [`list_*` family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
 
 ```{r list_animal_project_codes}
-list_animal_project_codes()
+list_animal_project_codes() %>% head(10)
 ```
 
 ## Animals
@@ -238,7 +238,7 @@ However, keep in mind that there is a fundamental difference between the argumen
 All possible `acoustic_tag_id` can be retrieved with the correspondent `list_*` function:
 
 ```{r list_acoustic_tag_ids}
-list_acoustic_tag_ids()
+list_acoustic_tag_ids() %>% head(10)
 ```
 
 ## Acoustic network projects
@@ -262,7 +262,7 @@ networks
 You can retrieve the full list of acoustic network projects with the correspondent `list_*` function:
 
 ```{r list_acoustic_project_codes}
-list_acoustic_project_codes()
+list_acoustic_project_codes() %>% head(10)
 ```
 
 ## Acoustic deployments
