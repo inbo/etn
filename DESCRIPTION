@@ -25,6 +25,7 @@ Imports:
     stringr
 Suggests:
     formattable,
+    leaflet,
     kableExtra,
     knitr,
     rmarkdown,
