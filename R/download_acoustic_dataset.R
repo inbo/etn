@@ -47,7 +47,7 @@
 #' @export
 #'
 #' @importFrom glue glue
-#' @importFrom dplyr .data %>% arrange distinct filter group_by mutate n pull select summarize
+#' @importFrom dplyr .data %>% distinct filter group_by mutate n pull select summarize
 #' @importFrom readr write_csv
 #' @importFrom stringr str_detect str_replace_all
 #'
@@ -164,8 +164,8 @@ download_acoustic_dataset <- function(connection = con,
   acoustic_project_codes <-
     detections %>%
     distinct(.data$acoustic_project_code) %>%
-    arrange(.data$acoustic_project_code) %>%
-    pull()
+    pull() %>%
+    sort()
   deployments <- get_acoustic_deployments(
     connection = connection,
     acoustic_project_code = acoustic_project_codes,
@@ -199,8 +199,8 @@ download_acoustic_dataset <- function(connection = con,
   scientific_names <-
     animals %>%
     distinct(.data$scientific_name) %>%
-    arrange(.data$scientific_name) %>%
-    pull()
+    pull() %>%
+    sort()
 
   message("")
   message(glue("\nSummary statistics for dataset \"{animal_project_code}\":"))
