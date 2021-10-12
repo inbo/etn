@@ -1,10 +1,10 @@
 ---
-title: "Explore ETN acoustic telemetry data"
+title: "Explore acoustic telemetry data"
 author: "Damiano Oldoni"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Explore ETN acoustic telemetry data}
+  %\VignetteIndexEntry{Explore acoustic telemetry data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,15 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-In this vignette we show a typical workflow using `etn` package to retrieve acoustic telemetry data from the postgreSQL ETN database and the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection)  to perform basic data exploration. We will also use ome other packages: [`lubridate`](https://lubridate.tidyverse.org/) to handle date-time data and [`leaflet`](https://rstudio.github.io/leaflet/) and [`htmltools`](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
+In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) and [htmltools](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
 
-To start, load the `etn`package:
+To start, load the etn package:
 
 ```{r load_pkg}
 library(etn)
 ```
 
-and the other packages (install first the ones missing):
+And the other packages (with installation if necessary):
 
 ```{r load_other_pkgs, message=FALSE}
 other_pkgs <- c("dplyr", "lubridate", "leaflet")
@@ -33,9 +33,9 @@ pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
 install.packages(pkgs_to_install)
 
 # load packages
-library(dplyr)  #to do datascience
-library(lubridate)  #to handle date-time data
-library(leaflet)  # to create interactive maps
+library(dplyr)
+library(lubridate)
+library(leaflet)
 ```
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
