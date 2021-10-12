@@ -9,13 +9,17 @@
 #' @importFrom stringr str_sort
 #' @importFrom readr read_file
 #'
-#' @return A vector of all unique `acoustic_tag_id` present in `tag.sql`.
+#' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 list_acoustic_tag_ids <- function(connection = con) {
-  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
-  query <- glue_sql(
-    "SELECT DISTINCT acoustic_tag_id FROM ({tag_query}) AS tag WHERE acoustic_tag_id IS NOT NULL",
+  acoustic_tag_id_sql <- glue_sql(read_file(
+    system.file("sql", "acoustic_tag_id.sql", package = "etn")),
     .con = connection
   )
+  query <- glue_sql("
+    SELECT DISTINCT acoustic_tag_id
+    FROM ({acoustic_tag_id_sql}) AS acoustic_tag_id
+    WHERE acoustic_tag_id IS NOT NULL
+  ", .con = connection)
   data <- dbGetQuery(connection, query)
 
   str_sort(data$acoustic_tag_id, numeric = TRUE)

@@ -1,4 +1,4 @@
-/* Unified tag table with controlled tag_type, tag_subtype */
+/* Unified tags with controlled tag_type, tag_subtype */
 SELECT
   tag_device.serial_number AS tag_serial_number,
   CASE
@@ -14,7 +14,7 @@ SELECT
   END AS tag_subtype,
   tag_union.*
 FROM
-  common.tag_device AS tag_device
+  common.tag_device_limited AS tag_device
     LEFT JOIN common.tag_device_type AS tag_type
       ON tag_device.tag_device_type_fk = tag_type.id_pk
     LEFT JOIN acoustic.acoustic_tag_subtype AS tag_subtype
@@ -32,7 +32,10 @@ FROM
         min_delay_step2, max_delay_step2, power_step2, duration_step2, acceleration_on_sec_step2,
         min_delay_step3, max_delay_step3, power_step3, duration_step3, acceleration_on_sec_step3,
         min_delay_step4, max_delay_step4, power_step4, duration_step4, acceleration_on_sec_step4
-        -- id_pk, tag_code_space AS protocol, id_code, file, units, external_id
+        -- serial_number_tbd, type_tbd, model_tbd, owner_pi_tbd, activation_date_tbd,
+        -- end_date_tbd, estimated_lifetime_tbd, acoustic_tag_type_tbd, manufacturer_fk_tbd,
+        -- owner_group_fk_tbd, financing_project_fk_tbd, status_tbd
+        -- id_code, tag_code_space AS protocol, id_pk, file, units, external_id
       FROM
         acoustic.tags
       UNION
@@ -48,7 +51,7 @@ FROM
         min_delay_step2, max_delay_step2, power_step2, duration_step2, acceleration_on_sec_step2,
         min_delay_step3, max_delay_step3, power_step3, duration_step3, acceleration_on_sec_step3,
         min_delay_step4, max_delay_step4, power_step4, duration_step4, acceleration_on_sec_step4
-        -- id_pk, protocol, id_code
+        -- id_pk, id_code protocol
       FROM
         archive.sensor AS archival_tag
         LEFT JOIN archive.sensor_type AS sensor_type

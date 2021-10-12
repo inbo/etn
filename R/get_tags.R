@@ -87,7 +87,7 @@ get_tags <- function(connection = con,
     acoustic_tag_id_query <- glue_sql("tag.acoustic_tag_id IN ({acoustic_tag_id*})", .con = connection)
   }
 
-  tag_query <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
 
   # Build query
   query <- glue_sql("
@@ -105,14 +105,14 @@ get_tags <- function(connection = con,
       tag_device.activation_date AS activation_date,
       tag_device.battery_estimated_lifetime AS battery_estimated_life,
       tag_device.battery_estimated_end_date AS battery_estimated_end_date,
-      tag.resolution AS resolution,
-      tag.unit AS unit,
-      tag.accurency AS accuracy,
-      tag.range_min AS range_min,
-      tag.range_max AS range_max,
       tag.slope AS sensor_slope,
       tag.intercept AS sensor_intercept,
       tag.range AS sensor_range,
+      tag.range_min AS sensor_range_min,
+      tag.range_max AS sensor_range_max,
+      tag.resolution AS sensor_resolution,
+      tag.unit AS sensor_unit,
+      tag.accurency AS sensor_accuracy,
       tag.sensor_transmit_ratio AS sensor_transmit_ratio,
       tag.accelerometer_algoritm AS accelerometer_algorithm,
       tag.accelerometer_samples_per_second AS accelerometer_samples_per_second,
@@ -140,7 +140,15 @@ get_tags <- function(connection = con,
       tag.duration_step4 AS step4_duration,
       tag.acceleration_on_sec_step4 AS step4_acceleration_duration,
       tag_device.id_pk AS tag_device_id
-    FROM ({tag_query}) AS tag
+      -- tag_device.qc_migration
+      -- tag_device.archive_floating
+      -- tag_device.archive_weight
+      -- tag_device.archive_length
+      -- tag_device.archive_diameter
+      -- tag_device.order_number
+      -- tag_device.device_internal_memory
+      -- tag_device.external_id
+    FROM ({tag_sql}) AS tag
       LEFT JOIN common.tag_device AS tag_device
         ON tag.tag_device_fk = tag_device.id_pk
         LEFT JOIN common.manufacturer AS manufacturer

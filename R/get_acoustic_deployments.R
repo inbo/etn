@@ -90,7 +90,7 @@ get_acoustic_deployments <- function(connection = con,
     SELECT
       dep.id_pk AS deployment_id,
       receiver.receiver AS receiver_id,
-      network_project.projectcode AS acoustic_project_code, -- Not dep.project
+      network_project.projectcode AS acoustic_project_code,
       dep.station_name AS station_name,
       location_name AS station_description,
       location_manager AS station_manager,
@@ -126,20 +126,21 @@ get_acoustic_deployments <- function(connection = con,
       dep.log_depth_stats_period AS log_depth_stats_period,
       dep.log_depth_sample_period AS log_depth_sample_period,
       dep.comments AS comments
-      -- dep.check_complete_time,
-      -- dep.voltage_at_deploy,
-      -- dep.voltage_at_download,
-      -- dep.location_description,
-        -- dep.date_created,
-        -- dep.date_modified,
-      -- dep.distance_to_mouth,
-      -- dep.source,
-      -- dep.acousticreleasenumber,
-      -- dep.hydrophonecablelength,
-      -- dep.recordingname,
-      -- dep.hydrophonesensitivity,
-      -- dep.amplifiersensitivity,
-      -- dep.sample_rate,
+      -- dep.project: dep.project_fk instead
+      -- dep.check_complete_time
+      -- dep.voltage_at_deploy
+      -- dep.voltage_at_download
+      -- dep.location_description
+      -- dep.date_created
+      -- dep.date_modified
+      -- dep.distance_to_mouth
+      -- dep.source
+      -- dep.acousticreleasenumber: cpod
+      -- dep.hydrophonecablelength: cpod
+      -- dep.recordingname: cpod
+      -- dep.hydrophonesensitivity: cpod
+      -- dep.amplifiersensitivity: cpod
+      -- dep.sample_rate: cpod
       -- dep.external_id
     FROM
       acoustic.deployments AS dep
