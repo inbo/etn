@@ -227,6 +227,12 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
   )
   expect_gt(nrow(single_select_df), 0)
 
+  # Selection is case insensitive
+  expect_equal(
+    get_acoustic_detections(con, station_name = "de-9", limit = TRUE),
+    get_acoustic_detections(con, station_name = "DE-9", limit = TRUE)
+  )
+
   # Select multiple values
   multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
   multi_select_df <- get_acoustic_detections(con, station_name = multi_select)

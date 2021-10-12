@@ -111,7 +111,10 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql("det.transmitter IN ({acoustic_tag_id*})", .con = connection)
+    acoustic_tag_id_query <- glue_sql(
+      "det.transmitter IN ({acoustic_tag_id*})",
+      .con = connection
+    )
     include_ref_tags <- TRUE
   }
 
@@ -134,7 +137,10 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
-    scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
+    scientific_name_query <- glue_sql(
+      "animal.scientific_name IN ({scientific_name*})",
+      .con = connection
+    )
   }
 
   # Check acoustic_project_code
@@ -156,7 +162,10 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql("det.receiver IN ({receiver_id*})", .con = connection)
+    receiver_id_query <- glue_sql(
+      "det.receiver IN ({receiver_id*})",
+      .con = connection
+    )
   }
 
   # Check station_name

@@ -56,7 +56,10 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql("receiver.receiver IN ({receiver_id*})", .con = connection)
+    receiver_id_query <- glue_sql(
+      "receiver.receiver IN ({receiver_id*})",
+      .con = connection
+    )
   }
 
   # Check acoustic_project_code
