@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-In this vignette we show a typical workflow using `etn` package to retrieve acoustic telemetry data and the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection)  to perform basic data exploration. We will also use ome other packages: [`lubridate`](https://lubridate.tidyverse.org/) to handle date-time data and [`leaflet`](https://rstudio.github.io/leaflet/) and [`htmltools`](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
+In this vignette we show a typical workflow using `etn` package to retrieve acoustic telemetry data from the postgreSQL ETN database and the [`dplyr`](https://dplyr.tidyverse.org/) package (part of the [tidyverse](https://www.tidyverse.org/) R pacakges collection)  to perform basic data exploration. We will also use ome other packages: [`lubridate`](https://lubridate.tidyverse.org/) to handle date-time data and [`leaflet`](https://rstudio.github.io/leaflet/) and [`htmltools`](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
 
 To start, load the `etn`package:
 
@@ -26,9 +26,16 @@ To start, load the `etn`package:
 library(etn)
 ```
 
-and the other packages:
+and the other packages (install first the ones missing):
 
 ```{r load_other_pkgs, message=FALSE}
+other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
+
+# install missing packages
+pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
+install.packages(pkgs_to_install)
+
+# load packages
 library(dplyr)  #to do datascience
 library(lubridate)  #to handle date-time data
 library(leaflet)  # to create interactive maps
@@ -68,16 +75,22 @@ projects_study
 
 This is exactly the same as retrieving all projects first and filtering them afterwards based on column `project_code`:
 
-```{r}
+```{r retrieve_all_first_filter_after}
 all_my_projects %>%
   filter(project_code %in% c(projects_code))
+```
+
+If you are just interested in the project names you have right to access, you can easily retrieve them as a vector via `list_animal_project_codes`, one of the functions of the `list_*` family:
+
+```{r list_animal_project_codes}
+list_animal_project_codes()
 ```
 
 ## Data exploration
 
 ### Animals under study
 
-By using `get_animals()` you can retrieve information about each fish (`animal_id`), such as scientific name and length, capture and release date  and location and the acoustic transmitter (_tag_):
+By using `get_animals()` you can retrieve information about each fish (`animal_id`), such as scientific name and length, capture/release date and location and the atttached acoustic transmitter (_tag_):
 
 ```{r get_animals}
 animals <- get_animals(animal_project_code = projects_code)
@@ -323,16 +336,17 @@ n_detect_station %>%
              color = ~pal(n),
              fillOpacity = 0.8,
              stroke = FALSE,
-             popup = ~htmlEscape(
-               paste0("Station: ", station_name, "\n",
-                      "(", acoustic_project_code, ")", "\n",
-                      "# detections: ", n))) %>% 
+             popup = ~paste(sep = "<br/>",
+                            paste0("Station: ", 
+                                   station_name, 
+                                   "(", acoustic_project_code, ")"),
+                            paste0("# detections: ", n))) %>% 
   addLegend(title = "Number of detections",
             pal = pal,
             values = ~n)
 ```
 
-On a similar way we can visualie the number of detected fishes per station, `n_silurus_station`:
+On a similar way we can visualize the number of detected fishes per station, `n_silurus_station`:
 
 ```{r map_n_fishes_per_station}
 # Create a continuous palette function
