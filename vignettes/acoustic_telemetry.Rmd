@@ -283,18 +283,13 @@ deploys_silurus <-
 deploys_silurus
 ```
 
-More information about them can be retrieved via `get_acoustic_deployments()` function by specifying the `receiver_id` and `station_name` arguments and then filtering by `deployment_id`:
+More information about them can be retrieved via `get_acoustic_deployments()` function with argument `deployment_id`:
 
 ```{r get_acoustic_deployments_info}
 deployments_silurus <- get_acoustic_deployments(
-  receiver_id = deploys_silurus$receiver_id,
-  station_name = deploys_silurus$station_name
+  deployment_id = deploys_silurus$deployment_id
 )
-
-# filter on deployment_id
-deployments_silurus <-
-  deployments_silurus %>%
-  filter(deployment_id %in% detections_silurus$deployment_id)
+deployments_silurus
 ```
 
 Deployment duration:
