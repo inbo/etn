@@ -235,10 +235,16 @@ test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- df %>% filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
   expect_equal(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
-    c("", "acoustic", "acoustic-archival") # "archival" currently not in data
+    c("acoustic", "acoustic-archival") # "archival" currently not in data
   )
   expect_equal(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),
-    c("", "animal", "built-in", "sentinel") # "range" currently not in data
+    c("animal", "built-in", "sentinel") # "range" currently not in data
   )
+})
+
+test_that("get_animals() does not return animals without tags", {
+  # All animals should be related with a tag
+  df <- get_animals(con)
+  expect_equal(df %>% filter(is.na(tag_serial_number)) %>% nrow(), 0)
 })
