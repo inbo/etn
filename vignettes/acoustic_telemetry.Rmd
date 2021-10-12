@@ -4,16 +4,13 @@ author: "Damiano Oldoni"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Explore ETN data}
+  %\VignetteIndexEntry{Explore ETN acoustic telemetry data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
@@ -261,7 +258,7 @@ list_acoustic_project_codes()
 
 You can retrieve deployment information related to the networks in `networks_names` by using `get_acoustic_deployments()` function:
 
-```{r get_acoustic_deployments_info}
+```{r get_acoustic_deployments_info__networks}
 deployments <-get_acoustic_deployments(acoustic_project_code = networks_names)
 deployments
 ```
@@ -281,6 +278,7 @@ More information about them can be retrieved via `get_acoustic_deployments()` fu
 deployments_silurus <- get_acoustic_deployments(
   receiver_id = deploys_silurus$receiver_id,
   station_name = deploys_silurus$station_name)
+# filter on deployment_id
 deployments_silurus <- deployments_silurus  %>%
   filter(deployment_id %in% detections_silurus$deployment_id)
 ```
@@ -325,7 +323,7 @@ rel_det_duration_silurus
 
 Aside standard graphs, the geographical component of telemetry data makes interactive maps particularly useful. The package `leaflet` is quite popular to create such kind of visualizations. 
 
-We can for exampelcreate a map of the involved stations showing the station name and the acoustic project code it belongs to as popups. First, we retrieve the station geographical coordinates:
+We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as popups. First, we retrieve the station geographical coordinates:
 
 ```{r geo_info_stations}
 geo_info_stations <- 
@@ -410,7 +408,7 @@ n_silurus_station %>%
 
 We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
 
-```{r geo_info_stations}
+```{r geo_info_deployments}
 geo_info_deploys <- 
   detections_silurus %>%
   distinct(deployment_id, 
