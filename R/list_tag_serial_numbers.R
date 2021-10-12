@@ -2,14 +2,14 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #'
+#' @return A vector of all unique `tag_serial_numbers` present in
+#'   `common.tag_device`.
+#'
 #' @export
 #'
 #' @importFrom glue glue_sql
 #' @importFrom DBI dbGetQuery
 #' @importFrom stringr str_sort
-#'
-#' @return A vector of all unique `tag_serial_numbers` present in
-#'   `common.tag_device`.
 list_tag_serial_numbers <- function(connection = con) {
   query <- glue_sql(
     "SELECT DISTINCT serial_number FROM common.tag_device",
