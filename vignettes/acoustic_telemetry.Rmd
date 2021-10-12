@@ -228,11 +228,11 @@ tags_silurus <- get_tags(tag_serial_number = tags_serial)
 tags_silurus
 ```
 
-However, keep in mind that there is a fundamental differnce between the arguments `acoustic_tag_id` and `tag_serial_number`: the `tag_serial_number` identifies the _instrument_, which could contain multiple tags, i.e. multiple `acoustic_tag_id` values. Not only, the argument `acoustic_tag_id` is only valid when you are dealing with acoustic telemetry data (`get_acoustic_*()` functions).
+However, keep in mind that there is a fundamental difference between the arguments `acoustic_tag_id` and `tag_serial_number`: the `tag_serial_number` identifies the _instrument_, which could contain multiple tags, i.e. multiple `acoustic_tag_id` values. Not only, the argument `acoustic_tag_id` is only valid when you are dealing with acoustic telemetry data (`get_acoustic_*()` functions).
 
-## Acoutic network projects
+## Acoustic network projects
 
-The detections of Wels Catfish have been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`:
+The detection of wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`:
 
 ```{r acoustic_project_codes_involved}
 networks_names <- detections_silurus %>% 
@@ -241,14 +241,14 @@ networks_names <- detections_silurus %>%
 networks_names
 ```
 
-To get more information about these acoustic networks, yo ucan use function `get_acoustic_projects()`
+To get more information about these acoustic networks, you can use function `get_acoustic_projects()`
 
 ```{r get_acoustic_projects}
 networks <- get_acoustic_projects(acoustic_project_code = networks_names)
 networks
 ```
 
-As for animal projects, you can retrieve the full list of acoustic network projects you have access to by using a `list_*` function:
+As for animal projects, you can retrieve the full list of acoustic network projects you have access to by using the correspondent `list_*` function:
 
 ```{r list_acoustic_project_codes}
 list_acoustic_project_codes()
@@ -272,7 +272,7 @@ deploys_silurus <-
 deploys_silurus
 ```
 
-More information about them can be retrieved via `get_acoustic_deployments()` function:
+More information about them can be retrieved via `get_acoustic_deployments()` function by specifying the `receiver_id` and `station_name` arguments and then filtering by `deployment_id`:
 
 ```{r get_acoustic_deployments_info}
 deployments_silurus <- get_acoustic_deployments(
@@ -302,7 +302,7 @@ n_active_days_deployments_silurus <-
   mutate(date = date(date_time)) %>%
   distinct(deployment_id, station_name, date) %>%
   group_by(deployment_id, station_name) %>%
-  summarise(n_days = n()) %>%
+  summarise(n_days = n(), .groups = "drop") %>%
   ungroup()
 n_active_days_deployments_silurus
 ```
@@ -319,11 +319,11 @@ rel_det_duration_silurus <-
 rel_det_duration_silurus
 ```
 
-## Visualize data
+## Data visualization
 
 Aside standard graphs, the geographical component of telemetry data makes interactive maps particularly useful. The package `leaflet` is quite popular to create such kind of visualizations. 
 
-We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as popups. First, we retrieve the station geographical coordinates:
+We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as popups. First, we retrieve the coordinates of the stations:
 
 ```{r geo_info_stations}
 geo_info_stations <- 
@@ -372,7 +372,7 @@ n_detect_station %>%
                                    station_name, 
                                    " (", acoustic_project_code, ")"),
                             paste0("# detections: ", n))) %>% 
-  addLegend(title = "Number of detections",
+  addLegend(title = "Detections",
             pal = pal,
             values = ~n)
 ```
@@ -401,7 +401,7 @@ n_silurus_station %>%
                                    station_name, 
                                    " (", acoustic_project_code, ")"),
                             paste0("# detected fishes: ", n))) %>% 
-  addLegend(title = "Number of detected fishes",
+  addLegend(title = "Detected fishes",
             pal = pal,
             values = ~n)
 ```
@@ -439,14 +439,14 @@ rel_det_duration_silurus %>%
              color = ~pal(relative_detection_duration),
              fillOpacity = 0.8,
              stroke = FALSE,
-             clusterOptions = TRUE,
+             clusterOptions = markerClusterOptions(),
              popup = ~paste(sep = "<br/>",
                             paste0("DeploymentID: ", deployment_id),
                             paste0("Station: ", 
                                    station_name, 
                                    " (", acoustic_project_code, ")"),
                             paste0("# relative detection duration: ", 
-                                   relative_detection_duration))) %>% 
+                                   round(relative_detection_duration, 2)))) %>% 
   addLegend(title = "Relative detection duration",
             pal = pal,
             values = ~relative_detection_duration)
