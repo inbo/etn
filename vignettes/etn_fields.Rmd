@@ -13,6 +13,10 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<p class="alert alert-warning">
+The information below is outdated. We are working on [an update](https://github.com/inbo/etn/issues/226).
+</p>
+
 ```{r include=FALSE}
 library(etn)
 library(readr)
@@ -25,22 +29,23 @@ library(kableExtra)
 ```
 
 ```{r include=FALSE}
-con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+con <- connect_to_etn()
 query <- glue_sql("
-    SELECT
-      data_format_field_views_definition AS view,
-      lower(field_name) AS field,
-      trim(regexp_replace(field_definition, '[\\s+]+', ' ', 'g')) AS definition,
-      trim(regexp_replace(field_units_format_description, '[\\s+]+', ' ', 'g')) AS example,
-      order_field_definitions AS \"order\"
-    FROM
-      app.field_metadata
-    WHERE
-      data_format_field_views_definition IS NOT NULL
-    ORDER BY
-      view,
-      \"order\"
-    ", .con = connection)
+  SELECT
+    data_format_field_views_definition AS view,
+    lower(field_name) AS field,
+    trim(regexp_replace(field_definition, '[\\s+]+', ' ', 'g')) AS definition,
+    trim(regexp_replace(field_units_format_description, '[\\s+]+', ' ', 'g')) AS example,
+    view_order AS \"order\"
+  FROM
+    app.field_metadata
+  WHERE
+    data_format_field_views_definition IS NOT NULL
+  ORDER BY
+    view,
+    \"order\"
+  ", .con = connection
+)
 etn_fields <- dbGetQuery(con, query)
 ```
 
@@ -58,7 +63,7 @@ view_table <- function(view_name) {
     # Filter on view
     filter(view == view_name) %>%
     # Order by order (should already be done by query)
-    arrange(order) %>%
+    arrange(.data$order) %>%
     # Select columns
     select(field, definition, example) %>%
     # Convert quotes to backticks, so examples are shown as markdown monospaced code
@@ -79,14 +84,6 @@ view_table <- function(view_name) {
   
   return(view_kable)
 }
-```
-
-## Projects
-
-Related function: `get_projects()`.
-
-```{r echo=FALSE}
-view_table("projects_view2")
 ```
 
 ## Animals
