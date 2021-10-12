@@ -29,7 +29,7 @@ library(etn)
 and the other packages (install first the ones missing):
 
 ```{r load_other_pkgs, message=FALSE}
-other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
+other_pkgs <- c("dplyr", "lubridate", "leaflet")
 
 # install missing packages
 pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
@@ -39,7 +39,6 @@ install.packages(pkgs_to_install)
 library(dplyr)  #to do datascience
 library(lubridate)  #to handle date-time data
 library(leaflet)  # to create interactive maps
-library(htmltools)  # to write HTML in R
 ```
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
@@ -80,15 +79,13 @@ all_my_projects %>%
   filter(project_code %in% c(projects_code))
 ```
 
-If you are just interested in the project names you have right to access, you can easily retrieve them as a vector via `list_animal_project_codes`, one of the functions of the `list_*` family:
+If you are just interested in the project names you have right to access, you can easily retrieve them as a vector via `list_animal_project_codes()`, one of the etn functions in  the [`list_*` family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
 
 ```{r list_animal_project_codes}
 list_animal_project_codes()
 ```
 
-## Data exploration
-
-### Animals under study
+## Animals
 
 By using `get_animals()` you can retrieve information about each fish (`animal_id`), such as scientific name and length, capture/release date and location and the atttached acoustic transmitter (_tag_):
 
@@ -98,16 +95,16 @@ animals <- get_animals(animal_project_code = projects_code)
 animals %>% head(10)
 ```
 
-Which species and how many individuals have been tracked for these projects?
+Which species and how often have been tracked for the projects `2014_demer` and `2015_dijle`?
 
 ```{r get_species_and_number_individuals}
 animals %>%
   count(scientific_name)
 ```
 
-### Detection history
+## Detections
 
-Let's say we are interested in the tracking data of Wels catfish (_Silurus glanis_) between begin 2014 and end 2015:
+Let's say we are interested in the tracking data of Wels catfish (_Silurus glanis_) between begin 2014 and end 2015. You can retrieve the detection history by `get_acoustic_detections()`:
 
 ```{r get_detections_silurus}
 detections_silurus <- get_acoustic_detections(
@@ -155,7 +152,7 @@ detections_silurus_duration <-
 detections_silurus_duration
 ```
 
-How many detections per fish?
+How many times a fish has been detected?
 
 ```{r n_detections}
 detections_silurus %>%
@@ -163,7 +160,7 @@ detections_silurus %>%
   count()
 ```
 
-### Detection stations
+## Stations
 
 At how many detection stations have the fishes been detected?
 
@@ -216,8 +213,7 @@ n_silurus_station <-
 n_silurus_station
 ```
 
-
-### Acoustic tags 
+## Acoustic tags 
 
 To get more information about the tags involved in `detections_silurus`, you can use the function `get_tags`, which returns information such as manufacturer, model and frequency:
 
@@ -237,7 +233,7 @@ tags_silurus
 
 However, keep in mind that there is a fundamental differnce between these two arguments: the `tag_serial_number` identifies the instrument, which could contain multiple tags. Not only, the argument `acoustic_tag_id` is only valid when you are dealing with acoustic telemetry data (`get_acoustic_*()` functions).
 
-### Acoustic deployments
+## Acoustic deployments
 
 These are the deployments of the acoustic receivers involved in `detections_silurus`:
 
@@ -248,7 +244,7 @@ deploys_silurus <-
 deploys_silurus
 ```
 
-More information about them can be retrieved by `get_acoustic_deployments()` function:
+More information about them can be retrieved via `get_acoustic_deployments()` function:
 
 ```{r get_acoustic_deployments_info}
 deployments_silurus <-get_acoustic_deployments(
@@ -291,36 +287,39 @@ rel_det_duration_silurus <-
 rel_det_duration_silurus
 ```
 
-### Data visualization
+## Visualize data
 
-The package `leaflet` is very useful to create interactive maps. We start creating a map of the involved sattions showing the station name and the acoustic project code it belongs to as pop-up. First, we have to retrieve the station geographical coordinates:
+Aside standard graphs, the geographical component of telemetry data makes interactive maps particularly useful. The package `leaflet` is quite popular to create such kind of visualizations. 
+
+We start creating a map of the involved stations showing the station name and the acoustic project code it belongs to as pop-up. First, we have to retrieve the station geographical coordinates:
 
 ```{r geo_info_stations}
 geo_info_stations <- 
-  deployments_silurus %>%
+  detections_silurus %>%
   distinct(station_name, 
           deploy_latitude, 
           deploy_longitude, 
-          acoustic_project_code)
+          acoustic_project_code) %>%
+  arrange(station_name)
 geo_info_stations
 ```
 
-And then we add them on a map as markers: 
+And then we add them on a map showing the station name and the acoustic project code they belong to: 
 
 ```{r map_stations}
 leaflet(geo_info_stations) %>%
   addTiles() %>%
   addMarkers(lng = ~deploy_longitude,
              lat = ~deploy_latitude,
-             popup = ~htmlEscape(
-               paste0("Station: ", station_name, "\n",
-                      "(", acoustic_project_code, ")")))
+             popup = ~paste0("Station: ", 
+                             station_name, 
+                             " (", acoustic_project_code, ")"))
 ```
 
 In the previous section we calculated the number of detections per station, `n_detect_station`. We can visualize such information on a map by joining it with `geo_info_stations`:
 
 ```{r leaflet_n_detections_Wels_catfish}
-# Create a continuous palette function
+# Create a continuous color palette function
 pal <- colorNumeric(
   palette = "viridis",
   domain = n_detect_station$n)
@@ -339,7 +338,7 @@ n_detect_station %>%
              popup = ~paste(sep = "<br/>",
                             paste0("Station: ", 
                                    station_name, 
-                                   "(", acoustic_project_code, ")"),
+                                   " (", acoustic_project_code, ")"),
                             paste0("# detections: ", n))) %>% 
   addLegend(title = "Number of detections",
             pal = pal,
@@ -368,10 +367,11 @@ n_silurus_station %>%
              popup = ~paste(sep = "<br/>",
                             paste0("Station: ", 
                                    station_name, 
-                                   "(", acoustic_project_code, ")"),
+                                   " (", acoustic_project_code, ")"),
                             paste0("# detected fishes: ", n))) %>% 
   addLegend(title = "Number of detections",
             pal = pal,
             values = ~n)
 ```
 
+Do you want to add the temporal component to visualize the fish movement? Let's give a look to [moveVis](https://movevis.org/index.html) package.
