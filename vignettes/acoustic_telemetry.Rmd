@@ -26,7 +26,7 @@ library(etn)
 And the other packages (with installation if necessary):
 
 ```{r load_other_pkgs, message=FALSE}
-other_pkgs <- c("dplyr", "lubridate", "leaflet")
+other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
 
 # install missing packages
 pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
@@ -36,6 +36,7 @@ install.packages(pkgs_to_install)
 library(dplyr)
 library(lubridate)
 library(leaflet)
+library(htmltools)
 ```
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
