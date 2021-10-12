@@ -324,9 +324,9 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
   # A69-1303-20695 (tag_serial_number = 1097335) is associated with animal
   # 637 (2010_phd_reubens) from 2010-08-09 13:00:00 to 2011-05-19 00:00:00
-  in_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", start_date = "2010-08-09", end_date = "2011-05-19")
-  pre_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", end_date = "2010-08-09")
-  post_range_df <- get_acoustic_detections(acoustic_tag_id = "A69-1303-20695", start_date = "2011-05-19")
+  in_range_df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1303-20695", start_date = "2010-08-09", end_date = "2011-05-19")
+  pre_range_df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1303-20695", end_date = "2010-08-09")
+  post_range_df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1303-20695", start_date = "2011-05-19")
 
   # Expect detections within range
   expect_gt(nrow(in_range_df), 0)
