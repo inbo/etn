@@ -11,7 +11,7 @@
 #' @param tag_subtype Character (vector). `animal`, `built-in`, `range` or
 #'   `sentinel`.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag
-#'   identifiers. These are the identifiers found in acoustic detections.
+#'   identifiers, i.e. identifiers found in [get_acoustic_detections()].
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
@@ -57,7 +57,10 @@ get_tags <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql("tag.tag_serial_number IN ({tag_serial_number*})", .con = connection)
+    tag_serial_number_query <- glue_sql(
+      "tag.tag_serial_number IN ({tag_serial_number*})",
+      .con = connection
+    )
   }
 
   # Check tag_type
@@ -66,7 +69,10 @@ get_tags <- function(connection = con,
   } else {
     valid_tag_types <- c("acoustic", "archival", "acoustic-archival")
     check_value(tag_type, valid_tag_types, "tag_type")
-    tag_type_query <- glue_sql("tag.tag_type IN ({tag_type*})", .con = connection)
+    tag_type_query <- glue_sql(
+      "tag.tag_type IN ({tag_type*})",
+      .con = connection
+    )
   }
 
   # Check tag_subtype
@@ -75,7 +81,10 @@ get_tags <- function(connection = con,
   } else {
     valid_tag_subtypes <- c("animal", "built-in", "range", "sentinel")
     check_value(tag_subtype, valid_tag_subtypes, "tag_subtype")
-    tag_subtype_query <- glue_sql("tag.tag_subtype IN ({tag_subtype*})", .con = connection)
+    tag_subtype_query <- glue_sql(
+      "tag.tag_subtype IN ({tag_subtype*})",
+      .con = connection
+    )
   }
 
   # Check acoustic_tag_id
@@ -84,7 +93,10 @@ get_tags <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql("tag.acoustic_tag_id IN ({acoustic_tag_id*})", .con = connection)
+    acoustic_tag_id_query <- glue_sql(
+      "tag.acoustic_tag_id IN ({acoustic_tag_id*})",
+      .con = connection
+    )
   }
 
   tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
@@ -139,6 +151,7 @@ get_tags <- function(connection = con,
       tag.power_step4 AS step4_power,
       tag.duration_step4 AS step4_duration,
       tag.acceleration_on_sec_step4 AS step4_acceleration_duration,
+      tag.tag_id AS tag_id,
       tag_device.id_pk AS tag_device_id
       -- tag_device.qc_migration
       -- tag_device.archive_floating

@@ -63,7 +63,10 @@ get_animals <- function(connection = con,
   } else {
     valid_animal_ids <- list_animal_ids(connection)
     check_value(animal_id, valid_animal_ids, "animal_id")
-    animal_id_query <- glue_sql("animal.id_pk IN ({animal_id*})", .con = connection)
+    animal_id_query <- glue_sql(
+      "animal.id_pk IN ({animal_id*})",
+      .con = connection
+    )
     # animal_id_query seems to work correctly with integers or strings: 'animal_id IN (\'304\')'
   }
 
@@ -87,16 +90,22 @@ get_animals <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql("tag.tag_serial_number IN ({tag_serial_number*})", .con = connection)
+    tag_serial_number_query <- glue_sql(
+      "tag.tag_serial_number IN ({tag_serial_number*})",
+      .con = connection
+    )
   }
 
   # Check scientific_name
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    valid_scientific_name_ids <- list_scientific_names(connection)
-    check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
-    scientific_name_query <- glue_sql("animal.scientific_name IN ({scientific_name*})", .con = connection)
+    valid_scientific_names <- list_scientific_names(connection)
+    check_value(scientific_name, valid_scientific_names, "scientific_name")
+    scientific_name_query <- glue_sql(
+      "animal.scientific_name IN ({scientific_name*})",
+      .con = connection
+    )
   }
 
   tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)

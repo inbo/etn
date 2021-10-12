@@ -21,7 +21,7 @@ get_acoustic_deployments(
 project codes. Case-insensitive.}
 
 \item{station_name}{Character (vector). One or more deployment station
-names. Case-insensitive.}
+names.}
 
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{FALSE}.}

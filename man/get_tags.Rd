@@ -24,7 +24,7 @@ both, find those with \code{acoustic-archival}.}
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag
-identifiers. These are the identifiers found in acoustic detections.}
+identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also

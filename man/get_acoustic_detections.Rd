@@ -39,7 +39,7 @@ project codes. Case-insensitive.}
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{station_name}{Character (vector). One or more deployment station
-names. Case-insensitive.}
+names.}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
