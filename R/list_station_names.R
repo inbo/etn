@@ -12,7 +12,7 @@
 #'   `acoustic.deployments`.
 list_station_names <- function(connection = con) {
   query <- glue_sql(
-    "SELECT DISTINCT station_name FROM acoustic.deployments",
+    "SELECT DISTINCT station_name FROM acoustic.deployments WHERE station_name IS NOT NULL",
     .con = connection
   )
   data <- dbGetQuery(connection, query)
