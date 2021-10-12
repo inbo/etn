@@ -269,7 +269,7 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
   expect_gt(nrow(acoustic_df), 0)
 
   # A sentinel acoustic-archival tag with pressure + temperature sensor
-  acoustic_archival_df <- get_acoustic_detections(acoustic_tag_id = c("A69-9006-11100", "A69-9006-11099"))
+  acoustic_archival_df <- get_acoustic_detections(con, acoustic_tag_id = c("A69-9006-11100", "A69-9006-11099"))
   expect_gt(nrow(acoustic_archival_df), 0)
   expect_equal(
     acoustic_archival_df %>% distinct(tag_serial_number) %>% pull(),
@@ -283,12 +283,12 @@ test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alt
   # A69-1105-26 (tag_serial_number = 1734026) is associated with animal
   # - 5902 (2017_Fremur) from 2017-12-01 00:00 to open
   # Almost all its detections are from after the release date
-  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-26")), 0)
+  expect_gt(nrow(get_acoustic_detections(con, acoustic_tag_id = "A69-1105-26")), 0)
 
   # A69-1105-155 (tag_serial_number = 1712155) is associated with animal
   # - 4140 (OTN-Skjerstadfjorden) from 2017-05-31 01:00 to open
   # All detections are from before the release date, so it should return 0
-  expect_equal(nrow(get_acoustic_detections(acoustic_tag_id = "A69-1105-155")), 0)
+  expect_equal(nrow(get_acoustic_detections(con, acoustic_tag_id = "A69-1105-155")), 0)
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections across acoustic_id and acoustic_id_alternative", {
@@ -299,7 +299,7 @@ test_that("get_acoustic_detections() does not return duplicate detections across
   # 1228004           | A69-1105-100    | S256-100            | 720    | 2015-12-01 00:00 | 2013 Albertkanaal
 
   # Expect no duplicates
-  df <- get_acoustic_detections(acoustic_tag_id = "A69-1105-100")
+  df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1105-100")
   # expect_equal(nrow(df), nrow(df %>% distinct(detection_id))) # TODO: https://github.com/inbo/etn/issues/216
 })
 
@@ -339,5 +339,5 @@ test_that("get_acoustic_detections() does not return detections out of date rang
 test_that("get_acoustic_detections() can return detections not (yet) associated with an animal", {
   # A180-1702-49684 (tag_serial_number = 1317386) is an "acoustic / animal" tag
   # not yet associated with an animal. It should return detections
-  expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
+  expect_gt(nrow(get_acoustic_detections(con, acoustic_tag_id = "A180-1702-49684")), 0)
 })
