@@ -8,7 +8,7 @@
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
 #' @param station_name Character (vector). One or more deployment station
-#'   names. Case-insensitive.
+#'   names.
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `FALSE`.
 #'
@@ -56,7 +56,10 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql("receiver.receiver IN ({receiver_id*})", .con = connection)
+    receiver_id_query <- glue_sql(
+      "receiver.receiver IN ({receiver_id*})",
+      .con = connection
+    )
   }
 
   # Check acoustic_project_code
@@ -76,11 +79,10 @@ get_acoustic_deployments <- function(connection = con,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    station_name <- tolower(station_name)
-    valid_station_names <- tolower(list_station_names(connection))
+    valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
     station_name_query <- glue_sql(
-      "LOWER(dep.station_name) IN ({station_name*})",
+      "dep.station_name IN ({station_name*})",
       .con = connection
     )
   }

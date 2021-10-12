@@ -43,7 +43,10 @@ get_acoustic_receivers <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql("receiver.receiver IN ({receiver_id*})", .con = connection)
+    receiver_id_query <- glue_sql(
+      "receiver.receiver IN ({receiver_id*})",
+      .con = connection
+    )
   }
 
   # Check status
@@ -52,7 +55,10 @@ get_acoustic_receivers <- function(connection = con,
   } else {
     valid_status <- c("active", "available", "broken", "inactive", "lost", "returned")
     check_value(status, valid_status, "status")
-    status_query <- glue_sql("receiver.controlled_status IN ({status*})", .con = connection)
+    status_query <- glue_sql(
+      "receiver.controlled_status IN ({status*})",
+      .con = connection
+    )
   }
 
   receiver_sql <- glue_sql(read_file(system.file("sql", "receiver.sql", package = "etn")), .con = connection)

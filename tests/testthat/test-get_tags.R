@@ -63,6 +63,7 @@ test_that("get_tags() returns the expected columns", {
     "step4_power",
     "step4_duration",
     "step4_acceleration_duration",
+    "tag_id",
     "tag_device_id"
   )
   expect_equal(names(df), expected_col_names)
@@ -178,30 +179,30 @@ test_that("get_tags() allows selecting on multiple parameters", {
 })
 
 test_that("get_tags() can return multiple rows for a single tag", {
-  # A sentinel acoustic-archival tag with pressure + temperature sensor
+  # A sentinel acoustic-archival tag with temperature + pressure sensor
   tag_1_df <- get_tags(con, tag_serial_number = 1400185)
-  expect_equal(nrow(tag_1_df), 2) # 2 rows: presure + temperature
+  expect_equal(nrow(tag_1_df), 2) # 2 rows: temperature + presure
   expect_equal(
-    tag_1_df %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    tag_1_df %>% arrange(acoustic_tag_id) %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     as_tibble(data.frame(
       tag_type = "acoustic-archival",
       tag_subtype = "sentinel",
-      sensor_type = c("pressure", "temperature"),
-      acoustic_tag_id = c("A69-9006-11100", "A69-9006-11099"),
+      sensor_type = c("temperature", "pressure"),
+      acoustic_tag_id = c("A69-9006-11099", "A69-9006-11100"),
       stringsAsFactors = FALSE
     ))
   )
 
   # A built-in acoustic tag with two protocols: https://github.com/inbo/etn/issues/177#issuecomment-925578186
   tag_2_df <- get_tags(con, tag_serial_number = 461076)
-  expect_equal(nrow(tag_2_df), 2) # 2 rows: H170 + A180
+  expect_equal(nrow(tag_2_df), 2) # 2 rows: A180 + H170
   expect_equal(
-    tag_2_df %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    tag_2_df %>% arrange(acoustic_tag_id) %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     as_tibble(data.frame(
       tag_type = "acoustic",
       tag_subtype = "built-in",
       sensor_type = NA_character_,
-      acoustic_tag_id = c("H170-1802-62076", "A180-1702-62076"),
+      acoustic_tag_id = c("A180-1702-62076", "H170-1802-62076"),
       stringsAsFactors = FALSE
     ))
   )
