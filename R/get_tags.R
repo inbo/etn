@@ -139,6 +139,7 @@ get_tags <- function(connection = con,
       tag.power_step4 AS step4_power,
       tag.duration_step4 AS step4_duration,
       tag.acceleration_on_sec_step4 AS step4_acceleration_duration,
+      tag.tag_id AS tag_id,
       tag_device.id_pk AS tag_device_id
       -- tag_device.qc_migration
       -- tag_device.archive_floating

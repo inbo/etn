@@ -63,6 +63,7 @@ test_that("get_tags() returns the expected columns", {
     "step4_power",
     "step4_duration",
     "step4_acceleration_duration",
+    "tag_id",
     "tag_device_id"
   )
   expect_equal(names(df), expected_col_names)
