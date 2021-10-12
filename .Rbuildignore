@@ -6,3 +6,4 @@
 ^pkgdown$
 .gitignore
 .github
+^Meta
