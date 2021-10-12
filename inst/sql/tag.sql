@@ -21,7 +21,7 @@ FROM
       ON tag_device.acoustic_tag_subtype_fk = tag_subtype.id_pk
     LEFT JOIN (
       SELECT
-        CONCAT('acoustic:', acoustic_tag.id_pk) AS tag_id,
+        'acoustic:' ||  acoustic_tag.id_pk AS tag_id,
         tag_device_fk,
         sensor_type,
         tag_full_id AS acoustic_tag_id,
@@ -41,7 +41,7 @@ FROM
         acoustic.tags AS acoustic_tag
       UNION
       SELECT
-        CONCAT('archive:', archival_tag.id_pk) AS tag_id,
+        'archive:' || archival_tag.id_pk AS tag_id,
         device_tag_fk AS tag_device_fk,
         sensor_type.description AS sensor_type,
         sensor_full_id AS acoustic_tag_id,
