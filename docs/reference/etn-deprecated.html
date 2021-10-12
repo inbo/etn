@@ -81,7 +81,7 @@ the near future." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -94,9 +94,6 @@ the near future." />
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,6 +103,9 @@ the near future." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -142,7 +142,22 @@ the near future." />
 the near future.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_transmitters</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_deployments</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='fu'>get_detections</span>(
+  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
+  <span class='kw'>tag_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
+
+<span class='fu'>get_projects</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='no'>project_type</span>, <span class='no'>application_type</span>)
+
+<span class='fu'>get_receivers</span>(<span class='no'>...</span>)
+
+<span class='fu'>list_network_project_codes</span>(<span class='no'>...</span>)
+
+<span class='fu'>list_tag_ids</span>(<span class='no'>...</span>)</pre>
 
 
 

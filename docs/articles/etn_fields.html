@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -51,9 +51,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -64,6 +61,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
+    <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
   </ul>
@@ -92,7 +92,7 @@
       <h1 data-toc-skip>ETN field definitions</h1>
                         <h4 class="author">Peter Desmet &amp; Filip Waumans</h4>
             
-            <h4 class="date">2021-05-17</h4>
+            <h4 class="date">2021-10-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/master/vignettes/etn_fields.Rmd"><code>vignettes/etn_fields.Rmd</code></a></small>
       <div class="hidden name"><code>etn_fields.Rmd</code></div>
@@ -101,171 +101,10 @@
 
     
     
+<p class="alert alert-warning">
+The information below is outdated. We are working on <a href="https://github.com/inbo/etn/issues/226">an update</a>.
+</p>
 <p>Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the <a href="../CONTRIBUTING.html">contributing guide</a>). The definitions are also available as a <a href="https://github.com/inbo/etn/blob/master/inst/assets/etn_fields.csv">csv file</a>.</p>
-<div id="projects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#projects" class="anchor"></a>Projects</h2>
-<p>Related function: <code><a href="../reference/get_projects.html">get_projects()</a></code>.</p>
-<table class="table">
-<thead><tr>
-<th style="text-align:left;">
-field
-</th>
-<th style="text-align:left;">
-definition
-</th>
-<th style="text-align:left;">
-example
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>project_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>project_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>application_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>telemetry_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>project_name</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>coordinating_organization</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>principal_investigator</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>principal_investigator_email</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>start_date</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>end_date</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>latitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>longitude</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>moratorium</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>imis_dataset_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>pi_imis_person_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div id="animals" class="section level2">
 <h2 class="hasAnchor">
 <a href="#animals" class="anchor"></a>Animals</h2>
@@ -285,33 +124,6 @@ example
 <tbody>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_id</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>animal_project_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
 <code>tag_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -319,15 +131,6 @@ Select a tag. A tag code space will only appear here after adding the tag metada
 </td>
 <td style="text-align:left;width: 35%; ">
 as in: A69-9004-2210
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>tag_fk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
 </td>
 </tr>
 <tr>
@@ -1434,7 +1237,7 @@ units: seconds, as in: 37
 <div id="detections" class="section level2">
 <h2 class="hasAnchor">
 <a href="#detections" class="anchor"></a>Detections</h2>
-<p>Related function: <code><a href="../reference/get_detections.html">get_detections()</a></code>.</p>
+<p>Related function: <code><a href="../reference/etn-deprecated.html">get_detections()</a></code>.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1698,7 +1501,7 @@ Foreign key linked to the deployment information
 <div id="deployments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deployments" class="anchor"></a>Deployments</h2>
-<p>Related function: <code><a href="../reference/get_deployments.html">get_deployments()</a></code>.</p>
+<p>Related function: <code><a href="../reference/etn-deprecated.html">get_deployments()</a></code>.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1714,15 +1517,6 @@ example
 <tbody>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>pk</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
 <code>receiver_id</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -1730,24 +1524,6 @@ Receiver ID linked to the deployment. Composed by ‘Model number’-‘Serial n
 </td>
 <td style="text-align:left;width: 35%; ">
 as in: TBR700-234
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>application_type</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>network_project_code</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-</td>
-<td style="text-align:left;width: 35%; ">
 </td>
 </tr>
 <tr>
@@ -1906,17 +1682,6 @@ format: yyyy-mm-dd hh:mm; as in: 2017-06-04 00:00
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>activation_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date and time the receiver was activated, in 24-hour UTC.
-</td>
-<td style="text-align:left;width: 35%; ">
-format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
 <code>recover_date_time</code>
 </td>
 <td style="text-align:left;width: 40%; ">
@@ -1968,17 +1733,6 @@ Were data downloaded? Yes or no. If no, please add comment.
 </td>
 <td style="text-align:left;width: 35%; ">
 format: y or n; as in: y
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 25%; word-break: break-word">
-<code>valid_data_until_date_time</code>
-</td>
-<td style="text-align:left;width: 40%; ">
-Date and time until which valid data was recorded, in 24-hour UTC.
-</td>
-<td style="text-align:left;width: 35%; ">
-format: yyyy-mm-dd hh:mm:ss; as in: 2017-08-08 12:00:00
 </td>
 </tr>
 <tr>
@@ -2141,7 +1895,7 @@ format: free text
 <div id="receivers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#receivers" class="anchor"></a>Receivers</h2>
-<p>Related function: <code><a href="../reference/get_receivers.html">get_receivers()</a></code>.</p>
+<p>Related function: <code><a href="../reference/etn-deprecated.html">get_receivers()</a></code>.</p>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -2160,8 +1914,10 @@ example
 <code>pk</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+Primary Key linked to the tag. This field is automatically generated by the database when a new entry is made.
 </td>
 <td style="text-align:left;width: 35%; ">
+as in: 1
 </td>
 </tr>
 <tr>
@@ -2180,8 +1936,10 @@ as in: VR2W-120620
 <code>application_type</code>
 </td>
 <td style="text-align:left;width: 40%; ">
+The receiver context type
 </td>
 <td style="text-align:left;width: 35%; ">
+as in: CPOD or Acoustic
 </td>
 </tr>
 <tr>
@@ -2252,7 +2010,7 @@ units: months; format: integer; as in: 12
 </tr>
 <tr>
 <td style="text-align:left;width: 25%; word-break: break-word">
-<code>owner_organization</code>
+<code>owner_organisation</code>
 </td>
 <td style="text-align:left;width: 40%; ">
 Affiliation of the Principal Investigator for the project.

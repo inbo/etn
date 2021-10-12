@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all available scientific names — list_scientific_names • etn</title>
+<title>Get cpod project data — get_cpod_projects • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="List all available scientific names — list_scientific_names" />
-<meta property="og:description" content="List all available scientific names" />
+<meta property="og:title" content="Get cpod project data — get_cpod_projects" />
+<meta property="og:description" content="Get data for cpod projects, with options to filter results." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -131,16 +131,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all available scientific names</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_scientific_names.R'><code>R/list_scientific_names.R</code></a></small>
-    <div class="hidden name"><code>list_scientific_names.Rd</code></div>
+    <h1>Get cpod project data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_cpod_projects.R'><code>R/get_cpod_projects.R</code></a></small>
+    <div class="hidden name"><code>get_cpod_projects.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List all available scientific names</p>
+    <p>Get data for cpod projects, with options to filter results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_scientific_names</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>)</pre>
+    <pre class="usage"><span class='fu'>get_cpod_projects</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>cpod_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,13 +149,30 @@
       <th>connection</th>
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
+    <tr>
+      <th>cpod_project_code</th>
+      <td><p>Character (vector). One or more cpod project
+codes. Case-insensitive.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of all unique <code>scientific_name</code> present in
-<code>common.animal_release</code>.</p>
+    <p>A tibble with animal project data, sorted by <code>project_code</code>. See
+also
+<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Set default connection variable</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
+
+<span class='co'># Get all animal projects</span>
+<span class='fu'>get_cpod_projects</span>()
+
+<span class='co'># Get a specific animal project</span>
+<span class='fu'><a href='get_animal_projects.html'>get_animal_projects</a></span>(<span class='kw'>cpod_project_code</span> <span class='kw'>=</span> <span class='st'>"cpod-lifewatch"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

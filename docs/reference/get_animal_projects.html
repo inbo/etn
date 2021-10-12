@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get receiver data — get_receivers • etn</title>
+<title>Get animal project data — get_animal_projects • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get receiver data — get_receivers" />
-<meta property="og:description" content="Get data for receivers, with options to filter results." />
+<meta property="og:title" content="Get animal project data — get_animal_projects" />
+<meta property="og:description" content="Get data for animal projects, with options to filter results." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -105,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -131,21 +131,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get receiver data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_receivers.R'><code>R/get_receivers.R</code></a></small>
-    <div class="hidden name"><code>get_receivers.Rd</code></div>
+    <h1>Get animal project data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_animal_projects.R'><code>R/get_animal_projects.R</code></a></small>
+    <div class="hidden name"><code>get_animal_projects.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get data for receivers, with options to filter results.</p>
+    <p>Get data for animal projects, with options to filter results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_receivers</span>(
-  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
-  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>status</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_animal_projects</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,40 +150,28 @@
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
-      <th>receiver_id</th>
-      <td><p>Character (vector). One or more receiver ids.</p></td>
-    </tr>
-    <tr>
-      <th>application_type</th>
-      <td><p>Character. <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
-    </tr>
-    <tr>
-      <th>status</th>
-      <td><p>Character. One or more statuses, e.g. <code>Available</code> or <code>Broken</code>.</p></td>
+      <th>animal_project_code</th>
+      <td><p>Character (vector). One or more animal project
+codes. Case-insensitive.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with receivers data, sorted by <code>receiver_id</code>. See also
+    <p>A tibble with animal project data, sorted by <code>project_code</code>. See
+also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
+<span class='co'># Set default connection variable</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
-<span class='co'># Get all receivers</span>
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>)
+<span class='co'># Get all animal projects</span>
+<span class='fu'>get_animal_projects</span>()
 
-<span class='co'># Get specific receivers</span>
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2-4842c"</span>)
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"VR2AR-545719"</span>, <span class='st'>"VR2AR-545720"</span>))
-
-<span class='co'># Get receivers for a specific application type</span>
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='st'>"cpod"</span>)
-
-<span class='co'># Get receivers with a specific status</span>
-<span class='fu'>get_receivers</span>(<span class='no'>con</span>, <span class='kw'>status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Broken"</span>, <span class='st'>"Lost"</span>))
+<span class='co'># Get a specific animal project</span>
+<span class='fu'>get_animal_projects</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

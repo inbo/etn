@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -92,9 +92,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -104,6 +101,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -163,7 +163,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-get-data" class="hasAnchor"><a href="#section-get-data" class="anchor"></a>Get data</h2>
+          <h2 id="section-explore-acoustic-telemetry-data" class="hasAnchor"><a href="#section-explore-acoustic-telemetry-data" class="anchor"></a>Explore acoustic telemetry data</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -175,9 +175,9 @@
       <tr>
         
         <td>
-          <p><code><a href="get_projects.html">get_projects()</a></code> </p>
+          <p><code><a href="get_animal_projects.html">get_animal_projects()</a></code> </p>
         </td>
-        <td><p>Get project data</p></td>
+        <td><p>Get animal project data</p></td>
       </tr><tr>
         
         <td>
@@ -193,26 +193,38 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="get_detections.html">get_detections()</a></code> </p>
+          <p><code><a href="get_acoustic_projects.html">get_acoustic_projects()</a></code> </p>
         </td>
-        <td><p>Get detections data</p></td>
+        <td><p>Get acoustic project data</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_deployments.html">get_deployments()</a></code> </p>
+          <p><code><a href="get_acoustic_detections.html">get_acoustic_detections()</a></code> </p>
         </td>
-        <td><p>Get deployment data</p></td>
+        <td><p>Get acoustic detections data</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_receivers.html">get_receivers()</a></code> </p>
+          <p><code><a href="get_acoustic_deployments.html">get_acoustic_deployments()</a></code> </p>
         </td>
-        <td><p>Get receiver data</p></td>
+        <td><p>Get acoustic deployment data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_acoustic_receivers.html">get_acoustic_receivers()</a></code> </p>
+        </td>
+        <td><p>Get acoustic receiver data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_acoustic_dataset.html">download_acoustic_dataset()</a></code> </p>
+        </td>
+        <td><p>Download acoustic data package</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-download-data" class="hasAnchor"><a href="#section-download-data" class="anchor"></a>Download data</h2>
+          <h2 id="section-explore-archival-data" class="hasAnchor"><a href="#section-explore-archival-data" class="anchor"></a>Explore archival data</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -224,9 +236,40 @@
       <tr>
         
         <td>
-          <p><code><a href="download_dataset.html">download_dataset()</a></code> </p>
+          <p><code><a href="get_animal_projects.html">get_animal_projects()</a></code> </p>
         </td>
-        <td><p>Download data package</p></td>
+        <td><p>Get animal project data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_animals.html">get_animals()</a></code> </p>
+        </td>
+        <td><p>Get animal data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_tags.html">get_tags()</a></code> </p>
+        </td>
+        <td><p>Get tag data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-explore-cpod-data" class="hasAnchor"><a href="#section-explore-cpod-data" class="anchor"></a>Explore CPOD data</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="get_cpod_projects.html">get_cpod_projects()</a></code> </p>
+        </td>
+        <td><p>Get cpod project data</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -243,6 +286,18 @@
       <tr>
         
         <td>
+          <p><code><a href="list_acoustic_project_codes.html">list_acoustic_project_codes()</a></code> </p>
+        </td>
+        <td><p>List all available acoustic project codes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_acoustic_tag_ids.html">list_acoustic_tag_ids()</a></code> </p>
+        </td>
+        <td><p>List all available acoustic tag ids</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="list_animal_ids.html">list_animal_ids()</a></code> </p>
         </td>
         <td><p>List all available animal ids</p></td>
@@ -255,9 +310,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="list_network_project_codes.html">list_network_project_codes()</a></code> </p>
+          <p><code><a href="list_cpod_project_codes.html">list_cpod_project_codes()</a></code> </p>
         </td>
-        <td><p>List all available network project codes</p></td>
+        <td><p>List all available cpod project codes</p></td>
       </tr><tr>
         
         <td>
@@ -279,9 +334,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="list_tag_ids.html">list_tag_ids()</a></code> </p>
+          <p><code><a href="list_tag_serial_numbers.html">list_tag_serial_numbers()</a></code> </p>
         </td>
-        <td><p>List all available tag ids</p></td>
+        <td><p>List all available tag serial numbers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_values.html">list_values()</a></code> </p>
+        </td>
+        <td><p>List all unique values from a data.frame column</p></td>
       </tr>
     </tbody>
     </table>

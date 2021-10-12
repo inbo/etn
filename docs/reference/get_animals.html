@@ -48,8 +48,9 @@
 
 <meta property="og:title" content="Get animal data — get_animals" />
 <meta property="og:description" content="Get data for animals, with options to filter results. Associated tag
-information is available in columns starting with tag. If multiple tags
-are associated with a single animal, the information is comma-separated." />
+information is available in columns starting with tag and
+acoustic_tag_id. If multiple tags are associated with a single animal,
+the information is comma-separated." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -82,7 +83,7 @@ are associated with a single animal, the information is comma-separated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -95,9 +96,6 @@ are associated with a single animal, the information is comma-separated." />
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -107,6 +105,9 @@ are associated with a single animal, the information is comma-separated." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -140,13 +141,15 @@ are associated with a single animal, the information is comma-separated." />
 
     <div class="ref-description">
     <p>Get data for animals, with options to filter results. Associated tag
-information is available in columns starting with <code>tag</code>. If multiple tags
-are associated with a single animal, the information is comma-separated.</p>
+information is available in columns starting with <code>tag</code> and
+<code>acoustic_tag_id</code>. If multiple tags are associated with a single animal,
+the information is comma-separated.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_animals</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
   <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tag_serial_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -160,12 +163,16 @@ are associated with a single animal, the information is comma-separated.</p>
     </tr>
     <tr>
       <th>animal_id</th>
-      <td><p>Integer (vector). One or more animal ids.</p></td>
+      <td><p>Integer (vector). One or more animal identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>tag_serial_number</th>
+      <td><p>Character (vector). One or more tag serial numbers.</p></td>
     </tr>
     <tr>
       <th>animal_project_code</th>
-      <td><p>Character (vector). One or more animal projects.
-Case-insensitive.</p></td>
+      <td><p>Character (vector). One or more animal project
+codes. Case-insensitive.</p></td>
     </tr>
     <tr>
       <th>scientific_name</th>
@@ -176,30 +183,33 @@ Case-insensitive.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble with animals data, sorted by <code>animal_project_code</code>,
-<code>release_date_time</code> and <code>tag_id</code>. See also
+<code>release_date_time</code> and <code>tag_serial_number</code>. See also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
+<span class='co'># Set default connection variable</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all animals</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>)
+<span class='fu'>get_animals</span>()
 
 <span class='co'># Get specific animals</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fl'>2824</span>)
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='st'>"2824"</span>) <span class='co'># String values work as well</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2824</span>, <span class='fl'>2825</span>, <span class='fl'>2827</span>))
+<span class='fu'>get_animals</span>(<span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fl'>305</span>) <span class='co'># Or string value "305"</span>
+<span class='fu'>get_animals</span>(<span class='kw'>animal_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>304</span>, <span class='fl'>305</span>, <span class='fl'>2827</span>))
 
 <span class='co'># Get animals from specific animal project(s)</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2012_leopoldkanaal"</span>)
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2012_leopoldkanaal"</span>, <span class='st'>"2010_phd_reubens"</span>))
+<span class='fu'>get_animals</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
+<span class='fu'>get_animals</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2014_demer"</span>, <span class='st'>"2015_dijle"</span>))
+
+<span class='co'># Get animals associated with a specific tag_serial_number</span>
+<span class='fu'>get_animals</span>(<span class='kw'>tag_serial_number</span> <span class='kw'>=</span> <span class='st'>"1187450"</span>)
 
 <span class='co'># Get animals of specific species (across all projects)</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Gadus morhua"</span>, <span class='st'>"Sync tag"</span>))
+<span class='fu'>get_animals</span>(<span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Rutilus rutilus"</span>, <span class='st'>"Silurus glanis"</span>))
 
 <span class='co'># Get animals of a specific species from a specific project</span>
-<span class='fu'>get_animals</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2010_phd_reubens"</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Gadus morhua"</span>)
+<span class='fu'>get_animals</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>, <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Rutilus rutilus"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

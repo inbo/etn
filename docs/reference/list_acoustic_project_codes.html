@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all available network project codes — list_network_project_codes • etn</title>
+<title>List all available acoustic project codes — list_acoustic_project_codes • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="List all available network project codes — list_network_project_codes" />
-<meta property="og:description" content="List all available network project codes" />
+<meta property="og:title" content="List all available acoustic project codes — list_acoustic_project_codes" />
+<meta property="og:description" content="List all available acoustic project codes" />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -105,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -131,16 +131,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all available network project codes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_network_project_codes.R'><code>R/list_network_project_codes.R</code></a></small>
-    <div class="hidden name"><code>list_network_project_codes.Rd</code></div>
+    <h1>List all available acoustic project codes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_acoustic_project_codes.R'><code>R/list_acoustic_project_codes.R</code></a></small>
+    <div class="hidden name"><code>list_acoustic_project_codes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List all available network project codes</p>
+    <p>List all available acoustic project codes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_network_project_codes</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>)</pre>
+    <pre class="usage"><span class='fu'>list_acoustic_project_codes</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,8 +153,8 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of all unique <code>project_code</code> of <code>project_type="network"</code>
-present in <code>projects_view2</code>.</p>
+    <p>A vector of all unique <code>project_code</code> of <code>type = "acoustic"</code> in
+<code>project.sql</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

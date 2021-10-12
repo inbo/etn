@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download data package — download_dataset • etn</title>
+<title>Get acoustic detections data — get_acoustic_detections • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Download data package — download_dataset" />
-<meta property="og:description" content="Download all data related to an animal project as a data package that can
-be deposited in a research data repository. Includes option to filter on
-scientific names." />
+<meta property="og:title" content="Get acoustic detections data — get_acoustic_detections" />
+<meta property="og:description" content="Get data for acoustic detections, with options to filter results. Use
+limit to limit the number of returned records." />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -82,7 +81,7 @@ scientific names." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -95,9 +94,6 @@ scientific names." />
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -107,6 +103,9 @@ scientific names." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -133,22 +132,27 @@ scientific names." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download data package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/download_dataset.R'><code>R/download_dataset.R</code></a></small>
-    <div class="hidden name"><code>download_dataset.Rd</code></div>
+    <h1>Get acoustic detections data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_acoustic_detections.R'><code>R/get_acoustic_detections.R</code></a></small>
+    <div class="hidden name"><code>get_acoustic_detections.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Download all data related to an <strong>animal project</strong> as a data package that can
-be deposited in a research data repository. Includes option to filter on
-scientific names.</p>
+    <p>Get data for acoustic detections, with options to filter results. Use
+<code>limit</code> to limit the number of returned records.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>download_dataset</span>(
+    <pre class="usage"><span class='fu'>get_acoustic_detections</span>(
   <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
-  <span class='no'>animal_project_code</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='no'>animal_project_code</span>
+  <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -159,83 +163,99 @@ scientific names.</p>
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
     <tr>
+      <th>start_date</th>
+      <td><p>Character. Start date (inclusive) in ISO 8601 format (
+<code>yyyy-mm-dd</code>, <code>yyyy-mm</code> or <code>yyyy</code>).</p></td>
+    </tr>
+    <tr>
+      <th>end_date</th>
+      <td><p>Character. End date (exclusive) in ISO 8601 format (
+<code>yyyy-mm-dd</code>, <code>yyyy-mm</code> or <code>yyyy</code>).</p></td>
+    </tr>
+    <tr>
+      <th>acoustic_tag_id</th>
+      <td><p>Character (vector). One or more acoustic tag ids.</p></td>
+    </tr>
+    <tr>
       <th>animal_project_code</th>
-      <td><p>Character. Animal project you want to download
-data for. Required.</p></td>
+      <td><p>Character (vector). One or more animal project
+codes. Case-insensitive.</p></td>
     </tr>
     <tr>
       <th>scientific_name</th>
-      <td><p>Character (vector). One or more scientific names.
-Defaults to no filter (i.e. include all scientific names, including
-reference tags).</p></td>
+      <td><p>Character (vector). One or more scientific names.</p></td>
     </tr>
     <tr>
-      <th>directory</th>
-      <td><p>Character. Relative path to local download directory.
-Defaults to creating a directory named after animal project code. Existing
-files of the same name will be overwritten.</p></td>
+      <th>acoustic_project_code</th>
+      <td><p>Character (vector). One or more acoustic
+project codes. Case-insensitive.</p></td>
+    </tr>
+    <tr>
+      <th>receiver_id</th>
+      <td><p>Character (vector). One or more receiver identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>station_name</th>
+      <td><p>Character (vector). One or more deployment station
+names.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Logical. Limit the number of returned records to 100 (useful
+for testing purposes). Defaults to <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The data are downloaded as a
-<strong><a href='https://frictionlessdata.io/data-package/'>Frictionless Data Package</a></strong>
-containing:</p><table class='table'>
-<tr><td>file</td><td>description</td></tr>
-<tr><td><code>animals.csv</code></td><td>Animals related to an <code>animal_project_code</code>, optionally filtered on <code>scientific_name</code>(s), as returned by <code><a href='get_animals.html'>get_animals()</a></code>.</td></tr>
-<tr><td><code>tags.csv</code></td><td>Tags associated with the selected animals, as returned by <code><a href='get_tags.html'>get_tags()</a></code>.</td></tr>
-<tr><td><code>detections.csv</code></td><td>Detections for the selected animals, as returned by <code><a href='get_detections.html'>get_detections()</a></code>.</td></tr>
-<tr><td><code>deployments.csv</code></td><td>Deployments for the <code>network_project_code</code>(s) found in detections, as returned by <code><a href='get_deployments.html'>get_deployments()</a></code>. This allows users to see when receivers were deployed, even if these did not detect the selected animals.</td></tr>
-<tr><td><code>receivers.csv</code></td><td>Receivers for the selected deployments, as returned by <code><a href='get_receivers.html'>get_receivers()</a></code>.</td></tr>
-<tr><td><code>datapackage.json</code></td><td>A <a href='https://specs.frictionlessdata.io/table-schema/'>Frictionless Table Schema</a> metadata file describing the fields and relations of the above csv files. This file is copied from <a href='https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json'>here</a> and can be used to validate the data package.</td></tr>
-</table>
-
-
-
-<p>The function will report the number of records per csv file, as well as the
-included scientific names and network projects. Warnings will be raised for:</p><ul>
-<li><p>Animals with multiple tags</p></li>
-<li><p>Tags associated with multiple animals</p></li>
-<li><p>Deployments without network project: these deployments will not be listed
-in <code>deployments.csv</code> and will therefore raise a foreign key validation
-error.</p></li>
-<li><p>Duplicate detections: detections with the duplicate <code>pk</code>. These are
-removed by the function in <code>detections.csv</code>.</p></li>
-</ul>
-
-<p><strong>Important</strong>: The data are downloaded <em>as is</em> from the database, i.e. no
-quality or consistency checks are performed by this function. We therefore
-recommend to verify the data before publication. A consistency check can be
-performed by validation tools of the Frictionless Framework, e.g.
-<code>frictionless validate datapackage.json</code> on the command line using
-<a href='https://github.com/frictionlessdata/frictionless-py'>frictionless-py</a>.</p>
+    <p>A tibble with acoustic detections data, sorted by <code>acoustic_tag_id</code>
+and <code>date_time</code>. See also
+<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Download data for the 2012_leopoldkanaal animal project (all scientific names)</span>
-<span class='fu'>download_dataset</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2012_leopoldkanaal"</span>)
-<span class='co'>#&gt; Downloading data to directory "2012_leopoldkanaal":</span>
-<span class='co'>#&gt; (existing files with the same name will be overwritten)</span>
-<span class='co'>#&gt; * (1/6): downloading animals.csv</span>
-<span class='co'>#&gt; * (2/6): downloading tags.csv</span>
-<span class='co'>#&gt; * (3/6): downloading detections.csv</span>
-<span class='co'>#&gt; * (4/6): downloading deployments.csv</span>
-<span class='co'>#&gt; * (5/6): downloading receivers.csv</span>
-<span class='co'>#&gt; * (6/6): adding datapackage.json as file metadata</span>
-<span class='co'>#&gt; Summary statistics for dataset "2012_leopoldkanaal":</span>
-<span class='co'>#&gt; * number of animals:           104</span>
-<span class='co'>#&gt; * number of tags:              103</span>
-<span class='co'>#&gt; * number of detections:        2215839</span>
-<span class='co'>#&gt; * number of deployments:       1581</span>
-<span class='co'>#&gt; * number of receivers:         273</span>
-<span class='co'>#&gt; * first date of detection:     2012-07-03</span>
-<span class='co'>#&gt; * last date of detection:      2020-09-28</span>
-<span class='co'>#&gt; * included scientific names:   Anguilla anguilla</span>
-<span class='co'>#&gt; * included network projects:   albert, bpns, JJ_Belwind, leopold, pc4c, ws2, zeeschelde</span>
-<span class='co'>#&gt; Warning message:</span>
-<span class='co'>#&gt; In download_dataset(con, animal_project_code = "2012_leopoldkanaal") :</span>
-<span class='co'>#&gt; Found tags associated with multiple animals: A69-1601-29925</span>
+<span class='co'># Set default connection variable</span>
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
+
+<span class='co'># Get limited sample of acoustic detections</span>
+<span class='fu'>get_acoustic_detections</span>(<span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># Get all acoustic detections from a specific animal project</span>
+<span class='fu'>get_acoustic_detections</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
+
+<span class='co'># Get 2015 acoustic detections from that animal project</span>
+<span class='fu'>get_acoustic_detections</span>(
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2016"</span>,
+)
+
+<span class='co'># Get April 2015 acoustic detections from that animal project</span>
+<span class='fu'>get_acoustic_detections</span>(
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-04"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-05"</span>,
+)
+
+<span class='co'># Get April 24, 2015 acoustic detections from that animal project</span>
+<span class='fu'>get_acoustic_detections</span>(
+  <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
+  <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-04-24"</span>,
+  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-04-25"</span>,
+)
+
+<span class='co'># Get acoustic detections for a specific tag at two specific stations</span>
+<span class='fu'>get_acoustic_detections</span>(
+  <span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1601-16130"</span>,
+  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"de-9"</span>, <span class='st'>"de-10"</span>)
+)
+
+<span class='co'># Get acoustic detections for a specific species, receiver and acoustic project</span>
+<span class='fu'>get_acoustic_detections</span>(
+  <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Rutilus rutilus"</span>,
+  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>,
+  <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='st'>"demer"</span>
+)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

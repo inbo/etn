@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get deployment data — get_deployments • etn</title>
+<title>List all available cpod project codes — list_cpod_project_codes • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get deployment data — get_deployments" />
-<meta property="og:description" content="Get data for deployments, with options to filter results." />
+<meta property="og:title" content="List all available cpod project codes — list_cpod_project_codes" />
+<meta property="og:description" content="List all available cpod project codes" />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">etn</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9154</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/etn.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -105,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a>
+    </li>
     <li>
       <a href="../articles/etn_fields.html">ETN field definitions</a>
     </li>
@@ -131,21 +131,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get deployment data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_deployments.R'><code>R/get_deployments.R</code></a></small>
-    <div class="hidden name"><code>get_deployments.Rd</code></div>
+    <h1>List all available cpod project codes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_cpod_project_codes.R'><code>R/list_cpod_project_codes.R</code></a></small>
+    <div class="hidden name"><code>list_cpod_project_codes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get data for deployments, with options to filter results.</p>
+    <p>List all available cpod project codes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_deployments</span>(
-  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
-  <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>list_cpod_project_codes</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,44 +149,13 @@
       <th>connection</th>
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
-    <tr>
-      <th>application_type</th>
-      <td><p>Character. <code>acoustic_telemetry</code> or <code>cpod</code>.</p></td>
-    </tr>
-    <tr>
-      <th>network_project_code</th>
-      <td><p>Character (vector). One or more network
-projects. Case-insensitive.</p></td>
-    </tr>
-    <tr>
-      <th>open_only</th>
-      <td><p>Logical. Restrict deployments to those that are currently
-open (i.e. no end date defined). Defaults to <code>TRUE</code>.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with deployments data, sorted by <code>network_project_code</code>,
-<code>station_name</code> and <code>deploy_date_time</code>. See also
-<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
+    <p>A vector of all unique <code>project_code</code> of <code>type = "cpod"</code> in
+<code>project.sql</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>(<span class='no'>your_username</span>, <span class='no'>your_password</span>)
-
-<span class='co'># Get all open deployments</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>)
-
-<span class='co'># Get all deployments (including those with an end date)</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='co'># Get open deployments for a specific application type</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>application_type</span> <span class='kw'>=</span> <span class='st'>"cpod"</span>)
-
-<span class='co'># Get open deployments from specific network project(s)</span>
-<span class='fu'>get_deployments</span>(<span class='no'>con</span>, <span class='kw'>network_project_code</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ws1"</span>, <span class='st'>"ws2"</span>))
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
