@@ -6,6 +6,7 @@
 \usage{
 get_acoustic_deployments(
   connection = con,
+  deployment_id = NULL,
   receiver_id = NULL,
   acoustic_project_code = NULL,
   station_name = NULL,
@@ -14,6 +15,8 @@ get_acoustic_deployments(
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+
+\item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
@@ -42,6 +45,9 @@ con <- connect_to_etn()
 
 # Get all acoustic deployments
 get_acoustic_deployments()
+
+# Get specific acoustic deployment
+get_acoustic_deployments(deployment_id = 1437)
 
 # Get acoustic deployments for a specific receiver
 get_acoustic_deployments(receiver_id = "VR2W-124070")

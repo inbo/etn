@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get acoustic deployment data — get_acoustic_deployments • etn</title>
+<title>List all available receiver ids — list_deployment_ids • etn</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Get acoustic deployment data — get_acoustic_deployments" />
-<meta property="og:description" content="Get data for deployments of acoustic receivers, with options to filter
-results." />
+<meta property="og:title" content="List all available receiver ids — list_deployment_ids" />
+<meta property="og:description" content="List all available receiver ids" />
 <meta property="og:image" content="https://inbo.github.io/etn/logo.png" />
 
 
@@ -132,24 +131,16 @@ results." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get acoustic deployment data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/get_acoustic_deployments.R'><code>R/get_acoustic_deployments.R</code></a></small>
-    <div class="hidden name"><code>get_acoustic_deployments.Rd</code></div>
+    <h1>List all available receiver ids</h1>
+    <small class="dont-index">Source: <a href='https://github.com/inbo/etn/blob/master/R/list_deployment_ids.R'><code>R/list_deployment_ids.R</code></a></small>
+    <div class="hidden name"><code>list_deployment_ids.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get data for deployments of acoustic receivers, with options to filter
-results.</p>
+    <p>List all available receiver ids</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_acoustic_deployments</span>(
-  <span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>,
-  <span class='kw'>deployment_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>list_deployment_ids</span>(<span class='kw'>connection</span> <span class='kw'>=</span> <span class='no'>con</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,60 +149,12 @@ results.</p>
       <th>connection</th>
       <td><p>A connection to the ETN database. Defaults to <code>con</code>.</p></td>
     </tr>
-    <tr>
-      <th>deployment_id</th>
-      <td><p>Integer (vector). One or more deployment identifiers.</p></td>
-    </tr>
-    <tr>
-      <th>receiver_id</th>
-      <td><p>Character (vector). One or more receiver identifiers.</p></td>
-    </tr>
-    <tr>
-      <th>acoustic_project_code</th>
-      <td><p>Character (vector). One or more acoustic
-project codes. Case-insensitive.</p></td>
-    </tr>
-    <tr>
-      <th>station_name</th>
-      <td><p>Character (vector). One or more deployment station
-names.</p></td>
-    </tr>
-    <tr>
-      <th>open_only</th>
-      <td><p>Logical. Restrict deployments to those that are currently
-open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with acoustic deployment data, sorted by
-<code>acoustic_project_code</code>, <code>station_name</code> and <code>deploy_date_time</code>. See also
-<a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
+    <p>A vector of all unique <code>id_pk</code> present in <code>acoustic.deployments</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
-
-<span class='co'># Get all acoustic deployments</span>
-<span class='fu'>get_acoustic_deployments</span>()
-
-<span class='co'># Get specific acoustic deployment</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>deployment_id</span> <span class='kw'>=</span> <span class='fl'>1437</span>)
-
-<span class='co'># Get acoustic deployments for a specific receiver</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>)
-
-<span class='co'># Get open acoustic deployments for a specific receiver</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># Get acoustic deployments for a specific acoustic project</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
-
-<span class='co'># Get acoustic deployments for two specific stations</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"de-9"</span>, <span class='st'>"de-10"</span>))
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

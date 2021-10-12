@@ -4,6 +4,7 @@
 #' results.
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param deployment_id Integer (vector). One or more deployment identifiers.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
@@ -30,6 +31,9 @@
 #' # Get all acoustic deployments
 #' get_acoustic_deployments()
 #'
+#' # Get specific acoustic deployment
+#' get_acoustic_deployments(deployment_id = 1437)
+#'
 #' # Get acoustic deployments for a specific receiver
 #' get_acoustic_deployments(receiver_id = "VR2W-124070")
 #'
@@ -43,12 +47,25 @@
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
 #' }
 get_acoustic_deployments <- function(connection = con,
+                                     deployment_id = NULL,
                                      receiver_id = NULL,
                                      acoustic_project_code = NULL,
                                      station_name = NULL,
                                      open_only = FALSE) {
   # Check connection
   check_connection(connection)
+
+  # Check deployment_id
+  if (is.null(deployment_id)) {
+    deployment_id_query <- "True"
+  } else {
+    valid_deployment_ids <- list_deployment_ids(connection)
+    check_value(deployment_id, valid_deployment_ids, "receiver_id")
+    deployment_id_query <- glue_sql(
+      "dep.id_pk IN ({deployment_id*})",
+      .con = connection
+    )
+  }
 
   # Check receiver_id
   if (is.null(receiver_id)) {
@@ -152,6 +169,7 @@ get_acoustic_deployments <- function(connection = con,
         ON dep.project_fk = network_project.id
     WHERE
       dep.deployment_type = 'acoustic_telemetry'
+      AND {deployment_id_query}
       AND {receiver_id_query}
       AND {acoustic_project_code_query}
       AND {station_name_query}

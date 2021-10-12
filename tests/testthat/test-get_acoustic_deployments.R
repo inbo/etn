@@ -63,6 +63,30 @@ test_that("get_acoustic_deployments() returns the expected columns", {
   expect_equal(names(df), expected_col_names)
 })
 
+test_that("get_acoustic_deployments() allows selecting on deployment_id", {
+  # Errors
+  expect_error(get_acoustic_deployments(con, deployment_id = "not_a_deployment_id"))
+  expect_error(get_acoustic_deployments(con, deployment_id = c("1437", "not_a_deployment_id")))
+
+  # Select single value
+  single_select <- 1437 # From demer
+  single_select_df <- get_acoustic_deployments(con, deployment_id = single_select)
+  expect_equal(
+    single_select_df %>% distinct(deployment_id) %>% pull(),
+    c(single_select)
+  )
+  expect_gt(nrow(single_select_df), 0)
+
+  # Select multiple values
+  multi_select <- c("1437", 1588) # Characters are allowed
+  multi_select_df <- get_acoustic_deployments(con, deployment_id = multi_select)
+  expect_equal(
+    multi_select_df %>% distinct(deployment_id) %>% pull() %>% sort(),
+    c(as.integer(multi_select)) # Output will be all integer
+  )
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
+})
+
 test_that("get_acoustic_deployments() allows selecting on receiver_id", {
   # Errors
   expect_error(get_acoustic_deployments(con, receiver_id = "not_a_receiver_id"))
