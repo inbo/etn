@@ -23,17 +23,27 @@ reference:
   - title: "Connect to the database"
     contents:
       - connect_to_etn
-  - title: "Get data"
+  - title: "Explore acoustic telemetry data"
     contents:
-      - get_projects
+      - get_animal_projects
       - get_animals
       - get_tags
-      - get_detections
-      - get_deployments
-      - get_receivers
-  - title: "Download data"
+      - get_acoustic_projects
+      - get_acoustic_detections
+      - get_acoustic_deployments
+      - get_acoustic_receivers
+      - download_acoustic_dataset
+  - title: "Explore archival data"
     contents:
-      - download_dataset
+      - get_animal_projects
+      - get_animals
+      - get_tags
+      # - get_archival_readings
+  - title: "Explore CPOD data"
+    contents:
+      - get_cpod_projects
+      # - get_cpod_deployments
+      # - get_cpod_receivers
   - title: "List parameter options"
     contents:
       - starts_with("list_")
