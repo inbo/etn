@@ -10,10 +10,6 @@
       "schema": {
         "fields": [
           {
-            "name": "pk",
-            "type": "integer"
-          },
-          {
             "name": "animal_id",
             "type": "integer"
           },
@@ -22,12 +18,24 @@
             "type": "string"
           },
           {
-            "name": "tag_id",
+            "name": "tag_serial_number",
+            "type": "integer"
+          },
+          {
+            "name": "tag_type",
             "type": "string"
           },
           {
-            "name": "tag_fk",
-            "type": "integer"
+            "name": "tag_subtype",
+            "type": "string"
+          },
+          {
+            "name": "acoustic_tag_id",
+            "type": "string"
+          },
+          {
+            "name": "acoustic_tag_id_alternative",
+            "type": "string"
           },
           {
             "name": "scientific_name",
@@ -266,13 +274,13 @@
             "type": "string"
           }
         ],
-        "primaryKey": "pk",
+        "primaryKey": "animal_id",
         "foreignKeys": [
           {
-            "fields": "tag_id",
+            "fields": "tag_serial_number",
             "reference": {
               "resource": "tags",
-              "fields": "tag_id"
+              "fields": "tag_serial_number"
             }
           }
         ]
@@ -287,19 +295,27 @@
       "schema": {
         "fields": [
           {
-            "name": "pk",
+            "name": "tag_serial_number",
             "type": "integer"
           },
           {
-            "name": "tag_id",
+            "name": "tag_type",
             "type": "string"
           },
           {
-            "name": "tag_id_alternative",
+            "name": "tag_subtype",
             "type": "string"
           },
           {
-            "name": "telemetry_type",
+            "name": "sensor_type",
+            "type": "string"
+          },
+          {
+            "name": "acoustic_tag_id",
+            "type": "string"
+          },
+          {
+            "name": "acoustic_tag_id_alternative",
             "type": "string"
           },
           {
@@ -312,22 +328,6 @@
           },
           {
             "name": "frequency",
-            "type": "string"
-          },
-          {
-            "name": "type",
-            "type": "string"
-          },
-          {
-            "name": "serial_number",
-            "type": "string"
-          },
-          {
-            "name": "tag_id_protocol",
-            "type": "string"
-          },
-          {
-            "name": "tag_id_code",
             "type": "string"
           },
           {
@@ -347,10 +347,6 @@
             "type": "datetime"
           },
           {
-            "name": "sensor_type",
-            "type": "string"
-          },
-          {
             "name": "sensor_slope",
             "type": "number"
           },
@@ -361,6 +357,26 @@
           {
             "name": "sensor_range",
             "type": "string"
+          },
+          {
+            "name": "sensor_range_min",
+            "type": "integer"
+          },
+          {
+            "name": "sensor_range_max",
+            "type": "integer"
+          },
+          {
+            "name": "sensor_resolution",
+            "type": "number"
+          },
+          {
+            "name": "sensor_unit",
+            "type": "string"
+          },
+          {
+            "name": "sensor_accuracy",
+            "type": "number"
           },
           {
             "name": "sensor_transmit_ratio",
@@ -465,9 +481,17 @@
           {
             "name": "step4_acceleration_duration",
             "type": "integer"
+          },
+          {
+            "name": "tag_id",
+            "type": "string"
+          },
+          {
+            "name": "tag_device_id",
+            "type": "integer"
           }
         ],
-        "primaryKey": "pk"
+        "primaryKey": "tag_id"
       }
     },
     {
@@ -479,7 +503,7 @@
       "schema": {
         "fields": [
           {
-            "name": "pk",
+            "name": "detection_id",
             "type": "integer"
           },
           {
@@ -487,35 +511,31 @@
             "type": "datetime"
           },
           {
-            "name": "receiver_id",
-            "type": "string"
-          },
-          {
-            "name": "application_type",
-            "type": "string"
-          },
-          {
-            "name": "network_project_code",
-            "type": "string"
-          },
-          {
-            "name": "tag_id",
-            "type": "string"
-          },
-          {
-            "name": "tag_fk",
+            "name": "tag_serial_number",
             "type": "integer"
           },
           {
-            "name": "animal_id",
-            "type": "integer"
+            "name": "acoustic_tag_id",
+            "type": "string"
           },
           {
             "name": "animal_project_code",
             "type": "string"
           },
           {
+            "name": "animal_id",
+            "type": "integer"
+          },
+          {
             "name": "scientific_name",
+            "type": "string"
+          },
+          {
+            "name": "acoustic_project_code",
+            "type": "string"
+          },
+          {
+            "name": "receiver_id",
             "type": "string"
           },
           {
@@ -531,10 +551,6 @@
             "type": "number"
           },
           {
-            "name": "sensor_type",
-            "type": "string"
-          },
-          {
             "name": "sensor_value",
             "type": "number"
           },
@@ -543,15 +559,11 @@
             "type": "string"
           },
           {
-            "name": "sensor_value_depth",
+            "name": "sensor2_value",
             "type": "number"
           },
           {
-            "name": "sensor_value_acceleration",
-            "type": "number"
-          },
-          {
-            "name": "sensor_value_temperature",
+            "name": "sensor2_unit",
             "type": "number"
           },
           {
@@ -567,11 +579,11 @@
             "type": "boolean"
           },
           {
-            "name": "deployment_fk",
+            "name": "deployment_id",
             "type": "integer"
           }
         ],
-        "primaryKey": "pk",
+        "primaryKey": "detection_id",
         "foreignKeys": [
           {
             "fields": "receiver_id",
@@ -581,10 +593,10 @@
             }
           },
           {
-            "fields": "tag_id",
+            "fields": "acoustic_tag_id",
             "reference": {
               "resource": "tags",
-              "fields": "tag_id"
+              "fields": "acoustic_tag_id"
             }
           },
           {
@@ -595,10 +607,10 @@
             }
           },
           {
-            "fields": "deployment_fk",
+            "fields": "deployment_id",
             "reference": {
               "resource": "deployments",
-              "fields": "pk"
+              "fields": "deployment_id"
             }
           }
         ]
@@ -613,7 +625,7 @@
       "schema": {
         "fields": [
           {
-            "name": "pk",
+            "name": "deployment_id",
             "type": "integer"
           },
           {
@@ -621,11 +633,7 @@
             "type": "string"
           },
           {
-            "name": "application_type",
-            "type": "string"
-          },
-          {
-            "name": "network_project_code",
+            "name": "acoustic_project_code",
             "type": "string"
           },
           {
@@ -769,7 +777,7 @@
             "type": "string"
           }
         ],
-        "primaryKey": "pk",
+        "primaryKey": "deployment_id",
         "foreignKeys": [
           {
             "fields": "receiver_id",
@@ -790,19 +798,7 @@
       "schema": {
         "fields": [
           {
-            "name": "pk",
-            "type": "integer"
-          },
-          {
             "name": "receiver_id",
-            "type": "string"
-          },
-          {
-            "name": "application_type",
-            "type": "string"
-          },
-          {
-            "name": "telemetry_type",
             "type": "string"
           },
           {
@@ -810,11 +806,11 @@
             "type": "string"
           },
           {
-            "name": "receiver_id_model",
+            "name": "receiver_model",
             "type": "string"
           },
           {
-            "name": "receiver_id_serial_number",
+            "name": "receiver_serial_number",
             "type": "string"
           },
           {
@@ -838,11 +834,11 @@
             "type": "string"
           },
           {
-            "name": "built_in_tag_id",
+            "name": "built_in_acoustic_tag_id",
             "type": "string"
           },
           {
-            "name": "ar_model_number",
+            "name": "ar_model",
             "type": "string"
           },
           {
@@ -894,7 +890,7 @@
             "type": "string"
           }
         ],
-        "primaryKey": "pk"
+        "primaryKey": "receiver_id"
       }
     }
   ]
