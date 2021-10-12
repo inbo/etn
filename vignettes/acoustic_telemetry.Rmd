@@ -43,6 +43,7 @@ Connect with your user credentials (as received by VLIZ) to the database. To not
 
 ```{r connect_to_db}
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+# This is the default, so you could also use connect_to_etn()
 ```
 
 Using `con` as variable to store the collection is not mandatory, but it makes your life much easier as `con` is the default value of the argument `connection`, present in every other function of this package.
@@ -58,7 +59,6 @@ all_my_projects <- get_animal_projects()
 Show a preview:
 
 ```{r preview_first_10_projects}
-# show the first 10 projects
 all_my_projects %>% head(10)
 ```
 
@@ -89,7 +89,6 @@ By using `get_animals()` you can retrieve information about each animal (`animal
 
 ```{r get_animals}
 animals <- get_animals(animal_project_code = projects_code)
-# preview
 animals %>% head(10)
 ```
 
@@ -109,7 +108,8 @@ detections_silurus <- get_acoustic_detections(
   animal_project_code = projects_code,
   start_date = "2014-01-01",
   end_date = "2014-12-31",
-  scientific_name = "Silurus glanis")
+  scientific_name = "Silurus glanis"
+)
 ```
 
 Preview:
@@ -125,8 +125,10 @@ detections_silurus_period <-
   detections_silurus %>%
   mutate(date = date(date_time)) %>%
   group_by(animal_id) %>%
-  summarise(start = min(date),
-            end = max(date))
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
 detections_silurus_period
 ```
 
@@ -136,8 +138,10 @@ Notice we group by `animal_id`, the unique identifier of the fish. However, if t
 detections_silurus %>%
   mutate(date = date(date_time)) %>%
   group_by(acoustic_tag_id) %>%
-  summarise(start = min(date),
-            end = max(date))
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
 ```
 
 We can also get the tracking duration of each fish:
@@ -146,7 +150,7 @@ We can also get the tracking duration of each fish:
 detections_silurus_duration <-
   detections_silurus %>%
   group_by(animal_id) %>%
-  summarise(duration = max(date_time) - min(date_time))
+  summarize(duration = max(date_time) - min(date_time))
 detections_silurus_duration
 ```
 
@@ -284,9 +288,12 @@ More information about them can be retrieved via `get_acoustic_deployments()` fu
 ```{r get_acoustic_deployments_info}
 deployments_silurus <- get_acoustic_deployments(
   receiver_id = deploys_silurus$receiver_id,
-  station_name = deploys_silurus$station_name)
+  station_name = deploys_silurus$station_name
+)
+
 # filter on deployment_id
-deployments_silurus <- deployments_silurus  %>%
+deployments_silurus <-
+  deployments_silurus %>%
   filter(deployment_id %in% detections_silurus$deployment_id)
 ```
 
@@ -309,7 +316,7 @@ n_active_days_deployments_silurus <-
   mutate(date = date(date_time)) %>%
   distinct(deployment_id, station_name, date) %>%
   group_by(deployment_id, station_name) %>%
-  summarise(n_days = n(), .groups = "drop") %>%
+  summarize(n_days = n(), .groups = "drop") %>%
   ungroup()
 n_active_days_deployments_silurus
 ```
@@ -319,8 +326,10 @@ Relative detection duration, i.e. number of days with at least one detection div
 ```{r relative_detection_duration}
 rel_det_duration_silurus <- 
   n_active_days_deployments_silurus %>%
-  left_join(deployments_silurus_duration,
-            by = c("deployment_id", "station_name")) %>%
+  left_join(
+    deployments_silurus_duration,
+    by = c("deployment_id", "station_name")
+  ) %>%
   mutate(relative_detection_duration = n_days*(24*60*60) / as.numeric(duration)) %>%
   select(deployment_id, station_name, relative_detection_duration)
 rel_det_duration_silurus
@@ -335,10 +344,12 @@ We can for example create a map of the involved stations showing the station nam
 ```{r geo_info_stations}
 geo_info_stations <- 
   detections_silurus %>%
-  distinct(station_name, 
-          deploy_latitude, 
-          deploy_longitude, 
-          acoustic_project_code) %>%
+  distinct(
+    station_name, 
+    deploy_latitude, 
+    deploy_longitude, 
+    acoustic_project_code
+  ) %>%
   arrange(station_name)
 geo_info_stations
 ```
@@ -348,69 +359,83 @@ To be able to produce the desired map:
 ```{r map_stations}
 leaflet(geo_info_stations) %>%
   addTiles() %>%
-  addMarkers(lng = ~deploy_longitude,
-             lat = ~deploy_latitude,
-             popup = ~paste0("Station: ", 
-                             station_name, 
-                             " (", acoustic_project_code, ")"))
+  addMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    popup = ~paste0("Station: ", station_name, " (", acoustic_project_code, ")")
+  )
 ```
 
 We can visualize the number of detections per station, `n_detect_station`, by joining it with `geo_info_stations`:
 
 ```{r leaflet_n_detections_Wels_catfish}
-# Create a continuous color palette function
+# Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
-  domain = n_detect_station$n)
+  domain = n_detect_station$n
+)
 
 n_detect_station %>%
-  left_join(geo_info_stations,
-              by = "station_name") %>%
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) %>%
   leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(lng = ~deploy_longitude,
-             lat = ~deploy_latitude,
-             radius = ~log(n),
-             color = ~pal(n),
-             fillOpacity = 0.8,
-             stroke = FALSE,
-             popup = ~paste(sep = "<br/>",
-                            paste0("Station: ", 
-                                   station_name, 
-                                   " (", acoustic_project_code, ")"),
-                            paste0("# detections: ", n))) %>% 
-  addLegend(title = "Detections",
-            pal = pal,
-            values = ~n)
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~log(n),
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detections: ", n)
+    )
+  ) %>% 
+  addLegend(
+    title = "Detections",
+    pal = pal,
+    values = ~n
+  )
 ```
-```{r map_n_fishes_per_station}
-# Create a continuous palette function
 
 In a similar way we can visualize the number of detected individuals per station, `n_silurus_station`:
 
+```{r map_n_individuals_per_station}
+# Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
-  domain = n_silurus_station$n)
+  domain = n_silurus_station$n
+)
 
 n_silurus_station %>%
-  left_join(geo_info_stations,
-              by = "station_name") %>%
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) %>%
   leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(lng = ~deploy_longitude,
-             lat = ~deploy_latitude,
-             radius = ~n,
-             color = ~pal(n),
-             fillOpacity = 0.8,
-             stroke = FALSE,
-             popup = ~paste(sep = "<br/>",
-                            paste0("Station: ", 
-                                   station_name, 
-                                   " (", acoustic_project_code, ")"),
-                            paste0("# detected fishes: ", n))) %>% 
-  addLegend(title = "Detected fishes",
-            pal = pal,
-            values = ~n)
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~n,
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detected individuals: ", n)
+    )
+  ) %>% 
+  addLegend(
+    title = "Detected individuals",
+    pal = pal,
+    values = ~n
+  )
 ```
 
 We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
@@ -418,11 +443,13 @@ We can also make a map of the relative detection duration of the deployments. Fi
 ```{r geo_info_deployments}
 geo_info_deploys <- 
   detections_silurus %>%
-  distinct(deployment_id, 
-          deploy_latitude, 
-          deploy_longitude, 
-          station_name,
-          acoustic_project_code) %>%
+  distinct(
+    deployment_id, 
+    deploy_latitude, 
+    deploy_longitude, 
+    station_name,
+    acoustic_project_code
+  ) %>%
   arrange(station_name)
 geo_info_deploys
 ```
@@ -430,35 +457,39 @@ geo_info_deploys
 We are ready to create the desired map, where we show the deployment ID, the station name and the network project as popups:
 
 ```{r map_rel_detection_duration_deploys}
-# Create a continuous palette function
+# Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
-  domain = rel_det_duration_silurus$relative_detection_duration)
+  domain = rel_det_duration_silurus$relative_detection_duration
+)
 
 rel_det_duration_silurus %>%
-  left_join(geo_info_deploys,
-              by = c("deployment_id", "station_name")) %>%
+  left_join(
+    geo_info_deploys,
+    by = c("deployment_id", "station_name")
+  ) %>%
   leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(lng = ~deploy_longitude,
-             lat = ~deploy_latitude,
-             radius = ~100*relative_detection_duration,
-             color = ~pal(relative_detection_duration),
-             fillOpacity = 0.8,
-             stroke = FALSE,
-             clusterOptions = markerClusterOptions(),
-             popup = ~paste(sep = "<br/>",
-                            paste0("DeploymentID: ", deployment_id),
-                            paste0("Station: ", 
-                                   station_name, 
-                                   " (", acoustic_project_code, ")"),
-                            paste0("# relative detection duration: ", 
-                                   round(relative_detection_duration, 2)))) %>% 
-  addLegend(title = "Relative detection duration",
-            pal = pal,
-            values = ~relative_detection_duration)
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~100*relative_detection_duration,
+    color = ~pal(relative_detection_duration),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    clusterOptions = markerClusterOptions(),
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("DeploymentID: ", deployment_id),
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# relative detection duration: ", round(relative_detection_duration, 2))
+    )
+  ) %>% 
+  addLegend(
+    title = "Relative detection duration",
+    pal = pal,
+    values = ~relative_detection_duration
+  )
 ```
 
-
-Do you want to add the temporal component to visualize the fish movement? Let's give a look to [moveVis](https://movevis.org/index.html) package.
-
+Do you want to add the temporal component to visualize the fish movement? Take a look at the [moveVis](https://movevis.org/index.html) package.
