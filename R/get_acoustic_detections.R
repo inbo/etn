@@ -126,7 +126,7 @@ get_acoustic_detections <- function(connection = con,
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
     animal_project_code_query <- glue_sql(
-      "LOWER(animal_project.projectcode) IN ({animal_project_code*})",
+      "LOWER(animal_project_code) IN ({animal_project_code*})",
       .con = connection
     )
   }
@@ -138,7 +138,7 @@ get_acoustic_detections <- function(connection = con,
     valid_scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
     scientific_name_query <- glue_sql(
-      "animal.scientific_name IN ({scientific_name*})",
+      "animal_scientific_name IN ({scientific_name*})",
       .con = connection
     )
   }
@@ -151,7 +151,7 @@ get_acoustic_detections <- function(connection = con,
     valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
     check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
     acoustic_project_code_query <- glue_sql(
-      "LOWER(network_project.projectcode) IN ({acoustic_project_code*})",
+      "LOWER(network_project_code) IN ({acoustic_project_code*})",
       .con = connection
     )
   }
@@ -175,7 +175,7 @@ get_acoustic_detections <- function(connection = con,
     valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
     station_name_query <- glue_sql(
-      "deployment.station_name IN ({station_name*})",
+      "deployment_station_name IN ({station_name*})",
       .con = connection
     )
   }
@@ -198,23 +198,16 @@ get_acoustic_detections <- function(connection = con,
     SELECT
       det.id_pk AS detection_id,
       det.datetime AS date_time,
-      tag_device.serial_number AS tag_serial_number,
+      tag_serial_number AS tag_serial_number, -- exclusive to detections_limited
       det.transmitter AS acoustic_tag_id,
-      animal_project.projectcode AS animal_project_code,
-      -- det.animal_project_code AS animal_project_code, -- exclusive to detections_limited
-      animal.id_pk AS animal_id,
-      -- det.animal_id_pk AS animal_id, -- exclusive to detections_limited
-      animal.scientific_name AS scientific_name,
-      -- det.scientific_name AS scientific_name, -- exclusive to detections_limited
-      network_project.projectcode AS acoustic_project_code,
-      -- det.network_project_code AS acoustic_project_code, -- exclusive to detections_limited
+      animal_project_code AS animal_project_code, -- exclusive to detections_limited
+      animal_id_pk AS animal_id, -- exclusive to detections_limited
+      animal_scientific_name AS scientific_name, -- exclusive to detections_limited
+      network_project_code AS acoustic_project_code, -- exclusive to detections_limited
       det.receiver AS receiver_id,
-      deployment.station_name AS station_name,
-      -- det.deployment_station_name AS station_name, -- exclusive to detections_limited, from deployment
-      deployment.deploy_lat AS deploy_latitude,
-      -- det.deployment_lat AS deploy_latitude, -- exclusive to detections_limited, from deployment
-      deployment.deploy_long AS deploy_longitude,
-      -- det.deployment_long AS deploy_longitude, -- exclusive to detections_limited, from deployment
+      deployment_station_name AS station_name, -- exclusive to detections_limited
+      deployment_latitude AS deploy_latitude, -- exclusive to detections_limited
+      deployment_longitude AS deploy_longitude, -- exclusive to detections_limited
       det.sensor_value AS sensor_value,
       det.sensor_unit AS sensor_unit,
       det.sensor2_value AS sensor2_value,
@@ -232,30 +225,9 @@ get_acoustic_detections <- function(connection = con,
       -- det.receiver_serial
       -- det.gain
       -- external_id
-    FROM acoustic.detections AS det
-      LEFT JOIN ({acoustic_tag_id_sql}) AS acoustic_tag_id
-        ON det.transmitter = acoustic_tag_id.acoustic_tag_id
-        LEFT JOIN common.tag_device AS tag_device
-          ON acoustic_tag_id.tag_device_fk = tag_device.id_pk
-          LEFT JOIN common.animal_release_tag_device AS animal_with_tag
-            ON tag_device.id_pk = animal_with_tag.tag_device_fk
-            LEFT JOIN common.animal_release AS animal
-              ON animal_with_tag.animal_release_fk = animal.id_pk
-              LEFT JOIN common.projects AS animal_project
-                ON animal.project_fk = animal_project.id
-      LEFT JOIN acoustic.deployments AS deployment
-        ON det.deployment_fk = deployment.id_pk
-      LEFT JOIN common.projects AS network_project
-        ON deployment.project_fk = network_project.id
+    FROM acoustic.detections_limited AS det
     WHERE
-      (
-        animal.id_pk IS NULL
-        OR (
-          det.datetime >= animal.utc_release_date_time
-          AND (det.datetime <= animal.recapture_date OR animal.recapture_date IS NULL)
-        )
-      )
-      AND {start_date_query}
+      {start_date_query}
       AND {end_date_query}
       AND {acoustic_tag_id_query}
       AND {animal_project_code_query}
