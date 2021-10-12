@@ -1,0 +1,495 @@
+---
+title: "Explore acoustic telemetry data"
+author: "Damiano Oldoni"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Explore acoustic telemetry data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) and [htmltools](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
+
+To start, load the etn package:
+
+```{r load_pkg}
+library(etn)
+```
+
+And the other packages (with installation if necessary):
+
+```{r load_other_pkgs, message=FALSE}
+other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
+
+# install missing packages
+pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
+install.packages(pkgs_to_install)
+
+# load packages
+library(dplyr)
+library(lubridate)
+library(leaflet)
+library(htmltools)
+```
+
+Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
+
+```{r connect_to_db}
+con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
+# This is the default, so you could also use connect_to_etn()
+```
+
+Using `con` as variable to store the collection is not mandatory, but it makes your life much easier as `con` is the default value of the argument `connection`, present in every other function of this package.
+
+## Select project(s) of interest
+
+A researcher typically works in the context of one or more _animal projects_. As the project names are not easy to remember, it is always good to start by an overview of all projects we have access to:
+
+```{r get_my_animal_projects}
+all_my_projects <- get_animal_projects()
+```
+
+Show a preview:
+
+```{r preview_first_10_projects}
+all_my_projects %>% head(10)
+```
+
+If you know the `project code` already and you are just interested to get more information about it, you can specify it in the `get_animal_projects()` function directly:
+
+```{r get_demer_project_directly}
+projects_code <- c("2014_demer", "2015_dijle")
+projects_study <- get_animal_projects(animal_project_code = projects_code)
+projects_study
+```
+
+This is exactly the same as retrieving all projects first and filtering them afterwards based on column `project_code`:
+
+```{r retrieve_all_first_filter_after}
+all_my_projects %>%
+  filter(project_code %in% c(projects_code))
+```
+
+To list all available animal project codes as a vector, you can use `list_animal_project_codes()`, one of the etn functions in the [`list_*` family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
+
+```{r list_animal_project_codes}
+list_animal_project_codes()
+```
+
+## Animals
+
+By using `get_animals()` you can retrieve information about each animal (`animal_id`), such as scientific name, length, capture/release date and location, and the attached tag(s) (`tag_serial_number`):
+
+```{r get_animals}
+animals <- get_animals(animal_project_code = projects_code)
+animals %>% head(10)
+```
+
+What species and how many individuals are tracked for the projects `2014_demer` and `2015_dijle`?
+
+```{r get_species_and_number_individuals}
+animals %>%
+  count(scientific_name)
+```
+
+## Detections
+
+Let's say we are interested in the tracking data of Wels catfish (_Silurus glanis_) in 2014. You can retrieve the detection history using `get_acoustic_detections()`:
+
+```{r get_detections_silurus}
+detections_silurus <- get_acoustic_detections(
+  animal_project_code = projects_code,
+  start_date = "2014-01-01",
+  end_date = "2014-12-31",
+  scientific_name = "Silurus glanis"
+)
+```
+
+Preview:
+
+```{r preview_detections_silurus}
+detections_silurus %>% head(10)
+```
+
+Which individuals have been detected (`animal_id`) and in which period?
+
+```{r detections_silurus_period}
+detections_silurus_period <-
+  detections_silurus %>%
+  mutate(date = date(date_time)) %>%
+  group_by(animal_id) %>%
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
+detections_silurus_period
+```
+
+Notice we group by `animal_id`, the unique identifier of the fish. However, if the fish has only been tagged  once (as typically occurs), we could use `acoustic_tag_id` as well, i.e. the identifier picked up by acoustic receivers:
+
+```{r group_by_acoustic_tag_id}
+detections_silurus %>%
+  mutate(date = date(date_time)) %>%
+  group_by(acoustic_tag_id) %>%
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
+```
+
+We can also get the tracking duration of each fish:
+
+```{r duration_tracking}
+detections_silurus_duration <-
+  detections_silurus %>%
+  group_by(animal_id) %>%
+  summarize(duration = max(date_time) - min(date_time))
+detections_silurus_duration
+```
+
+How many times has an individual has been detected?
+
+```{r n_detections}
+detections_silurus %>%
+  group_by(animal_id) %>%
+  count()
+```
+
+## Stations
+
+At how many detection stations have the individuals been detected?
+
+```{r n_stations}
+detections_silurus %>%
+  group_by(animal_id) %>%
+  distinct(station_name) %>%
+  count()
+```
+
+Which stations have been involved?
+
+```{r deployments_silurus}
+stations_silurus <-
+  detections_silurus %>%
+  select(station_name) %>%
+  distinct() %>%
+  arrange()
+stations_silurus
+```
+
+Notice how a detection station can be linked to multiple deployments:
+
+```{r link_stations_deployments}
+detections_silurus %>%
+  distinct(station_name, deployment_id) %>%
+  group_by(station_name) %>%
+  add_tally() %>%
+  arrange(desc(n))
+```
+
+Sometimes it's interesting to know the number of detections per station:
+
+```{r n_detections_per_deployment}
+n_detect_station <- 
+  detections_silurus %>%
+  group_by(station_name) %>%
+  count()
+n_detect_station
+```
+
+It's also interesting to know the number of unique individuals per station:
+
+```{r n_silurus_station}
+n_silurus_station <- 
+  detections_silurus %>%
+  distinct(station_name, animal_id) %>%
+  group_by(station_name) %>%
+  count()
+n_silurus_station
+```
+
+## Acoustic tags 
+
+To get more information about the tags involved in `detections_silurus`, you can use the function `get_tags`, which returns tag related information such as serial number, manufacturer, model, and frequency:
+
+```{r acoustic_tags_info}
+tags_id <- unique(detections_silurus$acoustic_tag_id)
+tags_silurus <- get_tags(acoustic_tag_id = tags_id)
+tags_silurus
+```
+
+You can also retrieve such information by `tag_serial_number`:
+
+```{r acoustic_tags_info_via serial_number}
+tags_serial <- unique(detections_silurus$tag_serial_number)
+tags_silurus <- get_tags(tag_serial_number = tags_serial)
+tags_silurus
+```
+
+However, keep in mind that there is a fundamental difference between the arguments `acoustic_tag_id` and `tag_serial_number`: the `tag_serial_number` identifies the _device_, which could contain multiple tags or sensors and thus multiple `acoustic_tag_id`.
+
+All possible `acoustic_tag_id` can be retrieved with the correspondent `list_*` function:
+
+```{r list_acoustic_tag_ids}
+list_acoustic_tag_ids()
+```
+
+## Acoustic network projects
+
+The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`:
+
+```{r acoustic_project_codes_involved}
+networks_names <- detections_silurus %>% 
+  distinct(acoustic_project_code) %>% 
+  pull()
+networks_names
+```
+
+To get more information about these acoustic networks, you can use function `get_acoustic_projects()`
+
+```{r get_acoustic_projects}
+networks <- get_acoustic_projects(acoustic_project_code = networks_names)
+networks
+```
+
+You can retrieve the full list of acoustic network projects with the correspondent `list_*` function:
+
+```{r list_acoustic_project_codes}
+list_acoustic_project_codes()
+```
+
+## Acoustic deployments
+
+You can retrieve deployment information related to the networks in `networks_names` by using `get_acoustic_deployments()` function:
+
+```{r get_acoustic_deployments_info_networks}
+deployments <-get_acoustic_deployments(acoustic_project_code = networks_names)
+deployments
+```
+
+These are the deployments of the acoustic receivers involved in `detections_silurus`:
+
+```{r deploys_silurus}
+deploys_silurus <- 
+  detections_silurus %>%
+  distinct(receiver_id, deployment_id, station_name)
+deploys_silurus
+```
+
+More information about them can be retrieved via `get_acoustic_deployments()` function by specifying the `receiver_id` and `station_name` arguments and then filtering by `deployment_id`:
+
+```{r get_acoustic_deployments_info}
+deployments_silurus <- get_acoustic_deployments(
+  receiver_id = deploys_silurus$receiver_id,
+  station_name = deploys_silurus$station_name
+)
+
+# filter on deployment_id
+deployments_silurus <-
+  deployments_silurus %>%
+  filter(deployment_id %in% detections_silurus$deployment_id)
+```
+
+Deployment duration:
+
+```{r deployment_duration}
+deployments_silurus_duration <- 
+  deployments_silurus %>% 
+  mutate(duration = as.duration(recover_date_time - deploy_date_time)) %>%
+  select(deployment_id, station_name, duration) %>%
+  arrange(deployment_id)
+deployments_silurus_duration
+```
+
+Number of days a deployment detected the passage of one or more individuals:
+
+```{r n_active_days_deployments_silurus}
+n_active_days_deployments_silurus <- 
+  detections_silurus %>%
+  mutate(date = date(date_time)) %>%
+  distinct(deployment_id, station_name, date) %>%
+  group_by(deployment_id, station_name) %>%
+  summarize(n_days = n(), .groups = "drop") %>%
+  ungroup()
+n_active_days_deployments_silurus
+```
+
+Relative detection duration, i.e. number of days with at least one detection divided by deployment duration:
+
+```{r relative_detection_duration}
+rel_det_duration_silurus <- 
+  n_active_days_deployments_silurus %>%
+  left_join(
+    deployments_silurus_duration,
+    by = c("deployment_id", "station_name")
+  ) %>%
+  mutate(relative_detection_duration = n_days*(24*60*60) / as.numeric(duration)) %>%
+  select(deployment_id, station_name, relative_detection_duration)
+rel_det_duration_silurus
+```
+
+## Data visualization
+
+Aside standard graphs, the geographical component of telemetry data makes interactive maps particularly useful. The package `leaflet` is quite popular to create such kind of visualizations. 
+
+We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as pop-ups. First, we retrieve the coordinates of the stations:
+
+```{r geo_info_stations}
+geo_info_stations <- 
+  detections_silurus %>%
+  distinct(
+    station_name, 
+    deploy_latitude, 
+    deploy_longitude, 
+    acoustic_project_code
+  ) %>%
+  arrange(station_name)
+geo_info_stations
+```
+
+To be able to produce the desired map:
+
+```{r map_stations}
+leaflet(geo_info_stations) %>%
+  addTiles() %>%
+  addMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    popup = ~paste0("Station: ", station_name, " (", acoustic_project_code, ")")
+  )
+```
+
+We can visualize the number of detections per station, `n_detect_station`, by joining it with `geo_info_stations`:
+
+```{r leaflet_n_detections_Wels_catfish}
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = n_detect_station$n
+)
+
+n_detect_station %>%
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~log(n),
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detections: ", n)
+    )
+  ) %>% 
+  addLegend(
+    title = "Detections",
+    pal = pal,
+    values = ~n
+  )
+```
+
+In a similar way we can visualize the number of detected individuals per station, `n_silurus_station`:
+
+```{r map_n_individuals_per_station}
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = n_silurus_station$n
+)
+
+n_silurus_station %>%
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~n,
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detected individuals: ", n)
+    )
+  ) %>% 
+  addLegend(
+    title = "Detected individuals",
+    pal = pal,
+    values = ~n
+  )
+```
+
+We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
+
+```{r geo_info_deployments}
+geo_info_deploys <- 
+  detections_silurus %>%
+  distinct(
+    deployment_id, 
+    deploy_latitude, 
+    deploy_longitude, 
+    station_name,
+    acoustic_project_code
+  ) %>%
+  arrange(station_name)
+geo_info_deploys
+```
+
+We are ready to create the desired map, where we show the deployment ID, the station name and the network project as popups:
+
+```{r map_rel_detection_duration_deploys}
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = rel_det_duration_silurus$relative_detection_duration
+)
+
+rel_det_duration_silurus %>%
+  left_join(
+    geo_info_deploys,
+    by = c("deployment_id", "station_name")
+  ) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~100*relative_detection_duration,
+    color = ~pal(relative_detection_duration),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    clusterOptions = markerClusterOptions(),
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("DeploymentID: ", deployment_id),
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# relative detection duration: ", round(relative_detection_duration, 2))
+    )
+  ) %>% 
+  addLegend(
+    title = "Relative detection duration",
+    pal = pal,
+    values = ~relative_detection_duration
+  )
+```
+
+Do you want to add the temporal component to visualize the fish movement? Take a look at the [moveVis](https://movevis.org/index.html) package.
