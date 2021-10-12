@@ -20,7 +20,7 @@ Imports:
     glue,
     lubridate,
     methods,
-    odbc,
+    odbc <= 1.2.2,
     readr,
     stringr
 Suggests:
