@@ -18,16 +18,14 @@
 #' @importFrom readr read_file
 #'
 #' @examples
-#' \dontrun{
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
 #' # Get all animal projects
-#' get_animal_projects()
+#' get_animal_projects(con)
 #'
 #' # Get a specific animal project
-#' get_animal_projects(animal_project_code = "2014_demer")
-#' }
+#' get_animal_projects(con, animal_project_code = "2014_demer")
 get_animal_projects <- function(connection = con,
                                 animal_project_code = NULL) {
   # Check connection

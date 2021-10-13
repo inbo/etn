@@ -24,28 +24,26 @@
 #' @importFrom dplyr .data %>% arrange as_tibble filter
 #'
 #' @examples
-#' \dontrun{
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
 #' # Get all acoustic deployments
-#' get_acoustic_deployments()
+#' get_acoustic_deployments(con)
 #'
 #' # Get specific acoustic deployment
-#' get_acoustic_deployments(deployment_id = 1437)
+#' get_acoustic_deployments(con, deployment_id = 1437)
 #'
 #' # Get acoustic deployments for a specific receiver
-#' get_acoustic_deployments(receiver_id = "VR2W-124070")
+#' get_acoustic_deployments(con, receiver_id = "VR2W-124070")
 #'
 #' # Get open acoustic deployments for a specific receiver
-#' get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
+#' get_acoustic_deployments(con, receiver_id = "VR2W-124070", open_only = TRUE)
 #'
 #' # Get acoustic deployments for a specific acoustic project
 #' get_acoustic_deployments(con, acoustic_project_code = "demer")
 #'
 #' # Get acoustic deployments for two specific stations
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
-#' }
 get_acoustic_deployments <- function(connection = con,
                                      deployment_id = NULL,
                                      receiver_id = NULL,

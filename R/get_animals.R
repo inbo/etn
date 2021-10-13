@@ -25,30 +25,28 @@
 #' @importFrom readr read_file
 #'
 #' @examples
-#' \dontrun{
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
 #' # Get all animals
-#' get_animals()
+#' get_animals(con)
 #'
 #' # Get specific animals
-#' get_animals(animal_id = 305) # Or string value "305"
-#' get_animals(animal_id = c(304, 305, 2827))
+#' get_animals(con, animal_id = 305) # Or string value "305"
+#' get_animals(con, animal_id = c(304, 305, 2827))
 #'
 #' # Get animals from specific animal project(s)
-#' get_animals(animal_project_code = "2014_demer")
-#' get_animals(animal_project_code = c("2014_demer", "2015_dijle"))
+#' get_animals(con, animal_project_code = "2014_demer")
+#' get_animals(con, animal_project_code = c("2014_demer", "2015_dijle"))
 #'
 #' # Get animals associated with a specific tag_serial_number
-#' get_animals(tag_serial_number = "1187450")
+#' get_animals(con, tag_serial_number = "1187450")
 #'
 #' # Get animals of specific species (across all projects)
-#' get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
+#' get_animals(con, scientific_name = c("Rutilus rutilus", "Silurus glanis"))
 #'
 #' # Get animals of a specific species from a specific project
-#' get_animals(animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
-#' }
+#' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
 get_animals <- function(connection = con,
                         animal_id = NULL,
                         tag_serial_number = NULL,

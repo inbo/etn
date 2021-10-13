@@ -190,28 +190,105 @@ open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></td>
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all acoustic deployments</span>
-<span class='fu'>get_acoustic_deployments</span>()
-
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 7,041 × 38</span>
+#&gt;    deployment_id receiver_id acoustic_project_code station_name station_descrip…
+#&gt;            <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'> 1</span>          <span style='text-decoration: underline;'>6</span>660 VR20-2029   2004_Gudena           GUD1         GUD1            
+#&gt; <span style='color: #BCBCBC;'> 2</span>          <span style='text-decoration: underline;'>6</span>670 VR2-3536    2004_Gudena           GUD1         GUD1            
+#&gt; <span style='color: #BCBCBC;'> 3</span>          <span style='text-decoration: underline;'>6</span>661 VR2-1908    2004_Gudena           GUD2         GUD2            
+#&gt; <span style='color: #BCBCBC;'> 4</span>          <span style='text-decoration: underline;'>6</span>671 VR2-1908    2004_Gudena           GUD2         GUD2            
+#&gt; <span style='color: #BCBCBC;'> 5</span>          <span style='text-decoration: underline;'>6</span>680 VR2-2566    2004_Gudena           KATNORD      KATNORD         
+#&gt; <span style='color: #BCBCBC;'> 6</span>          <span style='text-decoration: underline;'>6</span>679 VR2-2719    2004_Gudena           KATSYD       KATSYD          
+#&gt; <span style='color: #BCBCBC;'> 7</span>          <span style='text-decoration: underline;'>6</span>662 VR2-3538    2004_Gudena           RAN1         RAN1            
+#&gt; <span style='color: #BCBCBC;'> 8</span>          <span style='text-decoration: underline;'>6</span>672 VR2-3538    2004_Gudena           RAN1         RAN1            
+#&gt; <span style='color: #BCBCBC;'> 9</span>          <span style='text-decoration: underline;'>6</span>663 VR2-1909    2004_Gudena           RAN2         RAN2            
+#&gt; <span style='color: #BCBCBC;'>10</span>          <span style='text-decoration: underline;'>6</span>673 VR2-1909    2004_Gudena           RAN2         RAN2            
+#&gt; <span style='color: #949494;'># … with 7,031 more rows, and 33 more variables: station_manager &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;, …</span></div><div class='input'>
 <span class='co'># Get specific acoustic deployment</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>deployment_id</span> <span class='kw'>=</span> <span class='fl'>1437</span>)
-
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>deployment_id</span> <span class='kw'>=</span> <span class='fl'>1437</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 38</span>
+#&gt;   deployment_id receiver_id acoustic_project_code station_name station_descript…
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>          <span style='text-decoration: underline;'>1</span>437 VR2W-124070 demer                 de-9         SA_GB_RODEMER    
+#&gt; <span style='color: #949494;'># … with 33 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;, …</span></div><div class='input'>
 <span class='co'># Get acoustic deployments for a specific receiver</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>)
-
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 38</span>
+#&gt;   deployment_id receiver_id acoustic_project_code station_name station_descript…
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>          <span style='text-decoration: underline;'>1</span>437 VR2W-124070 demer                 de-9         <span style='color: #949494;'>"</span>SA_GB_RODEMER<span style='color: #949494;'>"</span>  
+#&gt; <span style='color: #BCBCBC;'>2</span>          <span style='text-decoration: underline;'>1</span>588 VR2W-124070 demer                 de-9         <span style='color: #949494;'>"</span>de-9<span style='color: #949494;'>"</span>           
+#&gt; <span style='color: #BCBCBC;'>3</span>          <span style='text-decoration: underline;'>1</span>803 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>"</span>M-2<span style='color: #949494;'>"</span>            
+#&gt; <span style='color: #BCBCBC;'>4</span>          <span style='text-decoration: underline;'>1</span>804 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>""</span>               
+#&gt; <span style='color: #BCBCBC;'>5</span>          <span style='text-decoration: underline;'>1</span>805 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>""</span>               
+#&gt; <span style='color: #BCBCBC;'>6</span>          <span style='text-decoration: underline;'>1</span>806 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>""</span>               
+#&gt; <span style='color: #BCBCBC;'>7</span>          <span style='text-decoration: underline;'>1</span>807 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>"</span>m-2<span style='color: #949494;'>"</span>            
+#&gt; <span style='color: #BCBCBC;'>8</span>          <span style='text-decoration: underline;'>2</span>511 VR2W-124070 dijle                 M-2          <span style='color: #949494;'>"</span>m-2<span style='color: #949494;'>"</span>            
+#&gt; <span style='color: #949494;'># … with 33 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;, …</span></div><div class='input'>
 <span class='co'># Get open acoustic deployments for a specific receiver</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>, <span class='kw'>open_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 0 × 38</span>
+#&gt; <span style='color: #949494;'># … with 38 variables: deployment_id &lt;int&gt;, receiver_id &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   acoustic_project_code &lt;chr&gt;, station_name &lt;chr&gt;, station_description &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;, …</span></div><div class='input'>
 <span class='co'># Get acoustic deployments for a specific acoustic project</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)
-
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='st'>"demer"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 46 × 38</span>
+#&gt;    deployment_id receiver_id acoustic_project_code station_name station_descrip…
+#&gt;            <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'> 1</span>          <span style='text-decoration: underline;'>1</span>424 VR2W-122350 demer                 de-1         fietsersbrug aa…
+#&gt; <span style='color: #BCBCBC;'> 2</span>          <span style='text-decoration: underline;'>1</span>658 VR2W-122345 demer                 de-2         Rommelaar       
+#&gt; <span style='color: #BCBCBC;'> 3</span>          <span style='text-decoration: underline;'>1</span>478 VR2W-122325 demer                 de-2         rommelaar       
+#&gt; <span style='color: #BCBCBC;'> 4</span>          <span style='text-decoration: underline;'>1</span>661 VR2W-122344 demer                 de-3         Messelbroek     
+#&gt; <span style='color: #BCBCBC;'> 5</span>          <span style='text-decoration: underline;'>1</span>381 VR2W-122339 demer                 de-3         Messelbroek     
+#&gt; <span style='color: #BCBCBC;'> 6</span>          <span style='text-decoration: underline;'>2</span>869 VR2W-122339 demer                 de-3         Messelbroek     
+#&gt; <span style='color: #BCBCBC;'> 7</span>          <span style='text-decoration: underline;'>1</span>662 VR2W-122323 demer                 de-4         Testelt         
+#&gt; <span style='color: #BCBCBC;'> 8</span>          <span style='text-decoration: underline;'>1</span>425 VR2W-122337 demer                 de-5         SO_ZICHEM_DEMER 
+#&gt; <span style='color: #BCBCBC;'> 9</span>          <span style='text-decoration: underline;'>1</span>663 VR2W-122341 demer                 de-6         SA_RIF_LODEMER  
+#&gt; <span style='color: #BCBCBC;'>10</span>          <span style='text-decoration: underline;'>1</span>378 VR2W-122320 demer                 de-7         de-7            
+#&gt; <span style='color: #949494;'># … with 36 more rows, and 33 more variables: station_manager &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   bottom_depth &lt;chr&gt;, riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;, …</span></div><div class='input'>
 <span class='co'># Get acoustic deployments for two specific stations</span>
-<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"de-9"</span>, <span class='st'>"de-10"</span>))
-}</div></pre>
+<span class='fu'>get_acoustic_deployments</span>(<span class='no'>con</span>, <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"de-9"</span>, <span class='st'>"de-10"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 38</span>
+#&gt;   deployment_id receiver_id acoustic_project_code station_name station_descript…
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>          <span style='text-decoration: underline;'>1</span>437 VR2W-124070 demer                 de-9         SA_GB_RODEMER    
+#&gt; <span style='color: #BCBCBC;'>2</span>          <span style='text-decoration: underline;'>1</span>588 VR2W-124070 demer                 de-9         de-9             
+#&gt; <span style='color: #BCBCBC;'>3</span>          <span style='text-decoration: underline;'>1</span>428 VR2W-124078 demer                 de-10        IN_MZ_RODEMER    
+#&gt; <span style='color: #949494;'># … with 33 more variables: station_manager &lt;chr&gt;, deploy_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;, intended_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;, bottom_depth &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   riser_length &lt;chr&gt;, deploy_depth &lt;chr&gt;, battery_installation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, activation_date_time &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   recover_date_time &lt;dttm&gt;, recover_latitude &lt;dbl&gt;, recover_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   download_date_time &lt;dttm&gt;, download_file_name &lt;chr&gt;, …</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

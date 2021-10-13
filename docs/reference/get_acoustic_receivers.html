@@ -166,19 +166,63 @@ also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all acoustic receivers</span>
-<span class='fu'>get_acoustic_receivers</span>()
-
+<span class='fu'>get_acoustic_receivers</span>(<span class='no'>con</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2,378 × 23</span>
+#&gt;    receiver_id manufacturer receiver_model receiver_serial… modem_address status
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> 
+#&gt; <span style='color: #BCBCBC;'> 1</span> 134850-VR2W VEMCO        134850         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 2</span> 134851-VR2W VEMCO        134851         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 3</span> 134852-VR2W VEMCO        134852         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 4</span> 134853-VR2W VEMCO        134853         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 5</span> 134854-VR2W VEMCO        134854         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 6</span> 134855-VR2W VEMCO        134855         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 7</span> 134856-VR2W VEMCO        134856         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 8</span> 134857-VR2W VEMCO        134857         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'> 9</span> 134858-VR2W VEMCO        134858         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #BCBCBC;'>10</span> 134859-VR2W VEMCO        134859         VR2W             <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>    
+#&gt; <span style='color: #949494;'># … with 2,368 more rows, and 17 more variables: battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   owner_organization &lt;chr&gt;, financing_project &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   built_in_acoustic_tag_id &lt;chr&gt;, ar_model &lt;chr&gt;, ar_serial_number &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_battery_estimated_life &lt;chr&gt;, ar_voltage_at_deploy &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_interrogate_code &lt;chr&gt;, ar_receive_frequency &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_reply_frequency &lt;chr&gt;, ar_ping_rate &lt;chr&gt;, ar_enable_code_address &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_release_code &lt;chr&gt;, ar_disable_code &lt;chr&gt;, ar_tilt_code &lt;chr&gt;, …</span></div><div class='input'>
 <span class='co'># Get lost and broken acoustic receivers</span>
-<span class='fu'>get_acoustic_receivers</span>(<span class='kw'>status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lost"</span>, <span class='st'>"broken"</span>))
-
+<span class='fu'>get_acoustic_receivers</span>(<span class='no'>con</span>, <span class='kw'>status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lost"</span>, <span class='st'>"broken"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 87 × 23</span>
+#&gt;    receiver_id manufacturer receiver_model receiver_serial… modem_address status
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> 
+#&gt; <span style='color: #BCBCBC;'> 1</span> VR2AR-5457… VEMCO        VR2AR          545719           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 2</span> VR2AR-5460… VEMCO        VR2AR          546046           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 3</span> VR2AR-5460… VEMCO        VR2AR          546049           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 4</span> VR2AR-5460… VEMCO        VR2AR          546050           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 5</span> VR2AR-5468… VEMCO        VR2AR          546894           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 6</span> VR2AR-5476… VEMCO        VR2AR          547657           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 7</span> VR2AR-5476… VEMCO        VR2AR          547663           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 8</span> VR2C-450116 VEMCO        VR2C           450116           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'> 9</span> VR2Tx-4800… VEMCO        VR2Tx          480062           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #BCBCBC;'>10</span> VR2Tx-4807… VEMCO        VR2Tx          480721           <span style='color: #BB0000;'>NA</span>            lost  
+#&gt; <span style='color: #949494;'># … with 77 more rows, and 17 more variables: battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   owner_organization &lt;chr&gt;, financing_project &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   built_in_acoustic_tag_id &lt;chr&gt;, ar_model &lt;chr&gt;, ar_serial_number &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_battery_estimated_life &lt;chr&gt;, ar_voltage_at_deploy &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_interrogate_code &lt;chr&gt;, ar_receive_frequency &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_reply_frequency &lt;chr&gt;, ar_ping_rate &lt;chr&gt;, ar_enable_code_address &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_release_code &lt;chr&gt;, ar_disable_code &lt;chr&gt;, ar_tilt_code &lt;chr&gt;, …</span></div><div class='input'>
 <span class='co'># Get a specific acoustic receiver</span>
-<span class='fu'>get_acoustic_receiver</span>(<span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>)
-}</div></pre>
+<span class='fu'>get_acoustic_receivers</span>(<span class='no'>con</span>, <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 23</span>
+#&gt;   receiver_id manufacturer receiver_model receiver_serial_… modem_address status
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> 
+#&gt; <span style='color: #BCBCBC;'>1</span> VR2W-124070 VEMCO        VR2W           124070            <span style='color: #BB0000;'>NA</span>            avail…
+#&gt; <span style='color: #949494;'># … with 17 more variables: battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   owner_organization &lt;chr&gt;, financing_project &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   built_in_acoustic_tag_id &lt;chr&gt;, ar_model &lt;chr&gt;, ar_serial_number &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_battery_estimated_life &lt;chr&gt;, ar_voltage_at_deploy &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_interrogate_code &lt;chr&gt;, ar_receive_frequency &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_reply_frequency &lt;chr&gt;, ar_ping_rate &lt;chr&gt;, ar_enable_code_address &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   ar_release_code &lt;chr&gt;, ar_disable_code &lt;chr&gt;, ar_tilt_code &lt;chr&gt;, …</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

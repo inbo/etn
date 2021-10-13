@@ -33,13 +33,13 @@ check_connection <- function(connection) {
 #'
 #' @examples
 #' \dontrun{
-#' # Valid inputs for project_type
-#' check_value("animal", c("animal", "network"), "project_type")
-#' check_value(NULL, c("animal", "network"), "project_type")
-#' check_value(c("animal", "network"), c("animal", "network"), "project_type")
+#' # Valid inputs for tag_type
+#' check_value("acoustic", c("acoustic", "archival"), "tag_type")
+#' check_value(NULL, c("acoustic", "archival"), "tag_type")
+#' check_value(c("acoustic", "archival"), c("acoustic", "archival"), "tag_type")
 #'
-#' # Invalid inputs for project_type
-#' check_value("ddsf", c("animal", "network"), "project_type")
+#' # Invalid inputs for tag_type
+#' check_value("ddsf", c("acoustic", "archival"), "tag_type")
 #' }
 check_value <- function(arg, options = NULL, arg_name) {
   max_print <- 20

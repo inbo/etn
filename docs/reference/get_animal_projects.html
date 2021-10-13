@@ -163,16 +163,32 @@ also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all animal projects</span>
-<span class='fu'>get_animal_projects</span>()
-
+<span class='fu'>get_animal_projects</span>(<span class='no'>con</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 184 × 11</span>
+#&gt;    project_id project_code  project_type telemetry_type project_name  start_date
+#&gt;         <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>    
+#&gt; <span style='color: #BCBCBC;'> 1</span>        793 2004_Gudena   animal       Acoustic       2004_Gudena   2004-01-01
+#&gt; <span style='color: #BCBCBC;'> 2</span>         16 2010_phd_reu… animal       Acoustic       2010_phd_reu… 2010-08-01
+#&gt; <span style='color: #BCBCBC;'> 3</span>        841 2010_phd_reu… animal       Acoustic       2010_phd_reu… 2010-08-01
+#&gt; <span style='color: #BCBCBC;'> 4</span>        760 2011_Loire    animal       Acoustic       2011_Loire    2011-11-11
+#&gt; <span style='color: #BCBCBC;'> 5</span>         20 2011_rivierp… animal       Acoustic       2011 Rivierp… 2011-01-01
+#&gt; <span style='color: #BCBCBC;'> 6</span>        754 2011_Warnow   animal       Acoustic       2011_Warnow   2011-06-01
+#&gt; <span style='color: #BCBCBC;'> 7</span>         15 2012_leopold… animal       Acoustic       2012 Leopold… 2012-01-01
+#&gt; <span style='color: #BCBCBC;'> 8</span>         18 2013_albertk… animal       Acoustic       2013 Albertk… 2013-10-10
+#&gt; <span style='color: #BCBCBC;'> 9</span>        757 2013_Foyle    animal       Acoustic       2013_Foyle    2013-07-01
+#&gt; <span style='color: #BCBCBC;'>10</span>         21 2014_demer    animal       Acoustic       2014 Demer    2014-04-10
+#&gt; <span style='color: #949494;'># … with 174 more rows, and 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   longitude &lt;dbl&gt;, moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get a specific animal project</span>
-<span class='fu'>get_animal_projects</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
-}</div></pre>
+<span class='fu'>get_animal_projects</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 11</span>
+#&gt;   project_id project_code project_type telemetry_type project_name start_date
+#&gt;        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>    
+#&gt; <span style='color: #BCBCBC;'>1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10
+#&gt; <span style='color: #949494;'># … with 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

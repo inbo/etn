@@ -213,50 +213,165 @@ and <code>date_time</code>. See also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get limited sample of acoustic detections</span>
-<span class='fu'>get_acoustic_detections</span>(<span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
+<span class='fu'>get_acoustic_detections</span>(<span class='no'>con</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 100 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     21<span style='text-decoration: underline;'>811</span>753 2014-02-10 <span style='color: #949494;'>04:15:08</span> 1172821           A69-1601-13635 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     21<span style='text-decoration: underline;'>811</span>708 2014-02-15 <span style='color: #949494;'>08:01:00</span> 1172821           A69-1601-13635 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     21<span style='text-decoration: underline;'>811</span>715 2014-04-29 <span style='color: #949494;'>01:29:10</span> 1172821           A69-1601-13635 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     21<span style='text-decoration: underline;'>811</span>724 2014-10-05 <span style='color: #949494;'>05:31:25</span> 1172825           A69-1601-13639 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     21<span style='text-decoration: underline;'>811</span>741 2014-05-19 <span style='color: #949494;'>05:37:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     21<span style='text-decoration: underline;'>811</span>762 2014-06-04 <span style='color: #949494;'>22:41:02</span> 1171780           A69-1601-26534 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     21<span style='text-decoration: underline;'>811</span>714 2013-12-29 <span style='color: #949494;'>10:04:58</span> 1157748           A69-1601-28263 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     21<span style='text-decoration: underline;'>811</span>722 2014-01-15 <span style='color: #949494;'>03:45:24</span> 1157748           A69-1601-28263 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     21<span style='text-decoration: underline;'>811</span>755 2014-06-05 <span style='color: #949494;'>13:41:57</span> 1157779           A69-1601-28294 
+#&gt; <span style='color: #BCBCBC;'>10</span>     21<span style='text-decoration: underline;'>811</span>693 2014-10-30 <span style='color: #949494;'>01:47:15</span> 1157779           A69-1601-28294 
+#&gt; <span style='color: #949494;'># … with 90 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get all acoustic detections from a specific animal project</span>
-<span class='fu'>get_acoustic_detections</span>(<span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)
-
+<span class='fu'>get_acoustic_detections</span>(<span class='no'>con</span>, <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 236,918 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     21<span style='text-decoration: underline;'>676</span>626 2014-04-18 <span style='color: #949494;'>15:45:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     22<span style='text-decoration: underline;'>524</span>167 2014-04-18 <span style='color: #949494;'>15:45:09</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     21<span style='text-decoration: underline;'>919</span>770 2014-04-18 <span style='color: #949494;'>15:47:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     21<span style='text-decoration: underline;'>745</span>679 2014-04-18 <span style='color: #949494;'>15:47:45</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     21<span style='text-decoration: underline;'>823</span>882 2014-04-18 <span style='color: #949494;'>15:49:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     21<span style='text-decoration: underline;'>976</span>905 2014-04-18 <span style='color: #949494;'>15:49:02</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     21<span style='text-decoration: underline;'>425</span>044 2014-04-18 <span style='color: #949494;'>15:50:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     20<span style='text-decoration: underline;'>734</span>006 2014-04-18 <span style='color: #949494;'>15:50:03</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     21<span style='text-decoration: underline;'>095</span>838 2014-04-18 <span style='color: #949494;'>15:51:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'>10</span>     20<span style='text-decoration: underline;'>627</span>256 2014-04-18 <span style='color: #949494;'>15:51:11</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #949494;'># … with 236,908 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get 2015 acoustic detections from that animal project</span>
 <span class='fu'>get_acoustic_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015"</span>,
   <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2016"</span>,
-)
-
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 23,695 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     23<span style='text-decoration: underline;'>629</span>467 2015-05-06 <span style='color: #949494;'>04:11:52</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     23<span style='text-decoration: underline;'>630</span>262 2015-05-07 <span style='color: #949494;'>15:59:24</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     23<span style='text-decoration: underline;'>630</span>263 2015-05-07 <span style='color: #949494;'>16:45:38</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     23<span style='text-decoration: underline;'>630</span>265 2015-05-07 <span style='color: #949494;'>16:56:22</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     23<span style='text-decoration: underline;'>630</span>267 2015-05-07 <span style='color: #949494;'>17:00:18</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     23<span style='text-decoration: underline;'>630</span>274 2015-05-07 <span style='color: #949494;'>17:06:13</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     23<span style='text-decoration: underline;'>630</span>278 2015-05-07 <span style='color: #949494;'>17:08:54</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     23<span style='text-decoration: underline;'>630</span>285 2015-05-07 <span style='color: #949494;'>17:15:07</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     23<span style='text-decoration: underline;'>630</span>294 2015-05-07 <span style='color: #949494;'>17:23:21</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #BCBCBC;'>10</span>     23<span style='text-decoration: underline;'>630</span>300 2015-05-07 <span style='color: #949494;'>17:27:27</span> 1187468           A69-1601-16148 
+#&gt; <span style='color: #949494;'># … with 23,685 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get April 2015 acoustic detections from that animal project</span>
 <span class='fu'>get_acoustic_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-04"</span>,
   <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-05"</span>,
-)
-
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 442 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     23<span style='text-decoration: underline;'>184</span>110 2015-04-03 <span style='color: #949494;'>15:40:26</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     23<span style='text-decoration: underline;'>184</span>111 2015-04-04 <span style='color: #949494;'>15:46:28</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     23<span style='text-decoration: underline;'>184</span>112 2015-04-04 <span style='color: #949494;'>15:57:00</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     23<span style='text-decoration: underline;'>184</span>113 2015-04-04 <span style='color: #949494;'>16:01:08</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     23<span style='text-decoration: underline;'>184</span>114 2015-04-04 <span style='color: #949494;'>16:26:53</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     23<span style='text-decoration: underline;'>184</span>115 2015-04-04 <span style='color: #949494;'>16:35:18</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     23<span style='text-decoration: underline;'>184</span>116 2015-04-04 <span style='color: #949494;'>16:47:53</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     23<span style='text-decoration: underline;'>184</span>117 2015-04-04 <span style='color: #949494;'>17:10:07</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     23<span style='text-decoration: underline;'>184</span>118 2015-04-04 <span style='color: #949494;'>17:13:54</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'>10</span>     23<span style='text-decoration: underline;'>184</span>119 2015-04-04 <span style='color: #949494;'>17:24:01</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #949494;'># … with 432 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get April 24, 2015 acoustic detections from that animal project</span>
 <span class='fu'>get_acoustic_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>animal_project_code</span> <span class='kw'>=</span> <span class='st'>"2014_demer"</span>,
   <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='st'>"2015-04-24"</span>,
   <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>"2015-04-25"</span>,
-)
-
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 20</span>
+#&gt;   detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span>     23<span style='text-decoration: underline;'>053</span>006 2015-04-24 <span style='color: #949494;'>07:54:12</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #BCBCBC;'>2</span>     23<span style='text-decoration: underline;'>053</span>007 2015-04-24 <span style='color: #949494;'>07:56:29</span> 1171781           A69-1601-26535 
+#&gt; <span style='color: #949494;'># … with 16 more variables: animal_project_code &lt;chr&gt;, animal_id &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;, receiver_id &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor2_value &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;, source_file &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get acoustic detections for a specific tag at two specific stations</span>
 <span class='fu'>get_acoustic_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1601-16130"</span>,
   <span class='kw'>station_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"de-9"</span>, <span class='st'>"de-10"</span>)
-)
-
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 48 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     22<span style='text-decoration: underline;'>308</span>206 2014-04-24 <span style='color: #949494;'>16:12:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     21<span style='text-decoration: underline;'>286</span>383 2014-04-24 <span style='color: #949494;'>16:12:42</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     21<span style='text-decoration: underline;'>634</span>739 2014-04-24 <span style='color: #949494;'>16:15:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     21<span style='text-decoration: underline;'>844</span>100 2014-04-24 <span style='color: #949494;'>16:15:27</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     22<span style='text-decoration: underline;'>670</span>703 2014-04-24 <span style='color: #949494;'>16:16:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     21<span style='text-decoration: underline;'>503</span>030 2014-04-24 <span style='color: #949494;'>16:16:57</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     22<span style='text-decoration: underline;'>094</span>662 2014-04-26 <span style='color: #949494;'>10:22:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     21<span style='text-decoration: underline;'>861</span>085 2014-04-26 <span style='color: #949494;'>10:22:44</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     22<span style='text-decoration: underline;'>362</span>287 2014-04-26 <span style='color: #949494;'>10:23:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'>10</span>     20<span style='text-decoration: underline;'>667</span>884 2014-04-26 <span style='color: #949494;'>10:23:51</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #949494;'># … with 38 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get acoustic detections for a specific species, receiver and acoustic project</span>
 <span class='fu'>get_acoustic_detections</span>(
+  <span class='no'>con</span>,
   <span class='kw'>scientific_name</span> <span class='kw'>=</span> <span class='st'>"Rutilus rutilus"</span>,
   <span class='kw'>receiver_id</span> <span class='kw'>=</span> <span class='st'>"VR2W-124070"</span>,
   <span class='kw'>acoustic_project_code</span> <span class='kw'>=</span> <span class='st'>"demer"</span>
-)
-}</div></pre>
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 38 × 20</span>
+#&gt;    detection_id date_time           tag_serial_number acoustic_tag_id
+#&gt;           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dttm&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span>     22<span style='text-decoration: underline;'>437</span>907 2014-04-18 <span style='color: #949494;'>16:10:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     21<span style='text-decoration: underline;'>250</span>456 2014-04-18 <span style='color: #949494;'>16:10:52</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     21<span style='text-decoration: underline;'>697</span>884 2014-04-18 <span style='color: #949494;'>16:12:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     20<span style='text-decoration: underline;'>962</span>095 2014-04-18 <span style='color: #949494;'>16:12:26</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     22<span style='text-decoration: underline;'>013</span>363 2014-04-18 <span style='color: #949494;'>16:15:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     22<span style='text-decoration: underline;'>153</span>161 2014-04-18 <span style='color: #949494;'>16:15:32</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     21<span style='text-decoration: underline;'>863</span>649 2014-04-18 <span style='color: #949494;'>16:17:00</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     21<span style='text-decoration: underline;'>261</span>941 2014-04-18 <span style='color: #949494;'>16:17:05</span> 1187449           A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     22<span style='text-decoration: underline;'>308</span>206 2014-04-24 <span style='color: #949494;'>16:12:00</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #BCBCBC;'>10</span>     21<span style='text-decoration: underline;'>286</span>383 2014-04-24 <span style='color: #949494;'>16:12:42</span> 1187450           A69-1601-16130 
+#&gt; <span style='color: #949494;'># … with 28 more rows, and 16 more variables: animal_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   animal_id &lt;int&gt;, scientific_name &lt;chr&gt;, acoustic_project_code &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   receiver_id &lt;chr&gt;, station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   deploy_longitude &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span>
+#&gt; <span style='color: #949494;'>#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -163,16 +163,28 @@ also
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all animal projects</span>
-<span class='fu'>get_cpod_projects</span>()
-
+<span class='fu'>get_cpod_projects</span>(<span class='no'>con</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 11</span>
+#&gt;   project_id project_code   project_type telemetry_type project_name  start_date
+#&gt;        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>    
+#&gt; <span style='color: #BCBCBC;'>1</span>        880 Apelafico_por… cpod         <span style='color: #BB0000;'>NA</span>             Apelafico_po… 2021-01-01
+#&gt; <span style='color: #BCBCBC;'>2</span>        638 cpod-lifewatch cpod         <span style='color: #BB0000;'>NA</span>             Lifewatch     2015-06-01
+#&gt; <span style='color: #BCBCBC;'>3</span>        639 cpod-od-natuur cpod         <span style='color: #BB0000;'>NA</span>             OD Natuur     <span style='color: #BB0000;'>NA</span>        
+#&gt; <span style='color: #BCBCBC;'>4</span>        948 PhD_Parcerisas cpod         <span style='color: #BB0000;'>NA</span>             PhD_Parceris… 2021-03-09
+#&gt; <span style='color: #BCBCBC;'>5</span>        838 VLIZ-MRC-AMUC… cpod         <span style='color: #BB0000;'>NA</span>             VLIZ-MRC-AMU… <span style='color: #BB0000;'>NA</span>        
+#&gt; <span style='color: #BCBCBC;'>6</span>        839 VLIZ-MRC-AMUC… cpod         <span style='color: #BB0000;'>NA</span>             VLIZ-MRC-AMU… <span style='color: #BB0000;'>NA</span>        
+#&gt; <span style='color: #949494;'># … with 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></div><div class='input'>
 <span class='co'># Get a specific animal project</span>
-<span class='fu'><a href='get_animal_projects.html'>get_animal_projects</a></span>(<span class='kw'>cpod_project_code</span> <span class='kw'>=</span> <span class='st'>"cpod-lifewatch"</span>)
-}</div></pre>
+<span class='fu'>get_cpod_projects</span>(<span class='no'>con</span>, <span class='kw'>cpod_project_code</span> <span class='kw'>=</span> <span class='st'>"cpod-lifewatch"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 11</span>
+#&gt;   project_id project_code   project_type telemetry_type project_name start_date
+#&gt;        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>    
+#&gt; <span style='color: #BCBCBC;'>1</span>        638 cpod-lifewatch cpod         <span style='color: #BB0000;'>NA</span>             Lifewatch    2015-06-01
+#&gt; <span style='color: #949494;'># … with 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

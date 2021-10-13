@@ -186,24 +186,105 @@ identifiers, i.e. identifiers found in <code><a href='get_acoustic_detections.ht
 <a href='https://inbo.github.io/etn/articles/etn_fields.html'>field definitions</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default connection variable</span>
+    <pre class="examples"><div class='input'><span class='co'># Set default connection variable</span>
 <span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='connect_to_etn.html'>connect_to_etn</a></span>()
 
 <span class='co'># Get all tags</span>
-<span class='fu'>get_tags</span>()
-
+<span class='fu'>get_tags</span>(<span class='no'>con</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 13,066 × 49</span>
+#&gt;    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span> 1208              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-101   
+#&gt; <span style='color: #BCBCBC;'> 2</span> 1209              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-102   
+#&gt; <span style='color: #BCBCBC;'> 3</span> 1210              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-103   
+#&gt; <span style='color: #BCBCBC;'> 4</span> 1211              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-104   
+#&gt; <span style='color: #BCBCBC;'> 5</span> 1212              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-105   
+#&gt; <span style='color: #BCBCBC;'> 6</span> 1213              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-106   
+#&gt; <span style='color: #BCBCBC;'> 7</span> 1214              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-107   
+#&gt; <span style='color: #BCBCBC;'> 8</span> 1215              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-108   
+#&gt; <span style='color: #BCBCBC;'> 9</span> 1216              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-109   
+#&gt; <span style='color: #BCBCBC;'>10</span> 1217              acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1008-110   
+#&gt; <span style='color: #949494;'># … with 13,056 more rows, and 44 more variables:</span>
+#&gt; <span style='color: #949494;'>#   acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;, model &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div><div class='input'>
 <span class='co'># Get archival tags, including acoustic-archival</span>
-<span class='fu'>get_tags</span>(<span class='kw'>tag_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"archival"</span>, <span class='st'>"acoustic-archival"</span>))
-
+<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>tag_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"archival"</span>, <span class='st'>"acoustic-archival"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2,408 × 49</span>
+#&gt;    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span> 1099674           acoustic-archival sentinel    P           A69-9002-16200 
+#&gt; <span style='color: #BCBCBC;'> 2</span> 1108971           acoustic-archival sentinel    P           A69-1105-1     
+#&gt; <span style='color: #BCBCBC;'> 3</span> 1108972           acoustic-archival sentinel    P           A69-1105-2     
+#&gt; <span style='color: #BCBCBC;'> 4</span> 1108973           acoustic-archival sentinel    P           A69-1105-3     
+#&gt; <span style='color: #BCBCBC;'> 5</span> 1108974           acoustic-archival sentinel    P           A69-1105-4     
+#&gt; <span style='color: #BCBCBC;'> 6</span> 1145533           acoustic-archival sentinel    P           A69-9002-6814  
+#&gt; <span style='color: #BCBCBC;'> 7</span> 1145534           acoustic-archival sentinel    P           A69-9002-6815  
+#&gt; <span style='color: #BCBCBC;'> 8</span> 1148544           acoustic-archival sentinel    T           A69-9002-13730 
+#&gt; <span style='color: #BCBCBC;'> 9</span> 1148544           acoustic-archival sentinel    P           A69-9002-13731 
+#&gt; <span style='color: #BCBCBC;'>10</span> 1161815           acoustic-archival sentinel    P           A69-1105-210   
+#&gt; <span style='color: #949494;'># … with 2,398 more rows, and 44 more variables:</span>
+#&gt; <span style='color: #949494;'>#   acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;, model &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div><div class='input'>
 <span class='co'># Get tags of specific subtype</span>
-<span class='fu'>get_tags</span>(<span class='kw'>tag_subtype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"built-in"</span>, <span class='st'>"range"</span>))
-
-<span class='co'># Get specific tags</span>
-<span class='fu'>get_tags</span>(<span class='kw'>tag_serial_number</span> <span class='kw'>=</span> <span class='st'>"1187450"</span>)
-<span class='fu'>get_tags</span>(<span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1601-16130"</span>)
-<span class='fu'>get_tags</span>(<span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A69-1601-16129"</span>, <span class='st'>"A69-1601-16130"</span>))
-}</div></pre>
+<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>tag_subtype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"built-in"</span>, <span class='st'>"range"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 125 × 49</span>
+#&gt;    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'> 1</span> 461076            acoustic built-in    <span style='color: #BB0000;'>NA</span>          H170-1802-62076
+#&gt; <span style='color: #BCBCBC;'> 2</span> 461076            acoustic built-in    <span style='color: #BB0000;'>NA</span>          A180-1702-62076
+#&gt; <span style='color: #BCBCBC;'> 3</span> 461135            acoustic built-in    <span style='color: #BB0000;'>NA</span>          H170-1802-62135
+#&gt; <span style='color: #BCBCBC;'> 4</span> 461135            acoustic built-in    <span style='color: #BB0000;'>NA</span>          A180-1702-62135
+#&gt; <span style='color: #BCBCBC;'> 5</span> 461140            acoustic built-in    <span style='color: #BB0000;'>NA</span>          H170-1802-62140
+#&gt; <span style='color: #BCBCBC;'> 6</span> 461140            acoustic built-in    <span style='color: #BB0000;'>NA</span>          A180-1702-62140
+#&gt; <span style='color: #BCBCBC;'> 7</span> 461206            acoustic built-in    <span style='color: #BB0000;'>NA</span>          H170-1802-62206
+#&gt; <span style='color: #BCBCBC;'> 8</span> 461206            acoustic built-in    <span style='color: #BB0000;'>NA</span>          A180-1702-62206
+#&gt; <span style='color: #BCBCBC;'> 9</span> 461207            acoustic built-in    <span style='color: #BB0000;'>NA</span>          H170-1802-62207
+#&gt; <span style='color: #BCBCBC;'>10</span> 461207            acoustic built-in    <span style='color: #BB0000;'>NA</span>          A180-1702-62207
+#&gt; <span style='color: #949494;'># … with 115 more rows, and 44 more variables:</span>
+#&gt; <span style='color: #949494;'>#   acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;, model &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div><div class='input'>
+<span class='co'># Get specific tags (note that these can return multiple records)</span>
+<span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>tag_serial_number</span> <span class='kw'>=</span> <span class='st'>"1187450"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 49</span>
+#&gt;   tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> 1187450           acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1601-16130 
+#&gt; <span style='color: #949494;'># … with 44 more variables: acoustic_tag_id_alternative &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   manufacturer &lt;chr&gt;, model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   activation_date &lt;dttm&gt;, battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, sensor_slope &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div><div class='input'><span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='st'>"A69-1601-16130"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 49</span>
+#&gt;   tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> 1187450           acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1601-16130 
+#&gt; <span style='color: #949494;'># … with 44 more variables: acoustic_tag_id_alternative &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   manufacturer &lt;chr&gt;, model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   activation_date &lt;dttm&gt;, battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, sensor_slope &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div><div class='input'><span class='fu'>get_tags</span>(<span class='no'>con</span>, <span class='kw'>acoustic_tag_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A69-1601-16129"</span>, <span class='st'>"A69-1601-16130"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 49</span>
+#&gt;   tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> 1187449           acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1601-16129 
+#&gt; <span style='color: #BCBCBC;'>2</span> 1187450           acoustic animal      <span style='color: #BB0000;'>NA</span>          A69-1601-16130 
+#&gt; <span style='color: #949494;'># … with 44 more variables: acoustic_tag_id_alternative &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   manufacturer &lt;chr&gt;, model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   activation_date &lt;dttm&gt;, battery_estimated_life &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   battery_estimated_end_date &lt;dttm&gt;, sensor_slope &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_intercept &lt;dbl&gt;, sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_range_max &lt;dbl&gt;, sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sensor_accuracy &lt;dbl&gt;, sensor_transmit_ratio &lt;int&gt;, …</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

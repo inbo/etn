@@ -22,17 +22,15 @@ also
 Get data for acoustic receivers, with options to filter results.
 }
 \examples{
-\dontrun{
 # Set default connection variable
 con <- connect_to_etn()
 
 # Get all acoustic receivers
-get_acoustic_receivers()
+get_acoustic_receivers(con)
 
 # Get lost and broken acoustic receivers
-get_acoustic_receivers(status = c("lost", "broken"))
+get_acoustic_receivers(con, status = c("lost", "broken"))
 
 # Get a specific acoustic receiver
-get_acoustic_receiver(receiver_id = "VR2W-124070")
-}
+get_acoustic_receivers(con, receiver_id = "VR2W-124070")
 }

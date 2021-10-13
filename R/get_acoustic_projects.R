@@ -18,16 +18,14 @@
 #' @importFrom readr read_file
 #'
 #' @examples
-#' \dontrun{
 #' # Set default connection variable
 #' con <- connect_to_etn()
 #'
 #' # Get all acoustic projects
-#' get_acoustic_projects()
+#' get_acoustic_projects(con)
 #'
 #' # Get a specific acoustic project
-#' get_acoustic_projects(acoustic_project_code = "demer")
-#' }
+#' get_acoustic_projects(con, acoustic_project_code = "demer")
 get_acoustic_projects <- function(connection = con,
                                   acoustic_project_code = NULL) {
   # Check connection

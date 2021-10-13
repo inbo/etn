@@ -36,22 +36,20 @@ can be multiple records (\code{acoustic_tag_id}) per tag device
 (\code{tag_serial_number}).
 }
 \examples{
-\dontrun{
 # Set default connection variable
 con <- connect_to_etn()
 
 # Get all tags
-get_tags()
+get_tags(con)
 
 # Get archival tags, including acoustic-archival
-get_tags(tag_type = c("archival", "acoustic-archival"))
+get_tags(con, tag_type = c("archival", "acoustic-archival"))
 
 # Get tags of specific subtype
-get_tags(tag_subtype = c("built-in", "range"))
+get_tags(con, tag_subtype = c("built-in", "range"))
 
-# Get specific tags
-get_tags(tag_serial_number = "1187450")
-get_tags(acoustic_tag_id = "A69-1601-16130")
-get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
-}
+# Get specific tags (note that these can return multiple records)
+get_tags(con, tag_serial_number = "1187450")
+get_tags(con, acoustic_tag_id = "A69-1601-16130")
+get_tags(con, acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 }
