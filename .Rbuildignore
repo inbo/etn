@@ -6,4 +6,5 @@
 ^pkgdown$
 .gitignore
 .github
-^Meta/
+^doc$
+^Meta$

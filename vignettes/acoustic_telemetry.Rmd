@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) and [htmltools](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
+In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) for interactive visualizations.
 
 To start, load the etn package:
 
@@ -26,7 +26,7 @@ library(etn)
 And the other packages (with installation if necessary):
 
 ```{r load_other_pkgs, message=FALSE}
-other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
+other_pkgs <- c("dplyr", "lubridate", "leaflet")
 
 # install missing packages
 pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
@@ -36,7 +36,6 @@ install.packages(pkgs_to_install)
 library(dplyr)
 library(lubridate)
 library(leaflet)
-library(htmltools)
 ```
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
@@ -173,14 +172,12 @@ detections_silurus %>%
   count()
 ```
 
-Which stations have been involved?
+Which stations have been involved? You can retrieve them using `list_values` function applied to column `station_name`:
 
-```{r deployments_silurus}
+```{r stations_silurus}
 stations_silurus <-
   detections_silurus %>%
-  select(station_name) %>%
-  distinct() %>%
-  arrange()
+  list_values(station_name)
 stations_silurus
 ```
 
@@ -243,20 +240,21 @@ list_acoustic_tag_ids() %>% head(10)
 
 ## Acoustic network projects
 
-The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`:
+The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`. You can retrieve them via the _list_ function `list_values()`:
 
 ```{r acoustic_project_codes_involved}
-networks_names <- detections_silurus %>% 
-  distinct(acoustic_project_code) %>% 
-  pull()
-networks_names
+acoustic_project_codes <- detections_silurus %>% 
+  list_values(acoustic_project_code)
+acoustic_project_codes
 ```
 
 To get more information about these acoustic networks, you can use function `get_acoustic_projects()`
 
 ```{r get_acoustic_projects}
-networks <- get_acoustic_projects(acoustic_project_code = networks_names)
-networks
+acoustic_projects_silurus <- get_acoustic_projects(
+  acoustic_project_code = acoustic_project_codes
+)
+acoustic_projects_silurus
 ```
 
 You can retrieve the full list of acoustic network projects with the correspondent `list_*` function:
@@ -267,10 +265,12 @@ list_acoustic_project_codes() %>% head(10)
 
 ## Acoustic deployments
 
-You can retrieve deployment information related to the networks in `networks_names` by using `get_acoustic_deployments()` function:
+You can retrieve deployment information related to the acoustic networks in `acoustic_project_codes` by using `get_acoustic_deployments()` function:
 
 ```{r get_acoustic_deployments_info_networks}
-deployments <-get_acoustic_deployments(acoustic_project_code = networks_names)
+deployments <-get_acoustic_deployments(
+  acoustic_project_code = acoustic_project_codes
+)
 deployments
 ```
 
@@ -279,22 +279,17 @@ These are the deployments of the acoustic receivers involved in `detections_silu
 ```{r deploys_silurus}
 deploys_silurus <- 
   detections_silurus %>%
-  distinct(receiver_id, deployment_id, station_name)
+  list_values(deployment_id)
 deploys_silurus
 ```
 
-More information about them can be retrieved via `get_acoustic_deployments()` function by specifying the `receiver_id` and `station_name` arguments and then filtering by `deployment_id`:
+More information about them can be retrieved via `get_acoustic_deployments()` function with argument `deployment_id`:
 
 ```{r get_acoustic_deployments_info}
 deployments_silurus <- get_acoustic_deployments(
-  receiver_id = deploys_silurus$receiver_id,
-  station_name = deploys_silurus$station_name
+  deployment_id = deploys_silurus
 )
-
-# filter on deployment_id
-deployments_silurus <-
-  deployments_silurus %>%
-  filter(deployment_id %in% detections_silurus$deployment_id)
+deployments_silurus
 ```
 
 Deployment duration:
