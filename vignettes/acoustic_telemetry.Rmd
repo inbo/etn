@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) and [htmltools](https://rstudio.github.io/htmltools/index.html) for interactive visualizations.
+In this vignette we show a typical workflow using the etn package to retrieve **acoustic telemetry data** from ETN. We will also use the packages [dplyr](https://dplyr.tidyverse.org/) for data exploration, [lubridate](https://lubridate.tidyverse.org/) to handle datetime data and [leaflet](https://rstudio.github.io/leaflet/) for interactive visualizations.
 
 To start, load the etn package:
 
@@ -26,7 +26,7 @@ library(etn)
 And the other packages (with installation if necessary):
 
 ```{r load_other_pkgs, message=FALSE}
-other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmltools")
+other_pkgs <- c("dplyr", "lubridate", "leaflet")
 
 # install missing packages
 pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
@@ -36,7 +36,6 @@ install.packages(pkgs_to_install)
 library(dplyr)
 library(lubridate)
 library(leaflet)
-library(htmltools)
 ```
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
