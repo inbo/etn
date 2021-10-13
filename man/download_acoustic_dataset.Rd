@@ -31,7 +31,7 @@ to filter on scientific names.
 }
 \details{
 The data are downloaded as a
-\strong{\href{https://frictionlessdata.io/data-package/}{Frictionless Data Package}}
+\strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
 containing:\tabular{ll}{
    file \tab description \cr
    \code{animals.csv} \tab Animals related to an \code{animal_project_code}, optionally filtered on \code{scientific_name}(s), as returned by \code{get_animals()}. \cr

@@ -5,7 +5,7 @@
 #' to filter on scientific names.
 #'
 #' The data are downloaded as a
-#' **[Frictionless Data Package](https://frictionlessdata.io/data-package/)**
+#' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
 #' containing:
 #'
 #' file | description
