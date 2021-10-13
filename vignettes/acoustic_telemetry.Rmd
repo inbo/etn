@@ -49,16 +49,16 @@ Using `con` as variable to store the collection is not mandatory, but it makes y
 
 ## Select project(s) of interest
 
-A researcher typically works in the context of one or more _animal projects_. As the project names are not easy to remember, it is always good to start by an overview of all projects we have access to:
+A researcher typically works in the context of one or more _animal projects_. As the project codes are not always easy to remember, let's start by getting an overview of all projects:
 
-```{r get_my_animal_projects}
-all_my_projects <- get_animal_projects()
+```{r get_animal_projects}
+all_projects <- get_animal_projects()
 ```
 
 Show a preview:
 
 ```{r preview_first_10_projects}
-all_my_projects %>% head(10)
+all_projects %>% head(10)
 ```
 
 If you know the `project code` already and you are just interested to get more information about it, you can specify it in the `get_animal_projects()` function directly:
@@ -72,7 +72,7 @@ projects_study
 This is exactly the same as retrieving all projects first and filtering them afterwards based on column `project_code`:
 
 ```{r retrieve_all_first_filter_after}
-all_my_projects %>%
+all_projects %>%
   filter(project_code %in% c(projects_code))
 ```
 
@@ -106,7 +106,7 @@ Let's say we are interested in the tracking data of Wels catfish (_Silurus glani
 detections_silurus <- get_acoustic_detections(
   animal_project_code = projects_code,
   start_date = "2014-01-01",
-  end_date = "2014-12-31",
+  end_date = "2015-01-01", # The end date is exclusive
   scientific_name = "Silurus glanis"
 )
 ```
@@ -217,7 +217,7 @@ n_silurus_station
 To get more information about the tags involved in `detections_silurus`, you can use the function `get_tags`, which returns tag related information such as serial number, manufacturer, model, and frequency:
 
 ```{r acoustic_tags_info}
-tags_id <- unique(detections_silurus$acoustic_tag_id)
+tags_id <- list_values(detections_silurus, acoustic_tag_id)
 tags_silurus <- get_tags(acoustic_tag_id = tags_id)
 tags_silurus
 ```
