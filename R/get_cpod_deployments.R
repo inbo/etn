@@ -109,25 +109,25 @@ get_cpod_deployments <- function(connection = con,
       receiver.receiver AS receiver_id,
       cpod_project.projectcode AS cpod_project_code,
       dep.station_name AS station_name,
-      -- dep.location_name AS station_description,
-      -- dep.location_manager AS station_manager,
+      -- dep.location_name AS station_description
+      -- dep.location_manager AS station_manager
       dep.deploy_date_time AS deploy_date_time,
       dep.deploy_lat AS deploy_latitude,
       dep.deploy_long AS deploy_longitude,
-      -- dep.intended_lat AS intended_latitude,
-      -- dep.intended_long AS intended_longitude,
+      -- dep.intended_lat AS intended_latitude
+      -- dep.intended_long AS intended_longitude
       dep.mooring_type AS mooring_type,
-      -- dep.bottom_depth AS bottom_depth,
-      -- dep.riser_length AS riser_length,
-      -- dep.instrument_depth AS deploy_depth,
-      -- dep.battery_install_date AS battery_installation_date,
+      -- dep.bottom_depth AS bottom_depth
+      -- dep.riser_length AS riser_length
+      -- dep.instrument_depth AS deploy_depth
+      -- dep.battery_install_date AS battery_installation_date
       dep.drop_dead_date AS battery_estimated_end_date,
       dep.activation_datetime AS activation_date_time,
       dep.recover_date_time AS recover_date_time,
-      -- dep.recover_lat AS recover_latitude,
-      -- dep.recover_long AS recover_longitude,
+      -- dep.recover_lat AS recover_latitude
+      -- dep.recover_long AS recover_longitude
       dep.download_date_time AS download_date_time,
-      -- dep.data_downloaded AS download_file_name,
+      -- dep.data_downloaded AS download_file_name
       dep.valid_data_until_datetime AS valid_data_until_date_time,
       dep.acousticreleasenumber AS acoustic_release_number,
       dep.hydrophonecablelength AS hydrophone_cable_length,
@@ -135,19 +135,19 @@ get_cpod_deployments <- function(connection = con,
       dep.amplifiersensitivity AS amplifier_sensitivity,
       dep.sample_rate AS sample_rate,
       dep.recordingname AS recording_name,
-      -- dep.sync_date_time AS sync_date_time,
-      -- dep.time_drift AS time_drift,
-      -- dep.ar_battery_install_date AS ar_battery_installation_date,
-      -- dep.ar_confirm AS ar_confirm,
-      -- dep.transmit_profile AS transmit_profile,
-      -- dep.transmit_power_output AS transmit_power_output,
-      -- dep.log_temperature_stats_period AS log_temperature_stats_period,
-      -- dep.log_temperature_sample_period AS log_temperature_sample_period,
-      -- dep.log_tilt_sample_period AS log_tilt_sample_period,
-      -- dep.log_noise_stats_period AS log_noise_stats_period,
-      -- dep.log_noise_sample_period AS log_noise_sample_period,
-      -- dep.log_depth_stats_period AS log_depth_stats_period,
-      -- dep.log_depth_sample_period AS log_depth_sample_period,
+      -- dep.sync_date_time AS sync_date_time
+      -- dep.time_drift AS time_drift
+      -- dep.ar_battery_install_date AS ar_battery_installation_date
+      -- dep.ar_confirm AS ar_confirm
+      -- dep.transmit_profile AS transmit_profile
+      -- dep.transmit_power_output AS transmit_power_output
+      -- dep.log_temperature_stats_period AS log_temperature_stats_period
+      -- dep.log_temperature_sample_period AS log_temperature_sample_period
+      -- dep.log_tilt_sample_period AS log_tilt_sample_period
+      -- dep.log_noise_stats_period AS log_noise_stats_period
+      -- dep.log_noise_sample_period AS log_noise_sample_period
+      -- dep.log_depth_stats_period AS log_depth_stats_period
+      -- dep.log_depth_sample_period AS log_depth_sample_period
       dep.comments AS comments
       -- dep.project: dep.project_fk instead
       -- dep.check_complete_time
