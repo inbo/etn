@@ -115,6 +115,11 @@ get_tags <- function(connection = con,
       tag_device.activation_date AS activation_date,
       tag_device.battery_estimated_lifetime AS battery_estimated_life,
       tag_device.battery_estimated_end_date AS battery_estimated_end_date,
+      tag_device.archive_length AS length,
+      tag_device.archive_diameter AS diameter,
+      tag_device.archive_weight AS weight,
+      tag_device.archive_floating AS floating,
+      tag_device.device_internal_memory AS archive_memory,
       tag.slope AS sensor_slope,
       tag.intercept AS sensor_intercept,
       tag.range AS sensor_range,
@@ -152,12 +157,7 @@ get_tags <- function(connection = con,
       tag.tag_id AS tag_id,
       tag_device.id_pk AS tag_device_id
       -- tag_device.qc_migration
-      -- tag_device.archive_floating
-      -- tag_device.archive_weight
-      -- tag_device.archive_length
-      -- tag_device.archive_diameter
       -- tag_device.order_number
-      -- tag_device.device_internal_memory
       -- tag_device.external_id
     FROM ({tag_sql}) AS tag
       LEFT JOIN common.tag_device AS tag_device
