@@ -17,6 +17,8 @@ get_acoustic_receivers(connection = con, receiver_id = NULL, status = NULL)
 A tibble with acoustic receiver data, sorted by \code{receiver_id}. See
 also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+Values for \code{owner_organization} will only be visible if you are member of
+the group.
 }
 \description{
 Get data for acoustic receivers, with options to filter results.

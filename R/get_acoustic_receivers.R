@@ -9,6 +9,8 @@
 #' @return A tibble with acoustic receiver data, sorted by `receiver_id`. See
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+#'   Values for `owner_organization` will only be visible if you are member of
+#'   the group.
 #'
 #' @export
 #'
@@ -72,7 +74,10 @@ get_acoustic_receivers <- function(connection = con,
       receiver.modem_address AS modem_address,
       receiver.controlled_status AS status,
       receiver.expected_battery_life AS battery_estimated_life,
-      owner_organization.name AS owner_organization,
+      CASE
+        WHEN receiver.owner_group_fk_limited IS NOT NULL THEN owner_organization.name
+        ELSE NULL
+      END AS owner_organization,
       financing_project.projectcode AS financing_project,
       acoustic_tag_id.acoustic_tag_id AS built_in_acoustic_tag_id,
       receiver.ar_model_number AS ar_model,
@@ -95,7 +100,7 @@ get_acoustic_receivers <- function(connection = con,
       LEFT JOIN common.manufacturer AS manufacturer
           ON receiver.manufacturer_fk = manufacturer.id_pk
       LEFT JOIN common.etn_group AS owner_organization
-        ON receiver.owner_group_fk = owner_organization.id_pk
+        ON receiver.owner_group_fk_limited = owner_organization.id_pk
       LEFT JOIN common.projects AS financing_project
         ON receiver.financing_project_fk = financing_project.id
       LEFT JOIN ({acoustic_tag_id_sql}) AS acoustic_tag_id

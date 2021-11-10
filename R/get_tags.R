@@ -15,6 +15,8 @@
 #'
 #' @return A tibble with tags data, sorted by `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+#'  Values for `owner_organization` and `owner_pi` will only be visible if you
+#'  are member of the group.
 #'
 #' @export
 #'
@@ -131,8 +133,14 @@ get_tags <- function(connection = con,
       tag.sensor_transmit_ratio AS sensor_transmit_ratio,
       tag.accelerometer_algoritm AS accelerometer_algorithm,
       tag.accelerometer_samples_per_second AS accelerometer_samples_per_second,
-      owner_organization.name AS owner_organization,
-      tag_device.owner_pi AS owner_pi,
+      CASE
+        WHEN tag_device.owner_group_fk_limited IS NOT NULL THEN owner_organization.name
+        ELSE NULL
+      END AS owner_organization,
+      CASE
+        WHEN tag_device.owner_group_fk_limited IS NOT NULL THEN tag_device.owner_pi
+        ELSE NULL
+      END AS owner_pi,
       financing_project.projectcode AS financing_project,
       tag.min_delay AS step1_min_delay,
       tag.max_delay AS step1_max_delay,
@@ -160,14 +168,14 @@ get_tags <- function(connection = con,
       -- tag_device.order_number
       -- tag_device.external_id
     FROM ({tag_sql}) AS tag
-      LEFT JOIN common.tag_device AS tag_device
+      LEFT JOIN common.tag_device_limited AS tag_device
         ON tag.tag_device_fk = tag_device.id_pk
         LEFT JOIN common.manufacturer AS manufacturer
           ON tag_device.manufacturer_fk = manufacturer.id_pk
         LEFT JOIN common.tag_device_status AS tag_status
           ON tag_device.tag_device_status_fk = tag_status.id_pk
         LEFT JOIN common.etn_group AS owner_organization
-          ON tag_device.owner_group_fk = owner_organization.id_pk
+          ON tag_device.owner_group_fk_limited = owner_organization.id_pk
         LEFT JOIN common.projects AS financing_project
           ON tag_device.financing_project_fk = financing_project.id
     WHERE

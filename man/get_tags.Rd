@@ -29,6 +29,8 @@ identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also
 \href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+Values for \code{owner_organization} and \code{owner_pi} will only be visible if you
+are member of the group.
 }
 \description{
 Get data for tags, with options to filter results. Note that there
