@@ -4,8 +4,6 @@
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
 #'
-#' @keywords internal
-#'
 #' @noRd
 check_connection <- function(connection) {
   assertthat::assert_that(methods::is(connection, "PostgreSQL"),
@@ -26,8 +24,7 @@ check_connection <- function(connection) {
 #'
 #' @return If no error, `TRUE`.
 #'
-#' @keywords internal
-#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -74,8 +71,7 @@ check_value <- function(arg, options = NULL, arg_name) {
 #' @param regex Character. A regular expression to parse.
 #' @param ... Additional arguments passed to the collapse.
 #'
-#' @keywords internal
-#'
+#' @noRd
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
@@ -96,8 +92,6 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #'   date.
 #'
 #' @return `FALSE` | character
-#'
-#' @keywords internal
 #'
 #' @noRd
 #'
