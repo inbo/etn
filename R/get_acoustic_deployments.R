@@ -19,10 +19,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble filter
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -59,7 +55,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     valid_deployment_ids <- list_deployment_ids(connection)
     check_value(deployment_id, valid_deployment_ids, "receiver_id")
-    deployment_id_query <- glue_sql(
+    deployment_id_query <- glue::glue_sql(
       "dep.id_pk IN ({deployment_id*})",
       .con = connection
     )
@@ -71,7 +67,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql(
+    receiver_id_query <- glue::glue_sql(
       "receiver.receiver IN ({receiver_id*})",
       .con = connection
     )
@@ -84,7 +80,7 @@ get_acoustic_deployments <- function(connection = con,
     acoustic_project_code <- tolower(acoustic_project_code)
     valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
     check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
-    acoustic_project_code_query <- glue_sql(
+    acoustic_project_code_query <- glue::glue_sql(
       "LOWER(network_project.projectcode) IN ({acoustic_project_code*})",
       .con = connection
     )
@@ -96,14 +92,14 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
-    station_name_query <- glue_sql(
+    station_name_query <- glue::glue_sql(
       "dep.station_name IN ({station_name*})",
       .con = connection
     )
   }
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       dep.id_pk AS deployment_id,
       receiver.receiver AS receiver_id,
@@ -172,21 +168,21 @@ get_acoustic_deployments <- function(connection = con,
       AND {acoustic_project_code_query}
       AND {station_name_query}
     ", .con = connection)
-  deployments <- dbGetQuery(connection, query)
+  deployments <- DBI::dbGetQuery(connection, query)
 
   # Filter on open deployments
   if (open_only) {
-    deployments <- deployments %>% filter(is.na(.data$recover_date_time))
+    deployments <- filter(deployments, is.na(.data$recover_date_time))
   }
 
   # Sort data
   deployments <-
     deployments %>%
-    arrange(
+    dplyr::arrange(
       .data$acoustic_project_code,
       factor(.data$station_name, levels = list_station_names(connection)),
       .data$deploy_date_time
     )
 
-  as_tibble(deployments)
+  dplyr::as_tibble(deployments)
 }

@@ -26,11 +26,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble
-#' @importFrom assertthat assert_that
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -97,7 +92,7 @@ get_acoustic_detections <- function(connection = con,
     start_date_query <- "True"
   } else {
     start_date <- check_date_time(start_date, "start_date")
-    start_date_query <- glue_sql("det.datetime >= {start_date}", .con = connection)
+    start_date_query <- glue::glue_sql("det.datetime >= {start_date}", .con = connection)
   }
 
   # Check end_date
@@ -105,7 +100,7 @@ get_acoustic_detections <- function(connection = con,
     end_date_query <- "True"
   } else {
     end_date <- check_date_time(end_date, "end_date")
-    end_date_query <- glue_sql("det.datetime < {end_date}", .con = connection)
+    end_date_query <- glue::glue_sql("det.datetime < {end_date}", .con = connection)
   }
 
   # Check acoustic_tag_id
@@ -114,7 +109,7 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql(
+    acoustic_tag_id_query <- glue::glue_sql(
       "det.transmitter IN ({acoustic_tag_id*})",
       .con = connection
     )
@@ -128,7 +123,7 @@ get_acoustic_detections <- function(connection = con,
     animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql(
+    animal_project_code_query <- glue::glue_sql(
       "LOWER(animal_project_code) IN ({animal_project_code*})",
       .con = connection
     )
@@ -140,7 +135,7 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_scientific_name_ids <- list_scientific_names(connection)
     check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
-    scientific_name_query <- glue_sql(
+    scientific_name_query <- glue::glue_sql(
       "animal_scientific_name IN ({scientific_name*})",
       .con = connection
     )
@@ -153,7 +148,7 @@ get_acoustic_detections <- function(connection = con,
     acoustic_project_code <- tolower(acoustic_project_code)
     valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
     check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
-    acoustic_project_code_query <- glue_sql(
+    acoustic_project_code_query <- glue::glue_sql(
       "LOWER(network_project_code) IN ({acoustic_project_code*})",
       .con = connection
     )
@@ -165,7 +160,7 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql(
+    receiver_id_query <- glue::glue_sql(
       "det.receiver IN ({receiver_id*})",
       .con = connection
     )
@@ -177,27 +172,27 @@ get_acoustic_detections <- function(connection = con,
   } else {
     valid_station_names <- list_station_names(connection)
     check_value(station_name, valid_station_names, "station_name")
-    station_name_query <- glue_sql(
+    station_name_query <- glue::glue_sql(
       "deployment_station_name IN ({station_name*})",
       .con = connection
     )
   }
 
   # Check limit
-  assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
+  assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
-    limit_query <- glue_sql("LIMIT 100", .con = connection)
+    limit_query <- glue::glue_sql("LIMIT 100", .con = connection)
   } else {
-    limit_query <- glue_sql("LIMIT ALL}", .con = connection)
+    limit_query <- glue::glue_sql("LIMIT ALL}", .con = connection)
   }
 
-  acoustic_tag_id_sql <- glue_sql(read_file(
-    system.file("sql", "acoustic_tag_id.sql", package = "etn")),
+  acoustic_tag_id_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "acoustic_tag_id.sql", package = "etn")),
     .con = connection
   )
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       det.id_pk AS detection_id,
       det.datetime AS date_time,
@@ -240,15 +235,15 @@ get_acoustic_detections <- function(connection = con,
       AND {station_name_query}
       {limit_query}
     ", .con = connection)
-  detections <- dbGetQuery(connection, query)
+  detections <- DBI::dbGetQuery(connection, query)
 
   # Sort data (faster than in SQL)
   detections <-
     detections %>%
-    arrange(
+    dplyr::arrange(
       factor(.data$acoustic_tag_id, levels = list_acoustic_tag_ids(connection)),
       .data$date_time
     )
 
-  as_tibble(detections)
+  dplyr::as_tibble(detections)
 }

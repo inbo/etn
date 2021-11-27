@@ -18,12 +18,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble group_by_at mutate_at select
-#'   starts_with summarize_at ungroup
-#' @importFrom readr read_file
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -61,7 +55,7 @@ get_animals <- function(connection = con,
   } else {
     valid_animal_ids <- list_animal_ids(connection)
     check_value(animal_id, valid_animal_ids, "animal_id")
-    animal_id_query <- glue_sql(
+    animal_id_query <- glue::glue_sql(
       "animal.id_pk IN ({animal_id*})",
       .con = connection
     )
@@ -75,7 +69,7 @@ get_animals <- function(connection = con,
     animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-    animal_project_code_query <- glue_sql(
+    animal_project_code_query <- glue::glue_sql(
       "LOWER(animal_project.projectcode) IN ({animal_project_code*})",
       .con = connection
     )
@@ -88,7 +82,7 @@ get_animals <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql(
+    tag_serial_number_query <- glue::glue_sql(
       "tag.tag_serial_number IN ({tag_serial_number*})",
       .con = connection
     )
@@ -100,16 +94,19 @@ get_animals <- function(connection = con,
   } else {
     valid_scientific_names <- list_scientific_names(connection)
     check_value(scientific_name, valid_scientific_names, "scientific_name")
-    scientific_name_query <- glue_sql(
+    scientific_name_query <- glue::glue_sql(
       "animal.scientific_name IN ({scientific_name*})",
       .con = connection
     )
   }
 
-  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "tag.sql", package = "etn")),
+    .con = connection
+  )
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       animal.id_pk AS animal_id,
       animal_project.projectcode AS animal_project_code,
@@ -198,33 +195,33 @@ get_animals <- function(connection = con,
       AND {tag_serial_number_query}
       AND {scientific_name_query}
     ", .con = connection)
-  animals <- dbGetQuery(connection, query)
+  animals <- DBI::dbGetQuery(connection, query)
 
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
     animals %>%
-    select(starts_with("tag"), starts_with("acoustic_tag_id")) %>%
+    dplyr::select(dplyr::starts_with("tag"), dplyr::starts_with("acoustic_tag_id")) %>%
     names()
   other_cols <-
     animals %>%
-    select(-starts_with("tag"), -starts_with("acoustic_tag_id")) %>%
+    dplyr::select(-dplyr::starts_with("tag"), -dplyr::starts_with("acoustic_tag_id")) %>%
     names()
   animals <-
     animals %>%
-    group_by_at(other_cols) %>%
-    summarize_at(tag_cols, paste, collapse = ",") %>% # Collapse multiple tags by comma
-    ungroup() %>%
-    mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
-    select(names(animals)) # Use the original column order
+    dplyr::group_by_at(other_cols) %>%
+    dplyr::summarize_at(tag_cols, paste, collapse = ",") %>% # Collapse multiple tags by comma
+    dplyr::ungroup() %>%
+    dplyr::mutate_at(tag_cols, gsub, pattern = "NA", replacement = "") %>% # Use "" instead of "NA"
+    dplyr::select(names(animals)) # Use the original column order
 
   # Sort data
   animals <-
     animals %>%
-    arrange(
+    dplyr::arrange(
       .data$animal_project_code,
       .data$release_date_time,
       factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection))
     )
 
-  as_tibble(animals) # Is already a tibble, but added if code above changes
+  dplyr::as_tibble(animals) # Is already a tibble, but added if code above changes
 }

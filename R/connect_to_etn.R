@@ -9,9 +9,6 @@
 #'
 #' @export
 #'
-#' @importFrom DBI dbConnect
-#' @importFrom odbc odbc
-#'
 #' @examples
 #' \dontrun{
 #' # Connect to the ETN database using your rstudio.lifewatch.be username and

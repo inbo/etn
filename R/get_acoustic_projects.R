@@ -12,11 +12,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble
-#' @importFrom readr read_file
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -38,16 +33,19 @@ get_acoustic_projects <- function(connection = con,
     acoustic_project_code <- tolower(acoustic_project_code)
     valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
     check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
-    acoustic_project_code_query <- glue_sql(
+    acoustic_project_code_query <- glue::glue_sql(
       "LOWER(project.project_code) IN ({acoustic_project_code*})",
       .con = connection
     )
   }
 
-  project_sql <- glue_sql(read_file(system.file("sql", "project.sql", package = "etn")), .con = connection)
+  project_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "project.sql", package = "etn")),
+    .con = connection
+  )
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       project.*
     FROM
@@ -56,12 +54,12 @@ get_acoustic_projects <- function(connection = con,
       project_type = 'acoustic'
       AND {acoustic_project_code_query}
     ", .con = connection)
-  projects <- dbGetQuery(connection, query)
+  projects <- DBI::dbGetQuery(connection, query)
 
   # Sort data
   projects <-
     projects %>%
-    arrange(.data$project_code)
+    dplyr::arrange(.data$project_code)
 
-  as_tibble(projects)
+  dplyr::as_tibble(projects)
 }

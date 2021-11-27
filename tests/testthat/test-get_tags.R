@@ -188,8 +188,10 @@ test_that("get_tags() can return multiple rows for a single tag", {
   tag_1_df <- get_tags(con, tag_serial_number = 1400185)
   expect_equal(nrow(tag_1_df), 2) # 2 rows: temperature + presure
   expect_equal(
-    tag_1_df %>% arrange(acoustic_tag_id) %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
-    as_tibble(data.frame(
+    tag_1_df %>%
+      dplyr::arrange(acoustic_tag_id) %>%
+      distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    dplyr::as_tibble(data.frame(
       tag_type = "acoustic-archival",
       tag_subtype = "sentinel",
       sensor_type = c("temperature", "pressure"),
@@ -202,8 +204,10 @@ test_that("get_tags() can return multiple rows for a single tag", {
   tag_2_df <- get_tags(con, tag_serial_number = 461076)
   expect_equal(nrow(tag_2_df), 2) # 2 rows: A180 + H170
   expect_equal(
-    tag_2_df %>% arrange(acoustic_tag_id) %>% distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
-    as_tibble(data.frame(
+    tag_2_df %>%
+      dplyr::arrange(acoustic_tag_id) %>%
+      distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    dplyr::as_tibble(data.frame(
       tag_type = "acoustic",
       tag_subtype = "built-in",
       sensor_type = NA_character_,

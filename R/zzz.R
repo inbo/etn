@@ -6,12 +6,12 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom methods is
+#' @noRd
 check_connection <- function(connection) {
-  assert_that(is(connection, "PostgreSQL"),
+  assertthat::assert_that(methods::is(connection, "PostgreSQL"),
     msg = "Not a connection object to database."
   )
-  assert_that(connection@info$dbname == "ETN")
+  assertthat::assert_that(connection@info$dbname == "ETN")
 }
 
 #' Check input value against list of provided values
@@ -28,8 +28,6 @@ check_connection <- function(connection) {
 #'
 #' @keywords internal
 #'
-#' @importFrom assertthat assert_that
-#' @importFrom glue glue
 #'
 #' @examples
 #' \dontrun{
@@ -55,9 +53,9 @@ check_value <- function(arg, options = NULL, arg_name) {
   }
   # Provide user message
   if (!is.null(arg)) {
-    assert_that(
+    assertthat::assert_that(
       all(arg %in% options),
-      msg = glue(
+      msg = glue::glue(
         "Invalid value(s) for {arg_name} argument.
         Valid inputs are: {options_to_print*}.",
         .transformer = collapse_transformer(
@@ -78,14 +76,13 @@ check_value <- function(arg, options = NULL, arg_name) {
 #'
 #' @keywords internal
 #'
-#' @importFrom glue glue_collapse
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
     if (grepl(regex, code)) {
       code <- sub(regex, "", code)
     }
     res <- eval(parse(text = code), envir)
-    glue_collapse(res, ...)
+    glue::glue_collapse(res, ...)
   }
 }
 
@@ -99,9 +96,6 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #'   date.
 #'
 #' @return `FALSE` | character
-#'
-#' @importFrom glue glue
-#' @importFrom lubridate parse_date_time
 #'
 #' @keywords internal
 #'
@@ -117,16 +111,16 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #' }
 check_date_time <- function(date_time, date_name = "start_date") {
   parsed <- tryCatch(
-    parse_date_time(date_time, orders = c("ymd", "ym", "y")),
+    lubridate::parse_date_time(date_time, orders = c("ymd", "ym", "y")),
     warning = function(warning) {
       if (grepl("No formats found", warning$message)) {
-        stop(glue(
+        stop(glue::glue(
           "The given {date_name}, {date_time}, is not in a valid ",
           "date format. Use a yyyy-mm-dd format or shorter, ",
           "e.g. 2012-11-21, 2012-11 or 2012."
         ))
       } else {
-        stop(glue(
+        stop(glue::glue(
           "The given {date_name}, {date_time} can not be interpreted ",
           "as a valid date."
         ))

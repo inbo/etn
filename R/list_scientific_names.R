@@ -6,15 +6,12 @@
 #'   `common.animal_release`.
 #'
 #' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
 list_scientific_names <- function(connection = con) {
-  query <- glue_sql(
+  query <- glue::glue_sql(
     "SELECT DISTINCT scientific_name FROM common.animal_release",
     .con = connection
   )
-  data <- dbGetQuery(connection, query)
+  data <- DBI::dbGetQuery(connection, query)
 
   sort(data$scientific_name)
 }

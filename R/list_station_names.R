@@ -6,16 +6,12 @@
 #'   `acoustic.deployments`.
 #'
 #' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom stringr str_sort
 list_station_names <- function(connection = con) {
-  query <- glue_sql(
+  query <- glue::glue_sql(
     "SELECT DISTINCT station_name FROM acoustic.deployments WHERE station_name IS NOT NULL",
     .con = connection
   )
-  data <- dbGetQuery(connection, query)
+  data <- DBI::dbGetQuery(connection, query)
 
-  str_sort(data$station_name, numeric = TRUE)
+  stringr::str_sort(data$station_name, numeric = TRUE)
 }

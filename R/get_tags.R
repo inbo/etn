@@ -20,11 +20,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble
-#' @importFrom readr read_file
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -57,7 +52,7 @@ get_tags <- function(connection = con,
     valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
     tag_serial_number <- as.character(tag_serial_number) # Cast to character
     check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
-    tag_serial_number_query <- glue_sql(
+    tag_serial_number_query <- glue::glue_sql(
       "tag.tag_serial_number IN ({tag_serial_number*})",
       .con = connection
     )
@@ -69,7 +64,7 @@ get_tags <- function(connection = con,
   } else {
     valid_tag_types <- c("acoustic", "archival", "acoustic-archival")
     check_value(tag_type, valid_tag_types, "tag_type")
-    tag_type_query <- glue_sql(
+    tag_type_query <- glue::glue_sql(
       "tag.tag_type IN ({tag_type*})",
       .con = connection
     )
@@ -81,7 +76,7 @@ get_tags <- function(connection = con,
   } else {
     valid_tag_subtypes <- c("animal", "built-in", "range", "sentinel")
     check_value(tag_subtype, valid_tag_subtypes, "tag_subtype")
-    tag_subtype_query <- glue_sql(
+    tag_subtype_query <- glue::glue_sql(
       "tag.tag_subtype IN ({tag_subtype*})",
       .con = connection
     )
@@ -93,16 +88,19 @@ get_tags <- function(connection = con,
   } else {
     valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
     check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
-    acoustic_tag_id_query <- glue_sql(
+    acoustic_tag_id_query <- glue::glue_sql(
       "tag.acoustic_tag_id IN ({acoustic_tag_id*})",
       .con = connection
     )
   }
 
-  tag_sql <- glue_sql(read_file(system.file("sql", "tag.sql", package = "etn")), .con = connection)
+  tag_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "tag.sql", package = "etn")),
+    .con = connection
+  )
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       tag.tag_serial_number AS tag_serial_number,
       tag.tag_type AS tag_type,
@@ -184,12 +182,12 @@ get_tags <- function(connection = con,
       AND {tag_subtype_query}
       AND {acoustic_tag_id_query}
     ", .con = connection)
-  tags <- dbGetQuery(connection, query)
+  tags <- DBI::dbGetQuery(connection, query)
 
   # Sort data
   tags <-
     tags %>%
-    arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection)))
+    dplyr::arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection)))
 
-  as_tibble(tags)
+  dplyr::as_tibble(tags)
 }

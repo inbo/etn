@@ -46,11 +46,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue
-#' @importFrom dplyr .data %>% distinct filter group_by mutate n pull select summarize
-#' @importFrom readr write_csv
-#' @importFrom stringr str_detect str_replace_all
-#'
 #' @examples
 #' \dontrun{
 #' # Set default connection variable
@@ -107,7 +102,7 @@ download_acoustic_dataset <- function(connection = con,
   dir.create(directory, recursive = TRUE, showWarnings = FALSE)
 
   # Start downloading
-  message(glue(
+  message(glue::glue(
     "Downloading data to directory \"{directory}\":
     (existing files with the same name will be overwritten)"
   ))
@@ -120,7 +115,7 @@ download_acoustic_dataset <- function(connection = con,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
-  write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
+  readr::write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
 
   # TAGS
   message("* (2/6): downloading tags.csv")
@@ -139,7 +134,7 @@ download_acoustic_dataset <- function(connection = con,
     connection = connection,
     tag_serial_number = tag_serial_numbers
   )
-  write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
+  readr::write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
@@ -155,7 +150,7 @@ download_acoustic_dataset <- function(connection = con,
   detections <-
     detections %>%
     distinct(.data$detection_id, .keep_all = TRUE)
-  write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
+  readr::write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
@@ -174,8 +169,8 @@ download_acoustic_dataset <- function(connection = con,
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments %>%
-    mutate(comments = str_replace_all(.data$comments, "[\r\n]+", " "))
-  write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
+    dplyr::mutate(comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " "))
+  readr::write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
 
   # RECEIVERS
   message("* (5/6): downloading receivers.csv")
@@ -188,7 +183,7 @@ download_acoustic_dataset <- function(connection = con,
     connection = connection,
     receiver_id = receiver_ids
   )
-  write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
+  readr::write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
@@ -203,15 +198,15 @@ download_acoustic_dataset <- function(connection = con,
     sort()
 
   message("")
-  message(glue("\nSummary statistics for dataset \"{animal_project_code}\":"))
+  message(glue::glue("\nSummary statistics for dataset \"{animal_project_code}\":"))
   message("* number of animals:           ", nrow(animals))
   message("* number of tags:              ", nrow(tags))
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
   if (nrow(detections) > 0) {
-    message("* first date of detection:     ", detections %>% summarize(min(as.Date(.data$date_time))) %>% pull())
-    message("* last date of detection:      ", detections %>% summarize(max(as.Date(.data$date_time))) %>% pull())
+    message("* first date of detection:     ", detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull())
+    message("* last date of detection:      ", detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull())
   } else {
     message("* first date of detection:     ", NA)
     message("* last date of detection:      ", NA)
@@ -223,14 +218,14 @@ download_acoustic_dataset <- function(connection = con,
   # Create warnings
   animals_multiple_tags <-
     animals %>%
-    filter(str_detect(.data$tag_serial_number, ",")) %>%
+    filter(stringr::str_detect(.data$tag_serial_number, ",")) %>%
     distinct(.data$animal_id) %>% # Should be unique already
     pull()
 
   tags_multiple_animals <-
     animals %>%
-    group_by(.data$tag_serial_number) %>%
-    filter(n() > 1) %>%
+    dplyr::group_by(.data$tag_serial_number) %>%
+    filter(dplyr::n() > 1) %>%
     distinct(.data$tag_serial_number) %>%
     pull()
 

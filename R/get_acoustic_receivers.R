@@ -14,11 +14,6 @@
 #'
 #' @export
 #'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom dplyr .data %>% arrange as_tibble
-#' @importFrom readr read_file
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -43,7 +38,7 @@ get_acoustic_receivers <- function(connection = con,
   } else {
     valid_receiver_ids <- list_receiver_ids(connection)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
-    receiver_id_query <- glue_sql(
+    receiver_id_query <- glue::glue_sql(
       "receiver.receiver IN ({receiver_id*})",
       .con = connection
     )
@@ -55,17 +50,23 @@ get_acoustic_receivers <- function(connection = con,
   } else {
     valid_status <- c("active", "available", "broken", "inactive", "lost", "returned")
     check_value(status, valid_status, "status")
-    status_query <- glue_sql(
+    status_query <- glue::glue_sql(
       "receiver.controlled_status IN ({status*})",
       .con = connection
     )
   }
 
-  receiver_sql <- glue_sql(read_file(system.file("sql", "receiver.sql", package = "etn")), .con = connection)
-  acoustic_tag_id_sql <- glue_sql(read_file(system.file("sql", "acoustic_tag_id.sql", package = "etn")), .con = connection)
+  receiver_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "receiver.sql", package = "etn")),
+    .con = connection
+  )
+  acoustic_tag_id_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql", "acoustic_tag_id.sql", package = "etn")),
+    .con = connection
+  )
 
   # Build query
-  query <- glue_sql("
+  query <- glue::glue_sql("
     SELECT
       receiver.receiver AS receiver_id,
       manufacturer.project AS manufacturer,
@@ -110,12 +111,12 @@ get_acoustic_receivers <- function(connection = con,
       AND {receiver_id_query}
       AND {status_query}
     ", .con = connection)
-  receivers <- dbGetQuery(connection, query)
+  receivers <- DBI::dbGetQuery(connection, query)
 
   # Sort data
   receivers <-
     receivers %>%
-    arrange(.data$receiver_id)
+    dplyr::arrange(.data$receiver_id)
 
-  as_tibble(receivers)
+  dplyr::as_tibble(receivers)
 }
