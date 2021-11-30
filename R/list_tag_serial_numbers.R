@@ -6,16 +6,12 @@
 #'   `common.tag_device`.
 #'
 #' @export
-#'
-#' @importFrom glue glue_sql
-#' @importFrom DBI dbGetQuery
-#' @importFrom stringr str_sort
 list_tag_serial_numbers <- function(connection = con) {
-  query <- glue_sql(
+  query <- glue::glue_sql(
     "SELECT DISTINCT serial_number FROM common.tag_device",
     .con = connection
   )
-  data <- dbGetQuery(connection, query)
+  data <- DBI::dbGetQuery(connection, query)
 
-  str_sort(data$serial_number, numeric = TRUE)
+  stringr::str_sort(data$serial_number, numeric = TRUE)
 }

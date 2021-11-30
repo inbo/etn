@@ -15,9 +15,6 @@
 #'
 #' @export
 #'
-#' @importFrom assertthat assert_that
-#' @importFrom glue glue
-#'
 #' @examples
 #' # Set default connection variable
 #' con <- connect_to_etn()
@@ -44,20 +41,20 @@
 #' list_values(df, tag_serial_number, split = "\\.")
 list_values <- function(.data, column, split = ",") {
   # check .data
-  assert_that(is.data.frame(.data))
+  assertthat::assert_that(is.data.frame(.data))
   # check split
-  assert_that(is.character(split))
+  assertthat::assert_that(is.character(split))
 
   arguments <- as.list(match.call())
 
   if (is.numeric(arguments$column)){
     col_number <- arguments$column
     n_col_df <- ncol(.data)
-    assert_that(as.integer(col_number) == col_number,
+    assertthat::assert_that(as.integer(col_number) == col_number,
                 msg = "column number must be an integer")
-    assert_that(col_number <= ncol(.data),
-                msg = glue("column number exceeds the number of columns ",
-                           "of .data ({n_col_df})"))
+    assertthat::assert_that(col_number <= ncol(.data),
+                msg = glue::glue("column number exceeds the number of columns ",
+                                 "of .data ({n_col_df})"))
     # extract values
     values <- .data[,col_number]
     # extract column name
@@ -65,10 +62,10 @@ list_values <- function(.data, column, split = ",") {
   } else {
     #check column name
     col_name <- as.character(arguments$column)
-    assert_that(length(col_name) == 1,
+    assertthat::assert_that(length(col_name) == 1,
                 msg = "invalid column value")
-    assert_that(col_name %in% names(.data),
-                msg = glue("column {col_name} not found in .data"))
+    assertthat::assert_that(col_name %in% names(.data),
+                msg = glue::glue("column {col_name} not found in .data"))
 
     # extract values
     if (class(arguments$column) == "name") {
@@ -88,7 +85,7 @@ list_values <- function(.data, column, split = ",") {
   values <- unique(values)
 
   # return a message on console
-  message(glue("{length(values)} unique {col_name} values"))
+  message(glue::glue("{length(values)} unique {col_name} values"))
 
   return(values)
 }
