@@ -5,7 +5,11 @@
 #' @return A vector of all unique `id_pk` present in `common.animal_release`.
 #'
 #' @export
-list_animal_ids <- function(connection = con) {
+list_animal_ids <- function(username = Sys.getenv("userid"),
+                            password = Sys.getenv("pwd")) {
+
+  connection <- connect_to_etn(username, password)
+
   query <- glue::glue_sql(
     "SELECT DISTINCT id_pk FROM common.animal_release",
     .con = connection
