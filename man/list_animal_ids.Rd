@@ -4,10 +4,12 @@
 \alias{list_animal_ids}
 \title{List all available animal ids}
 \usage{
-list_animal_ids(connection = con)
+list_animal_ids(
+  con = list(username = Sys.getenv("userid"), password = Sys.getenv("pwd"))
+)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{A list with the username and password to connect to the ETN database.}
 }
 \value{
 A vector of all unique \code{id_pk} present in \code{common.animal_release}.
