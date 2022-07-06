@@ -1,8 +1,10 @@
-url: https://inbo.github.io/etn
+url: ~
 
 template:
-  params:
-    bootswatch: yeti
+  bootstrap: 5
+
+navbar:
+  bg: dark
 
 authors:
   Peter Desmet:
@@ -19,8 +21,6 @@ home:
   links:
   - text: Visit the European Tracking Network (ETN)
     href: http://lifewatch.be/etn/
-  - text: Get to know our team
-    href: https://oscibio.inbo.be
 
 reference:
   - title: "Connect to the database"
