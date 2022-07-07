@@ -1,87 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://inbo.github.io/etn/index.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/check_connection.html</loc>
+    <loc>/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/check_value.html</loc>
+    <loc>/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/collapse_transformer.html</loc>
+    <loc>/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/connect_to_etn.html</loc>
+    <loc>/articles/acoustic_telemetry.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/download_acoustic_dataset.html</loc>
+    <loc>/articles/etn_fields.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/etn-deprecated.html</loc>
+    <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_acoustic_deployments.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_acoustic_detections.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_acoustic_projects.html</loc>
+    <loc>/reference/connect_to_etn.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_acoustic_receivers.html</loc>
+    <loc>/reference/download_acoustic_dataset.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_animal_projects.html</loc>
+    <loc>/reference/etn-deprecated.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_animals.html</loc>
+    <loc>/reference/etn-package.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_cpod_projects.html</loc>
+    <loc>/reference/get_acoustic_deployments.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/get_tags.html</loc>
+    <loc>/reference/get_acoustic_detections.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_acoustic_project_codes.html</loc>
+    <loc>/reference/get_acoustic_projects.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_acoustic_tag_ids.html</loc>
+    <loc>/reference/get_acoustic_receivers.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_animal_ids.html</loc>
+    <loc>/reference/get_animal_projects.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_animal_project_codes.html</loc>
+    <loc>/reference/get_animals.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_cpod_project_codes.html</loc>
+    <loc>/reference/get_cpod_projects.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_deployment_ids.html</loc>
+    <loc>/reference/get_tags.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_receiver_ids.html</loc>
+    <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_scientific_names.html</loc>
+    <loc>/reference/list_acoustic_project_codes.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_station_names.html</loc>
+    <loc>/reference/list_acoustic_tag_ids.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_tag_serial_numbers.html</loc>
+    <loc>/reference/list_animal_ids.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/reference/list_values.html</loc>
+    <loc>/reference/list_animal_project_codes.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/articles/acoustic_telemetry.html</loc>
+    <loc>/reference/list_cpod_project_codes.html</loc>
   </url>
   <url>
-    <loc>https://inbo.github.io/etn/articles/etn_fields.html</loc>
+    <loc>/reference/list_deployment_ids.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_receiver_ids.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_scientific_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_station_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_tag_serial_numbers.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_values.html</loc>
   </url>
 </urlset>
