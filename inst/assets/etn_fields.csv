@@ -32,7 +32,7 @@ animals_view2,length4,"Quaternary length measurement, depending on 'Length4 type
 animals_view2,length4_unit,Units of quaternary length.,as in: mm,35
 animals_view2,weight,"Weight of animal that carries tag, in units specified in 'Weight units'.",format: double; as in: 806.9,36
 animals_view2,weight_unit,Units of weight.,as in: g,37
-animals_view2,age,"Weight of animal that carries tag, the units are specified in 'Age units'.",format: integer; as in: 2,38
+animals_view2,age,"Age of animal that carries tag, the units are specified in 'Age units'.",format: integer; as in: 2,38
 animals_view2,age_unit,Units of age.,as in: durif index,39
 animals_view2,sex,"Sex of animal. ""M"" or ""F"". Can enter unknown (""U"").",as in: M,40
 animals_view2,life_stage,"Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.",as in: FV,41
@@ -77,7 +77,7 @@ deployments_view2,battery_estimated_end_date,Estimated date at which receiver wi
 deployments_view2,recover_date_time,"Date and time that the equipment was recovered, in 24-hour UTC. ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,20
 deployments_view2,recover_latitude,"Latitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central latitude of the recovery sea.",format: dd.ddddd; as in: 51.36324,21
 deployments_view2,recover_longitude,"Longitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central longitude of the recovery sea",format: ddd.ddddd; as in: 2.59020,22
-deployments_view2,download_date_time,"Date and time that data were downloaded, in 24-hour UTC.",format: yyyy-mm-dd hh:mm; as in: 2017-06-27 12:00,23
+deployments_view2,download_date_time,"Date and time that data were downloaded, in 24-hour UTC.",format: yyyy-mm-ddThh:mmZ; as in: 2017-06-27T12:00Z,23
 deployments_view2,download_file_name,"Were data downloaded? Yes or no. If no, please add comment.",format: y or n; as in: y,24
 deployments_view2,sync_date_time,"Date and time when a receiver's clock is synchronized to correct UTC, in 24-hour UTC. ISO-8601 format.",format: yyyy-mm-ddThh:mm:ssZ; as in: 2017-06-27T12:00:00Z,26
 deployments_view2,time_drift,Displayed difference in time between the instrument's clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.,format: hh:mm:ssZ; as in: 12:00:00Z,27
@@ -149,7 +149,7 @@ tags_view2,frequency,Frequency at which the tag emits a signal.,units: Hz; as in
 tags_view2,tag_id_protocol,Tag code space of the detected tag.,"as in: ""S256"" or ""A69-1105""",10
 tags_view2,tag_id_code,"In the case of an acoustic tag or Vemco mobile transceiver, this is the identification code transmitted by the tag, which is available from the tag manufacturer.",as in: 1450,11
 tags_view2,status,"Current status of the tag. Three options: ""available"", ""active"" or ""ended"".",as in: active,12
-tags_view2,activation_date_time,"Date and time the tag was activated, in UTC",format: yyyy-mm-ddThh:mm:ssZ; as in: 2020-01-01T12:30:00,13
+tags_view2,activation_date_time,"Date and time the tag was activated, in UTC",format: yyyy-mm-ddThh:mm:ssZ; as in: 2020-01-01T12:30:00Z,13
 tags_view2,battery_estimated_life,Estimated duration of time during which the tag will be transmitting.,units: days; as in: 90,14
 tags_view2,battery_estimated_end_date,Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.,format: yyyy-mm-ddT; as in: 2017-06-27T,15
 tags_view2,sensor_type,"Type of tag sensor. Predefined options: ""P"", ""T"" or ""A"". P = pressure, T = temperature, A = acceleration.",as in: Pressure,16
