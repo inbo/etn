@@ -29,5 +29,11 @@ Authors:
   \item Stijn Van Hoey \email{stijnvanhoey@gmail.com} (\href{https://orcid.org/0000-0001-6413-3185}{ORCID})
 }
 
+Other contributors:
+\itemize{
+  \item Research Institute for Nature and Forest (INBO) (https://www.vlaanderen.be/inbo/en-gb/) [copyright holder]
+  \item LifeWatch Belgium (https://lifewatch.be) [funder]
+}
+
 }
 \keyword{internal}
