@@ -193,7 +193,7 @@ test_that("get_tags() can return multiple rows for a single tag", {
       distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     dplyr::as_tibble(data.frame(
       tag_type = "acoustic-archival",
-      tag_subtype = "sentinel",
+      tag_subtype = "animal",
       sensor_type = c("temperature", "pressure"),
       acoustic_tag_id = c("A69-9006-11099", "A69-9006-11100"),
       stringsAsFactors = FALSE

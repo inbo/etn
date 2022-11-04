@@ -223,7 +223,7 @@ test_that("get_animals() collapses multiple associated tags to one row", {
     "tagging_methodology"
   )
   has_comma <- apply(
-    animal_two_tags_df %>% select(tag_col_names),
+    animal_two_tags_df %>% dplyr::select(tag_col_names),
     MARGIN = 2,
     function(x) grepl(pattern = ",", x = x)
   )
@@ -233,13 +233,14 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- get_animals(con)
   df <- df %>% filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
+  df <- df %>% filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
   expect_equal(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
     c("acoustic", "acoustic-archival") # "archival" currently not in data
   )
   expect_equal(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),
-    c("animal", "built-in", "sentinel") # "range" currently not in data
+    c("animal", "built-in", "range", "sentinel")
   )
 })
 
