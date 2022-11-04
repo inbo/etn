@@ -88,6 +88,7 @@ download_acoustic_dataset <- function(connection = con,
   if (missing(animal_project_code) || is.null(animal_project_code)) {
     stop("Please provide an animal_project_code")
   } else {
+    animal_project_code <- tolower(animal_project_code)
     valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
     check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
   }
