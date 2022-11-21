@@ -6,64 +6,45 @@
 #'
 #' @noRd
 check_connection <- function(connection) {
-  assertthat::assert_that(methods::is(connection, "PostgreSQL"),
+  assertthat::assert_that(
+    methods::is(connection, "PostgreSQL"),
     msg = "Not a connection object to database."
   )
   assertthat::assert_that(connection@info$dbname == "ETN")
 }
 
-#' Check input value against list of provided values
+#' Check input value against valid values
 #'
-#' Will return error message if an input value cannot be found in list of provided
-#' values. NULL values are allowed.
-#'
-#' @param arg Character. The input argument provided by the user.
-#' @param options Character vector of valid inputs for the argument.
-#' @param arg_name Character. The name of the argument used in the function to
-#'   test.
-#'
-#' @return If no error, `TRUE`.
-#'
+#' @param x Value(s) to test.
+#'   `NULL` values will automatically pass.
+#' @param y Value(s) to test against.
+#' @param name Name of the parameter.
+#' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
+#'   `x` values will be returned lowercase.
+#' @return Error or (lowercase) `x` values.
+#' @family helper functions
 #' @noRd
-#'
-#' @examples
-#' \dontrun{
-#' # Valid inputs for tag_type
-#' check_value("acoustic", c("acoustic", "archival"), "tag_type")
-#' check_value(NULL, c("acoustic", "archival"), "tag_type")
-#' check_value(c("acoustic", "archival"), c("acoustic", "archival"), "tag_type")
-#'
-#' # Invalid inputs for tag_type
-#' check_value("ddsf", c("acoustic", "archival"), "tag_type")
-#' }
-check_value <- function(arg, options = NULL, arg_name) {
-  max_print <- 20
+check_value <- function(x, y, name = "value", lowercase = FALSE) {
+  # Remove NA from valid values
+  y <- y[!is.na(x)]
 
-  # Drop NA
-  options <- options[!is.na(options)]
-
-  # Suppress long messages
-  if (length(options) > max_print) {
-    options_to_print <- c(options[1:max_print], "others..")
-  } else {
-    options_to_print <- options
+  # Ignore case
+  if (lowercase) {
+    x <- tolower(x)
+    y <- tolower(y)
   }
-  # Provide user message
-  if (!is.null(arg)) {
-    assertthat::assert_that(
-      all(arg %in% options),
-      msg = glue::glue(
-        "Invalid value(s) for {arg_name} argument.
-        Valid inputs are: {options_to_print*}.",
-        .transformer = collapse_transformer(
-          sep = ", ",
-          last = " and "
-        )
-      )
+
+  # Check value(s) against valid values
+  assertthat::assert_that(
+    all(x %in% y), # Returns TRUE for x = NULL
+    msg = glue::glue(
+      "Can't find {name} `{x}` in: {y}",
+      x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
+      y = glue::glue_collapse(y, sep = ", ", width = 300)
     )
-  } else {
-    TRUE
-  }
+  )
+
+  return(x)
 }
 
 #' Print list of options

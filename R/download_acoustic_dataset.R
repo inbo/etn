@@ -85,18 +85,24 @@ download_acoustic_dataset <- function(connection = con,
   check_connection(connection)
 
   # Check animal_project_code
-  if (missing(animal_project_code) || is.null(animal_project_code)) {
-    stop("Please provide an animal_project_code")
-  } else {
-    animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-  }
+  assertthat::assert_that(
+    length(animal_project_code) == 1,
+    msg = "`animal_project_code` must be a single value."
+  )
+  animal_project_code <- check_value(
+    animal_project_code,
+    list_animal_project_codes(connection),
+    "animal_project_code",
+    lowercase = TRUE
+  )
 
   # Check scientific_name
   if (!is.null(scientific_name)) {
-    valid_scientific_names <- list_scientific_names(connection)
-    check_value(scientific_name, valid_scientific_names, "scientific_name")
+    scientific_name <- check_value(
+      scientific_name,
+      list_scientific_names(connection),
+      "scientific_name"
+    )
   }
 
   # Check directory

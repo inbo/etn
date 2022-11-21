@@ -1,52 +1,44 @@
-con <- connect_to_etn(
-  username = Sys.getenv("userid"),
-  password = Sys.getenv("pwd")
-)
-
-valid_animal_projects <- list_animal_project_codes(con)
-
-test_that("Test input for project_type", {
+test_that("check_value() returns error for incorrect values", {
   expect_error(
-    check_value("not_a_project_type", c("animal", "network"), "project_type"),
-    paste0(
-      "Invalid value(s) for project_type argument.",
-      "\nValid inputs are: animal and network."
-    ),
+    check_value("invalid", c("a", "b")),
+    "Can't find value `invalid` in: a, b",
     fixed = TRUE
   )
   expect_error(
-    check_value(c("animal", "not_a_project_type"), c("animal", "network"), "project_type"),
-    paste0(
-      "Invalid value(s) for project_type argument.",
-      "\nValid inputs are: animal and network."
-    ),
+    check_value(c("a", "invalid"), c("a", "b")),
+    "Can't find value `a` and/or `invalid` in: a, b",
     fixed = TRUE
   )
-  expect_true(
-    check_value("animal", c("animal", "network"), "project_type")
-  )
-  expect_true(
-    check_value(NULL, c("animal", "network"), "project_type")
-  )
-  expect_true(
-    check_value(c("animal", "network"), c("animal", "network"), "project_type")
+  expect_error(
+    check_value("invalid", c("a", "b"), name = "param_name"),
+    "Can't find param_name `invalid` in: a, b",
+    fixed = TRUE
   )
 })
 
-test_that("Test input for animal_project", {
+test_that("check_value() returns x for correct values", {
+  expect_equal(
+    check_value("a", c("a", "b")),
+    "a"
+  )
+  expect_equal(
+    check_value(c("a", "b"), c("a", "b")),
+    c("a", "b")
+  )
+})
+
+test_that("check_value() can ignore case", {
   expect_error(
-    check_value("not_an_animal_project", valid_animal_projects, "animal_project")
+    check_value("A", c("a", "B")),
+    "Can't find value `A` in: a, B",
+    fixed = TRUE
   )
-  expect_true(
-    check_value("2011_rivierprik", valid_animal_projects, "animal_project")
+  expect_equal(
+    check_value("A", c("a", "B"), lowercase = TRUE),
+    "a"
   )
-  expect_true(
-    check_value(c("2012_leopoldkanaal", "2010_phd_reubens"), valid_animal_projects, "animal_project")
-  )
-  expect_error(
-    check_value(c("2012_leopoldkanaal", "not_an_animal_project"), valid_animal_projects, "animal_project")
-  )
-  expect_true(
-    check_value(NULL, valid_animal_projects, "animal_project")
+  expect_equal(
+    check_value(c("A", "b"), c("a", "B"), lowercase = TRUE),
+    c("a", "b")
   )
 })

@@ -30,9 +30,12 @@ get_cpod_projects <- function(connection = con,
   if (is.null(cpod_project_code)) {
     cpod_project_code_query <- "True"
   } else {
-    cpod_project_code <- tolower(cpod_project_code)
-    valid_cpod_project_codes <- tolower(list_cpod_project_codes(connection))
-    check_value(cpod_project_code, valid_cpod_project_codes, "cpod_project_code")
+    cpod_project_code <- check_value(
+      cpod_project_code,
+      list_cpod_project_codes(connection),
+      "cpod_project_code",
+      lowercase = TRUE
+    )
     cpod_project_code_query <- glue::glue_sql(
       "LOWER(project.project_code) IN ({cpod_project_code*})",
       .con = connection

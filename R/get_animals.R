@@ -53,8 +53,11 @@ get_animals <- function(connection = con,
   if (is.null(animal_id)) {
     animal_id_query <- "True"
   } else {
-    valid_animal_ids <- list_animal_ids(connection)
-    check_value(animal_id, valid_animal_ids, "animal_id")
+    animal_id <- check_value(
+      animal_id,
+      list_animal_ids(connection),
+      "animal_id"
+    )
     animal_id_query <- glue::glue_sql(
       "animal.id_pk IN ({animal_id*})",
       .con = connection
@@ -66,9 +69,12 @@ get_animals <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
-    animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code <- check_value(
+      animal_project_code,
+      list_animal_project_codes(connection),
+      "animal_project_code",
+      lowercase = TRUE
+    )
     animal_project_code_query <- glue::glue_sql(
       "LOWER(animal_project.projectcode) IN ({animal_project_code*})",
       .con = connection
@@ -79,9 +85,11 @@ get_animals <- function(connection = con,
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
-    valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
-    tag_serial_number <- as.character(tag_serial_number) # Cast to character
-    check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
+    tag_serial_number <- check_value(
+      as.character(tag_serial_number), # Cast to character
+      list_tag_serial_numbers(connection),
+      "tag_serial_number"
+    )
     tag_serial_number_query <- glue::glue_sql(
       "tag.tag_serial_number IN ({tag_serial_number*})",
       .con = connection
@@ -92,8 +100,11 @@ get_animals <- function(connection = con,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    valid_scientific_names <- list_scientific_names(connection)
-    check_value(scientific_name, valid_scientific_names, "scientific_name")
+    scientific_name <- check_value(
+      scientific_name,
+      list_scientific_names(connection),
+      "scientific_name"
+    )
     scientific_name_query <- glue::glue_sql(
       "animal.scientific_name IN ({scientific_name*})",
       .con = connection
