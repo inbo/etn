@@ -223,7 +223,7 @@ test_that("get_animals() collapses multiple associated tags to one row", {
     "tagging_methodology"
   )
   has_comma <- apply(
-    animal_two_tags_df %>% dplyr::select(tag_col_names),
+    animal_two_tags_df %>% dplyr::select(dplyr::all_of(tag_col_names)),
     MARGIN = 2,
     function(x) grepl(pattern = ",", x = x)
   )
