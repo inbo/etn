@@ -2,11 +2,21 @@
 Schema: https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml
 */
 
-/* HELPER TABLE FOR HUMAN OBSERVATION EVENTS
-The animals table contains multiple events (capture, release, surgery, recapture) as columns.
-Here they are transposed to rows. Events without date information are excluded.
-*/
-WITH event AS (
+/* HELPER TABLES */
+WITH
+-- Animals associated with animal_project_code
+animal AS (
+  SELECT *
+  FROM common.animal_release_limited AS animal
+    LEFT JOIN common.projects AS animal_project
+      ON animal.project_fk = animal_project.id
+  WHERE
+    LOWER(animal_project.projectcode) = {animal_project_code}
+),
+
+-- Animals contain multiple events (capture, release, surgery, recapture) as columns.
+-- Here they are transposed to rows. Events without date information are excluded.
+event AS (
   SELECT *
   FROM
     (
@@ -17,11 +27,8 @@ WITH event AS (
         animal.capture_location         AS locality,
         animal.capture_latitude         AS latitude,
         animal.capture_longitude        AS longitude
-      FROM common.animal_release_limited AS animal
-      WHERE animal.project_fk = {animal_project_id}
-
+      FROM animal
       UNION
-
       SELECT
         animal.id_pk                    AS animal_id_pk,
         'surgery'                       AS protocol,
@@ -29,11 +36,8 @@ WITH event AS (
         animal.surgery_location         AS locality,
         animal.surgery_latitude         AS latitude,
         animal.surgery_longitude        AS longitude
-      FROM common.animal_release_limited AS animal
-      WHERE animal.project_fk = {animal_project_id}
-
+      FROM animal
       UNION
-
       SELECT
         animal.id_pk                    AS animal_id_pk,
         'release'                       AS protocol,
@@ -41,11 +45,8 @@ WITH event AS (
         animal.release_location         AS locality,
         animal.release_latitude         AS latitude,
         animal.release_longitude        AS longitude
-      FROM common.animal_release_limited AS animal
-      WHERE animal.project_fk = {animal_project_id}
-
+      FROM animal
       UNION
-
       SELECT
         animal.id_pk                    AS animal_id_pk,
         'recapture'                     AS protocol,
@@ -53,8 +54,7 @@ WITH event AS (
         NULL                            AS locality,
         NULL                            AS latitude,
         NULL                            AS longitude
-      FROM common.animal_release_limited AS animal
-      WHERE animal.project_fk = {animal_project_id}
+      FROM animal
     ) AS events
   WHERE
     date IS NOT NULL
@@ -195,12 +195,12 @@ SELECT
   'Animalia'                            AS kingdom
 FROM
   acoustic.detections_limited AS det
-  LEFT JOIN common.animal_release_limited AS animal
+  LEFT JOIN animal
     ON det.animal_id_pk = animal.id_pk
   LEFT JOIN acoustic.deployments AS dep
     ON det.deployment_fk = dep.id_pk
 WHERE
-  det.animal_project_code = {animal_project_code}
+  LOWER(det.animal_project_code) = {animal_project_code}
 ) AS occurrences
 
 ORDER BY

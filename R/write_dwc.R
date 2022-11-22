@@ -50,7 +50,6 @@ write_dwc <- function(connection = con,
 
   # Get imis_dataset_id and project_id from animal_project
   project <- get_animal_projects(connection, animal_project_code)
-  project_id <- project$project_id
   dataset_id <- paste0("https://www.vliz.be/en/imis?module=dataset&dasid=", project$imis_dataset_id)
 
   # Query database
