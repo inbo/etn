@@ -3,7 +3,6 @@ Schema: https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml
 */
 
 /* HELPER TABLE FOR HUMAN OBSERVATION EVENTS
-
 The animals table contains multiple events (capture, release, surgery, recapture) as columns.
 Here they are transposed to rows. Events without date information are excluded.
 */
@@ -64,8 +63,9 @@ WITH event AS (
     date
 )
 
+/* DATASET-LEVEL */
+
 SELECT
--- RECORD LEVEL
   'Event'                               AS type,
   {license}                             AS license,
   {rights_holder}                       AS rightsHolder,
@@ -73,13 +73,25 @@ SELECT
   'VLIZ'                                AS institutionCode,
   'ETN'                                 AS collectionCode,
 -- datasetName
+  *
+FROM (
+
+/* HUMAN OBSERVATIONS */
+
+SELECT
 -- RECORD LEVEL
   'HumanObservation'                    AS basisOfRecord,
   NULL                                  AS dataGeneralizations,
 -- OCCURRENCE
   animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS occurrenceID, -- Same as EventID
-  animal.sex                            AS sex,
-  animal.life_stage                     AS lifeStage,
+  CASE
+    WHEN TRIM(LOWER(animal.sex)) IN ('male', 'm') THEN 'male'
+    WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
+    WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
+    WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
+    ELSE NULL -- Includes transitional, na, ...
+  END                                   AS sex,
+  TRIM(LOWER(animal.life_stage))        AS lifeStage,
   'present'                             AS occurrenceStatus,
   animal.id_pk                          AS organismID,
   animal.animal_nickname                AS organismName,
@@ -96,11 +108,11 @@ SELECT
       CASE
         WHEN LOWER(animal.implant_type) = 'internal' THEN 'implanted in '
         WHEN LOWER(animal.implant_type) = 'external' THEN 'attached to '
-        ELSE 'implanted in/attached to ' -- Includes "Acoutic and pit", "internal and external"
+        ELSE 'implanted in or attached to ' -- Includes `Acoutic and pit`, ...
       END ||
       CASE
-        WHEN LOWER(animal.wild_or_hatchery) = 'wild' OR LOWER(animal.wild_or_hatchery) = 'w' THEN 'free-ranging animal'
-        WHEN LOWER(animal.wild_or_hatchery) = 'hatchery' OR LOWER(animal.wild_or_hatchery) = 'h' THEN 'hatched animal'
+        WHEN TRIM(LOWER(animal.wild_or_hatchery)) IN ('wild', 'w') THEN 'free-ranging animal'
+        WHEN TRIM(LOWER(animal.wild_or_hatchery)) IN ('hatchery', 'h') THEN 'hatched animal'
         ELSE 'likely free-ranging animal'
       END
     ELSE NULL
@@ -115,7 +127,7 @@ SELECT
     ELSE NULL
   END                                   AS geodeticDatum,
   CASE
-    WHEN event.latitude IS NOT NULL THEN 1000 -- Event coordinates not always precise
+    WHEN event.latitude IS NOT NULL THEN 30
     ELSE NULL
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
@@ -136,3 +148,9 @@ FROM
           ON tag_device.manufacturer_fk = manufacturer.id_pk
 WHERE
   animal.project_fk = {animal_project_id}
+) AS occurrences
+
+ORDER BY
+  parentEventID,
+  eventDate,
+  samplingProtocol -- capture, surgery, release, rerelease
