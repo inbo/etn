@@ -7,7 +7,9 @@
 write_dwc(
   connection = con,
   animal_project_code,
-  directory = animal_project_code
+  directory = animal_project_code,
+  rights_holder = NULL,
+  license = "CC-BY-4.0"
 )
 }
 \arguments{
@@ -17,6 +19,17 @@ write_dwc(
 
 \item{directory}{Path to local directory to write file(s) to.
 Existing files of the same name will be overwritten.}
+
+\item{rights_holder}{Acronym of the organization owning or managing the
+rights over the data.}
+
+\item{license}{Identifier of the license under which the data will be
+published.
+\itemize{
+\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY-4.0}}
+(default).
+\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0-1.0}}.
+}}
 }
 \value{
 CSV file(s) written to disk.
