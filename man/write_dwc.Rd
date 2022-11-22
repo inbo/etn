@@ -7,9 +7,9 @@
 write_dwc(
   connection = con,
   animal_project_code,
-  directory = animal_project_code,
+  directory = ".",
   rights_holder = NULL,
-  license = "CC-BY-4.0"
+  license = "CC-BY"
 )
 }
 \arguments{
@@ -26,9 +26,9 @@ rights over the data.}
 \item{license}{Identifier of the license under which the data will be
 published.
 \itemize{
-\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY-4.0}}
+\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}}
 (default).
-\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0-1.0}}.
+\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
 }}
 }
 \value{
