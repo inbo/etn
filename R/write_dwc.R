@@ -53,27 +53,20 @@ write_dwc <- function(connection = con,
   project_id <- project$project_id
   dataset_id <- paste0("https://www.vliz.be/en/imis?module=dataset&dasid=", project$imis_dataset_id)
 
-  # Get human observations (capture, release, ...)
-  dwc_occurrence_human_sql <- glue::glue_sql(
-    readr::read_file(system.file("sql/dwc_occurrence_human.sql", package = "etn")),
+  # Query database
+  dwc_occurrence_sql <- glue::glue_sql(
+    readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
     .con = connection
   )
-  dwc_occurrence_human <- DBI::dbGetQuery(connection, dwc_occurrence_human_sql)
-
-  # Get machine observations (sampled down detections)
-  # dwc_occurrence_machine_sql <- glue::glue_sql(
-  #   readr::read_file(system.file("sql/dwc_occurrence_machine.sql", package = "etn")),
-  #   .con = connection
-  # )
-  # dwc_occurrence_machine <- DBI::dbGetQuery(connection, dwc_occurrence_machine_sql)
-
-  # Create directory
-  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
+  dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
   # Write files
+  if (!dir.exists(directory)) {
+    dir.create(directory, recursive = TRUE)
+  }
   readr::write_csv(
-    dwc_occurrence_human,
-    file.path(directory, "dwc_occurrence_human.csv"),
+    dwc_occurrence,
+    file.path(directory, "dwc_occurrence.csv"),
     na = ""
   )
 }

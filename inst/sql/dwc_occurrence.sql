@@ -11,7 +11,7 @@ WITH event AS (
   FROM
     (
       SELECT
-        animal.id_pk                    AS id_pk,
+        animal.id_pk                    AS animal_id_pk,
         'capture'                       AS protocol,
         animal.catched_date_time        AS date,
         animal.capture_location         AS locality,
@@ -23,7 +23,7 @@ WITH event AS (
       UNION
 
       SELECT
-        animal.id_pk                    AS id_pk,
+        animal.id_pk                    AS animal_id_pk,
         'surgery'                       AS protocol,
         animal.date_of_surgery          AS date,
         animal.surgery_location         AS locality,
@@ -35,7 +35,7 @@ WITH event AS (
       UNION
 
       SELECT
-        animal.id_pk                    AS id_pk,
+        animal.id_pk                    AS animal_id_pk,
         'release'                       AS protocol,
         animal.utc_release_date_time    AS date,
         animal.release_location         AS locality,
@@ -47,7 +47,7 @@ WITH event AS (
       UNION
 
       SELECT
-        animal.id_pk                    AS id_pk,
+        animal.id_pk                    AS animal_id_pk,
         'recapture'                     AS protocol,
         animal.recapture_date           AS date,
         NULL                            AS locality,
@@ -59,7 +59,7 @@ WITH event AS (
   WHERE
     date IS NOT NULL
   ORDER BY
-    id_pk,
+    animal_id_pk,
     date
 )
 
@@ -98,7 +98,7 @@ SELECT
 -- EVENT
   animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS EventID,
   animal.id_pk || '_' || tag_device.serial_number AS parentEventID,
-  to_char(event.date, 'YYYY-MM-DD"T"HH:MI:SS"Z"') AS eventDate,
+  TO_CHAR(event.date, 'YYYY-MM-DD"T"HH:MI:SS"Z"') AS eventDate,
   event.protocol                        AS samplingProtocol,
   CASE
     WHEN event.protocol = 'capture' THEN
@@ -137,7 +137,7 @@ SELECT
 FROM
   event
   LEFT JOIN common.animal_release_limited AS animal
-    ON event.id_pk = animal.id_pk
+    ON event.animal_id_pk = animal.id_pk
     LEFT JOIN common.animal_release_tag_device AS animal_with_tag
       ON animal.id_pk = animal_with_tag.animal_release_fk
       LEFT JOIN common.tag_device_limited AS tag_device
@@ -148,6 +148,59 @@ FROM
           ON tag_device.manufacturer_fk = manufacturer.id_pk
 WHERE
   animal.project_fk = {animal_project_id}
+
+UNION
+
+/* DETECTIONS */
+
+SELECT
+-- RECORD LEVEL
+  'MachineObservation'                  AS basisOfRecord,
+  'TODO'                                AS dataGeneralizations,
+-- OCCURRENCE
+  det.id_pk::text                       AS occurrenceID, -- Same as EventID
+  CASE
+    WHEN TRIM(LOWER(animal.sex)) IN ('male', 'm') THEN 'male'
+    WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
+    WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
+    WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
+    ELSE NULL -- Includes transitional, na, ...
+  END                                   AS sex,
+  NULL                                  AS lifeStage, -- Value at release might not apply to all records
+  'present'                             AS occurrenceStatus,
+  animal.id_pk                          AS organismID,
+  animal.animal_nickname                AS organismName,
+-- EVENT
+  det.id_pk::text                       AS eventID,
+  animal.id_pk || '_' || det.tag_serial_number AS parentEventID,
+  TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH:MI:SS"Z"') AS eventDate,
+  'acoustic detection'                  AS samplingProtocol,
+  'detected on receiver ' || det.receiver AS eventRemarks,
+-- LOCATION
+  det.deployment_station_name           AS locationID,
+  dep.location_name                     AS locality,
+  det.deployment_latitude               AS decimalLatitude,
+  det.deployment_longitude              AS decimalLongitude,
+  CASE
+    WHEN det.deployment_latitude IS NOT NULL THEN 'WGS84'
+    ELSE NULL
+  END                                   AS geodeticDatum,
+  CASE
+    WHEN det.deployment_latitude IS NOT NULL THEN 300 -- Water conditions can effect uncertainty
+    ELSE NULL
+  END                                   AS coordinateUncertaintyInMeters,
+-- TAXON
+  'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
+  animal.scientific_name                AS scientificName,
+  'Animalia'                            AS kingdom
+FROM
+  acoustic.detections_limited AS det
+  LEFT JOIN common.animal_release_limited AS animal
+    ON det.animal_id_pk = animal.id_pk
+  LEFT JOIN acoustic.deployments AS dep
+    ON det.deployment_fk = dep.id_pk
+WHERE
+  det.animal_project_code = {animal_project_code}
 ) AS occurrences
 
 ORDER BY
