@@ -3,9 +3,11 @@ Schema: https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml
 */
 
 /* HELPER TABLES */
+
 WITH
--- Animals associated with animal_project_code
-animal AS (
+-- ANIMALS
+-- Select animals from animal_project_code
+animals AS (
   SELECT *
   FROM common.animal_release_limited AS animal
     LEFT JOIN common.projects AS animal_project
@@ -13,10 +15,10 @@ animal AS (
   WHERE
     LOWER(animal_project.projectcode) = {animal_project_code}
 ),
-
--- Animals contain multiple events (capture, release, surgery, recapture) as columns.
--- Here they are transposed to rows. Events without date information are excluded.
-event AS (
+-- EVENTS
+-- Animals contain multiple events (capture, release, surgery, recapture) as columns
+-- Transpose events to rows and exclude those without date information
+events AS (
   SELECT *
   FROM
     (
@@ -27,7 +29,7 @@ event AS (
         animal.capture_location         AS locality,
         animal.capture_latitude         AS latitude,
         animal.capture_longitude        AS longitude
-      FROM animal
+      FROM animals AS animal
       UNION
       SELECT
         animal.id_pk                    AS animal_id_pk,
@@ -36,7 +38,7 @@ event AS (
         animal.surgery_location         AS locality,
         animal.surgery_latitude         AS latitude,
         animal.surgery_longitude        AS longitude
-      FROM animal
+      FROM animals AS animal
       UNION
       SELECT
         animal.id_pk                    AS animal_id_pk,
@@ -45,7 +47,7 @@ event AS (
         animal.release_location         AS locality,
         animal.release_latitude         AS latitude,
         animal.release_longitude        AS longitude
-      FROM animal
+      FROM animals AS animal
       UNION
       SELECT
         animal.id_pk                    AS animal_id_pk,
@@ -54,13 +56,27 @@ event AS (
         NULL                            AS locality,
         NULL                            AS latitude,
         NULL                            AS longitude
-      FROM animal
+      FROM animals AS animal
     ) AS events
   WHERE
     date IS NOT NULL
   ORDER BY
     animal_id_pk,
     date
+),
+-- SAMPLED-DOWN DETECTIONS
+-- Select detections from animal_project_code
+-- Group detections by animal+tag+date+hour combination and select the first timestamp/record
+detections AS (
+  SELECT DISTINCT ON (det.animal_id_pk || det.tag_serial_number || DATE_TRUNC('hour', det.datetime))
+    *
+  FROM
+    acoustic.detections_limited AS det
+  WHERE
+    LOWER(det.animal_project_code) = {animal_project_code}
+  ORDER BY
+    det.animal_id_pk || det.tag_serial_number || DATE_TRUNC('hour', det.datetime),
+    datetime ASC -- Sort chronologically
 )
 
 /* DATASET-LEVEL */
@@ -98,7 +114,7 @@ SELECT
 -- EVENT
   animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS EventID,
   animal.id_pk || '_' || tag_device.serial_number AS parentEventID,
-  TO_CHAR(event.date, 'YYYY-MM-DD"T"HH:MI:SS"Z"') AS eventDate,
+  TO_CHAR(event.date, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
   event.protocol                        AS samplingProtocol,
   CASE
     WHEN event.protocol = 'capture' THEN
@@ -135,8 +151,8 @@ SELECT
   animal.scientific_name                AS scientificName,
   'Animalia'                            AS kingdom
 FROM
-  event
-  LEFT JOIN common.animal_release_limited AS animal
+  events AS event
+  LEFT JOIN animals AS animal
     ON event.animal_id_pk = animal.id_pk
     LEFT JOIN common.animal_release_tag_device AS animal_with_tag
       ON animal.id_pk = animal_with_tag.animal_release_fk
@@ -146,8 +162,6 @@ FROM
           ON tag_device.tag_device_type_fk = tag_type.id_pk
         LEFT JOIN common.manufacturer AS manufacturer
           ON tag_device.manufacturer_fk = manufacturer.id_pk
-WHERE
-  animal.project_fk = {animal_project_id}
 
 UNION
 
@@ -156,7 +170,7 @@ UNION
 SELECT
 -- RECORD LEVEL
   'MachineObservation'                  AS basisOfRecord,
-  'TODO'                                AS dataGeneralizations,
+  NULL                                  AS dataGeneralizations,
 -- OCCURRENCE
   det.id_pk::text                       AS occurrenceID, -- Same as EventID
   CASE
@@ -173,7 +187,7 @@ SELECT
 -- EVENT
   det.id_pk::text                       AS eventID,
   animal.id_pk || '_' || det.tag_serial_number AS parentEventID,
-  TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH:MI:SS"Z"') AS eventDate,
+  TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
   'acoustic detection'                  AS samplingProtocol,
   'detected on receiver ' || det.receiver AS eventRemarks,
 -- LOCATION
@@ -194,13 +208,11 @@ SELECT
   animal.scientific_name                AS scientificName,
   'Animalia'                            AS kingdom
 FROM
-  acoustic.detections_limited AS det
-  LEFT JOIN animal
+  detections AS det
+  LEFT JOIN animals AS animal
     ON det.animal_id_pk = animal.id_pk
   LEFT JOIN acoustic.deployments AS dep
     ON det.deployment_fk = dep.id_pk
-WHERE
-  LOWER(det.animal_project_code) = {animal_project_code}
 ) AS occurrences
 
 ORDER BY
