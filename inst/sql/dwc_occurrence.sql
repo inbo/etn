@@ -97,7 +97,7 @@ FROM (
 SELECT
 -- RECORD LEVEL
   'HumanObservation'                    AS basisOfRecord,
-  NULL                                  AS dataGeneralizations,
+  'subsampled by hour'                  AS dataGeneralizations,
 -- OCCURRENCE
   animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS occurrenceID, -- Same as EventID
   CASE
