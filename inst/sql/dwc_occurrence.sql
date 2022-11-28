@@ -107,7 +107,10 @@ SELECT
     WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
     ELSE NULL -- Includes transitional, na, ...
   END                                   AS sex,
-  TRIM(LOWER(animal.life_stage))        AS lifeStage,
+  CASE
+    WHEN event.protocol = 'release' THEN TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
+    ELSE NULL
+  END                                   AS lifeStage,
   'present'                             AS occurrenceStatus,
   animal.id_pk                          AS organismID,
   animal.animal_nickname                AS organismName,
