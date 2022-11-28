@@ -97,7 +97,7 @@ FROM (
 SELECT
 -- RECORD LEVEL
   'HumanObservation'                    AS basisOfRecord,
-  'subsampled by hour'                  AS dataGeneralizations,
+  NULL                                  AS dataGeneralizations,
 -- OCCURRENCE
   animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS occurrenceID, -- Same as EventID
   CASE
@@ -108,7 +108,8 @@ SELECT
     ELSE NULL -- Includes transitional, na, ...
   END                                   AS sex,
   CASE
-    WHEN event.protocol = 'release' THEN TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
+    WHEN event.protocol = 'release' THEN
+      TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
     ELSE NULL
   END                                   AS lifeStage,
   'present'                             AS occurrenceStatus,
@@ -173,7 +174,7 @@ UNION
 SELECT
 -- RECORD LEVEL
   'MachineObservation'                  AS basisOfRecord,
-  NULL                                  AS dataGeneralizations,
+  'subsampled by hour'                  AS dataGeneralizations,
 -- OCCURRENCE
   det.id_pk::text                       AS occurrenceID, -- Same as EventID
   CASE
