@@ -139,7 +139,7 @@ SELECT
   event.latitude                        AS decimalLatitude,
   event.longitude                       AS decimalLongitude,
   CASE
-    WHEN event.latitude IS NOT NULL THEN 'WGS84'
+    WHEN event.latitude IS NOT NULL THEN 'EPSG:4326'
     ELSE NULL
   END                                   AS geodeticDatum,
   CASE
@@ -196,7 +196,7 @@ SELECT
   det.deployment_latitude               AS decimalLatitude,
   det.deployment_longitude              AS decimalLongitude,
   CASE
-    WHEN det.deployment_latitude IS NOT NULL THEN 'WGS84'
+    WHEN det.deployment_latitude IS NOT NULL THEN 'EPSG:4326'
     ELSE NULL
   END                                   AS geodeticDatum,
   CASE
