@@ -37,7 +37,32 @@ CSV file(s) written to disk.
 \description{
 Transforms and downloads data from a European Tracking Network
 \strong{animal project} to \href{https://dwc.tdwg.org/}{Darwin Core}.
-The resulting CSV file(s) can be uploaded to a
-\href{https://www.gbif.org/ipt}{GBIF IPT} for publication to OBIS or GBIF.
+The resulting CSV file(s) can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for publication to OBIS and/or GBIF.
 A \code{meta.xml} or \code{eml.xml} file are not created.
 }
+\section{Transformation details}{
+
+Data are transformed into an
+\href{https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml}{Occurrence core}.
+This \strong{follows recommendations} discussed and created by Peter Desmet,
+Jonas Mortelmans, Jonathan Pye, John Wieczorek and others.
+See the \href{https://github.com/inbo/etn/tree/main/inst/sql}{SQL file(s)}
+used by this function for details.
+
+Key features of the Darwin Core transformation:
+\itemize{
+\item Deployments (animal+tag associations) are parent events, with capture,
+surgery, release, recapture (human observations) and acoustic detections
+(machine observations) as child events.
+No information about the parent event is provided other than its ID,
+meaning that data can be expressed in an Occurrence Core with one row per
+observation and \code{parentEventID} shared by all occurrences in a deployment.
+\item The release event often contains metadata about the animal (sex,
+lifestage, comments) and deployment as a whole.
+\item Acoustic detections are downsampled to the first detection per hour, to reduce
+the size of high-frequency data.
+It is possible for a deployment to contain no detections, e.g. if the
+tag malfunctioned right after deployment.
+}
+}
+
