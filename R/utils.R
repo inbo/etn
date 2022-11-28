@@ -3,7 +3,7 @@
 #' Check the validity of the database connection
 #'
 #' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @family helper functions
 #' @noRd
 check_connection <- function(connection) {
   assertthat::assert_that(
@@ -51,7 +51,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'
 #' @param regex Character. A regular expression to parse.
 #' @param ... Additional arguments passed to the collapse.
-#'
+#' @family helper functions
 #' @noRd
 collapse_transformer <- function(regex = "[*]$", ...) {
   function(code, envir) {
@@ -71,11 +71,9 @@ collapse_transformer <- function(regex = "[*]$", ...) {
 #' @param date_time Character. A character representation of a date.
 #' @param date_name Character. Informative description to user about type of
 #'   date.
-#'
 #' @return `FALSE` | character
-#'
+#' @family helper functions
 #' @noRd
-#'
 #' @examples
 #' \dontrun{
 #' check_date_time("1985-11-21")
