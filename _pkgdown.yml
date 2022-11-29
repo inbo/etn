@@ -36,6 +36,7 @@ reference:
       - get_acoustic_deployments
       - get_acoustic_receivers
       - download_acoustic_dataset
+      - write_dwc
   - title: "Explore archival data"
     contents:
       - get_animal_projects
