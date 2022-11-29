@@ -14,9 +14,8 @@
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
 #'   published.
-#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode)
-#'   (default).
-#'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode) (default).
+#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode).
 #' @return CSV file(s) written to disk.
 #' @export
 #' @section Transformation details:
@@ -44,7 +43,7 @@ write_dwc <- function(connection = con,
                       animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
-                      license = "CC-BY") {
+                      license = "CC0") {
   # Check connection
   check_connection(connection)
 
@@ -55,12 +54,12 @@ write_dwc <- function(connection = con,
   )
 
   # Check license
-  licenses <- c("CC-BY", "CC0")
+  licenses <- c("CC0", "CC-BY")
   assertthat::assert_that(
     license %in% licenses,
     msg = glue::glue(
-      "`license` must be {licenses}.",
-      licenses = glue::glue_collapse(licenses, sep = ", ", last = " or ")
+      "`license` must be `{licenses}`.",
+      licenses = glue::glue_collapse(licenses, sep = "`, `", last = "` or `")
     )
   )
   license <- switch(
@@ -69,7 +68,7 @@ write_dwc <- function(connection = con,
     "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
   )
 
-  # Get imis_dataset_id and project_id from animal_project
+  # Get imis dataset id and title
   project <- get_animal_projects(connection, animal_project_code)
   dataset_id <- paste0("https://www.vliz.be/en/imis?module=dataset&dasid=", project$imis_dataset_id)
 
