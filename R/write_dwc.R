@@ -74,6 +74,7 @@ write_dwc <- function(connection = con,
   dataset_id <- paste0("https://www.vliz.be/en/imis?module=dataset&dasid=", project$imis_dataset_id)
 
   # Query database
+  message("Reading data and transforming to Darwin Core.")
   dwc_occurrence_sql <- glue::glue_sql(
     readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
     .con = connection
@@ -81,12 +82,14 @@ write_dwc <- function(connection = con,
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
   # Write files
+  dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
+  message(glue::glue(
+    "Writing data to:",
+    dwc_occurrence_path,
+    .sep = "\n"
+  ))
   if (!dir.exists(directory)) {
     dir.create(directory, recursive = TRUE)
   }
-  readr::write_csv(
-    dwc_occurrence,
-    file.path(directory, "dwc_occurrence.csv"),
-    na = ""
-  )
+  readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
 }
