@@ -64,19 +64,41 @@ events AS (
     animal_id_pk,
     date
 ),
--- SAMPLED-DOWN DETECTIONS
+-- HOURLY DETECTION GROUPS
 -- Select detections from animal_project_code
--- Group detections by animal+tag+date+hour combination and select the first timestamp/record
+-- Group detections by animal+tag+date+hour combination and get first timestamp and count
+detection_groups AS (
+  SELECT
+    det.animal_id_pk || det.tag_serial_number || DATE_TRUNC('hour', det.datetime) AS det_group,
+    det.animal_id_pk,
+    det.tag_serial_number,
+    min(det.datetime) AS datetime,
+    count(*) AS det_group_count
+  FROM acoustic.detections_limited AS det
+  WHERE LOWER(animal_project_code) = {animal_project_code}
+  GROUP BY
+    det_group,
+    det.animal_id_pk,
+    det.tag_serial_number
+),
+-- SUBSAMPLED DETECTIONS
+-- Join hour_groups with detections to get all fields
+-- Exclude animal+tag+timestamp duplicates with DISTINCT ON
 detections AS (
-  SELECT DISTINCT ON (det.animal_id_pk || det.tag_serial_number || DATE_TRUNC('hour', det.datetime))
-    *
-  FROM
-    acoustic.detections_limited AS det
-  WHERE
-    LOWER(det.animal_project_code) = {animal_project_code}
-  ORDER BY
-    det.animal_id_pk || det.tag_serial_number || DATE_TRUNC('hour', det.datetime),
-    datetime ASC -- Sort chronologically
+  SELECT DISTINCT ON (det_group.det_group)
+    det_group.det_group_count,
+    det.*
+  FROM detection_groups AS det_group
+  LEFT JOIN (
+    SELECT *
+    FROM acoustic.detections_limited AS det
+    WHERE LOWER(det.animal_project_code) = {animal_project_code}
+  ) AS det
+    -- Joining on these 3 fields is faster than creating det_group again
+    ON
+      det_group.animal_id_pk = det.animal_id_pk
+      AND det_group.tag_serial_number = det.tag_serial_number
+      AND det_group.datetime = det.datetime
 )
 
 /* DATASET-LEVEL */
@@ -174,7 +196,7 @@ UNION
 SELECT
 -- RECORD LEVEL
   'MachineObservation'                  AS basisOfRecord,
-  'subsampled by hour'                  AS dataGeneralizations,
+  'subsampled by hour: first of ' || det.det_group_count || ' record(s)' AS dataGeneralizations,
 -- OCCURRENCE
   det.id_pk::text                       AS occurrenceID, -- Same as EventID
   CASE
