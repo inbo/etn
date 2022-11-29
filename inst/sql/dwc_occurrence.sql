@@ -210,7 +210,7 @@ SELECT
   det.id_pk::text                       AS eventID,
   animal.id_pk || '_' || det.tag_serial_number AS parentEventID,
   TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
-  'acoustic detection'                  AS samplingProtocol,
+  'acoustic telemetry'                  AS samplingProtocol,
   'detected on receiver ' || det.receiver AS eventRemarks,
 -- LOCATION
   det.deployment_station_name           AS locationID,
