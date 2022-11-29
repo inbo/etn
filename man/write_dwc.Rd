@@ -58,8 +58,8 @@ meaning that data can be expressed in an Occurrence Core with one row per
 observation and \code{parentEventID} shared by all occurrences in a deployment.
 \item The release event often contains metadata about the animal (sex,
 lifestage, comments) and deployment as a whole.
-\item Acoustic detections are downsampled to the first detection per hour, to reduce
-the size of high-frequency data.
+\item Acoustic detections are downsampled to the \strong{first detection per hour},
+to reduce the size of high-frequency data.
 Duplicate detections (same animal, tag and timestamp) are excluded.
 It is possible for a deployment to contain no detections, e.g. if the
 tag malfunctioned right after deployment.
