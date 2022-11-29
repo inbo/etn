@@ -88,7 +88,7 @@ SELECT
   {dataset_id}                          AS datasetID,
   'VLIZ'                                AS institutionCode,
   'ETN'                                 AS collectionCode,
--- datasetName
+  {dataset_name}                        AS datasetName,
   *
 FROM (
 
