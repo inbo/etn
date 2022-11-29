@@ -127,12 +127,11 @@ SELECT
     WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
     WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
     WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
-    ELSE NULL -- Includes transitional, na, ...
+    -- Exclude transitional, na, ...
   END                                   AS sex,
   CASE
-    WHEN event.protocol = 'release' THEN
-      TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
-    ELSE NULL
+    WHEN event.protocol = 'release'
+      THEN TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
   END                                   AS lifeStage,
   'present'                             AS occurrenceStatus,
   animal.id_pk                          AS organismID,
@@ -143,10 +142,10 @@ SELECT
   TO_CHAR(event.date, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
   event.protocol                        AS samplingProtocol,
   CASE
-    WHEN event.protocol = 'capture' THEN
-      'Caugth using ' || TRIM(LOWER(animal.capture_method))
-    WHEN event.protocol = 'release' THEN
-      manufacturer.project || ' ' || tag_device.model || ' tag ' ||
+    WHEN event.protocol = 'capture'
+      THEN 'Caugth using ' || TRIM(LOWER(animal.capture_method))
+    WHEN event.protocol = 'release'
+      THEN manufacturer.project || ' ' || tag_device.model || ' tag ' ||
       CASE
         WHEN LOWER(animal.implant_type) = 'internal' THEN 'implanted in '
         WHEN LOWER(animal.implant_type) = 'external' THEN 'attached to '
@@ -157,7 +156,6 @@ SELECT
         WHEN TRIM(LOWER(animal.wild_or_hatchery)) IN ('hatchery', 'h') THEN 'hatched animal'
         ELSE 'likely free-ranging animal'
       END
-    ELSE NULL
   END                                   AS eventRemarks,
 -- LOCATION
   NULL                                  AS locationID,
@@ -166,11 +164,9 @@ SELECT
   event.longitude                       AS decimalLongitude,
   CASE
     WHEN event.latitude IS NOT NULL THEN 'EPSG:4326'
-    ELSE NULL
   END                                   AS geodeticDatum,
   CASE
-    WHEN event.latitude IS NOT NULL THEN 30
-    ELSE NULL
+    WHEN event.latitude IS NOT NULL THEN 100
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
   'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
@@ -204,7 +200,7 @@ SELECT
     WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
     WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
     WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
-    ELSE NULL -- Includes transitional, na, ...
+    -- Exclude transitional, na, ...
   END                                   AS sex,
   NULL                                  AS lifeStage, -- Value at release might not apply to all records
   'present'                             AS occurrenceStatus,
@@ -223,11 +219,9 @@ SELECT
   det.deployment_longitude              AS decimalLongitude,
   CASE
     WHEN det.deployment_latitude IS NOT NULL THEN 'EPSG:4326'
-    ELSE NULL
   END                                   AS geodeticDatum,
   CASE
     WHEN det.deployment_latitude IS NOT NULL THEN 300 -- Water conditions can effect uncertainty
-    ELSE NULL
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
   'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
