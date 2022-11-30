@@ -221,7 +221,7 @@ SELECT
     WHEN det.deployment_latitude IS NOT NULL THEN 'EPSG:4326'
   END                                   AS geodeticDatum,
   CASE
-    WHEN det.deployment_latitude IS NOT NULL THEN 300 -- Water conditions can effect uncertainty
+    WHEN det.deployment_latitude IS NOT NULL THEN 1000 -- Reasonable upper limit for detections, see https://github.com/inbo/etn/issues/256#issuecomment-1332224935
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
   'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
