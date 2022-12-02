@@ -174,7 +174,8 @@ SELECT
     WHEN event.latitude IS NOT NULL THEN 'EPSG:4326'
   END                                   AS geodeticDatum,
   CASE
-    WHEN event.latitude IS NOT NULL THEN 100
+     -- Assume coordinate precision of 0.001 degree (157m) and recording by GPS (30m)
+    WHEN event.latitude IS NOT NULL THEN 187
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
   'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
@@ -229,7 +230,9 @@ SELECT
     WHEN det.deployment_latitude IS NOT NULL THEN 'EPSG:4326'
   END                                   AS geodeticDatum,
   CASE
-    WHEN det.deployment_latitude IS NOT NULL THEN 1000 -- Reasonable upper limit for detections, see https://github.com/inbo/etn/issues/256#issuecomment-1332224935
+     -- Assume coordinate precision of 0.001 degree (157m), recording by GPS (30m) and detection range of around 800m ≈ 1000m
+     -- See https://github.com/inbo/etn/issues/256#issuecomment-1332224935
+    WHEN det.deployment_latitude IS NOT NULL THEN 1000
   END                                   AS coordinateUncertaintyInMeters,
 -- TAXON
   'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
