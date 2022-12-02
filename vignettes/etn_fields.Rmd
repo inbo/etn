@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 The information below is outdated. We are working on [an update](https://github.com/inbo/etn/issues/226).
 </p>
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 library(etn)
 library(readr)
 library(dplyr)
@@ -28,7 +28,7 @@ library(DBI)
 library(kableExtra)
 ```
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 con <- connect_to_etn()
 query <- glue_sql("
   SELECT
@@ -49,13 +49,13 @@ query <- glue_sql("
 etn_fields <- dbGetQuery(con, query)
 ```
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 write_csv(etn_fields, "../inst/assets/etn_fields.csv", na = "")
 ```
 
 Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the [contributing guide](../.github/CONTRIBUTING.md)). The definitions are also available as a [csv file](https://github.com/inbo/etn/blob/master/inst/assets/etn_fields.csv).
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 # Create helper function to display tables for each view
 view_table <- function(view_name) {
   view_data <-
@@ -90,7 +90,7 @@ view_table <- function(view_name) {
 
 Related function: `get_animals()`.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 view_table("animals_view2")
 ```
 
@@ -98,7 +98,7 @@ view_table("animals_view2")
 
 Related function: `get_tags()`.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 view_table("tags_view2")
 ```
 
@@ -106,7 +106,7 @@ view_table("tags_view2")
 
 Related function: `get_detections()`.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 view_table("detections_view2")
 ```
 
@@ -114,7 +114,7 @@ view_table("detections_view2")
 
 Related function: `get_deployments()`.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 view_table("deployments_view2")
 ```
 
@@ -122,6 +122,6 @@ view_table("deployments_view2")
 
 Related function: `get_receivers()`.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 view_table("receivers_view2")
 ```
