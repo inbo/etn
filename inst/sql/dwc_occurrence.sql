@@ -130,8 +130,16 @@ SELECT
     -- Exclude transitional, na, ...
   END                                   AS sex,
   CASE
-    WHEN event.protocol = 'release'
-      THEN TRIM(LOWER(animal.life_stage)) -- Only at release, can change over time
+    WHEN event.protocol = 'release' THEN -- Only at release, can change over time
+      CASE
+        -- Follows http://vocab.nerc.ac.uk/collection/S11/current/, see https://github.com/inbo/etn/issues/262
+        WHEN TRIM(LOWER(animal.life_stage)) IN ('juvenile', 'i', 'fii', 'fiii') THEN 'juvenile'
+        WHEN TRIM(LOWER(animal.life_stage)) IN ('sub-adult', 'fiv', 'fv', 'mii', 'silver') THEN 'sub-adult'
+        WHEN TRIM(LOWER(animal.life_stage)) IN ('adult', 'mature') THEN 'adult'
+        WHEN TRIM(LOWER(animal.life_stage)) IN ('immature', 'imature') THEN 'immature'
+        WHEN TRIM(LOWER(animal.life_stage)) IN ('smolt') THEN 'smolt'
+        -- Exclude unknown, and other values
+      END
   END                                   AS lifeStage,
   'present'                             AS occurrenceStatus,
   animal.id_pk                          AS organismID,
@@ -142,10 +150,10 @@ SELECT
   TO_CHAR(event.date, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
   event.protocol                        AS samplingProtocol,
   CASE
-    WHEN event.protocol = 'capture'
-      THEN 'Caugth using ' || TRIM(LOWER(animal.capture_method))
-    WHEN event.protocol = 'release'
-      THEN manufacturer.project || ' ' || tag_device.model || ' tag ' ||
+    WHEN event.protocol = 'capture' THEN
+      'Caugth using ' || TRIM(LOWER(animal.capture_method))
+    WHEN event.protocol = 'release' THEN
+      manufacturer.project || ' ' || tag_device.model || ' tag ' ||
       CASE
         WHEN LOWER(animal.implant_type) = 'internal' THEN 'implanted in '
         WHEN LOWER(animal.implant_type) = 'external' THEN 'attached to '
