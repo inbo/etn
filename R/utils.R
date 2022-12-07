@@ -47,22 +47,6 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
-#' Print list of options
-#'
-#' @param regex Character. A regular expression to parse.
-#' @param ... Additional arguments passed to the collapse.
-#' @family helper functions
-#' @noRd
-collapse_transformer <- function(regex = "[*]$", ...) {
-  function(code, envir) {
-    if (grepl(regex, code)) {
-      code <- sub(regex, "", code)
-    }
-    res <- eval(parse(text = code), envir)
-    glue::glue_collapse(res, ...)
-  }
-}
-
 #' Check if the string input can be converted to a date
 #'
 #' Returns `FALSE`` or the cleaned character version of the date
