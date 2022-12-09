@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.0.1
+Version: 2.1.0
 Authors@R: c(
     person("Peter", "Desmet", email = "peter.desmet@inbo.be",
            role = c("aut", "cre"), comment =  c(ORCID = "0000-0002-8442-8025")),
@@ -25,6 +25,7 @@ Imports:
     DBI,
     dplyr,
     glue,
+    jsonlite,
     lubridate,
     methods,
     odbc,
@@ -42,4 +43,4 @@ LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2

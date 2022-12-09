@@ -53,8 +53,11 @@ get_acoustic_deployments <- function(connection = con,
   if (is.null(deployment_id)) {
     deployment_id_query <- "True"
   } else {
-    valid_deployment_ids <- list_deployment_ids(connection)
-    check_value(deployment_id, valid_deployment_ids, "receiver_id")
+    deployment_id <- check_value(
+      deployment_id,
+      list_deployment_ids(connection),
+      "receiver_id"
+    )
     deployment_id_query <- glue::glue_sql(
       "dep.id_pk IN ({deployment_id*})",
       .con = connection
@@ -65,8 +68,11 @@ get_acoustic_deployments <- function(connection = con,
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- list_receiver_ids(connection)
-    check_value(receiver_id, valid_receiver_ids, "receiver_id")
+    receiver_id <- check_value(
+      receiver_id,
+      list_receiver_ids(connection),
+      "receiver_id"
+    )
     receiver_id_query <- glue::glue_sql(
       "receiver.receiver IN ({receiver_id*})",
       .con = connection
@@ -77,9 +83,12 @@ get_acoustic_deployments <- function(connection = con,
   if (is.null(acoustic_project_code)) {
     acoustic_project_code_query <- "True"
   } else {
-    acoustic_project_code <- tolower(acoustic_project_code)
-    valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
-    check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
+    acoustic_project_code <- check_value(
+      acoustic_project_code,
+      list_acoustic_project_codes(connection),
+      "acoustic_project_code",
+      lowercase = TRUE
+    )
     acoustic_project_code_query <- glue::glue_sql(
       "LOWER(network_project.projectcode) IN ({acoustic_project_code*})",
       .con = connection
@@ -90,8 +99,11 @@ get_acoustic_deployments <- function(connection = con,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    valid_station_names <- list_station_names(connection)
-    check_value(station_name, valid_station_names, "station_name")
+    station_name <- check_value(
+      station_name,
+      list_station_names(connection),
+      "station_name"
+    )
     station_name_query <- glue::glue_sql(
       "dep.station_name IN ({station_name*})",
       .con = connection

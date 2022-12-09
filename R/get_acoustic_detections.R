@@ -107,8 +107,11 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(acoustic_tag_id)) {
     acoustic_tag_id_query <- "True"
   } else {
-    valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
-    check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
+    acoustic_tag_id <- check_value(
+      acoustic_tag_id,
+      list_acoustic_tag_ids(connection),
+      "acoustic_tag_id"
+    )
     acoustic_tag_id_query <- glue::glue_sql(
       "det.transmitter IN ({acoustic_tag_id*})",
       .con = connection
@@ -120,9 +123,12 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
-    animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code <- check_value(
+      animal_project_code,
+      list_animal_project_codes(connection),
+      "animal_project_code",
+      lowercase = TRUE
+    )
     animal_project_code_query <- glue::glue_sql(
       "LOWER(animal_project_code) IN ({animal_project_code*})",
       .con = connection
@@ -133,8 +139,11 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    valid_scientific_name_ids <- list_scientific_names(connection)
-    check_value(scientific_name, valid_scientific_name_ids, "scientific_name")
+    scientific_name <- check_value(
+      scientific_name,
+      list_scientific_names(connection),
+      "scientific_name"
+    )
     scientific_name_query <- glue::glue_sql(
       "animal_scientific_name IN ({scientific_name*})",
       .con = connection
@@ -145,9 +154,12 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(acoustic_project_code)) {
     acoustic_project_code_query <- "True"
   } else {
-    acoustic_project_code <- tolower(acoustic_project_code)
-    valid_acoustic_project_codes <- tolower(list_acoustic_project_codes(connection))
-    check_value(acoustic_project_code, valid_acoustic_project_codes, "acoustic_project_code")
+    acoustic_project_code <- check_value(
+      acoustic_project_code,
+      list_acoustic_project_codes(connection),
+      "acoustic_project_code",
+      lowercase = TRUE
+    )
     acoustic_project_code_query <- glue::glue_sql(
       "LOWER(network_project_code) IN ({acoustic_project_code*})",
       .con = connection
@@ -158,8 +170,11 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- list_receiver_ids(connection)
-    check_value(receiver_id, valid_receiver_ids, "receiver_id")
+    receiver_id <- check_value(
+      receiver_id,
+      list_receiver_ids(connection),
+      "receiver_id"
+    )
     receiver_id_query <- glue::glue_sql(
       "det.receiver IN ({receiver_id*})",
       .con = connection
@@ -170,8 +185,11 @@ get_acoustic_detections <- function(connection = con,
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    valid_station_names <- list_station_names(connection)
-    check_value(station_name, valid_station_names, "station_name")
+    station_name <- check_value(
+      station_name,
+      list_station_names(connection),
+      "station_name"
+    )
     station_name_query <- glue::glue_sql(
       "deployment_station_name IN ({station_name*})",
       .con = connection

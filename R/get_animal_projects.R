@@ -30,9 +30,12 @@ get_animal_projects <- function(connection = con,
   if (is.null(animal_project_code)) {
     animal_project_code_query <- "True"
   } else {
-    animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
+    animal_project_code <- check_value(
+      animal_project_code,
+      list_animal_project_codes(connection),
+      "animal_project_code",
+      lowercase = TRUE
+    )
     animal_project_code_query <- glue::glue_sql(
       "LOWER(project.project_code) IN ({animal_project_code*})",
       .con = connection

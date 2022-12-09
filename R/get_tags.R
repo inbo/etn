@@ -49,9 +49,11 @@ get_tags <- function(connection = con,
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
-    valid_tag_serial_numbers <- list_tag_serial_numbers(connection)
-    tag_serial_number <- as.character(tag_serial_number) # Cast to character
-    check_value(tag_serial_number, valid_tag_serial_numbers, "tag_serial_number")
+    tag_serial_number <- check_value(
+      as.character(tag_serial_number), # Cast to character
+      list_tag_serial_numbers(connection),
+      "tag_serial_number"
+    )
     tag_serial_number_query <- glue::glue_sql(
       "tag.tag_serial_number IN ({tag_serial_number*})",
       .con = connection
@@ -62,8 +64,11 @@ get_tags <- function(connection = con,
   if (is.null(tag_type)) {
     tag_type_query <- "True"
   } else {
-    valid_tag_types <- c("acoustic", "archival", "acoustic-archival")
-    check_value(tag_type, valid_tag_types, "tag_type")
+    tag_type <- check_value(
+      tag_type,
+      c("acoustic", "archival", "acoustic-archival"),
+      "tag_type"
+    )
     tag_type_query <- glue::glue_sql(
       "tag.tag_type IN ({tag_type*})",
       .con = connection
@@ -74,8 +79,11 @@ get_tags <- function(connection = con,
   if (is.null(tag_subtype)) {
     tag_subtype_query <- "True"
   } else {
-    valid_tag_subtypes <- c("animal", "built-in", "range", "sentinel")
-    check_value(tag_subtype, valid_tag_subtypes, "tag_subtype")
+    tag_subtype <- check_value(
+      tag_subtype,
+      c("animal", "built-in", "range", "sentinel"),
+      "tag_subtype"
+    )
     tag_subtype_query <- glue::glue_sql(
       "tag.tag_subtype IN ({tag_subtype*})",
       .con = connection
@@ -86,8 +94,11 @@ get_tags <- function(connection = con,
   if (is.null(acoustic_tag_id)) {
     acoustic_tag_id_query <- "True"
   } else {
-    valid_acoustic_tag_ids <- list_acoustic_tag_ids(connection)
-    check_value(acoustic_tag_id, valid_acoustic_tag_ids, "acoustic_tag_id")
+    check_value(
+      acoustic_tag_id,
+      list_acoustic_tag_ids(connection),
+      "acoustic_tag_id"
+    )
     acoustic_tag_id_query <- glue::glue_sql(
       "tag.acoustic_tag_id IN ({acoustic_tag_id*})",
       .con = connection

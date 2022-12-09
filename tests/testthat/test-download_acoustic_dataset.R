@@ -14,7 +14,6 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
   message <- readLines("./test-download_acoustic_dataset-message.txt")
   # Process output message
   message <- paste0(message, "\n")
-  message <- c(paste0(message[1], message[2]), message[3:length(message)])
 
   # Run function
   evaluate_download <- evaluate_promise({

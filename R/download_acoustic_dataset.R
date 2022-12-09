@@ -53,8 +53,7 @@
 #'
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
-#' #> Downloading data to directory "2012_leopoldkanaal":
-#' #> (existing files with the same name will be overwritten)
+#' #> Downloading data to directory `2012_leopoldkanaal`:
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
 #' #> * (3/6): downloading detections.csv
@@ -62,7 +61,7 @@
 #' #> * (5/6): downloading receivers.csv
 #' #> * (6/6): adding datapackage.json as file metadata
 
-#' #> Summary statistics for dataset "2012_leopoldkanaal":
+#' #> Summary statistics for dataset `2012_leopoldkanaal`:
 #' #> * number of animals:           104
 #' #> * number of tags:              103
 #' #> * number of detections:        2215243
@@ -85,28 +84,29 @@ download_acoustic_dataset <- function(connection = con,
   check_connection(connection)
 
   # Check animal_project_code
-  if (missing(animal_project_code) || is.null(animal_project_code)) {
-    stop("Please provide an animal_project_code")
-  } else {
-    animal_project_code <- tolower(animal_project_code)
-    valid_animal_project_codes <- tolower(list_animal_project_codes(connection))
-    check_value(animal_project_code, valid_animal_project_codes, "animal_project_code")
-  }
+  assertthat::assert_that(
+    length(animal_project_code) == 1,
+    msg = "`animal_project_code` must be a single value."
+  )
+  animal_project_code <- check_value(
+    animal_project_code,
+    list_animal_project_codes(connection),
+    "animal_project_code",
+    lowercase = TRUE
+  )
 
   # Check scientific_name
   if (!is.null(scientific_name)) {
-    valid_scientific_names <- list_scientific_names(connection)
-    check_value(scientific_name, valid_scientific_names, "scientific_name")
+    scientific_name <- check_value(
+      scientific_name,
+      list_scientific_names(connection),
+      "scientific_name"
+    )
   }
 
-  # Check directory
-  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
-
   # Start downloading
-  message(glue::glue(
-    "Downloading data to directory \"{directory}\":
-    (existing files with the same name will be overwritten)"
-  ))
+  dir.create(directory, recursive = TRUE, showWarnings = FALSE)
+  message(glue::glue("Downloading data to directory `{directory}`:"))
 
   # ANIMALS
   message("* (1/6): downloading animals.csv")
@@ -199,7 +199,7 @@ download_acoustic_dataset <- function(connection = con,
     sort()
 
   message("")
-  message(glue::glue("\nSummary statistics for dataset \"{animal_project_code}\":"))
+  message(glue::glue("\nSummary statistics for dataset `{animal_project_code}`:"))
   message("* number of animals:           ", nrow(animals))
   message("* number of tags:              ", nrow(tags))
   message("* number of detections:        ", nrow(detections))

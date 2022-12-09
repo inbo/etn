@@ -6,10 +6,9 @@
 \alias{etn-package}
 \title{etn: Access Data from the European Tracking Network}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Package with functions to access and process data from the European
-    Tracking Network hosted by VLIZ.
+Package with functions to access and process data from the European Tracking Network hosted by VLIZ.
 }
 \seealso{
 Useful links:
