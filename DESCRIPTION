@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.0.1
+Version: 2.1.0
 Authors@R: c(
     person("Peter", "Desmet", email = "peter.desmet@inbo.be",
            role = c("aut", "cre"), comment =  c(ORCID = "0000-0002-8442-8025")),

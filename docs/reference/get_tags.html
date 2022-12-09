@@ -14,7 +14,7 @@ can be multiple records (acoustic_tag_id) per tag device
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,7 +112,7 @@ are member of the group.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get all tags</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23,865 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22,882 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_se…¹ tag_t…² tag_s…³ senso…⁴ acous…⁵ acous…⁶ manuf…⁷ model frequ…⁸ status</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 10       acoust… animal  <span style="color: #BB0000;">NA</span>      S256-10 A69-11… THELMA… LP6-D 69 kHz  active</span>
@@ -125,7 +125,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 17       acoust… animal  <span style="color: #BB0000;">NA</span>      S256-17 A69-11… THELMA… LP6-D 69 kHz  active</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 18       acoust… animal  <span style="color: #BB0000;">NA</span>      S256-18 A69-11… THELMA… LP6-D 69 kHz  active</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 19       acoust… animal  <span style="color: #BB0000;">NA</span>      S256-19 A69-11… THELMA… LP6-D 69 kHz  active</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 23,855 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22,872 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
@@ -135,7 +135,7 @@ are member of the group.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get archival tags, including acoustic-archival</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span><span class="va">con</span>, tag_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"archival"</span>, <span class="st">"acoustic-archival"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3,616 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3,826 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_se…¹ tag_t…² tag_s…³ senso…⁴ acous…⁵ acous…⁶ manuf…⁷ model frequ…⁸ status</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 4879H    acoust… animal  <span style="color: #BB0000;">NA</span>      A69-13… R64K-5… VEMCO   V13-… <span style="color: #BB0000;">NA</span>      avail…</span>
@@ -148,7 +148,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 31541    acoust… animal  <span style="color: #BB0000;">NA</span>      A69-16… <span style="color: #BB0000;">NA</span>      VEMCO   V13-… <span style="color: #BB0000;">NA</span>      active</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 31542    acoust… animal  <span style="color: #BB0000;">NA</span>      A69-16… <span style="color: #BB0000;">NA</span>      VEMCO   V13-… <span style="color: #BB0000;">NA</span>      active</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 31543    acoust… animal  <span style="color: #BB0000;">NA</span>      A69-16… <span style="color: #BB0000;">NA</span>      VEMCO   V13-… <span style="color: #BB0000;">NA</span>      active</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 3,606 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 3,816 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
@@ -158,7 +158,7 @@ are member of the group.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get tags of specific subtype</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span><span class="va">con</span>, tag_subtype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"built-in"</span>, <span class="st">"range"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 290 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 299 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_se…¹ tag_t…² tag_s…³ senso…⁴ acous…⁵ acous…⁶ manuf…⁷ model frequ…⁸ status</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2060     acoust… built-… <span style="color: #BB0000;">NA</span>      R01M-8… <span style="color: #BB0000;">NA</span>      THELMA… TBR8… 069k    avail…</span>
@@ -171,7 +171,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2071     acoust… built-… <span style="color: #BB0000;">NA</span>      R01M-8… <span style="color: #BB0000;">NA</span>      THELMA… TBR8… 069k    avail…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2072     acoust… built-… <span style="color: #BB0000;">NA</span>      R01M-8… <span style="color: #BB0000;">NA</span>      THELMA… TBR8… 069k    avail…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2073     acoust… built-… <span style="color: #BB0000;">NA</span>      R01M-8… <span style="color: #BB0000;">NA</span>      THELMA… TBR8… 069k    avail…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 280 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 289 more rows, 44 more variables: activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
