@@ -33,7 +33,8 @@ published.
 }}
 }
 \value{
-CSV file(s) written to disk.
+CSV file(s) written to disk or list of data frames when
+\code{directory = NULL}.
 }
 \description{
 Transforms and downloads data from a European Tracking Network
