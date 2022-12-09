@@ -104,13 +104,13 @@ detections AS (
 /* DATASET-LEVEL */
 
 SELECT
-  'Event'                               AS type,
-  {license}                             AS license,
-  {rights_holder}                       AS rightsHolder,
-  {dataset_id}                          AS datasetID,
-  'VLIZ'                                AS institutionCode,
-  'ETN'                                 AS collectionCode,
-  {dataset_name}                        AS datasetName,
+  'Event'                               AS "type",
+  {license}                             AS "license",
+  {rights_holder}                       AS "rightsHolder",
+  {dataset_id}                          AS "datasetID",
+  'VLIZ'                                AS "institutionCode",
+  'ETN'                                 AS "collectionCode",
+  {dataset_name}                        AS "datasetName",
   *
 FROM (
 
@@ -118,17 +118,17 @@ FROM (
 
 SELECT
 -- RECORD LEVEL
-  'HumanObservation'                    AS basisOfRecord,
-  NULL                                  AS dataGeneralizations,
+  'HumanObservation'                    AS "basisOfRecord",
+  NULL                                  AS "dataGeneralizations",
 -- OCCURRENCE
-  animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS occurrenceID, -- Same as EventID
+  animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS "occurrenceID", -- Same as EventID
   CASE
     WHEN TRIM(LOWER(animal.sex)) IN ('male', 'm') THEN 'male'
     WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
     WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
     WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
     -- Exclude transitional, na, ...
-  END                                   AS sex,
+  END                                   AS "sex",
   CASE
     WHEN event.protocol = 'release' THEN -- Only at release, can change over time
       CASE
@@ -140,15 +140,15 @@ SELECT
         WHEN TRIM(LOWER(animal.life_stage)) IN ('smolt') THEN 'smolt'
         -- Exclude unknown, and other values
       END
-  END                                   AS lifeStage,
-  'present'                             AS occurrenceStatus,
-  animal.id_pk                          AS organismID,
-  animal.animal_nickname                AS organismName,
+  END                                   AS "lifeStage",
+  'present'                             AS "occurrenceStatus",
+  animal.id_pk                          AS "organismID",
+  animal.animal_nickname                AS "organismName",
 -- EVENT
-  animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS EventID,
-  animal.id_pk || '_' || tag_device.serial_number AS parentEventID,
-  TO_CHAR(event.date, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
-  event.protocol                        AS samplingProtocol,
+  animal.id_pk || '_' || tag_device.serial_number || '_' || event.protocol AS "eventID",
+  animal.id_pk || '_' || tag_device.serial_number AS "parentEventID",
+  TO_CHAR(event.date, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS "eventDate",
+  event.protocol                        AS "samplingProtocol",
   CASE
     WHEN event.protocol = 'capture' THEN
       'Caugth using ' || TRIM(LOWER(animal.capture_method))
@@ -164,23 +164,23 @@ SELECT
         WHEN TRIM(LOWER(animal.wild_or_hatchery)) IN ('hatchery', 'h') THEN 'hatched animal'
         ELSE 'likely free-ranging animal'
       END
-  END                                   AS eventRemarks,
+  END                                   AS "eventRemarks",
 -- LOCATION
-  NULL                                  AS locationID,
-  event.locality                        AS locality,
-  event.latitude                        AS decimalLatitude,
-  event.longitude                       AS decimalLongitude,
+  NULL                                  AS "locationID",
+  event.locality                        AS "locality",
+  event.latitude                        AS "decimalLatitude",
+  event.longitude                       AS "decimalLongitude",
   CASE
     WHEN event.latitude IS NOT NULL THEN 'EPSG:4326'
-  END                                   AS geodeticDatum,
+  END                                   AS "geodeticDatum",
   CASE
      -- Assume coordinate precision of 0.001 degree (157m) and recording by GPS (30m)
     WHEN event.latitude IS NOT NULL THEN 187
-  END                                   AS coordinateUncertaintyInMeters,
+  END                                   AS "coordinateUncertaintyInMeters",
 -- TAXON
-  'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
-  animal.scientific_name                AS scientificName,
-  'Animalia'                            AS kingdom
+  'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS "scientificNameID",
+  animal.scientific_name                AS "scientificName",
+  'Animalia'                            AS "kingdom"
 FROM
   events AS event
   LEFT JOIN animals AS animal
@@ -200,44 +200,44 @@ UNION
 
 SELECT
 -- RECORD LEVEL
-  'MachineObservation'                  AS basisOfRecord,
-  'subsampled by hour: first of ' || det.det_group_count || ' record(s)' AS dataGeneralizations,
+  'MachineObservation'                  AS "basisOfRecord",
+  'subsampled by hour: first of ' || det.det_group_count || ' record(s)' AS "dataGeneralizations",
 -- OCCURRENCE
-  det.id_pk::text                       AS occurrenceID, -- Same as EventID
+  det.id_pk::text                       AS "occurrenceID", -- Same as EventID
   CASE
     WHEN TRIM(LOWER(animal.sex)) IN ('male', 'm') THEN 'male'
     WHEN TRIM(LOWER(animal.sex)) IN ('female', 'f') THEN 'female'
     WHEN TRIM(LOWER(animal.sex)) IN ('hermaphrodite') THEN 'hermaphrodite'
     WHEN TRIM(LOWER(animal.sex)) IN ('unknown', 'u') THEN 'unknown'
     -- Exclude transitional, na, ...
-  END                                   AS sex,
-  NULL                                  AS lifeStage, -- Value at release might not apply to all records
-  'present'                             AS occurrenceStatus,
-  animal.id_pk                          AS organismID,
-  animal.animal_nickname                AS organismName,
+  END                                   AS "sex",
+  NULL                                  AS "lifeStage", -- Value at release might not apply to all records
+  'present'                             AS "occurrenceStatus",
+  animal.id_pk                          AS "organismID",
+  animal.animal_nickname                AS "organismName",
 -- EVENT
-  det.id_pk::text                       AS eventID,
-  animal.id_pk || '_' || det.tag_serial_number AS parentEventID,
-  TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS eventDate,
-  'acoustic telemetry'                  AS samplingProtocol,
-  'detected on receiver ' || det.receiver AS eventRemarks,
+  det.id_pk::text                       AS "eventID",
+  animal.id_pk || '_' || det.tag_serial_number AS "parentEventID",
+  TO_CHAR(det.datetime, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS "eventDate",
+  'acoustic telemetry'                  AS "samplingProtocol",
+  'detected on receiver ' || det.receiver AS "eventRemarks",
 -- LOCATION
-  det.deployment_station_name           AS locationID,
-  dep.location_name                     AS locality,
-  det.deployment_latitude               AS decimalLatitude,
-  det.deployment_longitude              AS decimalLongitude,
+  det.deployment_station_name           AS "locationID",
+  dep.location_name                     AS "locality",
+  det.deployment_latitude               AS "decimalLatitude",
+  det.deployment_longitude              AS "decimalLongitude",
   CASE
     WHEN det.deployment_latitude IS NOT NULL THEN 'EPSG:4326'
-  END                                   AS geodeticDatum,
+  END                                   AS "geodeticDatum",
   CASE
      -- Assume coordinate precision of 0.001 degree (157m), recording by GPS (30m) and detection range of around 800m ≈ 1000m
      -- See https://github.com/inbo/etn/issues/256#issuecomment-1332224935
     WHEN det.deployment_latitude IS NOT NULL THEN 1000
-  END                                   AS coordinateUncertaintyInMeters,
+  END                                   AS "coordinateUncertaintyInMeters",
 -- TAXON
-  'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS scientificNameID,
-  animal.scientific_name                AS scientificName,
-  'Animalia'                            AS kingdom
+  'urn:lsid:marinespecies.org:taxname:' || animal.aphia_id AS "scientificNameID",
+  animal.scientific_name                AS "scientificName",
+  'Animalia'                            AS "kingdom"
 FROM
   detections AS det
   LEFT JOIN animals AS animal
@@ -247,6 +247,6 @@ FROM
 ) AS occurrences
 
 ORDER BY
-  parentEventID,
-  eventDate,
-  samplingProtocol -- capture, surgery, release, rerelease
+  "parentEventID",
+  "eventDate",
+  "samplingProtocol" -- capture, surgery, release, rerelease
