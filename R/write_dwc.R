@@ -9,7 +9,9 @@
 #' @param connection Connection to the ETN database.
 #' @param animal_project_code Animal project code.
 #' @param directory Path to local directory to write file(s) to.
-#'   Existing files of the same name will be overwritten.
+#'   If `NULL`, then a list of data frames is returned instead, which can be
+#'   useful for extending/adapting the Darwin Core mapping before writing with
+#'   [readr::write_csv()].
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
@@ -85,15 +87,21 @@ write_dwc <- function(connection = con,
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
-  # Write files
-  dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
-  message(glue::glue(
-    "Writing data to:",
-    dwc_occurrence_path,
-    .sep = "\n"
-  ))
-  if (!dir.exists(directory)) {
-    dir.create(directory, recursive = TRUE)
+  # Return object or write files
+  if (is.null(directory)) {
+    list(
+      dwc_occurrence = dplyr::as_tibble(dwc_occurrence)
+    )
+  } else {
+    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
+    message(glue::glue(
+      "Writing data to:",
+      dwc_occurrence_path,
+      .sep = "\n"
+    ))
+    if (!dir.exists(directory)) {
+      dir.create(directory, recursive = TRUE)
+    }
+    readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
   }
-  readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
 }
