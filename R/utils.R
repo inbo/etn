@@ -109,3 +109,24 @@ get_credentials <-
            password = Sys.getenv("pwd")) {
     stringr::str_glue('list(username = "{username}", password = "{password}")')
   }
+
+#' Extract the OCPU temp key from a response object
+#'
+#' When posting a request to the opencpu api service without the json flag, a
+#' response object is returned containing all the generated objects, with a
+#' unique temp key in the path. To retreive these objects in a subsequent GET
+#' request, it is convenient to retreive this temp key from the original
+#' response object
+#'
+#' @param response The response resulting from a POST request to a opencpu api
+#'   service
+#'
+#' @return the OCPU temp key to be used as part of a GET request to an opencpu
+#'   api service
+#' @family helper functions
+#' @noRd
+extract_temp_key <- function(response){
+  response %>%
+    httr::content(as = "text") %>%
+    stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
+}
