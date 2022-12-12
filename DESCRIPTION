@@ -25,6 +25,7 @@ Imports:
     DBI,
     dplyr,
     glue,
+    httr,
     jsonlite,
     lubridate,
     methods,
