@@ -11,10 +11,11 @@ list_animal_ids_api <- function(credentials = get_credentials()) {
 
   # POST the function request to the api_domain, request json as direct return
   response <-
-    httr::POST(stringr::str_glue(api_domain,function_path,"json",.sep = "/"),
-         body = list(
-           con = credentials
-         ))
+    httr::POST(stringr::str_glue(api_domain, function_path, "json", .sep = "/"),
+      body = list(
+        con = credentials
+      )
+    )
   # If request was not succesful, generate a warning
   httr::warn_for_status(response, "submit request to API server")
 

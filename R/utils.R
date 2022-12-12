@@ -125,7 +125,7 @@ get_credentials <-
 #'   api service
 #' @family helper functions
 #' @noRd
-extract_temp_key <- function(response){
+extract_temp_key <- function(response) {
   response %>%
     httr::content(as = "text") %>%
     stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
@@ -141,17 +141,19 @@ extract_temp_key <- function(response){
 #' @param temp_key the temp key returned from the POST request to the API
 #'
 #' @return the uncompressed object resulting form a GET request to the API
-#'
+#' @family helper functions
+#' @noRd
 #' @examples
-#' \dontrun{etn:::extract_temp_key(response) %>% get_val()}
+#' \dontrun{
+#' etn:::extract_temp_key(response) %>% get_val()
+#' }
 #'
 #' # using the opencpu test instance
 #' api_url <- "https://cloud.opencpu.org/ocpu/library/stats/R/rnorm"
-#' httr::POST(api_url,body = list(n = 10,mean = 5)) %>%
-#'     extract_temp_key() %>%
-#'     get_val(api_domain = "https://cloud.opencpu.org/ocpu")
-#'  )
-get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be"){
+#' httr::POST(api_url, body = list(n = 10, mean = 5)) %>%
+#'   extract_temp_key() %>%
+#'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
+get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
   httr::GET(
     stringr::str_glue(
       "{api_domain}",
