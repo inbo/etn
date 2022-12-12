@@ -86,3 +86,26 @@ check_date_time <- function(date_time, date_name = "start_date") {
   )
   as.character(parsed)
 }
+
+#' Get the credentials from environment variables, or set them manually
+#'
+#' By default, it's not necessary to set any values in this function as it's
+#' used in the background by other functions. However, if you wish to provide
+#' your username and password on a per function basis, this function allows you
+#' to do so.
+#'
+#' @param username ETN Data username, by default read from the environment, but
+#'   you can set it manually too.
+#' @param password ETN Data password, by default read from the environment, but
+#'   you can set it manually too.
+#'
+#' @return A string as it is ingested by other functions that need
+#'   authentication
+#' @family helper functions
+#' @noRd
+
+get_credentials <-
+  function(username = Sys.getenv("userid"),
+           password = Sys.getenv("pwd")) {
+    stringr::str_glue('list(username = "{username}", password = "{password}")')
+  }
