@@ -47,14 +47,12 @@
 
 # as a function
 
-#' @inheritSection list_animal_ids title
-#' @inheritSection list_animal_ids description
+#' List all available animal ids
+#' @inherit list_animal_ids
 #'
 #' @param credentials Login credentials to the ETN database, as created by
 #'   `get_credentials()`
-#' @inheritSection list_animal_ids return
 #' @export
-#'
 list_animal_ids_api <- function(credentials = get_credentials()) {
   api_domain <- "https://opencpu.lifewatch.be"
   function_path <- "library/etn/R/list_animal_ids"
@@ -81,39 +79,6 @@ list_animal_ids_api <- function(credentials = get_credentials()) {
 
 # get evaluated object as a function
 
-#' Retrieve the result of a function called to the opencpu api
-#'
-#' @param temp_key the temp key returned from the POST request to the API
-#'
-#' @return the uncompressed object resulting form a GET request to the API
-#'
-#' @examples etn:::extract_temp_key(response) %>% get_val()
-get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be"){
 
-  # api_domain <- "https://opencpu.lifewatch.be"
 
-  httr::GET(
-    stringr::str_glue(
-      # "https://cloud.opencpu.org",
-      "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
-      .sep = "/"
-    )
-  ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection() %>%
-    gzcon() %>%
-    readRDS()
-}
 
-## test case with rnorm ----------------------------------------------------
-# api_domain <- "https://cloud.opencpu.org/ocpu"
-# post request
-# response <- httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
-#            body = list(n = 10,
-#                        mean = 5))
-#
-# response %>%
-#   extract_temp_key() %>%
-#   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
-#
