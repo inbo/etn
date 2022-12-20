@@ -5,6 +5,9 @@
 # Session Data files
 .RData
 
+# User-specific files
+.Ruserdata
+
 # Example code in package build process
 *-Ex.R
 
@@ -17,6 +20,7 @@
 # RStudio files
 .Rproj.user/
 .Rproj.user
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -49,3 +53,4 @@ inst/doc
 .Renviron*
 draft
 Meta
+.Rdata
