@@ -37,6 +37,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "sensor_unit",
     "sensor2_value",
     "sensor2_unit",
+    "depth_in_meters",
     "signal_to_noise_ratio",
     "source_file",
     "qc_flag",
