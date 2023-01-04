@@ -98,17 +98,14 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #'   you can set it manually too.
 #' @param password ETN Data password, by default read from the environment, but
 #'   you can set it manually too.
-#'
 #' @return A string as it is ingested by other functions that need
 #'   authentication
 #' @family helper functions
 #' @noRd
-
-get_credentials <-
-  function(username = Sys.getenv("userid"),
-           password = Sys.getenv("pwd")) {
-    stringr::str_glue('list(username = "{username}", password = "{password}")')
-  }
+get_credentials <- function(username = Sys.getenv("userid"),
+                            password = Sys.getenv("pwd")) {
+  stringr::str_glue('list(username = "{username}", password = "{password}")')
+}
 
 #' Extract the OCPU temp key from a response object
 #'
