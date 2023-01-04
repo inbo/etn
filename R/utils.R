@@ -130,10 +130,10 @@ extract_temp_key <- function(response) {
 
 #' Retrieve the result of a function called to the opencpu api
 #'
-#' Loading the evaluated object into the current environment, to be used
-#' internally in functions calling the opencpu api service to convert a response
-#' object included in the response from a post request, to the corresponding
-#' objects resulting from the original call.
+#' Fetch the result of an API call to OpenCPU
+#'
+#' This function is used internally to GET an evaluated object from an OpenCPU
+#' api, to GET a result, you must of course POST a function call first
 #'
 #' @param temp_key the temp key returned from the POST request to the API
 #'
