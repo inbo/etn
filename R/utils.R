@@ -152,7 +152,7 @@ extract_temp_key <- function(response) {
 #'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
   httr::GET(
-    stringr::str_glue(
+    glue::glue(
       "{api_domain}",
       "tmp/{temp_key}/R/.val/rds",
       .sep = "/"
