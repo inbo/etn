@@ -2,9 +2,7 @@
 #'
 #' @param credentials Login credentials to the ETN database, as created by
 #'   `get_credentials()`
-#'
 #' @return A vector of all unique `id_pk` present in `common.animal_release`.
-#'
 #' @export
 list_animal_ids_api <- function(credentials = get_credentials()) {
   api_domain <- "https://opencpu.lifewatch.be"
