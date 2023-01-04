@@ -15,7 +15,7 @@ list_animal_ids_api <- function(credentials = get_credentials()) {
         con = credentials
       )
     )
-  # If request was not succesful, generate a warning
+  # If request was not successful, generate a warning
   httr::warn_for_status(response, "submit request to API server")
 
   # Parse server response JSON to a vector
