@@ -163,3 +163,20 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     gzcon() %>%
     readRDS()
 }
+
+#' Generate an error if a response doesn't have the expected content type
+#'
+#' @param response httr response object to check
+#' @param expected_content_type the mime type of the content you expect the
+#'   response to have
+#' @family helper functions
+#' @noRd
+check_content_type <- function(response, expected_content_type) {
+  assertthat::assert_that(
+    response$headers$`content-type` == expected_content_type,
+    msg = sprintf(
+      "Server returned object of type %s instead of %s",
+      response$headers$`content-type`, expected_content_type
+    )
+  )
+}
