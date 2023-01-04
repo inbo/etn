@@ -15,7 +15,14 @@ list_animal_ids_api <- function(credentials = get_credentials()) {
     )
   # If request was not successful, generate a warning
   httr::warn_for_status(response, "submit request to API server")
-
+  # Check if the response has the expected content type
+  assertthat::assert_that(
+    response$headers$`content-type` == "application/json",
+    msg = sprintf(
+      "Server returned object of type %s instead of json",
+      response$headers$`content-type`
+    )
+  )
   # Parse server response JSON to a vector
   response %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
