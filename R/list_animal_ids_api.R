@@ -10,7 +10,7 @@ list_animal_ids_api <- function(credentials = get_credentials()) {
 
   # POST the function request to the api_domain, request json as direct return
   response <-
-    httr::POST(stringr::str_glue(api_domain, function_path, "json", .sep = "/"),
+    httr::POST(glue::glue(api_domain, function_path, "json", .sep = "/"),
       body = list(
         con = credentials
       )
