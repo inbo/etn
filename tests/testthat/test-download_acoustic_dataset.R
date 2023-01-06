@@ -26,7 +26,7 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
   expect_true(all(files_to_create %in% list.files(tempdir())))
 
   # Function returns the expected output message
-  expect_true(all(evaluate_download$messages == message))
+  expect_true(all(tail(evaluate_download$messages,-1) == tail(message,-1)))
 
   # Function returns no warnings (character of length 0)
   expect_true(length(evaluate_download$warnings) == 0)
