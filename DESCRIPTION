@@ -38,7 +38,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    tidyr
+    tidyr,
+    frictionless
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
