@@ -224,11 +224,11 @@ get_acoustic_detections <- function(connection = con,
       deployment_station_name AS station_name, -- exclusive to detections_limited
       deployment_latitude AS deploy_latitude, -- exclusive to detections_limited
       deployment_longitude AS deploy_longitude, -- exclusive to detections_limited
+      det.depth_in_meters AS depth_in_meters,
       det.sensor_value AS sensor_value,
       det.sensor_unit AS sensor_unit,
       det.sensor2_value AS sensor2_value,
       det.sensor2_unit AS sensor2_unit,
-      det.depth_in_meters AS depth_in_meters,
       det.signal_to_noise_ratio AS signal_to_noise_ratio,
       det.file AS source_file,
       det.qc_flag AS qc_flag,
