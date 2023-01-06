@@ -1,8 +1,15 @@
 con <- connect_to_etn()
 
+# create a data package
+evaluate_download <- evaluate_promise({
+  download_acoustic_dataset(
+    con,
+    animal_project_code = "2014_demer",
+    directory = tempdir()
+  )
+})
+
 test_that("download_acoustic_dataset() creates the expected messages and files", {
-  download_dir <- "./temp_download"
-  dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -15,17 +22,8 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
   # Process output message
   message <- paste0(message, "\n")
 
-  # Run function
-  evaluate_download <- evaluate_promise({
-    download_acoustic_dataset(
-      con,
-      animal_project_code = "2014_demer",
-      directory = download_dir
-    )
-  })
-
   # Function creates the expected files
-  expect_true(all(sort(list.files(download_dir)) == sort(files_to_create)))
+  expect_true(all(files_to_create %in% list.files(tempdir())))
 
   # Function returns the expected output message
   expect_true(all(evaluate_download$messages == message))
