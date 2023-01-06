@@ -34,6 +34,4 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
   # Function returns no result
   expect_null(evaluate_download$result)
 
-  # Remove generated files and directories after test
-  unlink(download_dir, recursive = TRUE)
 })
