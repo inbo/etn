@@ -35,3 +35,15 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
   expect_null(evaluate_download$result)
 
 })
+
+test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
+  # fails eg. when a field was added to a get function but not to datapackage.json
+  ## load datapackage
+  datapackage <- frictionless::read_package(file.path(tempdir(),"datapackage.json"))
+  ## check for errors when reading the resource
+  expect_no_warning(frictionless::read_resource(datapackage, "animals"))
+  expect_no_warning(frictionless::read_resource(datapackage, "tags"))
+  expect_no_warning(frictionless::read_resource(datapackage, "detections"))
+  expect_no_warning(frictionless::read_resource(datapackage, "deployments"))
+  expect_no_warning(frictionless::read_resource(datapackage, "receivers"))
+})

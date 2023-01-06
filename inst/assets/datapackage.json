@@ -551,6 +551,10 @@
             "type": "number"
           },
           {
+            "name": "depth_in_meters",
+            "type": "number"
+          },
+          {
             "name": "sensor_value",
             "type": "number"
           },
