@@ -347,6 +347,26 @@
             "type": "datetime"
           },
           {
+            "name": "length",
+            "type": "number"
+          },
+          {
+            "name": "diameter",
+            "type": "number"
+          },
+          {
+            "name": "weight",
+            "type": "number"
+          },
+          {
+            "name": "floating",
+            "type": "boolean"
+          },
+          {
+            "name": "archive_memory",
+            "type": "string"
+          },
+          {
             "name": "sensor_slope",
             "type": "number"
           },
