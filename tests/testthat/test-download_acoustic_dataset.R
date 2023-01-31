@@ -8,45 +8,6 @@ evaluate_download <- evaluate_promise({
     directory = tempdir()
   )
 })
-
-test_that("download_acoustic_dataset() creates the expected messages and files", {
-  files_to_create <- c(
-    "animals.csv",
-    "tags.csv",
-    "detections.csv",
-    "deployments.csv",
-    "receivers.csv",
-    "datapackage.json"
-  )
-  message <- readLines("./test-download_acoustic_dataset-message.txt")
-  # Process output message
-  message <- paste0(message, "\n")
-
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
-
-  # Function returns the expected output message
-  expect_true(all(tail(evaluate_download$messages, -1) == tail(message, -1)))
-
-  # Function returns no warnings (character of length 0)
-  expect_true(length(evaluate_download$warnings) == 0)
-
-  # Function returns no result
-  expect_null(evaluate_download$result)
-})
-
-test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
-  # fails eg. when a field was added to a get function but not to datapackage.json
-  ## load datapackage
-  datapackage <- frictionless::read_package(file.path(tempdir(), "datapackage.json"))
-  ## check for errors when reading the resource
-  expect_no_warning(frictionless::read_resource(datapackage, "animals"))
-  expect_no_warning(frictionless::read_resource(datapackage, "tags"))
-  expect_no_warning(frictionless::read_resource(datapackage, "detections"))
-  expect_no_warning(frictionless::read_resource(datapackage, "deployments"))
-  expect_no_warning(frictionless::read_resource(datapackage, "receivers"))
-})
-
 # TODO to be moved to R/testthat-helpers.R
 fetch_schema_fields <- function(datapackage = datapackage, table_name) {
   datapackage[["resources"]][[
@@ -57,12 +18,89 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
         function(x) x[["name"]]
       )
     )
-  ]][[
-    "schema"
-  ]][["fields"]]
+    ]][[
+      "schema"
+      ]][["fields"]]
 }
 
-test_that("the created csv files have the same number of columns as the schema in datapackage.json", {
+
+test_that("download_acoustic_dataset() creates the expected files", {
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
+  )
+  # Function creates the expected files
+  expect_true(all(files_to_create %in% list.files(tempdir())))
+})
+
+test_that(paste("download_acoustic_dataset() doesn't return any warnings",
+                " for a known good dataset"), {
+          # Function returns no warnings (character of length 0)
+          expect_true(length(evaluate_download$warnings) == 0)
+          })
+
+test_that("download_acoustic_dataset() output message and summary statistics", {
+  # call download_acoustic_dataset() and capture the output, compare to a local
+  # file.
+  expect_snapshot(cat(download_acoustic_dataset(
+    con,
+    animal_project_code = "2014_demer"
+  )))
+  # After running, remove the files we just created
+  withr::defer(unlink("2014_demer"))
+})
+
+test_that("download_acoustic_dataset() creates the expected messages and files", {
+  # files_to_create <- c(
+  #   "animals.csv",
+  #   "tags.csv",
+  #   "detections.csv",
+  #   "deployments.csv",
+  #   "receivers.csv",
+  #   "datapackage.json"
+  # )
+  # message <- readLines("./test-download_acoustic_dataset-message.txt")
+  # Process output message
+  # message <- paste0(message, "\n")
+
+  # # Function creates the expected files
+  # expect_true(all(files_to_create %in% list.files(tempdir())))
+
+  # Function returns the expected output message
+  # expect_true(all(tail(evaluate_download$messages, -1) == tail(message, -1)))
+
+  # # Function returns no warnings (character of length 0)
+  # expect_true(length(evaluate_download$warnings) == 0)
+
+  # Function returns no result
+  expect_null(evaluate_download$result)
+})
+
+test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
+  # fails eg. when a field was added to a get function but not to datapackage.json
+  ## load datapackage
+  datapackage <-
+    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+  ## check for errors when reading the resource
+  expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "animals")))
+  expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "tags")))
+  expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "detections")))
+  expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "deployments")))
+  expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "receivers")))
+})
+
+
+test_that(paste("the created csv files have the same number of columns as the",
+                "schema in datapackage.json"), {
+  ## load datapackage
+  datapackage <-
+    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+  ## check the number of schema fields in the datapackage against the number of
+  ## columns in the csv files
   expect_length(
     fetch_schema_fields(datapackage, "animals"),
     ncol(readr::read_csv(file.path(tempdir(), "animals.csv"),
@@ -90,8 +128,15 @@ test_that("the created csv files have the same number of columns as the schema i
   )
 })
 
-test_that(paste("the created csv files have the columns in the same order as",
-                "the schema in datapackage.json"), {
+test_that(paste(
+  "the created csv files have the columns in the same order as",
+  "the schema in datapackage.json"
+), {
+  ## load datapackage
+  datapackage <-
+    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+  ## check if the schema fields in the data package are exactly the same
+  ## (thus also in the same order) as the header of the csv files
   expect_identical(
     sapply(
       fetch_schema_fields(datapackage, "animals"),
