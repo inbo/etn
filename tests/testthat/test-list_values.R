@@ -69,3 +69,12 @@ test_that("list_values() returns a vector with unique values", {
     df$dot_sep_col
   )
 })
+
+test_that("list_values() returns message on console", {
+  expect_message(list_values(df, "num_col"),
+                 regexp = "3 unique num_col values",
+                 fixed = TRUE)
+  expect_message(list_values(df, "chr_col", split = ","),
+                 regexp = "4 unique chr_col values",
+                 fixed = TRUE)
+})
