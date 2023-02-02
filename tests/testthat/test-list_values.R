@@ -49,23 +49,42 @@ test_that("list_values() returns error for incorrect input", {
 
 test_that("list_values() returns a vector with unique values", {
   # Output has right class
-  expect_type(list_values(df, chr_col), type = "character")
-  expect_type(list_values(df, num_col), type = "double")
+  expect_type(
+    suppressMessages(list_values(df, chr_col), type = "character")
+  )
+  expect_type(
+    suppressMessages(list_values(df, num_col), type = "double")
+  )
 
   # Output value is correct with default split value (comma)
-  expect_equal(list_values(df, chr_col), c("A", "B", "C", "D"))
+  expect_equal(
+    suppressMessages(list_values(df, chr_col)),
+    c("A", "B", "C", "D")
+  )
 
   # Output value is correct with non default split value
-  expect_equal(list_values(df, dot_sep_col, "\\."), c("A", "B", "C", "D"))
+  expect_equal(
+    suppressMessages(list_values(df, dot_sep_col, "\\.")),
+    c("A", "B", "C", "D")
+  )
 
   # Output value doesn't depend on the way column is passed
-  expect_equal(list_values(df, column = chr_col), list_values(df, "chr_col"))
-  expect_equal(list_values(df, column = chr_col), list_values(df, 1))
-  expect_equal(list_values(df, "num_col"), c(1, 2, 3))
+  expect_equal(
+    suppressMessages(list_values(df, column = chr_col)),
+    list_values(df, "chr_col")
+  )
+  expect_equal(
+    suppressMessages(list_values(df, column = chr_col)),
+    list_values(df, 1)
+  )
+  expect_equal(
+    suppressMessages(list_values(df, "num_col")),
+    c(1, 2, 3)
+  )
 
   # If the split value is not present in column, return a copy of the column
   expect_equal(
-    list_values(df, "dot_sep_col", split = ","),
+    suppressMessages(list_values(df, "dot_sep_col", split = ",")),
     df$dot_sep_col
   )
 })
