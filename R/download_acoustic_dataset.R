@@ -151,7 +151,10 @@ download_acoustic_dataset <- function(connection = con,
   detections <-
     detections %>%
     distinct(.data$detection_id, .keep_all = TRUE)
-  readr::write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
+  readr::write_csv(detections,
+    paste(directory, "detections.csv", sep = "/"),
+    na = ""
+  )
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
@@ -170,8 +173,14 @@ download_acoustic_dataset <- function(connection = con,
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments %>%
-    dplyr::mutate(comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " "))
-  readr::write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
+    dplyr::mutate(
+      comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
+    )
+  readr::write_csv(
+    deployments,
+    paste(directory, "deployments.csv", sep = "/"),
+    na = ""
+  )
 
   # RECEIVERS
   message("* (5/6): downloading receivers.csv")
@@ -184,12 +193,18 @@ download_acoustic_dataset <- function(connection = con,
     connection = connection,
     receiver_id = receiver_ids
   )
-  readr::write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
+  readr::write_csv(
+    receivers,
+    paste(directory, "receivers.csv", sep = "/"),
+    na = ""
+  )
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
   datapackage <- system.file("assets", "datapackage.json", package = "etn")
-  file.copy(datapackage, paste(directory, "datapackage.json", sep = "/"), overwrite = TRUE)
+  file.copy(datapackage,
+            paste(directory, "datapackage.json", sep = "/"),
+            overwrite = TRUE)
 
   # Create summary stats
   scientific_names <-
@@ -199,21 +214,29 @@ download_acoustic_dataset <- function(connection = con,
     sort()
 
   message("")
-  message(glue::glue("\nSummary statistics for dataset `{animal_project_code}`:"))
+  message(
+    glue::glue("\nSummary statistics for dataset `{animal_project_code}`:")
+  )
   message("* number of animals:           ", nrow(animals))
   message("* number of tags:              ", nrow(tags))
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
   if (nrow(detections) > 0) {
-    message("* first date of detection:     ", detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull())
-    message("* last date of detection:      ", detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull())
+    message("* first date of detection:     ",
+            detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>%
+              pull())
+    message("* last date of detection:      ",
+            detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>%
+              pull())
   } else {
     message("* first date of detection:     ", NA)
     message("* last date of detection:      ", NA)
   }
-  message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
-  message("* included acoustic projects:  ", paste(acoustic_project_codes, collapse = ", "))
+  message("* included scientific names:   ",
+          paste(scientific_names, collapse = ", "))
+  message("* included acoustic projects:  ",
+          paste(acoustic_project_codes, collapse = ", "))
   message("")
 
   # Create warnings
@@ -239,15 +262,28 @@ download_acoustic_dataset <- function(connection = con,
   duplicate_detections_count <- detections_orig_count - nrow(detections)
 
   if (length(animals_multiple_tags) > 0) {
-    warning("Found animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
+    warning(
+      "Found animals with multiple tags: ",
+      paste(animals_multiple_tags, collapse = ", ")
+    )
   }
   if (length(tags_multiple_animals) > 0) {
-    warning("Found tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
+    warning(
+      "Found tags associated with multiple animals: ",
+      paste(tags_multiple_animals, collapse = ", ")
+    )
   }
   if (length(orphaned_deployments) > 0) {
-    warning("Found deployments without acoustic project: ", paste(orphaned_deployments, collapse = ", "))
+    warning(
+      "Found deployments without acoustic project: ",
+      paste(orphaned_deployments, collapse = ", ")
+    )
   }
   if (duplicate_detections_count > 0) {
-    warning("Found and removed duplicate detections: ", duplicate_detections_count, " detections")
+    warning(
+      "Found and removed duplicate detections: ",
+      duplicate_detections_count,
+      " detections"
+    )
   }
 }
