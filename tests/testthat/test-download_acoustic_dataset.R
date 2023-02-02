@@ -8,21 +8,6 @@ evaluate_download <- evaluate_promise({
     directory = tempdir()
   )
 })
-# TODO to be moved to R/testthat-helpers.R
-fetch_schema_fields <- function(datapackage = datapackage, table_name) {
-  datapackage[["resources"]][[
-    match(
-      table_name,
-      sapply(
-        datapackage[["resources"]],
-        function(x) x[["name"]]
-      )
-    )
-    ]][[
-      "schema"
-      ]][["fields"]]
-}
-
 
 test_that("download_acoustic_dataset() creates the expected files", {
   files_to_create <- c(
