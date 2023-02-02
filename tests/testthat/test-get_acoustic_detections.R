@@ -70,7 +70,7 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(end_day_df$date_time))
 
   # Between
-  between_year_df <- get_acoustic_detections(con, start_date= "2015", end_date = "2016", animal_project_code = "2014_demer")
+  between_year_df <- get_acoustic_detections(con, start_date = "2015", end_date = "2016", animal_project_code = "2014_demer")
   expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(between_year_df$date_time))
   expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(between_year_df$date_time))
   between_month_df <- get_acoustic_detections(con, start_date = "2015-04", end_date = "2015-05", animal_project_code = "2014_demer")
@@ -319,8 +319,8 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   expect_equal(nrow(df_both), nrow(df_both %>% distinct(detection_id)))
 
   # Return correct animal within range
-  expect_equal(df_393 %>% distinct(animal_id) %>% pull, 393)
-  expect_equal(df_394 %>% distinct(animal_id) %>% pull, 394)
+  expect_equal(df_393 %>% distinct(animal_id) %>% pull(), 393)
+  expect_equal(df_394 %>% distinct(animal_id) %>% pull(), 394)
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
