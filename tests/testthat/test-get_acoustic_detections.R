@@ -290,7 +290,7 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
 #   # A69-1105-155 (tag_serial_number = 1712155) is associated with animal
 #   # - 4140 (OTN-Skjerstadfjorden) from 2017-05-31 01:00 to open
 #   # All detections are from before the release date, so it should return 0
-#   expect_identical(nrow(get_acoustic_detections(con, acoustic_tag_id = "A69-1105-155")), 0)
+#   expect_equal(nrow(get_acoustic_detections(con, acoustic_tag_id = "A69-1105-155")), 0)
 # })
 
 test_that("get_acoustic_detections() does not return duplicate detections across acoustic_id and acoustic_id_alternative", {
@@ -302,7 +302,7 @@ test_that("get_acoustic_detections() does not return duplicate detections across
 
   # Expect no duplicates
   df <- get_acoustic_detections(con, acoustic_tag_id = "A69-1105-100")
-  # expect_identical(nrow(df), nrow(df %>% distinct(detection_id))) # TODO: https://github.com/inbo/etn/issues/216
+  # expect_equal(nrow(df), nrow(df %>% distinct(detection_id))) # TODO: https://github.com/inbo/etn/issues/216
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
