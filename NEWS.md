@@ -3,6 +3,7 @@
 * Added a `NEWS.md` file to track changes to the package.
 * Added `depth_in_meters` field to `get_acoustic_detections()` (#261)
 * Fixed issue in `download_acoustic_dataset()` where some fields would be missing from `datapackage.json`
+* The [unit tests](https://en.wikipedia.org/wiki/Unit_testing) within the package are now even more strict in their judgement (#268)
 
 # etn 2.1.0
 
