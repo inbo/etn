@@ -71,11 +71,11 @@ test_that("list_values() returns a vector with unique values", {
   # Output value doesn't depend on the way column is passed
   expect_identical(
     suppressMessages(list_values(df, column = chr_col)),
-    list_values(df, "chr_col")
+    suppressMessages(list_values(df, "chr_col"))
   )
   expect_identical(
     suppressMessages(list_values(df, column = chr_col)),
-    list_values(df, 1)
+    suppressMessages(list_values(df, 1))
   )
   expect_identical(
     suppressMessages(list_values(df, "num_col")),
