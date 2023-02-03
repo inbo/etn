@@ -3,3 +3,17 @@
 * Added a `NEWS.md` file to track changes to the package.
 * Added `depth_in_meters` field to `get_acoustic_detections()` (#261)
 * Fixed issue in `download_acoustic_dataset()` where some fields would be missing from `datapackage.json`
+
+# etn 2.1.0
+
+* Add funder and use default README.Rmd (#247)
+* It is now possible to transforms acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF: Added `write_dwc()` function (#257)
+
+# etn 2.0.0
+
+This releases updates the package to make use of the new model and scope of ETN. Have a look at [this milestone](https://github.com/inbo/etn/milestone/2) for all issues that are included.
+
+* `tag_serial_number` is now the primary identifier for tags. Tags can have multiple types, subtypes and sensors. Acoustic information is related to the `acoustic_tag_id`.
+* `acoustic` scope remains completely covered, but is now reflected in function names. This allows us to implement additional scopes (e.g. `cpod`) in the future.
+* Deprecations for old function names.
+* New tutorial on acoustic scope ([acoustic_telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic_telemetry.Rmd)).
