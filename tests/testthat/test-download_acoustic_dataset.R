@@ -79,8 +79,7 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 })
 
 
-test_that(paste("the created csv files have the same number of columns as the",
-                "schema in datapackage.json"), {
+test_that("the csv files have the same number of columns as the schema", {
   ## load datapackage
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
