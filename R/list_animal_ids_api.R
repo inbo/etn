@@ -5,12 +5,12 @@
 #' @return A vector of all unique `id_pk` present in `common.animal_release`.
 #' @export
 list_animal_ids_api <- function(credentials = get_credentials()) {
-  endpoint <- "https://opencpu.lifewatch.be/library/etn/R/list_animal_ids"
+  endpoint <- "https://opencpu.lifewatch.be/library/etnservice/R/list_animal_ids"
   # POST the function request to the api_domain, request json as direct return
   response <-
     httr::POST(paste(endpoint, "json", sep = "/"),
       body = list(
-        con = credentials
+        credentials = credentials
       )
     )
   # If request was not successful, generate a warning
