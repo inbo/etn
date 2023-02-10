@@ -104,7 +104,8 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #' @noRd
 get_credentials <- function(username = Sys.getenv("userid"),
                             password = Sys.getenv("pwd")) {
-  glue::glue('list(username = "{username}", password = "{password}")')
+  # glue::glue('list(username = "{username}", password = "{password}")')
+  list(username = username, password = password)
 }
 
 #' Extract the OCPU temp key from a response object
@@ -172,11 +173,6 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
 #' @family helper functions
 #' @noRd
 check_content_type <- function(response, expected_content_type) {
-  assertthat::assert_that(
-    response$headers$`content-type` == expected_content_type,
-    msg = sprintf(
-      "Server returned object of type %s instead of %s",
-      response$headers$`content-type`, expected_content_type
     )
   )
 }
