@@ -204,5 +204,48 @@ check_content_type <- function(response, expected_content_type) {
   #
   #   }
 }
+
+
+#' transform list values into JSON primitives
+#'
+#' OpenCPU expects JSON data types: https://www.w3schools.com/js/js_json_datatypes.asp
+#' Thus we should transform any input to the API from R primitives to JSON primitives
+#'
+#' @param list_of_arguments
+#'
+#' @return a list with string equivalents JSON data objects equivalent to the input
+#'
+#' @family helper functions
+#' @noRd
+as_json_primitive <- function(list_of_arguments) {
+  assertthat::assert_that(is.list(list_of_arguments),
+                          msg = sprintf("Expected a list but got a %s",
+                                        class(list_of_arguments))
   )
+  not_null_arguments <- list_of_arguments[lengths(list_of_arguments) != 0]
+
+  lapply(not_null_arguments,
+         function(x)
+           ifelse(is.logical(x), tolower(as.character(x)), x))
+
+  lapply(not_null_arguments,
+         function(argument) {
+           dplyr::case_when(
+             names(argument) == "credentials" ~ argument,
+             # is.logical(argument) ~ tolower(as.character(argument))
+             is.character(argument) ~ sprintf('"%s"',argument)
+           )
+         })
+}
+
+#' Return the arguments as a named list of the parent environment
+#'
+#' Because the requests to the API are so similar, it's more DRY to pass the
+#' function arguments of the parent function directly to the API, instead of
+#' repeating them in the function body.
+#'
+#' @return a named list of name value pairs form the parent environement
+#'
+#' @family helper functions
+#' @noRd
 }
