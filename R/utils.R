@@ -167,12 +167,42 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
 
 #' Generate an error if a response doesn't have the expected content type
 #'
+#' Will also forward any errors opencpu generates as R errors (calls to stop())
+#'
 #' @param response httr response object to check
 #' @param expected_content_type the mime type of the content you expect the
 #'   response to have
 #' @family helper functions
 #' @noRd
 check_content_type <- function(response, expected_content_type) {
+  # if the status is 400: opencpu reports an R error, forward this error but
+  # omit the call as the error is outside of this package (but on etnservice
+  # side)
+  if (response$status_code == 400) {
+    err_msg <- rawToChar(response$content)
+    # remove the In call: suffix of the error message, not useful for
+    # client-side users
+    err_msg %>%
+      stringr::str_remove(
+        stringr::regex("In call:.+", multiline = TRUE, dotall = TRUE)) %>%
+      trimws() %>% # get rid of trailing newlines
+    stop(call. = FALSE)
+  } else {
+    # return an error if the returned object is not of the expected type
+    assertthat::assert_that(
+      response$headers$`content-type` == expected_content_type,
+      msg = sprintf(
+        "Server returned object of type %s instead of %s",
+        response$headers$`content-type`,
+        expected_content_type
+      )
     )
+  }
+  # if(response$headers$`content-type` != expected_content_type &
+  #    response$headers$`content-type` == "text/html") {
+  #   stop(httr::content(response, as = "text", encoding = "UTF-8"))
+  #
+  #   }
+}
   )
 }
