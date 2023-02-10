@@ -248,4 +248,13 @@ as_json_primitive <- function(list_of_arguments) {
 #'
 #' @family helper functions
 #' @noRd
+return_parent_arguments <- function(){
+  # lock in the environment of the function we are being called in. Otherwise
+  # lazy evaluation can cause trouble
+  parent_env <- rlang::caller_env()
+  env_names <- rlang::env_names(parent_env)
+  # set the environement names so lapply can output a names list
+  names(env_names) <- env_names
+  lapply(env_names,
+         function(x) rlang::env_get(env = parent_env, nm = x))
 }
