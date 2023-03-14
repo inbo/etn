@@ -46,7 +46,7 @@ test_that("get_acoustic_receivers() returns the expected columns", {
     "ar_tilt_code",
     "ar_tilt_after_deploy"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_receivers() allows selecting on receiver_id", {
@@ -57,7 +57,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   # Select single value
   single_select <- "VR2W-124070" # From demer
   single_select_df <- get_acoustic_receivers(con, receiver_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(receiver_id) %>% pull(),
     c(single_select)
   )
@@ -66,7 +66,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
   multi_select_df <- get_acoustic_receivers(con, receiver_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -83,7 +83,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   # Select single value
   single_select <- "broken"
   single_select_df <- get_acoustic_receivers(con, status = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(status) %>% pull(),
     c(single_select)
   )
@@ -92,7 +92,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   # Select multiple values
   multi_select <- c("broken", "lost")
   multi_select_df <- get_acoustic_receivers(con, status = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(status) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -102,5 +102,5 @@ test_that("get_acoustic_receivers() allows selecting on status", {
 test_that("get_acoustic_receivers() does not return cpod receivers", {
   # POD-3330 is a cpod receiver
   df <- get_acoustic_receivers(con, receiver_id = "POD-3330")
-  expect_equal(nrow(df), 0)
+  expect_identical(nrow(df), 0L)
 })

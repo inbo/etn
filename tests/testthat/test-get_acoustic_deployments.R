@@ -15,7 +15,7 @@ test_that("get_acoustic_deployments() returns a tibble", {
 
 test_that("get_acoustic_deployments() returns unique deployment_id", {
   df <- get_acoustic_deployments(con)
-  expect_equal(nrow(df), nrow(df %>% distinct(deployment_id)))
+  expect_identical(nrow(df), nrow(df %>% distinct(deployment_id)))
 })
 
 test_that("get_acoustic_deployments() returns the expected columns", {
@@ -60,7 +60,7 @@ test_that("get_acoustic_deployments() returns the expected columns", {
     "log_depth_sample_period",
     "comments"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_deployments() allows selecting on deployment_id", {
@@ -69,9 +69,9 @@ test_that("get_acoustic_deployments() allows selecting on deployment_id", {
   expect_error(get_acoustic_deployments(con, deployment_id = c("1437", "not_a_deployment_id")))
 
   # Select single value
-  single_select <- 1437 # From demer
+  single_select <- 1437L # From demer
   single_select_df <- get_acoustic_deployments(con, deployment_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(deployment_id) %>% pull(),
     c(single_select)
   )
@@ -80,7 +80,7 @@ test_that("get_acoustic_deployments() allows selecting on deployment_id", {
   # Select multiple values
   multi_select <- c("1437", 1588) # Characters are allowed
   multi_select_df <- get_acoustic_deployments(con, deployment_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(deployment_id) %>% pull() %>% sort(),
     c(as.integer(multi_select)) # Output will be all integer
   )
@@ -95,7 +95,7 @@ test_that("get_acoustic_deployments() allows selecting on receiver_id", {
   # Select single value
   single_select <- "VR2W-124070" # From demer
   single_select_df <- get_acoustic_deployments(con, receiver_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(receiver_id) %>% pull(),
     c(single_select)
   )
@@ -104,7 +104,7 @@ test_that("get_acoustic_deployments() allows selecting on receiver_id", {
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
   multi_select_df <- get_acoustic_deployments(con, receiver_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -119,14 +119,14 @@ test_that("get_acoustic_deployments() allows selecting on acoustic_project_code"
   # Select single value
   single_select <- "demer"
   single_select_df <- get_acoustic_deployments(con, acoustic_project_code = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
-  expect_equal(
+  expect_identical(
     get_acoustic_deployments(con, acoustic_project_code = "demer"),
     get_acoustic_deployments(con, acoustic_project_code = "DEMER")
   )
@@ -134,7 +134,7 @@ test_that("get_acoustic_deployments() allows selecting on acoustic_project_code"
   # Select multiple values
   multi_select <- c("demer", "dijle")
   multi_select_df <- get_acoustic_deployments(con, acoustic_project_code = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -149,7 +149,7 @@ test_that("get_acoustic_deployments() allows selecting on station_name", {
   # Select single value
   single_select <- "de-9" # From demer
   single_select_df <- get_acoustic_deployments(con, station_name = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(station_name) %>% pull(),
     c(single_select)
   )
@@ -158,7 +158,7 @@ test_that("get_acoustic_deployments() allows selecting on station_name", {
   # Select multiple values
   multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
   multi_select_df <- get_acoustic_deployments(con, station_name = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -174,7 +174,7 @@ test_that("get_acoustic_deployments() allows selecting on open deployments only"
 
   # Default returns all
   default_df <- get_acoustic_deployments(con, acoustic_project_code = "ws1")
-  expect_equal(default_df, all_df)
+  expect_identical(default_df, all_df)
 
   # Open only returns deployments with no end date
   open_only_df <- get_acoustic_deployments(con, acoustic_project_code = "ws1", open_only = TRUE)
@@ -196,5 +196,5 @@ test_that("get_acoustic_deployments() allows selecting on multiple parameters", 
 test_that("get_acoustic_deployments() does not return cpod deployments", {
   # POD-3330 is a cpod receiver
   df <- get_acoustic_deployments(con, receiver_id = "POD-3330")
-  expect_equal(nrow(df), 0)
+  expect_identical(nrow(df), 0L)
 })
