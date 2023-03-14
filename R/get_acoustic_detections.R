@@ -199,7 +199,7 @@ get_acoustic_detections <- function(connection = con,
   # Check limit
   assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
-    limit_query <- glue::glue_sql("LIMIT 100", .con = connection)
+    limit_query <- glue::glue_sql("ORDER BY det.id_pk LIMIT 100", .con = connection)
   } else {
     limit_query <- glue::glue_sql("LIMIT ALL}", .con = connection)
   }
