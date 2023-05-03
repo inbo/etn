@@ -7,19 +7,23 @@ test_that("get_acoustic_detections() returns error for incorrect connection", {
   )
 })
 
+# store the first 100 rows of the acoustic detections data for use in tests
+df <- get_acoustic_detections(con, limit = TRUE)
+
 test_that("get_acoustic_detections() returns a tibble", {
-  df <- get_acoustic_detections(con, limit = TRUE)
+  # df <- get_acoustic_detections(con, limit = TRUE)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
 
 test_that("get_acoustic_detections() returns unique detection_id", {
-  df <- get_acoustic_detections(con, limit = TRUE)
-  expect_identical(nrow(df), nrow(df %>% distinct(detection_id)))
+  # df <- get_acoustic_detections(con, limit = TRUE)
+  # expect_identical(nrow(df), nrow(df %>% distinct(detection_id)))
+  expect_identical(nrow(df), length(unique(df$detection_id)))
 })
 
 test_that("get_acoustic_detections() returns the expected columns", {
-  df <- get_acoustic_detections(con, limit = TRUE)
+  # df <- get_acoustic_detections(con, limit = TRUE)
   expected_col_names <- c(
     "detection_id",
     "date_time",
@@ -121,8 +125,13 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
   # Selection is case insensitive
   expect_identical(
-    get_acoustic_detections(con, animal_project_code = "2014_demer", limit = TRUE),
-    get_acoustic_detections(con, animal_project_code = "2014_DEMER", limit = TRUE)
+    # a limited query doesn't always return the same results, the order isn't guaranteed
+    arrange(
+      get_acoustic_detections(con, animal_project_code = "2014_demer", limit = FALSE),
+      detection_id),
+    arrange(
+      get_acoustic_detections(con, animal_project_code = "2014_DEMER", limit = FALSE),
+      detection_id)
   )
 
   # Select multiple values
@@ -176,8 +185,11 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
   # Selection is case insensitive
   expect_identical(
-    get_acoustic_detections(con, acoustic_project_code = "demer", limit = TRUE),
-    get_acoustic_detections(con, acoustic_project_code = "DEMER", limit = TRUE)
+    # a limit doesn't guarantee the same records get returned every time
+    arrange(
+      get_acoustic_detections(con, acoustic_project_code = "demer", limit = FALSE),
+      detection_id),
+    get_acoustic_detections(con, acoustic_project_code = "DEMER", limit = FALSE)
   )
 
   # Select multiple values
