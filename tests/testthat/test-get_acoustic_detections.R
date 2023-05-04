@@ -186,10 +186,12 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
   # Selection is case insensitive
   expect_identical(
     # a limit doesn't guarantee the same records get returned every time
-    arrange(
+    dplyr::arrange(
       get_acoustic_detections(con, acoustic_project_code = "demer", limit = FALSE),
       detection_id),
-    get_acoustic_detections(con, acoustic_project_code = "DEMER", limit = FALSE)
+    dplyr::arrange(
+      get_acoustic_detections(con, acoustic_project_code = "DEMER", limit = FALSE),
+      detection_id)
   )
 
   # Select multiple values
