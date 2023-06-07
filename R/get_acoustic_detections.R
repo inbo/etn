@@ -98,8 +98,8 @@ get_acoustic_detections <- function(start_date = NULL,
 
   # either use the API helper or the SQL helper depending on the api argument
   ifelse(api,
-         do.call(get_acoustic_detections_api(),arguments_to_pass),
-         do.call(get_acoustic_detections_sql(), arguments_to_pass)
+         do.call(get_acoustic_detections_api, arguments_to_pass),
+         do.call(get_acoustic_detections_sql, arguments_to_pass)
          )
 }
 
