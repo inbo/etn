@@ -128,7 +128,9 @@ get_acoustic_detections_api <- function(start_date,
   #)
   ## get rid of _api in the function name, etnservice doesn't use this suffix
   function_identity <-
-    gsub("_api", "", deparse(match.call()[[1]]))
+    stringr::str_extract(
+      deparse(sys.calls()[[1]]),
+      "[a-z_]+(?=\\()")
 
   endpoint <-
     sprintf(
