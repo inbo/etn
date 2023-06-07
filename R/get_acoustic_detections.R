@@ -132,7 +132,7 @@ get_acoustic_detections_api <- function(start_date,
 
   endpoint <-
     sprintf(
-      "https://opencpu.lifewatch.be/library/etnservice/R/%s",
+      "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
       function_identity
     )
   ## OPENCPU uses JSON primitives, so we have to fetch and convert the function
