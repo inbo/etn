@@ -135,29 +135,35 @@ get_acoustic_detections_api <- function(start_date = NULL,
   ## arguments before sending them as the request body
   response <-
     httr::POST(
-      url = paste(endpoint, "json", sep = "/"),
+      # url = paste(endpoint, "json", sep = "/"),
+      url = endpoint,
       body = payload,
       encode = "json"
     )
+
+  rda_out <-
+    extract_temp_key(response) %>%
+    get_val()
+  return(rda_out)
 
   # Check if the response has the expected content type, if the server returns
   # an error stop and return it
 
   # TODO if it's text/html, its probably an error message: forward as an error
   # in check_content_type?
-  check_content_type(response, "application/json")
+  # check_content_type(response, "application/json")
 
   # If request was not successful, generate a warning
   # ISSUE conflict with check_content_type()
   httr::warn_for_status(response, "submit request to API server")
   # Parse server response JSON to a vector
   # all etn functions output tibbles instead of data.frames
-  response %>%
-    httr::content(as = "text", encoding = "UTF-8") %>%
-    jsonlite::fromJSON(simplifyVector = TRUE) %>%
-    dplyr::as_tibble() %>%
-    readr::format_csv() %>% #abuse parser to get column classes back :()
-    readr::read_csv()
+  # response %>%
+  #   httr::content(as = "text", encoding = "UTF-8") %>%
+  #   jsonlite::fromJSON(simplifyVector = TRUE) %>%
+  #   dplyr::as_tibble() %>%
+  #   readr::format_csv() %>% #abuse parser to get column classes back :()
+  #   readr::read_csv()
 }
 
 get_acoustic_detections_sql <- function(start_date = NULL,
