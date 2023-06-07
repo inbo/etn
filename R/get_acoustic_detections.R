@@ -150,13 +150,27 @@ get_acoustic_detections_api <- function(start_date,
     )
   ## OPENCPU uses JSON primitives, so we have to fetch and convert the function
   ## arguments before sending them as the request body
+
+  # retry if server responds with http error, default retry settings of httr
   response <-
-    httr::POST(
-      # url = paste(endpoint, "json", sep = "/"),
+    httr::RETRY(
+      verb = "POST",
       url = endpoint,
       body = payload,
-      encode = "json"
+      encode = "json",
+      terminate_on = c(400)
     )
+
+  # If etnservice forwarded an error, stop
+  assertthat::assert_that(response$status_code != 400,
+                          msg = httr::content(response, as = "text", encoding = "UTF-8"))
+
+  # Stop for other errors
+  assertthat::assert_that(!httr::http_error(response),
+                          msg = glue::glue(
+                            "API request failed: {http_message}",
+                            http_message = httr::http_status(response)$message)
+  )
 
   # output
   get_val(extract_temp_key(response))
