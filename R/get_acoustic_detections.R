@@ -94,7 +94,9 @@ get_acoustic_detections <- function(start_date = NULL,
     )
   }
   # pass arguments to helper functions, except connection and api
-  arguments_to_pass <- head(return_parent_arguments(), -2)
+  arguments_to_pass <-
+    return_parent_arguments()[
+      !names(return_parent_arguments()) %in% c("api", "connection")]
 
   # either use the API helper or the SQL helper depending on the api argument
   # ifelse(api,
@@ -136,7 +138,9 @@ get_acoustic_detections_api <- function(start_date,
   function_identity <-
     stringr::str_extract(
       # deparse(sys.calls()[[1]]),
-      deparse(sys.status()$sys.calls[[sys.parent()]]),
+      paste(
+        deparse(sys.status()$sys.calls[[sys.parent()]]),
+        collapse = ""),
       "[a-z_]+(?=\\()")
 
   endpoint <-
