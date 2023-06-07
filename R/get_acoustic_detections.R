@@ -104,6 +104,11 @@ get_acoustic_detections <- function(start_date = NULL,
          )
 }
 
+#' get_acoustic_detections() api helper
+#'
+#' @inheritParams get_acoustic_detections()
+#' @noRd
+#'
 get_acoustic_detections_api <- function(start_date = NULL,
                                         end_date = NULL,
                                         acoustic_tag_id = NULL,
