@@ -108,15 +108,15 @@ get_acoustic_detections <- function(start_date = NULL,
 #' @inheritParams get_acoustic_detections()
 #' @noRd
 #'
-get_acoustic_detections_api <- function(start_date = NULL,
-                                        end_date = NULL,
-                                        acoustic_tag_id = NULL,
-                                        animal_project_code = NULL,
-                                        scientific_name = NULL,
-                                        acoustic_project_code = NULL,
-                                        receiver_id = NULL,
-                                        station_name = NULL,
-                                        limit = FALSE){
+get_acoustic_detections_api <- function(start_date,
+                                        end_date,
+                                        acoustic_tag_id,
+                                        animal_project_code,
+                                        scientific_name,
+                                        acoustic_project_code,
+                                        receiver_id,
+                                        station_name,
+                                        limit){
   # I want the following block to be universal for all API functions, so
   # independent of the function name which is part of the URL
   credentials <- get_credentials()
