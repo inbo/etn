@@ -97,10 +97,16 @@ get_acoustic_detections <- function(start_date = NULL,
   arguments_to_pass <- head(return_parent_arguments(), -2)
 
   # either use the API helper or the SQL helper depending on the api argument
-  ifelse(api,
-         do.call(get_acoustic_detections_api, arguments_to_pass),
-         do.call(get_acoustic_detections_sql, arguments_to_pass)
-         )
+  # ifelse(api,
+  #        do.call(get_acoustic_detections_api, arguments_to_pass),
+  #        do.call(get_acoustic_detections_sql, arguments_to_pass)
+  #        )
+  if(api){
+    out <- do.call(get_acoustic_detections_api, arguments_to_pass)
+  } else {
+    out <- do.call(get_acoustic_detections_sql, arguments_to_pass)
+  }
+  return(out)
 }
 
 #' get_acoustic_detections() api helper
@@ -129,7 +135,8 @@ get_acoustic_detections_api <- function(start_date,
   ## get rid of _api in the function name, etnservice doesn't use this suffix
   function_identity <-
     stringr::str_extract(
-      deparse(sys.calls()[[1]]),
+      # deparse(sys.calls()[[1]]),
+      deparse(sys.status()$sys.calls[[sys.parent()]]),
       "[a-z_]+(?=\\()")
 
   endpoint <-
@@ -147,10 +154,9 @@ get_acoustic_detections_api <- function(start_date,
       encode = "json"
     )
 
-  rda_out <-
-    extract_temp_key(response) %>%
-    get_val()
-  return(rda_out)
+  # output
+  get_val(extract_temp_key(response))
+
 
   # Check if the response has the expected content type, if the server returns
   # an error stop and return it
@@ -161,15 +167,8 @@ get_acoustic_detections_api <- function(start_date,
 
   # If request was not successful, generate a warning
   # ISSUE conflict with check_content_type()
-  httr::warn_for_status(response, "submit request to API server")
-  # Parse server response JSON to a vector
-  # all etn functions output tibbles instead of data.frames
-  # response %>%
-  #   httr::content(as = "text", encoding = "UTF-8") %>%
-  #   jsonlite::fromJSON(simplifyVector = TRUE) %>%
-  #   dplyr::as_tibble() %>%
-  #   readr::format_csv() %>% #abuse parser to get column classes back :()
-  #   readr::read_csv()
+    # httr::warn_for_status(response, "submit request to API server")
+
 }
 
 get_acoustic_detections_sql <- function(start_date = NULL,
