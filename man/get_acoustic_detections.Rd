@@ -5,7 +5,6 @@
 \title{Get acoustic detections data}
 \usage{
 get_acoustic_detections(
-  connection = con,
   start_date = NULL,
   end_date = NULL,
   acoustic_tag_id = NULL,
@@ -14,12 +13,12 @@ get_acoustic_detections(
   acoustic_project_code = NULL,
   receiver_id = NULL,
   station_name = NULL,
-  limit = FALSE
+  limit = FALSE,
+  api = TRUE,
+  connection = NULL
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{start_date}{Character. Start date (inclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
 
@@ -43,6 +42,8 @@ names.}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}

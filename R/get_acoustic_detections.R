@@ -74,8 +74,93 @@
 #'   receiver_id = "VR2W-124070",
 #'   acoustic_project_code = "demer"
 #' )
-get_acoustic_detections <- function(connection = con,
-                                    start_date = NULL,
+get_acoustic_detections <- function(start_date = NULL,
+                                    end_date = NULL,
+                                    acoustic_tag_id = NULL,
+                                    animal_project_code = NULL,
+                                    scientific_name = NULL,
+                                    acoustic_project_code = NULL,
+                                    receiver_id = NULL,
+                                    station_name = NULL,
+                                    limit = FALSE,
+                                    api = TRUE,
+                                    connection = NULL){
+  if(lifecycle::is_present(connection)){
+    lifecycle::deprecate_warn(
+  when = "v3.0.0",
+  what = "get_acoustic_detections(connection)",
+  details = glue::glue("Please set `api = FALSE` to use local database, ",
+                       "otherwise the API will be used")
+    )
+  }
+  # pass arguments to helper functions, except connection which is always the
+  # last element
+  arguments_to_pass <- head(return_parent_arguments(), -1)
+
+  # either use the API helper or the SQL helper depending on the api argument
+  ifelse(api,
+         do.call(get_acoustic_detections_api(),arguments_to_pass),
+         do.call(get_acoustic_detections_sql(), arguments_to_pass)
+         )
+}
+
+get_acoustic_detections_api <- function(start_date = NULL,
+                                        end_date = NULL,
+                                        acoustic_tag_id = NULL,
+                                        animal_project_code = NULL,
+                                        scientific_name = NULL,
+                                        acoustic_project_code = NULL,
+                                        receiver_id = NULL,
+                                        station_name = NULL,
+                                        limit = FALSE){
+  # I want the following block to be universal for all API functions, so
+  # independent of the function name which is part of the URL
+  credentials <- get_credentials()
+  ## first retrieve the arguments from the function environment, before we
+  ## create any other objects, parse it as json primitives because that's what
+  ## opencpu expects
+  payload <- #as_json_primitive(
+    return_parent_arguments()
+  #)
+  ## get rid of _api in the function name, etnservice doesn't use this suffix
+  function_identity <-
+    gsub("_api", "", deparse(match.call()[[1]]))
+
+  endpoint <-
+    sprintf(
+      "https://opencpu.lifewatch.be/library/etnservice/R/%s",
+      function_identity
+    )
+  ## OPENCPU uses JSON primitives, so we have to fetch and convert the function
+  ## arguments before sending them as the request body
+  response <-
+    httr::POST(
+      url = paste(endpoint, "json", sep = "/"),
+      body = payload,
+      encode = "json"
+    )
+
+  # Check if the response has the expected content type, if the server returns
+  # an error stop and return it
+
+  # TODO if it's text/html, its probably an error message: forward as an error
+  # in check_content_type?
+  check_content_type(response, "application/json")
+
+  # If request was not successful, generate a warning
+  # ISSUE conflict with check_content_type()
+  httr::warn_for_status(response, "submit request to API server")
+  # Parse server response JSON to a vector
+  # all etn functions output tibbles instead of data.frames
+  response %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON(simplifyVector = TRUE) %>%
+    dplyr::as_tibble() %>%
+    readr::format_csv() %>% #abuse parser to get column classes back :()
+    readr::read_csv()
+}
+
+get_acoustic_detections_sql <- function(start_date = NULL,
                                     end_date = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
@@ -84,6 +169,8 @@ get_acoustic_detections <- function(connection = con,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
