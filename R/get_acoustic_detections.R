@@ -93,9 +93,8 @@ get_acoustic_detections <- function(start_date = NULL,
                        "otherwise the API will be used")
     )
   }
-  # pass arguments to helper functions, except connection which is always the
-  # last element
-  arguments_to_pass <- head(return_parent_arguments(), -1)
+  # pass arguments to helper functions, except connection and api
+  arguments_to_pass <- head(return_parent_arguments(), -2)
 
   # either use the API helper or the SQL helper depending on the api argument
   ifelse(api,
