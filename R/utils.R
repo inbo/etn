@@ -190,3 +190,46 @@ return_parent_arguments <- function(){
   lapply(env_names,
          function(x) rlang::env_get(env = parent_env, nm = x))
 }
+
+#' Check an OpenCPU reponse object and forward any errors
+#'
+#' @param response httr::response object from an OpenCPU API call
+#'
+#' @family helper functions
+#' @noRd
+check_opencpu_response <- function(response) {
+  # Stop if etnservice forwarded an error
+  assertthat::assert_that(response$status_code != 400,
+    msg = httr::content(response,
+      as = "text",
+      encoding = "UTF-8"
+    )
+  )
+
+  # Stop for other HTTP errors
+  assertthat::assert_that(!httr::http_error(response),
+    msg = glue::glue(
+      "API request failed: {http_message}",
+      http_message = httr::http_status(response)$message
+    )
+  )
+}
+
+
+#' Lifecycle warning for the deprecated connection argument
+#'
+#' @param function_identity Character of length one with the name
+#'   of the function the warning is being generated from
+#'
+#' @family helper functions
+#' @noRd
+deprecate_warn_connection <- function(function_identity){
+  lifecycle::deprecate_warn(
+    when = "v3.0.0",
+    what = glue::glue("{function_identity}(connection)"),
+    details = glue::glue("Please set `api = FALSE` to use local database, ",
+                         "otherwise the API will be used"),
+    env = rlang::caller_env(),
+    user_env = rlang::caller_env(2)
+  )
+}
