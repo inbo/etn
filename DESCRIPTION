@@ -33,6 +33,7 @@ Imports:
     odbc,
     purrr,
     readr,
+    rlang,
     stringr
 Suggests:
     formattable,
