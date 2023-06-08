@@ -15,7 +15,7 @@ get_acoustic_detections(
   station_name = NULL,
   limit = FALSE,
   api = TRUE,
-  connection = NULL
+  connection
 )
 }
 \arguments{

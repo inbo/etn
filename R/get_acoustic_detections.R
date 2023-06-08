@@ -84,7 +84,7 @@ get_acoustic_detections <- function(start_date = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
                                     api = TRUE,
-                                    connection = NULL){
+                                    connection){
   if(lifecycle::is_present(connection)){
     lifecycle::deprecate_warn(
   when = "v3.0.0",
@@ -98,11 +98,6 @@ get_acoustic_detections <- function(start_date = NULL,
     return_parent_arguments()[
       !names(return_parent_arguments()) %in% c("api", "connection")]
 
-  # either use the API helper or the SQL helper depending on the api argument
-  # ifelse(api,
-  #        do.call(get_acoustic_detections_api, arguments_to_pass),
-  #        do.call(get_acoustic_detections_sql, arguments_to_pass)
-  #        )
   if(api){
     out <- do.call(get_acoustic_detections_api, arguments_to_pass)
   } else {
@@ -175,20 +170,12 @@ get_acoustic_detections_api <- function(start_date,
   # output
   get_val(extract_temp_key(response))
 
-
-  # Check if the response has the expected content type, if the server returns
-  # an error stop and return it
-
-  # TODO if it's text/html, its probably an error message: forward as an error
-  # in check_content_type?
-  # check_content_type(response, "application/json")
-
-  # If request was not successful, generate a warning
-  # ISSUE conflict with check_content_type()
-    # httr::warn_for_status(response, "submit request to API server")
-
 }
-
+#' get_acoustic_detections() sql helper
+#'
+#' @inheritParams get_acoustic_detections()
+#' @noRd
+#'
 get_acoustic_detections_sql <- function(start_date = NULL,
                                     end_date = NULL,
                                     acoustic_tag_id = NULL,
