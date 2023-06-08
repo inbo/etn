@@ -1,7 +1,5 @@
-con <- connect_to_etn()
-
 test_that("list_acoustic_project_codes() returns unique list of values", {
-  vector <- list_acoustic_project_codes(con)
+  vector <- list_acoustic_project_codes()
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
