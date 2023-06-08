@@ -126,9 +126,12 @@ get_acoustic_detections_api <- function(start_date,
   ## Retrieve the arguments from the function environment
   payload <- return_parent_arguments()
 
+  ## Lock in the name of the parent function, used to determine what function to
+  ## forward to the API
+
+  ### TODO: write helper that can handle complex nesting, eg. in tests.
   function_identity <-
     stringr::str_extract(
-      # deparse(sys.calls()[[1]]),
       paste(
         deparse(sys.status()$sys.calls[[sys.parent()]]),
         collapse = ""),
@@ -151,16 +154,8 @@ get_acoustic_detections_api <- function(start_date,
       terminate_on = c(400)
     )
 
-  # Stop if etnservice forwarded an error
-  assertthat::assert_that(response$status_code != 400,
-                          msg = httr::content(response, as = "text", encoding = "UTF-8"))
-
-  # Stop for other HTTP errors
-  assertthat::assert_that(!httr::http_error(response),
-                          msg = glue::glue(
-                            "API request failed: {http_message}",
-                            http_message = httr::http_status(response)$message)
-  )
+  # Check if the response contains any errors, and forward them if so.
+  check_opencpu_response(response)
 
   # Fetch the output from the API: call 2
   get_val(extract_temp_key(response))
