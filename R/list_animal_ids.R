@@ -6,18 +6,9 @@
 #' @export
 list_animal_ids <- function(api = TRUE,
                             connection) {
-  ## Lock in the name of the parent function, used to determine what function to
-  ## forward to the API
-
-  ### TODO: write helper that can handle complex nesting, eg. in tests.
+  # Lock in the name of the parent function
   function_identity <-
-    stringr::str_extract(
-      paste(
-        deparse(sys.status()$sys.calls[[sys.parent(n = 0)]]),
-        collapse = ""
-      ),
-      "[a-z_]+(?=\\()"
-    )
+    get_parent_fn_name()
 
   # the connection argument has been depriciated
   if (lifecycle::is_present(connection)) {
@@ -47,17 +38,10 @@ list_animal_ids_api <- function(){
   ## Retrieve the arguments from the function environment
   payload <- return_parent_arguments()
 
-  ## Lock in the name of the parent function, used to determine what function to
+  ## Fetch the name of the parent function, used to determine what function to
   ## forward to the API
-
-  ### TODO: write helper that can handle complex nesting, eg. in tests.
   function_identity <-
-    stringr::str_extract(
-      paste(
-        deparse(sys.status()$sys.calls[[sys.parent()]]),
-        collapse = ""),
-      "[a-z_]+(?=\\()")
-
+    stringr::str_remove(get_parent_fn_name(),"_api")
   endpoint <-
     sprintf(
       "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
