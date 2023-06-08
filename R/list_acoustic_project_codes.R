@@ -42,7 +42,6 @@ list_acoustic_project_codes_sql <- function(){
   connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
-
   project_sql <- glue::glue_sql(
     readr::read_file(system.file("sql", "project.sql", package = "etn")),
     .con = connection
