@@ -104,8 +104,13 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #' @noRd
 get_credentials <- function(username = Sys.getenv("userid"),
                             password = Sys.getenv("pwd")) {
+  if(Sys.getenv("userid") == ""){
+    message("No credentials stored, prompting..")
+    Sys.setenv(userid = readline(prompt = "Please enter a userid: "))
+    Sys.setenv(pwd = askpass::askpass())
+  }
   # glue::glue('list(username = "{username}", password = "{password}")')
-  list(username = username, password = password)
+  invisible(list(username = username, password = password))
 }
 
 #' Extract the OCPU temp key from a response object
