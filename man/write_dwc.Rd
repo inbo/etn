@@ -9,7 +9,7 @@ write_dwc(
   animal_project_code,
   directory = ".",
   rights_holder = NULL,
-  license = "CC0"
+  license = "CC-BY"
 )
 }
 \arguments{
@@ -18,7 +18,9 @@ write_dwc(
 \item{animal_project_code}{Animal project code.}
 
 \item{directory}{Path to local directory to write file(s) to.
-Existing files of the same name will be overwritten.}
+If \code{NULL}, then a list of data frames is returned instead, which can be
+useful for extending/adapting the Darwin Core mapping before writing with
+\code{\link[readr:write_delim]{readr::write_csv()}}.}
 
 \item{rights_holder}{Acronym of the organization owning or managing the
 rights over the data.}
@@ -26,12 +28,13 @@ rights over the data.}
 \item{license}{Identifier of the license under which the data will be
 published.
 \itemize{
-\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}} (default).
-\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}}.
+\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}} (default).
+\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
 }}
 }
 \value{
-CSV file(s) written to disk.
+CSV file(s) written to disk or list of data frames when
+\code{directory = NULL}.
 }
 \description{
 Transforms and downloads data from a European Tracking Network

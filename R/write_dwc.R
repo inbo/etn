@@ -9,14 +9,17 @@
 #' @param connection Connection to the ETN database.
 #' @param animal_project_code Animal project code.
 #' @param directory Path to local directory to write file(s) to.
-#'   Existing files of the same name will be overwritten.
+#'   If `NULL`, then a list of data frames is returned instead, which can be
+#'   useful for extending/adapting the Darwin Core mapping before writing with
+#'   [readr::write_csv()].
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
 #'   published.
-#'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode) (default).
-#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode).
-#' @return CSV file(s) written to disk.
+#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
+#'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#' @return CSV file(s) written to disk or list of data frames when
+#'   `directory = NULL`.
 #' @export
 #' @section Transformation details:
 #' Data are transformed into an
@@ -44,7 +47,7 @@ write_dwc <- function(connection = con,
                       animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
-                      license = "CC0") {
+                      license = "CC-BY") {
   # Check connection
   check_connection(connection)
 
@@ -55,7 +58,7 @@ write_dwc <- function(connection = con,
   )
 
   # Check license
-  licenses <- c("CC0", "CC-BY")
+  licenses <- c("CC-BY", "CC0")
   assertthat::assert_that(
     license %in% licenses,
     msg = glue::glue(
@@ -66,7 +69,7 @@ write_dwc <- function(connection = con,
   license <- switch(
     license,
     "CC-BY" = "https://creativecommons.org/licenses/by/4.0/legalcode",
-    "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+    "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
   )
 
   # Get imis dataset id and title
@@ -85,15 +88,21 @@ write_dwc <- function(connection = con,
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
-  # Write files
-  dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
-  message(glue::glue(
-    "Writing data to:",
-    dwc_occurrence_path,
-    .sep = "\n"
-  ))
-  if (!dir.exists(directory)) {
-    dir.create(directory, recursive = TRUE)
+  # Return object or write files
+  if (is.null(directory)) {
+    list(
+      dwc_occurrence = dplyr::as_tibble(dwc_occurrence)
+    )
+  } else {
+    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
+    message(glue::glue(
+      "Writing data to:",
+      dwc_occurrence_path,
+      .sep = "\n"
+    ))
+    if (!dir.exists(directory)) {
+      dir.create(directory, recursive = TRUE)
+    }
+    readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
   }
-  readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
 }

@@ -17,11 +17,11 @@ test_that("check_value() returns error for incorrect values", {
 })
 
 test_that("check_value() returns x for correct values", {
-  expect_equal(
+  expect_identical(
     check_value("a", c("a", "b")),
     "a"
   )
-  expect_equal(
+  expect_identical(
     check_value(c("a", "b"), c("a", "b")),
     c("a", "b")
   )
@@ -33,11 +33,11 @@ test_that("check_value() can ignore case", {
     "Can't find value `A` in: a, B",
     fixed = TRUE
   )
-  expect_equal(
+  expect_identical(
     check_value("A", c("a", "B"), lowercase = TRUE),
     "a"
   )
-  expect_equal(
+  expect_identical(
     check_value(c("A", "b"), c("a", "B"), lowercase = TRUE),
     c("a", "b")
   )
