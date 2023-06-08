@@ -123,13 +123,9 @@ get_acoustic_detections_api <- function(start_date,
   # I want the following block to be universal for all API functions, so
   # independent of the function name which is part of the URL
   credentials <- get_credentials()
-  ## first retrieve the arguments from the function environment, before we
-  ## create any other objects, parse it as json primitives because that's what
-  ## opencpu expects
-  payload <- #as_json_primitive(
-    return_parent_arguments()
-  #)
-  ## get rid of _api in the function name, etnservice doesn't use this suffix
+  ## Retrieve the arguments from the function environment
+  payload <- return_parent_arguments()
+
   function_identity <-
     stringr::str_extract(
       # deparse(sys.calls()[[1]]),
@@ -143,10 +139,9 @@ get_acoustic_detections_api <- function(start_date,
       "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
       function_identity
     )
-  ## OPENCPU uses JSON primitives, so we have to fetch and convert the function
-  ## arguments before sending them as the request body
 
-  # retry if server responds with http error, default retry settings of httr
+  # Forward the function and arguments to the API: call 1
+  ## Retry if server responds with HTTP error, use default rate settings of httr
   response <-
     httr::RETRY(
       verb = "POST",
@@ -156,18 +151,18 @@ get_acoustic_detections_api <- function(start_date,
       terminate_on = c(400)
     )
 
-  # If etnservice forwarded an error, stop
+  # Stop if etnservice forwarded an error
   assertthat::assert_that(response$status_code != 400,
                           msg = httr::content(response, as = "text", encoding = "UTF-8"))
 
-  # Stop for other errors
+  # Stop for other HTTP errors
   assertthat::assert_that(!httr::http_error(response),
                           msg = glue::glue(
                             "API request failed: {http_message}",
                             http_message = httr::http_status(response)$message)
   )
 
-  # output
+  # Fetch the output from the API: call 2
   get_val(extract_temp_key(response))
 
 }
