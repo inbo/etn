@@ -85,6 +85,8 @@ get_acoustic_detections <- function(start_date = NULL,
                                     limit = FALSE,
                                     api = TRUE,
                                     connection){
+  # check arguments
+  assertthat::assert_that(assertthat::is.flag(api))
   # Lock in the name of the parent function
   function_identity <-
     get_parent_fn_name()

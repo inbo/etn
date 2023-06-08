@@ -6,6 +6,8 @@
 #' @export
 list_animal_ids <- function(api = TRUE,
                             connection) {
+  # check arguments
+  assertthat::assert_that(assertthat::is.flag(api))
   # Lock in the name of the parent function
   function_identity <-
     get_parent_fn_name()
