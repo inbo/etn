@@ -255,3 +255,41 @@ deprecate_warn_connection <- function(function_identity){
 get_parent_fn_name <- function(){
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = 1)))
 }
+
+#' Forward function arguments to API and retreive response
+#'
+#' @param function_identity Character vector of what function should be passed
+#' @param payload Arguments to be passed to OpenCPU function
+#'
+#' @return The same return object of the `function_identity` function
+#'
+#' @family helper functions
+#' @noRd
+forward_to_api <- function(function_identity, payload){
+  # Get credentials and attatch to payload
+  payload <- purrr::prepend(payload, list(credentials = get_credentials()))
+  # Set endpoint based on the passed function_identity
+  endpoint <-
+    sprintf(
+      "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
+      function_identity
+    )
+
+  # Forward the function and arguments to the API: call 1
+  ## Retry if server responds with HTTP error, use default rate settings of httr
+  response <-
+    httr::RETRY(
+      verb = "POST",
+      url = endpoint,
+      body = payload,
+      encode = "json",
+      terminate_on = c(400)
+    )
+
+  # Check if the response contains any errors, and forward them if so.
+  check_opencpu_response(response)
+
+  # Fetch the output from the API: call 2
+  get_val(extract_temp_key(response))
+}
+
