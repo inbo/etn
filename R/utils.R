@@ -233,3 +233,25 @@ deprecate_warn_connection <- function(function_identity){
     user_env = rlang::caller_env(2)
   )
 }
+
+#' Get the name (symbol) of the parent function
+#'
+#' @return A length one Character with the name of the parent function.
+#'
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' child_fn <- function(){
+#'   get_parent_fn_name()
+#' }
+#'
+#' parent_fn <- function(){
+#'   print(get_parent_fn_name())
+#'   print(paste("nested:", child_fn()))
+#' }
+#'
+#' parent_fn()
+get_parent_fn_name <- function(){
+  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = 1)))
+}
