@@ -85,82 +85,31 @@ get_acoustic_detections <- function(start_date = NULL,
                                     limit = FALSE,
                                     api = TRUE,
                                     connection){
-  if(lifecycle::is_present(connection)){
-    lifecycle::deprecate_warn(
-  when = "v3.0.0",
-  what = "get_acoustic_detections(connection)",
-  details = glue::glue("Please set `api = FALSE` to use local database, ",
-                       "otherwise the API will be used")
-    )
+  # Lock in the name of the parent function
+  function_identity <-
+    get_parent_fn_name()
+
+  # the connection argument has been depriciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection(function_identity)
   }
-  # pass arguments to helper functions, except connection and api
+
   arguments_to_pass <-
     return_parent_arguments()[
-      !names(return_parent_arguments()) %in% c("api", "connection")]
+      !names(return_parent_arguments()) %in% c("api", "connection", "function_identity")]
+      # )]
 
   if(api){
-    out <- do.call(get_acoustic_detections_api, arguments_to_pass)
+    out <- do.call(
+      forward_to_api,
+      list(function_identity = function_identity, payload = arguments_to_pass)
+      )
   } else {
-    out <- do.call(get_acoustic_detections_sql, arguments_to_pass)
+    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
   }
   return(out)
 }
 
-#' get_acoustic_detections() api helper
-#'
-#' @inheritParams get_acoustic_detections()
-#' @noRd
-#'
-get_acoustic_detections_api <- function(start_date,
-                                        end_date,
-                                        acoustic_tag_id,
-                                        animal_project_code,
-                                        scientific_name,
-                                        acoustic_project_code,
-                                        receiver_id,
-                                        station_name,
-                                        limit){
-  # I want the following block to be universal for all API functions, so
-  # independent of the function name which is part of the URL
-  credentials <- get_credentials()
-  ## Retrieve the arguments from the function environment
-  payload <- return_parent_arguments()
-
-  ## Lock in the name of the parent function, used to determine what function to
-  ## forward to the API
-
-  ### TODO: write helper that can handle complex nesting, eg. in tests.
-  function_identity <-
-    stringr::str_extract(
-      paste(
-        deparse(sys.status()$sys.calls[[sys.parent()]]),
-        collapse = ""),
-      "[a-z_]+(?=\\()")
-
-  endpoint <-
-    sprintf(
-      "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
-      function_identity
-    )
-
-  # Forward the function and arguments to the API: call 1
-  ## Retry if server responds with HTTP error, use default rate settings of httr
-  response <-
-    httr::RETRY(
-      verb = "POST",
-      url = endpoint,
-      body = payload,
-      encode = "json",
-      terminate_on = c(400)
-    )
-
-  # Check if the response contains any errors, and forward them if so.
-  check_opencpu_response(response)
-
-  # Fetch the output from the API: call 2
-  get_val(extract_temp_key(response))
-
-}
 #' get_acoustic_detections() sql helper
 #'
 #' @inheritParams get_acoustic_detections()
