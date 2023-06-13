@@ -11,7 +11,7 @@ list_acoustic_project_codes <- function(api = TRUE,
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
-    deprecate_warn_connection(function_identity)
+    deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
   out <- conduct_parent_to_helpers(api)
