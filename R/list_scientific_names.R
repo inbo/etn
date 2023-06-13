@@ -8,29 +8,13 @@
 #' @export
 list_scientific_names <- function(api = TRUE,
                                   connection) {
-  # check arguments
-  assertthat::assert_that(assertthat::is.flag(api))
-  # Lock in the name of the parent function
-  function_identity <-
-    get_parent_fn_name()
-
-  # the connection argument has been depriciated
+  # Check arguments
+  # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection(function_identity)
   }
-
-  arguments_to_pass <-
-    return_parent_arguments()[
-      !names(return_parent_arguments()) %in% c("api", "connection", "function_identity")]
-
-  if(api){
-    out <- do.call(
-      forward_to_api,
-      list(function_identity = function_identity, payload = arguments_to_pass)
-    )
-  } else {
-    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
-  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
   return(out)
 }
 #' list_scientific_names() sql helper
