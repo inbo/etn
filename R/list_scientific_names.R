@@ -1,6 +1,5 @@
 #' List all available scientific names
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #'
 #' @return A vector of all unique `scientific_name` present in
 #'   `common.animal_release`.
