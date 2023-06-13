@@ -180,10 +180,10 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
 #'
 #' @family helper functions
 #' @noRd
-return_parent_arguments <- function(){
+return_parent_arguments <- function(depth = 1){
   # lock in the environment of the function we are being called in. Otherwise
   # lazy evaluation can cause trouble
-  parent_env <- rlang::caller_env()
+  parent_env <- rlang::caller_env(n = depth)
   env_names <- rlang::env_names(parent_env)
   # set the environement names so lapply can output a names list
   names(env_names) <- env_names
@@ -252,8 +252,8 @@ deprecate_warn_connection <- function(function_identity){
 #' }
 #'
 #' parent_fn()
-get_parent_fn_name <- function(){
-  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = 1)))
+get_parent_fn_name <- function(depth = 1){
+  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
 #' Forward function arguments to API and retreive response
@@ -267,7 +267,7 @@ get_parent_fn_name <- function(){
 #' @noRd
 forward_to_api <- function(function_identity, payload){
   # Get credentials and attatch to payload
-  payload <- purrr::prepend(payload, list(credentials = get_credentials()))
+  payload <- append(payload, list(credentials = get_credentials()), after = 0)
   # Set endpoint based on the passed function_identity
   endpoint <-
     sprintf(
@@ -293,3 +293,29 @@ forward_to_api <- function(function_identity, payload){
   get_val(extract_temp_key(response))
 }
 
+conduct_parent_to_helpers <- function(api) {
+  # Check arguments
+  assertthat::assert_that(assertthat::is.flag(api))
+
+  # Lock in the name of the parent function
+  function_identity <-
+    get_parent_fn_name(depth = 2)
+
+  # Get the argument values from the parent function
+  arguments_to_pass <-
+    return_parent_arguments(depth = 2)[
+      !names(return_parent_arguments(depth = 2)) %in% c("api",
+                                                        "connection",
+                                                        "function_identity")]
+
+  if(api){
+    out <- do.call(
+      forward_to_api,
+      list(function_identity = function_identity, payload = arguments_to_pass)
+    )
+  } else {
+    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
+  }
+
+  return(out)
+}
