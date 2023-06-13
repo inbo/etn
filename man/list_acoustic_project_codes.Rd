@@ -4,7 +4,7 @@
 \alias{list_acoustic_project_codes}
 \title{List all available acoustic project codes}
 \usage{
-list_acoustic_project_codes(connection = con)
+list_acoustic_project_codes(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}

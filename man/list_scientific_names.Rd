@@ -4,7 +4,7 @@
 \alias{list_scientific_names}
 \title{List all available scientific names}
 \usage{
-list_scientific_names(connection = con)
+list_scientific_names(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}

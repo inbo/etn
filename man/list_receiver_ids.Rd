@@ -4,7 +4,7 @@
 \alias{list_receiver_ids}
 \title{List all available receiver ids}
 \usage{
-list_receiver_ids(connection = con)
+list_receiver_ids(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
