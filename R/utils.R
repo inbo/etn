@@ -223,14 +223,17 @@ check_opencpu_response <- function(response) {
 #'
 #' @family helper functions
 #' @noRd
-deprecate_warn_connection <- function(function_identity){
+deprecate_warn_connection <- function(){
+
   lifecycle::deprecate_warn(
     when = "v3.0.0",
-    what = glue::glue("{function_identity}(connection)"),
+    what = glue::glue("{function_identity}(connection)",
+                      function_identity = get_parent_fn_name(depth = 2)),
     details = glue::glue("Please set `api = FALSE` to use local database, ",
                          "otherwise the API will be used"),
     env = rlang::caller_env(),
-    user_env = rlang::caller_env(2)
+    user_env = rlang::caller_env(2),
+    always = TRUE
   )
 }
 
