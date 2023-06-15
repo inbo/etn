@@ -104,7 +104,7 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #' @noRd
 get_credentials <- function(username = Sys.getenv("userid"),
                             password = Sys.getenv("pwd")) {
-  if(Sys.getenv("userid") == ""){
+  if (Sys.getenv("userid") == "") {
     message("No credentials stored, prompting..")
     Sys.setenv(userid = readline(prompt = "Please enter a userid: "))
     Sys.setenv(pwd = askpass::askpass())
@@ -157,8 +157,9 @@ extract_temp_key <- function(response) {
 #'   extract_temp_key() %>%
 #'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
-  httr::GET(
-    glue::glue(
+  httr::RETRY(
+    verb = "GET",
+    url =     glue::glue(
       "{api_domain}",
       "tmp/{temp_key}/R/.val/rds",
       .sep = "/"
@@ -180,15 +181,17 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
 #'
 #' @family helper functions
 #' @noRd
-return_parent_arguments <- function(depth = 1){
+return_parent_arguments <- function(depth = 1) {
   # lock in the environment of the function we are being called in. Otherwise
   # lazy evaluation can cause trouble
   parent_env <- rlang::caller_env(n = depth)
   env_names <- rlang::env_names(parent_env)
   # set the environement names so lapply can output a names list
   names(env_names) <- env_names
-  lapply(env_names,
-         function(x) rlang::env_get(env = parent_env, nm = x))
+  lapply(
+    env_names,
+    function(x) rlang::env_get(env = parent_env, nm = x)
+  )
 }
 
 #' Check an OpenCPU reponse object and forward any errors
@@ -223,14 +226,16 @@ check_opencpu_response <- function(response) {
 #'
 #' @family helper functions
 #' @noRd
-deprecate_warn_connection <- function(){
-
+deprecate_warn_connection <- function() {
   lifecycle::deprecate_warn(
     when = "v3.0.0",
     what = glue::glue("{function_identity}(connection)",
-                      function_identity = get_parent_fn_name(depth = 2)),
-    details = glue::glue("Please set `api = FALSE` to use local database, ",
-                         "otherwise the API will be used"),
+      function_identity = get_parent_fn_name(depth = 2)
+    ),
+    details = glue::glue(
+      "Please set `api = FALSE` to use local database, ",
+      "otherwise the API will be used"
+    ),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
     always = TRUE
@@ -245,17 +250,17 @@ deprecate_warn_connection <- function(){
 #' @noRd
 #'
 #' @examples
-#' child_fn <- function(){
+#' child_fn <- function() {
 #'   get_parent_fn_name()
 #' }
 #'
-#' parent_fn <- function(){
+#' parent_fn <- function() {
 #'   print(get_parent_fn_name())
 #'   print(paste("nested:", child_fn()))
 #' }
 #'
 #' parent_fn()
-get_parent_fn_name <- function(depth = 1){
+get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
@@ -268,15 +273,15 @@ get_parent_fn_name <- function(depth = 1){
 #'
 #' @family helper functions
 #' @noRd
-forward_to_api <- function(function_identity, payload){
+forward_to_api <- function(
+    function_identity,
+    payload,
+    domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
   # Get credentials and attatch to payload
   payload <- append(payload, list(credentials = get_credentials()), after = 0)
   # Set endpoint based on the passed function_identity
-  endpoint <-
-    sprintf(
-      "https://opencpu.lifewatch.be/library/etnservice/R/%s/",
-      function_identity
-    )
+  # NOTE trailing backslash is important for OpenCPU
+  endpoint <- glue::glue("{domain}/{function_identity}/")
 
   # Forward the function and arguments to the API: call 1
   ## Retry if server responds with HTTP error, use default rate settings of httr
@@ -296,6 +301,18 @@ forward_to_api <- function(function_identity, payload){
   get_val(extract_temp_key(response))
 }
 
+
+#' Conductor Helper: point the way to API or SQL helper
+#'
+#' Helper that conducts it's parent function to either use a helper to query the api,
+#'  or a helper to query a local database connection using SQL.
+#'
+#' @param api Logical, Should the API be used?
+#'
+#' @return parsed R object as resulting from the API
+#'
+#' @family helper functions
+#' @noRd
 conduct_parent_to_helpers <- function(api) {
   # Check arguments
   assertthat::assert_that(assertthat::is.flag(api))
@@ -307,11 +324,14 @@ conduct_parent_to_helpers <- function(api) {
   # Get the argument values from the parent function
   arguments_to_pass <-
     return_parent_arguments(depth = 2)[
-      !names(return_parent_arguments(depth = 2)) %in% c("api",
-                                                        "connection",
-                                                        "function_identity")]
+      !names(return_parent_arguments(depth = 2)) %in% c(
+        "api",
+        "connection",
+        "function_identity"
+      )
+    ]
 
-  if(api){
+  if (api) {
     out <- do.call(
       forward_to_api,
       list(function_identity = function_identity, payload = arguments_to_pass)
