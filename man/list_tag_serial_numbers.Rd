@@ -4,7 +4,7 @@
 \alias{list_tag_serial_numbers}
 \title{List all available tag serial numbers}
 \usage{
-list_tag_serial_numbers(connection = con)
+list_tag_serial_numbers(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}
