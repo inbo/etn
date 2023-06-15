@@ -11,6 +11,9 @@ test_that("get_acoustic_deployments() returns a tibble", {
   df <- get_acoustic_deployments()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
+  df_sql <- get_acoustic_deployments(api = FALSE)
+  expect_s3_class(df_sql, "data.frame")
+  expect_s3_class(df_sql, "tbl")
 })
 
 test_that("get_acoustic_deployments() returns unique deployment_id", {
