@@ -40,12 +40,36 @@
 #'
 #' # Get acoustic deployments for two specific stations
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
-get_acoustic_deployments <- function(connection = con,
-                                     deployment_id = NULL,
+get_acoustic_deployments <- function(deployment_id = NULL,
                                      receiver_id = NULL,
                                      acoustic_project_code = NULL,
                                      station_name = NULL,
-                                     open_only = FALSE) {
+                                     open_only = FALSE,
+                                     api = TRUE,
+                                     connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' get_acoustic_deployments() sql helper
+#'
+#' @inheritParams get_acoustic_deployments()
+#' @noRd
+#'
+get_acoustic_deployments_sql <- function(deployment_id = NULL,
+                                         receiver_id = NULL,
+                                         acoustic_project_code = NULL,
+                                         station_name = NULL,
+                                         open_only = FALSE) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
+
   # Check connection
   check_connection(connection)
 
