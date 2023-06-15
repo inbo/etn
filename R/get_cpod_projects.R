@@ -21,8 +21,27 @@
 #'
 #' # Get a specific animal project
 #' get_cpod_projects(con, cpod_project_code = "cpod-lifewatch")
-get_cpod_projects <- function(connection = con,
-                              cpod_project_code = NULL) {
+get_cpod_projects <- function(cpod_project_code = NULL,
+                              api = TRUE,
+                              connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' get_cpod_projects() sql helper
+#'
+#' @inheritParams get_cpod_projects()
+#' @noRd
+#'
+get_cpod_projects_sql <- function(cpod_project_code = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
