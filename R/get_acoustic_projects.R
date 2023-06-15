@@ -21,8 +21,26 @@
 #'
 #' # Get a specific acoustic project
 #' get_acoustic_projects(con, acoustic_project_code = "demer")
-get_acoustic_projects <- function(connection = con,
-                                  acoustic_project_code = NULL) {
+get_acoustic_projects <- function(acoustic_project_code = NULL,
+                                  api = TRUE,
+                                  connection){
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+#' get_acoustic_projects() sql helper
+#'
+#' @inheritParams get_acoustic_projects()
+#' @noRd
+#'
+get_acoustic_projects_sql <- function(acoustic_project_code = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -32,7 +50,7 @@ get_acoustic_projects <- function(connection = con,
   } else {
     acoustic_project_code <- check_value(
       acoustic_project_code,
-      list_acoustic_project_codes(connection),
+      list_acoustic_project_codes(api = FALSE),
       "acoustic_project_code",
       lowercase = TRUE
     )
