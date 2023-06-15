@@ -41,11 +41,33 @@
 #'
 #' # Get animals of a specific species from a specific project
 #' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
-get_animals <- function(connection = con,
-                        animal_id = NULL,
+get_animals <- function(animal_id = NULL,
                         tag_serial_number = NULL,
                         animal_project_code = NULL,
-                        scientific_name = NULL) {
+                        scientific_name = NULL,
+                        api = TRUE,
+                        connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' get_animals() sql helper
+#'
+#' @inheritParams get_animals()
+#' @noRd
+#'
+get_animals_sql <- function(animal_id = NULL,
+                            tag_serial_number = NULL,
+                            animal_project_code = NULL,
+                            scientific_name = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -55,7 +77,7 @@ get_animals <- function(connection = con,
   } else {
     animal_id <- check_value(
       animal_id,
-      list_animal_ids(connection),
+      list_animal_ids(api = FALSE),
       "animal_id"
     )
     animal_id_query <- glue::glue_sql(
@@ -102,7 +124,7 @@ get_animals <- function(connection = con,
   } else {
     scientific_name <- check_value(
       scientific_name,
-      list_scientific_names(connection),
+      list_scientific_names(api = FALSE),
       "scientific_name"
     )
     scientific_name_query <- glue::glue_sql(
@@ -231,7 +253,7 @@ get_animals <- function(connection = con,
     dplyr::arrange(
       .data$animal_project_code,
       .data$release_date_time,
-      factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection))
+      factor(.data$tag_serial_number, levels = list_tag_serial_numbers(api = FALSE))
     )
 
   dplyr::as_tibble(animals) # Is already a tibble, but added if code above changes
