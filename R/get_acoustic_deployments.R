@@ -79,7 +79,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
   } else {
     deployment_id <- check_value(
       deployment_id,
-      list_deployment_ids(connection),
+      list_deployment_ids(api = FALSE),
       "receiver_id"
     )
     deployment_id_query <- glue::glue_sql(
@@ -94,7 +94,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
   } else {
     receiver_id <- check_value(
       receiver_id,
-      list_receiver_ids(connection),
+      list_receiver_ids(api = FALSE),
       "receiver_id"
     )
     receiver_id_query <- glue::glue_sql(
@@ -109,7 +109,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
   } else {
     acoustic_project_code <- check_value(
       acoustic_project_code,
-      list_acoustic_project_codes(connection),
+      list_acoustic_project_codes(api = FALSE),
       "acoustic_project_code",
       lowercase = TRUE
     )
@@ -125,7 +125,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
   } else {
     station_name <- check_value(
       station_name,
-      list_station_names(connection),
+      list_station_names(api = FALSE),
       "station_name"
     )
     station_name_query <- glue::glue_sql(
@@ -216,7 +216,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
     deployments %>%
     dplyr::arrange(
       .data$acoustic_project_code,
-      factor(.data$station_name, levels = list_station_names(connection)),
+      factor(.data$station_name, levels = list_station_names(api = FALSE)),
       .data$deploy_date_time
     )
 
