@@ -5,17 +5,16 @@
 \title{Get acoustic deployment data}
 \usage{
 get_acoustic_deployments(
-  connection = con,
   deployment_id = NULL,
   receiver_id = NULL,
   acoustic_project_code = NULL,
   station_name = NULL,
-  open_only = FALSE
+  open_only = FALSE,
+  api = TRUE,
+  connection
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
@@ -28,6 +27,8 @@ names.}
 
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{FALSE}.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with acoustic deployment data, sorted by

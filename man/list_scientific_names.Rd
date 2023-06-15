@@ -6,9 +6,6 @@
 \usage{
 list_scientific_names(api = TRUE, connection)
 }
-\arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-}
 \value{
 A vector of all unique \code{scientific_name} present in
 \code{common.animal_release}.
