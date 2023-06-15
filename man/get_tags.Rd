@@ -5,16 +5,15 @@
 \title{Get tag data}
 \usage{
 get_tags(
-  connection = con,
   tag_type = NULL,
   tag_subtype = NULL,
   tag_serial_number = NULL,
-  acoustic_tag_id = NULL
+  acoustic_tag_id = NULL,
+  api = TRUE,
+  connection
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{tag_type}{Character (vector). \code{acoustic} or \code{archival}. Some tags are
 both, find those with \code{acoustic-archival}.}
 
@@ -25,6 +24,8 @@ both, find those with \code{acoustic-archival}.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag
 identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also

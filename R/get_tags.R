@@ -37,11 +37,32 @@
 #' get_tags(con, tag_serial_number = "1187450")
 #' get_tags(con, acoustic_tag_id = "A69-1601-16130")
 #' get_tags(con, acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
-get_tags <- function(connection = con,
-                     tag_type = NULL,
+get_tags <- function(tag_type = NULL,
                      tag_subtype = NULL,
                      tag_serial_number = NULL,
-                     acoustic_tag_id = NULL) {
+                     acoustic_tag_id = NULL,
+                     api = TRUE,
+                     connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+#' get_tags() sql helper
+#'
+#' @inheritParams get_tags()
+#' @noRd
+#'
+get_tags_sql <- function(tag_type = NULL,
+                         tag_subtype = NULL,
+                         tag_serial_number = NULL,
+                         acoustic_tag_id = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -51,7 +72,7 @@ get_tags <- function(connection = con,
   } else {
     tag_serial_number <- check_value(
       as.character(tag_serial_number), # Cast to character
-      list_tag_serial_numbers(connection),
+      list_tag_serial_numbers(api = FALSE),
       "tag_serial_number"
     )
     tag_serial_number_query <- glue::glue_sql(
@@ -96,7 +117,7 @@ get_tags <- function(connection = con,
   } else {
     check_value(
       acoustic_tag_id,
-      list_acoustic_tag_ids(connection),
+      list_acoustic_tag_ids(api = FALSE),
       "acoustic_tag_id"
     )
     acoustic_tag_id_query <- glue::glue_sql(
@@ -198,7 +219,7 @@ get_tags <- function(connection = con,
   # Sort data
   tags <-
     tags %>%
-    dplyr::arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(connection)))
+    dplyr::arrange(factor(.data$tag_serial_number, levels = list_tag_serial_numbers(api = FALSE)))
 
   dplyr::as_tibble(tags)
 }
