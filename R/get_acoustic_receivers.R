@@ -26,9 +26,24 @@
 #'
 #' # Get a specific acoustic receiver
 #' get_acoustic_receivers(con, receiver_id = "VR2W-124070")
-get_acoustic_receivers <- function(connection = con,
-                                   receiver_id = NULL,
+get_acoustic_receivers <- function(receiver_id = NULL,
+                                   status = NULL,
+                                   api = TRUE,
+                                   connection){
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+get_acoustic_receivers_sql <- function(receiver_id = NULL,
                                    status = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -36,7 +51,7 @@ get_acoustic_receivers <- function(connection = con,
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    valid_receiver_ids <- list_receiver_ids(connection)
+    valid_receiver_ids <- list_receiver_ids(api = FALSE)
     check_value(receiver_id, valid_receiver_ids, "receiver_id")
     receiver_id_query <- glue::glue_sql(
       "receiver.receiver IN ({receiver_id*})",

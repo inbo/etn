@@ -4,14 +4,19 @@
 \alias{get_acoustic_receivers}
 \title{Get acoustic receiver data}
 \usage{
-get_acoustic_receivers(connection = con, receiver_id = NULL, status = NULL)
+get_acoustic_receivers(
+  receiver_id = NULL,
+  status = NULL,
+  api = TRUE,
+  connection
+)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{status}{Character. One or more statuses, e.g. \code{available} or \code{broken}.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with acoustic receiver data, sorted by \code{receiver_id}. See
