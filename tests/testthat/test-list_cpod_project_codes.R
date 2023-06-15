@@ -1,9 +1,9 @@
-con <- connect_to_etn()
-
 test_that("list_cpod_project_codes() returns unique list of values", {
-  vector <- list_cpod_project_codes(con)
+  vector <- list_cpod_project_codes()
+  vector_sql <- list_cpod_project_codes(api = FALSE)
 
-  expect_is(vector, "character")
+  expect_type(vector, "character")
+  expect_type(vector_sql, "character")
   expect_false(any(duplicated(vector)))
   expect_true(all(!is.na(vector)))
 
