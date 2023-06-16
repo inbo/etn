@@ -93,7 +93,7 @@ get_animals_sql <- function(animal_id = NULL,
   } else {
     animal_project_code <- check_value(
       animal_project_code,
-      list_animal_project_codes(connection),
+      list_animal_project_codes(api = FALSE),
       "animal_project_code",
       lowercase = TRUE
     )
@@ -109,7 +109,7 @@ get_animals_sql <- function(animal_id = NULL,
   } else {
     tag_serial_number <- check_value(
       as.character(tag_serial_number), # Cast to character
-      list_tag_serial_numbers(connection),
+      list_tag_serial_numbers(api = FALSE),
       "tag_serial_number"
     )
     tag_serial_number_query <- glue::glue_sql(
