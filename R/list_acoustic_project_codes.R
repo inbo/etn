@@ -38,5 +38,9 @@ list_acoustic_project_codes_sql <- function(){
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return acoustic_project_codes
   sort(data$project_code)
 }

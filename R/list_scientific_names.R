@@ -33,5 +33,9 @@ list_scientific_names_sql <- function(){
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return scientific_names
   sort(data$scientific_name)
 }

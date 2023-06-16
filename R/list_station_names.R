@@ -34,5 +34,9 @@ list_station_names_sql <- function(){
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return station_names
   stringr::str_sort(data$station_name, numeric = TRUE)
 }
