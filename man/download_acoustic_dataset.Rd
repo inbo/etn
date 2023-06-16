@@ -5,15 +5,14 @@
 \title{Download acoustic data package}
 \usage{
 download_acoustic_dataset(
-  connection = con,
   animal_project_code,
   scientific_name = NULL,
-  directory = animal_project_code
+  directory = animal_project_code,
+  api = TRUE,
+  connection
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{animal_project_code}{Character. Animal project you want to download
 data for. Required.}
 
@@ -23,6 +22,8 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).}
 \item{directory}{Character. Relative path to local download directory.
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data
