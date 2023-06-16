@@ -290,5 +290,10 @@ get_acoustic_detections_sql <- function(start_date = NULL,
       .data$date_time
     )
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return detections
   dplyr::as_tibble(detections)
+
 }
