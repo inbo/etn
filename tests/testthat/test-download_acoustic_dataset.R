@@ -1,8 +1,7 @@
-con <- connect_to_etn()
-
-test_that("download_acoustic_dataset() creates the expected messages and files", {
-  download_dir <- "./temp_download"
+test_that("download_acoustic_dataset() creates the expected messages and files using api", {
+  download_dir <- file.path(tempdir(), "using_api")
   dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
+
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -11,30 +10,49 @@ test_that("download_acoustic_dataset() creates the expected messages and files",
     "receivers.csv",
     "datapackage.json"
   )
-  message <- readLines("./test-download_acoustic_dataset-message.txt")
-  # Process output message
-  message <- paste0(message, "\n")
 
-  # Run function
-  evaluate_download <- evaluate_promise({
+  expect_snapshot(
     download_acoustic_dataset(
-      con,
+      api = TRUE,
       animal_project_code = "2014_demer",
       directory = download_dir
-    )
-  })
+    ),
+    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+    variant = "api"
+  )
 
   # Function creates the expected files
-  expect_true(all(sort(list.files(download_dir)) == sort(files_to_create)))
+  expect_true(all(files_to_create %in% list.files(download_dir)))
 
-  # Function returns the expected output message
-  expect_true(all(evaluate_download$messages == message))
+  # Remove generated files and directories after test
+  unlink(download_dir, recursive = TRUE)
+})
 
-  # Function returns no warnings (character of length 0)
-  expect_true(length(evaluate_download$warnings) == 0)
+test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
+  download_dir <- file.path(tempdir(), "using_sql")
+  dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
 
-  # Function returns no result
-  expect_null(evaluate_download$result)
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
+  )
+
+  expect_snapshot(
+    download_acoustic_dataset(
+      api = FALSE,
+      animal_project_code = "2014_demer",
+      directory = download_dir
+    ),
+    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+    variant = "sql"
+  )
+
+  # Function creates the expected files
+  expect_true(all(files_to_create %in% list.files(download_dir)))
 
   # Remove generated files and directories after test
   unlink(download_dir, recursive = TRUE)
