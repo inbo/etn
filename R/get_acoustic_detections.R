@@ -136,7 +136,7 @@ get_acoustic_detections_sql <- function(start_date = NULL,
   } else {
     acoustic_tag_id <- check_value(
       acoustic_tag_id,
-      list_acoustic_tag_ids(connection),
+      list_acoustic_tag_ids(api = FALSE),
       "acoustic_tag_id"
     )
     acoustic_tag_id_query <- glue::glue_sql(
