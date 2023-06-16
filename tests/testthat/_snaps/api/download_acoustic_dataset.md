@@ -1,4 +1,4 @@
-# download_acoustic_dataset() creates the expected messages and files
+# download_acoustic_dataset() creates the expected messages and files using api
 
     Code
       download_acoustic_dataset(api = TRUE, animal_project_code = "2014_demer",

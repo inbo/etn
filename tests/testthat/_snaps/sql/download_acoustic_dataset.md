@@ -1,4 +1,4 @@
-# download_acoustic_dataset() creates the expected messages and files
+# download_acoustic_dataset() creates the expected messages and files using local db
 
     Code
       download_acoustic_dataset(api = FALSE, animal_project_code = "2014_demer",
