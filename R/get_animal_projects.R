@@ -51,7 +51,7 @@ get_animal_projects_sql <- function(animal_project_code = NULL) {
   } else {
     animal_project_code <- check_value(
       animal_project_code,
-      list_animal_project_codes(connection),
+      list_animal_project_codes(api = FALSE),
       "animal_project_code",
       lowercase = TRUE
     )

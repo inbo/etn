@@ -73,7 +73,8 @@ write_dwc <- function(connection = con,
   )
 
   # Get imis dataset id and title
-  project <- get_animal_projects(connection, animal_project_code)
+  project <-
+    get_animal_projects(api = FALSE, animal_project_code = animal_project_code)
   imis_dataset_id <- project$imis_dataset_id
   imis_url <- "https://www.vliz.be/en/imis?module=dataset&dasid="
   imis_json <- jsonlite::read_json(paste0(imis_url, imis_dataset_id, "&show=json"))
