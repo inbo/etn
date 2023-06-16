@@ -22,6 +22,11 @@ list_scientific_names <- function(api = TRUE,
 #' @noRd
 #'
 list_scientific_names_sql <- function(){
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
+  # Check connection
+  check_connection(connection)
+
   query <- glue::glue_sql(
     "SELECT DISTINCT scientific_name FROM common.animal_release",
     .con = connection
