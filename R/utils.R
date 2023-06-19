@@ -163,7 +163,8 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
       "{api_domain}",
       "tmp/{temp_key}/R/.val/rds",
       .sep = "/"
-    )
+    ),
+    times = 5
   ) %>%
     httr::content(as = "raw") %>%
     rawConnection() %>%
@@ -291,7 +292,8 @@ forward_to_api <- function(
       url = endpoint,
       body = payload,
       encode = "json",
-      terminate_on = c(400)
+      terminate_on = c(400),
+      times = 5
     )
 
   # Check if the response contains any errors, and forward them if so.
