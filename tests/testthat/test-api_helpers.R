@@ -111,7 +111,7 @@ test_that("deprecate_warn_connection() returns warning with function symbol", {
   fn_to_test <- function(connection) {deprecate_warn_connection()}
   expect_warning(
     fn_to_test(),
-    regexp = "The `connection` argument of `fn_to_test()` is deprecated as of"
+    regexp = "The `connection` argument of `fn_to_test\\(\\)` is deprecated as of"
   )
 })
 
