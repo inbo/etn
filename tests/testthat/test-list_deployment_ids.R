@@ -1,11 +1,17 @@
-con <- connect_to_etn()
-
 test_that("list_deployment_ids() returns unique list of values", {
-  vector <- list_deployment_ids(con)
+  vector <- list_deployment_ids()
 
-  expect_is(vector, "character")
+  expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
   expect_true(all(!is.na(vector)))
 
   expect_true("1437" %in% vector)
+
+  vector_sql <- list_deployment_ids(api = FALSE)
+
+  expect_type(vector_sql, "character")
+  expect_false(any(duplicated(vector_sql)))
+  expect_true(all(!is.na(vector_sql)))
+
+  expect_true("1437" %in% vector_sql)
 })

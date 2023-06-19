@@ -4,10 +4,7 @@
 \alias{list_animal_ids}
 \title{List all available animal ids}
 \usage{
-list_animal_ids(connection = con)
-}
-\arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+list_animal_ids(api = TRUE, connection)
 }
 \value{
 A vector of all unique \code{id_pk} present in \code{common.animal_release}.

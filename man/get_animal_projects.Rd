@@ -4,13 +4,13 @@
 \alias{get_animal_projects}
 \title{Get animal project data}
 \usage{
-get_animal_projects(connection = con, animal_project_code = NULL)
+get_animal_projects(animal_project_code = NULL, api = TRUE, connection)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{animal_project_code}{Character (vector). One or more animal project
 codes. Case-insensitive.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with animal project data, sorted by \code{project_code}. See

@@ -1,9 +1,7 @@
-con <- connect_to_etn()
-
 test_that("list_station_names() returns unique list of values", {
-  vector <- list_station_names(con)
+  vector <- list_station_names()
 
-  expect_is(vector, "character")
+  expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
   expect_true(all(!is.na(vector)))
 

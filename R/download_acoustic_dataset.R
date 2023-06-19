@@ -76,12 +76,16 @@
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
 #' }
-download_acoustic_dataset <- function(connection = con,
-                                      animal_project_code,
+download_acoustic_dataset <- function(animal_project_code,
                                       scientific_name = NULL,
-                                      directory = animal_project_code) {
-  # Check connection
-  check_connection(connection)
+                                      directory = animal_project_code,
+                                      api = TRUE,
+                                      connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
 
   # Check animal_project_code
   assertthat::assert_that(
@@ -90,7 +94,7 @@ download_acoustic_dataset <- function(connection = con,
   )
   animal_project_code <- check_value(
     animal_project_code,
-    list_animal_project_codes(connection),
+    list_animal_project_codes(api = api),
     "animal_project_code",
     lowercase = TRUE
   )
@@ -99,7 +103,7 @@ download_acoustic_dataset <- function(connection = con,
   if (!is.null(scientific_name)) {
     scientific_name <- check_value(
       scientific_name,
-      list_scientific_names(connection),
+      list_scientific_names(api = api),
       "scientific_name"
     )
   }
@@ -112,7 +116,7 @@ download_acoustic_dataset <- function(connection = con,
   message("* (1/6): downloading animals.csv")
   # Select on animal_project_code and scientific_name
   animals <- get_animals(
-    connection = connection,
+    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
@@ -132,7 +136,7 @@ download_acoustic_dataset <- function(connection = con,
     unlist() %>%
     unique()
   tags <- get_tags(
-    connection = connection,
+    api = api,
     tag_serial_number = tag_serial_numbers
   )
   readr::write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
@@ -141,7 +145,7 @@ download_acoustic_dataset <- function(connection = con,
   message("* (3/6): downloading detections.csv")
   # Select on animal_project_code and scientific_name
   detections <- get_acoustic_detections(
-    connection = connection,
+    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name,
     limit = FALSE
@@ -163,7 +167,7 @@ download_acoustic_dataset <- function(connection = con,
     pull() %>%
     sort()
   deployments <- get_acoustic_deployments(
-    connection = connection,
+    api = api,
     acoustic_project_code = acoustic_project_codes,
     open_only = FALSE
   )
@@ -181,7 +185,7 @@ download_acoustic_dataset <- function(connection = con,
     distinct(.data$receiver_id) %>%
     pull()
   receivers <- get_acoustic_receivers(
-    connection = connection,
+    api = api,
     receiver_id = receiver_ids
   )
   readr::write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")

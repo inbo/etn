@@ -40,12 +40,36 @@
 #'
 #' # Get acoustic deployments for two specific stations
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
-get_acoustic_deployments <- function(connection = con,
-                                     deployment_id = NULL,
+get_acoustic_deployments <- function(deployment_id = NULL,
                                      receiver_id = NULL,
                                      acoustic_project_code = NULL,
                                      station_name = NULL,
-                                     open_only = FALSE) {
+                                     open_only = FALSE,
+                                     api = TRUE,
+                                     connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' get_acoustic_deployments() sql helper
+#'
+#' @inheritParams get_acoustic_deployments()
+#' @noRd
+#'
+get_acoustic_deployments_sql <- function(deployment_id = NULL,
+                                         receiver_id = NULL,
+                                         acoustic_project_code = NULL,
+                                         station_name = NULL,
+                                         open_only = FALSE) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
+
   # Check connection
   check_connection(connection)
 
@@ -55,7 +79,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     deployment_id <- check_value(
       deployment_id,
-      list_deployment_ids(connection),
+      list_deployment_ids(api = FALSE),
       "receiver_id"
     )
     deployment_id_query <- glue::glue_sql(
@@ -70,7 +94,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     receiver_id <- check_value(
       receiver_id,
-      list_receiver_ids(connection),
+      list_receiver_ids(api = FALSE),
       "receiver_id"
     )
     receiver_id_query <- glue::glue_sql(
@@ -85,7 +109,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     acoustic_project_code <- check_value(
       acoustic_project_code,
-      list_acoustic_project_codes(connection),
+      list_acoustic_project_codes(api = FALSE),
       "acoustic_project_code",
       lowercase = TRUE
     )
@@ -101,7 +125,7 @@ get_acoustic_deployments <- function(connection = con,
   } else {
     station_name <- check_value(
       station_name,
-      list_station_names(connection),
+      list_station_names(api = FALSE),
       "station_name"
     )
     station_name_query <- glue::glue_sql(
@@ -192,9 +216,11 @@ get_acoustic_deployments <- function(connection = con,
     deployments %>%
     dplyr::arrange(
       .data$acoustic_project_code,
-      factor(.data$station_name, levels = list_station_names(connection)),
+      factor(.data$station_name, levels = list_station_names(api = FALSE)),
       .data$deploy_date_time
     )
-
+  # Close connection
+  DBI::dbDisconnect(connection)
+  # Return acoustic deployments
   dplyr::as_tibble(deployments)
 }

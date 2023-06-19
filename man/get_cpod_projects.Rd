@@ -4,13 +4,13 @@
 \alias{get_cpod_projects}
 \title{Get cpod project data}
 \usage{
-get_cpod_projects(connection = con, cpod_project_code = NULL)
+get_cpod_projects(cpod_project_code = NULL, api = TRUE, connection)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{cpod_project_code}{Character (vector). One or more cpod project
 codes. Case-insensitive.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with animal project data, sorted by \code{project_code}. See

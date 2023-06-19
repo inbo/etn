@@ -98,17 +98,20 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #'   you can set it manually too.
 #' @param password ETN Data password, by default read from the environment, but
 #'   you can set it manually too.
-#'
 #' @return A string as it is ingested by other functions that need
 #'   authentication
 #' @family helper functions
 #' @noRd
-
-get_credentials <-
-  function(username = Sys.getenv("userid"),
-           password = Sys.getenv("pwd")) {
-    stringr::str_glue('list(username = "{username}", password = "{password}")')
+get_credentials <- function(username = Sys.getenv("userid"),
+                            password = Sys.getenv("pwd")) {
+  if (Sys.getenv("userid") == "") {
+    message("No credentials stored, prompting..")
+    Sys.setenv(userid = readline(prompt = "Please enter a userid: "))
+    Sys.setenv(pwd = askpass::askpass())
   }
+  # glue::glue('list(username = "{username}", password = "{password}")')
+  invisible(list(username = username, password = password))
+}
 
 #' Extract the OCPU temp key from a response object
 #'
@@ -133,10 +136,10 @@ extract_temp_key <- function(response) {
 
 #' Retrieve the result of a function called to the opencpu api
 #'
-#' Loading the evaluated object into the current environment, to be used
-#' internally in functions calling the opencpu api service to convert a response
-#' object included in the response from a post request, to the corresponding
-#' objects resulting from the original call.
+#' Fetch the result of an API call to OpenCPU
+#'
+#' This function is used internally to GET an evaluated object from an OpenCPU
+#' api, to GET a result, you must of course POST a function call first
 #'
 #' @param temp_key the temp key returned from the POST request to the API
 #'
@@ -154,15 +157,190 @@ extract_temp_key <- function(response) {
 #'   extract_temp_key() %>%
 #'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
-  httr::GET(
-    stringr::str_glue(
+  httr::RETRY(
+    verb = "GET",
+    url =     glue::glue(
       "{api_domain}",
       "tmp/{temp_key}/R/.val/rds",
       .sep = "/"
-    )
+    ),
+    times = 5
   ) %>%
     httr::content(as = "raw") %>%
     rawConnection() %>%
     gzcon() %>%
     readRDS()
+}
+
+#' Return the arguments as a named list of the parent environment
+#'
+#' Because the requests to the API are so similar, it's more DRY to pass the
+#' function arguments of the parent function directly to the API, instead of
+#' repeating them in the function body.
+#'
+#' @return a named list of name value pairs form the parent environement
+#'
+#' @family helper functions
+#' @noRd
+return_parent_arguments <- function(depth = 1) {
+  # lock in the environment of the function we are being called in. Otherwise
+  # lazy evaluation can cause trouble
+  parent_env <- rlang::caller_env(n = depth)
+  env_names <- rlang::env_names(parent_env)
+  # set the environement names so lapply can output a names list
+  names(env_names) <- env_names
+  lapply(
+    env_names,
+    function(x) rlang::env_get(env = parent_env, nm = x)
+  )
+}
+
+#' Check an OpenCPU reponse object and forward any errors
+#'
+#' @param response httr::response object from an OpenCPU API call
+#'
+#' @family helper functions
+#' @noRd
+check_opencpu_response <- function(response) {
+  # Stop if etnservice forwarded an error
+  assertthat::assert_that(response$status_code != 400,
+    msg = httr::content(response,
+      as = "text",
+      encoding = "UTF-8"
+    )
+  )
+
+  # Stop for other HTTP errors
+  assertthat::assert_that(!httr::http_error(response),
+    msg = glue::glue(
+      "API request failed: {http_message}",
+      http_message = httr::http_status(response)$message
+    )
+  )
+}
+
+
+#' Lifecycle warning for the deprecated connection argument
+#'
+#' @param function_identity Character of length one with the name
+#'   of the function the warning is being generated from
+#'
+#' @family helper functions
+#' @noRd
+deprecate_warn_connection <- function() {
+  lifecycle::deprecate_warn(
+    when = "v3.0.0",
+    what = glue::glue("{function_identity}(connection)",
+      function_identity = get_parent_fn_name(depth = 2)
+    ),
+    details = glue::glue(
+      "Please set `api = FALSE` to use local database, ",
+      "otherwise the API will be used"
+    ),
+    env = rlang::caller_env(),
+    user_env = rlang::caller_env(2),
+    always = TRUE
+  )
+}
+
+#' Get the name (symbol) of the parent function
+#'
+#' @return A length one Character with the name of the parent function.
+#'
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' child_fn <- function() {
+#'   get_parent_fn_name()
+#' }
+#'
+#' parent_fn <- function() {
+#'   print(get_parent_fn_name())
+#'   print(paste("nested:", child_fn()))
+#' }
+#'
+#' parent_fn()
+get_parent_fn_name <- function(depth = 1) {
+  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
+}
+
+#' Forward function arguments to API and retreive response
+#'
+#' @param function_identity Character vector of what function should be passed
+#' @param payload Arguments to be passed to OpenCPU function
+#'
+#' @return The same return object of the `function_identity` function
+#'
+#' @family helper functions
+#' @noRd
+forward_to_api <- function(
+    function_identity,
+    payload,
+    domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
+  # Get credentials and attatch to payload
+  payload <- append(payload, list(credentials = get_credentials()), after = 0)
+  # Set endpoint based on the passed function_identity
+  # NOTE trailing backslash is important for OpenCPU
+  endpoint <- glue::glue("{domain}/{function_identity}/")
+
+  # Forward the function and arguments to the API: call 1
+  ## Retry if server responds with HTTP error, use default rate settings of httr
+  response <-
+    httr::RETRY(
+      verb = "POST",
+      url = endpoint,
+      body = payload,
+      encode = "json",
+      terminate_on = c(400),
+      times = 5
+    )
+
+  # Check if the response contains any errors, and forward them if so.
+  check_opencpu_response(response)
+
+  # Fetch the output from the API: call 2
+  get_val(extract_temp_key(response))
+}
+
+
+#' Conductor Helper: point the way to API or SQL helper
+#'
+#' Helper that conducts it's parent function to either use a helper to query the api,
+#'  or a helper to query a local database connection using SQL.
+#'
+#' @param api Logical, Should the API be used?
+#'
+#' @return parsed R object as resulting from the API
+#'
+#' @family helper functions
+#' @noRd
+conduct_parent_to_helpers <- function(api) {
+  # Check arguments
+  assertthat::assert_that(assertthat::is.flag(api))
+
+  # Lock in the name of the parent function
+  function_identity <-
+    get_parent_fn_name(depth = 2)
+
+  # Get the argument values from the parent function
+  arguments_to_pass <-
+    return_parent_arguments(depth = 2)[
+      !names(return_parent_arguments(depth = 2)) %in% c(
+        "api",
+        "connection",
+        "function_identity"
+      )
+    ]
+
+  if (api) {
+    out <- do.call(
+      forward_to_api,
+      list(function_identity = function_identity, payload = arguments_to_pass)
+    )
+  } else {
+    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
+  }
+
+  return(out)
 }

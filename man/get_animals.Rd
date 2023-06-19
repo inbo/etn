@@ -5,16 +5,15 @@
 \title{Get animal data}
 \usage{
 get_animals(
-  connection = con,
   animal_id = NULL,
   tag_serial_number = NULL,
   animal_project_code = NULL,
-  scientific_name = NULL
+  scientific_name = NULL,
+  api = TRUE,
+  connection
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{animal_id}{Integer (vector). One or more animal identifiers.}
 
 \item{tag_serial_number}{Character (vector). One or more tag serial numbers.}
@@ -23,6 +22,8 @@ get_animals(
 codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},

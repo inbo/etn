@@ -4,10 +4,7 @@
 \alias{list_scientific_names}
 \title{List all available scientific names}
 \usage{
-list_scientific_names(connection = con)
-}
-\arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+list_scientific_names(api = TRUE, connection)
 }
 \value{
 A vector of all unique \code{scientific_name} present in

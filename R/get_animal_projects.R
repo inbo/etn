@@ -21,8 +21,27 @@
 #'
 #' # Get a specific animal project
 #' get_animal_projects(con, animal_project_code = "2014_demer")
-get_animal_projects <- function(connection = con,
-                                animal_project_code = NULL) {
+get_animal_projects <- function(animal_project_code = NULL,
+                                api = TRUE,
+                                connection){
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' get_animal_projects() sql helper
+#'
+#' @inheritParams get_animal_projects()
+#' @noRd
+#'
+get_animal_projects_sql <- function(animal_project_code = NULL) {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -32,7 +51,7 @@ get_animal_projects <- function(connection = con,
   } else {
     animal_project_code <- check_value(
       animal_project_code,
-      list_animal_project_codes(connection),
+      list_animal_project_codes(api = FALSE),
       "animal_project_code",
       lowercase = TRUE
     )
@@ -58,7 +77,10 @@ get_animal_projects <- function(connection = con,
       AND {animal_project_code_query}
     ", .con = connection)
   projects <- DBI::dbGetQuery(connection, query)
-
+  
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Sort data
   projects <-
     projects %>%

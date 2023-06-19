@@ -4,7 +4,7 @@
 \alias{list_acoustic_tag_ids}
 \title{List all available acoustic tag ids}
 \usage{
-list_acoustic_tag_ids(connection = con)
+list_acoustic_tag_ids(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}

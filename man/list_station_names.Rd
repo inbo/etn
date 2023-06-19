@@ -4,7 +4,7 @@
 \alias{list_station_names}
 \title{List all available station names}
 \usage{
-list_station_names(connection = con)
+list_station_names(api = TRUE, connection)
 }
 \arguments{
 \item{connection}{A connection to the ETN database. Defaults to \code{con}.}

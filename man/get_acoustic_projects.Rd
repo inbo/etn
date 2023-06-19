@@ -4,13 +4,13 @@
 \alias{get_acoustic_projects}
 \title{Get acoustic project data}
 \usage{
-get_acoustic_projects(connection = con, acoustic_project_code = NULL)
+get_acoustic_projects(acoustic_project_code = NULL, api = TRUE, connection)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
-
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
+
+\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
 }
 \value{
 A tibble with acoustic project data, sorted by \code{project_code}. See

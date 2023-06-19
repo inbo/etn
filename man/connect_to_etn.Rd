@@ -15,6 +15,7 @@ connect_to_etn(username = Sys.getenv("userid"), password = Sys.getenv("pwd"))
 ODBC connection to ETN database.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Connect to the ETN database using username and password.
 }
 \examples{

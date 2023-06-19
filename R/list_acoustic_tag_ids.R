@@ -5,7 +5,29 @@
 #' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 #'
 #' @export
-list_acoustic_tag_ids <- function(connection = con) {
+list_acoustic_tag_ids <- function(api = TRUE,
+                                  connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api)
+  return(out)
+}
+
+#' list_acoustic_tag_ids() sql helper
+#'
+#' @inheritParams list_acoustic_tag_ids()
+#' @noRd
+#'
+list_acoustic_tag_ids_sql <- function(){
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
+  # Check connection
+  check_connection(connection)
+
   acoustic_tag_id_sql <- glue::glue_sql(
     readr::read_file(system.file("sql", "acoustic_tag_id.sql", package = "etn")),
     .con = connection
@@ -17,5 +39,9 @@ list_acoustic_tag_ids <- function(connection = con) {
   ", .con = connection)
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return acoustic_tag_ids()
   stringr::str_sort(data$acoustic_tag_id, numeric = TRUE)
 }
