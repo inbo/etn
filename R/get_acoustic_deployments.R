@@ -219,6 +219,8 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
       factor(.data$station_name, levels = list_station_names(api = FALSE)),
       .data$deploy_date_time
     )
-
+  # Close connection
+  DBI::dbDisconnect(connection)
+  # Return acoustic deployments
   dplyr::as_tibble(deployments)
 }

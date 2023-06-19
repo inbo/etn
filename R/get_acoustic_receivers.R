@@ -127,7 +127,10 @@ get_acoustic_receivers_sql <- function(receiver_id = NULL,
       AND {status_query}
     ", .con = connection)
   receivers <- DBI::dbGetQuery(connection, query)
-
+  
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Sort data
   receivers <-
     receivers %>%

@@ -82,5 +82,9 @@ get_acoustic_projects_sql <- function(acoustic_project_code = NULL) {
     projects %>%
     dplyr::arrange(.data$project_code)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
+  # Return acoustic projects
   dplyr::as_tibble(projects)
 }

@@ -33,5 +33,9 @@ list_animal_ids_sql <- function() {
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return animal ids
   sort(data$id_pk)
 }

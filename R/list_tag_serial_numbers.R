@@ -34,6 +34,10 @@ list_tag_serial_numbers_sql <- function() {
     .con = connection
   )
   data <- DBI::dbGetQuery(connection, query)
+  
+  # Close connection
+  DBI::dbDisconnect(connection)
 
+  # Return tag serial numbers
   stringr::str_sort(data$serial_number, numeric = TRUE)
 }

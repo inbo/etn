@@ -39,5 +39,9 @@ list_cpod_project_codes_sql <- function() {
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return cpod project codes
   sort(data$project_code)
 }

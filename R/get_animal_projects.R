@@ -77,7 +77,10 @@ get_animal_projects_sql <- function(animal_project_code = NULL) {
       AND {animal_project_code_query}
     ", .con = connection)
   projects <- DBI::dbGetQuery(connection, query)
-
+  
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Sort data
   projects <-
     projects %>%

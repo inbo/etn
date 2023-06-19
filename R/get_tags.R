@@ -216,6 +216,9 @@ get_tags_sql <- function(tag_type = NULL,
     ", .con = connection)
   tags <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Sort data
   tags <-
     tags %>%

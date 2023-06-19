@@ -230,6 +230,9 @@ get_animals_sql <- function(animal_id = NULL,
     ", .con = connection)
   animals <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
     animals %>%

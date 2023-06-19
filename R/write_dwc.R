@@ -88,6 +88,9 @@ write_dwc <- function(connection = con,
     .con = connection
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
+  
+  # Close connection
+  DBI::dbDisconnect(connection)
 
   # Return object or write files
   if (is.null(directory)) {

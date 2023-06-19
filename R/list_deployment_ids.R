@@ -33,5 +33,9 @@ list_deployment_ids_sql <- function() {
   )
   data <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+
+  # Return deployment ids
   stringr::str_sort(data$id, numeric = TRUE)
 }
