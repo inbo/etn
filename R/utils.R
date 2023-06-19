@@ -157,9 +157,10 @@ extract_temp_key <- function(response) {
 #'   extract_temp_key() %>%
 #'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
-  httr::RETRY(
+  # request data and open connection
+  response_connection <- httr::RETRY(
     verb = "GET",
-    url =     glue::glue(
+    url = glue::glue(
       "{api_domain}",
       "tmp/{temp_key}/R/.val/rds",
       .sep = "/"
@@ -167,9 +168,15 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     times = 5
   ) %>%
     httr::content(as = "raw") %>%
-    rawConnection() %>%
+    rawConnection()
+  # read connection
+  api_response <- response_connection %>%
     gzcon() %>%
     readRDS()
+  # close connection
+  close(response_connection)
+  # Return OpenCPU return object
+  return(api_response)
 }
 
 #' Return the arguments as a named list of the parent environment
