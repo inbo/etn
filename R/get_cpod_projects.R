@@ -78,6 +78,9 @@ get_cpod_projects_sql <- function(cpod_project_code = NULL) {
     ", .con = connection)
   projects <- DBI::dbGetQuery(connection, query)
 
+  # Close connection
+  DBI::dbDisconnect(connection)
+  
   # Sort data
   projects <-
     projects %>%
