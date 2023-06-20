@@ -43,7 +43,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    withr
+    withr,
+    vcr (>= 0.6.0)
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
