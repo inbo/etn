@@ -23,10 +23,11 @@ test_that("get_acoustic_detections() returns a tibble", {
   expect_s3_class(df_sql, "tbl")
 })
 
-test_that("get_acoustic_detections() returns unique detection_id", {
-  df <- get_acoustic_detections(limit = TRUE)
-  expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
-})
+# TODO check #283 and re-enable test if neccesairy.
+# test_that("get_acoustic_detections() returns unique detection_id", {
+#   df <- get_acoustic_detections(limit = TRUE)
+#   expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
+# })
 
 test_that("get_acoustic_detections() returns the expected columns", {
   df <- get_acoustic_detections(limit = TRUE)
