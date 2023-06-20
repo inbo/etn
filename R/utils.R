@@ -297,7 +297,7 @@ forward_to_api <- function(
     response <-
       httr::RETRY(
         verb = "POST",
-        url = glue::glue(endpoint, "json/", .sep = "/"),
+        url = glue::glue(endpoint, "json", .close = "/"),
         body = payload,
         encode = "json",
         terminate_on = c(400),
