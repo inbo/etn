@@ -134,8 +134,16 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(animal_project_code = "2014_demer", limit = TRUE),
-    get_acoustic_detections(animal_project_code = "2014_DEMER", limit = TRUE)
+    get_acoustic_detections(
+      animal_project_code = "2014_demer",
+      start_date = "2015-09-07",
+      end_date = "2015-09-08"
+    ),
+    get_acoustic_detections(
+      animal_project_code = "2014_DEMER",
+      start_date = "2015-09-07",
+      end_date = "2015-09-08"
+    )
   )
 
   # Select multiple values
@@ -190,8 +198,16 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(acoustic_project_code = "demer", limit = TRUE),
-    get_acoustic_detections(acoustic_project_code = "DEMER", limit = TRUE)
+    get_acoustic_detections(
+      acoustic_project_code = "demer",
+      start_date = "2014-04-28",
+      end_date = "2014-04-30"
+    ),
+    get_acoustic_detections(
+      acoustic_project_code = "DEMER",
+      start_date = "2014-04-28",
+      end_date = "2014-04-30"
+    )
   )
 
   # Select multiple values
