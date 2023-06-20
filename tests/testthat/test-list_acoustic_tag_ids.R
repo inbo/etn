@@ -1,5 +1,7 @@
 test_that("list_acoustic_tag_ids() returns unique list of values", {
-  vector <- list_acoustic_tag_ids()
+  vcr::use_cassette("list_acoustic_tag_ids", {
+    vector <- list_acoustic_tag_ids()
+  })
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
