@@ -1,0 +1,88 @@
+http_interactions:
+- request:
+    method: get
+    uri: http://httpbin.org/status/404
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 404
+      category: Client error
+      reason: Not Found
+      message: 'Client error: (404) Not Found'
+    headers:
+      date: Tue, 20 Jun 2023 13:53:04 GMT
+      content-type: text/html; charset=utf-8
+      content-length: '0'
+      connection: keep-alive
+      server: gunicorn/19.9.0
+      access-control-allow-origin: '*'
+      access-control-allow-credentials: 'true'
+    body:
+      encoding: ''
+      file: no
+      string: ''
+  recorded_at: 2023-06-20 13:53:58 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0
+- request:
+    method: get
+    uri: http://httpbin.org/status/504
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 504
+      category: Server error
+      reason: Gateway Timeout
+      message: 'Server error: (504) Gateway Timeout'
+    headers:
+      date: Tue, 20 Jun 2023 13:53:06 GMT
+      content-type: text/html; charset=utf-8
+      content-length: '0'
+      connection: keep-alive
+      server: gunicorn/19.9.0
+      access-control-allow-origin: '*'
+      access-control-allow-credentials: 'true'
+    body:
+      encoding: ''
+      file: no
+      string: ''
+  recorded_at: 2023-06-20 13:53:58 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0
+- request:
+    method: get
+    uri: http://httpbin.org/status/429
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 429
+      category: Client error
+      reason: Too Many Requests (RFC 6585)
+      message: 'Client error: (429) Too Many Requests (RFC 6585)'
+    headers:
+      date: Tue, 20 Jun 2023 13:53:58 GMT
+      content-type: text/html; charset=utf-8
+      content-length: '0'
+      connection: keep-alive
+      server: gunicorn/19.9.0
+      access-control-allow-origin: '*'
+      access-control-allow-credentials: 'true'
+    body:
+      encoding: ''
+      file: no
+      string: ''
+  recorded_at: 2023-06-20 13:53:58 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0
