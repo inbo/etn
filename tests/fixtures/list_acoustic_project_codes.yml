@@ -1,0 +1,47 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/list_acoustic_project_codes/json/
+    body:
+      encoding: ''
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"}}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+  response:
+    status:
+      status_code: 201
+      category: Success
+      reason: Created
+      message: 'Success: (201) Created'
+    headers:
+      date: Tue, 20 Jun 2023 13:19:58 GMT
+      server: Apache/2.4.41 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=300, public
+      x-ocpu-session: x0110ed2a8d2c3b
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0110ed2a8d2c3b/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.3.0 (2023-04-21)
+      x-ocpu-locale: en_US.UTF-8
+      x-ocpu-time: 2023-06-20 13:19:59 UTC
+      x-ocpu-version: 2.2.9
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '1525'
+      content-type: application/json
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc1; path=/
+    body:
+      encoding: ''
+      file: no
+      string: |
+        ["2004_Gudena", "2011_Loire", "2011_Warnow", "2013_Foyle", "2013_Maas", "2014_Frome", "2014_Nene", "2015_PhD_Gutmann_Roberts", "2016_Diaccia_Botrona", "2017_Fremur", "2019_Grotenete", "2020_PhD_Winter", "2021_YEELAZ", "2022_Beaver_Durme", "Aberdeen", "albert", "Albertkanaal_VPS_Ham", "Albertkanaal_VPS_Hasselt", "Apelafico", "ARAISOLA02", "ARAISOLA03", "Ars", "Artevigo", "ASMOP1", "ASMOP2", "AZO", "BALANCE", "BECORV", "BlueCrab2022Algarve", "Bodden_Pike", "BOOGMR", "BOOPAP", "BOOPIRATA", "BOORAMA", "BOOSBI", "bovenschelde", "bpns", "Brasem_IJM/MM", "BTN", "BTN-DeepWater-IMEDEA", "BTN-IMEDEA", "CANAPE", "CMAX_Hebrides", "Cod-connectivity", "CONNECT-MED", "Conon", "CORYTRACK", "cpodnetwork", "CTN", "DAbecasis_PhD", "DAK", "Danish_southeastern_strait", "Danube_Sturgeons", "Delfzijl", "demer", "Deveron", "dijle", "Dijle_VPS", "DSM", "DTU-Skjern", "Eel-source-to-sea", "eemskanaal_I", "eemskanaal_II", "eemskanaal_III", "EMMN", "ESGL", "ETN_project_group_1", "ETN_project_group_4", "ETN_Workshop_group2", "FarmTrack", "Fish_Mig_Wad_Sea", "FISHINTEL", "FISHOWF", "Friesland", "GIBRALTRACK_pilot", "GTN", "Gudena_network", "IBASS", "IG_II_Fish_Pass", "Iller_VPS", "Inforbiomares", "IOA", "Jersey_Coastal", "JJ_Belwind", "JSATS-PalmaBay-2019", "KBTN", "KERG", "kornwerderzand", "Lake_Anundsjo_VPS", "LamTre20/21", "LamYorOus18-20", "lauwersmeer", "LBSSM", "leopold", "LESPUR", "life4fish", "lifewatch", "Limfjord", "LMHv", "MacFish", "Mangar-Keban", "Marble_rainbow_trout", "MariagerFjord_network", "MBA_Massmo", "MBA_Wavehub", "MBA_Whitsand", "mepnsw", "MIGRATOEBRE", "MOBEIA", "Mobula_IMAR", "MOPP", "MorayFirth", "mrc_vliz", "NARVAEEL", "no_info", "none", "Noordzeekanaal", "North_sea_wrecks", "Northern_Norfolk_Broads", "NTNU-Gaulosen", "OP-Test", "Orstedcod", "OTN_UPLOAD", "OTN-Hemnfjorden", "OTN-Skjerstadfjorden", "OTN-Tosenfjorden", "paintedcomber", "pc4c", "PhD_Barbara_Koeck", "PhD_Jeremy_Pastor", "PhD_Marrocco", "PhD_Nolan", "PhD_Parcerisas", "PhysFish", "PrePARED", "PTN-MARSW", "PTN-Silver-eel-Mondego", "PTN/MEROSW2021", "PTN/MIGRACORV", "PTN/PROTECT2012", "PTN/PROTECT2013", "RBVV2", "Reelease", "RESBIO", "ResMed", "River_Usk", "RNP", "rt2020_zeeschelde", "Running_eel", "saeftinghe", "SAMARCH", "SARTELARAM", "SARTELTG", "SARTELZINGARO", "Scytrack", "SeaMonitor", "SEM", "SEMP", "SGB", "Siganid_East_Med", "Siganid_Gulf_Aqaba", "SkagNor", "Skye", "SMAFBI", "SMLA", "SMOLTRACK-I-Engeland", "SMOLTRACK-II-Engeland", "SMUOG", "SPAWNSEIS", "SrivAqab", "SrivEMed", "ST08SWE", "sturgeonSK", "SU.MO.ELASMO.Adriatic", "Sudle_IMPULS", "Sudle_INNOV", "SUPERSAT", "SVNL-FISH-WATCH", "SwanseaBristolArray", "SWIMWAY_2021", "Swimway_vechte", "TelMarsw", "TeRi", "testvr2ar", "thornton", "Top-Predator", "UtS", "V2LBEIAR", "V2LCASP", "V2LCHASES", "V2LDBS", "V2LFALK", "V2LGOL", "V2LIMFSTP", "V2LLIMS", "V2LNR", "V2LSMQUB", "V2LWATCH", "VFM_GoB", "VFM_Hjalmaren", "VFM_Malaren", "VFM_Siljan", "VFM_Vattern", "VFM_WCC", "VMLSMMI", "VMLSOCBS", "VVV", "Walloneel", "ws1", "ws2", "ws3", "Z001", "zeeschelde"]
+  recorded_at: 2023-06-20 13:19:59 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0

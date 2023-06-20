@@ -1,5 +1,7 @@
 test_that("list_animal_project_codes() returns unique list of values", {
-  vector <- list_animal_project_codes()
+  vcr::use_cassette("list_animal_project_codes", {
+    vector <- list_animal_project_codes()
+  })
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
