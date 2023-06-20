@@ -1,0 +1,47 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/list_scientific_names/json
+    body:
+      encoding: ''
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"}}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+  response:
+    status:
+      status_code: 201
+      category: Success
+      reason: Created
+      message: 'Success: (201) Created'
+    headers:
+      date: Tue, 20 Jun 2023 12:56:30 GMT
+      server: Apache/2.4.41 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=300, public
+      x-ocpu-session: x0c564140ca37d5
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0c564140ca37d5/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.3.0 (2023-04-21)
+      x-ocpu-locale: en_US.UTF-8
+      x-ocpu-time: 2023-06-20 12:56:31 UTC
+      x-ocpu-version: 2.2.9
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '1182'
+      content-type: application/json
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      encoding: ''
+      file: no
+      string: |
+        ["Abramis brama", "Abramis brama Rutilus rutilus", "Alosa fallax", "Anguilla anguilla", "Anguilla rostrata", "Argyrosomus regius", "Balistes capriscus", "Barbus barbus", "Built-in", "Callinectes sapidus", "Caranx ignobilis", "Carcharhinus albimarginatus", "Carcharhinus leucas", "Castor fiber", "Cetorhinus maximus", "Chelon labrosus", "Chelon ramada", "Conger conger", "Coregonus lavaretus", "Coryphaena hippurus", "Cyprinus carpio", "Dactylopterus volitans", "Dalatias licha", "Dasyatis pastinaca", "Dentex dentex", "Dicentrarchus labrax", "Diplodus cervinus", "Diplodus sargus", "Diplodus vulgaris", "Dipturus intermedius", "Epinephelus marginatus", "Eriocheir sinensis", "Eriphia verrucosa", "Esox lucius", "Gadus morhua", "Galeocerdo cuvier", "Galeorhinus galeus", "Hexanchus griseus", "Homarus gammarus", "Homo sapiens sapiens", "Labrus bergylta", "Lamna nasus", "Lampetra fluviatilis", "Leuciscus idus", "Lichia amia", "Limanda limanda", "Lithognathus mormyrus", "Liza aurata", "Liza ramada", "Melanogrammus aeglefinus", "Merlangius Merlangus", "Microstomus kitt", "Mobula tarapacana", "Mugil sp.", "Mullus surmuletus", "Muraena helena", "Mustelus asterias", "Mustelus sp.", "Myliobatis aquila", "Nebrius ferrugineus", "Octopus vulgaris", "Oncorhynchus mykiss", "Pagellus bogaraveo", "Pagellus erythrinus", "Pagrus pagrus", "Palinurus elephas", "Perca fluviatilis", "Petromyzon marinus", "Petromyzon marinus Linnaeus", "Plastic", "Platichthys flesus", "Pleuronectes platessa", "Pollachius pollachius", "Polyprion americanus", "Pomatomus saltatrix", "Prionace glauca", "Pseudocaranx dentex", "Raja asterias", "Raja brachyura", "Raja clavata", "Raja radula", "Raja undulata", "Range tag", "Reference Tag D-2LP13", "Reference Tag D-2LP9L", "Rhynchobatus djiddensis", "Rostroraja alba", "Rutilus rutilus", "Salmo salar", "Salmo salar/Salmo trutta", "Salmo t. trutta", "Salmo trutta", "Salmo trutta trutta Linnaeus", "Salvelinus alpinus", "Sander lucioperca", "Sarpa salpa", "Sciaena umbra", "Scorpaena scrofa", "Scyliorhinus canicula", "Scyliorhinus stellaris", "Scyllarides latus", "Sepia officinalis", "Seriola dumerili", "Seriola rivoliana", "Serranus atricauda", "Serranus scriba", "Silurus glanis", "Solea senegalensis", "Solea solea", "Sparisoma cretense", "Sparus aurata", "Sphyraena barracuda", "Sphyraena viridensis", "Sphyrna zygaena", "Spider crab", "Spondyliosoma cantharus", "Spondyliosoma cantharus ", "Squalius cephalus", "Squalus acanthias", "Squatina squatina", "Symphodus bailloni", "Symphodus melops", "Sync tag", "Synctag R-HP16", "Test testium", "Thunnus thynnus", "Torpedo marmorata", "Torpedo torpedo", "Umbrina cirrosa", "Vimba vimba", "Xyrichtys novacula"]
+  recorded_at: 2023-06-20 12:56:31 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0

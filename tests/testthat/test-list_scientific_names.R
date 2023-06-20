@@ -1,5 +1,7 @@
 test_that("list_scientific_names() returns unique list of values", {
-  vector <- list_scientific_names()
+  vcr::use_cassette("list_scientific_names", {
+    vector <- list_scientific_names()
+  })
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
