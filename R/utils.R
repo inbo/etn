@@ -276,7 +276,8 @@ get_parent_fn_name <- function(depth = 1) {
 #'
 #' @param function_identity Character vector of what function should be passed
 #' @param payload Arguments to be passed to OpenCPU function
-#'
+#' @param json Logical, if TRUE, then a one step process is used the output is
+#'   parsed from a json response
 #' @return The same return object of the `function_identity` function
 #'
 #' @family helper functions
@@ -284,6 +285,7 @@ get_parent_fn_name <- function(depth = 1) {
 forward_to_api <- function(
     function_identity,
     payload,
+    json = FALSE,
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
   # Get credentials and attatch to payload
   payload <- append(payload, list(credentials = get_credentials()), after = 0)
@@ -291,23 +293,40 @@ forward_to_api <- function(
   # NOTE trailing backslash is important for OpenCPU
   endpoint <- glue::glue("{domain}/{function_identity}/")
 
-  # Forward the function and arguments to the API: call 1
-  ## Retry if server responds with HTTP error, use default rate settings of httr
-  response <-
-    httr::RETRY(
-      verb = "POST",
-      url = endpoint,
-      body = payload,
-      encode = "json",
-      terminate_on = c(400),
-      times = 5
-    )
+  if (json) {
+    response <-
+      httr::RETRY(
+        verb = "POST",
+        url = glue::glue(endpoint, "json/", .sep = "/"),
+        body = payload,
+        encode = "json",
+        terminate_on = c(400),
+        times = 5
+      )
+    # Check if the response contains any errors, and forward them if so.
+    check_opencpu_response(response)
 
-  # Check if the response contains any errors, and forward them if so.
-  check_opencpu_response(response)
+    # return as a vector
+    return(unlist(httr::content(response, as = "parsed")))
+  } else {
+    # Forward the function and arguments to the API: call 1
+    ## Retry if server responds with HTTP error, use default rate settings of httr
+    response <-
+      httr::RETRY(
+        verb = "POST",
+        url = endpoint,
+        body = payload,
+        encode = "json",
+        terminate_on = c(400),
+        times = 5
+      )
 
-  # Fetch the output from the API: call 2
-  get_val(extract_temp_key(response))
+    # Check if the response contains any errors, and forward them if so.
+    check_opencpu_response(response)
+
+    # Fetch the output from the API: call 2
+    return(get_val(extract_temp_key(response)))
+  }
 }
 
 
@@ -317,12 +336,14 @@ forward_to_api <- function(
 #'  or a helper to query a local database connection using SQL.
 #'
 #' @param api Logical, Should the API be used?
+#' @param ... options on how to fetch the response.
+#'    Forwarded to `forward_to_api()`
 #'
 #' @return parsed R object as resulting from the API
 #'
 #' @family helper functions
 #' @noRd
-conduct_parent_to_helpers <- function(api) {
+conduct_parent_to_helpers <- function(api, ...) {
   # Check arguments
   assertthat::assert_that(assertthat::is.flag(api))
 
@@ -343,7 +364,9 @@ conduct_parent_to_helpers <- function(api) {
   if (api) {
     out <- do.call(
       forward_to_api,
-      list(function_identity = function_identity, payload = arguments_to_pass)
+      list(function_identity = function_identity,
+           payload = arguments_to_pass,
+           ...)
     )
   } else {
     out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
