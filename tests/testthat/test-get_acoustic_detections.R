@@ -184,8 +184,12 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 
 test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
   # Errors
-  expect_error(get_acoustic_detections(acoustic_project_code = "not_a_project"))
-  expect_error(get_acoustic_detections(acoustic_project_code = c("demer", "not_a_project")))
+  expect_error(
+    get_acoustic_detections(acoustic_project_code = "not_a_project"),
+    regexp = "find acoustic_project_code")
+  expect_error(
+    get_acoustic_detections(acoustic_project_code = c("demer", "not_a_project")),
+    regexp = "find acoustic_project_code")
 
   # Select single value
   single_select <- "demer"
