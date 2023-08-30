@@ -231,8 +231,12 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
   # Errors
-  expect_error(get_acoustic_detections(receiver_id = "not_a_receiver_id"))
-  expect_error(get_acoustic_detections(receiver_id = c("VR2W-124070", "not_a_receiver_id")))
+  expect_error(
+    get_acoustic_detections(receiver_id = "not_a_receiver_id"),
+    regexp = "find receiver_id")
+  expect_error(
+    get_acoustic_detections(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
+    regexp = "find receiver_id")
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
