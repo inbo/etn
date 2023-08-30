@@ -194,7 +194,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
   # Select single value
   single_select <- "demer"
   single_select_df <- get_acoustic_detections(acoustic_project_code = single_select,
-                                              limit = TRUE)
+                                              limit = TRUE,
+                                              api = TRUE)
   expect_equal(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
@@ -206,18 +207,21 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
     get_acoustic_detections(
       acoustic_project_code = "demer",
       start_date = "2014-04-28",
-      end_date = "2014-04-30"
+      end_date = "2014-04-30",
+      api = TRUE
     ),
     get_acoustic_detections(
       acoustic_project_code = "DEMER",
       start_date = "2014-04-28",
-      end_date = "2014-04-30"
+      end_date = "2014-04-30",
+      api = TRUE
     )
   )
 
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <- get_acoustic_detections(acoustic_project_code = multi_select)
+  multi_select_df <-
+    get_acoustic_detections(acoustic_project_code = multi_select, api = TRUE)
   expect_equal(
     multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
