@@ -224,6 +224,10 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
       start_date = "2015-09-07",
       end_date = "2015-09-08"
     )
+  })
+  expect_equal(
+    demer_lowercase,
+    demer_uppercase
   )
 
   # Select multiple values
