@@ -212,13 +212,14 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
-  expect_equal(
-    get_acoustic_detections(
+  vcr::use_cassette("2014_demer_acoustic_detections", {
+    demer_lowercase <- get_acoustic_detections(
       animal_project_code = "2014_demer",
       start_date = "2015-09-07",
       end_date = "2015-09-08"
-    ),
-    get_acoustic_detections(
+    )})
+  vcr::use_cassette("2014_demer_acoustic_detections_upper", {
+    demer_uppercase <- get_acoustic_detections(
       animal_project_code = "2014_DEMER",
       start_date = "2015-09-07",
       end_date = "2015-09-08"
