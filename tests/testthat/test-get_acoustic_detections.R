@@ -35,7 +35,9 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
 # })
 
 test_that("get_acoustic_detections() returns the expected columns", {
-  df <- get_acoustic_detections(limit = TRUE)
+  vcr::use_cassette("acoustic_detections_limited", {
+    df <- get_acoustic_detections(limit = TRUE)
+  })
   expected_col_names <- c(
     "detection_id",
     "date_time",
