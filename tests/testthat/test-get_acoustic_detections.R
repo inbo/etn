@@ -198,9 +198,11 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
   single_select <- "2014_demer"
   vcr::use_cassette("2014_demer_acoustic_detections", {
     single_select_df <-
-      get_acoustic_detections(animal_project_code = single_select,
-                              start_date = "2015-09-07",
-                              end_date = "2015-09-08")
+      get_acoustic_detections(
+        animal_project_code = single_select,
+        start_date = "2015-09-07",
+        end_date = "2015-09-08"
+      )
   })
 
   expect_equal(
