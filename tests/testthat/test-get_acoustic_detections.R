@@ -187,8 +187,12 @@ test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
 
 test_that("get_acoustic_detections() allows selecting on animal_project_code", {
   # Errors
-  expect_error(get_acoustic_detections(animal_project_code = "not_a_project"))
-  expect_error(get_acoustic_detections(animal_project_code = c("2014_demer", "not_a_project")))
+  expect_error(
+    get_acoustic_detections(animal_project_code = "not_a_project"),
+    regexp = "find animal_project_code")
+  expect_error(
+    get_acoustic_detections(animal_project_code = c("2014_demer", "not_a_project")),
+    regexp = "find animal_project_code")
 
   # Select single value
   single_select <- "2014_demer"
