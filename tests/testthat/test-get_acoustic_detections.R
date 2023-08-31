@@ -227,7 +227,12 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
   # Select multiple values
   multi_select <- c("2014_demer", "2015_dijle")
-  multi_select_df <- get_acoustic_detections(animal_project_code = multi_select)
+  vcr::use_cassette("demer_and_dijle_acoustic_detections", {
+    multi_select_df <-
+      get_acoustic_detections(animal_project_code = multi_select,
+                              start_date = "2015-04-21",
+                              end_date = "2015-04-26")
+  })
   expect_equal(
     multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
     c(multi_select)
