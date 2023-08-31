@@ -258,8 +258,11 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
     regexp = "find scientific_name")
 
   # Select single value
-  single_select <- "Rutilus rutilus"
-  single_select_df <- get_acoustic_detections(scientific_name = single_select)
+  single_select <- "Torpedo torpedo"
+  vcr::use_cassette("torpedo_acoustic_detections", {
+    single_select_df <- get_acoustic_detections(scientific_name = single_select)
+  })
+
   expect_equal(
     single_select_df %>% distinct(scientific_name) %>% pull(),
     c(single_select)
@@ -267,8 +270,11 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
-  multi_select <- c("Rutilus rutilus", "Silurus glanis")
-  multi_select_df <- get_acoustic_detections(scientific_name = multi_select)
+  multi_select <- c("Raja asterias", "Torpedo torpedo")
+  vcr::use_cassette("torpedo_raja_acoustic_detections", {
+    multi_select_df <-
+      get_acoustic_detections(scientific_name = multi_select)
+  })
   expect_equal(
     multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
     c(multi_select)
