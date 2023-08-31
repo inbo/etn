@@ -71,33 +71,92 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   # 2014_demer contains data from 2014-04-18 15:45:00 UTC to 2018-09-15 19:40:51 UTC
 
   # Start date (inclusive) <= min(date_time)
-  start_year_df <- get_acoustic_detections(start_date = "2015", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(start_year_df$date_time))
-  start_month_df <- get_acoustic_detections(start_date = "2015-04", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(start_month_df$date_time))
-  start_day_df <- get_acoustic_detections(start_date = "2015-04-24", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(start_day_df$date_time))
+  vcr::use_cassette("start_year_acoustic_detections", {
+    start_year_df <-
+      get_acoustic_detections(
+        start_date = "2017",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2017-01-01", tz = "UTC"),
+    min(start_year_df$date_time)
+  )
+  vcr::use_cassette("start_month_acoustic_detections", {
+    start_month_df <-
+      get_acoustic_detections(
+        start_date = "2015-04",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2015-04-01", tz = "UTC"),
+    min(start_month_df$date_time)
+  )
+  vcr::use_cassette("start_day_acoustic_detections", {
+    start_day_df <-
+      get_acoustic_detections(
+        start_date = "2015-04-24",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2015-04-24", tz = "UTC"),
+    min(start_day_df$date_time)
+  )
 
   # End date (exclusive) > max(date_time)
-  end_year_df <- get_acoustic_detections(end_date = "2016", animal_project_code = "2014_demer")
-  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(end_year_df$date_time))
-  end_month_df <- get_acoustic_detections(end_date = "2015-05", animal_project_code = "2014_demer")
+  vcr::use_cassette("end_year_acoustic_detections", {
+    end_year_df <- get_acoustic_detections(
+      end_date = "2012",
+      animal_project_code = "2011_rivierprik"
+    )
+  })
+  expect_gt(as.POSIXct("2012-01-01", tz = "UTC"), max(end_year_df$date_time))
+  vcr::use_cassette("end_month_acoustic_detections", {
+    end_month_df <- get_acoustic_detections(
+      end_date = "2015-05",
+      animal_project_code = "2015_fint"
+    )
+  })
   expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(end_month_df$date_time))
-  end_day_df <- get_acoustic_detections(end_date = "2015-04-25", animal_project_code = "2014_demer")
-  expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(end_day_df$date_time))
+  vcr::use_cassette("end_day_acoustic_detections", {
+    end_day_df <- get_acoustic_detections(
+      end_date = "2014-04-25",
+      animal_project_code = "2014_demer"
+    )
+  })
+  expect_gt(as.POSIXct("2014-04-25", tz = "UTC"), max(end_day_df$date_time))
 
   # Between
-  between_year_df <-
-    get_acoustic_detections(
-      start_date= "2015",
-      end_date = "2016",
-      animal_project_code = "2014_demer")
+  vcr::use_cassette("between_year_acoustic_detections", {
+    between_year_df <-
+      get_acoustic_detections(
+        start_date = "2015",
+        end_date = "2016",
+        animal_project_code = "2014_demer"
+      )
+  })
   expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(between_year_df$date_time))
   expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(between_year_df$date_time))
-  between_month_df <- get_acoustic_detections(start_date = "2015-04", end_date = "2015-05", animal_project_code = "2014_demer")
+  vcr::use_cassette("between_month_acoustic_detections", {
+    between_month_df <-
+      get_acoustic_detections(
+        start_date = "2015-04",
+        end_date = "2015-05",
+        animal_project_code = "2014_demer"
+      )
+  })
   expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(between_month_df$date_time))
   expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(between_month_df$date_time))
-  between_day_df <- get_acoustic_detections(start_date = "2015-04-24", end_date = "2015-04-25", animal_project_code = "2014_demer")
+  vcr::use_cassette("between_day_acoustic_detections", {
+    between_day_df <-
+      get_acoustic_detections(
+        start_date = "2015-04-24",
+        end_date = "2015-04-25",
+        animal_project_code = "2014_demer"
+      )
+  })
   expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(between_day_df$date_time))
   expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(between_day_df$date_time))
 })
