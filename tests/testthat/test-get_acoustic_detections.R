@@ -247,9 +247,15 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
 test_that("get_acoustic_detections() allows selecting on scientific_name", {
   # Errors
-  expect_error(get_acoustic_detections(scientific_name = "not_a_sciname"))
-  expect_error(get_acoustic_detections(scientific_name = "rutilus rutilus")) # Case sensitive
-  expect_error(get_acoustic_detections(scientific_name = c("Rutilus rutilus", "not_a_sciname")))
+  expect_error(
+    get_acoustic_detections(scientific_name = "not_a_sciname"),
+    regexp = "find scientific_name")
+  expect_error(
+    get_acoustic_detections(scientific_name = "rutilus rutilus"),
+    regexp = "find scientific_name") # Case sensitive
+  expect_error(
+    get_acoustic_detections(scientific_name = c("Rutilus rutilus", "not_a_sciname")),
+    regexp = "find scientific_name")
 
   # Select single value
   single_select <- "Rutilus rutilus"
