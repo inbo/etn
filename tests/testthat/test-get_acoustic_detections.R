@@ -108,11 +108,11 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   # End date (exclusive) > max(date_time)
   vcr::use_cassette("end_year_acoustic_detections", {
     end_year_df <- get_acoustic_detections(
-      end_date = "2012",
-      animal_project_code = "2011_rivierprik"
+      end_date = "2016",
+      animal_project_code = "2015_fint"
     )
   })
-  expect_gt(as.POSIXct("2012-01-01", tz = "UTC"), max(end_year_df$date_time))
+  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(end_year_df$date_time))
   vcr::use_cassette("end_month_acoustic_detections", {
     end_month_df <- get_acoustic_detections(
       end_date = "2015-05",
@@ -132,13 +132,13 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   vcr::use_cassette("between_year_acoustic_detections", {
     between_year_df <-
       get_acoustic_detections(
-        start_date = "2015",
-        end_date = "2016",
+        start_date = "2016",
+        end_date = "2017",
         animal_project_code = "2014_demer"
       )
   })
-  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(between_year_df$date_time))
-  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(between_year_df$date_time))
+  expect_lte(as.POSIXct("2016-01-01", tz = "UTC"), min(between_year_df$date_time))
+  expect_gt(as.POSIXct("2017-01-01", tz = "UTC"), max(between_year_df$date_time))
   vcr::use_cassette("between_month_acoustic_detections", {
     between_month_df <-
       get_acoustic_detections(
