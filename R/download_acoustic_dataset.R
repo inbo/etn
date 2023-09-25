@@ -218,20 +218,26 @@ download_acoustic_dataset <- function(connection = con,
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
   if (nrow(detections) > 0) {
-    message("* first date of detection:     ",
-            detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>%
-              pull())
-    message("* last date of detection:      ",
-            detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>%
-              pull())
+    message(
+      "* first date of detection:     ",
+      detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull()
+    )
+    message(
+      "* last date of detection:      ",
+      detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull()
+    )
   } else {
     message("* first date of detection:     ", NA)
     message("* last date of detection:      ", NA)
   }
-  message("* included scientific names:   ",
-          paste(scientific_names, collapse = ", "))
-  message("* included acoustic projects:  ",
-          paste(acoustic_project_codes, collapse = ", "))
+  message(
+    "* included scientific names:   ",
+    paste(scientific_names, collapse = ", ")
+  )
+  message(
+    "* included acoustic projects:  ",
+    paste(acoustic_project_codes, collapse = ", ")
+  )
   message("")
 
   # Create warnings

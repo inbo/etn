@@ -50,10 +50,12 @@ list_values <- function(.data, column, split = ",") {
   if (is.numeric(arguments$column)) {
     col_number <- arguments$column
     n_col_df <- ncol(.data)
-    assertthat::assert_that(as.integer(col_number) == col_number,
+    assertthat::assert_that(
+      as.integer(col_number) == col_number,
       msg = "column number must be an integer"
     )
-    assertthat::assert_that(col_number <= ncol(.data),
+    assertthat::assert_that(
+      col_number <= ncol(.data),
       msg = glue::glue(
         "column number exceeds the number of columns ",
         "of .data ({n_col_df})"
@@ -66,10 +68,12 @@ list_values <- function(.data, column, split = ",") {
   } else {
     # check column name
     col_name <- as.character(arguments$column)
-    assertthat::assert_that(length(col_name) == 1,
+    assertthat::assert_that(
+      length(col_name) == 1,
       msg = "invalid column value"
     )
-    assertthat::assert_that(col_name %in% names(.data),
+    assertthat::assert_that(
+      col_name %in% names(.data),
       msg = glue::glue("column {col_name} not found in .data")
     )
 

@@ -7,7 +7,7 @@ test_that("get_acoustic_detections() returns error for incorrect connection", {
   )
 })
 
-# store the first 100 rows of the acoustic detections data for use in tests
+# Store the first 100 rows of the acoustic detections data for use in tests
 df <- get_acoustic_detections(con, limit = TRUE)
 
 test_that("get_acoustic_detections() returns a tibble", {
