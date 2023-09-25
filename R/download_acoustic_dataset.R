@@ -116,7 +116,7 @@ download_acoustic_dataset <- function(connection = con,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
-  readr::write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
+  readr::write_csv(animals, file.path(directory, "animals.csv"), na = "")
 
   # TAGS
   message("* (2/6): downloading tags.csv")
@@ -135,7 +135,7 @@ download_acoustic_dataset <- function(connection = con,
     connection = connection,
     tag_serial_number = tag_serial_numbers
   )
-  readr::write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
+  readr::write_csv(tags, file.path(directory, "tags.csv"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
@@ -151,10 +151,7 @@ download_acoustic_dataset <- function(connection = con,
   detections <-
     detections %>%
     distinct(.data$detection_id, .keep_all = TRUE)
-  readr::write_csv(detections,
-    paste(directory, "detections.csv", sep = "/"),
-    na = ""
-  )
+  readr::write_csv(detections, file.path(directory, "detections.csv"), na = "")
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
@@ -178,7 +175,7 @@ download_acoustic_dataset <- function(connection = con,
     )
   readr::write_csv(
     deployments,
-    paste(directory, "deployments.csv", sep = "/"),
+    file.path(directory, "deployments.csv"),
     na = ""
   )
 
@@ -193,18 +190,16 @@ download_acoustic_dataset <- function(connection = con,
     connection = connection,
     receiver_id = receiver_ids
   )
-  readr::write_csv(
-    receivers,
-    paste(directory, "receivers.csv", sep = "/"),
-    na = ""
-  )
+  readr::write_csv(receivers, file.path(directory, "receivers.csv"), na = "")
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
   datapackage <- system.file("assets", "datapackage.json", package = "etn")
-  file.copy(datapackage,
-            paste(directory, "datapackage.json", sep = "/"),
-            overwrite = TRUE)
+  file.copy(
+    datapackage,
+    file.path(directory, "datapackage.json"),
+    overwrite = TRUE
+  )
 
   # Create summary stats
   scientific_names <-
