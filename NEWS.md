@@ -1,14 +1,14 @@
 # etn 2.2.0
 
-* Added a `NEWS.md` file to track changes to the package.
-* Added `depth_in_meters` field to `get_acoustic_detections()` (#261)
-* Fixed issue in `download_acoustic_dataset()` where some fields would be missing from `datapackage.json`
-* The [unit tests](https://en.wikipedia.org/wiki/Unit_testing) within the package are now even more strict in their judgement (#268)
+* Add `NEWS.md` file to communicate changes to the package.
+* Add `depth_in_meters` field to `get_acoustic_detections()` (#261).
+* Fix issue in `download_acoustic_dataset()` where some fields were missing from `datapackage.json`.
+* Stricter unit tests (#268).
 
 # etn 2.1.0
 
-* Add funder and use default README.Rmd (#247)
-* It is now possible to transforms acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF: Added `write_dwc()` function (#257)
+* Add funder and use default README.Rmd (#247).
+* New function `write_dwc()` to transform acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF (#257).
 
 # etn 2.0.0
 
