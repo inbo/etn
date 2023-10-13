@@ -185,6 +185,7 @@ test_that("get_acoustic_deployments() allows selecting on open deployments only"
 test_that("get_acoustic_deployments() allows selecting on multiple parameters", {
   multiple_parameters_df <- get_acoustic_deployments(
     con,
+    deployment_id = 1437,
     receiver_id = "VR2W-124070",
     acoustic_project_code = "demer",
     station_name = "de-9",
@@ -194,7 +195,7 @@ test_that("get_acoustic_deployments() allows selecting on multiple parameters", 
 })
 
 test_that("get_acoustic_deployments() does not return cpod deployments", {
-  # POD-3330 is a cpod receiver
-  df <- get_acoustic_deployments(con, receiver_id = "POD-3330")
+  # POD-2723 is a cpod receiver
+  df <- get_acoustic_deployments(con, receiver_id = "POD-2723")
   expect_equal(nrow(df), 0)
 })

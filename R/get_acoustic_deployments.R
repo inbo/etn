@@ -117,8 +117,8 @@ get_acoustic_deployments <- function(connection = con,
       receiver.receiver AS receiver_id,
       network_project.projectcode AS acoustic_project_code,
       dep.station_name AS station_name,
-      location_name AS station_description,
-      location_manager AS station_manager,
+      dep.location_name AS station_description,
+      dep.location_manager AS station_manager,
       dep.deploy_date_time AS deploy_date_time,
       dep.deploy_lat AS deploy_latitude,
       dep.deploy_long AS deploy_longitude,
@@ -150,6 +150,12 @@ get_acoustic_deployments <- function(connection = con,
       dep.log_noise_sample_period AS log_noise_sample_period,
       dep.log_depth_stats_period AS log_depth_stats_period,
       dep.log_depth_sample_period AS log_depth_sample_period,
+      -- dep.acousticreleasenumber AS acoustic_release_number
+      -- dep.hydrophonecablelength AS hydrophone_cable_length
+      -- dep.hydrophonesensitivity AS hydrophone_sensitivity
+      -- dep.amplifiersensitivity AS amplifier_sensitivity
+      -- dep.sample_rate AS sample_rate
+      -- dep.recordingname AS recording_name
       dep.comments AS comments
       -- dep.project: dep.project_fk instead
       -- dep.check_complete_time
@@ -160,12 +166,6 @@ get_acoustic_deployments <- function(connection = con,
       -- dep.date_modified
       -- dep.distance_to_mouth
       -- dep.source
-      -- dep.acousticreleasenumber: cpod
-      -- dep.hydrophonecablelength: cpod
-      -- dep.recordingname: cpod
-      -- dep.hydrophonesensitivity: cpod
-      -- dep.amplifiersensitivity: cpod
-      -- dep.sample_rate: cpod
       -- dep.external_id
     FROM
       acoustic.deployments AS dep
