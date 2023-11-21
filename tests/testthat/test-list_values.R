@@ -49,23 +49,53 @@ test_that("list_values() returns error for incorrect input", {
 
 test_that("list_values() returns a vector with unique values", {
   # Output has right class
-  expect_is(list_values(df, chr_col), class = "character")
-  expect_is(list_values(df, num_col), class = "numeric")
+  expect_type(
+    suppressMessages(list_values(df, chr_col)), type = "character"
+  )
+  expect_type(
+    suppressMessages(list_values(df, num_col)), type = "double"
+  )
 
   # Output value is correct with default split value (comma)
-  expect_equal(list_values(df, chr_col), c("A", "B", "C", "D"))
+  expect_identical(
+    suppressMessages(list_values(df, chr_col)),
+    c("A", "B", "C", "D")
+  )
 
   # Output value is correct with non default split value
-  expect_equal(list_values(df, dot_sep_col, "\\."), c("A", "B", "C", "D"))
+  expect_identical(
+    suppressMessages(list_values(df, dot_sep_col, "\\.")),
+    c("A", "B", "C", "D")
+  )
 
   # Output value doesn't depend on the way column is passed
-  expect_equal(list_values(df, column = chr_col), list_values(df, "chr_col"))
-  expect_equal(list_values(df, column = chr_col), list_values(df, 1))
-  expect_equal(list_values(df, "num_col"), c(1, 2, 3))
+  expect_identical(
+    suppressMessages(list_values(df, column = chr_col)),
+    suppressMessages(list_values(df, "chr_col"))
+  )
+  expect_identical(
+    suppressMessages(list_values(df, column = chr_col)),
+    suppressMessages(list_values(df, 1))
+  )
+  expect_identical(
+    suppressMessages(list_values(df, "num_col")),
+    c(1, 2, 3)
+  )
 
   # If the split value is not present in column, return a copy of the column
-  expect_equal(
-    list_values(df, "dot_sep_col", split = ","),
+  expect_identical(
+    suppressMessages(list_values(df, "dot_sep_col", split = ",")),
     df$dot_sep_col
+  )
+})
+
+test_that("list_values() returns message on console", {
+  expect_message(list_values(df, "num_col"),
+    regexp = "3 unique num_col values",
+    fixed = TRUE
+  )
+  expect_message(list_values(df, "chr_col", split = ","),
+    regexp = "4 unique chr_col values",
+    fixed = TRUE
   )
 })
