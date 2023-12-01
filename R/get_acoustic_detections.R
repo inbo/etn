@@ -83,6 +83,7 @@ get_acoustic_detections <- function(connection = con,
                                     acoustic_project_code = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
+                                    progress = FALSE,
                                     limit = FALSE) {
   # Check connection
   check_connection(connection)
@@ -254,7 +255,7 @@ get_acoustic_detections <- function(connection = con,
       AND {station_name_query}
       {limit_query}
     ", .con = connection)
-  detections <- DBI::dbGetQuery(connection, query)
+  detections <- fetch_result_paged(connection, query, progress = progress)
 
   # Sort data (faster than in SQL)
   detections <-
