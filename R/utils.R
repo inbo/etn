@@ -86,3 +86,74 @@ check_date_time <- function(date_time, date_name = "start_date") {
   )
   as.character(parsed)
 }
+
+#' Helper to fetch query results via tempfile and built in paging
+#'
+#' @param connection connection A connection to the ETN database. Defaults to `con`.
+#' @param query The query to send to the db, as per `glue::glue_sql()`
+#' @param page_size Number of rows per returned page.
+#' @param progress Logical. Should a progress bar for the fetchign stage be shown?
+#'
+#' @return A data.frame of the result of the sent query.
+
+fetch_result_paged <-
+  function(connection,
+           query,
+           page_size = 1000,
+           progress = FALSE
+  ){
+
+  assertthat::assert_that(assertthat::is.count(page_size))
+
+  # Stop a progress bar from appearing if not required
+    if(!progress) {
+      withr::local_options(cli.progress_show_after = Inf)
+    }
+  # Create result object to page into = Execute query on DB
+  result <- DBI::dbSendQuery(connection, query, immediate = FALSE)
+  # When this function exits, clear the result (Mandatory)
+  withr::defer(DBI::dbClearResult(result))
+
+  # Fetch some information about our result object
+  result_colnames <- DBI::dbColumnInfo(result)$name
+  result_nrow <- DBI::dbGetInfo(result)$rows.affected
+
+  # Create tempfile to write to, automatically delete when function completes
+  partial_result_file <- withr::local_tempfile()
+
+  # Initialize a progress bar
+  # pb <- progress::progress_bar$new(
+  #   total = result_nrow,
+  #   format = "  fetching [:bar] :percent in :elapsed",
+  #   width = 60
+  # )
+  # withr::defer(pb$terminate())
+  cli::cli_progress_bar("Fetching result from ETN", total = result_nrow)
+  ## set object to keep track of howmany rows have been fetched
+  rows_done <- 0
+  # Fetch pages of the result until we have everything
+  while(!DBI::dbHasCompleted(result)){
+
+    readr::write_csv(DBI::dbFetch(result, n = page_size),
+                     partial_result_file,
+                     append = TRUE,
+                     progress = FALSE)
+    rows_done <- rows_done + page_size
+    # rows_done <- DBI::dbGetInfo(result)$row.count
+    # pb$update(rows_done/result_nrow)
+    cli::cli_progress_update(set =
+      # length(readr::read_lines(partial_result_file, progress = FALSE))
+      rows_done
+      )
+    }
+  # Read the temp file we wrote the result data.frame to
+  result_df <-
+    readr::read_csv(
+    partial_result_file,
+    col_names = result_colnames,
+    show_col_types = FALSE,
+    progress = FALSE
+  )
+
+  return(result_df)
+}
