@@ -12,7 +12,7 @@ list_animal_ids <- function(api = TRUE,
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(api, json = TRUE)
   return(out)
 }
 

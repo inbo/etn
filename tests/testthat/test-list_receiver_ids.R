@@ -1,5 +1,5 @@
 test_that("list_receiver_ids() returns unique list of values", {
-  vector <- list_receiver_ids()
+  vcr::use_cassette("list_receiver_ids", {vector <- list_receiver_ids()})
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))

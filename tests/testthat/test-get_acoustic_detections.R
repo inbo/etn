@@ -18,6 +18,11 @@ test_that("get_acoustic_detections() returns a tibble", {
   df <- get_acoustic_detections(limit = TRUE)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
+})
+
+test_that("get_acoustic_detections() returns a tibble over sql", {
+  # only test if running in on the Rstuio server, with rshiny as the nodename
+  skip_if_not(Sys.info()[[4]] == "rshiny")
   df_sql <- get_acoustic_detections(limit = TRUE, api = FALSE)
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
@@ -30,7 +35,9 @@ test_that("get_acoustic_detections() returns a tibble", {
 # })
 
 test_that("get_acoustic_detections() returns the expected columns", {
-  df <- get_acoustic_detections(limit = TRUE)
+  vcr::use_cassette("acoustic_detections_limited", {
+    df <- get_acoustic_detections(limit = TRUE)
+  })
   expected_col_names <- c(
     "detection_id",
     "date_time",
@@ -64,33 +71,92 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   # 2014_demer contains data from 2014-04-18 15:45:00 UTC to 2018-09-15 19:40:51 UTC
 
   # Start date (inclusive) <= min(date_time)
-  start_year_df <- get_acoustic_detections(start_date = "2015", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(start_year_df$date_time))
-  start_month_df <- get_acoustic_detections(start_date = "2015-04", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(start_month_df$date_time))
-  start_day_df <- get_acoustic_detections(start_date = "2015-04-24", animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(start_day_df$date_time))
+  vcr::use_cassette("start_year_acoustic_detections", {
+    start_year_df <-
+      get_acoustic_detections(
+        start_date = "2017",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2017-01-01", tz = "UTC"),
+    min(start_year_df$date_time)
+  )
+  vcr::use_cassette("start_month_acoustic_detections", {
+    start_month_df <-
+      get_acoustic_detections(
+        start_date = "2015-04",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2015-04-01", tz = "UTC"),
+    min(start_month_df$date_time)
+  )
+  vcr::use_cassette("start_day_acoustic_detections", {
+    start_day_df <-
+      get_acoustic_detections(
+        start_date = "2015-04-24",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(
+    as.POSIXct("2015-04-24", tz = "UTC"),
+    min(start_day_df$date_time)
+  )
 
   # End date (exclusive) > max(date_time)
-  end_year_df <- get_acoustic_detections(end_date = "2016", animal_project_code = "2014_demer")
+  vcr::use_cassette("end_year_acoustic_detections", {
+    end_year_df <- get_acoustic_detections(
+      end_date = "2016",
+      animal_project_code = "2015_fint"
+    )
+  })
   expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(end_year_df$date_time))
-  end_month_df <- get_acoustic_detections(end_date = "2015-05", animal_project_code = "2014_demer")
+  vcr::use_cassette("end_month_acoustic_detections", {
+    end_month_df <- get_acoustic_detections(
+      end_date = "2015-05",
+      animal_project_code = "2015_fint"
+    )
+  })
   expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(end_month_df$date_time))
-  end_day_df <- get_acoustic_detections(end_date = "2015-04-25", animal_project_code = "2014_demer")
-  expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(end_day_df$date_time))
+  vcr::use_cassette("end_day_acoustic_detections", {
+    end_day_df <- get_acoustic_detections(
+      end_date = "2014-04-25",
+      animal_project_code = "2014_demer"
+    )
+  })
+  expect_gt(as.POSIXct("2014-04-25", tz = "UTC"), max(end_day_df$date_time))
 
   # Between
-  between_year_df <-
-    get_acoustic_detections(
-      start_date= "2015",
-      end_date = "2016",
-      animal_project_code = "2014_demer")
-  expect_lte(as.POSIXct("2015-01-01", tz = "UTC"), min(between_year_df$date_time))
-  expect_gt(as.POSIXct("2016-01-01", tz = "UTC"), max(between_year_df$date_time))
-  between_month_df <- get_acoustic_detections(start_date = "2015-04", end_date = "2015-05", animal_project_code = "2014_demer")
+  vcr::use_cassette("between_year_acoustic_detections", {
+    between_year_df <-
+      get_acoustic_detections(
+        start_date = "2016",
+        end_date = "2017",
+        animal_project_code = "2014_demer"
+      )
+  })
+  expect_lte(as.POSIXct("2016-01-01", tz = "UTC"), min(between_year_df$date_time))
+  expect_gt(as.POSIXct("2017-01-01", tz = "UTC"), max(between_year_df$date_time))
+  vcr::use_cassette("between_month_acoustic_detections", {
+    between_month_df <-
+      get_acoustic_detections(
+        start_date = "2015-04",
+        end_date = "2015-05",
+        animal_project_code = "2014_demer"
+      )
+  })
   expect_lte(as.POSIXct("2015-04-01", tz = "UTC"), min(between_month_df$date_time))
   expect_gt(as.POSIXct("2015-05-01", tz = "UTC"), max(between_month_df$date_time))
-  between_day_df <- get_acoustic_detections(start_date = "2015-04-24", end_date = "2015-04-25", animal_project_code = "2014_demer")
+  vcr::use_cassette("between_day_acoustic_detections", {
+    between_day_df <-
+      get_acoustic_detections(
+        start_date = "2015-04-24",
+        end_date = "2015-04-25",
+        animal_project_code = "2014_demer"
+      )
+  })
   expect_lte(as.POSIXct("2015-04-24", tz = "UTC"), min(between_day_df$date_time))
   expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(between_day_df$date_time))
 })
@@ -121,12 +187,24 @@ test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
 
 test_that("get_acoustic_detections() allows selecting on animal_project_code", {
   # Errors
-  expect_error(get_acoustic_detections(animal_project_code = "not_a_project"))
-  expect_error(get_acoustic_detections(animal_project_code = c("2014_demer", "not_a_project")))
+  expect_error(
+    get_acoustic_detections(animal_project_code = "not_a_project"),
+    regexp = "find animal_project_code")
+  expect_error(
+    get_acoustic_detections(animal_project_code = c("2014_demer", "not_a_project")),
+    regexp = "find animal_project_code")
 
   # Select single value
   single_select <- "2014_demer"
-  single_select_df <- get_acoustic_detections(animal_project_code = single_select)
+  vcr::use_cassette("2014_demer_acoustic_detections", {
+    single_select_df <-
+      get_acoustic_detections(
+        animal_project_code = single_select,
+        start_date = "2015-09-07",
+        end_date = "2015-09-08"
+      )
+  })
+
   expect_equal(
     single_select_df %>% distinct(animal_project_code) %>% pull(),
     c(single_select)
@@ -134,22 +212,32 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
-  expect_equal(
-    get_acoustic_detections(
+  vcr::use_cassette("2014_demer_acoustic_detections_lower", {
+    demer_lowercase <- get_acoustic_detections(
       animal_project_code = "2014_demer",
       start_date = "2015-09-07",
       end_date = "2015-09-08"
-    ),
-    get_acoustic_detections(
+    )})
+  vcr::use_cassette("2014_demer_acoustic_detections_upper", {
+    demer_uppercase <- get_acoustic_detections(
       animal_project_code = "2014_DEMER",
       start_date = "2015-09-07",
       end_date = "2015-09-08"
     )
+  })
+  expect_equal(
+    demer_lowercase,
+    demer_uppercase
   )
 
   # Select multiple values
   multi_select <- c("2014_demer", "2015_dijle")
-  multi_select_df <- get_acoustic_detections(animal_project_code = multi_select)
+  vcr::use_cassette("demer_and_dijle_acoustic_detections", {
+    multi_select_df <-
+      get_acoustic_detections(animal_project_code = multi_select,
+                              start_date = "2015-04-21",
+                              end_date = "2015-04-26")
+  })
   expect_equal(
     multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
     c(multi_select)
@@ -159,13 +247,22 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 
 test_that("get_acoustic_detections() allows selecting on scientific_name", {
   # Errors
-  expect_error(get_acoustic_detections(scientific_name = "not_a_sciname"))
-  expect_error(get_acoustic_detections(scientific_name = "rutilus rutilus")) # Case sensitive
-  expect_error(get_acoustic_detections(scientific_name = c("Rutilus rutilus", "not_a_sciname")))
+  expect_error(
+    get_acoustic_detections(scientific_name = "not_a_sciname"),
+    regexp = "find scientific_name")
+  expect_error(
+    get_acoustic_detections(scientific_name = "rutilus rutilus"),
+    regexp = "find scientific_name") # Case sensitive
+  expect_error(
+    get_acoustic_detections(scientific_name = c("Rutilus rutilus", "not_a_sciname")),
+    regexp = "find scientific_name")
 
   # Select single value
-  single_select <- "Rutilus rutilus"
-  single_select_df <- get_acoustic_detections(scientific_name = single_select)
+  single_select <- "Torpedo torpedo"
+  vcr::use_cassette("torpedo_acoustic_detections", {
+    single_select_df <- get_acoustic_detections(scientific_name = single_select)
+  })
+
   expect_equal(
     single_select_df %>% distinct(scientific_name) %>% pull(),
     c(single_select)
@@ -173,8 +270,11 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
-  multi_select <- c("Rutilus rutilus", "Silurus glanis")
-  multi_select_df <- get_acoustic_detections(scientific_name = multi_select)
+  multi_select <- c("Raja asterias", "Torpedo torpedo")
+  vcr::use_cassette("torpedo_raja_acoustic_detections", {
+    multi_select_df <-
+      get_acoustic_detections(scientific_name = multi_select)
+  })
   expect_equal(
     multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
     c(multi_select)
@@ -184,13 +284,18 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 
 test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
   # Errors
-  expect_error(get_acoustic_detections(acoustic_project_code = "not_a_project"))
-  expect_error(get_acoustic_detections(acoustic_project_code = c("demer", "not_a_project")))
+  expect_error(
+    get_acoustic_detections(acoustic_project_code = "not_a_project"),
+    regexp = "find acoustic_project_code")
+  expect_error(
+    get_acoustic_detections(acoustic_project_code = c("demer", "not_a_project")),
+    regexp = "find acoustic_project_code")
 
   # Select single value
   single_select <- "demer"
   single_select_df <- get_acoustic_detections(acoustic_project_code = single_select,
-                                              limit = TRUE)
+                                              limit = TRUE,
+                                              api = TRUE)
   expect_equal(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
@@ -202,18 +307,24 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
     get_acoustic_detections(
       acoustic_project_code = "demer",
       start_date = "2014-04-28",
-      end_date = "2014-04-30"
+      end_date = "2014-04-30",
+      api = TRUE
     ),
     get_acoustic_detections(
       acoustic_project_code = "DEMER",
       start_date = "2014-04-28",
-      end_date = "2014-04-30"
+      end_date = "2014-04-30",
+      api = TRUE
     )
   )
+})
 
+test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
+  skip("BUG #278 crashes on big queries like demer and dijle")
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <- get_acoustic_detections(acoustic_project_code = multi_select)
+  multi_select_df <-
+    get_acoustic_detections(acoustic_project_code = multi_select, api = TRUE)
   expect_equal(
     multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
@@ -223,8 +334,12 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
   # Errors
-  expect_error(get_acoustic_detections(receiver_id = "not_a_receiver_id"))
-  expect_error(get_acoustic_detections(receiver_id = c("VR2W-124070", "not_a_receiver_id")))
+  expect_error(
+    get_acoustic_detections(receiver_id = "not_a_receiver_id"),
+    regexp = "find receiver_id")
+  expect_error(
+    get_acoustic_detections(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
+    regexp = "find receiver_id")
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
