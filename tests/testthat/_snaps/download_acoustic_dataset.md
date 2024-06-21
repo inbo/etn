@@ -15,8 +15,8 @@
       * number of animals:           16
       * number of tags:              16
       * number of detections:        236918
-      * number of deployments:       1081
-      * number of receivers:         244
+      * number of deployments:       1122
+      * number of receivers:         255
       * first date of detection:     2014-04-18
       * last date of detection:      2018-09-15
       * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus

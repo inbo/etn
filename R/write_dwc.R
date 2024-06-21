@@ -56,6 +56,8 @@ write_dwc <- function(connection = con,
     length(animal_project_code) == 1,
     msg = "`animal_project_code` must be a single value."
   )
+  ## Set animal project code to lowercase for sql
+  animal_project_code <- stringr::str_to_lower(animal_project_code)
 
   # Check license
   licenses <- c("CC-BY", "CC0")
@@ -84,7 +86,8 @@ write_dwc <- function(connection = con,
   message("Reading data and transforming to Darwin Core.")
   dwc_occurrence_sql <- glue::glue_sql(
     readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
-    .con = connection
+    .con = connection,
+    .null = "NULL"
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
