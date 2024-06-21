@@ -1,3 +1,5 @@
+# etn 2.2.1
+
 # etn 2.2.0
 
 * Add `NEWS.md` file to communicate changes to the package.
