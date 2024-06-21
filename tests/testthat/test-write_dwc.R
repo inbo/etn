@@ -63,3 +63,13 @@ test_that("write_dwc() returns the expected Darwin Core terms as columns", {
     )
   )
 })
+
+test_that("write_dwc() supports uppercase animal_project_code's", {
+  result <- suppressMessages(
+    write_dwc(con, animal_project_code = "2011_RIVIERPRIK", directory = NULL)
+  )
+
+  expect_identical(names(result), "dwc_occurrence")
+  expect_s3_class(result$dwc_occurrence, "tbl")
+  expect_gte(length(result$dwc_occurrence$occurrenceID), 1)
+})
