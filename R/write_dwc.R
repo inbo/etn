@@ -84,7 +84,8 @@ write_dwc <- function(connection = con,
   message("Reading data and transforming to Darwin Core.")
   dwc_occurrence_sql <- glue::glue_sql(
     readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
-    .con = connection
+    .con = connection,
+    .null = "NULL"
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
