@@ -1,7 +1,7 @@
 # etn 2.2.1
 
-* Fix bug in `write_dwc()` where the function would return an error due to an updated dependency (#293).
-* Add support for UPPERCASE `animal_project_code`s in `write_dwc()` (#289).
+* `write_dwc()` now supports uppercase `animal_project_code`s (#289).
+* Bug fix in `write_dwc()` where the function would return an error due to an updated dependency (#293).
 
 # etn 2.2.0
 
