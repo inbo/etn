@@ -32,7 +32,8 @@ Imports:
     methods,
     odbc,
     readr,
-    stringr
+    stringr,
+    tidyr
 Suggests:
     formattable,
     leaflet,
@@ -40,7 +41,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    tidyr,
     frictionless,
     withr
 LazyData: true
