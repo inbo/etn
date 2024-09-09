@@ -35,10 +35,9 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
   diagnostics <- DBI::dbGetQuery(connection, query)
 
   # parse out log_data column into wider format
-
   diagnostics <-
     diagnostics %>%
-    mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
+    dplyr::mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
     tidyr::unnest_wider(log_data)
 
   # drop Device Time (UTC) column, is identical to datetime
