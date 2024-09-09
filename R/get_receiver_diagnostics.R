@@ -1,15 +1,35 @@
 
 #' Get diagnostics information for a receiver
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#' @param limit Logical. Limit the number of returned records to 100 (useful
-#'   for testing purposes). Defaults to `FALSE`.
+#' @inheritParams get_acoustic_detections
+#' @inheritParams get_acoustic_deployments
 #'
 #' @return A tibble with receiver diagnostics data
 #' @export
-get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
+get_receiver_diagnostics <- function(connection = con,
+                                     start_date = NULL,
+                                     end_date = NULL,
+                                     receiver_id = NULL,
+                                     deployment_id = NULL,
+                                     limit = FALSE) {
   # Check connection
   check_connection(connection)
+
+  # Check start_date
+  if (is.null(start_date)) {
+    start_date_query <- "True"
+  } else {
+    start_date <- check_date_time(start_date, "start_date")
+    start_date_query <- glue::glue_sql("datetime >= {start_date}", .con = connection)
+  }
+
+  # Check end_date
+  if (is.null(end_date)) {
+    end_date_query <- "True"
+  } else {
+    end_date <- check_date_time(end_date, "end_date")
+    end_date_query <- glue::glue_sql("datetime < {end_date}", .con = connection)
+  }
 
   # Check limit
   assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
@@ -22,14 +42,18 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
   # Build query
   query <-
     glue::glue_sql(
-      "SELECT id_pk AS receiver_id,
+    "SELECT id_pk AS receiver_id,
     deployment_fk AS deployment_id,
     record_type,
     log_data,
-    datetime FROM acoustic.receiver_logs_data
+    datetime
+    FROM acoustic.receiver_logs_data
+    WHERE
+      {start_date_query}
+      AND {end_date_query}
     {limit_query}",
-      .con = connection,
-      .null = "NULL"
+    .con = connection,
+    .null = "NULL"
     )
 
   diagnostics <- DBI::dbGetQuery(connection, query)
