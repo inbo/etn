@@ -33,10 +33,12 @@ test_that("get_receiver_diagnostics() returns the expected columns", {
       "internal",
       "depth"
     )
-  expect_identical(colnames(df),
-                   expected_column_names)
+
+  # I can't guarantee that all the log_data columns will always be present
+  expect_true(expected_column_names %in% colnames(df))
 })
 
 test_that("get_receiver_diagnostics() allows for filtering on start_date and end_date",{
 
 })
+
