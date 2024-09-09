@@ -16,8 +16,10 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
     glue::glue_sql(
       "SELECT id_pk AS receiver_id,
     deployment_fk AS deployment_id,
-    record_type, log_data, datetime FROM acoustic.receiver_logs_data
-     {limit_query}",
+    record_type,
+    log_data,
+    datetime FROM acoustic.receiver_logs_data
+    {limit_query}",
       .con = connection,
       .null = "NULL"
     )
@@ -32,8 +34,8 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
     mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
     tidyr::unnest_wider(log_data)
 
-  # parse Device Time UTC to a datetime column
-
+  # drop Device Time (UTC) column, is identical to datetime
+  diagnostics <- dplyr::select(diagnostics, -`Device Time (UTC)`)
 
 
 }
