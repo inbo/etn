@@ -56,15 +56,16 @@ get_receiver_diagnostics <- function(connection = con,
     .null = "NULL"
     )
 
+  ## Query database
   diagnostics <- DBI::dbGetQuery(connection, query)
 
-  # parse out log_data column into wider format
+  # Parse out log_data column into wider format
   diagnostics <-
     diagnostics %>%
     dplyr::mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
     tidyr::unnest_wider(log_data)
 
-  # drop Device Time (UTC) column, is identical to datetime
+  # Drop Device Time (UTC) column, is identical to datetime
   diagnostics <- dplyr::select(diagnostics, -`Device Time (UTC)`)
 
   # Replace empty strings with NA
