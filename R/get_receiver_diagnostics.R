@@ -101,9 +101,6 @@ get_receiver_diagnostics <- function(connection = con,
     dplyr::mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
     tidyr::unnest_wider(log_data)
 
-  # Drop Device Time (UTC) column, is identical to datetime
-  diagnostics <- dplyr::select(diagnostics, -dplyr::any_of("Device Time (UTC)"))
-
   # Replace empty strings with NA
   diagnostics <-
     diagnostics %>%
