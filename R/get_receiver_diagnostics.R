@@ -43,6 +43,11 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
   # drop Device Time (UTC) column, is identical to datetime
   diagnostics <- dplyr::select(diagnostics, -`Device Time (UTC)`)
 
+  # Replace empty strings with NA
+  diagnostics <-
+    diagnostics %>%
+    dplyr::mutate(dplyr::across(is.character, ~dplyr::na_if(.x, "")))
+
   # Return a tibble
   dplyr::as_tibble(diagnostics)
 }
