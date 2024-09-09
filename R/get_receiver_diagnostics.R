@@ -1,4 +1,12 @@
 
+#' Get diagnostics information for a receiver
+#'
+#' @param connection A connection to the ETN database. Defaults to `con`.
+#' @param limit Logical. Limit the number of returned records to 100 (useful
+#'   for testing purposes). Defaults to `FALSE`.
+#'
+#' @return A tibble with receiver diagnostics data
+#' @export
 get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
   # Check connection
   check_connection(connection)
@@ -36,6 +44,7 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
   # drop Device Time (UTC) column, is identical to datetime
   diagnostics <- dplyr::select(diagnostics, -`Device Time (UTC)`)
 
-
+  # Return a tibble
+  dplyr::as_tibble(diagnostics)
 }
 
