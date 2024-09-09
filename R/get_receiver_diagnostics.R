@@ -1,5 +1,15 @@
 
-get_receiver_diagnostics <- function(connection) {
+get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
+  # Check connection
+  check_connection(connection)
+
+  # Check limit
+  assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
+  if (limit) {
+    limit_query <- glue::glue_sql("LIMIT 100", .con = connection)
+  } else {
+    limit_query <- glue::glue_sql("LIMIT ALL}", .con = connection)
+  }
 
   # Build query
   query <-
@@ -7,7 +17,7 @@ get_receiver_diagnostics <- function(connection) {
       "SELECT id_pk AS receiver_id,
     deployment_fk AS deployment_id,
     record_type, log_data, datetime FROM acoustic.receiver_logs_data
-     LIMIT 100",
+     {limit_query}",
       .con = connection,
       .null = "NULL"
     )
