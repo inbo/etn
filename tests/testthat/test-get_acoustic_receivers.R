@@ -14,10 +14,10 @@ test_that("get_acoustic_receivers() returns a tibble", {
 })
 
 # TODO: re-enable after https://github.com/inbo/etn/issues/251
-# test_that("get_acoustic_receivers() returns unique receiver_id", {
-#   df <- get_acoustic_receivers(con)
-#   expect_equal(nrow(df), nrow(df %>% distinct(receiver_id)))
-# })
+test_that("get_acoustic_receivers() returns unique receiver_id", {
+  df <- get_acoustic_receivers(con)
+  expect_equal(nrow(df), nrow(df %>% distinct(receiver_id)))
+})
 
 test_that("get_acoustic_receivers() returns the expected columns", {
   df <- get_acoustic_receivers(con)
