@@ -41,7 +41,7 @@ get_receiver_diagnostics <- function(connection = con,
       name = "receiver_id"
     )
     receiver_id_query <- glue::glue_sql(
-      "id_pk IN ({receiver_id*})",
+      "receiver.receiver IN ({receiver_id*})",
       .con = connection
     )
   }
@@ -57,16 +57,20 @@ get_receiver_diagnostics <- function(connection = con,
   # Build query
   query <-
     glue::glue_sql(
-    "SELECT id_pk AS receiver_id,
+    "SELECT
+    --- receiver.receiver AS receiver_id,
     deployment_fk AS deployment_id,
     record_type,
     log_data,
     datetime
-    FROM acoustic.receiver_logs_data
+    FROM
+      acoustic.receiver_logs_data
+      --- LEFT JOIN acoustic.receivers AS receiver
+      ---  ON deployment_fk = receiver.id_pk
     WHERE
       {start_date_query}
       AND {end_date_query}
-      AND {receiver_id_query}
+      --- AND {receiver_id_query}
     {limit_query}",
     .con = connection,
     .null = "NULL"
