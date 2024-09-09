@@ -36,3 +36,7 @@ test_that("get_receiver_diagnostics() returns the expected columns", {
   expect_identical(colnames(df),
                    expected_column_names)
 })
+
+test_that("get_receiver_diagnostics() allows for filtering on start_date and end_date",{
+
+})
