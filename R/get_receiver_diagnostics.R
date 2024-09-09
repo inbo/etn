@@ -7,13 +7,28 @@
 #' @return A tibble with receiver diagnostics data
 #' @export
 get_receiver_diagnostics <- function(connection = con,
+                                     deployment_id = NULL,
                                      start_date = NULL,
                                      end_date = NULL,
                                      receiver_id = NULL,
-                                     deployment_id = NULL,
                                      limit = FALSE) {
   # Check connection
   check_connection(connection)
+
+  # Check deployment_id
+  if (is.null(deployment_id)) {
+    deployment_id_query <- "True"
+  } else {
+    deployment_id <- check_value(
+      deployment_id,
+      list_deployment_ids(connection),
+      "deployment_id"
+    )
+    deployment_id_query <- glue::glue_sql(
+      "deployment_fk IN ({deployment_id*})",
+      .con = connection
+    )
+  }
 
   # Check start_date
   if (is.null(start_date)) {
@@ -58,19 +73,20 @@ get_receiver_diagnostics <- function(connection = con,
   query <-
     glue::glue_sql(
     "SELECT
-    --- receiver.receiver AS receiver_id,
+    receiver.receiver AS receiver_id,
     deployment_fk AS deployment_id,
     record_type,
     log_data,
     datetime
     FROM
       acoustic.receiver_logs_data
-      --- LEFT JOIN acoustic.receivers AS receiver
-      ---  ON deployment_fk = receiver.id_pk
+      LEFT JOIN acoustic.receivers AS receiver
+      ON deployment_fk = receiver.id_pk
     WHERE
       {start_date_query}
       AND {end_date_query}
-      --- AND {receiver_id_query}
+      AND {deployment_id_query}
+      AND {receiver_id_query}
     {limit_query}",
     .con = connection,
     .null = "NULL"
@@ -86,7 +102,7 @@ get_receiver_diagnostics <- function(connection = con,
     tidyr::unnest_wider(log_data)
 
   # Drop Device Time (UTC) column, is identical to datetime
-  diagnostics <- dplyr::select(diagnostics, -`Device Time (UTC)`)
+  diagnostics <- dplyr::select(diagnostics, -dplyr::any_of("Device Time (UTC)"))
 
   # Replace empty strings with NA
   diagnostics <-
