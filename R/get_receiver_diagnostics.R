@@ -48,6 +48,18 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
     diagnostics %>%
     dplyr::mutate(dplyr::across(is.character, ~dplyr::na_if(.x, "")))
 
+  # Tidy up column names
+  diagnostics <-
+    diagnostics %>%
+      ## Remove UPPERCASE except for the units in brackets
+      dplyr::rename_with(
+        ~stringr::str_replace_all(.x, "[A-Z](?!\\))", tolower)
+      ) %>%
+      ## Remove braces
+      dplyr::rename_with(~stringr::str_remove_all(.x, "[\\(\\)]")) %>%
+      ## Remove spaces
+      dplyr::rename_with(~stringr::str_replace_all(.x, stringr::fixed(" "), "_"))
+
   # Return a tibble
   dplyr::as_tibble(diagnostics)
 }
