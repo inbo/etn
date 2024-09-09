@@ -31,6 +31,21 @@ get_receiver_diagnostics <- function(connection = con,
     end_date_query <- glue::glue_sql("datetime < {end_date}", .con = connection)
   }
 
+  # Check receiver_id
+  if (is.null(receiver_id)) {
+    receiver_id_query <- "True"
+  } else {
+    receiver_id <- check_value(
+      receiver_id,
+      list_receiver_ids(connection),
+      name = "receiver_id"
+    )
+    receiver_id_query <- glue::glue_sql(
+      "id_pk IN ({receiver_id*})",
+      .con = connection
+    )
+  }
+
   # Check limit
   assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
@@ -51,6 +66,7 @@ get_receiver_diagnostics <- function(connection = con,
     WHERE
       {start_date_query}
       AND {end_date_query}
+      AND {receiver_id_query}
     {limit_query}",
     .con = connection,
     .null = "NULL"
