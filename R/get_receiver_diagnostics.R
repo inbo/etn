@@ -25,7 +25,6 @@ get_receiver_diagnostics <- function(connection = con, limit = FALSE) {
     )
 
   diagnostics <- DBI::dbGetQuery(connection, query)
-  DBI::dbDisconnect(connection)
 
   # parse out log_data column into wider format
 
