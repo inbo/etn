@@ -111,7 +111,7 @@ get_receiver_diagnostics <- function(connection = con,
     diagnostics %>%
       ## Remove UPPERCASE except for the units in brackets
       dplyr::rename_with(
-        ~stringr::str_replace_all(.x, "[A-Z](?!\\))", tolower)
+        ~stringr::str_replace_all(.x, "[A-Z](?=[a-z])", tolower)
       ) %>%
       ## Remove braces
       dplyr::rename_with(~stringr::str_remove_all(.x, "[\\(\\)]")) %>%
