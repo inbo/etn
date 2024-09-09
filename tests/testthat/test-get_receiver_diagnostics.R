@@ -42,3 +42,10 @@ test_that("get_receiver_diagnostics() allows for filtering on start_date and end
 
 })
 
+test_that("get_receiver_diagnostics() allows for filtering on deployment_id", {
+
+})
+
+test_that("get_receiver_diagnostics() allows for filtering on receiver_id", {
+
+})
