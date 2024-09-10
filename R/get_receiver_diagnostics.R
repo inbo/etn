@@ -125,17 +125,19 @@ get_receiver_diagnostics <- function(connection = con,
 
   diagnostics <-
     diagnostics %>%
-    dplyr::select(dplyr::where(~!all(is.na(.))),
-                  - ambient_deg_C,
-                  - firmware_version) %>%
+    ## Drop any columns that are all NA
+    dplyr::select(dplyr::where(~ !all(is.na(.)))) %>%
     dplyr::group_by(deployment_id, receiver_id, record_type, datetime) %>%
+    ## If a column only contains NA values, keep it, if not, keep the first non
+    ## NA value per group
     dplyr::summarise(
-      dplyr::across(dplyr::everything(),
-                    ~ifelse(all(is.na(.)),
-                                   NA,
-                                   dplyr::coalesce(.[!is.na(.)], .)
-                                   )
-                    ),
+      dplyr::across(
+        dplyr::everything(),
+        ~ ifelse(all(is.na(.)),
+          NA,
+          dplyr::coalesce(.[!is.na(.)], .)
+        )
+      ),
       .groups = "drop"
     )
 
