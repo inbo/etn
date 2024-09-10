@@ -147,6 +147,13 @@ get_receiver_diagnostics <- function(connection = con,
       .groups = "drop"
     )
 
+  # Convert column classes to classes based on base parsing
+  diagnostics <-
+    diagnostics %>%
+    dplyr::mutate(dplyr::across(dplyr::where(is.character),
+                                ~ type.convert(.x, as.is = TRUE))
+                  )
+
   # Return a tibble
   dplyr::as_tibble(diagnostics)
 }
