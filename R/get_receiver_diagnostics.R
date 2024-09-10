@@ -73,15 +73,17 @@ get_receiver_diagnostics <- function(connection = con,
   query <-
     glue::glue_sql(
     "SELECT
-    receiver.receiver AS receiver_id,
-    deployment_fk AS deployment_id,
-    record_type,
-    log_data,
-    datetime
+      log.deployment_fk AS deployment_id,
+      receiver.receiver AS receiver_id,
+      log.datetime AS datetime,
+      log.record_type,
+      log.log_data
     FROM
-      acoustic.receiver_logs_data
+      acoustic.receiver_logs_data AS log
+      LEFT JOIN acoustic.deployments AS dep
+        ON log.deployment_fk = dep.id_pk
       LEFT JOIN acoustic.receivers AS receiver
-      ON deployment_fk = receiver.id_pk
+        ON dep.receiver_fk = receiver.id_pk
     WHERE
       {start_date_query}
       AND {end_date_query}
