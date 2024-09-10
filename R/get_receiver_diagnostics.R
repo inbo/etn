@@ -1,4 +1,3 @@
-
 #' Get diagnostics information for a receiver
 #'
 #' @inheritParams get_acoustic_detections
@@ -35,7 +34,8 @@ get_receiver_diagnostics <- function(connection = con,
     start_date_query <- "True"
   } else {
     start_date <- check_date_time(start_date, "start_date")
-    start_date_query <- glue::glue_sql("datetime >= {start_date}", .con = connection)
+    start_date_query <- glue::glue_sql("datetime >= {start_date}",
+                                       .con = connection)
   }
 
   # Check end_date
@@ -62,7 +62,8 @@ get_receiver_diagnostics <- function(connection = con,
   }
 
   # Check limit
-  assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
+  assertthat::assert_that(is.logical(limit),
+                          msg = "limit must be a logical: TRUE/FALSE.")
   if (limit) {
     limit_query <- glue::glue_sql("LIMIT 100", .con = connection)
   } else {
@@ -133,7 +134,10 @@ get_receiver_diagnostics <- function(connection = con,
     diagnostics %>%
     ## Drop any columns that are all NA
     dplyr::select(dplyr::where(~ !all(is.na(.)))) %>%
-    dplyr::group_by(deployment_id, receiver_id, record_type, datetime) %>%
+    dplyr::group_by(.data$deployment_id,
+                    .data$receiver_id,
+                    .data$record_type,
+                    .data$datetime) %>%
     ## If a column only contains NA values, keep it, if not, keep the first non
     ## NA value per group
     dplyr::summarise(
@@ -159,4 +163,3 @@ get_receiver_diagnostics <- function(connection = con,
   # Return a tibble
   dplyr::as_tibble(diagnostics)
 }
-
