@@ -116,9 +116,15 @@ get_receiver_diagnostics <- function(connection = con,
         ~stringr::str_replace_all(.x, "[A-Z](?=[a-z])", tolower)
       ) %>%
       ## Remove braces
-      dplyr::rename_with(~stringr::str_remove_all(.x, "[\\(\\)]")) %>%
+      dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) %>%
       ## Remove spaces
-      dplyr::rename_with(~stringr::str_replace_all(.x, stringr::fixed(" "), "_"))
+      dplyr::rename_with(
+        ~ stringr::str_replace_all(
+          .x,
+          stringr::fixed(" "),
+          "_"
+        )
+      )
 
   # Collapse log_data columns into single rows per deployment_id, receiver_id,
   # record_type, datetime combination
