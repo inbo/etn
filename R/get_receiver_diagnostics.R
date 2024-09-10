@@ -151,7 +151,9 @@ get_receiver_diagnostics <- function(connection = con,
   diagnostics <-
     diagnostics %>%
     dplyr::mutate(dplyr::across(dplyr::where(is.character),
-                                ~ type.convert(.x, as.is = TRUE))
+                                ~ type.convert(.x, as.is = TRUE)),
+                  dplyr::across(dplyr::ends_with("_UTC"),
+                                lubridate::ymd_hms)
                   )
 
   # Return a tibble
