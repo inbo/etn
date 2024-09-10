@@ -120,6 +120,25 @@ get_receiver_diagnostics <- function(connection = con,
       ## Remove spaces
       dplyr::rename_with(~stringr::str_replace_all(.x, stringr::fixed(" "), "_"))
 
+  # Collapse log_data columns into single rows per deployment_id, receiver_id,
+  # record_type, datetime combination
+
+  diagnostics <-
+    diagnostics %>%
+    dplyr::select(dplyr::where(~!all(is.na(.))),
+                  - ambient_deg_C,
+                  - firmware_version) %>%
+    dplyr::group_by(deployment_id, receiver_id, record_type, datetime) %>%
+    dplyr::summarise(
+      dplyr::across(dplyr::everything(),
+                    ~ifelse(all(is.na(.)),
+                                   NA,
+                                   dplyr::coalesce(.[!is.na(.)], .)
+                                   )
+                    ),
+      .groups = "drop"
+    )
+
   # Return a tibble
   dplyr::as_tibble(diagnostics)
 }
