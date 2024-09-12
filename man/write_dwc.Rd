@@ -5,22 +5,16 @@
 \title{Transform ETN data to Darwin Core}
 \usage{
 write_dwc(
-  connection = con,
   animal_project_code,
-  directory = ".",
   rights_holder = NULL,
-  license = "CC-BY"
+  license = "CC-BY",
+  api = TRUE,
+  connection,
+  directory
 )
 }
 \arguments{
-\item{connection}{Connection to the ETN database.}
-
 \item{animal_project_code}{Animal project code.}
-
-\item{directory}{Path to local directory to write file(s) to.
-If \code{NULL}, then a list of data frames is returned instead, which can be
-useful for extending/adapting the Darwin Core mapping before writing with
-\code{\link[readr:write_delim]{readr::write_csv()}}.}
 
 \item{rights_holder}{Acronym of the organization owning or managing the
 rights over the data.}
@@ -31,6 +25,13 @@ published.
 \item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}} (default).
 \item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
 }}
+
+\item{connection}{Connection to the ETN database.}
+
+\item{directory}{Path to local directory to write file(s) to.
+If \code{NULL}, then a list of data frames is returned instead, which can be
+useful for extending/adapting the Darwin Core mapping before writing with
+\code{\link[readr:write_delim]{readr::write_csv()}}.}
 }
 \value{
 CSV file(s) written to disk or list of data frames when
