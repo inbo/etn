@@ -43,11 +43,45 @@
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
-write_dwc <- function(connection = con,
-                      animal_project_code,
-                      directory = ".",
+write_dwc <- function(animal_project_code,
                       rights_holder = NULL,
-                      license = "CC-BY") {
+                      license = "CC-BY",
+                      api = TRUE,
+                      connection,
+                      directory) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # The directory argument has been depreciated
+  if (lifecycle::is_present(directory)) {
+    lifecycle::deprecate_stop(
+      when = "v3.0.0",
+      what = "write_dwc(directory)",
+      details = glue::glue(
+        "write_dwc() no longer supports writing directly to disk, but returns a",
+        "dataframe instead. Use readr::write_csv() to write the output to disk."
+      ),
+      always = TRUE
+    )
+  }
+
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api, json = FALSE)
+  return(out)
+}
+
+#' write_dwc() sql helper
+#'
+#' @inheritParams write_dwc()
+#' @noRd
+#'
+write_dwc_sql <- function(animal_project_code,
+                          rights_holder = NULL,
+                          license = "CC-BY") {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -88,25 +122,7 @@ write_dwc <- function(connection = con,
     .con = connection
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
-  
-  # Close connection
-  DBI::dbDisconnect(connection)
 
-  # Return object or write files
-  if (is.null(directory)) {
-    list(
-      dwc_occurrence = dplyr::as_tibble(dwc_occurrence)
-    )
-  } else {
-    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
-    message(glue::glue(
-      "Writing data to:",
-      dwc_occurrence_path,
-      .sep = "\n"
-    ))
-    if (!dir.exists(directory)) {
-      dir.create(directory, recursive = TRUE)
-    }
-    readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
-  }
+  # Return as a tibble
+    return(dplyr::as_tibble(dwc_occurrence))
 }
