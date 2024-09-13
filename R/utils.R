@@ -332,20 +332,25 @@ forward_to_api <- function(
 
 #' Conductor Helper: point the way to API or SQL helper
 #'
-#' Helper that conducts it's parent function to either use a helper to query the api,
-#'  or a helper to query a local database connection using SQL.
+#' Helper that conducts it's parent function to either use a helper to query the
+#' api, or a helper to query a local database connection using SQL.
 #'
 #' @param api Logical, Should the API be used?
-#' @param ... options on how to fetch the response.
-#'    Forwarded to `forward_to_api()`
+#' @param ignored_arguments Character vector of arguments not to pass to the API
+#'   or SQL helper
+#' @param ... options on how to fetch the response. Forwarded to
+#'   `forward_to_api()`
 #'
 #' @return parsed R object as resulting from the API
 #'
 #' @family helper functions
 #' @noRd
-conduct_parent_to_helpers <- function(api, ...) {
+conduct_parent_to_helpers <- function(api,
+                                      ignored_arguments = NULL,
+                                      ...) {
   # Check arguments
   assertthat::assert_that(assertthat::is.flag(api))
+  assertthat::assert_that(is.character(ignored_arguments))
 
   # Lock in the name of the parent function
   function_identity <-
@@ -357,7 +362,7 @@ conduct_parent_to_helpers <- function(api, ...) {
       !names(return_parent_arguments(depth = 2)) %in% c(
         "api",
         "connection",
-        "directory",
+        ignored_arguments,
         "function_identity"
       )
     ]

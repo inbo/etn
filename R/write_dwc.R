@@ -56,7 +56,9 @@ write_dwc <- function(animal_project_code,
   }
 
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api, json = FALSE)
+  out <- conduct_parent_to_helpers(api,
+                                   json = FALSE,
+                                   ignored_arguments = "directory")
   return(out)
 }
 
