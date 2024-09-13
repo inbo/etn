@@ -19,7 +19,7 @@ write_dwc(
 \item{directory}{Path to local directory to write file(s) to.
 If \code{NULL}, then a list of data frames is returned instead, which can be
 useful for extending/adapting the Darwin Core mapping before writing with
-\code{\link[readr:write_delim]{readr::write_csv()}}.}
+\code{\link[readr:write_delim]{readr::write_csv()}}. If the directory does not exist, it will be created.}
 
 \item{rights_holder}{Acronym of the organization owning or managing the
 rights over the data.}
