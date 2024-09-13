@@ -11,7 +11,7 @@
 #' @param directory Path to local directory to write file(s) to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
 #'   useful for extending/adapting the Darwin Core mapping before writing with
-#'   [readr::write_csv()].
+#'   [readr::write_csv()]. If the directory does not exist, it will be created.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
@@ -62,17 +62,14 @@ write_dwc <- function(animal_project_code,
 
   # Return the object or write out to file
   if (is.null(directory)) {
+    ## Return the tibble as a list
     return(
       list(
         dwc_occurrence = dplyr::as_tibble(out)
         )
       )
   } else {
-    # Check if the `directory` argument is suitable for writing to
-    assertthat::assert_that(assertthat::is.dir(directory))
-    assertthat::assert_that(assertthat::is.writeable(directory))
-
-    # Write to file
+    ## Write to file
     dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
     message(glue::glue(
       "Writing data to:",
