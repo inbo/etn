@@ -114,5 +114,5 @@ write_dwc_sql <- function(animal_project_code,
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
   # Return as a tibble
-    return(dplyr::as_tibble(dwc_occurrence))
+  return(dplyr::as_tibble(dwc_occurrence))
 }
