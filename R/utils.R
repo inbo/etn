@@ -350,7 +350,8 @@ conduct_parent_to_helpers <- function(api,
                                       ...) {
   # Check arguments
   assertthat::assert_that(assertthat::is.flag(api))
-  assertthat::assert_that(is.character(ignored_arguments))
+  assertthat::assert_that(is.character(ignored_arguments) |
+                            is.null(ignored_arguments))
 
   # Lock in the name of the parent function
   function_identity <-
