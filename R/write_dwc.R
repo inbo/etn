@@ -59,7 +59,33 @@ write_dwc <- function(animal_project_code,
   out <- conduct_parent_to_helpers(api,
                                    json = FALSE,
                                    ignored_arguments = "directory")
-  return(out)
+
+  # Return the object or write out to file
+  if (is.null(directory)) {
+    return(
+      list(
+        dwc_occurrence = dplyr::as_tibble(out)
+        )
+      )
+  } else {
+    # Check if the `directory` argument is suitable for writing to
+    assertthat::assert_that(assertthat::is.dir(directory))
+    assertthat::assert_that(assertthat::is.writeable(directory))
+
+    # Write to file
+    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
+    message(glue::glue(
+      "Writing data to:",
+      dwc_occurrence_path,
+      .sep = "\n"
+    ))
+    if (!dir.exists(directory)) {
+      dir.create(directory, recursive = TRUE)
+    }
+    readr::write_csv(out, dwc_occurrence_path, na = "")
+  }
+
+  invisible(out)
 }
 
 #' write_dwc() sql helper
