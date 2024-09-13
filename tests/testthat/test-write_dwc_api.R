@@ -13,6 +13,12 @@ test_that("write_dwc() can write csv files to a path", {
 })
 
 test_that("write_dwc() can return data as list of tibbles rather than files", {
+  vcr::use_cassette("2014_demer_dwc", {
+    2014_demer_dwc <- write_dwc(animal_project_code = "2014_demer",
+                                directory = NULL,
+                                api = TRUE)
+  })
+
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL, api = TRUE)
   )
