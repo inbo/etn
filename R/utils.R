@@ -357,6 +357,7 @@ conduct_parent_to_helpers <- function(api, ...) {
       !names(return_parent_arguments(depth = 2)) %in% c(
         "api",
         "connection",
+        "directory",
         "function_identity"
       )
     ]

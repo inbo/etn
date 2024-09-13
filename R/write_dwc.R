@@ -44,27 +44,15 @@
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 write_dwc <- function(animal_project_code,
+                      directory,
                       rights_holder = NULL,
                       license = "CC-BY",
                       api = TRUE,
-                      connection,
-                      directory) {
+                      connection) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
-  }
-  # The directory argument has been depreciated
-  if (lifecycle::is_present(directory)) {
-    lifecycle::deprecate_stop(
-      when = "v3.0.0",
-      what = "write_dwc(directory)",
-      details = glue::glue(
-        "write_dwc() no longer supports writing directly to disk, but returns a",
-        "dataframe instead. Use readr::write_csv() to write the output to disk."
-      ),
-      always = TRUE
-    )
   }
 
   # Either use the API, or the SQL helper.
