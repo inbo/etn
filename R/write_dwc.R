@@ -62,12 +62,8 @@ write_dwc <- function(animal_project_code,
 
   # Return the object or write out to file
   if (is.null(directory)) {
-    ## Return the tibble as a list
-    return(
-      list(
-        dwc_occurrence = dplyr::as_tibble(out)
-        )
-      )
+    ## Return a list of dataframes
+    return(out)
   } else {
     ## Write to file
     dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
@@ -79,7 +75,7 @@ write_dwc <- function(animal_project_code,
     if (!dir.exists(directory)) {
       dir.create(directory, recursive = TRUE)
     }
-    readr::write_csv(out, dwc_occurrence_path, na = "")
+    readr::write_csv(x = out$dwc_occurrence, file = dwc_occurrence_path, na = "")
   }
 
   invisible(out)
@@ -132,10 +128,13 @@ write_dwc_sql <- function(animal_project_code,
   message("Reading data and transforming to Darwin Core.")
   dwc_occurrence_sql <- glue::glue_sql(
     readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
-    .con = connection
+    .con = connection,
+    .null = "NULL"
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
-  # Return as a tibble
-  return(dplyr::as_tibble(dwc_occurrence))
+  # Return list of dataframes
+  return(
+    list(dwc_occurrence = dplyr::as_tibble(dwc_occurrence))
+    )
 }
