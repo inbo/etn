@@ -44,7 +44,7 @@
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 write_dwc <- function(animal_project_code,
-                      directory,
+                      directory = ".",
                       rights_holder = NULL,
                       license = "CC-BY",
                       api = TRUE,
