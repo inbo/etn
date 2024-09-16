@@ -133,6 +133,9 @@ write_dwc_sql <- function(animal_project_code,
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
 
+  ## Close the database connection, it's recreated on every function call
+  DBI::dbDisconnect(connection)
+
   # Return list of dataframes
   return(
     list(dwc_occurrence = dplyr::as_tibble(dwc_occurrence))
