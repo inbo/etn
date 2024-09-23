@@ -1,4 +1,4 @@
-test_that("write_dwc() can write csv files to a path", {
+test_that("[SQL] write_dwc() can write csv files to a path", {
   out_dir <- file.path(tempdir(), "dwc")
   unlink(out_dir, recursive = TRUE)
   dir.create(out_dir)
@@ -12,7 +12,7 @@ test_that("write_dwc() can write csv files to a path", {
   )
 })
 
-test_that("write_dwc() can return data as list of tibbles rather than files", {
+test_that("[SQL] write_dwc can return data as list of tibbles rather than files", {
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL, api = FALSE)
   )
@@ -21,7 +21,7 @@ test_that("write_dwc() can return data as list of tibbles rather than files", {
   expect_s3_class(result$dwc_occurrence, "tbl")
 })
 
-test_that("write_dwc() returns the expected Darwin Core terms as columns", {
+test_that("[SQL] write_dwc returns the expected Darwin Core terms as columns", {
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL, api = FALSE)
   )
