@@ -6,7 +6,7 @@
 \usage{
 write_dwc(
   animal_project_code,
-  directory,
+  directory = ".",
   rights_holder = NULL,
   license = "CC-BY",
   api = TRUE,
