@@ -1,7 +1,6 @@
 #' List all available station names
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `station_name` present in
 #'   `acoustic.deployments`.
 #'

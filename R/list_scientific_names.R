@@ -1,6 +1,6 @@
 #' List all available scientific names
 #'
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `scientific_name` present in
 #'   `common.animal_release`.
 #'

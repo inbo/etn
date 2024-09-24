@@ -1,7 +1,6 @@
 #' List all available animal project codes
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `project_code` of `type = "animal"` in
 #'   `project.sql`.
 #'

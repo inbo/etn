@@ -1,10 +1,10 @@
 #' List all available acoustic project codes
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #'
 #' @return A vector of all unique `project_code` of `type = "acoustic"` in
 #'   `project.sql`.
-#'
+#' 
+#' @inheritParams list_animal_ids
 #' @export
 list_acoustic_project_codes <- function(api = TRUE,
                                         connection) {

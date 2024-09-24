@@ -1,7 +1,6 @@
 #' List all available tag serial numbers
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `tag_serial_numbers` present in
 #'   `common.tag_device`.
 #'

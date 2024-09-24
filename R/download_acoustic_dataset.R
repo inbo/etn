@@ -35,7 +35,6 @@
 #' `frictionless validate datapackage.json` on the command line using
 #' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_project_code Character. Animal project you want to download
 #'   data for. Required.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -44,6 +43,7 @@
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
 #'
+#' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examples

@@ -4,7 +4,6 @@
 #' can be multiple records (`acoustic_tag_id`) per tag device
 #' (`tag_serial_number`).
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param tag_type Character (vector). `acoustic` or `archival`. Some tags are
 #'   both, find those with `acoustic-archival`.
@@ -17,7 +16,8 @@
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'  Values for `owner_organization` and `owner_pi` will only be visible if you
 #'  are member of the group.
-#'
+#' 
+#' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examples

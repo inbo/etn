@@ -2,14 +2,14 @@
 #'
 #' Get data for acoustic projects, with options to filter results.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
 #'
 #' @return A tibble with acoustic project data, sorted by `project_code`. See
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
-#'
+#' 
+#' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examples

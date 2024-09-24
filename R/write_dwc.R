@@ -6,7 +6,6 @@
 #' https://www.gbif.org/ipt) for publication to OBIS and/or GBIF.
 #' A `meta.xml` or `eml.xml` file are not created.
 #'
-#' @param connection Connection to the ETN database.
 #' @param animal_project_code Animal project code.
 #' @param directory Path to local directory to write file(s) to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
@@ -18,6 +17,7 @@
 #'   published.
 #'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
 #'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#' @inheritParams list_animal_ids
 #' @return CSV file(s) written to disk or list of data frames when
 #'   `directory = NULL`.
 #' @export
