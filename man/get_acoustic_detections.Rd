@@ -43,7 +43,11 @@ names.}
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
 
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
+
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}

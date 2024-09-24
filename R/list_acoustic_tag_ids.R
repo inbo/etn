@@ -1,7 +1,7 @@
 #' List all available acoustic tag ids
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 #'
 #' @export

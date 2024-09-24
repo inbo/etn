@@ -2,10 +2,10 @@
 #'
 #' Get data for animal projects, with options to filter results.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
 #'
+#' @inheritParams list_animal_ids
 #' @return A tibble with animal project data, sorted by `project_code`. See
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).

@@ -2,7 +2,6 @@
 #'
 #' Get data for cpod projects, with options to filter results.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param cpod_project_code Character (vector). One or more cpod project
 #'   codes. Case-insensitive.
 #'
@@ -10,6 +9,7 @@
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
+#' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examples

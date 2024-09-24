@@ -6,18 +6,18 @@
 #' https://www.gbif.org/ipt) for publication to OBIS and/or GBIF.
 #' A `meta.xml` or `eml.xml` file are not created.
 #'
-#' @param connection Connection to the ETN database.
 #' @param animal_project_code Animal project code.
 #' @param directory Path to local directory to write file(s) to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
 #'   useful for extending/adapting the Darwin Core mapping before writing with
-#'   [readr::write_csv()].
+#'   [readr::write_csv()]. If the directory does not exist, it will be created.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
 #'   published.
 #'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
 #'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#' @inheritParams list_animal_ids
 #' @return CSV file(s) written to disk or list of data frames when
 #'   `directory = NULL`.
 #' @export
@@ -43,11 +43,54 @@
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
-write_dwc <- function(connection = con,
-                      animal_project_code,
+write_dwc <- function(animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
-                      license = "CC-BY") {
+                      license = "CC-BY",
+                      api = TRUE,
+                      connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(api,
+                                   json = FALSE,
+                                   ignored_arguments = "directory")
+
+  # Return the object or write out to file
+  if (is.null(directory)) {
+    ## Return a list of dataframes
+    return(out)
+  } else {
+    ## Write to file
+    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
+    message(glue::glue(
+      "Writing data to:",
+      dwc_occurrence_path,
+      .sep = "\n"
+    ))
+    if (!dir.exists(directory)) {
+      dir.create(directory, recursive = TRUE)
+    }
+    readr::write_csv(x = out$dwc_occurrence, file = dwc_occurrence_path, na = "")
+  }
+
+  invisible(out)
+}
+
+#' write_dwc() sql helper
+#'
+#' @inheritParams write_dwc()
+#' @noRd
+#'
+write_dwc_sql <- function(animal_project_code,
+                          rights_holder = NULL,
+                          license = "CC-BY") {
+  # Create connection
+  connection <- do.call(connect_to_etn, get_credentials())
   # Check connection
   check_connection(connection)
 
@@ -85,28 +128,16 @@ write_dwc <- function(connection = con,
   message("Reading data and transforming to Darwin Core.")
   dwc_occurrence_sql <- glue::glue_sql(
     readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
-    .con = connection
+    .con = connection,
+    .null = "NULL"
   )
   dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
-  
-  # Close connection
+
+  ## Close the database connection, it's recreated on every function call
   DBI::dbDisconnect(connection)
 
-  # Return object or write files
-  if (is.null(directory)) {
-    list(
-      dwc_occurrence = dplyr::as_tibble(dwc_occurrence)
+  # Return list of dataframes
+  return(
+    list(dwc_occurrence = dplyr::as_tibble(dwc_occurrence))
     )
-  } else {
-    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
-    message(glue::glue(
-      "Writing data to:",
-      dwc_occurrence_path,
-      .sep = "\n"
-    ))
-    if (!dir.exists(directory)) {
-      dir.create(directory, recursive = TRUE)
-    }
-    readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
-  }
 }

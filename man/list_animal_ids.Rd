@@ -6,6 +6,13 @@
 \usage{
 list_animal_ids(api = TRUE, connection)
 }
+\arguments{
+\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
+
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
+}
 \value{
 A vector of all unique \code{id_pk} present in \code{common.animal_release}.
 }

@@ -2,10 +2,10 @@
 #'
 #' Get data for acoustic receivers, with options to filter results.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param status Character. One or more statuses, e.g. `available` or `broken`.
 #'
+#' @inheritParams list_animal_ids
 #' @return A tibble with acoustic receiver data, sorted by `receiver_id`. See
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).

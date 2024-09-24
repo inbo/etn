@@ -5,7 +5,6 @@
 #' `acoustic_tag_id`. If multiple tags are associated with a single animal,
 #' the information is comma-separated.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param animal_id Integer (vector). One or more animal identifiers.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
@@ -16,6 +15,7 @@
 #' `release_date_time` and `tag_serial_number`. See also
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
+#' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examples
