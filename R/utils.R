@@ -236,7 +236,7 @@ check_opencpu_response <- function(response) {
 #' @noRd
 deprecate_warn_connection <- function() {
   lifecycle::deprecate_warn(
-    when = "v3.0.0",
+    when = "v2.3.0",
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
