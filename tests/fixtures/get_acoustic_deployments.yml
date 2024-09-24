@@ -1,0 +1,139 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_deployments/
+    body:
+      encoding: ''
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"deployment_id":1437,"open_only":false}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+  response:
+    status:
+      status_code: 201
+      category: Success
+      reason: Created
+      message: 'Success: (201) Created'
+    headers:
+      date: Tue, 24 Sep 2024 08:59:06 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=300, public
+      x-ocpu-session: x07600dc94b6373
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x07600dc94b6373/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.4.1 (2024-06-14)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2024-09-24 08:59:08 UTC
+      x-ocpu-version: 2.2.13
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '135'
+      content-type: text/plain; charset=utf-8
+      access-control-allow-methods: '*'
+    body:
+      encoding: ''
+      file: no
+      string: |
+        /ocpu/tmp/x07600dc94b6373/R/.val
+        /ocpu/tmp/x07600dc94b6373/R/credentials
+        /ocpu/tmp/x07600dc94b6373/R/get_acoustic_deployments
+        /ocpu/tmp/x07600dc94b6373/stdout
+        /ocpu/tmp/x07600dc94b6373/source
+        /ocpu/tmp/x07600dc94b6373/console
+        /ocpu/tmp/x07600dc94b6373/info
+        /ocpu/tmp/x07600dc94b6373/files/DESCRIPTION
+  recorded_at: 2024-09-24 08:59:14 GMT
+  recorded_with: vcr/1.2.2, webmockr/0.9.0
+- request:
+    method: get
+    uri: https://opencpu.lifewatch.be/tmp/x07600dc94b6373/R/.val/rds
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Tue, 24 Sep 2024 08:59:08 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=86400, public
+      content-disposition: attachment;filename=.val.rds
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.4.1 (2024-06-14)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2024-09-24 08:59:09 UTC
+      x-ocpu-version: 2.2.13
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '718'
+      content-type: application/r-rds
+      access-control-allow-methods: '*'
+    body:
+      encoding: ''
+      file: no
+      base64_string: WAoAAAADAAQEAQADBQAAAAAFVVRGLTgAAAMTAAAAJgAAAA0AAAABAAAFnQAAABAAAAABAAQACQAAAAtW
+        UjJXLTEyNDA3MAAAABAAAAABAAQACQAAAAVkZW1lcgAAABAAAAABAAQACQAAAARkZS05AAAAEAAAAAEA
+        BAAJAAAADVNBX0dCX1JPREVNRVIAAAAQAAAAAQAEAAkAAAABMQAAAw4AAAABQdTRd8AAAAAAAAQCAAAA
+        AQAEAAkAAAAFdHpvbmUAAAAQAAAAAQAEAAkAAAADVVRDAAAEAgAAAAEABAAJAAAABWNsYXNzAAAAEAAA
+        AAIABAAJAAAAB1BPU0lYY3QABAAJAAAABlBPU0lYdAAAAP4AAAAOAAAAAUBJfuG2aN05AAAADgAAAAFA
+        FDJVsDW9UQAAAA4AAAABf/AAAAAAB6IAAAAOAAAAAX/wAAAAAAeiAAAAEAAAAAEABAAJAAAADHN1cmZh
+        Y2UtYnVveQAAABAAAAABAAAACf////8AAAAQAAAAAQAAAAn/////AAAAEAAAAAEAAAAJ/////wAAAw4A
+        AAABf/AAAAAAB6IAAAQCAAAB/wAAABAAAAABAAQACQAAAANVVEMAAAQCAAAC/wAAABAAAAACAAQACQAA
+        AAdQT1NJWGN0AAQACQAAAAZQT1NJWHQAAAD+AAADDgAAAAFB1WfCwAAAAAAABAIAAAH/AAAAEAAAAAEA
+        BAAJAAAAA1VUQwAABAIAAAL/AAAAEAAAAAIABAAJAAAAB1BPU0lYY3QABAAJAAAABlBPU0lYdAAAAP4A
+        AAMOAAAAAX/wAAAAAAeiAAAEAgAAAf8AAAAQAAAAAQAEAAkAAAADVVRDAAAEAgAAAv8AAAAQAAAAAgAE
+        AAkAAAAHUE9TSVhjdAAEAAkAAAAGUE9TSVh0AAAA/gAAAw4AAAABQdUk3+YAAAAAAAQCAAAB/wAAABAA
+        AAABAAQACQAAAANVVEMAAAQCAAAC/wAAABAAAAACAAQACQAAAAdQT1NJWGN0AAQACQAAAAZQT1NJWHQA
+        AAD+AAAADgAAAAF/8AAAAAAHogAAAA4AAAABf/AAAAAAB6IAAAMOAAAAAUHVNvtAAAAAAAAEAgAAAf8A
+        AAAQAAAAAQAEAAkAAAADVVRDAAAEAgAAAv8AAAAQAAAAAgAEAAkAAAAHUE9TSVhjdAAEAAkAAAAGUE9T
+        SVh0AAAA/gAAABAAAAABAAAACf////8AAAMOAAAAAX/wAAAAAAeiAAAEAgAAAf8AAAAQAAAAAQAEAAkA
+        AAADVVRDAAAEAgAAAv8AAAAQAAAAAgAEAAkAAAAHUE9TSVhjdAAEAAkAAAAGUE9TSVh0AAAA/gAAAw4A
+        AAABf/AAAAAAB6IAAAQCAAAB/wAAABAAAAABAAQACQAAAANVVEMAAAQCAAAC/wAAABAAAAACAAQACQAA
+        AAdQT1NJWGN0AAQACQAAAAZQT1NJWHQAAAD+AAAAEAAAAAEAAAAJ/////wAAAw4AAAABf/AAAAAAB6IA
+        AAQCAAAB/wAAABAAAAABAAQACQAAAANVVEMAAAQCAAAC/wAAABAAAAACAAQACQAAAAdQT1NJWGN0AAQA
+        CQAAAAZQT1NJWHQAAAD+AAAAEAAAAAEAAAAJ/////wAAABAAAAABAAAACf////8AAAAQAAAAAQAAAAn/
+        ////AAAADQAAAAGAAAAAAAAADQAAAAGAAAAAAAAADQAAAAGAAAAAAAAADQAAAAGAAAAAAAAADQAAAAGA
+        AAAAAAAADQAAAAGAAAAAAAAADQAAAAGAAAAAAAAAEAAAAAEAAAAJ/////wAABAIAAAL/AAAAEAAAAAMA
+        BAAJAAAABnRibF9kZgAEAAkAAAADdGJsAAQACQAAAApkYXRhLmZyYW1lAAAEAgAAAAEABAAJAAAACXJv
+        dy5uYW1lcwAAAA0AAAACgAAAAP////8AAAQCAAAAAQAEAAkAAAAFbmFtZXMAAAAQAAAAJgAEAAkAAAAN
+        ZGVwbG95bWVudF9pZAAEAAkAAAALcmVjZWl2ZXJfaWQABAAJAAAAFWFjb3VzdGljX3Byb2plY3RfY29k
+        ZQAEAAkAAAAMc3RhdGlvbl9uYW1lAAQACQAAABNzdGF0aW9uX2Rlc2NyaXB0aW9uAAQACQAAAA9zdGF0
+        aW9uX21hbmFnZXIABAAJAAAAEGRlcGxveV9kYXRlX3RpbWUABAAJAAAAD2RlcGxveV9sYXRpdHVkZQAE
+        AAkAAAAQZGVwbG95X2xvbmdpdHVkZQAEAAkAAAARaW50ZW5kZWRfbGF0aXR1ZGUABAAJAAAAEmludGVu
+        ZGVkX2xvbmdpdHVkZQAEAAkAAAAMbW9vcmluZ190eXBlAAQACQAAAAxib3R0b21fZGVwdGgABAAJAAAA
+        DHJpc2VyX2xlbmd0aAAEAAkAAAAMZGVwbG95X2RlcHRoAAQACQAAABliYXR0ZXJ5X2luc3RhbGxhdGlv
+        bl9kYXRlAAQACQAAABpiYXR0ZXJ5X2VzdGltYXRlZF9lbmRfZGF0ZQAEAAkAAAAUYWN0aXZhdGlvbl9k
+        YXRlX3RpbWUABAAJAAAAEXJlY292ZXJfZGF0ZV90aW1lAAQACQAAABByZWNvdmVyX2xhdGl0dWRlAAQA
+        CQAAABFyZWNvdmVyX2xvbmdpdHVkZQAEAAkAAAASZG93bmxvYWRfZGF0ZV90aW1lAAQACQAAABJkb3du
+        bG9hZF9maWxlX25hbWUABAAJAAAAGnZhbGlkX2RhdGFfdW50aWxfZGF0ZV90aW1lAAQACQAAAA5zeW5j
+        X2RhdGVfdGltZQAEAAkAAAAKdGltZV9kcmlmdAAEAAkAAAAcYXJfYmF0dGVyeV9pbnN0YWxsYXRpb25f
+        ZGF0ZQAEAAkAAAAKYXJfY29uZmlybQAEAAkAAAAQdHJhbnNtaXRfcHJvZmlsZQAEAAkAAAAVdHJhbnNt
+        aXRfcG93ZXJfb3V0cHV0AAQACQAAABxsb2dfdGVtcGVyYXR1cmVfc3RhdHNfcGVyaW9kAAQACQAAAB1s
+        b2dfdGVtcGVyYXR1cmVfc2FtcGxlX3BlcmlvZAAEAAkAAAAWbG9nX3RpbHRfc2FtcGxlX3BlcmlvZAAE
+        AAkAAAAWbG9nX25vaXNlX3N0YXRzX3BlcmlvZAAEAAkAAAAXbG9nX25vaXNlX3NhbXBsZV9wZXJpb2QA
+        BAAJAAAAFmxvZ19kZXB0aF9zdGF0c19wZXJpb2QABAAJAAAAF2xvZ19kZXB0aF9zYW1wbGVfcGVyaW9k
+        AAQACQAAAAhjb21tZW50cwAAAP4=
+  recorded_at: 2024-09-24 08:59:14 GMT
+  recorded_with: vcr/1.2.2, webmockr/0.9.0
