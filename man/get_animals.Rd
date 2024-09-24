@@ -23,7 +23,11 @@ codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
 
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
+
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},
