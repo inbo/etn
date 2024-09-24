@@ -3,7 +3,6 @@
 #' Get data for acoustic detections, with options to filter results. Use
 #' `limit` to limit the number of returned records.
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
 #' @param start_date Character. Start date (inclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
@@ -19,6 +18,8 @@
 #'   names.
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'   for testing purposes). Defaults to `FALSE`.
+#'
+#' @inheritParams list_animal_ids
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
 #'  and `date_time`. See also
