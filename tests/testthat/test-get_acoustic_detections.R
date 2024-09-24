@@ -29,10 +29,10 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
 })
 
 # TODO check #283 and re-enable test if neccesairy.
-# test_that("get_acoustic_detections() returns unique detection_id", {
+test_that("get_acoustic_detections() returns unique detection_id", {
 #   df <- get_acoustic_detections(limit = TRUE)
 #   expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
-# })
+})
 
 test_that("get_acoustic_detections() returns the expected columns", {
   vcr::use_cassette("acoustic_detections_limited", {
