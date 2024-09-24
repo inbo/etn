@@ -16,7 +16,7 @@
 #'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'  Values for `owner_organization` and `owner_pi` will only be visible if you
 #'  are member of the group.
-#' 
+#'
 #' @inheritParams list_animal_ids
 #' @export
 #'
@@ -37,12 +37,12 @@
 #' get_tags(con, tag_serial_number = "1187450")
 #' get_tags(con, acoustic_tag_id = "A69-1601-16130")
 #' get_tags(con, acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
-get_tags <- function(tag_type = NULL,
+get_tags <- function(connection,
+                     tag_type = NULL,
                      tag_subtype = NULL,
                      tag_serial_number = NULL,
                      acoustic_tag_id = NULL,
-                     api = TRUE,
-                     connection) {
+                     api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -218,7 +218,7 @@ get_tags_sql <- function(tag_type = NULL,
 
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Sort data
   tags <-
     tags %>%

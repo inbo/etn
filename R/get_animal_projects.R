@@ -21,9 +21,9 @@
 #'
 #' # Get a specific animal project
 #' get_animal_projects(con, animal_project_code = "2014_demer")
-get_animal_projects <- function(animal_project_code = NULL,
-                                api = TRUE,
-                                connection){
+get_animal_projects <- function(connection,
+                                animal_project_code = NULL,
+                                api = TRUE){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -77,10 +77,10 @@ get_animal_projects_sql <- function(animal_project_code = NULL) {
       AND {animal_project_code_query}
     ", .con = connection)
   projects <- DBI::dbGetQuery(connection, query)
-  
+
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Sort data
   projects <-
     projects %>%

@@ -8,7 +8,7 @@
 #' @return A tibble with acoustic project data, sorted by `project_code`. See
 #'   also
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
-#' 
+#'
 #' @inheritParams list_animal_ids
 #' @export
 #'
@@ -21,9 +21,9 @@
 #'
 #' # Get a specific acoustic project
 #' get_acoustic_projects(con, acoustic_project_code = "demer")
-get_acoustic_projects <- function(acoustic_project_code = NULL,
-                                  api = TRUE,
-                                  connection){
+get_acoustic_projects <- function(connection,
+                                  acoustic_project_code = NULL,
+                                  api = TRUE){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -84,7 +84,7 @@ get_acoustic_projects_sql <- function(acoustic_project_code = NULL) {
 
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Return acoustic projects
   dplyr::as_tibble(projects)
 }

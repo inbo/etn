@@ -75,7 +75,8 @@
 #'   receiver_id = "VR2W-124070",
 #'   acoustic_project_code = "demer"
 #' )
-get_acoustic_detections <- function(start_date = NULL,
+get_acoustic_detections <- function(connection,
+                                    start_date = NULL,
                                     end_date = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
@@ -84,8 +85,7 @@ get_acoustic_detections <- function(start_date = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    api = TRUE,
-                                    connection){
+                                    api = TRUE){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
