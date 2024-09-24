@@ -1,10 +1,3 @@
-# test_that("get_acoustic_deployments() returns error for incorrect connection", {
-#   expect_error(
-#     get_acoustic_deployments(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_acoustic_deployments() returns a tibble", {
   df <- get_acoustic_deployments()
   expect_s3_class(df, "data.frame")
