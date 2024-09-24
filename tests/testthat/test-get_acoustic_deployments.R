@@ -1,5 +1,3 @@
-# con <- connect_to_etn()
-
 # test_that("get_acoustic_deployments() returns error for incorrect connection", {
 #   expect_error(
 #     get_acoustic_deployments(con = "not_a_connection"),
