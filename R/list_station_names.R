@@ -5,8 +5,8 @@
 #'   `acoustic.deployments`.
 #'
 #' @export
-list_station_names <- function(api = TRUE,
-                               connection) {
+list_station_names <- function(connection,
+                               api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

@@ -43,12 +43,12 @@
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
-write_dwc <- function(animal_project_code,
+write_dwc <- function(connection,
+                      animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
                       license = "CC-BY",
-                      api = TRUE,
-                      connection) {
+                      api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

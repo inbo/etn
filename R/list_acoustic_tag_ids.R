@@ -5,8 +5,8 @@
 #' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 #'
 #' @export
-list_acoustic_tag_ids <- function(api = TRUE,
-                                  connection) {
+list_acoustic_tag_ids <- function(connection,
+                                  api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

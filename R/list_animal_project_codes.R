@@ -5,8 +5,8 @@
 #'   `project.sql`.
 #'
 #' @export
-list_animal_project_codes <- function(api = TRUE,
-                                      connection) {
+list_animal_project_codes <- function(connection,
+                                      api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

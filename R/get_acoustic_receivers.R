@@ -26,10 +26,10 @@
 #'
 #' # Get a specific acoustic receiver
 #' get_acoustic_receivers(con, receiver_id = "VR2W-124070")
-get_acoustic_receivers <- function(receiver_id = NULL,
+get_acoustic_receivers <- function(connection,
+                                   receiver_id = NULL,
                                    status = NULL,
-                                   api = TRUE,
-                                   connection){
+                                   api = TRUE){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -127,10 +127,10 @@ get_acoustic_receivers_sql <- function(receiver_id = NULL,
       AND {status_query}
     ", .con = connection)
   receivers <- DBI::dbGetQuery(connection, query)
-  
+
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Sort data
   receivers <-
     receivers %>%

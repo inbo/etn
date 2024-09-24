@@ -5,8 +5,8 @@
 #'   `common.tag_device`.
 #'
 #' @export
-list_tag_serial_numbers <- function(api = TRUE,
-                                    connection) {
+list_tag_serial_numbers <- function(connection,
+                                    api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

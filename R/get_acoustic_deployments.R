@@ -40,13 +40,13 @@
 #'
 #' # Get acoustic deployments for two specific stations
 #' get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
-get_acoustic_deployments <- function(deployment_id = NULL,
+get_acoustic_deployments <- function(connection,
+                                     deployment_id = NULL,
                                      receiver_id = NULL,
                                      acoustic_project_code = NULL,
                                      station_name = NULL,
                                      open_only = FALSE,
-                                     api = TRUE,
-                                     connection) {
+                                     api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

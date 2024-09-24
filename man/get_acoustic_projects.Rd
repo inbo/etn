@@ -4,17 +4,17 @@
 \alias{get_acoustic_projects}
 \title{Get acoustic project data}
 \usage{
-get_acoustic_projects(acoustic_project_code = NULL, api = TRUE, connection)
+get_acoustic_projects(connection, acoustic_project_code = NULL, api = TRUE)
 }
 \arguments{
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
+
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
 
 \item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
-
-\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.}
 }
 \value{
 A tibble with acoustic project data, sorted by \code{project_code}. See

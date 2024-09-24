@@ -4,8 +4,8 @@
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
 #'
 #' @export
-list_receiver_ids <- function(api = TRUE,
-                              connection){
+list_receiver_ids <- function(connection,
+                              api = TRUE){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

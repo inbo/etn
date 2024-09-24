@@ -3,11 +3,11 @@
 #'
 #' @return A vector of all unique `project_code` of `type = "acoustic"` in
 #'   `project.sql`.
-#' 
+#'
 #' @inheritParams list_animal_ids
 #' @export
-list_acoustic_project_codes <- function(api = TRUE,
-                                        connection) {
+list_acoustic_project_codes <- function(connection,
+                                        api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

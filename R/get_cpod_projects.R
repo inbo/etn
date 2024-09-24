@@ -21,9 +21,9 @@
 #'
 #' # Get a specific animal project
 #' get_cpod_projects(con, cpod_project_code = "cpod-lifewatch")
-get_cpod_projects <- function(cpod_project_code = NULL,
-                              api = TRUE,
-                              connection) {
+get_cpod_projects <- function(connection,
+                              cpod_project_code = NULL,
+                              api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -80,7 +80,7 @@ get_cpod_projects_sql <- function(cpod_project_code = NULL) {
 
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Sort data
   projects <-
     projects %>%

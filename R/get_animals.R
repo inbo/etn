@@ -41,12 +41,12 @@
 #'
 #' # Get animals of a specific species from a specific project
 #' get_animals(con, animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
-get_animals <- function(animal_id = NULL,
+get_animals <- function(connection,
+                        animal_id = NULL,
                         tag_serial_number = NULL,
                         animal_project_code = NULL,
                         scientific_name = NULL,
-                        api = TRUE,
-                        connection) {
+                        api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -232,7 +232,7 @@ get_animals_sql <- function(animal_id = NULL,
 
   # Close connection
   DBI::dbDisconnect(connection)
-  
+
   # Collapse tag information, to obtain one row = one animal
   tag_cols <-
     animals %>%

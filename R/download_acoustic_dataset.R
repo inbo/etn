@@ -76,11 +76,11 @@
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
 #' }
-download_acoustic_dataset <- function(animal_project_code,
+download_acoustic_dataset <- function(connection,
+                                      animal_project_code,
                                       scientific_name = NULL,
                                       directory = animal_project_code,
-                                      api = TRUE,
-                                      connection) {
+                                      api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

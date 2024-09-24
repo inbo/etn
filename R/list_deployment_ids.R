@@ -4,7 +4,7 @@
 #' @return A vector of all unique `id_pk` present in `acoustic.deployments`.
 #'
 #' @export
-list_deployment_ids <- function(api = TRUE, connection) {
+list_deployment_ids <- function(connection, api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
