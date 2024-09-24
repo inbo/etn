@@ -353,7 +353,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-est_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
+test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
   # Errors
   expect_error(
     get_acoustic_deployments(station_name = "not_a_station_name",
