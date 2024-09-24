@@ -5,16 +5,20 @@
 \title{Get acoustic deployment data}
 \usage{
 get_acoustic_deployments(
+  connection,
   deployment_id = NULL,
   receiver_id = NULL,
   acoustic_project_code = NULL,
   station_name = NULL,
   open_only = FALSE,
-  api = TRUE,
-  connection
+  api = TRUE
 )
 }
 \arguments{
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
+
 \item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
@@ -29,10 +33,6 @@ names.}
 open (i.e. no end date defined). Defaults to \code{FALSE}.}
 
 \item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
-
-\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.}
 }
 \value{
 A tibble with acoustic deployment data, sorted by

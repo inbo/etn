@@ -5,6 +5,7 @@
 \title{Get acoustic detections data}
 \usage{
 get_acoustic_detections(
+  connection,
   start_date = NULL,
   end_date = NULL,
   acoustic_tag_id = NULL,
@@ -14,11 +15,14 @@ get_acoustic_detections(
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
-  api = TRUE,
-  connection
+  api = TRUE
 )
 }
 \arguments{
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
+
 \item{start_date}{Character. Start date (inclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
 
@@ -44,10 +48,6 @@ names.}
 for testing purposes). Defaults to \code{FALSE}.}
 
 \item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
-
-\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}

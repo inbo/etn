@@ -5,15 +5,19 @@
 \title{Get tag data}
 \usage{
 get_tags(
+  connection,
   tag_type = NULL,
   tag_subtype = NULL,
   tag_serial_number = NULL,
   acoustic_tag_id = NULL,
-  api = TRUE,
-  connection
+  api = TRUE
 )
 }
 \arguments{
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
+
 \item{tag_type}{Character (vector). \code{acoustic} or \code{archival}. Some tags are
 both, find those with \code{acoustic-archival}.}
 
@@ -26,10 +30,6 @@ both, find those with \code{acoustic-archival}.}
 identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
 
 \item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
-
-\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also
