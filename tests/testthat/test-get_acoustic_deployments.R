@@ -1,5 +1,5 @@
 vcr::use_cassette("get_acoustic_deployments", {
-  df <- get_acoustic_deployments(deployment_id = 1437, api = TRUE)
+  df <- get_acoustic_deployments(api = TRUE)
 })
 
 test_that("get_acoustic_deployments() returns a tibble", {
