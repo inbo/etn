@@ -1,5 +1,7 @@
 #' List all available animal ids
 #'
+#' @param api
+#' @param connection
 #'
 #' @return A vector of all unique `id_pk` present in `common.animal_release`.
 #'
