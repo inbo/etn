@@ -12,7 +12,7 @@ Authors@R: c(
            role = "aut", comment = c(ORCID = "0000-0001-6413-3185")),
     person("Research Institute for Nature and Forest (INBO)",
            role = "cph", comment = "https://www.vlaanderen.be/inbo/en-gb/"),
-    person("LifeWatch Belgium",
+    person("Research Foundation - Flanders",
            role = "fnd", comment = "https://lifewatch.be")
   )          
 Description: Package with functions to access and process data from the European
@@ -47,5 +47,5 @@ LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
