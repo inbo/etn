@@ -1,12 +1,11 @@
 #' Connect to the ETN database
 #'
-#' `r lifecycle::badge("deprecated")`
-#'     Connect to the ETN database using username and password.
+#' This function is `r lifecycle::badge("deprecated")` since etn version 2.3.0.
+#' It's use is no longer supported or needed. All connections to the ETN database
+#' are now made automatically when you use a function. If your credentials are not saved
+#' in the system environement, you will be prompted to enter them.
 #'
-#' @param username Character. Username to use for the connection.
-#' @param password Character. Password to use for the connection.
-#'
-#' @return ODBC connection to ETN database.
+#' @return This function is no longer in use, and returns NULL invisibly.
 #'
 #' @export
 connect_to_etn <- function() {
