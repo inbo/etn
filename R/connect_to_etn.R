@@ -8,6 +8,7 @@
 #'
 #' @return ODBC connection to ETN database.
 #'
+#' @export
 #'
 #' @examples
 #' \dontrun{
