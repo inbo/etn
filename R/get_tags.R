@@ -62,7 +62,7 @@ get_tags_sql <- function(tag_type = NULL,
                          tag_serial_number = NULL,
                          acoustic_tag_id = NULL) {
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- do.call(create_connection, get_credentials())
   # Check connection
   check_connection(connection)
 

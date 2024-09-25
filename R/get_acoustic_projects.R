@@ -40,7 +40,7 @@ get_acoustic_projects <- function(connection,
 #'
 get_acoustic_projects_sql <- function(acoustic_project_code = NULL) {
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- do.call(create_connection, get_credentials())
   # Check connection
   check_connection(connection)
 
