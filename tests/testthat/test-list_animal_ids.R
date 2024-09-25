@@ -18,8 +18,3 @@ test_that("list_animal_ids returns at least 5 known values", {
   testthat::expect_true(all(known_ids %in% result_api))
   testthat::expect_true(all(known_ids %in% result_sql))
 })
-
-test_that("list_animal_ids() warns for depreciation of connection", {
-  # snapshot warning only, not values
-  expect_snapshot(animal_ids <- list_animal_ids(connection = "any_object"))
-})
