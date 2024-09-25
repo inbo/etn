@@ -6,7 +6,7 @@ test_that("check_connection() returns error when connection is not valid", {
 })
 
 test_that("deprecate_warn_connection() returns warning when connection is provided", {
-  # because this helper looks at the evironement two levels up, it's not very
+  # because this helper looks at the environment two levels up, it's not very
   # practical to test it directly. So here we test it by calling a function that
   # uses it.
   expect_warning(
