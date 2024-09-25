@@ -38,14 +38,7 @@ library(lubridate)
 library(leaflet)
 ```
 
-Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
-
-```{r connect_to_db}
-con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
-# This is the default, so you could also use connect_to_etn()
-```
-
-Using `con` as variable to store the collection is not mandatory, but it makes your life much easier as `con` is the default value of the argument `connection`, present in every other function of this package.
+Connect with your user credentials (as received by VLIZ) to the database. You can store these by use of [environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables), or alternativly, functions that require a database connection will prompt you for this information the first time you use them per session.
 
 ## Select project(s) of interest
 
