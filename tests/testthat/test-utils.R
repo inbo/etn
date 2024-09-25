@@ -20,7 +20,7 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
 
 # create_connection() -----------------------------------------------------
 test_that("create_connection() can create a connection with the database", {
-  con <- create_connection(get_credentials())
+  con <- do.call(create_connection, get_credentials())
   expect_true(check_connection(con))
   expect_true(isClass(con, "PostgreSQL"))
 })
