@@ -20,14 +20,18 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
 
 # create_connection() -----------------------------------------------------
 test_that("create_connection() can create a connection with the database", {
-  con <- do.call(create_connection, get_credentials())
+  con <- create_connection()
   expect_true(check_connection(con))
   expect_true(isClass(con, "PostgreSQL"))
 })
 
 test_that("create_connection() returns error on non character arguments", {
-  expect_error(create_connection(1, "password"),
-               regexp = "username is not a string")
-  expect_error(create_connection("username", 1),
-               regexp = "password is not a string")
+  expect_error(
+    create_connection(list(username = 1, password = "password")),
+    regexp = "username is not a string"
+  )
+  expect_error(
+    create_connection(credentials = list(username = "username", password = 1)),
+    regexp = "password is not a string"
+  )
 })
