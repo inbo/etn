@@ -1,25 +1,17 @@
-test_that("connect_to_etn() returns NULL since it's deprecation", {
-  # This is intended to be a hard deprecated function, that is no longer used.
-  # For local connections to the ETN database, use the non exported
-  # create_connection() function instead.
-  expect_null(suppressWarnings(connect_to_etn()))
-})
-
 test_that("connect_to_etn() returns deprecation warning when used", {
-  expect_warning(connect_to_etn(),
-    regexp =
-      "was deprecated in etn 2.3.0."
-    )
-  expect_warning(connect_to_etn(),
-                 regexp =
-                   "You will be prompted for credentials instead."
+  lifecycle::expect_deprecated(
+    connect_to_etn()
+  )
+  lifecycle::expect_deprecated(
+    connect_to_etn(username = "my name", password = "my password")
+  )
+  lifecycle::expect_deprecated(
+    connect_to_etn("my name", "my password")
   )
 })
 
-test_that("connect_to_etn() returns deprecation warning when provided with arguments", {
-  expect_warning(
-    connect_to_etn(username = "My name is human name",
-                   password = "Very Secret!"),
-    regexp = "was deprecated in etn 2.3.0"
-  )
+test_that("connect_to_etn() returns NULL invisibly", {
+  # connect_to_etn() is hard deprecated and no longer used
+  # It should return NULL rather than connection information
+  expect_null(suppressWarnings(connect_to_etn()))
 })
