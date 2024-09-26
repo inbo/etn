@@ -32,7 +32,6 @@ Imports:
     lubridate,
     methods,
     odbc,
-    purrr,
     readr,
     rlang,
     stringr
