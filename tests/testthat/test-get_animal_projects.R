@@ -1,12 +1,3 @@
-# con <- connect_to_etn()
-#
-# test_that("get_animal_projects() returns error for incorrect connection", {
-#   expect_error(
-#     get_animal_projects(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_animal_projects() returns a tibble", {
   df <- get_animal_projects()
   expect_s3_class(df, "data.frame")
