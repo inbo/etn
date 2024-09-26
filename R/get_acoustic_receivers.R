@@ -15,17 +15,14 @@
 #' @export
 #'
 #' @examples
-#' # Set default connection variable
-#' con <- connect_to_etn()
-#'
 #' # Get all acoustic receivers
-#' get_acoustic_receivers(con)
+#' get_acoustic_receivers()
 #'
 #' # Get lost and broken acoustic receivers
-#' get_acoustic_receivers(con, status = c("lost", "broken"))
+#' get_acoustic_receivers(status = c("lost", "broken"))
 #'
 #' # Get a specific acoustic receiver
-#' get_acoustic_receivers(con, receiver_id = "VR2W-124070")
+#' get_acoustic_receivers(receiver_id = "VR2W-124070")
 get_acoustic_receivers <- function(connection,
                                    receiver_id = NULL,
                                    status = NULL,

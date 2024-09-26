@@ -13,14 +13,11 @@
 #' @export
 #'
 #' @examples
-#' # Set default connection variable
-#' con <- connect_to_etn()
-#'
 #' # Get all animal projects
-#' get_cpod_projects(con)
+#' get_cpod_projects()
 #'
 #' # Get a specific animal project
-#' get_cpod_projects(con, cpod_project_code = "cpod-lifewatch")
+#' get_cpod_projects(cpod_project_code = "cpod-lifewatch")
 get_cpod_projects <- function(connection,
                               cpod_project_code = NULL,
                               api = TRUE) {
