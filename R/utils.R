@@ -391,7 +391,7 @@ conduct_parent_to_helpers <- function(api,
 #'
 #' @return ODBC connection to ETN database.
 #' @noRd
-create_connection <- function(credentials = list(username, password)) {
+create_connection <- function(credentials = get_credentials()) {
   # Check the input arguments
   assertthat::assert_that(
     assertthat::is.string(credentials$username)
