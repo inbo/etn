@@ -15,3 +15,11 @@ test_that("connect_to_etn() returns deprecation warning when used", {
                    "You will be prompted for credentials instead."
   )
 })
+
+test_that("connect_to_etn() returns deprecation warning when provided with arguments", {
+  expect_warning(
+    connect_to_etn(username = "My name is human name",
+                   password = "Very Secret!"),
+    regexp = "was deprecated in etn 2.3.0"
+  )
+})

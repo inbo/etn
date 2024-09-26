@@ -8,7 +8,7 @@
 #' @return This function is no longer in use, and returns NULL invisibly.
 #'
 #' @export
-connect_to_etn <- function() {
+connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
     when = "2.3.0",
     what = "connect_to_etn()",
