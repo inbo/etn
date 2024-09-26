@@ -6,6 +6,9 @@
 \usage{
 connect_to_etn(...)
 }
+\arguments{
+\item{...}{Any arguments passed to this function are ignored.}
+}
 \value{
 This function is no longer in use, and returns NULL invisibly.
 }
