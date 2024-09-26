@@ -4,7 +4,7 @@
 \alias{connect_to_etn}
 \title{Connect to the ETN database}
 \usage{
-connect_to_etn()
+connect_to_etn(...)
 }
 \value{
 This function is no longer in use, and returns NULL invisibly.
