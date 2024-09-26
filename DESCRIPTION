@@ -25,6 +25,7 @@ Imports:
     assertthat,
     DBI,
     dplyr,
+    etnservice,
     glue,
     httr,
     jsonlite,
