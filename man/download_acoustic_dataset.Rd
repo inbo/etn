@@ -69,9 +69,6 @@ performed by validation tools of the Frictionless Framework, e.g.
 }
 \examples{
 \dontrun{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> Downloading data to directory `2012_leopoldkanaal`:

@@ -25,12 +25,9 @@ also
 Get data for acoustic projects, with options to filter results.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get all acoustic projects
-get_acoustic_projects(con)
+get_acoustic_projects()
 
 # Get a specific acoustic project
-get_acoustic_projects(con, acoustic_project_code = "demer")
+get_acoustic_projects(acoustic_project_code = "demer")
 }
