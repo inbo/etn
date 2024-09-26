@@ -13,14 +13,11 @@
 #' @export
 #'
 #' @examples
-#' # Set default connection variable
-#' con <- connect_to_etn()
-#'
 #' # Get all animal projects
-#' get_animal_projects(con)
+#' get_animal_projects()
 #'
 #' # Get a specific animal project
-#' get_animal_projects(con, animal_project_code = "2014_demer")
+#' get_animal_projects(animal_project_code = "2014_demer")
 get_animal_projects <- function(connection,
                                 animal_project_code = NULL,
                                 api = TRUE){

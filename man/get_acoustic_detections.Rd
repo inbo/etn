@@ -59,18 +59,14 @@ Get data for acoustic detections, with options to filter results. Use
 \code{limit} to limit the number of returned records.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get limited sample of acoustic detections
-get_acoustic_detections(con, limit = TRUE)
+get_acoustic_detections(limit = TRUE)
 
 # Get all acoustic detections from a specific animal project
-get_acoustic_detections(con, animal_project_code = "2014_demer")
+get_acoustic_detections(animal_project_code = "2014_demer")
 
 # Get 2015 acoustic detections from that animal project
 get_acoustic_detections(
-  con,
   animal_project_code = "2014_demer",
   start_date = "2015",
   end_date = "2016",
@@ -78,7 +74,6 @@ get_acoustic_detections(
 
 # Get April 2015 acoustic detections from that animal project
 get_acoustic_detections(
-  con,
   animal_project_code = "2014_demer",
   start_date = "2015-04",
   end_date = "2015-05",
@@ -86,7 +81,6 @@ get_acoustic_detections(
 
 # Get April 24, 2015 acoustic detections from that animal project
 get_acoustic_detections(
-  con,
   animal_project_code = "2014_demer",
   start_date = "2015-04-24",
   end_date = "2015-04-25",
@@ -94,14 +88,12 @@ get_acoustic_detections(
 
 # Get acoustic detections for a specific tag at two specific stations
 get_acoustic_detections(
-  con,
   acoustic_tag_id = "A69-1601-16130",
   station_name = c("de-9", "de-10")
 )
 
 # Get acoustic detections for a specific species, receiver and acoustic project
 get_acoustic_detections(
-  con,
   scientific_name = "Rutilus rutilus",
   receiver_id = "VR2W-124070",
   acoustic_project_code = "demer"
