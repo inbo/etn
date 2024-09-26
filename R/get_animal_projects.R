@@ -37,51 +37,8 @@ get_animal_projects <- function(connection,
 #' @noRd
 #'
 get_animal_projects_sql <- function(animal_project_code = NULL) {
-  # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
-  # Check connection
-  check_connection(connection)
-
-  # Check animal_project_code
-  if (is.null(animal_project_code)) {
-    animal_project_code_query <- "True"
-  } else {
-    animal_project_code <- check_value(
-      animal_project_code,
-      list_animal_project_codes(api = FALSE),
-      "animal_project_code",
-      lowercase = TRUE
-    )
-    animal_project_code_query <- glue::glue_sql(
-      "LOWER(project.project_code) IN ({animal_project_code*})",
-      .con = connection
-    )
-  }
-
-  project_sql <- glue::glue_sql(
-    readr::read_file(system.file("sql", "project.sql", package = "etn")),
-    .con = connection
+  do.call(getFromNamespace("get_animal_projects", ns = "etnservice"),
+          args = list(credentials = get_credentials(),
+                      animal_project_code = animal_project_code)
   )
-
-  # Build query
-  query <- glue::glue_sql("
-    SELECT
-      project.*
-    FROM
-      ({project_sql}) AS project
-    WHERE
-      project_type = 'animal'
-      AND {animal_project_code_query}
-    ", .con = connection)
-  projects <- DBI::dbGetQuery(connection, query)
-
-  # Close connection
-  DBI::dbDisconnect(connection)
-
-  # Sort data
-  projects <-
-    projects %>%
-    dplyr::arrange(.data$project_code)
-
-  dplyr::as_tibble(projects)
 }
