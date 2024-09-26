@@ -68,7 +68,7 @@ list_values <- function(.data, column, split = ",") {
                 msg = glue::glue("column {col_name} not found in .data"))
 
     # extract values
-    if (class(arguments$column) == "name") {
+    if (is(arguments$column, "name")) {
       values <- eval(arguments$column, .data)
     } else {
       if (is.character(arguments$column)) {
