@@ -90,7 +90,7 @@ write_dwc_sql <- function(animal_project_code,
                           rights_holder = NULL,
                           license = "CC-BY") {
   # Create connection
-  connection <- do.call(create_connection, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

@@ -24,7 +24,7 @@ list_tag_serial_numbers <- function(connection,
 #'
 list_tag_serial_numbers_sql <- function() {
   # Create connection
-  connection <- do.call(create_connection, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

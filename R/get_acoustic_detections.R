@@ -111,7 +111,7 @@ get_acoustic_detections_sql <- function(start_date = NULL,
                                     station_name = NULL,
                                     limit = FALSE) {
   # Create connection
-  connection <- do.call(create_connection, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 
