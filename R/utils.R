@@ -376,7 +376,10 @@ conduct_parent_to_helpers <- function(api,
            ...)
     )
   } else {
-    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
+    out <- do.call(getFromNamespace(function_identity, ns = "etnservice"),
+            args = list(credentials = get_credentials(),
+                        arguments_to_pass)
+    )
   }
 
   return(out)
