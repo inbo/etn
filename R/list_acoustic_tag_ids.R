@@ -24,7 +24,7 @@ list_acoustic_tag_ids <- function(connection,
 #'
 list_acoustic_tag_ids_sql <- function(){
   # Create connection
-  connection <- do.call(create_connection, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

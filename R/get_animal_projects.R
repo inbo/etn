@@ -41,7 +41,7 @@ get_animal_projects <- function(connection,
 #'
 get_animal_projects_sql <- function(animal_project_code = NULL) {
   # Create connection
-  connection <- do.call(create_connection, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 
