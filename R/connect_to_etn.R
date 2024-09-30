@@ -1,30 +1,21 @@
 #' Connect to the ETN database
 #'
-#' `r lifecycle::badge("deprecated")`
-#'     Connect to the ETN database using username and password.
+#' This function is `r lifecycle::badge("deprecated")` since etn version 2.3.0.
+#' Its use is no longer supported or needed. All connections to the ETN database
+#' are now made automatically when you use a function. If your credentials are not saved
+#' in the system environement, you will be prompted to enter them.
 #'
-#' @param username Character. Username to use for the connection.
-#' @param password Character. Password to use for the connection.
+#' @param ... Any arguments passed to this function are ignored.
 #'
-#' @return ODBC connection to ETN database.
+#' @return This function is no longer in use, and returns NULL invisibly.
 #'
-#'
-#' @examples
-#' \dontrun{
-#' # Connect to the ETN database using your rstudio.lifewatch.be username and
-#' # password, and save as the default connection variable "con"
-#' con <- connect_to_etn()
-#'
-#' # Connect to the ETN database using non-default username and password
-#' con <- connect_to_etn(username = "my_username", password = "my_password")
-#' }
-connect_to_etn <- function(username = Sys.getenv("userid"),
-                           password = Sys.getenv("pwd")) {
-  con <- DBI::dbConnect(
-    odbc::odbc(),
-    "ETN",
-    uid = paste("", tolower(username), "", sep = ""),
-    pwd = paste("", password, "", sep = "")
+#' @export
+connect_to_etn <- function(...) {
+  lifecycle::deprecate_warn(
+    when = "2.3.0",
+    what = "connect_to_etn()",
+    details = "You will be prompted for credentials instead.",
+    always = TRUE
   )
-  return(con)
+  invisible(NULL)
 }

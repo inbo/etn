@@ -24,7 +24,7 @@ list_receiver_ids <- function(connection,
 #'
 list_receiver_ids_sql <- function(){
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

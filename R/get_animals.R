@@ -64,7 +64,7 @@ get_animals_sql <- function(animal_id = NULL,
                             animal_project_code = NULL,
                             scientific_name = NULL) {
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

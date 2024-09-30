@@ -1,11 +1,25 @@
-test_that("connect_to_etn() allows to create a connection with default parameters", {
-  con <- connect_to_etn()
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
+test_that("connect_to_etn() returns deprecation warning when used with named arguments", {
+  lifecycle::expect_deprecated(
+    connect_to_etn(username = "my name", password = "my password")
+  )
 })
 
-test_that("connect_to_etn() allows to create a connection with specific parameters", {
-  con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
+test_that("connect_to_etn() returns deprecation warning when used with unnamed arguments", {
+  skip("BUG #319: tests will always fail after first deprecation test")
+  lifecycle::expect_deprecated(
+    connect_to_etn("my name", "my password")
+  )
+})
+
+test_that("connect_to_etn() returns deprecation argument when used without arguments",{
+  skip("BUG #319: tests will always fail after first deprecation test")
+  lifecycle::expect_deprecated(
+    connect_to_etn()
+  )
+})
+
+test_that("connect_to_etn() returns NULL invisibly", {
+  # connect_to_etn() is hard deprecated and no longer used
+  # It should return NULL rather than connection information
+  expect_null(suppressWarnings(connect_to_etn()))
 })

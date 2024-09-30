@@ -24,7 +24,7 @@ list_animal_project_codes <- function(connection,
 #'
 list_animal_project_codes_sql <- function(){
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
   # Check connection
   check_connection(connection)
 

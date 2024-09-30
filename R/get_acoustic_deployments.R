@@ -65,7 +65,7 @@ get_acoustic_deployments_sql <- function(deployment_id = NULL,
                                          station_name = NULL,
                                          open_only = FALSE) {
   # Create connection
-  connection <- do.call(connect_to_etn, get_credentials())
+  connection <- create_connection(credentials = get_credentials())
 
   # Check connection
   check_connection(connection)
