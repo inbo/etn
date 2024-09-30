@@ -3,7 +3,7 @@
     Code
       download_acoustic_dataset(api = TRUE, animal_project_code = "2014_demer",
         directory = download_dir)
-    Message <simpleMessage>
+    Message
       Downloading data to directory :
       * (1/6): downloading animals.csv
       * (2/6): downloading tags.csv
