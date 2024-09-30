@@ -377,8 +377,9 @@ conduct_parent_to_helpers <- function(api,
     )
   } else {
     out <- do.call(getFromNamespace(function_identity, ns = "etnservice"),
-            args = list(credentials = get_credentials(),
-                        arguments_to_pass)
+            args = append(arguments_to_pass,
+                          list(credentials = get_credentials()),
+                          after = 0)
     )
   }
 
