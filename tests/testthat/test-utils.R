@@ -1,3 +1,4 @@
+# check_connection() ------------------------------------------------------
 test_that("check_connection() returns error when connection is not valid", {
   not_a_connection <- "This is not a valid connection object"
   expect_error(check_connection(not_a_connection),
@@ -5,6 +6,7 @@ test_that("check_connection() returns error when connection is not valid", {
                fixed = TRUE)
 })
 
+# deprecate_warn_connection() ---------------------------------------------
 test_that("deprecate_warn_connection() returns warning when connection is provided", {
   # because this helper looks at the environment two levels up, it's not very
   # practical to test it directly. So here we test it by calling a function that
@@ -13,5 +15,23 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
     list_animal_project_codes(connection = "any object should cause a warning"),
     regexp = "The connection argument is no longer used. You will be prompted for credentials instead.",
     fixed = TRUE
+  )
+})
+
+# create_connection() -----------------------------------------------------
+test_that("create_connection() can create a connection with the database", {
+  con <- create_connection()
+  expect_true(check_connection(con))
+  expect_true(isClass(con, "PostgreSQL"))
+})
+
+test_that("create_connection() returns error on non character arguments", {
+  expect_error(
+    create_connection(list(username = 1, password = "password")),
+    regexp = "username is not a string"
+  )
+  expect_error(
+    create_connection(credentials = list(username = "username", password = 1)),
+    regexp = "password is not a string"
   )
 })
