@@ -30,15 +30,3 @@ get_animal_projects <- function(connection,
   out <- conduct_parent_to_helpers(api)
   return(out)
 }
-
-#' get_animal_projects() sql helper
-#'
-#' @inheritParams get_animal_projects()
-#' @noRd
-#'
-get_animal_projects_sql <- function(animal_project_code = NULL) {
-  do.call(getFromNamespace("get_animal_projects", ns = "etnservice"),
-          args = list(credentials = get_credentials(),
-                      animal_project_code = animal_project_code)
-  )
-}
