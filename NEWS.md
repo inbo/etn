@@ -1,4 +1,5 @@
 # etn 2.3.1
+* etn now uses a more direct dependency on `{etnservice}` for queries to a local database connection. Queries via the API and on the Lifewatch RStudio Server will now always return the same results.
 
 # etn 2.3.0
 
