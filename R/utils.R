@@ -171,8 +171,6 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     rawConnection()
   # read connection
   api_response <- arrow::read_feather(response_connection)
-  # close connection
-  close(response_connection)
   # Return OpenCPU return object
   return(api_response)
 }
