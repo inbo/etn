@@ -162,7 +162,7 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     verb = "GET",
     url = glue::glue(
       "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
+      "tmp/{temp_key}/R/.val/feather",
       .sep = "/"
     ),
     times = 5
@@ -170,9 +170,7 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     httr::content(as = "raw") %>%
     rawConnection()
   # read connection
-  api_response <- response_connection %>%
-    gzcon() %>%
-    readRDS()
+  api_response <- arrow::read_feather(response_connection)
   # close connection
   close(response_connection)
   # Return OpenCPU return object

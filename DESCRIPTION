@@ -21,6 +21,7 @@ BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 3.4.0)
 Imports:
+    arrow,
     askpass,
     assertthat,
     DBI,
