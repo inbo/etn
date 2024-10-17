@@ -343,7 +343,7 @@ forward_to_api <- function(
     check_opencpu_response(response)
 
     # Fetch the output from the API: call 2
-    return(get_val_rds(extract_temp_key(response)))
+    return(get_val(extract_temp_key(response)))
   }
 }
 
