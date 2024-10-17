@@ -1,3 +1,7 @@
+# etn (development version)
+* API functions now use the `arrow` package to transfer data.frames, which should allow for greater amounts of detections to be transferred without crashing (#323, #327). This will also reduce memory usage for large objects, an should generally result in a speedup.
+* etn now requires an R version of at least 4, this is a consequence of the usage of the `arrow` package.
+
 # etn 2.3.0
 
 * **The etn package can now be used on your computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. All functions make use of this API by default, which may result in **slower response times**. To use the previous method of directly connecting to the database (only possible when working on the [LifeWatch RStudio Server](https://rstudio.lifewatch.be/)), set `api = false` in all functions (#280).
