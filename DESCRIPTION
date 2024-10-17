@@ -33,6 +33,7 @@ Imports:
     lubridate,
     methods,
     odbc,
+    protolite,
     readr,
     rlang,
     stringr

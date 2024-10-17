@@ -162,15 +162,14 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     verb = "GET",
     url = glue::glue(
       "{api_domain}",
-      'tmp/{temp_key}/R/.val/feather?compression="lz4"',
+      "tmp/{temp_key}/R/.val/pb",
       .sep = "/"
     ),
     times = 5
   ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection()
+    httr::content(as = "raw")
   # read connection
-  api_response <- arrow::read_feather(response_connection)
+  api_response <- protolite::unserialize_pb(response_connection)
   # Return OpenCPU return object
   return(api_response)
 }
