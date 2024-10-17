@@ -174,28 +174,6 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
   return(api_response)
 }
 
-get_val_rds <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
-  # request data and open connection
-  response_connection <- httr::RETRY(
-    verb = "GET",
-    url = glue::glue(
-      "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
-      .sep = "/"
-    ),
-    times = 5
-  ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection()
-  # read connection
-  api_response <- response_connection %>%
-    gzcon() %>%
-    readRDS()
-  # close connection
-  close(response_connection)
-  # Return OpenCPU return object
-  return(api_response)
-}
 #' Return the arguments as a named list of the parent environment
 #'
 #' Because the requests to the API are so similar, it's more DRY to pass the
