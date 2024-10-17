@@ -162,7 +162,7 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     verb = "GET",
     url = glue::glue(
       "{api_domain}",
-      "tmp/{temp_key}/R/.val/feather",
+      'tmp/{temp_key}/R/.val/feather?compression="lz4"',
       .sep = "/"
     ),
     times = 5
