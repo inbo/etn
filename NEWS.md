@@ -1,3 +1,6 @@
+# etn 2.3.1
+* etn now uses a more direct dependency on `{etnservice}` for queries to a local database connection. Queries via the API and on the Lifewatch RStudio Server will now always return the same results.
+
 # etn 2.3.0
 
 * **The etn package can now be used on your computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. All functions make use of this API by default, which may result in **slower response times**. To use the previous method of directly connecting to the database (only possible when working on the [LifeWatch RStudio Server](https://rstudio.lifewatch.be/)), set `api = false` in all functions (#280).
