@@ -35,7 +35,8 @@ Imports:
     odbc,
     readr,
     rlang,
-    stringr
+    stringr,
+    utils
 Suggests:
     formattable,
     leaflet,
