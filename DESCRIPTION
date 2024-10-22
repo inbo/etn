@@ -31,7 +31,8 @@ Imports:
     methods,
     readr,
     rlang,
-    stringr
+    stringr,
+    utils
 Suggests:
     formattable,
     leaflet,
