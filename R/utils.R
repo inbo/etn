@@ -1,18 +1,5 @@
 # HELPER FUNCTIONS
 
-#' Check the validity of the database connection
-#'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#' @family helper functions
-#' @noRd
-check_connection <- function(connection) {
-  assertthat::assert_that(
-    methods::is(connection, "PostgreSQL"),
-    msg = "Not a connection object to database."
-  )
-  assertthat::assert_that(connection@info$dbname == "ETN")
-}
-
 #' Check input value against valid values
 #'
 #' @param x Value(s) to test.
