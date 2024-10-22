@@ -1,18 +1,5 @@
 # HELPER FUNCTIONS
 
-#' Check the validity of the database connection
-#'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#' @family helper functions
-#' @noRd
-check_connection <- function(connection) {
-  assertthat::assert_that(
-    methods::is(connection, "PostgreSQL"),
-    msg = "Not a connection object to database."
-  )
-  assertthat::assert_that(connection@info$dbname == "ETN")
-}
-
 #' Check input value against valid values
 #'
 #' @param x Value(s) to test.
@@ -45,46 +32,6 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   )
 
   return(x)
-}
-
-#' Check if the string input can be converted to a date
-#'
-#' Returns `FALSE`` or the cleaned character version of the date
-#' (acknowledgments to micstr/isdate.R).
-#'
-#' @param date_time Character. A character representation of a date.
-#' @param date_name Character. Informative description to user about type of
-#'   date.
-#' @return `FALSE` | character
-#' @family helper functions
-#' @noRd
-#' @examples
-#' \dontrun{
-#' check_date_time("1985-11-21")
-#' check_date_time("1985-11")
-#' check_date_time("1985")
-#' check_date_time("1985-04-31") # invalid date
-#' check_date_time("01-03-1973") # invalid format
-#' }
-check_date_time <- function(date_time, date_name = "start_date") {
-  parsed <- tryCatch(
-    lubridate::parse_date_time(date_time, orders = c("ymd", "ym", "y")),
-    warning = function(warning) {
-      if (grepl("No formats found", warning$message)) {
-        stop(glue::glue(
-          "The given {date_name}, {date_time}, is not in a valid ",
-          "date format. Use a yyyy-mm-dd format or shorter, ",
-          "e.g. 2012-11-21, 2012-11 or 2012."
-        ))
-      } else {
-        stop(glue::glue(
-          "The given {date_name}, {date_time} can not be interpreted ",
-          "as a valid date."
-        ))
-      }
-    }
-  )
-  as.character(parsed)
 }
 
 #' Get the credentials from environment variables, or set them manually
@@ -384,32 +331,4 @@ conduct_parent_to_helpers <- function(api,
   }
 
   return(out)
-}
-
-#' Create a local connection to the ETN database
-#'
-#' Connect to the ETN database using username and password.
-#'
-#' @param username Character. Username to use for the connection.
-#' @param password Character. Password to use for the connection.
-#'
-#' @return ODBC connection to ETN database.
-#' @noRd
-create_connection <- function(credentials = get_credentials()) {
-  # Check the input arguments
-  assertthat::assert_that(
-    assertthat::is.string(credentials$username)
-  )
-  assertthat::assert_that(
-    assertthat::is.string(credentials$password)
-  )
-
-  # Connect to the ETN database
-  con <- DBI::dbConnect(
-    odbc::odbc(),
-    "ETN",
-    uid = tolower(credentials$username),
-    pwd = credentials$password
-  )
-  return(con)
 }
