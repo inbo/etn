@@ -23,20 +23,15 @@ Depends:
 Imports:
     askpass,
     assertthat,
-    DBI,
     dplyr,
     etnservice,
     glue,
     httr,
-    jsonlite,
     lifecycle,
-    lubridate,
     methods,
-    odbc,
     readr,
     rlang,
-    stringr,
-    utils
+    stringr
 Suggests:
     formattable,
     leaflet,
