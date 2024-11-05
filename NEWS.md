@@ -5,4 +5,4 @@
 * `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
 * The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
-* etn now uses a more direct dependency on `{etnservice}` for queries to a local database connection. Queries via the API and on the Lifewatch RStudio Server will now always return the same results.
+* Queries via the API and on the Lifewatch RStudio Server will now always return the same results.
