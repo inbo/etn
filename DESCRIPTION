@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.3.0
+Version: 2.2.1.9000
 Authors@R: c(
     person("Peter", "Desmet", email = "peter.desmet@inbo.be",
            role = c("aut", "cre"), comment =  c(ORCID = "0000-0002-8442-8025")),
@@ -23,18 +23,16 @@ Depends:
 Imports:
     askpass,
     assertthat,
-    DBI,
     dplyr,
+    etnservice,
     glue,
     httr,
-    jsonlite,
     lifecycle,
-    lubridate,
     methods,
-    odbc,
     readr,
     rlang,
-    stringr
+    stringr,
+    utils
 Suggests:
     formattable,
     leaflet,

@@ -20,26 +20,3 @@ list_animal_ids <- function(connection,
   return(out)
 }
 
-#' list_animal_ids() sql helper
-#'
-#' @inheritParams list_animal_ids()
-#' @noRd
-#'
-list_animal_ids_sql <- function() {
-  # Create connection
-  connection <- create_connection(credentials = get_credentials())
-  # Check connection
-  check_connection(connection)
-
-  query <- glue::glue_sql(
-    "SELECT DISTINCT id_pk FROM common.animal_release",
-    .con = connection
-  )
-  data <- DBI::dbGetQuery(connection, query)
-
-  # Close connection
-  DBI::dbDisconnect(connection)
-
-  # Return animal ids
-  sort(data$id_pk)
-}
