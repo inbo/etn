@@ -1,3 +1,5 @@
+skip_if_not_localdb()
+
 con <- connect_to_etn()
 
 test_that("list_animal_project_codes() returns unique list of values", {

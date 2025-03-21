@@ -1,3 +1,5 @@
+skip_if_not_localdb()
+
 con <- connect_to_etn()
 
 test_that("write_dwc() can write csv files to a path", {
