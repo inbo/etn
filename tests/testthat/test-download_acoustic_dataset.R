@@ -1,3 +1,5 @@
+skip_if_not_localdb()
+
 con <- connect_to_etn()
 
 # Create a data package

@@ -1,3 +1,5 @@
+skip_if_not_localdb()
+
 con <- connect_to_etn()
 
 test_that("get_acoustic_projects() returns error for incorrect connection", {

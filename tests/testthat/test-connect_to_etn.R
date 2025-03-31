@@ -1,3 +1,5 @@
+skip_if_not_localdb()
+
 test_that("connect_to_etn() allows to create a connection with default parameters", {
   con <- connect_to_etn()
   expect_true(check_connection(con))

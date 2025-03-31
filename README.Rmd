@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
 [![repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Etn provides functionality to access data from the [European Tracking Network (ETN)](http://www.lifewatch.be/etn/) database hosted by the Flanders Marine Institute (VLIZ) as part of the Flemish contribution to LifeWatch. ETN data is subject to the [ETN data policy](http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and can be:
