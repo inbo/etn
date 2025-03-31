@@ -2,11 +2,11 @@
 % Please edit documentation in R/get_receiver_diagnostics.R
 \name{get_receiver_diagnostics}
 \alias{get_receiver_diagnostics}
-\title{Get diagnostics information for a receiver}
+\title{Get diagnostics information for a receiver for a deployment id.}
 \usage{
 get_receiver_diagnostics(
   connection = con,
-  deployment_id = NULL,
+  deployment_id,
   start_date = NULL,
   end_date = NULL,
   receiver_id = NULL,
@@ -33,5 +33,5 @@ for testing purposes). Defaults to \code{FALSE}.}
 A tibble with receiver diagnostics data
 }
 \description{
-Get diagnostics information for a receiver
+Get diagnostics information for a receiver for a deployment id.
 }

@@ -1,12 +1,14 @@
-#' Get diagnostics information for a receiver
+#' Get diagnostics information for a receiver for a deployment id.
 #'
+#'
+#' @param deployment_id Integer (vector). One or more deployment identifiers.
 #' @inheritParams get_acoustic_detections
 #' @inheritParams get_acoustic_deployments
 #'
 #' @return A tibble with receiver diagnostics data
 #' @export
 get_receiver_diagnostics <- function(connection = con,
-                                     deployment_id = NULL,
+                                     deployment_id,
                                      start_date = NULL,
                                      end_date = NULL,
                                      receiver_id = NULL,
@@ -15,9 +17,8 @@ get_receiver_diagnostics <- function(connection = con,
   check_connection(connection)
 
   # Check deployment_id
-  if (is.null(deployment_id)) {
-    deployment_id_query <- "True"
-  } else {
+  if(assertthat::validate_that(!missing(deployment_id))){
+    # If the deployment ID is present:
     deployment_id <- check_value(
       deployment_id,
       list_deployment_ids(connection),
