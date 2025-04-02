@@ -86,3 +86,21 @@ check_date_time <- function(date_time, date_name = "start_date") {
   )
   as.character(parsed)
 }
+
+#' Clean contacts
+#'
+#' - Remove generic email `info@inbo.be`.
+#' - Replace organization `Vlaamse overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek` with `Research Institute for Nature and Forest (INBO)`.
+#'
+#' @param contact Contact information.
+#'
+#' @returns Cleaned contact
+#' @family helper functions
+#' @noRd
+clean_contact <- function(contact) {
+  contact$electronicMailAddress <- NULL
+  if (!is.null(contact$organizationName) && contact$organizationName == "Vlaamse overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek") {
+    contact$organizationName <- "Research Institute for Nature and Forest (INBO)"
+  }
+  contact
+}
