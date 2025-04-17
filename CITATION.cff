@@ -9,7 +9,7 @@ type: software
 license: MIT
 title: 'etn: Access Data from the European Tracking Network'
 version: 2.2.1
-doi: zenodo.15235747
+doi: 10.5281/zenodo.15235747
 abstract: Package with functions to access and process data from the European Tracking
   Network hosted by VLIZ.
 authors:
@@ -52,7 +52,7 @@ preferred-citation:
   year: '2025'
   notes: R package version 2.2.1
   url: https://inbo.github.io/etn/
-  doi: zenodo.15235747
+  doi: 10.5281/zenodo.15235747
 repository-code: https://github.com/inbo/etn
 url: https://inbo.github.io/etn
 contact:
