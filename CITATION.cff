@@ -1,9 +1,15 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
 cff-version: 1.2.0
 message: 'To cite package "etn" in publications use:'
 type: software
 license: MIT
 title: 'etn: Access Data from the European Tracking Network'
 version: 2.2.1
+doi: zenodo.15235747
 abstract: Package with functions to access and process data from the European Tracking
   Network hosted by VLIZ.
 authors:
@@ -46,6 +52,7 @@ preferred-citation:
   year: '2025'
   notes: R package version 2.2.1
   url: https://inbo.github.io/etn/
+  doi: zenodo.15235747
 repository-code: https://github.com/inbo/etn
 url: https://inbo.github.io/etn
 contact:
@@ -86,6 +93,7 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2025'
+  doi: 10.32614/CRAN.package.assertthat
 - type: software
   title: DBI
   abstract: 'DBI: R Database Interface'
@@ -101,6 +109,7 @@ references:
     email: kirill@cynkra.com
     orcid: https://orcid.org/0000-0002-1416-3412
   year: '2025'
+  doi: 10.32614/CRAN.package.DBI
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -125,6 +134,7 @@ references:
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2025'
+  doi: 10.32614/CRAN.package.dplyr
 - type: software
   title: glue
   abstract: 'glue: Interpreted String Literals'
@@ -140,6 +150,7 @@ references:
     email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2025'
+  doi: 10.32614/CRAN.package.glue
 - type: software
   title: jsonlite
   abstract: 'jsonlite: A Simple and Robust JSON Parser and Generator for R'
@@ -152,6 +163,7 @@ references:
     email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2025'
+  doi: 10.32614/CRAN.package.jsonlite
 - type: software
   title: lubridate
   abstract: 'lubridate: Make Dealing with Dates a Little Easier'
@@ -167,6 +179,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
   year: '2025'
+  doi: 10.32614/CRAN.package.lubridate
 - type: software
   title: methods
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -192,6 +205,7 @@ references:
   - family-names: Gjoneski
     given-names: Oliver
   year: '2025'
+  doi: 10.32614/CRAN.package.odbc
 - type: software
   title: readr
   abstract: 'readr: Read Rectangular Text Data'
@@ -208,6 +222,7 @@ references:
     given-names: Jennifer
     email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
+  doi: 10.32614/CRAN.package.readr
   year: '2025'
 - type: software
   title: stringr
@@ -220,6 +235,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2025'
+  doi: 10.32614/CRAN.package.stringr
 - type: software
   title: formattable
   abstract: 'formattable: Create ''Formattable'' Data Structures'
@@ -234,6 +250,7 @@ references:
     given-names: Kenton
     email: kent.russell@timelyportfolio.com
   year: '2025'
+  doi: 10.32614/CRAN.package.formattable
 - type: software
   title: leaflet
   abstract: 'leaflet: Create Interactive Web Maps with the JavaScript ''Leaflet''
@@ -254,6 +271,7 @@ references:
   - family-names: Xie
     given-names: Yihui
   year: '2025'
+  doi: 10.32614/CRAN.package.leaflet
 - type: software
   title: kableExtra
   abstract: 'kableExtra: Construct Complex Table with ''kable'' and Pipe Syntax'
@@ -266,6 +284,7 @@ references:
     email: haozhu233@gmail.com
     orcid: https://orcid.org/0000-0002-3386-6076
   year: '2025'
+  doi: 10.32614/CRAN.package.kableExtra
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -278,6 +297,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2025'
+  doi: 10.32614/CRAN.package.knitr
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -321,6 +341,7 @@ references:
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2025'
+  doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -332,6 +353,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2025'
+  doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 - type: software
   title: tidyr
@@ -349,6 +371,7 @@ references:
   - family-names: Girlich
     given-names: Maximilian
   year: '2025'
+  doi: 10.32614/CRAN.package.tidyr
 - type: software
   title: frictionless
   abstract: 'frictionless: Read and Write Frictionless Data Packages'
@@ -377,6 +400,7 @@ references:
     orcid: https://orcid.org/0000-0002-8939-1305
     affiliation: Research Institute for Nature and Forest (INBO)
   year: '2025'
+  doi: 10.32614/CRAN.package.frictionless
 - type: software
   title: withr
   abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
@@ -401,4 +425,5 @@ references:
   - family-names: Chang
     given-names: Winston
   year: '2025'
+  doi: 10.32614/CRAN.package.withr
 
