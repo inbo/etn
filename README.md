@@ -9,6 +9,8 @@
 status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
 [![repo
 status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
+[![DOI](https://zenodo.org/badge/95901229.svg)](https://doi.org/10.5281/zenodo.15235747)
 <!-- badges: end -->
 
 Etn provides functionality to access data from the [European Tracking
@@ -18,10 +20,10 @@ LifeWatch. ETN data is subject to the [ETN data
 policy](http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and
 can be:
 
-  - restricted: under moratorium and only accessible to logged-in data
-    owners/collaborators
-  - unrestricted: publicly accessible without login and routinely
-    published to international biodiversity facilities
+- restricted: under moratorium and only accessible to logged-in data
+  owners/collaborators
+- unrestricted: publicly accessible without login and routinely
+  published to international biodiversity facilities
 
 The ETN infrastructure currently requires the package to be run within
 the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), which
@@ -40,10 +42,10 @@ devtools::install_github("inbo/etn")
 
 ## Meta
 
-  - We welcome [contributions](.github/CONTRIBUTING.md) including bug
-    reports.
-  - License: MIT
-  - Get citation information for etn in R doing `citation("etn")`.
-  - Please note that this project is released with a [Contributor Code
-    of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this
-    project you agree to abide by its terms.
+- We welcome [contributions](.github/CONTRIBUTING.md) including bug
+  reports.
+- License: MIT
+- Get citation information for etn in R doing `citation("etn")`.
+- Please note that this project is released with a [Contributor Code of
+  Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
+  you agree to abide by its terms.
