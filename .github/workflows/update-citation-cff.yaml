@@ -39,7 +39,7 @@ jobs:
           # See https://docs.ropensci.org/cffr/articles/cffr.html
 
           # Write your own keys
-          mykeys <- list(doi = "https://doi.org/10.5281/zenodo.15235747")
+          mykeys <- list()
 
           # Create your CITATION.cff file
           cff_write(keys = mykeys)
