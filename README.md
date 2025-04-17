@@ -9,6 +9,7 @@
 status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
 [![repo
 status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![DOI](https://zenodo.org/badge/95901229.svg)](https://doi.org/10.5281/zenodo.15235747)
 <!-- badges: end -->
 
 Etn provides functionality to access data from the [European Tracking
