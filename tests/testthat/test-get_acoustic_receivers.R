@@ -102,7 +102,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
 })
 
 test_that("get_acoustic_receivers() does not return cpod receivers", {
-  # POD-3330 is a cpod receiver
-  df <- get_acoustic_receivers(con, receiver_id = "POD-3330")
+  # POD-3610 is a cpod receiver
+  df <- get_acoustic_receivers(con, receiver_id = "POD-3610")
   expect_identical(nrow(df), 0L)
 })
