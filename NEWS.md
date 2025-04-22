@@ -2,6 +2,7 @@
 
 * Fix issue in `check_value()` helper used in several functions to generate error messages. The error message failed to format when `NA` values were returned as part of a `list_` function call. (#356)
 * Fix issue in `list_receiver_ids()` where `NA` was sometimes included in the results.  (#356)
+* Fix bug in `write_dwc()`: when `rights_holder` was not provided the function would fail to generate a darwincore archive. (#356)
 
 # etn 2.2.1
 
