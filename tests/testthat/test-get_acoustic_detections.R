@@ -1,12 +1,12 @@
+# Store the first 100 rows of the acoustic detections data for use in tests
+df <- get_acoustic_detections(con, limit = TRUE)
+
 test_that("get_acoustic_detections() can pass errors over the api", {
   expect_error(
     get_acoustic_detections(start_date = "not_a_date", api = TRUE),
     regexp = "The given start_date, not_a_date, is not in a valid date format."
   )
 })
-
-# Store the first 100 rows of the acoustic detections data for use in tests
-df <- get_acoustic_detections(con, limit = TRUE)
 
 test_that("get_acoustic_detections() returns a tibble", {
   df <- get_acoustic_detections(limit = TRUE)
