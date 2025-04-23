@@ -43,14 +43,14 @@ test_that("check_value() can ignore case", {
   )
 })
 
-test_that("check_value() can handle NA in reference",{
+test_that("check_value() can handle NA in reference", {
   expect_identical(
-    check_value("A", c("A",NA,"C")),
+    check_value("A", c("A", NA, "C")),
     "A"
   )
 
   expect_error(
-    check_value("invalid", c("A",NA,"C")),
+    check_value("invalid", c("A", NA, "C")),
     "Can't find value `invalid` in: A, C",
     fixed = TRUE
   )
