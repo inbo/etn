@@ -8,7 +8,7 @@ message: 'To cite package "etn" in publications use:'
 type: software
 license: MIT
 title: 'etn: Access Data from the European Tracking Network'
-version: 2.2.1
+version: 2.2.2
 doi: 10.5281/zenodo.15235747
 abstract: Package with functions to access and process data from the European Tracking
   Network hosted by VLIZ.
@@ -50,7 +50,7 @@ preferred-citation:
     email: stijnvanhoey@gmail.com
     orcid: https://orcid.org/0000-0001-6413-3185
   year: '2025'
-  notes: R package version 2.2.1
+  notes: R package version 2.2.2
   url: https://inbo.github.io/etn/
   doi: 10.5281/zenodo.15235747
 repository-code: https://github.com/inbo/etn
