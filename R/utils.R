@@ -49,12 +49,12 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'   authentication
 #' @family helper functions
 #' @noRd
-get_credentials <- function(username = Sys.getenv("userid"),
-                            password = Sys.getenv("pwd")) {
+get_credentials <- function(username = Sys.getenv("ETN_USER"),
+                            password = Sys.getenv("ETN_PWD")) {
   if (Sys.getenv("userid") == "") {
     message("No credentials stored, prompting..")
-    Sys.setenv(userid = readline(prompt = "Please enter a userid: "))
-    Sys.setenv(pwd = askpass::askpass())
+    Sys.setenv(ETN_USER = readline(prompt = "Please enter a userid: "))
+    Sys.setenv(ETN_PWD = askpass::askpass())
   }
   # glue::glue('list(username = "{username}", password = "{password}")')
   invisible(list(username = username, password = password))
