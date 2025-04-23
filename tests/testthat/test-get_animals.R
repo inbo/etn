@@ -1,6 +1,8 @@
 df <- get_animals()
 
 test_that("get_animals() returns a tibble", {
+  skip_if_not_localdb()
+
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
   df_sql <- get_animals(api = FALSE)
