@@ -60,7 +60,6 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
   # call download_acoustic_dataset() and capture the output, compare to a local
   # file. Covers warnings and messages, but will fail on an error.
   expect_snapshot(cat(download_acoustic_dataset(
-    con,
     animal_project_code = "2014_demer"
   )))
   # After running, remove the files we just created
