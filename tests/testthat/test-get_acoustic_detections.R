@@ -15,8 +15,8 @@ test_that("get_acoustic_detections() returns a tibble", {
 })
 
 test_that("get_acoustic_detections() returns a tibble over sql", {
-  # only test if running in on the Rstuio server, with rshiny as the nodename
-  skip_if_not(Sys.info()[[4]] == "rshiny")
+  skip_if_not_localdb()
+
   df_sql <- get_acoustic_detections(limit = TRUE, api = FALSE)
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
