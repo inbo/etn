@@ -1,5 +1,5 @@
 test_that("get_animal_projects() returns a tibble", {
-  skip_if_no_localdb()
+  skip_if_not_localdb()
 
   df <- get_animal_projects()
   expect_s3_class(df, "data.frame")

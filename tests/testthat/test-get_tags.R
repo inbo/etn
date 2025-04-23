@@ -1,7 +1,7 @@
 df <- get_tags()
 
 # Test with local database, skip if not available
-skip_if_no_localdb()
+skip_if_not_localdb()
 df_sql <- get_tags(api = FALSE)
 
 test_that("get_tags() returns a tibble", {
