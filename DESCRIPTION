@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.3.1.9000
+Version: 2.2.1.9000
 Authors@R: c(
     person("Pieter", "Huybrechts", email = "pieter.huybrechts@inbo.be",
            role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6658-6062")),
@@ -43,8 +43,9 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    withr,
-    vcr (>= 0.6.0)
+    vcr (>= 0.6.0),
+    frictionless,
+    withr
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr

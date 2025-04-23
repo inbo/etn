@@ -16,7 +16,7 @@ A meta.xml or eml.xml file are not created."><meta property="og:image" content="
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,21 +68,18 @@ A <code>meta.xml</code> or <code>eml.xml</code> file are not created.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_dwc</span><span class="op">(</span></span>
-<span>  <span class="va">connection</span>,</span>
+<span>  connection <span class="op">=</span> <span class="va">con</span>,</span>
 <span>  <span class="va">animal_project_code</span>,</span>
 <span>  directory <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  rights_holder <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  license <span class="op">=</span> <span class="st">"CC-BY"</span>,</span>
-<span>  api <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  license <span class="op">=</span> <span class="st">"CC-BY"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>connection</dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.</p></dd>
+<dd><p>Connection to the ETN database.</p></dd>
 
 
 <dt>animal_project_code</dt>
@@ -93,7 +90,7 @@ credentials instead.</p></dd>
 <dd><p>Path to local directory to write file(s) to.
 If <code>NULL</code>, then a list of data frames is returned instead, which can be
 useful for extending/adapting the Darwin Core mapping before writing with
-<code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code>. If the directory does not exist, it will be created.</p></dd>
+<code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code>.</p></dd>
 
 
 <dt>rights_holder</dt>
@@ -106,10 +103,6 @@ rights over the data.</p></dd>
 published.</p><ul><li><p><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="external-link"><code>CC-BY</code></a> (default).</p></li>
 <li><p><a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" class="external-link"><code>CC0</code></a>.</p></li>
 </ul></dd>
-
-
-<dt>api</dt>
-<dd><p>Logical. If <code>TRUE</code>, the function will use the API to access ETN.</p></dd>
 
 </dl></div>
     <div class="section level2">
