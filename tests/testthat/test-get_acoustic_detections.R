@@ -1,18 +1,12 @@
-# con <- connect_to_etn()
-
-# test_that("get_acoustic_detections() returns error for incorrect connection", {
-#   expect_error(
-#     get_acoustic_detections(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_acoustic_detections() can pass errors over the api", {
   expect_error(
     get_acoustic_detections(start_date = "not_a_date", api = TRUE),
     regexp = "The given start_date, not_a_date, is not in a valid date format."
   )
 })
+
+# Store the first 100 rows of the acoustic detections data for use in tests
+df <- get_acoustic_detections(con, limit = TRUE)
 
 test_that("get_acoustic_detections() returns a tibble", {
   df <- get_acoustic_detections(limit = TRUE)
@@ -52,6 +46,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "station_name",
     "deploy_latitude",
     "deploy_longitude",
+    "depth_in_meters",
     "sensor_value",
     "sensor_unit",
     "sensor2_value",
@@ -61,7 +56,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "qc_flag",
     "deployment_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_detections() allows selecting on start_date and end_date", {
@@ -259,7 +254,7 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
     regexp = "find scientific_name")
 
   # Select single value
-  single_select <- "Torpedo torpedo"
+  single_select <- "Rutilus rutilus"
   vcr::use_cassette("torpedo_acoustic_detections", {
     single_select_df <- get_acoustic_detections(scientific_name = single_select)
   })
@@ -271,7 +266,7 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
-  multi_select <- c("Raja asterias", "Torpedo torpedo")
+  multi_select <- c("Rutilus rutilus", "Silurus glanis")
   vcr::use_cassette("torpedo_raja_acoustic_detections", {
     multi_select_df <-
       get_acoustic_detections(scientific_name = multi_select)
@@ -294,10 +289,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
   # Select single value
   single_select <- "demer"
-  single_select_df <- get_acoustic_detections(acoustic_project_code = single_select,
-                                              limit = TRUE,
-                                              api = TRUE)
-  expect_equal(
+  single_select_df <- get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
+  expect_identical(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
   )
@@ -305,18 +298,20 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_detections(
-      acoustic_project_code = "demer",
-      start_date = "2014-04-28",
-      end_date = "2014-04-30",
-      api = TRUE
-    ),
-    get_acoustic_detections(
-      acoustic_project_code = "DEMER",
-      start_date = "2014-04-28",
-      end_date = "2014-04-30",
-      api = TRUE
-    )
+    dplyr::arrange(
+      get_acoustic_detections(
+        acoustic_project_code = "demer",
+        start_date = "2014-04-28",
+        end_date = "2014-04-30",
+        api = TRUE),
+      "detection_id"),
+    dplyr::arrange(
+      get_acoustic_detections(
+        acoustic_project_code = "DEMER",
+        start_date = "2014-04-28",
+        end_date = "2014-04-30",
+        api = TRUE
+    ), "detection_id")
   )
 })
 
@@ -324,9 +319,8 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
   skip("BUG #278 crashes on big queries like demer and dijle")
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <-
-    get_acoustic_detections(acoustic_project_code = multi_select, api = TRUE)
-  expect_equal(
+  multi_select_df <- get_acoustic_detections(acoustic_project_code = multi_select)
+  expect_identical(
     multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -345,7 +339,7 @@ test_that("get_acoustic_detections() allows selecting on receiver_id", {
   # Select single value
   single_select <- "VR2W-124070" # From demer
   single_select_df <- get_acoustic_detections(receiver_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(receiver_id) %>% pull(),
     c(single_select)
   )
@@ -354,7 +348,7 @@ test_that("get_acoustic_detections() allows selecting on receiver_id", {
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
   multi_select_df <- get_acoustic_detections(receiver_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -369,7 +363,7 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
   # Select single value
   single_select <- "de-9" # From demer
   single_select_df <- get_acoustic_detections(station_name = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(station_name) %>% pull(),
     c(single_select)
   )
@@ -378,7 +372,7 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
   # Select multiple values
   multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
   multi_select_df <- get_acoustic_detections(station_name = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -390,10 +384,10 @@ test_that("get_acoustic_detections() allows to limit to 100 records", {
   expect_error(get_acoustic_detections(limit = "not_a_logical"))
 
   # Limit
-  expect_equal(nrow(get_acoustic_detections(limit = TRUE)), 100)
-  expect_equal(
+  expect_identical(nrow(get_acoustic_detections(limit = TRUE)), 100L)
+  expect_identical(
     nrow(get_acoustic_detections(acoustic_project_code = "demer", limit = TRUE)),
-    100
+    100L
   )
 })
 
@@ -418,7 +412,7 @@ test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags
   # A sentinel acoustic-archival tag with pressure + temperature sensor
   acoustic_archival_df <- get_acoustic_detections(acoustic_tag_id = c("A69-9006-11100", "A69-9006-11099"))
   expect_gt(nrow(acoustic_archival_df), 0)
-  expect_equal(
+  expect_identical(
     acoustic_archival_df %>% distinct(tag_serial_number) %>% pull(),
     "1400185"
   )
@@ -463,11 +457,11 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   df_394 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-14")
 
   # Expect no duplicates
-  expect_equal(nrow(df_both), nrow(df_both %>% distinct(detection_id)))
+  expect_identical(nrow(df_both), nrow(df_both %>% distinct(detection_id)))
 
   # Return correct animal within range
-  expect_equal(df_393 %>% distinct(animal_id) %>% pull, 393)
-  expect_equal(df_394 %>% distinct(animal_id) %>% pull, 394)
+  expect_identical(df_393 %>% distinct(animal_id) %>% pull(), 393L)
+  expect_identical(df_394 %>% distinct(animal_id) %>% pull(), 394L)
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
@@ -481,8 +475,8 @@ test_that("get_acoustic_detections() does not return detections out of date rang
   expect_gt(nrow(in_range_df), 0)
 
   # Expect no detections outside range
-  expect_equal(nrow(pre_range_df), 0)
-  expect_equal(nrow(post_range_df), 0)
+  expect_identical(nrow(pre_range_df), 0L)
+  expect_identical(nrow(post_range_df), 0L)
 })
 
 test_that("get_acoustic_detections() can return detections not (yet) associated with an animal", {

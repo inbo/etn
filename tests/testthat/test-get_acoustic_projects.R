@@ -1,13 +1,8 @@
-# con <- connect_to_etn()
-#
-# test_that("get_acoustic_projects() returns error for incorrect connection", {
-#   expect_error(
-#     get_acoustic_projects(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
+skip_if_not_localdb() # local database and api tests are mixed
+
 df <- get_acoustic_projects()
 df_sql <- get_acoustic_projects(api = FALSE)
+
 test_that("get_acoustic_projects() returns a tibble", {
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -16,12 +11,10 @@ test_that("get_acoustic_projects() returns a tibble", {
 })
 
 test_that("get_acoustic_projects() returns unique project_id", {
-  # df <- get_acoustic_projects()
   expect_equal(nrow(df), nrow(df %>% distinct(project_id)))
 })
 
 test_that("get_acoustic_projects() returns the expected columns", {
-  # df <- get_acoustic_projects()
   expected_col_names <- c(
     "project_id",
     "project_code",
@@ -38,7 +31,7 @@ test_that("get_acoustic_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
@@ -55,14 +48,14 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   # Select single value
   single_select <- "demer"
   single_select_df <- get_acoustic_projects(acoustic_project_code = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(project_code) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
 
   # Selection is case insensitive
-  expect_equal(
+  expect_identical(
     get_acoustic_projects(acoustic_project_code = "demer"),
     get_acoustic_projects(acoustic_project_code = "DEMER")
   )
@@ -70,15 +63,15 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   # Select multiple values
   multi_select <- c("demer", "dijle")
   multi_select_df <- get_acoustic_projects(acoustic_project_code = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
-  expect_equal(
+  expect_identical(
     get_acoustic_projects() %>% distinct(project_type) %>% pull(),
     "acoustic"
   )

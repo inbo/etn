@@ -1,12 +1,3 @@
-# con <- connect_to_etn()
-#
-# test_that("get_animals() returns error for incorrect connection", {
-#   expect_error(
-#     get_animals(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 df <- get_animals()
 
 test_that("get_animals() returns a tibble", {
@@ -18,7 +9,7 @@ test_that("get_animals() returns a tibble", {
 })
 
 test_that("get_animals() returns unique animal_id", {
-  expect_equal(nrow(df), nrow(df %>% distinct(animal_id)))
+  expect_identical(nrow(df), nrow(df %>% distinct(animal_id)))
 })
 
 test_that("get_animals() returns the expected columns", {
@@ -90,7 +81,7 @@ test_that("get_animals() returns the expected columns", {
     "holding_temperature",
     "comments"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_animals() allows selecting on animal_id", {
@@ -109,22 +100,22 @@ test_that("get_animals() allows selecting on animal_id", {
   ) # Not an integer
 
   # Select single value
-  single_select <- 305
+  single_select <- 305L
   single_select_df <- get_animals(animal_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(animal_id) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
 
   # Select multiple values
   multi_select <- c(304, "305") # Characters are allowed
   multi_select_df <- get_animals(animal_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(animal_id) %>% pull() %>% sort(),
     c(as.integer(multi_select)) # Output will be all integer
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_animals() allows selecting on animal_project_code", {
@@ -141,14 +132,14 @@ test_that("get_animals() allows selecting on animal_project_code", {
   # Select single value
   single_select <- "2014_demer"
   single_select_df <- get_animals(animal_project_code = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(animal_project_code) %>% pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Selection is case insensitive
-  expect_equal(
+  expect_identical(
     get_animals(animal_project_code = "2014_demer"),
     get_animals(animal_project_code = "2014_DEMER")
   )
@@ -156,7 +147,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
   # Select multiple values
   multi_select <- c("2014_demer", "2015_dijle")
   multi_select_df <- get_animals(animal_project_code = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -177,21 +168,21 @@ test_that("get_animals() allows selecting on tag_serial_number", {
   # Select single value
   single_select <- "1187450" # From 2014_demer
   single_select_df <- get_animals(tag_serial_number = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(tag_serial_number) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
   # Note that not all tag_serial_number return a single row, e.g. "1119796"
 
   # Select multiple values
   multi_select <- c(1187449, "1187450") # Integers are allowed
   multi_select_df <- get_animals(tag_serial_number = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
     c(as.character(multi_select)) # Output will be all character
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_animals() allows selecting on scientific_name", {
@@ -212,7 +203,7 @@ test_that("get_animals() allows selecting on scientific_name", {
   # Select single value
   single_select <- "Rutilus rutilus"
   single_select_df <- get_animals(scientific_name = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(scientific_name) %>% pull(),
     c(single_select)
   )
@@ -221,7 +212,7 @@ test_that("get_animals() allows selecting on scientific_name", {
   # Select multiple values
   multi_select <- c("Rutilus rutilus", "Silurus glanis")
   multi_select_df <- get_animals(scientific_name = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -234,14 +225,14 @@ test_that("get_animals() allows selecting on multiple parameters", {
     scientific_name = "Rutilus rutilus"
   )
   # There are 2 Rutilus rutilus records in 2014_demer
-  expect_equal(nrow(multiple_parameters_df), 2)
+  expect_identical(nrow(multiple_parameters_df), 2L)
 })
 
 test_that("get_animals() collapses multiple associated tags to one row", {
   # Animal 5841 (project SPAWNSEIS) has 2 associated tags (1280688,1280688)
   animal_two_tags_df <- get_animals(animal_id = 5841)
 
-  expect_equal(nrow(animal_two_tags_df), 1) # Rows should be collapsed
+  expect_identical(nrow(animal_two_tags_df), 1L) # Rows should be collapsed
 
   # Columns starting with tag_ and acoustic_tag_id are collapsed with comma
   tag_col_names <- c(
@@ -264,11 +255,11 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- df %>% filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
   df <- df %>% filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
-  expect_equal(
+  expect_identical(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
     c("acoustic", "acoustic-archival") # "archival" currently not in data
   )
-  expect_equal(
+  expect_identical(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),
     c("animal", "built-in", "range", "sentinel")
   )
@@ -276,6 +267,5 @@ test_that("get_animals() returns correct tag_type and tag_subtype", {
 
 test_that("get_animals() does not return animals without tags", {
   # All animals should be related with a tag
-
-  expect_equal(df %>% filter(is.na(tag_serial_number)) %>% nrow(), 0)
+  expect_identical(df %>% filter(is.na(tag_serial_number)) %>% nrow(), 0L)
 })

@@ -12,7 +12,8 @@ list_receiver_ids <- function(connection,
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api, json = TRUE)
-  return(out)
-}
+  ## Return receiver_ids and drop NA (issue on database side inbo/etn#333)
+  receiver_ids <- conduct_parent_to_helpers(api, json = TRUE)
 
+  return(receiver_ids[!is.na(receiver_ids)])
+}

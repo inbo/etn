@@ -1,12 +1,7 @@
-# con <- connect_to_etn()
-#
-# test_that("get_tags() returns error for incorrect connection", {
-#   expect_error(
-#     get_tags(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
 df <- get_tags()
+
+# Test with local database, skip if not available
+skip_if_no_localdb()
 df_sql <- get_tags(api = FALSE)
 
 test_that("get_tags() returns a tibble", {
@@ -74,7 +69,7 @@ test_that("get_tags() returns the expected columns", {
     "tag_id",
     "tag_device_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_tags() allows selecting on tag_serial_number", {
@@ -93,7 +88,7 @@ test_that("get_tags() allows selecting on tag_serial_number", {
     single_select_df %>% distinct(tag_serial_number) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
   # Note that not all tag_serial_number return a single row, see further test
 
   # Select multiple values
@@ -103,7 +98,7 @@ test_that("get_tags() allows selecting on tag_serial_number", {
     multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
     c(as.character(multi_select)) # Output will be all character
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_tags() allows selecting on tag_type", {
@@ -178,7 +173,7 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
     single_select_df %>% distinct(acoustic_tag_id) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
   # Note that not all acoustic_tag_id return a single row, e.g. "A180-1702-48973"
 
   # Select multiple values
@@ -188,7 +183,7 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
     multi_select_df %>% distinct(acoustic_tag_id) %>% pull() %>% sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_tags() allows selecting on multiple parameters", {
@@ -198,7 +193,7 @@ test_that("get_tags() allows selecting on multiple parameters", {
     tag_subtype = "animal",
     acoustic_tag_id = "A69-1601-16130"
   )
-  expect_equal(nrow(multiple_parameters_df), 1)
+  expect_identical(nrow(multiple_parameters_df), 1L)
 })
 
 test_that("get_tags() can return multiple rows for a single tag", {
@@ -240,7 +235,7 @@ test_that("get_tags() returns correct tag_type and tag_subtype", {
     df %>% distinct(tag_type) %>% pull() %>% sort(),
     c("acoustic", "acoustic-archival", "archival")
   )
-  expect_equal(
+  expect_identical(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),
     c("animal", "built-in", "range", "sentinel")
   )
