@@ -22,6 +22,7 @@ test_that("download_acoustic_dataset() creates the expected files", {
     "receivers.csv",
     "datapackage.json"
   )
+  download_dir <- file.path(tempdir(), "using_api")
 
   expect_snapshot(
     download_acoustic_dataset(
