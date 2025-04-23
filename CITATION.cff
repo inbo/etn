@@ -8,7 +8,7 @@ message: 'To cite package "etn" in publications use:'
 type: software
 license: MIT
 title: 'etn: Access Data from the European Tracking Network'
-version: 2.3.1.9000
+version: 2.2.2.9000
 doi: 10.5281/zenodo.15235747
 abstract: Package with functions to access and process data from the European Tracking
   Network hosted by VLIZ.
@@ -50,7 +50,7 @@ preferred-citation:
     email: stijnvanhoey@gmail.com
     orcid: https://orcid.org/0000-0001-6413-3185
   year: '2025'
-  notes: R package version 2.3.1.9000
+  notes: R package version 2.2.2.9000
   url: https://inbo.github.io/etn/
   doi: 10.5281/zenodo.15235747
 repository-code: https://github.com/inbo/etn
@@ -392,6 +392,58 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.tidyr
 - type: software
+  title: vcr
+  abstract: 'vcr: Record ''HTTP'' Calls to Disk'
+  notes: Suggests
+  url: https://github.com/ropensci/vcr/
+  repository: https://CRAN.R-project.org/package=vcr
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+    orcid: https://orcid.org/0000-0003-1444-9135
+  - family-names: Wolen
+    given-names: Aaron
+    orcid: https://orcid.org/0000-0003-2542-2202
+  - family-names: Salmon
+    given-names: Maëlle
+    orcid: https://orcid.org/0000-0002-2815-0399
+  - family-names: Possenriede
+    given-names: Daniel
+    orcid: https://orcid.org/0000-0002-6738-9845
+  year: '2025'
+  doi: 10.32614/CRAN.package.vcr
+  version: '>= 0.6.0'
+- type: software
+  title: frictionless
+  abstract: 'frictionless: Read and Write Frictionless Data Packages'
+  notes: Suggests
+  url: https://docs.ropensci.org/frictionless/
+  repository: https://CRAN.R-project.org/package=frictionless
+  authors:
+  - family-names: Desmet
+    given-names: Peter
+    email: peter.desmet@inbo.be
+    orcid: https://orcid.org/0000-0002-8442-8025
+    affiliation: Research Institute for Nature and Forest (INBO)
+  - family-names: Oldoni
+    given-names: Damiano
+    email: damiano.oldoni@inbo.be
+    orcid: https://orcid.org/0000-0003-3445-7562
+    affiliation: Research Institute for Nature and Forest (INBO)
+  - family-names: Huybrechts
+    given-names: Pieter
+    email: pieter.huybrechts@inbo.be
+    orcid: https://orcid.org/0000-0002-6658-6062
+    affiliation: Research Institute for Nature and Forest (INBO)
+  - family-names: Govaert
+    given-names: Sanne
+    email: sanne.govaert@inbo.be
+    orcid: https://orcid.org/0000-0002-8939-1305
+    affiliation: Research Institute for Nature and Forest (INBO)
+  year: '2025'
+  doi: 10.32614/CRAN.package.frictionless
+- type: software
   title: withr
   abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
   notes: Suggests
@@ -416,27 +468,4 @@ references:
     given-names: Winston
   year: '2025'
   doi: 10.32614/CRAN.package.withr
-- type: software
-  title: vcr
-  abstract: 'vcr: Record ''HTTP'' Calls to Disk'
-  notes: Suggests
-  url: https://github.com/ropensci/vcr/
-  repository: https://CRAN.R-project.org/package=vcr
-  authors:
-  - family-names: Chamberlain
-    given-names: Scott
-    email: myrmecocystus@gmail.com
-    orcid: https://orcid.org/0000-0003-1444-9135
-  - family-names: Wolen
-    given-names: Aaron
-    orcid: https://orcid.org/0000-0003-2542-2202
-  - family-names: Salmon
-    given-names: Maëlle
-    orcid: https://orcid.org/0000-0002-2815-0399
-  - family-names: Possenriede
-    given-names: Daniel
-    orcid: https://orcid.org/0000-0002-6738-9845
-  year: '2025'
-  doi: 10.32614/CRAN.package.vcr
-  version: '>= 0.6.0'
 
