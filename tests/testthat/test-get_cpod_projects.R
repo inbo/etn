@@ -12,7 +12,7 @@ test_that("get_cpod_projects() returns a tibble", {
 })
 
 test_that("get_cpod_projects() returns unique project_id", {
-  df <- get_cpod_projects(con)
+  df <- get_cpod_projects()
   expect_identical(nrow(df), nrow(df %>% distinct(project_id)))
 })
 
