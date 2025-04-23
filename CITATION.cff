@@ -8,7 +8,7 @@ message: 'To cite package "etn" in publications use:'
 type: software
 license: MIT
 title: 'etn: Access Data from the European Tracking Network'
-version: 2.2.2
+version: 2.3.1.9000
 doi: 10.5281/zenodo.15235747
 abstract: Package with functions to access and process data from the European Tracking
   Network hosted by VLIZ.
@@ -50,7 +50,7 @@ preferred-citation:
     email: stijnvanhoey@gmail.com
     orcid: https://orcid.org/0000-0001-6413-3185
   year: '2025'
-  notes: R package version 2.2.2
+  notes: R package version 2.3.1.9000
   url: https://inbo.github.io/etn/
   doi: 10.5281/zenodo.15235747
 repository-code: https://github.com/inbo/etn
@@ -84,6 +84,19 @@ references:
   year: '2025'
   version: '>= 3.4.0'
 - type: software
+  title: askpass
+  abstract: 'askpass: Password Entry Utilities for R, Git, and SSH'
+  notes: Imports
+  url: https://r-lib.r-universe.dev/askpass
+  repository: https://CRAN.R-project.org/package=askpass
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2025'
+  doi: 10.32614/CRAN.package.askpass
+- type: software
   title: assertthat
   abstract: 'assertthat: Easy Pre and Post Assertions'
   notes: Imports
@@ -94,22 +107,6 @@ references:
     email: hadley@rstudio.com
   year: '2025'
   doi: 10.32614/CRAN.package.assertthat
-- type: software
-  title: DBI
-  abstract: 'DBI: R Database Interface'
-  notes: Imports
-  url: https://dbi.r-dbi.org
-  repository: https://CRAN.R-project.org/package=DBI
-  authors:
-  - name: R Special Interest Group on Databases (R-SIG-DB)
-  - family-names: Wickham
-    given-names: Hadley
-  - family-names: Müller
-    given-names: Kirill
-    email: kirill@cynkra.com
-    orcid: https://orcid.org/0000-0002-1416-3412
-  year: '2025'
-  doi: 10.32614/CRAN.package.DBI
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -136,6 +133,20 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.dplyr
 - type: software
+  title: etnservice
+  abstract: 'etnservice: Serve Data from the European Tracking Network'
+  notes: Imports
+  authors:
+  - family-names: Huybrechts
+    given-names: Pieter
+    email: pieter.huybrechts@inbo.be
+    orcid: https://orcid.org/0000-0002-6658-6062
+  - family-names: Desmet
+    given-names: Peter
+    email: peter.desmet@inbo.be
+    orcid: https://orcid.org/0000-0002-8442-8025
+  year: '2025'
+- type: software
   title: glue
   abstract: 'glue: Interpreted String Literals'
   notes: Imports
@@ -152,34 +163,33 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.glue
 - type: software
-  title: jsonlite
-  abstract: 'jsonlite: A Simple and Robust JSON Parser and Generator for R'
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
   notes: Imports
-  url: https://jeroen.r-universe.dev/jsonlite
-  repository: https://CRAN.R-project.org/package=jsonlite
+  url: https://httr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=httr
   authors:
-  - family-names: Ooms
-    given-names: Jeroen
-    email: jeroenooms@gmail.com
-    orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2025'
-  doi: 10.32614/CRAN.package.jsonlite
-- type: software
-  title: lubridate
-  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
-  notes: Imports
-  url: https://lubridate.tidyverse.org
-  repository: https://CRAN.R-project.org/package=lubridate
-  authors:
-  - family-names: Spinu
-    given-names: Vitalie
-    email: spinuvit@gmail.com
-  - family-names: Grolemund
-    given-names: Garrett
   - family-names: Wickham
     given-names: Hadley
+    email: hadley@posit.co
   year: '2025'
-  doi: 10.32614/CRAN.package.lubridate
+  doi: 10.32614/CRAN.package.httr
+- type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2025'
+  doi: 10.32614/CRAN.package.lifecycle
 - type: software
   title: methods
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -190,22 +200,6 @@ references:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
   year: '2025'
-- type: software
-  title: odbc
-  abstract: 'odbc: Connect to ODBC Compatible Databases (using the DBI Interface)'
-  notes: Imports
-  url: https://odbc.r-dbi.org
-  repository: https://CRAN.R-project.org/package=odbc
-  authors:
-  - family-names: Hester
-    given-names: Jim
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  - family-names: Gjoneski
-    given-names: Oliver
-  year: '2025'
-  doi: 10.32614/CRAN.package.odbc
 - type: software
   title: readr
   abstract: 'readr: Read Rectangular Text Data'
@@ -225,6 +219,21 @@ references:
   doi: 10.32614/CRAN.package.readr
   year: '2025'
 - type: software
+  title: rlang
+  abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2025'
+  doi: 10.32614/CRAN.package.rlang
+- type: software
   title: stringr
   abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
   notes: Imports
@@ -236,6 +245,16 @@ references:
     email: hadley@posit.co
   year: '2025'
   doi: 10.32614/CRAN.package.stringr
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
 - type: software
   title: formattable
   abstract: 'formattable: Create ''Formattable'' Data Structures'
@@ -373,35 +392,6 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.tidyr
 - type: software
-  title: frictionless
-  abstract: 'frictionless: Read and Write Frictionless Data Packages'
-  notes: Suggests
-  url: https://docs.ropensci.org/frictionless/
-  repository: https://CRAN.R-project.org/package=frictionless
-  authors:
-  - family-names: Desmet
-    given-names: Peter
-    email: peter.desmet@inbo.be
-    orcid: https://orcid.org/0000-0002-8442-8025
-    affiliation: Research Institute for Nature and Forest (INBO)
-  - family-names: Oldoni
-    given-names: Damiano
-    email: damiano.oldoni@inbo.be
-    orcid: https://orcid.org/0000-0003-3445-7562
-    affiliation: Research Institute for Nature and Forest (INBO)
-  - family-names: Huybrechts
-    given-names: Pieter
-    email: pieter.huybrechts@inbo.be
-    orcid: https://orcid.org/0000-0002-6658-6062
-    affiliation: Research Institute for Nature and Forest (INBO)
-  - family-names: Govaert
-    given-names: Sanne
-    email: sanne.govaert@inbo.be
-    orcid: https://orcid.org/0000-0002-8939-1305
-    affiliation: Research Institute for Nature and Forest (INBO)
-  year: '2025'
-  doi: 10.32614/CRAN.package.frictionless
-- type: software
   title: withr
   abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
   notes: Suggests
@@ -426,4 +416,27 @@ references:
     given-names: Winston
   year: '2025'
   doi: 10.32614/CRAN.package.withr
+- type: software
+  title: vcr
+  abstract: 'vcr: Record ''HTTP'' Calls to Disk'
+  notes: Suggests
+  url: https://github.com/ropensci/vcr/
+  repository: https://CRAN.R-project.org/package=vcr
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+    orcid: https://orcid.org/0000-0003-1444-9135
+  - family-names: Wolen
+    given-names: Aaron
+    orcid: https://orcid.org/0000-0003-2542-2202
+  - family-names: Salmon
+    given-names: Maëlle
+    orcid: https://orcid.org/0000-0002-2815-0399
+  - family-names: Possenriede
+    given-names: Daniel
+    orcid: https://orcid.org/0000-0002-6738-9845
+  year: '2025'
+  doi: 10.32614/CRAN.package.vcr
+  version: '>= 0.6.0'
 
