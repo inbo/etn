@@ -1,4 +1,4 @@
-vcr::use_cassette("list_receiver_ids", {vector <- list_receiver_ids()})
+vcr::use_cassette("list_receiver_ids", {receiver_ids <- list_receiver_ids()})
 
 test_that("list_receiver_ids() returns unique list of values", {
   expect_false(any(duplicated(receiver_ids)))
