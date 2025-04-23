@@ -4,6 +4,7 @@ test_that("connect_to_etn() returns deprecation warning when used with named arg
   lifecycle::expect_deprecated(
     connect_to_etn(username = "my name", password = "my password")
   )
+})
 
 test_that("connect_to_etn() allows to create a connection with default parameters", {
   con <- connect_to_etn()
