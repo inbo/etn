@@ -267,7 +267,7 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 
   # Select multiple values
   multi_select <- c("Rutilus rutilus", "Silurus glanis")
-  vcr::use_cassette("torpedo_raja_acoustic_detections", {
+  vcr::use_cassette("rutilus_silurus_acoustic_detections", {
     multi_select_df <-
       get_acoustic_detections(scientific_name = multi_select)
   })

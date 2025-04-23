@@ -1,0 +1,56 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections/
+    body:
+      encoding: ''
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"scientific_name":["Rutilus
+        rutilus","Silurus glanis"],"limit":false}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+  response:
+    status:
+      status_code: 201
+      category: Success
+      reason: Created
+      message: 'Success: (201) Created'
+    headers:
+      date: Wed, 23 Apr 2025 12:01:27 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=300, public
+      x-ocpu-session: x079e5c8a8ca83d
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x079e5c8a8ca83d/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.4.1 (2024-06-14)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2025-04-23 12:01:33 UTC
+      x-ocpu-version: 2.2.13
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '143'
+      content-type: text/plain; charset=utf-8
+      access-control-allow-methods: '*'
+    body:
+      encoding: ''
+      file: no
+      string: |
+        /ocpu/tmp/x079e5c8a8ca83d/R/.val
+        /ocpu/tmp/x079e5c8a8ca83d/R/credentials
+        /ocpu/tmp/x079e5c8a8ca83d/R/get_acoustic_detections
+        /ocpu/tmp/x079e5c8a8ca83d/R/scientific_name
+        /ocpu/tmp/x079e5c8a8ca83d/stdout
+        /ocpu/tmp/x079e5c8a8ca83d/source
+        /ocpu/tmp/x079e5c8a8ca83d/console
+        /ocpu/tmp/x079e5c8a8ca83d/info
+        /ocpu/tmp/x079e5c8a8ca83d/files/DESCRIPTION
+  recorded_at: 2025-04-23 12:01:37 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
