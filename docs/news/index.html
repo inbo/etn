@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +51,12 @@
       <small>Source: <a href="https://github.com/inbo/etn/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.2" id="etn-2-2-2">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-2-2-2"></a></h2>
+<ul><li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
+<li>Fix issue in <code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> where <code>NA</code> was sometimes included in the results. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
+<li>Fix bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code>: when <code>rights_holder</code> was not provided the function would fail to generate a darwincore archive. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="etn-2-2-1">etn 2.2.1<a class="anchor" aria-label="anchor" href="#etn-2-2-1"></a></h2>
 <ul><li>

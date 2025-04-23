@@ -75,3 +75,31 @@ test_that("write_dwc() supports uppercase animal_project_codes", {
   expect_s3_class(result$dwc_occurrence, "tbl")
   expect_gte(length(result$dwc_occurrence$occurrenceID), 1)
 })
+
+
+test_that("write_dwc() allows setting of rights_holder", {
+  result <- suppressMessages(
+    write_dwc(con,
+              animal_project_code = "2014_demer",
+              rights_holder = "my_rightholder",
+              directory = NULL)
+  )
+
+  expect_identical(
+    unique(result$dwc_occurrence$rightsHolder),
+    "my_rightholder"
+  )
+})
+
+test_that("write_dwc() returns an empty column for rights holder by default", {
+  result <- suppressMessages(
+    write_dwc(con,
+              animal_project_code = "2014_demer",
+              directory = NULL)
+  )
+
+  expect_identical(
+    unique(result$dwc_occurrence$rightsHolder),
+    NA_character_
+  )
+})
