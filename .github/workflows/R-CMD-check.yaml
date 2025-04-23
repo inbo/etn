@@ -27,6 +27,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      ETN_USER: ${{ secrets.ETN_USER }}
+      ETN_PWD: ${{ secrets.ETN_PWD }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
