@@ -5,7 +5,9 @@
 * `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
 * The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
-* Queries via the API and on the Lifewatch RStudio Server will now always return the same results.
+* Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
+* You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339)
+
 # etn 2.2.2
 
 * Fix issue in `check_value()` helper used in several functions to generate error messages. The error message failed to format when `NA` values were returned as part of a `list_` function call (#356).
