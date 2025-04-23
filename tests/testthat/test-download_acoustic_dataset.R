@@ -3,7 +3,6 @@ skip_if_not_localdb() # Mixed tests for API and local database access
 # Create a data package
 evaluate_download <- evaluate_promise({
   download_acoustic_dataset(
-    con,
     animal_project_code = "2014_demer",
     directory = tempdir()
   )
@@ -12,8 +11,6 @@ evaluate_download <- evaluate_promise({
 test_that("download_acoustic_dataset() creates the expected messages and files using api", {
   download_dir <- file.path(tempdir(), "using_api")
   dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
-
-
 })
 
 test_that("download_acoustic_dataset() creates the expected files", {
