@@ -244,6 +244,7 @@ get_acoustic_detections_sql <- function(start_date = NULL,
       deployment_station_name AS station_name, -- exclusive to detections_limited
       deployment_latitude AS deploy_latitude, -- exclusive to detections_limited
       deployment_longitude AS deploy_longitude, -- exclusive to detections_limited
+      det.depth_in_meters AS depth_in_meters,
       det.sensor_value AS sensor_value,
       det.sensor_unit AS sensor_unit,
       det.sensor2_value AS sensor2_value,

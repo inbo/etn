@@ -189,7 +189,7 @@ detections_silurus %>%
 Sometimes it's interesting to know the number of detections per station:
 
 ```{r n_detections_per_deployment}
-n_detect_station <- 
+n_detect_station <-
   detections_silurus %>%
   group_by(station_name) %>%
   count()
@@ -199,7 +199,7 @@ n_detect_station
 It's also interesting to know the number of unique individuals per station:
 
 ```{r n_silurus_station}
-n_silurus_station <- 
+n_silurus_station <-
   detections_silurus %>%
   distinct(station_name, animal_id) %>%
   group_by(station_name) %>%
@@ -238,7 +238,7 @@ list_acoustic_tag_ids() %>% head(10)
 The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`. You can retrieve them via the _list_ function `list_values()`:
 
 ```{r acoustic_project_codes_involved}
-acoustic_project_codes <- detections_silurus %>% 
+acoustic_project_codes <- detections_silurus %>%
   list_values(acoustic_project_code)
 acoustic_project_codes
 ```
@@ -263,7 +263,7 @@ list_acoustic_project_codes() %>% head(10)
 You can retrieve deployment information related to the acoustic networks in `acoustic_project_codes` by using `get_acoustic_deployments()` function:
 
 ```{r get_acoustic_deployments_info_networks}
-deployments <-get_acoustic_deployments(
+deployments <- get_acoustic_deployments(
   acoustic_project_code = acoustic_project_codes
 )
 deployments
@@ -272,7 +272,7 @@ deployments
 These are the deployments of the acoustic receivers involved in `detections_silurus`:
 
 ```{r deploys_silurus}
-deploys_silurus <- 
+deploys_silurus <-
   detections_silurus %>%
   list_values(deployment_id)
 deploys_silurus
@@ -290,8 +290,8 @@ deployments_silurus
 Deployment duration:
 
 ```{r deployment_duration}
-deployments_silurus_duration <- 
-  deployments_silurus %>% 
+deployments_silurus_duration <-
+  deployments_silurus %>%
   mutate(duration = as.duration(recover_date_time - deploy_date_time)) %>%
   select(deployment_id, station_name, duration) %>%
   arrange(deployment_id)
@@ -301,7 +301,7 @@ deployments_silurus_duration
 Number of days a deployment detected the passage of one or more individuals:
 
 ```{r n_active_days_deployments_silurus}
-n_active_days_deployments_silurus <- 
+n_active_days_deployments_silurus <-
   detections_silurus %>%
   mutate(date = date(date_time)) %>%
   distinct(deployment_id, station_name, date) %>%
@@ -314,13 +314,15 @@ n_active_days_deployments_silurus
 Relative detection duration, i.e. number of days with at least one detection divided by deployment duration:
 
 ```{r relative_detection_duration}
-rel_det_duration_silurus <- 
+rel_det_duration_silurus <-
   n_active_days_deployments_silurus %>%
   left_join(
     deployments_silurus_duration,
     by = c("deployment_id", "station_name")
   ) %>%
-  mutate(relative_detection_duration = n_days*(24*60*60) / as.numeric(duration)) %>%
+  mutate(
+    relative_detection_duration = n_days * (24 * 60 * 60) / as.numeric(duration)
+  ) %>%
   select(deployment_id, station_name, relative_detection_duration)
 rel_det_duration_silurus
 ```
@@ -332,12 +334,12 @@ Aside standard graphs, the geographical component of telemetry data makes intera
 We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as pop-ups. First, we retrieve the coordinates of the stations:
 
 ```{r geo_info_stations}
-geo_info_stations <- 
+geo_info_stations <-
   detections_silurus %>%
   distinct(
-    station_name, 
-    deploy_latitude, 
-    deploy_longitude, 
+    station_name,
+    deploy_latitude,
+    deploy_longitude,
     acoustic_project_code
   ) %>%
   arrange(station_name)
@@ -384,7 +386,7 @@ n_detect_station %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# detections: ", n)
     )
-  ) %>% 
+  ) %>%
   addLegend(
     title = "Detections",
     pal = pal,
@@ -420,7 +422,7 @@ n_silurus_station %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# detected individuals: ", n)
     )
-  ) %>% 
+  ) %>%
   addLegend(
     title = "Detected individuals",
     pal = pal,
@@ -431,12 +433,12 @@ n_silurus_station %>%
 We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
 
 ```{r geo_info_deployments}
-geo_info_deploys <- 
+geo_info_deploys <-
   detections_silurus %>%
   distinct(
-    deployment_id, 
-    deploy_latitude, 
-    deploy_longitude, 
+    deployment_id,
+    deploy_latitude,
+    deploy_longitude,
     station_name,
     acoustic_project_code
   ) %>%
@@ -463,7 +465,7 @@ rel_det_duration_silurus %>%
   addCircleMarkers(
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
-    radius = ~100*relative_detection_duration,
+    radius = ~100 * relative_detection_duration,
     color = ~pal(relative_detection_duration),
     fillOpacity = 0.8,
     stroke = FALSE,
@@ -474,7 +476,7 @@ rel_det_duration_silurus %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# relative detection duration: ", round(relative_detection_duration, 2))
     )
-  ) %>% 
+  ) %>%
   addLegend(
     title = "Relative detection duration",
     pal = pal,

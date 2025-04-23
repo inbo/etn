@@ -20,10 +20,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Peter Desmet \email{peter.desmet@inbo.be} (\href{https://orcid.org/0000-0002-8442-8025}{ORCID})
+\strong{Maintainer}: Pieter Huybrechts \email{pieter.huybrechts@inbo.be} (\href{https://orcid.org/0000-0002-6658-6062}{ORCID})
 
 Authors:
 \itemize{
+  \item Peter Desmet \email{peter.desmet@inbo.be} (\href{https://orcid.org/0000-0002-8442-8025}{ORCID})
   \item Damiano Oldoni \email{damiano.oldoni@inbo.be} (\href{https://orcid.org/0000-0003-3445-7562}{ORCID})
   \item Stijn Van Hoey \email{stijnvanhoey@gmail.com} (\href{https://orcid.org/0000-0001-6413-3185}{ORCID})
 }
@@ -31,7 +32,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Research Institute for Nature and Forest (INBO) (https://www.vlaanderen.be/inbo/en-gb/) [copyright holder]
-  \item LifeWatch Belgium (https://lifewatch.be) [funder]
+  \item Research Foundation - Flanders (https://lifewatch.be) [funder]
 }
 
 }

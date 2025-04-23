@@ -78,6 +78,7 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> * (4/6): downloading deployments.csv
 #> * (5/6): downloading receivers.csv
 #> * (6/6): adding datapackage.json as file metadata
+#>
 #> Summary statistics for dataset `2012_leopoldkanaal`:
 #> * number of animals:           104
 #> * number of tags:              103
@@ -88,6 +89,7 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> * last date of detection:      2021-09-02
 #> * included scientific names:   Anguilla anguilla
 #> * included acoustic projects:  albert, Apelafico, bpns, JJ_Belwind, leopold, MOBEIA, pc4c, SPAWNSEIS, ws2, zeeschelde
+#>
 #> Warning message:
 #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #> Found tags associated with multiple animals: 1145373

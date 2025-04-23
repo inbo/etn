@@ -1,13 +1,6 @@
-# con <- connect_to_etn()
-#
-# test_that("get_animal_projects() returns error for incorrect connection", {
-#   expect_error(
-#     get_animal_projects(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_animal_projects() returns a tibble", {
+  skip_if_not_localdb()
+
   df <- get_animal_projects()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -39,7 +32,7 @@ test_that("get_animal_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_animal_projects() allows selecting on animal_project_code", {
@@ -60,7 +53,7 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
     single_select_df %>% distinct(project_code) %>% pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
 
   # Selection is case insensitive
   expect_equal(
@@ -75,11 +68,11 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
     multi_select_df %>% distinct(project_code) %>% pull() %>% sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_animal_projects() returns projects of type 'animal'", {
-  expect_equal(
+  expect_identical(
     get_animal_projects() %>% distinct(project_type) %>% pull(),
     "animal"
   )

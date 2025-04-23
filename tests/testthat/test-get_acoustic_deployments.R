@@ -3,15 +3,17 @@ vcr::use_cassette("get_acoustic_deployments", {
   df <- get_acoustic_deployments(api = TRUE)
 })
 
-# Response via local database connection
-df_sql <- get_acoustic_deployments(api = FALSE)
-
 test_that("[API] get_acoustic_deployments() returns a tibble", {
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
 
 test_that("[SQL] get_acoustic_deployments() returns a tibble", {
+  skip_if_not_localdb()
+
+  # Response via local database connection
+  df_sql <- get_acoustic_deployments(api = FALSE)
+
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
@@ -21,6 +23,11 @@ test_that("[API] get_acoustic_deployments() returns unique deployment_id", {
 })
 
 test_that("[SQL] get_acoustic_deployments() returns unique deployment_id", {
+  skip_if_not_localdb()
+
+  # Response via local database connection
+  df_sql <- get_acoustic_deployments(api = FALSE)
+
   expect_equal(nrow(df_sql), nrow(df_sql %>% distinct(deployment_id)))
 })
 
@@ -65,7 +72,7 @@ test_that("[API] get_acoustic_deployments() returns the expected columns", {
     "log_depth_sample_period",
     "comments"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
@@ -109,6 +116,11 @@ test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
     "log_depth_sample_period",
     "comments"
   )
+  skip_if_not_localdb()
+
+  # Response via local database connection
+  df_sql <- get_acoustic_deployments(api = FALSE)
+
   expect_equal(names(df_sql), expected_col_names)
 })
 
@@ -148,6 +160,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", 
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", {
+  skip_if_not_localdb()
+
   # Errors
   expect_error(
     get_acoustic_deployments(deployment_id = "not_a_deployment_id",
@@ -212,6 +226,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
+  skip_if_not_localdb()
+
   # Errors
   expect_error(
     get_acoustic_deployments(receiver_id = "not_a_receiver_id",
@@ -282,6 +298,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project_code", {
+  skip_if_not_localdb()
+
   # Errors
   expect_error(
     get_acoustic_deployments(acoustic_project_code = "not_a_project",
@@ -354,6 +372,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
+  skip_if_not_localdb()
+
   # Errors
   expect_error(
     get_acoustic_deployments(station_name = "not_a_station_name",
@@ -409,6 +429,9 @@ test_that("[API] get_acoustic_deployments() allows selecting on open deployments
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments only", {
+
+  skip_if_not_localdb()
+
   # Errors
   expect_error(
     get_acoustic_deployments(open_only = "not_a_logical",
@@ -446,6 +469,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on multiple paramet
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on multiple parameters", {
+  skip_if_not_localdb()
+
   multiple_parameters_df <- get_acoustic_deployments(
     receiver_id = "VR2W-124070",
     acoustic_project_code = "demer",
@@ -457,13 +482,15 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on multiple paramet
 })
 
 test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
-  # POD-3330 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "POD-3330")
+  # POD-3610 is a cpod receiver
+  df <- get_acoustic_deployments(receiver_id = "POD-3610")
   expect_equal(nrow(df), 0)
 })
 
 test_that("[SQL] get_acoustic_deployments() does not return cpod deployments", {
-  # POD-3330 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "POD-3330", api = FALSE)
+  skip_if_not_localdb()
+
+  # POD-3610 is a cpod receiver
+  df <- get_acoustic_deployments(receiver_id = "POD-3610", api = FALSE)
   expect_equal(nrow(df), 0)
 })

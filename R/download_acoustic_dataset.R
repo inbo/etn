@@ -57,7 +57,7 @@
 #' #> * (4/6): downloading deployments.csv
 #' #> * (5/6): downloading receivers.csv
 #' #> * (6/6): adding datapackage.json as file metadata
-
+#' #>
 #' #> Summary statistics for dataset `2012_leopoldkanaal`:
 #' #> * number of animals:           104
 #' #> * number of tags:              103
@@ -68,7 +68,7 @@
 #' #> * last date of detection:      2021-09-02
 #' #> * included scientific names:   Anguilla anguilla
 #' #> * included acoustic projects:  albert, Apelafico, bpns, JJ_Belwind, leopold, MOBEIA, pc4c, SPAWNSEIS, ws2, zeeschelde
-
+#' #>
 #' #> Warning message:
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
@@ -117,7 +117,7 @@ download_acoustic_dataset <- function(connection,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
-  readr::write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
+  readr::write_csv(animals, file.path(directory, "animals.csv"), na = "")
 
   # TAGS
   message("* (2/6): downloading tags.csv")
@@ -136,7 +136,7 @@ download_acoustic_dataset <- function(connection,
     api = api,
     tag_serial_number = tag_serial_numbers
   )
-  readr::write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
+  readr::write_csv(tags, file.path(directory, "tags.csv"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
@@ -152,7 +152,7 @@ download_acoustic_dataset <- function(connection,
   detections <-
     detections %>%
     distinct(.data$detection_id, .keep_all = TRUE)
-  readr::write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
+  readr::write_csv(detections, file.path(directory, "detections.csv"), na = "")
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
@@ -171,8 +171,14 @@ download_acoustic_dataset <- function(connection,
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments %>%
-    dplyr::mutate(comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " "))
-  readr::write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
+    dplyr::mutate(
+      comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
+    )
+  readr::write_csv(
+    deployments,
+    file.path(directory, "deployments.csv"),
+    na = ""
+  )
 
   # RECEIVERS
   message("* (5/6): downloading receivers.csv")
@@ -185,12 +191,16 @@ download_acoustic_dataset <- function(connection,
     api = api,
     receiver_id = receiver_ids
   )
-  readr::write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
+  readr::write_csv(receivers, file.path(directory, "receivers.csv"), na = "")
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
   datapackage <- system.file("assets", "datapackage.json", package = "etn")
-  file.copy(datapackage, paste(directory, "datapackage.json", sep = "/"), overwrite = TRUE)
+  file.copy(
+    datapackage,
+    file.path(directory, "datapackage.json"),
+    overwrite = TRUE
+  )
 
   # Create summary stats
   scientific_names <-
@@ -200,21 +210,35 @@ download_acoustic_dataset <- function(connection,
     sort()
 
   message("")
-  message(glue::glue("\nSummary statistics for dataset `{animal_project_code}`:"))
+  message(
+    glue::glue("\nSummary statistics for dataset `{animal_project_code}`:")
+  )
   message("* number of animals:           ", nrow(animals))
   message("* number of tags:              ", nrow(tags))
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
   if (nrow(detections) > 0) {
-    message("* first date of detection:     ", detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull())
-    message("* last date of detection:      ", detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull())
+    message(
+      "* first date of detection:     ",
+      detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull()
+    )
+    message(
+      "* last date of detection:      ",
+      detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull()
+    )
   } else {
     message("* first date of detection:     ", NA)
     message("* last date of detection:      ", NA)
   }
-  message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
-  message("* included acoustic projects:  ", paste(acoustic_project_codes, collapse = ", "))
+  message(
+    "* included scientific names:   ",
+    paste(scientific_names, collapse = ", ")
+  )
+  message(
+    "* included acoustic projects:  ",
+    paste(acoustic_project_codes, collapse = ", ")
+  )
   message("")
 
   # Create warnings
@@ -240,15 +264,28 @@ download_acoustic_dataset <- function(connection,
   duplicate_detections_count <- detections_orig_count - nrow(detections)
 
   if (length(animals_multiple_tags) > 0) {
-    warning("Found animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
+    warning(
+      "Found animals with multiple tags: ",
+      paste(animals_multiple_tags, collapse = ", ")
+    )
   }
   if (length(tags_multiple_animals) > 0) {
-    warning("Found tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
+    warning(
+      "Found tags associated with multiple animals: ",
+      paste(tags_multiple_animals, collapse = ", ")
+    )
   }
   if (length(orphaned_deployments) > 0) {
-    warning("Found deployments without acoustic project: ", paste(orphaned_deployments, collapse = ", "))
+    warning(
+      "Found deployments without acoustic project: ",
+      paste(orphaned_deployments, collapse = ", ")
+    )
   }
   if (duplicate_detections_count > 0) {
-    warning("Found and removed duplicate detections: ", duplicate_detections_count, " detections")
+    warning(
+      "Found and removed duplicate detections: ",
+      duplicate_detections_count,
+      " detections"
+    )
   }
 }

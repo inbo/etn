@@ -9,6 +9,7 @@ test_that("list_deployment_ids() returns unique list of values using api", {
 })
 
 test_that("list_deployment_ids() returns unique list of values using local db", {
+  skip_if_not_localdb()
   vector_sql <- list_deployment_ids(api = FALSE)
 
   expect_type(vector_sql, "character")
