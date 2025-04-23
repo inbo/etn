@@ -1,13 +1,6 @@
-# con <- connect_to_etn()
-#
-# test_that("get_acoustic_receivers() returns error for incorrect connection", {
-#   expect_error(
-#     get_acoustic_receivers(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_acoustic_receivers() returns a tibble", {
+  skip_if_not_localdb()
+
   df <- get_acoustic_receivers()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -49,7 +42,7 @@ test_that("get_acoustic_receivers() returns the expected columns", {
     "ar_tilt_code",
     "ar_tilt_after_deploy"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_receivers() allows selecting on receiver_id", {
@@ -66,7 +59,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   # Select single value
   single_select <- "VR2W-124070" # From demer
   single_select_df <- get_acoustic_receivers(receiver_id = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(receiver_id) %>% pull(),
     c(single_select)
   )
@@ -75,7 +68,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
   multi_select_df <- get_acoustic_receivers(receiver_id = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -98,7 +91,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   # Select single value
   single_select <- "broken"
   single_select_df <- get_acoustic_receivers(status = single_select)
-  expect_equal(
+  expect_identical(
     single_select_df %>% distinct(status) %>% pull(),
     c(single_select)
   )
@@ -107,7 +100,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   # Select multiple values
   multi_select <- c("broken", "lost")
   multi_select_df <- get_acoustic_receivers(status = multi_select)
-  expect_equal(
+  expect_identical(
     multi_select_df %>% distinct(status) %>% pull() %>% sort(),
     c(multi_select)
   )
@@ -115,7 +108,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
 })
 
 test_that("get_acoustic_receivers() does not return cpod receivers", {
-  # POD-3330 is a cpod receiver
-  df <- get_acoustic_receivers(receiver_id = "POD-3330")
-  expect_equal(nrow(df), 0)
+  # POD-3610 is a cpod receiver
+  df <- get_acoustic_receivers(receiver_id = "POD-3610")
+  expect_identical(nrow(df), 0L)
 })

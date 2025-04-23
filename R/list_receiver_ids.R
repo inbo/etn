@@ -37,6 +37,8 @@ list_receiver_ids_sql <- function(){
   # Close connection
   DBI::dbDisconnect(connection)
 
-  # Return receiver_ids
-  stringr::str_sort(data$receiver, numeric = TRUE)
+  # Return receiver_ids and drop NA (issue on database side inbo/etn#333)
+  receiver_ids <- stringr::str_sort(data$receiver, numeric = TRUE)
+
+  return(receiver_ids[!is.na(receiver_ids)])
 }

@@ -26,7 +26,7 @@ check_connection <- function(connection) {
 #' @noRd
 check_value <- function(x, y, name = "value", lowercase = FALSE) {
   # Remove NA from valid values
-  y <- y[!is.na(x)]
+  y <- y[!is.na(y)]
 
   # Ignore case
   if (lowercase) {

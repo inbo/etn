@@ -45,25 +45,35 @@ list_values <- function(.data, column, split = ",") {
 
   arguments <- as.list(match.call())
 
-  if (is.numeric(arguments$column)){
+  if (is.numeric(arguments$column)) {
     col_number <- arguments$column
     n_col_df <- ncol(.data)
-    assertthat::assert_that(as.integer(col_number) == col_number,
-                msg = "column number must be an integer")
-    assertthat::assert_that(col_number <= ncol(.data),
-                msg = glue::glue("column number exceeds the number of columns ",
-                                 "of .data ({n_col_df})"))
+    assertthat::assert_that(
+      as.integer(col_number) == col_number,
+      msg = "column number must be an integer"
+    )
+    assertthat::assert_that(
+      col_number <= ncol(.data),
+      msg = glue::glue(
+        "column number exceeds the number of columns ",
+        "of .data ({n_col_df})"
+      )
+    )
     # extract values
-    values <- .data[,col_number]
+    values <- .data[, col_number]
     # extract column name
     col_name <- names(.data)[col_number]
   } else {
-    #check column name
+    # check column name
     col_name <- as.character(arguments$column)
-    assertthat::assert_that(length(col_name) == 1,
-                msg = "invalid column value")
-    assertthat::assert_that(col_name %in% names(.data),
-                msg = glue::glue("column {col_name} not found in .data"))
+    assertthat::assert_that(
+      length(col_name) == 1,
+      msg = "invalid column value"
+    )
+    assertthat::assert_that(
+      col_name %in% names(.data),
+      msg = glue::glue("column {col_name} not found in .data")
+    )
 
     # extract values
     if (methods::is(arguments$column, "name")) {
@@ -75,9 +85,10 @@ list_values <- function(.data, column, split = ",") {
     }
   }
 
-  if (is.character(values))
+  if (is.character(values)) {
     # extract all values by splitting strings using split value
     values <- unlist(strsplit(x = values, split = split))
+  }
 
   # remove duplicates, unique values only
   values <- unique(values)
