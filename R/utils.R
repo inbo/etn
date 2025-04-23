@@ -149,19 +149,17 @@ get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
     verb = "GET",
     url = glue::glue(
       "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
+      # I'm passing an argument to arrow::write_feather() via OpenCPU, this
+      # feature is currenlty only documented in the NEWS file. Not in the
+      # official documentation of OPENCPU
+      'tmp/{temp_key}/R/.val/feather?compression="lz4"',
       .sep = "/"
     ),
     times = 5
   ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection()
+    httr::content(as = "raw")
   # read connection
-  api_response <- response_connection %>%
-    gzcon() %>%
-    readRDS()
-  # close connection
-  close(response_connection)
+  api_response <- arrow::read_feather(response_connection)
   # Return OpenCPU return object
   return(api_response)
 }

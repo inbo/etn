@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.3.0
+Version: 2.3.1.9000
 Authors@R: c(
     person("Pieter", "Huybrechts", email = "pieter.huybrechts@inbo.be",
            role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6658-6062")),
@@ -21,8 +21,9 @@ License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 4.0)
 Imports:
+    arrow,
     askpass,
     assertthat,
     DBI,
