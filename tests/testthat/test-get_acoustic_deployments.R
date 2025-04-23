@@ -1,6 +1,7 @@
 # Cached response from the API
 vcr::use_cassette("get_acoustic_deployments", {
   df <- get_acoustic_deployments(api = TRUE)
+})
 
 test_that("[API] get_acoustic_deployments() returns a tibble", {
   expect_s3_class(df, "data.frame")
@@ -160,7 +161,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", 
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", {
   skip_if_not_localdb()
-  
+
   # Errors
   expect_error(
     get_acoustic_deployments(deployment_id = "not_a_deployment_id",
@@ -226,7 +227,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
   skip_if_not_localdb()
-  
+
   # Errors
   expect_error(
     get_acoustic_deployments(receiver_id = "not_a_receiver_id",
@@ -372,7 +373,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
   skip_if_not_localdb()
-  
+
   # Errors
   expect_error(
     get_acoustic_deployments(station_name = "not_a_station_name",
@@ -428,7 +429,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on open deployments
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments only", {
-  
+
   skip_if_not_localdb()
 
   # Errors
@@ -488,7 +489,7 @@ test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
 
 test_that("[SQL] get_acoustic_deployments() does not return cpod deployments", {
   skip_if_not_localdb()
-  
+
   # POD-3610 is a cpod receiver
   df <- get_acoustic_deployments(receiver_id = "POD-3610", api = FALSE)
   expect_equal(nrow(df), 0)

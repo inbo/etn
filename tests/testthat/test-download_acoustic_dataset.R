@@ -7,6 +7,7 @@ evaluate_download <- evaluate_promise({
     animal_project_code = "2014_demer",
     directory = tempdir()
   )
+})
 
 test_that("download_acoustic_dataset() creates the expected messages and files using api", {
   download_dir <- file.path(tempdir(), "using_api")
@@ -70,9 +71,9 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
 })
 
 test_that("download_acoustic_dataset() creates the expected files", {
-  
+
   skip_if_not_localdb()
-  
+
   files_to_create <- c(
     "animals.csv",
     "tags.csv",

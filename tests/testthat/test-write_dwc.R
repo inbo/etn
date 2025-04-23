@@ -27,7 +27,7 @@ test_that("[SQL] write_dwc() can return data as list of tibbles rather than file
 
 test_that("[SQL] write_dwc() returns the expected Darwin Core terms as columns", {
   skip_if_not_localdb()
-  
+
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL, api = FALSE)
   )
@@ -68,12 +68,15 @@ test_that("[SQL] write_dwc() returns the expected Darwin Core terms as columns",
   )
 })
 
-# cached version of API response for 2014_demer
-vcr::use_cassette("2014_demer_dwc", {
-  # Request without writing to disk
-  demer_dwc <- write_dwc(animal_project_code = "2014_demer",
-                         directory = NULL,
-                         api = TRUE)
+  # cached version of API response for 2014_demer
+  vcr::use_cassette("2014_demer_dwc", {
+    # Request without writing to disk
+    demer_dwc <- write_dwc(
+      animal_project_code = "2014_demer",
+      directory = NULL,
+      api = TRUE
+    )
+  })
 
   test_that("[API] write_dwc() can write csv files to a path", {
     out_dir <- file.path(tempdir(), "dwc")
