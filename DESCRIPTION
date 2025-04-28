@@ -5,7 +5,7 @@ Authors@R: c(
     person("Pieter", "Huybrechts", , "pieter.huybrechts@inbo.be", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6658-6062")),
     person("Peter", "Desmet", , "peter.desmet@inbo.be", role = "aut",
-           comment =  c(ORCID = "0000-0002-8442-8025")),
+           comment = c(ORCID = "0000-0002-8442-8025")),
     person("Damiano", "Oldoni", , "damiano.oldoni@inbo.be", role = "aut",
            comment = c(ORCID = "0000-0003-3445-7562")),
     person("Stijn", "Van Hoey", , "stijnvanhoey@gmail.com", role = "aut",
@@ -14,9 +14,9 @@ Authors@R: c(
            comment = c(ROR = "00j54wy13")),
     person("Research Foundation - Flanders", role = "fnd",
            comment = "https://lifewatch.be")
-  )          
-Description: Package with functions to access and process data from the European
-    Tracking Network hosted by VLIZ.
+  )
+Description: Package with functions to access and process data from the
+    European Tracking Network hosted by VLIZ.
 License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn
 BugReports: https://github.com/inbo/etn/issues
@@ -35,17 +35,18 @@ Imports:
     stringr
 Suggests:
     formattable,
-    leaflet,
+    frictionless,
     kableExtra,
     knitr,
+    leaflet,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    frictionless,
     withr
-LazyData: true
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
-VignetteBuilder: knitr
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Config/testthat/edition: 3
