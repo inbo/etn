@@ -11,7 +11,7 @@ Authors@R: c(
     person("Stijn", "Van Hoey", , "stijnvanhoey@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-6413-3185")),
     person("Research Institute for Nature and Forest (INBO)", role = "cph",
-           comment = "https://www.vlaanderen.be/inbo/en-gb/"),
+           comment = c(ROR = "00j54wy13")),
     person("Research Foundation - Flanders", role = "fnd",
            comment = "https://lifewatch.be")
   )          
