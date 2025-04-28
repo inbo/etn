@@ -2,18 +2,18 @@ Package: etn
 Title: Access Data from the European Tracking Network
 Version: 2.2.2
 Authors@R: c(
-    person("Pieter", "Huybrechts", email = "pieter.huybrechts@inbo.be",
-           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6658-6062")),
-    person("Peter", "Desmet", email = "peter.desmet@inbo.be",
-           role = "aut", comment =  c(ORCID = "0000-0002-8442-8025")),
-    person("Damiano", "Oldoni", email = "damiano.oldoni@inbo.be",
-           role = "aut", comment = c(ORCID = "0000-0003-3445-7562")),
-    person("Stijn", "Van Hoey", email = "stijnvanhoey@gmail.com",
-           role = "aut", comment = c(ORCID = "0000-0001-6413-3185")),
-    person("Research Institute for Nature and Forest (INBO)",
-           role = "cph", comment = "https://www.vlaanderen.be/inbo/en-gb/"),
-    person("Research Foundation - Flanders",
-           role = "fnd", comment = "https://lifewatch.be")
+    person("Pieter", "Huybrechts", , "pieter.huybrechts@inbo.be", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6658-6062")),
+    person("Peter", "Desmet", , "peter.desmet@inbo.be", role = "aut",
+           comment =  c(ORCID = "0000-0002-8442-8025")),
+    person("Damiano", "Oldoni", , "damiano.oldoni@inbo.be", role = "aut",
+           comment = c(ORCID = "0000-0003-3445-7562")),
+    person("Stijn", "Van Hoey", , "stijnvanhoey@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0001-6413-3185")),
+    person("Research Institute for Nature and Forest (INBO)", role = "cph",
+           comment = "https://www.vlaanderen.be/inbo/en-gb/"),
+    person("Research Foundation - Flanders", role = "fnd",
+           comment = "https://lifewatch.be")
   )          
 Description: Package with functions to access and process data from the European
     Tracking Network hosted by VLIZ.
