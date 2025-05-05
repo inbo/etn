@@ -53,9 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.2" id="etn-2-2-2">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-2-2-2"></a></h2>
-<ul><li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
-<li>Fix issue in <code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> where <code>NA</code> was sometimes included in the results. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
-<li>Fix bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code>: when <code>rights_holder</code> was not provided the function would fail to generate a darwincore archive. (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>)</li>
+<ul><li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
+<li>Fix issue in <code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> where <code>NA</code> was sometimes included in the results (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
+<li>Fixed bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code> where providing no value for <code>rights_holder</code> would result in the function failing to generate a Darwin Core Archive (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="etn-2-2-1">etn 2.2.1<a class="anchor" aria-label="anchor" href="#etn-2-2-1"></a></h2>
