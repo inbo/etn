@@ -1,5 +1,7 @@
 # etn (development version)
 
+* Archival tags are now available in `get_animals()` (#365). 
+
 # etn 2.2.2
 
 * Fix issue in `check_value()` helper used in several functions to generate error messages. The error message failed to format when `NA` values were returned as part of a `list_` function call (#356).
