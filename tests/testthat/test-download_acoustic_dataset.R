@@ -64,7 +64,6 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
   withr::with_tempdir(
     {
       expect_snapshot(cat(download_acoustic_dataset(
-        con,
         animal_project_code = "2014_demer"
       )))
     },
