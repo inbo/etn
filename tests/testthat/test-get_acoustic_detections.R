@@ -31,7 +31,8 @@ test_that("get_acoustic_detections() returns unique detection_id", {
 
 test_that("get_acoustic_detections() returns the expected columns", {
   vcr::use_cassette("acoustic_detections_limited", {
-    df <- get_acoustic_detections(limit = TRUE)
+    df <- get_acoustic_detections(animal_project_code = "2014_demer",
+                                  limit = TRUE)
   })
   expected_col_names <- c(
     "detection_id",
