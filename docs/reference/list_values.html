@@ -14,7 +14,7 @@ Concatenated values (A,B) in the column can be returned as single values
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,9 +93,7 @@ Defaults to <code>,</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set default connection variable</span></span></span>
-<span class="r-in"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="connect_to_etn.html">connect_to_etn</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># For %&gt;%</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># For %&gt;%</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -106,7 +104,7 @@ Defaults to <code>,</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List unique scientific_name from a dataframe containing animal information</span></span></span>
-<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span><span class="va">con</span>, animal_project_code <span class="op">=</span> <span class="st">"2014_demer"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="st">"2014_demer"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">list_values</span><span class="op">(</span><span class="va">df</span>, <span class="st">"scientific_name"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 4 unique scientific_name values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Rutilus rutilus"    "Silurus glanis"     "Squalius cephalus" </span>
@@ -130,7 +128,7 @@ Defaults to <code>,</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Petromyzon marinus</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># tag_serial_number can contain comma-separated values</span></span></span>
-<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span><span class="va">con</span>, animal_id <span class="op">=</span> <span class="fl">5841</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span>animal_id <span class="op">=</span> <span class="fl">5841</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">df</span><span class="op">$</span><span class="va">tag_serial_number</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1280688,1280688"</span>
 <span class="r-in"><span></span></span>

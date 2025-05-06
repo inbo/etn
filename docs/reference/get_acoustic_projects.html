@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,18 +58,24 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_acoustic_projects</span><span class="op">(</span>connection <span class="op">=</span> <span class="va">con</span>, acoustic_project_code <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_acoustic_projects</span><span class="op">(</span><span class="va">connection</span>, acoustic_project_code <span class="op">=</span> <span class="cn">NULL</span>, api <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>connection</dt>
-<dd><p>A connection to the ETN database. Defaults to <code>con</code>.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.</p></dd>
 
 
 <dt>acoustic_project_code</dt>
 <dd><p>Character (vector). One or more acoustic
 project codes. Case-insensitive.</p></dd>
+
+
+<dt>api</dt>
+<dd><p>Logical. If <code>TRUE</code>, the function will use the API to access ETN.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -83,12 +89,9 @@ also
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set default connection variable</span></span></span>
-<span class="r-in"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="connect_to_etn.html">connect_to_etn</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Get all acoustic projects</span></span></span>
-<span class="r-in"><span><span class="fu">get_acoustic_projects</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 266 × 11</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all acoustic projects</span></span></span>
+<span class="r-in"><span><span class="fu">get_acoustic_projects</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 267 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    project_id project_code   project_type telemetry_type project_name start_date</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        794 2004_Gudena    acoustic     Acoustic       2004_Gudena  2004-01-01</span>
@@ -101,18 +104,18 @@ also
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        819 2014_Nene      acoustic     Acoustic       2014_Nene    2014-10-31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        815 2015_PhD_Gutm… acoustic     Acoustic       2015_PhD_Gu… 2015-09-22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        773 2016_Diaccia_… acoustic     PIT            2016_Diacci… 2016-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 256 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 257 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get a specific acoustic project</span></span></span>
-<span class="r-in"><span><span class="fu">get_acoustic_projects</span><span class="op">(</span><span class="va">con</span>, acoustic_project_code <span class="op">=</span> <span class="st">"demer"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_acoustic_projects</span><span class="op">(</span>acoustic_project_code <span class="op">=</span> <span class="st">"demer"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   project_id project_code project_type telemetry_type project_name start_date</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>          7 demer        acoustic     Acoustic       Demer        2014-04-10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
