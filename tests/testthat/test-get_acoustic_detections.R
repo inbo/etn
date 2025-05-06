@@ -317,7 +317,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
-  skip("BUG #278 crashes on big queries like demer and dijle")
+  single_select <- "demer"
+  single_select_df <- get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
   # Select multiple values
   multi_select <- c("demer", "dijle")
   multi_select_df <- get_acoustic_detections(acoustic_project_code = multi_select)
