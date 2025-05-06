@@ -1,5 +1,4 @@
-vcr::use_cassette("list_animal_ids", result_api <- list_animal_ids())
-
+result_api <- list_animal_ids()
 
 test_that("list_animal_ids() returns unique list of values using api", {
   expect_type(result_api, "integer")
@@ -19,7 +18,7 @@ test_that("list_animal_ids returns at least 5 known values", {
   result_sql <- list_animal_ids(api = FALSE)
 
   # a set of 5 known id_pk present in common.animal_release
-  known_ids <- c("56314", "8504", "7601", "4293", "58407")
+  known_ids <- c(4622, 4653, 4647, 4674, 4678, 4675)
 
   testthat::expect_true(all(known_ids %in% result_api))
   testthat::expect_true(all(known_ids %in% result_sql))
