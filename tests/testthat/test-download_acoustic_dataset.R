@@ -59,12 +59,17 @@ test_that("download_acoustic_dataset() does not warnings for valid dataset", {
 
 test_that("download_acoustic_dataset() returns message and summary stats", {
   # call download_acoustic_dataset() and capture the output, compare to a local
-  # file. Covers warnings and messages, but will fail on an error.
-  expect_snapshot(cat(download_acoustic_dataset(
-    animal_project_code = "2014_demer"
-  )))
-  # After running, remove the files we just created
-  withr::defer(unlink("2014_demer"))
+  # file. Covers warnings and messages, but will fail on an error. Use withr so
+  # we can download the dataset without storing it, but snapshot the message.
+  withr::with_tempdir(
+    {
+      expect_snapshot(cat(download_acoustic_dataset(
+        con,
+        animal_project_code = "2014_demer"
+      )))
+    },
+    clean = TRUE
+  )
 })
 
 test_that("download_acoustic_dataset() creates the expected files", {

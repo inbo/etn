@@ -52,19 +52,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.3.0" id="etn-2-3-0">etn 2.3.0<a class="anchor" aria-label="anchor" href="#etn-2-3-0"></a></h2>
-<ul><li>
-<strong>The etn package can now be used on your computer!</strong> It connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package. All functions make use of this API by default, which may result in <strong>slower response times</strong>. To use the previous method of directly connecting to the database (only possible when working on the <a href="https://rstudio.lifewatch.be/" class="external-link">LifeWatch RStudio Server</a>), set <code>api = false</code> in all functions (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>).</li>
-<li>The <code>connection</code> argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. <code>get_animals(animal_id = 305)</code>, not <code>get_animals(con, animal_id = 305)</code> or <code>get_animals(connection = con, animal_id = 305)</code> (<a href="https://github.com/inbo/etn/issues/301" class="external-link">#301</a>).</li>
-<li>
-<code><a href="../reference/connect_to_etn.html">connect_to_etn()</a></code> is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (<a href="https://github.com/inbo/etn/issues/303" class="external-link">#303</a>).</li>
-<li>The deprecated functions <code>get_deployments()</code>, <code>get_detections()</code>, <code>get_projects()</code>, <code>get_receivers()</code>, <code>list_network_project_codes()</code> are no longer included.</li>
-<li>
-<code><a href="../reference/write_dwc.html">write_dwc()</a></code> now invisibly returns the transformed data as a list of data frames (rather than a data frame) (<a href="https://github.com/inbo/etn/issues/302" class="external-link">#302</a>).</li>
-<li><p>Queries via the API and on the Lifewatch RStudio Server will now always return the same results. # etn 2.2.2</p></li>
-<li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
+<h2 class="pkg-version" data-toc-text="2.2.2" id="etn-2-2-2">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-2-2-2"></a></h2>
+<ul><li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
 <li>Fix issue in <code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> where <code>NA</code> was sometimes included in the results (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
-<li><p>Fixed bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code> where providing no value for <code>rights_holder</code> would result in the function failing to generate a Darwin Core Archive (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</p></li>
+<li>Fixed bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code> where providing no value for <code>rights_holder</code> would result in the function failing to generate a Darwin Core Archive (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="etn-2-2-1">etn 2.2.1<a class="anchor" aria-label="anchor" href="#etn-2-2-1"></a></h2>

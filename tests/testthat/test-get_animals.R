@@ -259,7 +259,7 @@ test_that("get_animals() returns correct tag_type and tag_subtype", {
   df <- df %>% filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
   expect_identical(
     df %>% distinct(tag_type) %>% pull() %>% sort(),
-    c("acoustic", "acoustic-archival") # "archival" currently not in data
+    c("acoustic", "acoustic-archival", "archival")
   )
   expect_identical(
     df %>% distinct(tag_subtype) %>% pull() %>% sort(),

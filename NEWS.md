@@ -1,4 +1,4 @@
-# etn 2.3.0
+# etn (development version)
 
 * **The etn package can now be used on your computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. All functions make use of this API by default, which may result in **slower response times**. To use the previous method of directly connecting to the database (only possible when working on the [LifeWatch RStudio Server](https://rstudio.lifewatch.be/)), set `api = false` in all functions (#280).
 * The `connection` argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. `get_animals(animal_id = 305)`, not `get_animals(con, animal_id = 305)` or `get_animals(connection = con, animal_id = 305)` (#301).
@@ -7,6 +7,7 @@
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
 * Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
 * You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339)
+* Archival tags are now available in `get_animals()` (#365). 
 
 # etn 2.2.2
 
