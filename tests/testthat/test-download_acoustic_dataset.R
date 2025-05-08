@@ -1,4 +1,4 @@
-# Create a data package
+# Create a data package using the API
 datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
 evalute_download_api <- evaluate_promise({
   download_acoustic_dataset(
@@ -7,6 +7,18 @@ evalute_download_api <- evaluate_promise({
   )
 })
 
+# Create a data package using local database access, if available. Tests that
+# require local database access should be skipped when it's not available.
+if ("ETN" %in% odbc::odbcListDataSources()$name) {
+  localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
+  evalutate_download_localdb <- evaluate_promise({
+    download_acoustic_dataset(
+      api = FALSE,
+      animal_project_code = "2014_demer",
+      directory = localdb_datapackage_path
+    )
+  })
+}
 test_that("download_acoustic_dataset() creates the expected files using api", {
   files_to_create <- c(
     "animals.csv",
@@ -35,17 +47,8 @@ test_that("download_acoustic_dataset() creates the expected files using local db
     "datapackage.json"
   )
 
-  local_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
-  evalutate_download_local <- evaluate_promise({
-    download_acoustic_dataset(
-      api = FALSE,
-      animal_project_code = "2014_demer",
-      directory = local_datapackage_path
-    )
-  })
-
   # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(local_datapackage_path)))
+  expect_true(all(files_to_create %in% list.files(localdb_datapackage_path)))
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
@@ -61,7 +64,7 @@ test_that("download_acoustic_dataset() creates the expected messages using local
   skip_if_not_localdb()
 
   expect_snapshot(
-    cat(evalutate_download_local$messages, sep = "\n"),
+    cat(evalutate_download_localdb$messages, sep = "\n"),
     variant = "sql",
     # don't include the tempdir name
     transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)")
