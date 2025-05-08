@@ -8,11 +8,6 @@ evaluate_download <- evaluate_promise({
   )
 })
 
-test_that("download_acoustic_dataset() creates the expected messages and files using api", {
-  download_dir <- file.path(tempdir(), "using_api")
-  dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
-})
-
 test_that("download_acoustic_dataset() creates the expected files", {
   files_to_create <- c(
     "animals.csv",
@@ -44,6 +39,15 @@ test_that("download_acoustic_dataset() creates the expected files", {
 test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
 
   skip_if_not_localdb()
+
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
+  )
 
   download_dir <- file.path(tempdir(), "using_sql")
   dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
