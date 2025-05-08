@@ -125,7 +125,6 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "receivers")))
 })
 
-
 test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
