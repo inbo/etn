@@ -44,35 +44,11 @@ test_that("download_acoustic_dataset() creates the expected files using local db
     )
   })
 
-  # download_dir <- file.path(tempdir(), "using_sql")
-
-  # expect_snapshot(
-  #   download_acoustic_dataset(
-  #     api = FALSE,
-  #     animal_project_code = "2014_demer",
-  #     directory = download_dir
-  #   ),
-  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-  #   variant = "sql"
-  # )
-
   # Function creates the expected files
   expect_true(all(files_to_create %in% list.files(local_datapackage_path)))
-
-  # Remove generated files and directories after test
-  # unlink(download_dir, recursive = TRUE)
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
-  # expect_snapshot(
-  #   download_acoustic_dataset(
-  #     api = TRUE,
-  #     animal_project_code = "2014_demer",
-  #     directory = download_dir
-  #   ),
-  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-  #   variant = "api"
-  # )
   expect_snapshot(
     cat(evalute_download_api$messages, sep = "\n"),
     variant = "api",
