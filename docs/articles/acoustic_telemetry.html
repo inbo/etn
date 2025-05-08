@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Explore acoustic telemetry data</h1>
                         <h4 data-toc-skip class="author">Damiano Oldoni</h4>
             
-            <h4 data-toc-skip class="date">2025-04-22</h4>
+            <h4 data-toc-skip class="date">2025-05-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/HEAD/vignettes/acoustic_telemetry.Rmd" class="external-link"><code>vignettes/acoustic_telemetry.Rmd</code></a></small>
       <div class="d-none name"><code>acoustic_telemetry.Rmd</code></div>
@@ -114,20 +114,20 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span></code></pre></div>
-<p>Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to <a href="https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables" class="external-link">use environment variables</a>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connect_to_etn.html">connect_to_etn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"userid"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"pwd"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># This is the default, so you could also use connect_to_etn()</span></span></code></pre></div>
-<p>Using <code>con</code> as variable to store the collection is not mandatory, but it makes your life much easier as <code>con</code> is the default value of the argument <code>connection</code>, present in every other function of this package.</p>
+</div>
+<div class="section level2">
+<h2 id="user-credentials">User credentials<a class="anchor" aria-label="anchor" href="#user-credentials"></a>
+</h2>
+<p>Functions in etn need user credentials to connect to the database. You should have received those from VLIZ. You will be prompted (once per session) for these credentials. To avoid this you can save them as <a href="https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables" class="external-link">environment variables</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="select-projects-of-interest">Select project(s) of interest<a class="anchor" aria-label="anchor" href="#select-projects-of-interest"></a>
 </h2>
 <p>A researcher typically works in the context of one or more <em>animal projects</em>. As the project codes are not always easy to remember, let’s start by getting an overview of all projects:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_projects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_animal_projects.html">get_animal_projects</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Show a preview:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_projects</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 10 × 11</span></span></span>
 <span><span class="co">##    project_id project_code   project_type telemetry_type project_name start_date</span></span>
@@ -141,11 +141,11 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span>         15 2012_leopoldk… animal       Acoustic       2012 Leopol… 2012-01-01</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span>        757 2013_Foyle     animal       Acoustic       2013_Foyle   2013-07-01</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span>         18 2013_albertka… animal       Acoustic       2013 Albert… 2013-10-10</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span>        801 2014_Frome     animal       Acoustic       2014_Frome   2014-10-01</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span>        801 2014_Frome     animal       <span style="color: #BB0000;">NA</span>             2014_Frome   2014-10-01</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>If you know the <code>project code</code> already and you are just interested to get more information about it, you can specify it in the <code><a href="../reference/get_animal_projects.html">get_animal_projects()</a></code> function directly:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">projects_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2014_demer"</span>, <span class="st">"2015_dijle"</span><span class="op">)</span></span>
 <span><span class="va">projects_study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_animal_projects.html">get_animal_projects</a></span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="va">projects_code</span><span class="op">)</span></span>
 <span><span class="va">projects_study</span></span></code></pre></div>
@@ -155,9 +155,9 @@
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>This is exactly the same as retrieving all projects first and filtering them afterwards based on column <code>project_code</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_projects</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">project_code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">projects_code</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
@@ -166,9 +166,9 @@
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>To list all available animal project codes as a vector, you can use <code><a href="../reference/list_animal_project_codes.html">list_animal_project_codes()</a></code>, one of the etn functions in the <a href="https://inbo.github.io/etn/reference/index.html#section-list-parameter-options"><code>list_*</code> family</a>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_animal_project_codes.html">list_animal_project_codes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "2004_Gudena"           "2010_phd_reubens"      "2010_phd_reubens_sync"</span></span>
 <span><span class="co">##  [4] "2011_Loire"            "2011_rivierprik"       "2011_Warnow"          </span></span>
@@ -179,7 +179,7 @@
 <h2 id="animals">Animals<a class="anchor" aria-label="anchor" href="#animals"></a>
 </h2>
 <p>By using <code><a href="../reference/get_animals.html">get_animals()</a></code> you can retrieve information about each animal (<code>animal_id</code>), such as scientific name, length, capture/release date and location, and the attached tag(s) (<code>tag_serial_number</code>):</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_animals.html">get_animals</a></span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="va">projects_code</span><span class="op">)</span></span>
 <span><span class="va">animals</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 10 × 66</span></span></span>
@@ -203,7 +203,7 @@
 <span><span class="co">## <span style="color: #949494;">#   capture_method &lt;chr&gt;, capture_depth &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   capture_temperature_change &lt;chr&gt;, release_date_time &lt;dttm&gt;, …</span></span></span></code></pre>
 <p>What species and how many individuals are tracked for the projects <code>2014_demer</code> and <code>2015_dijle</code>?</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animals</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">scientific_name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
@@ -221,7 +221,7 @@
 <h2 id="detections">Detections<a class="anchor" aria-label="anchor" href="#detections"></a>
 </h2>
 <p>Let’s say we are interested in the tracking data of Wels catfish (<em>Silurus glanis</em>) in 2014. You can retrieve the detection history using <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code>:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acoustic_detections.html">get_acoustic_detections</a></span><span class="op">(</span></span>
 <span>  animal_project_code <span class="op">=</span> <span class="va">projects_code</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2014-01-01"</span>,</span>
@@ -229,7 +229,7 @@
 <span>  scientific_name <span class="op">=</span> <span class="st">"Silurus glanis"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Preview:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 10 × 21</span></span></span>
 <span><span class="co">##    detection_id date_time           tag_serial_number acoustic_tag_id</span></span>
@@ -249,9 +249,9 @@
 <span><span class="co">## <span style="color: #949494;">#   station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   depth_in_meters &lt;dbl&gt;, sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor2_value &lt;dbl&gt;, sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   source_file &lt;chr&gt;, qc_flag &lt;lgl&gt;, deployment_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   source_file &lt;chr&gt;, qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></span></span></code></pre>
 <p>Which individuals have been detected (<code>animal_id</code>) and in which period?</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus_period</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/date.html" class="external-link">date</a></span><span class="op">(</span><span class="va">date_time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -274,7 +274,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>       385 2014-04-24 2014-12-19</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">9</span>       386 2014-04-24 2014-12-28</span></span></code></pre>
 <p>Notice we group by <code>animal_id</code>, the unique identifier of the fish. However, if the fish has only been tagged once (as typically occurs), we could use <code>acoustic_tag_id</code> as well, i.e. the identifier picked up by acoustic receivers:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/date.html" class="external-link">date</a></span><span class="op">(</span><span class="va">date_time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">acoustic_tag_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -295,7 +295,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">8</span> A69-1601-28297  2014-04-24 2014-12-19</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">9</span> A69-1601-28298  2014-04-24 2014-12-28</span></span></code></pre>
 <p>We can also get the tracking duration of each fish:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus_duration</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">animal_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -314,7 +314,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>       385 238.517766 days</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">9</span>       386 248.323808 days</span></span></code></pre>
 <p>How many times has an individual has been detected?</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">animal_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -322,21 +322,21 @@
 <span><span class="co">## <span style="color: #949494;"># Groups:   animal_id [9]</span></span></span>
 <span><span class="co">##   animal_id     n</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>       365  <span style="text-decoration: underline;">4</span>872</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>       365  <span style="text-decoration: underline;">4</span>857</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>       366  <span style="text-decoration: underline;">2</span>778</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span>       367   497</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">4</span>       368  <span style="text-decoration: underline;">7</span>690</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span>       369  <span style="text-decoration: underline;">1</span>183</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">6</span>       370  <span style="text-decoration: underline;">4</span>462</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">7</span>       384  <span style="text-decoration: underline;">2</span>563</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">8</span>       385 <span style="text-decoration: underline;">29</span>068</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">9</span>       386 <span style="text-decoration: underline;">18</span>478</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">8</span>       385 <span style="text-decoration: underline;">28</span>004</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">9</span>       386 <span style="text-decoration: underline;">18</span>455</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="stations">Stations<a class="anchor" aria-label="anchor" href="#stations"></a>
 </h2>
 <p>At how many detection stations have the individuals been detected?</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">animal_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">station_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -355,18 +355,18 @@
 <span><span class="co">## <span style="color: #BCBCBC;">8</span>       385    18</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">9</span>       386    15</span></span></code></pre>
 <p>Which stations have been involved? You can retrieve them using <code>list_values</code> function applied to column <code>station_name</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations_silurus</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/list_values.html">list_values</a></span><span class="op">(</span><span class="va">station_name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 23 unique station_name values</span></span></code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations_silurus</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "de-8"   "de-9"   "de-7"   "de-10"  "de-12"  "de-14"  "de-14a" "de-5"  </span></span>
 <span><span class="co">##  [9] "de-11"  "de-13"  "s-2a"   "de-18"  "de-19"  "de-20"  "de-3"   "de-2"  </span></span>
 <span><span class="co">## [17] "de-6"   "de-4"   "de-1"   "de-21"  "de-22"  "de-23"  "de-16"</span></span></code></pre>
 <p>Notice how a detection station can be linked to multiple deployments:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">station_name</span>, <span class="va">deployment_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">station_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -388,7 +388,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> de-3                  <span style="text-decoration: underline;">2</span>869     2</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 23 more rows</span></span></span></code></pre>
 <p>Sometimes it’s interesting to know the number of detections per station:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n_detect_station</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">station_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -403,14 +403,14 @@
 <span><span class="co">## <span style="color: #BCBCBC;"> 3</span> de-11          163</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span> de-12         <span style="text-decoration: underline;">4</span>203</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 5</span> de-13          166</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> de-14        <span style="text-decoration: underline;">13</span>353</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> de-14        <span style="text-decoration: underline;">12</span>266</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 7</span> de-14a        <span style="text-decoration: underline;">6</span>604</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> de-16          591</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> de-18          148</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> de-19          650</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 13 more rows</span></span></span></code></pre>
 <p>It’s also interesting to know the number of unique individuals per station:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n_silurus_station</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">station_name</span>, <span class="va">animal_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -437,10 +437,10 @@
 <h2 id="acoustic-tags">Acoustic tags<a class="anchor" aria-label="anchor" href="#acoustic-tags"></a>
 </h2>
 <p>To get more information about the tags involved in <code>detections_silurus</code>, you can use the function <code>get_tags</code>, which returns tag related information such as serial number, manufacturer, model, and frequency:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tags_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_values.html">list_values</a></span><span class="op">(</span><span class="va">detections_silurus</span>, <span class="va">acoustic_tag_id</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 9 unique acoustic_tag_id values</span></span></code></pre>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tags_silurus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tags.html">get_tags</a></span><span class="op">(</span>acoustic_tag_id <span class="op">=</span> <span class="va">tags_id</span><span class="op">)</span></span>
 <span><span class="va">tags_silurus</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 9 × 54</span></span></span>
@@ -458,12 +458,12 @@
 <span><span class="co">## <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span></span></code></pre>
 <p>You can also retrieve such information by <code>tag_serial_number</code>:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tags_serial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">detections_silurus</span><span class="op">$</span><span class="va">tag_serial_number</span><span class="op">)</span></span>
 <span><span class="va">tags_silurus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_tags.html">get_tags</a></span><span class="op">(</span>tag_serial_number <span class="op">=</span> <span class="va">tags_serial</span><span class="op">)</span></span>
 <span><span class="va">tags_silurus</span></span></code></pre></div>
@@ -482,13 +482,13 @@
 <span><span class="co">## <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span></span></code></pre>
 <p>However, keep in mind that there is a fundamental difference between the arguments <code>acoustic_tag_id</code> and <code>tag_serial_number</code>: the <code>tag_serial_number</code> identifies the <em>device</em>, which could contain multiple tags or sensors and thus multiple <code>acoustic_tag_id</code>.</p>
 <p>All possible <code>acoustic_tag_id</code> can be retrieved with the correspondent <code>list_*</code> function:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_acoustic_tag_ids.html">list_acoustic_tag_ids</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "416kHz-485"  "416kHz-956"  "416kHz-1141" "416kHz-1164" "416kHz-1277"</span></span>
 <span><span class="co">##  [6] "416kHz-1935" "416kHz-2066" "416kHz-2219" "416kHz-2228" "416kHz-2248"</span></span></code></pre>
@@ -497,15 +497,15 @@
 <h2 id="acoustic-network-projects">Acoustic network projects<a class="anchor" aria-label="anchor" href="#acoustic-network-projects"></a>
 </h2>
 <p>The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field <code>acoustic_project_code</code>. You can retrieve them via the <em>list</em> function <code><a href="../reference/list_values.html">list_values()</a></code>:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acoustic_project_codes</span> <span class="op">&lt;-</span> <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/list_values.html">list_values</a></span><span class="op">(</span><span class="va">acoustic_project_code</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 2 unique acoustic_project_code values</span></span></code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acoustic_project_codes</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "demer"      "zeeschelde"</span></span></code></pre>
 <p>To get more information about these acoustic networks, you can use function <code><a href="../reference/get_acoustic_projects.html">get_acoustic_projects()</a></code></p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acoustic_projects_silurus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acoustic_projects.html">get_acoustic_projects</a></span><span class="op">(</span></span>
 <span>  acoustic_project_code <span class="op">=</span> <span class="va">acoustic_project_codes</span></span>
 <span><span class="op">)</span></span>
@@ -516,9 +516,9 @@
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>          7 demer        acoustic     Acoustic       Demer        2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>          5 zeeschelde   acoustic     Acoustic       Zeeschelde   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>You can retrieve the full list of acoustic network projects with the correspondent <code>list_*</code> function:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_acoustic_project_codes.html">list_acoustic_project_codes</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "2004_Gudena"              "2011_bovenschelde"       </span></span>
 <span><span class="co">##  [3] "2011_Loire"               "2011_Warnow"             </span></span>
@@ -530,7 +530,7 @@
 <h2 id="acoustic-deployments">Acoustic deployments<a class="anchor" aria-label="anchor" href="#acoustic-deployments"></a>
 </h2>
 <p>You can retrieve deployment information related to the acoustic networks in <code>acoustic_project_codes</code> by using <code><a href="../reference/get_acoustic_deployments.html">get_acoustic_deployments()</a></code> function:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deployments</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acoustic_deployments.html">get_acoustic_deployments</a></span><span class="op">(</span></span>
 <span>  acoustic_project_code <span class="op">=</span> <span class="va">acoustic_project_codes</span></span>
 <span><span class="op">)</span></span>
@@ -556,18 +556,18 @@
 <span><span class="co">## <span style="color: #949494;">#   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;, …</span></span></span></code></pre>
 <p>These are the deployments of the acoustic receivers involved in <code>detections_silurus</code>:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deploys_silurus</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/list_values.html">list_values</a></span><span class="op">(</span><span class="va">deployment_id</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 33 unique deployment_id values</span></span></code></pre>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deploys_silurus</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] 1427 1437 1378 1428 2938 1433 1431 1425 1429 1432 1379 1439 1436 1440 1381</span></span>
-<span><span class="co">## [16] 2869 1478 1663 1662 1424 1656 1659 1660 1441 2933 1434 1384 1506 1592 1470</span></span>
-<span><span class="co">## [31] 1588 1573 1593</span></span></code></pre>
+<span><span class="co">## [16] 2869 1478 1663 1662 1424 1656 1659 1660 1441 2933 1434 1384 1506 1470 1588</span></span>
+<span><span class="co">## [31] 1573 1593 1592</span></span></code></pre>
 <p>More information about them can be retrieved via <code><a href="../reference/get_acoustic_deployments.html">get_acoustic_deployments()</a></code> function with argument <code>deployment_id</code>:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deployments_silurus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acoustic_deployments.html">get_acoustic_deployments</a></span><span class="op">(</span></span>
 <span>  deployment_id <span class="op">=</span> <span class="va">deploys_silurus</span></span>
 <span><span class="op">)</span></span>
@@ -593,7 +593,7 @@
 <span><span class="co">## <span style="color: #949494;">#   battery_installation_date &lt;dttm&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   activation_date_time &lt;dttm&gt;, recover_date_time &lt;dttm&gt;, …</span></span></span></code></pre>
 <p>Deployment duration:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deployments_silurus_duration</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">deployments_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>duration <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span><span class="va">recover_date_time</span> <span class="op">-</span> <span class="va">deploy_date_time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -615,7 +615,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>          <span style="text-decoration: underline;">1</span>431 de-14a       16070400s (~26.57 weeks)</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 23 more rows</span></span></span></code></pre>
 <p>Number of days a deployment detected the passage of one or more individuals:</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n_active_days_deployments_silurus</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/date.html" class="external-link">date</a></span><span class="op">(</span><span class="va">date_time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -629,7 +629,7 @@
 <span><span class="co">##            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span>          <span style="text-decoration: underline;">1</span>378 de-7            125</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 2</span>          <span style="text-decoration: underline;">1</span>379 s-2a              7</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>          <span style="text-decoration: underline;">1</span>381 de-3              5</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>          <span style="text-decoration: underline;">1</span>381 de-3              3</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span>          <span style="text-decoration: underline;">1</span>384 de-21            25</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 5</span>          <span style="text-decoration: underline;">1</span>424 de-1              7</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span>          <span style="text-decoration: underline;">1</span>425 de-5             48</span></span>
@@ -639,7 +639,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>          <span style="text-decoration: underline;">1</span>431 de-14a           59</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 23 more rows</span></span></span></code></pre>
 <p>Relative detection duration, i.e. number of days with at least one detection divided by deployment duration:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rel_det_duration_silurus</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">n_active_days_deployments_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
@@ -656,7 +656,7 @@
 <span><span class="co">##            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span>          <span style="text-decoration: underline;">1</span>378 de-7                              0.548 </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 2</span>          <span style="text-decoration: underline;">1</span>379 s-2a                              0.031<span style="text-decoration: underline;">1</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>          <span style="text-decoration: underline;">1</span>381 de-3                              0.111 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>          <span style="text-decoration: underline;">1</span>381 de-3                              0.066<span style="text-decoration: underline;">7</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 4</span>          <span style="text-decoration: underline;">1</span>384 de-21                             0.373 </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 5</span>          <span style="text-decoration: underline;">1</span>424 de-1                              0.025<span style="text-decoration: underline;">5</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 6</span>          <span style="text-decoration: underline;">1</span>425 de-5                              0.170 </span></span>
@@ -671,7 +671,7 @@
 </h2>
 <p>Aside standard graphs, the geographical component of telemetry data makes interactive maps particularly useful. The package <code>leaflet</code> is quite popular to create such kind of visualizations.</p>
 <p>We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as pop-ups. First, we retrieve the coordinates of the stations:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_info_stations</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span></span>
@@ -697,7 +697,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> de-19                   51.0             5.08 demer                </span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 13 more rows</span></span></span></code></pre>
 <p>To be able to produce the desired map:</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">geo_info_stations</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addMarkers</a></span><span class="op">(</span></span>
@@ -707,7 +707,7 @@
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[50.9851617,50.9916225,50.9922283,50.9911178,50.9918161,50.9902591,50.99004,50.9901667,50.9876189,50.9849358,50.9942609,50.9847044,50.9843681,50.9833902,50.98197,51.0028729,51.0089239,51.0026609,50.9898768,50.9909004,50.991246,50.9912632,51.02032],[4.8410025,5.0542423,5.0549485,5.0574492,5.0578433,5.0602737,5.060056,5.0616675,5.0742895,5.075274,4.8938203,5.0765513,5.0725863,5.0759855,5.0780232,4.9333539,4.9623949,4.9914479,5.0152068,5.0310774,5.0403814,5.049155,3.96965],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Station: de-1 (demer)","Station: de-10 (demer)","Station: de-11 (demer)","Station: de-12 (demer)","Station: de-13 (demer)","Station: de-14 (demer)","Station: de-14a (demer)","Station: de-16 (demer)","Station: de-18 (demer)","Station: de-19 (demer)","Station: de-2 (demer)","Station: de-20 (demer)","Station: de-21 (demer)","Station: de-22 (demer)","Station: de-23 (demer)","Station: de-3 (demer)","Station: de-4 (demer)","Station: de-5 (demer)","Station: de-6 (demer)","Station: de-7 (demer)","Station: de-8 (demer)","Station: de-9 (demer)","Station: s-2a (zeeschelde)"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>We can visualize the number of detections per station, <code>n_detect_station</code>, by joining it with <code>geo_info_stations</code>:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a continuous colour palette function</span></span>
 <span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/colorNumeric.html" class="external-link">colorNumeric</a></span><span class="op">(</span></span>
 <span>  palette <span class="op">=</span> <span class="st">"viridis"</span>,</span>
@@ -740,8 +740,8 @@
 <span>    values <span class="op">=</span> <span class="op">~</span><span class="va">n</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[50.9851617,50.9916225,50.9922283,50.9911178,50.9918161,50.9902591,50.99004,50.9901667,50.9876189,50.9849358,50.9942609,50.9847044,50.9843681,50.9833902,50.98197,51.0028729,51.0089239,51.0026609,50.9898768,50.9909004,50.991246,50.9912632,51.02032],[4.8410025,5.0542423,5.0549485,5.0574492,5.0578433,5.0602737,5.060056,5.0616675,5.0742895,5.075274,4.8938203,5.0765513,5.0725863,5.0759855,5.0780232,4.9333539,4.9623949,4.9914479,5.0152068,5.0310774,5.0403814,5.049155,3.96965],[5.908082938168931,7.427144133408616,5.093750200806762,8.343553835005117,5.111987788356544,9.499496357683965,8.795430805040018,6.381816017406098,4.997212273764115,6.476972362889683,3.610917912644224,4.110873864173311,5.891644211825771,6.282266746896006,6.952728644624869,3.891820298110626,5.988961416889864,7.428927194802272,6.309918278226516,9.52134826973146,9.656051308652874,9.165447603085447,4.753590191106364],null,null,{"interactive":true,"className":"","stroke":false,"color":["#46095C","#482677","#450457","#39568C","#450457","#9DD93B","#287D8E","#470E61","#450457","#471063","#440154","#440155","#46095C","#470D60","#48196B","#440154","#460A5D","#482677","#470D60","#AADC32","#FDE725","#25AB82","#440356"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#46095C","#482677","#450457","#39568C","#450457","#9DD93B","#287D8E","#470E61","#450457","#471063","#440154","#440155","#46095C","#470D60","#48196B","#440154","#460A5D","#482677","#470D60","#AADC32","#FDE725","#25AB82","#440356"],"fillOpacity":0.8},null,null,["Station: de-1 (demer)<br/># detections: 368","Station: de-10 (demer)<br/># detections: 1681","Station: de-11 (demer)<br/># detections: 163","Station: de-12 (demer)<br/># detections: 4203","Station: de-13 (demer)<br/># detections: 166","Station: de-14 (demer)<br/># detections: 13353","Station: de-14a (demer)<br/># detections: 6604","Station: de-16 (demer)<br/># detections: 591","Station: de-18 (demer)<br/># detections: 148","Station: de-19 (demer)<br/># detections: 650","Station: de-2 (demer)<br/># detections: 37","Station: de-20 (demer)<br/># detections: 61","Station: de-21 (demer)<br/># detections: 362","Station: de-22 (demer)<br/># detections: 535","Station: de-23 (demer)<br/># detections: 1046","Station: de-3 (demer)<br/># detections: 49","Station: de-4 (demer)<br/># detections: 399","Station: de-5 (demer)<br/># detections: 1684","Station: de-6 (demer)<br/># detections: 550","Station: de-7 (demer)<br/># detections: 13648","Station: de-8 (demer)<br/># detections: 15616","Station: de-9 (demer)<br/># detections: 9561","Station: s-2a (zeeschelde)<br/># detections: 116"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #472D7B 12.6002952692727%, #3A538B 25.4380897361833%, #2B748E 38.2758842030939%, #20928C 51.1136786700045%, #2CB17E 63.9514731369151%, #67CC5C 76.7892676038257%, #B9DE28 89.6270620707363%, #FDE725 "],"labels":["2,000","4,000","6,000","8,000","10,000","12,000","14,000"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Detections","extra":{"p_1":0.1260029526927274,"p_n":0.8962706207073625},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>In a similar way we can visualize the number of detected individuals per station, <code>n_silurus_station</code>:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[50.9851617,50.9916225,50.9922283,50.9911178,50.9918161,50.9902591,50.99004,50.9901667,50.9876189,50.9849358,50.9942609,50.9847044,50.9843681,50.9833902,50.98197,51.0028729,51.0089239,51.0026609,50.9898768,50.9909004,50.991246,50.9912632,51.02032],[4.8410025,5.0542423,5.0549485,5.0574492,5.0578433,5.0602737,5.060056,5.0616675,5.0742895,5.075274,4.8938203,5.0765513,5.0725863,5.0759855,5.0780232,4.9333539,4.9623949,4.9914479,5.0152068,5.0310774,5.0403814,5.049155,3.96965],[5.908082938168931,7.427144133408616,5.093750200806762,8.343553835005117,5.111987788356544,9.414586486185929,8.795430805040018,6.381816017406098,4.997212273764115,6.476972362889683,3.610917912644224,4.110873864173311,5.891644211825771,6.282266746896006,6.952728644624869,3.526360524616162,5.988961416889864,7.428927194802272,6.309918278226516,9.52134826973146,9.656051308652874,9.165447603085447,4.753590191106364],null,null,{"interactive":true,"className":"","stroke":false,"color":["#46095C","#482677","#450457","#39568C","#450457","#71CF57","#277E8E","#470E61","#450457","#471063","#440154","#440155","#46095C","#470D60","#48196B","#440154","#460A5D","#482677","#470D60","#AADC32","#FDE725","#25AB82","#440356"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#46095C","#482677","#450457","#39568C","#450457","#71CF57","#277E8E","#470E61","#450457","#471063","#440154","#440155","#46095C","#470D60","#48196B","#440154","#460A5D","#482677","#470D60","#AADC32","#FDE725","#25AB82","#440356"],"fillOpacity":0.8},null,null,["Station: de-1 (demer)<br/># detections: 368","Station: de-10 (demer)<br/># detections: 1681","Station: de-11 (demer)<br/># detections: 163","Station: de-12 (demer)<br/># detections: 4203","Station: de-13 (demer)<br/># detections: 166","Station: de-14 (demer)<br/># detections: 12266","Station: de-14a (demer)<br/># detections: 6604","Station: de-16 (demer)<br/># detections: 591","Station: de-18 (demer)<br/># detections: 148","Station: de-19 (demer)<br/># detections: 650","Station: de-2 (demer)<br/># detections: 37","Station: de-20 (demer)<br/># detections: 61","Station: de-21 (demer)<br/># detections: 362","Station: de-22 (demer)<br/># detections: 535","Station: de-23 (demer)<br/># detections: 1046","Station: de-3 (demer)<br/># detections: 34","Station: de-4 (demer)<br/># detections: 399","Station: de-5 (demer)<br/># detections: 1684","Station: de-6 (demer)<br/># detections: 550","Station: de-7 (demer)<br/># detections: 13648","Station: de-8 (demer)<br/># detections: 15616","Station: de-9 (demer)<br/># detections: 9561","Station: s-2a (zeeschelde)<br/># detections: 116"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #472D7B 12.6171223206264%, #3A538B 25.452445128995%, #2B748E 38.2877679373636%, #20928C 51.1230907457323%, #2CB17E 63.9584135541009%, #67CC5C 76.7937363624695%, #B9DE28 89.6290591708381%, #FDE725 "],"labels":["2,000","4,000","6,000","8,000","10,000","12,000","14,000"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Detections","extra":{"p_1":0.1261712232062636,"p_n":0.8962905917083814},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>In a similar way we can visualize the number of detected individuals per station, <code>n_silurus_station</code>:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a continuous colour palette function</span></span>
 <span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/colorNumeric.html" class="external-link">colorNumeric</a></span><span class="op">(</span></span>
 <span>  palette <span class="op">=</span> <span class="st">"viridis"</span>,</span>
@@ -775,7 +775,7 @@
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-36aa3d2a04d42bbc2145" style="width:700px;height:432.632880098888px;"></div>
 <script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[50.9851617,50.9916225,50.9922283,50.9911178,50.9918161,50.9902591,50.99004,50.9901667,50.9876189,50.9849358,50.9942609,50.9847044,50.9843681,50.9833902,50.98197,51.0028729,51.0089239,51.0026609,50.9898768,50.9909004,50.991246,50.9912632,51.02032],[4.8410025,5.0542423,5.0549485,5.0574492,5.0578433,5.0602737,5.060056,5.0616675,5.0742895,5.075274,4.8938203,5.0765513,5.0725863,5.0759855,5.0780232,4.9333539,4.9623949,4.9914479,5.0152068,5.0310774,5.0403814,5.049155,3.96965],[3,6,4,5,4,6,6,4,3,5,3,4,4,4,4,3,3,7,6,7,7,8,4],null,null,{"interactive":true,"className":"","stroke":false,"color":["#440154","#22A884","#414487","#2A788E","#414487","#22A884","#22A884","#414487","#440154","#2A788E","#440154","#414487","#414487","#414487","#414487","#440154","#440154","#7AD151","#22A884","#7AD151","#7AD151","#FDE725","#414487"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#22A884","#414487","#2A788E","#414487","#22A884","#22A884","#414487","#440154","#2A788E","#440154","#414487","#414487","#414487","#414487","#440154","#440154","#7AD151","#22A884","#7AD151","#7AD151","#FDE725","#414487"],"fillOpacity":0.8},null,null,["Station: de-1 (demer)<br/># detected individuals: 3","Station: de-10 (demer)<br/># detected individuals: 6","Station: de-11 (demer)<br/># detected individuals: 4","Station: de-12 (demer)<br/># detected individuals: 5","Station: de-13 (demer)<br/># detected individuals: 4","Station: de-14 (demer)<br/># detected individuals: 6","Station: de-14a (demer)<br/># detected individuals: 6","Station: de-16 (demer)<br/># detected individuals: 4","Station: de-18 (demer)<br/># detected individuals: 3","Station: de-19 (demer)<br/># detected individuals: 5","Station: de-2 (demer)<br/># detected individuals: 3","Station: de-20 (demer)<br/># detected individuals: 4","Station: de-21 (demer)<br/># detected individuals: 4","Station: de-22 (demer)<br/># detected individuals: 4","Station: de-23 (demer)<br/># detected individuals: 4","Station: de-3 (demer)<br/># detected individuals: 3","Station: de-4 (demer)<br/># detected individuals: 3","Station: de-5 (demer)<br/># detected individuals: 7","Station: de-6 (demer)<br/># detected individuals: 6","Station: de-7 (demer)<br/># detected individuals: 7","Station: de-8 (demer)<br/># detected individuals: 7","Station: de-9 (demer)<br/># detected individuals: 8","Station: s-2a (zeeschelde)<br/># detected individuals: 4"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #440154 0%, #414487 20%, #2A788E 40%, #22A884 60%, #7AD151 80%, #FDE725 100%, #FDE725 "],"labels":["3","4","5","6","7","8"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Detected individuals","extra":{"p_1":0,"p_n":1},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_info_deploys</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">detections_silurus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span></span>
@@ -803,7 +803,7 @@
 <span><span class="co">## <span style="color: #949494;"># ℹ 23 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: acoustic_project_code &lt;chr&gt;</span></span></span></code></pre>
 <p>We are ready to create the desired map, where we show the deployment ID, the station name and the network project as popups:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a continuous colour palette function</span></span>
 <span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/colorNumeric.html" class="external-link">colorNumeric</a></span><span class="op">(</span></span>
 <span>  palette <span class="op">=</span> <span class="st">"viridis"</span>,</span>
@@ -838,7 +838,7 @@
 <span>    values <span class="op">=</span> <span class="op">~</span><span class="va">relative_detection_duration</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-febe03efa1a2d8d52a86" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[50.9909004,51.02032,51.0028729,50.9843681,50.9851617,51.0026609,50.991246,50.9916225,50.9922283,50.99004,50.9918161,50.9902591,50.9901667,50.9849358,50.9912632,50.9876189,50.9847044,50.98197,50.9911178,50.9942609,50.99004,50.991246,50.9912632,50.9902591,50.9909004,50.9911178,50.9843681,50.9833902,51.0089239,50.9898768,51.0028729,50.9833902,50.9911178],[5.0310774,3.96965,4.9333539,5.0725863,4.8410025,4.9914479,5.0403814,5.0542423,5.0549485,5.060056,5.0578433,5.0602737,5.0616675,5.075274,5.049155,5.0742895,5.0765513,5.0780232,5.0574492,4.8938203,5.060056,5.0403814,5.049155,5.0602737,5.0310774,5.0574492,5.0725863,5.0759855,4.9623949,5.0152068,4.9333539,5.0759855,5.0574492],[54.80453050785532,3.111111111111111,11.11111111111111,37.3134328358209,2.545454545454545,16.96113074204947,62.25794665692364,11.36363636363636,4.870129870129871,31.72043010752688,4.39121756487026,28.23529411764706,8.766233766233766,5.51948051948052,37.93529266485552,2.711864406779661,3.050847457627119,18.30508474576271,9.090909090909092,2.116402116402116,9.448818897637794,5.286343612334802,5.28052805280528,63.1578947368421,5.286343612334802,6.25,26.08695652173913,18.84057971014493,18.36734693877551,29.82456140350877,4.918032786885246,13.65638766519824,14.44444444444444],null,null,{"interactive":true,"className":"","stroke":false,"color":["#A2DA37","#46075A","#463480","#1FA287","#450457","#3C508B","#F4E61E","#453581","#471265","#228D8D","#470F62","#277F8E","#482878","#481668","#21A585","#450458","#46075A","#39568C","#482979","#440154","#472B7A","#481467","#481467","#FDE725","#481467","#481A6C","#2A768E","#38598C","#39568C","#25858E","#471265","#424086","#414588"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#A2DA37","#46075A","#463480","#1FA287","#450457","#3C508B","#F4E61E","#453581","#471265","#228D8D","#470F62","#277F8E","#482878","#481668","#21A585","#450458","#46075A","#39568C","#482979","#440154","#472B7A","#481467","#481467","#FDE725","#481467","#481A6C","#2A768E","#38598C","#39568C","#25858E","#471265","#424086","#414588"],"fillOpacity":0.8},{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["DeploymentID: 1378<br/>Station: de-7 (demer)<br/># relative detection duration: 0.55","DeploymentID: 1379<br/>Station: s-2a (zeeschelde)<br/># relative detection duration: 0.03","DeploymentID: 1381<br/>Station: de-3 (demer)<br/># relative detection duration: 0.11","DeploymentID: 1384<br/>Station: de-21 (demer)<br/># relative detection duration: 0.37","DeploymentID: 1424<br/>Station: de-1 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1425<br/>Station: de-5 (demer)<br/># relative detection duration: 0.17","DeploymentID: 1427<br/>Station: de-8 (demer)<br/># relative detection duration: 0.62","DeploymentID: 1428<br/>Station: de-10 (demer)<br/># relative detection duration: 0.11","DeploymentID: 1429<br/>Station: de-11 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1431<br/>Station: de-14a (demer)<br/># relative detection duration: 0.32","DeploymentID: 1432<br/>Station: de-13 (demer)<br/># relative detection duration: 0.04","DeploymentID: 1433<br/>Station: de-14 (demer)<br/># relative detection duration: 0.28","DeploymentID: 1434<br/>Station: de-16 (demer)<br/># relative detection duration: 0.09","DeploymentID: 1436<br/>Station: de-19 (demer)<br/># relative detection duration: 0.06","DeploymentID: 1437<br/>Station: de-9 (demer)<br/># relative detection duration: 0.38","DeploymentID: 1439<br/>Station: de-18 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1440<br/>Station: de-20 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1441<br/>Station: de-23 (demer)<br/># relative detection duration: 0.18","DeploymentID: 1470<br/>Station: de-12 (demer)<br/># relative detection duration: 0.09","DeploymentID: 1478<br/>Station: de-2 (demer)<br/># relative detection duration: 0.02","DeploymentID: 1506<br/>Station: de-14a (demer)<br/># relative detection duration: 0.09","DeploymentID: 1573<br/>Station: de-8 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1588<br/>Station: de-9 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1592<br/>Station: de-14 (demer)<br/># relative detection duration: 0.63","DeploymentID: 1593<br/>Station: de-7 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1656<br/>Station: de-12 (demer)<br/># relative detection duration: 0.06","DeploymentID: 1659<br/>Station: de-21 (demer)<br/># relative detection duration: 0.26","DeploymentID: 1660<br/>Station: de-22 (demer)<br/># relative detection duration: 0.19","DeploymentID: 1662<br/>Station: de-4 (demer)<br/># relative detection duration: 0.18","DeploymentID: 1663<br/>Station: de-6 (demer)<br/># relative detection duration: 0.3","DeploymentID: 2869<br/>Station: de-3 (demer)<br/># relative detection duration: 0.05","DeploymentID: 2933<br/>Station: de-22 (demer)<br/># relative detection duration: 0.14","DeploymentID: 2938<br/>Station: de-12 (demer)<br/># relative detection duration: 0.14"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #472E7C 12.9151459854015%, #355E8D 29.2974452554745%, #25858E 45.6797445255475%, #26AD81 62.0620437956204%, #70CF57 78.4443430656934%, #DCE318 94.8266423357664%, #FDE725 "],"labels":["0.1","0.2","0.3","0.4","0.5","0.6"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Relative detection duration","extra":{"p_1":0.1291514598540146,"p_n":0.9482664233576644},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>Do you want to add the temporal component to visualize the fish movement? Take a look at the <a href="https://movevis.org/index.html" class="external-link">moveVis</a> package.</p>
+<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[50.9909004,51.02032,51.0028729,50.9843681,50.9851617,51.0026609,50.991246,50.9916225,50.9922283,50.99004,50.9918161,50.9902591,50.9901667,50.9849358,50.9912632,50.9876189,50.9847044,50.98197,50.9911178,50.9942609,50.99004,50.991246,50.9912632,50.9902591,50.9909004,50.9911178,50.9843681,50.9833902,51.0089239,50.9898768,51.0028729,50.9833902,50.9911178],[5.0310774,3.96965,4.9333539,5.0725863,4.8410025,4.9914479,5.0403814,5.0542423,5.0549485,5.060056,5.0578433,5.0602737,5.0616675,5.075274,5.049155,5.0742895,5.0765513,5.0780232,5.0574492,4.8938203,5.060056,5.0403814,5.049155,5.0602737,5.0310774,5.0574492,5.0725863,5.0759855,4.9623949,5.0152068,4.9333539,5.0759855,5.0574492],[54.80453050785532,3.111111111111111,6.666666666666667,37.3134328358209,2.545454545454545,16.96113074204947,62.25794665692364,11.36363636363636,4.870129870129871,31.72043010752688,4.39121756487026,28.23529411764706,8.766233766233766,5.51948051948052,37.93529266485552,2.711864406779661,3.050847457627119,18.30508474576271,9.090909090909092,2.116402116402116,9.448818897637794,5.286343612334802,5.28052805280528,18.04511278195488,5.286343612334802,6.25,26.08695652173913,18.84057971014493,18.36734693877551,29.82456140350877,4.918032786885246,13.65638766519824,14.44444444444444],null,null,{"interactive":true,"className":"","stroke":false,"color":["#ABDC31","#46075A","#481C6E","#20A486","#450457","#3B518B","#FDE725","#453581","#471265","#218F8D","#470F62","#26818E","#482878","#481668","#22A785","#450558","#46075A","#38578C","#472A7A","#440154","#472C7A","#481567","#481567","#39568C","#481567","#481B6D","#2A788E","#375A8C","#38588C","#24868E","#471365","#424186","#404588"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#ABDC31","#46075A","#481C6E","#20A486","#450457","#3B518B","#FDE725","#453581","#471265","#218F8D","#470F62","#26818E","#482878","#481668","#22A785","#450558","#46075A","#38578C","#472A7A","#440154","#472C7A","#481567","#481567","#39568C","#481567","#481B6D","#2A788E","#375A8C","#38588C","#24868E","#471365","#424186","#404588"],"fillOpacity":0.8},{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["DeploymentID: 1378<br/>Station: de-7 (demer)<br/># relative detection duration: 0.55","DeploymentID: 1379<br/>Station: s-2a (zeeschelde)<br/># relative detection duration: 0.03","DeploymentID: 1381<br/>Station: de-3 (demer)<br/># relative detection duration: 0.07","DeploymentID: 1384<br/>Station: de-21 (demer)<br/># relative detection duration: 0.37","DeploymentID: 1424<br/>Station: de-1 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1425<br/>Station: de-5 (demer)<br/># relative detection duration: 0.17","DeploymentID: 1427<br/>Station: de-8 (demer)<br/># relative detection duration: 0.62","DeploymentID: 1428<br/>Station: de-10 (demer)<br/># relative detection duration: 0.11","DeploymentID: 1429<br/>Station: de-11 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1431<br/>Station: de-14a (demer)<br/># relative detection duration: 0.32","DeploymentID: 1432<br/>Station: de-13 (demer)<br/># relative detection duration: 0.04","DeploymentID: 1433<br/>Station: de-14 (demer)<br/># relative detection duration: 0.28","DeploymentID: 1434<br/>Station: de-16 (demer)<br/># relative detection duration: 0.09","DeploymentID: 1436<br/>Station: de-19 (demer)<br/># relative detection duration: 0.06","DeploymentID: 1437<br/>Station: de-9 (demer)<br/># relative detection duration: 0.38","DeploymentID: 1439<br/>Station: de-18 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1440<br/>Station: de-20 (demer)<br/># relative detection duration: 0.03","DeploymentID: 1441<br/>Station: de-23 (demer)<br/># relative detection duration: 0.18","DeploymentID: 1470<br/>Station: de-12 (demer)<br/># relative detection duration: 0.09","DeploymentID: 1478<br/>Station: de-2 (demer)<br/># relative detection duration: 0.02","DeploymentID: 1506<br/>Station: de-14a (demer)<br/># relative detection duration: 0.09","DeploymentID: 1573<br/>Station: de-8 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1588<br/>Station: de-9 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1592<br/>Station: de-14 (demer)<br/># relative detection duration: 0.18","DeploymentID: 1593<br/>Station: de-7 (demer)<br/># relative detection duration: 0.05","DeploymentID: 1656<br/>Station: de-12 (demer)<br/># relative detection duration: 0.06","DeploymentID: 1659<br/>Station: de-21 (demer)<br/># relative detection duration: 0.26","DeploymentID: 1660<br/>Station: de-22 (demer)<br/># relative detection duration: 0.19","DeploymentID: 1662<br/>Station: de-4 (demer)<br/># relative detection duration: 0.18","DeploymentID: 1663<br/>Station: de-6 (demer)<br/># relative detection duration: 0.3","DeploymentID: 2869<br/>Station: de-3 (demer)<br/># relative detection duration: 0.05","DeploymentID: 2933<br/>Station: de-22 (demer)<br/># relative detection duration: 0.14","DeploymentID: 2938<br/>Station: de-12 (demer)<br/># relative detection duration: 0.14"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #472E7C 13.1084060840608%, #355F8D 29.7358473584736%, #24878E 46.3632886328863%, #29AF7F 62.9907299072991%, #77D153 79.6181711817118%, #E6E419 96.2456124561246%, #FDE725 "],"labels":["0.1","0.2","0.3","0.4","0.5","0.6"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Relative detection duration","extra":{"p_1":0.1310840608406084,"p_n":0.9624561245612459},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.98197,51.02032],"lng":[3.96965,5.0780232]}},"evals":[],"jsHooks":[]}</script><p>Do you want to add the temporal component to visualize the fish movement? Take a look at the <a href="https://movevis.org/index.html" class="external-link">moveVis</a> package.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -162,7 +162,7 @@ download_acoustic_dataset <- function(connection,
     detections %>%
     distinct(.data$acoustic_project_code) %>%
     pull() %>%
-    sort()
+    stringr::str_sort()
   deployments <- get_acoustic_deployments(
     api = api,
     acoustic_project_code = acoustic_project_codes,
@@ -207,7 +207,7 @@ download_acoustic_dataset <- function(connection,
     animals %>%
     distinct(.data$scientific_name) %>%
     pull() %>%
-    sort()
+    stringr::str_sort()
 
   message("")
   message(

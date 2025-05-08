@@ -15,8 +15,8 @@ test_that("get_acoustic_detections() returns a tibble", {
 })
 
 test_that("get_acoustic_detections() returns a tibble over sql", {
-  # only test if running in on the Rstuio server, with rshiny as the nodename
-  skip_if_not(Sys.info()[[4]] == "rshiny")
+  skip_if_not_localdb()
+
   df_sql <- get_acoustic_detections(limit = TRUE, api = FALSE)
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
@@ -31,7 +31,8 @@ test_that("get_acoustic_detections() returns unique detection_id", {
 
 test_that("get_acoustic_detections() returns the expected columns", {
   vcr::use_cassette("acoustic_detections_limited", {
-    df <- get_acoustic_detections(limit = TRUE)
+    df <- get_acoustic_detections(animal_project_code = "2014_demer",
+                                  limit = TRUE)
   })
   expected_col_names <- c(
     "detection_id",
@@ -316,7 +317,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
-  skip("BUG #278 crashes on big queries like demer and dijle")
+  single_select <- "demer"
+  single_select_df <- get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
   # Select multiple values
   multi_select <- c("demer", "dijle")
   multi_select_df <- get_acoustic_detections(acoustic_project_code = multi_select)

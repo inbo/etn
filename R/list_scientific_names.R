@@ -16,26 +16,3 @@ list_scientific_names <- function(connection,
   out <- conduct_parent_to_helpers(api, json = TRUE)
   return(out)
 }
-#' list_scientific_names() sql helper
-#'
-#' @inheritParams list_scientific_names()
-#' @noRd
-#'
-list_scientific_names_sql <- function(){
-  # Create connection
-  connection <- create_connection(credentials = get_credentials())
-  # Check connection
-  check_connection(connection)
-
-  query <- glue::glue_sql(
-    "SELECT DISTINCT scientific_name FROM common.animal_release",
-    .con = connection
-  )
-  data <- DBI::dbGetQuery(connection, query)
-
-  # Close connection
-  DBI::dbDisconnect(connection)
-
-  # Return scientific_names
-  sort(data$scientific_name)
-}

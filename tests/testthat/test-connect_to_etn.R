@@ -6,12 +6,6 @@ test_that("connect_to_etn() returns deprecation warning when used with named arg
   )
 })
 
-test_that("connect_to_etn() allows to create a connection with default parameters", {
-  con <- connect_to_etn()
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
-})
-
 test_that("connect_to_etn() returns deprecation warning when used with unnamed arguments", {
   skip("BUG #319: tests will always fail after first deprecation test")
   lifecycle::expect_deprecated(
