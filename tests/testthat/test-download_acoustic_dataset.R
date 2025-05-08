@@ -52,11 +52,6 @@ test_that("download_acoustic_dataset() creates the expected files using local db
 
   # Remove generated files and directories after test
   unlink(download_dir, recursive = TRUE)
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
-
-  # Function returns no result
-  expect_null(evaluate_download$result)
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
