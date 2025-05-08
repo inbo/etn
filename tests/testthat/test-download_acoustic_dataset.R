@@ -1,10 +1,11 @@
 skip_if_not_localdb() # Mixed tests for API and local database access
 
 # Create a data package
+datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
 evaluate_download <- evaluate_promise({
   download_acoustic_dataset(
     animal_project_code = "2014_demer",
-    directory = tempdir()
+    directory = datapackage_path
   )
 })
 
