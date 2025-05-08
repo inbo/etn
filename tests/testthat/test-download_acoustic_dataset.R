@@ -114,14 +114,9 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
 })
 
 test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
-
-  download_acoustic_dataset(api = TRUE,
-                            animal_project_code = "2014_demer",
-                            directory = tempdir())
-
   # This will fail when a field is added to a get_ function but not to datapackage.json
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   ## Check for errors when reading the resource
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "animals")))
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "tags")))
@@ -132,41 +127,41 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 
 test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
   # columns in the csv files
   expect_length(
     fetch_schema_fields(datapackage, "animals"),
     ncol(readr::read_csv(
-      file.path(tempdir(), "animals.csv"),
+      file.path(datapackage_path, "animals.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
   expect_length(
     fetch_schema_fields(datapackage, "tags"),
     ncol(readr::read_csv(
-      file.path(tempdir(), "tags.csv"),
+      file.path(datapackage_path, "tags.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
   expect_length(
     fetch_schema_fields(datapackage, "detections"),
     ncol(readr::read_csv(
-      file.path(tempdir(), "detections.csv"),
+      file.path(datapackage_path, "detections.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
   expect_length(
     fetch_schema_fields(datapackage, "deployments"),
     ncol(readr::read_csv(
-      file.path(tempdir(), "deployments.csv"),
+      file.path(datapackage_path, "deployments.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
   expect_length(
     fetch_schema_fields(datapackage, "receivers"),
     ncol(readr::read_csv(
-      file.path(tempdir(), "receivers.csv"),
+      file.path(datapackage_path, "receivers.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -174,7 +169,7 @@ test_that("download_acoustic_dataset() returns CSV files with expected number of
 
 test_that("download_acoustic_dataset() returns CSV files with columns in expected order", {
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check if the schema fields in the data package are exactly the same
   # (thus also in the same order) as the header of the csv files
   expect_identical(
@@ -183,7 +178,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "animals.csv"),
+      file.path(datapackage_path, "animals.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -193,7 +188,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "tags.csv"),
+      file.path(datapackage_path, "tags.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -203,7 +198,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "detections.csv"),
+      file.path(datapackage_path, "detections.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -213,7 +208,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "deployments.csv"),
+      file.path(datapackage_path, "deployments.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -223,7 +218,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "receivers.csv"),
+      file.path(datapackage_path, "receivers.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
