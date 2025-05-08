@@ -1,6 +1,6 @@
 # Create a data package
 datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-evaluate_download <- evaluate_promise({
+evalute_download_api <- evaluate_promise({
   download_acoustic_dataset(
     animal_project_code = "2014_demer",
     directory = datapackage_path
@@ -74,7 +74,7 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
   #   variant = "api"
   # )
   expect_snapshot(
-    cat(evaluate_download$messages, sep = "\n"),
+    cat(evalute_download_api$messages, sep = "\n"),
     variant = "api",
     # don't include the tempdir name
     transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)")
@@ -95,7 +95,7 @@ test_that("download_acoustic_dataset() creates the expected messages using local
 
 test_that("download_acoustic_dataset() does not return warnings for valid dataset api", {
   # Function returns no warnings (character of length 0)
-  expect_true(length(evaluate_download$warnings) == 0)
+  expect_true(length(evalute_download_api$warnings) == 0)
 })
 
 test_that("download_acoustic_dataset() returns message and summary stats", {
