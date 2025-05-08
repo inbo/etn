@@ -56,7 +56,7 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
     cat(evalute_download_api$messages, sep = "\n"),
     variant = "api",
     # don't include the tempdir name
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)")
+    transform = ~ stringr::str_remove(.x, pattern = "(?<=directory ).+(?=:)")
   )
 })
 
@@ -67,7 +67,7 @@ test_that("download_acoustic_dataset() creates the expected messages using local
     cat(evalutate_download_localdb$messages, sep = "\n"),
     variant = "sql",
     # don't include the tempdir name
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)")
+    transform = ~ stringr::str_remove(.x, pattern = "(?<=directory ).+(?=:)")
   )
 
 })
