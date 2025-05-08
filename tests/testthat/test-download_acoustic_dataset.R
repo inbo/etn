@@ -94,7 +94,7 @@ test_that("download_acoustic_dataset() creates the expected messages using local
 
 })
 
-test_that("download_acoustic_dataset() does not warnings for valid dataset", {
+test_that("download_acoustic_dataset() does not return warnings for valid dataset", {
   # Function returns no warnings (character of length 0)
   expect_true(length(evaluate_download$warnings) == 0)
 })
