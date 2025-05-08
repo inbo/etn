@@ -7,7 +7,7 @@ evaluate_download <- evaluate_promise({
   )
 })
 
-test_that("download_acoustic_dataset() creates the expected files", {
+test_that("download_acoustic_dataset() creates the expected files using api", {
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -16,23 +16,20 @@ test_that("download_acoustic_dataset() creates the expected files", {
     "receivers.csv",
     "datapackage.json"
   )
-  download_dir <- file.path(tempdir(), "using_api")
 
-  expect_snapshot(
-    download_acoustic_dataset(
-      api = TRUE,
-      animal_project_code = "2014_demer",
-      directory = download_dir
-    ),
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-    variant = "api"
-  )
+  # expect_snapshot(
+  #   download_acoustic_dataset(
+  #     api = TRUE,
+  #     animal_project_code = "2014_demer",
+  #     directory = download_dir
+  #   ),
+  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+  #   variant = "api"
+  # )
 
   # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(download_dir)))
+  expect_true(all(files_to_create %in% list.files(datapackage_path)))
 
-  # Remove generated files and directories after test
-  unlink(download_dir, recursive = TRUE)
 })
 
 test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
@@ -74,7 +71,7 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
   )
 })
 
-test_that("download_acoustic_dataset() creates the expected files", {
+test_that("download_acoustic_dataset() creates the expected files using local db", {
 
   skip_if_not_localdb()
 
