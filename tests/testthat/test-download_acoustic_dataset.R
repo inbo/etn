@@ -88,7 +88,7 @@ test_that("download_acoustic_dataset() creates the expected files", {
     "datapackage.json"
   )
 
-  download_dir <- file.path(tempdir(), "using_api")
+  download_dir <- file.path(tempdir(), "using_sql")
 
   expect_snapshot(
     download_acoustic_dataset(
