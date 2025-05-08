@@ -82,7 +82,7 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
 })
 
 test_that("download_acoustic_dataset() creates the expected messages using local db", {
-
+  skip("duplicate test")
   skip_if_not_localdb()
 
   expect_snapshot(
