@@ -60,13 +60,17 @@ test_that("download_acoustic_dataset() creates the expected files using local db
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
+  # expect_snapshot(
+  #   download_acoustic_dataset(
+  #     api = TRUE,
+  #     animal_project_code = "2014_demer",
+  #     directory = download_dir
+  #   ),
+  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+  #   variant = "api"
+  # )
   expect_snapshot(
-    download_acoustic_dataset(
-      api = TRUE,
-      animal_project_code = "2014_demer",
-      directory = download_dir
-    ),
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+    cat(evaluate_download$messages, sep = "\n"),
     variant = "api"
   )
 })
