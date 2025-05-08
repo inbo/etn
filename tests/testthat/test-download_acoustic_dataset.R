@@ -130,7 +130,7 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 })
 
 
-test_that("download_acoustic_dataset() returns CSV files with expected columns", {
+test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
