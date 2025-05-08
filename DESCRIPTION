@@ -45,7 +45,6 @@ Suggests:
     testthat (>= 3.0.0),
     tidyr,
     vcr (>= 0.6.0),
-    frictionless,
     withr
 VignetteBuilder: 
     knitr
