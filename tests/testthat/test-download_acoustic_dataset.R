@@ -82,7 +82,6 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
 })
 
 test_that("download_acoustic_dataset() creates the expected messages using local db", {
-  skip("duplicate test")
   skip_if_not_localdb()
 
   expect_snapshot(
@@ -94,12 +93,13 @@ test_that("download_acoustic_dataset() creates the expected messages using local
 
 })
 
-test_that("download_acoustic_dataset() does not return warnings for valid dataset", {
+test_that("download_acoustic_dataset() does not return warnings for valid dataset api", {
   # Function returns no warnings (character of length 0)
   expect_true(length(evaluate_download$warnings) == 0)
 })
 
 test_that("download_acoustic_dataset() returns message and summary stats", {
+  skip("duplicated test")
   # call download_acoustic_dataset() and capture the output, compare to a local
   # file. Covers warnings and messages, but will fail on an error. Use withr so
   # we can download the dataset without storing it, but snapshot the message.
