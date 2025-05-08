@@ -74,21 +74,6 @@ test_that("download_acoustic_dataset() does not return warnings for valid datase
   expect_true(length(evalute_download_api$warnings) == 0)
 })
 
-test_that("download_acoustic_dataset() returns message and summary stats", {
-  skip("duplicated test")
-  # call download_acoustic_dataset() and capture the output, compare to a local
-  # file. Covers warnings and messages, but will fail on an error. Use withr so
-  # we can download the dataset without storing it, but snapshot the message.
-  withr::with_tempdir(
-    {
-      expect_snapshot(cat(download_acoustic_dataset(
-        animal_project_code = "2014_demer"
-      )))
-    },
-    clean = TRUE
-  )
-})
-
 test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
   # This will fail when a field is added to a get_ function but not to datapackage.json
   datapackage <-
