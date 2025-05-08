@@ -35,23 +35,32 @@ test_that("download_acoustic_dataset() creates the expected files using local db
     "datapackage.json"
   )
 
-  download_dir <- file.path(tempdir(), "using_sql")
-
-  expect_snapshot(
+  local_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
+  evalutate_download_local <- evaluate_promise({
     download_acoustic_dataset(
       api = FALSE,
       animal_project_code = "2014_demer",
-      directory = download_dir
-    ),
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-    variant = "sql"
-  )
+      directory = local_datapackage_path
+    )
+  })
+
+  # download_dir <- file.path(tempdir(), "using_sql")
+
+  # expect_snapshot(
+  #   download_acoustic_dataset(
+  #     api = FALSE,
+  #     animal_project_code = "2014_demer",
+  #     directory = download_dir
+  #   ),
+  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+  #   variant = "sql"
+  # )
 
   # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(download_dir)))
+  expect_true(all(files_to_create %in% list.files(local_datapackage_path)))
 
   # Remove generated files and directories after test
-  unlink(download_dir, recursive = TRUE)
+  # unlink(download_dir, recursive = TRUE)
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
@@ -70,24 +79,15 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
   )
 })
 
-test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
+test_that("download_acoustic_dataset() creates the expected messages using local db", {
 
   skip_if_not_localdb()
 
-  files_to_create <- c(
-    "animals.csv",
-    "tags.csv",
-    "detections.csv",
-    "deployments.csv",
-    "receivers.csv",
-    "datapackage.json"
+  expect_snapshot(
+    cat(evalutate_download_local$messages, sep = "\n"),
+    variant = "sql"
   )
 
-  download_dir <- file.path(tempdir(), "using_sql")
-  dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
-
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
 })
 
 test_that("download_acoustic_dataset() does not warnings for valid dataset", {
