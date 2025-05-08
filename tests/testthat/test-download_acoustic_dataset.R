@@ -32,6 +32,43 @@ test_that("download_acoustic_dataset() creates the expected files using api", {
 
 })
 
+test_that("download_acoustic_dataset() creates the expected files using local db", {
+
+  skip_if_not_localdb()
+
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
+  )
+
+  download_dir <- file.path(tempdir(), "using_sql")
+
+  expect_snapshot(
+    download_acoustic_dataset(
+      api = FALSE,
+      animal_project_code = "2014_demer",
+      directory = download_dir
+    ),
+    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+    variant = "sql"
+  )
+
+  # Function creates the expected files
+  expect_true(all(files_to_create %in% list.files(download_dir)))
+
+  # Remove generated files and directories after test
+  unlink(download_dir, recursive = TRUE)
+  # Function creates the expected files
+  expect_true(all(files_to_create %in% list.files(tempdir())))
+
+  # Function returns no result
+  expect_null(evaluate_download$result)
+})
+
 test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
 
   skip_if_not_localdb()
@@ -69,43 +106,6 @@ test_that("download_acoustic_dataset() returns message and summary stats", {
     },
     clean = TRUE
   )
-})
-
-test_that("download_acoustic_dataset() creates the expected files using local db", {
-
-  skip_if_not_localdb()
-
-  files_to_create <- c(
-    "animals.csv",
-    "tags.csv",
-    "detections.csv",
-    "deployments.csv",
-    "receivers.csv",
-    "datapackage.json"
-  )
-
-  download_dir <- file.path(tempdir(), "using_sql")
-
-  expect_snapshot(
-    download_acoustic_dataset(
-      api = FALSE,
-      animal_project_code = "2014_demer",
-      directory = download_dir
-    ),
-    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-    variant = "sql"
-  )
-
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(download_dir)))
-
-  # Remove generated files and directories after test
-  unlink(download_dir, recursive = TRUE)
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
-
-  # Function returns no result
-  expect_null(evaluate_download$result)
 })
 
 test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
