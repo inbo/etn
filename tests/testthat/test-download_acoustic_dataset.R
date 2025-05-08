@@ -17,16 +17,6 @@ test_that("download_acoustic_dataset() creates the expected files using api", {
     "datapackage.json"
   )
 
-  # expect_snapshot(
-  #   download_acoustic_dataset(
-  #     api = TRUE,
-  #     animal_project_code = "2014_demer",
-  #     directory = download_dir
-  #   ),
-  #   transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
-  #   variant = "api"
-  # )
-
   # Function creates the expected files
   expect_true(all(files_to_create %in% list.files(datapackage_path)))
 
@@ -67,6 +57,18 @@ test_that("download_acoustic_dataset() creates the expected files using local db
 
   # Function returns no result
   expect_null(evaluate_download$result)
+})
+
+test_that("download_acoustic_dataset() returns the expected messages using api", {
+  expect_snapshot(
+    download_acoustic_dataset(
+      api = TRUE,
+      animal_project_code = "2014_demer",
+      directory = download_dir
+    ),
+    transform = ~ stringr::str_remove(.x, pattern = "(?=`\\/).+(?<=`)"),
+    variant = "api"
+  )
 })
 
 test_that("download_acoustic_dataset() creates the expected messages and files using local db", {
