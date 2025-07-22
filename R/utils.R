@@ -56,7 +56,6 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
     Sys.setenv(ETN_USER = readline(prompt = "Please enter a userid: "))
     Sys.setenv(ETN_PWD = askpass::askpass())
   }
-  # glue::glue('list(username = "{username}", password = "{password}")')
   invisible(list(username = username, password = password))
 }
 
