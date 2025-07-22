@@ -3,6 +3,17 @@
 #' Helper that conducts it's parent function to either use a helper to query the
 #' api, or a helper to query a local database connection using SQL.
 #'
+#' This function will change the behaviour of etn based on the  value of the
+#' `api` argument of it's functions. When `api == TRUE` it'll use the
+#' function_identity, the name of the parent function that calls this helper to
+#' create the api call via `forward_to_api()`. If `api == FALSE` it'll get the
+#' correct function from the namespace of `etnservice` so it can query a local
+#' database connection. The package was constructed this way to ensure
+#' etnservice which creates the API via OpenCPU, and local queries to etn always
+#' result in the same output as the api. This also ensures the actual queries
+#' only need to be maintained in a single place. See examples to see in
+#' practise.
+#'
 #' @param api Logical, Should the API be used?
 #' @param ignored_arguments Character vector of arguments not to pass to the API
 #'   or SQL helper
@@ -13,6 +24,15 @@
 #'
 #' @family helper functions
 #' @noRd
+#' @examplesIf "ETN" %in% odbc::odbcListDataSources()$name
+#' # When API is FALSE, this package forwards function calls directly to
+#' # etnservice
+#'
+#' # These two calls are identical. They run the same code (locally). Both will
+#' # only work when there is a local connection to the etn database.
+#' etnservice::list_acoustic_tag_ids()
+#' list_acoustic_tag_ids(api = FALSE)
+#'
 conduct_parent_to_helpers <- function(api,
                                       ignored_arguments = NULL,
                                       ...) {
