@@ -51,7 +51,8 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
-  if (Sys.getenv("ETN_USER") == "") {
+  if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
+      is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     message("No credentials stored, prompting..")
     Sys.setenv(ETN_USER = readline(prompt = "Please enter a userid: "))
     Sys.setenv(ETN_PWD = askpass::askpass())
