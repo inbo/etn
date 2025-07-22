@@ -126,7 +126,9 @@ get_parent_fn_name <- function(depth = 1) {
 #'
 #' @family wrappers
 #' @noRd
-ask_pass <- askpass::askpass
+ask_pass <- function(...) {
+  askpass::askpass(...)
+}
 
 #' Wrapper of rlang::is_interactive
 #'
@@ -136,7 +138,9 @@ ask_pass <- askpass::askpass
 #'
 #' @family wrappers
 #' @noRd
-is_interactive <- rlang::is_interactive
+is_interactive <- function(...) {
+  rlang::is_interactive(...)
+}
 
 #' Wrapper for base::readline
 #'
@@ -146,4 +150,6 @@ is_interactive <- rlang::is_interactive
 #'
 #' @family wrappers
 #' @noRd
-prompt_user <- readline
+prompt_user <- function(...) {
+  readline(...)
+}
