@@ -84,3 +84,20 @@ test_that("get_credentials() does not store prompted credentials", {
     is_interactive = function(...) TRUE
   )
 })
+
+test_that("get_credentials() returns error when no credentials are stored and run in non interactive mode", {
+  with_mocked_bindings(code = {
+    expect_error(
+      withr::with_envvar(
+        new = list( # Reset credentials
+          ETN_USER = NULL,
+          ETN_PWD = NULL
+        ),
+        get_credentials()
+      ),
+      "No credentials stored, not running in interactive mode"
+    )},
+    ask_pass = function(...) "entered_pwd",
+    prompt_user = function(...) "entered_id"
+  )
+})

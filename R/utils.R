@@ -51,17 +51,24 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
-  if ((is.na(Sys.getenv("ETN_USER", unset = NA)) ||
-    is.na(Sys.getenv("ETN_PWD", unset = NA))) &&
-    is_interactive()) {
-    message("No credentials stored, prompting..")
-    username <- prompt_user(prompt = "Please enter a userid: ")
-    password <- ask_pass()
+  if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
+    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+    if (is_interactive()) {
+      message("No credentials stored, prompting..")
+      username <- prompt_user(prompt = "Please enter a userid: ")
+      password <- ask_pass()
+    } else {
+      # No credentials, not interactive
+      stop(
+        glue::glue(
+          "No credentials stored, not running in interactive mode. ",
+          "Please set credentials as environemental variables or in the .Renviron file."
+        )
+      )
+    }
   }
   invisible(list(username = username, password = password))
 }
-
-
 
 #' Lifecycle warning for the deprecated connection argument
 #'
