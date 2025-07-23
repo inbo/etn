@@ -19,34 +19,38 @@ test_that("get_credentials() returns list with values from sys.env", {
 })
 
 test_that("get_credentials() prompts the user for credentials if not stored", {
-  with_mocked_bindings(code = {
-  expect_identical(
-    withr::with_envvar(
-      new = list( # Reset credentials
-        ETN_USER = NULL,
-        ETN_PWD = NULL
-      ),
-      suppressMessages(get_credentials())
-    ),
-    list(username = "entered_id", password = "entered_pwd")
-  )},
-  ask_pass = function(...) "entered_pwd",
-  prompt_user = function(...) "entered_id",
-  is_interactive = function(...) TRUE
+  with_mocked_bindings(
+    code = {
+      expect_identical(
+        withr::with_envvar(
+          new = list( # Reset credentials
+            ETN_USER = NULL,
+            ETN_PWD = NULL
+          ),
+          suppressMessages(get_credentials())
+        ),
+        list(username = "entered_id", password = "entered_pwd")
+      )
+    },
+    ask_pass = function(...) "entered_pwd",
+    prompt_user = function(...) "entered_id",
+    is_interactive = function(...) TRUE
   )
 
-  with_mocked_bindings(code = {
-    expect_message(
-      withr::with_envvar(
-        new = list( # Reset credentials
-          ETN_USER = NULL,
-          ETN_PWD = NULL
+  with_mocked_bindings(
+    code = {
+      expect_message(
+        withr::with_envvar(
+          new = list( # Reset credentials
+            ETN_USER = NULL,
+            ETN_PWD = NULL
+          ),
+          get_credentials()
         ),
-        get_credentials()
-      ),
-      "No credentials stored, prompting..",
-      fixed = TRUE
-    )},
+        "No credentials stored, prompting..",
+        fixed = TRUE
+      )
+    },
     ask_pass = function(...) "entered_pwd",
     prompt_user = function(...) "entered_id",
     is_interactive = function(...) TRUE
@@ -67,7 +71,7 @@ test_that("get_credentials() does not store prompted credentials", {
         ),
         code = {
           # Run get_credentials() this should not result in a change of env var
-          suppressMessages(get_credentials());
+          suppressMessages(get_credentials())
           # Check that the credentials are still unset
           expect_identical(
             list(
@@ -86,17 +90,19 @@ test_that("get_credentials() does not store prompted credentials", {
 })
 
 test_that("get_credentials() returns error when no credentials are stored and run in non interactive mode", {
-  with_mocked_bindings(code = {
-    expect_error(
-      withr::with_envvar(
-        new = list( # Reset credentials
-          ETN_USER = NULL,
-          ETN_PWD = NULL
+  with_mocked_bindings(
+    code = {
+      expect_error(
+        withr::with_envvar(
+          new = list( # Reset credentials
+            ETN_USER = NULL,
+            ETN_PWD = NULL
+          ),
+          get_credentials()
         ),
-        get_credentials()
-      ),
-      "No credentials stored, not running in interactive mode"
-    )},
+        "No credentials stored, not running in interactive mode"
+      )
+    },
     ask_pass = function(...) "entered_pwd",
     prompt_user = function(...) "entered_id"
   )
