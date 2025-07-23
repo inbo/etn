@@ -146,3 +146,29 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
     "grandparent_function"
   )
 })
+
+# validate_login() --------------------------------------------------------
+
+
+test_that("validate_login() returns TRUE on correct credentials",{
+  expect_true(validate_login())
+})
+
+test_that("validate_login() returns error on bad credentials",{
+  with_mocked_bindings(
+    code = {
+  expect_error(
+   validate_login(),
+   regexp = "Failed to login. Please check username/password.",
+   fixed = TRUE
+  )
+  # This error should be forwarded to all api functions
+  expect_error(
+    list_animal_ids(api = TRUE),
+    regexp = "Failed to login. Please check username/password.",
+    fixed = TRUE
+  )},
+  get_credentials = function(...) list(username = "not_a_username",
+                                       password = "not the correct pwd")
+  )
+})

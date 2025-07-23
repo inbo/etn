@@ -57,6 +57,9 @@ conduct_parent_to_helpers <- function(api,
     ]
 
   if (api) {
+    # Check if username/password are correct.
+    validate_login()
+    # Forward arguments to API via helper.
     out <- do.call(
       forward_to_api,
       list(function_identity = function_identity,
