@@ -98,17 +98,17 @@ return_parent_arguments <- function(depth = 1) {
 check_opencpu_response <- function(response) {
   # Stop if etnservice forwarded an error
   assertthat::assert_that(response$status_code != 400,
-                          msg = httr::content(response,
-                                              as = "text",
-                                              encoding = "UTF-8"
-                          )
+    msg = httr::content(response,
+      as = "text",
+      encoding = "UTF-8"
+    )
   )
 
   # Stop for other HTTP errors
   assertthat::assert_that(!httr::http_error(response),
-                          msg = glue::glue(
-                            "API request failed: {http_message}",
-                            http_message = httr::http_status(response)$message
-                          )
+    msg = glue::glue(
+      "API request failed: {http_message}",
+      http_message = httr::http_status(response)$message
+    )
   )
 }
