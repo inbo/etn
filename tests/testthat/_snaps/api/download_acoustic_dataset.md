@@ -25,11 +25,11 @@
       
       * number of tags:              16
       
-      * number of detections:        235810
+      * number of detections:        235809
       
-      * number of deployments:       1152
+      * number of deployments:       1036
       
-      * number of receivers:         249
+      * number of receivers:         140
       
       * first date of detection:     2014-04-18
       
@@ -37,7 +37,7 @@
       
       * included scientific names:   Petromyzon marinus, Rutilus rutilus, Silurus glanis, Squalius cephalus
       
-      * included acoustic projects:  albert, demer, dijle, V2LCHASES, zeeschelde
+      * included acoustic projects:  albert, demer, dijle, zeeschelde
       
       
       
