@@ -15,7 +15,7 @@ http_interactions:
       reason: Not Found
       message: 'Client error: (404) Not Found'
     headers:
-      date: Tue, 20 Jun 2023 13:53:04 GMT
+      date: Wed, 23 Jul 2025 07:20:25 GMT
       content-type: text/html; charset=utf-8
       content-length: '0'
       connection: keep-alive
@@ -26,8 +26,8 @@ http_interactions:
       encoding: ''
       file: no
       string: ''
-  recorded_at: 2023-06-20 13:53:58 GMT
-  recorded_with: vcr/1.2.0, webmockr/0.9.0
+  recorded_at: 2025-07-23 07:20:26 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
 - request:
     method: get
     uri: http://httpbin.org/status/504
@@ -44,7 +44,7 @@ http_interactions:
       reason: Gateway Timeout
       message: 'Server error: (504) Gateway Timeout'
     headers:
-      date: Tue, 20 Jun 2023 13:53:06 GMT
+      date: Wed, 23 Jul 2025 07:20:25 GMT
       content-type: text/html; charset=utf-8
       content-length: '0'
       connection: keep-alive
@@ -55,8 +55,8 @@ http_interactions:
       encoding: ''
       file: no
       string: ''
-  recorded_at: 2023-06-20 13:53:58 GMT
-  recorded_with: vcr/1.2.0, webmockr/0.9.0
+  recorded_at: 2025-07-23 07:20:26 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
 - request:
     method: get
     uri: http://httpbin.org/status/429
@@ -73,7 +73,7 @@ http_interactions:
       reason: Too Many Requests (RFC 6585)
       message: 'Client error: (429) Too Many Requests (RFC 6585)'
     headers:
-      date: Tue, 20 Jun 2023 13:53:58 GMT
+      date: Wed, 23 Jul 2025 07:20:26 GMT
       content-type: text/html; charset=utf-8
       content-length: '0'
       connection: keep-alive
@@ -84,5 +84,5 @@ http_interactions:
       encoding: ''
       file: no
       string: ''
-  recorded_at: 2023-06-20 13:53:58 GMT
-  recorded_with: vcr/1.2.0, webmockr/0.9.0
+  recorded_at: 2025-07-23 07:20:26 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
