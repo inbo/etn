@@ -81,12 +81,15 @@ test_that("return_parent_arguments() can return higher call function arguments",
   )
 })
 
-vcr::use_cassette("httpbin_error_status", {
+# check_opencpu_response() ------------------------------------------------
+
+
+vcr::use_cassette("httpbingo_error_status", {
   test_that("check_opencpu_response() returns error on HTTP error codes", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/404",
+        "http://httpbingo.org/status/404",
         terminate_on = 404
       )
     ),
@@ -95,7 +98,7 @@ vcr::use_cassette("httpbin_error_status", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/504",
+        "http://httpbingo.org/status/504",
         terminate_on = 504
       )
     ),
@@ -104,7 +107,7 @@ vcr::use_cassette("httpbin_error_status", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/429",
+        "http://httpbingo.org/status/429",
         terminate_on = 429
       )
     ),
@@ -113,6 +116,9 @@ vcr::use_cassette("httpbin_error_status", {
   })
 })
 
+# deprecate_warn_connection() ---------------------------------------------
+
+
 test_that("deprecate_warn_connection() returns warning with function symbol", {
   fn_to_test <- function(connection) {deprecate_warn_connection()}
   expect_warning(
@@ -120,6 +126,9 @@ test_that("deprecate_warn_connection() returns warning with function symbol", {
     regexp = "The `connection` argument of `fn_to_test\\(\\)` is deprecated as of"
   )
 })
+
+# get_parent_fn_name() ----------------------------------------------------
+
 
 test_that("get_parent_fn_name() can return the name of the parent function", {
   parent_function_with_a_cool_name <- function(){get_parent_fn_name()}

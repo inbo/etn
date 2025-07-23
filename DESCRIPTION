@@ -41,6 +41,8 @@ Suggests:
     kableExtra,
     knitr,
     leaflet,
+    lubridate,
+    odbc,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
