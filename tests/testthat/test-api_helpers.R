@@ -84,12 +84,12 @@ test_that("return_parent_arguments() can return higher call function arguments",
 # check_opencpu_response() ------------------------------------------------
 
 
-vcr::use_cassette("httpbin_error_status", {
+vcr::use_cassette("httpbingo_error_status", {
   test_that("check_opencpu_response() returns error on HTTP error codes", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/404",
+        "http://httpbingo.org/status/404",
         terminate_on = 404
       )
     ),
@@ -98,7 +98,7 @@ vcr::use_cassette("httpbin_error_status", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/504",
+        "http://httpbingo.org/status/504",
         terminate_on = 504
       )
     ),
@@ -107,7 +107,7 @@ vcr::use_cassette("httpbin_error_status", {
     expect_error(check_opencpu_response(
       httr::RETRY(
         verb = "GET",
-        "http://httpbin.org/status/429",
+        "http://httpbingo.org/status/429",
         terminate_on = 429
       )
     ),
