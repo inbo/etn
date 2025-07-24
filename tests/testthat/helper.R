@@ -39,3 +39,23 @@ skip_if_not_localdb <- function(){
   skip_if_not("ETN" %in% odbc::odbcListDataSources()$name,
               "ETN is not a local database on this machine")
 }
+
+#' Get an HTTP response for a specific HTTP status code.
+#'
+#' This function is useful to test other functions that respond to a specific
+#' HTTP status code. For example to convert a certain HTTP error into a helpful
+#' message.
+#'
+#' @param http_code An integer representing the HTTP status code to retrieve. Defaults to 200.
+#'
+#' @return An `httr2` response object containing the HTTP response for the specified status code.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' get_http_response(404) %>% httr2::resp_status_desc()
+get_http_response <- function(http_code = 200) {
+  httr2::request("http://httpbingo.org") %>%
+    httr2::req_url_path_append("status", http_code) %>%
+    httr2::req_error(is_error = function(resp){FALSE}) %>%
+    httr2::req_perform()
+}
