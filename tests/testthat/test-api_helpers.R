@@ -14,9 +14,9 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
 test_that("extract_temp_key() can extract a key from a httr2 response object", {
   vcr::use_cassette("opencpu_cloud_rnorm", {
     response <-
-      httr2::request(api_url) %>%
+      httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") %>%
       httr2::req_body_json(list(n = 10, mean = 5)) %>%
-    httr2::req_perform()
+      httr2::req_perform()
   })
   temp_key <- extract_temp_key(response)
   expect_type(temp_key, "character")
@@ -31,14 +31,14 @@ test_that("get_val() can get a value from a temp_key", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
   response <-
-    httr2::request(api_url) %>%
+    httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") %>%
     httr2::req_body_json(list(n = 2)) %>%
     httr2::req_perform()
-    )
+
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"
-
-  expect_no_error(api_out <- get_val(temp_key, domain))
+  api_out <- get_val(temp_key, domain)
+  expect_no_error(api_out)
   expect_type(api_out, "double")
   expect_length(api_out, 2)
 })
@@ -123,7 +123,9 @@ vcr::use_cassette("httpbingo_error_status", {
 
 
 test_that("deprecate_warn_connection() returns warning with function symbol", {
-  fn_to_test <- function(connection) {deprecate_warn_connection()}
+  fn_to_test <- function(connection) {
+    deprecate_warn_connection()
+  }
   expect_warning(
     fn_to_test(),
     regexp = "The `connection` argument of `fn_to_test\\(\\)` is deprecated as of"
@@ -134,7 +136,9 @@ test_that("deprecate_warn_connection() returns warning with function symbol", {
 
 
 test_that("get_parent_fn_name() can return the name of the parent function", {
-  parent_function_with_a_cool_name <- function(){get_parent_fn_name()}
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name()
+  }
   expect_identical(
     parent_function_with_a_cool_name(),
     "parent_function_with_a_cool_name"
@@ -142,8 +146,12 @@ test_that("get_parent_fn_name() can return the name of the parent function", {
 })
 
 test_that("get_parent_fn_name() can return the name a higher level caller", {
-  parent_function_with_a_cool_name <- function(){get_parent_fn_name(depth = 2)}
-  grandparent_function <- function(){parent_function_with_a_cool_name()}
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name(depth = 2)
+  }
+  grandparent_function <- function() {
+    parent_function_with_a_cool_name()
+  }
   expect_identical(
     grandparent_function(),
     "grandparent_function"
@@ -153,25 +161,30 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
 # validate_login() --------------------------------------------------------
 
 
-test_that("validate_login() returns TRUE on correct credentials",{
+test_that("validate_login() returns TRUE on correct credentials", {
   expect_true(validate_login())
 })
 
-test_that("validate_login() returns error on bad credentials",{
+test_that("validate_login() returns error on bad credentials", {
   with_mocked_bindings(
     code = {
-  expect_error(
-   validate_login(),
-   regexp = "Failed to login. Please check username/password.",
-   fixed = TRUE
-  )
-  # This error should be forwarded to all api functions
-  expect_error(
-    list_animal_ids(api = TRUE),
-    regexp = "Failed to login. Please check username/password.",
-    fixed = TRUE
-  )},
-  get_credentials = function(...) list(username = "not_a_username",
-                                       password = "not the correct pwd")
+      expect_error(
+        validate_login(),
+        regexp = "Failed to login. Please check username/password.",
+        fixed = TRUE
+      )
+      # This error should be forwarded to all api functions
+      expect_error(
+        list_animal_ids(api = TRUE),
+        regexp = "Failed to login. Please check username/password.",
+        fixed = TRUE
+      )
+    },
+    get_credentials = function(...) {
+      list(
+        username = "not_a_username",
+        password = "not the correct pwd"
+      )
+    }
   )
 })
