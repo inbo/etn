@@ -1,0 +1,53 @@
+http_interactions:
+- request:
+    method: GET
+    uri: http://httpbingo.org/status/404
+  response:
+    status: 404
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-type: text/plain; charset=utf-8
+      date: Thu, 24 Jul 2025 08:02:41 GMT
+      server: Fly/3124c784db (2025-07-23)
+      via: 1.1 fly.io, 1.1 fly.io
+      fly-request-id: 01K0XQ9DYCVRNKTRDQBX359ZC3-ams
+      content-length: '0'
+    body:
+      string: ''
+  recorded_at: 2025-07-24 08:02:42
+- request:
+    method: GET
+    uri: http://httpbingo.org/status/504
+  response:
+    status: 504
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-type: text/plain; charset=utf-8
+      date: Thu, 24 Jul 2025 08:02:42 GMT
+      server: Fly/3124c784db (2025-07-23)
+      via: 1.1 fly.io, 1.1 fly.io
+      fly-request-id: 01K0XQ9E8KZAGES9VVBV5R78R8-ams
+      content-length: '0'
+    body:
+      string: ''
+  recorded_at: 2025-07-24 08:02:42
+- request:
+    method: GET
+    uri: http://httpbingo.org/status/429
+  response:
+    status: 429
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-type: text/plain; charset=utf-8
+      date: Thu, 24 Jul 2025 08:02:42 GMT
+      server: Fly/3124c784db (2025-07-23)
+      via: 1.1 fly.io, 1.1 fly.io
+      fly-request-id: 01K0XQ9EJ5FTWZDTT99KWNE43B-ams
+      content-length: '0'
+    body:
+      string: ''
+  recorded_at: 2025-07-24 08:02:42
+recorded_with: VCR-vcr/2.0.0
