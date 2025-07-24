@@ -47,20 +47,20 @@ extract_temp_key <- function(response) {
 #'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
   # request data and open connection
-  raw_response <- 
-    httr2::request("https://opencpu.lifewatch.be") %>%
+  raw_response <-
+    httr2::request(api_domain) %>%
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", "rds") %>%
     httr2::req_retry(max_tries = 5) %>%
     httr2::req_perform() %>%
     httr2::resp_body_raw()
-  raw_connection <- rawConnection(rawConnection)
+  raw_connection <- rawConnection(raw_response)
   # read response via connection
-  api_response <- 
+  api_response <-
     raw_connection %>%
     gzcon() %>%
     readRDS()
   # close connection
-  close(response_connection)
+  close(raw_connection)
   # Return OpenCPU return object
   return(api_response)
 }
