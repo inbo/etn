@@ -29,6 +29,7 @@ Imports:
     etnservice,
     glue,
     httr,
+    httr2,
     lifecycle,
     methods,
     readr,
