@@ -28,6 +28,7 @@ test_that("extract_temp_key() can extract a key from a httr::response object", {
 
 test_that("get_val() can get a value from a temp_key", {
   # NOTE Dependent on the OpenCPU testing API
+  skip_if_offline("cloud.opencpu.org")
   response <-
     httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
       body = list(n = 2)
