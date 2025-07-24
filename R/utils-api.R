@@ -104,7 +104,8 @@ check_opencpu_response <- function(response) {
   assertthat::assert_that(!httr2::resp_is_error(response),
     msg = glue::glue(
       "API request failed: {http_message}",
-      http_message = httr2::resp_status_desc(response)
+      http_message = glue::glue("({httr2::resp_status(response)})",
+                                " {httr2::resp_status_desc(response)}")
     )
   )
 }
