@@ -17,7 +17,7 @@
 #' @noRd
 extract_temp_key <- function(response) {
   response %>%
-    httr::content(as = "text") %>%
+    httr2::resp_body_string() %>%
     stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
 }
 
@@ -40,24 +40,23 @@ extract_temp_key <- function(response) {
 #'
 #' # using the opencpu test instance
 #' api_url <- "https://cloud.opencpu.org/ocpu/library/stats/R/rnorm"
-#' httr::POST(api_url, body = list(n = 10, mean = 5)) %>%
-#'   extract_temp_key() %>%
-#'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
+#' httr2::request(api_url) %>%
+#'  httr2::req_body_json(list(n = 10, mean = 5)) %>%
+#'  httr2::req_perform() %>%
+#'  extract_temp_key() %>%
+#'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
   # request data and open connection
-  response_connection <- httr::RETRY(
-    verb = "GET",
-    url = glue::glue(
-      "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
-      .sep = "/"
-    ),
-    times = 5
-  ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection()
-  # read connection
-  api_response <- response_connection %>%
+  raw_response <- 
+    httr2::request("https://opencpu.lifewatch.be") %>%
+    httr2::req_url_path_append("tmp", temp_key, "R", ".val", "rds") %>%
+    httr2::req_retry(max_tries = 5) %>%
+    httr2::req_perform() %>%
+    httr2::resp_body_raw()
+  raw_connection <- rawConnection(rawConnection)
+  # read response via connection
+  api_response <- 
+    raw_connection %>%
     gzcon() %>%
     readRDS()
   # close connection
@@ -91,24 +90,21 @@ return_parent_arguments <- function(depth = 1) {
 
 #' Check an OpenCPU reponse object and forward any errors
 #'
-#' @param response httr::response object from an OpenCPU API call
+#' @param response Response object from an OpenCPU API call (httr2)
 #'
 #' @family helper functions
 #' @noRd
 check_opencpu_response <- function(response) {
   # Stop if etnservice forwarded an error
   assertthat::assert_that(response$status_code != 400,
-    msg = httr::content(response,
-      as = "text",
-      encoding = "UTF-8"
-    )
+    msg = httr2::resp_body_string(response)
   )
 
   # Stop for other HTTP errors
-  assertthat::assert_that(!httr::http_error(response),
+  assertthat::assert_that(!httr2::resp_is_error(response),
     msg = glue::glue(
       "API request failed: {http_message}",
-      http_message = httr::http_status(response)$message
+      http_message = httr2::resp_status_desc(response)
     )
   )
 }

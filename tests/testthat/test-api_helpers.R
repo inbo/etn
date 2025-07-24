@@ -11,11 +11,12 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
 # extract_temp_key() ------------------------------------------------------
 
 
-test_that("extract_temp_key() can extract a key from a httr::response object", {
+test_that("extract_temp_key() can extract a key from a httr2 response object", {
   vcr::use_cassette("opencpu_cloud_rnorm", {
     response <-
-      httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
-                 body = list(n = 2))
+      httr2::request(api_url) %>%
+      httr2::req_body_json(list(n = 10, mean = 5)) %>%
+    httr2::req_perform()
   })
   temp_key <- extract_temp_key(response)
   expect_type(temp_key, "character")
@@ -28,9 +29,11 @@ test_that("extract_temp_key() can extract a key from a httr::response object", {
 
 test_that("get_val() can get a value from a temp_key", {
   # NOTE Dependent on the OpenCPU testing API
+  skip_if_offline("cloud.opencpu.org")
   response <-
-    httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
-      body = list(n = 2)
+    httr2::request(api_url) %>%
+    httr2::req_body_json(list(n = 2)) %>%
+    httr2::req_perform()
     )
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"

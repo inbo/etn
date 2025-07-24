@@ -15,37 +15,29 @@ forward_to_api <- function(
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
   # Get credentials and attatch to payload
   payload <- append(payload, list(credentials = get_credentials()), after = 0)
-  # Set endpoint based on the passed function_identity
-  # NOTE trailing backslash is important for OpenCPU
-  endpoint <- glue::glue("{domain}/{function_identity}/")
+
+  request <- httr2::request(domain) %>%
+    # Set endpoint based on the passed function_identity
+    # NOTE trailing backslash is important for OpenCPU
+    httr2::req_url_path_append(function_identity, "") %>%
+    httr2::req_body_json(payload) %>%
+    httr2::req_retry(max_tries = 5)
 
   if (json) {
-    response <-
-      httr::RETRY(
-        verb = "POST",
-        url = glue::glue(endpoint, "json/"),
-        body = payload,
-        encode = "json",
-        terminate_on = c(400),
-        times = 5
-      )
+    response <- 
+      request %>%
+      httr2::req_url_path_append("json/") %>%
+      httr2::req_perform()
+
     # Check if the response contains any errors, and forward them if so.
     check_opencpu_response(response)
 
     # return as a vector
-    return(unlist(httr::content(response, as = "parsed")))
+    return(httr2::resp_body_json(response, simplifyVector = TRUE))
   } else {
     # Forward the function and arguments to the API: call 1
     ## Retry if server responds with HTTP error, use default rate settings of httr
-    response <-
-      httr::RETRY(
-        verb = "POST",
-        url = endpoint,
-        body = payload,
-        encode = "json",
-        terminate_on = c(400),
-        times = 5
-      )
+    response <- httr2::req_perform(request)
 
     # Check if the response contains any errors, and forward them if so.
     check_opencpu_response(response)
