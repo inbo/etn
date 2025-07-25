@@ -139,12 +139,15 @@ validate_login <- function(domain = "https://opencpu.lifewatch.be") {
 #'
 #' @param url_str A character string containing a URL
 #'
-#' @return The hostname extracted from the URL string
+#' @return The hostname extracted from the URL string including the scheme (eg.
+#'   https)
 #'
 #' @family helper functions
 #' @noRd
 #' @examples
 #' get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
 get_hostname <- function(url_str){
-  httr2::url_parse(url_str)$hostname
+  httr2::url_parse(url_str) %>%
+    httr2::url_modify(path = NULL) %>%
+    httr2::url_build()
 }
