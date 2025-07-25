@@ -1,27 +1,21 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://cloud.opencpu.org/ocpu/library/stats/R/rnorm
     body:
-      encoding: ''
-      string: n=2
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
+      fields:
+        'n': '2'
   response:
-    status:
-      status_code: 201
-      category: Success
-      reason: Created
-      message: 'Success: (201) Created'
+    status: 201
     headers:
-      date: Wed, 23 Jul 2025 07:20:23 GMT
+      date: Fri, 25 Jul 2025 07:33:57 GMT
       content-type: text/plain; charset=utf-8
-      content-length: '109'
-      location: https://cloud.opencpu.org/ocpu/tmp/x05facf52fb4fe4/
+      content-length: '110'
+      location: https://cloud.opencpu.org/ocpu/tmp/x0195820ff7c30d/
       server: cloudflare
       nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       cache-control: max-age=300, public
-      x-ocpu-session: x05facf52fb4fe4
+      x-ocpu-session: x0195820ff7c30d
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: Origin, Content-Type, Accept, Accept-Encoding,
@@ -29,26 +23,24 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: en_US.UTF-8
-      x-ocpu-time: 2025-07-23 07:20:23 UTC
+      x-ocpu-time: 2025-07-25 07:33:56 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
       content-encoding: gzip
       x-ocpu-cache: MISS
       cf-cache-status: DYNAMIC
-      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7Gt54Nx2PW84JPNxTF0XASngCYUGbM1mKFu02SLbs2ueVUx%2BN2f7yOgKhk52AhPt6LPHE%2FlketcpvW%2BM0Rpj1KOGlArv5cpHvYgaXFQ%3D"}]}'
-      cf-ray: 96396a34f918b9ba-BRU
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V4ZvQIdtK%2BhhCzbK8Y0ftw0tA8K053MDzAvqtLNTt94QqTsDOWK9gVIEEmWfVNnHxIuDXwQNc%2BxYIBZG6hmBfW%2BPwAeD%2Bxf5L7GK4SY%3D"}]}'
+      cf-ray: 9649f8cf8c85b780-BRU
       alt-svc: h3=":443"; ma=86400
     body:
-      encoding: ''
-      file: no
       string: |
-        /ocpu/tmp/x05facf52fb4fe4/R/.val
-        /ocpu/tmp/x05facf52fb4fe4/R/rnorm
-        /ocpu/tmp/x05facf52fb4fe4/stdout
-        /ocpu/tmp/x05facf52fb4fe4/source
-        /ocpu/tmp/x05facf52fb4fe4/console
-        /ocpu/tmp/x05facf52fb4fe4/info
-        /ocpu/tmp/x05facf52fb4fe4/files/DESCRIPTION
-  recorded_at: 2025-07-23 07:20:24 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+        /ocpu/tmp/x0195820ff7c30d/R/.val
+        /ocpu/tmp/x0195820ff7c30d/R/rnorm
+        /ocpu/tmp/x0195820ff7c30d/stdout
+        /ocpu/tmp/x0195820ff7c30d/source
+        /ocpu/tmp/x0195820ff7c30d/console
+        /ocpu/tmp/x0195820ff7c30d/info
+        /ocpu/tmp/x0195820ff7c30d/files/DESCRIPTION
+  recorded_at: 2025-07-25 07:33:57
+recorded_with: VCR-vcr/2.0.0

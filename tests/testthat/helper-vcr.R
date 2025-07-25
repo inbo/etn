@@ -4,4 +4,3 @@ invisible(vcr::vcr_configure(
                                "<<<my_pwd>>>" = Sys.getenv('pwd')),
   dir = vcr::vcr_test_path("fixtures")
 ))
-vcr::check_cassette_names()
