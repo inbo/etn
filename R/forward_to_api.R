@@ -4,6 +4,8 @@
 #' @param payload Arguments to be passed to OpenCPU function
 #' @param json Logical, if TRUE, then a one step process is used the output is
 #'   parsed from a json response
+#' @param domain Character vector of the OpenCPU domain to use, defaults to
+#'   "https://opencpu.lifewatch.be/library/etnservice/R"
 #' @return The same return object of the `function_identity` function
 #'
 #' @family helper functions
