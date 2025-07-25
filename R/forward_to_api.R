@@ -26,7 +26,7 @@ forward_to_api <- function(
     httr2::req_retry(max_tries = 5)
 
   if (json) {
-    response <- 
+    response <-
       request %>%
       httr2::req_url_path_append("json/") %>%
       httr2::req_perform()
