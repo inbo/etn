@@ -15,7 +15,7 @@ forward_to_api <- function(
     payload,
     json = FALSE,
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
-  # Get credentials and attatch to payload
+  # Get credentials and attach to payload
   payload <- append(payload, list(credentials = get_credentials()), after = 0)
 
   request <- httr2::request(domain) %>%
