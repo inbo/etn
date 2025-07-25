@@ -2,6 +2,9 @@
 #'
 #' @param function_identity Character vector of what function should be passed
 #' @param payload Arguments to be passed to OpenCPU function
+#' @param add_credentials Logical, if TRUE, then the credentials are added to
+#'   the #'   payload. Defaults to TRUE. You want to turn is off for requests to
+#'   libraries other than etnservice.
 #' @param json Logical, if TRUE, then a one step process is used the output is
 #'   parsed from a json response
 #' @param domain Character vector of the OpenCPU domain to use, defaults to
@@ -13,10 +16,13 @@
 forward_to_api <- function(
     function_identity,
     payload,
+    add_credentials = TRUE,
     json = FALSE,
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
   # Get credentials and attach to payload
-  payload <- append(payload, list(credentials = get_credentials()), after = 0)
+  if (add_credentials) {
+    payload <- append(payload, list(credentials = get_credentials()), after = 0)
+  }
 
   request <- httr2::request(domain) %>%
     # Set endpoint based on the passed function_identity
