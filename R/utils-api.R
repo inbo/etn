@@ -112,6 +112,9 @@ check_opencpu_response <- function(response) {
 
 #' Check if the provided credentials can be used to login via the API
 #'
+#' @param domain Character vector of the OpenCPU domain to use, defaults to
+#'  "https://opencpu.lifewatch.be"
+#'
 #' @family helper functions
 #' @noRd
 validate_login <- function(domain = "https://opencpu.lifewatch.be") {
