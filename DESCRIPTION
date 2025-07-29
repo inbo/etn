@@ -46,7 +46,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    vcr (>= 2.0.0),
+    vcr,
     withr
 VignetteBuilder: 
     knitr
