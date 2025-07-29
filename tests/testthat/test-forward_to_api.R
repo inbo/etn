@@ -41,10 +41,12 @@ test_that("forward_to_api() can send requests to domains other than etn", {
 })
 
 test_that("forward_to_api() can forward R errors to client console", {
-
-  forward_to_api("rnorm",
-                 payload = list(mean = 4), # results in error: "n" is missing,
-                 json = FALSE,
-                 domain = "https://cloud.opencpu.org/ocpu"
-                 )
+  expect_error(
+    forward_to_api("rnorm",
+      payload = list(mean = 4), # results in error: "n" is missing,
+      json = FALSE,
+      domain = "https://cloud.opencpu.org/ocpu/library/stats/R/"
+    ),
+    regexp = 'argument "n" is missing, with no default'
+  )
 })
