@@ -129,7 +129,11 @@ validate_login <- function(domain = "https://opencpu.lifewatch.be") {
     httr2::resp_body_json(simplifyVector = TRUE)
 
   if (!login_valid) {
-    stop("Failed to login. Please check username/password.")
+    rlang::abort(
+      glue::glue("Failed to login with username: {get_credentials()$username}.",
+                 " Please check username/password."),
+      caller = rlang::env_parent()
+    )
   }
 
   return(login_valid)

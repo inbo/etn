@@ -158,13 +158,13 @@ test_that("validate_login() returns error on bad credentials", {
     code = {
       expect_error(
         validate_login(),
-        regexp = "Failed to login. Please check username/password.",
+        regexp = "Failed to login with username: not_a_username. Please check username/password.",
         fixed = TRUE
       )
       # This error should be forwarded to all api functions
       expect_error(
         list_animal_ids(api = TRUE),
-        regexp = "Failed to login. Please check username/password.",
+        regexp = "Failed to login with username: not_a_username. Please check username/password.",
         fixed = TRUE
       )
     },
