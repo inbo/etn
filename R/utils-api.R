@@ -114,17 +114,20 @@ check_opencpu_response <- function(response) {
 #'
 #' @param domain Character vector of the OpenCPU domain to use, defaults to
 #'  "https://opencpu.lifewatch.be"
+#' @param credentials A list containing the username and password to use for
+#' login, defaults to `get_credentials()`
 #'
 #' @family helper functions
 #' @noRd
-validate_login <- function(domain = "https://opencpu.lifewatch.be") {
+validate_login <- function(domain = "https://opencpu.lifewatch.be",
+                           credentials = get_credentials()) {
   # Placing a custom request because validate_login accepts username and
   # password directly in the body rather than as a credentials object like the
   # other functions.
   login_valid <- httr2::request(domain) %>%
     httr2::req_url_path_append("library", "etnservice", "R") %>%
     httr2::req_url_path_append("validate_login", "json/") %>%
-    httr2::req_body_json(data = get_credentials()) %>%
+    httr2::req_body_json(data = credentials) %>%
     httr2::req_perform() %>%
     httr2::resp_body_json(simplifyVector = TRUE)
 

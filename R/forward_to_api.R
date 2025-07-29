@@ -21,7 +21,13 @@ forward_to_api <- function(
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
   # Get credentials and attach to payload
   if (add_credentials) {
-    payload <- append(payload, list(credentials = get_credentials()), after = 0)
+    # Get credentials out of .Renviron or prompt user.
+    provided_credentials <- get_credentials()
+    # Check if username/password are correct.
+    validate_login(credentials = provided_credentials)
+    # Add credentials to payload if correct and required.
+    payload <-
+      append(payload, list(credentials = provided_credentials), after = 0)
   }
 
   request <- httr2::request(domain) %>%
