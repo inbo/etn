@@ -147,7 +147,8 @@ validate_login <- function(domain = "https://opencpu.lifewatch.be") {
 #' @examples
 #' get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
 get_hostname <- function(url_str){
-  httr2::url_parse(url_str) %>%
-    httr2::url_modify(path = NULL) %>%
-    httr2::url_build()
+  # the hostname + everything in the path before `library`, because opencpu
+  # doesn't need to be hosted directly on the hostname. Useful for testing on
+  # other domains than etn.
+  stringr::str_extract(url_str, ".+(?=library)")
 }
