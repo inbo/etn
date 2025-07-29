@@ -6,7 +6,7 @@
 * The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
 * Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
-* You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339)
+* You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339, #338, #228)
 * Archival tags are now available in `get_animals()` (#365). 
 
 # etn 2.2.2

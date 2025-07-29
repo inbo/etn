@@ -1,36 +1,28 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/list_cpod_project_codes/json/
     body:
-      encoding: ''
       string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"}}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
   response:
-    status:
-      status_code: 201
-      category: Success
-      reason: Created
-      message: 'Success: (201) Created'
+    status: 201
     headers:
-      date: Wed, 23 Jul 2025 07:26:56 GMT
+      date: Fri, 25 Jul 2025 07:40:32 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
         form.vliz.be www.omes-monitoring.be omes-monitoring.be;
       cross-origin-opener-policy: same-origin
       cache-control: max-age=300, public
-      x-ocpu-session: x0eb165b5983fca
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0eb165b5983fca/
+      x-ocpu-session: x065871f83cf01a
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x065871f83cf01a/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-07-23 07:26:57 UTC
+      x-ocpu-time: 2025-07-25 07:40:33 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -39,9 +31,7 @@ http_interactions:
       content-type: application/json
       access-control-allow-methods: '*'
     body:
-      encoding: ''
-      file: no
       string: |
         ["Apelafico_acoustics", "Apelafico_underwater", "ARMS_MBON_Belgium", "CODEVCO", "cpod-lifewatch", "cpod-od-natuur", "Lifewatch_extra", "Lifewatch_test", "PAM-Borssele", "PelFish", "PhD_Parcerisas", "PureWind", "SEAWave", "SMGMIT", "STRAITS_PAM", "VLIZ-MRC-AMUC-001", "VLIZ-MRC-AMUC-002", "WaveHub"]
-  recorded_at: 2025-07-23 07:26:58 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-25 07:40:33
+recorded_with: VCR-vcr/2.0.0

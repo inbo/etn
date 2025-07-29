@@ -28,7 +28,7 @@ Imports:
     dplyr,
     etnservice,
     glue,
-    httr,
+    httr2,
     lifecycle,
     methods,
     readr,
@@ -46,12 +46,13 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    vcr (>= 0.6.0),
+    vcr (>= 2.0.0),
     withr
 VignetteBuilder: 
     knitr
-Remotes: 
-    inbo/etnservice
+Remotes:  
+    inbo/etnservice,
+    ropensci/vcr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

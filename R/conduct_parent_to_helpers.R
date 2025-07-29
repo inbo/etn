@@ -57,6 +57,7 @@ conduct_parent_to_helpers <- function(api,
     ]
 
   if (api) {
+    # Forward arguments to API via helper.
     out <- do.call(
       forward_to_api,
       list(function_identity = function_identity,
