@@ -48,6 +48,7 @@ test_that("forward_to_api() can forward R errors to client console", {
       domain = "https://cloud.opencpu.org/ocpu/library/stats/R/",
       add_credentials = FALSE
     ),
-    regexp = 'argument "n" is missing, with no default'
+    regexp = 'argument "n" is missing, with no default',
+    fixed = FALSE # don't check for caller
   )
 })
