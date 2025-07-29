@@ -45,7 +45,15 @@ forward_to_api <- function(
   } else {
     # Forward the function and arguments to the API: call 1
     ## Retry if server responds with HTTP error, use default rate settings of httr
-    response <- httr2::req_perform(request)
+
+    response <- tryCatch(
+      httr2::req_perform(request),
+      httr2_http_400 = function(cnd) {
+        rlang::abort(
+          httr2::resp_body_string(httr2::last_response()),
+          call = rlang::env_parent(n = 2))
+      }
+    )
 
     # Check if the response contains any errors, and forward them if so.
     check_opencpu_response(response)
