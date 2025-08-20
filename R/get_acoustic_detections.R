@@ -70,6 +70,7 @@
 get_acoustic_detections <- function(connection,
                                     start_date = NULL,
                                     end_date = NULL,
+                                    detection_id = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
@@ -83,7 +84,37 @@ get_acoustic_detections <- function(connection,
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
+  assertthat::assert_that(assertthat::is.flag(api))
+
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
-  return(out)
+  if(api){
+    # Some arguments don't need to be send to the API
+    arguments_to_pass <-
+      return_parent_arguments(depth = 1)[
+        !names(return_parent_arguments(depth = 1)) %in% c(
+        "api",
+        "connection",
+        "limit" # handled client side
+      )]
+
+    n_records_returned <- forward_to_api("get_acoustic_detections_page",
+                                         payload = append(arguments_to_pass,
+                                                          list(count = TRUE)),
+                                         json = TRUE) %>%
+      dplyr::pull("count")
+
+    # init object to store pages in
+    combined_results <- list()
+    repeat {
+    out <-
+      forward_to_api(
+        function_identity = "get_acoustic_detections_page",
+        payload = append(arguments_to_pass,
+                         next_id_pk = next_id_pk,
+                         # Set number of records to fetch per page
+                         page_size = 100000
+        )
+      )
+    }
+  }
 }
