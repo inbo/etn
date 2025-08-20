@@ -8,17 +8,20 @@
 #' @param json Logical, if TRUE, then a one step process is used the output is
 #'   parsed from a json response
 #' @param domain Character vector of the OpenCPU domain to use, defaults to
-#'   "https://opencpu.lifewatch.be/library/etnservice/R"
+#'   "https://opencpu.lifewatch.be/library/etnservice/R". A test domain can be
+#'   set via the environmental variable `ETN_TEST_API`. VLIZ has requested the
+#'   authors to not disclose this test url.
 #' @return The same return object of the `function_identity` function
 #'
 #' @family helper functions
 #' @noRd
 forward_to_api <- function(
     function_identity,
-    payload,
+    payload = list(),
     add_credentials = TRUE,
     json = FALSE,
-    domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
+    domain = Sys.getenv("ETN_TEST_API",
+                        unset = "https://opencpu.lifewatch.be/library/etnservice/R")) {
   # Get credentials and attach to payload
   if (add_credentials) {
     # Get credentials out of .Renviron or prompt user.

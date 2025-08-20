@@ -8,6 +8,7 @@
 * Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
 * You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339, #338, #228)
 * Archival tags are now available in `get_animals()` (#365). 
+* Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API`. (#383)
 
 # etn 2.2.2
 
