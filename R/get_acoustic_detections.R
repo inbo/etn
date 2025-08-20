@@ -131,7 +131,7 @@ get_acoustic_detections <- function(connection,
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
 
-      if(nrow(fetched_page) < page_size){
+      if (nrow(fetched_page) < page_size) {
         # Page isn't full: end of results.
         break
       }
