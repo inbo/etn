@@ -103,10 +103,12 @@ get_acoustic_detections <- function(connection,
                                          json = TRUE) %>%
       dplyr::pull("count")
 
-    # control number of objects to fetch per page
+    # Control number of objects to fetch per page
     page_size <- 100000
-    # init object to store pages in
+    # Init object to store pages in
     combined_results <- list()
+
+    # Keep repeating until the last page is smaller than the page_size
     repeat {
       fetched_page <-
         forward_to_api(
