@@ -86,28 +86,29 @@ get_acoustic_detections <- function(connection,
   }
   assertthat::assert_that(assertthat::is.flag(api))
 
-  # Either use the API, or the SQL helper
-  if(api){
-    # Some arguments don't need to be send to the API
-    arguments_to_pass <-
-      return_parent_arguments(depth = 1)[
-        !names(return_parent_arguments(depth = 1)) %in% c(
+  # Some arguments don't need to be send to etnservice
+  arguments_to_pass <-
+    return_parent_arguments(depth = 1)[
+      !names(return_parent_arguments(depth = 1)) %in% c(
         "api",
         "connection",
         "limit" # handled client side
       )]
 
+  # Either use the API, or the SQL helper
+  if(api){
     n_records_returned <- forward_to_api("get_acoustic_detections_page",
                                          payload = append(arguments_to_pass,
                                                           list(count = TRUE)),
                                          json = TRUE) %>%
       dplyr::pull("count")
 
-    # Initialize progress bar
+    # Initialise progress bar with total records expected
     cli::cli_progress_bar(total = n_records_returned)
 
     # Control number of objects to fetch per page
     page_size <- 100000
+
     # Init object to store pages in
     combined_results <- list()
 
@@ -148,6 +149,58 @@ get_acoustic_detections <- function(connection,
       }
     }
 
-    dplyr::bind_rows(combined_results)
+
+  } else {
+    # Use a local database connection instead
+
+    n_records_returned <- do.call(etnservice::get_acoustic_detections_page,
+      args = append(
+        arguments_to_pass,
+        list(count = TRUE)
+      )
+    ) %>%
+      dplyr::pull("count")
+
+    # Initialise progress bar with total records expected
+    cli::cli_progress_bar(total = n_records_returned)
+
+    # Init object to store pages in
+    combined_results <- list()
+
+    # Keep repeating until the last page is smaller than the page_size
+    repeat {
+      fetched_page <- do.call(
+        etnservice::get_acoustic_detections_page,
+        args = append(
+          arguments_to_pass,
+          # use the next_id_pk to paginate, if we are on the first page, start
+          # at 0
+          mget(
+            # Get the following objects from the enclosing frame
+            c("next_id_pk", "page_size"),
+            # With the following default values if not set:
+            ifnotfound = list(0, 100000),
+            inherits = FALSE
+          ),
+          after = 0
+        )
+      )
+      # Iterate the progress bar
+      cli::cli_progress_update(inc = nrow(fetched_page))
+
+      # The next page will be fetched with detection_ids higher than the current
+      # max detection_id
+
+      next_id_pk <- max(fetched_page$detection_id)
+
+      # store page: use next_id_pk as name to avoid iterating page number
+      combined_results[[as.character(next_id_pk)]] <- fetched_page
+
+      if (nrow(fetched_page) < page_size) {
+        # Page isn't full = end of results.
+        break
+      }
+    }
   }
+  dplyr::bind_rows(combined_results)
 }
