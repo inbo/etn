@@ -18,7 +18,8 @@ forward_to_api <- function(
     payload = list(),
     add_credentials = TRUE,
     json = FALSE,
-    domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
+    domain = Sys.getenv("ETN_TEST_API",
+                        unset = "https://opencpu.lifewatch.be/library/etnservice/R")) {
   # Get credentials and attach to payload
   if (add_credentials) {
     # Get credentials out of .Renviron or prompt user.
