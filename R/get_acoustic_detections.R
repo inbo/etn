@@ -86,7 +86,7 @@ get_acoustic_detections <- function(connection,
   }
   assertthat::assert_that(assertthat::is.flag(api))
 
-  # Either use the API, or the SQL helper.
+  # Either use the API, or the SQL helper
   if(api){
     # Some arguments don't need to be send to the API
     arguments_to_pass <-
@@ -102,6 +102,9 @@ get_acoustic_detections <- function(connection,
                                                           list(count = TRUE)),
                                          json = TRUE) %>%
       dplyr::pull("count")
+
+    # Initialize progress bar
+    cli::cli_progress_bar(total = n_records_returned)
 
     # Control number of objects to fetch per page
     page_size <- 100000
@@ -127,14 +130,20 @@ get_acoustic_detections <- function(connection,
             after = 0
           )
         )
+
+      # Iterate the progress bar
+      cli::cli_progress_update(inc = nrow(fetched_page))
+
       # The next page will be fetched with detection_ids higher than the current
       # max detection_id
+
       next_id_pk <- max(fetched_page$detection_id)
+
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
 
       if (nrow(fetched_page) < page_size) {
-        # Page isn't full: end of results.
+        # Page isn't full = end of results.
         break
       }
     }

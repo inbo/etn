@@ -25,6 +25,7 @@ Depends:
 Imports:
     askpass,
     assertthat,
+    cli,
     dplyr,
     etnservice,
     glue,
@@ -50,7 +51,7 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
-Remotes:  
+Remotes: 
     inbo/etnservice,
     ropensci/vcr
 Config/testthat/edition: 3
