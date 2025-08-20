@@ -107,8 +107,9 @@ get_acoustic_detections <- function(connection,
     # Initialise progress bar with total records expected
     cli::cli_progress_bar(total = n_records_returned)
 
-    # Control number of objects to fetch per page
-    page_size <- 100000
+    # Control number of objects to fetch per page, 100k default, up to 1M for
+    # big queries
+    page_size <- ifelse(n_records_returned <= 5e6, 100000, 1000000)
 
     # Init object to store pages in
     combined_results <- list()
