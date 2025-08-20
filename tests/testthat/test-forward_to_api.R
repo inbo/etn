@@ -40,6 +40,22 @@ test_that("forward_to_api() can send requests to domains other than etn", {
   )
 })
 
+test_that("forward_to_api() can send requests to test domain", {
+  skip_if(Sys.getenv("ETN_TEST_API", unset = "True") == "True",
+    message = "ETN_TEST_API is not set to test deployment url."
+  )
+
+  expect_type(
+    forward_to_api(
+      function_identity = "list_scientific_names",
+      payload = list(),
+      add_credentials = TRUE,
+      json = TRUE
+    ),
+    "character"
+  )
+})
+
 test_that("forward_to_api() can forward R errors to client console", {
   expect_error(
     forward_to_api("rnorm",
