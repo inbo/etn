@@ -107,19 +107,26 @@ get_acoustic_detections <- function(connection,
     page_size <- 100000
     # init object to store pages in
     combined_results <- list()
-    # start looking for detections at the very start of the view
-    next_id_pk <- 0
     repeat {
       fetched_page <-
         forward_to_api(
           function_identity = "get_acoustic_detections_page",
           payload = append(
             arguments_to_pass,
-            next_id_pk = next_id_pk,
-            # Set number of records to fetch per page
-            page_size = page_size
+            # use the next_id_pk to paginate, if we are on the first page, start
+            # at 0
+            mget(
+              # Get the following objects from the enclosing frame
+              c("next_id_pk", "page_size"),
+              # With the following default values if not set:
+              ifnotfound = list(0, 100000),
+              inherits = FALSE
+            ),
+            after = 0
           )
         )
+      # The next page will be fetched with detection_ids higher than the current
+      # max detection_id
       next_id_pk <- max(fetched_page$detection_id)
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
