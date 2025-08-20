@@ -106,15 +106,16 @@ get_acoustic_detections <- function(connection,
     # init object to store pages in
     combined_results <- list()
     repeat {
-    out <-
-      forward_to_api(
-        function_identity = "get_acoustic_detections_page",
-        payload = append(arguments_to_pass,
-                         next_id_pk = next_id_pk,
-                         # Set number of records to fetch per page
-                         page_size = 100000
+      out <-
+        forward_to_api(
+          function_identity = "get_acoustic_detections_page",
+          payload = append(
+            arguments_to_pass,
+            next_id_pk = next_id_pk,
+            # Set number of records to fetch per page
+            page_size = 100000
+          )
         )
-      )
     }
   }
 }
