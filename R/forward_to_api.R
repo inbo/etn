@@ -15,7 +15,7 @@
 #' @noRd
 forward_to_api <- function(
     function_identity,
-    payload,
+    payload = list(),
     add_credentials = TRUE,
     json = FALSE,
     domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
