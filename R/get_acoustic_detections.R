@@ -102,8 +102,11 @@ get_acoustic_detections <- function(connection,
   n_records_expected <-
     ifelse(
       limit,
-      100, # If limit is set to TRUE, we expect 100 records
-      count_acoustic_detections(arguments_to_pass, api = api) # otherwise calc
+      # If limit is set to TRUE, we expect 100 records
+      100,
+      # otherwise query the number of records
+      do.call(count_acoustic_detections, append(arguments_to_pass,
+                                                list(api = api)))
     )
 
   # Initialise progress bar with total records expected
