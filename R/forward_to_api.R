@@ -49,7 +49,7 @@ forward_to_api <- function(
       httr2_http_400 = function(cnd) {
         rlang::abort(
           httr2::resp_body_string(httr2::last_response()),
-          call = rlang::env_parent(n = 2))
+          call = call(function_identity))
       }
     )
 
@@ -67,7 +67,7 @@ forward_to_api <- function(
       httr2_http_400 = function(cnd) {
         rlang::abort(
           httr2::resp_body_string(httr2::last_response()),
-          call = rlang::env_parent(n = 2))
+          call = call(function_identity))
       }
     )
 
