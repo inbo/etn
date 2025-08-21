@@ -41,10 +41,17 @@ forward_to_api <- function(
     httr2::req_retry(max_tries = 5)
 
   if (json) {
-    response <-
-      request %>%
-      httr2::req_url_path_append("json/") %>%
-      httr2::req_perform()
+    request <- request %>%
+      httr2::req_url_path_append("json/")
+
+    response <- tryCatch(
+      httr2::req_perform(request),
+      httr2_http_400 = function(cnd) {
+        rlang::abort(
+          httr2::resp_body_string(httr2::last_response()),
+          call = rlang::env_parent(n = 2))
+      }
+    )
 
     # Check if the response contains any errors, and forward them if so.
     check_opencpu_response(response)
