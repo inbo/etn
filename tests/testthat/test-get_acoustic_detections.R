@@ -454,15 +454,19 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   # Detections should be joined with acoustic_tag_id AND datetime, so that they
   # are not duplicated. Note: for df_393 we use a start_date to limit records.
   df_both <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925")
-  df_393 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-01", end_date = "2012-12-10")
-  df_394 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-14")
+  df_393 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925",
+                                    start_date = "2012-12-01",
+                                    end_date = "2012-12-10")
+  df_394 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925",
+                                    start_date = "2012-12-14")
 
   # Expect no duplicates
-  expect_identical(nrow(df_both), nrow(df_both %>% distinct(detection_id)))
+  expect_identical(nrow(df_both),
+                   nrow(df_both %>% dplyr::distinct(detection_id)))
 
   # Return correct animal within range
-  expect_identical(df_393 %>% distinct(animal_id) %>% pull(), 393L)
-  expect_identical(df_394 %>% distinct(animal_id) %>% pull(), 394L)
+  expect_identical(df_393 %>% dplyr::distinct(animal_id) %>% dplyr::pull(), 393L)
+  expect_identical(df_394 %>% dplyr::distinct(animal_id) %>% dplyr::pull(), 394L)
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
