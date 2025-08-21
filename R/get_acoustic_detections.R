@@ -79,13 +79,14 @@ get_acoustic_detections <- function(connection,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    api = TRUE){
+                                    api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   assertthat::assert_that(assertthat::is.flag(api))
+  assertthat::assert_that(assertthat::is.flag(limit))
 
   # Some arguments don't need to be send to etnservice
   arguments_to_pass <-
@@ -94,26 +95,40 @@ get_acoustic_detections <- function(connection,
         "api",
         "connection",
         "limit" # handled client side
-      )]
+      )
+    ]
 
   # Either use the API, or the SQL helper
-  if(api){
+  if (api) {
     n_records_returned <- forward_to_api("get_acoustic_detections_page",
-                                         payload = append(arguments_to_pass,
-                                                          list(count = TRUE)),
-                                         json = TRUE) %>%
+      payload = append(
+        arguments_to_pass,
+        list(count = TRUE)
+      ),
+      json = TRUE
+    ) %>%
       dplyr::pull("count")
+  } else {
+    n_records_returned <- do.call(etnservice::get_acoustic_detections_page,
+      args = append(
+        arguments_to_pass,
+        list(count = TRUE)
+      )
+    ) %>%
+      dplyr::pull("count")
+  }
 
-    # Initialise progress bar with total records expected
-    cli::cli_progress_bar(total = n_records_returned)
+  # Initialise progress bar with total records expected
+  cli::cli_progress_bar(total = n_records_returned)
 
     # Control number of objects to fetch per page, 100k default, up to 1M for
     # big queries
     page_size <- ifelse(n_records_returned <= 5e6, 100000, 1000000)
 
-    # Init object to store pages in
-    combined_results <- list()
+  # Init object to store pages
+  combined_results <- list()
 
+  if (api) {
     # Keep repeating until the last page is smaller than the page_size
     repeat {
       fetched_page <-
@@ -150,24 +165,7 @@ get_acoustic_detections <- function(connection,
         break
       }
     }
-
-
-  } else {
-    # Use a local database connection instead
-
-    n_records_returned <- do.call(etnservice::get_acoustic_detections_page,
-      args = append(
-        arguments_to_pass,
-        list(count = TRUE)
-      )
-    ) %>%
-      dplyr::pull("count")
-
-    # Initialise progress bar with total records expected
-    cli::cli_progress_bar(total = n_records_returned)
-
-    # Init object to store pages in
-    combined_results <- list()
+  } else { # Use a local database connection instead
 
     # Keep repeating until the last page is smaller than the page_size
     repeat {
