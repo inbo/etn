@@ -99,33 +99,16 @@ get_acoustic_detections <- function(connection,
     ]
 
   # Either use the API, or the SQL helper
-  if (api) {
-    n_records_returned <- forward_to_api("get_acoustic_detections_page",
-      payload = append(
-        arguments_to_pass,
-        list(count = TRUE)
-      ),
-      json = TRUE
-    ) %>%
-      dplyr::pull("count")
-  } else {
-    n_records_returned <- do.call(etnservice::get_acoustic_detections_page,
-      args = append(
-        arguments_to_pass,
-        list(count = TRUE)
-      )
-    ) %>%
-      dplyr::pull("count")
-  }
+  n_records_expected <- count_acoustic_detections(arguments_to_pass, api = api)
 
   # Initialise progress bar with total records expected
-  cli::cli_progress_bar(total = n_records_returned)
+  cli::cli_progress_bar(total = n_records_expected)
 
   # Control number of objects to fetch per page, 100k default, up to 1M for
   # big queries
   page_size <- dplyr::case_when(
     limit ~ 100,
-    n_records_returned > 5e6 ~ 1e6,
+    n_records_expected > 5e6 ~ 1e6,
     .default = 100000
   )
 
@@ -207,4 +190,44 @@ get_acoustic_detections <- function(connection,
     }
   }
   dplyr::bind_rows(combined_results)
+}
+
+#' Count acoustic detections
+#'
+#' Count the number of acoustic detections that match the given parameters. This
+#' is a helper function that uses
+#' [`get_acoustic_detections_page()`][etnservice::get_acoustic_detections_page]
+#' to count the number of records that would be returned by
+#' [`get_acoustic_detections()`][get_acoustic_detections].
+#'
+#'
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name apii
+#' @inheritParams get_acoustic_detections
+#'
+#' @return
+#' @family helper functions
+#' @noRd
+#' @examples
+#' count_acoustic_detections(acoustic_project_code = "demer")
+#' count_acoustic_detections(acoustic_tag_id = "A69-1601-16130",
+#'                           station_name = c("de-9", "de-10"))
+count_acoustic_detections <- function(..., api = TRUE) {
+  if(api){
+    returned_count <- forward_to_api("get_acoustic_detections_page",
+                   payload = append(
+                     rlang::list2(...),
+                     list(count = TRUE)
+                   ),
+                   json = TRUE
+    )
+  } else {
+    returned_count <- do.call(etnservice::get_acoustic_detections_page,
+            args = append(
+              rlang::list2(...),
+              list(count = TRUE)
+            )
+    )
+  }
+
+  dplyr::pull(returned_count, "count")
 }
