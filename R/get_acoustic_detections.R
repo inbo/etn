@@ -98,8 +98,13 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
-  # Either use the API, or the SQL helper
-  n_records_expected <- count_acoustic_detections(arguments_to_pass, api = api)
+  # Calculate the number of records we expect: for progress bar + page_size
+  n_records_expected <-
+    ifelse(
+      limit,
+      100, # If limit is set to TRUE, we expect 100 records
+      count_acoustic_detections(arguments_to_pass, api = api) # otherwise calc
+    )
 
   # Initialise progress bar with total records expected
   cli::cli_progress_bar(total = n_records_expected)
@@ -115,6 +120,7 @@ get_acoustic_detections <- function(connection,
   # Init object to store pages
   combined_results <- list()
 
+  # Either use the API, or the SQL helper
   if (api) {
     # Keep repeating until the last page is smaller than the page_size
     repeat {
