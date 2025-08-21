@@ -121,9 +121,13 @@ get_acoustic_detections <- function(connection,
   # Initialise progress bar with total records expected
   cli::cli_progress_bar(total = n_records_returned)
 
-    # Control number of objects to fetch per page, 100k default, up to 1M for
-    # big queries
-    page_size <- ifelse(n_records_returned <= 5e6, 100000, 1000000)
+  # Control number of objects to fetch per page, 100k default, up to 1M for
+  # big queries
+  page_size <- dplyr::case_when(
+    limit ~ 100,
+    n_records_returned > 5e6 ~ 1e6,
+    .default = 100000
+  )
 
   # Init object to store pages
   combined_results <- list()
@@ -160,7 +164,7 @@ get_acoustic_detections <- function(connection,
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
 
-      if (nrow(fetched_page) < page_size) {
+      if (nrow(fetched_page) < page_size || limit) {
         # Page isn't full = end of results.
         break
       }
@@ -196,7 +200,7 @@ get_acoustic_detections <- function(connection,
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
 
-      if (nrow(fetched_page) < page_size) {
+      if (nrow(fetched_page) < page_size || limit) {
         # Page isn't full = end of results.
         break
       }
