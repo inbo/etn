@@ -198,7 +198,9 @@ get_acoustic_detections <- function(connection,
       }
     }
   }
-  dplyr::bind_rows(combined_results)
+  # Combine pages and sort on acoustic_tag_id
+  dplyr::bind_rows(combined_results) %>%
+    dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
 }
 
 #' Count acoustic detections
