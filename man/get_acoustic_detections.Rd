@@ -8,11 +8,11 @@ get_acoustic_detections(
   connection,
   start_date = NULL,
   end_date = NULL,
-  detection_id = NULL,
   acoustic_tag_id = NULL,
   animal_project_code = NULL,
   scientific_name = NULL,
   acoustic_project_code = NULL,
+  deployment_id = NULL,
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
@@ -31,8 +31,6 @@ credentials instead.}
 \item{end_date}{Character. End date (exclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
 
-\item{detection_id}{Character (vector). One or more detection ids.}
-
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
 
 \item{animal_project_code}{Character (vector). One or more animal project
@@ -42,6 +40,8 @@ codes. Case-insensitive.}
 
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
+
+\item{deployment_id}{Character (vector). One or more deployment ids.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 

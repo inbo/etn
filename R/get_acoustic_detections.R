@@ -7,13 +7,13 @@
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
-#' @param detection_id Character (vector). One or more detection ids.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
 #' @param scientific_name Character (vector). One or more scientific names.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
+#' @param deployment_id Character (vector). One or more deployment ids.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names.
@@ -72,11 +72,11 @@
 get_acoustic_detections <- function(connection,
                                     start_date = NULL,
                                     end_date = NULL,
-                                    detection_id = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
                                     acoustic_project_code = NULL,
+                                    deployment_id = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
