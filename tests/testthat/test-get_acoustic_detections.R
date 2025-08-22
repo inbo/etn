@@ -59,6 +59,39 @@ test_that("get_acoustic_detections() returns the expected columns", {
   expect_identical(names(df), expected_col_names)
 })
 
+test_that("get_acoustic_detections() returns expected columns on 0 row result",{
+  # There should be no detections before the year 1000
+  df <- get_acoustic_detections(end_date = "1000-01-01")
+  # Still return a tibble
+  expect_s3_class(df, "data.frame")
+  # With 0 rows
+  expect_identical(nrow(df), 0L)
+  # With the expected cols
+  expected_col_names <- c(
+    "detection_id",
+    "date_time",
+    "tag_serial_number",
+    "acoustic_tag_id",
+    "animal_project_code",
+    "animal_id",
+    "scientific_name",
+    "acoustic_project_code",
+    "receiver_id",
+    "station_name",
+    "deploy_latitude",
+    "deploy_longitude",
+    "sensor_value",
+    "sensor_unit",
+    "sensor2_value",
+    "sensor2_unit",
+    "signal_to_noise_ratio",
+    "source_file",
+    "qc_flag",
+    "deployment_id"
+  )
+  expect_identical(names(df), expected_col_names)
+})
+
 test_that("get_acoustic_detections() allows selecting on start_date and end_date", {
   # Errors
   expect_error(get_acoustic_detections(start_date = "not_a_date"))
@@ -489,3 +522,5 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
   # not yet associated with an animal. It should return detections
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
+
+

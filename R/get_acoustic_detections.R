@@ -118,6 +118,34 @@ get_acoustic_detections <- function(connection,
                                                 list(api = api)))
     )
 
+  # Return early if query didn't result in any rows
+  if (n_records_expected == 0) {
+    return(
+      dplyr::tibble(.rows = 0,
+        "detection_id",
+        "date_time",
+        "tag_serial_number",
+        "acoustic_tag_id",
+        "animal_project_code",
+        "animal_id",
+        "scientific_name",
+        "acoustic_project_code",
+        "receiver_id",
+        "station_name",
+        "deploy_latitude",
+        "deploy_longitude",
+        "sensor_value",
+        "sensor_unit",
+        "sensor2_value",
+        "sensor2_unit",
+        "signal_to_noise_ratio",
+        "source_file",
+        "qc_flag",
+        "deployment_id"
+      )
+    )
+  }
+
   # Initialise progress bar with total records expected
   cli::cli_progress_bar(total = n_records_expected)
 
@@ -158,9 +186,8 @@ get_acoustic_detections <- function(connection,
       cli::cli_progress_update(inc = nrow(fetched_page))
 
       # The next page will be fetched with detection_ids higher than the current
-      # max detection_id, don't warn if all detection_id's are empty (0 rows)
-
-      next_id_pk <- suppressWarnings(max(fetched_page$detection_id))
+      # max detection_id
+      next_id_pk <- max(fetched_page$detection_id)
 
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
@@ -194,9 +221,9 @@ get_acoustic_detections <- function(connection,
       cli::cli_progress_update(inc = nrow(fetched_page))
 
       # The next page will be fetched with detection_ids higher than the current
-      # max detection_id, don't warn if all detection_id's are empty (0 rows)
+      # max detection_id
 
-      next_id_pk <- suppressWarnings(max(fetched_page$detection_id))
+      next_id_pk <- max(fetched_page$detection_id)
 
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
