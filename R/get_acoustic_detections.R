@@ -19,7 +19,8 @@
 #'   names.
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'   for testing purposes). Defaults to `FALSE`.
-#'
+#' @param progress Logical. Show a progress bar while fetching data. Defaults to
+#'   `TRUE`.
 #' @inheritParams list_animal_ids
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
@@ -79,6 +80,7 @@ get_acoustic_detections <- function(connection,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
+                                    progress = TRUE,
                                     api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
@@ -88,11 +90,18 @@ get_acoustic_detections <- function(connection,
   assertthat::assert_that(assertthat::is.flag(api))
   assertthat::assert_that(assertthat::is.flag(limit))
 
+  # Control progress reporting
+  # Don't show the progress bar when testing: clutters up console and CI output
+  if(is_testing()){progress <- FALSE}
+  # Only show the progress bar if less than 50% of records have been fetched in
+  # 24h
+  if(!progress){withr::local_options(cli.progress_show_after = 60 * 60 * 24)}
   # Some arguments don't need to be send to etnservice
   arguments_to_pass <-
     return_parent_arguments(depth = 1)[
       !names(return_parent_arguments(depth = 1)) %in% c(
         "api",
+        "progress",
         "connection",
         "limit" # handled client side
       )
