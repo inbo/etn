@@ -224,7 +224,8 @@ get_acoustic_detections <- function(connection,
 #' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name apii
 #' @inheritParams get_acoustic_detections
 #'
-#' @return
+#' @return A numeric value with the number of acoustic detections that match the
+#'     given parameters.
 #' @family helper functions
 #' @noRd
 #' @examples
