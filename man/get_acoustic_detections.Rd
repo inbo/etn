@@ -16,6 +16,7 @@ get_acoustic_detections(
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
+  progress = TRUE,
   api = TRUE
 )
 }
@@ -49,6 +50,9 @@ names.}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
+
+\item{progress}{Logical. Show a progress bar while fetching data. Defaults to
+\code{TRUE}.}
 
 \item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
