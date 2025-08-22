@@ -158,9 +158,9 @@ get_acoustic_detections <- function(connection,
       cli::cli_progress_update(inc = nrow(fetched_page))
 
       # The next page will be fetched with detection_ids higher than the current
-      # max detection_id
+      # max detection_id, don't warn if all detection_id's are empty (0 rows)
 
-      next_id_pk <- max(fetched_page$detection_id)
+      next_id_pk <- suppressWarnings(max(fetched_page$detection_id))
 
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
@@ -194,9 +194,9 @@ get_acoustic_detections <- function(connection,
       cli::cli_progress_update(inc = nrow(fetched_page))
 
       # The next page will be fetched with detection_ids higher than the current
-      # max detection_id
+      # max detection_id, don't warn if all detection_id's are empty (0 rows)
 
-      next_id_pk <- max(fetched_page$detection_id)
+      next_id_pk <- suppressWarnings(max(fetched_page$detection_id))
 
       # store page: use next_id_pk as name to avoid iterating page number
       combined_results[[as.character(next_id_pk)]] <- fetched_page
