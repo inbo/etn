@@ -486,6 +486,9 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   # - 394 (2012_leopoldkanaal) from 2012-12-14 13:30:00 to open
   # Detections should be joined with acoustic_tag_id AND datetime, so that they
   # are not duplicated. Note: for df_393 we use a start_date to limit records.
+
+  skip("Issue in database, detections are not linked to the acoustic tag in new view inbo/etnservice#95")
+
   df_both <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925")
   df_393 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925",
                                     start_date = "2012-12-01",
