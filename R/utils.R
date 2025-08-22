@@ -164,3 +164,12 @@ is_interactive <- function(...) {
 prompt_user <- function(...) {
   readline(...)
 }
+
+# onLoad ------------------------------------------------------------------
+
+# Memoisation: only validate the login credentials every 15 minutes.
+.onLoad <- function(libname, pkgname) {
+  validate_login <<- memoise::memoise(validate_login,
+                                      cache = cachem::cache_mem(max_age = 60 * 15)
+  )
+}
