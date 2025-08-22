@@ -160,14 +160,16 @@ get_acoustic_detections <- function(connection,
   # Init object to store pages
   combined_results <- list()
 
-  # Either use the API, or the SQL helper
-  if (api) {
-    # Keep repeating until the last page is smaller than the page_size
-    repeat {
-      fetched_page <-
-        forward_to_api(
+  repeat {
+    fetched_page <-
+      do.call(
+        # Either use the API, or the SQL helper
+        if(api) forward_to_api else etnservice::get_acoustic_detections_page,
+        args = list(
+          # function_identity is ignored by
+          # etnservice::get_acoustic_detections_paged and sent to ...
           function_identity = "get_acoustic_detections_page",
-          payload = append(
+          append(
             arguments_to_pass,
             # use the next_id_pk to paginate, if we are on the first page, start
             # at 0
@@ -181,59 +183,24 @@ get_acoustic_detections <- function(connection,
             after = 0
           )
         )
-
-      # Iterate the progress bar
-      cli::cli_progress_update(inc = nrow(fetched_page))
-
-      # The next page will be fetched with detection_ids higher than the current
-      # max detection_id
-      next_id_pk <- max(fetched_page$detection_id)
-
-      # store page: use next_id_pk as name to avoid iterating page number
-      combined_results[[as.character(next_id_pk)]] <- fetched_page
-
-      if (nrow(fetched_page) < page_size || limit) {
-        # Page isn't full = end of results.
-        break
-      }
-    }
-  } else { # Use a local database connection instead
-
-    # Keep repeating until the last page is smaller than the page_size
-    repeat {
-      fetched_page <- do.call(
-        etnservice::get_acoustic_detections_page,
-        args = append(
-          arguments_to_pass,
-          # use the next_id_pk to paginate, if we are on the first page, start
-          # at 0
-          mget(
-            # Get the following objects from the enclosing frame
-            c("next_id_pk", "page_size"),
-            # With the following default values if not set:
-            ifnotfound = list(0, 100000),
-            inherits = FALSE
-          ),
-          after = 0
-        )
       )
-      # Iterate the progress bar
-      cli::cli_progress_update(inc = nrow(fetched_page))
 
-      # The next page will be fetched with detection_ids higher than the current
-      # max detection_id
+    # Iterate the progress bar
+    cli::cli_progress_update(inc = nrow(fetched_page))
 
-      next_id_pk <- max(fetched_page$detection_id)
+    # The next page will be fetched with detection_ids higher than the current
+    # max detection_id
+    next_id_pk <- max(fetched_page$detection_id)
 
-      # store page: use next_id_pk as name to avoid iterating page number
-      combined_results[[as.character(next_id_pk)]] <- fetched_page
+    # store page: use next_id_pk as name to avoid iterating page number
+    combined_results[[as.character(next_id_pk)]] <- fetched_page
 
-      if (nrow(fetched_page) < page_size || limit) {
-        # Page isn't full = end of results.
-        break
-      }
+    if (nrow(fetched_page) < page_size || limit) {
+      # Page isn't full = end of results.
+      break
     }
   }
+
   # Combine pages and sort on acoustic_tag_id
   dplyr::bind_rows(combined_results) %>%
     dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
