@@ -54,7 +54,25 @@ forward_to_api <- function(
       httr2_http_400 = function(cnd) {
         rlang::abort(
           httr2::resp_body_string(httr2::last_response()),
-          call = call(function_identity)
+          call = call(function_identity),
+          footer = c(i = "This is an error forwarded via the API.")
+        )
+      },
+      # OpenCPU reports server side errors as 502 and 503
+      httr2_http_502 = function(cnd) {
+        rlang::abort(
+          c("Server side error",
+            "*" = "Please try again.",
+            "*" = "If the error persists, please report it to the package authors"
+          )
+        )
+      },
+      httr2_http_503 = function(cnd) {
+        rlang::abort(
+          c("Server side error",
+            "*" = "Please try again.",
+            "*" = "If the error persists, please report it to the package authors"
+          )
         )
       }
     )
@@ -73,7 +91,25 @@ forward_to_api <- function(
       httr2_http_400 = function(cnd) {
         rlang::abort(
           httr2::resp_body_string(httr2::last_response()),
-          call = call(function_identity)
+          call = call(function_identity),
+          footer = c(i = "This is an error forwarded via the API.")
+        )
+      },
+      # OpenCPU reports server side errors as 502 and 503
+      httr2_http_502 = function(cnd) {
+        rlang::abort(
+          c("Server side error",
+            "*" = "Please try again.",
+            "*" = "If the error persists, please report it to the package authors"
+          )
+        )
+      },
+      httr2_http_503 = function(cnd) {
+        rlang::abort(
+          c("Server side error",
+            "*" = "Please try again.",
+            "*" = "If the error persists, please report it to the package authors"
+          )
         )
       }
     )
