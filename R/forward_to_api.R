@@ -38,7 +38,12 @@ forward_to_api <- function(
     # NOTE trailing backslash is important for OpenCPU
     httr2::req_url_path_append(function_identity, "") %>%
     httr2::req_body_json(payload) %>%
-    httr2::req_retry(max_tries = 5)
+    # Setup retry strategy
+    httr2::req_retry(max_tries = 5,
+                     is_transient = function(resp) {
+                       # OpenCPU server side errors, sometimes transient
+                       httr2::resp_status(resp) %in% c(502, 503)
+                     })
 
   if (json) {
     request <- request %>%
