@@ -28,7 +28,7 @@ Imports:
     cachem,
     cli,
     dplyr,
-    etnservice,
+    etnservice (>= 0.4.0),
     glue,
     httr2,
     lifecycle,
