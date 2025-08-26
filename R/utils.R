@@ -115,7 +115,7 @@ get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
-#' Deterimine testing status
+#' Determine testing status
 #'
 #' Copy of testthat::is_testing() implementation to avoid a runtime dependency
 #' on testthat.
