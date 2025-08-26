@@ -25,8 +25,8 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
 # TODO check #283 and re-enable test if neccesairy.
 test_that("get_acoustic_detections() returns unique detection_id", {
   skip("Issue #283 detection_id is currently not unique")
-#   df <- get_acoustic_detections(limit = TRUE)
-#   expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
+  df <- get_acoustic_detections(limit = TRUE)
+  expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
 })
 
 test_that("get_acoustic_detections() returns the expected columns", {
@@ -59,7 +59,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
   expect_identical(names(df), expected_col_names)
 })
 
-test_that("get_acoustic_detections() returns expected columns on 0 row result",{
+test_that("get_acoustic_detections() returns expected cols on 0 row result", {
   # There should be no detections before the year 1000
   df <- get_acoustic_detections(end_date = "1000-01-01")
   # Still return a tibble
@@ -525,5 +525,3 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
   # not yet associated with an animal. It should return detections
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
-
-
