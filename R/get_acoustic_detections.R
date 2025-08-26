@@ -92,10 +92,14 @@ get_acoustic_detections <- function(connection,
 
   # Control progress reporting
   # Don't show the progress bar when testing: clutters up console and CI output
-  if(is_testing()){progress <- FALSE}
+  if (is_testing()) {
+    progress <- FALSE
+  }
   # Only show the progress bar if less than 50% of records have been fetched in
   # 24h
-  if(!progress){withr::local_options(cli.progress_show_after = 60 * 60 * 24)}
+  if (!progress) {
+    withr::local_options(cli.progress_show_after = 60 * 60 * 24)
+  }
   # Some arguments don't need to be send to etnservice
   arguments_to_pass <-
     return_parent_arguments(depth = 1)[
@@ -114,14 +118,17 @@ get_acoustic_detections <- function(connection,
       # If limit is set to TRUE, we expect 100 records
       100,
       # otherwise query the number of records
-      do.call(count_acoustic_detections, append(arguments_to_pass,
-                                                list(api = api)))
+      do.call(count_acoustic_detections, append(
+        arguments_to_pass,
+        list(api = api)
+      ))
     )
 
   # Return early if query didn't result in any rows
   if (n_records_expected == 0) {
     return(
-      dplyr::tibble(.rows = 0,
+      dplyr::tibble(
+        .rows = 0,
         detection_id = NA,
         date_time = NA,
         tag_serial_number = NA,
@@ -164,7 +171,7 @@ get_acoustic_detections <- function(connection,
     fetched_page <-
       do.call(
         # Either use the API, or the SQL helper
-        if(api) forward_to_api else etnservice::get_acoustic_detections_page,
+        if (api) forward_to_api else etnservice::get_acoustic_detections_page,
         args = list(
           # function_identity is ignored by
           # etnservice::get_acoustic_detections_paged and sent to ...
@@ -224,23 +231,25 @@ get_acoustic_detections <- function(connection,
 #' @noRd
 #' @examples
 #' count_acoustic_detections(acoustic_project_code = "demer")
-#' count_acoustic_detections(acoustic_tag_id = "A69-1601-16130",
-#'                           station_name = c("de-9", "de-10"))
+#' count_acoustic_detections(
+#'   acoustic_tag_id = "A69-1601-16130",
+#'   station_name = c("de-9", "de-10")
+#' )
 count_acoustic_detections <- function(..., api = TRUE) {
-  if(api){
+  if (api) {
     returned_count <- forward_to_api("get_acoustic_detections_page",
-                   payload = append(
-                     rlang::list2(...),
-                     list(count = TRUE)
-                   ),
-                   json = TRUE
+      payload = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      ),
+      json = TRUE
     )
   } else {
     returned_count <- do.call(etnservice::get_acoustic_detections_page,
-            args = append(
-              rlang::list2(...),
-              list(count = TRUE)
-            )
+      args = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      )
     )
   }
 
