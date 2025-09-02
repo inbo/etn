@@ -115,42 +115,6 @@ get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
-#' Check if the locally installed version of etnservice matches the version
-#' deployed on the API exactly.
-#'
-#' This function is useful to ensure that the local package version is
-#' compatible with the API version. This is checked by comparing the version
-#' returned by `etnservice::get_version()` with the version returned by the API
-#' endpoint `get_version`.
-#'
-#' This is important to make sure that a function calls return consistent ree
-#' version of the package installed locally.ts regardsless of the argument
-#' `api`.
-#'
-#' The exact version of the package installed locally can be returned by
-#' `etnservice::get_version()`, the version deployed can be returned by calling
-#' `forward_to_api("get_version", add_credentials = FALSE)`
-#'
-#' @param ... Additional arguments passed to `etnservice::get_version()`. These
-#'   are used to specify the API endpoint, such as `api =
-#'   "https://api.etnservice.com"`.
-#' @return A logical value indicating whether the locally installed version of
-#'   etnservice is the same as the one deployed online.
-#' @noRd
-#' @family helper functions
-etnservice_version_matches <- function(...){
-  setequal(
-    etnservice::get_version(...),
-    forward_to_api(
-      "get_version",
-      payload = ...,
-      add_credentials = FALSE,
-      json = TRUE
-    )
-  )
-}
-
-
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
