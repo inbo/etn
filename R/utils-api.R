@@ -203,11 +203,12 @@ get_etnservice_version <- function(..., api = TRUE) {
 #' This function is useful to ensure that the local package version is
 #' compatible with the API version. This is checked by comparing the version
 #' returned by `etnservice::get_version()` with the version returned by the API
-#' endpoint `get_version`.
+#' endpoint `get_version`. Both the version numbers are checked as well as the
+#' checksums of all functions, ensuring that a small change in a function
+#' without updating the package version will also trigger this check.
 #'
-#' This is important to make sure that a function calls return consistent ree
-#' version of the package installed locally.ts regardsless of the argument
-#' `api`.
+#' This is important to make sure that a function calls return consistent
+#' results independent of the call was made locally or over the api.
 #'
 #' The exact version of the package installed locally can be returned by
 #' `etnservice::get_version()`, the version deployed can be returned by calling
@@ -221,6 +222,7 @@ get_etnservice_version <- function(..., api = TRUE) {
 #' @noRd
 #' @family helper functions
 etnservice_version_matches <- function(...){
+  # Compare the package versions, and the checksums of all functions.
   setequal(
     etnservice::get_version(...),
     forward_to_api(
