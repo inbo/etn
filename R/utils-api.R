@@ -183,15 +183,17 @@ get_hostname <- function(url_str){
 #' # Get the version of the version of etnservice deployed on OpenCPU
 #' get_etnservice_version(api = TRUE)
 get_etnservice_version <- function(..., api = TRUE) {
-  ifelse(api,
+  pkg_version <- ifelse(api,
     yes = forward_to_api(
       "get_version",
       payload = rlang::list2(...),
       add_credentials = FALSE,
       json = TRUE
     )$version,
-    no = etnservice::get_version(...)$version
+    no = utils::packageVersion("etnservice")
   )
+  # coerce into character, packageVersion() returns other class.
+  as.character(pkg_version)
 }
 
 
