@@ -162,14 +162,18 @@ get_hostname <- function(url_str){
 
 #' Get the version number of etnservice, either locally or deployed
 #'
-#' This function is useful because it allows us to mock the version of etnservice
-#' for tests via `testhat::with_mocked_bindings()`. Thus allowing us to test the
-#' error messaging in [conduct_parent_to_helpers()].
+#' This function calls `etnservice::get_version()` if `api = FALSE`, otherwise
+#' it forwards the call to the API via `forward_to_api("get_version")`.
+#'
+#' This function is useful because it allows us to mock the version of
+#' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
+#' to test the error messaging in [conduct_parent_to_helpers()].
+#'
 #'
 #' @inheritDotParams etnservice::get_version
 #' @inheritParams list_animal_ids
 #'
-#' @returns
+#' @returns A character string with the version number of etnservice.
 #' @noRd
 #' @family helper functions
 #'
