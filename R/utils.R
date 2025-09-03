@@ -152,3 +152,14 @@ is_interactive <- function(...) {
 prompt_user <- function(...) {
   readline(...)
 }
+
+# onLoad ------------------------------------------------------------------
+
+# Memoisation: Every 15 minutes, check the etnservice version compared to the
+# version deployed via OpenCPU. Checking this on every call would slow down the
+# package.
+.onLoad <- function(libname, pkgname) {
+  etnservice_version_matches <<- memoise::memoise(etnservice_version_matches,
+                                      cache = cachem::cache_mem(max_age = 60 * 15)
+  )
+}
