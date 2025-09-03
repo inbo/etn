@@ -160,6 +160,37 @@ get_hostname <- function(url_str){
   stringr::str_extract(url_str, ".+(?=library)")
 }
 
+#' Get the version number of etnservice, either locally or deployed
+#'
+#' This function is useful because it allows us to mock the version of etnservice
+#' for tests via `testhat::with_mocked_bindings()`. Thus allowing us to test the
+#' error messaging in [conduct_parent_to_helpers()].
+#'
+#' @inheritDotParams etnservice::get_version
+#' @inheritParams list_animal_ids
+#'
+#' @returns
+#' @noRd
+#' @family helper functions
+#'
+#' @examples
+#' # Get the version of the locally installed version of etnservice
+#' get_etnservice_version(api = FALSE)
+#' # Get the version of the version of etnservice deployed on OpenCPU
+#' get_etnservice_version(api = TRUE)
+get_etnservice_version <- function(..., api = TRUE) {
+  ifelse(api,
+    yes = forward_to_api(
+      "get_version",
+      payload = rlang::list2(...),
+      add_credentials = FALSE,
+      json = TRUE
+    )$version,
+    no = etnservice::get_version(...)$version
+  )
+}
+
+
 #' Check if the locally installed version of etnservice matches the version
 #' deployed on the API exactly.
 #'
