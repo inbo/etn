@@ -21,7 +21,7 @@ License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 3.6.3)
+    R (>= 4.2.0)
 Imports:
     askpass,
     assertthat,
