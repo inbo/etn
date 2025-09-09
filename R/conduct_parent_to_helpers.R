@@ -65,6 +65,23 @@ conduct_parent_to_helpers <- function(api,
            ...)
     )
   } else {
+    # Check if the local version of etnservice matches the one deployed on
+    # OpenCPU.
+    if (!etnservice_version_matches()) {
+      deployed_version <- get_etnservice_version(api = TRUE)
+
+      rlang::check_installed(
+        "etnservice",
+        version = deployed_version,
+        reason =
+          paste(
+            "\nThere is a newer version of etnservice available",
+            "please update",
+            "to avoid differences between local and API queries."
+          )
+      )
+    }
+
     out <- do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
                    args = append(arguments_to_pass,
                                  list(credentials = get_credentials()),
