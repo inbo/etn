@@ -8,6 +8,14 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
   )
 })
 
+test_that("conduct_parent_to_helpers() prompts for etnservice update if newer version is deployed", {
+  expect_error(
+  with_mocked_bindings()
+  class = "rlib_error_package_not_found"
+  )
+
+})
+
 # extract_temp_key() ------------------------------------------------------
 
 
