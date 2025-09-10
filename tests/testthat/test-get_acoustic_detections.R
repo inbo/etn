@@ -1,10 +1,8 @@
 # Use vcr to cache HTTP responses
 vcr::local_cassette(
-  "get_acoustic_detections"
-)
-# Setup vcr to use qs2 serializer: faster and uses less storage space
-vcr::local_vcr_configure(
-  serialize_with = "qs2"
+  "get_acoustic_detections",
+  serialize_with = "qs2", #faster and uses less storage space
+  preserve_exact_body_bytes = TRUE # safer as response bodies are binary
 )
 
 # Store the first 100 rows of the acoustic detections data for use in tests
