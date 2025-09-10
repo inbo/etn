@@ -1,21 +1,15 @@
-# Use vcr to cache HTTP responses
-vcr::local_cassette(
-  "get_acoustic_detections",
-  serialize_with = "qs2", #faster and uses less storage space
-)
-
 vcr::local_vcr_configure_log()
-# Store the first 100 rows of the acoustic detections data for use in tests
-df <- get_acoustic_detections(limit = TRUE)
 
 test_that("get_acoustic_detections() can pass errors over the api", {
-  expect_error(
+  vcr::local_cassette("detections_error")
+    expect_error(
     get_acoustic_detections(start_date = "not_a_date", api = TRUE),
     regexp = "The given start_date, not_a_date, is not in a valid date format."
   )
 })
 
 test_that("get_acoustic_detections() returns a tibble", {
+  vcr::local_cassette("detections_limit")
   df <- get_acoustic_detections(limit = TRUE)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -32,11 +26,13 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
 # TODO check #283 and re-enable test if neccesairy.
 test_that("get_acoustic_detections() returns unique detection_id", {
   skip("Issue #283 detection_id is currently not unique")
+  vcr::local_cassette("detections_limit")
   df <- get_acoustic_detections(limit = TRUE)
   expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
 })
 
 test_that("get_acoustic_detections() returns the expected columns", {
+  vcr::local_cassette("detections_columns")
   df <- get_acoustic_detections(
     animal_project_code = "2014_demer",
     limit = TRUE
@@ -67,6 +63,7 @@ test_that("get_acoustic_detections() returns the expected columns", {
 })
 
 test_that("get_acoustic_detections() returns expected cols on 0 row result", {
+  vcr::local_cassette("detections_no_results")
   # There should be no detections before the year 1000
   df <- get_acoustic_detections(end_date = "1000-01-01")
   # Still return a tibble
@@ -100,6 +97,7 @@ test_that("get_acoustic_detections() returns expected cols on 0 row result", {
 })
 
 test_that("get_acoustic_detections() allows selecting on start_date and end_date", {
+  vcr::local_cassette("detections_dates")
   # Errors
   expect_error(get_acoustic_detections(start_date = "not_a_date"))
   expect_error(get_acoustic_detections(end_date = "not_a_date"))
@@ -195,6 +193,8 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
+  vcr::local_cassette("detections_tag_id")
+
   # Errors
   expect_error(get_acoustic_detections(acoustic_tag_id = "not_a_tag_id"))
   expect_error(get_acoustic_detections(acoustic_tag_id = c("A69-1601-16130",
@@ -220,6 +220,7 @@ test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
 })
 
 test_that("get_acoustic_detections() allows selecting on animal_project_code", {
+  vcr::local_cassette("detections_animal_project_code")
   # Errors
   expect_error(
     get_acoustic_detections(animal_project_code = "not_a_project"),
@@ -285,6 +286,7 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 })
 
 test_that("get_acoustic_detections() allows selecting on scientific_name", {
+  vcr::local_cassette("detections_scientific_name")
   # Errors
   expect_error(
     get_acoustic_detections(scientific_name = "not_a_sciname"),
@@ -326,6 +328,7 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
+  vcr::local_cassette("detections_acoustic_project_code")
   # Errors
   expect_error(
     get_acoustic_detections(acoustic_project_code = "not_a_project"),
@@ -370,6 +373,7 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
+  vcr::local_cassette("detections_acoustic_project_code_multi")
   single_select <- "demer"
   single_select_df <-
     get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
@@ -388,6 +392,7 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
 })
 
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
+  vcr::local_cassette("detections_receiver_id")
   # Errors
   expect_error(
     get_acoustic_detections(receiver_id = "not_a_receiver_id"),
@@ -419,6 +424,8 @@ test_that("get_acoustic_detections() allows selecting on receiver_id", {
 })
 
 test_that("get_acoustic_detections() allows selecting on station_name", {
+  vcr::local_cassette("detections_station_name")
+
   # Errors
   expect_error(get_acoustic_detections(station_name = "not_a_station_name"))
   expect_error(get_acoustic_detections(station_name = c("de-9",
@@ -444,6 +451,7 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
 })
 
 test_that("get_acoustic_detections() allows to limit to 100 records", {
+  vcr::local_cassette("detections_limit_param")
   # Errors
   expect_error(get_acoustic_detections(limit = "not_a_logical"))
 
@@ -456,6 +464,7 @@ test_that("get_acoustic_detections() allows to limit to 100 records", {
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple parameters", {
+  vcr::local_cassette("detections_multiple_parameters")
   multiple_parameters_df <- get_acoustic_detections(
     start_date = "2014-04-24",
     end_date = "2014-04-25",
@@ -470,6 +479,8 @@ test_that("get_acoustic_detections() allows selecting on multiple parameters", {
 })
 
 test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags", {
+  vcr::local_cassette("detections_acoustic_and_acoustic_archival_tags")
+
   acoustic_df <- get_acoustic_detections(acoustic_tag_id = "A69-1601-16130")
   expect_gt(nrow(acoustic_df), 0)
 
@@ -501,6 +512,7 @@ test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alt
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections across acoustic_id and acoustic_id_alternative", {
+  vcr::local_cassette("detections_no_duplicates_acoustic_id")
   # A69-1105-100 is used as acoustic_tag_id once and acoustic_tag_id_alternative twice:
   # tag_serial_number | acoustic_tag_id | acoustic_tag_id_alt | animal | release_date     | animal_project
   # 1634100           | S256-100        | A69-1105-100        | 4282   | 2016-10-19 01:00 | OTN-Skjerstadfjorden
@@ -513,6 +525,7 @@ test_that("get_acoustic_detections() does not return duplicate detections across
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
+  vcr::local_cassette("detections_reused_tags")
   # A69-1601-29925 (tag_serial_number = 1145373) is associated with two animals:
   # - 393 (2012_leopoldkanaal) from 2012-08-21 14:27:00 to 2012-12-10
   # - 394 (2012_leopoldkanaal) from 2012-12-14 13:30:00 to open
@@ -544,6 +557,7 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
+  vcr::local_cassette("detections_tag_date_range")
   # A69-1303-20695 (tag_serial_number = 1097335) is associated with animal
   # 637 (2010_phd_reubens) from 2010-08-09 13:00:00 to 2011-05-19 00:00:00
   in_range_df <-
@@ -566,6 +580,7 @@ test_that("get_acoustic_detections() does not return detections out of date rang
 })
 
 test_that("get_acoustic_detections() can return detections not (yet) associated with an animal", {
+  vcr::local_cassette("detections_no_animal")
   # A180-1702-49684 (tag_serial_number = 1317386) is an "acoustic / animal" tag
   # not yet associated with an animal. It should return detections
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
