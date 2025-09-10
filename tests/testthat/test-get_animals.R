@@ -1,4 +1,3 @@
-vcr::local_vcr_configure_log()
 # Cache HTTP Response
 vcr::use_cassette("get_animals",{df <- get_animals()})
 
