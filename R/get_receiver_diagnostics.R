@@ -99,6 +99,12 @@ get_receiver_diagnostics <- function(connection = con,
   ## Query database
   diagnostics <- DBI::dbGetQuery(connection, query)
 
+  ## Return early if no log_data
+  if(nrow(diagnostics) == 0){
+    warning("No receiver logs found.")
+    return(diagnostics)
+  }
+
   # Parse out log_data column into wider format
   diagnostics <-
     diagnostics %>%
