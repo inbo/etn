@@ -512,20 +512,20 @@ test_that("get_acoustic_detections() returns detections from acoustic_tag_id_alt
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections across acoustic_id and acoustic_id_alternative", {
-  vcr::local_cassette("detections_no_duplicates_acoustic_id")
   # A69-1105-100 is used as acoustic_tag_id once and acoustic_tag_id_alternative twice:
   # tag_serial_number | acoustic_tag_id | acoustic_tag_id_alt | animal | release_date     | animal_project
   # 1634100           | S256-100        | A69-1105-100        | 4282   | 2016-10-19 01:00 | OTN-Skjerstadfjorden
   # 1645100           | S256-100        | A69-1105-100        | 3911   | 2017-03-29 15:30 | OTN-Tosenfjorden
   # 1228004           | A69-1105-100    | S256-100            | 720    | 2015-12-01 00:00 | 2013 Albertkanaal
   skip("TODO: https://github.com/inbo/etn/issues/216")
+
+  vcr::local_cassette("detections_no_duplicates_acoustic_id")
   # Expect no duplicates
   df <- get_acoustic_detections(acoustic_tag_id = "A69-1105-100")
   expect_equal(nrow(df), nrow(df %>% distinct(detection_id))) # TODO: https://github.com/inbo/etn/issues/216
 })
 
 test_that("get_acoustic_detections() does not return duplicate detections when tags are reused", {
-  vcr::local_cassette("detections_reused_tags")
   # A69-1601-29925 (tag_serial_number = 1145373) is associated with two animals:
   # - 393 (2012_leopoldkanaal) from 2012-08-21 14:27:00 to 2012-12-10
   # - 394 (2012_leopoldkanaal) from 2012-12-14 13:30:00 to open
@@ -534,6 +534,7 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
 
   skip("Issue in database, detections are not linked to the acoustic tag in new view inbo/etnservice#95")
 
+  vcr::local_cassette("detections_reused_tags")
   df_both <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925")
   df_393 <- get_acoustic_detections(
     acoustic_tag_id = "A69-1601-29925",
