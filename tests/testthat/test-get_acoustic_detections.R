@@ -1,3 +1,8 @@
+# Use vcr to cache HTTP responses
+vcr::local_cassette(
+  "get_acoustic_detections"
+)
+
 # Store the first 100 rows of the acoustic detections data for use in tests
 df <- get_acoustic_detections(limit = TRUE)
 
