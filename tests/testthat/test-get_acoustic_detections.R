@@ -4,6 +4,7 @@ vcr::local_cassette(
   serialize_with = "qs2", #faster and uses less storage space
 )
 
+vcr::local_vcr_configure_log()
 # Store the first 100 rows of the acoustic detections data for use in tests
 df <- get_acoustic_detections(limit = TRUE)
 
