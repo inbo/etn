@@ -1,4 +1,9 @@
 vcr::local_vcr_configure_log()
+# Use qs2 serializer, faster and uses less space. Even though our response body
+# is already compressed
+vcr::local_vcr_configure(
+  serialize_with = "qs2"
+)
 
 test_that("get_acoustic_detections() can pass errors over the api", {
   vcr::local_cassette("detections_error")
