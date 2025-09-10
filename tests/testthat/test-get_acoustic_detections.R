@@ -1,3 +1,4 @@
+vcr::local_vcr_configure_log()
 test_that("get_acoustic_detections() can pass errors over the api", {
   vcr::local_cassette("detections_error")
     expect_error(
