@@ -119,13 +119,14 @@ check_opencpu_response <- function(response) {
 #'
 #' @family helper functions
 #' @noRd
-validate_login <- function(domain = "https://opencpu.lifewatch.be",
+validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
+                                               unset = "https://opencpu.lifewatch.be/library/etnservice/R"
+),
                            credentials = get_credentials()) {
   # Placing a custom request because validate_login accepts username and
   # password directly in the body rather than as a credentials object like the
   # other functions.
   login_valid <- httr2::request(domain) %>%
-    httr2::req_url_path_append("library", "etnservice", "R") %>%
     httr2::req_url_path_append("validate_login", "json/") %>%
     httr2::req_body_json(data = credentials) %>%
     httr2::req_perform() %>%
