@@ -62,7 +62,7 @@ forward_to_api <- function(
     httr2::req_perform(request),
     httr2_http_400 = function(cnd) {
       rlang::abort(
-        httr2::resp_body_string(httr2::last_response()),
+        httr2::resp_body_string(cnd$resp),
         call = call(function_identity),
         footer = c(i = "This is an error forwarded via the API.")
       )
