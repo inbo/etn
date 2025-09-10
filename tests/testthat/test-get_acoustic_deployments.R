@@ -1,4 +1,3 @@
-vcr::local_vcr_configure_log()
 # Cached response from the API
 vcr::use_cassette("get_acoustic_deployments", {
   df <- get_acoustic_deployments(api = TRUE)
