@@ -125,6 +125,7 @@ test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", {
+  vcr::use_cassette("get_acoustic_deployments_deployment_id")
   # Errors
   expect_error(
     get_acoustic_deployments(deployment_id = "not_a_deployment_id"),
@@ -196,6 +197,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", 
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
+  vcr::local_cassette("acoustic_deployments_receiver_id")
   # Errors
   expect_error(
     get_acoustic_deployments(receiver_id = "not_a_receiver_id"),
@@ -262,6 +264,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project_code", {
+  vcr::use_cassette("get_acoustic_deployments_acoustic_project_code")
+
   # Errors
   expect_error(
     get_acoustic_deployments(acoustic_project_code = "not_a_project"),
@@ -342,6 +346,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
+  vcr::local_cassette("acoustic_deployments_station_name")
   # Errors
   expect_error(
     get_acoustic_deployments(station_name = "not_a_station_name"),
@@ -408,6 +413,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on open deployments only", {
+  vcr::local_cassette("acoustic_deployments_open_only")
   # Errors
   expect_error(
     get_acoustic_deployments(open_only = "not_a_logical"),
@@ -459,6 +465,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on multiple parameters", {
+  vcr::local_cassette("acoustic_deployments_multiple_parameters")
   multiple_parameters_df <- get_acoustic_deployments(
     receiver_id = "VR2W-124070",
     acoustic_project_code = "demer",
@@ -482,6 +489,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on multiple paramet
 })
 
 test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
+  vcr::local_cassette("acoustic_deployments_cpod")
   # C-POD-408 is a cpod receiver
   df <- get_acoustic_deployments(receiver_id = "C-POD-408")
   expect_equal(nrow(df), 0)

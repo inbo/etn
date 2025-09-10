@@ -1,3 +1,7 @@
+# Use vcr cassette to cache HTTP response: only one call to API function in test
+# file
+vcr::local_cassette("download_acoustic_dataset")
+
 # Create a data package using the API
 datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
 evalute_download_api <- evaluate_promise({
