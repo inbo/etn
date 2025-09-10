@@ -1,3 +1,4 @@
+vcr::local_vcr_configure_log()
 # Cached response from the API
 vcr::use_cassette("get_acoustic_deployments", {
   df <- get_acoustic_deployments(api = TRUE)
@@ -125,7 +126,7 @@ test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", {
-  vcr::use_cassette("get_acoustic_deployments_deployment_id")
+  vcr::local_cassette("get_acoustic_deployments_deployment_id")
   # Errors
   expect_error(
     get_acoustic_deployments(deployment_id = "not_a_deployment_id"),
@@ -264,7 +265,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project_code", {
-  vcr::use_cassette("get_acoustic_deployments_acoustic_project_code")
+  vcr::local_cassette("get_acoustic_deployments_acoustic_project_code")
 
   # Errors
   expect_error(
