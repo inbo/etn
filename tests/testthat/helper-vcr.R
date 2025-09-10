@@ -4,3 +4,5 @@ invisible(vcr::vcr_configure(
                                "<<<my_pwd>>>" = Sys.getenv('pwd')),
   dir = vcr::vcr_test_path("fixtures")
 ))
+
+rlang::check_installed("qs2", "To use qs2 serializer for vcr")
