@@ -482,15 +482,15 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on multiple paramet
 })
 
 test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
-  # POD-3610 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "POD-3610")
+  # C-POD-408 is a cpod receiver
+  df <- get_acoustic_deployments(receiver_id = "C-POD-408")
   expect_equal(nrow(df), 0)
 })
 
 test_that("[SQL] get_acoustic_deployments() does not return cpod deployments", {
   skip_if_not_localdb()
 
-  # POD-3610 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "POD-3610", api = FALSE)
+  # C-POD-408 is a cpod receiver
+  df <- get_acoustic_deployments(receiver_id = "C-POD-408", api = FALSE)
   expect_equal(nrow(df), 0)
 })

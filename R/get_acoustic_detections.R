@@ -13,12 +13,14 @@
 #' @param scientific_name Character (vector). One or more scientific names.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
+#' @param deployment_id Character (vector). One or more deployment ids.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names.
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'   for testing purposes). Defaults to `FALSE`.
-#'
+#' @param progress Logical. Show a progress bar while fetching data. Defaults to
+#'   `TRUE`.
 #' @inheritParams list_animal_ids
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
@@ -74,16 +76,182 @@ get_acoustic_detections <- function(connection,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
                                     acoustic_project_code = NULL,
+                                    deployment_id = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    api = TRUE){
+                                    progress = TRUE,
+                                    api = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
-  # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
-  return(out)
+  assertthat::assert_that(assertthat::is.flag(api))
+  assertthat::assert_that(assertthat::is.flag(limit))
+
+  # Control progress reporting
+  # Don't show the progress bar when testing: clutters up console and CI output
+  if (is_testing()) {
+    progress <- FALSE
+  }
+  # Only show the progress bar if less than 50% of records have been fetched in
+  # 24h
+  if (!progress) {
+    withr::local_options(cli.progress_show_after = 60 * 60 * 24)
+  }
+  # Some arguments don't need to be send to etnservice
+  arguments_to_pass <-
+    return_parent_arguments(depth = 1)[
+      !names(return_parent_arguments(depth = 1)) %in% c(
+        "api",
+        "progress",
+        "connection",
+        "limit" # handled client side
+      )
+    ]
+
+  # Calculate the number of records we expect: for progress bar + page_size
+  n_records_expected <-
+    ifelse(
+      limit,
+      # If limit is set to TRUE, we expect 100 records
+      100,
+      # otherwise query the number of records
+      do.call(count_acoustic_detections, append(
+        arguments_to_pass,
+        list(api = api)
+      ))
+    )
+
+  # Return early if query didn't result in any rows
+  if (n_records_expected == 0) {
+    return(
+      dplyr::tibble(
+        .rows = 0,
+        detection_id = NA,
+        date_time = NA,
+        tag_serial_number = NA,
+        acoustic_tag_id = NA,
+        animal_project_code = NA,
+        animal_id = NA,
+        scientific_name = NA,
+        acoustic_project_code = NA,
+        receiver_id = NA,
+        station_name = NA,
+        deploy_latitude = NA,
+        deploy_longitude = NA,
+        sensor_value = NA,
+        sensor_unit = NA,
+        sensor2_value = NA,
+        sensor2_unit = NA,
+        signal_to_noise_ratio = NA,
+        source_file = NA,
+        qc_flag = NA,
+        deployment_id = NA
+      )
+    )
+  }
+
+  # Initialise progress bar with total records expected
+  cli::cli_progress_bar(total = n_records_expected)
+
+  # Control number of objects to fetch per page, 100k default, up to 1M for
+  # big queries
+  page_size <- dplyr::case_when(
+    limit ~ 100,
+    n_records_expected > 5e6 ~ 1e6,
+    .default = 100000
+  )
+
+  # Init object to store pages
+  combined_results <- list()
+
+  repeat {
+    fetched_page <-
+      do.call(
+        # Either use the API, or the SQL helper
+        if (api) forward_to_api else etnservice::get_acoustic_detections_page,
+        args = list(
+          # function_identity is ignored by
+          # etnservice::get_acoustic_detections_paged and sent to ...
+          function_identity = "get_acoustic_detections_page",
+          append(
+            arguments_to_pass,
+            # use the next_id_pk to paginate, if we are on the first page, start
+            # at 0
+            mget(
+              # Get the following objects from the enclosing frame
+              c("next_id_pk", "page_size"),
+              # With the following default values if not set:
+              ifnotfound = list(0, 100000),
+              inherits = FALSE
+            ),
+            after = 0
+          )
+        )
+      )
+
+    # Iterate the progress bar
+    cli::cli_progress_update(inc = nrow(fetched_page))
+
+    # The next page will be fetched with detection_ids higher than the current
+    # max detection_id
+    next_id_pk <- max(fetched_page$detection_id)
+
+    # store page: use next_id_pk as name to avoid iterating page number
+    combined_results[[as.character(next_id_pk)]] <- fetched_page
+
+    if (nrow(fetched_page) < page_size || limit) {
+      # Page isn't full = end of results.
+      break
+    }
+  }
+
+  # Combine pages and sort on acoustic_tag_id
+  dplyr::bind_rows(combined_results) %>%
+    dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
+}
+
+#' Count acoustic detections
+#'
+#' Count the number of acoustic detections that match the given parameters. This
+#' is a helper function that uses
+#' [`get_acoustic_detections_page()`][etnservice::get_acoustic_detections_page]
+#' to count the number of records that would be returned by
+#' [`get_acoustic_detections()`][get_acoustic_detections].
+#'
+#'
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name api
+#' @inheritParams get_acoustic_detections
+#'
+#' @return A numeric value with the number of acoustic detections that match the
+#'     given parameters.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' count_acoustic_detections(acoustic_project_code = "demer")
+#' count_acoustic_detections(
+#'   acoustic_tag_id = "A69-1601-16130",
+#'   station_name = c("de-9", "de-10")
+#' )
+count_acoustic_detections <- function(..., api = TRUE) {
+  if (api) {
+    returned_count <- forward_to_api("get_acoustic_detections_page",
+      payload = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      ),
+      json = TRUE
+    )
+  } else {
+    returned_count <- do.call(etnservice::get_acoustic_detections_page,
+      args = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      )
+    )
+  }
+
+  dplyr::pull(returned_count, "count")
 }

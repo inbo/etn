@@ -21,7 +21,8 @@ forward_to_api <- function(
     add_credentials = TRUE,
     json = FALSE,
     domain = Sys.getenv("ETN_TEST_API",
-                        unset = "https://opencpu.lifewatch.be/library/etnservice/R")) {
+      unset = "https://opencpu.lifewatch.be/library/etnservice/R"
+    )) {
   # Get credentials and attach to payload
   if (add_credentials) {
     # Get credentials out of .Renviron or prompt user.
@@ -38,35 +39,60 @@ forward_to_api <- function(
     # NOTE trailing backslash is important for OpenCPU
     httr2::req_url_path_append(function_identity, "") %>%
     httr2::req_body_json(payload) %>%
-    httr2::req_retry(max_tries = 5)
-
-  if (json) {
-    response <-
-      request %>%
-      httr2::req_url_path_append("json/") %>%
-      httr2::req_perform()
-
-    # Check if the response contains any errors, and forward them if so.
-    check_opencpu_response(response)
-
-    # return as a vector
-    return(httr2::resp_body_json(response, simplifyVector = TRUE))
-  } else {
-    # Forward the function and arguments to the API: call 1
-    ## Retry if server responds with HTTP error, use default rate settings of httr
-
-    response <- tryCatch(
-      httr2::req_perform(request),
-      httr2_http_400 = function(cnd) {
-        rlang::abort(
-          httr2::resp_body_string(httr2::last_response()),
-          call = rlang::env_parent(n = 2))
+    # Setup retry strategy
+    httr2::req_retry(
+      max_tries = 5,
+      is_transient = function(resp) {
+        # OpenCPU server side errors, sometimes transient
+        httr2::resp_status(resp) %in% c(502, 503)
       }
     )
 
-    # Check if the response contains any errors, and forward them if so.
-    check_opencpu_response(response)
+  # We can actually send a request and immediately fetch the result by requesting
+  # JSON, but using a two step protocol allows us to get the exact R object that
+  # was returned back via RDS (`get_val()`).
+  if (json) {
+    request <- request %>%
+      httr2::req_url_path_append("json/")
+  }
 
+  # Forward the function and arguments to the API: call 1
+
+  response <- tryCatch(
+    httr2::req_perform(request),
+    httr2_http_400 = function(cnd) {
+      rlang::abort(
+        httr2::resp_body_string(httr2::last_response()),
+        call = call(function_identity),
+        footer = c(i = "This is an error forwarded via the API.")
+      )
+    },
+    # OpenCPU reports server side errors as 502 and 503
+    httr2_http_502 = function(cnd) {
+      rlang::abort(
+        c("Server side error",
+          "*" = "Please try again.",
+          "*" = "If the error persists, please report it to the package authors"
+        )
+      )
+    },
+    httr2_http_503 = function(cnd) {
+      rlang::abort(
+        c("Server side error",
+          "*" = "Please try again.",
+          "*" = "If the error persists, please report it to the package authors"
+        )
+      )
+    }
+  )
+
+  # Check if the response contains any errors, and forward them if so.
+  check_opencpu_response(response)
+
+  if (json) {
+    # return as a vector
+    return(httr2::resp_body_json(response, simplifyVector = TRUE))
+  } else {
     # Fetch the output from the API: call 2
     return(
       get_val(extract_temp_key(response),

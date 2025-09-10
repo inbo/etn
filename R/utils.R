@@ -115,6 +115,17 @@ get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
+#' Determine testing status
+#'
+#' Copy of testthat::is_testing() implementation to avoid a runtime dependency
+#' on testthat.
+#'
+#' @return `TRUE` inside a test.
+#' @family helper functions
+#' @noRd
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
 
 # WRAPPER FUNCTIONS ----
 
@@ -152,4 +163,13 @@ is_interactive <- function(...) {
 #' @noRd
 prompt_user <- function(...) {
   readline(...)
+}
+
+# onLoad ------------------------------------------------------------------
+
+# Memoisation: only validate the login credentials every 15 minutes.
+.onLoad <- function(libname, pkgname) {
+  validate_login <<- memoise::memoise(validate_login,
+                                      cache = cachem::cache_mem(max_age = 60 * 15)
+  )
 }

@@ -25,8 +25,8 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
 # TODO check #283 and re-enable test if neccesairy.
 test_that("get_acoustic_detections() returns unique detection_id", {
   skip("Issue #283 detection_id is currently not unique")
-#   df <- get_acoustic_detections(limit = TRUE)
-#   expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
+  df <- get_acoustic_detections(limit = TRUE)
+  expect_equal(nrow(df), nrow(df %>% distinct(detection_id)))
 })
 
 test_that("get_acoustic_detections() returns the expected columns", {
@@ -47,7 +47,39 @@ test_that("get_acoustic_detections() returns the expected columns", {
     "station_name",
     "deploy_latitude",
     "deploy_longitude",
-    "depth_in_meters",
+    "sensor_value",
+    "sensor_unit",
+    "sensor2_value",
+    "sensor2_unit",
+    "signal_to_noise_ratio",
+    "source_file",
+    "qc_flag",
+    "deployment_id"
+  )
+  expect_identical(names(df), expected_col_names)
+})
+
+test_that("get_acoustic_detections() returns expected cols on 0 row result", {
+  # There should be no detections before the year 1000
+  df <- get_acoustic_detections(end_date = "1000-01-01")
+  # Still return a tibble
+  expect_s3_class(df, "data.frame")
+  # With 0 rows
+  expect_identical(nrow(df), 0L)
+  # With the expected cols
+  expected_col_names <- c(
+    "detection_id",
+    "date_time",
+    "tag_serial_number",
+    "acoustic_tag_id",
+    "animal_project_code",
+    "animal_id",
+    "scientific_name",
+    "acoustic_project_code",
+    "receiver_id",
+    "station_name",
+    "deploy_latitude",
+    "deploy_longitude",
     "sensor_value",
     "sensor_unit",
     "sensor2_value",
@@ -454,16 +486,23 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
   # - 394 (2012_leopoldkanaal) from 2012-12-14 13:30:00 to open
   # Detections should be joined with acoustic_tag_id AND datetime, so that they
   # are not duplicated. Note: for df_393 we use a start_date to limit records.
+
+  skip("Issue in database, detections are not linked to the acoustic tag in new view inbo/etnservice#95")
+
   df_both <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925")
-  df_393 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-01", end_date = "2012-12-10")
-  df_394 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925", start_date = "2012-12-14")
+  df_393 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925",
+                                    start_date = "2012-12-01",
+                                    end_date = "2012-12-10")
+  df_394 <- get_acoustic_detections(acoustic_tag_id = "A69-1601-29925",
+                                    start_date = "2012-12-14")
 
   # Expect no duplicates
-  expect_identical(nrow(df_both), nrow(df_both %>% distinct(detection_id)))
+  expect_identical(nrow(df_both),
+                   nrow(df_both %>% dplyr::distinct(detection_id)))
 
   # Return correct animal within range
-  expect_identical(df_393 %>% distinct(animal_id) %>% pull(), 393L)
-  expect_identical(df_394 %>% distinct(animal_id) %>% pull(), 394L)
+  expect_identical(df_393 %>% dplyr::distinct(animal_id) %>% dplyr::pull(), 393L)
+  expect_identical(df_394 %>% dplyr::distinct(animal_id) %>% dplyr::pull(), 394L)
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
