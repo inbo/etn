@@ -1,0 +1,96 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_deployments/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"deployment_id":null,"receiver_id":"C-POD-408","acoustic_project_code":null,"station_name":null,"open_only":false}'
+  response:
+    status: 201
+    headers:
+      date: Wed, 10 Sep 2025 13:05:16 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=300, public
+      x-ocpu-session: x0ee5ab0f5d54f0
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0ee5ab0f5d54f0/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.0 (2025-04-11)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2025-09-10 13:05:17 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '132'
+      content-type: text/plain; charset=utf-8
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      string: |
+        /ocpu/tmp/x0ee5ab0f5d54f0/R/.val
+        /ocpu/tmp/x0ee5ab0f5d54f0/R/credentials
+        /ocpu/tmp/x0ee5ab0f5d54f0/R/get_acoustic_deployments
+        /ocpu/tmp/x0ee5ab0f5d54f0/stdout
+        /ocpu/tmp/x0ee5ab0f5d54f0/source
+        /ocpu/tmp/x0ee5ab0f5d54f0/console
+        /ocpu/tmp/x0ee5ab0f5d54f0/info
+        /ocpu/tmp/x0ee5ab0f5d54f0/files/DESCRIPTION
+  recorded_at: 2025-09-10 13:05:17
+- request:
+    method: GET
+    uri: https://opencpu.lifewatch.be/tmp/x0ee5ab0f5d54f0/R/.val/rds
+  response:
+    status: 200
+    headers:
+      date: Wed, 10 Sep 2025 13:05:17 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      cache-control: max-age=86400, public
+      content-disposition: attachment;filename=.val.rds
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.0 (2025-04-11)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2025-09-10 13:05:18 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '552'
+      content-type: application/r-rds
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc1; path=/
+    body:
+      raw_gzip: |
+        eJzlU01PGzEQXZLQlpRAgH6oqL1yK+feKyFxaqWCxM1ybG/qyvasvLOJwo+nHSf27rJhVVqJ
+        Q9WVvPa
+        898YzY49vxlmWDbPRLv1pZNnu9dXFx09knZBxRmOSbb7p4+bhwWYeDei3k42yvbAp
+        3oJTUZTA4fXV56
+        5OGF6WUTeI4POvX75d3giM5rO1ibS6oxGj9c5/kO3Oz94EB4l6TE7/857d
+        83+SGP/Y3T1lvr39PfnLe
+        drkWCcyTJFxZpjMU8ZkxeVYcuTnuedWdR70nofluSO8bGLcf/GJ
+        DIHOIjiRqjCwssoh0zKCL70SSi+U
+        b6DXXEBVohas8PBDCWQCpIrkfokcNTgWIkTsJGFSlcLr
+        IqwjdZgoyx2fKx/h6SYVRhUqhrre6TDihpy
+        wqoMmuQE3b+NH2qFyUsmuw3FDdFz2LYDXbs5w
+        VdTYDBDBUvoFfk+Y1yUdilFu3mAp65bu3YwjKr9i2l
+        GpxsSDoLqi4DQJFB2pJVwyyqyteMUF
+        6kXj2D6QI7oeCLfTJaaJ6FReO3QLP5awdAa43NqqYXJtVPtiT
+        xfc6LUDZ5VDbbZ8D8qVE1vo
+        OKyZ9DpPz+s99+x3JzUmjQCXa29Tkei5K63G0IkhudShDQ5LqhUqLKo6
+        lAG6XWUL5TlWXrHQ
+        giUjU0Nq8Q9bGm4Lqv2e6M1apA32sw6oSx4K8LbF9jmv26jXObIPOL8QYMMjDu/
+        77hd75YTm
+  recorded_at: 2025-09-10 13:05:18
+recorded_with: VCR-vcr/2.0.0
