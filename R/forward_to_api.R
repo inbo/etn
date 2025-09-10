@@ -28,7 +28,11 @@ forward_to_api <- function(
     # Get credentials out of .Renviron or prompt user.
     provided_credentials <- get_credentials()
     # Check if username/password are correct.
-    validate_login(credentials = provided_credentials)
+    # Skip check when testing, makes caching HTTP requests difficult due to
+    # memoisation
+    if (!is_testing()) {
+      validate_login(credentials = provided_credentials)
+    }
     # Add credentials to payload if correct and required.
     payload <-
       append(payload, list(credentials = provided_credentials), after = 0)
