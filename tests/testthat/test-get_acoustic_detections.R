@@ -1,4 +1,3 @@
-vcr::local_vcr_configure_log()
 test_that("get_acoustic_detections() can pass errors over the api", {
   vcr::local_cassette("detections_error")
     expect_error(
@@ -17,7 +16,9 @@ test_that("get_acoustic_detections() returns a tibble", {
 test_that("get_acoustic_detections() returns a tibble over sql", {
   skip_if_not_localdb()
 
-  df_sql <- get_acoustic_detections(limit = TRUE, api = FALSE)
+  df_sql <- get_acoustic_detections(animal_project_code = "2014_demer",
+                                    limit = TRUE,
+                                    api = FALSE)
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
