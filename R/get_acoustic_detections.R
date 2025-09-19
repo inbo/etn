@@ -193,7 +193,10 @@ get_acoustic_detections <- function(connection,
       arguments_for_helper <-
         list(
           function_identity = "get_acoustic_detections_page",
-          payload = payload
+          payload = payload,
+          # Set the format to feather because it's faster more memory efficient
+          # and faster than rds
+          format = "feather"
         )
     } else {
       helper_to_use <- etnservice::get_acoustic_detections_page
