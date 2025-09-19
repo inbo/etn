@@ -174,50 +174,36 @@ get_acoustic_detections <- function(connection,
 
   repeat {
 
-    # Append the arguments_to_pass with additional elements needed for the
-    # respective helpers
-    if(api){
-      # Calls to forward_to_api expect the arguments to be a in a payload object
-      arguments_to_pass <-
-        list(
-          function_identity = "get_acoustic_detections_page",
-          append(
-            arguments_to_pass,
-            # use the next_id_pk to paginate, if we are on the first page, start
-            # at 0
-            mget(
-              # Get the following objects from the enclosing frame
-              c("next_id_pk", "page_size", "credentials"),
-              # With the following default values if not set:
-              ifnotfound = list(0, 100000, NULL),
-              inherits = FALSE
-            ),
-            after = 0
-          )
-        )
-    } else {
-      # Direct query to database via etnservice expect a the arguments to be
-      # flat and don't need function_identity
-      arguments_to_pass <-
-        append(
-          arguments_to_pass,
-          mget(
-            # Get the following objects from the enclosing frame
-            c("next_id_pk", "page_size", "credentials"),
-            # With the following default values if not set:
-            ifnotfound = list(0, 100000, NULL),
-            inherits = FALSE
-          )
-        ) |>
-        purrr::list_flatten()
-    }
+    # Pagination arguments
+    # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
+    # Also includes credentials.
+    pagination_arguments <-
+      mget(
+        # Get the following objects from the enclosing frame
+        c("next_id_pk", "page_size", "credentials"),
+        # With the following default values if not set:
+        ifnotfound = list(0, 100000, NULL),
+        inherits = FALSE
+      )
 
     # Fetch a page of results
     fetched_page <-
       do.call(
         # Either use the API, or the SQL helper
         if (api) forward_to_api else etnservice::get_acoustic_detections_page,
-        args = arguments_to_pass
+        args = if(api){
+          # Calls to forward_to_api expect the arguments to be a in a payload
+          # object
+          list(
+            function_identity = "get_acoustic_detections_page",
+            append(arguments_to_pass, pagination_arguments)
+          )
+          } else {
+            # Direct query to database via etnservice expect a the arguments to
+            # be flat and doesn't need function_identity
+            append(arguments_to_pass, pagination_arguments) |>
+              purrr::list_flatten()
+          }
       )
 
     # Iterate the progress bar
