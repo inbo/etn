@@ -127,25 +127,6 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
-#' Flatten a list
-#'
-#' A base equivalent to purrr::list_flatten(): recursively flattens a list
-#' of lists into a single list.
-#'
-#' This is used to flatten the list of arguments passed to the etnservice API
-#' functions.
-#'
-#' @param x A list
-#' @return A flattened list
-#' @family helper functions
-#' @noRd
-#' @examples
-#' x <- list(a = 1, b = list(c = 2, d = 3))
-#' list_flatten(x)
-list_flatten <- function(x) {
-  do.call(c, x)
-}
-
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
