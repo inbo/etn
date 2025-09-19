@@ -167,34 +167,53 @@ get_acoustic_detections <- function(connection,
   # Init object to store pages
   combined_results <- list()
 
-  # Fetch credentials in case of local query
+  # Fetch credentials only once and reuse for every page
   if(!api) credentials <- get_credentials()
 
-  # Append the arguments_to_pass with additional elements needed for helpers, drop the elements if not needed
-  arguments_to_pass <-
-    list(
-      # function_identity is ignored by
-      # etnservice::get_acoustic_detections_paged and sent to ...
-      function_identity = "get_acoustic_detections_page",
-      append(
-        arguments_to_pass,
-        # use the next_id_pk to paginate, if we are on the first page, start
-        # at 0
-        mget(
-          # Get the following objects from the enclosing frame
-          c("next_id_pk", "page_size", "credentials"),
-          # With the following default values if not set:
-          ifnotfound = list(0, 100000, NULL),
-          inherits = FALSE
-        ),
-        after = 0
-      )
-    ) |>
-    purrr::list_flatten() |>
-    # drop any arguments that have no value
-    purrr::discard(is.null)
+
 
   repeat {
+
+    # Append the arguments_to_pass with additional elements needed for the
+    # respective helpers
+    if(api){
+      # Calls to forward_to_api expect the arguments to be a in a payload object
+      arguments_to_pass <-
+        list(
+          function_identity = "get_acoustic_detections_page",
+          append(
+            arguments_to_pass,
+            # use the next_id_pk to paginate, if we are on the first page, start
+            # at 0
+            mget(
+              # Get the following objects from the enclosing frame
+              c("next_id_pk", "page_size", "credentials"),
+              # With the following default values if not set:
+              ifnotfound = list(0, 100000, NULL),
+              inherits = FALSE
+            ),
+            after = 0
+          )
+        )
+    } else {
+      # Direct query to database via etnservice expect a the arguments to be
+      # flat and don't need function_identity
+      arguments_to_pass <-
+        append(
+          arguments_to_pass,
+          credentials = credentials,
+          mget(
+            # Get the following objects from the enclosing frame
+            c("next_id_pk", "page_size"),
+            # With the following default values if not set:
+            ifnotfound = list(0, 100000),
+            inherits = FALSE
+          )
+        ) |>
+        purrr::list_flatten()
+    }
+
+    # Fetch a page of results
     fetched_page <-
       do.call(
         # Either use the API, or the SQL helper
