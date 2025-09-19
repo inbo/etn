@@ -28,7 +28,11 @@ forward_to_api <- function(
     # Get credentials out of .Renviron or prompt user.
     provided_credentials <- get_credentials()
     # Check if username/password are correct.
-    validate_login(credentials = provided_credentials)
+    # Skip check when testing, makes caching HTTP requests difficult due to
+    # memoisation
+    if (!is_testing()) {
+      validate_login(credentials = provided_credentials)
+    }
     # Add credentials to payload if correct and required.
     payload <-
       append(payload, list(credentials = provided_credentials), after = 0)
@@ -62,7 +66,7 @@ forward_to_api <- function(
     httr2::req_perform(request),
     httr2_http_400 = function(cnd) {
       rlang::abort(
-        httr2::resp_body_string(httr2::last_response()),
+        httr2::resp_body_string(cnd$resp),
         call = call(function_identity),
         footer = c(i = "This is an error forwarded via the API.")
       )

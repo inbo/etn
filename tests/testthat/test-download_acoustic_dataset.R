@@ -1,11 +1,17 @@
 # Create a data package using the API
-datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-evalute_download_api <- evaluate_promise({
-  download_acoustic_dataset(
-    animal_project_code = "2014_demer",
-    directory = datapackage_path
-  )
-})
+vcr::use_cassette( # Cache HTTP response
+  "download_acoustic_dataset",
+  {
+    datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+    evalute_download_api <- evaluate_promise({
+      download_acoustic_dataset(
+        animal_project_code = "2014_demer",
+        directory = datapackage_path
+      )
+    })
+  }
+)
+
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.

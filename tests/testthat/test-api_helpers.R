@@ -173,6 +173,10 @@ test_that("validate_login() returns error on bad credentials", {
         username = "not_a_username",
         password = "not the correct pwd"
       )
+    },
+    # validate_login() is skipped in testing, so we need to pretend we're not.
+    is_testing = function(...) {
+      FALSE
     }
   )
 })
