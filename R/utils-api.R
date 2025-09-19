@@ -29,6 +29,11 @@ extract_temp_key <- function(response) {
 #' api, to GET a result, you must of course POST a function call first
 #'
 #' @param temp_key the temp key returned from the POST request to the API
+#' @param api_domain Character vector of the OpenCPU domain to use, defaults to
+#' "https://opencpu.lifewatch.be"
+#' @param format Character vector of the format to use for the GET request,
+#' either "feather" or "rds", defaults to "feather". Note that feather is
+#' faster, but rds preserves more R specific object types.
 #'
 #' @return the uncompressed object resulting form a GET request to the API
 #' @family helper functions
@@ -45,22 +50,41 @@ extract_temp_key <- function(response) {
 #'  httr2::req_perform() %>%
 #'  extract_temp_key() %>%
 #'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
-get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
+get_val <- function(temp_key,
+                    api_domain = "https://opencpu.lifewatch.be",
+                    format = c("feather", "rds")) {
+
+  format <- rlang::arg_match(format)
+  reading_function <-
+    switch(
+      format,
+      "rds" = \(raw_response){
+        raw_connection <- rawConnection(raw_response)
+        rds_response <-
+          raw_connection |>
+          gzcon() |>
+          readRDS()
+        # close connection
+        close(raw_connection)
+        # return R object
+        return(rds_response)
+      },
+      "feather" = arrow::read_feather
+    )
+
   # request data and open connection
   raw_response <-
     httr2::request(api_domain) %>%
-    httr2::req_url_path_append("tmp", temp_key, "R", ".val", "rds") %>%
+    httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) %>%
     httr2::req_retry(max_tries = 5) %>%
     httr2::req_perform() %>%
     httr2::resp_body_raw()
-  raw_connection <- rawConnection(raw_response)
+
   # read response via connection
   api_response <-
-    raw_connection %>%
-    gzcon() %>%
-    readRDS()
-  # close connection
-  close(raw_connection)
+    raw_response |>
+    (\(x) reading_function(x))()
+
   # Return OpenCPU return object
   return(api_response)
 }
