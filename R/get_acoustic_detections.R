@@ -185,25 +185,25 @@ get_acoustic_detections <- function(connection,
         inherits = FALSE
       )
 
-    # Fetch a page of results
-    fetched_page <-
-      do.call(
-        # Either use the API, or the SQL helper
-        if (api) forward_to_api else etnservice::get_acoustic_detections_page,
-        args = if (api) {
-          # Calls to forward_to_api expect the arguments to be a in a payload
-          # object
-          list(
-            function_identity = "get_acoustic_detections_page",
-            append(arguments_to_pass, pagination_arguments)
-          )
-        } else {
-          # Direct query to database via etnservice expect a the arguments to
-          # be flat and doesn't need function_identity
-          append(arguments_to_pass, pagination_arguments) |>
-            purrr::list_flatten()
-        }
-      )
+    # Combine arguments to pass to helper function
+    payload <- append(arguments_to_pass, pagination_arguments)
+
+    # Decide what helper to use, add any extra required arguments
+    if(api){
+      helper_to_use <- forward_to_api
+      arguments_for_helper <-
+        list(function_identity = "get_acoustic_detections_page",
+             payload = payload)
+    } else {
+      helper_to_use <- etnservice::get_acoustic_detections_page
+      arguments_for_helper <- payload
+    }
+
+    # Fetch page
+    fetched_page <- do.call(helper_to_use, arguments_for_helper)
+
+    # Iterate the progress bar
+    cli::cli_progress_update(inc = nrow(fetched_page))
 
     # The next page will be fetched with detection_ids higher than the current
     # max detection_id
