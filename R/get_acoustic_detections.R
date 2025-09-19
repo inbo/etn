@@ -154,9 +154,6 @@ get_acoustic_detections <- function(connection,
     )
   }
 
-  # Initialise progress bar with total records expected
-  cli::cli_progress_bar(total = n_records_expected)
-
   # Control number of objects to fetch per page, 100k default, up to 1M for
   # big queries
   page_size <- dplyr::case_when(
@@ -165,13 +162,14 @@ get_acoustic_detections <- function(connection,
     .default = 100000
   )
 
+  # Initialize progress bar with total number of pages expected
+  cli::cli_progress_bar(total = ceiling(n_records_expected/page_size))
+
   # Init object to store pages
   combined_results <- list()
 
   # Fetch credentials only once and reuse for every page
   if(!api) credentials <- get_credentials()
-
-
 
   repeat {
 
@@ -207,15 +205,15 @@ get_acoustic_detections <- function(connection,
           }
       )
 
-    # Iterate the progress bar
-    cli::cli_progress_update(inc = nrow(fetched_page))
-
     # The next page will be fetched with detection_ids higher than the current
     # max detection_id
     next_id_pk <- max(fetched_page$detection_id)
 
     # store page: use next_id_pk as name to avoid iterating page number
     combined_results[[as.character(next_id_pk)]] <- fetched_page
+
+    # Iterate the progress bar: we fetched one page
+    cli::cli_progress_update(inc = 1)
 
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
