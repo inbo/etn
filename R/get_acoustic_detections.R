@@ -113,16 +113,17 @@ get_acoustic_detections <- function(connection,
 
   # Calculate the number of records we expect: for progress bar + page_size
   n_records_expected <-
-    ifelse(
-      limit,
+    if (limit) {
       # If limit is set to TRUE, we expect 100 records
-      100,
+      100
+    } else {
       # otherwise query the number of records
+
       do.call(count_acoustic_detections, append(
         arguments_to_pass,
         list(api = api)
       ))
-    )
+    }
 
   # Return early if query didn't result in any rows
   if (n_records_expected == 0) {
@@ -153,9 +154,6 @@ get_acoustic_detections <- function(connection,
     )
   }
 
-  # Initialise progress bar with total records expected
-  cli::cli_progress_bar(total = n_records_expected)
-
   # Control number of objects to fetch per page, 100k default, up to 1M for
   # big queries
   page_size <- dplyr::case_when(
@@ -164,33 +162,46 @@ get_acoustic_detections <- function(connection,
     .default = 100000
   )
 
+  # Initialize progress bar with total number of pages expected
+  cli::cli_progress_bar(total = ceiling(n_records_expected / page_size))
+
   # Init object to store pages
   combined_results <- list()
 
+  # Fetch credentials only once and reuse for every page
+  if (!api) credentials <- get_credentials()
+
   repeat {
-    fetched_page <-
-      do.call(
-        # Either use the API, or the SQL helper
-        if (api) forward_to_api else etnservice::get_acoustic_detections_page,
-        args = list(
-          # function_identity is ignored by
-          # etnservice::get_acoustic_detections_paged and sent to ...
-          function_identity = "get_acoustic_detections_page",
-          append(
-            arguments_to_pass,
-            # use the next_id_pk to paginate, if we are on the first page, start
-            # at 0
-            mget(
-              # Get the following objects from the enclosing frame
-              c("next_id_pk", "page_size"),
-              # With the following default values if not set:
-              ifnotfound = list(0, 100000),
-              inherits = FALSE
-            ),
-            after = 0
-          )
-        )
+    # Pagination arguments
+    # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
+    # Also includes credentials.
+    pagination_arguments <-
+      mget(
+        # Get the following objects from the enclosing frame
+        c("next_id_pk", "page_size", "credentials"),
+        # With the following default values if not set:
+        ifnotfound = list(0, 100000, NULL),
+        inherits = FALSE
       )
+
+    # Combine arguments to pass to helper function
+    payload <- append(arguments_to_pass, pagination_arguments)
+
+    # Decide what helper to use, add any extra required arguments
+    if (api) {
+      helper_to_use <- forward_to_api
+      arguments_for_helper <-
+        list(
+          function_identity = "get_acoustic_detections_page",
+          payload = payload
+        )
+    } else {
+      helper_to_use <- etnservice::get_acoustic_detections_page
+      arguments_for_helper <- payload
+    }
+
+    # Fetch page
+    fetched_page <- do.call(helper_to_use, arguments_for_helper)
 
     # Iterate the progress bar
     cli::cli_progress_update(inc = nrow(fetched_page))
@@ -201,6 +212,9 @@ get_acoustic_detections <- function(connection,
 
     # store page: use next_id_pk as name to avoid iterating page number
     combined_results[[as.character(next_id_pk)]] <- fetched_page
+
+    # Iterate the progress bar: we fetched one page
+    cli::cli_progress_update(inc = 1)
 
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
