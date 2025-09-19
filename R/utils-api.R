@@ -112,28 +112,6 @@ return_parent_arguments <- function(depth = 1) {
   )
 }
 
-#' Check an OpenCPU reponse object and forward any errors
-#'
-#' @param response Response object from an OpenCPU API call (httr2)
-#'
-#' @family helper functions
-#' @noRd
-check_opencpu_response <- function(response) {
-  # Stop if etnservice forwarded an error
-  assertthat::assert_that(response$status_code != 400,
-    msg = httr2::resp_body_string(response)
-  )
-
-  # Stop for other HTTP errors
-  assertthat::assert_that(!httr2::resp_is_error(response),
-    msg = glue::glue(
-      "API request failed: {http_message}",
-      http_message = glue::glue("({httr2::resp_status(response)})",
-                                " {httr2::resp_status_desc(response)}")
-    )
-  )
-}
-
 #' Check if the provided credentials can be used to login via the API
 #'
 #' @param domain Character vector of the OpenCPU domain to use, defaults to

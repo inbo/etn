@@ -106,29 +106,6 @@ test_that("return_parent_arguments() can return higher call function arguments",
   )
 })
 
-# check_opencpu_response() ------------------------------------------------
-
-
-vcr::use_cassette("httpbingo_error_status", {
-  test_that("check_opencpu_response() returns error on HTTP error codes", {
-    expect_error(
-      check_opencpu_response(get_http_response(404)),
-      regexp = "API request failed: (404) Not Found",
-      fixed = TRUE
-    )
-    expect_error(
-      check_opencpu_response(get_http_response(504)),
-      regexp = "API request failed: (504) Gateway Timeout",
-      fixed = TRUE
-    )
-    expect_error(
-      check_opencpu_response(get_http_response(429)),
-      regexp = "API request failed: (429) Too Many Requests",
-      fixed = TRUE
-    )
-  })
-})
-
 # deprecate_warn_connection() ---------------------------------------------
 
 
