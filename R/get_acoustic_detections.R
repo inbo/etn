@@ -202,7 +202,7 @@ get_acoustic_detections <- function(connection,
             # Direct query to database via etnservice expect a the arguments to
             # be flat and doesn't need function_identity
             append(arguments_to_pass, pagination_arguments) |>
-              purrr::list_flatten()
+              list_flatten()
           }
       )
 
