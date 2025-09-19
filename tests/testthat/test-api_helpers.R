@@ -27,7 +27,7 @@ test_that("extract_temp_key() can extract a key from a httr2 response object", {
 # get_val() ---------------------------------------------------------------
 
 
-test_that("get_val() can get a value from a temp_key", {
+test_that("get_val() can get a value from a temp_key using rds", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
   response <-
@@ -37,9 +37,31 @@ test_that("get_val() can get a value from a temp_key", {
 
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"
-  api_out <- get_val(temp_key, domain)
+  api_out <- get_val(temp_key, domain, format = "rds")
   expect_no_error(api_out)
   expect_type(api_out, "double")
+  expect_length(api_out, 2)
+})
+
+
+test_that("get_val() can get a value from a temp_key using feather", {
+  # NOTE Dependent on the OpenCPU testing API
+  skip_if_offline("cloud.opencpu.org")
+  response <-
+    httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") %>%
+    httr2::req_body_json(
+      list(
+        animal = c("dogs", "cats"), judgement = c("cute", "amazing", "superb")
+      )
+    ) %>%
+    httr2::req_perform()
+
+  temp_key <- extract_temp_key(response)
+  domain <- "https://cloud.opencpu.org/ocpu"
+  api_out <- get_val(temp_key, domain, format = "feather")
+  expect_no_error(api_out)
+  expect_type(api_out, "list")
+  expect_s3_class(api_out, "tbl_df")
   expect_length(api_out, 2)
 })
 
