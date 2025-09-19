@@ -172,7 +172,6 @@ get_acoustic_detections <- function(connection,
   if (!api) credentials <- get_credentials()
 
   repeat {
-
     # Pagination arguments
     # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
     # Also includes credentials.
@@ -189,11 +188,13 @@ get_acoustic_detections <- function(connection,
     payload <- append(arguments_to_pass, pagination_arguments)
 
     # Decide what helper to use, add any extra required arguments
-    if(api){
+    if (api) {
       helper_to_use <- forward_to_api
       arguments_for_helper <-
-        list(function_identity = "get_acoustic_detections_page",
-             payload = payload)
+        list(
+          function_identity = "get_acoustic_detections_page",
+          payload = payload
+        )
     } else {
       helper_to_use <- etnservice::get_acoustic_detections_page
       arguments_for_helper <- payload
