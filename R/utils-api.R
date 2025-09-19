@@ -77,7 +77,7 @@ get_val <- function(temp_key,
     httr2::request(api_domain) %>%
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) %>%
     httr2::req_retry(max_tries = 5) %>%
-    httr2::req_perform() %>%
+    req_perform_opencpu() %>%
     httr2::resp_body_raw()
 
   # read response via connection

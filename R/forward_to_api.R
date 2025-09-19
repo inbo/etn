@@ -60,35 +60,10 @@ forward_to_api <- function(
       httr2::req_url_path_append("json/")
   }
 
-  # Forward the function and arguments to the API: call 1
+  # Forward the function and arguments to the API: call 1, forward any R errors
 
-  response <- tryCatch(
-    httr2::req_perform(request),
-    httr2_http_400 = function(cnd) {
-      rlang::abort(
-        httr2::resp_body_string(cnd$resp),
-        call = call(function_identity),
-        footer = c(i = "This is an error forwarded via the API.")
-      )
-    },
-    # OpenCPU reports server side errors as 502 and 503
-    httr2_http_502 = function(cnd) {
-      rlang::abort(
-        c("Server side error",
-          "*" = "Please try again.",
-          "*" = "If the error persists, please report it to the package authors"
-        )
-      )
-    },
-    httr2_http_503 = function(cnd) {
-      rlang::abort(
-        c("Server side error",
-          "*" = "Please try again.",
-          "*" = "If the error persists, please report it to the package authors"
-        )
-      )
-    }
-  )
+  response <- req_perform_opencpu(request,
+                                  function_identity = function_identity)
 
   # Check if the response contains any errors, and forward them if so.
   check_opencpu_response(response)
