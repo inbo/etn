@@ -184,3 +184,52 @@ get_hostname <- function(url_str){
   # other domains than etn.
   stringr::str_extract(url_str, ".+(?=library)")
 }
+
+#' Perform a request to OpenCPU to get a response
+#'
+#' This is a slight modification on httr2::req_perform() to allow for OpenCPU
+#' error forwarding. OpenCPU doesn't stick to HTTP error codes, but assigns
+#' different meanings and places R error messages in the body of HTTP 400
+#' responses.
+#'
+#' @inheritParams httr2::req_perform
+#' @param function_identity Character of length one with the name
+#'  of the function the warning is being generated from, defaults to
+#'  `get_parent_fn_name(depth = 3)`: the function calling this helper
+#'  function.
+#' @param ... Additional arguments passed on to `httr2::req_perform()`
+#'
+#' @return The response object from the request
+#' @family helper functions
+#' @noRd
+req_perform_opencpu <- function(req,
+                                function_identity = get_parent_fn_name(),
+                                ...) {
+  tryCatch(
+    httr2::req_perform(req, ...),
+    httr2_http_400 = function(cnd) {
+      rlang::abort(
+        httr2::resp_body_string(cnd$resp),
+        call = call(function_identity),
+        footer = c(i = "This is an error forwarded via the API.")
+      )
+    },
+    # OpenCPU reports server side errors as 502 and 503
+    httr2_http_502 = function(cnd) {
+      rlang::abort(
+        c("Server side error",
+          "*" = "Please try again.",
+          "*" = "If the error persists, please report it to the package authors"
+        )
+      )
+    },
+    httr2_http_503 = function(cnd) {
+      rlang::abort(
+        c("Server side error",
+          "*" = "Please try again.",
+          "*" = "If the error persists, please report it to the package authors"
+        )
+      )
+    }
+  )
+}
