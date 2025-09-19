@@ -201,12 +201,11 @@ get_acoustic_detections <- function(connection,
       arguments_to_pass <-
         append(
           arguments_to_pass,
-          credentials = credentials,
           mget(
             # Get the following objects from the enclosing frame
-            c("next_id_pk", "page_size"),
+            c("next_id_pk", "page_size", "credentials"),
             # With the following default values if not set:
-            ifnotfound = list(0, 100000),
+            ifnotfound = list(0, 100000, NULL),
             inherits = FALSE
           )
         ) |>
