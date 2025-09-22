@@ -96,7 +96,7 @@ get_acoustic_detections <- function(connection,
     progress <- FALSE
   }
   # Only show the progress bar if less than 50% of records have been fetched in
-  # 24h
+  # 24h: workaround to control progress reporting
   if (!progress) {
     withr::local_options(cli.progress_show_after = 60 * 60 * 24)
   }
@@ -111,8 +111,10 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
-  # Initialize progress bar
-  pb_fetch_pages <- cli::cli_progress_bar(status = "Preparing")
+  # Initialize progress bar for record counting
+  pb_count <- cli::cli_progress_bar("Preparing",
+                                    "tasks",
+                                    total = 1)
 
   # Calculate the number of records we expect: for progress bar + page_size
   n_records_expected <-
@@ -164,6 +166,12 @@ get_acoustic_detections <- function(connection,
     n_records_expected > 5e6 ~ 1e6,
     .default = 100000
   )
+
+  # Finish up progress bar for count step
+  cli::cli_process_done(id = pb_count)
+
+  # Initialize progress bar for fetching the pages
+  pb_fetch_pages <- cli::cli_progress_bar()
 
   # Update progress bar with total number of pages expected: plus one for the
   # count query, this update doesn't count as a progress step. Otherwise we'd
