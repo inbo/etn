@@ -612,7 +612,7 @@ test_that("get_acoustic_detection() reports no progress when disabled", {
   expect_no_message(
     with_mocked_bindings(
       code = get_acoustic_detections(station_name = "de-9",
-                                     progress = TRUE,
+                                     progress = FALSE,
                                      api = TRUE,
                                      start_date = "2014-04-10",
                                      end_date = "2014-04-11"),
