@@ -606,18 +606,20 @@ test_that("get_acoustic_detections() can handle 5M+ detections: SQL", {
 })
 
 test_that("get_acoustic_detection() reports no progress when disabled", {
-  # Reuse cassette
-  vcr::local_cassette("detections_station_name")
+  vcr::local_cassette("detections_minimal")
   # The function will never report progress when testing, overwrite this
   # behaviour to test the function argument.
   expect_no_message(
     with_mocked_bindings(
-      code = get_acoustic_detections(station_name = "de-9", progress = FALSE),
+      code = get_acoustic_detections(station_name = "de-9",
+                                     progress = TRUE,
+                                     api = TRUE,
+                                     start_date = "2014-04-10",
+                                     end_date = "2014-04-11"),
       # disable testing overwrite: it would never show when testing
       is_testing = function(...) {
         FALSE
-      },
-
+      }
     )
   )
 })
