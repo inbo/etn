@@ -589,6 +589,7 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
 
 test_that("get_acoustic_detections() can handle 5M+ detections: API", {
   skip_on_ci() # This takes ages
+  skip_on_covr() # This takes ages, doesn't add coverage
   df <- get_acoustic_detections(animal_project_code = "2013_albertkanaal",
                                 limit = FALSE,
                                 api = TRUE)
@@ -602,4 +603,41 @@ test_that("get_acoustic_detections() can handle 5M+ detections: SQL", {
                                 limit = FALSE,
                                 api = FALSE)
   expect_s3_class(df, "data.frame")
+})
+
+test_that("get_acoustic_detection() reports no progress when disabled", {
+  vcr::local_cassette("detections_minimal")
+  # The function will never report progress when testing, overwrite this
+  # behaviour to test the function argument.
+  expect_no_message(
+    with_mocked_bindings(
+      code = get_acoustic_detections(station_name = "de-9",
+                                     progress = FALSE,
+                                     api = TRUE,
+                                     start_date = "2014-04-10",
+                                     end_date = "2014-04-11"),
+      # disable testing overwrite: it would never show when testing
+      is_testing = function(...) {
+        FALSE
+      }
+    )
+  )
+})
+
+# count_acoustic_detections -----------------------------------------------
+
+test_that("count_acoustic_detections() returns numeric values", {
+  vcr::local_cassette("count_detections")
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
+                                     api = TRUE)
+  expect_type(count, "double")
+  expect_length(count, 1L)
+})
+
+test_that("count_acoustic_detections() returns values within expected range", {
+  vcr::local_cassette("count_detections")
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
+                                     api = TRUE)
+  expect_gt(count, 5e6)
+  expect_lt(count, 1e8)
 })

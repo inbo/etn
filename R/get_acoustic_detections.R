@@ -96,7 +96,7 @@ get_acoustic_detections <- function(connection,
     progress <- FALSE
   }
   # Only show the progress bar if less than 50% of records have been fetched in
-  # 24h
+  # 24h: workaround to control progress reporting
   if (!progress) {
     withr::local_options(cli.progress_show_after = 60 * 60 * 24)
   }
@@ -112,6 +112,10 @@ get_acoustic_detections <- function(connection,
     ]
 
   # Calculate the number of records we expect: for progress bar + page_size
+  # Report on this step as it can take a while for large queries
+  if (progress) {
+    cli::cli_progress_message("Preparing")
+  }
   n_records_expected <-
     if (limit) {
       # If limit is set to TRUE, we expect 100 records
@@ -162,8 +166,17 @@ get_acoustic_detections <- function(connection,
     .default = 100000
   )
 
-  # Initialize progress bar with total number of pages expected
-  cli::cli_progress_bar(total = ceiling(n_records_expected / page_size))
+  # Initialize progress bar for fetching the pages
+  pb_fetch_pages <- cli::cli_progress_bar()
+
+  # Update progress bar with total number of pages expected: plus one for the
+  # count query, this update doesn't count as a progress step. Otherwise we'd
+  # have to add 1 more to the total number of steps.
+  n_pages_expected <- ceiling(n_records_expected / page_size)
+  cli::cli_progress_update(total = n_pages_expected + 1,
+                           set = 0,
+                           id = pb_fetch_pages,
+                           status = "Getting detections.")
 
   # Init object to store pages
   combined_results <- list()
@@ -206,8 +219,7 @@ get_acoustic_detections <- function(connection,
     # Fetch page
     fetched_page <- do.call(helper_to_use, arguments_for_helper)
 
-    # Iterate the progress bar
-    cli::cli_progress_update(inc = nrow(fetched_page))
+
 
     # The next page will be fetched with detection_ids higher than the current
     # max detection_id
@@ -216,8 +228,8 @@ get_acoustic_detections <- function(connection,
     # store page: use next_id_pk as name to avoid iterating page number
     combined_results[[as.character(next_id_pk)]] <- fetched_page
 
-    # Iterate the progress bar: we fetched one page
-    cli::cli_progress_update(inc = 1)
+    # Iterate the progress bar by one page
+    cli::cli_progress_update(id = pb_fetch_pages, inc = 1)
 
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
@@ -225,9 +237,18 @@ get_acoustic_detections <- function(connection,
     }
   }
 
+  # Update the user on final time consuming step.
+  if (progress) {
+    cli::cli_progress_message("Wrapping up")
+  }
+
   # Combine pages and sort on acoustic_tag_id
-  dplyr::bind_rows(combined_results) %>%
+  detections <-
+    dplyr::bind_rows(combined_results) |>
     dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
+
+  # Return single detections table
+  detections
 }
 
 #' Count acoustic detections
@@ -270,5 +291,8 @@ count_acoustic_detections <- function(..., api = TRUE) {
     )
   }
 
-  dplyr::pull(returned_count, "count")
+  dplyr::pull(returned_count, "count") |>
+    # If the count class is not numeric, convert it. DBI returns Integer64 which
+    # causes issues with cli progress bars
+    as.numeric()
 }
