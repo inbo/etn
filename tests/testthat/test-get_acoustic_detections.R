@@ -607,5 +607,17 @@ test_that("get_acoustic_detections() can handle 5M+ detections: SQL", {
 # count_acoustic_detections -----------------------------------------------
 
 test_that("count_acoustic_detections() returns numeric values", {
+  vcr::local_cassette("count_detections")
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
+                                     api = TRUE)
+  expect_type(count, "double")
+  expect_length(count, 1L)
+})
 
+test_that("count_acoustic_detections() returns values within expected range", {
+  vcr::local_cassette("count_detections")
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
+                                     api = TRUE)
+  expect_gt(count, 5e6)
+  expect_lt(count, 1e8)
 })
