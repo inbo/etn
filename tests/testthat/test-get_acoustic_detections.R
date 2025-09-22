@@ -603,3 +603,9 @@ test_that("get_acoustic_detections() can handle 5M+ detections: SQL", {
                                 api = FALSE)
   expect_s3_class(df, "data.frame")
 })
+
+# count_acoustic_detections -----------------------------------------------
+
+test_that("count_acoustic_detections() returns numeric values", {
+
+})
