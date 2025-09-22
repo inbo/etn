@@ -112,7 +112,7 @@ get_acoustic_detections <- function(connection,
     ]
 
   # Initialize progress bar
-  cli::cli_progress_bar()
+  cli::cli_progress_bar(auto_terminate = FALSE)
 
   # Calculate the number of records we expect: for progress bar + page_size
   n_records_expected <-
