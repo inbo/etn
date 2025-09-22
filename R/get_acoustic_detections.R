@@ -221,10 +221,7 @@ get_acoustic_detections <- function(connection,
       helper_to_use <- save_api_page
     } else {
       arguments_for_helper <- payload
-      helper_to_use <- \(..., tmp_featherpath){
-          etnservice::get_acoustic_detections_page(...) |>
-          arrow::write_feather(tmp_featherpath, compression = "lz4")
-      }
+      helper_to_use <- save_sql_page
     }
 
     # Fetch page
@@ -339,5 +336,11 @@ save_api_page <- function(..., path){
     # set feather compression to lz4
     httr2::req_url_query(compression = "lz4") |>
     req_perform_opencpu(path = path)
+  invisible(path)
+}
+
+save_sql_page <- function(..., path){
+  etnservice::get_acoustic_detections_page(...) |>
+    arrow::write_feather(path, compression = "lz4")
   invisible(path)
 }
