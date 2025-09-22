@@ -79,8 +79,8 @@ get_val <- function(temp_key,
   # early return in case of return_url
   if(return_url){
     return(
-      glue::glue("{get_hostname(api_domain)}",
-                 "/tmp/{temp_key}/R/val.{format}")
+      file.path(api_domain,
+                 "tmp",temp_key,"R",".val",format)
     )
   }
 
