@@ -7,22 +7,22 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Mon, 22 Sep 2025 07:43:20 GMT
+      date: Mon, 22 Sep 2025 13:27:03 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
         form.vliz.be www.omes-monitoring.be omes-monitoring.be;
       cross-origin-opener-policy: same-origin
       cache-control: max-age=300, public
-      x-ocpu-session: x072de4face768c
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x072de4face768c/
+      x-ocpu-session: x0efd09fa7613d8
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0efd09fa7613d8/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-09-22 07:43:26 UTC
+      x-ocpu-time: 2025-09-22 13:27:09 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -30,7 +30,7 @@ http_interactions:
       content-length: '50'
       content-type: application/json
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc2; path=/
+      set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
         [
@@ -38,5 +38,5 @@ http_interactions:
             "count": 5479707
           }
         ]
-  recorded_at: 2025-09-22 07:43:27
+  recorded_at: 2025-09-22 13:27:09
 recorded_with: VCR-vcr/2.0.0
