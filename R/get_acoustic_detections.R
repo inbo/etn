@@ -233,7 +233,7 @@ get_acoustic_detections <- function(connection,
   }
 
   # Update the user on final time consuming step.
-  cli::cli_progress_message("Wrapping up")
+  cli::cli_progress_message("Wrapping up...")
 
   # Combine pages and sort on acoustic_tag_id
   detections <-
