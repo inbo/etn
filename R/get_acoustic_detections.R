@@ -112,6 +112,8 @@ get_acoustic_detections <- function(connection,
     ]
 
   # Calculate the number of records we expect: for progress bar + page_size
+  # Report on this step as it can take a while for large queries
+  cli::cli_progress_message("Preparing...")
   n_records_expected <-
     if (limit) {
       # If limit is set to TRUE, we expect 100 records
@@ -170,9 +172,9 @@ get_acoustic_detections <- function(connection,
   # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
   cli::cli_progress_update(total = n_pages_expected + 1,
-                           inc = 0,
+                           set = 0,
                            id = pb_fetch_pages,
-                           status = "Fetching")
+                           status = "Getting detections.")
 
   # Init object to store pages
   combined_results <- list()
@@ -230,9 +232,10 @@ get_acoustic_detections <- function(connection,
     }
   }
 
+  # Update the user on final time consuming step.
+  cli::cli_progress_message("Wrapping up")
+
   # Combine pages and sort on acoustic_tag_id
-  cli::cli_progress_update(status = "Wrapping up",
-                           id = pb_fetch_pages)
   detections <-
     dplyr::bind_rows(combined_results) %>%
     dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
