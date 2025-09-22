@@ -589,6 +589,7 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
 
 test_that("get_acoustic_detections() can handle 5M+ detections: API", {
   skip_on_ci() # This takes ages
+  skip_on_covr() # This takes ages, doesn't add coverage
   df <- get_acoustic_detections(animal_project_code = "2013_albertkanaal",
                                 limit = FALSE,
                                 api = TRUE)
