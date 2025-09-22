@@ -111,6 +111,9 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
+  # Initialize progress bar
+  cli::cli_progress_bar()
+
   # Calculate the number of records we expect: for progress bar + page_size
   n_records_expected <-
     if (limit) {
@@ -162,8 +165,10 @@ get_acoustic_detections <- function(connection,
     .default = 100000
   )
 
-  # Initialize progress bar with total number of pages expected
-  cli::cli_progress_bar(total = ceiling(n_records_expected / page_size))
+  # Update progress bar with total number of pages expected: plus one for the
+  # count query
+  n_pages_expected <- ceiling(n_records_expected / page_size)
+  cli::cli_progress_update(total = n_pages_expected + 1)
 
   # Init object to store pages
   combined_results <- list()
@@ -203,8 +208,8 @@ get_acoustic_detections <- function(connection,
     # Fetch page
     fetched_page <- do.call(helper_to_use, arguments_for_helper)
 
-    # Iterate the progress bar
-    cli::cli_progress_update(inc = nrow(fetched_page))
+    # Iterate the progress bar by one page
+    cli::cli_progress_update(inc = 1)
 
     # The next page will be fetched with detection_ids higher than the current
     # max detection_id
@@ -218,6 +223,7 @@ get_acoustic_detections <- function(connection,
 
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
+      cli::cli_progress_done()
       break
     }
   }
