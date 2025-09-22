@@ -224,14 +224,19 @@ get_acoustic_detections <- function(connection,
 
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
-      cli::cli_progress_done()
       break
     }
   }
 
   # Combine pages and sort on acoustic_tag_id
-  dplyr::bind_rows(combined_results) %>%
+  cli::cli_progress_update(status = "Wrapping up",
+                           id = pb_fetch_pages)
+  detections <-
+    dplyr::bind_rows(combined_results) %>%
     dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
+
+  # Return single detections table
+  detections
 }
 
 #' Count acoustic detections
