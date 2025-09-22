@@ -267,5 +267,8 @@ count_acoustic_detections <- function(..., api = TRUE) {
     )
   }
 
-  dplyr::pull(returned_count, "count")
+  dplyr::pull(returned_count, "count") |>
+    # If the count class is not numeric, convert it. DBI returns Integer64 which
+    # causes issues with cli progress bars
+    as.numeric()
 }
