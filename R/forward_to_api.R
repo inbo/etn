@@ -15,6 +15,8 @@
 #'   "https://opencpu.lifewatch.be/library/etnservice/R". A test domain can be
 #'   set via the environmental variable `ETN_TEST_API`. VLIZ has requested the
 #'   authors to not disclose this test url.
+#' @param ... Additional arguments passed to the `get_val` function, such as
+#'  `return_url`.
 #' @return The same return object of the `function_identity` function
 #'
 #' @family helper functions
@@ -27,7 +29,8 @@ forward_to_api <- function(
     json = FALSE,
     domain = Sys.getenv("ETN_TEST_API",
       unset = "https://opencpu.lifewatch.be/library/etnservice/R"
-    )) {
+    ),
+    ...) {
   format <- rlang::arg_match(format)
   # If the requested format is JSON, switch to a one step process.
 
@@ -83,7 +86,8 @@ forward_to_api <- function(
     return(
       get_val(extract_temp_key(response),
         api_domain = get_hostname(domain),
-        format = format
+        format = format,
+        ...
       )
     )
   }

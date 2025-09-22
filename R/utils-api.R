@@ -30,12 +30,15 @@ extract_temp_key <- function(response) {
 #'
 #' @param temp_key the temp key returned from the POST request to the API
 #' @param api_domain Character vector of the OpenCPU domain to use, defaults to
-#' "https://opencpu.lifewatch.be"
+#'   "https://opencpu.lifewatch.be"
 #' @param format Character vector of the format to use for the GET request,
-#' either "feather" or "rds", defaults to "feather". Note that feather is
-#' faster, but rds preserves more R specific object types.
+#'   either "feather" or "rds", defaults to "feather". Note that feather is
+#'   faster, but rds preserves more R specific object types.
+#' @param return_url Logical. If `TRUE` fetching the result of the API call. The
+#'   url of the result object is returned instead.
 #'
-#' @return the uncompressed object resulting form a GET request to the API
+#' @return the uncompressed object resulting form a GET request to the API. If
+#'  `return_url` is `TRUE`, the url of the result object is returned instead.
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -52,7 +55,8 @@ extract_temp_key <- function(response) {
 #'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key,
                     api_domain = "https://opencpu.lifewatch.be",
-                    format = c("feather", "rds")) {
+                    format = c("feather", "rds"),
+                    return_url = FALSE) {
 
   format <- rlang::arg_match(format)
   reading_function <-
@@ -71,6 +75,14 @@ get_val <- function(temp_key,
       },
       "feather" = arrow::read_feather
     )
+
+  # early return in case of return_url
+  if(return_url){
+    return(
+      glue::glue("{get_hostname(api_domain)}",
+                 "/tmp/{temp_key}/R/val.{format}")
+    )
+  }
 
   # request data and open connection
   raw_response <-
