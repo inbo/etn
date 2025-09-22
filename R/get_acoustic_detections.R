@@ -114,7 +114,7 @@ get_acoustic_detections <- function(connection,
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
   if (progress) {
-    cli::cli_progress_step("Preparing")
+    cli::cli_progress_message("Preparing")
   }
   n_records_expected <-
     if (limit) {
@@ -236,8 +236,7 @@ get_acoustic_detections <- function(connection,
 
   # Update the user on final time consuming step.
   if (progress) {
-    cli::cli_alert_success("Getting data.")
-    cli::cli_progress_step("Wrapping up")
+    cli::cli_progress_message("Wrapping up")
   }
 
   # Combine pages and sort on acoustic_tag_id
