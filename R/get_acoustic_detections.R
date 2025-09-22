@@ -111,11 +111,6 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
-  # Initialize progress bar for record counting
-  pb_count <- cli::cli_progress_bar("Preparing",
-                                    "tasks",
-                                    total = 1)
-
   # Calculate the number of records we expect: for progress bar + page_size
   n_records_expected <-
     if (limit) {
@@ -166,9 +161,6 @@ get_acoustic_detections <- function(connection,
     n_records_expected > 5e6 ~ 1e6,
     .default = 100000
   )
-
-  # Finish up progress bar for count step
-  cli::cli_process_done(id = pb_count)
 
   # Initialize progress bar for fetching the pages
   pb_fetch_pages <- cli::cli_progress_bar()
