@@ -166,9 +166,10 @@ get_acoustic_detections <- function(connection,
   )
 
   # Update progress bar with total number of pages expected: plus one for the
-  # count query
+  # count query, this update doesn't count as a progress step. Otherwise we'd
+  # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
-  cli::cli_progress_update(total = n_pages_expected + 1)
+  cli::cli_progress_update(total = n_pages_expected + 1, inc = 0)
 
   # Init object to store pages
   combined_results <- list()
