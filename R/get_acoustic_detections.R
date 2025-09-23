@@ -132,7 +132,7 @@ get_acoustic_detections <- function(connection,
       ))
     }
 
-  cli::cli_alert_info("n records expected: {n_records_expected}")
+  # cli::cli_alert_info("n records expected: {n_records_expected}")
   # if (progress) {
   #   cli::cli_progress_update("Fetching {n_records_expected} detections")
   # }
@@ -178,7 +178,7 @@ get_acoustic_detections <- function(connection,
     # default page size
     page_size <- 1e5
   }
-  cli::cli_alert_info("page size: {page_size}")
+  # cli::cli_alert_info("page size: {page_size}")
 
   # Update progress bar with total number of pages expected: plus one for the
   # count query, this update doesn't count as a progress step. Otherwise we'd
@@ -189,7 +189,7 @@ get_acoustic_detections <- function(connection,
   #                          id = pb_fetch_pages,
   #                          status = "Getting detections.")
 
-  cli::cli_alert_info("n pages expected: {n_pages_expected}")
+  # cli::cli_alert_info("n pages expected: {n_pages_expected}")
 
   # Fetch credentials only once and reuse for every page
   if (!api) credentials <- get_credentials()
@@ -199,9 +199,9 @@ get_acoustic_detections <- function(connection,
   tmp_pagedir <- withr::local_tempdir(pattern="detection_pages-")
 
   # Initialize progress bar for fetching the pages
-  # cli::cli_progress_bar(name = "Getting detections.",
-  #                                         total = n_pages_expected)
-  cli::cli_progress_bar()
+  cli::cli_progress_bar(name = "Getting detections.",
+                                          total = n_pages_expected)
+
   repeat {
     # Pagination arguments
     # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
@@ -259,7 +259,7 @@ get_acoustic_detections <- function(connection,
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
-    cli::cli_alert_info("records on page: {nrow(fetched_page)}")
+    # cli::cli_alert_info("records on page: {nrow(fetched_page)}")
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
       break
@@ -274,8 +274,8 @@ get_acoustic_detections <- function(connection,
       dplyr::collect() |>
       dplyr::pull("detection_id")
 
-    cli::cli_alert_info("next_id_pk: {next_id_pk}")
-    cli::cli_alert_info("n files fetched: {length(list.files(tmp_pagedir))}")
+    # cli::cli_alert_info("next_id_pk: {next_id_pk}")
+    # cli::cli_alert_info("n files fetched: {length(list.files(tmp_pagedir))}")
     # Iterate the progress bar by one page
     cli::cli_progress_update()
   }
