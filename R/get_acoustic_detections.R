@@ -132,6 +132,7 @@ get_acoustic_detections <- function(connection,
       ))
     }
 
+  cli::cli_alert_info("n records expected: {n_records_expected}")
   # if (progress) {
   #   cli::cli_progress_update("Fetching {n_records_expected} detections")
   # }
