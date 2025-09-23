@@ -201,8 +201,9 @@ get_hostname <- function(url_str){
 #' @noRd
 req_perform_opencpu <- function(req,
                                 function_identity = get_parent_fn_name(),
+                                path = NULL,
                                 ...) {
-  tryCatch(
+  resp <- tryCatch(
     httr2::req_perform(req, ...),
     httr2_http_400 = function(cnd) {
       rlang::abort(
@@ -229,4 +230,9 @@ req_perform_opencpu <- function(req,
       )
     }
   )
+  if(!is.null(path)){
+    httr2::resp_body_raw(resp) |>
+      writeBin(path)
+  }
+  resp
 }
