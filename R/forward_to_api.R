@@ -50,11 +50,11 @@ forward_to_api <- function(
       append(payload, list(credentials = provided_credentials), after = 0)
   }
 
-  request <- httr2::request(domain) %>%
+  request <- httr2::request(domain) |>
     # Set endpoint based on the passed function_identity
     # NOTE trailing backslash is important for OpenCPU
-    httr2::req_url_path_append(function_identity, "") %>%
-    httr2::req_body_json(payload) %>%
+    httr2::req_url_path_append(function_identity, "") |>
+    httr2::req_body_json(payload) |>
     # Setup retry strategy
     httr2::req_retry(
       max_tries = 5,
@@ -68,7 +68,7 @@ forward_to_api <- function(
   # JSON, but using a two step protocol allows us to get the exact R object that
   # was returned back via RDS (`get_val()`).
   if (json) {
-    request <- request %>%
+    request <- request |>
       httr2::req_url_path_append("json/")
   }
 
