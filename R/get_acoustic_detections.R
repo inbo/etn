@@ -116,7 +116,8 @@ get_acoustic_detections <- function(connection,
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
   if (progress) {
-    cli::cli_progress_step("Preparing")
+    msg <- ""
+    cli::cli_progress_step("Preparing {msg}")
   }
 
   n_records_expected <-
@@ -131,6 +132,13 @@ get_acoustic_detections <- function(connection,
         list(api = api)
       ))
     }
+
+  # Update progress step with number of records we'll be fetching.
+  if (progress) {
+    msg <- glue::glue(": will fetch {n_records_pretty} detections",
+      r_records_pretty = prettyunits::pretty_num(n_records_expected)
+    )
+  }
 
   # cli::cli_alert_info("n records expected: {n_records_expected}")
   # if (progress) {
