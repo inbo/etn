@@ -36,9 +36,14 @@ extract_temp_key <- function(response) {
 #'   faster, but rds preserves more R specific object types.
 #' @param return_url Logical. If `TRUE` fetching the result of the API call. The
 #'   url of the result object is returned instead.
+#' @param ... Query arguments to pass to OpenCPU. These are arguments to the
+#'   writing functions from the [supported
+#'   encoders](https://www.opencpu.org/api.html#api-formats). For example:
+#'   `compression = "lz4"` in the case of `format = "feather"` is passed to
+#'   `arrow::write_feather()`. Other encoders include `base::saveRDS`.
 #'
 #' @return the uncompressed object resulting form a GET request to the API. If
-#'  `return_url` is `TRUE`, the url of the result object is returned instead.
+#'   `return_url` is `TRUE`, the url of the result object is returned instead.
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -56,7 +61,8 @@ extract_temp_key <- function(response) {
 get_val <- function(temp_key,
                     api_domain = "https://opencpu.lifewatch.be",
                     format = c("feather", "rds"),
-                    return_url = FALSE) {
+                    return_url = FALSE,
+                    ...) {
 
   format <- rlang::arg_match(format)
   reading_function <-
@@ -88,6 +94,7 @@ get_val <- function(temp_key,
   raw_response <-
     httr2::request(api_domain) %>%
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) %>%
+    httr2::req_url_query(...) |>
     httr2::req_retry(max_tries = 5) %>%
     req_perform_opencpu() %>%
     httr2::resp_body_raw()
