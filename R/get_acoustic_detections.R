@@ -111,11 +111,17 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
+  # Estimate number of pages ------------------------------------------------
+
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
   if (progress) {
-    cli::cli_progress_message("Preparing")
+    # you need to init a message to pass it to cli, we'll update it as we get a
+    # count
+    exp_records_msg <- ""
+    cli::cli_progress_step("Preparing {exp_records_msg}")
   }
+
   n_records_expected <-
     if (limit) {
       # If limit is set to TRUE, we expect 100 records
@@ -128,6 +134,14 @@ get_acoustic_detections <- function(connection,
         list(api = api)
       ))
     }
+
+  # Update progress step with number of records we'll be fetching.
+  if (progress) {
+    exp_records_msg <-
+      glue::glue(": will fetch {n_records_pretty} detections",
+        n_records_pretty = prettyunits::pretty_num(n_records_expected)
+      )
+  }
 
   # Return early if query didn't result in any rows
   if (n_records_expected == 0) {
@@ -160,29 +174,36 @@ get_acoustic_detections <- function(connection,
 
   # Control number of objects to fetch per page, 100k default, up to 1M for
   # big queries
-  page_size <- dplyr::case_when(
-    limit ~ 100,
-    n_records_expected > 5e6 ~ 1e6,
-    .default = 100000
-  )
-
-  # Initialize progress bar for fetching the pages
-  pb_fetch_pages <- cli::cli_progress_bar()
+  if (limit) {
+    # Only fetch 100 records
+    page_size <- 100
+  } else if (n_records_expected > 5e6) {
+    # Increase page_size in case of over 5M records
+    page_size <- 1e6
+  } else {
+    # default page size
+    page_size <- 1e5
+  }
 
   # Update progress bar with total number of pages expected: plus one for the
   # count query, this update doesn't count as a progress step. Otherwise we'd
   # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
-  cli::cli_progress_update(total = n_pages_expected + 1,
-                           set = 0,
-                           id = pb_fetch_pages,
-                           status = "Getting detections.")
-
-  # Init object to store pages
-  combined_results <- list()
 
   # Fetch credentials only once and reuse for every page
   if (!api) credentials <- get_credentials()
+
+  # Fetch pages -------------------------------------------------------------
+  # Path to store pages on disk
+  tmp_pagedir <- withr::local_tempdir(pattern = "detection_pages-")
+
+  # Initialize progress bar for fetching the pages
+  cli::cli_progress_bar(
+    name = "Getting detections.",
+    total = n_pages_expected,
+    format =
+      "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}"
+  )
 
   repeat {
     # Pagination arguments
@@ -200,52 +221,103 @@ get_acoustic_detections <- function(connection,
     # Combine arguments to pass to helper function
     payload <- append(arguments_to_pass, pagination_arguments)
 
-    # Decide what helper to use, add any extra required arguments
+
+    ## store pages on disk -----------------------------------------------------
+
+
+    # Decide what helper to use, add any extra required arguments. Regardless of
+    # helper, return temppath where page was written.
     if (api) {
-      helper_to_use <- forward_to_api
       arguments_for_helper <-
         list(
           function_identity = "get_acoustic_detections_page",
-          payload = payload
+          payload = payload,
+          # Set the format to feather because it's faster more memory efficient
+          # and faster than rds
+          format = "feather"
         )
+      # Save the feather file to disk
+      helper_to_use <- \(..., path) {
+        forward_to_api(...,
+          return_url = TRUE,
+          compression = "lz4",
+        ) |>
+          httr2::request() |>
+          req_perform_opencpu(path = path)
+        invisible(path)
+      }
     } else {
-      helper_to_use <- etnservice::get_acoustic_detections_page
       arguments_for_helper <- payload
+      # Save the DBI returned data.frame as a feather file
+      helper_to_use <- \(..., path) {
+        etnservice::get_acoustic_detections_page(...) |>
+          arrow::write_feather(path, compression = "lz4")
+        invisible(path)
+      }
     }
 
     # Fetch page
-    fetched_page <- do.call(helper_to_use, arguments_for_helper)
+    fetched_page_path <- do.call(
+      helper_to_use,
+      append(
+        arguments_for_helper,
+        list(
+          path =
+            tempfile(
+              tmpdir = tmp_pagedir,
+              fileext = ".feather"
+            )
+        )
+      )
+    )
 
+    # Get some metadata on the page we fetched
+    fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
 
-
-    # The next page will be fetched with detection_ids higher than the current
-    # max detection_id
-    next_id_pk <- max(fetched_page$detection_id)
-
-    # store page: use next_id_pk as name to avoid iterating page number
-    combined_results[[as.character(next_id_pk)]] <- fetched_page
-
-    # Iterate the progress bar by one page
-    cli::cli_progress_update(id = pb_fetch_pages, inc = 1)
-
+    # Break the loop if the page is smaller than the page size, or limit is set
+    # to TRUE (always only fetch one page).
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
       break
     }
+
+    # The next page will be fetched with detection_ids higher than the current
+    # max detection_id
+    next_id_pk <-
+      fetched_page |>
+      # Arrow does not support slicing with ties
+      dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
+      dplyr::collect() |>
+      dplyr::pull("detection_id")
+
+    # Iterate the progress bar by one page
+    cli::cli_progress_update()
   }
+
+  # combine pages -----------------------------------------------------------
 
   # Update the user on final time consuming step.
   if (progress) {
-    cli::cli_progress_message("Wrapping up")
+    cli::cli_progress_step("Wrapping up")
   }
 
   # Combine pages and sort on acoustic_tag_id
   detections <-
-    dplyr::bind_rows(combined_results) |>
-    dplyr::arrange(stringr::str_rank(.data$acoustic_tag_id, numeric = TRUE))
+    arrow::open_dataset(tmp_pagedir, format = "feather") |>
+    # perform a natural sort via Arrow C++ mapping
+    dplyr::mutate(
+      text_part = stringr::str_remove_all(.data$acoustic_tag_id, "[0-9]"),
+      num_part = as.numeric(
+        stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
+      )
+    ) |>
+    # Arrange by the text part, then the numeric part
+    dplyr::arrange(.data$text_part, .data$num_part) |>
+    dplyr::select(-dplyr::all_of(c("text_part", "num_part")))
+
 
   # Return single detections table
-  detections
+  dplyr::collect(detections)
 }
 
 #' Count acoustic detections

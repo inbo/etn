@@ -23,6 +23,7 @@ BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 4.1)
 Imports:
+    arrow,
     askpass,
     assertthat,
     cachem,
@@ -34,6 +35,7 @@ Imports:
     lifecycle,
     memoise,
     methods,
+    prettyunits,
     readr,
     rlang,
     stringr,

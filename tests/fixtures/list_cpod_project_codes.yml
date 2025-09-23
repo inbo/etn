@@ -7,22 +7,22 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Wed, 10 Sep 2025 14:57:51 GMT
+      date: Tue, 23 Sep 2025 14:16:27 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
         form.vliz.be www.omes-monitoring.be omes-monitoring.be;
       cross-origin-opener-policy: same-origin
       cache-control: max-age=300, public
-      x-ocpu-session: x0eb09c249df082
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0eb09c249df082/
+      x-ocpu-session: x090b0c82b057b8
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x090b0c82b057b8/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-09-10 14:57:52 UTC
+      x-ocpu-time: 2025-09-23 14:16:28 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -34,5 +34,5 @@ http_interactions:
     body:
       string: |
         ["Apelafico_acoustics", "Apelafico_underwater", "ARMS_MBON_Belgium", "CODEVCO", "cpod-lifewatch", "cpod-od-natuur", "Lifewatch_extra", "Lifewatch_test", "PAM-Borssele", "PelFish", "PhD_Parcerisas", "PureWind", "SEAWave", "SMGMIT", "STRAITS_PAM", "VLIZ-MRC-AMUC-001", "VLIZ-MRC-AMUC-002", "WaveHub"]
-  recorded_at: 2025-09-10 14:57:52
+  recorded_at: 2025-09-23 14:16:28
 recorded_with: VCR-vcr/2.0.0
