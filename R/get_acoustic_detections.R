@@ -116,8 +116,9 @@ get_acoustic_detections <- function(connection,
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
   if (progress) {
-    cli::cli_progress_message("Preparing")
+    cli::cli_progress_step("Preparing")
   }
+
   n_records_expected <-
     if (limit) {
       # If limit is set to TRUE, we expect 100 records
@@ -130,6 +131,10 @@ get_acoustic_detections <- function(connection,
         list(api = api)
       ))
     }
+
+  # if (progress) {
+  #   cli::cli_progress_update("Fetching {n_records_expected} detections")
+  # }
 
   # Return early if query didn't result in any rows
   if (n_records_expected == 0) {
@@ -162,24 +167,28 @@ get_acoustic_detections <- function(connection,
 
   # Control number of objects to fetch per page, 100k default, up to 1M for
   # big queries
-  page_size <- dplyr::case_when(
-    limit ~ 100,
-    n_records_expected > 5e6 ~ 1e6,
-    .default = 100000
-  )
-
-  # Initialize progress bar for fetching the pages
-  pb_fetch_pages <- cli::cli_progress_bar()
+  if (limit) {
+    # Only fetch 100 records
+    page_size <- 100
+  } else if (n_records_expected > 5e6) {
+    # Increase page_size in case of over 5M records
+    page_size <- 1e6
+  } else {
+    # default page size
+    page_size <- 1e5
+  }
+  cli::cli_alert_info("page size: {page_size}")
 
   # Update progress bar with total number of pages expected: plus one for the
   # count query, this update doesn't count as a progress step. Otherwise we'd
   # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
-  cli::cli_progress_update(total = n_pages_expected + 1,
-                           set = 0,
-                           id = pb_fetch_pages,
-                           status = "Getting detections.")
+  # cli::cli_progress_update(total = n_pages_expected + 1,
+  #                          set = 0,
+  #                          id = pb_fetch_pages,
+  #                          status = "Getting detections.")
 
+  cli::cli_alert_info("n pages expected: {n_pages_expected}")
 
   # Fetch credentials only once and reuse for every page
   if (!api) credentials <- get_credentials()
@@ -187,6 +196,11 @@ get_acoustic_detections <- function(connection,
   # Fetch pages -------------------------------------------------------------
   # Path to store pages on disk
   tmp_pagedir <- withr::local_tempdir(pattern="detection_pages-")
+
+  # Initialize progress bar for fetching the pages
+  # cli::cli_progress_bar(name = "Getting detections.",
+  #                                         total = n_pages_expected)
+  cli::cli_progress_bar()
   repeat {
     # Pagination arguments
     # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
@@ -241,6 +255,15 @@ get_acoustic_detections <- function(connection,
 
     # Get some metadata on the page we fetched
     fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
+
+    # Break the loop if the page is smaller than the page size, or limit is set
+    # to TRUE (always only fetch one page).
+    cli::cli_alert_info("records on page: {nrow(fetched_page)}")
+    if (nrow(fetched_page) < page_size || limit) {
+      # Page isn't full = end of results.
+      break
+    }
+
     # The next page will be fetched with detection_ids higher than the current
     # max detection_id
     next_id_pk <-
@@ -250,22 +273,18 @@ get_acoustic_detections <- function(connection,
       dplyr::collect() |>
       dplyr::pull("detection_id")
 
+    cli::cli_alert_info("next_id_pk: {next_id_pk}")
+    cli::cli_alert_info("n files fetched: {length(list.files(tmp_pagedir))}")
     # Iterate the progress bar by one page
-    cli::cli_progress_update(id = pb_fetch_pages, inc = 1)
-
-    if (nrow(fetched_page) < page_size || limit) {
-      # Page isn't full = end of results.
-      break
-    }
-  }
-
-  # Update the user on final time consuming step.
-  if (progress) {
-    cli::cli_progress_message("Wrapping up")
+    cli::cli_progress_update()
   }
 
   # combine pages -----------------------------------------------------------
 
+  # Update the user on final time consuming step.
+  if (progress) {
+    cli::cli_progress_step("Wrapping up")
+  }
 
   # Combine pages and sort on acoustic_tag_id
   detections <-
