@@ -16,8 +16,8 @@
 #' @family helper functions
 #' @noRd
 extract_temp_key <- function(response) {
-  response %>%
-    httr2::resp_body_string() %>%
+  response |>
+    httr2::resp_body_string() |>
     stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
 }
 
@@ -48,15 +48,15 @@ extract_temp_key <- function(response) {
 #' @noRd
 #' @examples
 #' \dontrun{
-#' etn:::extract_temp_key(response) %>% get_val()
+#' etn:::extract_temp_key(response) |> get_val()
 #' }
 #'
 #' # using the opencpu test instance
 #' api_url <- "https://cloud.opencpu.org/ocpu/library/stats/R/rnorm"
-#' httr2::request(api_url) %>%
-#'  httr2::req_body_json(list(n = 10, mean = 5)) %>%
-#'  httr2::req_perform() %>%
-#'  extract_temp_key() %>%
+#' httr2::request(api_url) |>
+#'  httr2::req_body_json(list(n = 10, mean = 5)) |>
+#'  httr2::req_perform() |>
+#'  extract_temp_key() |>
 #'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key,
                     api_domain = "https://opencpu.lifewatch.be",
@@ -92,11 +92,11 @@ get_val <- function(temp_key,
 
   # request data and open connection
   raw_response <-
-    httr2::request(api_domain) %>%
-    httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) %>%
+    httr2::request(api_domain) |>
+    httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) |>
     httr2::req_url_query(...) |>
-    httr2::req_retry(max_tries = 5) %>%
-    req_perform_opencpu() %>%
+    httr2::req_retry(max_tries = 5) |>
+    req_perform_opencpu() |>
     httr2::resp_body_raw()
 
   # read response via connection
@@ -147,10 +147,10 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
   # Placing a custom request because validate_login accepts username and
   # password directly in the body rather than as a credentials object like the
   # other functions.
-  login_valid <- httr2::request(domain) %>%
-    httr2::req_url_path_append("validate_login", "json/") %>%
-    httr2::req_body_json(data = credentials) %>%
-    httr2::req_perform() %>%
+  login_valid <- httr2::request(domain) |>
+    httr2::req_url_path_append("validate_login", "json/") |>
+    httr2::req_body_json(data = credentials) |>
+    httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE)
 
   if (!login_valid) {
