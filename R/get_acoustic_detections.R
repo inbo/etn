@@ -139,7 +139,7 @@ get_acoustic_detections <- function(connection,
   if (progress) {
     exp_records_msg <-
       glue::glue(": will fetch {n_records_pretty} detections",
-        r_records_pretty = prettyunits::pretty_num(n_records_expected)
+        n_records_pretty = prettyunits::pretty_num(n_records_expected)
       )
   }
 
