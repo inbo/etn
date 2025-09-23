@@ -233,7 +233,16 @@ get_acoustic_detections <- function(connection,
           # and faster than rds
           format = "feather"
         )
-      helper_to_use <- save_api_page
+      # Save the feather file to disk
+      helper_to_use <- \(..., path){
+        forward_to_api(...,
+                       return_url = TRUE,
+                       compression = "lz4",
+                       ) |>
+          httr2::request() |>
+          req_perform_opencpu(path = path)
+        invisible(path)
+      }
     } else {
       arguments_for_helper <- payload
       helper_to_use <- save_sql_page
@@ -345,15 +354,6 @@ count_acoustic_detections <- function(..., api = TRUE) {
     # If the count class is not numeric, convert it. DBI returns Integer64 which
     # causes issues with cli progress bars
     as.numeric()
-}
-
-save_api_page <- function(..., path){
-  forward_to_api(..., return_url = TRUE) |>
-    httr2::request() |>
-    # set feather compression to lz4
-    httr2::req_url_query(compression = "lz4") |>
-    req_perform_opencpu(path = path)
-  invisible(path)
 }
 
 save_sql_page <- function(..., path){
