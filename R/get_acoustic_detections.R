@@ -269,8 +269,8 @@ get_acoustic_detections <- function(connection,
     # max detection_id
     next_id_pk <-
       fetched_page |>
-      dplyr::select("detection_id") |>
-      tail(1) |>
+      # Arrow does not support slicing with ties
+      dplyr::slice_max(.data$detection_id,n = 1, with_ties = FALSE) |>
       dplyr::collect() |>
       dplyr::pull("detection_id")
 
