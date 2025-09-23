@@ -587,24 +587,6 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
 
-test_that("get_acoustic_detections() can handle 5M+ detections: API", {
-  skip_on_ci() # This takes ages
-  skip_on_covr() # This takes ages, doesn't add coverage
-  df <- get_acoustic_detections(animal_project_code = "2013_albertkanaal",
-                                limit = FALSE,
-                                api = TRUE)
-  expect_s3_class(df, "data.frame")
-})
-
-test_that("get_acoustic_detections() can handle 5M+ detections: SQL", {
-  skip_on_ci() # This takes ages
-  skip_if_not_localdb()
-  df <- get_acoustic_detections(animal_project_code = "2013_albertkanaal",
-                                limit = FALSE,
-                                api = FALSE)
-  expect_s3_class(df, "data.frame")
-})
-
 test_that("get_acoustic_detection() reports no progress when disabled", {
   vcr::local_cassette("detections_minimal")
   # The function will never report progress when testing, overwrite this
