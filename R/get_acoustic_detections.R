@@ -195,12 +195,15 @@ get_acoustic_detections <- function(connection,
 
   # Fetch pages -------------------------------------------------------------
   # Path to store pages on disk
-  tmp_pagedir <- withr::local_tempdir(pattern="detection_pages-")
+  tmp_pagedir <- withr::local_tempdir(pattern = "detection_pages-")
 
   # Initialize progress bar for fetching the pages
-  cli::cli_progress_bar(name = "Getting detections.",
-                                          total = n_pages_expected,
-                        format = "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}")
+  cli::cli_progress_bar(
+    name = "Getting detections.",
+    total = n_pages_expected,
+    format =
+      "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}"
+  )
 
   repeat {
     # Pagination arguments
@@ -219,7 +222,7 @@ get_acoustic_detections <- function(connection,
     payload <- append(arguments_to_pass, pagination_arguments)
 
 
-  ## store pages on disk -----------------------------------------------------
+    ## store pages on disk -----------------------------------------------------
 
 
     # Decide what helper to use, add any extra required arguments. Regardless of
@@ -234,11 +237,11 @@ get_acoustic_detections <- function(connection,
           format = "feather"
         )
       # Save the feather file to disk
-      helper_to_use <- \(..., path){
+      helper_to_use <- \(..., path) {
         forward_to_api(...,
-                       return_url = TRUE,
-                       compression = "lz4",
-                       ) |>
+          return_url = TRUE,
+          compression = "lz4",
+        ) |>
           httr2::request() |>
           req_perform_opencpu(path = path)
         invisible(path)
@@ -246,7 +249,7 @@ get_acoustic_detections <- function(connection,
     } else {
       arguments_for_helper <- payload
       # Save the DBI returned data.frame as a feather file
-      helper_to_use <- \(..., path){
+      helper_to_use <- \(..., path) {
         etnservice::get_acoustic_detections_page(...) |>
           arrow::write_feather(path, compression = "lz4")
         invisible(path)
@@ -283,7 +286,7 @@ get_acoustic_detections <- function(connection,
     next_id_pk <-
       fetched_page |>
       # Arrow does not support slicing with ties
-      dplyr::slice_max(.data$detection_id,n = 1, with_ties = FALSE) |>
+      dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
       dplyr::collect() |>
       dplyr::pull("detection_id")
 
@@ -304,7 +307,9 @@ get_acoustic_detections <- function(connection,
     # perform a natural sort via Arrow C++ mapping
     dplyr::mutate(
       text_part = stringr::str_remove_all(.data$acoustic_tag_id, "[0-9]"),
-      num_part = as.numeric(stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]"))
+      num_part = as.numeric(
+        stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
+      )
     ) |>
     # Arrange by the text part, then the numeric part
     dplyr::arrange(.data$text_part, .data$num_part) |>
