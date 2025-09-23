@@ -199,7 +199,8 @@ get_acoustic_detections <- function(connection,
 
   # Initialize progress bar for fetching the pages
   cli::cli_progress_bar(name = "Getting detections.",
-                                          total = n_pages_expected)
+                                          total = n_pages_expected,
+                        format = "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}")
 
   repeat {
     # Pagination arguments
