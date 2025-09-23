@@ -245,7 +245,12 @@ get_acoustic_detections <- function(connection,
       }
     } else {
       arguments_for_helper <- payload
-      helper_to_use <- save_sql_page
+      # Save the DBI returned data.frame as a feather file
+      helper_to_use <- \(..., path){
+        etnservice::get_acoustic_detections_page(...) |>
+          arrow::write_feather(path, compression = "lz4")
+        invisible(path)
+      }
     }
 
     # Fetch page
@@ -354,10 +359,4 @@ count_acoustic_detections <- function(..., api = TRUE) {
     # If the count class is not numeric, convert it. DBI returns Integer64 which
     # causes issues with cli progress bars
     as.numeric()
-}
-
-save_sql_page <- function(..., path){
-  etnservice::get_acoustic_detections_page(...) |>
-    arrow::write_feather(path, compression = "lz4")
-  invisible(path)
 }
