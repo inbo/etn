@@ -116,8 +116,10 @@ get_acoustic_detections <- function(connection,
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
   if (progress) {
-    msg <- ""
-    cli::cli_progress_step("Preparing {msg}")
+    # you need to init a message to pass it to cli, we'll update it as we get a
+    # count
+    exp_records_msg <- ""
+    cli::cli_progress_step("Preparing {exp_records_msg}")
   }
 
   n_records_expected <-
@@ -135,15 +137,11 @@ get_acoustic_detections <- function(connection,
 
   # Update progress step with number of records we'll be fetching.
   if (progress) {
-    msg <- glue::glue(": will fetch {n_records_pretty} detections",
-      r_records_pretty = prettyunits::pretty_num(n_records_expected)
-    )
+    exp_records_msg <-
+      glue::glue(": will fetch {n_records_pretty} detections",
+        r_records_pretty = prettyunits::pretty_num(n_records_expected)
+      )
   }
-
-  # cli::cli_alert_info("n records expected: {n_records_expected}")
-  # if (progress) {
-  #   cli::cli_progress_update("Fetching {n_records_expected} detections")
-  # }
 
   # Return early if query didn't result in any rows
   if (n_records_expected == 0) {
@@ -186,18 +184,11 @@ get_acoustic_detections <- function(connection,
     # default page size
     page_size <- 1e5
   }
-  # cli::cli_alert_info("page size: {page_size}")
 
   # Update progress bar with total number of pages expected: plus one for the
   # count query, this update doesn't count as a progress step. Otherwise we'd
   # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
-  # cli::cli_progress_update(total = n_pages_expected + 1,
-  #                          set = 0,
-  #                          id = pb_fetch_pages,
-  #                          status = "Getting detections.")
-
-  # cli::cli_alert_info("n pages expected: {n_pages_expected}")
 
   # Fetch credentials only once and reuse for every page
   if (!api) credentials <- get_credentials()
@@ -267,7 +258,6 @@ get_acoustic_detections <- function(connection,
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
-    # cli::cli_alert_info("records on page: {nrow(fetched_page)}")
     if (nrow(fetched_page) < page_size || limit) {
       # Page isn't full = end of results.
       break
@@ -282,8 +272,6 @@ get_acoustic_detections <- function(connection,
       dplyr::collect() |>
       dplyr::pull("detection_id")
 
-    # cli::cli_alert_info("next_id_pk: {next_id_pk}")
-    # cli::cli_alert_info("n files fetched: {length(list.files(tmp_pagedir))}")
     # Iterate the progress bar by one page
     cli::cli_progress_update()
   }
