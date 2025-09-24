@@ -1,11 +1,17 @@
 # Create a data package using the API
-datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-evalute_download_api <- evaluate_promise({
-  download_acoustic_dataset(
-    animal_project_code = "2014_demer",
-    directory = datapackage_path
-  )
-})
+vcr::use_cassette( # Cache HTTP response
+  "download_acoustic_dataset",
+  {
+    datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+    evalute_download_api <- evaluate_promise({
+      download_acoustic_dataset(
+        animal_project_code = "2014_demer",
+        directory = datapackage_path
+      )
+    })
+  }
+)
+
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.
@@ -95,39 +101,39 @@ test_that("download_acoustic_dataset() returns CSV files with expected number of
   # Check the number of schema fields in the datapackage against the number of
   # columns in the csv files
   expect_length(
-    fetch_schema_fields(datapackage, "animals"),
-    ncol(readr::read_csv(
+    names(readr::read_csv(
       file.path(datapackage_path, "animals.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "animals"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "tags"),
-    ncol(readr::read_csv(
+    names(readr::read_csv(
       file.path(datapackage_path, "tags.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "tags"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "detections"),
-    ncol(readr::read_csv(
+    names(readr::read_csv(
       file.path(datapackage_path, "detections.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "detections"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "deployments"),
-    ncol(readr::read_csv(
+    names(readr::read_csv(
       file.path(datapackage_path, "deployments.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "deployments"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "receivers"),
-    ncol(readr::read_csv(
+    names(readr::read_csv(
       file.path(datapackage_path, "receivers.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "receivers"))
   )
 })
 

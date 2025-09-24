@@ -115,6 +115,18 @@ get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
+#' Determine testing status
+#'
+#' Copy of testthat::is_testing() implementation to avoid a runtime dependency
+#' on testthat.
+#'
+#' @return `TRUE` inside a test.
+#' @family helper functions
+#' @noRd
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
@@ -155,11 +167,13 @@ prompt_user <- function(...) {
 
 # onLoad ------------------------------------------------------------------
 
-# Memoisation: Every 15 minutes, check the etnservice version compared to the
-# version deployed via OpenCPU. Checking this on every call would slow down the
-# package.
 .onLoad <- function(libname, pkgname) {
+  # Memoisation: Every 15 minutes, check the etnservice version compared to the
+  # version deployed via OpenCPU. Checking this on every call would slow down the
+  # package.
   etnservice_version_matches <<- memoise::memoise(etnservice_version_matches,
+  # Memoisation: only validate the login credentials every 15 minutes.
+  validate_login <<- memoise::memoise(validate_login,
                                       cache = cachem::cache_mem(max_age = 60 * 15)
   )
 }

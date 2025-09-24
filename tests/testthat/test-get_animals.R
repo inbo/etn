@@ -1,4 +1,5 @@
-df <- get_animals()
+# Cache HTTP Response
+vcr::use_cassette("get_animals",{df <- get_animals()})
 
 test_that("get_animals() returns a tibble", {
   skip_if_not_localdb()

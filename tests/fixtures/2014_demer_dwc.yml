@@ -3,51 +3,52 @@ http_interactions:
     method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/write_dwc/
     body:
-      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"animal_project_code":"2014_demer","license":"CC-BY"}'
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"animal_project_code":"2014_demer","rights_holder":null,"license":"CC-BY"}'
   response:
     status: 201
     headers:
-      date: Fri, 25 Jul 2025 07:40:42 GMT
+      date: Tue, 23 Sep 2025 14:16:36 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
         form.vliz.be www.omes-monitoring.be omes-monitoring.be;
       cross-origin-opener-policy: same-origin
       cache-control: max-age=300, public
-      x-ocpu-session: x079ff154d957ee
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x079ff154d957ee/
+      x-ocpu-session: x0cc6ccb5e8e543
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0cc6ccb5e8e543/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-07-25 07:40:51 UTC
+      x-ocpu-time: 2025-09-23 14:16:48 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
       content-encoding: gzip
-      content-length: '124'
+      content-length: '123'
       content-type: text/plain; charset=utf-8
       access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
     body:
       string: |
-        /ocpu/tmp/x079ff154d957ee/R/.val
-        /ocpu/tmp/x079ff154d957ee/R/credentials
-        /ocpu/tmp/x079ff154d957ee/R/write_dwc
-        /ocpu/tmp/x079ff154d957ee/stdout
-        /ocpu/tmp/x079ff154d957ee/source
-        /ocpu/tmp/x079ff154d957ee/console
-        /ocpu/tmp/x079ff154d957ee/info
-        /ocpu/tmp/x079ff154d957ee/files/DESCRIPTION
-  recorded_at: 2025-07-25 07:40:51
+        /ocpu/tmp/x0cc6ccb5e8e543/R/.val
+        /ocpu/tmp/x0cc6ccb5e8e543/R/credentials
+        /ocpu/tmp/x0cc6ccb5e8e543/R/write_dwc
+        /ocpu/tmp/x0cc6ccb5e8e543/stdout
+        /ocpu/tmp/x0cc6ccb5e8e543/source
+        /ocpu/tmp/x0cc6ccb5e8e543/console
+        /ocpu/tmp/x0cc6ccb5e8e543/info
+        /ocpu/tmp/x0cc6ccb5e8e543/files/DESCRIPTION
+  recorded_at: 2025-09-23 14:16:48
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be/tmp/x079ff154d957ee/R/.val/rds
+    uri: https://opencpu.lifewatch.be/tmp/x0cc6ccb5e8e543/R/.val/rds
   response:
     status: 200
     headers:
-      date: Fri, 25 Jul 2025 07:40:51 GMT
+      date: Tue, 23 Sep 2025 14:16:48 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -61,13 +62,14 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-07-25 07:40:52 UTC
+      x-ocpu-time: 2025-09-23 14:16:49 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
       content-encoding: gzip
       content-type: application/r-rds
       access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
     body:
       raw_gzip: |-
         eJzs3duvHNl5nvFOLF9MrojkegBeDSQD1ojDswAjSGAFChAnQOAckJuAmtnSEBiSAskZQf7n
@@ -6459,5 +6461,5 @@ http_interactions:
         gTt3NGCy0cmmgt3dLw5jRc3F8Tk9PDo+PR168c3NKYbk1PtyR4ZbU7f6NbR
         kZkl0J6gRS/kyZK5sjmD
         WyZ2NP98du96duBzrVUrWd8WbblmZPPs4p+55f8H9GPoOw==
-  recorded_at: 2025-07-25 07:40:52
+  recorded_at: 2025-09-23 14:16:49
 recorded_with: VCR-vcr/2.0.0
