@@ -46,9 +46,11 @@ skip_if_not_localdb <- function(){
 #' HTTP status code. For example to convert a certain HTTP error into a helpful
 #' message.
 #'
-#' @param http_code An integer representing the HTTP status code to retrieve. Defaults to 200.
+#' @param http_code An integer representing the HTTP status code to retrieve.
+#'   Defaults to 200.
 #'
-#' @return An `httr2` response object containing the HTTP response for the specified status code.
+#' @return An `httr2` response object containing the HTTP response for the
+#'   specified status code.
 #' @family helper functions
 #' @noRd
 #' @examples
