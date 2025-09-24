@@ -191,6 +191,10 @@ get_hostname <- function(url_str){
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
 #' to test the error messaging in [conduct_parent_to_helpers()].
 #'
+#' Setting api = FALSE is the same as a direct call to
+#' `etnservice::get_version()`. This option is still useful for mocking in
+#' tests.
+#'
 #' @inheritDotParams forward_to_api format domain
 #' @inheritDotParams get_val return_url
 #' @inheritParams list_animal_ids
@@ -259,17 +263,15 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #'   etnservice is the same as the one deployed online.
 #' @noRd
 #' @family helper functions
-etnservice_version_matches <- function(...){
+etnservice_version_matches <- function(...) {
   # Compare the package versions, and the checksums of all functions.
-  setequal(
-    etnservice::get_version(...),
-    forward_to_api(
-      "get_version",
-      payload = list(),
-      add_credentials = FALSE,
-      json = TRUE,
-      ...
-    )
+  identical(
+    get_etnservice_version("all", api = TRUE, ...),
+    # We can't use get_etnservice_version(api = FALSE) here because we mock this
+    # function in tests, if we mock it twice and compare it against itself, we
+    # would always pass. This way, we can simulate a deployed version to test
+    # against.
+    etnservice::get_version()
   )
 }
 #' Perform a request to OpenCPU to get a response

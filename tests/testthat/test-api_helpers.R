@@ -64,9 +64,10 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
   # Skip if the OpenCPU server is not reachable
-  skip_if_offline(host = "https://opencpu.lifewatch.be")
+  skip_if_offline(host = "opencpu.lifewatch.be")
   # Skip if the local and deployed versions don't match
-  skip_if(!etnservice_version_matches())
+  skip_if(!etnservice_version_matches(),
+          "Local etnservice and OpenCPU deployed version do not match")
 
   expect_identical(
     names(get_etnservice_version("all")$fn_checksums),
@@ -82,6 +83,29 @@ test_that("get_etnservice_version() lists checksums of available functions", {
     deparse(etnservice::get_acoustic_detections) |> rlang::hash()
   )
 })
+
+# etnservice_version_matches() --------------------------------------------
+
+test_that("etnservice_version_matches() can return TRUE/FALSE", {
+
+})
+
+test_that("etnservice_version_matches() returns TRUE on mismatch", {
+  # Mock a etnservice version that is definitely different than local
+  mock_version_info <- get_etnservice_version("all", api = FALSE)
+  mock_version_info$fn_checksums[4] <- "not_a_real_checksum_value"
+  expect_false(
+    with_mocked_bindings(
+      etnservice_version_matches(),
+      get_etnservice_version = function(...) {
+        mock_version_info
+      }
+    )
+  )
+})
+
+
+
 
 # extract_temp_key() ------------------------------------------------------
 
