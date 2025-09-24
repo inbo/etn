@@ -191,11 +191,16 @@ get_hostname <- function(url_str){
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
 #' to test the error messaging in [conduct_parent_to_helpers()].
 #'
-#'
-#' @inheritDotParams etnservice::get_version
+#' @inheritDotParams forward_to_api format domain
+#' @inheritDotParams get_val return_url
 #' @inheritParams list_animal_ids
+#' @param return_as Character, either "version" or "all", indicating if only the
+#'   version number should be returned, or the full output of
+#'   `etnservice::get_version()` (either loally or via the API).
 #'
-#' @returns A character string with the version number of etnservice.
+#' @returns Either a character string with the version number of etnservice. Or
+#'   a list with the full output of `etnservice::get_version()`, which includes
+#'   the version number, And the checksums of all functions in etnservice.
 #' @noRd
 #' @family helper functions
 #'
@@ -204,18 +209,30 @@ get_hostname <- function(url_str){
 #' get_etnservice_version(api = FALSE)
 #' # Get the version of the version of etnservice deployed on OpenCPU
 #' get_etnservice_version(api = TRUE)
-get_etnservice_version <- function(..., api = TRUE) {
-  pkg_version <- ifelse(api,
-    yes = forward_to_api(
+#' get_etnservice_version(return_as = "all", api = TRUE)
+get_etnservice_version <- function(return_as = c("version", "all"),
+                                   api = TRUE,
+                                   ...) {
+  return_as <- rlang::arg_match(return_as)
+  # Get the full version information either locally or from the API
+  if(api){
+    pkg_version <- forward_to_api(
       "get_version",
-      payload = rlang::list2(...),
+      payload = list(),
       add_credentials = FALSE,
-      json = TRUE
-    )$version,
-    no = utils::packageVersion("etnservice")
+      format = "rds",
+      ...
+    )
+  } else {
+    pkg_version <- etnservice::get_version()
+  }
+
+  # Return either the version number or the full output
+  switch (return_as,
+    # coerce into character, packageVersion() returns other class.
+    version = as.character(pkg_version$version),
+    all = pkg_version
   )
-  # coerce into character, packageVersion() returns other class.
-  as.character(pkg_version)
 }
 
 
@@ -236,9 +253,8 @@ get_etnservice_version <- function(..., api = TRUE) {
 #' `etnservice::get_version()`, the version deployed can be returned by calling
 #' `forward_to_api("get_version", add_credentials = FALSE)`
 #'
-#' @param ... Additional arguments passed to `etnservice::get_version()`. These
-#'   are used to specify the API endpoint, such as `api =
-#'   "https://api.etnservice.com"`.
+#' @inheritDotParams forward_to_api format domain
+#' @inheritDotParams get_val return_url
 #' @return A logical value indicating whether the locally installed version of
 #'   etnservice is the same as the one deployed online.
 #' @noRd
@@ -249,9 +265,10 @@ etnservice_version_matches <- function(...){
     etnservice::get_version(...),
     forward_to_api(
       "get_version",
-      payload = ...,
+      payload = list(),
       add_credentials = FALSE,
-      json = TRUE
+      json = TRUE,
+      ...
     )
   )
 }
