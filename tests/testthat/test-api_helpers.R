@@ -29,6 +29,60 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
   )
 })
 
+# get_etnservice_version() ------------------------------------------------
+test_that("get_etnservice_version() returns local etnservice package version", {
+  expect_type(
+    get_etnservice_version(api = FALSE),
+    "character"
+  )
+
+  expect_identical(
+    get_etnservice_version(api = FALSE),
+    as.character(packageVersion("etnservice"))
+  )
+})
+
+test_that("get_etnservice_version() returns OpenCPU deployed package version", {
+  # Cache the HTTP response so we can always test against the same version. I'm
+  # testing the ability of get_etnservice_version() to handle the API response,
+  # not the API's ability to respond.
+  vcr::local_cassette("etnservice_version")
+
+  expect_type(
+    get_etnservice_version(api = TRUE),
+    "character"
+  )
+
+  # This is stable because we use a cassette, if the cassette is updated, the
+  # expected version needs to be updated as well
+  version_in_cassette <- "0.4.1"
+  expect_identical(
+    get_etnservice_version(api = TRUE),
+    version_in_cassette
+  )
+})
+
+test_that("get_etnservice_version() lists available functions of etnservice", {
+  # Skip if the OpenCPU server is not reachable
+  skip_if_offline(host = "https://opencpu.lifewatch.be")
+  # Skip if the local and deployed versions don't match
+  skip_if(!etnservice_version_matches())
+
+  expect_identical(
+    names(get_etnservice_version("all")$fn_checksums),
+    ls(getNamespace("etnservice"))
+  )
+})
+
+test_that("get_etnservice_version() lists checksums of available functions", {
+  local_version_info <- get_etnservice_version("all", api = FALSE)
+  # test for Single function
+  expect_identical(
+    local_version_info$fn_checksums$get_acoustic_detections,
+    deparse(etnservice::get_acoustic_detections) |> rlang::hash()
+  )
+})
+
 # extract_temp_key() ------------------------------------------------------
 
 
