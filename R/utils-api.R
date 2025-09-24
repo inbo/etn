@@ -254,6 +254,7 @@ etnservice_version_matches <- function(...){
       json = TRUE
     )
   )
+}
 #' Perform a request to OpenCPU to get a response
 #'
 #' This is a slight modification on httr2::req_perform() to allow for OpenCPU
