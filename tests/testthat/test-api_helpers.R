@@ -8,12 +8,18 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
   )
 })
 
-test_that("conduct_parent_to_helpers() prompts for etnservice update if newer version is deployed", {
+test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
+  vcr::use_cassette("etnservice_version")
   expect_error(
-  with_mocked_bindings()
-  class = "rlib_error_package_not_found"
+    with_mocked_bindings(
+      conduct_parent_to_helpers(api = TRUE),
+      # mock a function call
+      get_parent_fn_name = function(...) "list_animal_ids",
+      # Mock a very high version deployed on OpenCPU
+      get_etnservice_version = function(...) "9999.0.0"
+    ),
+    class = "rlib_error_package_not_found"
   )
-
 })
 
 # extract_temp_key() ------------------------------------------------------
