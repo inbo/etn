@@ -13,7 +13,6 @@
 #' @param scientific_name Character (vector). One or more scientific names.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
-#' @param deployment_id Character (vector). One or more deployment ids.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names.

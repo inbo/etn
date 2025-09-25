@@ -49,8 +49,6 @@ for testing purposes). Defaults to \code{FALSE}.}
 
 \item{progress}{Logical. Show a progress bar while fetching data. Defaults to
 \code{TRUE}.}
-
-\item{deployment_id}{Character (vector). One or more deployment ids.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}
