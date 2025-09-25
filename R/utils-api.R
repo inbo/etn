@@ -285,7 +285,8 @@ etnservice_version_matches <- function(..., exact = FALSE) {
     )
   } else {
     # Deployed <= Local
-    get_etnservice_version("version") <= etnservice::get_version()$version
+    get_etnservice_version("version", api = TRUE) <=
+      etnservice::get_version()$version
   }
 }
 
