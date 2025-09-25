@@ -33,13 +33,13 @@
 #' etnservice::list_acoustic_tag_ids()
 #' list_acoustic_tag_ids(api = FALSE)
 #'
-conduct_parent_to_helpers <- function(api,
+conduct_parent_to_helpers <- function(protocol = c("api", "localdb"),
                                       ignored_arguments = NULL,
                                       ...) {
   # Check arguments
-  assertthat::assert_that(assertthat::is.flag(api))
+  protocol <- rlang::arg_match(protocol)
   assertthat::assert_that(is.character(ignored_arguments) |
-                            is.null(ignored_arguments))
+    is.null(ignored_arguments))
 
   # Lock in the name of the parent function
   function_identity <-
@@ -56,38 +56,42 @@ conduct_parent_to_helpers <- function(api,
       )
     ]
 
-  if (api) {
-    # Forward arguments to API via helper.
-    out <- do.call(
-      forward_to_api,
-      list(function_identity = function_identity,
-           payload = arguments_to_pass,
-           ...)
-    )
-  } else {
-    # Check if the local version of etnservice matches the one deployed on
-    # OpenCPU.
-    if (!etnservice_version_matches()) {
-      deployed_version <- get_etnservice_version(api = TRUE)
+  switch(protocol,
+    api = {
+      # Forward arguments to API via helper.
+      do.call(
+        forward_to_api,
+        list(
+          function_identity = function_identity,
+          payload = arguments_to_pass,
+          ...
+        )
+      )
+    },
+    localdb = {
+      # Check if the local version of etnservice matches the one deployed on
+      # OpenCPU.
+      if (!etnservice_version_matches()) {
+        deployed_version <- get_etnservice_version(api = TRUE)
 
-      rlang::check_installed(
-        "etnservice",
-        version = deployed_version,
-        reason =
-          paste(
-            "\nThere is a newer version of etnservice available",
-            "please update",
-            "to avoid differences between local and API queries."
-          )
+        rlang::check_installed(
+          "etnservice",
+          version = deployed_version,
+          reason =
+            paste(
+              "\nThere is a newer version of etnservice available",
+              "please update",
+              "to avoid differences between local and API queries."
+            )
+        )
+      }
+
+      do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
+        args = append(arguments_to_pass,
+          list(credentials = get_credentials()),
+          after = 0
+        )
       )
     }
-
-    out <- do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
-                   args = append(arguments_to_pass,
-                                 list(credentials = get_credentials()),
-                                 after = 0)
-    )
-  }
-
-  return(out)
+  )
 }
