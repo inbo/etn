@@ -31,14 +31,14 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
 
 # get_etnservice_version() ------------------------------------------------
 test_that("get_etnservice_version() returns local etnservice package version", {
-  expect_type(
+  expect_s3_class(
     get_etnservice_version(api = FALSE),
-    "character"
+    "package_version"
   )
 
   expect_identical(
     get_etnservice_version(api = FALSE),
-    as.character(packageVersion("etnservice"))
+    packageVersion("etnservice")
   )
 })
 
@@ -48,17 +48,17 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
   # not the API's ability to respond.
   vcr::local_cassette("etnservice_version")
 
-  expect_type(
+  expect_s3_class(
     get_etnservice_version(api = TRUE),
-    "character"
+    "package_version"
   )
 
   # This is stable because we use a cassette, if the cassette is updated, the
   # expected version needs to be updated as well
-  version_in_cassette <- "0.4.1"
+  version_in_cassette <- "0.4.3"
   expect_identical(
     get_etnservice_version(api = TRUE),
-    version_in_cassette
+    package_version(version_in_cassette)
   )
 })
 
@@ -93,13 +93,13 @@ test_that("etnservice_version_matches() can return TRUE/FALSE", {
   )
 })
 
-test_that("etnservice_version_matches() returns TRUE on mismatch", {
+test_that("etnservice_version_matches() returns TRUE on mismatch when exact is TRUE", {
   # Mock a etnservice version that is definitely different than local
   mock_version_info <- get_etnservice_version("all", api = FALSE)
   mock_version_info$fn_checksums[4] <- "not_a_real_checksum_value"
   expect_false(
     with_mocked_bindings(
-      etnservice_version_matches(),
+      etnservice_version_matches(exact = TRUE),
       get_etnservice_version = function(...) {
         mock_version_info
       }
@@ -107,7 +107,16 @@ test_that("etnservice_version_matches() returns TRUE on mismatch", {
   )
 })
 
-
+test_that("etnservice_version_matches() can allows a more recent version to be installed when exact is FALSE", {
+  expect_true(
+    with_mocked_bindings(
+      etnservice_version_matches(exact = FALSE),
+      # Mock the deployed version to be 0.0.1, the local version is always more
+      # recent since I never released a 0.0.1 release.
+      get_etnservice_version = function(...) {package_version("0.0.1")}
+    )
+  )
+})
 
 
 # extract_temp_key() ------------------------------------------------------
