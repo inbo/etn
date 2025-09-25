@@ -13,6 +13,5 @@ list_acoustic_project_codes <- function(connection) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
-  return(out)
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
 }
