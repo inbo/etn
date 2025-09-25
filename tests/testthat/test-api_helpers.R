@@ -87,7 +87,10 @@ test_that("get_etnservice_version() lists checksums of available functions", {
 # etnservice_version_matches() --------------------------------------------
 
 test_that("etnservice_version_matches() can return TRUE/FALSE", {
-
+  expect_type(
+    etnservice_version_matches(),
+    "logical"
+  )
 })
 
 test_that("etnservice_version_matches() returns TRUE on mismatch", {
