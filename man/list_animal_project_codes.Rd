@@ -4,14 +4,12 @@
 \alias{list_animal_project_codes}
 \title{List all available animal project codes}
 \usage{
-list_animal_project_codes(connection, api = TRUE)
+list_animal_project_codes(connection)
 }
 \arguments{
 \item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
 database. This argument is no longer used. You will be prompted for
 credentials instead.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A vector of all unique \code{project_code} of \code{type = "animal"} in

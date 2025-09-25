@@ -8,8 +8,7 @@ download_acoustic_dataset(
   connection,
   animal_project_code,
   scientific_name = NULL,
-  directory = animal_project_code,
-  api = TRUE
+  directory = animal_project_code
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).}
 \item{directory}{Character. Relative path to local download directory.
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data

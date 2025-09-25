@@ -4,14 +4,12 @@
 \alias{list_station_names}
 \title{List all available station names}
 \usage{
-list_station_names(connection, api = TRUE)
+list_station_names(connection)
 }
 \arguments{
 \item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
 database. This argument is no longer used. You will be prompted for
 credentials instead.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A vector of all unique \code{station_name} present in

@@ -12,12 +12,10 @@ get_acoustic_detections(
   animal_project_code = NULL,
   scientific_name = NULL,
   acoustic_project_code = NULL,
-  deployment_id = NULL,
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
-  progress = TRUE,
-  api = TRUE
+  progress = TRUE
 )
 }
 \arguments{
@@ -41,8 +39,6 @@ codes. Case-insensitive.}
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
 
-\item{deployment_id}{Character (vector). One or more deployment ids.}
-
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{station_name}{Character (vector). One or more deployment station
@@ -54,7 +50,7 @@ for testing purposes). Defaults to \code{FALSE}.}
 \item{progress}{Logical. Show a progress bar while fetching data. Defaults to
 \code{TRUE}.}
 
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
+\item{deployment_id}{Character (vector). One or more deployment ids.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}

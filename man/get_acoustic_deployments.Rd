@@ -10,8 +10,7 @@ get_acoustic_deployments(
   receiver_id = NULL,
   acoustic_project_code = NULL,
   station_name = NULL,
-  open_only = FALSE,
-  api = TRUE
+  open_only = FALSE
 )
 }
 \arguments{
@@ -31,8 +30,6 @@ names.}
 
 \item{open_only}{Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to \code{FALSE}.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A tibble with acoustic deployment data, sorted by
