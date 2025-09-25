@@ -167,9 +167,17 @@ prompt_user <- function(...) {
 
 # onLoad ------------------------------------------------------------------
 
-# Memoisation: only validate the login credentials every 15 minutes.
 .onLoad <- function(libname, pkgname) {
-  validate_login <<- memoise::memoise(validate_login,
-                                      cache = cachem::cache_mem(max_age = 60 * 15)
+  # Memoisation: Every 15 minutes, check the etnservice version compared to the
+  # version deployed via OpenCPU. Checking this on every call would slow down the
+  # package.
+  etnservice_version_matches <<-
+    memoise::memoise(etnservice_version_matches,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
+    )
+  # Memoisation: only validate the login credentials every 15 minutes.
+  validate_login <<-
+    memoise::memoise(validate_login,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
   )
 }

@@ -7,11 +7,12 @@
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
 * Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
 * You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339, #338, #228)
-* Archival tags are now available in `get_animals()` (#365). 
+* Archival tags are now available in `get_animals()` (#365).
 * Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API`. (#383)
 * `get_acoustic_detections()` now uses a different interface to the database resulting in much more detections being able to be fetched reliably. However, due to changes in the database, it'll initially result in less detections being returned for the same filter variables (but with less mistakes). (#384, #382, #323)
 * You can now select detections via `get_acoustic_detections()` using a `deployment_id` (#382, #340)
 * `get_acoustic_detections()` now returns a progress bar on large queries. (#384)
+* When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date (same or more recent) with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
 
 # etn 2.2.2
 

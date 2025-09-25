@@ -49,3 +49,5 @@ inst/doc
 .Renviron*
 draft
 Meta
+/doc/
+/Meta/

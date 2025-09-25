@@ -63,12 +63,10 @@ get_val <- function(temp_key,
                     format = c("feather", "rds"),
                     return_url = FALSE,
                     ...) {
-
   format <- rlang::arg_match(format)
   reading_function <-
-    switch(
-      format,
-      "rds" = \(raw_response){
+    switch(format,
+      "rds" = \(raw_response) {
         raw_connection <- rawConnection(raw_response)
         rds_response <-
           raw_connection |>
@@ -77,16 +75,18 @@ get_val <- function(temp_key,
         # close connection
         close(raw_connection)
         # return R object
-        return(rds_response)
+        rds_response
       },
       "feather" = arrow::read_feather
     )
 
   # early return in case of return_url
-  if(return_url){
+  if (return_url) {
     return(
-      file.path(api_domain,
-                 "tmp",temp_key,"R",".val",format)
+      file.path(
+        api_domain,
+        "tmp", temp_key, "R", ".val", format
+      )
     )
   }
 
@@ -141,8 +141,8 @@ return_parent_arguments <- function(depth = 1) {
 #' @family helper functions
 #' @noRd
 validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
-                                               unset = "https://opencpu.lifewatch.be/library/etnservice/R"
-),
+                             unset = "https://opencpu.lifewatch.be/library/etnservice/R"
+                           ),
                            credentials = get_credentials()) {
   # Placing a custom request because validate_login accepts username and
   # password directly in the body rather than as a credentials object like the
@@ -155,13 +155,15 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 
   if (!login_valid) {
     rlang::abort(
-      glue::glue("Failed to login with username: {get_credentials()$username}.",
-                 " Please check username/password."),
+      glue::glue(
+        "Failed to login with username: {get_credentials()$username}.",
+        " Please check username/password."
+      ),
       caller = rlang::env_parent()
     )
   }
 
-  return(login_valid)
+  login_valid
 }
 
 #' Get the hostname from a URL string
@@ -175,11 +177,117 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 #' @noRd
 #' @examples
 #' get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
-get_hostname <- function(url_str){
+get_hostname <- function(url_str) {
   # the hostname + everything in the path before `library`, because opencpu
   # doesn't need to be hosted directly on the hostname. Useful for testing on
   # other domains than etn.
   stringr::str_extract(url_str, ".+(?=library)")
+}
+
+#' Get the version number of etnservice, either locally or deployed
+#'
+#' This function calls `etnservice::get_version()` if `api = FALSE`, otherwise
+#' it forwards the call to the API via `forward_to_api("get_version")`.
+#'
+#' This function is useful because it allows us to mock the version of
+#' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
+#' to test the error messaging in [conduct_parent_to_helpers()].
+#'
+#' Setting api = FALSE is the same as a direct call to
+#' `etnservice::get_version()`. This option is still useful for mocking in
+#' tests.
+#'
+#' @inheritDotParams forward_to_api format domain
+#' @inheritDotParams get_val return_url
+#' @inheritParams list_animal_ids
+#' @param return_as Character, either "version" or "all", indicating if only the
+#'   version number should be returned, or the full output of
+#'   `etnservice::get_version()` (either locally or via the API).
+#'
+#' @returns Either a character string with the version number of etnservice. Or
+#'   a list with the full output of `etnservice::get_version()`, which includes
+#'   the version number, And the checksums of all functions in etnservice.
+#' @noRd
+#' @family helper functions
+#'
+#' @examples
+#' # Get the version of the locally installed version of etnservice
+#' get_etnservice_version(api = FALSE)
+#' # Get the version of the version of etnservice deployed on OpenCPU
+#' get_etnservice_version(api = TRUE)
+#' get_etnservice_version(return_as = "all", api = TRUE)
+get_etnservice_version <- function(return_as = c("version", "all"),
+                                   api = TRUE,
+                                   ...) {
+  return_as <- rlang::arg_match(return_as)
+  # Get the full version information either locally or from the API
+  if (api) {
+    pkg_version <- forward_to_api(
+      "get_version",
+      payload = list(),
+      add_credentials = FALSE,
+      format = "rds",
+      ...
+    )
+  } else {
+    pkg_version <- etnservice::get_version()
+  }
+
+  # Return either the version number or the full output
+  switch(return_as,
+    # coerce into character, packageVersion() returns other class.
+    version = pkg_version$version,
+    all = pkg_version
+  )
+}
+
+
+#' Check if the locally installed version of etnservice matches the version
+#' deployed on the API.
+#'
+#' The function can check for an exact match, or by default, if the installed
+#' version of etnservice is equal or more recent than the one deployed via
+#' OpenCPU.
+#'
+#' This function is useful to ensure that the local package version is
+#' compatible with the API version. This is checked by comparing the version
+#' returned by `etnservice::get_version()` with the version returned by the API
+#' endpoint `get_version`. Both the version numbers are checked as well as the
+#' checksums of all functions, ensuring that a small change in a function
+#' without updating the package version will also trigger this check.
+#'
+#' This is important to make sure that a function calls return consistent
+#' results independent of the call was made locally or over the api.
+#'
+#' The exact version of the package installed locally can be returned by
+#' `etnservice::get_version()`, the version deployed can be returned by calling
+#' `forward_to_api("get_version", add_credentials = FALSE)`
+#'
+#' @inheritDotParams forward_to_api format domain
+#' @inheritDotParams get_val return_url
+#' @return A logical value indicating whether the locally installed version of
+#'   etnservice is the same as the one deployed online.
+#' @noRd
+#' @family helper functions
+etnservice_version_matches <- function(..., exact = FALSE) {
+  if (exact) {
+    # Compare the package versions, and the checksums of all functions.
+    identical(
+      # Deployed
+      get_etnservice_version("all", api = TRUE, ...),
+      # We can't use get_etnservice_version(api = FALSE) here because we mock
+      # this function in tests, if we mock it twice and compare it against
+      # itself, we would always pass. This way, we can simulate a deployed
+      # version to test against.
+
+      # Local
+      etnservice::get_version()
+    )
+  } else {
+    # Deployed <= Local
+    get_etnservice_version("version", api = TRUE) <=
+      etnservice::get_version()$version
+  }
 }
 
 #' Perform a request to OpenCPU to get a response
@@ -230,7 +338,7 @@ req_perform_opencpu <- function(req,
       )
     }
   )
-  if(!is.null(path)){
+  if (!is.null(path)) {
     httr2::resp_body_raw(resp) |>
       writeBin(path)
   }

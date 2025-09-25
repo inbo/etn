@@ -8,6 +8,125 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
   )
 })
 
+test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
+  withr::local_options(
+    # Disable the prompt, and have rlang return an error to test on.
+    list(rlib_restart_package_not_found = FALSE)
+  )
+
+  expect_error(
+    with_mocked_bindings(
+      # We only check the versions for calls to the local database
+      conduct_parent_to_helpers(api = FALSE),
+      # Mock a function call
+      get_parent_fn_name = function(...) {
+        "list_animal_project_codes"
+      },
+      # Mock a mismatch between the installed and deployed version of etnservice
+      etnservice_version_matches = function(...) {
+        FALSE
+      },
+      # Mock the deployed version of etnservice to a very high version
+      get_etnservice_version = function(...) {
+        "9999.0.0"
+      }
+    ),
+    class = "rlib_error_package_not_found"
+  )
+})
+
+# get_etnservice_version() ------------------------------------------------
+test_that("get_etnservice_version() returns local etnservice package version", {
+  expect_s3_class(
+    get_etnservice_version(api = FALSE),
+    "package_version"
+  )
+
+  expect_identical(
+    get_etnservice_version(api = FALSE),
+    packageVersion("etnservice")
+  )
+})
+
+test_that("get_etnservice_version() returns OpenCPU deployed package version", {
+  # Cache the HTTP response so we can always test against the same version. I'm
+  # testing the ability of get_etnservice_version() to handle the API response,
+  # not the API's ability to respond.
+  vcr::local_cassette("etnservice_version")
+
+  expect_s3_class(
+    get_etnservice_version(api = TRUE),
+    "package_version"
+  )
+
+  # This is stable because we use a cassette, if the cassette is updated, the
+  # expected version needs to be updated as well
+  version_in_cassette <- "0.4.3"
+  expect_identical(
+    get_etnservice_version(api = TRUE),
+    package_version(version_in_cassette)
+  )
+})
+
+test_that("get_etnservice_version() lists available functions of etnservice", {
+  # Skip if the OpenCPU server is not reachable
+  skip_if_offline(host = "opencpu.lifewatch.be")
+  # Skip if the local and deployed versions don't match
+  skip_if(!etnservice_version_matches(),
+          "Local etnservice and OpenCPU deployed version do not match")
+
+  expect_identical(
+    names(get_etnservice_version("all")$fn_checksums),
+    ls(getNamespace("etnservice"))
+  )
+})
+
+test_that("get_etnservice_version() lists checksums of available functions", {
+  local_version_info <- get_etnservice_version("all", api = FALSE)
+  # test for Single function
+  expect_identical(
+    local_version_info$fn_checksums$get_acoustic_detections,
+    deparse(etnservice::get_acoustic_detections) |> rlang::hash()
+  )
+})
+
+# etnservice_version_matches() --------------------------------------------
+
+test_that("etnservice_version_matches() can return TRUE/FALSE", {
+  expect_type(
+    etnservice_version_matches(),
+    "logical"
+  )
+})
+
+test_that("etnservice_version_matches() returns TRUE on mismatch when exact is TRUE", {
+  # Mock a etnservice version that is definitely different than local
+  mock_version_info <- get_etnservice_version("all", api = FALSE)
+  mock_version_info$fn_checksums[4] <- "not_a_real_checksum_value"
+  expect_false(
+    with_mocked_bindings(
+      etnservice_version_matches(exact = TRUE),
+      get_etnservice_version = function(...) {
+        mock_version_info
+      }
+    )
+  )
+})
+
+test_that("etnservice_version_matches() allows a more recent version to be installed when exact is FALSE", {
+  expect_true(
+    with_mocked_bindings(
+      etnservice_version_matches(exact = FALSE),
+      # Mock the deployed version to be 0.0.1, the local version is always more
+      # recent since I never released a 0.0.1 release.
+      get_etnservice_version = function(...) {
+        package_version("0.0.1")
+      }
+    )
+  )
+})
+
+
 # extract_temp_key() ------------------------------------------------------
 
 
