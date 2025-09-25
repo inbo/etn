@@ -35,9 +35,11 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
 #'
 #' @family helper functions
 #' @noRd
-skip_if_not_localdb <- function(){
-  testthat::skip_if_not(localdb_is_available(),
-              "ETN is not a local database on this machine")
+skip_if_not_localdb <- function() {
+  testthat::skip_if_not(
+    localdb_is_available(),
+    "ETN is not a local database on this machine"
+  )
 }
 
 #' Get an HTTP response for a specific HTTP status code.
