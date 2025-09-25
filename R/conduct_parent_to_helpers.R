@@ -33,7 +33,7 @@
 #' etnservice::list_acoustic_tag_ids()
 #' list_acoustic_tag_ids(api = FALSE)
 #'
-conduct_parent_to_helpers <- function(protocol = c("api", "localdb"),
+conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
                                       ignored_arguments = NULL,
                                       ...) {
   # Check arguments
@@ -57,7 +57,7 @@ conduct_parent_to_helpers <- function(protocol = c("api", "localdb"),
     ]
 
   switch(protocol,
-    api = {
+    opencpu = {
       # Forward arguments to API via helper.
       do.call(
         forward_to_api,
