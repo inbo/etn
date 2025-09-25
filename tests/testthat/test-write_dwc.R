@@ -5,7 +5,7 @@ test_that("[SQL] write_dwc() can write csv files to a path", {
   unlink(out_dir, recursive = TRUE)
   dir.create(out_dir)
   suppressMessages(
-    write_dwc(animal_project_code = "2014_demer", directory = out_dir, api = FALSE)
+    write_dwc(animal_project_code = "2014_demer", directory = out_dir)
   )
 
   expect_identical(
@@ -18,7 +18,7 @@ test_that("[SQL] write_dwc() can return data as list of tibbles rather than file
   skip_if_not_localdb()
 
   result <- suppressMessages(
-    write_dwc(animal_project_code = "2014_demer", directory = NULL, api = FALSE)
+    write_dwc(animal_project_code = "2014_demer", directory = NULL)
   )
 
   expect_identical(names(result), "dwc_occurrence")
@@ -29,7 +29,7 @@ test_that("[SQL] write_dwc() returns the expected Darwin Core terms as columns",
   skip_if_not_localdb()
 
   result <- suppressMessages(
-    write_dwc(animal_project_code = "2014_demer", directory = NULL, api = FALSE)
+    write_dwc(animal_project_code = "2014_demer", directory = NULL)
   )
 
   expect_identical(

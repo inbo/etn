@@ -15,7 +15,7 @@ test_that("list_cpod_project_codes() returns unique list of values using api", {
 test_that("list_cpod_project_codes() returns unique list of values using local db", {
   skip_if_not_localdb()
 
-  vector_sql <- list_cpod_project_codes(api = FALSE)
+  vector_sql <- list_cpod_project_codes()
   expect_type(vector_sql, "character")
   expect_false(any(duplicated(vector_sql)))
   expect_true(all(!is.na(vector_sql)))

@@ -2,7 +2,7 @@ df <- get_tags()
 
 # Test with local database, skip if not available
 skip_if_not_localdb()
-df_sql <- get_tags(api = FALSE)
+df_sql <- get_tags()
 
 test_that("get_tags() returns a tibble", {
   expect_s3_class(df, "data.frame")

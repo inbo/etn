@@ -76,8 +76,7 @@
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
-                                      directory = animal_project_code,
-                                      api = TRUE) {
+                                      directory = animal_project_code) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

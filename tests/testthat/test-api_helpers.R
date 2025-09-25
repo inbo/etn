@@ -4,7 +4,7 @@
 
 test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
   expect_error(
-    conduct_parent_to_helpers(api = "not a flag!")
+    conduct_parent_to_helpers(protocol = "not a protocol!")
   )
 })
 
@@ -17,7 +17,7 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
   expect_error(
     with_mocked_bindings(
       # We only check the versions for calls to the local database
-      conduct_parent_to_helpers(api = FALSE),
+      conduct_parent_to_helpers(protocol = "localdb"),
       # Mock a function call
       get_parent_fn_name = function(...) {
         "list_animal_project_codes"
@@ -281,7 +281,7 @@ test_that("validate_login() returns error on bad credentials", {
       )
       # This error should be forwarded to all api functions
       expect_error(
-        list_animal_ids(api = TRUE),
+        list_animal_ids(),
         regexp = "Failed to login with username: not_a_username. Please check username/password.",
         fixed = TRUE
       )
@@ -295,6 +295,10 @@ test_that("validate_login() returns error on bad credentials", {
     # validate_login() is skipped in testing, so we need to pretend we're not.
     is_testing = function(...) {
       FALSE
+    },
+    # Force using the api by setting the protocol to opencpu
+    select_protocol = function(...) {
+      "opencpu"
     }
   )
 })

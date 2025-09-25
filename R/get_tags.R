@@ -38,14 +38,13 @@ get_tags <- function(connection,
                      tag_type = NULL,
                      tag_subtype = NULL,
                      tag_serial_number = NULL,
-                     acoustic_tag_id = NULL,
-                     api = TRUE) {
+                     acoustic_tag_id = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(protocol = select_protocol())
   return(out)
 }

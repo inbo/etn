@@ -80,8 +80,7 @@ get_acoustic_detections <- function(connection,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    progress = TRUE,
-                                    api = TRUE) {
+                                    progress = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -342,7 +341,7 @@ get_acoustic_detections <- function(connection,
 #'   acoustic_tag_id = "A69-1601-16130",
 #'   station_name = c("de-9", "de-10")
 #' )
-count_acoustic_detections <- function(..., api = TRUE) {
+count_acoustic_detections <- function(...) {
   if (api) {
     returned_count <- forward_to_api("get_acoustic_detections_page",
       payload = append(

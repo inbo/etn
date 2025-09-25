@@ -42,14 +42,13 @@ get_acoustic_deployments <- function(connection,
                                      receiver_id = NULL,
                                      acoustic_project_code = NULL,
                                      station_name = NULL,
-                                     open_only = FALSE,
-                                     api = TRUE) {
+                                     open_only = FALSE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(protocol = select_protocol())
   return(out)
 }
