@@ -24,15 +24,6 @@
 #'
 #' @family helper functions
 #' @noRd
-#' @examplesIf "ETN" %in% odbc::odbcListDataSources()$name
-#' # When API is FALSE, this package forwards function calls directly to
-#' # etnservice
-#'
-#' # These two calls are identical. They run the same code (locally). Both will
-#' # only work when there is a local connection to the etn database.
-#' etnservice::list_acoustic_tag_ids()
-#' list_acoustic_tag_ids(api = FALSE)
-#'
 conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
                                       ignored_arguments = NULL,
                                       ...) {
