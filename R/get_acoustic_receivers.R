@@ -25,8 +25,7 @@
 #' get_acoustic_receivers(receiver_id = "VR2W-124070")
 get_acoustic_receivers <- function(connection,
                                    receiver_id = NULL,
-                                   status = NULL,
-                                   api = TRUE){
+                                   status = NULL){
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
