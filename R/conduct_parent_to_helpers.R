@@ -64,6 +64,7 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
       # OpenCPU.
       if (!etnservice_version_matches()) {
         deployed_version <- get_etnservice_version(api = TRUE)
+      }
 
       rlang::check_installed(
         "etnservice",
