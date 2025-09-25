@@ -19,7 +19,7 @@
 #' # Get a specific acoustic project
 #' get_acoustic_projects(acoustic_project_code = "demer")
 get_acoustic_projects <- function(connection,
-                                  acoustic_project_code = NULL){
+                                  acoustic_project_code = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

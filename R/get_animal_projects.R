@@ -19,7 +19,7 @@
 #' # Get a specific animal project
 #' get_animal_projects(animal_project_code = "2014_demer")
 get_animal_projects <- function(connection,
-                                animal_project_code = NULL){
+                                animal_project_code = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {

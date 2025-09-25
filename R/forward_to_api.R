@@ -34,7 +34,9 @@ forward_to_api <- function(
   format <- rlang::arg_match(format)
   # If the requested format is JSON, switch to a one step process.
 
-  if(format == "json"){json <- TRUE}
+  if (format == "json") {
+    json <- TRUE
+  }
   # Get credentials and attach to payload
   if (add_credentials) {
     # Get credentials out of .Renviron or prompt user.
@@ -75,7 +77,8 @@ forward_to_api <- function(
   # Forward the function and arguments to the API: call 1, forward any R errors
 
   response <- req_perform_opencpu(request,
-                                  function_identity = function_identity)
+    function_identity = function_identity
+  )
 
 
   if (json) {

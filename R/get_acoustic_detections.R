@@ -248,7 +248,7 @@ get_acoustic_detections <- function(connection,
       }
     }
 
-    if(protocol == "localdb") {
+    if (protocol == "localdb") {
       arguments_for_helper <- payload
       # Save the DBI returned data.frame as a feather file
       helper_to_use <- \(..., path) {
@@ -358,7 +358,7 @@ count_acoustic_detections <- function(...) {
     )
   }
   # If protocol is localdb, use etnservice::get_acoustic_detections_page()
-  if(protocol == "localdb") {
+  if (protocol == "localdb") {
     returned_count <- do.call(etnservice::get_acoustic_detections_page,
       args = append(
         rlang::list2(...),

@@ -1,5 +1,7 @@
 test_that("list_deployment_ids() returns unique list of values using api", {
-  vcr::use_cassette("list_deployment_ids", {vector <- list_deployment_ids()})
+  vcr::use_cassette("list_deployment_ids", {
+    vector <- list_deployment_ids()
+  })
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))
