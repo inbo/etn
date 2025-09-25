@@ -73,6 +73,9 @@ conduct_parent_to_helpers <- function(api,
       rlang::check_installed(
         "etnservice",
         version = deployed_version,
+        # Ensure the exact version is installed, and not an even more recent
+        # version (In case OpenCPU is lagging on the Github released version).
+        compare = "==",
         reason =
           paste(
             "\nThere is a newer version of etnservice available",
