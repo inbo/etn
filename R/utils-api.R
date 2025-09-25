@@ -234,7 +234,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   # Return either the version number or the full output
   switch (return_as,
     # coerce into character, packageVersion() returns other class.
-    version = as.character(pkg_version$version),
+    version = pkg_version$version,
     all = pkg_version
   )
 }
