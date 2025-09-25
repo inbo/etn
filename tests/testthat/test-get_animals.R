@@ -1,5 +1,12 @@
-# Cache HTTP Response
-vcr::use_cassette("get_animals",{df <- get_animals()})
+# Force using the OpenCPU API and cache the response
+withr::with_envvar(
+  c("ETN_PROTOCOL" = "opencpu"),
+  {
+    vcr::use_cassette("get_animals", {
+      df <- get_animals()
+    })
+  }
+)
 
 test_that("get_animals() returns a tibble", {
   skip_if_not_localdb()
