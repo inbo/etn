@@ -107,7 +107,7 @@ test_that("etnservice_version_matches() returns TRUE on mismatch when exact is T
   )
 })
 
-test_that("etnservice_version_matches() can allows a more recent version to be installed when exact is FALSE", {
+test_that("etnservice_version_matches() allows a more recent version to be installed when exact is FALSE", {
   expect_true(
     with_mocked_bindings(
       etnservice_version_matches(exact = FALSE),
