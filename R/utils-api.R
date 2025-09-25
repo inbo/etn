@@ -282,6 +282,7 @@ etnservice_version_matches <- function(..., exact = FALSE) {
     get_etnservice_version("version") <= etnservice::get_version()$version
   }
 }
+
 #' Perform a request to OpenCPU to get a response
 #'
 #' This is a slight modification on httr2::req_perform() to allow for OpenCPU
