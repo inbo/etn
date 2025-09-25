@@ -65,23 +65,18 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
       if (!etnservice_version_matches()) {
         deployed_version <- get_etnservice_version(api = TRUE)
 
-        rlang::check_installed(
-          "etnservice",
-          version = deployed_version,
-          reason =
-            paste(
-              "\nThere is a newer version of etnservice available",
-              "please update",
-              "to avoid differences between local and API queries."
-            )
-        )
-      }
-
-      do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
-        args = append(arguments_to_pass,
-          list(credentials = get_credentials()),
-          after = 0
-        )
+      rlang::check_installed(
+        "etnservice",
+        version = deployed_version,
+        # Ensure the exact version is installed, and not an even more recent
+        # version (In case OpenCPU is lagging on the Github released version).
+        compare = "==",
+        reason =
+          paste(
+            "\nThere is a newer version of etnservice available",
+            "please update",
+            "to avoid differences between local and API queries."
+          )
       )
     }
   )
