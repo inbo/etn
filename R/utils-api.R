@@ -263,16 +263,24 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #'   etnservice is the same as the one deployed online.
 #' @noRd
 #' @family helper functions
-etnservice_version_matches <- function(...) {
-  # Compare the package versions, and the checksums of all functions.
-  identical(
-    get_etnservice_version("all", api = TRUE, ...),
-    # We can't use get_etnservice_version(api = FALSE) here because we mock this
-    # function in tests, if we mock it twice and compare it against itself, we
-    # would always pass. This way, we can simulate a deployed version to test
-    # against.
-    etnservice::get_version()
-  )
+etnservice_version_matches <- function(..., exact = FALSE) {
+  if (exact) {
+    # Compare the package versions, and the checksums of all functions.
+    identical(
+      # Deployed
+      get_etnservice_version("all", api = TRUE, ...),
+      # We can't use get_etnservice_version(api = FALSE) here because we mock this
+      # function in tests, if we mock it twice and compare it against itself, we
+      # would always pass. This way, we can simulate a deployed version to test
+      # against.
+
+      # Local
+      etnservice::get_version()
+    )
+  } else {
+    # Deployed <= Local
+    get_etnservice_version("version") <= etnservice::get_version()$version
+  }
 }
 #' Perform a request to OpenCPU to get a response
 #'
