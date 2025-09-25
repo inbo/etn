@@ -36,7 +36,7 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
 #' @family helper functions
 #' @noRd
 skip_if_not_localdb <- function(){
-  skip_if_not(localdb_is_available(),
+  testthat::skip_if_not(localdb_is_available(),
               "ETN is not a local database on this machine")
 }
 
