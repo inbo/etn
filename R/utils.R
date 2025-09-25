@@ -176,6 +176,38 @@ localdb_is_available <- function(check = c("nodename", "odbc")){
          }
   )
 }
+
+#' Select the protocol to use
+#'
+#' The protocol is the way data is fetched. This is in addition to the source,
+#' which is where the data comes from.
+#'
+#' This function is used to centrally control the decision tree for which
+#' protocol to use for ´conduct_parent_to_helper()´. When there is a local
+#' database connection available, use this by default. If not, use the OpenCPU
+#' API. Both these protocols use the ETN database as a source.
+#'
+#' @returns Character of length one with one of the available protocols.
+#'
+#' @family helper functions
+#' @noRd
+select_protocol <- function() {
+  # ALlow overwriting of protocol logic by environmental variable
+  user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
+                                       unset = "no_protocol_set")
+  if (user_selected_protocol != "no_protocol_set") {
+    return(user_selected_protocol)
+  }
+
+  # If there is a local database connection available, use it.
+  if (localdb_is_available(check = "nodename")) {
+    return("localdb")
+  }
+
+  # Fallback on API
+  return("opencpu")
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
