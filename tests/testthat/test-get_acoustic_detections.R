@@ -1,7 +1,9 @@
 test_that("get_acoustic_detections() can pass errors over the api", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   vcr::local_cassette("detections_error")
     expect_error(
-    get_acoustic_detections(start_date = "not_a_date", api = TRUE),
+    get_acoustic_detections(start_date = "not_a_date"),
     regexp = "The given start_date, not_a_date, is not in a valid date format."
   )
 })
@@ -17,8 +19,7 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
   skip_if_not_localdb()
 
   df_sql <- get_acoustic_detections(animal_project_code = "2014_demer",
-                                    limit = TRUE,
-                                    api = FALSE)
+                                    limit = TRUE)
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
@@ -328,6 +329,9 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+  # Use a cached API response
   vcr::local_cassette("detections_acoustic_project_code")
   # Errors
   expect_error(
@@ -343,7 +347,7 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
   # Select single value
   single_select <- "demer"
   single_select_df <-
-    get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
+    get_acoustic_detections(acoustic_project_code = single_select)
   expect_identical(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
@@ -356,8 +360,7 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
       get_acoustic_detections(
         acoustic_project_code = "demer",
         start_date = "2014-04-28",
-        end_date = "2014-04-30",
-        api = TRUE
+        end_date = "2014-04-30"
       ),
       "detection_id"
     ),
@@ -365,18 +368,20 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
       get_acoustic_detections(
         acoustic_project_code = "DEMER",
         start_date = "2014-04-28",
-        end_date = "2014-04-30",
-        api = TRUE
+        end_date = "2014-04-30"
       ), "detection_id"
     )
   )
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+  # Use a cached API response
   vcr::local_cassette("detections_acoustic_project_code_multi")
   single_select <- "demer"
   single_select_df <-
-    get_acoustic_detections(acoustic_project_code = single_select, api = TRUE)
+    get_acoustic_detections(acoustic_project_code = single_select)
   # Select multiple values
   multi_select <- c("demer", "dijle")
   multi_select_df <-
@@ -588,6 +593,9 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
 })
 
 test_that("get_acoustic_detection() reports no progress when disabled", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+  # Use a cached API response
   vcr::local_cassette("detections_minimal")
   # The function will never report progress when testing, overwrite this
   # behaviour to test the function argument.
@@ -595,7 +603,6 @@ test_that("get_acoustic_detection() reports no progress when disabled", {
     with_mocked_bindings(
       code = get_acoustic_detections(station_name = "de-9",
                                      progress = FALSE,
-                                     api = TRUE,
                                      start_date = "2014-04-10",
                                      end_date = "2014-04-11"),
       # disable testing overwrite: it would never show when testing
@@ -609,17 +616,21 @@ test_that("get_acoustic_detection() reports no progress when disabled", {
 # count_acoustic_detections -----------------------------------------------
 
 test_that("count_acoustic_detections() returns numeric values", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+  # Use a cached API response
   vcr::local_cassette("count_detections")
-  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
-                                     api = TRUE)
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal")
   expect_type(count, "double")
   expect_length(count, 1L)
 })
 
 test_that("count_acoustic_detections() returns values within expected range", {
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+  # Use a cached API response
   vcr::local_cassette("count_detections")
-  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal",
-                                     api = TRUE)
+  count <- count_acoustic_detections(animal_project_code = "2013_albertkanaal")
   expect_gt(count, 5e6)
   expect_lt(count, 1e8)
 })
