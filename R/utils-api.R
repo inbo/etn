@@ -202,7 +202,7 @@ get_hostname <- function(url_str) {
 #' @inheritParams list_animal_ids
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
-#'   `etnservice::get_version()` (either loally or via the API).
+#'   `etnservice::get_version()` (either locally or via the API).
 #'
 #' @returns Either a character string with the version number of etnservice. Or
 #'   a list with the full output of `etnservice::get_version()`, which includes
@@ -246,7 +246,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #' deployed on the API.
 #'
 #' The function can check for an exact match, or by default, if the installed
-#' verison of etnservice is equal or more recent than the one deployed via
+#' version of etnservice is equal or more recent than the one deployed via
 #' OpenCPU.
 #'
 #' This function is useful to ensure that the local package version is
