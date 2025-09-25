@@ -63,12 +63,10 @@ get_val <- function(temp_key,
                     format = c("feather", "rds"),
                     return_url = FALSE,
                     ...) {
-
   format <- rlang::arg_match(format)
   reading_function <-
-    switch(
-      format,
-      "rds" = \(raw_response){
+    switch(format,
+      "rds" = \(raw_response) {
         raw_connection <- rawConnection(raw_response)
         rds_response <-
           raw_connection |>
@@ -77,16 +75,18 @@ get_val <- function(temp_key,
         # close connection
         close(raw_connection)
         # return R object
-        return(rds_response)
+        rds_response
       },
       "feather" = arrow::read_feather
     )
 
   # early return in case of return_url
-  if(return_url){
+  if (return_url) {
     return(
-      file.path(api_domain,
-                 "tmp",temp_key,"R",".val",format)
+      file.path(
+        api_domain,
+        "tmp", temp_key, "R", ".val", format
+      )
     )
   }
 
@@ -141,8 +141,8 @@ return_parent_arguments <- function(depth = 1) {
 #' @family helper functions
 #' @noRd
 validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
-                                               unset = "https://opencpu.lifewatch.be/library/etnservice/R"
-),
+                             unset = "https://opencpu.lifewatch.be/library/etnservice/R"
+                           ),
                            credentials = get_credentials()) {
   # Placing a custom request because validate_login accepts username and
   # password directly in the body rather than as a credentials object like the
@@ -155,13 +155,15 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 
   if (!login_valid) {
     rlang::abort(
-      glue::glue("Failed to login with username: {get_credentials()$username}.",
-                 " Please check username/password."),
+      glue::glue(
+        "Failed to login with username: {get_credentials()$username}.",
+        " Please check username/password."
+      ),
       caller = rlang::env_parent()
     )
   }
 
-  return(login_valid)
+  login_valid
 }
 
 #' Get the hostname from a URL string
@@ -175,7 +177,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 #' @noRd
 #' @examples
 #' get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
-get_hostname <- function(url_str){
+get_hostname <- function(url_str) {
   # the hostname + everything in the path before `library`, because opencpu
   # doesn't need to be hosted directly on the hostname. Useful for testing on
   # other domains than etn.
@@ -219,7 +221,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
                                    ...) {
   return_as <- rlang::arg_match(return_as)
   # Get the full version information either locally or from the API
-  if(api){
+  if (api) {
     pkg_version <- forward_to_api(
       "get_version",
       payload = list(),
@@ -232,7 +234,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   }
 
   # Return either the version number or the full output
-  switch (return_as,
+  switch(return_as,
     # coerce into character, packageVersion() returns other class.
     version = pkg_version$version,
     all = pkg_version
@@ -273,10 +275,10 @@ etnservice_version_matches <- function(..., exact = FALSE) {
     identical(
       # Deployed
       get_etnservice_version("all", api = TRUE, ...),
-      # We can't use get_etnservice_version(api = FALSE) here because we mock this
-      # function in tests, if we mock it twice and compare it against itself, we
-      # would always pass. This way, we can simulate a deployed version to test
-      # against.
+      # We can't use get_etnservice_version(api = FALSE) here because we mock
+      # this function in tests, if we mock it twice and compare it against
+      # itself, we would always pass. This way, we can simulate a deployed
+      # version to test against.
 
       # Local
       etnservice::get_version()
@@ -335,7 +337,7 @@ req_perform_opencpu <- function(req,
       )
     }
   )
-  if(!is.null(path)){
+  if (!is.null(path)) {
     httr2::resp_body_raw(resp) |>
       writeBin(path)
   }
