@@ -1,6 +1,5 @@
 #' List all available animal ids
 #'
-#' @param api Logical. If `TRUE`, the function will use the API to access ETN.
 #' @param connection `r lifecycle::badge("deprecated")` A connection to the ETN
 #'   database. This argument is no longer used. You will be prompted for
 #'   credentials instead.
