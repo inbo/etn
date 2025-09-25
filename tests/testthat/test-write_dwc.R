@@ -76,21 +76,20 @@ withr::with_envvar(
       # Request without writing to disk
       demer_dwc <- write_dwc(
         animal_project_code = "2014_demer",
-        directory = NULL,
-        api = TRUE
+        directory = NULL
       )
     })
   }
 )
+
 test_that("[API] write_dwc() can write csv files to a path", {
-  out_dir <- file.path(tempdir(), "dwc")
-  unlink(out_dir, recursive = TRUE)
-  dir.create(out_dir)
+  # Force using the OpenCPU API
+  withr::local_envvar("ETN_PROTOCOL" = "opencpu")
+  out_dir <- withr::local_tempdir()
   # Request that writes to disk
   suppressMessages(write_dwc(
     animal_project_code = "2014_demer",
-    directory = out_dir,
-    api = TRUE
+    directory = out_dir
   ))
 
   expect_identical(list.files(out_dir, pattern = "*.csv"), "dwc_occurrence.csv")
@@ -137,6 +136,7 @@ test_that("[API] write_dwc() returns the expected Darwin Core terms as columns",
     )
   )
 })
+
 test_that("[SQL] write_dwc() supports uppercase animal_project_codes", {
   skip_if_not_localdb()
   result <- suppressMessages(
