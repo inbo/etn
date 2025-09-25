@@ -241,7 +241,11 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 
 
 #' Check if the locally installed version of etnservice matches the version
-#' deployed on the API exactly.
+#' deployed on the API.
+#'
+#' The function can check for an exact match, or by default, if the installed
+#' verison of etnservice is equal or more recent than the one deployed via
+#' OpenCPU.
 #'
 #' This function is useful to ensure that the local package version is
 #' compatible with the API version. This is checked by comparing the version
