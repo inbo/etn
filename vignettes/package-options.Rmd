@@ -18,7 +18,7 @@ The package has a number of options that can be set via [System Environmental va
 
 ## How to change these options.
 
-You can change a System Environmental Variable from within R with ?Sys.setenv() and get a set value with ?Sys.getenv(). To set variables more permanently you can use the `.Renviron` file, which can be easily changed with ?usethis::edit_r_environ().
+You can change a System Environmental Variable from within R with `Sys.setenv()` and get a set value with `Sys.getenv()`. To set variables more permanently you can use the `.Renviron` file, which can be easily changed with `usethis::edit_r_environ()`.
 
 ## Options overview
 
