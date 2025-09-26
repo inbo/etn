@@ -231,33 +231,30 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   # Get the full version information either locally or from the API
   pkg_version <-
     switch(which,
-           "opencpu" = {
-             forward_to_api(
-               "get_version",
-               payload = list(),
-               add_credentials = FALSE,
-               format = "rds",
-               ...)
-             },
-           "local" = {
-             etnservice::get_version()
-             }
-           )
+      "opencpu" = {
+        forward_to_api(
+          "get_version",
+          payload = list(),
+          add_credentials = FALSE,
+          format = "rds",
+          ...
+        )
+      },
+      "local" = {
+        etnservice::get_version()
+      }
+    )
+
+  # Optionally strip the dev version from the version number
+  if(ignore_dev) {
+    pkg_version$version <- strip_dev_version(pkg_version$version)
+  }
 
   # Return either the version number or the full output
   switch(return_as,
     # coerce into character, packageVersion() returns other class.
     version = pkg_version$version,
-    all = function(ignore_dev) {
-      if (ignore_dev) {
-        package_version(paste(pkg_version$major,
-          pkg_version$minor,
-          pkg_version$patch,
-          sep = "."
-        ))
-      }
-      pkg_version
-    }
+    all = pkg_version
   )
 }
 
