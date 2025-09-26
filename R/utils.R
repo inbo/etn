@@ -137,7 +137,7 @@ is_testing <- function() {
 #' @noRd
 #' @examples
 #' get_nodename()
-get_nodename <- function(){
+get_nodename <- function() {
   Sys.info()["nodename"]
 }
 
@@ -162,18 +162,18 @@ get_nodename <- function(){
 #' # This should return FALSE unless you are running this example from the VLIZ
 #' # RStudio Server.
 #' localdb_is_available()
-localdb_is_available <- function(check = c("nodename", "odbc")){
+localdb_is_available <- function(check = c("nodename", "odbc")) {
   check <- rlang::arg_match(check)
   switch(check,
-         nodename =
-           # As discussed with VLIZ, all systems that have acces with the local database
-           # should have nodenames ending on vliz.be
-           endsWith(get_nodename(), "vliz.be"),
-         odbc = {
-           rlang::check_installed("odbc")
-           # A stricter and more failsafe test is possible, if odbc is installed
-           "ETN" %in% odbc::odbcListDataSources()$name
-         }
+    nodename =
+    # As discussed with VLIZ, all systems that have access to the local database
+    # should have nodenames ending on vliz.be
+      endsWith(get_nodename(), "vliz.be"),
+    odbc = {
+      rlang::check_installed("odbc")
+      # A stricter and more fail-safe test is possible, if odbc is installed
+      "ETN" %in% odbc::odbcListDataSources()$name
+    }
   )
 }
 
