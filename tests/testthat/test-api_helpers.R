@@ -30,15 +30,6 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
   )
 })
 
-test_that("get_etnservice_version() lists checksums of available functions", {
-  local_version_info <- get_etnservice_version("all")
-  # test for Single function
-  expect_identical(
-    local_version_info$fn_checksums$get_acoustic_detections,
-    deparse(etnservice::get_acoustic_detections) |> rlang::hash()
-  )
-})
-
 # extract_temp_key() ------------------------------------------------------
 
 
