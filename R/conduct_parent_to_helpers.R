@@ -141,6 +141,8 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
           }
         )
       }
+
+      # Forward the parent function to etnservice
       do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
         args = append(arguments_to_pass,
           list(credentials = get_credentials()),
