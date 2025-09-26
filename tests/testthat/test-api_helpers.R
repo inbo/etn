@@ -6,7 +6,7 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
   vcr::local_cassette("etnservice_version")
 
   expect_s3_class(
-    get_etnservice_version(which = "opencpu"),
+    get_etnservice_version(),
     "package_version"
   )
 
@@ -34,7 +34,7 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
 })
 
 test_that("get_etnservice_version() lists checksums of available functions", {
-  local_version_info <- get_etnservice_version("all", which = "local")
+  local_version_info <- get_etnservice_version("all")
   # test for Single function
   expect_identical(
     local_version_info$fn_checksums$get_acoustic_detections,
