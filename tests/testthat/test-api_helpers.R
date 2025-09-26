@@ -35,8 +35,7 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
   # Skip if the OpenCPU server is not reachable
   skip_if_offline(host = "opencpu.lifewatch.be")
   # Skip if the local and deployed versions don't match
-  skip_if(!etnservice_version_matches(),
-          "Local etnservice and OpenCPU deployed version do not match")
+  skip_if(!rlang::is_installed("etnservice", version = get_etnservice_version("opencpu")))
 
   expect_identical(
     names(get_etnservice_version("all")$fn_checksums),
@@ -52,43 +51,6 @@ test_that("get_etnservice_version() lists checksums of available functions", {
     deparse(etnservice::get_acoustic_detections) |> rlang::hash()
   )
 })
-
-# etnservice_version_matches() --------------------------------------------
-
-test_that("etnservice_version_matches() can return TRUE/FALSE", {
-  expect_type(
-    etnservice_version_matches(),
-    "logical"
-  )
-})
-
-test_that("etnservice_version_matches() returns TRUE on mismatch when exact is TRUE", {
-  # Mock a etnservice version that is definitely different than local
-  mock_version_info <- get_etnservice_version("all", which = "local")
-  mock_version_info$fn_checksums[4] <- "not_a_real_checksum_value"
-  expect_false(
-    with_mocked_bindings(
-      etnservice_version_matches(exact = TRUE),
-      get_etnservice_version = function(...) {
-        mock_version_info
-      }
-    )
-  )
-})
-
-test_that("etnservice_version_matches() allows a more recent version to be installed when exact is FALSE", {
-  expect_true(
-    with_mocked_bindings(
-      etnservice_version_matches(exact = FALSE),
-      # Mock the deployed version to be 0.0.1, the local version is always more
-      # recent since I never released a 0.0.1 release.
-      get_etnservice_version = function(...) {
-        package_version("0.0.1")
-      }
-    )
-  )
-})
-
 
 # extract_temp_key() ------------------------------------------------------
 

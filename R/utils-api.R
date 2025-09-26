@@ -261,55 +261,6 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   )
 }
 
-
-#' Check if the locally installed version of etnservice matches the version
-#' deployed on the API.
-#'
-#' The function can check for an exact match, or by default, if the installed
-#' version of etnservice is equal or more recent than the one deployed via
-#' OpenCPU.
-#'
-#' This function is useful to ensure that the local package version is
-#' compatible with the API version. This is checked by comparing the version
-#' returned by `etnservice::get_version()` with the version returned by the API
-#' endpoint `get_version`. Both the version numbers are checked as well as the
-#' checksums of all functions, ensuring that a small change in a function
-#' without updating the package version will also trigger this check.
-#'
-#' This is important to make sure that a function calls return consistent
-#' results independent of the call was made locally or over the api.
-#'
-#' The exact version of the package installed locally can be returned by
-#' `etnservice::get_version()`, the version deployed can be returned by calling
-#' `forward_to_api("get_version", add_credentials = FALSE)`
-#'
-#' @inheritDotParams forward_to_api format domain
-#' @inheritDotParams get_val return_url
-#' @return A logical value indicating whether the locally installed version of
-#'   etnservice is the same as the one deployed online.
-#' @noRd
-#' @family helper functions
-etnservice_version_matches <- function(..., exact = FALSE) {
-  if (exact) {
-    # Compare the package versions, and the checksums of all functions.
-    identical(
-      # Deployed
-      get_etnservice_version("all", which = "opencpu", ...),
-      # We can't use get_etnservice_version(which = "local") here because we mock
-      # this function in tests, if we mock it twice and compare it against
-      # itself, we would always pass. This way, we can simulate a deployed
-      # version to test against.
-
-      # Local
-      etnservice::get_version()
-    )
-  } else {
-    # Deployed <= Local
-    get_etnservice_version("version", which = "opencpu") <=
-      etnservice::get_version()$version
-  }
-}
-
 #' Perform a request to OpenCPU to get a response
 #'
 #' This is a slight modification on httr2::req_perform() to allow for OpenCPU
