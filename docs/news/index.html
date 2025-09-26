@@ -21,6 +21,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -57,7 +58,7 @@
 <li>You can now select detections via <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> using a <code>deployment_id</code> (<a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/340" class="external-link">#340</a>)</li>
 <li>
 <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now returns a progress bar on large queries. (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>)</li>
-<li>When using a local database connection, <code>etn</code> will now check if the installed helper package <code>etnservice</code> that is used to place these queries is up to date (same or more recent) with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of <code>etnservice</code> is older, you will be prompted to install a newer version. (<a href="https://github.com/inbo/etn/issues/385" class="external-link">#385</a>)</li>
+<li>When using a local database connection, <code>etn</code> will now check if the installed helper package <code>etnservice</code> that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of <code>etnservice</code> is older, you will be prompted to install a newer version. (<a href="https://github.com/inbo/etn/issues/385" class="external-link">#385</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.2" id="etn-222">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-222"></a></h2>
