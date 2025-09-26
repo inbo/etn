@@ -184,7 +184,7 @@ get_hostname <- function(url_str) {
   stringr::str_extract(url_str, ".+(?=library)")
 }
 
-#' Get the version number of etnservice, either locally or deployed
+#' Get the version of etnservice that was deployed on OpenCPU
 #'
 #' This function calls `etnservice::get_version()` if `which = "local"`,
 #' otherwise it forwards the call to the API via
@@ -204,49 +204,31 @@ get_hostname <- function(url_str) {
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
-#' @param which What version of etnservice should be checked, the one deployed
-#'   on the OpenCPU API : `opencpu`, or the one locally installed: `local`.
 #' @param ignore_dev Logical, if `TRUE` then development versions `*.9***` are
-#' stripped from the returned version number. Convenient to avoid a trigger of
-#' [rlang::check_installed()]. Ignored when `return_as` is `"all"`
+#'   stripped from the returned version number. Convenient to avoid a trigger of
+#'   [rlang::check_installed()]. Ignored when `return_as` is `"all"`
 #'
 #' @returns Either a character string with the version number of etnservice. Or
-#'   a list with the full output of `etnservice::get_version()`, which includes
-#'   the version number, And the checksums of all functions in etnservice.
+#'   a list with the full output which includes the version number, And the
+#'   checksums of all functions in etnservice.
 #' @noRd
 #' @family helper functions
-#'
-#' @examples
-#' # Get the version of the locally installed version of etnservice
-#' get_etnservice_version(which = "local")
-#' # Get the version of the version of etnservice deployed on OpenCPU
-#' get_etnservice_version(which = "opencpu")
-#' get_etnservice_version(return_as = "all", api = TRUE)
 get_etnservice_version <- function(return_as = c("version", "all"),
-                                   which = c("opencpu", "local"),
                                    ignore_dev = TRUE,
                                    ...) {
   return_as <- rlang::arg_match(return_as)
-  which <- rlang::arg_match(which)
-  # Get the full version information either locally or from the API
+  # Get the full version information from the API
   pkg_version <-
-    switch(which,
-      "opencpu" = {
-        forward_to_api(
-          "get_version",
-          payload = list(),
-          add_credentials = FALSE,
-          format = "rds",
-          ...
-        )
-      },
-      "local" = {
-        etnservice::get_version()
-      }
+    forward_to_api(
+      "get_version",
+      payload = list(),
+      add_credentials = FALSE,
+      format = "rds",
+      ...
     )
 
   # Optionally strip the dev version from the version number
-  if(ignore_dev) {
+  if (ignore_dev) {
     pkg_version$version <- strip_dev_version(pkg_version$version)
   }
 
