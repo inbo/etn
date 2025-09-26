@@ -37,7 +37,6 @@ Imports:
     methods,
     prettyunits,
     readr,
-    remotes,
     rlang,
     stringr,
     utils
@@ -48,6 +47,7 @@ Suggests:
     knitr,
     leaflet,
     lubridate,
+    pak,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
