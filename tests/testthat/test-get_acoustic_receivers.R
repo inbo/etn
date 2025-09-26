@@ -4,7 +4,7 @@ test_that("get_acoustic_receivers() returns a tibble", {
   df <- get_acoustic_receivers()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-  df_sql <- get_acoustic_receivers(api = FALSE)
+  df_sql <- get_acoustic_receivers()
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
