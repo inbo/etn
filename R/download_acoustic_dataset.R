@@ -76,8 +76,7 @@
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
-                                      directory = animal_project_code,
-                                      api = TRUE) {
+                                      directory = animal_project_code) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -91,7 +90,7 @@ download_acoustic_dataset <- function(connection,
   )
   animal_project_code <- check_value(
     animal_project_code,
-    list_animal_project_codes(api = api),
+    list_animal_project_codes(),
     "animal_project_code",
     lowercase = TRUE
   )
@@ -100,7 +99,7 @@ download_acoustic_dataset <- function(connection,
   if (!is.null(scientific_name)) {
     scientific_name <- check_value(
       scientific_name,
-      list_scientific_names(api = api),
+      list_scientific_names(),
       "scientific_name"
     )
   }
@@ -113,7 +112,6 @@ download_acoustic_dataset <- function(connection,
   message("* (1/6): downloading animals.csv")
   # Select on animal_project_code and scientific_name
   animals <- get_animals(
-    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
@@ -132,17 +130,13 @@ download_acoustic_dataset <- function(connection,
     strsplit("\\,") %>%
     unlist() %>%
     unique()
-  tags <- get_tags(
-    api = api,
-    tag_serial_number = tag_serial_numbers
-  )
+  tags <- get_tags(tag_serial_number = tag_serial_numbers)
   readr::write_csv(tags, file.path(directory, "tags.csv"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
   # Select on animal_project_code and scientific_name
   detections <- get_acoustic_detections(
-    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name,
     limit = FALSE
@@ -164,7 +158,6 @@ download_acoustic_dataset <- function(connection,
     pull() %>%
     stringr::str_sort()
   deployments <- get_acoustic_deployments(
-    api = api,
     acoustic_project_code = acoustic_project_codes,
     open_only = FALSE
   )
@@ -188,7 +181,6 @@ download_acoustic_dataset <- function(connection,
     distinct(.data$receiver_id) %>%
     pull()
   receivers <- get_acoustic_receivers(
-    api = api,
     receiver_id = receiver_ids
   )
   readr::write_csv(receivers, file.path(directory, "receivers.csv"), na = "")

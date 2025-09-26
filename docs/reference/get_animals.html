@@ -27,6 +27,7 @@ the information is comma-separated."><meta property="og:image" content="https://
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -58,8 +59,7 @@ the information is comma-separated.</p>
 <span>  animal_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tag_serial_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  animal_project_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scientific_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  api <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  scientific_name <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -89,10 +89,6 @@ codes. Case-insensitive.</p></dd>
 <dt id="arg-scientific-name">scientific_name<a class="anchor" aria-label="anchor" href="#arg-scientific-name"></a></dt>
 <dd><p>Character (vector). One or more scientific names.</p></dd>
 
-
-<dt id="arg-api">api<a class="anchor" aria-label="anchor" href="#arg-api"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, the function will use the API to access ETN.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -105,7 +101,7 @@ codes. Case-insensitive.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all animals</span></span></span>
 <span class="r-in"><span><span class="fu">get_animals</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26,374 × 66</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26,737 × 66</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    animal_id animal_project_code tag_serial_number tag_type tag_subtype</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>      <span style="text-decoration: underline;">5</span>923 2004_Gudena         1208              acoustic animal     </span>
@@ -118,7 +114,7 @@ codes. Case-insensitive.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      <span style="text-decoration: underline;">5</span>920 2004_Gudena         7421              acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      <span style="text-decoration: underline;">5</span>921 2004_Gudena         7422              acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>      <span style="text-decoration: underline;">5</span>922 2004_Gudena         7423              acoustic animal     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26,364 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26,727 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 61 more variables: acoustic_tag_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   acoustic_tag_id_alternative &lt;chr&gt;, scientific_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   common_name &lt;chr&gt;, aphia_id &lt;int&gt;, animal_label &lt;chr&gt;,</span></span>
@@ -220,7 +216,7 @@ codes. Case-insensitive.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get animals of specific species (across all projects)</span></span></span>
 <span class="r-in"><span><span class="fu">get_animals</span><span class="op">(</span>scientific_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Rutilus rutilus"</span>, <span class="st">"Silurus glanis"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 246 × 66</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 255 × 66</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    animal_id animal_project_code tag_serial_number tag_type tag_subtype</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>       304 2014_demer          1187449           acoustic animal     </span>
@@ -233,7 +229,7 @@ codes. Case-insensitive.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       365 2014_demer          1171775           acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       366 2014_demer          1171776           acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       368 2014_demer          1171780           acoustic animal     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 236 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 245 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 61 more variables: acoustic_tag_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   acoustic_tag_id_alternative &lt;chr&gt;, scientific_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   common_name &lt;chr&gt;, aphia_id &lt;int&gt;, animal_label &lt;chr&gt;,</span></span>
@@ -266,7 +262,7 @@ codes. Case-insensitive.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

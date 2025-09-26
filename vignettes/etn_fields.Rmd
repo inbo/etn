@@ -72,7 +72,7 @@ view_table <- function(view_name) {
     mutate(field = if_else(!is.na(field), paste0("`", field, "`"), field)) %>%
     # Convert "NA" to empty strings
     mutate(across(everything(), ~ replace_na(., "")))
-  
+
   view_kable <-
     kable(view_data) %>%
     # field: some have long names, break-word will force them to wrap
@@ -81,7 +81,7 @@ view_table <- function(view_name) {
     column_spec(2, width = "40%") %>%
     # example
     column_spec(3, width = "35%")
-  
+
   return(view_kable)
 }
 ```

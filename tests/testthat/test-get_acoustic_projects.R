@@ -1,7 +1,7 @@
 skip_if_not_localdb() # local database and api tests are mixed
 
 df <- get_acoustic_projects()
-df_sql <- get_acoustic_projects(api = FALSE)
+df_sql <- get_acoustic_projects()
 
 test_that("get_acoustic_projects() returns a tibble", {
   expect_s3_class(df, "data.frame")

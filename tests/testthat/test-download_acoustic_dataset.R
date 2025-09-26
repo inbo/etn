@@ -15,16 +15,16 @@ vcr::use_cassette( # Cache HTTP response
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.
-if ("ETN" %in% odbc::odbcListDataSources()$name) {
+if (localdb_is_available()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
     download_acoustic_dataset(
-      api = FALSE,
       animal_project_code = "2014_demer",
       directory = localdb_datapackage_path
     )
   })
 }
+
 test_that("download_acoustic_dataset() creates the expected files using api", {
   files_to_create <- c(
     "animals.csv",

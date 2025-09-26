@@ -9,8 +9,7 @@ get_tags(
   tag_type = NULL,
   tag_subtype = NULL,
   tag_serial_number = NULL,
-  acoustic_tag_id = NULL,
-  api = TRUE
+  acoustic_tag_id = NULL
 )
 }
 \arguments{
@@ -28,8 +27,6 @@ both, find those with \code{acoustic-archival}.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag
 identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A tibble with tags data, sorted by \code{tag_serial_number}. See also

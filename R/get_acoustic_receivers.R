@@ -25,14 +25,13 @@
 #' get_acoustic_receivers(receiver_id = "VR2W-124070")
 get_acoustic_receivers <- function(connection,
                                    receiver_id = NULL,
-                                   status = NULL,
-                                   api = TRUE){
+                                   status = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(protocol = select_protocol())
   return(out)
 }

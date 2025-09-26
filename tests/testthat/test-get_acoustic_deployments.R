@@ -1,6 +1,8 @@
-# Cached response from the API
-vcr::use_cassette("get_acoustic_deployments", {
-  df <- get_acoustic_deployments(api = TRUE)
+# Set ETN_PROTOCOL to "opencpu" to force using the API and use a cached response
+withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
+  vcr::use_cassette("get_acoustic_deployments", {
+    df <- get_acoustic_deployments()
+  })
 })
 
 test_that("[API] get_acoustic_deployments() returns a tibble", {
@@ -12,7 +14,7 @@ test_that("[SQL] get_acoustic_deployments() returns a tibble", {
   skip_if_not_localdb()
 
   # Response via local database connection
-  df_sql <- get_acoustic_deployments(api = FALSE)
+  df_sql <- get_acoustic_deployments()
 
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
@@ -26,7 +28,7 @@ test_that("[SQL] get_acoustic_deployments() returns unique deployment_id", {
   skip_if_not_localdb()
 
   # Response via local database connection
-  df_sql <- get_acoustic_deployments(api = FALSE)
+  df_sql <- get_acoustic_deployments()
 
   expect_equal(nrow(df_sql), nrow(df_sql %>% distinct(deployment_id)))
 })
@@ -119,7 +121,7 @@ test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
   skip_if_not_localdb()
 
   # Response via local database connection
-  df_sql <- get_acoustic_deployments(api = FALSE)
+  df_sql <- get_acoustic_deployments()
 
   expect_equal(names(df_sql), expected_col_names)
 })
@@ -165,20 +167,17 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", 
 
   # Errors
   expect_error(
-    get_acoustic_deployments(deployment_id = "not_a_deployment_id",
-                             api = FALSE),
+    get_acoustic_deployments(deployment_id = "not_a_deployment_id"),
     regexp = "Can't find receiver_id `not_a_deployment_id` in"
   )
   expect_error(
-    get_acoustic_deployments(deployment_id = c("1437", "not_a_deployment_id"),
-                             api = FALSE),
+    get_acoustic_deployments(deployment_id = c("1437", "not_a_deployment_id")),
     regexp = "Can't find receiver_id `1437` and/or `not_a_deployment_id` in:"
   )
 
   # Select single value
   single_select <- 1437 # From demer
-  single_select_df <- get_acoustic_deployments(deployment_id = single_select,
-                                               api = FALSE)
+  single_select_df <- get_acoustic_deployments(deployment_id = single_select)
   expect_equal(
     single_select_df %>% distinct(deployment_id) %>% pull(),
     c(single_select)
@@ -187,8 +186,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", 
 
   # Select multiple values
   multi_select <- c("1437", 1588) # Characters are allowed
-  multi_select_df <- get_acoustic_deployments(deployment_id = multi_select,
-                                              api = FALSE)
+  multi_select_df <- get_acoustic_deployments(deployment_id = multi_select)
   expect_equal(
     multi_select_df %>% distinct(deployment_id) %>% pull() %>% sort(),
     c(as.integer(multi_select)) # Output will be all integer
@@ -232,20 +230,17 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
 
   # Errors
   expect_error(
-    get_acoustic_deployments(receiver_id = "not_a_receiver_id",
-                             api = FALSE),
+    get_acoustic_deployments(receiver_id = "not_a_receiver_id"),
     regexp = "Can't find receiver_id `not_a_receiver_id` in"
   )
   expect_error(
-    get_acoustic_deployments(receiver_id = c("VR2W-124070", "not_a_receiver_id"),
-                             api = FALSE),
+    get_acoustic_deployments(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
     regexp = "Can't find receiver_id `VR2W-124070` and/or `not_a_receiver_id` in"
   )
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
-  single_select_df <- get_acoustic_deployments(receiver_id = single_select,
-                                               api = FALSE)
+  single_select_df <- get_acoustic_deployments(receiver_id = single_select)
   expect_equal(
     single_select_df %>% distinct(receiver_id) %>% pull(),
     c(single_select)
@@ -254,8 +249,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
 
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
-  multi_select_df <- get_acoustic_deployments(receiver_id = multi_select,
-                                              api = FALSE)
+  multi_select_df <- get_acoustic_deployments(receiver_id = multi_select)
   expect_equal(
     multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
     c(multi_select)
@@ -306,20 +300,17 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project
 
   # Errors
   expect_error(
-    get_acoustic_deployments(acoustic_project_code = "not_a_project",
-                             api = FALSE),
+    get_acoustic_deployments(acoustic_project_code = "not_a_project"),
     regexp = "Can't find acoustic_project_code `not_a_project` in"
   )
   expect_error(
-    get_acoustic_deployments(acoustic_project_code = c("demer", "not_a_project"),
-                             api = FALSE),
+    get_acoustic_deployments(acoustic_project_code = c("demer", "not_a_project")),
     regexp = "Can't find acoustic_project_code `demer` and/or `not_a_project` in"
   )
 
   # Select single value
   single_select <- "demer"
-  single_select_df <- get_acoustic_deployments(acoustic_project_code = single_select,
-                                               api = FALSE)
+  single_select_df <- get_acoustic_deployments(acoustic_project_code = single_select)
   expect_equal(
     single_select_df %>% distinct(acoustic_project_code) %>% pull(),
     c(single_select)
@@ -328,16 +319,13 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project
 
   # Selection is case insensitive
   expect_equal(
-    get_acoustic_deployments(acoustic_project_code = "demer",
-                             api = FALSE),
-    get_acoustic_deployments(acoustic_project_code = "DEMER",
-                             api = FALSE)
+    get_acoustic_deployments(acoustic_project_code = "demer"),
+    get_acoustic_deployments(acoustic_project_code = "DEMER")
   )
 
   # Select multiple values
   multi_select <- c("demer", "dijle")
-  multi_select_df <- get_acoustic_deployments(acoustic_project_code = multi_select,
-                                              api = FALSE)
+  multi_select_df <- get_acoustic_deployments(acoustic_project_code = multi_select)
   expect_equal(
     multi_select_df %>% distinct(acoustic_project_code) %>% pull() %>% sort(),
     c(multi_select)
@@ -381,20 +369,17 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
 
   # Errors
   expect_error(
-    get_acoustic_deployments(station_name = "not_a_station_name",
-                             api = FALSE),
+    get_acoustic_deployments(station_name = "not_a_station_name"),
     regexp = "Can't find station_name `not_a_station_name` in"
   )
   expect_error(
-    get_acoustic_deployments(station_name = c("de-9", "not_a_station_name"),
-                             api = FALSE),
+    get_acoustic_deployments(station_name = c("de-9", "not_a_station_name")),
     regexp = "Can't find station_name `de-9` and/or `not_a_station_name` in"
   )
 
   # Select single value
   single_select <- "de-9" # From demer
-  single_select_df <- get_acoustic_deployments(station_name = single_select,
-                                               api = FALSE)
+  single_select_df <- get_acoustic_deployments(station_name = single_select)
   expect_equal(
     single_select_df %>% distinct(station_name) %>% pull(),
     c(single_select)
@@ -403,8 +388,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
 
   # Select multiple values
   multi_select <- c("de-10", "de-9") # Note that sort() will put de-10 before de-9
-  multi_select_df <- get_acoustic_deployments(station_name = multi_select,
-                                              api = FALSE)
+  multi_select_df <- get_acoustic_deployments(station_name = multi_select)
   expect_equal(
     multi_select_df %>% distinct(station_name) %>% pull() %>% sort(),
     c(multi_select)
@@ -440,26 +424,22 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments
 
   # Errors
   expect_error(
-    get_acoustic_deployments(open_only = "not_a_logical",
-                             api = FALSE),
+    get_acoustic_deployments(open_only = "not_a_logical"),
     regexp = "argument is not interpretable as logical"
   )
 
   # ws1 is an open ended acoustic project
   all_df <-
     get_acoustic_deployments(acoustic_project_code = "ws1",
-                             open_only = FALSE,
-                             api = FALSE)
+                             open_only = FALSE)
 
   # Default returns all
-  default_df <- get_acoustic_deployments(acoustic_project_code = "ws1",
-                                         api = FALSE)
+  default_df <- get_acoustic_deployments(acoustic_project_code = "ws1")
   expect_equal(default_df, all_df)
 
   # Open only returns deployments with no end date
   open_only_df <- get_acoustic_deployments(acoustic_project_code = "ws1",
-                                           open_only = TRUE,
-                                           api = FALSE)
+                                           open_only = TRUE)
   expect_lt(nrow(open_only_df), nrow(all_df))
   expect_true(all(is.na(open_only_df$recover_date_time)))
 })
@@ -482,8 +462,7 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on multiple paramet
     receiver_id = "VR2W-124070",
     acoustic_project_code = "demer",
     station_name = "de-9",
-    open_only = FALSE,
-    api = FALSE
+    open_only = FALSE
   )
   expect_gt(nrow(multiple_parameters_df), 0)
 })
@@ -499,6 +478,6 @@ test_that("[SQL] get_acoustic_deployments() does not return cpod deployments", {
   skip_if_not_localdb()
 
   # C-POD-408 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "C-POD-408", api = FALSE)
+  df <- get_acoustic_deployments(receiver_id = "C-POD-408")
   expect_equal(nrow(df), 0)
 })

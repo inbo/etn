@@ -13,7 +13,6 @@
 #' @param scientific_name Character (vector). One or more scientific names.
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
-#' @param deployment_id Character (vector). One or more deployment ids.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param station_name Character (vector). One or more deployment station
 #'   names.
@@ -76,19 +75,19 @@ get_acoustic_detections <- function(connection,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
                                     acoustic_project_code = NULL,
-                                    deployment_id = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    progress = TRUE,
-                                    api = TRUE) {
+                                    progress = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
-  assertthat::assert_that(assertthat::is.flag(api))
   assertthat::assert_that(assertthat::is.flag(limit))
+
+  # Decide how we're going to retrieve the data
+  protocol <- select_protocol()
 
   # Control progress reporting
   # Don't show the progress bar when testing: clutters up console and CI output
@@ -131,7 +130,7 @@ get_acoustic_detections <- function(connection,
 
       do.call(count_acoustic_detections, append(
         arguments_to_pass,
-        list(api = api)
+        list(protocol = protocol)
       ))
     }
 
@@ -190,8 +189,9 @@ get_acoustic_detections <- function(connection,
   # have to add 1 more to the total number of steps.
   n_pages_expected <- ceiling(n_records_expected / page_size)
 
-  # Fetch credentials only once and reuse for every page
-  if (!api) credentials <- get_credentials()
+  # Fetch credentials only once and reuse for every page, if the call is
+  # forwarded to openCPU, credentials are appended by default
+  if (protocol != "opencpu") credentials <- get_credentials()
 
   # Fetch pages -------------------------------------------------------------
   # Path to store pages on disk
@@ -227,7 +227,7 @@ get_acoustic_detections <- function(connection,
 
     # Decide what helper to use, add any extra required arguments. Regardless of
     # helper, return temppath where page was written.
-    if (api) {
+    if (protocol == "opencpu") {
       arguments_for_helper <-
         list(
           function_identity = "get_acoustic_detections_page",
@@ -246,7 +246,9 @@ get_acoustic_detections <- function(connection,
           req_perform_opencpu(path = path)
         invisible(path)
       }
-    } else {
+    }
+
+    if (protocol == "localdb") {
       arguments_for_helper <- payload
       # Save the DBI returned data.frame as a feather file
       helper_to_use <- \(..., path) {
@@ -329,7 +331,7 @@ get_acoustic_detections <- function(connection,
 #' [`get_acoustic_detections()`][get_acoustic_detections].
 #'
 #'
-#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name api
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
 #' @inheritParams get_acoustic_detections
 #'
 #' @return A numeric value with the number of acoustic detections that match the
@@ -342,8 +344,11 @@ get_acoustic_detections <- function(connection,
 #'   acoustic_tag_id = "A69-1601-16130",
 #'   station_name = c("de-9", "de-10")
 #' )
-count_acoustic_detections <- function(..., api = TRUE) {
-  if (api) {
+count_acoustic_detections <- function(...) {
+  # Decide how we're going to retrieve the count
+  protocol <- select_protocol()
+  # If protocol is opencpu, use forward_to_api()
+  if (protocol == "opencpu") {
     returned_count <- forward_to_api("get_acoustic_detections_page",
       payload = append(
         rlang::list2(...),
@@ -351,7 +356,9 @@ count_acoustic_detections <- function(..., api = TRUE) {
       ),
       json = TRUE
     )
-  } else {
+  }
+  # If protocol is localdb, use etnservice::get_acoustic_detections_page()
+  if (protocol == "localdb") {
     returned_count <- do.call(etnservice::get_acoustic_detections_page,
       args = append(
         rlang::list2(...),
@@ -360,6 +367,7 @@ count_acoustic_detections <- function(..., api = TRUE) {
     )
   }
 
+  # Extract the count from the returned data.frame
   dplyr::pull(returned_count, "count") |>
     # If the count class is not numeric, convert it. DBI returns Integer64 which
     # causes issues with cli progress bars

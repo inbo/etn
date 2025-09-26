@@ -127,6 +127,74 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+#' Get the system's nodename
+#'
+#' A simple wrapper around `Sys.info()["nodename"]` to facilitate mocking in
+#' tests.
+#'
+#' @returns Character of length one with the system's nodename.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' get_nodename()
+get_nodename <- function() {
+  Sys.info()["nodename"]
+}
+
+#' Check if the local database protocol is available
+#'
+#' This function checks if the local database is available by checking the
+#' nodename.
+#'
+#' The nodename check is a simple string check to see if the system's nodename
+#' ends with "vliz.be", which is a convention for systems that have access to
+#' the local database.#'
+#'
+#' @returns Logical. `TRUE` if the local database is available, `FALSE`
+#'   otherwise.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' # This should return FALSE unless you are running this example from the VLIZ
+#' # RStudio Server.
+#' localdb_is_available()
+localdb_is_available <- function() {
+  # As discussed with VLIZ, all systems that have access to the local database
+  # should have nodenames ending on vliz.be
+  endsWith(get_nodename(), "vliz.be")
+}
+
+#' Select the protocol to use
+#'
+#' The protocol is the way data is fetched. This is in addition to the source,
+#' which is where the data comes from.
+#'
+#' This function is used to centrally control the decision tree for which
+#' protocol to use for ´conduct_parent_to_helper()´. When there is a local
+#' database connection available, use this by default. If not, use the OpenCPU
+#' API. Both these protocols use the ETN database as a source.
+#'
+#' @returns Character of length one with one of the available protocols.
+#'
+#' @family helper functions
+#' @noRd
+select_protocol <- function() {
+  # ALlow overwriting of protocol logic by environmental variable
+  user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
+                                       unset = "no_protocol_set")
+  if (user_selected_protocol != "no_protocol_set") {
+    return(user_selected_protocol)
+  }
+
+  # If there is a local database connection available, use it.
+  if (localdb_is_available()) {
+    return("localdb")
+  }
+
+  # Fallback on API
+  return("opencpu")
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass

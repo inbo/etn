@@ -47,8 +47,7 @@ write_dwc <- function(connection,
                       animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
-                      license = "CC-BY",
-                      api = TRUE) {
+                      license = "CC-BY") {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -56,7 +55,7 @@ write_dwc <- function(connection,
   }
 
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api,
+  out <- conduct_parent_to_helpers(protocol = select_protocol(),
                                    json = FALSE,
                                    ignored_arguments = "directory")
 

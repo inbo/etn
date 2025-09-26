@@ -19,14 +19,13 @@
 #' # Get a specific animal project
 #' get_animal_projects(animal_project_code = "2014_demer")
 get_animal_projects <- function(connection,
-                                animal_project_code = NULL,
-                                api = TRUE){
+                                animal_project_code = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(protocol = select_protocol())
   return(out)
 }

@@ -29,15 +29,18 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
 
 #' Skip the test if ETN is not a local database on this machine.
 #'
-#' This function checks if the "ETN" database is present in the list of ODBC
-#' data sources on the local machine. If it is not found, the test is skipped
-#' with a corresponding message.
+#' This function is useful to skip tests that require a local database
+#' connection. The skip doesn't actually check for the database, but uses a
+#' helper to check if the system nodename ends with a known suffix for VLIZ
+#' machines. This should always cover the RStudio Server.
 #'
 #' @family helper functions
 #' @noRd
-skip_if_not_localdb <- function(){
-  skip_if_not("ETN" %in% odbc::odbcListDataSources()$name,
-              "ETN is not a local database on this machine")
+skip_if_not_localdb <- function() {
+  testthat::skip_if_not(
+    localdb_is_available(),
+    "ETN is not a local database on this machine"
+  )
 }
 
 #' Get an HTTP response for a specific HTTP status code.
@@ -58,6 +61,8 @@ skip_if_not_localdb <- function(){
 get_http_response <- function(http_code = 200) {
   httr2::request("http://httpbingo.org") %>%
     httr2::req_url_path_append("status", http_code) %>%
-    httr2::req_error(is_error = function(resp){FALSE}) %>%
+    httr2::req_error(is_error = function(resp) {
+      FALSE
+    }) %>%
     httr2::req_perform()
 }

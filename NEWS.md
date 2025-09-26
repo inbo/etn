@@ -1,6 +1,7 @@
 # etn (development version)
 
-* **The etn package can now be used on your own computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. All functions make use of this API by default, which may result in **slower response times**. To use the previous method of directly connecting to the database (only possible when working on the [LifeWatch RStudio Server](https://rstudio.lifewatch.be/)), set `api = false` in all functions (#280).
+* **The etn package can now be used on your own computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280).
+* The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable `ETN_PROTOCOL` to `opencpu` to force the package to use the API. This will be slower as a local database connection. (#398)
 * The `connection` argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. `get_animals(animal_id = 305)`, not `get_animals(con, animal_id = 305)` or `get_animals(connection = con, animal_id = 305)` (#301).
 * `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
 * The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
@@ -13,6 +14,7 @@
 * You can now select detections via `get_acoustic_detections()` using a `deployment_id` (#382, #340)
 * `get_acoustic_detections()` now returns a progress bar on large queries. (#384)
 * When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
+* New vignette `vignette("package-options")` that describes some developer/power user package wide options. (#398)
 
 # etn 2.2.2
 

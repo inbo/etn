@@ -4,8 +4,7 @@
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
 #'
 #' @export
-list_receiver_ids <- function(connection,
-                              api = TRUE){
+list_receiver_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -13,7 +12,10 @@ list_receiver_ids <- function(connection,
   }
   # Either use the API, or the SQL helper.
   ## Return receiver_ids and drop NA (issue on database side inbo/etn#333)
-  receiver_ids <- conduct_parent_to_helpers(api, json = TRUE)
+  receiver_ids <- conduct_parent_to_helpers(
+    protocol = select_protocol(),
+    json = TRUE
+  )
 
-  return(receiver_ids[!is.na(receiver_ids)])
+  receiver_ids[!is.na(receiver_ids)]
 }

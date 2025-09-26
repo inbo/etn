@@ -42,14 +42,14 @@ get_animals <- function(connection,
                         animal_id = NULL,
                         tag_serial_number = NULL,
                         animal_project_code = NULL,
-                        scientific_name = NULL,
-                        api = TRUE) {
+                        scientific_name = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api, format = "feather")
+  out <- conduct_parent_to_helpers(protocol = select_protocol(),
+                                   format = "feather")
   return(out)
 }

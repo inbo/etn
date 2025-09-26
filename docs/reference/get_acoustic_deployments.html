@@ -23,6 +23,7 @@ results."><meta property="og:image" content="https://inbo.github.io/etn/logo.png
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -53,8 +54,7 @@ results.</p>
 <span>  receiver_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  acoustic_project_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  station_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  open_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  api <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  open_only <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -90,10 +90,6 @@ names.</p></dd>
 <dd><p>Logical. Restrict deployments to those that are currently
 open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></dd>
 
-
-<dt id="arg-api">api<a class="anchor" aria-label="anchor" href="#arg-api"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, the function will use the API to access ETN.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -106,7 +102,7 @@ open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all acoustic deployments</span></span></span>
 <span class="r-in"><span><span class="fu">get_acoustic_deployments</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17,647 × 38</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18,212 × 38</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    deployment_id receiver_id acoustic_project_code station_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>          <span style="text-decoration: underline;">6</span>660 VR20-2029   2004_Gudena           GUD1        </span>
@@ -119,7 +115,7 @@ open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>          <span style="text-decoration: underline;">6</span>672 VR2-3538    2004_Gudena           RAN1        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>          <span style="text-decoration: underline;">6</span>663 VR2-1909    2004_Gudena           RAN2        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>          <span style="text-decoration: underline;">6</span>673 VR2-1909    2004_Gudena           RAN2        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17,637 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18,202 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 34 more variables: station_description &lt;chr&gt;, station_manager &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   deploy_date_time &lt;dttm&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   intended_latitude &lt;dbl&gt;, intended_longitude &lt;dbl&gt;, mooring_type &lt;chr&gt;,</span></span>
@@ -222,7 +218,7 @@ open (i.e. no end date defined). Defaults to <code>FALSE</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

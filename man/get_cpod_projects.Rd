@@ -4,7 +4,7 @@
 \alias{get_cpod_projects}
 \title{Get cpod project data}
 \usage{
-get_cpod_projects(connection, cpod_project_code = NULL, api = TRUE)
+get_cpod_projects(connection, cpod_project_code = NULL)
 }
 \arguments{
 \item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
@@ -13,8 +13,6 @@ credentials instead.}
 
 \item{cpod_project_code}{Character (vector). One or more cpod project
 codes. Case-insensitive.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A tibble with animal project data, sorted by \code{project_code}. See

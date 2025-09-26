@@ -21,6 +21,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="etn-development-version">etn (development version)<a class="anchor" aria-label="anchor" href="#etn-development-version"></a></h2>
 <ul><li>
-<strong>The etn package can now be used on your computer!</strong> It connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package. All functions make use of this API by default, which may result in <strong>slower response times</strong>. To use the previous method of directly connecting to the database (only possible when working on the <a href="https://rstudio.lifewatch.be/" class="external-link">LifeWatch RStudio Server</a>), set <code>api = false</code> in all functions (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>).</li>
+<strong>The etn package can now be used on your own computer!</strong> It connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package. (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>).</li>
+<li>The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable <code>ETN_PROTOCOL</code> to <code>opencpu</code> to force the package to use the API. This will be slower as a local database connection. (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>)</li>
 <li>The <code>connection</code> argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. <code>get_animals(animal_id = 305)</code>, not <code>get_animals(con, animal_id = 305)</code> or <code>get_animals(connection = con, animal_id = 305)</code> (<a href="https://github.com/inbo/etn/issues/301" class="external-link">#301</a>).</li>
 <li>
 <code><a href="../reference/connect_to_etn.html">connect_to_etn()</a></code> is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (<a href="https://github.com/inbo/etn/issues/303" class="external-link">#303</a>).</li>
@@ -48,8 +50,15 @@
 <li>
 <code><a href="../reference/write_dwc.html">write_dwc()</a></code> now invisibly returns the transformed data as a list of data frames (rather than a data frame) (<a href="https://github.com/inbo/etn/issues/302" class="external-link">#302</a>).</li>
 <li>Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>)</li>
-<li>You can now store your password and username in <code>.Renviron</code> (easy to edit with <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), specifically in <code>ETN_USER</code> and <code>ETN_PWD</code> (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>, <a href="https://github.com/inbo/etn/issues/339" class="external-link">#339</a>)</li>
+<li>You can now store your password and username in <code>.Renviron</code> (easy to edit with <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), specifically in <code>ETN_USER</code> and <code>ETN_PWD</code> (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>, <a href="https://github.com/inbo/etn/issues/339" class="external-link">#339</a>, <a href="https://github.com/inbo/etn/issues/338" class="external-link">#338</a>, <a href="https://github.com/inbo/etn/issues/228" class="external-link">#228</a>)</li>
 <li>Archival tags are now available in <code><a href="../reference/get_animals.html">get_animals()</a></code> (<a href="https://github.com/inbo/etn/issues/365" class="external-link">#365</a>).</li>
+<li>Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable <code>ETN_TEST_API</code>. (<a href="https://github.com/inbo/etn/issues/383" class="external-link">#383</a>)</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now uses a different interface to the database resulting in much more detections being able to be fetched reliably. However, due to changes in the database, it’ll initially result in less detections being returned for the same filter variables (but with less mistakes). (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>, <a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/323" class="external-link">#323</a>)</li>
+<li>You can now select detections via <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> using a <code>deployment_id</code> (<a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/340" class="external-link">#340</a>)</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now returns a progress bar on large queries. (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>)</li>
+<li>When using a local database connection, <code>etn</code> will now check if the installed helper package <code>etnservice</code> that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of <code>etnservice</code> is older, you will be prompted to install a newer version. (<a href="https://github.com/inbo/etn/issues/385" class="external-link">#385</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.2" id="etn-222">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-222"></a></h2>
@@ -94,7 +103,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

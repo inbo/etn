@@ -5,14 +5,12 @@
 #'   `project.sql`.
 #'
 #' @export
-list_cpod_project_codes <- function(connection, api = TRUE){
+list_cpod_project_codes <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api, json = TRUE)
-  return(out)
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
 }
-

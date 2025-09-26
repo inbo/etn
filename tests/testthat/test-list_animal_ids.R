@@ -8,14 +8,14 @@ test_that("list_animal_ids() returns unique list of values using api", {
 
 test_that("list_animal_ids() returns same list over api and sql", {
   skip_if_not_localdb()
-  result_sql <- list_animal_ids(api = FALSE)
+  result_sql <- list_animal_ids()
 
   expect_identical(result_api, result_sql)
 })
 
 test_that("list_animal_ids returns at least 5 known values", {
   skip_if_not_localdb()
-  result_sql <- list_animal_ids(api = FALSE)
+  result_sql <- list_animal_ids()
 
   # a set of 5 known id_pk present in common.animal_release
   known_ids <- c(4622, 4653, 4647, 4674, 4678, 4675)

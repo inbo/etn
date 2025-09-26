@@ -25,6 +25,7 @@ to filter on scientific names."><meta property="og:image" content="https://inbo.
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -54,8 +55,7 @@ to filter on scientific names.</p>
 <span>  <span class="va">connection</span>,</span>
 <span>  <span class="va">animal_project_code</span>,</span>
 <span>  scientific_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  directory <span class="op">=</span> <span class="va">animal_project_code</span>,</span>
-<span>  api <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  directory <span class="op">=</span> <span class="va">animal_project_code</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -83,10 +83,6 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).</p></dd>
 <dd><p>Character. Relative path to local download directory.
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.</p></dd>
-
-
-<dt id="arg-api">api<a class="anchor" aria-label="anchor" href="#arg-api"></a></dt>
-<dd><p>Logical. If <code>TRUE</code>, the function will use the API to access ETN.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -148,7 +144,7 @@ performed by validation tools of the Frictionless Framework, e.g.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
