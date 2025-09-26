@@ -220,14 +220,14 @@ get_hostname <- function(url_str) {
 #' get_etnservice_version(which = "opencpu")
 #' get_etnservice_version(return_as = "all", api = TRUE)
 get_etnservice_version <- function(return_as = c("version", "all"),
-                                   which = c("openapi", "local"),
+                                   which = c("opencpu", "local"),
                                    ...) {
   return_as <- rlang::arg_match(return_as)
   which <- rlang::arg_match(which)
   # Get the full version information either locally or from the API
   pkg_version <-
     switch(which,
-           "openapi" = {
+           "opepcu" = {
              forward_to_api(
                "get_version",
                payload = list(),
