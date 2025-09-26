@@ -32,15 +32,15 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
 })
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
-  # Skip if the OpenCPU server is not reachable
-  skip_if_offline(host = "opencpu.lifewatch.be")
-  # Skip if the local and deployed versions don't match
-  skip_if(!rlang::is_installed("etnservice",
-                               version = as.character(get_etnservice_version()),
-                               compare = "=="))
+  # This cassette will need to be updated as functions get added or removed from
+  # etnservice.
+  vcr::local_cassette("etnservice_version_fns")
+  # Force using the api by setting the protocol to opencpu
+  withr::local_envvar(ETN_PROTOCOL = "opencpu")
 
-  expect_identical(
-    names(get_etnservice_version("all")$fn_checksums),
+  # Test that all functions in the package are listed
+  expect_named(
+    get_etnservice_version("all")$fn_checksums,
     ls(getNamespace("etnservice"))
   )
 })
