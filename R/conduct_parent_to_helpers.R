@@ -127,7 +127,7 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
                   no = "install"
                 ),
               deployed_version = as.character(deployed_version)
-            ), "the version used in by the API should match",
+            ), "the version used by the API should match",
             "the locally installed version"
           ),
           # Because etnservice is not on CRAN we need to provide a function to
