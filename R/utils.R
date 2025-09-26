@@ -137,22 +137,18 @@ is_testing <- function() {
 #' @noRd
 #' @examples
 #' get_nodename()
-get_nodename <- function(){
+get_nodename <- function() {
   Sys.info()["nodename"]
 }
 
 #' Check if the local database protocol is available
 #'
-#' This function checks if the local database is available by checking either
-#' the nodename or the ODBC data sources.
+#' This function checks if the local database is available by checking the
+#' nodename.
 #'
 #' The nodename check is a simple string check to see if the system's nodename
 #' ends with "vliz.be", which is a convention for systems that have access to
-#' the local database. The ODBC check requires the `odbc` package and checks if
-#' "ETN" is listed among the available ODBC data sources.
-#'
-#' @param check Character. The method to use for checking local database
-#'   availability.
+#' the local database.#'
 #'
 #' @returns Logical. `TRUE` if the local database is available, `FALSE`
 #'   otherwise.
@@ -162,19 +158,10 @@ get_nodename <- function(){
 #' # This should return FALSE unless you are running this example from the VLIZ
 #' # RStudio Server.
 #' localdb_is_available()
-localdb_is_available <- function(check = c("nodename", "odbc")){
-  check <- rlang::arg_match(check)
-  switch(check,
-         nodename =
-           # As discussed with VLIZ, all systems that have acces with the local database
-           # should have nodenames ending on vliz.be
-           endsWith(get_nodename(), "vliz.be"),
-         odbc = {
-           rlang::check_installed("odbc")
-           # A stricter and more failsafe test is possible, if odbc is installed
-           "ETN" %in% odbc::odbcListDataSources()$name
-         }
-  )
+localdb_is_available <- function() {
+  # As discussed with VLIZ, all systems that have access to the local database
+  # should have nodenames ending on vliz.be
+  endsWith(get_nodename(), "vliz.be")
 }
 
 #' Select the protocol to use
@@ -200,7 +187,7 @@ select_protocol <- function() {
   }
 
   # If there is a local database connection available, use it.
-  if (localdb_is_available(check = "nodename")) {
+  if (localdb_is_available()) {
     return("localdb")
   }
 

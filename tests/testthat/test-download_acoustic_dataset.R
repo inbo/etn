@@ -19,7 +19,6 @@ if (localdb_is_available()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
     download_acoustic_dataset(
-      api = FALSE,
       animal_project_code = "2014_demer",
       directory = localdb_datapackage_path
     )

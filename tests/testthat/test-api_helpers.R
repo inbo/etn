@@ -38,12 +38,12 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
 # get_etnservice_version() ------------------------------------------------
 test_that("get_etnservice_version() returns local etnservice package version", {
   expect_s3_class(
-    get_etnservice_version(api = FALSE),
+    get_etnservice_version(which = "local"),
     "package_version"
   )
 
   expect_identical(
-    get_etnservice_version(api = FALSE),
+    get_etnservice_version(which = "local"),
     packageVersion("etnservice")
   )
 })
@@ -55,7 +55,7 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
   vcr::local_cassette("etnservice_version")
 
   expect_s3_class(
-    get_etnservice_version(api = TRUE),
+    get_etnservice_version(which = "opencpu"),
     "package_version"
   )
 
@@ -63,7 +63,7 @@ test_that("get_etnservice_version() returns OpenCPU deployed package version", {
   # expected version needs to be updated as well
   version_in_cassette <- "0.4.3"
   expect_identical(
-    get_etnservice_version(api = TRUE),
+    get_etnservice_version(which = "opencpu"),
     package_version(version_in_cassette)
   )
 })
@@ -82,7 +82,7 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
 })
 
 test_that("get_etnservice_version() lists checksums of available functions", {
-  local_version_info <- get_etnservice_version("all", api = FALSE)
+  local_version_info <- get_etnservice_version("all", which = "local")
   # test for Single function
   expect_identical(
     local_version_info$fn_checksums$get_acoustic_detections,
@@ -101,7 +101,7 @@ test_that("etnservice_version_matches() can return TRUE/FALSE", {
 
 test_that("etnservice_version_matches() returns TRUE on mismatch when exact is TRUE", {
   # Mock a etnservice version that is definitely different than local
-  mock_version_info <- get_etnservice_version("all", api = FALSE)
+  mock_version_info <- get_etnservice_version("all", which = "local")
   mock_version_info$fn_checksums[4] <- "not_a_real_checksum_value"
   expect_false(
     with_mocked_bindings(

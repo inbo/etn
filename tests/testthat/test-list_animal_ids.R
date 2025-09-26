@@ -8,7 +8,7 @@ test_that("list_animal_ids() returns unique list of values using api", {
 
 test_that("list_animal_ids() returns same list over api and sql", {
   skip_if_not_localdb()
-  result_sql <- list_animal_ids(api = FALSE)
+  result_sql <- list_animal_ids()
 
   expect_identical(result_api, result_sql)
 })

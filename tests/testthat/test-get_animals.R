@@ -13,7 +13,7 @@ test_that("get_animals() returns a tibble", {
 
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-  df_sql <- get_animals(api = FALSE)
+  df_sql <- get_animals()
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })

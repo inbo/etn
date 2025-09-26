@@ -25,6 +25,7 @@ can be multiple records (acoustic_tag_id) per tag device
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -117,7 +118,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
@@ -140,7 +141,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
@@ -163,7 +164,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
@@ -176,7 +177,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span>
@@ -188,7 +189,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span>
@@ -201,7 +202,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span>

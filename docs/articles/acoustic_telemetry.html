@@ -41,6 +41,7 @@
 <li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
     <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
     <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+    <li><a class="dropdown-item" href="../articles/package-options.html">Package Options</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +72,7 @@
                         <h4 data-toc-skip class="author">Damiano
 Oldoni</h4>
             
-            <h4 data-toc-skip class="date">2025-09-25</h4>
+            <h4 data-toc-skip class="date">2025-09-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/HEAD/vignettes/acoustic_telemetry.Rmd" class="external-link"><code>vignettes/acoustic_telemetry.Rmd</code></a></small>
       <div class="d-none name"><code>acoustic_telemetry.Rmd</code></div>
@@ -137,7 +138,7 @@ let’s start by getting an overview of all projects:</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span>         18 2013_albertka… animal       Acoustic       2013 Albert… 2013-10-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>        801 2014_Frome     animal       <span style="color: #BB0000;">NA</span>             2014_Frome   2014-10-01</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>If you know the <code>project code</code> already and you are just
 interested to get more information about it, you can specify it in the
 <code><a href="../reference/get_animal_projects.html">get_animal_projects()</a></code> function directly:</p>
@@ -151,7 +152,7 @@ interested to get more information about it, you can specify it in the
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>This is exactly the same as retrieving all projects first and
 filtering them afterwards based on column <code>project_code</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -163,7 +164,7 @@ filtering them afterwards based on column <code>project_code</code>:</p>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>To list all available animal project codes as a vector, you can use
 <code><a href="../reference/list_animal_project_codes.html">list_animal_project_codes()</a></code>, one of the etn functions in
 the <a href="https://inbo.github.io/etn/reference/index.html#section-list-parameter-options"><code>list_*</code>
@@ -235,10 +236,10 @@ history using <code><a href="../reference/get_acoustic_detections.html">get_acou
 <span>  scientific_name <span class="op">=</span> <span class="st">"Silurus glanis"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Preparing</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Preparing : will fetch 70.49 k detections <span style="color: #B2B2B2;">[476ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Preparing : will fetch 70.49 k detections <span style="color: #B2B2B2;">[1.9s]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Wrapping up</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[267ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[204ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <p>Preview:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -261,7 +262,7 @@ history using <code><a href="../reference/get_acoustic_detections.html">get_acou
 <span><span class="co">## <span style="color: #949494;">#   station_name &lt;chr&gt;, deploy_latitude &lt;dbl&gt;, deploy_longitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_value &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor2_value &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor2_unit &lt;chr&gt;, signal_to_noise_ratio &lt;int&gt;, source_file &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   qc_flag &lt;lgl&gt;, deployment_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   qc_flag &lt;chr&gt;, deployment_id &lt;int&gt;</span></span></span></code></pre>
 <p>Which individuals have been detected (<code>animal_id</code>) and in
 which period?</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -483,7 +484,7 @@ serial number, manufacturer, model, and frequency:</p>
 <span><span class="co">## <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span></span></code></pre>
@@ -508,7 +509,7 @@ serial number, manufacturer, model, and frequency:</p>
 <span><span class="co">## <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;lgl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   length &lt;dbl&gt;, diameter &lt;dbl&gt;, weight &lt;dbl&gt;, floating &lt;chr&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   archive_memory &lt;chr&gt;, sensor_slope &lt;dbl&gt;, sensor_intercept &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_range &lt;chr&gt;, sensor_range_min &lt;dbl&gt;, sensor_range_max &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   sensor_resolution &lt;dbl&gt;, sensor_unit &lt;chr&gt;, sensor_accuracy &lt;dbl&gt;, …</span></span></span></code></pre>
@@ -551,7 +552,7 @@ function <code><a href="../reference/get_acoustic_projects.html">get_acoustic_pr
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>          7 demer        acoustic     Acoustic       Demer        2014-04-10</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>          5 zeeschelde   acoustic     Acoustic       Zeeschelde   2014-04-10</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;">#   moratorium &lt;chr&gt;, imis_dataset_id &lt;int&gt;</span></span></span></code></pre>
 <p>You can retrieve the full list of acoustic network projects with the
 correspondent <code>list_*</code> function:</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">

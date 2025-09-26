@@ -29,9 +29,10 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
 
 #' Skip the test if ETN is not a local database on this machine.
 #'
-#' This function checks if the "ETN" database is present in the list of ODBC
-#' data sources on the local machine. If it is not found, the test is skipped
-#' with a corresponding message.
+#' This function is useful to skip tests that require a local database
+#' connection. The skip doesn't actually check for the database, but uses a
+#' helper to check if the system nodename ends with a known suffix for VLIZ
+#' machines. This should always cover the RStudio Server.
 #'
 #' @family helper functions
 #' @noRd

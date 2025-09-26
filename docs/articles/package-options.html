@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>ETN field definitions • etn</title>
+<title>Package Options • etn</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -15,7 +15,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="ETN field definitions">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Package Options">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -63,50 +63,67 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>ETN field definitions</h1>
-                        <h4 data-toc-skip class="author">Peter Desmet
-&amp; Filip Waumans</h4>
+      <img src="../logo.png" class="logo" alt=""><h1>Package Options</h1>
+                        <h4 data-toc-skip class="author">Pieter
+Huybrechts</h4>
             
             <h4 data-toc-skip class="date">2025-09-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/HEAD/vignettes/etn_fields.Rmd" class="external-link"><code>vignettes/etn_fields.Rmd</code></a></small>
-      <div class="d-none name"><code>etn_fields.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/HEAD/vignettes/package-options.Rmd" class="external-link"><code>vignettes/package-options.Rmd</code></a></small>
+      <div class="d-none name"><code>package-options.Rmd</code></div>
     </div>
 
     
     
-<p class="alert alert-warning">
-The information below is outdated. We are working on <a href="https://github.com/inbo/etn/issues/226" class="external-link">an update</a>.
-</p>
-<p>Field definitions are managed in the ETN database, not in this
-package, but suggestions/corrections can be reported as an issue (see
-the <a href="../CONTRIBUTING.html">contributing guide</a>). The
-definitions are also available as a <a href="https://github.com/inbo/etn/blob/master/inst/assets/etn_fields.csv" class="external-link">csv
-file</a>.</p>
+<p>The package has a number of options that can be set via <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html" class="external-link">System
+Environmental variables</a>. You usually don’t need to change these
+options, and most of them are actually there to help contributors in
+developing the package.</p>
 <div class="section level2">
-<h2 id="animals">Animals<a class="anchor" aria-label="anchor" href="#animals"></a>
+<h2 id="how-to-change-these-options-">How to change these options.<a class="anchor" aria-label="anchor" href="#how-to-change-these-options-"></a>
 </h2>
-<p>Related function: <code><a href="../reference/get_animals.html">get_animals()</a></code>.</p>
+<p>You can change a System Environmental Variable from within R with
+<code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> and get a set value with
+<code><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv()</a></code>. To set variables more permanently you can use
+the <code>.Renviron</code> file, which can be easily changed with
+<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>.</p>
 </div>
 <div class="section level2">
-<h2 id="tags">Tags<a class="anchor" aria-label="anchor" href="#tags"></a>
+<h2 id="options-overview">Options overview<a class="anchor" aria-label="anchor" href="#options-overview"></a>
 </h2>
-<p>Related function: <code><a href="../reference/get_tags.html">get_tags()</a></code>.</p>
+<p>The following options are available:</p>
+<div class="section level3">
+<h3 id="login-credentials">Login credentials<a class="anchor" aria-label="anchor" href="#login-credentials"></a>
+</h3>
+<p>See <a href="etn_credentials.html">Set Up Your ETN Username and
+Password</a>. These variables allow you to set your etn database
+username and password.</p>
+<ul>
+<li>
+<code>ETN_USER</code> : Username to the etn database</li>
+<li>
+<code>ETN_PWD</code> : Password to the etn database</li>
+</ul>
 </div>
-<div class="section level2">
-<h2 id="detections">Detections<a class="anchor" aria-label="anchor" href="#detections"></a>
-</h2>
-<p>Related function: <code>get_detections()</code>.</p>
+<div class="section level3">
+<h3 id="opencpu-options">OpenCPU Options<a class="anchor" aria-label="anchor" href="#opencpu-options"></a>
+</h3>
+<ul>
+<li>
+<code>ETN_PROTOCOL</code> : The package automatically switches
+between using a local connection to the etn database or the OpenCPU API
+depending on the availability of a local database connection is
+available. You can force the package to always use one or the other by
+setting this option to <code>opencpu</code> or
+<code>localdb</code>.</li>
+<li>
+<code>ETN_TEST_API</code> : <strong>DANGER</strong> Overwrite the
+url where the etn OpenCPU API is hosted. This variable is used to switch
+the entire package over to a different url, for example the testing api.
+Changing this variable to anything other than the testing api url will
+break the package.</li>
+</ul>
 </div>
-<div class="section level2">
-<h2 id="deployments">Deployments<a class="anchor" aria-label="anchor" href="#deployments"></a>
-</h2>
-<p>Related function: <code>get_deployments()</code>.</p>
-</div>
-<div class="section level2">
-<h2 id="receivers">Receivers<a class="anchor" aria-label="anchor" href="#receivers"></a>
-</h2>
-<p>Related function: <code>get_receivers()</code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
