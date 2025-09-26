@@ -35,7 +35,9 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
   # Skip if the OpenCPU server is not reachable
   skip_if_offline(host = "opencpu.lifewatch.be")
   # Skip if the local and deployed versions don't match
-  skip_if(!rlang::is_installed("etnservice", version = get_etnservice_version("opencpu")))
+  skip_if(!rlang::is_installed("etnservice",
+                               version = as.character(get_etnservice_version()),
+                               compare = "=="))
 
   expect_identical(
     names(get_etnservice_version("all")$fn_checksums),
