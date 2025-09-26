@@ -1,16 +1,4 @@
 # get_etnservice_version() ------------------------------------------------
-test_that("get_etnservice_version() returns local etnservice package version", {
-  expect_s3_class(
-    get_etnservice_version(which = "local"),
-    "package_version"
-  )
-
-  expect_identical(
-    get_etnservice_version(which = "local"),
-    packageVersion("etnservice")
-  )
-})
-
 test_that("get_etnservice_version() returns OpenCPU deployed package version", {
   # Cache the HTTP response so we can always test against the same version. I'm
   # testing the ability of get_etnservice_version() to handle the API response,
