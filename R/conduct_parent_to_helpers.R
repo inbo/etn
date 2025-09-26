@@ -80,14 +80,15 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
               # installed.
               no = ", no local installation could be found.",
               # If installed, create a string template to report what version.
-              yes = ", the locally installed version is: {local_version}. "
-            ),
-            local_version = ifelse(
-              rlang::is_installed("etnservice"),
-              # If installed, check what version
-              yes = as.character(utils::packageVersion("etnservice")),
-              # If not installed, then local_version is not used.
-              no = ""
+              yes = glue::glue(", the locally installed version is: {local_version}. ",
+                local_version = ifelse(
+                  rlang::is_installed("etnservice"),
+                  # If installed, check what version
+                  yes = as.character(utils::packageVersion("etnservice")),
+                  # If not installed, then local_version is not used.
+                  no = "NOT_INSTALLED"
+                )
+              )
             )
           ),
           class = "etn_etnservice_version_mismatch"
