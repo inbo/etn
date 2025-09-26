@@ -203,6 +203,9 @@ get_hostname <- function(url_str) {
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
+#' @param ignore_dev Logical, if `TRUE` then development versions `*.9***` are
+#' stripped from the returned version number. Convenient to avoid a trigger of
+#' [rlang::check_installed()]. Ignored when `return_as` is `"all"`
 #'
 #' @returns Either a character string with the version number of etnservice. Or
 #'   a list with the full output of `etnservice::get_version()`, which includes
@@ -218,6 +221,7 @@ get_hostname <- function(url_str) {
 #' get_etnservice_version(return_as = "all", api = TRUE)
 get_etnservice_version <- function(return_as = c("version", "all"),
                                    api = TRUE,
+                                   ignore_dev = TRUE,
                                    ...) {
   return_as <- rlang::arg_match(return_as)
   # Get the full version information either locally or from the API
@@ -237,7 +241,16 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   switch(return_as,
     # coerce into character, packageVersion() returns other class.
     version = pkg_version$version,
-    all = pkg_version
+    all = function(ignore_dev) {
+      if (ignore_dev) {
+        package_version(paste(pkg_version$major,
+          pkg_version$minor,
+          pkg_version$patch,
+          sep = "."
+        ))
+      }
+      pkg_version
+    }
   )
 }
 

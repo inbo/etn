@@ -37,6 +37,7 @@ Imports:
     methods,
     prettyunits,
     readr,
+    remotes,
     rlang,
     stringr,
     utils

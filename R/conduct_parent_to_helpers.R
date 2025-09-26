@@ -63,7 +63,9 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
       # Check if the local version of etnservice matches the one deployed on
       # OpenCPU.
       if (!etnservice_version_matches()) {
-        deployed_version <- get_etnservice_version(api = TRUE)
+        # Cast into character, rlang doesn't expect `package_version` obj
+        deployed_version <- as.character(get_etnservice_version(api = TRUE,
+                                                                ignore_dev = TRUE))
 
         rlang::check_installed(
           "etnservice",
@@ -76,7 +78,17 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
               "\nThere is a newer version of etnservice available",
               "please update",
               "to avoid differences between local and API queries."
+            ),
+          # Because etnservice is not on CRAN we need to provide a function to install it.
+          # The pkg and ... arguments are required by rlang.
+          action = function(pkg, ...){
+            remotes::install_github(
+              repo = file.path("inbo", pkg),
+              # The HEAD, tag, to install. By convention the tags for etnservice start with v.
+              # If we ever diverge from this conversion, I need to change this ref constructor.
+              ref = paste0("v", deployed_version)
             )
+          }
         )
       }
       do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
