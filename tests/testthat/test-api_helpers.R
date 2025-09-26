@@ -1,21 +1,18 @@
 # get_etnservice_version() ------------------------------------------------
-test_that("get_etnservice_version() returns OpenCPU deployed package version", {
-  # Cache the HTTP response so we can always test against the same version. I'm
-  # testing the ability of get_etnservice_version() to handle the API response,
-  # not the API's ability to respond.
-  vcr::local_cassette("etnservice_version")
-
+test_that("get_etnservice_version() returns package_version object", {
   expect_s3_class(
-    get_etnservice_version(),
+    get_etnservice_version(ignore_dev = FALSE),
     "package_version"
   )
+})
 
-  # This is stable because we use a cassette, if the cassette is updated, the
-  # expected version needs to be updated as well
-  version_in_cassette <- "0.4.3"
+test_that("get_etnservice_version() can strip dev versions", {
   expect_identical(
-    get_etnservice_version(which = "opencpu"),
-    package_version(version_in_cassette)
+    with_mocked_bindings(
+      get_etnservice_version(ignore_dev = TRUE),
+      forward_to_api = function(...) package_version("0.4.3.9000")
+    ),
+    package_version("0.4.3")
   )
 })
 
