@@ -227,7 +227,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
   # Get the full version information either locally or from the API
   pkg_version <-
     switch(which,
-           "opepcu" = {
+           "opencpu" = {
              forward_to_api(
                "get_version",
                payload = list(),
