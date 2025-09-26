@@ -38,10 +38,6 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
       get_parent_fn_name = function(...) {
         "list_animal_project_codes"
       },
-      # Mock a mismatch between the installed and deployed version of etnservice
-      etnservice_version_matches = function(...) {
-        FALSE
-      },
       # Mock the deployed version of etnservice to a very high version
       get_etnservice_version = function(...) {
         "9999.0.0"
