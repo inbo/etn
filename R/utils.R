@@ -207,7 +207,7 @@ select_protocol <- function() {
 #' strip_dev_version(package_version("1.2.3.9000"))
 #' strip_dev_version(package_version("1.2.3"))
 strip_dev_version <- function(x) {
-  if (!any(class(x) %in% c("package_version", "numeric_version"))) {
+  if (!inherits(x, c("package_version", "numeric_version"))) {
     cli::cli_abort("`x` should be a `package_version`, not a {class(x)}")
   }
 
