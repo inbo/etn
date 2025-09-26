@@ -29,8 +29,9 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
                                       ...) {
   # Check arguments
   protocol <- rlang::arg_match(protocol)
-  assertthat::assert_that(is.character(ignored_arguments) |
-    is.null(ignored_arguments))
+  if (!(is.character(ignored_arguments) || is.null(ignored_arguments))) {
+    cli::cli_abort("{ignored_arguments} should be a character vector or NULL.")
+  }
 
   # Lock in the name of the parent function
   function_identity <-
