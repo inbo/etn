@@ -4,6 +4,26 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
   )
 })
 
+test_that("conduct_parent_to_helper() does not forward ignored arguments", {
+  vcr::local_cassette("conduct_acoustic_projects")
+  # If the `acoustic_project_code` arguments is not forwarded, then the result
+  # should be the same as passing without arguments.
+  expect_identical(
+    with_mocked_bindings(
+      conduct_parent_to_helpers(ignored_arguments = "acoustic_project_code"),
+      return_parent_arguments = \(...) list(acoustic_project_code = "2013_Foyle"),
+      get_parent_fn_name = \(...) "get_acoustic_projects",
+      select_protocol = \(...) "opencpu"
+    ),
+    with_mocked_bindings(
+      conduct_parent_to_helpers(),
+      return_parent_arguments = \(...) list(),
+      get_parent_fn_name = \(...) "get_acoustic_projects",
+      select_protocol = \(...) "opencpu"
+    )
+  )
+})
+
 test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
   withr::local_options(
     # Disable the prompt, and have rlang return an error to test on.
