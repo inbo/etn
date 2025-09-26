@@ -14,6 +14,7 @@
 * You can now select detections via `get_acoustic_detections()` using a `deployment_id` (#382, #340)
 * `get_acoustic_detections()` now returns a progress bar on large queries. (#384)
 * When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
+* New vignette `vignette("package-options")` that describes some developer/power user package wide options. (#398)
 
 # etn 2.2.2
 
