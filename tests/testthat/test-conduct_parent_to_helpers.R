@@ -33,7 +33,8 @@ test_that("conduct_parent_to_helpers() asks for etnservice update if needed", {
   expect_error(
     with_mocked_bindings(
       # We only check the versions for calls to the local database
-      conduct_parent_to_helpers(protocol = "localdb"),
+      # Suppress the inform message.
+      suppressMessages(conduct_parent_to_helpers(protocol = "localdb")),
       # Mock a function call
       get_parent_fn_name = function(...) {
         "list_animal_project_codes"
