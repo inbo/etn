@@ -187,7 +187,7 @@ select_protocol <- function() {
   }
 
   # If there is a local database connection available, use it.
-  if (localdb_is_available(check = "nodename")) {
+  if (localdb_is_available()) {
     return("localdb")
   }
 
