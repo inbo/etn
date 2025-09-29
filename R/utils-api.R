@@ -186,9 +186,9 @@ get_hostname <- function(url_str) {
 
 #' Get the version of etnservice that was deployed on OpenCPU
 #'
-#' This function calls `etnservice::get_version()` if `which = "local"`,
-#' otherwise it forwards the call to the API via
-#' `forward_to_api("get_version")`.
+#' This function forwards a call to the API via `forward_to_api("get_version")`
+#' to get the deployed version of etnservice on the OpenCPU deployment. It can
+#' also request a list of function checksums.
 #'
 #' This function is useful because it allows us to mock the version of
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
