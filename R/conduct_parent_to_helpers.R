@@ -62,7 +62,6 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
     },
     localdb = {
       deployed_version <- get_etnservice_version(
-        which = "opencpu",
         return_as = "version"
       ) |>
         as.character()
