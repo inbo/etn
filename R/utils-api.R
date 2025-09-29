@@ -184,11 +184,11 @@ get_hostname <- function(url_str) {
   stringr::str_extract(url_str, ".+(?=library)")
 }
 
-#' Get the version number of etnservice, either locally or deployed
+#' Get the version of etnservice that was deployed on OpenCPU
 #'
-#' This function calls `etnservice::get_version()` if `which = "local"`,
-#' otherwise it forwards the call to the API via
-#' `forward_to_api("get_version")`.
+#' This function forwards a call to the API via `forward_to_api("get_version")`
+#' to get the deployed version of etnservice on the OpenCPU deployment. It can
+#' also request a list of function checksums.
 #'
 #' This function is useful because it allows us to mock the version of
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
@@ -204,41 +204,24 @@ get_hostname <- function(url_str) {
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
-#' @param which What version of etnservice should be checked, the one deployed
-#'   on the OpenCPU API : `opencpu`, or the one locally installed: `local`.
 #'
 #' @returns Either a character string with the version number of etnservice. Or
-#'   a list with the full output of `etnservice::get_version()`, which includes
-#'   the version number, And the checksums of all functions in etnservice.
+#'   a list with the full output which includes the version number, And the
+#'   checksums of all functions in etnservice.
 #' @noRd
 #' @family helper functions
-#'
-#' @examples
-#' # Get the version of the locally installed version of etnservice
-#' get_etnservice_version(which = "local")
-#' # Get the version of the version of etnservice deployed on OpenCPU
-#' get_etnservice_version(which = "opencpu")
-#' get_etnservice_version(return_as = "all", api = TRUE)
 get_etnservice_version <- function(return_as = c("version", "all"),
-                                   which = c("opencpu", "local"),
                                    ...) {
   return_as <- rlang::arg_match(return_as)
-  which <- rlang::arg_match(which)
-  # Get the full version information either locally or from the API
+  # Get the full version information from the API
   pkg_version <-
-    switch(which,
-           "opencpu" = {
-             forward_to_api(
-               "get_version",
-               payload = list(),
-               add_credentials = FALSE,
-               format = "rds",
-               ...)
-             },
-           "local" = {
-             etnservice::get_version()
-             }
-           )
+    forward_to_api(
+      "get_version",
+      payload = list(),
+      add_credentials = FALSE,
+      format = "rds",
+      ...
+    )
 
   # Return either the version number or the full output
   switch(return_as,
@@ -246,55 +229,6 @@ get_etnservice_version <- function(return_as = c("version", "all"),
     version = pkg_version$version,
     all = pkg_version
   )
-}
-
-
-#' Check if the locally installed version of etnservice matches the version
-#' deployed on the API.
-#'
-#' The function can check for an exact match, or by default, if the installed
-#' version of etnservice is equal or more recent than the one deployed via
-#' OpenCPU.
-#'
-#' This function is useful to ensure that the local package version is
-#' compatible with the API version. This is checked by comparing the version
-#' returned by `etnservice::get_version()` with the version returned by the API
-#' endpoint `get_version`. Both the version numbers are checked as well as the
-#' checksums of all functions, ensuring that a small change in a function
-#' without updating the package version will also trigger this check.
-#'
-#' This is important to make sure that a function calls return consistent
-#' results independent of the call was made locally or over the api.
-#'
-#' The exact version of the package installed locally can be returned by
-#' `etnservice::get_version()`, the version deployed can be returned by calling
-#' `forward_to_api("get_version", add_credentials = FALSE)`
-#'
-#' @inheritDotParams forward_to_api format domain
-#' @inheritDotParams get_val return_url
-#' @return A logical value indicating whether the locally installed version of
-#'   etnservice is the same as the one deployed online.
-#' @noRd
-#' @family helper functions
-etnservice_version_matches <- function(..., exact = FALSE) {
-  if (exact) {
-    # Compare the package versions, and the checksums of all functions.
-    identical(
-      # Deployed
-      get_etnservice_version("all", which = "opencpu", ...),
-      # We can't use get_etnservice_version(which = "local") here because we mock
-      # this function in tests, if we mock it twice and compare it against
-      # itself, we would always pass. This way, we can simulate a deployed
-      # version to test against.
-
-      # Local
-      etnservice::get_version()
-    )
-  } else {
-    # Deployed <= Local
-    get_etnservice_version("version", which = "opencpu") <=
-      etnservice::get_version()$version
-  }
 }
 
 #' Perform a request to OpenCPU to get a response

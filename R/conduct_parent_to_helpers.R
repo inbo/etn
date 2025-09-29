@@ -29,8 +29,9 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
                                       ...) {
   # Check arguments
   protocol <- rlang::arg_match(protocol)
-  assertthat::assert_that(is.character(ignored_arguments) |
-    is.null(ignored_arguments))
+  if (!(is.character(ignored_arguments) || is.null(ignored_arguments))) {
+    cli::cli_abort("{ignored_arguments} should be a character vector or NULL.")
+  }
 
   # Lock in the name of the parent function
   function_identity <-
@@ -60,25 +61,83 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
       )
     },
     localdb = {
-      # Check if the local version of etnservice matches the one deployed on
-      # OpenCPU.
-      if (!etnservice_version_matches()) {
-        deployed_version <- get_etnservice_version(which = "opencpu")
+      deployed_version <- get_etnservice_version(
+        return_as = "version"
+      ) |>
+        as.character()
+      # If the local and deployed etnservice versions do not match:
+      if (!rlang::is_installed("etnservice", version = deployed_version)) {
+        cli::cli_alert_info(
+          glue::glue(
+            "The API is using etnservice version {deployed_version}",
+            "{local_situation_str}",
+            "To ensure consistent results installing the same version as ",
+            "the API is recommended.",
+            deployed_version = deployed_version,
+            local_situation_str = ifelse(
+              rlang::is_installed("etnservice"),
+              # If not installed, don't need to mention what version is
+              # installed.
+              no = ", no local installation could be found.",
+              # If installed, create a string template to report what version.
+              yes = glue::glue(", the locally installed version is: {local_version}. ",
+                local_version = as.character(utils::packageVersion("etnservice"))
+              )
+            )
+          ),
+          class = "etn_etnservice_version_mismatch"
+        )
 
+
+        # We will need pak to install/update etnservice from GitHub
+        rlang::check_installed("pak",
+          reason = glue::glue(
+            "to {update_or_install} etnservice.",
+            update_or_install =
+              ifelse(
+                rlang::is_installed("etnservice"),
+                yes = "update",
+                no = "install"
+              )
+          )
+        )
+
+        # Update or install etnservice to the same version as deployed
         rlang::check_installed(
           "etnservice",
           version = deployed_version,
           # Ensure the exact version is installed, and not an even more recent
           # version (In case OpenCPU is lagging on the Github released version).
           compare = "==",
-          reason =
-            paste(
-              "\nThere is a newer version of etnservice available",
-              "please update",
-              "to avoid differences between local and API queries."
+          reason = paste(
+            "ensure consistent results,",
+            glue::glue(
+              "to {update_or_install} etnservice to version ",
+              "{deployed_version} to ensure consistent results with the API.",
+              update_or_install =
+                ifelse(
+                  rlang::is_installed("etnservice"),
+                  yes = "update",
+                  no = "install"
+                ),
+              deployed_version = as.character(deployed_version)
+            ), "the version used by the API should match",
+            "the locally installed version"
+          ),
+          # Because etnservice is not on CRAN we need to provide a function to
+          # install it. The pkg and ... arguments are required by rlang.
+          action = function(pkg, ...) {
+            pak::pak(
+              # The HEAD, tag, to install. By convention the tags for etnservice
+              # start with v. If we ever diverge from this conversion, I need to
+              # change this ref constructor.
+              pkg = paste0("inbo/etnservice", "@v", deployed_version),
             )
+          }
         )
       }
+
+      # Forward the parent function to etnservice
       do.call(utils::getFromNamespace(function_identity, ns = "etnservice"),
         args = append(arguments_to_pass,
           list(credentials = get_credentials()),
