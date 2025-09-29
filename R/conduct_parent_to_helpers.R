@@ -136,10 +136,7 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
               # The HEAD, tag, to install. By convention the tags for etnservice
               # start with v. If we ever diverge from this conversion, I need to
               # change this ref constructor.
-              pkg = file.path(
-                "inbo",
-                paste0("etnservice", "@v", deployed_version)
-              )
+              pkg = paste0("inbo/etnservice", "@v", deployed_version),
             )
           }
         )
