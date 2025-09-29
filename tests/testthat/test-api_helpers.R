@@ -1,18 +1,8 @@
 # get_etnservice_version() ------------------------------------------------
 test_that("get_etnservice_version() returns package_version object", {
   expect_s3_class(
-    get_etnservice_version(ignore_dev = FALSE),
+    get_etnservice_version(),
     "package_version"
-  )
-})
-
-test_that("get_etnservice_version() can strip dev versions", {
-  expect_identical(
-    with_mocked_bindings(
-      get_etnservice_version(ignore_dev = TRUE),
-      forward_to_api = function(...) package_version("0.4.3.9000")
-    ),
-    package_version("0.4.3")
   )
 })
 

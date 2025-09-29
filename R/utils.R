@@ -195,29 +195,6 @@ select_protocol <- function() {
   return("opencpu")
 }
 
-#' Strip the dev version from a package_version object
-#'
-#'
-#' @param x A `package_version` object
-#'
-#' @returns A `package_version` object without the dev version
-#' @family helper functions
-#' @noRd
-#' @examples
-#' strip_dev_version(package_version("1.2.3.9000"))
-#' strip_dev_version(package_version("1.2.3"))
-strip_dev_version <- function(x) {
-  if (!inherits(x, c("package_version", "numeric_version"))) {
-    cli::cli_abort("`x` should be a `package_version`, not a {class(x)}")
-  }
-
-  package_version(paste(x$major,
-    x$minor,
-    x$patch,
-    sep = "."
-  ))
-}
-
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
