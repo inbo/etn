@@ -102,9 +102,10 @@ get_acoustic_detections <- function(connection,
   if (!progress) {
     withr::local_options(cli.progress_show_after = 60 * 60 * 24)
   }
-  # Some arguments don't need to be send to etnservice
+  # Some arguments don't need to be sent to etnservice, drop arguments set to
+  # NULL
   arguments_to_pass <-
-    return_parent_arguments(depth = 1)[
+    return_parent_arguments(depth = 1, compact = TRUE)[
       !names(return_parent_arguments(depth = 1)) %in% c(
         "api",
         "progress",
