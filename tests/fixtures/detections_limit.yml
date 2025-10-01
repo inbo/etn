@@ -3,26 +3,26 @@ http_interactions:
     method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections_page/
     body:
-      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"protocol":"opencpu","start_date":null,"end_date":null,"acoustic_tag_id":null,"animal_project_code":null,"scientific_name":null,"acoustic_project_code":null,"receiver_id":null,"station_name":null,"next_id_pk":0,"page_size":100,"credentials.1":null}'
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"protocol":"opencpu","start_date":null,"end_date":null,"tag_serial_number":null,"acoustic_tag_id":null,"animal_project_code":null,"scientific_name":null,"acoustic_project_code":null,"receiver_id":null,"station_name":null,"next_id_pk":0,"page_size":100,"credentials.1":null}'
   response:
     status: 201
     headers:
-      date: Mon, 29 Sep 2025 08:46:26 GMT
+      date: Wed, 01 Oct 2025 10:02:24 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
         form.vliz.be www.omes-monitoring.be omes-monitoring.be;
       cross-origin-opener-policy: same-origin
       cache-control: max-age=300, public
-      x-ocpu-session: x095e6463216b1e
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x095e6463216b1e/
+      x-ocpu-session: x0453c2b08c6a8f
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0453c2b08c6a8f/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.1 (2025-06-13)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-09-29 08:46:27 UTC
+      x-ocpu-time: 2025-10-01 10:02:25 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -33,22 +33,22 @@ http_interactions:
       set-cookie: vliz_webc=vliz_webc2; path=/
     body:
       string: |
-        /ocpu/tmp/x095e6463216b1e/R/.val
-        /ocpu/tmp/x095e6463216b1e/R/credentials
-        /ocpu/tmp/x095e6463216b1e/R/get_acoustic_detections_page
-        /ocpu/tmp/x095e6463216b1e/stdout
-        /ocpu/tmp/x095e6463216b1e/source
-        /ocpu/tmp/x095e6463216b1e/console
-        /ocpu/tmp/x095e6463216b1e/info
-        /ocpu/tmp/x095e6463216b1e/files/DESCRIPTION
-  recorded_at: 2025-09-29 08:46:27
+        /ocpu/tmp/x0453c2b08c6a8f/R/.val
+        /ocpu/tmp/x0453c2b08c6a8f/R/credentials
+        /ocpu/tmp/x0453c2b08c6a8f/R/get_acoustic_detections_page
+        /ocpu/tmp/x0453c2b08c6a8f/stdout
+        /ocpu/tmp/x0453c2b08c6a8f/source
+        /ocpu/tmp/x0453c2b08c6a8f/console
+        /ocpu/tmp/x0453c2b08c6a8f/info
+        /ocpu/tmp/x0453c2b08c6a8f/files/DESCRIPTION
+  recorded_at: 2025-10-01 10:02:25
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be//tmp/x095e6463216b1e/R/.val/feather
+    uri: https://opencpu.lifewatch.be//tmp/x0453c2b08c6a8f/R/.val/feather
   response:
     status: 200
     headers:
-      date: Mon, 29 Sep 2025 08:46:27 GMT
+      date: Wed, 01 Oct 2025 10:02:25 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -62,7 +62,7 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.1 (2025-06-13)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2025-09-29 08:46:27 UTC
+      x-ocpu-time: 2025-10-01 10:02:26 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -198,5 +198,5 @@ http_interactions:
         G6LMQZ9b5Rm/RbopmT9XOY2Bn/Vbo66yVZa0avCm/q5x8W8e
         jNfFv3m4+DcPiftz8W8e/m/+
         5kH/rcMo42+2/gs3y9um
-  recorded_at: 2025-09-29 08:46:28
+  recorded_at: 2025-10-01 10:02:26
 recorded_with: VCR-vcr/2.0.0
