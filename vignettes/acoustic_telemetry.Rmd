@@ -970,14 +970,11 @@ leaflet(geo_info_stations) %>%
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
     popup = ~paste0("Station: ", station_name, " (", acoustic_project_code, ")")
-  )
+  ) %>%
+  htmlwidgets::saveWidget(file = "stations_map.html")
 ```
 
-```
-## file:////tmp/RtmpEKn5NP/filea35c1130b7cd/widgeta35c27e179fc.html screenshot completed
-```
-
-![plot of chunk map_stations](figure/map_stations-1.png)
+<iframe src="stations_map.html" width="100%" height="600" frameborder="0"></iframe>
 
 We can visualize the number of detections per station, `n_detect_station`, by joining it with `geo_info_stations`:
 
@@ -1013,14 +1010,11 @@ n_detect_station %>%
     title = "Detections",
     pal = pal,
     values = ~n
-  )
+  ) %>%
+  htmlwidgets::saveWidget(file = "n_detections_per_station.html")
 ```
 
-```
-## file:////tmp/RtmpEKn5NP/filea35c167f3d55/widgeta35c33bae59f.html screenshot completed
-```
-
-![plot of chunk leaflet_n_detections_Wels_catfish](figure/leaflet_n_detections_Wels_catfish-1.png)
+<iframe src="n_detections_per_station.html" width="100%" height="600" frameborder="0"></iframe>
 
 In a similar way we can visualize the number of detected individuals per station, `n_silurus_station`:
 
@@ -1056,14 +1050,11 @@ n_silurus_station %>%
     title = "Detected individuals",
     pal = pal,
     values = ~n
-  )
+  ) %>%
+  htmlwidgets::saveWidget(file = "n_individuals_per_station.html")
 ```
 
-```
-## file:////tmp/RtmpEKn5NP/filea35c4b890f6/widgeta35c3b12bdf1.html screenshot completed
-```
-
-![plot of chunk map_n_individuals_per_station](figure/map_n_individuals_per_station-1.png)
+<iframe src="n_individuals_per_station.html" width="100%" height="600" frameborder="0"></iframe>
 
 We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
 
@@ -1147,13 +1138,10 @@ rel_det_duration_silurus %>%
     title = "Relative detection duration",
     pal = pal,
     values = ~relative_detection_duration
-  )
+  ) %>%
+  htmlwidgets::saveWidget(file = "relative_detection_duration.html")
 ```
 
-```
-## file:////tmp/RtmpEKn5NP/filea35c4ff4eacb/widgeta35c60a0a6ab.html screenshot completed
-```
-
-![plot of chunk map_rel_detection_duration_deploys](figure/map_rel_detection_duration_deploys-1.png)
+<iframe src="relative_detection_duration.html" width="100%" height="600" frameborder="0"></iframe>
 
 Do you want to add the temporal component to visualize the fish movement? Take a look at the [moveVis](https://movevis.org/index.html) package.
