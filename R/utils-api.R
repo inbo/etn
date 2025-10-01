@@ -114,21 +114,31 @@ get_val <- function(temp_key,
 #' function arguments of the parent function directly to the API, instead of
 #' repeating them in the function body.
 #'
+#' @param depth Integer, the depth of the parent environement to extract. The
+#' default of 1 means the direct parent environement, 2 means the parent of
+#' the parent, etc.
+#' @param compact Logical, if `TRUE` (default) `NULL` values are removed from the
+#' returned list. Similar (but not identical to) to [purrr::compact()].
+#'
 #' @return a named list of name value pairs form the parent environement
 #'
 #' @family helper functions
 #' @noRd
-return_parent_arguments <- function(depth = 1) {
+return_parent_arguments <- function(depth = 1, compact = TRUE) {
   # lock in the environment of the function we are being called in. Otherwise
   # lazy evaluation can cause trouble
   parent_env <- rlang::caller_env(n = depth)
   env_names <- rlang::env_names(parent_env)
   # set the environement names so lapply can output a names list
   names(env_names) <- env_names
-  lapply(
+  parent_arguments <- lapply(
     env_names,
     function(x) rlang::env_get(env = parent_env, nm = x)
   )
+  if (compact) {
+    compact(parent_arguments)
+  }
+  parent_arguments
 }
 
 #' Check if the provided credentials can be used to login via the API
