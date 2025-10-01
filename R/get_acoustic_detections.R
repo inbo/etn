@@ -7,6 +7,8 @@
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
+#' @param tag_serial_number Character (vector). One or more acoustic tag serial
+#'  numbers.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
@@ -71,6 +73,7 @@
 get_acoustic_detections <- function(connection,
                                     start_date = NULL,
                                     end_date = NULL,
+                                    tag_serial_number = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
@@ -99,9 +102,10 @@ get_acoustic_detections <- function(connection,
   if (!progress) {
     withr::local_options(cli.progress_show_after = 60 * 60 * 24)
   }
-  # Some arguments don't need to be send to etnservice
+  # Some arguments don't need to be sent to etnservice, drop arguments set to
+  # NULL
   arguments_to_pass <-
-    return_parent_arguments(depth = 1)[
+    return_parent_arguments(depth = 1, compact = TRUE)[
       !names(return_parent_arguments(depth = 1)) %in% c(
         "api",
         "progress",

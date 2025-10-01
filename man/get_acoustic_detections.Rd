@@ -8,6 +8,7 @@ get_acoustic_detections(
   connection,
   start_date = NULL,
   end_date = NULL,
+  tag_serial_number = NULL,
   acoustic_tag_id = NULL,
   animal_project_code = NULL,
   scientific_name = NULL,
@@ -28,6 +29,9 @@ credentials instead.}
 
 \item{end_date}{Character. End date (exclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
+
+\item{tag_serial_number}{Character (vector). One or more acoustic tag serial
+numbers.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
 

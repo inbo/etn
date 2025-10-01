@@ -37,10 +37,10 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
   function_identity <-
     get_parent_fn_name(depth = 2)
 
-  # Get the argument values from the parent function
+  # Get the argument values from the parent function, drop arguments set to NULL
   arguments_to_pass <-
     return_parent_arguments(depth = 2)[
-      !names(return_parent_arguments(depth = 2)) %in% c(
+      !names(return_parent_arguments(depth = 2, compact = TRUE)) %in% c(
         "api",
         "connection",
         ignored_arguments,
