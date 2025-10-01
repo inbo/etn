@@ -193,6 +193,39 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
   expect_gt(as.POSIXct("2015-04-25", tz = "UTC"), max(between_day_df$date_time))
 })
 
+test_that("get_acoustic_detections() allows selecting on tag_serial_number", {
+  vcr::local_cassette("detections_tag_serial_number")
+
+  # Errors
+  expect_error(get_acoustic_detections(tag_serial_number = "not_a_serial_no",
+                                       limit = TRUE),
+               regexp = "Can't find tag_serial_number",
+               fixed = FALSE)
+  expect_error(get_acoustic_detections(tag_serial_number = c("1400185",
+                                                          "not_a_serial_no"),
+                                       limit = TRUE),
+               regexp = "Can't find tag_serial_number",
+               fixed = FALSE)
+
+  # Select single value
+  single_select <- "1400185" # From PhD_Goossens
+  single_select_df <- get_acoustic_detections(tag_serial_number = single_select)
+  expect_identical(
+    single_select_df %>% distinct(tag_serial_number) %>% pull(),
+    c(single_select)
+  )
+  expect_gt(nrow(single_select_df), 0)
+
+  # Select multiple values
+  multi_select <- c("1105440", "1400185")
+  multi_select_df <- get_acoustic_detections(tag_serial_number = multi_select)
+  expect_identical(
+    multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
+    c(multi_select)
+  )
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
+})
+
 test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
   vcr::local_cassette("detections_tag_id")
 
