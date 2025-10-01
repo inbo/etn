@@ -233,6 +233,11 @@ prompt_user <- function(...) {
   readline(...)
 }
 
+# rlang null handling -----------------------------------------------------
+#' @importFrom rlang %||%
+NULL
+
+
 # onLoad ------------------------------------------------------------------
 
 .onLoad <- function(libname, pkgname) {
