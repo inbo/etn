@@ -7,6 +7,8 @@
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
+#' @param tag_serial_number Character (vector). One or more acoustic tag serial
+#'  numbers.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
@@ -71,6 +73,7 @@
 get_acoustic_detections <- function(connection,
                                     start_date = NULL,
                                     end_date = NULL,
+                                    tag_serial_number = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
