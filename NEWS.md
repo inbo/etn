@@ -12,6 +12,7 @@
 * Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API`. (#383)
 * `get_acoustic_detections()` now uses a different interface to the database resulting in much more detections being able to be fetched reliably. However, due to changes in the database, it'll initially result in less detections being returned for the same filter variables (but with less mistakes). (#384, #382, #323)
 * You can now select detections via `get_acoustic_detections()` using a `deployment_id` (#382, #340)
+* You can now select detections via `get_acoustic_detections()` using a `tag_serial_number`, this is a better option as `acoustic_tag_id` which will remain supported for the near future. Thank you @lottepohl for the suggestion. (#408, #386)
 * `get_acoustic_detections()` now returns a progress bar on large queries. (#384)
 * When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
 * New vignette `vignette("package-options")` that describes some developer/power user package wide options. (#398)
