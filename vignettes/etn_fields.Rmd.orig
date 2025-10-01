@@ -1,0 +1,127 @@
+---
+title: "ETN field definitions"
+author: "Peter Desmet & Filip Waumans"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ETN field definitions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<p class="alert alert-warning">
+The information below is outdated. We are working on [an update](https://github.com/inbo/etn/issues/226).
+</p>
+
+```{r include=FALSE, eval=FALSE}
+library(etn)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(glue)
+library(DBI)
+library(kableExtra)
+```
+
+```{r include=FALSE, eval=FALSE}
+con <- connect_to_etn()
+query <- glue_sql("
+  SELECT
+    data_format_field_views_definition AS view,
+    lower(field_name) AS field,
+    trim(regexp_replace(field_definition, '[\\s+]+', ' ', 'g')) AS definition,
+    trim(regexp_replace(field_units_format_description, '[\\s+]+', ' ', 'g')) AS example,
+    view_order AS \"order\"
+  FROM
+    app.field_metadata
+  WHERE
+    data_format_field_views_definition IS NOT NULL
+  ORDER BY
+    view,
+    \"order\"
+  ", .con = connection
+)
+etn_fields <- dbGetQuery(con, query)
+```
+
+```{r include=FALSE, eval=FALSE}
+write_csv(etn_fields, "../inst/assets/etn_fields.csv", na = "")
+```
+
+Field definitions are managed in the ETN database, not in this package, but suggestions/corrections can be reported as an issue (see the [contributing guide](../.github/CONTRIBUTING.md)). The definitions are also available as a [csv file](https://github.com/inbo/etn/blob/master/inst/assets/etn_fields.csv).
+
+```{r include=FALSE, eval=FALSE}
+# Create helper function to display tables for each view
+view_table <- function(view_name) {
+  view_data <-
+    etn_fields %>%
+    # Filter on view
+    filter(view == view_name) %>%
+    # Order by order (should already be done by query)
+    arrange(.data$order) %>%
+    # Select columns
+    select(field, definition, example) %>%
+    # Convert quotes to backticks, so examples are shown as markdown monospaced code
+    mutate(across(everything(), ~ str_replace_all(., "\"", "`"))) %>%
+    # Wrap "field" in backticks
+    mutate(field = if_else(!is.na(field), paste0("`", field, "`"), field)) %>%
+    # Convert "NA" to empty strings
+    mutate(across(everything(), ~ replace_na(., "")))
+  
+  view_kable <-
+    kable(view_data) %>%
+    # field: some have long names, break-word will force them to wrap
+    column_spec(1, width = "25%", extra_css = "word-break: break-word") %>%
+    # definition
+    column_spec(2, width = "40%") %>%
+    # example
+    column_spec(3, width = "35%")
+  
+  return(view_kable)
+}
+```
+
+## Animals
+
+Related function: `get_animals()`.
+
+```{r echo=FALSE, eval=FALSE}
+view_table("animals_view2")
+```
+
+## Tags
+
+Related function: `get_tags()`.
+
+```{r echo=FALSE, eval=FALSE}
+view_table("tags_view2")
+```
+
+## Detections
+
+Related function: `get_detections()`.
+
+```{r echo=FALSE, eval=FALSE}
+view_table("detections_view2")
+```
+
+## Deployments
+
+Related function: `get_deployments()`.
+
+```{r echo=FALSE, eval=FALSE}
+view_table("deployments_view2")
+```
+
+## Receivers
+
+Related function: `get_receivers()`.
+
+```{r echo=FALSE, eval=FALSE}
+view_table("receivers_view2")
+```

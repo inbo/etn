@@ -1,7 +1,7 @@
 ---
 title: "Explore acoustic telemetry data"
 author: "Damiano Oldoni"
-date: "2025-10-01"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Explore acoustic telemetry data}
@@ -9,7 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Introduction
 
@@ -17,15 +19,13 @@ In this vignette we show a typical workflow using the etn package to retrieve **
 
 To start, load the etn package:
 
-
-``` r
+```{r load_pkg}
 library(etn)
 ```
 
 And the other packages (with installation if necessary):
 
-
-``` r
+```{r load_other_pkgs, message=FALSE}
 other_pkgs <- c("dplyr", "lubridate", "leaflet")
 
 # install missing packages
@@ -40,22 +40,8 @@ library(leaflet)
 
 Connect with your user credentials (as received by VLIZ) to the database. To not expose such confidential information, you could opt to [use environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables):
 
-
-``` r
+```{r connect_to_db}
 con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
-```
-
-```
-## Error in `connect_to_etn()`:
-## ! ODBC failed with error 00000 from
-##   [unixODBC][Driver Manager].
-## ✖ Data source name not found and no default driver
-##   specified
-## ℹ See `?odbc::odbcListDataSources()` to learn more.
-## ℹ From 'nanodbc/nanodbc.cpp:1184'.
-```
-
-``` r
 # This is the default, so you could also use connect_to_etn()
 ```
 
@@ -65,108 +51,58 @@ Using `con` as variable to store the collection is not mandatory, but it makes y
 
 A researcher typically works in the context of one or more _animal projects_. As the project codes are not always easy to remember, let's start by getting an overview of all projects:
 
-
-``` r
+```{r get_animal_projects}
 all_projects <- get_animal_projects()
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
 ```
 
 Show a preview:
 
-
-``` r
+```{r preview_first_10_projects}
 all_projects %>% head(10)
-```
-
-```
-## Error in head(., 10): object 'all_projects' not found
 ```
 
 If you know the `project code` already and you are just interested to get more information about it, you can specify it in the `get_animal_projects()` function directly:
 
-
-``` r
+```{r get_demer_project_directly}
 projects_code <- c("2014_demer", "2015_dijle")
 projects_study <- get_animal_projects(animal_project_code = projects_code)
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 projects_study
-```
-
-```
-## Error: object 'projects_study' not found
 ```
 
 This is exactly the same as retrieving all projects first and filtering them afterwards based on column `project_code`:
 
-
-``` r
+```{r retrieve_all_first_filter_after}
 all_projects %>%
   filter(project_code %in% c(projects_code))
 ```
 
-```
-## Error in filter(., project_code %in% c(projects_code)): object 'all_projects' not found
-```
-
 To list all available animal project codes as a vector, you can use `list_animal_project_codes()`, one of the etn functions in the [`list_*` family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
 
-
-``` r
+```{r list_animal_project_codes}
 list_animal_project_codes() %>% head(10)
-```
-
-```
-## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
 ```
 
 ## Animals
 
 By using `get_animals()` you can retrieve information about each animal (`animal_id`), such as scientific name, length, capture/release date and location, and the attached tag(s) (`tag_serial_number`):
 
-
-``` r
+```{r get_animals}
 animals <- get_animals(animal_project_code = projects_code)
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 animals %>% head(10)
-```
-
-```
-## Error in head(., 10): object 'animals' not found
 ```
 
 What species and how many individuals are tracked for the projects `2014_demer` and `2015_dijle`?
 
-
-``` r
+```{r get_species_and_number_individuals}
 animals %>%
   count(scientific_name)
-```
-
-```
-## Error in count(., scientific_name): object 'animals' not found
 ```
 
 ## Detections
 
 Let's say we are interested in the tracking data of Wels catfish (_Silurus glanis_) in 2014. You can retrieve the detection history using `get_acoustic_detections()`:
 
-
-``` r
+```{r get_detections_silurus}
 detections_silurus <- get_acoustic_detections(
   animal_project_code = projects_code,
   start_date = "2014-01-01",
@@ -175,25 +111,15 @@ detections_silurus <- get_acoustic_detections(
 )
 ```
 
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
 Preview:
 
-
-``` r
+```{r preview_detections_silurus}
 detections_silurus %>% head(10)
-```
-
-```
-## Error in head(., 10): object 'detections_silurus' not found
 ```
 
 Which individuals have been detected (`animal_id`) and in which period?
 
-
-``` r
+```{r detections_silurus_period}
 detections_silurus_period <-
   detections_silurus %>%
   mutate(date = date(date_time)) %>%
@@ -202,24 +128,12 @@ detections_silurus_period <-
     start = min(date),
     end = max(date)
   )
-```
-
-```
-## Error in mutate(., date = date(date_time)): object 'detections_silurus' not found
-```
-
-``` r
 detections_silurus_period
-```
-
-```
-## Error: object 'detections_silurus_period' not found
 ```
 
 Notice we group by `animal_id`, the unique identifier of the fish. However, if the fish has only been tagged  once (as typically occurs), we could use `acoustic_tag_id` as well, i.e. the identifier picked up by acoustic receivers:
 
-
-``` r
+```{r group_by_acoustic_tag_id}
 detections_silurus %>%
   mutate(date = date(date_time)) %>%
   group_by(acoustic_tag_id) %>%
@@ -229,86 +143,47 @@ detections_silurus %>%
   )
 ```
 
-```
-## Error in mutate(., date = date(date_time)): object 'detections_silurus' not found
-```
-
 We can also get the tracking duration of each fish:
 
-
-``` r
+```{r duration_tracking}
 detections_silurus_duration <-
   detections_silurus %>%
   group_by(animal_id) %>%
   summarize(duration = max(date_time) - min(date_time))
-```
-
-```
-## Error in group_by(., animal_id): object 'detections_silurus' not found
-```
-
-``` r
 detections_silurus_duration
-```
-
-```
-## Error: object 'detections_silurus_duration' not found
 ```
 
 How many times has an individual has been detected?
 
-
-``` r
+```{r n_detections}
 detections_silurus %>%
   group_by(animal_id) %>%
   count()
-```
-
-```
-## Error in group_by(., animal_id): object 'detections_silurus' not found
 ```
 
 ## Stations
 
 At how many detection stations have the individuals been detected?
 
-
-``` r
+```{r n_stations}
 detections_silurus %>%
   group_by(animal_id) %>%
   distinct(station_name) %>%
   count()
 ```
 
-```
-## Error in group_by(., animal_id): object 'detections_silurus' not found
-```
-
 Which stations have been involved? You can retrieve them using `list_values` function applied to column `station_name`:
 
-
-``` r
+```{r stations_silurus}
 stations_silurus <-
   detections_silurus %>%
   list_values(station_name)
-```
-
-```
-## Error in is.data.frame(.data): object 'detections_silurus' not found
-```
-
-``` r
 stations_silurus
-```
-
-```
-## Error: object 'stations_silurus' not found
 ```
 
 Notice how a detection station can be linked to multiple deployments:
 
-
-``` r
+```{r link_stations_deployments}
 detections_silurus %>%
   distinct(station_name, deployment_id) %>%
   group_by(station_name) %>%
@@ -316,270 +191,121 @@ detections_silurus %>%
   arrange(desc(n))
 ```
 
-```
-## Error in distinct(., station_name, deployment_id): object 'detections_silurus' not found
-```
-
 Sometimes it's interesting to know the number of detections per station:
 
-
-``` r
+```{r n_detections_per_deployment}
 n_detect_station <-
   detections_silurus %>%
   group_by(station_name) %>%
   count()
-```
-
-```
-## Error in group_by(., station_name): object 'detections_silurus' not found
-```
-
-``` r
 n_detect_station
-```
-
-```
-## Error: object 'n_detect_station' not found
 ```
 
 It's also interesting to know the number of unique individuals per station:
 
-
-``` r
+```{r n_silurus_station}
 n_silurus_station <-
   detections_silurus %>%
   distinct(station_name, animal_id) %>%
   group_by(station_name) %>%
   count()
-```
-
-```
-## Error in distinct(., station_name, animal_id): object 'detections_silurus' not found
-```
-
-``` r
 n_silurus_station
-```
-
-```
-## Error: object 'n_silurus_station' not found
 ```
 
 ## Acoustic tags 
 
 To get more information about the tags involved in `detections_silurus`, you can use the function `get_tags`, which returns tag related information such as serial number, manufacturer, model, and frequency:
 
-
-``` r
+```{r acoustic_tags_info}
 tags_id <- list_values(detections_silurus, acoustic_tag_id)
-```
-
-```
-## Error in is.data.frame(.data): object 'detections_silurus' not found
-```
-
-``` r
 tags_silurus <- get_tags(acoustic_tag_id = tags_id)
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 tags_silurus
-```
-
-```
-## Error: object 'tags_silurus' not found
 ```
 
 You can also retrieve such information by `tag_serial_number`:
 
-
-``` r
+```{r acoustic_tags_info_via serial_number}
 tags_serial <- unique(detections_silurus$tag_serial_number)
-```
-
-```
-## Error in unique(detections_silurus$tag_serial_number): object 'detections_silurus' not found
-```
-
-``` r
 tags_silurus <- get_tags(tag_serial_number = tags_serial)
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 tags_silurus
-```
-
-```
-## Error: object 'tags_silurus' not found
 ```
 
 However, keep in mind that there is a fundamental difference between the arguments `acoustic_tag_id` and `tag_serial_number`: the `tag_serial_number` identifies the _device_, which could contain multiple tags or sensors and thus multiple `acoustic_tag_id`.
 
 All possible `acoustic_tag_id` can be retrieved with the correspondent `list_*` function:
 
-
-``` r
+```{r list_acoustic_tag_ids}
 list_acoustic_tag_ids() %>% head(10)
-```
-
-```
-## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
 ```
 
 ## Acoustic network projects
 
 The detection of Wels catfishes has been possible thanks to one or more acoustic network projects, mentioned in field `acoustic_project_code`. You can retrieve them via the _list_ function `list_values()`:
 
-
-``` r
+```{r acoustic_project_codes_involved}
 acoustic_project_codes <- detections_silurus %>%
   list_values(acoustic_project_code)
-```
-
-```
-## Error in is.data.frame(.data): object 'detections_silurus' not found
-```
-
-``` r
 acoustic_project_codes
-```
-
-```
-## Error: object 'acoustic_project_codes' not found
 ```
 
 To get more information about these acoustic networks, you can use function `get_acoustic_projects()`
 
-
-``` r
+```{r get_acoustic_projects}
 acoustic_projects_silurus <- get_acoustic_projects(
   acoustic_project_code = acoustic_project_codes
 )
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 acoustic_projects_silurus
-```
-
-```
-## Error: object 'acoustic_projects_silurus' not found
 ```
 
 You can retrieve the full list of acoustic network projects with the correspondent `list_*` function:
 
-
-``` r
+```{r list_acoustic_project_codes}
 list_acoustic_project_codes() %>% head(10)
-```
-
-```
-## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
 ```
 
 ## Acoustic deployments
 
 You can retrieve deployment information related to the acoustic networks in `acoustic_project_codes` by using `get_acoustic_deployments()` function:
 
-
-``` r
+```{r get_acoustic_deployments_info_networks}
 deployments <- get_acoustic_deployments(
   acoustic_project_code = acoustic_project_codes
 )
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 deployments
-```
-
-```
-## Error: object 'deployments' not found
 ```
 
 These are the deployments of the acoustic receivers involved in `detections_silurus`:
 
-
-``` r
+```{r deploys_silurus}
 deploys_silurus <-
   detections_silurus %>%
   list_values(deployment_id)
-```
-
-```
-## Error in is.data.frame(.data): object 'detections_silurus' not found
-```
-
-``` r
 deploys_silurus
-```
-
-```
-## Error: object 'deploys_silurus' not found
 ```
 
 More information about them can be retrieved via `get_acoustic_deployments()` function with argument `deployment_id`:
 
-
-``` r
+```{r get_acoustic_deployments_info}
 deployments_silurus <- get_acoustic_deployments(
   deployment_id = deploys_silurus
 )
-```
-
-```
-## Error in methods::is(connection, "PostgreSQL"): object 'con' not found
-```
-
-``` r
 deployments_silurus
-```
-
-```
-## Error: object 'deployments_silurus' not found
 ```
 
 Deployment duration:
 
-
-``` r
+```{r deployment_duration}
 deployments_silurus_duration <-
   deployments_silurus %>%
   mutate(duration = as.duration(recover_date_time - deploy_date_time)) %>%
   select(deployment_id, station_name, duration) %>%
   arrange(deployment_id)
-```
-
-```
-## Error in mutate(., duration = as.duration(recover_date_time - deploy_date_time)): object 'deployments_silurus' not found
-```
-
-``` r
 deployments_silurus_duration
-```
-
-```
-## Error: object 'deployments_silurus_duration' not found
 ```
 
 Number of days a deployment detected the passage of one or more individuals:
 
-
-``` r
+```{r n_active_days_deployments_silurus}
 n_active_days_deployments_silurus <-
   detections_silurus %>%
   mutate(date = date(date_time)) %>%
@@ -587,24 +313,12 @@ n_active_days_deployments_silurus <-
   group_by(deployment_id, station_name) %>%
   summarize(n_days = n(), .groups = "drop") %>%
   ungroup()
-```
-
-```
-## Error in mutate(., date = date(date_time)): object 'detections_silurus' not found
-```
-
-``` r
 n_active_days_deployments_silurus
-```
-
-```
-## Error: object 'n_active_days_deployments_silurus' not found
 ```
 
 Relative detection duration, i.e. number of days with at least one detection divided by deployment duration:
 
-
-``` r
+```{r relative_detection_duration}
 rel_det_duration_silurus <-
   n_active_days_deployments_silurus %>%
   left_join(
@@ -615,18 +329,7 @@ rel_det_duration_silurus <-
     relative_detection_duration = n_days * (24 * 60 * 60) / as.numeric(duration)
   ) %>%
   select(deployment_id, station_name, relative_detection_duration)
-```
-
-```
-## Error in left_join(., deployments_silurus_duration, by = c("deployment_id", : object 'n_active_days_deployments_silurus' not found
-```
-
-``` r
 rel_det_duration_silurus
-```
-
-```
-## Error: object 'rel_det_duration_silurus' not found
 ```
 
 ## Data visualization
@@ -635,8 +338,7 @@ Aside standard graphs, the geographical component of telemetry data makes intera
 
 We can for example create a map of the involved stations showing the station name and the acoustic project code it belongs to as pop-ups. First, we retrieve the coordinates of the stations:
 
-
-``` r
+```{r geo_info_stations}
 geo_info_stations <-
   detections_silurus %>%
   distinct(
@@ -646,24 +348,12 @@ geo_info_stations <-
     acoustic_project_code
   ) %>%
   arrange(station_name)
-```
-
-```
-## Error in distinct(., station_name, deploy_latitude, deploy_longitude, : object 'detections_silurus' not found
-```
-
-``` r
 geo_info_stations
-```
-
-```
-## Error: object 'geo_info_stations' not found
 ```
 
 To be able to produce the desired map:
 
-
-``` r
+```{r map_stations}
 leaflet(geo_info_stations) %>%
   addTiles() %>%
   addMarkers(
@@ -673,26 +363,15 @@ leaflet(geo_info_stations) %>%
   )
 ```
 
-```
-## Error in structure(list(options = options), leafletData = data): object 'geo_info_stations' not found
-```
-
 We can visualize the number of detections per station, `n_detect_station`, by joining it with `geo_info_stations`:
 
-
-``` r
+```{r leaflet_n_detections_Wels_catfish}
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
   domain = n_detect_station$n
 )
-```
 
-```
-## Error in colorNumeric(palette = "viridis", domain = n_detect_station$n): object 'n_detect_station' not found
-```
-
-``` r
 n_detect_station %>%
   left_join(
     geo_info_stations,
@@ -720,26 +399,15 @@ n_detect_station %>%
   )
 ```
 
-```
-## Error in left_join(., geo_info_stations, by = "station_name"): object 'n_detect_station' not found
-```
-
 In a similar way we can visualize the number of detected individuals per station, `n_silurus_station`:
 
-
-``` r
+```{r map_n_individuals_per_station}
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
   domain = n_silurus_station$n
 )
-```
 
-```
-## Error in colorNumeric(palette = "viridis", domain = n_silurus_station$n): object 'n_silurus_station' not found
-```
-
-``` r
 n_silurus_station %>%
   left_join(
     geo_info_stations,
@@ -767,14 +435,9 @@ n_silurus_station %>%
   )
 ```
 
-```
-## Error in left_join(., geo_info_stations, by = "station_name"): object 'n_silurus_station' not found
-```
-
 We can also make a map of the relative detection duration of the deployments. First, we have to retrieve the deployment geographical coordinates:
 
-
-``` r
+```{r geo_info_deployments}
 geo_info_deploys <-
   detections_silurus %>%
   distinct(
@@ -785,36 +448,18 @@ geo_info_deploys <-
     acoustic_project_code
   ) %>%
   arrange(station_name)
-```
-
-```
-## Error in distinct(., deployment_id, deploy_latitude, deploy_longitude, : object 'detections_silurus' not found
-```
-
-``` r
 geo_info_deploys
-```
-
-```
-## Error: object 'geo_info_deploys' not found
 ```
 
 We are ready to create the desired map, where we show the deployment ID, the station name and the network project as popups:
 
-
-``` r
+```{r map_rel_detection_duration_deploys}
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
   domain = rel_det_duration_silurus$relative_detection_duration
 )
-```
 
-```
-## Error in colorNumeric(palette = "viridis", domain = rel_det_duration_silurus$relative_detection_duration): object 'rel_det_duration_silurus' not found
-```
-
-``` r
 rel_det_duration_silurus %>%
   left_join(
     geo_info_deploys,
@@ -842,10 +487,6 @@ rel_det_duration_silurus %>%
     pal = pal,
     values = ~relative_detection_duration
   )
-```
-
-```
-## Error in left_join(., geo_info_deploys, by = c("deployment_id", "station_name")): object 'rel_det_duration_silurus' not found
 ```
 
 Do you want to add the temporal component to visualize the fish movement? Take a look at the [moveVis](https://movevis.org/index.html) package.
