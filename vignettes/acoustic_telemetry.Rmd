@@ -26,7 +26,7 @@ And the other packages (with installation if necessary):
 
 
 ``` r
-other_pkgs <- c("dplyr", "lubridate", "leaflet")
+other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmlwidgets", "htmltools")
 
 # install missing packages
 pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
