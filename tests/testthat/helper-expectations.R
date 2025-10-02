@@ -21,8 +21,8 @@
 #' @inherits testthat::expect_identical return
 #'
 #' @examples
-#' expect_call_agnostic(list_acoustic_projects())
-#' expect_call_agnostic(list_animal_projects())
+#' expect_protocol_agnostic(list_acoustic_projects())
+#' expect_protocol_agnostic(list_animal_projects())
 #'
 #'
 #' @export
