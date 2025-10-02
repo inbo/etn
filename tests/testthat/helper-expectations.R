@@ -26,7 +26,7 @@
 #'
 #'
 #' @export
-expect_call_agnostic <- function(expression) {
+expect_protocol_agnostic <- function(expression) {
   # Skip if not both the API and the local database are available to compare
   testthat::skip_if_offline()
   testthat::skip_if(!"ETN" %in% odbc::odbcListDataSources()$name, "ETN is not a local database on this machine")
