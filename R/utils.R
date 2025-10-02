@@ -195,6 +195,33 @@ select_protocol <- function() {
   return("opencpu")
 }
 
+#' Remove HTML tags from a string
+#'
+#' This function uses the xml2 package to parse the HTML and extract the text
+#' content.
+#'
+#'
+#' @param x Character string with HTML tags.
+#'
+#' @returns Character string without HTML tags.
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
+remove_html_tags <- function(x){
+  # Early return
+  if(is.null(x)) {
+    return(NULL)
+  }
+
+  # Check if xml2 is installed
+  rlang::check_installed("xml2", reason = "To parse HTML")
+
+  # Convert to raw so it's not interpreted as a path
+  xml2::read_html(charToRaw(x)) |> xml2::xml_text()
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass

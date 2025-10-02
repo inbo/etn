@@ -43,7 +43,9 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
   # Get dataset title and acroynm
   acronym <- purrr::chuck(imis_metadata, "datasetrec", "Acronym")
   title <- purrr::chuck(imis_metadata, "datasetrec", "StandardTitle")
-  citations <- purrr::chuck(imis_metadata, "datasetrec", "Citation")
+  citations <- purrr::chuck(imis_metadata, "datasetrec", "Citation") |>
+    # Citations sometimes contain HTML formatting, let's ignore it for now.
+    remove_html_tags()
 
   if(is.null(citations)){
     cli::cli_warn("No citation found on IMIS for: {acoustic_project_code}")
