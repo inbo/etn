@@ -57,7 +57,7 @@
 #' #> * (4/6): downloading deployments.csv
 #' #> * (5/6): downloading receivers.csv
 #' #> * (6/6): adding datapackage.json as file metadata
-
+#' #>
 #' #> Summary statistics for dataset `2012_leopoldkanaal`:
 #' #> * number of animals:           104
 #' #> * number of tags:              103
@@ -68,7 +68,7 @@
 #' #> * last date of detection:      2021-09-02
 #' #> * included scientific names:   Anguilla anguilla
 #' #> * included acoustic projects:  albert, Apelafico, bpns, JJ_Belwind, leopold, MOBEIA, pc4c, SPAWNSEIS, ws2, zeeschelde
-
+#' #>
 #' #> Warning message:
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
@@ -76,8 +76,7 @@
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
-                                      directory = animal_project_code,
-                                      api = TRUE) {
+                                      directory = animal_project_code) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
@@ -91,7 +90,7 @@ download_acoustic_dataset <- function(connection,
   )
   animal_project_code <- check_value(
     animal_project_code,
-    list_animal_project_codes(api = api),
+    list_animal_project_codes(),
     "animal_project_code",
     lowercase = TRUE
   )
@@ -100,7 +99,7 @@ download_acoustic_dataset <- function(connection,
   if (!is.null(scientific_name)) {
     scientific_name <- check_value(
       scientific_name,
-      list_scientific_names(api = api),
+      list_scientific_names(),
       "scientific_name"
     )
   }
@@ -113,36 +112,31 @@ download_acoustic_dataset <- function(connection,
   message("* (1/6): downloading animals.csv")
   # Select on animal_project_code and scientific_name
   animals <- get_animals(
-    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name
   )
-  readr::write_csv(animals, paste(directory, "animals.csv", sep = "/"), na = "")
+  readr::write_csv(animals, file.path(directory, "animals.csv"), na = "")
 
   # TAGS
   message("* (2/6): downloading tags.csv")
   # Select on tags associated with animals
   tag_serial_numbers <-
-    animals %>%
-    distinct(.data$tag_serial_number) %>%
-    pull() %>%
+    animals |>
+    dplyr::distinct(.data$tag_serial_number) |>
+    dplyr::pull() |>
     # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
     # all tags and split them again on comma
-    paste(collapse = ",") %>%
-    strsplit("\\,") %>%
-    unlist() %>%
+    paste(collapse = ",") |>
+    strsplit("\\,") |>
+    unlist() |>
     unique()
-  tags <- get_tags(
-    api = api,
-    tag_serial_number = tag_serial_numbers
-  )
-  readr::write_csv(tags, paste(directory, "tags.csv", sep = "/"), na = "")
+  tags <- get_tags(tag_serial_number = tag_serial_numbers)
+  readr::write_csv(tags, file.path(directory, "tags.csv"), na = "")
 
   # DETECTIONS
   message("* (3/6): downloading detections.csv")
   # Select on animal_project_code and scientific_name
   detections <- get_acoustic_detections(
-    api = api,
     animal_project_code = animal_project_code,
     scientific_name = scientific_name,
     limit = FALSE
@@ -150,105 +144,140 @@ download_acoustic_dataset <- function(connection,
   # Keep unique records
   detections_orig_count <- nrow(detections)
   detections <-
-    detections %>%
-    distinct(.data$detection_id, .keep_all = TRUE)
-  readr::write_csv(detections, paste(directory, "detections.csv", sep = "/"), na = "")
+    detections |>
+    dplyr::distinct(.data$detection_id, .keep_all = TRUE)
+  readr::write_csv(detections, file.path(directory, "detections.csv"), na = "")
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
   # Select on acoustic_project_codes found in detections to get all deployments,
   # including those without detections for animal_project_code
   acoustic_project_codes <-
-    detections %>%
-    distinct(.data$acoustic_project_code) %>%
-    pull() %>%
-    sort()
+    detections |>
+    dplyr::distinct(.data$acoustic_project_code) |>
+    dplyr::pull() |>
+    stringr::str_sort()
   deployments <- get_acoustic_deployments(
-    api = api,
     acoustic_project_code = acoustic_project_codes,
     open_only = FALSE
   )
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
-    deployments %>%
-    dplyr::mutate(comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " "))
-  readr::write_csv(deployments, paste(directory, "deployments.csv", sep = "/"), na = "")
+    deployments |>
+    dplyr::mutate(
+      comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
+    )
+  readr::write_csv(
+    deployments,
+    file.path(directory, "deployments.csv"),
+    na = ""
+  )
 
   # RECEIVERS
   message("* (5/6): downloading receivers.csv")
   # Select on receivers associated with deployments
   receiver_ids <-
-    deployments %>%
-    distinct(.data$receiver_id) %>%
-    pull()
+    deployments |>
+    dplyr::distinct(.data$receiver_id) |>
+    dplyr::pull()
   receivers <- get_acoustic_receivers(
-    api = api,
     receiver_id = receiver_ids
   )
-  readr::write_csv(receivers, paste(directory, "receivers.csv", sep = "/"), na = "")
+  readr::write_csv(receivers, file.path(directory, "receivers.csv"), na = "")
 
   # DATAPACKAGE.JSON
   message("* (6/6): adding datapackage.json as file metadata")
   datapackage <- system.file("assets", "datapackage.json", package = "etn")
-  file.copy(datapackage, paste(directory, "datapackage.json", sep = "/"), overwrite = TRUE)
+  file.copy(
+    datapackage,
+    file.path(directory, "datapackage.json"),
+    overwrite = TRUE
+  )
 
   # Create summary stats
   scientific_names <-
-    animals %>%
-    distinct(.data$scientific_name) %>%
-    pull() %>%
-    sort()
+    animals |>
+    dplyr::distinct(.data$scientific_name) |>
+    dplyr::pull() |>
+    stringr::str_sort()
 
   message("")
-  message(glue::glue("\nSummary statistics for dataset `{animal_project_code}`:"))
+  message(
+    glue::glue("\nSummary statistics for dataset `{animal_project_code}`:")
+  )
   message("* number of animals:           ", nrow(animals))
   message("* number of tags:              ", nrow(tags))
   message("* number of detections:        ", nrow(detections))
   message("* number of deployments:       ", nrow(deployments))
   message("* number of receivers:         ", nrow(receivers))
   if (nrow(detections) > 0) {
-    message("* first date of detection:     ", detections %>% dplyr::summarize(min(as.Date(.data$date_time))) %>% pull())
-    message("* last date of detection:      ", detections %>% dplyr::summarize(max(as.Date(.data$date_time))) %>% pull())
+    message(
+      "* first date of detection:     ",
+      detections |> dplyr::summarize(min(as.Date(.data$date_time))) |> dplyr::pull()
+    )
+    message(
+      "* last date of detection:      ",
+      detections |> dplyr::summarize(max(as.Date(.data$date_time))) |> dplyr::pull()
+    )
   } else {
     message("* first date of detection:     ", NA)
     message("* last date of detection:      ", NA)
   }
-  message("* included scientific names:   ", paste(scientific_names, collapse = ", "))
-  message("* included acoustic projects:  ", paste(acoustic_project_codes, collapse = ", "))
+  message(
+    "* included scientific names:   ",
+    paste(scientific_names, collapse = ", ")
+  )
+  message(
+    "* included acoustic projects:  ",
+    paste(acoustic_project_codes, collapse = ", ")
+  )
   message("")
 
   # Create warnings
   animals_multiple_tags <-
-    animals %>%
-    filter(stringr::str_detect(.data$tag_serial_number, ",")) %>%
-    distinct(.data$animal_id) %>% # Should be unique already
-    pull()
+    animals |>
+    dplyr::filter(stringr::str_detect(.data$tag_serial_number, ",")) |>
+    dplyr::distinct(.data$animal_id) |> # Should be unique already
+    dplyr::pull()
 
   tags_multiple_animals <-
-    animals %>%
-    dplyr::group_by(.data$tag_serial_number) %>%
-    filter(dplyr::n() > 1) %>%
-    distinct(.data$tag_serial_number) %>%
-    pull()
+    animals |>
+    dplyr::group_by(.data$tag_serial_number) |>
+    dplyr::filter(dplyr::n() > 1) |>
+    dplyr::distinct(.data$tag_serial_number) |>
+    dplyr::pull()
 
   orphaned_deployments <-
-    detections %>%
-    filter(.data$acoustic_project_code %in% c("no_info", "none")) %>%
-    distinct(.data$deployment_id) %>%
-    pull()
+    detections |>
+    dplyr::filter(.data$acoustic_project_code %in% c("no_info", "none")) |>
+    dplyr::distinct(.data$deployment_id) |>
+    dplyr::pull()
 
   duplicate_detections_count <- detections_orig_count - nrow(detections)
 
   if (length(animals_multiple_tags) > 0) {
-    warning("Found animals with multiple tags: ", paste(animals_multiple_tags, collapse = ", "))
+    warning(
+      "Found animals with multiple tags: ",
+      paste(animals_multiple_tags, collapse = ", ")
+    )
   }
   if (length(tags_multiple_animals) > 0) {
-    warning("Found tags associated with multiple animals: ", paste(tags_multiple_animals, collapse = ", "))
+    warning(
+      "Found tags associated with multiple animals: ",
+      paste(tags_multiple_animals, collapse = ", ")
+    )
   }
   if (length(orphaned_deployments) > 0) {
-    warning("Found deployments without acoustic project: ", paste(orphaned_deployments, collapse = ", "))
+    warning(
+      "Found deployments without acoustic project: ",
+      paste(orphaned_deployments, collapse = ", ")
+    )
   }
   if (duplicate_detections_count > 0) {
-    warning("Found and removed duplicate detections: ", duplicate_detections_count, " detections")
+    warning(
+      "Found and removed duplicate detections: ",
+      duplicate_detections_count,
+      " detections"
+    )
   }
 }

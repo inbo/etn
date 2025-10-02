@@ -19,69 +19,13 @@
 #' # Get a specific acoustic project
 #' get_acoustic_projects(acoustic_project_code = "demer")
 get_acoustic_projects <- function(connection,
-                                  acoustic_project_code = NULL,
-                                  api = TRUE){
+                                  acoustic_project_code = NULL) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
+  out <- conduct_parent_to_helpers(protocol = select_protocol())
   return(out)
-}
-#' get_acoustic_projects() sql helper
-#'
-#' @inheritParams get_acoustic_projects()
-#' @noRd
-#'
-get_acoustic_projects_sql <- function(acoustic_project_code = NULL) {
-  # Create connection
-  connection <- create_connection(credentials = get_credentials())
-  # Check connection
-  check_connection(connection)
-
-  # Check acoustic_project_code
-  if (is.null(acoustic_project_code)) {
-    acoustic_project_code_query <- "True"
-  } else {
-    acoustic_project_code <- check_value(
-      acoustic_project_code,
-      list_acoustic_project_codes(api = FALSE),
-      "acoustic_project_code",
-      lowercase = TRUE
-    )
-    acoustic_project_code_query <- glue::glue_sql(
-      "LOWER(project.project_code) IN ({acoustic_project_code*})",
-      .con = connection
-    )
-  }
-
-  project_sql <- glue::glue_sql(
-    readr::read_file(system.file("sql", "project.sql", package = "etn")),
-    .con = connection
-  )
-
-  # Build query
-  query <- glue::glue_sql("
-    SELECT
-      project.*
-    FROM
-      ({project_sql}) AS project
-    WHERE
-      project_type = 'acoustic'
-      AND {acoustic_project_code_query}
-    ", .con = connection)
-  projects <- DBI::dbGetQuery(connection, query)
-
-  # Sort data
-  projects <-
-    projects %>%
-    dplyr::arrange(.data$project_code)
-
-  # Close connection
-  DBI::dbDisconnect(connection)
-
-  # Return acoustic projects
-  dplyr::as_tibble(projects)
 }

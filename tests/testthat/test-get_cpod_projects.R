@@ -1,11 +1,5 @@
-# con <- connect_to_etn()
-#
-# test_that("get_cpod_projects() returns error for incorrect connection", {
-#   expect_error(
-#     get_cpod_projects(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
+skip_if_not_localdb() # local database and api tests are mixed
+
 df <- get_cpod_projects()
 df_sql <- get_cpod_projects()
 
@@ -18,7 +12,8 @@ test_that("get_cpod_projects() returns a tibble", {
 })
 
 test_that("get_cpod_projects() returns unique project_id", {
-  expect_equal(nrow(df), nrow(df %>% distinct(project_id)))
+  df <- get_cpod_projects()
+  expect_identical(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_cpod_projects() returns the expected columns", {
@@ -38,7 +33,7 @@ test_that("get_cpod_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_cpod_projects() allows selecting on cpod_project_code", {
@@ -56,10 +51,10 @@ test_that("get_cpod_projects() allows selecting on cpod_project_code", {
   single_select <- "cpod-lifewatch"
   single_select_df <- get_cpod_projects(cpod_project_code = single_select)
   expect_equal(
-    single_select_df %>% distinct(project_code) %>% pull(),
+    single_select_df |> dplyr::distinct(project_code) |> dplyr::pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
 
   # Selection is case insensitive
   expect_equal(
@@ -71,15 +66,15 @@ test_that("get_cpod_projects() allows selecting on cpod_project_code", {
   multi_select <- c("cpod-lifewatch", "cpod-od-natuur")
   multi_select_df <- get_cpod_projects(cpod_project_code = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(project_code) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(project_code) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_cpod_projects() returns projects of type 'cpod'", {
   expect_equal(
-    get_cpod_projects() %>% distinct(project_type) %>% pull(),
+    get_cpod_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "cpod"
   )
 })

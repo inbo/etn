@@ -7,6 +7,8 @@
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
 #' @param end_date Character. End date (exclusive) in ISO 8601 format (
 #'   `yyyy-mm-dd`, `yyyy-mm` or `yyyy`).
+#' @param tag_serial_number Character (vector). One or more acoustic tag serial
+#'  numbers.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag ids.
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
@@ -18,7 +20,8 @@
 #'   names.
 #' @param limit Logical. Limit the number of returned records to 100 (useful
 #'   for testing purposes). Defaults to `FALSE`.
-#'
+#' @param progress Logical. Show a progress bar while fetching data. Defaults to
+#'   `TRUE`.
 #' @inheritParams list_animal_ids
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
@@ -70,6 +73,7 @@
 get_acoustic_detections <- function(connection,
                                     start_date = NULL,
                                     end_date = NULL,
+                                    tag_serial_number = NULL,
                                     acoustic_tag_id = NULL,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
@@ -77,216 +81,299 @@ get_acoustic_detections <- function(connection,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    api = TRUE){
+                                    progress = TRUE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
-  # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(api)
-  return(out)
-}
+  assertthat::assert_that(assertthat::is.flag(limit))
 
-#' get_acoustic_detections() sql helper
-#'
-#' @inheritParams get_acoustic_detections()
-#' @noRd
-#'
-get_acoustic_detections_sql <- function(start_date = NULL,
-                                    end_date = NULL,
-                                    acoustic_tag_id = NULL,
-                                    animal_project_code = NULL,
-                                    scientific_name = NULL,
-                                    acoustic_project_code = NULL,
-                                    receiver_id = NULL,
-                                    station_name = NULL,
-                                    limit = FALSE) {
-  # Create connection
-  connection <- create_connection(credentials = get_credentials())
-  # Check connection
-  check_connection(connection)
+  # Decide how we're going to retrieve the data
+  protocol <- select_protocol()
 
-  # Check start_date
-  if (is.null(start_date)) {
-    start_date_query <- "True"
-  } else {
-    start_date <- check_date_time(start_date, "start_date")
-    start_date_query <- glue::glue_sql("det.datetime >= {start_date}", .con = connection)
+  # Control progress reporting
+  # Don't show the progress bar when testing: clutters up console and CI output
+  if (is_testing()) {
+    progress <- FALSE
+  }
+  # Only show the progress bar if less than 50% of records have been fetched in
+  # 24h: workaround to control progress reporting
+  if (!progress) {
+    withr::local_options(cli.progress_show_after = 60 * 60 * 24)
+  }
+  # Some arguments don't need to be sent to etnservice, drop arguments set to
+  # NULL
+  arguments_to_pass <-
+    return_parent_arguments(depth = 1, compact = TRUE)[
+      !names(return_parent_arguments(depth = 1)) %in% c(
+        "api",
+        "progress",
+        "connection",
+        "limit" # handled client side
+      )
+    ]
+
+  # Estimate number of pages ------------------------------------------------
+
+  # Calculate the number of records we expect: for progress bar + page_size
+  # Report on this step as it can take a while for large queries
+  if (progress) {
+    # you need to init a message to pass it to cli, we'll update it as we get a
+    # count
+    exp_records_msg <- ""
+    cli::cli_progress_step("Preparing {exp_records_msg}")
   }
 
-  # Check end_date
-  if (is.null(end_date)) {
-    end_date_query <- "True"
-  } else {
-    end_date <- check_date_time(end_date, "end_date")
-    end_date_query <- glue::glue_sql("det.datetime < {end_date}", .con = connection)
+  n_records_expected <-
+    if (limit) {
+      # If limit is set to TRUE, we expect 100 records
+      100
+    } else {
+      # otherwise query the number of records
+
+      do.call(count_acoustic_detections, append(
+        arguments_to_pass,
+        list(protocol = protocol)
+      ))
+    }
+
+  # Update progress step with number of records we'll be fetching.
+  if (progress) {
+    exp_records_msg <-
+      glue::glue(": will fetch {n_records_pretty} detections",
+        n_records_pretty = prettyunits::pretty_num(n_records_expected)
+      )
   }
 
-  # Check acoustic_tag_id
-  if (is.null(acoustic_tag_id)) {
-    acoustic_tag_id_query <- "True"
-  } else {
-    acoustic_tag_id <- check_value(
-      acoustic_tag_id,
-      list_acoustic_tag_ids(api = FALSE),
-      "acoustic_tag_id"
-    )
-    acoustic_tag_id_query <- glue::glue_sql(
-      "det.transmitter IN ({acoustic_tag_id*})",
-      .con = connection
-    )
-    include_ref_tags <- TRUE
-  }
-
-  # Check animal_project_code
-  if (is.null(animal_project_code)) {
-    animal_project_code_query <- "True"
-  } else {
-    animal_project_code <- check_value(
-      animal_project_code,
-      list_animal_project_codes(api = FALSE),
-      "animal_project_code",
-      lowercase = TRUE
-    )
-    animal_project_code_query <- glue::glue_sql(
-      "LOWER(animal_project_code) IN ({animal_project_code*})",
-      .con = connection
-    )
-  }
-
-  # Check scientific_name
-  if (is.null(scientific_name)) {
-    scientific_name_query <- "True"
-  } else {
-    scientific_name <- check_value(
-      scientific_name,
-      list_scientific_names(api = FALSE),
-      "scientific_name"
-    )
-    scientific_name_query <- glue::glue_sql(
-      "animal_scientific_name IN ({scientific_name*})",
-      .con = connection
-    )
-  }
-
-  # Check acoustic_project_code
-  if (is.null(acoustic_project_code)) {
-    acoustic_project_code_query <- "True"
-  } else {
-    acoustic_project_code <- check_value(
-      acoustic_project_code,
-      list_acoustic_project_codes(api = FALSE),
-      "acoustic_project_code",
-      lowercase = TRUE
-    )
-    acoustic_project_code_query <- glue::glue_sql(
-      "LOWER(network_project_code) IN ({acoustic_project_code*})",
-      .con = connection
+  # Return early if query didn't result in any rows
+  if (n_records_expected == 0) {
+    return(
+      dplyr::tibble(
+        .rows = 0,
+        detection_id = NA,
+        date_time = NA,
+        tag_serial_number = NA,
+        acoustic_tag_id = NA,
+        animal_project_code = NA,
+        animal_id = NA,
+        scientific_name = NA,
+        acoustic_project_code = NA,
+        receiver_id = NA,
+        station_name = NA,
+        deploy_latitude = NA,
+        deploy_longitude = NA,
+        sensor_value = NA,
+        sensor_unit = NA,
+        sensor2_value = NA,
+        sensor2_unit = NA,
+        signal_to_noise_ratio = NA,
+        source_file = NA,
+        qc_flag = NA,
+        deployment_id = NA
+      )
     )
   }
 
-  # Check receiver_id
-  if (is.null(receiver_id)) {
-    receiver_id_query <- "True"
-  } else {
-    receiver_id <- check_value(
-      receiver_id,
-      list_receiver_ids(api = FALSE),
-      "receiver_id"
-    )
-    receiver_id_query <- glue::glue_sql(
-      "det.receiver IN ({receiver_id*})",
-      .con = connection
-    )
-  }
-
-  # Check station_name
-  if (is.null(station_name)) {
-    station_name_query <- "True"
-  } else {
-    station_name <- check_value(
-      station_name,
-      list_station_names(api = FALSE),
-      "station_name"
-    )
-    station_name_query <- glue::glue_sql(
-      "deployment_station_name IN ({station_name*})",
-      .con = connection
-    )
-  }
-
-  # Check limit
-  assertthat::assert_that(is.logical(limit), msg = "limit must be a logical: TRUE/FALSE.")
+  # Control number of objects to fetch per page, 100k default, up to 1M for
+  # big queries
   if (limit) {
-    limit_query <- glue::glue_sql("LIMIT 100", .con = connection)
+    # Only fetch 100 records
+    page_size <- 100
+  } else if (n_records_expected > 5e6) {
+    # Increase page_size in case of over 5M records
+    page_size <- 1e6
   } else {
-    limit_query <- glue::glue_sql("LIMIT ALL}", .con = connection)
+    # default page size
+    page_size <- 1e5
   }
 
-  acoustic_tag_id_sql <- glue::glue_sql(
-    readr::read_file(system.file("sql", "acoustic_tag_id.sql", package = "etn")),
-    .con = connection
+  # Update progress bar with total number of pages expected: plus one for the
+  # count query, this update doesn't count as a progress step. Otherwise we'd
+  # have to add 1 more to the total number of steps.
+  n_pages_expected <- ceiling(n_records_expected / page_size)
+
+  # Fetch credentials only once and reuse for every page, if the call is
+  # forwarded to openCPU, credentials are appended by default
+  if (protocol != "opencpu") credentials <- get_credentials()
+
+  # Fetch pages -------------------------------------------------------------
+  # Path to store pages on disk
+  tmp_pagedir <- withr::local_tempdir(pattern = "detection_pages-")
+
+  # Initialize progress bar for fetching the pages
+  cli::cli_progress_bar(
+    name = "Getting detections.",
+    total = n_pages_expected,
+    format =
+      "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}"
   )
 
-  # Build query
-  query <- glue::glue_sql("
-    SELECT
-      det.id_pk AS detection_id,
-      det.datetime AS date_time,
-      tag_serial_number AS tag_serial_number, -- exclusive to detections_limited
-      det.transmitter AS acoustic_tag_id,
-      animal_project_code AS animal_project_code, -- exclusive to detections_limited
-      animal_id_pk AS animal_id, -- exclusive to detections_limited
-      animal_scientific_name AS scientific_name, -- exclusive to detections_limited
-      network_project_code AS acoustic_project_code, -- exclusive to detections_limited
-      det.receiver AS receiver_id,
-      deployment_station_name AS station_name, -- exclusive to detections_limited
-      deployment_latitude AS deploy_latitude, -- exclusive to detections_limited
-      deployment_longitude AS deploy_longitude, -- exclusive to detections_limited
-      det.sensor_value AS sensor_value,
-      det.sensor_unit AS sensor_unit,
-      det.sensor2_value AS sensor2_value,
-      det.sensor2_unit AS sensor2_unit,
-      det.signal_to_noise_ratio AS signal_to_noise_ratio,
-      det.file AS source_file,
-      det.qc_flag AS qc_flag,
-      det.deployment_fk AS deployment_id
-      -- det.transmitter_name
-      -- det.transmitter_serial: via tag_device instead
-      -- det.station_name: deployment.station_name instead
-      -- det.latitude: deployment.deploy_lat instead
-      -- det.longitude: deployment.deploy_long instead
-      -- det.detection_file_id
-      -- det.receiver_serial
-      -- det.gain
-      -- external_id
-    FROM acoustic.detections_limited AS det
-    WHERE
-      {start_date_query}
-      AND {end_date_query}
-      AND {acoustic_tag_id_query}
-      AND {animal_project_code_query}
-      AND {scientific_name_query}
-      AND {acoustic_project_code_query}
-      AND {receiver_id_query}
-      AND {station_name_query}
-      {limit_query}
-    ", .con = connection)
-  detections <- DBI::dbGetQuery(connection, query)
+  repeat {
+    # Pagination arguments
+    # If not set, next_id_pk starts at 0 (used to paginate), page_size at 100k.
+    # Also includes credentials.
+    pagination_arguments <-
+      mget(
+        # Get the following objects from the enclosing frame
+        c("next_id_pk", "page_size", "credentials"),
+        # With the following default values if not set:
+        ifnotfound = list(0, 100000, NULL),
+        inherits = FALSE
+      )
 
-  # Sort data (faster than in SQL)
-  detections <-
-    detections %>%
-    dplyr::arrange(
-      factor(.data$acoustic_tag_id, levels = list_acoustic_tag_ids(api = FALSE)),
-      .data$date_time
+    # Combine arguments to pass to helper function
+    payload <- append(arguments_to_pass, pagination_arguments)
+
+
+    ## store pages on disk -----------------------------------------------------
+
+
+    # Decide what helper to use, add any extra required arguments. Regardless of
+    # helper, return temppath where page was written.
+    if (protocol == "opencpu") {
+      arguments_for_helper <-
+        list(
+          function_identity = "get_acoustic_detections_page",
+          payload = payload,
+          # Set the format to feather because it's faster more memory efficient
+          # and faster than rds
+          format = "feather"
+        )
+      # Save the feather file to disk
+      helper_to_use <- \(..., path) {
+        forward_to_api(...,
+          return_url = TRUE,
+          compression = "lz4",
+        ) |>
+          httr2::request() |>
+          req_perform_opencpu(path = path)
+        invisible(path)
+      }
+    }
+
+    if (protocol == "localdb") {
+      arguments_for_helper <- payload
+      # Save the DBI returned data.frame as a feather file
+      helper_to_use <- \(..., path) {
+        etnservice::get_acoustic_detections_page(...) |>
+          arrow::write_feather(path, compression = "lz4")
+        invisible(path)
+      }
+    }
+
+    # Fetch page
+    fetched_page_path <- do.call(
+      helper_to_use,
+      append(
+        arguments_for_helper,
+        list(
+          path =
+            tempfile(
+              tmpdir = tmp_pagedir,
+              fileext = ".feather"
+            )
+        )
+      )
     )
 
-  # Close connection
-  DBI::dbDisconnect(connection)
+    # Get some metadata on the page we fetched
+    fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
 
-  # Return detections
-  dplyr::as_tibble(detections)
+    # Break the loop if the page is smaller than the page size, or limit is set
+    # to TRUE (always only fetch one page).
+    if (nrow(fetched_page) < page_size || limit) {
+      # Page isn't full = end of results.
+      break
+    }
 
+    # The next page will be fetched with detection_ids higher than the current
+    # max detection_id
+    next_id_pk <-
+      fetched_page |>
+      # Arrow does not support slicing with ties
+      dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
+      dplyr::collect() |>
+      dplyr::pull("detection_id")
+
+    # Iterate the progress bar by one page
+    cli::cli_progress_update()
+  }
+
+  # combine pages -----------------------------------------------------------
+
+  # Update the user on final time consuming step.
+  if (progress) {
+    cli::cli_progress_step("Wrapping up")
+  }
+
+  # Combine pages and sort on acoustic_tag_id
+  detections <-
+    arrow::open_dataset(tmp_pagedir, format = "feather") |>
+    # perform a natural sort via Arrow C++ mapping
+    dplyr::mutate(
+      text_part = stringr::str_remove_all(.data$acoustic_tag_id, "[0-9]"),
+      num_part = as.numeric(
+        stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
+      )
+    ) |>
+    # Arrange by the text part, then the numeric part
+    dplyr::arrange(.data$text_part, .data$num_part) |>
+    dplyr::select(-dplyr::all_of(c("text_part", "num_part")))
+
+
+  # Return single detections table
+  dplyr::collect(detections)
+}
+
+#' Count acoustic detections
+#'
+#' Count the number of acoustic detections that match the given parameters. This
+#' is a helper function that uses
+#' [`get_acoustic_detections_page()`][etnservice::get_acoustic_detections_page]
+#' to count the number of records that would be returned by
+#' [`get_acoustic_detections()`][get_acoustic_detections].
+#'
+#'
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
+#' @inheritParams get_acoustic_detections
+#'
+#' @return A numeric value with the number of acoustic detections that match the
+#'     given parameters.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' count_acoustic_detections(acoustic_project_code = "demer")
+#' count_acoustic_detections(
+#'   acoustic_tag_id = "A69-1601-16130",
+#'   station_name = c("de-9", "de-10")
+#' )
+count_acoustic_detections <- function(...) {
+  # Decide how we're going to retrieve the count
+  protocol <- select_protocol()
+  # If protocol is opencpu, use forward_to_api()
+  if (protocol == "opencpu") {
+    returned_count <- forward_to_api("get_acoustic_detections_page",
+      payload = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      ),
+      json = TRUE
+    )
+  }
+  # If protocol is localdb, use etnservice::get_acoustic_detections_page()
+  if (protocol == "localdb") {
+    returned_count <- do.call(etnservice::get_acoustic_detections_page,
+      args = append(
+        rlang::list2(...),
+        list(count = TRUE)
+      )
+    )
+  }
+
+  # Extract the count from the returned data.frame
+  dplyr::pull(returned_count, "count") |>
+    # If the count class is not numeric, convert it. DBI returns Integer64 which
+    # causes issues with cli progress bars
+    as.numeric()
 }

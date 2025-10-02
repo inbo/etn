@@ -16,17 +16,16 @@
 #' @export
 #'
 #' @examples
-#' library(dplyr) # For %>%
 #'
 #' # List unique scientific_name from a dataframe containing animal information
 #' df <- get_animals(animal_project_code = "2014_demer")
 #' list_values(df, "scientific_name")
 #'
 #' # Or using pipe and unquoted column name
-#' df %>% list_values(scientific_name)
+#' df |> list_values(scientific_name)
 #'
 #' # Or using column position
-#' df %>% list_values(8)
+#' df |> list_values(8)
 #'
 #' # tag_serial_number can contain comma-separated values
 #' df <- get_animals(animal_id = 5841)
@@ -45,25 +44,35 @@ list_values <- function(.data, column, split = ",") {
 
   arguments <- as.list(match.call())
 
-  if (is.numeric(arguments$column)){
+  if (is.numeric(arguments$column)) {
     col_number <- arguments$column
     n_col_df <- ncol(.data)
-    assertthat::assert_that(as.integer(col_number) == col_number,
-                msg = "column number must be an integer")
-    assertthat::assert_that(col_number <= ncol(.data),
-                msg = glue::glue("column number exceeds the number of columns ",
-                                 "of .data ({n_col_df})"))
+    assertthat::assert_that(
+      as.integer(col_number) == col_number,
+      msg = "column number must be an integer"
+    )
+    assertthat::assert_that(
+      col_number <= ncol(.data),
+      msg = glue::glue(
+        "column number exceeds the number of columns ",
+        "of .data ({n_col_df})"
+      )
+    )
     # extract values
-    values <- .data[,col_number]
+    values <- .data[, col_number]
     # extract column name
     col_name <- names(.data)[col_number]
   } else {
-    #check column name
+    # check column name
     col_name <- as.character(arguments$column)
-    assertthat::assert_that(length(col_name) == 1,
-                msg = "invalid column value")
-    assertthat::assert_that(col_name %in% names(.data),
-                msg = glue::glue("column {col_name} not found in .data"))
+    assertthat::assert_that(
+      length(col_name) == 1,
+      msg = "invalid column value"
+    )
+    assertthat::assert_that(
+      col_name %in% names(.data),
+      msg = glue::glue("column {col_name} not found in .data")
+    )
 
     # extract values
     if (methods::is(arguments$column, "name")) {
@@ -75,9 +84,10 @@ list_values <- function(.data, column, split = ",") {
     }
   }
 
-  if (is.character(values))
+  if (is.character(values)) {
     # extract all values by splitting strings using split value
     values <- unlist(strsplit(x = values, split = split))
+  }
 
   # remove duplicates, unique values only
   values <- unique(values)

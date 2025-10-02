@@ -8,6 +8,7 @@ get_acoustic_detections(
   connection,
   start_date = NULL,
   end_date = NULL,
+  tag_serial_number = NULL,
   acoustic_tag_id = NULL,
   animal_project_code = NULL,
   scientific_name = NULL,
@@ -15,7 +16,7 @@ get_acoustic_detections(
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
-  api = TRUE
+  progress = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ credentials instead.}
 
 \item{end_date}{Character. End date (exclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
+
+\item{tag_serial_number}{Character (vector). One or more acoustic tag serial
+numbers.}
 
 \item{acoustic_tag_id}{Character (vector). One or more acoustic tag ids.}
 
@@ -47,7 +51,8 @@ names.}
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
 
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
+\item{progress}{Logical. Show a progress bar while fetching data. Defaults to
+\code{TRUE}.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}

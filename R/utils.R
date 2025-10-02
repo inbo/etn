@@ -1,17 +1,4 @@
-# HELPER FUNCTIONS
-
-#' Check the validity of the database connection
-#'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#' @family helper functions
-#' @noRd
-check_connection <- function(connection) {
-  assertthat::assert_that(
-    methods::is(connection, "PostgreSQL"),
-    msg = "Not a connection object to database."
-  )
-  assertthat::assert_that(connection@info$dbname == "ETN")
-}
+# HELPER FUNCTIONS ----
 
 #' Check input value against valid values
 #'
@@ -26,7 +13,7 @@ check_connection <- function(connection) {
 #' @noRd
 check_value <- function(x, y, name = "value", lowercase = FALSE) {
   # Remove NA from valid values
-  y <- y[!is.na(x)]
+  y <- y[!is.na(y)]
 
   # Ignore case
   if (lowercase) {
@@ -47,46 +34,6 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
-#' Check if the string input can be converted to a date
-#'
-#' Returns `FALSE`` or the cleaned character version of the date
-#' (acknowledgments to micstr/isdate.R).
-#'
-#' @param date_time Character. A character representation of a date.
-#' @param date_name Character. Informative description to user about type of
-#'   date.
-#' @return `FALSE` | character
-#' @family helper functions
-#' @noRd
-#' @examples
-#' \dontrun{
-#' check_date_time("1985-11-21")
-#' check_date_time("1985-11")
-#' check_date_time("1985")
-#' check_date_time("1985-04-31") # invalid date
-#' check_date_time("01-03-1973") # invalid format
-#' }
-check_date_time <- function(date_time, date_name = "start_date") {
-  parsed <- tryCatch(
-    lubridate::parse_date_time(date_time, orders = c("ymd", "ym", "y")),
-    warning = function(warning) {
-      if (grepl("No formats found", warning$message)) {
-        stop(glue::glue(
-          "The given {date_name}, {date_time}, is not in a valid ",
-          "date format. Use a yyyy-mm-dd format or shorter, ",
-          "e.g. 2012-11-21, 2012-11 or 2012."
-        ))
-      } else {
-        stop(glue::glue(
-          "The given {date_name}, {date_time} can not be interpreted ",
-          "as a valid date."
-        ))
-      }
-    }
-  )
-  as.character(parsed)
-}
-
 #' Get the credentials from environment variables, or set them manually
 #'
 #' By default, it's not necessary to set any values in this function as it's
@@ -102,130 +49,26 @@ check_date_time <- function(date_time, date_name = "start_date") {
 #'   authentication
 #' @family helper functions
 #' @noRd
-get_credentials <- function(username = Sys.getenv("userid"),
-                            password = Sys.getenv("pwd")) {
-  if (Sys.getenv("userid") == "") {
-    message("No credentials stored, prompting..")
-    Sys.setenv(userid = readline(prompt = "Please enter a userid: "))
-    Sys.setenv(pwd = askpass::askpass())
+get_credentials <- function(username = Sys.getenv("ETN_USER"),
+                            password = Sys.getenv("ETN_PWD")) {
+  if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
+    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+    if (is_interactive()) {
+      message("No credentials stored, prompting..")
+      username <- prompt_user(prompt = "Please enter a userid: ")
+      password <- ask_pass()
+    } else {
+      # No credentials, not interactive
+      stop(
+        glue::glue(
+          "No credentials stored, not running in interactive mode. ",
+          "Please set credentials as environemental variables or in the .Renviron file."
+        )
+      )
+    }
   }
-  # glue::glue('list(username = "{username}", password = "{password}")')
   invisible(list(username = username, password = password))
 }
-
-#' Extract the OCPU temp key from a response object
-#'
-#' When posting a request to the opencpu api service without the json flag, a
-#' response object is returned containing all the generated objects, with a
-#' unique temp key in the path. To retrieve these objects in a subsequent GET
-#' request, it is convenient to retrieve this temp key from the original
-#' response object
-#'
-#' @param response The response resulting from a POST request to a opencpu api
-#'   service
-#'
-#' @return the OCPU temp key to be used as part of a GET request to an opencpu
-#'   api service
-#' @family helper functions
-#' @noRd
-extract_temp_key <- function(response) {
-  response %>%
-    httr::content(as = "text") %>%
-    stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
-}
-
-#' Retrieve the result of a function called to the opencpu api
-#'
-#' Fetch the result of an API call to OpenCPU
-#'
-#' This function is used internally to GET an evaluated object from an OpenCPU
-#' api, to GET a result, you must of course POST a function call first
-#'
-#' @param temp_key the temp key returned from the POST request to the API
-#'
-#' @return the uncompressed object resulting form a GET request to the API
-#' @family helper functions
-#' @noRd
-#' @examples
-#' \dontrun{
-#' etn:::extract_temp_key(response) %>% get_val()
-#' }
-#'
-#' # using the opencpu test instance
-#' api_url <- "https://cloud.opencpu.org/ocpu/library/stats/R/rnorm"
-#' httr::POST(api_url, body = list(n = 10, mean = 5)) %>%
-#'   extract_temp_key() %>%
-#'   get_val(api_domain = "https://cloud.opencpu.org/ocpu")
-get_val <- function(temp_key, api_domain = "https://opencpu.lifewatch.be") {
-  # request data and open connection
-  response_connection <- httr::RETRY(
-    verb = "GET",
-    url = glue::glue(
-      "{api_domain}",
-      "tmp/{temp_key}/R/.val/rds",
-      .sep = "/"
-    ),
-    times = 5
-  ) %>%
-    httr::content(as = "raw") %>%
-    rawConnection()
-  # read connection
-  api_response <- response_connection %>%
-    gzcon() %>%
-    readRDS()
-  # close connection
-  close(response_connection)
-  # Return OpenCPU return object
-  return(api_response)
-}
-
-#' Return the arguments as a named list of the parent environment
-#'
-#' Because the requests to the API are so similar, it's more DRY to pass the
-#' function arguments of the parent function directly to the API, instead of
-#' repeating them in the function body.
-#'
-#' @return a named list of name value pairs form the parent environement
-#'
-#' @family helper functions
-#' @noRd
-return_parent_arguments <- function(depth = 1) {
-  # lock in the environment of the function we are being called in. Otherwise
-  # lazy evaluation can cause trouble
-  parent_env <- rlang::caller_env(n = depth)
-  env_names <- rlang::env_names(parent_env)
-  # set the environement names so lapply can output a names list
-  names(env_names) <- env_names
-  lapply(
-    env_names,
-    function(x) rlang::env_get(env = parent_env, nm = x)
-  )
-}
-
-#' Check an OpenCPU reponse object and forward any errors
-#'
-#' @param response httr::response object from an OpenCPU API call
-#'
-#' @family helper functions
-#' @noRd
-check_opencpu_response <- function(response) {
-  # Stop if etnservice forwarded an error
-  assertthat::assert_that(response$status_code != 400,
-    msg = httr::content(response,
-      as = "text",
-      encoding = "UTF-8"
-    )
-  )
-
-  # Stop for other HTTP errors
-  assertthat::assert_that(!httr::http_error(response),
-    msg = glue::glue(
-      "API request failed: {http_message}",
-      http_message = httr::http_status(response)$message
-    )
-  )
-}
-
 
 #' Lifecycle warning for the deprecated connection argument
 #'
@@ -272,140 +115,141 @@ get_parent_fn_name <- function(depth = 1) {
   rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
 }
 
-#' Forward function arguments to API and retreive response
+#' Determine testing status
 #'
-#' @param function_identity Character vector of what function should be passed
-#' @param payload Arguments to be passed to OpenCPU function
-#' @param json Logical, if TRUE, then a one step process is used the output is
-#'   parsed from a json response
-#' @return The same return object of the `function_identity` function
+#' Copy of testthat::is_testing() implementation to avoid a runtime dependency
+#' on testthat.
 #'
+#' @return `TRUE` inside a test.
 #' @family helper functions
 #' @noRd
-forward_to_api <- function(
-    function_identity,
-    payload,
-    json = FALSE,
-    domain = "https://opencpu.lifewatch.be/library/etnservice/R") {
-  # Get credentials and attatch to payload
-  payload <- append(payload, list(credentials = get_credentials()), after = 0)
-  # Set endpoint based on the passed function_identity
-  # NOTE trailing backslash is important for OpenCPU
-  endpoint <- glue::glue("{domain}/{function_identity}/")
-
-  if (json) {
-    response <-
-      httr::RETRY(
-        verb = "POST",
-        url = glue::glue(endpoint, "json/"),
-        body = payload,
-        encode = "json",
-        terminate_on = c(400),
-        times = 5
-      )
-    # Check if the response contains any errors, and forward them if so.
-    check_opencpu_response(response)
-
-    # return as a vector
-    return(unlist(httr::content(response, as = "parsed")))
-  } else {
-    # Forward the function and arguments to the API: call 1
-    ## Retry if server responds with HTTP error, use default rate settings of httr
-    response <-
-      httr::RETRY(
-        verb = "POST",
-        url = endpoint,
-        body = payload,
-        encode = "json",
-        terminate_on = c(400),
-        times = 5
-      )
-
-    # Check if the response contains any errors, and forward them if so.
-    check_opencpu_response(response)
-
-    # Fetch the output from the API: call 2
-    return(get_val(extract_temp_key(response)))
-  }
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+#' Get the system's nodename
+#'
+#' A simple wrapper around `Sys.info()["nodename"]` to facilitate mocking in
+#' tests.
+#'
+#' @returns Character of length one with the system's nodename.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' get_nodename()
+get_nodename <- function() {
+  Sys.info()["nodename"]
+}
 
-#' Conductor Helper: point the way to API or SQL helper
+#' Check if the local database protocol is available
 #'
-#' Helper that conducts it's parent function to either use a helper to query the
-#' api, or a helper to query a local database connection using SQL.
+#' This function checks if the local database is available by checking the
+#' nodename.
 #'
-#' @param api Logical, Should the API be used?
-#' @param ignored_arguments Character vector of arguments not to pass to the API
-#'   or SQL helper
-#' @param ... options on how to fetch the response. Forwarded to
-#'   `forward_to_api()`
+#' The nodename check is a simple string check to see if the system's nodename
+#' ends with "vliz.be", which is a convention for systems that have access to
+#' the local database.#'
 #'
-#' @return parsed R object as resulting from the API
+#' @returns Logical. `TRUE` if the local database is available, `FALSE`
+#'   otherwise.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' # This should return FALSE unless you are running this example from the VLIZ
+#' # RStudio Server.
+#' localdb_is_available()
+localdb_is_available <- function() {
+  # As discussed with VLIZ, all systems that have access to the local database
+  # should have nodenames ending on vliz.be
+  endsWith(get_nodename(), "vliz.be")
+}
+
+#' Select the protocol to use
+#'
+#' The protocol is the way data is fetched. This is in addition to the source,
+#' which is where the data comes from.
+#'
+#' This function is used to centrally control the decision tree for which
+#' protocol to use for ´conduct_parent_to_helper()´. When there is a local
+#' database connection available, use this by default. If not, use the OpenCPU
+#' API. Both these protocols use the ETN database as a source.
+#'
+#' @returns Character of length one with one of the available protocols.
 #'
 #' @family helper functions
 #' @noRd
-conduct_parent_to_helpers <- function(api,
-                                      ignored_arguments = NULL,
-                                      ...) {
-  # Check arguments
-  assertthat::assert_that(assertthat::is.flag(api))
-  assertthat::assert_that(is.character(ignored_arguments) |
-                            is.null(ignored_arguments))
+select_protocol <- function() {
+  # ALlow overwriting of protocol logic by environmental variable
+  user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
+                                       unset = "no_protocol_set")
+  if (user_selected_protocol != "no_protocol_set") {
+    return(user_selected_protocol)
+  }
 
-  # Lock in the name of the parent function
-  function_identity <-
-    get_parent_fn_name(depth = 2)
+  # If there is a local database connection available, use it.
+  if (localdb_is_available()) {
+    return("localdb")
+  }
 
-  # Get the argument values from the parent function
-  arguments_to_pass <-
-    return_parent_arguments(depth = 2)[
-      !names(return_parent_arguments(depth = 2)) %in% c(
-        "api",
-        "connection",
-        ignored_arguments,
-        "function_identity"
-      )
-    ]
+  # Fallback on API
+  return("opencpu")
+}
 
-  if (api) {
-    out <- do.call(
-      forward_to_api,
-      list(function_identity = function_identity,
-           payload = arguments_to_pass,
-           ...)
+# WRAPPER FUNCTIONS ----
+
+#' Wrapper of askpass::askpass
+#'
+#' This function is wrapped so it can be mocked in
+#' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behavior of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+ask_pass <- function(...) {
+  askpass::askpass(...)
+}
+
+#' Wrapper of rlang::is_interactive
+#'
+#' This function is wrapped so it can be mocked in
+#' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behaviour of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+is_interactive <- function(...) {
+  rlang::is_interactive(...)
+}
+
+#' Wrapper for base::readline
+#'
+#' This function is wrapped because I find it easier to read, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behaviour of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+prompt_user <- function(...) {
+  readline(...)
+}
+
+# rlang null handling -----------------------------------------------------
+#' @importFrom rlang %||%
+NULL
+
+
+# onLoad ------------------------------------------------------------------
+
+.onLoad <- function(libname, pkgname) {
+  # Memoisation: Every 15 minutes, check the deployed version of etnservice.
+  # Checking this on every call would slow down the package.
+  get_etnservice_version <<-
+    memoise::memoise(get_etnservice_version,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
     )
-  } else {
-    out <- do.call(glue::glue("{function_identity}_sql"), arguments_to_pass)
-  }
-
-  return(out)
-}
-
-#' Create a local connection to the ETN database
-#'
-#' Connect to the ETN database using username and password.
-#'
-#' @param username Character. Username to use for the connection.
-#' @param password Character. Password to use for the connection.
-#'
-#' @return ODBC connection to ETN database.
-#' @noRd
-create_connection <- function(credentials = get_credentials()) {
-  # Check the input arguments
-  assertthat::assert_that(
-    assertthat::is.string(credentials$username)
+  # Memoisation: only validate the login credentials every 15 minutes.
+  validate_login <<-
+    memoise::memoise(validate_login,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
   )
-  assertthat::assert_that(
-    assertthat::is.string(credentials$password)
-  )
-
-  # Connect to the ETN database
-  con <- DBI::dbConnect(
-    odbc::odbc(),
-    "ETN",
-    uid = tolower(credentials$username),
-    pwd = credentials$password
-  )
-  return(con)
 }

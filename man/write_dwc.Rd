@@ -9,8 +9,7 @@ write_dwc(
   animal_project_code,
   directory = ".",
   rights_holder = NULL,
-  license = "CC-BY",
-  api = TRUE
+  license = "CC-BY"
 )
 }
 \arguments{
@@ -34,8 +33,6 @@ published.
 \item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}} (default).
 \item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
 }}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 CSV file(s) written to disk or list of data frames when

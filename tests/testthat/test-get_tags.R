@@ -1,13 +1,8 @@
-# con <- connect_to_etn()
-#
-# test_that("get_tags() returns error for incorrect connection", {
-#   expect_error(
-#     get_tags(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
 df <- get_tags()
-df_sql <- get_tags(api = FALSE)
+
+# Test with local database, skip if not available
+skip_if_not_localdb()
+df_sql <- get_tags()
 
 test_that("get_tags() returns a tibble", {
   expect_s3_class(df, "data.frame")
@@ -74,7 +69,7 @@ test_that("get_tags() returns the expected columns", {
     "tag_id",
     "tag_device_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_tags() allows selecting on tag_serial_number", {
@@ -90,20 +85,20 @@ test_that("get_tags() allows selecting on tag_serial_number", {
   single_select <- "1187450" # From 2014_demer
   single_select_df <- get_tags(tag_serial_number = single_select)
   expect_equal(
-    single_select_df %>% distinct(tag_serial_number) %>% pull(),
+    single_select_df |> dplyr::distinct(tag_serial_number) |> dplyr::pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
   # Note that not all tag_serial_number return a single row, see further test
 
   # Select multiple values
   multi_select <- c(1187449, "1187450") # Integers are allowed
   multi_select_df <- get_tags(tag_serial_number = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(tag_serial_number) |> dplyr::pull() |> sort(),
     c(as.character(multi_select)) # Output will be all character
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_tags() allows selecting on tag_type", {
@@ -119,7 +114,7 @@ test_that("get_tags() allows selecting on tag_type", {
   single_select <- "archival"
   single_select_df <- get_tags(tag_type = single_select)
   expect_equal(
-    single_select_df %>% distinct(tag_type) %>% pull(),
+    single_select_df |> dplyr::distinct(tag_type) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -128,7 +123,7 @@ test_that("get_tags() allows selecting on tag_type", {
   multi_select <- c("acoustic-archival", "archival")
   multi_select_df <- get_tags(tag_type = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(tag_type) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -147,7 +142,7 @@ test_that("get_tags() allows selecting on tag_subtype", {
   single_select <- "built-in"
   single_select_df <- get_tags(tag_subtype = single_select)
   expect_equal(
-    single_select_df %>% distinct(tag_subtype) %>% pull(),
+    single_select_df |> dplyr::distinct(tag_subtype) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -156,7 +151,7 @@ test_that("get_tags() allows selecting on tag_subtype", {
   multi_select <- c("built-in", "range")
   multi_select_df <- get_tags(tag_subtype = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(tag_subtype) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -175,20 +170,20 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
   single_select <- "A69-1601-16130" # From 2014_demer
   single_select_df <- get_tags(acoustic_tag_id = single_select)
   expect_equal(
-    single_select_df %>% distinct(acoustic_tag_id) %>% pull(),
+    single_select_df |> dplyr::distinct(acoustic_tag_id) |> dplyr::pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
   # Note that not all acoustic_tag_id return a single row, e.g. "A180-1702-48973"
 
   # Select multiple values
   multi_select <- c("A69-1601-16129", "A69-1601-16130")
   multi_select_df <- get_tags(acoustic_tag_id = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(acoustic_tag_id) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(acoustic_tag_id) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_tags() allows selecting on multiple parameters", {
@@ -198,7 +193,7 @@ test_that("get_tags() allows selecting on multiple parameters", {
     tag_subtype = "animal",
     acoustic_tag_id = "A69-1601-16130"
   )
-  expect_equal(nrow(multiple_parameters_df), 1)
+  expect_identical(nrow(multiple_parameters_df), 1L)
 })
 
 test_that("get_tags() can return multiple rows for a single tag", {
@@ -206,9 +201,9 @@ test_that("get_tags() can return multiple rows for a single tag", {
   tag_1_df <- get_tags(tag_serial_number = 1400185)
   expect_equal(nrow(tag_1_df), 2) # 2 rows: temperature + presure
   expect_equal(
-    tag_1_df %>%
-      dplyr::arrange(acoustic_tag_id) %>%
-      distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    tag_1_df |>
+      dplyr::arrange(acoustic_tag_id) |>
+      dplyr::distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     dplyr::as_tibble(data.frame(
       tag_type = "acoustic-archival",
       tag_subtype = "animal",
@@ -222,9 +217,9 @@ test_that("get_tags() can return multiple rows for a single tag", {
   tag_2_df <- get_tags(tag_serial_number = 461076)
   expect_equal(nrow(tag_2_df), 2) # 2 rows: A180 + H170
   expect_equal(
-    tag_2_df %>%
-      dplyr::arrange(acoustic_tag_id) %>%
-      distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
+    tag_2_df |>
+      dplyr::arrange(acoustic_tag_id) |>
+      dplyr::distinct(tag_type, tag_subtype, sensor_type, acoustic_tag_id),
     dplyr::as_tibble(data.frame(
       tag_type = "acoustic",
       tag_subtype = "built-in",
@@ -237,11 +232,11 @@ test_that("get_tags() can return multiple rows for a single tag", {
 
 test_that("get_tags() returns correct tag_type and tag_subtype", {
   expect_equal(
-    df %>% distinct(tag_type) %>% pull() %>% sort(),
+    df |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
     c("acoustic", "acoustic-archival", "archival")
   )
-  expect_equal(
-    df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+  expect_identical(
+    df |> dplyr::distinct(tag_subtype) |> dplyr::pull() |> sort(),
     c("animal", "built-in", "range", "sentinel")
   )
 })

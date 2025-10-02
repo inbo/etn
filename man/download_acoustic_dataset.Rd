@@ -8,8 +8,7 @@ download_acoustic_dataset(
   connection,
   animal_project_code,
   scientific_name = NULL,
-  directory = animal_project_code,
-  api = TRUE
+  directory = animal_project_code
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).}
 \item{directory}{Character. Relative path to local download directory.
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data
@@ -78,6 +75,7 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> * (4/6): downloading deployments.csv
 #> * (5/6): downloading receivers.csv
 #> * (6/6): adding datapackage.json as file metadata
+#>
 #> Summary statistics for dataset `2012_leopoldkanaal`:
 #> * number of animals:           104
 #> * number of tags:              103
@@ -88,6 +86,7 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> * last date of detection:      2021-09-02
 #> * included scientific names:   Anguilla anguilla
 #> * included acoustic projects:  albert, Apelafico, bpns, JJ_Belwind, leopold, MOBEIA, pc4c, SPAWNSEIS, ws2, zeeschelde
+#>
 #> Warning message:
 #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #> Found tags associated with multiple animals: 1145373

@@ -9,3 +9,5 @@
 ^doc$
 ^Meta$
 ^README\.Rmd$
+^CITATION\.cff$
+^\.github$

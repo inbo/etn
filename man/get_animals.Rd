@@ -9,8 +9,7 @@ get_animals(
   animal_id = NULL,
   tag_serial_number = NULL,
   animal_project_code = NULL,
-  scientific_name = NULL,
-  api = TRUE
+  scientific_name = NULL
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ credentials instead.}
 codes. Case-insensitive.}
 
 \item{scientific_name}{Character (vector). One or more scientific names.}
-
-\item{api}{Logical. If \code{TRUE}, the function will use the API to access ETN.}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},

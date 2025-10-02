@@ -1,24 +1,17 @@
-# con <- connect_to_etn()
-#
-# test_that("get_animal_projects() returns error for incorrect connection", {
-#   expect_error(
-#     get_animal_projects(con = "not_a_connection"),
-#     "Not a connection object to database."
-#   )
-# })
-
 test_that("get_animal_projects() returns a tibble", {
+  skip_if_not_localdb()
+
   df <- get_animal_projects()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-  df_sql <- get_animal_projects(api = FALSE)
+  df_sql <- get_animal_projects()
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
 
 test_that("get_animal_projects() returns unique project_id", {
   df <- get_animal_projects()
-  expect_equal(nrow(df), nrow(df %>% distinct(project_id)))
+  expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_animal_projects() returns the expected columns", {
@@ -39,7 +32,7 @@ test_that("get_animal_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
-  expect_equal(names(df), expected_col_names)
+  expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_animal_projects() allows selecting on animal_project_code", {
@@ -57,10 +50,10 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
   single_select <- "2014_demer"
   single_select_df <- get_animal_projects(animal_project_code = single_select)
   expect_equal(
-    single_select_df %>% distinct(project_code) %>% pull(),
+    single_select_df |> dplyr::distinct(project_code) |> dplyr::pull(),
     c(single_select)
   )
-  expect_equal(nrow(single_select_df), 1)
+  expect_identical(nrow(single_select_df), 1L)
 
   # Selection is case insensitive
   expect_equal(
@@ -72,15 +65,15 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
   multi_select <- c("2014_demer", "2015_dijle")
   multi_select_df <- get_animal_projects(animal_project_code = multi_select)
   expect_equal(
-    multi_select_df %>% distinct(project_code) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(project_code) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
-  expect_equal(nrow(multi_select_df), 2)
+  expect_identical(nrow(multi_select_df), 2L)
 })
 
 test_that("get_animal_projects() returns projects of type 'animal'", {
-  expect_equal(
-    get_animal_projects() %>% distinct(project_type) %>% pull(),
+  expect_identical(
+    get_animal_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "animal"
   )
 })

@@ -1,21 +1,31 @@
+# get_etnservice_version() ------------------------------------------------
+test_that("get_etnservice_version() returns package_version object", {
+  expect_s3_class(
+    get_etnservice_version(),
+    "package_version"
+  )
+})
 
-# conduct_parent_to_helpers() ---------------------------------------------
+test_that("get_etnservice_version() lists available functions of etnservice", {
+# Skip if there is a mismatch between the locally installed version and the deployed version
+  skip_if(utils::packageVersion("etnservice") != get_etnservice_version())
 
-
-test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
-  expect_error(
-    conduct_parent_to_helpers(api = "not a flag!")
+  # Test that all functions in the package are listed
+  expect_named(
+    get_etnservice_version("all")$fn_checksums,
+    ls(getNamespace("etnservice"))
   )
 })
 
 # extract_temp_key() ------------------------------------------------------
 
 
-test_that("extract_temp_key() can extract a key from a httr::response object", {
+test_that("extract_temp_key() can extract a key from a httr2 response object", {
   vcr::use_cassette("opencpu_cloud_rnorm", {
     response <-
-      httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
-                 body = list(n = 2))
+      httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") |>
+      httr2::req_body_json(list(n = 10, mean = 5)) |>
+      httr2::req_perform()
   })
   temp_key <- extract_temp_key(response)
   expect_type(temp_key, "character")
@@ -24,19 +34,41 @@ test_that("extract_temp_key() can extract a key from a httr::response object", {
 })
 
 # get_val() ---------------------------------------------------------------
-
-
-test_that("get_val() can get a value from a temp_key", {
+test_that("get_val() can get a value from a temp_key using rds", {
   # NOTE Dependent on the OpenCPU testing API
+  skip_if_offline("cloud.opencpu.org")
   response <-
-    httr::POST("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm",
-      body = list(n = 2)
-    )
+    httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") |>
+    httr2::req_body_json(list(n = 2)) |>
+    httr2::req_perform()
+
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"
-
-  expect_no_error(api_out <- get_val(temp_key, domain))
+  api_out <- get_val(temp_key, domain, format = "rds")
+  expect_no_error(api_out)
   expect_type(api_out, "double")
+  expect_length(api_out, 2)
+})
+
+
+test_that("get_val() can get a value from a temp_key using feather", {
+  # NOTE Dependent on the OpenCPU testing API
+  skip_if_offline("cloud.opencpu.org")
+  response <-
+    httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") |>
+    httr2::req_body_json(
+      list(
+        animal = c("dogs", "cats"), judgement = c("cute", "amazing", "superb")
+      )
+    ) |>
+    httr2::req_perform()
+
+  temp_key <- extract_temp_key(response)
+  domain <- "https://cloud.opencpu.org/ocpu"
+  api_out <- get_val(temp_key, domain, format = "feather")
+  expect_no_error(api_out)
+  expect_type(api_out, "list")
+  expect_s3_class(api_out, "tbl_df")
   expect_length(api_out, 2)
 })
 
@@ -81,48 +113,26 @@ test_that("return_parent_arguments() can return higher call function arguments",
   )
 })
 
-vcr::use_cassette("httpbin_error_status", {
-  test_that("check_opencpu_response() returns error on HTTP error codes", {
-    expect_error(check_opencpu_response(
-      httr::RETRY(
-        verb = "GET",
-        "http://httpbin.org/status/404",
-        terminate_on = 404
-      )
-    ),
-    regexp = "API request failed: Client error: (404) Not Found",
-    fixed = TRUE)
-    expect_error(check_opencpu_response(
-      httr::RETRY(
-        verb = "GET",
-        "http://httpbin.org/status/504",
-        terminate_on = 504
-      )
-    ),
-    regexp = "API request failed: Server error: (504) Gateway Timeout",
-    fixed = TRUE)
-    expect_error(check_opencpu_response(
-      httr::RETRY(
-        verb = "GET",
-        "http://httpbin.org/status/429",
-        terminate_on = 429
-      )
-    ),
-    regexp = "API request failed: Client error: (429) Too Many Requests (RFC 6585)",
-    fixed = TRUE)
-  })
-})
+# deprecate_warn_connection() ---------------------------------------------
+
 
 test_that("deprecate_warn_connection() returns warning with function symbol", {
-  fn_to_test <- function(connection) {deprecate_warn_connection()}
+  fn_to_test <- function(connection) {
+    deprecate_warn_connection()
+  }
   expect_warning(
     fn_to_test(),
     regexp = "The `connection` argument of `fn_to_test\\(\\)` is deprecated as of"
   )
 })
 
+# get_parent_fn_name() ----------------------------------------------------
+
+
 test_that("get_parent_fn_name() can return the name of the parent function", {
-  parent_function_with_a_cool_name <- function(){get_parent_fn_name()}
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name()
+  }
   expect_identical(
     parent_function_with_a_cool_name(),
     "parent_function_with_a_cool_name"
@@ -130,10 +140,53 @@ test_that("get_parent_fn_name() can return the name of the parent function", {
 })
 
 test_that("get_parent_fn_name() can return the name a higher level caller", {
-  parent_function_with_a_cool_name <- function(){get_parent_fn_name(depth = 2)}
-  grandparent_function <- function(){parent_function_with_a_cool_name()}
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name(depth = 2)
+  }
+  grandparent_function <- function() {
+    parent_function_with_a_cool_name()
+  }
   expect_identical(
     grandparent_function(),
     "grandparent_function"
+  )
+})
+
+# validate_login() --------------------------------------------------------
+
+
+test_that("validate_login() returns TRUE on correct credentials", {
+  expect_true(validate_login())
+})
+
+test_that("validate_login() returns error on bad credentials", {
+  with_mocked_bindings(
+    code = {
+      expect_error(
+        validate_login(),
+        regexp = "Failed to login with username: not_a_username. Please check username/password.",
+        fixed = TRUE
+      )
+      # This error should be forwarded to all api functions
+      expect_error(
+        list_animal_ids(),
+        regexp = "Failed to login with username: not_a_username. Please check username/password.",
+        fixed = TRUE
+      )
+    },
+    get_credentials = function(...) {
+      list(
+        username = "not_a_username",
+        password = "not the correct pwd"
+      )
+    },
+    # validate_login() is skipped in testing, so we need to pretend we're not.
+    is_testing = function(...) {
+      FALSE
+    },
+    # Force using the api by setting the protocol to opencpu
+    select_protocol = function(...) {
+      "opencpu"
+    }
   )
 })

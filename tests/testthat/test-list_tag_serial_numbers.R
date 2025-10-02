@@ -14,7 +14,9 @@ test_that("list_tag_serial_numbers() returns unique list of values", {
 })
 
 test_that("list_tag_serial_numbers() returns unique list of values using api", {
-  vector_sql <- list_tag_serial_numbers(api = FALSE)
+  skip_if_not_localdb()
+
+  vector_sql <- list_tag_serial_numbers()
   expect_type(vector_sql, "character")
   expect_false(any(duplicated(vector_sql)))
   expect_true(all(!is.na(vector_sql)))

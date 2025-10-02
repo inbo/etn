@@ -1,11 +1,3 @@
-# check_connection() ------------------------------------------------------
-test_that("check_connection() returns error when connection is not valid", {
-  not_a_connection <- "This is not a valid connection object"
-  expect_error(check_connection(not_a_connection),
-               regexp = "Not a connection object to database.",
-               fixed = TRUE)
-})
-
 # deprecate_warn_connection() ---------------------------------------------
 test_that("deprecate_warn_connection() returns warning when connection is provided", {
   # because this helper looks at the environment two levels up, it's not very
@@ -18,20 +10,39 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
   )
 })
 
-# create_connection() -----------------------------------------------------
-test_that("create_connection() can create a connection with the database", {
-  con <- create_connection()
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
+
+# localdb_is_available() --------------------------------------------------
+
+test_that("localdb_is_available() returns TRUE when nodename ends on vliz.be", {
+  with_mocked_bindings(
+    expect_true(localdb_is_available()),
+    # Mock running on the RStudio server
+    get_nodename = function(...) "rstudio4.web.vliz.be"
+  )
 })
 
-test_that("create_connection() returns error on non character arguments", {
-  expect_error(
-    create_connection(list(username = 1, password = "password")),
-    regexp = "username is not a string"
+
+# select_protocol() -------------------------------------------------------
+
+test_that("select_protocol() returns 'localdb' when nodename ends on vliz.be", {
+  with_mocked_bindings(
+    expect_equal(select_protocol(), "localdb"),
+    # Mock running on the RStudio server
+    get_nodename = function(...) "rstudio4.web.vliz.be"
   )
-  expect_error(
-    create_connection(credentials = list(username = "username", password = 1)),
-    regexp = "password is not a string"
+})
+
+test_that("select_protocol() returns 'opencpu' when nodename does not end on vliz.be", {
+  with_mocked_bindings(
+    expect_equal(select_protocol(), "opencpu"),
+    # Mock running NOT on the RStudio server
+    get_nodename = function(...) "my-computer"
+  )
+})
+
+test_that("select_protocol() allows user override by environmental variable", {
+  withr::with_envvar(
+    new = c(ETN_PROTOCOL = "myprotocol"),
+    expect_equal(select_protocol(), "myprotocol")
   )
 })
