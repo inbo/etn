@@ -19,7 +19,7 @@ test_that("get_animals() returns a tibble", {
 })
 
 test_that("get_animals() returns unique animal_id", {
-  expect_identical(nrow(df), nrow(df %>% distinct(animal_id)))
+  expect_identical(nrow(df), nrow(df |> dplyr::distinct(animal_id)))
 })
 
 test_that("get_animals() returns the expected columns", {
@@ -113,7 +113,7 @@ test_that("get_animals() allows selecting on animal_id", {
   single_select <- 305L
   single_select_df <- get_animals(animal_id = single_select)
   expect_identical(
-    single_select_df %>% distinct(animal_id) %>% pull(),
+    single_select_df |> dplyr::distinct(animal_id) |> dplyr::pull(),
     c(single_select)
   )
   expect_identical(nrow(single_select_df), 1L)
@@ -122,7 +122,7 @@ test_that("get_animals() allows selecting on animal_id", {
   multi_select <- c(304, "305") # Characters are allowed
   multi_select_df <- get_animals(animal_id = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(animal_id) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(animal_id) |> dplyr::pull() |> sort(),
     c(as.integer(multi_select)) # Output will be all integer
   )
   expect_identical(nrow(multi_select_df), 2L)
@@ -143,7 +143,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
   single_select <- "2014_demer"
   single_select_df <- get_animals(animal_project_code = single_select)
   expect_identical(
-    single_select_df %>% distinct(animal_project_code) %>% pull(),
+    single_select_df |> dplyr::distinct(animal_project_code) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -158,7 +158,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
   multi_select <- c("2014_demer", "2015_dijle")
   multi_select_df <- get_animals(animal_project_code = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(animal_project_code) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(animal_project_code) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -179,7 +179,7 @@ test_that("get_animals() allows selecting on tag_serial_number", {
   single_select <- "1187450" # From 2014_demer
   single_select_df <- get_animals(tag_serial_number = single_select)
   expect_identical(
-    single_select_df %>% distinct(tag_serial_number) %>% pull(),
+    single_select_df |> dplyr::distinct(tag_serial_number) |> dplyr::pull(),
     c(single_select)
   )
   expect_identical(nrow(single_select_df), 1L)
@@ -189,7 +189,7 @@ test_that("get_animals() allows selecting on tag_serial_number", {
   multi_select <- c(1187449, "1187450") # Integers are allowed
   multi_select_df <- get_animals(tag_serial_number = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(tag_serial_number) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(tag_serial_number) |> dplyr::pull() |> sort(),
     c(as.character(multi_select)) # Output will be all character
   )
   expect_identical(nrow(multi_select_df), 2L)
@@ -214,7 +214,7 @@ test_that("get_animals() allows selecting on scientific_name", {
   single_select <- "Rutilus rutilus"
   single_select_df <- get_animals(scientific_name = single_select)
   expect_identical(
-    single_select_df %>% distinct(scientific_name) %>% pull(),
+    single_select_df |> dplyr::distinct(scientific_name) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -223,7 +223,7 @@ test_that("get_animals() allows selecting on scientific_name", {
   multi_select <- c("Rutilus rutilus", "Silurus glanis")
   multi_select_df <- get_animals(scientific_name = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(scientific_name) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(scientific_name) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -255,7 +255,7 @@ test_that("get_animals() collapses multiple associated tags to one row", {
     "tagging_methodology"
   )
   has_comma <- apply(
-    animal_two_tags_df %>% dplyr::select(dplyr::all_of(tag_col_names)),
+    animal_two_tags_df |> dplyr::select(dplyr::all_of(tag_col_names)),
     MARGIN = 2,
     function(x) grepl(pattern = ",", x = x)
   )
@@ -263,19 +263,19 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 })
 
 test_that("get_animals() returns correct tag_type and tag_subtype", {
-  df <- df %>% filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
-  df <- df %>% filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
+  df <- df |> dplyr::filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
+  df <- df |> dplyr::filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
   expect_identical(
-    df %>% distinct(tag_type) %>% pull() %>% sort(),
+    df |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
     c("acoustic", "acoustic-archival", "archival")
   )
   expect_identical(
-    df %>% distinct(tag_subtype) %>% pull() %>% sort(),
+    df |> dplyr::distinct(tag_subtype) |> dplyr::pull() |> sort(),
     c("animal", "built-in", "range", "sentinel")
   )
 })
 
 test_that("get_animals() does not return animals without tags", {
   # All animals should be related with a tag
-  expect_identical(df %>% filter(is.na(tag_serial_number)) %>% nrow(), 0L)
+  expect_identical(df |> dplyr::filter(is.na(tag_serial_number)) |> nrow(), 0L)
 })

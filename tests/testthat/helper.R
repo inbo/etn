@@ -57,12 +57,12 @@ skip_if_not_localdb <- function() {
 #' @family helper functions
 #' @noRd
 #' @examples
-#' get_http_response(404) %>% httr2::resp_status_desc()
+#' get_http_response(404) |> httr2::resp_status_desc()
 get_http_response <- function(http_code = 200) {
-  httr2::request("http://httpbingo.org") %>%
-    httr2::req_url_path_append("status", http_code) %>%
+  httr2::request("http://httpbingo.org") |>
+    httr2::req_url_path_append("status", http_code) |>
     httr2::req_error(is_error = function(resp) {
       FALSE
-    }) %>%
+    }) |>
     httr2::req_perform()
 }

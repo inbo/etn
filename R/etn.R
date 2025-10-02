@@ -1,4 +1,4 @@
-#' @importFrom dplyr %>% .data distinct filter pull
+#' @importFrom dplyr .data
 #' @keywords internal
 "_PACKAGE"
 

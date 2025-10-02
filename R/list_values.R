@@ -16,17 +16,16 @@
 #' @export
 #'
 #' @examples
-#' library(dplyr) # For %>%
 #'
 #' # List unique scientific_name from a dataframe containing animal information
 #' df <- get_animals(animal_project_code = "2014_demer")
 #' list_values(df, "scientific_name")
 #'
 #' # Or using pipe and unquoted column name
-#' df %>% list_values(scientific_name)
+#' df |> list_values(scientific_name)
 #'
 #' # Or using column position
-#' df %>% list_values(8)
+#' df |> list_values(8)
 #'
 #' # tag_serial_number can contain comma-separated values
 #' df <- get_animals(animal_id = 5841)
