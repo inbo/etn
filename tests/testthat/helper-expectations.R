@@ -32,7 +32,9 @@ expect_protocol_agnostic <- function(expression) {
   testthat::skip_if_not(localdb_is_available(),
                         "ETN is not a local database on this machine")
 
-  # Test if the provided expression returns identical results with the API flag set to TRUE or FALSE
+  # Test if the provided expression returns identical results regardless of
+  # the return value of select_protocol()
+
   testthat::expect_identical(
     testthat::with_mocked_bindings(
     code = rlang::eval_tidy(rlang::enquo(expression)),
