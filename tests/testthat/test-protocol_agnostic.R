@@ -4,6 +4,10 @@
 
 # Test if listing functions are protocol agnostic -------------------------
 
+# All these functions use similar internal referring to either simple API calls
+# or etnservice. Thus I'd expect them to either all pass, or all fail, as long
+# as etnservice is the same version locally on the test machine and deployed on
+# OpenCPU
 test_that("list_animal_project_codes() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_animal_project_codes())
 })
@@ -24,7 +28,26 @@ test_that("list_animal_ids() returns identical results independent of the used p
   expect_protocol_agnostic(list_animal_ids())
 })
 
+test_that("list_tag_serial_numbers() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_tag_serial_numbers())
+})
+
+test_that("list_station_names() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_station_names())
+})
+
+test_that("list_scientific_names() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_scientific_names())
+})
+
+test_that("list_receiver_ids() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_receiver_ids())
+})
+
 # get_acoustic_detections -------------------------------------------------
+
+# get_acoustic_detections() has internal logic, and should be tested in more
+# detail.
 test_that("get_acoustic_detections() returns identical results on limit", {
   expect_protocol_agnostic(get_acoustic_detections(limit = TRUE))
 })
