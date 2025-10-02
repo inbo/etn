@@ -91,7 +91,7 @@ test_that("get_acoustic_detections() returns identical results for multiple args
     get_acoustic_detections(
       animal_project_code = "2014_demer",
       start_date = "2015-04",
-      end_date = "2015-05",
+      end_date = "2015-05"
     )
   )
 
