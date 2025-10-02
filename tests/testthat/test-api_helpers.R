@@ -23,8 +23,8 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
 test_that("extract_temp_key() can extract a key from a httr2 response object", {
   vcr::use_cassette("opencpu_cloud_rnorm", {
     response <-
-      httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") %>%
-      httr2::req_body_json(list(n = 10, mean = 5)) %>%
+      httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") |>
+      httr2::req_body_json(list(n = 10, mean = 5)) |>
       httr2::req_perform()
   })
   temp_key <- extract_temp_key(response)
@@ -38,8 +38,8 @@ test_that("get_val() can get a value from a temp_key using rds", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
   response <-
-    httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") %>%
-    httr2::req_body_json(list(n = 2)) %>%
+    httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") |>
+    httr2::req_body_json(list(n = 2)) |>
     httr2::req_perform()
 
   temp_key <- extract_temp_key(response)
@@ -55,12 +55,12 @@ test_that("get_val() can get a value from a temp_key using feather", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
   response <-
-    httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") %>%
+    httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") |>
     httr2::req_body_json(
       list(
         animal = c("dogs", "cats"), judgement = c("cute", "amazing", "superb")
       )
-    ) %>%
+    ) |>
     httr2::req_perform()
 
   temp_key <- extract_temp_key(response)
