@@ -39,13 +39,32 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
 
   # Parse the returned value ------------------------------------------------
-  citation_df <- imis_metadata[["dois"]]
-  citations <- dplyr::pull(citation_df, "Citation")
 
+  # Get dataset title and acroynm
   acronym <- purrr::chuck(imis_metadata, "datasetrec", "Acronym")
   title <- purrr::chuck(imis_metadata, "datasetrec", "StandardTitle")
-  doi_urls <- glue::glue_col("https://doi.org/",
-                                   dplyr::pull(citation_df, "DOI"))
+  citations <- purrr::chuck(imis_metadata, "datasetrec", "Citation")
+
+  if(is.null(citations)){
+    cli::cli_warn("No citation found on IMIS for: {acoustic_project_code}")
+  }
+  # If a doi is registered, fetch and format it
+  citation_df <- purrr::pluck(imis_metadata, "dois")
+  if (!is.null(citation_df)) {
+    # citations <- dplyr::pull(citation_df, "Citation")
+    doi_urls <- glue::glue_col(
+      "https://doi.org/",
+      dplyr::pull(citation_df, "DOI")
+    )
+  }
+  # Format and output the citation
   cli::cli_h2("{acronym} : {title}")
-  cli::cli_ul("{citations}. {.url {doi_urls}}")
+  cli::cli_ul(paste(
+    "{citations}",
+    ifelse(is.null(citation_df), yes = "", no = "{.url {doi_urls}}")
+  ))
+
+
+  # Invisibly return citations ----------------------------------------------
+  invisible(citation_df)
 }
