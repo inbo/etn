@@ -43,6 +43,7 @@ Imports:
 Suggests:
     formattable,
     frictionless,
+    jsonlite,
     kableExtra,
     knitr,
     leaflet,
