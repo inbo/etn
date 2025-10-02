@@ -23,3 +23,61 @@ test_that("list_acoustic_projects() returns identical results independent of the
 test_that("list_animal_ids() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_animal_ids())
 })
+
+# get_acoustic_detections -------------------------------------------------
+test_that("get_acoustic_detections() returns identical results on limit", {
+  expect_protocol_agnostic(get_acoustic_detections(limit = TRUE))
+})
+
+test_that("get_acoustic_detections() returns identical results on big query", {
+  expect_protocol_agnostic(
+    get_acoustic_detections(animal_project_code = "2011_Warnow")
+  )
+})
+
+test_that("get_acoustic_detections() returns identical results for multiple stations", {
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      acoustic_tag_id = "A69-1601-16130",
+      station_name = c("de-9", "de-10")
+    )
+  )
+})
+
+test_that("get_acoustic_detections() returns identical results for multiple tag IDs", {
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      acoustic_tag_id = c("A69-1601-16130", "A69-1601-16131"),
+      station_name = "de-9"
+    )
+  )
+})
+
+test_that("get_acoustic_detections() returns identical results for multiple args", {
+  # scientific_name, receiver_id, acoustic_project_code
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      scientific_name = "Rutilus rutilus",
+      receiver_id = "VR2W-124070",
+      acoustic_project_code = "demer"
+    )
+  )
+
+  # animal_project_code, start_date, end_date
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      animal_project_code = "2014_demer",
+      start_date = "2015-04",
+      end_date = "2015-05",
+    )
+  )
+
+  # tag_serial_number animal_project_code receiver_id
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      tag_serial_number = "1283964",
+      animal_project_code = "Carp_markermeer",
+      receiver_id = "VR2W-133054"
+    )
+  )
+})
