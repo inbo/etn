@@ -2,8 +2,8 @@
 #'
 #' This function tests if the provided expression returns identical results with the API flag set to TRUE or FALSE.
 #' To this it makes use of testthat's `expect_identical()`, no other parameters are passed to `expect_identical()`.
-#' 
-#' This expectation will be skipped when offline, or when the ETN database is not available via odbc. 
+#'
+#' This expectation will be skipped when offline, or when the ETN database is not available via odbc.
 #'
 #' @param expression The expression to be tested.
 #' @inherits testthat::expect_identical return
@@ -21,8 +21,16 @@ expect_call_agnostic <- function(expression) {
 
   # Test if the provided expression returns identical results with the API flag set to TRUE or FALSE
   testthat::expect_identical(
-    rlang::eval_tidy(rlang::call_modify(rlang::enquo(expression), api = TRUE)),
-    rlang::eval_tidy(rlang::call_modify(rlang::enquo(expression), api = FALSE)),
+    testthat::with_mocked_bindings(
+    code = rlang::eval_tidy(rlang::enquo(expression)),
+    # Object, is a call to opencpu
+    select_protocol = function(...) {"opencpu"}
+    ),
+    testthat::with_mocked_bindings(
+      code = rlang::eval_tidy(rlang::enquo(expression)),
+      # Expectation is a call to the local database
+      select_protocol = function(...) {"localdb"}
+    ),
     label = "api",
     expected.label = "local database"
   )
