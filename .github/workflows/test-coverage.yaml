@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      ETN_USER: ${{ secrets.ETN_USER }}
+      ETN_PWD: ${{ secrets.ETN_PWD }}
 
     steps:
       - uses: actions/checkout@v4
