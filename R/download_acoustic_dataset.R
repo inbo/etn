@@ -122,8 +122,8 @@ download_acoustic_dataset <- function(connection,
   # Select on tags associated with animals
   tag_serial_numbers <-
     animals |>
-    distinct(.data$tag_serial_number) |>
-    pull() |>
+    dplyr::distinct(.data$tag_serial_number) |>
+    dplyr::pull() |>
     # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
     # all tags and split them again on comma
     paste(collapse = ",") |>
@@ -145,7 +145,7 @@ download_acoustic_dataset <- function(connection,
   detections_orig_count <- nrow(detections)
   detections <-
     detections |>
-    distinct(.data$detection_id, .keep_all = TRUE)
+    dplyr::distinct(.data$detection_id, .keep_all = TRUE)
   readr::write_csv(detections, file.path(directory, "detections.csv"), na = "")
 
   # DEPLOYMENTS
@@ -154,8 +154,8 @@ download_acoustic_dataset <- function(connection,
   # including those without detections for animal_project_code
   acoustic_project_codes <-
     detections |>
-    distinct(.data$acoustic_project_code) |>
-    pull() |>
+    dplyr::distinct(.data$acoustic_project_code) |>
+    dplyr::pull() |>
     stringr::str_sort()
   deployments <- get_acoustic_deployments(
     acoustic_project_code = acoustic_project_codes,
@@ -178,8 +178,8 @@ download_acoustic_dataset <- function(connection,
   # Select on receivers associated with deployments
   receiver_ids <-
     deployments |>
-    distinct(.data$receiver_id) |>
-    pull()
+    dplyr::distinct(.data$receiver_id) |>
+    dplyr::pull()
   receivers <- get_acoustic_receivers(
     receiver_id = receiver_ids
   )
@@ -197,8 +197,8 @@ download_acoustic_dataset <- function(connection,
   # Create summary stats
   scientific_names <-
     animals |>
-    distinct(.data$scientific_name) |>
-    pull() |>
+    dplyr::distinct(.data$scientific_name) |>
+    dplyr::pull() |>
     stringr::str_sort()
 
   message("")
@@ -213,11 +213,11 @@ download_acoustic_dataset <- function(connection,
   if (nrow(detections) > 0) {
     message(
       "* first date of detection:     ",
-      detections |> dplyr::summarize(min(as.Date(.data$date_time))) |> pull()
+      detections |> dplyr::summarize(min(as.Date(.data$date_time))) |> dplyr::pull()
     )
     message(
       "* last date of detection:      ",
-      detections |> dplyr::summarize(max(as.Date(.data$date_time))) |> pull()
+      detections |> dplyr::summarize(max(as.Date(.data$date_time))) |> dplyr::pull()
     )
   } else {
     message("* first date of detection:     ", NA)
@@ -236,22 +236,22 @@ download_acoustic_dataset <- function(connection,
   # Create warnings
   animals_multiple_tags <-
     animals |>
-    filter(stringr::str_detect(.data$tag_serial_number, ",")) |>
-    distinct(.data$animal_id) |> # Should be unique already
-    pull()
+    dplyr::filter(stringr::str_detect(.data$tag_serial_number, ",")) |>
+    dplyr::distinct(.data$animal_id) |> # Should be unique already
+    dplyr::pull()
 
   tags_multiple_animals <-
     animals |>
     dplyr::group_by(.data$tag_serial_number) |>
-    filter(dplyr::n() > 1) |>
-    distinct(.data$tag_serial_number) |>
-    pull()
+    dplyr::filter(dplyr::n() > 1) |>
+    dplyr::distinct(.data$tag_serial_number) |>
+    dplyr::pull()
 
   orphaned_deployments <-
     detections |>
-    filter(.data$acoustic_project_code %in% c("no_info", "none")) |>
-    distinct(.data$deployment_id) |>
-    pull()
+    dplyr::filter(.data$acoustic_project_code %in% c("no_info", "none")) |>
+    dplyr::distinct(.data$deployment_id) |>
+    dplyr::pull()
 
   duplicate_detections_count <- detections_orig_count - nrow(detections)
 

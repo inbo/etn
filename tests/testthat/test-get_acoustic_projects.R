@@ -11,7 +11,7 @@ test_that("get_acoustic_projects() returns a tibble", {
 })
 
 test_that("get_acoustic_projects() returns unique project_id", {
-  expect_equal(nrow(df), nrow(df |> distinct(project_id)))
+  expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_acoustic_projects() returns the expected columns", {
@@ -49,7 +49,7 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   single_select <- "demer"
   single_select_df <- get_acoustic_projects(acoustic_project_code = single_select)
   expect_identical(
-    single_select_df |> distinct(project_code) |> pull(),
+    single_select_df |> dplyr::distinct(project_code) |> dplyr::pull(),
     c(single_select)
   )
   expect_identical(nrow(single_select_df), 1L)
@@ -64,7 +64,7 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   multi_select <- c("demer", "dijle")
   multi_select_df <- get_acoustic_projects(acoustic_project_code = multi_select)
   expect_identical(
-    multi_select_df |> distinct(project_code) |> pull() |> sort(),
+    multi_select_df |> dplyr::distinct(project_code) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_identical(nrow(multi_select_df), 2L)
@@ -72,7 +72,7 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
 
 test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
   expect_identical(
-    get_acoustic_projects() |> distinct(project_type) |> pull(),
+    get_acoustic_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "acoustic"
   )
 })

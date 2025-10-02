@@ -13,7 +13,7 @@ test_that("get_acoustic_receivers() returns a tibble", {
 test_that("get_acoustic_receivers() returns unique receiver_id", {
   skip("re-enable after https://github.com/inbo/etn/issues/251")
   df <- get_acoustic_receivers(con)
-  expect_equal(nrow(df), nrow(df |> distinct(receiver_id)))
+  expect_equal(nrow(df), nrow(df |> dplyr::distinct(receiver_id)))
 })
 
 test_that("get_acoustic_receivers() returns the expected columns", {
@@ -61,7 +61,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   single_select <- "VR2W-124070" # From demer
   single_select_df <- get_acoustic_receivers(receiver_id = single_select)
   expect_identical(
-    single_select_df |> distinct(receiver_id) |> pull(),
+    single_select_df |> dplyr::distinct(receiver_id) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -70,7 +70,7 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   multi_select <- c("VR2W-124070", "VR2W-124078")
   multi_select_df <- get_acoustic_receivers(receiver_id = multi_select)
   expect_identical(
-    multi_select_df |> distinct(receiver_id) |> pull() |> sort(),
+    multi_select_df |> dplyr::distinct(receiver_id) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -93,7 +93,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   single_select <- "broken"
   single_select_df <- get_acoustic_receivers(status = single_select)
   expect_identical(
-    single_select_df |> distinct(status) |> pull(),
+    single_select_df |> dplyr::distinct(status) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
@@ -102,7 +102,7 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   multi_select <- c("broken", "lost")
   multi_select_df <- get_acoustic_receivers(status = multi_select)
   expect_identical(
-    multi_select_df |> distinct(status) |> pull() |> sort(),
+    multi_select_df |> dplyr::distinct(status) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))

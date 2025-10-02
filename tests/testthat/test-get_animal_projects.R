@@ -11,7 +11,7 @@ test_that("get_animal_projects() returns a tibble", {
 
 test_that("get_animal_projects() returns unique project_id", {
   df <- get_animal_projects()
-  expect_equal(nrow(df), nrow(df |> distinct(project_id)))
+  expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_animal_projects() returns the expected columns", {
@@ -50,7 +50,7 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
   single_select <- "2014_demer"
   single_select_df <- get_animal_projects(animal_project_code = single_select)
   expect_equal(
-    single_select_df |> distinct(project_code) |> pull(),
+    single_select_df |> dplyr::distinct(project_code) |> dplyr::pull(),
     c(single_select)
   )
   expect_identical(nrow(single_select_df), 1L)
@@ -65,7 +65,7 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
   multi_select <- c("2014_demer", "2015_dijle")
   multi_select_df <- get_animal_projects(animal_project_code = multi_select)
   expect_equal(
-    multi_select_df |> distinct(project_code) |> pull() |> sort(),
+    multi_select_df |> dplyr::distinct(project_code) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_identical(nrow(multi_select_df), 2L)
@@ -73,7 +73,7 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
 
 test_that("get_animal_projects() returns projects of type 'animal'", {
   expect_identical(
-    get_animal_projects() |> distinct(project_type) |> pull(),
+    get_animal_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "animal"
   )
 })
