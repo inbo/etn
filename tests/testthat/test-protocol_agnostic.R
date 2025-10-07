@@ -16,12 +16,12 @@ test_that("list_acoustic_project_codes() returns identical results independent o
   expect_protocol_agnostic(list_acoustic_project_codes())
 })
 
-test_that("list_animal_projects() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_animal_projects())
+test_that("list_animal_project_codes() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_animal_project_codes())
 })
 
-test_that("list_acoustic_projects() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_acoustic_projects())
+test_that("list_acoustic_project_codes() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_acoustic_project_codes())
 })
 
 test_that("list_animal_ids() returns identical results independent of the used protocol", {
