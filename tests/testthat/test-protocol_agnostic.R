@@ -36,6 +36,10 @@ test_that("list_receiver_ids() returns identical results independent of the used
   expect_protocol_agnostic(list_receiver_ids())
 })
 
+test_that("list_cpod_project_codes() return identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_cpod_project_codes())
+})
+
 # get_acoustic_detections -------------------------------------------------
 
 # get_acoustic_detections() has internal logic, and should be tested in more
