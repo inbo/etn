@@ -103,20 +103,30 @@ test_that("get_acoustic_detections() returns identical results for multiple args
 
 # get_cpod_projects -------------------------------------------------------
 
-expect_protocol_agnostic(get_cpod_projects())
+test_that("get_cpod_projects() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(get_cpod_projects())
+})
 
 # get_animal_projects -----------------------------------------------------
 
-expect_protocol_agnostic(get_animal_projects())
+test_that("get_animal_projects() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(get_animal_projects())
+})
 
 # get_acoustic_projects ---------------------------------------------------
 
-expect_protocol_agnostic(get_acoustic_projects())
+test_that("get_acoustic_projects() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(get_acoustic_projects())
+})
 
 # get_animals -------------------------------------------------------------
 
-expect_protocol_agnostic(get_animals())
+test_that("get_animals() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(get_animals())
+})
 
 # get_tags ----------------------------------------------------------------
 
-expect_protocol_agnostic(get_tags())
+test_that("get_tags() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(get_tags())
+})
