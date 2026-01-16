@@ -27,7 +27,7 @@
       
       * number of detections:        235809
       
-      * number of deployments:       1036
+      * number of deployments:       1060
       
       * number of receivers:         140
       
