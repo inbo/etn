@@ -319,11 +319,15 @@ get_acoustic_detections <- function(connection,
     ) |>
     # Arrange by the text part, then the numeric part
     dplyr::arrange(.data$text_part, .data$num_part) |>
-    dplyr::select(-dplyr::all_of(c("text_part", "num_part")))
-
+    dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
+    ## Set col classes explicitly ----
+    dplyr::mutate(
+      qc_flag = as.logical(qc_flag)
+    )
 
   # Return single detections table
   dplyr::collect(detections)
+
 }
 
 #' Count acoustic detections
