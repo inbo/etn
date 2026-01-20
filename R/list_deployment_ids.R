@@ -11,5 +11,7 @@ list_deployment_ids <- function(connection) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE) |>
+    # Set the output class explicitly
+    as.integer()
 }
