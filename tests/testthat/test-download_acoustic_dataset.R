@@ -11,7 +11,7 @@ vcr::use_cassette( # Cache HTTP response
             directory = datapackage_path
           )
         },
-        # force an API request, otherwise vcr will fail.
+        # Force an API request, otherwise vcr will fail.
         select_protocol = \(x) "opencpu"
       )
     })
@@ -31,7 +31,7 @@ if (localdb_is_available()) {
           directory = localdb_datapackage_path
         )
       },
-      # force a query to the local database
+      # Force a query to the local database
       select_protocol = \(x) "localdb"
     )
   })

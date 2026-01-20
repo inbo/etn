@@ -12,6 +12,6 @@ list_deployment_ids <- function(connection) {
   }
   # Either use the API, or the SQL helper.
   conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE) |>
-    # Set the output class explicitly
+    # Set the column classes explicitly
     as.integer()
 }

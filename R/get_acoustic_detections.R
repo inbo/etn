@@ -321,7 +321,7 @@ get_acoustic_detections <- function(connection,
     # ensure the same result regardless of protocol
     dplyr::arrange(.data$text_part, .data$num_part, .data$deployment_id) |>
     dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
-    ## Set col classes explicitly ----
+    # Set the column classes explicitly
     dplyr::mutate(
       qc_flag = as.logical(.data$qc_flag)
     )
