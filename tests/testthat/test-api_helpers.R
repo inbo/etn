@@ -37,6 +37,8 @@ test_that("extract_temp_key() can extract a key from a httr2 response object", {
 test_that("get_val() can get a value from a temp_key using rds", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
+  skip_if_http_error("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm")
+
   response <-
     httr2::request("https://cloud.opencpu.org/ocpu/library/stats/R/rnorm") |>
     httr2::req_body_json(list(n = 2)) |>
@@ -54,6 +56,7 @@ test_that("get_val() can get a value from a temp_key using rds", {
 test_that("get_val() can get a value from a temp_key using feather", {
   # NOTE Dependent on the OpenCPU testing API
   skip_if_offline("cloud.opencpu.org")
+  skip_if_http_error("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid")
   response <-
     httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") |>
     httr2::req_body_json(
