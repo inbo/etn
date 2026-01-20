@@ -3,7 +3,7 @@ test_that("list_deployment_ids() returns unique list of values using api", {
     vector <- list_deployment_ids()
   })
 
-  expect_type(vector, "character")
+  expect_type(vector, "integer")
   expect_false(any(duplicated(vector)))
   expect_true(all(!is.na(vector)))
 
@@ -14,7 +14,7 @@ test_that("list_deployment_ids() returns unique list of values using local db", 
   skip_if_not_localdb()
   vector_sql <- list_deployment_ids()
 
-  expect_type(vector_sql, "character")
+  expect_type(vector_sql, "integer")
   expect_false(any(duplicated(vector_sql)))
   expect_true(all(!is.na(vector_sql)))
 
