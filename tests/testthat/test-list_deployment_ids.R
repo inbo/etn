@@ -8,7 +8,7 @@ test_that("list_deployment_ids() returns unique list of values using api", {
   expect_false(any(duplicated(deployment_ids)))
   expect_true(all(!is.na(deployment_ids)))
 
-  expect_true("1437" %in% deployment_ids)
+  expect_true(1437 %in% deployment_ids)
 })
 
 test_that("list_deployment_ids() returns unique list of values using local db", {
@@ -20,5 +20,5 @@ test_that("list_deployment_ids() returns unique list of values using local db", 
   expect_false(any(duplicated(deployment_ids_sql)))
   expect_true(all(!is.na(deployment_ids_sql)))
 
-  expect_true("1437" %in% deployment_ids_sql)
+  expect_true(1437 %in% deployment_ids_sql)
 })
