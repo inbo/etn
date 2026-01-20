@@ -1,6 +1,7 @@
 # etn (development version)
 
 * **The etn package can now be used on your own computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280).
+* etn now relies on R >= 4.1.0 (because of vcr dependency) and uses base pipes (|> rather than %>%) (#384).
 * The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable `ETN_PROTOCOL` to `opencpu` to force the package to use the API. This will be slower as a local database connection. (#398)
 * The `connection` argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. `get_animals(animal_id = 305)`, not `get_animals(con, animal_id = 305)` or `get_animals(connection = con, animal_id = 305)` (#301).
 * `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
