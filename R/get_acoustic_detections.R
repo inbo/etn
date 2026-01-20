@@ -322,7 +322,7 @@ get_acoustic_detections <- function(connection,
     dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
     ## Set col classes explicitly ----
     dplyr::mutate(
-      qc_flag = as.logical(qc_flag)
+      qc_flag = as.logical(.data$qc_flag)
     )
 
   # Return single detections table

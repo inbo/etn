@@ -28,7 +28,7 @@ get_acoustic_projects <- function(connection,
   # Either use the API, or the SQL helper.
   out <- conduct_parent_to_helpers(protocol = select_protocol()) |>
     # Set the column classes explicitly
-    dplyr::mutate(moratorium = as.logical(as.integer(moratorium)))
+    dplyr::mutate(moratorium = as.logical(as.integer(.data$moratorium)))
 
   return(out)
 }
