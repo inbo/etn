@@ -43,6 +43,19 @@ skip_if_not_localdb <- function() {
   )
 }
 
+skip_if_http_error <- function(url) {
+  url_resp <- httr2::request(url) |>
+    # If the url returns an error, do not convert into R error.
+    httr2::req_error(is_error = \(response){ FALSE}) |>
+    httr2::req_perform()
+
+  testthat::skip_if(
+    httr2::resp_is_error(url_resp),
+    glue::glue("{url} returned http error: {http_error}",
+               http_error = httr2::resp_status(url_resp))
+  )
+}
+
 #' Get an HTTP response for a specific HTTP status code.
 #'
 #' This function is useful to test other functions that respond to a specific
