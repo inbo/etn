@@ -45,14 +45,12 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install system dependencies
-        # Ubuntu-latest (4.1.0) was failing because of a missing sys dep
-        if: matrix.config.r == '4.1.0'
-        run: sudo apt-get update && sudo apt-get install -y build-essential unixodbc-dev
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages:  |
+          # Ubuntu-latest (4.1.0) was failing because of a missing sys dep
+           sysreqs::unixodbc-dev
+           any::rcmdcheck
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
