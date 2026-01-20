@@ -4,10 +4,13 @@ vcr::use_cassette( # Cache HTTP response
   {
     datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
     evalute_download_api <- evaluate_promise({
-      download_acoustic_dataset(
+      with_mocked_bindings(
+      {download_acoustic_dataset(
         animal_project_code = "2014_demer",
         directory = datapackage_path
-      )
+      )},
+      # force an API request, otherwise vcr will fail.
+      select_protocol = \(x) "opencpu")
     })
   }
 )
@@ -18,10 +21,13 @@ vcr::use_cassette( # Cache HTTP response
 if (localdb_is_available()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
-    download_acoustic_dataset(
+    with_mocked_bindings(
+    {download_acoustic_dataset(
       animal_project_code = "2014_demer",
       directory = localdb_datapackage_path
-    )
+    )},
+    # force a query to the local database
+    select_protocol = \(x) "localdb")
   })
 }
 
