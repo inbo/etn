@@ -47,7 +47,7 @@ get_tags <- function(connection,
   # Either use the API, or the SQL helper.
   out <- conduct_parent_to_helpers(protocol = select_protocol()) |>
     # Set the column classes explicitly
-    dplyr::mutate(floating = as.logical(floating))
+    dplyr::mutate(floating = as.logical(.data$floating))
 
   return(out)
 }
