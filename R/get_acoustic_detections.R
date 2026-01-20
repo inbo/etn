@@ -319,7 +319,7 @@ get_acoustic_detections <- function(connection,
     ) |>
     # Arrange by the text part, then the numeric part, then deployment_id to
     # ensure the same result regardless of protocol
-    dplyr::arrange(.data$text_part, .data$num_part, deployment_id) |>
+    dplyr::arrange(.data$text_part, .data$num_part, .data$deployment_id) |>
     dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
     ## Set col classes explicitly ----
     dplyr::mutate(
