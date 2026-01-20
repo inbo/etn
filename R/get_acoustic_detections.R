@@ -317,8 +317,9 @@ get_acoustic_detections <- function(connection,
         stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
       )
     ) |>
-    # Arrange by the text part, then the numeric part
-    dplyr::arrange(.data$text_part, .data$num_part) |>
+    # Arrange by the text part, then the numeric part, then deployment_id to
+    # ensure the same result regardless of protocol
+    dplyr::arrange(.data$text_part, .data$num_part, deployment_id) |>
     dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
     ## Set col classes explicitly ----
     dplyr::mutate(
