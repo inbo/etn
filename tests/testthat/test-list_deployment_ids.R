@@ -1,22 +1,24 @@
 test_that("list_deployment_ids() returns unique list of values using api", {
   vcr::use_cassette("list_deployment_ids", {
-    vector <- list_deployment_ids()
+    deployment_ids <-
+      with_mocked_bindings(list_deployment_ids(), select_protocol = \(x) "opencpu")
   })
 
-  expect_type(vector, "character")
-  expect_false(any(duplicated(vector)))
-  expect_true(all(!is.na(vector)))
+  expect_type(deployment_ids, "integer")
+  expect_false(any(duplicated(deployment_ids)))
+  expect_true(all(!is.na(deployment_ids)))
 
-  expect_true("1437" %in% vector)
+  expect_true(1437 %in% deployment_ids)
 })
 
 test_that("list_deployment_ids() returns unique list of values using local db", {
   skip_if_not_localdb()
-  vector_sql <- list_deployment_ids()
+  deployment_ids_sql <-
+    with_mocked_bindings(list_deployment_ids(), select_protocol = \(x) "localdb")
 
-  expect_type(vector_sql, "character")
-  expect_false(any(duplicated(vector_sql)))
-  expect_true(all(!is.na(vector_sql)))
+  expect_type(deployment_ids_sql, "integer")
+  expect_false(any(duplicated(deployment_ids_sql)))
+  expect_true(all(!is.na(deployment_ids_sql)))
 
-  expect_true("1437" %in% vector_sql)
+  expect_true(1437 %in% deployment_ids_sql)
 })

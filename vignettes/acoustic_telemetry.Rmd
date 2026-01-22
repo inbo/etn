@@ -55,7 +55,7 @@ Show a preview:
 
 
 ``` r
-all_projects %>% head(10)
+all_projects |> head(10)
 ```
 
 ```
@@ -113,7 +113,7 @@ This is exactly the same as retrieving all projects first and filtering them aft
 
 
 ``` r
-all_projects %>%
+all_projects |>
   filter(project_code %in% c(projects_code))
 ```
 
@@ -134,7 +134,7 @@ To list all available animal project codes as a vector, you can use `list_animal
 
 
 ``` r
-list_animal_project_codes() %>% head(10)
+list_animal_project_codes() |> head(10)
 ```
 
 ```
@@ -152,7 +152,7 @@ By using `get_animals()` you can retrieve information about each animal (`animal
 
 ``` r
 animals <- get_animals(animal_project_code = projects_code)
-animals %>% head(10)
+animals |> head(10)
 ```
 
 ```
@@ -194,7 +194,7 @@ What species and how many individuals are tracked for the projects `2014_demer` 
 
 
 ``` r
-animals %>%
+animals |>
   count(scientific_name)
 ```
 
@@ -229,7 +229,7 @@ Preview:
 
 
 ``` r
-detections_silurus %>% head(10)
+detections_silurus |> head(10)
 ```
 
 ```
@@ -270,9 +270,9 @@ Which individuals have been detected (`animal_id`) and in which period?
 
 ``` r
 detections_silurus_period <-
-  detections_silurus %>%
-  mutate(date = date(date_time)) %>%
-  group_by(animal_id) %>%
+  detections_silurus |>
+  mutate(date = date(date_time)) |>
+  group_by(animal_id) |>
   summarize(
     start = min(date),
     end = max(date)
@@ -299,9 +299,9 @@ Notice we group by `animal_id`, the unique identifier of the fish. However, if t
 
 
 ``` r
-detections_silurus %>%
-  mutate(date = date(date_time)) %>%
-  group_by(acoustic_tag_id) %>%
+detections_silurus |>
+  mutate(date = date(date_time)) |>
+  group_by(acoustic_tag_id) |>
   summarize(
     start = min(date),
     end = max(date)
@@ -328,8 +328,8 @@ We can also get the tracking duration of each fish:
 
 ``` r
 detections_silurus_duration <-
-  detections_silurus %>%
-  group_by(animal_id) %>%
+  detections_silurus |>
+  group_by(animal_id) |>
   summarize(duration = max(date_time) - min(date_time))
 detections_silurus_duration
 ```
@@ -353,8 +353,8 @@ How many times has an individual has been detected?
 
 
 ``` r
-detections_silurus %>%
-  group_by(animal_id) %>%
+detections_silurus |>
+  group_by(animal_id) |>
   count()
 ```
 
@@ -380,9 +380,9 @@ At how many detection stations have the individuals been detected?
 
 
 ``` r
-detections_silurus %>%
-  group_by(animal_id) %>%
-  distinct(station_name) %>%
+detections_silurus |>
+  group_by(animal_id) |>
+  distinct(station_name) |>
   count()
 ```
 
@@ -407,7 +407,7 @@ Which stations have been involved? You can retrieve them using `list_values` fun
 
 ``` r
 stations_silurus <-
-  detections_silurus %>%
+  detections_silurus |>
   list_values(station_name)
 ```
 
@@ -431,10 +431,10 @@ Notice how a detection station can be linked to multiple deployments:
 
 
 ``` r
-detections_silurus %>%
-  distinct(station_name, deployment_id) %>%
-  group_by(station_name) %>%
-  add_tally() %>%
+detections_silurus |>
+  distinct(station_name, deployment_id) |>
+  group_by(station_name) |>
+  add_tally() |>
   arrange(desc(n))
 ```
 
@@ -461,8 +461,8 @@ Sometimes it's interesting to know the number of detections per station:
 
 ``` r
 n_detect_station <-
-  detections_silurus %>%
-  group_by(station_name) %>%
+  detections_silurus |>
+  group_by(station_name) |>
   count()
 n_detect_station
 ```
@@ -490,9 +490,9 @@ It's also interesting to know the number of unique individuals per station:
 
 ``` r
 n_silurus_station <-
-  detections_silurus %>%
-  distinct(station_name, animal_id) %>%
-  group_by(station_name) %>%
+  detections_silurus |>
+  distinct(station_name, animal_id) |>
+  group_by(station_name) |>
   count()
 n_silurus_station
 ```
@@ -614,7 +614,7 @@ All possible `acoustic_tag_id` can be retrieved with the correspondent `list_*` 
 
 
 ``` r
-list_acoustic_tag_ids() %>% head(10)
+list_acoustic_tag_ids() |> head(10)
 ```
 
 ```
@@ -630,7 +630,7 @@ The detection of Wels catfishes has been possible thanks to one or more acoustic
 
 
 ``` r
-acoustic_project_codes <- detections_silurus %>%
+acoustic_project_codes <- detections_silurus |>
   list_values(acoustic_project_code)
 ```
 
@@ -673,7 +673,7 @@ You can retrieve the full list of acoustic network projects with the corresponde
 
 
 ``` r
-list_acoustic_project_codes() %>% head(10)
+list_acoustic_project_codes() |> head(10)
 ```
 
 ```
@@ -741,7 +741,7 @@ These are the deployments of the acoustic receivers involved in `detections_silu
 
 ``` r
 deploys_silurus <-
-  detections_silurus %>%
+  detections_silurus |>
   list_values(deployment_id)
 ```
 
@@ -810,9 +810,9 @@ Deployment duration:
 
 ``` r
 deployments_silurus_duration <-
-  deployments_silurus %>%
-  mutate(duration = as.duration(recover_date_time - deploy_date_time)) %>%
-  select(deployment_id, station_name, duration) %>%
+  deployments_silurus |>
+  mutate(duration = as.duration(recover_date_time - deploy_date_time)) |>
+  select(deployment_id, station_name, duration) |>
   arrange(deployment_id)
 deployments_silurus_duration
 ```
@@ -839,11 +839,11 @@ Number of days a deployment detected the passage of one or more individuals:
 
 ``` r
 n_active_days_deployments_silurus <-
-  detections_silurus %>%
-  mutate(date = date(date_time)) %>%
-  distinct(deployment_id, station_name, date) %>%
-  group_by(deployment_id, station_name) %>%
-  summarize(n_days = n(), .groups = "drop") %>%
+  detections_silurus |>
+  mutate(date = date(date_time)) |>
+  distinct(deployment_id, station_name, date) |>
+  group_by(deployment_id, station_name) |>
+  summarize(n_days = n(), .groups = "drop") |>
   ungroup()
 n_active_days_deployments_silurus
 ```
@@ -870,14 +870,14 @@ Relative detection duration, i.e. number of days with at least one detection div
 
 ``` r
 rel_det_duration_silurus <-
-  n_active_days_deployments_silurus %>%
+  n_active_days_deployments_silurus |>
   left_join(
     deployments_silurus_duration,
     by = c("deployment_id", "station_name")
-  ) %>%
+  ) |>
   mutate(
     relative_detection_duration = n_days * (24 * 60 * 60) / as.numeric(duration)
-  ) %>%
+  ) |>
   select(deployment_id, station_name, relative_detection_duration)
 rel_det_duration_silurus
 ```
@@ -920,13 +920,13 @@ We can for example create a map of the involved stations showing the station nam
 
 ``` r
 geo_info_stations <-
-  detections_silurus %>%
+  detections_silurus |>
   distinct(
     station_name,
     deploy_latitude,
     deploy_longitude,
     acoustic_project_code
-  ) %>%
+  ) |>
   arrange(station_name)
 geo_info_stations
 ```
@@ -964,13 +964,13 @@ To be able to produce the desired map:
 
 
 ``` r
-leaflet(geo_info_stations) %>%
-  addTiles() %>%
+leaflet(geo_info_stations) |>
+  addTiles() |>
   addMarkers(
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
     popup = ~paste0("Station: ", station_name, " (", acoustic_project_code, ")")
-  ) %>%
+  ) |>
   htmlwidgets::saveWidget(file = "stations_map.html")
 ```
 
@@ -986,13 +986,13 @@ pal <- colorNumeric(
   domain = n_detect_station$n
 )
 
-n_detect_station %>%
+n_detect_station |>
   left_join(
     geo_info_stations,
     by = "station_name"
-  ) %>%
-  leaflet() %>%
-  addTiles() %>%
+  ) |>
+  leaflet() |>
+  addTiles() |>
   addCircleMarkers(
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
@@ -1005,12 +1005,12 @@ n_detect_station %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# detections: ", n)
     )
-  ) %>%
+  ) |>
   addLegend(
     title = "Detections",
     pal = pal,
     values = ~n
-  ) %>%
+  ) |>
   htmlwidgets::saveWidget(file = "n_detections_per_station.html")
 ```
 
@@ -1026,13 +1026,13 @@ pal <- colorNumeric(
   domain = n_silurus_station$n
 )
 
-n_silurus_station %>%
+n_silurus_station |>
   left_join(
     geo_info_stations,
     by = "station_name"
-  ) %>%
-  leaflet() %>%
-  addTiles() %>%
+  ) |>
+  leaflet() |>
+  addTiles() |>
   addCircleMarkers(
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
@@ -1045,12 +1045,12 @@ n_silurus_station %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# detected individuals: ", n)
     )
-  ) %>%
+  ) |>
   addLegend(
     title = "Detected individuals",
     pal = pal,
     values = ~n
-  ) %>%
+  ) |>
   htmlwidgets::saveWidget(file = "n_individuals_per_station.html")
 ```
 
@@ -1061,14 +1061,14 @@ We can also make a map of the relative detection duration of the deployments. Fi
 
 ``` r
 geo_info_deploys <-
-  detections_silurus %>%
+  detections_silurus |>
   distinct(
     deployment_id,
     deploy_latitude,
     deploy_longitude,
     station_name,
     acoustic_project_code
-  ) %>%
+  ) |>
   arrange(station_name)
 geo_info_deploys
 ```
@@ -1112,13 +1112,13 @@ pal <- colorNumeric(
   domain = rel_det_duration_silurus$relative_detection_duration
 )
 
-rel_det_duration_silurus %>%
+rel_det_duration_silurus |>
   left_join(
     geo_info_deploys,
     by = c("deployment_id", "station_name")
-  ) %>%
-  leaflet() %>%
-  addTiles() %>%
+  ) |>
+  leaflet() |>
+  addTiles() |>
   addCircleMarkers(
     lng = ~deploy_longitude,
     lat = ~deploy_latitude,
@@ -1133,12 +1133,12 @@ rel_det_duration_silurus %>%
       paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
       paste0("# relative detection duration: ", round(relative_detection_duration, 2))
     )
-  ) %>%
+  ) |>
   addLegend(
     title = "Relative detection duration",
     pal = pal,
     values = ~relative_detection_duration
-  ) %>%
+  ) |>
   htmlwidgets::saveWidget(file = "relative_detection_duration.html")
 ```
 

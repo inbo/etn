@@ -317,13 +317,18 @@ get_acoustic_detections <- function(connection,
         stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
       )
     ) |>
-    # Arrange by the text part, then the numeric part
-    dplyr::arrange(.data$text_part, .data$num_part) |>
-    dplyr::select(-dplyr::all_of(c("text_part", "num_part")))
-
+    # Arrange by the text part, then the numeric part, then deployment_id to
+    # ensure the same result regardless of protocol
+    dplyr::arrange(.data$text_part, .data$num_part, .data$deployment_id) |>
+    dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
+    # Set the column classes explicitly
+    dplyr::mutate(
+      qc_flag = as.logical(.data$qc_flag)
+    )
 
   # Return single detections table
   dplyr::collect(detections)
+
 }
 
 #' Count acoustic detections

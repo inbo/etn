@@ -36,8 +36,12 @@ test_that("list_receiver_ids() returns identical results independent of the used
   expect_protocol_agnostic(list_receiver_ids())
 })
 
-test_that("list_cpod_project_codes() return identical results independent of the used protocol", {
+test_that("list_cpod_project_codes() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_cpod_project_codes())
+})
+
+test_that("list_deployment_ids() returns identical results independent of the used protocol", {
+  expect_protocol_agnostic(list_deployment_ids())
 })
 
 # get_acoustic_detections -------------------------------------------------
