@@ -27,7 +27,7 @@ You can change a System Environmental Variable from within R with `Sys.setenv()`
 The following options are available:
 
 ### Login credentials
-See [Set Up Your ETN Username and Password](etn_credentials.html). These variables allow you to set your etn database username and password.
+See [Set Up Your ETN Username and Password](authentication.html). These variables allow you to set your etn database username and password.
 
 - `ETN_USER` : Username to the etn database
 - `ETN_PWD` : Password to the etn database
