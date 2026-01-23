@@ -83,10 +83,14 @@ deprecate_warn_connection <- function() {
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
-    details = glue::glue(
-      "The connection argument is no longer used. ",
-      "You will be prompted for credentials instead."
-    ),
+    details = cli::cli_fmt(
+    cli::cli_text(
+      "The connection argument is no longer used.
+      You will be prompted for credentials instead.
+
+      Alternativly you can store them as {.envvar ETN_USER} and {.envvar ETN_PWD}
+    using {.code Sys.setenv()} or in the {.file ~/.Renviron} file.
+    For more information see {.vignette etn::etn_credentials}.")),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
     always = TRUE
