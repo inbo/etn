@@ -85,12 +85,7 @@ deprecate_warn_connection <- function() {
     ),
     details = cli::cli_fmt(
     cli::cli_text(
-      "The connection argument is no longer used.
-      You will be prompted for credentials instead.
-
-      Alternativly you can store them as {.envvar ETN_USER} and {.envvar ETN_PWD}
-    using {.code Sys.setenv()} or in the {.file ~/.Renviron} file.
-    For more information see {.vignette etn::etn_credentials}.")),
+      "See the {.vignette authentication} vignette to configure authentication.")),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
     always = TRUE
