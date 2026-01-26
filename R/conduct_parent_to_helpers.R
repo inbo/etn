@@ -30,7 +30,7 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
   # Check arguments
   protocol <- rlang::arg_match(protocol)
   if (!(is.character(ignored_arguments) || is.null(ignored_arguments))) {
-    cli::cli_abort("{ignored_arguments} should be a character vector or NULL.")
+    cli::cli_abort("{.var ignored_arguments} should be a character vector or NULL.")
   }
 
   # Lock in the name of the parent function
@@ -38,9 +38,10 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
     get_parent_fn_name(depth = 2)
 
   # Get the argument values from the parent function, drop arguments set to NULL
+  parent_args <- return_parent_arguments(depth = 2, compact = TRUE)
   arguments_to_pass <-
-    return_parent_arguments(depth = 2)[
-      !names(return_parent_arguments(depth = 2, compact = TRUE)) %in% c(
+    parent_args[
+      !names(parent_args) %in% c(
         "api",
         "connection",
         ignored_arguments,

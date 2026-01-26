@@ -136,7 +136,7 @@ return_parent_arguments <- function(depth = 1, compact = TRUE) {
     function(x) rlang::env_get(env = parent_env, nm = x)
   )
   if (compact) {
-    compact(parent_arguments)
+    parent_arguments <- compact(parent_arguments)
   }
   parent_arguments
 }
@@ -166,7 +166,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
   if (!login_valid) {
     rlang::abort(
       glue::glue(
-        "Failed to login with username: {get_credentials()$username}.",
+        "Failed to login with username: {credentials$username}.",
         " Please check username/password."
       ),
       caller = rlang::env_parent()
