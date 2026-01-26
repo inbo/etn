@@ -5,8 +5,7 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
   # uses it.
   expect_warning(
     list_animal_project_codes(connection = "any object should cause a warning"),
-    regexp = "The `connection` argument is deprecated as of etn",
-    fixed = FALSE
+    class = "lifecycle_warning_deprecated"
   )
 })
 
