@@ -301,7 +301,6 @@ get_acoustic_detections <- function(connection,
       fetched_page |>
       # Arrow does not support slicing with ties
       dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
-      dplyr::collect() |>
       dplyr::pull("detection_id")
 
     # Iterate the progress bar by one page
