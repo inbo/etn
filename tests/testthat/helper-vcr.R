@@ -40,3 +40,9 @@ invisible(vcr::vcr_configure(
 if (using_test_deployment()) {
   vcr::turn_off(ignore_cassettes = TRUE)
 }
+
+# If VCR_TURN_OFF is set to "true", turn off vcr entirely. This is useful for
+# environments where vcr might cause issues (e.g., Windows CI).
+if (tolower(Sys.getenv("VCR_TURN_OFF", unset = "false")) == "true") {
+  vcr::turn_off(ignore_cassettes = TRUE)
+}
