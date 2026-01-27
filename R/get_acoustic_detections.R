@@ -278,7 +278,13 @@ get_acoustic_detections <- function(connection,
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
+    fetched_page <- arrow::read_feather(fetched_page_path,
+                                        # Only read what we need.
+                                        col_select = "detection_id",
+                                        # Windows suffers memory allocation
+                                        # issues with arrow::open_dataset() call
+                                        # later on
+                                        mmap = FALSE)
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
