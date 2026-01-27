@@ -1,4 +1,4 @@
-testthat::skip_on_os("windows")
+#testthat::skip_on_os("windows")
 
 # Create a data package using the API
 vcr::use_cassette( # Cache HTTP response
