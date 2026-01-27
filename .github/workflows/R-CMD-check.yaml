@@ -33,6 +33,9 @@ jobs:
       ETN_PWD: ${{ secrets.ETN_PWD }}
       VCR_TURN_OFF: ${{ vars.VCR_TURN_OFF }}
       R_KEEP_PKG_SOURCE: yes
+      # Disable parallel test execution on Windows to avoid intermittent crashes
+      # related to arrow package's C++ code (exit status -1073741819)
+      TESTTHAT_PARALLEL: ${{ runner.os == 'Windows' && 'false' || '' }}
 
     steps:
       - uses: actions/checkout@v4
