@@ -24,8 +24,8 @@ jobs:
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
-          # And minimum supported version in DESCRIPTION
-          - {os: windows-latest,   r: '4.1.0'}
+          # And minimum supported version in DESCRIPTION, windows arm is a full desktop runner
+          - {os: windows-11-arm,   r: '4.1.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
