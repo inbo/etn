@@ -68,8 +68,7 @@ test_that("get_val() can get a value from a temp_key using feather", {
 
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"
-  api_out <- get_val(temp_key, domain, format = "feather")
-  expect_no_error(api_out)
+  expect_no_error(api_out <- get_val(temp_key, domain, format = "feather"))
   expect_type(api_out, "list")
   expect_s3_class(api_out, "tbl_df")
   expect_length(api_out, 2)
