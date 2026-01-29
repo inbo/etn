@@ -1,5 +1,6 @@
 # get_etnservice_version() ------------------------------------------------
 test_that("get_etnservice_version() returns package_version object", {
+  testthat::skip_if_offline()
   expect_s3_class(
     get_etnservice_version(),
     "package_version"
@@ -7,7 +8,8 @@ test_that("get_etnservice_version() returns package_version object", {
 })
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
-# Skip if there is a mismatch between the locally installed version and the deployed version
+  testthat::skip_if_offline()
+  # Skip if there is a mismatch between the locally installed version and the deployed version
   skip_if(utils::packageVersion("etnservice") != get_etnservice_version())
 
   # Test that all functions in the package are listed
@@ -68,8 +70,7 @@ test_that("get_val() can get a value from a temp_key using feather", {
 
   temp_key <- extract_temp_key(response)
   domain <- "https://cloud.opencpu.org/ocpu"
-  api_out <- get_val(temp_key, domain, format = "feather")
-  expect_no_error(api_out)
+  expect_no_error(api_out <- get_val(temp_key, domain, format = "feather"))
   expect_type(api_out, "list")
   expect_s3_class(api_out, "tbl_df")
   expect_length(api_out, 2)
@@ -159,10 +160,12 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
 
 
 test_that("validate_login() returns TRUE on correct credentials", {
+  testthat::skip_if_offline()
   expect_true(validate_login())
 })
 
 test_that("validate_login() returns error on bad credentials", {
+  testthat::skip_if_offline()
   with_mocked_bindings(
     code = {
       expect_error(
