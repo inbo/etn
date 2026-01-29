@@ -83,6 +83,7 @@ withr::with_envvar(
 )
 
 test_that("[API] write_dwc() can write csv files to a path", {
+  skip_if_offline("opencpu.lifewatch.be")
   # Force using the OpenCPU API
   withr::local_envvar("ETN_PROTOCOL" = "opencpu")
   out_dir <- withr::local_tempdir()
