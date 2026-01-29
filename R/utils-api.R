@@ -81,7 +81,9 @@ get_val <- function(temp_key,
         rds_response
       },
       "feather" = \(request) {
-        arrow::read_feather(request$url,
+        temp_featherfile <- withr::local_tempfile(fileext = ".feather")
+        req_perform_opencpu(request, path = temp_featherfile)
+        arrow::read_feather(temp_featherfile,
                             mmap = FALSE)
       }
     )
