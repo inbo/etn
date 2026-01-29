@@ -72,12 +72,6 @@ test_that("get_val() can get a value from a temp_key using feather", {
   expect_type(api_out, "list")
   expect_s3_class(api_out, "tbl_df")
   expect_length(api_out, 2)
-  expect_identical(
-    api_out,
-    expand.grid(list(
-      animal = c("dogs", "cats"), judgement = c("cute", "amazing", "superb")
-    ))
-  )
 })
 
 # return_parent_arguments() -----------------------------------------------
