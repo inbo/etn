@@ -97,6 +97,7 @@ test_that("get_animals() returns the expected columns", {
 })
 
 test_that("get_animals() allows selecting on animal_id", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
   expect_error(
     get_animals(animal_id = 0),
@@ -131,6 +132,7 @@ test_that("get_animals() allows selecting on animal_id", {
 })
 
 test_that("get_animals() allows selecting on animal_project_code", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
   expect_error(
     get_animals(animal_project_code = "not_a_project"),
@@ -167,6 +169,7 @@ test_that("get_animals() allows selecting on animal_project_code", {
 })
 
 test_that("get_animals() allows selecting on tag_serial_number", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
   expect_error(
     get_animals(tag_serial_number = "0"),
@@ -198,6 +201,7 @@ test_that("get_animals() allows selecting on tag_serial_number", {
 })
 
 test_that("get_animals() allows selecting on scientific_name", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
   expect_error(
     get_animals(scientific_name = "not_a_sciname"),
@@ -232,6 +236,7 @@ test_that("get_animals() allows selecting on scientific_name", {
 })
 
 test_that("get_animals() allows selecting on multiple parameters", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   multiple_parameters_df <- get_animals(
     animal_project_code = "2014_demer",
     scientific_name = "Rutilus rutilus"
@@ -241,6 +246,7 @@ test_that("get_animals() allows selecting on multiple parameters", {
 })
 
 test_that("get_animals() collapses multiple associated tags to one row", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Animal 5841 (project SPAWNSEIS) has 2 associated tags (1280688,1280688)
   animal_two_tags_df <- get_animals(animal_id = 5841)
 
