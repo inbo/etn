@@ -1,3 +1,4 @@
+testthat::skip_if_offline("opencpu.lifewatch.be")
 df <- get_tags()
 
 # Test with local database, skip if not available
