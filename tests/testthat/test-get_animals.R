@@ -1,5 +1,3 @@
-#testthat::skip_on_os("windows")
-
 # Force using the OpenCPU API and cache the response
 withr::with_envvar(
   c("ETN_PROTOCOL" = "opencpu"),

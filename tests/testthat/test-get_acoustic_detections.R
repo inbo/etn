@@ -1,5 +1,3 @@
-#testthat::skip_on_os("windows")
-
 test_that("get_acoustic_detections() can pass errors over the api", {
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
