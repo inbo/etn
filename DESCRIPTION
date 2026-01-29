@@ -39,7 +39,8 @@ Imports:
     readr,
     rlang,
     stringr,
-    utils
+    utils,
+    withr
 Suggests:
     formattable,
     frictionless,
@@ -51,8 +52,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    vcr,
-    withr
+    vcr
 VignetteBuilder: 
     knitr
 Remotes: 
