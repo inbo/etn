@@ -23,7 +23,7 @@ The package now connects to the ETN database with an API provided by the [etnser
 * `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
 * The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
 
-## New Functions and arguments
+## New fields are available
 * Archival tags are now available in `get_animals()` (#365).
 
 ## Package configuration and settings
