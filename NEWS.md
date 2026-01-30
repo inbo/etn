@@ -18,23 +18,24 @@ Your ETN username and password are no longer passed via the `connection` argumen
 
 Here is how you can migrate:
 
-1. In the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), lookup your username and password:
+1. In the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), lookup your username and password (or use the [password reset form](https://rshiny.lifewatch.be/account?p=lostpass)):
 
     ```r
     Sys.getenv("userid")
     Sys.getenv("pwd")
     ```
 
-2. On your computer (and LifeWatch.be RStudio server) open your `.Renviron` file with:
+2. On your computer (and the LifeWatch.be RStudio server) open your `.Renviron` file with:
 
     ```r
+    # install.packages("usethis")
     usethis::edit_r_environ()
     ```
 
 3. Add the following lines to the file and save:
 
     ```
-    ETN_USER = "your username"
+    ETN_USER = "your email address"
     ETN_PWD = "your password"
     ```
 
