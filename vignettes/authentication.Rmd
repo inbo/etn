@@ -41,3 +41,5 @@ list_acoustic_project_codes()
 ```
 
 If you do not have your credentials stored already, functions will prompt you for them. You can then enter your username and password (without quotes `""`) but they will not be stored in `.Renviron` so you'll have to enter them every time you use a function. 
+
+Finally, you could also set them up manually using `Sys.setenv()`, but this will be reset if you restart your R session.

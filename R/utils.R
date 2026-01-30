@@ -83,10 +83,9 @@ deprecate_warn_connection <- function() {
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
-    details = glue::glue(
-      "The connection argument is no longer used. ",
-      "You will be prompted for credentials instead."
-    ),
+    details = cli::cli_fmt(
+    cli::cli_text(
+      "See the {.vignette authentication} vignette to configure authentication.")),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
     always = TRUE

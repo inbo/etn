@@ -6,8 +6,7 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
   skip_if_offline("opencpu.lifewatch.be")
   expect_warning(
     list_animal_project_codes(connection = "any object should cause a warning"),
-    regexp = "The connection argument is no longer used. You will be prompted for credentials instead.",
-    fixed = TRUE
+    class = "lifecycle_warning_deprecated"
   )
 })
 
