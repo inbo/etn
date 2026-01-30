@@ -1,7 +1,6 @@
 ---
 title: "Package options"
 output: rmarkdown::html_vignette
-author: Pieter Huybrechts
 date: "2025-09-26"
 vignette: >
   %\VignetteIndexEntry{Package options}
