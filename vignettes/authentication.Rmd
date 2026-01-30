@@ -21,7 +21,7 @@ All etn functions require credentials (username and password) to connect to the 
 
 Don't have an ETN user account? [Register here](https://rshiny.lifewatch.be/account?p=register).
 
-## Storing credentials
+## Store your credentials
 
 By default, all functions will ask you for your credentials. Very tedious! Avoid this by storing your credentials (once) in a local `.Renviron` file and etn will use those rather than asking every time.
 
