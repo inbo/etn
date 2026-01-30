@@ -1,10 +1,10 @@
 ---
-title: "Set Up Your ETN Username and Password"
+title: "Configure credentials"
 output: rmarkdown::html_vignette
 author: Pieter Huybrechts
 date: "2025-07-22"
 vignette: >
-  %\VignetteIndexEntry{Set up your ETN username and password}
+  %\VignetteIndexEntry{Configure credentials}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,30 +16,38 @@ knitr::opts_chunk$set(
 )
 ```
 
-All functions in the etn R package require credentials to access the etn database: a **username** and **password**.
+All etn functions require credentials (username and password) to connect to the ETN database.
 
-If you do not have credentials already, you can register an account [here](https://rshiny.lifewatch.be/account?p=register) or fill in the [contact form](https://www.lifewatch.be/etn/contact).
+## Register for an ETN account
 
-The easiest way to use the package is to store your credentials in your `.Renviron` file. You can edit this file by running:
+Don't have an ETN user account? [Register here](https://rshiny.lifewatch.be/account?p=register).
 
-```r
-install.packages("usethis")
-usethis::edit_r_environ()
-```
+## Storing credentials
 
-Add your credentials to the file like so:
+By default, all functions will ask you for your credentials. Very tedious! Avoid this by storing your credentials (once) in a local `.Renviron` file and etn will use those rather than asking every time.
 
-```bash
-ETN_USER = "pieter.huybrechts@inbo.be"
-ETN_PWD = "this_isnt_really_my_password"
-```
+1. Open your `.Renviron` file with:
 
-Then restart your R session and everything should just work. For example:
+    ```{r, eval=FALSE}
+    # install.packages(usethis)
+    usethis::edit_r_environ()
+    ```
 
-```r
-list_acoustic_project_codes()
-```
+2. Add the following lines to the file and save:
 
-If you do not have your credentials stored already, functions will prompt you for them. You can then enter your username and password (without quotes `""`) but they will not be stored in `.Renviron` so you'll have to enter them every time you use a function. 
+    ```bash
+    ETN_USER = "your username"
+    ETN_PWD = "your password"
+    ```
 
-Finally, you could also set them up manually using `Sys.setenv()`, but this will be reset if you restart your R session.
+3. Restart R.
+4. Try:
+
+   ```{r, eval=FALSE}
+   library(etn)
+   get_animal_projects() # This should return a data frame
+   ```
+
+## Forgot your password?
+
+Use the [reset password form](https://rshiny.lifewatch.be/account?p=lostpass).
