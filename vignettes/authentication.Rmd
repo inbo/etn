@@ -42,11 +42,18 @@ By default, all functions will ask you for your credentials. Very tedious! Avoid
 3. Restart R.
 4. Try:
 
-   ```{r, eval=FALSE}
-   library(etn)
-   get_animal_projects() # This should return a data frame
-   ```
+    ```{r, eval=FALSE}
+    library(etn)
+    get_animal_projects() # This should return a data frame
+    ```
 
-## Forgot your password?
+## Forgot your credentials?
 
-Use the [reset password form](https://rshiny.lifewatch.be/account?p=lostpass).
+You may still have them stored in the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/) environment:
+
+    ```{r, eval=FALSE}
+    Sys.getenv("userid")
+    Sys.getenv("pwd")
+    ```
+
+Otherwise, use the [reset password form](https://rshiny.lifewatch.be/account?p=lostpass).
