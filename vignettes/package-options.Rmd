@@ -1,10 +1,10 @@
 ---
-title: "Package Options"
+title: "Package options"
 output: rmarkdown::html_vignette
 author: Pieter Huybrechts
 date: "2025-09-26"
 vignette: >
-  %\VignetteIndexEntry{Package Options}
+  %\VignetteIndexEntry{Package options}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,24 +16,29 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package has a number of options that can be set via [System Environmental variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html). You usually don't need to change these options, and most of them are actually there to help contributors in developing the package.
+A number of etn options can be configured as [Environmental Variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html).
 
-## How to change these options.
+## Setting options
 
-You can change a System Environmental Variable from within R with `Sys.setenv()` and get a set value with `Sys.getenv()`. To set variables more permanently you can use the `.Renviron` file, which can be easily changed with `usethis::edit_r_environ()`.
+To temporarily set an option for the duration of an R session, use:
 
-## Options overview
+```{r, eval=FALSE}
+Sys.setenv(ETN_PROTOCOL = "opencpu")
+# Retrieve with Sys.getenv("ETN_PROTOCOL")
+```
 
-The following options are available:
+To store an option permanently, open the `.Renviron` file with `usethis::edit_r_environ()`, edit, and save:
 
-### Login credentials
-See [Set Up Your ETN Username and Password](etn_credentials.html). These variables allow you to set your etn database username and password.
+```bash
+ETN_PROTOCOL = "opencpu"
+```
 
-- `ETN_USER` : Username to the etn database
-- `ETN_PWD` : Password to the etn database
+## Available options
 
-### OpenCPU Options
-- `ETN_PROTOCOL` : The package automatically switches between using a local connection to the etn database or the OpenCPU API depending on the availability of a local database connection is available. You can force the package to always use one or the other by setting this option to `opencpu` or `localdb`.
-- `ETN_TEST_API` : **DANGER** Overwrite the url where the etn OpenCPU API is hosted. This variable is used to switch the entire package over to a different url, for example the testing api. Changing this variable to anything other than the testing api url will break the package. 
+- `ETN_USER`: Your username to the ETN database. See [authentication](etn_credentials.html).
 
+- `ETN_PWD`: Your password to the ETN database. See [authentication](etn_credentials.html).
 
+- `ETN_PROTOCOL` (value: `"opencpu"` or `"localdb"`): etn will automatically detect how to best connect to the ETN database, i.e. it will use a local database connection when available. This option allows you to override this behaviour by hardcoding the protocol to use.
+
+- `ETN_TEST_API` (value: a url) **developers only**: etn uses the production version of the OpenCPU API by default. This option allows you to use a test version of the OpenCPU API (available upon request). Any other value will break the package.
