@@ -8,8 +8,6 @@ home:
   - text: Visit the European Tracking Network (ETN)
     href: http://lifewatch.be/etn/
 reference:
-- title: Connect to the database
-  contents: connect_to_etn
 - title: Explore acoustic telemetry data
   contents:
   - get_animal_projects
@@ -30,4 +28,5 @@ reference:
   contents: get_cpod_projects
 - title: List parameter options
   contents: starts_with("list_")
-
+- title: Deprecated functions
+  contents: connect_to_etn
