@@ -51,9 +51,9 @@ By default, all functions will ask you for your credentials. Very tedious! Avoid
 
 You may still have them stored in the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/) environment:
 
-    ```{r, eval=FALSE}
-    Sys.getenv("userid")
-    Sys.getenv("pwd")
-    ```
+```{r, eval=FALSE}
+Sys.getenv("userid")
+Sys.getenv("pwd")
+```
 
-Otherwise, use the [reset password form](https://rshiny.lifewatch.be/account?p=lostpass).
+Otherwise, use the [password reset form](https://rshiny.lifewatch.be/account?p=lostpass).
