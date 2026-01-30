@@ -1,8 +1,8 @@
 # etn (development version)
 
-##  The etn package can now be used on your own computer!
+## The etn package can now be used on your own computer!
 
-The package now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280). 
+The package now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280).
 
 * The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable `ETN_PROTOCOL` to `opencpu` to force the package to use the API. This will be slower than a local database connection on the VLIZ RStudio Server. (#398)
 
