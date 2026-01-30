@@ -28,7 +28,7 @@ By default, all functions will ask you for your credentials. Very tedious! Avoid
 1. Open your `.Renviron` file with:
 
     ```{r, eval=FALSE}
-    # install.packages(usethis)
+    # install.packages("usethis")
     usethis::edit_r_environ()
     ```
 
