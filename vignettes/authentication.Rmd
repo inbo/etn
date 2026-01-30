@@ -35,7 +35,7 @@ By default, all functions will ask you for your credentials. Very tedious! Avoid
 2. Add the following lines to the file and save:
 
     ```bash
-    ETN_USER = "your username"
+    ETN_USER = "your email address"
     ETN_PWD = "your password"
     ```
 
