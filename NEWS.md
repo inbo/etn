@@ -1,22 +1,39 @@
 # etn (development version)
 
-* **The etn package can now be used on your own computer!** It connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280).
-* etn now relies on R >= 4.1.0 (because of vcr dependency) and uses base pipes (|> rather than %>%) (#384).
-* The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable `ETN_PROTOCOL` to `opencpu` to force the package to use the API. This will be slower as a local database connection. (#398)
-* The `connection` argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. `get_animals(animal_id = 305)`, not `get_animals(con, animal_id = 305)` or `get_animals(connection = con, animal_id = 305)` (#301).
-* `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
-* The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
+##  The etn package can now be used on your own computer!
+
+The package now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package. (#280). 
+
+* The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable `ETN_PROTOCOL` to `opencpu` to force the package to use the API. This will be slower as a local database connection on the VLIZ RStudio Server. (#398)
+
+## User experience
+* etn now relies on R >= 4.1.0 (because of vcr dependency) and uses base pipes (|> rather than magrittr pipes %>%) (#384).
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
-* Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
-* You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339, #338, #228)
-* Archival tags are now available in `get_animals()` (#365).
-* Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API`. (#383)
+
+### get_acoustic_detections()
 * `get_acoustic_detections()` now uses a different interface to the database resulting in much more detections being able to be fetched reliably. However, due to changes in the database, it'll initially result in less detections being returned for the same filter variables (but with less mistakes). (#384, #382, #323)
 * You can now select detections via `get_acoustic_detections()` using a `deployment_id` (#382, #340)
 * You can now select detections via `get_acoustic_detections()` using a `tag_serial_number`, this is a better option as `acoustic_tag_id` which will remain supported for the near future. Thank you @lottepohl for the suggestion. (#408, #386)
 * `get_acoustic_detections()` now returns a progress bar on large queries. (#384)
-* When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
+* You should now be able to fetch 10M+ detections in a single call to `get_acoustic_detections()`.
+
+## Removed functions and arguments
+
+* The `connection` argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. `get_animals(animal_id = 305)`, not `get_animals(con, animal_id = 305)` or `get_animals(connection = con, animal_id = 305)` (#301).
+* `connect_to_etn()` is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (#303).
+* The deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are no longer included.
+
+## New Functions and arguments
+* Archival tags are now available in `get_animals()` (#365).
+
+## Package configuration and settings
+* You can now store your password and username in `.Renviron` (easy to edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and `ETN_PWD` (#317, #339, #338, #228)
+* Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API`. (#383)
 * New vignette `vignette("package-options")` that describes some developer/power user package wide options. (#398)
+
+## Bugs
+* Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (#317)
+* When using a local database connection, `etn` will now check if the installed helper package `etnservice` that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of `etnservice` is older, you will be prompted to install a newer version. (#385)
 
 # etn 2.2.2
 
