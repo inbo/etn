@@ -36,6 +36,7 @@ Imports:
     memoise,
     methods,
     prettyunits,
+    purrr,
     readr,
     rlang,
     stringr,

@@ -17,3 +17,6 @@ A vector of all unique \code{id_pk} present in \code{common.animal_release}.
 \description{
 List all available animal ids
 }
+\examples{
+list_animal_ids()
+}

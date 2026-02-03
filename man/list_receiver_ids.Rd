@@ -17,3 +17,6 @@ A vector of all unique \code{receiver} present in \code{acoustic.receivers}.
 \description{
 List all available receiver ids
 }
+\examples{
+list_receiver_ids()
+}

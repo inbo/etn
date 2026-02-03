@@ -5,6 +5,9 @@
 #'   `project.sql`.
 #'
 #' @export
+#'
+#' @examples
+#' list_animal_project_codes()
 list_animal_project_codes <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
