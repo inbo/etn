@@ -54,25 +54,17 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
     is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
-      cli::cli_alert_info("No ETN username/password could be found,
-                          prompting...")
+      cli::cli_alert_info("No ETN username/password stored.
+                          See {.vignette etn::authentication} to configure authentication.")
       username <- prompt_user(prompt = "Please enter a userid: ")
       password <- ask_pass()
-      cli::cli_inform(c(
-        "You can store your ETN username and password as {.envvar ETN_USER}
-        and {.envvar ETN_PWD} in the {.file ~/.Renviron} file.",
-        "Editing this file is easy by running
-        {.run usethis::edit_r_environ()}.",
-        "If no credentials are stored, the package will prompt for them every
-        time a query to the database is placed. For more information see the
-        {.vignette etn::authentication} vignette."
-      ))
     } else {
       # No credentials, not interactive
-      stop(
-        glue::glue(
+      cli::cli_abort(
+        c(
           "No credentials stored, not running in interactive mode. ",
-          "Please set credentials as environemental variables or in the .Renviron file."
+          "Please set credentials as environemental variables or in the .Renviron file.",
+          "See {.vignette etn::authentication} to configure authentication."
         )
       )
     }
