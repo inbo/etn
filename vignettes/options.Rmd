@@ -1,0 +1,43 @@
+---
+title: "Options"
+output: rmarkdown::html_vignette
+date: "2025-09-26"
+vignette: >
+  %\VignetteIndexEntry{Package options}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A number of etn options can be configured as [Environmental Variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html).
+
+## Setting options
+
+To temporarily set an option for the duration of an R session, use:
+
+```{r, eval=FALSE}
+Sys.setenv(ETN_PROTOCOL = "opencpu")
+# Retrieve with Sys.getenv("ETN_PROTOCOL")
+```
+
+To store an option permanently, open the `.Renviron` file with `usethis::edit_r_environ()`, edit, and save:
+
+```bash
+ETN_PROTOCOL = "opencpu"
+```
+
+## Available options
+
+- `ETN_USER`: Your username to the ETN database. See [authentication](etn_credentials.html).
+
+- `ETN_PWD`: Your password to the ETN database. See [authentication](etn_credentials.html).
+
+- `ETN_PROTOCOL` (value: `"opencpu"` or `"localdb"`): etn will automatically detect how to best connect to the ETN database, i.e. it will use a local database connection when available. This option allows you to override this behaviour by hardcoding the protocol to use.
+
+- `ETN_TEST_API` (value: a url) **developers only**: etn uses the production version of the OpenCPU API by default. This option allows you to use a test version of the OpenCPU API (available upon request). Any other value will break the package.
