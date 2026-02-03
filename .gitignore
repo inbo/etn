@@ -45,3 +45,5 @@ pkgdown
 # Other
 pgpass
 .Renviron*
+/doc/
+/Meta/
