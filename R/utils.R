@@ -89,7 +89,7 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
 #' @noRd
 deprecate_warn_connection <- function() {
   lifecycle::deprecate_warn(
-    when = "v3.0.0",
+    when = "3.0.0",
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
