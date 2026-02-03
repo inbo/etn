@@ -80,8 +80,7 @@ test_that("opencpu should not pass backtrace", {
   error_message <- expect_error(
     forward_to_api("get_animals",
                    payload = list(animal_id = "not_an_animal_id"),
-                  ),
-                  regexp = "Backtrace"
+                  )
   )
   expect_no_match(error_message$message, "Backtrace")
 })
