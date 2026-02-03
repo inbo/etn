@@ -4,6 +4,9 @@
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
 #'
 #' @export
+#'
+#' @examples
+#' list_receiver_ids()
 list_receiver_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

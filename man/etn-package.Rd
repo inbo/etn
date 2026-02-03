@@ -14,7 +14,7 @@ Package with functions to access and process data from the European Tracking Net
 Useful links:
 \itemize{
   \item \url{https://github.com/inbo/etn}
-  \item \url{https://inbo.github.io/etn}
+  \item \url{https://inbo.github.io/etn/}
   \item Report bugs at \url{https://github.com/inbo/etn/issues}
 }
 
@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Research Institute for Nature and Forest (INBO) (00j54wy13) [copyright holder]
+  \item Research Institute for Nature and Forest (INBO) (\href{https://ror.org/00j54wy13}{ROR}) [copyright holder]
   \item Research Foundation - Flanders (https://lifewatch.be) [funder]
 }
 
