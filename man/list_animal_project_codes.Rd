@@ -18,3 +18,6 @@ A vector of all unique \code{project_code} of \code{type = "animal"} in
 \description{
 List all available animal project codes
 }
+\examples{
+list_animal_project_codes()
+}
