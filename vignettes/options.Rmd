@@ -1,5 +1,5 @@
 ---
-title: "Package options"
+title: "Options"
 output: rmarkdown::html_vignette
 date: "2025-09-26"
 vignette: >
