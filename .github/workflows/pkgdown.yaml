@@ -39,6 +39,9 @@ jobs:
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
+        env:
+          ETN_USER: ${{ secrets.ETN_USER }}
+          ETN_PWD: ${{ secrets.ETN_PWD }}
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
