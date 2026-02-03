@@ -109,4 +109,4 @@ This releases updates the package to make use of the new model and scope of ETN.
 * `tag_serial_number` is now the primary identifier for tags. Tags can have multiple types, subtypes and sensors. Acoustic information is related to the `acoustic_tag_id`.
 * `acoustic` scope remains completely covered, but is now reflected in function names. This allows us to implement additional scopes (e.g. `cpod`) in the future.
 * Deprecations for old function names.
-* New tutorial on acoustic scope ([acoustic_telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic_telemetry.Rmd)).
+* New tutorial on acoustic scope ([acoustic-telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic-telemetry.Rmd)).
