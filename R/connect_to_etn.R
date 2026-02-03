@@ -12,7 +12,7 @@
 #' @export
 connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
-    when = "2.3.0",
+    when = "3.0.0",
     what = "connect_to_etn()",
     details = "You will be prompted for credentials instead.",
     always = TRUE
