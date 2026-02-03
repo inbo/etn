@@ -47,8 +47,8 @@ test_that("get_credentials() prompts the user for credentials if not stored", {
           ),
           get_credentials()
         ),
-        "No credentials stored, prompting..",
-        fixed = TRUE
+        "No ETN username/password stored.",
+        fixed = FALSE
       )
     },
     ask_pass = function(...) "entered_pwd",
@@ -100,7 +100,8 @@ test_that("get_credentials() returns error when no credentials are stored and ru
           ),
           get_credentials()
         ),
-        "No credentials stored, not running in interactive mode"
+        "No credentials stored, not running in interactive mode",
+        fixed = FALSE
       )
     },
     ask_pass = function(...) "entered_pwd",
