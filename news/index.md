@@ -1,0 +1,145 @@
+# Changelog
+
+## etn (development version)
+
+- **The etn package can now be used on your own computer!** It connects
+  to the ETN database with an API provided by the
+  [etnservice](https://github.com/inbo/etnservice) package.
+  ([\#280](https://github.com/inbo/etn/issues/280)).
+- The package will automatically switch to using a local database
+  connection when available, if you wish to overwrite this behaviour,
+  you can by setting the system environmental variable `ETN_PROTOCOL` to
+  `opencpu` to force the package to use the API. This will be slower as
+  a local database connection.
+  ([\#398](https://github.com/inbo/etn/issues/398))
+- The `connection` argument is no longer used and therefore deprecated.
+  You will be prompted for credentials instead. Use
+  e.g. `get_animals(animal_id = 305)`, not
+  `get_animals(con, animal_id = 305)` or
+  `get_animals(connection = con, animal_id = 305)`
+  ([\#301](https://github.com/inbo/etn/issues/301)).
+- [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)
+  is no longer necessary and therefore deprecated. All functions will
+  create their own connection when used. If you have no credentials
+  stored in the system environment, the functions will require you to
+  enter them once per session
+  ([\#303](https://github.com/inbo/etn/issues/303)).
+- The deprecated functions `get_deployments()`, `get_detections()`,
+  `get_projects()`, `get_receivers()`, `list_network_project_codes()`
+  are no longer included.
+- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) now
+  invisibly returns the transformed data as a list of data frames
+  (rather than a data frame)
+  ([\#302](https://github.com/inbo/etn/issues/302)).
+- Queries via the API and on the Lifewatch RStudio Server will now
+  always return the same results.
+  ([\#317](https://github.com/inbo/etn/issues/317))
+- You can now store your password and username in `.Renviron` (easy to
+  edit with `usethis::edit_r_environ()`), specifically in `ETN_USER` and
+  `ETN_PWD` ([\#317](https://github.com/inbo/etn/issues/317),
+  [\#339](https://github.com/inbo/etn/issues/339),
+  [\#338](https://github.com/inbo/etn/issues/338),
+  [\#228](https://github.com/inbo/etn/issues/228))
+- Archival tags are now available in
+  [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
+  ([\#365](https://github.com/inbo/etn/issues/365)).
+- Contributors can now change the default domain of the API to the url
+  of a test deployment by setting the environmental variable
+  `ETN_TEST_API`. ([\#383](https://github.com/inbo/etn/issues/383))
+- [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  now uses a different interface to the database resulting in much more
+  detections being able to be fetched reliably. However, due to changes
+  in the database, it’ll initially result in less detections being
+  returned for the same filter variables (but with less mistakes).
+  ([\#384](https://github.com/inbo/etn/issues/384),
+  [\#382](https://github.com/inbo/etn/issues/382),
+  [\#323](https://github.com/inbo/etn/issues/323))
+- You can now select detections via
+  [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  using a `deployment_id`
+  ([\#382](https://github.com/inbo/etn/issues/382),
+  [\#340](https://github.com/inbo/etn/issues/340))
+- You can now select detections via
+  [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  using a `tag_serial_number`, this is a better option as
+  `acoustic_tag_id` which will remain supported for the near future.
+  Thank you [@lottepohl](https://github.com/lottepohl) for the
+  suggestion. ([\#408](https://github.com/inbo/etn/issues/408),
+  [\#386](https://github.com/inbo/etn/issues/386))
+- [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  now returns a progress bar on large queries.
+  ([\#384](https://github.com/inbo/etn/issues/384))
+- When using a local database connection, `etn` will now check if the
+  installed helper package `etnservice` that is used to place these
+  queries is up to date with the one deployed via the API. This is to
+  ensure that queries placed via the API and via the local database
+  connection always result in consistent results. If the installed
+  version of `etnservice` is older, you will be prompted to install a
+  newer version. ([\#385](https://github.com/inbo/etn/issues/385))
+- New vignette
+  [`vignette("options")`](https://inbo.github.io/etn/articles/options.md)
+  that describes some developer/power user package wide options.
+  ([\#398](https://github.com/inbo/etn/issues/398))
+
+## etn 2.2.2
+
+- Fix issue in `check_value()` helper used in several functions to
+  generate error messages. The error message failed to format when `NA`
+  values were returned as part of a `list_` function call
+  ([\#356](https://github.com/inbo/etn/issues/356)).
+- Fix issue in
+  [`list_receiver_ids()`](https://inbo.github.io/etn/reference/list_receiver_ids.md)
+  where `NA` was sometimes included in the results
+  ([\#356](https://github.com/inbo/etn/issues/356)).
+- Fixed bug in
+  [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md)
+  where providing no value for `rights_holder` would result in the
+  function failing to generate a Darwin Core Archive
+  ([\#356](https://github.com/inbo/etn/issues/356)).
+
+## etn 2.2.1
+
+- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) now
+  supports uppercase `animal_project_code`s
+  ([\#289](https://github.com/inbo/etn/issues/289)).
+- Bug fix in
+  [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md)
+  where the function would return an error due to an updated dependency
+  ([\#293](https://github.com/inbo/etn/issues/293)).
+
+## etn 2.2.0
+
+- Add `NEWS.md` file to communicate changes to the package.
+- Add `depth_in_meters` field to
+  [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  ([\#261](https://github.com/inbo/etn/issues/261)).
+- Fix issue in
+  [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
+  where some fields were missing from `datapackage.json`.
+- Stricter unit tests ([\#268](https://github.com/inbo/etn/issues/268)).
+
+## etn 2.1.0
+
+- Add funder and use default README.Rmd
+  ([\#247](https://github.com/inbo/etn/issues/247)).
+- New function
+  [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) to
+  transform acoustic telemetry data to Darwin Core that can be harvested
+  by OBIS and GBIF ([\#257](https://github.com/inbo/etn/issues/257)).
+
+## etn 2.0.0
+
+This releases updates the package to make use of the new model and scope
+of ETN. Have a look at [this
+milestone](https://github.com/inbo/etn/milestone/2) for all issues that
+are included.
+
+- `tag_serial_number` is now the primary identifier for tags. Tags can
+  have multiple types, subtypes and sensors. Acoustic information is
+  related to the `acoustic_tag_id`.
+- `acoustic` scope remains completely covered, but is now reflected in
+  function names. This allows us to implement additional scopes
+  (e.g. `cpod`) in the future.
+- Deprecations for old function names.
+- New tutorial on acoustic scope
+  ([acoustic_telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic_telemetry.Rmd)).

@@ -1,0 +1,117 @@
+# etn
+
+Etn provides functionality to access data from the [European Tracking
+Network (ETN)](http://www.lifewatch.be/etn/) database hosted by the
+Flanders Marine Institute (VLIZ) as part of the Flemish contribution to
+LifeWatch. ETN data is subject to the [ETN data
+policy](http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and
+can be:
+
+- restricted: under moratorium and only accessible to logged-in data
+  owners/collaborators
+- unrestricted: publicly accessible without login and routinely
+  published to international biodiversity facilities
+
+The ETN infrastructure currently requires the package to be run within
+the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), which
+is password protected. A login can be requested at
+<http://www.lifewatch.be/etn/contact>.
+
+## Installation
+
+You can install the development version of etn from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("inbo/etn")
+```
+
+## Meta
+
+- We welcome [contributions](https://inbo.github.io/etn/CONTRIBUTING.md)
+  including bug reports.
+- License: MIT
+- Get citation information for etn in R doing `citation("etn")`.
+- Please note that this project is released with a [Contributor Code of
+  Conduct](https://inbo.github.io/etn/CODE_OF_CONDUCT.md). By
+  participating in this project you agree to abide by its terms.
+
+# Package index
+
+## Explore acoustic telemetry data
+
+- [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
+  : Get animal project data
+- [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
+  : Get animal data
+- [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md) : Get
+  tag data
+- [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md)
+  : Get acoustic project data
+- [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  : Get acoustic detections data
+- [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md)
+  : Get acoustic deployment data
+- [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md)
+  : Get acoustic receiver data
+- [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
+  : Download acoustic data package
+- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) :
+  Transform ETN data to Darwin Core
+
+## Explore archival data
+
+- [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
+  : Get animal project data
+- [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
+  : Get animal data
+- [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md) : Get
+  tag data
+
+## Explore CPOD data
+
+- [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
+  : Get cpod project data
+
+## List parameter options
+
+- [`list_acoustic_project_codes()`](https://inbo.github.io/etn/reference/list_acoustic_project_codes.md)
+  : List all available acoustic project codes
+- [`list_acoustic_tag_ids()`](https://inbo.github.io/etn/reference/list_acoustic_tag_ids.md)
+  : List all available acoustic tag ids
+- [`list_animal_ids()`](https://inbo.github.io/etn/reference/list_animal_ids.md)
+  : List all available animal ids
+- [`list_animal_project_codes()`](https://inbo.github.io/etn/reference/list_animal_project_codes.md)
+  : List all available animal project codes
+- [`list_cpod_project_codes()`](https://inbo.github.io/etn/reference/list_cpod_project_codes.md)
+  : List all available cpod project codes
+- [`list_deployment_ids()`](https://inbo.github.io/etn/reference/list_deployment_ids.md)
+  : List all available receiver ids
+- [`list_receiver_ids()`](https://inbo.github.io/etn/reference/list_receiver_ids.md)
+  : List all available receiver ids
+- [`list_scientific_names()`](https://inbo.github.io/etn/reference/list_scientific_names.md)
+  : List all available scientific names
+- [`list_station_names()`](https://inbo.github.io/etn/reference/list_station_names.md)
+  : List all available station names
+- [`list_tag_serial_numbers()`](https://inbo.github.io/etn/reference/list_tag_serial_numbers.md)
+  : List all available tag serial numbers
+- [`list_values()`](https://inbo.github.io/etn/reference/list_values.md)
+  : List all unique values from a data.frame column
+
+## Deprecated functions
+
+- [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)
+  **\[deprecated\]** : Connect to the ETN database
+
+# Articles
+
+### All vignettes
+
+- [Explore acoustic telemetry
+  data](https://inbo.github.io/etn/articles/acoustic_telemetry.md):
+- [Set Up Your ETN Username and
+  Password](https://inbo.github.io/etn/articles/etn_credentials.md):
+- [ETN field
+  definitions](https://inbo.github.io/etn/articles/etn_fields.md):
+- [Options](https://inbo.github.io/etn/articles/options.md):
