@@ -12,7 +12,7 @@
 Your ETN username and password are no longer passed via the `connection` argument, but asked or retrieved from your `.Renviron` file everytime you run a function.
 
 * New authentication mechanism (#317, #339, #338, #228).
-* New vignette `vignette("etn_credentials")`.
+* New vignette `vignette("authentication")`.
 * `connection` argument is deprecated in all functions (#301).
 * `connect_to_etn()` is deprecated (#303).
 
@@ -71,7 +71,7 @@ Here is how you can migrate:
 ## Developer settings
 
 * Contributors can change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API` (#383).
-* New vignette `vignette("package-options")` describes some developer/power user options (#398).
+* New vignette `vignette("options")` describes some developer/power user options (#398).
 
 ## Miscellaneous
 
