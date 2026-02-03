@@ -18,7 +18,7 @@ Authors@R: c(
 Description: Package with functions to access and process data from the
     European Tracking Network hosted by VLIZ.
 License: MIT + file LICENSE
-URL: https://github.com/inbo/etn, https://inbo.github.io/etn
+URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 4.1)
@@ -39,7 +39,8 @@ Imports:
     readr,
     rlang,
     stringr,
-    utils
+    utils,
+    withr
 Suggests:
     formattable,
     frictionless,
@@ -51,8 +52,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    vcr,
-    withr
+    vcr
 VignetteBuilder: 
     knitr
 Remotes: 

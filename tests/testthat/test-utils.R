@@ -3,6 +3,7 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
   # because this helper looks at the environment two levels up, it's not very
   # practical to test it directly. So here we test it by calling a function that
   # uses it.
+  skip_if_offline("opencpu.lifewatch.be")
   expect_warning(
     list_animal_project_codes(connection = "any object should cause a warning"),
     class = "lifecycle_warning_deprecated"

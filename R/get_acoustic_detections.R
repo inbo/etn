@@ -278,7 +278,15 @@ get_acoustic_detections <- function(connection,
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
+    fetched_page <- arrow::read_feather(fetched_page_path,
+                                        # Only read what we need.
+                                        col_select = "detection_id",
+                                        # Windows suffers memory allocation
+                                        # issues with the arrow::open_dataset()
+                                        # call later on. mmap = FALSE and
+                                        # read_feather over open_dataset force
+                                        # eager read into RAM.
+                                        mmap = FALSE)
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
@@ -293,7 +301,6 @@ get_acoustic_detections <- function(connection,
       fetched_page |>
       # Arrow does not support slicing with ties
       dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
-      dplyr::collect() |>
       dplyr::pull("detection_id")
 
     # Iterate the progress bar by one page
