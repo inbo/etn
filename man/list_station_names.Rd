@@ -18,3 +18,6 @@ A vector of all unique \code{station_name} present in
 \description{
 List all available station names
 }
+\examples{
+list_station_names()
+}

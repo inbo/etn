@@ -18,3 +18,6 @@ A vector of all unique \code{project_code} of \code{type = "acoustic"} in
 \description{
 List all available acoustic project codes
 }
+\examples{
+list_acoustic_project_codes()
+}
