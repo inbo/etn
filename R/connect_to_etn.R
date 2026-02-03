@@ -14,11 +14,9 @@ connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
     when = "3.0.0",
     what = "connect_to_etn()",
-    details = cli::cli_fmt(
-      cli::cli_text(
-        "Database connections are handled automatically.
-        See {.vignette etn::authentication} to configure authentication."
-      )
+    details = cli::format_inline(
+      "Database connections are handled automatically.
+       See {.vignette etn::authentication} to configure authentication."
     ),
     always = TRUE
   )
