@@ -4,6 +4,9 @@
 #' @return A vector of all unique `id_pk` present in `acoustic.deployments`.
 #'
 #' @export
+#'
+#' @examples
+#' list_deployment_ids()
 list_deployment_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

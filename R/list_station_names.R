@@ -5,6 +5,9 @@
 #'   `acoustic.deployments`.
 #'
 #' @export
+#'
+#' @examples
+#' list_station_names()
 list_station_names <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

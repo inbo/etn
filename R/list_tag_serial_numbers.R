@@ -5,6 +5,9 @@
 #'   `common.tag_device`.
 #'
 #' @export
+#'
+#' @examples
+#' list_tag_serial_numbers()
 list_tag_serial_numbers <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
