@@ -36,17 +36,12 @@ rsconnect/
 *.knit.md
 
 # pkgdown website
-# /docs/ # is not yet built by travis on gh-pages
-pkgdown/*
+docs
+pkgdown
 
 # Mac OS X
 .DS_Store
 
 # Other
 pgpass
-inst/doc
 .Renviron*
-draft
-Meta
-/doc/
-/Meta/

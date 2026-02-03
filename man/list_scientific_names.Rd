@@ -18,3 +18,6 @@ A vector of all unique \code{scientific_name} present in
 \description{
 List all available scientific names
 }
+\examples{
+list_scientific_names()
+}

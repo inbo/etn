@@ -141,7 +141,7 @@ return_parent_arguments <- function(depth = 1, compact = TRUE) {
     function(x) rlang::env_get(env = parent_env, nm = x)
   )
   if (compact) {
-    compact(parent_arguments)
+    purrr::compact(parent_arguments)
   }
   parent_arguments
 }
@@ -207,7 +207,7 @@ get_hostname <- function(url_str) {
 #'
 #' This function is useful because it allows us to mock the version of
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
-#' to test the error messaging in [conduct_parent_to_helpers()].
+#' to test the error messaging in `conduct_parent_to_helpers()`.
 #'
 #' Setting `which = "local"` is the same as a direct call to
 #' `etnservice::get_version()`. This option is still useful for mocking in

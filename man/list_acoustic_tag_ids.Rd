@@ -17,3 +17,6 @@ A vector of all unique \code{acoustic_tag_id} in \code{acoustic_tag_id.sql}.
 \description{
 List all available acoustic tag ids
 }
+\examples{
+list_acoustic_tag_ids()
+}

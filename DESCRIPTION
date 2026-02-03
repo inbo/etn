@@ -18,7 +18,7 @@ Authors@R: c(
 Description: Package with functions to access and process data from the
     European Tracking Network hosted by VLIZ.
 License: MIT + file LICENSE
-URL: https://github.com/inbo/etn, https://inbo.github.io/etn
+URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 4.1)
@@ -36,6 +36,7 @@ Imports:
     memoise,
     methods,
     prettyunits,
+    purrr,
     readr,
     rlang,
     stringr,
@@ -62,4 +63,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

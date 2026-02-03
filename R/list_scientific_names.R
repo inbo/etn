@@ -5,6 +5,9 @@
 #'   `common.animal_release`.
 #'
 #' @export
+#'
+#' @examples
+#' list_scientific_names()
 list_scientific_names <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
