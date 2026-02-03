@@ -14,7 +14,12 @@ connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
     when = "3.0.0",
     what = "connect_to_etn()",
-    details = "You will be prompted for credentials instead.",
+    details = cli::cli_fmt(
+      cli::cli_text(
+        "Database connections are handled automatically.
+        See {.vignette etn::authentication} to configure authentication."
+      )
+    ),
     always = TRUE
   )
   invisible(NULL)
