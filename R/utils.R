@@ -160,7 +160,7 @@ get_nodename <- function() {
 #' @noRd
 #' @examples
 #' # This should return FALSE unless you are running this example from the VLIZ
-#' # RStudio Server.
+#' # RStudio server.
 #' localdb_is_available()
 localdb_is_available <- function() {
   # As discussed with VLIZ, all systems that have access to the local database
