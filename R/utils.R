@@ -54,17 +54,19 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
     is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
-      cli::cli_alert_info("No ETN username/password stored.
-                          See {.vignette etn::authentication} to configure authentication.")
       username <- prompt_user(prompt = "Please enter a userid: ")
+      cli::cli_alert_info(
+        "No credentials stored. See {.vignette etn::authentication} to configure
+         credentials."
+      )
       password <- ask_pass()
     } else {
       # No credentials, not interactive
       cli::cli_abort(
         c(
-          "No credentials stored, not running in interactive mode. ",
-          "Please set credentials as environemental variables or in the .Renviron file.",
-          "See {.vignette etn::authentication} to configure authentication."
+          "No credentials stored. Can't prompt for credentials since this is not
+           running in interactive mode.",
+          "i" = "See {.vignette etn::authentication} to configure credentials."
         )
       )
     }
@@ -85,9 +87,10 @@ deprecate_warn_connection <- function() {
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
-    details = cli::cli_fmt(
-    cli::cli_text(
-      "See the {.vignette authentication} vignette to configure authentication.")),
+    details = cli::format_inline(
+      "Database connections are handled automatically.
+       See {.vignette etn::authentication} to configure credentials."
+    ),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
     always = TRUE

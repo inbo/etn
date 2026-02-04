@@ -16,7 +16,7 @@ connect_to_etn <- function(...) {
     what = "connect_to_etn()",
     details = cli::format_inline(
       "Database connections are handled automatically.
-       See {.vignette etn::authentication} to configure authentication."
+       See {.vignette etn::authentication} to configure credentials."
     ),
     always = TRUE
   )
