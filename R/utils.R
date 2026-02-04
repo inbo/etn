@@ -34,19 +34,19 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
-#' Get the credentials from environment variables, or set them manually
+#' Get credentials from environment variables, or set them manually
 #'
 #' By default, it's not necessary to set any values in this function as it's
 #' used in the background by other functions. However, if you wish to provide
 #' your username and password on a per function basis, this function allows you
 #' to do so.
 #'
-#' @param username ETN Data username, by default read from the environment, but
-#'   you can set it manually too.
-#' @param password ETN Data password, by default read from the environment, but
-#'   you can set it manually too.
+#' @param username Username to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
+#' @param password Password to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
 #' @return A string as it is ingested by other functions that need
-#'   authentication
+#'   authentication.
 #' @family helper functions
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
@@ -54,11 +54,11 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
     is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
-      username <- prompt_user(prompt = "Please enter a userid: ")
       cli::cli_alert_info(
         "No credentials stored. See {.vignette etn::authentication} to configure
          credentials."
       )
+      username <- prompt_user(prompt = "Please enter your username: ")
       password <- ask_pass()
     } else {
       # No credentials, not interactive
@@ -205,7 +205,7 @@ select_protocol <- function() {
 #'
 #' This function is wrapped so it can be mocked in
 #' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behavior of `get_credentials()`
+#' behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd

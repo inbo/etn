@@ -47,7 +47,7 @@ test_that("get_credentials() prompts the user for credentials if not stored", {
           ),
           get_credentials()
         ),
-        "No ETN username/password stored.",
+        "No credentials stored.",
         fixed = FALSE
       )
     },
@@ -100,7 +100,7 @@ test_that("get_credentials() returns error when no credentials are stored and ru
           ),
           get_credentials()
         ),
-        "No credentials stored, not running in interactive mode",
+        "No credentials stored. Can't prompt for credentials",
         fixed = FALSE
       )
     },
