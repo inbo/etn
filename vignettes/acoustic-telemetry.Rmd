@@ -1,7 +1,6 @@
 ---
 title: "Explore acoustic telemetry data"
 author: "Damiano Oldoni"
-date: "2025-10-01"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Explore acoustic telemetry data}
@@ -40,7 +39,7 @@ library(leaflet)
 
 ## User credentials
 
-Functions in etn need user credentials to connect to the database. You should have received those from VLIZ. You will be prompted (once per session) for these credentials. To avoid this you can save them as [environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables).
+etn functions require credentials (username and password) to connect to the ETN database. See [authentication](authentication.html) to configure credentials.
 
 ## Select project(s) of interest
 

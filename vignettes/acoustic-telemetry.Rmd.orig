@@ -1,7 +1,6 @@
 ---
 title: "Explore acoustic telemetry data"
 author: "Damiano Oldoni"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Explore acoustic telemetry data}
@@ -40,7 +39,7 @@ library(leaflet)
 
 ## User credentials
 
-Functions in etn need user credentials to connect to the database. You should have received those from VLIZ. You will be prompted (once per session) for these credentials. To avoid this you can save them as [environment variables](https://db.rstudio.com/best-practices/managing-credentials/#use-environment-variables).
+etn functions require credentials (username and password) to connect to the ETN database. See [authentication](authentication.html) to configure credentials.
 
 ## Select project(s) of interest
 
@@ -362,9 +361,9 @@ leaflet(geo_info_stations) %>%
 ```{r, results="asis", echo=FALSE}
 
 iframe_html <- htmltools::tags$iframe(
-  src = "stations_map.html",  
+  src = "stations_map.html",
   width = "100%",
-  height = "600",    
+  height = "600",
   frameborder = "0"
 )
 
@@ -412,9 +411,9 @@ n_detect_station %>%
 ```{r, results="asis", echo=FALSE}
 
 iframe_html <- htmltools::tags$iframe(
-  src = "n_detections_per_station.html",  
+  src = "n_detections_per_station.html",
   width = "100%",
-  height = "600",    
+  height = "600",
   frameborder = "0"
 )
 
@@ -462,9 +461,9 @@ n_silurus_station %>%
 ```{r, results="asis", echo=FALSE}
 
 iframe_html <- htmltools::tags$iframe(
-  src = "n_individuals_per_station.html",  
+  src = "n_individuals_per_station.html",
   width = "100%",
-  height = "600",    
+  height = "600",
   frameborder = "0"
 )
 
@@ -530,9 +529,9 @@ rel_det_duration_silurus %>%
 ```{r, results="asis", echo=FALSE}
 
 iframe_html <- htmltools::tags$iframe(
-  src = "relative_detection_duration.html",  
+  src = "relative_detection_duration.html",
   width = "100%",
-  height = "600",    
+  height = "600",
   frameborder = "0"
 )
 

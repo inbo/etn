@@ -2,9 +2,9 @@
 
 ## Use etn on your computer!
 
-* etn now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package (#280). This means you can use the package from your own computer. Note that this will be slower than running it from the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/).
-* etn will automatically switch to a local database connection when available (e.g. the LifeWatch.be RStudio server). Use `Sys.setenv(ETN_PROTOCOL = "opencpu")` to override this behaviour and force the package to use the API (#398).
-* Queries via the API and the LifeWatch.be RStudio Server will return the same results (#317).
+* etn now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package (#280). This means you can use the package from your own computer. Note that this will be slower than running it from the [VLIZ RStudio server](http://rstudio.lifewatch.be/).
+* etn will automatically switch to a local database connection when available (e.g. the VLIZ RStudio server). Use `Sys.setenv(ETN_PROTOCOL = "opencpu")` to override this behaviour and force the package to use the API (#398).
+* Queries via the API and the VLIZ RStudio Server will return the same results (#317).
 * When using a local database connection, etn will check if the installed helper package etnservice that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of etnservice is older, you will be prompted to install a newer version (#385).
 
 ## credentials - breaking change, action required!
@@ -12,42 +12,14 @@
 Your ETN username and password are no longer passed via the `connection` argument, but asked or retrieved from your `.Renviron` file everytime you run a function.
 
 * New authentication mechanism (#317, #339, #338, #228).
-* New vignette `vignette("etn_credentials")`.
+* New vignette `vignette("authentication")`.
 * `connection` argument is deprecated in all functions (#301).
 * `connect_to_etn()` is deprecated (#303).
 
 Here is how you can migrate:
 
-1. In the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), lookup your username and password (or use the [password reset form](https://rshiny.lifewatch.be/account?p=lostpass)):
-
-    ```r
-    Sys.getenv("userid")
-    Sys.getenv("pwd")
-    ```
-
-2. On your computer (and the LifeWatch.be RStudio server) open your `.Renviron` file with:
-
-    ```r
-    # install.packages("usethis")
-    usethis::edit_r_environ()
-    ```
-
-3. Add the following lines to the file and save:
-
-    ```
-    ETN_USER = "your email address"
-    ETN_PWD = "your password"
-    ```
-
-4. Restart R.
-5. Try:
-
-   ```r
-   library(etn)
-   get_animal_projects() # This should return a data frame
-   ```
-
-6. Update your scripts:
+1. Follow the [authentication tutorial](../articles/authentication.html) to look up and store your credentials.
+2. Update your scripts:
 
    ```r
    # Good
@@ -71,7 +43,7 @@ Here is how you can migrate:
 ## Developer settings
 
 * Contributors can change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API` (#383).
-* New vignette `vignette("package-options")` describes some developer/power user options (#398).
+* New vignette `vignette("options")` describes some developer/power user options (#398).
 
 ## Miscellaneous
 
@@ -109,4 +81,4 @@ This releases updates the package to make use of the new model and scope of ETN.
 * `tag_serial_number` is now the primary identifier for tags. Tags can have multiple types, subtypes and sensors. Acoustic information is related to the `acoustic_tag_id`.
 * `acoustic` scope remains completely covered, but is now reflected in function names. This allows us to implement additional scopes (e.g. `cpod`) in the future.
 * Deprecations for old function names.
-* New tutorial on acoustic scope ([acoustic_telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic_telemetry.Rmd)).
+* New tutorial on acoustic scope ([acoustic-telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic-telemetry.Rmd)).
