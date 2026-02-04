@@ -18,36 +18,8 @@ Your ETN username and password are no longer passed via the `connection` argumen
 
 Here is how you can migrate:
 
-1. In the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), lookup your username and password (or use the [password reset form](https://rshiny.lifewatch.be/account?p=lostpass)):
-
-    ```r
-    Sys.getenv("userid")
-    Sys.getenv("pwd")
-    ```
-
-2. On your computer (and the LifeWatch.be RStudio server) open your `.Renviron` file with:
-
-    ```r
-    # install.packages("usethis")
-    usethis::edit_r_environ()
-    ```
-
-3. Add the following lines to the file and save:
-
-    ```
-    ETN_USER = "your email address"
-    ETN_PWD = "your password"
-    ```
-
-4. Restart R.
-5. Try:
-
-   ```r
-   library(etn)
-   get_animal_projects() # This should return a data frame
-   ```
-
-6. Update your scripts:
+1. Follow the [authentication tutorial](../articles/authentication.html) to look up and store your credentials.
+2. Update your scripts:
 
    ```r
    # Good
