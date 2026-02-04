@@ -1,7 +1,6 @@
 ---
 title: "Configure credentials"
 output: rmarkdown::html_vignette
-date: "2025-07-22"
 vignette: >
   %\VignetteIndexEntry{Configure credentials}
   %\VignetteEngine{knitr::rmarkdown}

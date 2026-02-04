@@ -1,7 +1,6 @@
 ---
 title: "Explore acoustic telemetry data"
 author: "Damiano Oldoni"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Explore acoustic telemetry data}
