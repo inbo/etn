@@ -39,7 +39,7 @@ library(leaflet)
 
 ## User credentials
 
-etn functions require credentials (username and password) to connect to the ETN database. See [authentication](authentication.html) to configure credentials.
+etn functions require credentials (username and password) to connect to the ETN database. See `vignette("authentication")` to configure credentials.
 
 ## Select project(s) of interest
 
