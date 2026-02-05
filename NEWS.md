@@ -1,15 +1,19 @@
 # etn (development version)
 
-## Use etn on your computer!
+## Use etn on your computer 🎉
 
 * etn now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package (#280). This means you can use the package from your own computer. Note that this will be slower than running it from the [VLIZ RStudio server](http://rstudio.lifewatch.be/).
 * etn will automatically switch to a local database connection when available (e.g. the VLIZ RStudio server). Use `Sys.setenv(ETN_PROTOCOL = "opencpu")` to override this behaviour and force the package to use the API (#398).
 * Queries via the API and the VLIZ RStudio Server will return the same results (#317).
 * When using a local database connection, etn will check if the installed helper package etnservice that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of etnservice is older, you will be prompted to install a newer version (#385).
 
-## credentials - breaking change, action required!
+## Credentials
 
-Your ETN username and password are no longer passed via the `connection` argument, but asked or retrieved from your `.Renviron` file everytime you run a function.
+::: {.callout-important}
+**Breaking change! Action required**
+:::
+
+Your credentials (username and password) to connect to the ETN database are no longer passed via the `connection` argument. They are asked or retrieved from your `.Renviron` file every time you run a function.
 
 * New authentication mechanism (#317, #339, #338, #228).
 * New vignette `vignette("authentication")`.
@@ -18,7 +22,7 @@ Your ETN username and password are no longer passed via the `connection` argumen
 
 Here is how you can migrate:
 
-1. Follow the [authentication tutorial](../articles/authentication.html) to look up and store your credentials.
+1. Follow the steps in `vignette("authentication")` to look up and store your credentials.
 2. Update your scripts:
 
    ```r
@@ -40,39 +44,54 @@ Here is how you can migrate:
 * `get_acoustic_detections()` may return fewer (erroneous) detections than before, due to fixes in the database.
 * `get_animals()` now includes `type_type = "archival"` data (#365).
 
-## Developer settings
+## Changes for developers
 
-* Contributors can change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API` (#383).
-* New vignette `vignette("options")` describes some developer/power user options (#398).
+* New vignette `vignette("options")` describes some developer options (#398).
+* Contributors can change the default domain of the API to the URL of a test server via the environmental variable `ETN_TEST_API` (#383).
+* Tests make use of `{vcr}` to record and replay HTTP requests to the API. These results are stored in `/tests/fixtures` (#432).
+* Tests have new helper functions, including `skip_if_not_localdb()`, `skip_if_http_error()` and `expect_protocol_agnostic()`. The latter is used to compare SQL vs API calls in `test-protocol_agnostic.R` (#436).
+* Tests for `download_acoustic_datasets()` are updated for archival tags and SQL vs API calls and makes use of markdown snapshots (#366).
+* pkgdown website is now automatically build by a GitHub Action and is served from the `gh-pages` branch. The `docs/` directory has been removed (#456).
 
 ## Miscellaneous
 
 * etn now relies on R >= 4.1.0 (because of vcr dependency) and uses base pipes (`|>` rather than `%>%`) (#384).
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
 * Previously deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are now removed.
+* `vignette("etn_fields")` was outdated and has been removed (#468).
 
 # etn 2.2.2
 
-* Fix issue in `check_value()` helper used in several functions to generate error messages. The error message failed to format when `NA` values were returned as part of a `list_` function call (#356).
-* Fix issue in `list_receiver_ids()` where `NA` was sometimes included in the results (#356).
-* Fixed bug in `write_dwc()` where providing no value for `rights_holder` would result in the function failing to generate a Darwin Core Archive (#356).
+## Bug fixes
+
+* `check_value()` now correctly formats `NA` values returned by `list_` functions (#356, #357).
+* `list_receiver_ids()` no longer return duplicate values (#357).
+* `write_dwc()` now handles empty `rights_holder` (#356).
+
+## Miscellaneous
+
+* Tests depending on local database connection are now skipped when it is absent on testing machine (#346).
+* Funder is updated and custom authors are removed (#311).
+* The README now has a Zenodo badge (#352, #355).
+* New `CITATION.cff` file (#337).
+* pkgdown website has been updated (#354).
 
 # etn 2.2.1
 
 * `write_dwc()` now supports uppercase `animal_project_code`s (#289).
-* Bug fix in `write_dwc()` where the function would return an error due to an updated dependency (#293).
+* `write_dwc()` no longer breaks on updated dependency (#293).
 
 # etn 2.2.0
 
-* Add `NEWS.md` file to communicate changes to the package.
-* Add `depth_in_meters` field to `get_acoustic_detections()` (#261).
-* Fix issue in `download_acoustic_dataset()` where some fields were missing from `datapackage.json`.
-* Stricter unit tests (#268).
+* `NEWS.md` file is added to communicate changes to the package.
+* `depth_in_meters` field is added to `get_acoustic_detections()` (#261).
+* `download_acoustic_dataset()` no longer breaks on missing fields in `datapackage.json`.
+* Unit tests are stricter (#268).
 
 # etn 2.1.0
 
-* Add funder and use default README.Rmd (#247).
-* New function `write_dwc()` to transform acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF (#257).
+* Funder and default README.Rmd are added (#247).
+* New function `write_dwc()` transforms acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF (#257).
 
 # etn 2.0.0
 
@@ -80,5 +99,6 @@ This releases updates the package to make use of the new model and scope of ETN.
 
 * `tag_serial_number` is now the primary identifier for tags. Tags can have multiple types, subtypes and sensors. Acoustic information is related to the `acoustic_tag_id`.
 * `acoustic` scope remains completely covered, but is now reflected in function names. This allows us to implement additional scopes (e.g. `cpod`) in the future.
-* Deprecations for old function names.
-* New tutorial on acoustic scope ([acoustic-telemetry.Rmd](https://github.com/inbo/etn/blob/main/vignettes/acoustic-telemetry.Rmd)).
+* Old function names are deprecated.
+* New `vignette("acoustic-telemetry")` showcases an acoustic use case.
+* Test coverage is increased.
