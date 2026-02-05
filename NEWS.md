@@ -1,6 +1,6 @@
 # etn (development version)
 
-## Use etn on your computer!
+## Use etn on your computer 🎉
 
 * etn now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package (#280). This means you can use the package from your own computer. Note that this will be slower than running it from the [VLIZ RStudio server](http://rstudio.lifewatch.be/).
 * etn will automatically switch to a local database connection when available (e.g. the VLIZ RStudio server). Use `Sys.setenv(ETN_PROTOCOL = "opencpu")` to override this behaviour and force the package to use the API (#398).
@@ -22,7 +22,7 @@ Your credentials (username and password) to connect to the ETN database are no l
 
 Here is how you can migrate:
 
-1. Follow the [authentication tutorial](../articles/authentication.html) to look up and store your credentials.
+1. Follow the steps in `vignette("authentication")` to look up and store your credentials.
 2. Update your scripts:
 
    ```r
