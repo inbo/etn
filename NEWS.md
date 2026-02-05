@@ -51,6 +51,7 @@ Here is how you can migrate:
 * Tests make use of `{vcr}` to record and replay HTTP requests to the API. These results are stored in `/tests/fixtures` (#432).
 * Tests have new helper functions, including `skip_if_not_localdb()`, `skip_if_http_error()` and `expect_protocol_agnostic()`. The latter is used to compare SQL vs API calls in `test-protocol_agnostic.R` (#436).
 * Tests for `download_acoustic_datasets()` are updated for archival tags and SQL vs API calls and makes use of markdown snapshots (#366).
+* pkgdown website is now automatically build by a GitHub Action and is served from the `gh-pages` branch. The `docs/` directory has been removed (#456).
 
 ## Miscellaneous
 
