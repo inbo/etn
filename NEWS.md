@@ -7,9 +7,13 @@
 * Queries via the API and the VLIZ RStudio Server will return the same results (#317).
 * When using a local database connection, etn will check if the installed helper package etnservice that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of etnservice is older, you will be prompted to install a newer version (#385).
 
-## credentials - breaking change, action required!
+## Credentials
 
-Your ETN username and password are no longer passed via the `connection` argument, but asked or retrieved from your `.Renviron` file everytime you run a function.
+::: {.callout-important}
+**Breaking change! Action required**
+:::
+
+Your credentials (username and password) to connect to the ETN database are no longer passed via the `connection` argument. They are asked or retrieved from your `.Renviron` file every time you run a function.
 
 * New authentication mechanism (#317, #339, #338, #228).
 * New vignette `vignette("authentication")`.
