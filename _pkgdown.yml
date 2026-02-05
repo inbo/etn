@@ -5,7 +5,7 @@ navbar:
   bg: dark
 home:
   links:
-  - text: Visit the European Tracking Network (ETN)
+  - text: Go to the ETN data portal
     href: http://lifewatch.be/etn/
 reference:
 - title: Explore acoustic telemetry data
