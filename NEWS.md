@@ -55,7 +55,7 @@ Here is how you can migrate:
 
 ## Miscellaneous
 
-* etn now relies on R >= 4.1.0 (because of vcr dependency) and uses base pipes (`|>` rather than `%>%`) (#384).
+* etn now relies on R >= 4.1.0 (because of `{arrow}` and `{vcr}` dependencies) and uses base pipes (`|>` rather than `%>%`) (#327, #384).
 * `write_dwc()` now invisibly returns the transformed data as a list of data frames (rather than a data frame) (#302).
 * Previously deprecated functions `get_deployments()`, `get_detections()`, `get_projects()`, `get_receivers()`, `list_network_project_codes()` are now removed.
 * `vignette("etn_fields")` was outdated and has been removed (#468).
