@@ -46,8 +46,11 @@ Here is how you can migrate:
 
 ## Developer settings
 
-* Contributors can change the default domain of the API to the url of a test deployment by setting the environmental variable `ETN_TEST_API` (#383).
-* New vignette `vignette("options")` describes some developer/power user options (#398).
+* New vignette `vignette("options")` describes some developer options (#398).
+* Contributors can change the default domain of the API to the URL of a test server via the environmental variable `ETN_TEST_API` (#383).
+* Tests make use of `{vcr}` to record and replay HTTP requests to the API. These results are stored in `/tests/fixtures` (#432).
+* Tests have new helper functions, including `skip_if_not_localdb()`, `skip_if_http_error()` and `expect_protocol_agnostic()`. The latter is used to compare SQL vs API calls in `test-protocol_agnostic.R` (#436).
+* Tests for `download_acoustic_datasets()` are updated for archival tags and SQL vs API calls and makes use of markdown snapshots (#366).
 
 ## Miscellaneous
 
