@@ -106,7 +106,7 @@ deprecate_warn_connection <- function() {
 #'
 #' @examples
 #' child_fn <- function() {
-#'   get_parent_fn_name()
+#'   etn:::get_parent_fn_name()
 #' }
 #'
 #' parent_fn <- function() {
@@ -140,7 +140,7 @@ is_testing <- function() {
 #' @family helper functions
 #' @noRd
 #' @examples
-#' get_nodename()
+#' etn:::get_nodename()
 get_nodename <- function() {
   Sys.info()["nodename"]
 }
@@ -161,7 +161,7 @@ get_nodename <- function() {
 #' @examples
 #' # This should return FALSE unless you are running this example from the VLIZ
 #' # RStudio server.
-#' localdb_is_available()
+#' etn:::localdb_is_available()
 localdb_is_available <- function() {
   # As discussed with VLIZ, all systems that have access to the local database
   # should have nodenames ending on vliz.be
