@@ -10,11 +10,17 @@ connect_to_etn(...)
 \item{...}{Any arguments passed to this function are ignored.}
 }
 \value{
-This function is no longer in use, and returns NULL invisibly.
+This function is no longer in use, and returns \code{NULL} invisibly.
 }
 \description{
 This function is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} since etn version 3.0.0.
 Its use is no longer supported or needed. All connections to the ETN database
 are now handled automatically when you use a function. If your credentials
 are not stored in the system environment, you will be prompted to enter them.
+}
+\examples{
+\dontrun{
+# This will result in a deprecation warning!
+my_connection <- connect_to_etn()
+}
 }
