@@ -45,9 +45,12 @@
 #'   tag malfunctioned right after deployment.
 #'
 #' @examples
-#' # Write Darwin Core files for a specific animal project to the current directory
-#' write_dwc(animal_project_code = "cpod-lifewatch")
-#'
+#' \dontrun{
+#' # Return a list of data.frames in Darwin Core format.
+#' write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
+#' # Download files to disk
+#' write_dwc("2014_demer", directory = ".")
+#' }
 write_dwc <- function(connection,
                       animal_project_code,
                       directory = ".",
