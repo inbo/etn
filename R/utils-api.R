@@ -48,7 +48,7 @@ extract_temp_key <- function(response) {
 #' @noRd
 #' @examples
 #' \dontrun{
-#' etn:::extract_temp_key(response) |> get_val()
+#' extract_temp_key(response) |> get_val()
 #' }
 #'
 #' # using the opencpu test instance
@@ -56,8 +56,8 @@ extract_temp_key <- function(response) {
 #' httr2::request(api_url) |>
 #'  httr2::req_body_json(list(n = 10, mean = 5)) |>
 #'  httr2::req_perform() |>
-#'  etn:::extract_temp_key() |>
-#'  etn:::get_val(api_domain = "https://cloud.opencpu.org/ocpu")
+#'  extract_temp_key() |>
+#'  get_val(api_domain = "https://cloud.opencpu.org/ocpu")
 get_val <- function(temp_key,
                     api_domain = "https://opencpu.lifewatch.be",
                     format = c("feather", "rds"),
@@ -191,7 +191,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 #' @family helper functions
 #' @noRd
 #' @examples
-#' etn:::get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
+#' get_hostname("https://opencpu.lifewatch.be/library/etnservice/R")
 get_hostname <- function(url_str) {
   # the hostname + everything in the path before `library`, because opencpu
   # doesn't need to be hosted directly on the hostname. Useful for testing on
