@@ -27,7 +27,7 @@ Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
 }
 \value{
-\code{NULL}
+CSV and JSON files written to disk.
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data

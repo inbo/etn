@@ -43,6 +43,11 @@
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
+#'
+#' @examples
+#' # Write Darwin Core files for a specific animal project to the current directory
+#' write_dwc(animal_project_code = "cpod-lifewatch")
+#'
 write_dwc <- function(connection,
                       animal_project_code,
                       directory = ".",
