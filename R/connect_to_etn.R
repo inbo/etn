@@ -7,9 +7,14 @@
 #'
 #' @param ... Any arguments passed to this function are ignored.
 #'
-#' @return This function is no longer in use, and returns NULL invisibly.
+#' @return This function is no longer in use, and returns `NULL` invisibly.
 #'
 #' @export
+#' @examples
+#' dontrun{
+#' # This will result in a deprecation warning!
+#' my_connection <- connect_to_etn()
+#' }
 connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
     when = "3.0.0",
