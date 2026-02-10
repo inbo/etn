@@ -11,7 +11,7 @@
 #'
 #' @export
 #' @examples
-#' dontrun{
+#' \dontrun{
 #' # This will result in a deprecation warning!
 #' my_connection <- connect_to_etn()
 #' }
