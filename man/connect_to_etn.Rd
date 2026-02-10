@@ -19,7 +19,7 @@ are now handled automatically when you use a function. If your credentials
 are not stored in the system environment, you will be prompted to enter them.
 }
 \examples{
-dontrun{
+\dontrun{
 # This will result in a deprecation warning!
 my_connection <- connect_to_etn()
 }
