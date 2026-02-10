@@ -43,6 +43,8 @@
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
 #'
+#' @return `NULL`
+#'
 #' @inheritParams list_animal_ids
 #' @export
 #'
