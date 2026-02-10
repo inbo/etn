@@ -26,6 +26,9 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).}
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
 }
+\value{
+CSV and JSON files written to disk.
+}
 \description{
 Download all acoustic data related to an \strong{animal project} as a data
 package that can be deposited in a research data repository. Includes option
