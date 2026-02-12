@@ -114,7 +114,7 @@ skip_if_http_error <- function(url) {
 #' @family helper functions
 #' @noRd
 skip_if_no_authentication <- function(){
-  testthat::skip_if_not(credentials_are_set, message =
+  testthat::skip_if_not(credentials_are_set(), message =
                           "No credentials are stored")
 }
 
