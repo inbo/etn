@@ -13,35 +13,43 @@ knitr::opts_chunk$set(
 )
 ```
 
-# etn <img src="man/figures/logo.png" align="right" alt="" width="120">
+# etn
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
-[![repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15235747.svg)](https://doi.org/10.5281/zenodo.15235747)
-[![Codecov test coverage](https://codecov.io/gh/inbo/etn/graph/badge.svg)](https://app.codecov.io/gh/inbo/etn)
 <!-- badges: end -->
 
-Etn provides functionality to access data from the [European Tracking Network (ETN)](https://www.lifewatch.be/etn/) database hosted by the Flanders Marine Institute (VLIZ) as part of the Flemish contribution to LifeWatch. ETN data is subject to the [ETN data policy](https://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and can be:
- 
-- restricted: under moratorium and only accessible to logged-in data owners/collaborators
-- unrestricted: publicly accessible without login and routinely published to international biodiversity facilities
- 
-The ETN infrastructure currently requires the package to be run within the [VLIZ RStudio server](https://rstudio.lifewatch.be/), which is password protected. A login can be requested at https://www.lifewatch.be/etn/contact.
+The goal of etn is to ...
 
 ## Installation
 
 You can install the development version of etn from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("inbo/etn")
+# install.packages("pak")
+pak::pak("inbo/etn")
 ```
 
-## Meta
+## Example
 
-- We welcome [contributions](.github/CONTRIBUTING.md) including bug reports.
-- License: MIT
-- Get citation information for etn in R doing `citation("etn")`.
-- Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(etn)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
