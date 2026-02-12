@@ -1,6 +1,8 @@
 skip_if_no_authentication()
 
 test_that("get_acoustic_detections() can pass errors over the api", {
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   vcr::local_cassette("detections_error")
