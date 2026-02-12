@@ -34,19 +34,19 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
-#' Get the credentials from environment variables, or set them manually
+#' Get credentials from environment variables, or set them manually
 #'
 #' By default, it's not necessary to set any values in this function as it's
 #' used in the background by other functions. However, if you wish to provide
 #' your username and password on a per function basis, this function allows you
 #' to do so.
 #'
-#' @param username ETN Data username, by default read from the environment, but
-#'   you can set it manually too.
-#' @param password ETN Data password, by default read from the environment, but
-#'   you can set it manually too.
+#' @param username Username to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
+#' @param password Password to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
 #' @return A string as it is ingested by other functions that need
-#'   authentication
+#'   authentication.
 #' @family helper functions
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
@@ -54,15 +54,19 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
     is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
-      message("No credentials stored, prompting..")
-      username <- prompt_user(prompt = "Please enter a userid: ")
+      cli::cli_alert_info(
+        "No credentials stored. See {.vignette etn::authentication} to configure
+         credentials."
+      )
+      username <- prompt_user(prompt = "Please enter your username: ")
       password <- ask_pass()
     } else {
       # No credentials, not interactive
-      stop(
-        glue::glue(
-          "No credentials stored, not running in interactive mode. ",
-          "Please set credentials as environemental variables or in the .Renviron file."
+      cli::cli_abort(
+        c(
+          "No credentials stored. Can't prompt for credentials since this is not
+           running in interactive mode.",
+          "i" = "See {.vignette etn::authentication} to configure credentials."
         )
       )
     }
@@ -79,13 +83,13 @@ get_credentials <- function(username = Sys.getenv("ETN_USER"),
 #' @noRd
 deprecate_warn_connection <- function() {
   lifecycle::deprecate_warn(
-    when = "v2.3.0",
+    when = "3.0.0",
     what = glue::glue("{function_identity}(connection)",
       function_identity = get_parent_fn_name(depth = 2)
     ),
-    details = glue::glue(
-      "The connection argument is no longer used. ",
-      "You will be prompted for credentials instead."
+    details = cli::format_inline(
+      "Database connections are handled automatically.
+       See {.vignette etn::authentication} to configure credentials."
     ),
     env = rlang::caller_env(),
     user_env = rlang::caller_env(2),
@@ -156,7 +160,7 @@ get_nodename <- function() {
 #' @noRd
 #' @examples
 #' # This should return FALSE unless you are running this example from the VLIZ
-#' # RStudio Server.
+#' # RStudio server.
 #' localdb_is_available()
 localdb_is_available <- function() {
   # As discussed with VLIZ, all systems that have access to the local database
@@ -201,7 +205,7 @@ select_protocol <- function() {
 #'
 #' This function is wrapped so it can be mocked in
 #' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behavior of `get_credentials()`
+#' behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd

@@ -16,10 +16,10 @@ coverage](https://codecov.io/gh/inbo/etn/graph/badge.svg)](https://app.codecov.i
 <!-- badges: end -->
 
 Etn provides functionality to access data from the [European Tracking
-Network (ETN)](http://www.lifewatch.be/etn/) database hosted by the
+Network (ETN)](https://www.lifewatch.be/etn/) database hosted by the
 Flanders Marine Institute (VLIZ) as part of the Flemish contribution to
 LifeWatch. ETN data is subject to the [ETN data
-policy](http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and
+policy](https://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and
 can be:
 
 - restricted: under moratorium and only accessible to logged-in data
@@ -28,9 +28,9 @@ can be:
   published to international biodiversity facilities
 
 The ETN infrastructure currently requires the package to be run within
-the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), which
-is password protected. A login can be requested at
-<http://www.lifewatch.be/etn/contact>.
+the [VLIZ RStudio server](https://rstudio.lifewatch.be/), which is
+password protected. A login can be requested at
+<https://www.lifewatch.be/etn/contact>.
 
 ## Installation
 

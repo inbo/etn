@@ -1,7 +1,6 @@
 ---
 title: "Options"
 output: rmarkdown::html_vignette
-date: "2025-09-26"
 vignette: >
   %\VignetteIndexEntry{Package options}
   %\VignetteEngine{knitr::rmarkdown}
@@ -34,9 +33,9 @@ ETN_PROTOCOL = "opencpu"
 
 ## Available options
 
-- `ETN_USER`: Your username to the ETN database. See [authentication](etn_credentials.html).
+- `ETN_USER`: Your username to the ETN database. See [authentication](authentication.html).
 
-- `ETN_PWD`: Your password to the ETN database. See [authentication](etn_credentials.html).
+- `ETN_PWD`: Your password to the ETN database. See [authentication](authentication.html).
 
 - `ETN_PROTOCOL` (value: `"opencpu"` or `"localdb"`): etn will automatically detect how to best connect to the ETN database, i.e. it will use a local database connection when available. This option allows you to override this behaviour by hardcoding the protocol to use.
 

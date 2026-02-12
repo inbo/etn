@@ -9,8 +9,9 @@ test_that("get_etnservice_version() returns package_version object", {
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
   testthat::skip_if_offline()
-  # Skip if there is a mismatch between the locally installed version and the deployed version
-  skip_if(utils::packageVersion("etnservice") != get_etnservice_version())
+# Skip if there is a mismatch between the locally installed version and the deployed version
+  skip_if(utils::packageVersion("etnservice") != get_etnservice_version(),
+          "locally installed version of etnservice does not match")
 
   # Test that all functions in the package are listed
   expect_named(
@@ -170,13 +171,13 @@ test_that("validate_login() returns error on bad credentials", {
     code = {
       expect_error(
         validate_login(),
-        regexp = "Failed to login with username: not_a_username. Please check username/password.",
+        regexp = "Failed to log in with username: not_a_username. Please check credentials.",
         fixed = TRUE
       )
       # This error should be forwarded to all api functions
       expect_error(
         list_animal_ids(),
-        regexp = "Failed to login with username: not_a_username. Please check username/password.",
+        regexp = "Failed to log in with username: not_a_username. Please check credentials.",
         fixed = TRUE
       )
     },

@@ -48,7 +48,7 @@ extract_temp_key <- function(response) {
 #' @noRd
 #' @examples
 #' \dontrun{
-#' etn:::extract_temp_key(response) |> get_val()
+#' extract_temp_key(response) |> get_val()
 #' }
 #'
 #' # using the opencpu test instance
@@ -171,8 +171,8 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
   if (!login_valid) {
     rlang::abort(
       glue::glue(
-        "Failed to login with username: {get_credentials()$username}.",
-        " Please check username/password."
+        "Failed to log in with username: {get_credentials()$username}.",
+        " Please check credentials."
       ),
       caller = rlang::env_parent()
     )
