@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_tag_serial_numbers()
 list_tag_serial_numbers <- function(connection) {
   # Check arguments

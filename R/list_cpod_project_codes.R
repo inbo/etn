@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_cpod_project_codes()
 list_cpod_project_codes <- function(connection) {
   # Check arguments

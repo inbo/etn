@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_acoustic_tag_ids()
 list_acoustic_tag_ids <- function(connection) {
   # Check arguments

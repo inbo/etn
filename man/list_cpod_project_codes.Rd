@@ -19,5 +19,7 @@ A vector of all unique \code{project_code} of \code{type = "cpod"} in
 List all available cpod project codes
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 list_cpod_project_codes()
+\dontshow{\}) # examplesIf}
 }

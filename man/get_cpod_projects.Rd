@@ -23,9 +23,11 @@ also
 Get data for cpod projects, with options to filter results.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all animal projects
 get_cpod_projects()
 
 # Get a specific animal project
 get_cpod_projects(cpod_project_code = "cpod-lifewatch")
+\dontshow{\}) # examplesIf}
 }

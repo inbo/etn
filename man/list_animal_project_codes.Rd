@@ -19,5 +19,7 @@ A vector of all unique \code{project_code} of \code{type = "animal"} in
 List all available animal project codes
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 list_animal_project_codes()
+\dontshow{\}) # examplesIf}
 }

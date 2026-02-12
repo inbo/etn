@@ -64,6 +64,9 @@ Get data for acoustic detections, with options to filter results. Use
 \code{limit} to limit the number of returned records.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+# example code
+
 # Get limited sample of acoustic detections
 get_acoustic_detections(limit = TRUE)
 
@@ -103,4 +106,5 @@ get_acoustic_detections(
   receiver_id = "VR2W-124070",
   acoustic_project_code = "demer"
 )
+\dontshow{\}) # examplesIf}
 }

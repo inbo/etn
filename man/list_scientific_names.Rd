@@ -19,5 +19,7 @@ A vector of all unique \code{scientific_name} present in
 List all available scientific names
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 list_scientific_names()
+\dontshow{\}) # examplesIf}
 }

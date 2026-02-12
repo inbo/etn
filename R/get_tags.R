@@ -20,7 +20,7 @@
 #' @inheritParams list_animal_ids
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' # Get all tags
 #' get_tags()
 #'
