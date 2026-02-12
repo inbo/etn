@@ -55,7 +55,7 @@ install.packages("etn")
 ```
 
 You can read more about the r-universe platform
-[here](https://inbo.r-universe.dev).
+[here](https://ropensci.org/r-universe/).
 
 ## Example
 
@@ -146,7 +146,7 @@ get_acoustic_detections(tag_serial_number = "1097352",
 #> ✔ Preparing : will fetch 2.16 k detections [1.5s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [159ms]
+#> ✔ Wrapping up [160ms]
 #> 
 #> # A tibble: 2,163 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
