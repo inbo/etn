@@ -59,7 +59,12 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(etn)
-## basic example code
+# Get data for animal with animal_id 740
+get_animals(animal_id = 740) |> dplyr::glimpse()
+# Get detections for the associated tag for a certain period
+get_acoustic_detections(tag_serial_number = "1097352",
+                        start_date = "2011-01-01",
+                        end_date = "2011-01-15")
 ```
 
 ## Meta
