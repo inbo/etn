@@ -41,6 +41,22 @@ You can install the development version of etn from
 pak::pak("inbo/etn")
 ```
 
+If you want, you can also install etn directly from the [inbo
+r-universe](https://inbo.r-universe.dev):
+
+``` r
+# Enable the inbo r-universe
+options(repos = c(
+    inbo = 'https://inbo.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'))
+
+# Install etn
+install.packages("etn")
+```
+
+You can read more about the r-universe platform
+[here](https://inbo.r-universe.dev).
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
