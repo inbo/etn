@@ -48,10 +48,10 @@
 #' @inheritParams list_animal_ids
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
-#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
+#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
+#'                          directory = tempdir())
 #' #> Downloading data to directory `2012_leopoldkanaal`:
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
@@ -74,7 +74,6 @@
 #' #> Warning message:
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
-#' }
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,

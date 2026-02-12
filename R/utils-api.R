@@ -48,7 +48,7 @@ extract_temp_key <- function(response) {
 #' @noRd
 #' @examples
 #' \dontrun{
-#' etn:::extract_temp_key(response) |> get_val()
+#' extract_temp_key(response) |> get_val()
 #' }
 #'
 #' # using the opencpu test instance
