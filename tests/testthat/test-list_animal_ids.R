@@ -1,5 +1,7 @@
 test_that("list_animal_ids() returns unique list of values using api", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   result_api <- list_animal_ids()
   expect_type(result_api, "integer")
   expect_false(any(duplicated(result_api)))

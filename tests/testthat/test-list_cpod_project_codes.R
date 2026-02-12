@@ -1,4 +1,6 @@
 test_that("list_cpod_project_codes() returns unique list of values using api", {
+  skip_if_no_authentication()
+
   vcr::use_cassette("list_cpod_project_codes", {
     vector <- list_cpod_project_codes()
   })

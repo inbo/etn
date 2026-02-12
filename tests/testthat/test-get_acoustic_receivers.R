@@ -1,3 +1,5 @@
+skip_if_no_authentication()
+
 test_that("get_acoustic_receivers() returns a tibble", {
   skip_if_not_localdb()
 
@@ -112,7 +114,8 @@ test_that("get_acoustic_receivers() allows selecting on status", {
 })
 
 test_that("get_acoustic_receivers() does not return cpod receivers", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("opencpu.lifewatch.be")
+
   # C-POD-408 is a cpod receiver
   df <- get_acoustic_receivers(receiver_id = "C-POD-408")
   expect_identical(nrow(df), 0L)

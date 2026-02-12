@@ -1,3 +1,6 @@
+skip_if_no_authentication()
+skip_if_offline("opencpu.lifewatch.be")
+
 vcr::use_cassette("list_receiver_ids", {
   receiver_ids <- list_receiver_ids()
 })

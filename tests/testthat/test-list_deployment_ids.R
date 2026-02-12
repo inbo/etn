@@ -1,4 +1,7 @@
 test_that("list_deployment_ids() returns unique list of values using api", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   vcr::use_cassette("list_deployment_ids", {
     deployment_ids <-
       with_mocked_bindings(list_deployment_ids(), select_protocol = \(x) "opencpu")

@@ -1,3 +1,5 @@
+skip_if_no_authentication()
+
 # Force using the OpenCPU API and cache the response
 withr::with_envvar(
   c("ETN_PROTOCOL" = "opencpu"),

@@ -1,3 +1,6 @@
+skip_if_no_authentication()
+skip_if_offline("opencpu.lifewatch.be")
+
 test_that("list_scientific_names() returns unique list of values", {
   vcr::use_cassette("list_scientific_names", {
     vector <- list_scientific_names()

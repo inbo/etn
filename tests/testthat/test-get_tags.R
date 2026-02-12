@@ -1,3 +1,4 @@
+skip_if_no_authentication()
 testthat::skip_if_offline("opencpu.lifewatch.be")
 df <- get_tags()
 

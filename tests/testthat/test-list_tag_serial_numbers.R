@@ -1,5 +1,8 @@
 
 test_that("list_tag_serial_numbers() returns unique list of values", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   vcr::use_cassette("list_tag_serial_numbers", {
     vector <- list_tag_serial_numbers()
   })

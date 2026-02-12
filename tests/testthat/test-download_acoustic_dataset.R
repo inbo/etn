@@ -1,3 +1,5 @@
+skip_if_no_authentication()
+
 # Create a data package using the API
 vcr::use_cassette( # Cache HTTP response
   "download_acoustic_dataset",

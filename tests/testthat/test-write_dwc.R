@@ -69,6 +69,7 @@ test_that("[SQL] write_dwc() returns the expected Darwin Core terms as columns",
 })
 
 # Force protocol to be openCPU, cache a API response for 2014_demer
+skip_if_no_authentication()
 withr::with_envvar(
   c("ETN_PROTOCOL" = "opencpu"),
   {

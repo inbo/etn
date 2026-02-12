@@ -1,3 +1,5 @@
+skip_if_no_authentication()
+
 # Set ETN_PROTOCOL to "opencpu" to force using the API and use a cached response
 withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
   vcr::use_cassette("get_acoustic_deployments", {

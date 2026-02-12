@@ -159,9 +159,10 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
 
 # validate_login() --------------------------------------------------------
 
-
 test_that("validate_login() returns TRUE on correct credentials", {
-  testthat::skip_if_offline()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_true(validate_login())
 })
 

@@ -1,4 +1,6 @@
 test_that("list_acoustic_tag_ids() returns unique list of values", {
+  skip_if_no_authentication()
+
   vcr::use_cassette("list_acoustic_tag_ids", {
     vector <- list_acoustic_tag_ids()
   })

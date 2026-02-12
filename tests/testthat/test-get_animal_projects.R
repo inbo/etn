@@ -1,3 +1,5 @@
+skip_if_no_authentication()
+
 test_that("get_animal_projects() returns a tibble", {
   skip_if_not_localdb()
 
@@ -76,6 +78,7 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
 
 test_that("get_animal_projects() returns projects of type 'animal'", {
   testthat::skip_if_offline("opencpu.lifewatch.be")
+
   expect_identical(
     get_animal_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "animal"
