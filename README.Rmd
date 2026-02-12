@@ -53,6 +53,8 @@ You can read more about the r-universe platform [here](https://inbo.r-universe.d
 
 ## Example
 
+Before you can access data from the European Tracking Network, you need to request a login from the Flanders Marine Institute (VLIZ). A detailed description on how to do this can be found in the vignette on `vignette("authentication")`. 
+
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
