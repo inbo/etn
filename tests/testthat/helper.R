@@ -109,6 +109,16 @@ skip_if_http_error <- function(url) {
   )
 }
 
+#' Skip the test if authentication credentials are not set. #
+#'
+#' @family helper functions
+#' @noRd
+skip_if_no_authentication <- function(){
+  testthat::skip_if_not(credentials_are_set, message =
+                          "No credentials are stored")
+}
+
+
 #' Get an HTTP response for a specific HTTP status code.
 #'
 #' This function is useful to test other functions that respond to a specific

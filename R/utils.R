@@ -199,6 +199,21 @@ select_protocol <- function() {
   return("opencpu")
 }
 
+#' Test if ETN credentials are stored
+#'
+#' This function checks if the ETN credentials are set in the environment
+#' variables. It returns `TRUE` if both credentials are set, and `FALSE`
+#' otherwise. This can be used in tests or examples to conditionally skip if the
+#' credentials are not available.
+#'
+#' @returns A boolean indicating whether the ETN credentials are set in the
+#'   environment variables.
+#' @family helper functions
+#' @noRd
+credentials_are_set <- function(){
+    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass

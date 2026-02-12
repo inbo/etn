@@ -4,6 +4,8 @@ test_that("deprecate_warn_connection() returns warning when connection is provid
   # practical to test it directly. So here we test it by calling a function that
   # uses it.
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_warning(
     list_animal_project_codes(connection = "any object should cause a warning"),
     class = "lifecycle_warning_deprecated"
@@ -44,5 +46,26 @@ test_that("select_protocol() allows user override by environmental variable", {
   withr::with_envvar(
     new = c(ETN_PROTOCOL = "myprotocol"),
     expect_equal(select_protocol(), "myprotocol")
+  )
+})
+
+# credentials_are_set() ---------------------------------------------------
+
+test_that("credentials_are_set() returns TRUE when both credentials are set", {
+  withr::with_envvar(
+    new = c(ETN_USER = "user", ETN_PWD = "password"),
+    expect_true(credentials_are_set())
+  )
+})
+
+test_that("credentials_are_set() returns FALSE when ETN_USER is not set", {
+  withr::with_envvar(new = c(ETN_USER = NA, ETN_PWD = "password"),
+                     expect_false(credentials_are_set()))
+})
+
+test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
+  withr::with_envvar(
+    new = c(ETN_USER = "user", ETN_PWD = NA),
+    expect_false(credentials_are_set())
   )
 })
