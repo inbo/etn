@@ -62,7 +62,7 @@ You can read more about the r-universe platform
 Before you can access data from the European Tracking Network, you need
 to request a login from the Flanders Marine Institute (VLIZ). A detailed
 description on how to do this can be found in the vignette on
-[authentication](https://inbo.github.io/etn/articles/authentication.html#dont-have-an-account-to-etn).
+[authentication](articles/authentication.html#dont-have-an-account-to-etn).
 
 This is a basic example which shows you how to solve a common problem:
 
