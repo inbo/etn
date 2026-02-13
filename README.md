@@ -43,7 +43,6 @@ You can install the development version of etn from
 pak::pak("inbo/etn")
 ```
 
-## Example
 
 Before you can access data from the European Tracking Network, you need
 to request a login from the Flanders Marine Institute (VLIZ). A detailed
@@ -51,6 +50,7 @@ description on how to do this can be found in the vignette on
 [authentication](articles/authentication.html#dont-have-an-account-to-etn).
 
 This is a basic example which shows you how to solve a common problem:
+## Usage
 
 ``` r
 library(etn)
