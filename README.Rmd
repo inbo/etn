@@ -45,17 +45,21 @@ pak::pak("inbo/etn")
 
 Before you can access data from the European Tracking Network, you need to register for a MarinePass account at the Flanders Marine Institute (VLIZ). See [authentication](https://inbo.github.io/etn/articles/authentication.html#dont-have-an-account-to-etn) for instructions.
 
-
-This is a basic example which shows you how to solve a common problem:
+With etn you can query ETN (meta)data:
 
 ```{r example}
 library(etn)
-# Get data for animal with animal_id 740
-get_animals(animal_id = 740) |> dplyr::glimpse()
-# Get detections for the associated tag for a certain period
-get_acoustic_detections(tag_serial_number = "1097352",
-                        start_date = "2011-01-01",
-                        end_date = "2011-01-15")
+
+# Get animal metadata for a project
+get_animals(animal_project_code = "2014_demer")
+
+# Get acoustic detections for a tag and time period
+get_acoustic_detections(
+  animal_project_code = "2014_demer",
+  # TODO: change to tag_serial_number = "1171781",
+  start_date = "2014-06-01",
+  end_date = "2014-06-15"
+)
 ```
 
 ## Meta
