@@ -10,8 +10,11 @@ license: MIT
 title: 'etn: Access Data from the European Tracking Network'
 version: 2.2.2.9000
 doi: 10.5281/zenodo.15235747
-abstract: Package with functions to access and process data from the European Tracking
-  Network hosted by VLIZ.
+abstract: Access data from the European Tracking Network ('ETN', <https://www.lifewatch.be/etn/>).
+  With etn you can query metadata (animals, tags, deployments, receivers, projects)
+  and data (acoustic detections, sensor data) from the 'ETN' database and use these
+  in your analyses. Data access requires user credentials and is subject to a data
+  policy.
 authors:
 - family-names: Huybrechts
   given-names: Pieter

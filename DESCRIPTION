@@ -15,8 +15,11 @@ Authors@R: c(
     person("Research Foundation - Flanders", role = "fnd",
            comment = "https://lifewatch.be")
   )
-Description: Package with functions to access and process data from the
-    European Tracking Network hosted by VLIZ.
+Description: Access data from the European Tracking Network ('ETN',
+    <https://www.lifewatch.be/etn/>). With etn you can query metadata (animals, 
+    tags, deployments, receivers, projects) and data (acoustic detections, 
+    sensor data) from the 'ETN' database and use these in your analyses. Data
+    access requires user credentials and is subject to a data policy.
 License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
