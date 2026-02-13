@@ -24,6 +24,15 @@ analyses. Data access requires user credentials and is subject to a
 [data
 policy](https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use).
 
+To get started, see:
+
+- [Configure
+  credentials](https://inbo.github.io/etn/articles/authentication.html).
+- [Function reference](https://inbo.github.io/etn/reference/index.html):
+  overview of all functions.
+- [Explore acoustic telemetry
+  data](https://inbo.github.io/etn/articles/acoustic_telemetry.html).
+
 ## Installation
 
 You can install the development version of etn from
