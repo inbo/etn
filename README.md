@@ -7,12 +7,11 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
+[![codecov](https://codecov.io/gh/inbo/etn/branch/main/graph/badge.svg)](https://app.codecov.io/gh/inbo/etn)
 [![repo
 status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15235747.svg)](https://doi.org/10.5281/zenodo.15235747)
-[![Codecov test
-coverage](https://codecov.io/gh/inbo/etn/graph/badge.svg)](https://app.codecov.io/gh/inbo/etn)
 [![R-universe
 version](https://inbo.r-universe.dev/etn/badges/version)](https://inbo.r-universe.dev/etn)
 [![R-universe
