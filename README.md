@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# etn <img src="man/figures/logo.png" align="right" alt="" width="120">
+# etn <a href="https://inbo.github.io/etn/"><img src="man/figures/logo.png" align="right" height="138" alt="etn website" /></a>
 
 <!-- badges: start -->
 
