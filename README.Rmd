@@ -55,8 +55,7 @@ get_animals(animal_project_code = "2014_demer")
 
 # Get acoustic detections for a tag and time period
 get_acoustic_detections(
-  animal_project_code = "2014_demer",
-  # TODO: change to tag_serial_number = "1171781",
+  tag_serial_number = "1171781",
   start_date = "2014-06-01",
   end_date = "2014-06-15"
 )
