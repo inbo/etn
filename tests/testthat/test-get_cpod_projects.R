@@ -33,6 +33,9 @@ test_that("get_cpod_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
+
+  df <- get_cpod_projects()
+
   expect_identical(names(df), expected_col_names)
 })
 

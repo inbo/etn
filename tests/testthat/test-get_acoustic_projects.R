@@ -10,6 +10,7 @@ test_that("get_acoustic_projects() returns a tibble", {
 test_that("get_acoustic_projects() returns unique project_id", {
   skip_if_no_authentication()
 
+  df <- get_acoustic_projects()
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
@@ -32,6 +33,8 @@ test_that("get_acoustic_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
+
+  df <- get_acoustic_projects()
   expect_identical(names(df), expected_col_names)
 })
 
