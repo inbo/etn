@@ -20,7 +20,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/inbo/etn/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/inbo/etn/blob/v3.0.0/inst/CITATION)
 
 Huybrechts P, Desmet P, Oldoni D, Van Hoey S (2026). *etn: Access Data
 from the European Tracking Network*.

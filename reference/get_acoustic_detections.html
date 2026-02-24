@@ -36,7 +36,7 @@ limit to limit the number of returned records."><meta property="og:image" conten
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get acoustic detections data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/main/R/get_acoustic_detections.R" class="external-link"><code>R/get_acoustic_detections.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/v3.0.0/R/get_acoustic_detections.R" class="external-link"><code>R/get_acoustic_detections.R</code></a></small>
       <div class="d-none name"><code>get_acoustic_detections.Rd</code></div>
     </div>
 
@@ -137,10 +137,10 @@ and <code>date_time</code>. See also
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get limited sample of acoustic detections</span></span></span>
 <span class="r-in"><span><span class="fu">get_acoustic_detections</span><span class="op">(</span>limit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 100  detections <span style="color: #B2B2B2;">[12ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 100  detections <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[106ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[119ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -168,10 +168,10 @@ and <code>date_time</code>. See also
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 235.81 k detections <span style="color: #B2B2B2;">[3s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting detections. <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  33% [8.1s] | ETA: 16s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting detections. <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% [16.1s] | ETA:  8s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting detections. <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  33% [8.4s] | ETA: 17s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Getting detections. <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  67% [16.9s] | ETA:  8s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[385ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[388ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 235,809 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -204,7 +204,7 @@ and <code>date_time</code>. See also
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 23.70 k detections <span style="color: #B2B2B2;">[3.1s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[115ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[119ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23,695 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -234,10 +234,10 @@ and <code>date_time</code>. See also
 <span class="r-in"><span>  end_date <span class="op">=</span> <span class="st">"2015-05"</span>,</span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 442  detections <span style="color: #B2B2B2;">[2s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 442  detections <span style="color: #B2B2B2;">[2.8s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[60ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[64ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 442 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -267,10 +267,10 @@ and <code>date_time</code>. See also
 <span class="r-in"><span>  end_date <span class="op">=</span> <span class="st">"2015-04-25"</span>,</span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 2  detections <span style="color: #B2B2B2;">[1.7s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 2  detections <span style="color: #B2B2B2;">[2.1s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[53ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[56ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -290,10 +290,10 @@ and <code>date_time</code>. See also
 <span class="r-in"><span>  station_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"de-9"</span>, <span class="st">"de-10"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 50  detections <span style="color: #B2B2B2;">[2s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 50  detections <span style="color: #B2B2B2;">[2.4s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[58ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[61ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 50 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
@@ -323,10 +323,10 @@ and <code>date_time</code>. See also
 <span class="r-in"><span>  acoustic_project_code <span class="op">=</span> <span class="st">"demer"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Preparing </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 38  detections <span style="color: #B2B2B2;">[1.7s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Preparing : will fetch 38  detections <span style="color: #B2B2B2;">[2s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Wrapping up</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[59ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Wrapping up <span style="color: #B2B2B2;">[62ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 38 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    detection_id date_time           tag_serial_number acoustic_tag_id</span>
