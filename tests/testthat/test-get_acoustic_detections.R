@@ -25,7 +25,7 @@ test_that("get_acoustic_detections() returns a tibble over sql", {
   skip_if_no_authentication()
 
   df_sql <- withr::with_envvar(
-    new = c("ETN_PROTOCOL" = "opencpu"),
+    new = c("ETN_PROTOCOL" = "localdb"),
     code = get_acoustic_detections(animal_project_code = "2014_demer",
                                     limit = TRUE)
   )
