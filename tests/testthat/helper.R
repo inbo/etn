@@ -28,6 +28,9 @@
 #'
 #' @export
 expect_protocol_agnostic <- function(expression) {
+  # Skip if no credentials are stored
+  skip_if_no_authentication()
+
   # Skip if not both the API and the local database are available to compare
   testthat::skip_if_offline(host = "opencpu.lifewatch.be")
   testthat::skip_if_not(
