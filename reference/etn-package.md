@@ -1,7 +1,11 @@
 # etn: Access Data from the European Tracking Network
 
-Package with functions to access and process data from the European
-Tracking Network hosted by VLIZ.
+Access data from the European Tracking Network ('ETN',
+<https://www.lifewatch.be/etn/>). With etn you can query metadata
+(animals, tags, deployments, receivers, projects) and data (acoustic
+detections, sensor data) from the 'ETN' database and use these in your
+analyses. Data access requires user credentials and is subject to a data
+policy.
 
 ## See also
 
@@ -9,7 +13,7 @@ Useful links:
 
 - <https://github.com/inbo/etn>
 
-- <https://inbo.github.io/etn>
+- <https://inbo.github.io/etn/>
 
 - Report bugs at <https://github.com/inbo/etn/issues>
 
@@ -31,7 +35,7 @@ Authors:
 
 Other contributors:
 
-- Research Institute for Nature and Forest (INBO) (00j54wy13)
-  \[copyright holder\]
+- Research Institute for Nature and Forest (INBO)
+  ([ROR](https://ror.org/00j54wy13)) \[copyright holder\]
 
 - Research Foundation - Flanders (https://lifewatch.be) \[funder\]

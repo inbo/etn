@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,9 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
-    <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
-    <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic-telemetry.html">Explore acoustic telemetry data</a></li>
+    <li><a class="dropdown-item" href="../articles/authentication.html">Configure credentials</a></li>
     <li><a class="dropdown-item" href="../articles/options.html">Options</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -35,7 +34,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>List all available cpod project codes</h1>
-      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/v2.3.1/R/list_cpod_project_codes.R" class="external-link"><code>R/list_cpod_project_codes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/inbo/etn/blob/main/R/list_cpod_project_codes.R" class="external-link"><code>R/list_cpod_project_codes.R</code></a></small>
       <div class="d-none name"><code>list_cpod_project_codes.Rd</code></div>
     </div>
 
@@ -64,6 +63,17 @@ credentials instead.</p></dd>
 <code>project.sql</code>.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">list_cpod_project_codes</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Apelafico_acoustics"  "Apelafico_underwater" "ARMS_MBON_Belgium"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "CODEVCO"              "cpod-lifewatch"       "cpod-od-natuur"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Lifewatch_extra"      "Lifewatch_test"       "PAM-Borssele"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "PelFish"              "PhD_Parcerisas"       "PureWind"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "SEAWave"              "SMGMIT"               "STRAITS_PAM"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"    "WaveHub"             </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

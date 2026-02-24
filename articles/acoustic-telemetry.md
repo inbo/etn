@@ -1,0 +1,1043 @@
+# Explore acoustic telemetry data
+
+## Introduction
+
+In this vignette we show a typical workflow using the etn package to
+retrieve **acoustic telemetry data** from ETN. We will also use the
+packages [dplyr](https://dplyr.tidyverse.org/) for data exploration,
+[lubridate](https://lubridate.tidyverse.org/) to handle datetime data
+and [leaflet](https://rstudio.github.io/leaflet/) for interactive
+visualizations.
+
+To start, load the etn package:
+
+``` r
+library(etn)
+```
+
+And the other packages (with installation if necessary):
+
+``` r
+other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmlwidgets", "htmltools")
+
+# install missing packages
+pkgs_to_install <- other_pkgs[!other_pkgs %in% rownames(installed.packages())]
+install.packages(pkgs_to_install)
+
+# load packages
+library(dplyr)
+library(lubridate)
+library(leaflet)
+```
+
+## User credentials
+
+etn functions require credentials (username and password) to connect to
+the ETN database. See
+[`vignette("authentication")`](https://inbo.github.io/etn/articles/authentication.md)
+to configure credentials.
+
+## Select project(s) of interest
+
+A researcher typically works in the context of one or more *animal
+projects*. As the project codes are not always easy to remember, let’s
+start by getting an overview of all projects:
+
+``` r
+all_projects <- get_animal_projects()
+```
+
+Show a preview:
+
+``` r
+all_projects |> head(10)
+```
+
+    ## # A tibble: 10 × 11
+    ##    project_id project_code          project_type telemetry_type project_name   
+    ##         <int> <chr>                 <chr>        <chr>          <chr>          
+    ##  1        793 2004_Gudena           animal       Acoustic       Silver eel mig…
+    ##  2         16 2010_phd_reubens      animal       Acoustic       2010_phd_reube…
+    ##  3        841 2010_phd_reubens_sync animal       Acoustic       2010_phd_reube…
+    ##  4        760 2011_Loire            animal       Acoustic       2011_Loire     
+    ##  5        754 2011_Warnow           animal       Acoustic       Silver eel mig…
+    ##  6         20 2011_rivierprik       animal       Acoustic       2011 Rivierprik
+    ##  7         15 2012_leopoldkanaal    animal       Acoustic       2012 Leopoldka…
+    ##  8        757 2013_Foyle            animal       Acoustic       2013_Foyle     
+    ##  9         18 2013_albertkanaal     animal       Acoustic       2013 Albertkan…
+    ## 10        801 2014_Frome            animal       <NA>           2014_Frome     
+    ##    start_date end_date   latitude longitude moratorium imis_dataset_id
+    ##    <date>     <date>        <dbl>     <dbl> <lgl>                <int>
+    ##  1 2004-01-01 2005-12-31     56.4      9.91 FALSE                 6361
+    ##  2 2010-08-01 2012-10-30     56.4      2.74 FALSE                 5846
+    ##  3 2010-08-01 2012-10-30     NA       NA    FALSE                 6582
+    ##  4 2011-11-11 2012-02-25     47.3     -1.98 FALSE                 6336
+    ##  5 2011-06-01 2012-10-12     54.1     12.1  FALSE                 6332
+    ##  6 2011-01-01 2012-09-03     50.9      3.66 FALSE                 5867
+    ##  7 2012-01-01 2016-01-18     NA       NA    FALSE                 5873
+    ##  8 2013-07-01 2014-03-01     54.9     -7.39 TRUE                  6333
+    ##  9 2013-10-10 2018-12-31     51.1      5.11 FALSE                 5868
+    ## 10 2014-10-01 2015-01-31     50.7     -2.11 FALSE                 6385
+
+If you know the `project code` already and you are just interested to
+get more information about it, you can specify it in the
+[`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
+function directly:
+
+``` r
+projects_code <- c("2014_demer", "2015_dijle")
+projects_study <- get_animal_projects(animal_project_code = projects_code)
+projects_study
+```
+
+    ## # A tibble: 2 × 11
+    ##   project_id project_code project_type telemetry_type project_name start_date
+    ##        <int> <chr>        <chr>        <chr>          <chr>        <date>    
+    ## 1         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10
+    ## 2         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16
+    ##   end_date   latitude longitude moratorium imis_dataset_id
+    ##   <date>        <dbl>     <dbl> <lgl>                <int>
+    ## 1 2015-02-13     51.0      5.06 FALSE                 5871
+    ## 2 2018-12-31     51.0      4.50 FALSE                 5872
+
+This is exactly the same as retrieving all projects first and filtering
+them afterwards based on column `project_code`:
+
+``` r
+all_projects |>
+  filter(project_code %in% c(projects_code))
+```
+
+    ## # A tibble: 2 × 11
+    ##   project_id project_code project_type telemetry_type project_name start_date
+    ##        <int> <chr>        <chr>        <chr>          <chr>        <date>    
+    ## 1         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10
+    ## 2         22 2015_dijle   animal       Acoustic       2015 Dijle   2015-04-16
+    ##   end_date   latitude longitude moratorium imis_dataset_id
+    ##   <date>        <dbl>     <dbl> <lgl>                <int>
+    ## 1 2015-02-13     51.0      5.06 FALSE                 5871
+    ## 2 2018-12-31     51.0      4.50 FALSE                 5872
+
+To list all available animal project codes as a vector, you can use
+[`list_animal_project_codes()`](https://inbo.github.io/etn/reference/list_animal_project_codes.md),
+one of the etn functions in the [`list_*`
+family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
+
+``` r
+list_animal_project_codes() |> head(10)
+```
+
+    ##  [1] "2004_Gudena"           "2010_phd_reubens"      "2010_phd_reubens_sync"
+    ##  [4] "2011_Loire"            "2011_rivierprik"       "2011_Warnow"          
+    ##  [7] "2012_leopoldkanaal"    "2013_albertkanaal"     "2013_Foyle"           
+    ## [10] "2014_demer"
+
+## Animals
+
+By using
+[`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
+you can retrieve information about each animal (`animal_id`), such as
+scientific name, length, capture/release date and location, and the
+attached tag(s) (`tag_serial_number`):
+
+``` r
+animals <- get_animals(animal_project_code = projects_code)
+animals |> head(10)
+```
+
+    ## # A tibble: 10 × 66
+    ##    animal_id animal_project_code tag_serial_number tag_type tag_subtype
+    ##        <int> <chr>               <chr>             <chr>    <chr>      
+    ##  1       304 2014_demer          1187449           acoustic animal     
+    ##  2       384 2014_demer          1157781           acoustic animal     
+    ##  3       385 2014_demer          1157782           acoustic animal     
+    ##  4       386 2014_demer          1157783           acoustic animal     
+    ##  5       305 2014_demer          1187450           acoustic animal     
+    ##  6       383 2014_demer          1157780           acoustic animal     
+    ##  7       369 2014_demer          1171781           acoustic animal     
+    ##  8       370 2014_demer          1171782           acoustic animal     
+    ##  9       365 2014_demer          1171775           acoustic animal     
+    ## 10       366 2014_demer          1171776           acoustic animal     
+    ##    acoustic_tag_id acoustic_tag_id_alter…¹ scientific_name common_name aphia_id
+    ##    <chr>           <chr>                   <chr>           <chr>          <int>
+    ##  1 A69-1601-16129  ""                      Rutilus rutilus roach         154333
+    ##  2 A69-1601-28296  ""                      Silurus glanis  wels catfi…   154677
+    ##  3 A69-1601-28297  ""                      Silurus glanis  wels catfi…   154677
+    ##  4 A69-1601-28298  ""                      Silurus glanis  wels catfi…   154677
+    ##  5 A69-1601-16130  ""                      Rutilus rutilus roach         154333
+    ##  6 A69-1601-28295  ""                      Squalius cepha… chub          282855
+    ##  7 A69-1601-26535  ""                      Silurus glanis  wels catfi…   154677
+    ##  8 A69-1601-26536  ""                      Silurus glanis  wels catfi…   154677
+    ##  9 A69-1601-26529  ""                      Silurus glanis  wels catfi…   154677
+    ## 10 A69-1601-26530  ""                      Silurus glanis  wels catfi…   154677
+    ## # ℹ abbreviated name: ¹​acoustic_tag_id_alternative
+    ## # ℹ 56 more variables: animal_label <chr>, animal_nickname <chr>, tagger <chr>,
+    ## #   capture_date_time <dttm>, capture_location <chr>, capture_latitude <dbl>,
+    ## #   capture_longitude <dbl>, capture_method <chr>, capture_depth <chr>,
+    ## #   capture_temperature_change <chr>, release_date_time <dttm>,
+    ## #   release_location <chr>, release_latitude <dbl>, release_longitude <dbl>,
+    ## #   recapture_date_time <dttm>, length1_type <chr>, length1 <dbl>, …
+
+What species and how many individuals are tracked for the projects
+`2014_demer` and `2015_dijle`?
+
+``` r
+animals |>
+  count(scientific_name)
+```
+
+    ## # A tibble: 7 × 2
+    ##   scientific_name        n
+    ##   <chr>              <int>
+    ## 1 Anguilla anguilla      1
+    ## 2 Cyprinus carpio        2
+    ## 3 Petromyzon marinus     2
+    ## 4 Platichthys flesus     8
+    ## 5 Rutilus rutilus        6
+    ## 6 Silurus glanis        20
+    ## 7 Squalius cephalus      3
+
+## Detections
+
+Let’s say we are interested in the tracking data of Wels catfish
+(*Silurus glanis*) in 2014. You can retrieve the detection history using
+[`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md):
+
+``` r
+detections_silurus <- get_acoustic_detections(
+  animal_project_code = projects_code,
+  start_date = "2014-01-01",
+  end_date = "2015-01-01", # The end date is exclusive
+  scientific_name = "Silurus glanis"
+)
+```
+
+Preview:
+
+``` r
+detections_silurus |> head(10)
+```
+
+    ## # A tibble: 10 × 20
+    ##    detection_id date_time           tag_serial_number acoustic_tag_id
+    ##           <int> <dttm>              <chr>             <chr>          
+    ##  1     22603503 2014-08-24 00:48:26 1171775           A69-1601-26529 
+    ##  2     22612214 2014-08-18 23:45:03 1171775           A69-1601-26529 
+    ##  3     22613768 2014-06-26 22:54:46 1171775           A69-1601-26529 
+    ##  4     22615492 2014-08-16 21:34:10 1171775           A69-1601-26529 
+    ##  5     22617855 2014-08-16 21:05:51 1171775           A69-1601-26529 
+    ##  6     22618631 2014-06-26 21:47:33 1171775           A69-1601-26529 
+    ##  7     22621944 2014-09-06 03:08:05 1171775           A69-1601-26529 
+    ##  8     22624153 2014-07-26 20:37:43 1171775           A69-1601-26529 
+    ##  9     22624408 2014-09-16 00:48:53 1171775           A69-1601-26529 
+    ## 10     22627314 2014-08-16 23:44:40 1171775           A69-1601-26529 
+    ##    animal_project_code animal_id scientific_name acoustic_project_code
+    ##    <chr>                   <int> <chr>           <chr>                
+    ##  1 2014_demer                365 Silurus glanis  demer                
+    ##  2 2014_demer                365 Silurus glanis  demer                
+    ##  3 2014_demer                365 Silurus glanis  demer                
+    ##  4 2014_demer                365 Silurus glanis  demer                
+    ##  5 2014_demer                365 Silurus glanis  demer                
+    ##  6 2014_demer                365 Silurus glanis  demer                
+    ##  7 2014_demer                365 Silurus glanis  demer                
+    ##  8 2014_demer                365 Silurus glanis  demer                
+    ##  9 2014_demer                365 Silurus glanis  demer                
+    ## 10 2014_demer                365 Silurus glanis  demer                
+    ## # ℹ 12 more variables: receiver_id <chr>, station_name <chr>,
+    ## #   deploy_latitude <dbl>, deploy_longitude <dbl>, sensor_value <dbl>,
+    ## #   sensor_unit <chr>, sensor2_value <dbl>, sensor2_unit <chr>,
+    ## #   signal_to_noise_ratio <int>, source_file <chr>, qc_flag <lgl>,
+    ## #   deployment_id <int>
+
+Which individuals have been detected (`animal_id`) and in which period?
+
+``` r
+detections_silurus_period <-
+  detections_silurus |>
+  mutate(date = date(date_time)) |>
+  group_by(animal_id) |>
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
+detections_silurus_period
+```
+
+    ## # A tibble: 9 × 3
+    ##   animal_id start      end       
+    ##       <int> <date>     <date>    
+    ## 1       365 2014-05-26 2014-11-16
+    ## 2       366 2014-05-26 2014-09-22
+    ## 3       367 2014-06-18 2014-06-19
+    ## 4       368 2014-05-26 2014-09-01
+    ## 5       369 2014-05-21 2014-07-01
+    ## 6       370 2014-05-20 2014-11-16
+    ## 7       384 2014-04-24 2014-04-26
+    ## 8       385 2014-04-24 2014-12-19
+    ## 9       386 2014-04-24 2014-12-28
+
+Notice we group by `animal_id`, the unique identifier of the fish.
+However, if the fish has only been tagged once (as typically occurs), we
+could use `acoustic_tag_id` as well, i.e. the identifier picked up by
+acoustic receivers:
+
+``` r
+detections_silurus |>
+  mutate(date = date(date_time)) |>
+  group_by(acoustic_tag_id) |>
+  summarize(
+    start = min(date),
+    end = max(date)
+  )
+```
+
+    ## # A tibble: 9 × 3
+    ##   acoustic_tag_id start      end       
+    ##   <chr>           <date>     <date>    
+    ## 1 A69-1601-26529  2014-05-26 2014-11-16
+    ## 2 A69-1601-26530  2014-05-26 2014-09-22
+    ## 3 A69-1601-26531  2014-06-18 2014-06-19
+    ## 4 A69-1601-26534  2014-05-26 2014-09-01
+    ## 5 A69-1601-26535  2014-05-21 2014-07-01
+    ## 6 A69-1601-26536  2014-05-20 2014-11-16
+    ## 7 A69-1601-28296  2014-04-24 2014-04-26
+    ## 8 A69-1601-28297  2014-04-24 2014-12-19
+    ## 9 A69-1601-28298  2014-04-24 2014-12-28
+
+We can also get the tracking duration of each fish:
+
+``` r
+detections_silurus_duration <-
+  detections_silurus |>
+  group_by(animal_id) |>
+  summarize(duration = max(date_time) - min(date_time))
+detections_silurus_duration
+```
+
+    ## # A tibble: 9 × 2
+    ##   animal_id duration       
+    ##       <int> <drtn>         
+    ## 1       365 173.143345 days
+    ## 2       366 118.459780 days
+    ## 3       367   1.589421 days
+    ## 4       368  98.322998 days
+    ## 5       369  41.792720 days
+    ## 6       370 179.210486 days
+    ## 7       384   1.435150 days
+    ## 8       385 238.517766 days
+    ## 9       386 248.323808 days
+
+How many times has an individual has been detected?
+
+``` r
+detections_silurus |>
+  group_by(animal_id) |>
+  count()
+```
+
+    ## # A tibble: 9 × 2
+    ## # Groups:   animal_id [9]
+    ##   animal_id     n
+    ##       <int> <int>
+    ## 1       365  4857
+    ## 2       366  2778
+    ## 3       367   497
+    ## 4       368  7690
+    ## 5       369  1183
+    ## 6       370  4462
+    ## 7       384  2563
+    ## 8       385 28004
+    ## 9       386 18455
+
+## Stations
+
+At how many detection stations have the individuals been detected?
+
+``` r
+detections_silurus |>
+  group_by(animal_id) |>
+  distinct(station_name) |>
+  count()
+```
+
+    ## # A tibble: 9 × 2
+    ## # Groups:   animal_id [9]
+    ##   animal_id     n
+    ##       <int> <int>
+    ## 1       365    16
+    ## 2       366     9
+    ## 3       367     1
+    ## 4       368    23
+    ## 5       369     9
+    ## 6       370    18
+    ## 7       384     1
+    ## 8       385    18
+    ## 9       386    15
+
+Which stations have been involved? You can retrieve them using
+`list_values` function applied to column `station_name`:
+
+``` r
+stations_silurus <-
+  detections_silurus |>
+  list_values(station_name)
+```
+
+    ## 23 unique station_name values
+
+``` r
+stations_silurus
+```
+
+    ##  [1] "de-7"   "s-2a"   "de-3"   "de-5"   "de-8"   "de-10"  "de-11"  "de-14a"
+    ##  [9] "de-13"  "de-14"  "de-19"  "de-9"   "de-18"  "de-20"  "de-2"   "de-12" 
+    ## [17] "de-1"   "de-4"   "de-6"   "de-21"  "de-16"  "de-23"  "de-22"
+
+Notice how a detection station can be linked to multiple deployments:
+
+``` r
+detections_silurus |>
+  distinct(station_name, deployment_id) |>
+  group_by(station_name) |>
+  add_tally() |>
+  arrange(desc(n))
+```
+
+    ## # A tibble: 33 × 3
+    ## # Groups:   station_name [23]
+    ##    station_name deployment_id     n
+    ##    <chr>                <int> <int>
+    ##  1 de-12                 2938     3
+    ##  2 de-12                 1656     3
+    ##  3 de-12                 1470     3
+    ##  4 de-7                  1378     2
+    ##  5 de-3                  1381     2
+    ##  6 de-8                  1427     2
+    ##  7 de-14a                1431     2
+    ##  8 de-14                 1433     2
+    ##  9 de-9                  1437     2
+    ## 10 de-3                  2869     2
+    ## # ℹ 23 more rows
+
+Sometimes it’s interesting to know the number of detections per station:
+
+``` r
+n_detect_station <-
+  detections_silurus |>
+  group_by(station_name) |>
+  count()
+n_detect_station
+```
+
+    ## # A tibble: 23 × 2
+    ## # Groups:   station_name [23]
+    ##    station_name     n
+    ##    <chr>        <int>
+    ##  1 de-1           368
+    ##  2 de-10         1681
+    ##  3 de-11          163
+    ##  4 de-12         4203
+    ##  5 de-13          166
+    ##  6 de-14        12266
+    ##  7 de-14a        6604
+    ##  8 de-16          591
+    ##  9 de-18          148
+    ## 10 de-19          650
+    ## # ℹ 13 more rows
+
+It’s also interesting to know the number of unique individuals per
+station:
+
+``` r
+n_silurus_station <-
+  detections_silurus |>
+  distinct(station_name, animal_id) |>
+  group_by(station_name) |>
+  count()
+n_silurus_station
+```
+
+    ## # A tibble: 23 × 2
+    ## # Groups:   station_name [23]
+    ##    station_name     n
+    ##    <chr>        <int>
+    ##  1 de-1             3
+    ##  2 de-10            6
+    ##  3 de-11            4
+    ##  4 de-12            5
+    ##  5 de-13            4
+    ##  6 de-14            6
+    ##  7 de-14a           6
+    ##  8 de-16            4
+    ##  9 de-18            3
+    ## 10 de-19            5
+    ## # ℹ 13 more rows
+
+## Acoustic tags
+
+To get more information about the tags involved in `detections_silurus`,
+you can use the function `get_tags`, which returns tag related
+information such as serial number, manufacturer, model, and frequency:
+
+``` r
+tags_id <- list_values(detections_silurus, acoustic_tag_id)
+```
+
+    ## 9 unique acoustic_tag_id values
+
+``` r
+tags_silurus <- get_tags(acoustic_tag_id = tags_id)
+tags_silurus
+```
+
+    ## # A tibble: 9 × 54
+    ##   tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+    ##   <chr>             <chr>    <chr>       <chr>       <chr>          
+    ## 1 1157781           acoustic animal      <NA>        A69-1601-28296 
+    ## 2 1157782           acoustic animal      <NA>        A69-1601-28297 
+    ## 3 1157783           acoustic animal      <NA>        A69-1601-28298 
+    ## 4 1171775           acoustic animal      <NA>        A69-1601-26529 
+    ## 5 1171776           acoustic animal      <NA>        A69-1601-26530 
+    ## 6 1171777           acoustic animal      <NA>        A69-1601-26531 
+    ## 7 1171780           acoustic animal      <NA>        A69-1601-26534 
+    ## 8 1171781           acoustic animal      <NA>        A69-1601-26535 
+    ## 9 1171782           acoustic animal      <NA>        A69-1601-26536 
+    ##   acoustic_tag_id_alternative manufacturer model  frequency status
+    ##   <chr>                       <chr>        <chr>  <chr>     <chr> 
+    ## 1 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 2 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 3 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 4 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 5 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 6 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 7 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 8 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 9 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## # ℹ 44 more variables: activation_date <dttm>, battery_estimated_life <chr>,
+    ## #   battery_estimated_end_date <dttm>, length <dbl>, diameter <dbl>,
+    ## #   weight <dbl>, floating <lgl>, archive_memory <chr>, sensor_slope <dbl>,
+    ## #   sensor_intercept <dbl>, sensor_range <chr>, sensor_range_min <dbl>,
+    ## #   sensor_range_max <dbl>, sensor_resolution <dbl>, sensor_unit <chr>,
+    ## #   sensor_accuracy <dbl>, sensor_transmit_ratio <int>,
+    ## #   accelerometer_algorithm <chr>, accelerometer_samples_per_second <dbl>, …
+
+You can also retrieve such information by `tag_serial_number`:
+
+``` r
+tags_serial <- unique(detections_silurus$tag_serial_number)
+tags_silurus <- get_tags(tag_serial_number = tags_serial)
+tags_silurus
+```
+
+    ## # A tibble: 9 × 54
+    ##   tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
+    ##   <chr>             <chr>    <chr>       <chr>       <chr>          
+    ## 1 1157781           acoustic animal      <NA>        A69-1601-28296 
+    ## 2 1157782           acoustic animal      <NA>        A69-1601-28297 
+    ## 3 1157783           acoustic animal      <NA>        A69-1601-28298 
+    ## 4 1171775           acoustic animal      <NA>        A69-1601-26529 
+    ## 5 1171776           acoustic animal      <NA>        A69-1601-26530 
+    ## 6 1171777           acoustic animal      <NA>        A69-1601-26531 
+    ## 7 1171780           acoustic animal      <NA>        A69-1601-26534 
+    ## 8 1171781           acoustic animal      <NA>        A69-1601-26535 
+    ## 9 1171782           acoustic animal      <NA>        A69-1601-26536 
+    ##   acoustic_tag_id_alternative manufacturer model  frequency status
+    ##   <chr>                       <chr>        <chr>  <chr>     <chr> 
+    ## 1 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 2 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 3 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 4 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 5 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 6 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 7 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 8 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## 9 <NA>                        INNOVASEA    V13-1x 069k      ended 
+    ## # ℹ 44 more variables: activation_date <dttm>, battery_estimated_life <chr>,
+    ## #   battery_estimated_end_date <dttm>, length <dbl>, diameter <dbl>,
+    ## #   weight <dbl>, floating <lgl>, archive_memory <chr>, sensor_slope <dbl>,
+    ## #   sensor_intercept <dbl>, sensor_range <chr>, sensor_range_min <dbl>,
+    ## #   sensor_range_max <dbl>, sensor_resolution <dbl>, sensor_unit <chr>,
+    ## #   sensor_accuracy <dbl>, sensor_transmit_ratio <int>,
+    ## #   accelerometer_algorithm <chr>, accelerometer_samples_per_second <dbl>, …
+
+However, keep in mind that there is a fundamental difference between the
+arguments `acoustic_tag_id` and `tag_serial_number`: the
+`tag_serial_number` identifies the *device*, which could contain
+multiple tags or sensors and thus multiple `acoustic_tag_id`.
+
+All possible `acoustic_tag_id` can be retrieved with the correspondent
+`list_*` function:
+
+``` r
+list_acoustic_tag_ids() |> head(10)
+```
+
+    ##  [1] "416kHz-485"  "416kHz-956"  "416kHz-1141" "416kHz-1164" "416kHz-1277"
+    ##  [6] "416kHz-1935" "416kHz-2066" "416kHz-2219" "416kHz-2228" "416kHz-2248"
+
+## Acoustic network projects
+
+The detection of Wels catfishes has been possible thanks to one or more
+acoustic network projects, mentioned in field `acoustic_project_code`.
+You can retrieve them via the *list* function
+[`list_values()`](https://inbo.github.io/etn/reference/list_values.md):
+
+``` r
+acoustic_project_codes <- detections_silurus |>
+  list_values(acoustic_project_code)
+```
+
+    ## 2 unique acoustic_project_code values
+
+``` r
+acoustic_project_codes
+```
+
+    ## [1] "demer"      "zeeschelde"
+
+To get more information about these acoustic networks, you can use
+function
+[`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md)
+
+``` r
+acoustic_projects_silurus <- get_acoustic_projects(
+  acoustic_project_code = acoustic_project_codes
+)
+acoustic_projects_silurus
+```
+
+    ## # A tibble: 2 × 11
+    ##   project_id project_code project_type telemetry_type project_name start_date
+    ##        <int> <chr>        <chr>        <chr>          <chr>        <date>    
+    ## 1          7 demer        acoustic     Acoustic       Demer        2014-04-10
+    ## 2          5 zeeschelde   acoustic     Acoustic       Zeeschelde   2014-04-10
+    ##   end_date   latitude longitude moratorium imis_dataset_id
+    ##   <date>        <dbl>     <dbl> <lgl>                <int>
+    ## 1 2015-02-13     51.0      5.06 FALSE                 5879
+    ## 2 NA             51.1      4.27 FALSE                 5860
+
+You can retrieve the full list of acoustic network projects with the
+correspondent `list_*` function:
+
+``` r
+list_acoustic_project_codes() |> head(10)
+```
+
+    ##  [1] "2004_Gudena"              "2011_bovenschelde"       
+    ##  [3] "2011_Loire"               "2011_Warnow"             
+    ##  [5] "2013_Foyle"               "2013_Maas"               
+    ##  [7] "2014_Frome"               "2014_Nene"               
+    ##  [9] "2015_PhD_Gutmann_Roberts" "2016_Diaccia_Botrona"
+
+## Acoustic deployments
+
+You can retrieve deployment information related to the acoustic networks
+in `acoustic_project_codes` by using
+[`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md)
+function:
+
+``` r
+deployments <- get_acoustic_deployments(
+  acoustic_project_code = acoustic_project_codes
+)
+deployments
+```
+
+    ## # A tibble: 533 × 38
+    ##    deployment_id receiver_id acoustic_project_code station_name
+    ##            <int> <chr>       <chr>                 <chr>       
+    ##  1          1424 VR2W-122350 demer                 de-1        
+    ##  2          1658 VR2W-122345 demer                 de-2        
+    ##  3          1478 VR2W-122325 demer                 de-2        
+    ##  4          1661 VR2W-122344 demer                 de-3        
+    ##  5          1381 VR2W-122339 demer                 de-3        
+    ##  6          2869 VR2W-122339 demer                 de-3        
+    ##  7          1662 VR2W-122323 demer                 de-4        
+    ##  8          1425 VR2W-122337 demer                 de-5        
+    ##  9          1663 VR2W-122341 demer                 de-6        
+    ## 10          1378 VR2W-122320 demer                 de-7        
+    ##    station_description   station_manager deploy_date_time    deploy_latitude
+    ##    <chr>                 <chr>           <dttm>                        <dbl>
+    ##  1 fietsersbrug aarschot 1               2014-05-13 00:00:00            51.0
+    ##  2 Rommelaar             1               2014-05-14 00:00:00            51.0
+    ##  3 rommelaar             1               2014-08-07 00:00:00            51.0
+    ##  4 Messelbroek           1               2014-05-13 00:00:00            51.0
+    ##  5 Messelbroek           <NA>            2014-08-07 00:00:00            51.0
+    ##  6 Messelbroek           <NA>            2014-09-21 00:00:00            51.0
+    ##  7 Testelt               1               2014-05-13 00:00:00            51.0
+    ##  8 SO_ZICHEM_DEMER       1               2014-05-05 00:00:00            51.0
+    ##  9 SA_RIF_LODEMER        1               2014-05-05 00:00:00            51.0
+    ## 10 de-7                  <NA>            2014-05-05 00:00:00            51.0
+    ## # ℹ 523 more rows
+    ## # ℹ 30 more variables: deploy_longitude <dbl>, intended_latitude <dbl>,
+    ## #   intended_longitude <dbl>, mooring_type <chr>, bottom_depth <chr>,
+    ## #   riser_length <chr>, deploy_depth <chr>, battery_installation_date <dttm>,
+    ## #   battery_estimated_end_date <dttm>, activation_date_time <dttm>,
+    ## #   recover_date_time <dttm>, recover_latitude <dbl>, recover_longitude <dbl>,
+    ## #   download_date_time <dttm>, download_file_name <chr>, …
+
+These are the deployments of the acoustic receivers involved in
+`detections_silurus`:
+
+``` r
+deploys_silurus <-
+  detections_silurus |>
+  list_values(deployment_id)
+```
+
+    ## 33 unique deployment_id values
+
+``` r
+deploys_silurus
+```
+
+    ##  [1] 1378 1379 1381 1425 1427 1428 1429 1431 1432 1433 1436 1437 1439 1440 1478
+    ## [16] 2869 2938 1424 1662 1663 1384 1434 1441 1656 1659 1660 2933 1470 1506 1573
+    ## [31] 1588 1593 1592
+
+More information about them can be retrieved via
+[`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md)
+function with argument `deployment_id`:
+
+``` r
+deployments_silurus <- get_acoustic_deployments(
+  deployment_id = deploys_silurus
+)
+deployments_silurus
+```
+
+    ## # A tibble: 33 × 38
+    ##    deployment_id receiver_id acoustic_project_code station_name
+    ##            <int> <chr>       <chr>                 <chr>       
+    ##  1          1424 VR2W-122350 demer                 de-1        
+    ##  2          1478 VR2W-122325 demer                 de-2        
+    ##  3          1381 VR2W-122339 demer                 de-3        
+    ##  4          2869 VR2W-122339 demer                 de-3        
+    ##  5          1662 VR2W-122323 demer                 de-4        
+    ##  6          1425 VR2W-122337 demer                 de-5        
+    ##  7          1663 VR2W-122341 demer                 de-6        
+    ##  8          1378 VR2W-122320 demer                 de-7        
+    ##  9          1593 VR2W-122320 demer                 de-7        
+    ## 10          1427 VR2W-122330 demer                 de-8        
+    ##    station_description   station_manager deploy_date_time    deploy_latitude
+    ##    <chr>                 <chr>           <dttm>                        <dbl>
+    ##  1 fietsersbrug aarschot 1               2014-05-13 00:00:00            51.0
+    ##  2 rommelaar             1               2014-08-07 00:00:00            51.0
+    ##  3 Messelbroek           <NA>            2014-08-07 00:00:00            51.0
+    ##  4 Messelbroek           <NA>            2014-09-21 00:00:00            51.0
+    ##  5 Testelt               1               2014-05-13 00:00:00            51.0
+    ##  6 SO_ZICHEM_DEMER       1               2014-05-05 00:00:00            51.0
+    ##  7 SA_RIF_LODEMER        1               2014-05-05 00:00:00            51.0
+    ##  8 de-7                  <NA>            2014-05-05 00:00:00            51.0
+    ##  9 de-7                  <NA>            2014-12-19 02:00:00            51.0
+    ## 10 AAN_GB2_RODEMER       1               2014-05-05 00:00:00            51.0
+    ## # ℹ 23 more rows
+    ## # ℹ 30 more variables: deploy_longitude <dbl>, intended_latitude <dbl>,
+    ## #   intended_longitude <dbl>, mooring_type <chr>, bottom_depth <chr>,
+    ## #   riser_length <chr>, deploy_depth <chr>, battery_installation_date <dttm>,
+    ## #   battery_estimated_end_date <dttm>, activation_date_time <dttm>,
+    ## #   recover_date_time <dttm>, recover_latitude <dbl>, recover_longitude <dbl>,
+    ## #   download_date_time <dttm>, download_file_name <chr>, …
+
+Deployment duration:
+
+``` r
+deployments_silurus_duration <-
+  deployments_silurus |>
+  mutate(duration = as.duration(recover_date_time - deploy_date_time)) |>
+  select(deployment_id, station_name, duration) |>
+  arrange(deployment_id)
+deployments_silurus_duration
+```
+
+    ## # A tibble: 33 × 3
+    ##    deployment_id station_name duration                
+    ##            <int> <chr>        <Duration>              
+    ##  1          1378 de-7         19706400s (~32.58 weeks)
+    ##  2          1379 s-2a         19440000s (~32.14 weeks)
+    ##  3          1381 de-3         3888000s (~6.43 weeks)  
+    ##  4          1384 de-21        5788800s (~9.57 weeks)  
+    ##  5          1424 de-1         23760000s (~39.29 weeks)
+    ##  6          1425 de-5         24451200s (~40.43 weeks)
+    ##  7          1427 de-8         19706400s (~32.58 weeks)
+    ##  8          1428 de-10        26611200s (~44 weeks)   
+    ##  9          1429 de-11        26611200s (~44 weeks)   
+    ## 10          1431 de-14a       16070400s (~26.57 weeks)
+    ## # ℹ 23 more rows
+
+Number of days a deployment detected the passage of one or more
+individuals:
+
+``` r
+n_active_days_deployments_silurus <-
+  detections_silurus |>
+  mutate(date = date(date_time)) |>
+  distinct(deployment_id, station_name, date) |>
+  group_by(deployment_id, station_name) |>
+  summarize(n_days = n(), .groups = "drop") |>
+  ungroup()
+n_active_days_deployments_silurus
+```
+
+    ## # A tibble: 33 × 3
+    ##    deployment_id station_name n_days
+    ##            <int> <chr>         <int>
+    ##  1          1378 de-7            125
+    ##  2          1379 s-2a              7
+    ##  3          1381 de-3              3
+    ##  4          1384 de-21            25
+    ##  5          1424 de-1              7
+    ##  6          1425 de-5             48
+    ##  7          1427 de-8            142
+    ##  8          1428 de-10            35
+    ##  9          1429 de-11            15
+    ## 10          1431 de-14a           59
+    ## # ℹ 23 more rows
+
+Relative detection duration, i.e. number of days with at least one
+detection divided by deployment duration:
+
+``` r
+rel_det_duration_silurus <-
+  n_active_days_deployments_silurus |>
+  left_join(
+    deployments_silurus_duration,
+    by = c("deployment_id", "station_name")
+  ) |>
+  mutate(
+    relative_detection_duration = n_days * (24 * 60 * 60) / as.numeric(duration)
+  ) |>
+  select(deployment_id, station_name, relative_detection_duration)
+rel_det_duration_silurus
+```
+
+    ## # A tibble: 33 × 3
+    ##    deployment_id station_name relative_detection_duration
+    ##            <int> <chr>                              <dbl>
+    ##  1          1378 de-7                              0.548 
+    ##  2          1379 s-2a                              0.0311
+    ##  3          1381 de-3                              0.0667
+    ##  4          1384 de-21                             0.373 
+    ##  5          1424 de-1                              0.0255
+    ##  6          1425 de-5                              0.170 
+    ##  7          1427 de-8                              0.623 
+    ##  8          1428 de-10                             0.114 
+    ##  9          1429 de-11                             0.0487
+    ## 10          1431 de-14a                            0.317 
+    ## # ℹ 23 more rows
+
+## Data visualization
+
+Aside standard graphs, the geographical component of telemetry data
+makes interactive maps particularly useful. The package `leaflet` is
+quite popular to create such kind of visualizations.
+
+We can for example create a map of the involved stations showing the
+station name and the acoustic project code it belongs to as pop-ups.
+First, we retrieve the coordinates of the stations:
+
+``` r
+geo_info_stations <-
+  detections_silurus |>
+  distinct(
+    station_name,
+    deploy_latitude,
+    deploy_longitude,
+    acoustic_project_code
+  ) |>
+  arrange(station_name)
+geo_info_stations
+```
+
+    ## # A tibble: 23 × 4
+    ##    station_name deploy_latitude deploy_longitude acoustic_project_code
+    ##    <chr>                  <dbl>            <dbl> <chr>                
+    ##  1 de-1                    51.0             4.84 demer                
+    ##  2 de-10                   51.0             5.05 demer                
+    ##  3 de-11                   51.0             5.05 demer                
+    ##  4 de-12                   51.0             5.06 demer                
+    ##  5 de-13                   51.0             5.06 demer                
+    ##  6 de-14                   51.0             5.06 demer                
+    ##  7 de-14a                  51.0             5.06 demer                
+    ##  8 de-16                   51.0             5.06 demer                
+    ##  9 de-18                   51.0             5.07 demer                
+    ## 10 de-19                   51.0             5.08 demer                
+    ## # ℹ 13 more rows
+
+To be able to produce the desired map:
+
+``` r
+leaflet(geo_info_stations) |>
+  addTiles() |>
+  addMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    popup = ~paste0("Station: ", station_name, " (", acoustic_project_code, ")")
+  ) |>
+  htmlwidgets::saveWidget(file = "stations_map.html")
+```
+
+We can visualize the number of detections per station,
+`n_detect_station`, by joining it with `geo_info_stations`:
+
+``` r
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = n_detect_station$n
+)
+
+n_detect_station |>
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) |>
+  leaflet() |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~log(n),
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detections: ", n)
+    )
+  ) |>
+  addLegend(
+    title = "Detections",
+    pal = pal,
+    values = ~n
+  ) |>
+  htmlwidgets::saveWidget(file = "n_detections_per_station.html")
+```
+
+In a similar way we can visualize the number of detected individuals per
+station, `n_silurus_station`:
+
+``` r
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = n_silurus_station$n
+)
+
+n_silurus_station |>
+  left_join(
+    geo_info_stations,
+    by = "station_name"
+  ) |>
+  leaflet() |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~n,
+    color = ~pal(n),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# detected individuals: ", n)
+    )
+  ) |>
+  addLegend(
+    title = "Detected individuals",
+    pal = pal,
+    values = ~n
+  ) |>
+  htmlwidgets::saveWidget(file = "n_individuals_per_station.html")
+```
+
+We can also make a map of the relative detection duration of the
+deployments. First, we have to retrieve the deployment geographical
+coordinates:
+
+``` r
+geo_info_deploys <-
+  detections_silurus |>
+  distinct(
+    deployment_id,
+    deploy_latitude,
+    deploy_longitude,
+    station_name,
+    acoustic_project_code
+  ) |>
+  arrange(station_name)
+geo_info_deploys
+```
+
+    ## # A tibble: 33 × 5
+    ##    deployment_id deploy_latitude deploy_longitude station_name
+    ##            <int>           <dbl>            <dbl> <chr>       
+    ##  1          1424            51.0             4.84 de-1        
+    ##  2          1428            51.0             5.05 de-10       
+    ##  3          1429            51.0             5.05 de-11       
+    ##  4          2938            51.0             5.06 de-12       
+    ##  5          1656            51.0             5.06 de-12       
+    ##  6          1470            51.0             5.06 de-12       
+    ##  7          1432            51.0             5.06 de-13       
+    ##  8          1433            51.0             5.06 de-14       
+    ##  9          1592            51.0             5.06 de-14       
+    ## 10          1431            51.0             5.06 de-14a      
+    ##    acoustic_project_code
+    ##    <chr>                
+    ##  1 demer                
+    ##  2 demer                
+    ##  3 demer                
+    ##  4 demer                
+    ##  5 demer                
+    ##  6 demer                
+    ##  7 demer                
+    ##  8 demer                
+    ##  9 demer                
+    ## 10 demer                
+    ## # ℹ 23 more rows
+
+We are ready to create the desired map, where we show the deployment ID,
+the station name and the network project as popups:
+
+``` r
+# Create a continuous colour palette function
+pal <- colorNumeric(
+  palette = "viridis",
+  domain = rel_det_duration_silurus$relative_detection_duration
+)
+
+rel_det_duration_silurus |>
+  left_join(
+    geo_info_deploys,
+    by = c("deployment_id", "station_name")
+  ) |>
+  leaflet() |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~deploy_longitude,
+    lat = ~deploy_latitude,
+    radius = ~100 * relative_detection_duration,
+    color = ~pal(relative_detection_duration),
+    fillOpacity = 0.8,
+    stroke = FALSE,
+    clusterOptions = markerClusterOptions(),
+    popup = ~paste(
+      sep = "<br/>",
+      paste0("DeploymentID: ", deployment_id),
+      paste0("Station: ", station_name, " (", acoustic_project_code, ")"),
+      paste0("# relative detection duration: ", round(relative_detection_duration, 2))
+    )
+  ) |>
+  addLegend(
+    title = "Relative detection duration",
+    pal = pal,
+    values = ~relative_detection_duration
+  ) |>
+  htmlwidgets::saveWidget(file = "relative_detection_duration.html")
+```
+
+Do you want to add the temporal component to visualize the fish
+movement? Take a look at the [moveVis](https://movevis.org/index.html)
+package.

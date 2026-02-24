@@ -22,10 +22,10 @@ ETN_PROTOCOL = "opencpu"
 ## Available options
 
 - `ETN_USER`: Your username to the ETN database. See
-  [authentication](https://inbo.github.io/etn/articles/etn_credentials.md).
+  [authentication](https://inbo.github.io/etn/articles/authentication.md).
 
 - `ETN_PWD`: Your password to the ETN database. See
-  [authentication](https://inbo.github.io/etn/articles/etn_credentials.md).
+  [authentication](https://inbo.github.io/etn/articles/authentication.md).
 
 - `ETN_PROTOCOL` (value: `"opencpu"` or `"localdb"`): etn will
   automatically detect how to best connect to the ETN database, i.e. it

@@ -19,3 +19,15 @@ list_cpod_project_codes(connection)
 
 A vector of all unique `project_code` of `type = "cpod"` in
 `project.sql`.
+
+## Examples
+
+``` r
+list_cpod_project_codes()
+#>  [1] "Apelafico_acoustics"  "Apelafico_underwater" "ARMS_MBON_Belgium"   
+#>  [4] "CODEVCO"              "cpod-lifewatch"       "cpod-od-natuur"      
+#>  [7] "Lifewatch_extra"      "Lifewatch_test"       "PAM-Borssele"        
+#> [10] "PelFish"              "PhD_Parcerisas"       "PureWind"            
+#> [13] "SEAWave"              "SMGMIT"               "STRAITS_PAM"         
+#> [16] "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"    "WaveHub"             
+```

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">etn</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,9 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic_telemetry.html">Explore acoustic telemetry data</a></li>
-    <li><a class="dropdown-item" href="../articles/etn_credentials.html">Set Up Your ETN Username and Password</a></li>
-    <li><a class="dropdown-item" href="../articles/etn_fields.html">ETN field definitions</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/acoustic-telemetry.html">Explore acoustic telemetry data</a></li>
+    <li><a class="dropdown-item" href="../articles/authentication.html">Configure credentials</a></li>
     <li><a class="dropdown-item" href="../articles/options.html">Options</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -35,56 +34,122 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/inbo/etn/blob/v2.3.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/inbo/etn/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="etn-development-version">etn (development version)<a class="anchor" aria-label="anchor" href="#etn-development-version"></a></h2>
-<ul><li>
-<strong>The etn package can now be used on your own computer!</strong> It connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package. (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>).</li>
-<li>The package will automatically switch to using a local database connection when available, if you wish to overwrite this behaviour, you can by setting the system environmental variable <code>ETN_PROTOCOL</code> to <code>opencpu</code> to force the package to use the API. This will be slower as a local database connection. (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>)</li>
-<li>The <code>connection</code> argument is no longer used and therefore deprecated. You will be prompted for credentials instead. Use e.g. <code>get_animals(animal_id = 305)</code>, not <code>get_animals(con, animal_id = 305)</code> or <code>get_animals(connection = con, animal_id = 305)</code> (<a href="https://github.com/inbo/etn/issues/301" class="external-link">#301</a>).</li>
+<h2 class="pkg-version" data-toc-text="3.0.0" id="etn-300">etn 3.0.0<a class="anchor" aria-label="anchor" href="#etn-300"></a></h2>
+<div class="section level3">
+<h3 id="use-etn-on-your-computer--3-0-0">Use etn on your computer 🎉<a class="anchor" aria-label="anchor" href="#use-etn-on-your-computer--3-0-0"></a></h3>
+<ul><li>etn now connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>). This means you can use the package from your own computer. Note that this will be slower than running it from the <a href="https://rstudio4.vliz.be/" class="external-link">VLIZ RStudio server</a>.</li>
+<li>etn will automatically switch to a local database connection when available (e.g. the VLIZ RStudio server). Use <code>Sys.setenv(ETN_PROTOCOL = "opencpu")</code> to override this behaviour and force the package to use the API (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>).</li>
+<li>Queries via the API and the VLIZ RStudio Server will return the same results (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>).</li>
+<li>When using a local database connection, etn will check if the installed helper package etnservice that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of etnservice is older, you will be prompted to install a newer version (<a href="https://github.com/inbo/etn/issues/385" class="external-link">#385</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="credentials-3-0-0">Credentials<a class="anchor" aria-label="anchor" href="#credentials-3-0-0"></a></h3>
+<div class="callout-important">
+<p><strong>Breaking change! Action required</strong></p>
+</div>
+<p>Your credentials (username and password) to connect to the ETN database are no longer passed via the <code>connection</code> argument. They are asked or retrieved from your <code>.Renviron</code> file every time you run a function.</p>
+<ul><li>New authentication mechanism (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>, <a href="https://github.com/inbo/etn/issues/339" class="external-link">#339</a>, <a href="https://github.com/inbo/etn/issues/338" class="external-link">#338</a>, <a href="https://github.com/inbo/etn/issues/228" class="external-link">#228</a>).</li>
+<li>New vignette <code><a href="../articles/authentication.html">vignette("authentication")</a></code>.</li>
 <li>
-<code><a href="../reference/connect_to_etn.html">connect_to_etn()</a></code> is no longer necessary and therefore deprecated. All functions will create their own connection when used. If you have no credentials stored in the system environment, the functions will require you to enter them once per session (<a href="https://github.com/inbo/etn/issues/303" class="external-link">#303</a>).</li>
-<li>The deprecated functions <code>get_deployments()</code>, <code>get_detections()</code>, <code>get_projects()</code>, <code>get_receivers()</code>, <code>list_network_project_codes()</code> are no longer included.</li>
+<code>connection</code> argument is deprecated in all functions (<a href="https://github.com/inbo/etn/issues/301" class="external-link">#301</a>).</li>
+<li>
+<code><a href="../reference/connect_to_etn.html">connect_to_etn()</a></code> is deprecated (<a href="https://github.com/inbo/etn/issues/303" class="external-link">#303</a>).</li>
+</ul><p>Here is how you can migrate:</p>
+<ol style="list-style-type: decimal"><li><p>Use the new RStudio server (<a href="https://rstudio4.vliz.be/" class="external-link uri">https://rstudio4.vliz.be/</a>). The LifeWatch RStudio server (<a href="https://rstudio.lifewatch.be" class="external-link uri">https://rstudio.lifewatch.be</a>) won’t work with this version of etn and will be discontinued.</p></li>
+<li><p>Follow the steps in <code><a href="../articles/authentication.html">vignette("authentication")</a></code> to look up and store your credentials.</p></li>
+<li>
+<p>Update your scripts:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Good</span></span>
+<span><span class="fu"><a href="../reference/get_animals.html">get_animals</a></span><span class="op">(</span>animal_id <span class="op">=</span> <span class="fl">305</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Bad</span></span>
+<span><span class="fu"><a href="../reference/connect_to_etn.html">connect_to_etn</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_animals.html">get_animals</a></span><span class="op">(</span><span class="va">con</span>, animal_id <span class="op">=</span> <span class="fl">305</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_animals.html">get_animals</a></span><span class="op">(</span>connection <span class="op">=</span> <span class="va">con</span>, animal_id <span class="op">=</span> <span class="fl">305</span><span class="op">)</span></span></code></pre></div>
+</li>
+</ol></div>
+<div class="section level3">
+<h3 id="accessing-data-3-0-0">Accessing data<a class="anchor" aria-label="anchor" href="#accessing-data-3-0-0"></a></h3>
+<ul><li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now uses a different protocol to retrieve data. It can now reliably return 10M+ detections without timeouts (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>, <a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/323" class="external-link">#323</a>).</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now returns a progress bar for large queries (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>).</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now has a <code>deployment_id</code> filter argument (<a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/340" class="external-link">#340</a>).</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now has a <code>tag_serial_number</code> argument, which is more reliable than <code>acoustic_tag_id</code> (which is still supported). Thanks <a href="https://github.com/lottepohl" class="external-link">@lottepohl</a> for the suggestion (<a href="https://github.com/inbo/etn/issues/408" class="external-link">#408</a>, <a href="https://github.com/inbo/etn/issues/386" class="external-link">#386</a>).</li>
+<li>
+<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> may return fewer (erroneous) detections than before, due to fixes in the database.</li>
+<li>
+<code><a href="../reference/get_animals.html">get_animals()</a></code> now includes <code>type_type = "archival"</code> data (<a href="https://github.com/inbo/etn/issues/365" class="external-link">#365</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-for-developers-3-0-0">Changes for developers<a class="anchor" aria-label="anchor" href="#changes-for-developers-3-0-0"></a></h3>
+<ul><li>New vignette <code><a href="../articles/options.html">vignette("options")</a></code> describes some developer options (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>).</li>
+<li>Contributors can change the default domain of the API to the URL of a test server via the environmental variable <code>ETN_TEST_API</code> (<a href="https://github.com/inbo/etn/issues/383" class="external-link">#383</a>).</li>
+<li>Tests make use of <a href="https://docs.ropensci.org/vcr" class="external-link">vcr</a> to record and replay HTTP requests to the API. These results are stored in <code>/tests/fixtures</code> (<a href="https://github.com/inbo/etn/issues/432" class="external-link">#432</a>).</li>
+<li>Tests have new helper functions, including <code>skip_if_not_localdb()</code>, <code>skip_if_http_error()</code> and <code>expect_protocol_agnostic()</code>. The latter is used to compare SQL vs API calls in <code>test-protocol_agnostic.R</code> (<a href="https://github.com/inbo/etn/issues/436" class="external-link">#436</a>).</li>
+<li>Tests for <code>download_acoustic_datasets()</code> are updated for archival tags and SQL vs API calls and makes use of markdown snapshots (<a href="https://github.com/inbo/etn/issues/366" class="external-link">#366</a>).</li>
+<li>pkgdown website is now automatically build by a GitHub Action and is served from the <code>gh-pages</code> branch. The <code>docs/</code> directory has been removed (<a href="https://github.com/inbo/etn/issues/456" class="external-link">#456</a>).</li>
+<li>
+<code><a href="../articles/acoustic-telemetry.html">vignette("acoustic-telemetry")</a></code> is precompiled with <code>vignettes/precompile.R</code>, so it doesn’t run for every build (<a href="https://github.com/inbo/etn/issues/473" class="external-link">#473</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="miscellaneous-3-0-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-3-0-0"></a></h3>
+<ul><li>etn now relies on R &gt;= 4.1.0 (because of <a href="https://github.com/apache/arrow/" class="external-link">arrow</a> and <a href="https://docs.ropensci.org/vcr" class="external-link">vcr</a> dependencies) and uses base pipes (<code>|&gt;</code> rather than <code>%&gt;%</code>) (<a href="https://github.com/inbo/etn/issues/327" class="external-link">#327</a>, <a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>).</li>
 <li>
 <code><a href="../reference/write_dwc.html">write_dwc()</a></code> now invisibly returns the transformed data as a list of data frames (rather than a data frame) (<a href="https://github.com/inbo/etn/issues/302" class="external-link">#302</a>).</li>
-<li>Queries via the API and on the Lifewatch RStudio Server will now always return the same results. (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>)</li>
-<li>You can now store your password and username in <code>.Renviron</code> (easy to edit with <code>usethis::edit_r_environ()</code>), specifically in <code>ETN_USER</code> and <code>ETN_PWD</code> (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>, <a href="https://github.com/inbo/etn/issues/339" class="external-link">#339</a>, <a href="https://github.com/inbo/etn/issues/338" class="external-link">#338</a>, <a href="https://github.com/inbo/etn/issues/228" class="external-link">#228</a>)</li>
-<li>Archival tags are now available in <code><a href="../reference/get_animals.html">get_animals()</a></code> (<a href="https://github.com/inbo/etn/issues/365" class="external-link">#365</a>).</li>
-<li>Contributors can now change the default domain of the API to the url of a test deployment by setting the environmental variable <code>ETN_TEST_API</code>. (<a href="https://github.com/inbo/etn/issues/383" class="external-link">#383</a>)</li>
+<li>Previously deprecated functions <code>get_deployments()</code>, <code>get_detections()</code>, <code>get_projects()</code>, <code>get_receivers()</code>, <code>list_network_project_codes()</code> are now removed.</li>
 <li>
-<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now uses a different interface to the database resulting in much more detections being able to be fetched reliably. However, due to changes in the database, it’ll initially result in less detections being returned for the same filter variables (but with less mistakes). (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>, <a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/323" class="external-link">#323</a>)</li>
-<li>You can now select detections via <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> using a <code>deployment_id</code> (<a href="https://github.com/inbo/etn/issues/382" class="external-link">#382</a>, <a href="https://github.com/inbo/etn/issues/340" class="external-link">#340</a>)</li>
-<li>You can now select detections via <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> using a <code>tag_serial_number</code>, this is a better option as <code>acoustic_tag_id</code> which will remain supported for the near future. Thank you <a href="https://github.com/lottepohl" class="external-link">@lottepohl</a> for the suggestion. (<a href="https://github.com/inbo/etn/issues/408" class="external-link">#408</a>, <a href="https://github.com/inbo/etn/issues/386" class="external-link">#386</a>)</li>
-<li>
-<code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> now returns a progress bar on large queries. (<a href="https://github.com/inbo/etn/issues/384" class="external-link">#384</a>)</li>
-<li>When using a local database connection, <code>etn</code> will now check if the installed helper package <code>etnservice</code> that is used to place these queries is up to date with the one deployed via the API. This is to ensure that queries placed via the API and via the local database connection always result in consistent results. If the installed version of <code>etnservice</code> is older, you will be prompted to install a newer version. (<a href="https://github.com/inbo/etn/issues/385" class="external-link">#385</a>)</li>
-<li>New vignette <code><a href="../articles/options.html">vignette("options")</a></code> that describes some developer/power user package wide options. (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>)</li>
+<code>vignette("etn_fields")</code> was outdated and has been removed (<a href="https://github.com/inbo/etn/issues/468" class="external-link">#468</a>).</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.2" id="etn-222">etn 2.2.2<a class="anchor" aria-label="anchor" href="#etn-222"></a></h2>
-<ul><li>Fix issue in <code>check_value()</code> helper used in several functions to generate error messages. The error message failed to format when <code>NA</code> values were returned as part of a <code>list_</code> function call (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
-<li>Fix issue in <code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> where <code>NA</code> was sometimes included in the results (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
-<li>Fixed bug in <code><a href="../reference/write_dwc.html">write_dwc()</a></code> where providing no value for <code>rights_holder</code> would result in the function failing to generate a Darwin Core Archive (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
+<div class="section level3">
+<h3 id="bug-fixes-2-2-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-2-2"></a></h3>
+<ul><li>
+<code>check_value()</code> now correctly formats <code>NA</code> values returned by <code>list_</code> functions (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>, <a href="https://github.com/inbo/etn/issues/357" class="external-link">#357</a>).</li>
+<li>
+<code><a href="../reference/list_receiver_ids.html">list_receiver_ids()</a></code> no longer return duplicate values (<a href="https://github.com/inbo/etn/issues/357" class="external-link">#357</a>).</li>
+<li>
+<code><a href="../reference/write_dwc.html">write_dwc()</a></code> now handles empty <code>rights_holder</code> (<a href="https://github.com/inbo/etn/issues/356" class="external-link">#356</a>).</li>
 </ul></div>
+<div class="section level3">
+<h3 id="miscellaneous-2-2-2">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-2-2-2"></a></h3>
+<ul><li>Tests depending on local database connection are now skipped when it is absent on testing machine (<a href="https://github.com/inbo/etn/issues/346" class="external-link">#346</a>).</li>
+<li>Funder is updated and custom authors are removed (<a href="https://github.com/inbo/etn/issues/311" class="external-link">#311</a>).</li>
+<li>The README now has a Zenodo badge (<a href="https://github.com/inbo/etn/issues/352" class="external-link">#352</a>, <a href="https://github.com/inbo/etn/issues/355" class="external-link">#355</a>).</li>
+<li>New <code>CITATION.cff</code> file (<a href="https://github.com/inbo/etn/issues/337" class="external-link">#337</a>).</li>
+<li>pkgdown website has been updated (<a href="https://github.com/inbo/etn/issues/354" class="external-link">#354</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="etn-221">etn 2.2.1<a class="anchor" aria-label="anchor" href="#etn-221"></a></h2>
 <ul><li>
 <code><a href="../reference/write_dwc.html">write_dwc()</a></code> now supports uppercase <code>animal_project_code</code>s (<a href="https://github.com/inbo/etn/issues/289" class="external-link">#289</a>).</li>
-<li>Bug fix in <code><a href="../reference/write_dwc.html">write_dwc()</a></code> where the function would return an error due to an updated dependency (<a href="https://github.com/inbo/etn/issues/293" class="external-link">#293</a>).</li>
+<li>
+<code><a href="../reference/write_dwc.html">write_dwc()</a></code> no longer breaks on updated dependency (<a href="https://github.com/inbo/etn/issues/293" class="external-link">#293</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.0" id="etn-220">etn 2.2.0<a class="anchor" aria-label="anchor" href="#etn-220"></a></h2>
-<ul><li>Add <code>NEWS.md</code> file to communicate changes to the package.</li>
-<li>Add <code>depth_in_meters</code> field to <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> (<a href="https://github.com/inbo/etn/issues/261" class="external-link">#261</a>).</li>
-<li>Fix issue in <code><a href="../reference/download_acoustic_dataset.html">download_acoustic_dataset()</a></code> where some fields were missing from <code>datapackage.json</code>.</li>
-<li>Stricter unit tests (<a href="https://github.com/inbo/etn/issues/268" class="external-link">#268</a>).</li>
+<ul><li>
+<code>NEWS.md</code> file is added to communicate changes to the package.</li>
+<li>
+<code>depth_in_meters</code> field is added to <code><a href="../reference/get_acoustic_detections.html">get_acoustic_detections()</a></code> (<a href="https://github.com/inbo/etn/issues/261" class="external-link">#261</a>).</li>
+<li>
+<code><a href="../reference/download_acoustic_dataset.html">download_acoustic_dataset()</a></code> no longer breaks on missing fields in <code>datapackage.json</code>.</li>
+<li>Unit tests are stricter (<a href="https://github.com/inbo/etn/issues/268" class="external-link">#268</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0" id="etn-210">etn 2.1.0<a class="anchor" aria-label="anchor" href="#etn-210"></a></h2>
-<ul><li>Add funder and use default README.Rmd (<a href="https://github.com/inbo/etn/issues/247" class="external-link">#247</a>).</li>
-<li>New function <code><a href="../reference/write_dwc.html">write_dwc()</a></code> to transform acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF (<a href="https://github.com/inbo/etn/issues/257" class="external-link">#257</a>).</li>
+<ul><li>Funder and default README.Rmd are added (<a href="https://github.com/inbo/etn/issues/247" class="external-link">#247</a>).</li>
+<li>New function <code><a href="../reference/write_dwc.html">write_dwc()</a></code> transforms acoustic telemetry data to Darwin Core that can be harvested by OBIS and GBIF (<a href="https://github.com/inbo/etn/issues/257" class="external-link">#257</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.0" id="etn-200">etn 2.0.0<a class="anchor" aria-label="anchor" href="#etn-200"></a></h2>
@@ -93,8 +158,9 @@
 <code>tag_serial_number</code> is now the primary identifier for tags. Tags can have multiple types, subtypes and sensors. Acoustic information is related to the <code>acoustic_tag_id</code>.</li>
 <li>
 <code>acoustic</code> scope remains completely covered, but is now reflected in function names. This allows us to implement additional scopes (e.g. <code>cpod</code>) in the future.</li>
-<li>Deprecations for old function names.</li>
-<li>New tutorial on acoustic scope (<a href="https://github.com/inbo/etn/blob/main/vignettes/acoustic_telemetry.Rmd" class="external-link">acoustic_telemetry.Rmd</a>).</li>
+<li>Old function names are deprecated.</li>
+<li>New <code><a href="../articles/acoustic-telemetry.html">vignette("acoustic-telemetry")</a></code> showcases an acoustic use case.</li>
+<li>Test coverage is increased.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

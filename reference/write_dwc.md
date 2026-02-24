@@ -83,3 +83,14 @@ Key features of the Darwin Core transformation:
   detections (same animal, tag and timestamp) are excluded. It is
   possible for a deployment to contain no detections, e.g. if the tag
   malfunctioned right after deployment.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Return a list of data.frames in Darwin Core format.
+write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
+# Download files to disk
+write_dwc("2014_demer", directory = ".")
+} # }
+```
