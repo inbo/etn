@@ -20,18 +20,18 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/inbo/etn/blob/v3.0.0/inst/CITATION)
+[`inst/CITATION`](https://github.com/inbo/etn/blob/main/inst/CITATION)
 
 Huybrechts P, Desmet P, Oldoni D, Van Hoey S (2026). *etn: Access Data
 from the European Tracking Network*.
 [doi:10.5281/zenodo.15235747](https://doi.org/10.5281/zenodo.15235747),
-R package version 3.0.0, <https://inbo.github.io/etn/>.
+R package version 3.0.0.9000, <https://inbo.github.io/etn/>.
 
     @Manual{,
       title = {etn: Access Data from the European Tracking Network},
       author = {Pieter Huybrechts and Peter Desmet and Damiano Oldoni and Stijn {Van Hoey}},
       year = {2026},
-      note = {R package version 3.0.0},
+      note = {R package version 3.0.0.9000},
       url = {https://inbo.github.io/etn/},
       doi = {10.5281/zenodo.15235747},
     }
