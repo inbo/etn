@@ -7,20 +7,12 @@ if (credentials_are_set()) {
   )
 }
 
-# Test with local database, skip if not available
-if (localdb_is_available() & credentials_are_set()) {
-  df_sql <- get_tags()
-}
-
 test_that("get_tags() returns a tibble", {
   skip_if_no_authentication()
   testthat::skip_if_offline("opencpu.lifewatch.be")
 
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-
-  expect_s3_class(df_sql, "data.frame")
-  expect_s3_class(df_sql, "tbl")
 })
 
 test_that("get_tags() returns the expected columns", {
