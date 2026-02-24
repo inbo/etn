@@ -507,8 +507,12 @@ test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
 
 test_that("[SQL] get_acoustic_deployments() does not return cpod deployments", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # C-POD-408 is a cpod receiver
-  df <- get_acoustic_deployments(receiver_id = "C-POD-408")
+  df <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "localdb"),
+    code = get_acoustic_deployments(receiver_id = "C-POD-408")
+  )
   expect_equal(nrow(df), 0)
 })
