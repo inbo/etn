@@ -1,4 +1,4 @@
-# etn (development version)
+# etn 3.0.0
 
 ## Use etn on your computer 🎉
 
