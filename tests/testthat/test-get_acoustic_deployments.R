@@ -1,9 +1,11 @@
 # Set ETN_PROTOCOL to "opencpu" to force using the API and use a cached response
-withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
-  vcr::use_cassette("get_acoustic_deployments", {
-    df <- get_acoustic_deployments()
+if (credentials_are_set()) {
+  withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
+    vcr::use_cassette("get_acoustic_deployments", {
+      df <- get_acoustic_deployments()
+    })
   })
-})
+}
 
 test_that("[API] get_acoustic_deployments() returns a tibble", {
   skip_if_no_authentication()

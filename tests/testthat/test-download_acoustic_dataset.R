@@ -1,23 +1,24 @@
 # Create a data package using the API
-vcr::use_cassette( # Cache HTTP response
-  "download_acoustic_dataset",
-  {
-    datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-    evalute_download_api <- evaluate_promise({
-      with_mocked_bindings(
-        {
-          download_acoustic_dataset(
-            animal_project_code = "2014_demer",
-            directory = datapackage_path
-          )
-        },
-        # Force an API request, otherwise vcr will fail.
-        select_protocol = \(x) "opencpu"
-      )
-    })
-  }
-)
-
+if (credentials_are_set()) {
+  vcr::use_cassette( # Cache HTTP response
+    "download_acoustic_dataset",
+    {
+      datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+      evalute_download_api <- evaluate_promise({
+        with_mocked_bindings(
+          {
+            download_acoustic_dataset(
+              animal_project_code = "2014_demer",
+              directory = datapackage_path
+            )
+          },
+          # Force an API request, otherwise vcr will fail.
+          select_protocol = \(x) "opencpu"
+        )
+      })
+    }
+  )
+}
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.
@@ -116,6 +117,8 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 })
 
 test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
+  skip_if_no_authentication()
+
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
