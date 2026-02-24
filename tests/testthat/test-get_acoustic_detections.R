@@ -22,9 +22,14 @@ test_that("get_acoustic_detections() returns a tibble", {
 
 test_that("get_acoustic_detections() returns a tibble over sql", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
-  df_sql <- get_acoustic_detections(animal_project_code = "2014_demer",
+  df_sql <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "opencpu"),
+    code = get_acoustic_detections(animal_project_code = "2014_demer",
                                     limit = TRUE)
+  )
+
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
