@@ -5,14 +5,16 @@
 \title{Download acoustic data package}
 \usage{
 download_acoustic_dataset(
-  connection = con,
+  connection,
   animal_project_code,
   scientific_name = NULL,
   directory = animal_project_code
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{animal_project_code}{Character. Animal project you want to download
 data for. Required.}
@@ -23,6 +25,9 @@ Defaults to no all (all scientific names, include "Sync tag", etc.).}
 \item{directory}{Character. Relative path to local download directory.
 Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
+}
+\value{
+CSV and JSON files written to disk.
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data
@@ -63,12 +68,10 @@ performed by validation tools of the Frictionless Framework, e.g.
 \href{https://github.com/frictionlessdata/frictionless-py}{frictionless-py}.
 }
 \examples{
-\dontrun{
-# Set default connection variable
-con <- connect_to_etn()
-
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Download data for the 2012_leopoldkanaal animal project (all scientific names)
-download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
+download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
+                         directory = tempdir())
 #> Downloading data to directory `2012_leopoldkanaal`:
 #> * (1/6): downloading animals.csv
 #> * (2/6): downloading tags.csv
@@ -91,5 +94,5 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> Warning message:
 #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #> Found tags associated with multiple animals: 1145373
-}
+\dontshow{\}) # examplesIf}
 }

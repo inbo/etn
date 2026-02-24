@@ -1,28 +1,24 @@
-skip_if_not_localdb()
-
-con <- connect_to_etn()
-
-test_that("get_acoustic_receivers() returns error for incorrect connection", {
-  expect_error(
-    get_acoustic_receivers(con = "not_a_connection"),
-    "Not a connection object to database."
-  )
-})
-
 test_that("get_acoustic_receivers() returns a tibble", {
-  df <- get_acoustic_receivers(con)
+  skip_if_not_localdb()
+
+  df <- get_acoustic_receivers()
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
+  df_sql <- get_acoustic_receivers()
+  expect_s3_class(df_sql, "data.frame")
+  expect_s3_class(df_sql, "tbl")
 })
 
 # TODO: re-enable after https://github.com/inbo/etn/issues/251
-# test_that("get_acoustic_receivers() returns unique receiver_id", {
-#   df <- get_acoustic_receivers(con)
-#   expect_equal(nrow(df), nrow(df %>% distinct(receiver_id)))
-# })
+test_that("get_acoustic_receivers() returns unique receiver_id", {
+  skip("re-enable after https://github.com/inbo/etn/issues/251")
+  df <- get_acoustic_receivers(con)
+  expect_equal(nrow(df), nrow(df |> dplyr::distinct(receiver_id)))
+})
 
 test_that("get_acoustic_receivers() returns the expected columns", {
-  df <- get_acoustic_receivers(con)
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+  df <- get_acoustic_receivers()
   expected_col_names <- c(
     "receiver_id",
     "manufacturer",
@@ -52,24 +48,31 @@ test_that("get_acoustic_receivers() returns the expected columns", {
 })
 
 test_that("get_acoustic_receivers() allows selecting on receiver_id", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
-  expect_error(get_acoustic_receivers(con, receiver_id = "not_a_receiver_id"))
-  expect_error(get_acoustic_receivers(con, receiver_id = c("VR2W-124070", "not_a_receiver_id")))
+  expect_error(
+    get_acoustic_receivers(receiver_id = "not_a_receiver_id"),
+    regexp = "Can't find receiver_id `not_a_receiver_id` in"
+    )
+  expect_error(
+    get_acoustic_receivers(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
+    regexp = "Can't find receiver_id `VR2W-124070` and/or `not_a_receiver_id` in"
+    )
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
-  single_select_df <- get_acoustic_receivers(con, receiver_id = single_select)
+  single_select_df <- get_acoustic_receivers(receiver_id = single_select)
   expect_identical(
-    single_select_df %>% distinct(receiver_id) %>% pull(),
+    single_select_df |> dplyr::distinct(receiver_id) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
   multi_select <- c("VR2W-124070", "VR2W-124078")
-  multi_select_df <- get_acoustic_receivers(con, receiver_id = multi_select)
+  multi_select_df <- get_acoustic_receivers(receiver_id = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(receiver_id) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(receiver_id) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
@@ -78,31 +81,39 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
 
 
 test_that("get_acoustic_receivers() allows selecting on status", {
+  testthat::skip_if_offline("opencpu.lifewatch.be")
   # Errors
-  expect_error(get_acoustic_receivers(con, status = "not_a_status"))
-  expect_error(get_acoustic_receivers(con, status = c("broken", "not_a_status")))
+  expect_error(
+    get_acoustic_receivers(status = "not_a_status"),
+    regexp = "Can't find status `not_a_status` in"
+    )
+  expect_error(
+    get_acoustic_receivers(status = c("broken", "not_a_status")),
+    regexp = "Can't find status `broken` and/or `not_a_status` in"
+    )
 
   # Select single value
   single_select <- "broken"
-  single_select_df <- get_acoustic_receivers(con, status = single_select)
+  single_select_df <- get_acoustic_receivers(status = single_select)
   expect_identical(
-    single_select_df %>% distinct(status) %>% pull(),
+    single_select_df |> dplyr::distinct(status) |> dplyr::pull(),
     c(single_select)
   )
   expect_gt(nrow(single_select_df), 0)
 
   # Select multiple values
   multi_select <- c("broken", "lost")
-  multi_select_df <- get_acoustic_receivers(con, status = multi_select)
+  multi_select_df <- get_acoustic_receivers(status = multi_select)
   expect_identical(
-    multi_select_df %>% distinct(status) %>% pull() %>% sort(),
+    multi_select_df |> dplyr::distinct(status) |> dplyr::pull() |> sort(),
     c(multi_select)
   )
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
 test_that("get_acoustic_receivers() does not return cpod receivers", {
-  # POD-3610 is a cpod receiver
-  df <- get_acoustic_receivers(con, receiver_id = "POD-3610")
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+  # C-POD-408 is a cpod receiver
+  df <- get_acoustic_receivers(receiver_id = "C-POD-408")
   expect_identical(nrow(df), 0L)
 })

@@ -4,10 +4,12 @@
 \alias{get_acoustic_receivers}
 \title{Get acoustic receiver data}
 \usage{
-get_acoustic_receivers(connection = con, receiver_id = NULL, status = NULL)
+get_acoustic_receivers(connection, receiver_id = NULL, status = NULL)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
@@ -24,15 +26,12 @@ the group.
 Get data for acoustic receivers, with options to filter results.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get all acoustic receivers
-get_acoustic_receivers(con)
+get_acoustic_receivers()
 
 # Get lost and broken acoustic receivers
-get_acoustic_receivers(con, status = c("lost", "broken"))
+get_acoustic_receivers(status = c("lost", "broken"))
 
 # Get a specific acoustic receiver
-get_acoustic_receivers(con, receiver_id = "VR2W-124070")
+get_acoustic_receivers(receiver_id = "VR2W-124070")
 }

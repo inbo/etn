@@ -4,10 +4,12 @@
 \alias{list_acoustic_project_codes}
 \title{List all available acoustic project codes}
 \usage{
-list_acoustic_project_codes(connection = con)
+list_acoustic_project_codes(connection)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 }
 \value{
 A vector of all unique \code{project_code} of \code{type = "acoustic"} in
@@ -15,4 +17,7 @@ A vector of all unique \code{project_code} of \code{type = "acoustic"} in
 }
 \description{
 List all available acoustic project codes
+}
+\examples{
+list_acoustic_project_codes()
 }

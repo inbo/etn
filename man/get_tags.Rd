@@ -5,7 +5,7 @@
 \title{Get tag data}
 \usage{
 get_tags(
-  connection = con,
+  connection,
   tag_type = NULL,
   tag_subtype = NULL,
   tag_serial_number = NULL,
@@ -13,7 +13,9 @@ get_tags(
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{tag_type}{Character (vector). \code{acoustic} or \code{archival}. Some tags are
 both, find those with \code{acoustic-archival}.}
@@ -38,20 +40,17 @@ can be multiple records (\code{acoustic_tag_id}) per tag device
 (\code{tag_serial_number}).
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get all tags
-get_tags(con)
+get_tags()
 
 # Get archival tags, including acoustic-archival
-get_tags(con, tag_type = c("archival", "acoustic-archival"))
+get_tags(tag_type = c("archival", "acoustic-archival"))
 
 # Get tags of specific subtype
-get_tags(con, tag_subtype = c("built-in", "range"))
+get_tags(tag_subtype = c("built-in", "range"))
 
 # Get specific tags (note that these can return multiple records)
-get_tags(con, tag_serial_number = "1187450")
-get_tags(con, acoustic_tag_id = "A69-1601-16130")
-get_tags(con, acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
+get_tags(tag_serial_number = "1187450")
+get_tags(acoustic_tag_id = "A69-1601-16130")
+get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 }

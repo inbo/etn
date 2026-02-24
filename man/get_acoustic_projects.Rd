@@ -4,10 +4,12 @@
 \alias{get_acoustic_projects}
 \title{Get acoustic project data}
 \usage{
-get_acoustic_projects(connection = con, acoustic_project_code = NULL)
+get_acoustic_projects(connection, acoustic_project_code = NULL)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
@@ -21,12 +23,9 @@ also
 Get data for acoustic projects, with options to filter results.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get all acoustic projects
-get_acoustic_projects(con)
+get_acoustic_projects()
 
 # Get a specific acoustic project
-get_acoustic_projects(con, acoustic_project_code = "demer")
+get_acoustic_projects(acoustic_project_code = "demer")
 }

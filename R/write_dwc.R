@@ -6,18 +6,18 @@
 #' https://www.gbif.org/ipt) for publication to OBIS and/or GBIF.
 #' A `meta.xml` or `eml.xml` file are not created.
 #'
-#' @param connection Connection to the ETN database.
 #' @param animal_project_code Animal project code.
 #' @param directory Path to local directory to write file(s) to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
 #'   useful for extending/adapting the Darwin Core mapping before writing with
-#'   [readr::write_csv()].
+#'   [readr::write_csv()]. If the directory does not exist, it will be created.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @param license Identifier of the license under which the data will be
 #'   published.
 #'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
 #'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#' @inheritParams list_animal_ids
 #' @return CSV file(s) written to disk or list of data frames when
 #'   `directory = NULL`.
 #' @export
@@ -43,67 +43,36 @@
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
-write_dwc <- function(connection = con,
+#'
+#' @examples
+#' \dontrun{
+#' # Return a list of data.frames in Darwin Core format.
+#' write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
+#' # Download files to disk
+#' write_dwc("2014_demer", directory = ".")
+#' }
+write_dwc <- function(connection,
                       animal_project_code,
                       directory = ".",
                       rights_holder = NULL,
                       license = "CC-BY") {
-  # Check connection
-  check_connection(connection)
-
-  # Check animal_project_code
-  assertthat::assert_that(
-    length(animal_project_code) == 1,
-    msg = "`animal_project_code` must be a single value."
-  )
-
-  # Check rightsholder
-
-  if (is.null(rights_holder)) {
-    rights_holder <- NA_character_
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
   }
 
-  ## Set animal project code to lowercase for sql
-  animal_project_code <- stringr::str_to_lower(animal_project_code)
+  # Either use the API, or the SQL helper.
+  out <- conduct_parent_to_helpers(protocol = select_protocol(),
+                                   json = FALSE,
+                                   ignored_arguments = "directory")
 
-  # Check license
-  licenses <- c("CC-BY", "CC0")
-  assertthat::assert_that(
-    license %in% licenses,
-    msg = glue::glue(
-      "`license` must be `{licenses}`.",
-      licenses = glue::glue_collapse(licenses, sep = "`, `", last = "` or `")
-    )
-  )
-  license <- switch(
-    license,
-    "CC-BY" = "https://creativecommons.org/licenses/by/4.0/legalcode",
-    "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
-  )
-
-  # Get imis dataset id and title
-  project <- get_animal_projects(connection, animal_project_code)
-  imis_dataset_id <- project$imis_dataset_id
-  imis_url <- "https://www.vliz.be/en/imis?module=dataset&dasid="
-  imis_json <- jsonlite::read_json(paste0(imis_url, imis_dataset_id, "&show=json"))
-  dataset_id <- paste0(imis_url, imis_dataset_id)
-  dataset_name <- imis_json$datasetrec$StandardTitle
-
-  # Query database
-  message("Reading data and transforming to Darwin Core.")
-  dwc_occurrence_sql <- glue::glue_sql(
-    readr::read_file(system.file("sql/dwc_occurrence.sql", package = "etn")),
-    .con = connection,
-    .null = "NULL"
-  )
-  dwc_occurrence <- DBI::dbGetQuery(connection, dwc_occurrence_sql)
-
-  # Return object or write files
+  # Return the object or write out to file
   if (is.null(directory)) {
-    list(
-      dwc_occurrence = dplyr::as_tibble(dwc_occurrence)
-    )
+    ## Return a list of dataframes
+    return(out)
   } else {
+    ## Write to file
     dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
     message(glue::glue(
       "Writing data to:",
@@ -113,6 +82,8 @@ write_dwc <- function(connection = con,
     if (!dir.exists(directory)) {
       dir.create(directory, recursive = TRUE)
     }
-    readr::write_csv(dwc_occurrence, dwc_occurrence_path, na = "")
+    readr::write_csv(x = out$dwc_occurrence, file = dwc_occurrence_path, na = "")
   }
+
+  invisible(out)
 }

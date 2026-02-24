@@ -4,10 +4,12 @@
 \alias{get_animal_projects}
 \title{Get animal project data}
 \usage{
-get_animal_projects(connection = con, animal_project_code = NULL)
+get_animal_projects(connection, animal_project_code = NULL)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{animal_project_code}{Character (vector). One or more animal project
 codes. Case-insensitive.}
@@ -21,12 +23,9 @@ also
 Get data for animal projects, with options to filter results.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
 # Get all animal projects
-get_animal_projects(con)
+get_animal_projects()
 
 # Get a specific animal project
-get_animal_projects(con, animal_project_code = "2014_demer")
+get_animal_projects(animal_project_code = "2014_demer")
 }

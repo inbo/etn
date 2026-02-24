@@ -4,26 +4,23 @@
 \alias{connect_to_etn}
 \title{Connect to the ETN database}
 \usage{
-connect_to_etn(username = Sys.getenv("userid"), password = Sys.getenv("pwd"))
+connect_to_etn(...)
 }
 \arguments{
-\item{username}{Character. Username to use for the connection.}
-
-\item{password}{Character. Password to use for the connection.}
+\item{...}{Any arguments passed to this function are ignored.}
 }
 \value{
-ODBC connection to ETN database.
+This function is no longer in use, and returns \code{NULL} invisibly.
 }
 \description{
-Connect to the ETN database using username and password.
+This function is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} since etn version 3.0.0.
+Its use is no longer supported or needed. All connections to the ETN database
+are now handled automatically when you use a function. If your credentials
+are not stored in the system environment, you will be prompted to enter them.
 }
 \examples{
 \dontrun{
-# Connect to the ETN database using your rstudio.lifewatch.be username and
-# password, and save as the default connection variable "con"
-con <- connect_to_etn()
-
-# Connect to the ETN database using non-default username and password
-con <- connect_to_etn(username = "my_username", password = "my_password")
+# This will result in a deprecation warning!
+my_connection <- connect_to_etn()
 }
 }

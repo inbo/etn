@@ -1,6 +1,6 @@
 Package: etn
 Title: Access Data from the European Tracking Network
-Version: 2.2.2.9000
+Version: 3.0.0
 Authors@R: c(
     person("Pieter", "Huybrechts", , "pieter.huybrechts@inbo.be", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6658-6062")),
@@ -15,38 +15,55 @@ Authors@R: c(
     person("Research Foundation - Flanders", role = "fnd",
            comment = "https://lifewatch.be")
   )
-Description: Package with functions to access and process data from the
-    European Tracking Network hosted by VLIZ.
+Description: Access data from the European Tracking Network ('ETN',
+    <https://www.lifewatch.be/etn/>). With etn you can query metadata (animals, 
+    tags, deployments, receivers, projects) and data (acoustic detections, 
+    sensor data) from the 'ETN' database and use these in your analyses. Data
+    access requires user credentials and is subject to a data policy.
 License: MIT + file LICENSE
-URL: https://github.com/inbo/etn, https://inbo.github.io/etn
+URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 4.1)
 Imports:
+    arrow,
+    askpass,
     assertthat,
-    DBI,
+    cachem,
+    cli,
     dplyr,
+    etnservice (>= 0.5.0),
     glue,
-    jsonlite,
-    lubridate,
+    httr2,
+    lifecycle,
+    memoise,
     methods,
-    odbc,
+    prettyunits,
+    purrr,
     readr,
-    stringr
+    rlang,
+    stringr,
+    utils,
+    withr
 Suggests:
     formattable,
     frictionless,
     kableExtra,
     knitr,
     leaflet,
+    lubridate,
+    pak,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    withr
+    vcr
 VignetteBuilder: 
     knitr
+Remotes: 
+    inbo/etnservice,
+    ropensci/vcr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

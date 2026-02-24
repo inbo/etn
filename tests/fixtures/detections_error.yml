@@ -1,0 +1,53 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections_page/json/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"protocol":"opencpu","start_date":"not_a_date","end_date":null,"tag_serial_number":null,"acoustic_tag_id":null,"animal_project_code":null,"scientific_name":null,"acoustic_project_code":null,"receiver_id":null,"station_name":null,"protocol.1":"opencpu","count":true}'
+  response:
+    status: 400
+    headers:
+      date: Tue, 20 Jan 2026 09:19:29 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=300, public
+      x-ocpu-session: x051671533487ed
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x051671533487ed/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-01-20 09:19:30 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '406'
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc1; path=/
+    body:
+      raw_gzip: |-
+        eJyFkr9OwzAQxvc8xalTKqVWnfI3IywgIbEAS4Ui1zkSi8Su7KPAhhh4goqJp+uTYLeJ2tIC
+        liKd8/3
+        uO9/ZNxVCqWaowZGwlBeCMAFtKBdtrFzYgtIgYCZqVUD4Dw/GNoIY3Dr0wqtfg6YZ
+        FEUrgLHgKmMJbQ
+        LISgbpkKcDzgcpT7o4QCFkUXSpQYq6ziJf4gnH49HV/X0sjS76UXQm5CNZ
+        ITGLIKzF54cPOIPF/Gsxf
+        5sIh1mGPjEOFn2vpUF79998vz7azn1WVJ17SenyQuiiRutixlgg
+        D3bJO+XUpMZ46Ygv09CgninbD/wh
+        2626yXjkiIUe/oGO2arVJYakHdqZ8hPISvRXI82TIyXz
+        AgklKaNdPhUldoc+WSXvS89khfJxebU5qQb
+        jzWvvrTe94HPa+Wyfl+zruSBZteX4cI1tghDX
+        xg+8Dx1/pRy1fcpaOIcugamwqMm3nUDVjj5Y8k3LP0
+        2vNbaeWjS/OI7H3D+n4Jtu+3bOu48O
+        +Ognuj0ER2a6GsA3kC0aBA==
+  recorded_at: 2026-01-20 09:19:30
+recorded_with: VCR-vcr/2.0.0
