@@ -22,7 +22,7 @@ if (credentials_are_set()) {
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.
-if (localdb_is_available()) {
+if (localdb_is_available() & credentials_are_set()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
     with_mocked_bindings(
@@ -56,7 +56,7 @@ test_that("download_acoustic_dataset() creates the expected files using api", {
 })
 
 test_that("download_acoustic_dataset() creates the expected files using local db", {
-
+  skip_if_no_authentication()
   skip_if_not_localdb()
 
   files_to_create <- c(
@@ -85,6 +85,7 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
 
 test_that("download_acoustic_dataset() creates the expected messages using local db", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   expect_snapshot(
     cat(evalutate_download_localdb$messages, sep = "\n"),
