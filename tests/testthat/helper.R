@@ -26,13 +26,14 @@
 #' expect_protocol_agnostic(list_acoustic_projects())
 #' expect_protocol_agnostic(list_animal_projects())
 #'
-#'
 #' @export
 expect_protocol_agnostic <- function(expression) {
   # Skip if not both the API and the local database are available to compare
   testthat::skip_if_offline(host = "opencpu.lifewatch.be")
-  testthat::skip_if_not(localdb_is_available(),
-                        "ETN is not a local database on this machine")
+  testthat::skip_if_not(
+    localdb_is_available(),
+    "ETN is not a local database on this machine"
+  )
 
   # Test if the provided expression returns identical results regardless of
   # the return value of select_protocol()
@@ -41,12 +42,16 @@ expect_protocol_agnostic <- function(expression) {
     testthat::with_mocked_bindings(
       code = rlang::eval_tidy(rlang::enquo(expression)),
       # Object, is a call to opencpu
-      select_protocol = function(...) {"opencpu"}
+      select_protocol = function(...) {
+        "opencpu"
+      }
     ),
     testthat::with_mocked_bindings(
       code = rlang::eval_tidy(rlang::enquo(expression)),
       # Expectation is a call to the local database
-      select_protocol = function(...) {"localdb"}
+      select_protocol = function(...) {
+        "localdb"
+      }
     ),
     label = "api",
     expected.label = "sql"
@@ -75,9 +80,9 @@ fetch_schema_fields <- function(datapackage = datapackage, table_name) {
         function(x) x[["name"]]
       )
     )
-    ]][[
-      "schema"
-      ]][["fields"]]
+  ]][[
+    "schema"
+  ]][["fields"]]
 }
 
 #' Skip the test if ETN is not a local database on this machine.
@@ -99,23 +104,30 @@ skip_if_not_localdb <- function() {
 skip_if_http_error <- function(url) {
   url_resp <- httr2::request(url) |>
     # If the url returns an error, do not convert into R error.
-    httr2::req_error(is_error = \(response){ FALSE}) |>
+    httr2::req_error(is_error = \(response) {
+      FALSE
+    }) |>
     httr2::req_perform()
 
   testthat::skip_if(
     httr2::resp_is_error(url_resp),
-    glue::glue("{url} returned http error: {http_error}",
-               http_error = httr2::resp_status(url_resp))
+    glue::glue(
+      "{url} returned http error: {http_error}",
+      http_error = httr2::resp_status(url_resp)
+    )
   )
 }
 
-#' Skip the test if authentication credentials are not set. #
+#' Skip the test if authentication credentials are not set.
 #'
 #' @family helper functions
 #' @noRd
-skip_if_no_authentication <- function(){
-  testthat::skip_if_not(credentials_are_set(), message =
-                          "No credentials are stored")
+skip_if_no_authentication <- function() {
+  testthat::skip_if_not(
+    credentials_are_set(),
+    message =
+      "No credentials are stored"
+  )
 }
 
 
