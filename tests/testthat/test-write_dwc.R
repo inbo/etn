@@ -1,5 +1,6 @@
 test_that("[SQL] write_dwc() can write csv files to a path", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   out_dir <- file.path(tempdir(), "dwc")
   unlink(out_dir, recursive = TRUE)
@@ -16,6 +17,7 @@ test_that("[SQL] write_dwc() can write csv files to a path", {
 
 test_that("[SQL] write_dwc() can return data as list of tibbles rather than files", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL)
@@ -27,6 +29,7 @@ test_that("[SQL] write_dwc() can return data as list of tibbles rather than file
 
 test_that("[SQL] write_dwc() returns the expected Darwin Core terms as columns", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   result <- suppressMessages(
     write_dwc(animal_project_code = "2014_demer", directory = NULL)
@@ -85,6 +88,8 @@ withr::with_envvar(
 
 test_that("[API] write_dwc() can write csv files to a path", {
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   # Force using the OpenCPU API
   withr::local_envvar("ETN_PROTOCOL" = "opencpu")
   out_dir <- withr::local_tempdir()
@@ -141,6 +146,8 @@ test_that("[API] write_dwc() returns the expected Darwin Core terms as columns",
 
 test_that("[SQL] write_dwc() supports uppercase animal_project_codes", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
+
   result <- suppressMessages(
     write_dwc(animal_project_code = "2011_RIVIERPRIK", directory = NULL)
   )
@@ -153,6 +160,8 @@ test_that("[SQL] write_dwc() supports uppercase animal_project_codes", {
 
 test_that("[SQL] write_dwc() allows setting of rights_holder", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
+
   result <- suppressMessages(
     write_dwc(
       animal_project_code = "2014_demer",
@@ -169,6 +178,8 @@ test_that("[SQL] write_dwc() allows setting of rights_holder", {
 
 test_that("[SQL] write_dwc() returns an empty column for rights holder by default", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
+  
   result <- suppressMessages(
     write_dwc(
       animal_project_code = "2014_demer",

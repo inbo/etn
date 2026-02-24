@@ -160,8 +160,8 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
 # validate_login() --------------------------------------------------------
 
 test_that("validate_login() returns TRUE on correct credentials", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_true(validate_login())
 })
