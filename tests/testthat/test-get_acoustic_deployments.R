@@ -1,5 +1,3 @@
-skip_if_no_authentication()
-
 # Set ETN_PROTOCOL to "opencpu" to force using the API and use a cached response
 withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
   vcr::use_cassette("get_acoustic_deployments", {
@@ -8,12 +6,15 @@ withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), {
 })
 
 test_that("[API] get_acoustic_deployments() returns a tibble", {
+  skip_if_no_authentication()
+
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
 
 test_that("[SQL] get_acoustic_deployments() returns a tibble", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Response via local database connection
   df_sql <- get_acoustic_deployments()
@@ -23,6 +24,8 @@ test_that("[SQL] get_acoustic_deployments() returns a tibble", {
 })
 
 test_that("[API] get_acoustic_deployments() returns unique deployment_id", {
+  skip_if_no_authentication()
+
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(deployment_id)))
 })
 
@@ -36,6 +39,8 @@ test_that("[SQL] get_acoustic_deployments() returns unique deployment_id", {
 })
 
 test_that("[API] get_acoustic_deployments() returns the expected columns", {
+  skip_if_no_authentication()
+
   expected_col_names <- c(
     "deployment_id",
     "receiver_id",
@@ -80,6 +85,9 @@ test_that("[API] get_acoustic_deployments() returns the expected columns", {
 })
 
 test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
+  skip_if_not_localdb()
+  skip_if_no_authentication()
+
   expected_col_names <- c(
     "deployment_id",
     "receiver_id",
@@ -129,6 +137,8 @@ test_that("[SQL] get_acoustic_deployments() returns the expected columns", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("get_acoustic_deployments_deployment_id")
   # Errors
   expect_error(
@@ -166,6 +176,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", 
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Errors
   expect_error(
@@ -197,6 +208,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on deployment_id", 
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("acoustic_deployments_receiver_id")
   # Errors
   expect_error(
@@ -229,6 +242,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Errors
   expect_error(
@@ -260,6 +274,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on receiver_id", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project_code", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("get_acoustic_deployments_acoustic_project_code")
 
   # Errors
@@ -299,6 +315,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project_code", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Errors
   expect_error(
@@ -336,6 +353,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on acoustic_project
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("acoustic_deployments_station_name")
   # Errors
   expect_error(
@@ -368,6 +387,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Errors
   expect_error(
@@ -399,6 +419,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on station_name", {
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on open deployments only", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("acoustic_deployments_open_only")
   # Errors
   expect_error(
@@ -421,8 +443,8 @@ test_that("[API] get_acoustic_deployments() allows selecting on open deployments
 })
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments only", {
-
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Errors
   expect_error(
@@ -447,6 +469,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on open deployments
 })
 
 test_that("[API] get_acoustic_deployments() allows selecting on multiple parameters", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("acoustic_deployments_multiple_parameters")
   multiple_parameters_df <- get_acoustic_deployments(
     receiver_id = "VR2W-124070",
@@ -459,6 +483,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on multiple paramet
 
 test_that("[SQL] get_acoustic_deployments() allows selecting on multiple parameters", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   multiple_parameters_df <- get_acoustic_deployments(
     receiver_id = "VR2W-124070",
@@ -470,6 +495,8 @@ test_that("[SQL] get_acoustic_deployments() allows selecting on multiple paramet
 })
 
 test_that("[API] get_acoustic_deployments() does not return cpod deployments", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("acoustic_deployments_cpod")
   # C-POD-408 is a cpod receiver
   df <- get_acoustic_deployments(receiver_id = "C-POD-408")

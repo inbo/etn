@@ -1,6 +1,5 @@
-skip_if_no_authentication()
-
 test_that("get_animal_projects() returns a tibble", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
 
   df <- get_animal_projects()
@@ -12,13 +11,17 @@ test_that("get_animal_projects() returns a tibble", {
 })
 
 test_that("get_animal_projects() returns unique project_id", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   df <- get_animal_projects()
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_animal_projects() returns the expected columns", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   df <- get_animal_projects()
   expected_col_names <- c(
     "project_id",
@@ -40,7 +43,9 @@ test_that("get_animal_projects() returns the expected columns", {
 })
 
 test_that("get_animal_projects() allows selecting on animal_project_code", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_animal_projects(animal_project_code = "not_a_project"),
@@ -77,7 +82,8 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
 })
 
 test_that("get_animal_projects() returns projects of type 'animal'", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_identical(
     get_animal_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),

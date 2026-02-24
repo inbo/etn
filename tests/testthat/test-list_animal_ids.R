@@ -9,6 +9,7 @@ test_that("list_animal_ids() returns unique list of values using api", {
 })
 
 test_that("list_animal_ids() returns same list over api and sql", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
   result_sql <- list_animal_ids()
 
@@ -16,6 +17,7 @@ test_that("list_animal_ids() returns same list over api and sql", {
 })
 
 test_that("list_animal_ids returns at least 5 known values", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
   result_sql <- list_animal_ids()
 
