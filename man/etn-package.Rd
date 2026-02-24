@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Package with functions to access and process data from the European Tracking Network hosted by VLIZ.
+Access data from the European Tracking Network ('ETN', \url{https://www.lifewatch.be/etn/}). With etn you can query metadata (animals, tags, deployments, receivers, projects) and data (acoustic detections, sensor data) from the 'ETN' database and use these in your analyses. Data access requires user credentials and is subject to a data policy.
 }
 \seealso{
 Useful links:
