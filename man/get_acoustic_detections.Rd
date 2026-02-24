@@ -65,8 +65,6 @@ Get data for acoustic detections, with options to filter results. Use
 }
 \examples{
 \dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
-# example code
-
 # Get limited sample of acoustic detections
 get_acoustic_detections(limit = TRUE)
 
