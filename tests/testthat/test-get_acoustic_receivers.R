@@ -1,5 +1,6 @@
 test_that("get_acoustic_receivers() returns a tibble", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   df <- get_acoustic_receivers()
   expect_s3_class(df, "data.frame")
