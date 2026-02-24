@@ -1,9 +1,14 @@
 # Fetch tags using the API
 if (credentials_are_set()) {
-  df <- get_tags()
+  # Force using the API
+  df <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "opencpu"),
+    code = get_tags()
+  )
 }
+
 # Test with local database, skip if not available
-if (localdb_is_available()) {
+if (localdb_is_available() & credentials_are_set()) {
   df_sql <- get_tags()
 }
 
