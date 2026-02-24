@@ -33,9 +33,13 @@ test_that("[API] get_acoustic_deployments() returns unique deployment_id", {
 
 test_that("[SQL] get_acoustic_deployments() returns unique deployment_id", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   # Response via local database connection
-  df_sql <- get_acoustic_deployments()
+  df_sql <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "localdb"),
+    code = get_acoustic_deployments()
+  )
 
   expect_equal(nrow(df_sql), nrow(df_sql |> dplyr::distinct(deployment_id)))
 })
