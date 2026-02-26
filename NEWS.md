@@ -1,5 +1,7 @@
 # etn (development version)
 
+# etn 3.0.0
+
 ## Use etn on your computer 🎉
 
 * etn now connects to the ETN database with an API provided by the [etnservice](https://github.com/inbo/etnservice) package (#280). This means you can use the package from your own computer. Note that this will be slower than running it from the [VLIZ RStudio server](https://rstudio4.vliz.be/).

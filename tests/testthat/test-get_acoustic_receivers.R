@@ -1,5 +1,6 @@
 test_that("get_acoustic_receivers() returns a tibble", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   df <- get_acoustic_receivers()
   expect_s3_class(df, "data.frame")
@@ -17,7 +18,9 @@ test_that("get_acoustic_receivers() returns unique receiver_id", {
 })
 
 test_that("get_acoustic_receivers() returns the expected columns", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   df <- get_acoustic_receivers()
   expected_col_names <- c(
     "receiver_id",
@@ -48,7 +51,9 @@ test_that("get_acoustic_receivers() returns the expected columns", {
 })
 
 test_that("get_acoustic_receivers() allows selecting on receiver_id", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_acoustic_receivers(receiver_id = "not_a_receiver_id"),
@@ -81,7 +86,9 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
 
 
 test_that("get_acoustic_receivers() allows selecting on status", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_acoustic_receivers(status = "not_a_status"),
@@ -112,7 +119,9 @@ test_that("get_acoustic_receivers() allows selecting on status", {
 })
 
 test_that("get_acoustic_receivers() does not return cpod receivers", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # C-POD-408 is a cpod receiver
   df <- get_acoustic_receivers(receiver_id = "C-POD-408")
   expect_identical(nrow(df), 0L)

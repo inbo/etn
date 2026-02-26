@@ -68,7 +68,7 @@ performed by validation tools of the Frictionless Framework, e.g.
 \href{https://github.com/frictionlessdata/frictionless-py}{frictionless-py}.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+\dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
                          directory = tempdir())

@@ -18,5 +18,7 @@ A vector of all unique \code{receiver} present in \code{acoustic.receivers}.
 List all available receiver ids
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 list_receiver_ids()
+\dontshow{\}) # examplesIf}
 }

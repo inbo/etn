@@ -5,7 +5,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_deployment_ids()
 list_deployment_ids <- function(connection) {
   # Check arguments

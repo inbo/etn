@@ -30,7 +30,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' # Get limited sample of acoustic detections
 #' get_acoustic_detections(limit = TRUE)
 #'

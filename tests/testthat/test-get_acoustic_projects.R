@@ -1,20 +1,22 @@
-skip_if_not_localdb() # local database and api tests are mixed
-
-df <- get_acoustic_projects()
-df_sql <- get_acoustic_projects()
-
 test_that("get_acoustic_projects() returns a tibble", {
+  skip_if_no_authentication()
+
+  df <- get_acoustic_projects()
+
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-  expect_s3_class(df_sql, "data.frame")
-  expect_s3_class(df_sql, "tbl")
 })
 
 test_that("get_acoustic_projects() returns unique project_id", {
+  skip_if_no_authentication()
+
+  df <- get_acoustic_projects()
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
 
 test_that("get_acoustic_projects() returns the expected columns", {
+  skip_if_no_authentication()
+
   expected_col_names <- c(
     "project_id",
     "project_code",
@@ -31,10 +33,14 @@ test_that("get_acoustic_projects() returns the expected columns", {
     "moratorium",
     "imis_dataset_id"
   )
+
+  df <- get_acoustic_projects()
   expect_identical(names(df), expected_col_names)
 })
 
 test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
+  skip_if_no_authentication()
+
   # Errors
   expect_error(
     get_acoustic_projects(acoustic_project_code = "not_a_project"),
@@ -71,6 +77,8 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
 })
 
 test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
+  skip_if_no_authentication()
+
   expect_identical(
     get_acoustic_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "acoustic"

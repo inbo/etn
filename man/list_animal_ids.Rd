@@ -18,5 +18,7 @@ A vector of all unique \code{id_pk} present in \code{common.animal_release}.
 List all available animal ids
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 list_animal_ids()
+\dontshow{\}) # examplesIf}
 }

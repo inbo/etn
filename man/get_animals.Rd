@@ -38,6 +38,7 @@ information is available in columns starting with \code{tag} and
 the information is comma-separated.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all animals
 get_animals()
 
@@ -57,4 +58,5 @@ get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
 
 # Get animals of a specific species from a specific project
 get_animals(animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
+\dontshow{\}) # examplesIf}
 }

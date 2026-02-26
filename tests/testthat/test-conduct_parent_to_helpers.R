@@ -5,6 +5,7 @@ test_that("conduct_parent_to_helpers() can stop on bad input parameters", {
 })
 
 test_that("conduct_parent_to_helper() does not forward ignored arguments", {
+  skip_if_no_authentication()
   vcr::local_cassette("conduct_acoustic_projects")
   # If the `acoustic_project_code` arguments is not forwarded, then the result
   # should be the same as passing without arguments.
