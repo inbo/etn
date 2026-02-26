@@ -12,3 +12,4 @@
 ^CITATION\.cff$
 ^\.github$
 ^LICENSE\.md$
+^codemeta\.json$
