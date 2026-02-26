@@ -67,91 +67,106 @@ credentials instead.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">list_scientific_names</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Abramis brama"                  "Abramis brama Rutilus rutilus" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [3] "Acipenser"                      "Acipenser oxyrinchus"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [5] "Acipenser sturio"               "Aetomylaeus bovinus"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] "Alosa alosa"                    "Alosa fallax"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [9] "Anarhichas lupus"               "Anguilla anguilla"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "Anguilla rostrata"              "Argyrosomus regius"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] "Aspius aspius"                  "Balistes capriscus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [15] "Barbus barbus"                  "Belone belone"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [17] "Blicca bjoerkna"                "Built-in"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] "Callinectes sapidus"            "Cancer pagurus"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "Castor fiber"                   "Cetorhinus maximus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [23] "Chelidonichthys cuculus"        "Chelon labrosus"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "Chelon ramada"                  "Chelon saliens"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [27] "Chondrostoma nasus"             "Chromis chromis"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [29] "Clupea harengus"                "Conger conger"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "Coregonus lavaretus"            "Coregonus lavaretus oxyrinchus"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [33] "Coregonus oxyrinchus"           "Coris julis"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [35] "Coryphaena hippurus"            "Cyclopterus lumpus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] "Cyprinus carpio"                "Dactylopterus volitans"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [39] "Dasyatis pastinaca"             "Dentex dentex"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "Dicentrarchus labrax"           "Diplodus cervinus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "Diplodus puntazzo"              "Diplodus sargus"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [45] "Diplodus vulgaris"              "Epinephelus costae"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [47] "Epinephelus marginatus"         "Eriocheir sinensis"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "Eriphia verrucosa"              "Esox lucius"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "Gadus morhua"                   "Galeorhinus galeus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [53] "Glaucostegus cemiculus"         "Gobius cruentatus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "Gymnura altavela"               "Hexanchus griseus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] "Homarus gammarus"               "Homo sapiens sapiens"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [59] "Isurus oxyrinchus"              "Labrus bergylta"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "Labrus mixtus"                  "Lamna nasus"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [63] "Lampetra fluviatilis"           "Leuciscus idus"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] "Lichia amia"                    "Limanda limanda"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "Lithognathus mormyrus"          "Liza aurata"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [69] "Liza ramada"                    "Lota lota"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "Maja brachydactyla"             "Melanogrammus aeglefinus"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "Merlangius merlangus"           "Merluccius merluccius"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] "Microstomus kitt"               "Mola mola"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [77] "Mugil"                          "Mullus surmuletus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "Muraena helena"                 "Mustelus"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "Mustelus asterias"              "Mustelus mustelus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [83] "Mycteroperca rubra"             "Myliobatis aquila"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "Myoxocephalus scorpius"         "Oblada melanurus"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [87] "Octopus vulgaris"               "Oncorhynchus mykiss"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] "Osmerus eperlanus"              "Pagellus bogaraveo"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "Pagellus erythrinus"            "Pagrus pagrus"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [93] "Palinurus elephas"              "Parablennius gattorugine"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [95] "Perca fluviatilis"              "Petromyzon marinus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "Plastic"                        "Platichthys flesus"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [99] "Pleuronectes platessa"          "Pollachius pollachius"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "Pomadasys incisus"              "Pomatomus saltatrix"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "Prionace glauca"                "Pseudocaranx dentex"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [105] "Pteroplatytrygon violacea"      "Raja asterias"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [107] "Raja brachyura"                 "Raja clavata"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "Raja montagui"                  "Raja polystigma"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "Raja radula"                    "Raja undulata"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [113] "Range tag"                      "range test"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [115] "Range test"                     "Reference Tag D-2LP13"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [117] "Reference Tag D-2LP9L"          "Rostroraja alba"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [119] "Rutilus rutilus"                "Salmo salar"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "Salmo salar/Salmo trutta"       "Salmo t. trutta"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [123] "Salmo trutta"                   "Salmo trutta trutta"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [125] "Salvelinus alpinus"             "Sander lucioperca"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127] "Sarpa salpa"                    "Sciaena umbra"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [129] "Scomber scombrus"               "Scophthalmus maximus"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] "Scorpaena notata"               "Scorpaena porcus"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [133] "Scorpaena scrofa"               "Scyliorhinus canicula"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [135] "Scyliorhinus stellaris"         "Scyllarides latus"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [137] "Sensor tag"                     "Sepia officinalis"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [139] "Seriola dumerili"               "Seriola rivoliana"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141] "Serranus atricauda"             "Serranus cabrilla"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [143] "Serranus scriba"                "Silurus glanis"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145] "Solea senegalensis"             "Solea solea"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [147] "Somniosus microcephalus"        "Sparisoma cretense"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [149] "Sparus aurata"                  "Sphyraena barracuda"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "Sphyraena viridensis"           "Spondyliosoma cantharus"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [153] "Squalius cephalus"              "Squalus acanthias"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [155] "Symphodus bailloni"             "Symphodus melops"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [157] "Symphodus ocellatus"            "Symphodus rostratus"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [159] "Symphodus tinca"                "Sync tag"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161] "Synctag R-HP16"                 "Tetrapturus belone"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [163] "Thunnus thynnus"                "Thymallus thymallus"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [165] "Tinca tinca"                    "Torpedo (Torpedo)"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [167] "Torpedo marmorata"              "Torpedo torpedo"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169] "Trachurus trachurus"            "Umbrina cirrosa"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] "Vimba vimba"                    "Xyrichtys novacula"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3] "Acanthurus"                     "Acipenser"                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5] "Acipenser oxyrinchus"           "Acipenser sturio"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] "Aetomylaeus bovinus"            "Alosa alosa"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [9] "Alosa fallax"                   "Anarhichas lupus"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "Anguilla anguilla"              "Anguilla rostrata"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] "Argyrosomus regius"             "Aspius aspius"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [15] "Balistes capriscus"             "Barbus barbus"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [17] "Belone belone"                  "Blicca bjoerkna"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] "Built-in"                       "Callinectes sapidus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "Cancer pagurus"                 "Caranx bartholomaei"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [23] "Caranx crysos"                  "Caranx latus"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "Caranx ruber"                   "Castor fiber"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [27] "Cephalopholis cruentata"        "Cephalopholis fulva"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [29] "Cetorhinus maximus"             "Chelidonichthys cuculus"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "Chelon labrosus"                "Chelon ramada"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [33] "Chelon saliens"                 "Chondrostoma nasus"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [35] "Chromis chromis"                "Clupea harengus"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] "Conger conger"                  "Coregonus lavaretus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [39] "Coregonus lavaretus oxyrinchus" "Coregonus oxyrinchus"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "Coris julis"                    "Coryphaena hippurus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "Cyclopterus lumpus"             "Cyprinus carpio"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [45] "Dactylopterus volitans"         "Dasyatis pastinaca"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [47] "Dentex dentex"                  "Dicentrarchus labrax"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "Diplodus cervinus"              "Diplodus puntazzo"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "Diplodus sargus"                "Diplodus vulgaris"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [53] "Epinephelus costae"             "Epinephelus guttatus"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "Epinephelus marginatus"         "Epinephelus striatus"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] "Eriocheir sinensis"             "Eriphia verrucosa"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [59] "Esox lucius"                    "Gadus morhua"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "Galeorhinus galeus"             "Glaucostegus cemiculus"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [63] "Gobius cruentatus"              "Gymnura altavela"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] "Haemulon"                       "Haemulon carbonarium"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "Haemulon parra"                 "Haemulon plumierii"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [69] "Haemulon sciurus"               "Hexanchus griseus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "Holocentrus"                    "Homarus gammarus"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "Homo sapiens sapiens"           "Isurus oxyrinchus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] "Labrus bergylta"                "Labrus mixtus"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [77] "Lachnolaimus maximus"           "Lamna nasus"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "Lampetra fluviatilis"           "Leuciscus idus"                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "Lichia amia"                    "Limanda limanda"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [83] "Lithognathus mormyrus"          "Liza aurata"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "Liza ramada"                    "Lota lota"                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [87] "Lutjanus analis"                "Lutjanus apodus"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] "Lutjanus mahogoni"              "Lutjanus synagris"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "Maja brachydactyla"             "Melanogrammus aeglefinus"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [93] "Merlangius merlangus"           "Merluccius merluccius"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [95] "Microstomus kitt"               "Mola mola"                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "Mugil"                          "Mullus surmuletus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [99] "Muraena helena"                 "Mustelus"                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "Mustelus asterias"              "Mustelus mustelus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "Mycteroperca bonaci"            "Mycteroperca rubra"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [105] "Myliobatis aquila"              "Myoxocephalus scorpius"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [107] "Oblada melanurus"               "Octopus vulgaris"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "Ocyurus chrysurus"              "Oncorhynchus mykiss"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "Osmerus eperlanus"              "Pagellus bogaraveo"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [113] "Pagellus erythrinus"            "Pagrus pagrus"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [115] "Palinurus elephas"              "Parablennius gattorugine"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [117] "Perca fluviatilis"              "Petromyzon marinus"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [119] "Plastic"                        "Platichthys flesus"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "Pleuronectes platessa"          "Pollachius pollachius"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [123] "Pollachius virens"              "Pomadasys incisus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [125] "Pomatomus saltatrix"            "Prionace glauca"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [127] "Pseudocaranx dentex"            "Pteroplatytrygon violacea"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [129] "Raja asterias"                  "Raja brachyura"                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [131] "Raja clavata"                   "Raja montagui"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [133] "Raja polystigma"                "Raja radula"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [135] "Raja undulata"                  "Range tag"                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [137] "range test"                     "Range test"                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [139] "Reference Tag D-2LP13"          "Reference Tag D-2LP9L"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [141] "Rostroraja alba"                "Rutilus rutilus"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [143] "Salmo salar"                    "Salmo salar/Salmo trutta"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [145] "Salmo t. trutta"                "Salmo trutta"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [147] "Salmo trutta trutta"            "Salvelinus alpinus"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [149] "Sander lucioperca"              "Sarpa salpa"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "Scarus guacamaia"               "Scarus taeniopterus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [153] "Scarus vetula"                  "Sciaena umbra"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [155] "Scomber scombrus"               "Scophthalmus maximus"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [157] "Scorpaena notata"               "Scorpaena porcus"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [159] "Scorpaena scrofa"               "Scyliorhinus canicula"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [161] "Scyliorhinus stellaris"         "Scyllarides latus"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [163] "Sensor tag"                     "Sepia officinalis"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [165] "Seriola dumerili"               "Seriola rivoliana"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [167] "Serranidae"                     "Serranus atricauda"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [169] "Serranus cabrilla"              "Serranus scriba"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [171] "Silurus glanis"                 "Solea senegalensis"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [173] "Solea solea"                    "Somniosus microcephalus"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [175] "Sparisoma"                      "Sparisoma cretense"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [177] "Sparisoma rubripinne"           "Sparisoma viride"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [179] "Sparus aurata"                  "Sphyraena barracuda"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [181] "Sphyraena viridensis"           "Spondyliosoma cantharus"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [183] "Squalius cephalus"              "Squalus acanthias"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [185] "Symphodus bailloni"             "Symphodus melops"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [187] "Symphodus ocellatus"            "Symphodus rostratus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [189] "Symphodus tinca"                "Sync tag"                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [191] "Synctag R-HP16"                 "Tetrapturus belone"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [193] "Thunnus thynnus"                "Thymallus thymallus"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [195] "Tinca tinca"                    "Torpedo (Torpedo)"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [197] "Torpedo marmorata"              "Torpedo torpedo"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [199] "Trachurus trachurus"            "Umbrina cirrosa"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [201] "Vimba vimba"                    "Xyrichtys novacula"            </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
