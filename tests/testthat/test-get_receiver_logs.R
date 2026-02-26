@@ -150,4 +150,10 @@ test_that("get_receiver_logs() returns unique rows per ids, datetime, record_typ
   )
 })
 
+test_that("get_receiver_logs() can handle logs with multiple values", {
+  #coalesce works
+
+  # this deployment causes an error on the pings column
+  expect_no_error(get_receiver_logs(deployment_ids = 6028))
+})
 
