@@ -1,21 +1,34 @@
 test_that("list_animal_ids() returns unique list of values using api", {
-  testthat::skip_if_offline("opencpu.lifewatch.be")
-  result_api <- list_animal_ids()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
+  result_api <- withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), code = {
+    list_animal_ids()
+  })
+
   expect_type(result_api, "integer")
   expect_false(any(duplicated(result_api)))
   expect_true(all(!is.na(result_api)))
 })
 
 test_that("list_animal_ids() returns same list over api and sql", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
   result_sql <- list_animal_ids()
+  result_api <- withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), code = {
+    list_animal_ids()
+  })
 
   expect_identical(result_api, result_sql)
 })
 
 test_that("list_animal_ids returns at least 5 known values", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
   result_sql <- list_animal_ids()
+  result_api <- withr::with_envvar(c("ETN_PROTOCOL" = "opencpu"), code = {
+    list_animal_ids()
+  })
 
   # a set of 5 known id_pk present in common.animal_release
   known_ids <- c(4622, 4653, 4647, 4674, 4678, 4675)

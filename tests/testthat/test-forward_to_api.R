@@ -1,5 +1,7 @@
 test_that("forward_to_api() can forward call to api using JSON retrieval", {
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_type(
     forward_to_api("list_animal_ids", payload = list(), json = TRUE),
     "integer"
@@ -8,6 +10,8 @@ test_that("forward_to_api() can forward call to api using JSON retrieval", {
 
 test_that("forward_to_api() can forward call to api using two step retrieval", {
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_type(
     forward_to_api("list_animal_ids", payload = list(), json = FALSE),
     "integer"

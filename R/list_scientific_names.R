@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_scientific_names()
 list_scientific_names <- function(connection) {
   # Check arguments

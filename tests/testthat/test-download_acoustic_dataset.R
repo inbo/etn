@@ -1,27 +1,28 @@
 # Create a data package using the API
-vcr::use_cassette( # Cache HTTP response
-  "download_acoustic_dataset",
-  {
-    datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-    evalute_download_api <- evaluate_promise({
-      with_mocked_bindings(
-        {
-          download_acoustic_dataset(
-            animal_project_code = "2014_demer",
-            directory = datapackage_path
-          )
-        },
-        # Force an API request, otherwise vcr will fail.
-        select_protocol = \(x) "opencpu"
-      )
-    })
-  }
-)
-
+if (credentials_are_set()) {
+  vcr::use_cassette( # Cache HTTP response
+    "download_acoustic_dataset",
+    {
+      datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+      evalute_download_api <- evaluate_promise({
+        with_mocked_bindings(
+          {
+            download_acoustic_dataset(
+              animal_project_code = "2014_demer",
+              directory = datapackage_path
+            )
+          },
+          # Force an API request, otherwise vcr will fail.
+          select_protocol = \(x) "opencpu"
+        )
+      })
+    }
+  )
+}
 
 # Create a data package using local database access, if available. Tests that
 # require local database access should be skipped when it's not available.
-if (localdb_is_available()) {
+if (localdb_is_available() & credentials_are_set()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
     with_mocked_bindings(
@@ -38,6 +39,8 @@ if (localdb_is_available()) {
 }
 
 test_that("download_acoustic_dataset() creates the expected files using api", {
+  skip_if_no_authentication()
+
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -53,7 +56,7 @@ test_that("download_acoustic_dataset() creates the expected files using api", {
 })
 
 test_that("download_acoustic_dataset() creates the expected files using local db", {
-
+  skip_if_no_authentication()
   skip_if_not_localdb()
 
   files_to_create <- c(
@@ -70,6 +73,8 @@ test_that("download_acoustic_dataset() creates the expected files using local db
 })
 
 test_that("download_acoustic_dataset() returns the expected messages using api", {
+  skip_if_no_authentication()
+
   expect_snapshot(
     cat(evalute_download_api$messages, sep = "\n"),
     variant = "api",
@@ -80,6 +85,7 @@ test_that("download_acoustic_dataset() returns the expected messages using api",
 
 test_that("download_acoustic_dataset() creates the expected messages using local db", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
   expect_snapshot(
     cat(evalutate_download_localdb$messages, sep = "\n"),
@@ -91,11 +97,15 @@ test_that("download_acoustic_dataset() creates the expected messages using local
 })
 
 test_that("download_acoustic_dataset() does not return warnings for valid dataset api", {
+  skip_if_no_authentication()
+
   # Function returns no warnings (character of length 0)
   expect_true(length(evalute_download_api$warnings) == 0)
 })
 
 test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
+  skip_if_no_authentication()
+
   # This will fail when a field is added to a get_ function but not to datapackage.json
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
@@ -108,6 +118,8 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 })
 
 test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
+  skip_if_no_authentication()
+
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
@@ -150,6 +162,8 @@ test_that("download_acoustic_dataset() returns CSV files with expected number of
 })
 
 test_that("download_acoustic_dataset() returns CSV files with columns in expected order", {
+  skip_if_no_authentication()
+
   datapackage <-
     suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check if the schema fields in the data package are exactly the same

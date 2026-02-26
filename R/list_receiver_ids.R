@@ -5,7 +5,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_receiver_ids()
 list_receiver_ids <- function(connection) {
   # Check arguments

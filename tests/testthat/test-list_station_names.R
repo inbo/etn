@@ -1,4 +1,7 @@
 test_that("list_station_names() returns unique list of values", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   vcr::use_cassette("list_station_names", {
     vector <- list_station_names()
   })

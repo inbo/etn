@@ -8,7 +8,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' list_animal_ids()
 list_animal_ids <- function(connection) {
   # Check arguments

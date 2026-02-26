@@ -41,6 +41,7 @@ Get data for deployments of acoustic receivers, with options to filter
 results.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all acoustic deployments
 get_acoustic_deployments()
 
@@ -58,4 +59,5 @@ get_acoustic_deployments(acoustic_project_code = "demer")
 
 # Get acoustic deployments for two specific stations
 get_acoustic_deployments(station_name = c("de-9", "de-10"))
+\dontshow{\}) # examplesIf}
 }

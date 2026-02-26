@@ -19,7 +19,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' # Get all acoustic deployments
 #' get_acoustic_deployments()
 #'

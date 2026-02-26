@@ -23,9 +23,11 @@ also
 Get data for acoustic projects, with options to filter results.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all acoustic projects
 get_acoustic_projects()
 
 # Get a specific acoustic project
 get_acoustic_projects(acoustic_project_code = "demer")
+\dontshow{\}) # examplesIf}
 }

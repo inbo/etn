@@ -1,4 +1,7 @@
 test_that("get_acoustic_detections() can pass errors over the api", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   vcr::local_cassette("detections_error")
@@ -9,6 +12,8 @@ test_that("get_acoustic_detections() can pass errors over the api", {
 })
 
 test_that("get_acoustic_detections() returns a tibble", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_limit")
   df <- get_acoustic_detections(limit = TRUE)
   expect_s3_class(df, "data.frame")
@@ -17,9 +22,14 @@ test_that("get_acoustic_detections() returns a tibble", {
 
 test_that("get_acoustic_detections() returns a tibble over sql", {
   skip_if_not_localdb()
+  skip_if_no_authentication()
 
-  df_sql <- get_acoustic_detections(animal_project_code = "2014_demer",
+  df_sql <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "localdb"),
+    code = get_acoustic_detections(animal_project_code = "2014_demer",
                                     limit = TRUE)
+  )
+
   expect_s3_class(df_sql, "data.frame")
   expect_s3_class(df_sql, "tbl")
 })
@@ -33,6 +43,8 @@ test_that("get_acoustic_detections() returns unique detection_id", {
 })
 
 test_that("get_acoustic_detections() returns the expected columns", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_columns")
   df <- get_acoustic_detections(
     animal_project_code = "2014_demer",
@@ -64,6 +76,8 @@ test_that("get_acoustic_detections() returns the expected columns", {
 })
 
 test_that("get_acoustic_detections() returns expected cols on 0 row result", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_no_results")
   # There should be no detections before the year 1000
   df <- get_acoustic_detections(end_date = "1000-01-01")
@@ -98,6 +112,8 @@ test_that("get_acoustic_detections() returns expected cols on 0 row result", {
 })
 
 test_that("get_acoustic_detections() allows selecting on start_date and end_date", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_dates")
   # Errors
   expect_error(get_acoustic_detections(start_date = "not_a_date"))
@@ -194,6 +210,8 @@ test_that("get_acoustic_detections() allows selecting on start_date and end_date
 })
 
 test_that("get_acoustic_detections() allows selecting on tag_serial_number", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_tag_serial_number")
 
   # Errors
@@ -227,6 +245,8 @@ test_that("get_acoustic_detections() allows selecting on tag_serial_number", {
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_tag_id")
 
   # Errors
@@ -254,6 +274,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_tag_id", {
 })
 
 test_that("get_acoustic_detections() allows selecting on animal_project_code", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_animal_project_code")
   # Errors
   expect_error(
@@ -320,6 +342,8 @@ test_that("get_acoustic_detections() allows selecting on animal_project_code", {
 })
 
 test_that("get_acoustic_detections() allows selecting on scientific_name", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_scientific_name")
   # Errors
   expect_error(
@@ -362,6 +386,8 @@ test_that("get_acoustic_detections() allows selecting on scientific_name", {
 })
 
 test_that("get_acoustic_detections() allows selecting on acoustic_project_code", {
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   # Use a cached API response
@@ -408,6 +434,8 @@ test_that("get_acoustic_detections() allows selecting on acoustic_project_code",
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple acoustic_project_code", {
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   # Use a cached API response
@@ -430,6 +458,8 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
 })
 
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_receiver_id")
   # Errors
   expect_error(
@@ -462,6 +492,8 @@ test_that("get_acoustic_detections() allows selecting on receiver_id", {
 })
 
 test_that("get_acoustic_detections() allows selecting on station_name", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_station_name")
 
   # Errors
@@ -489,6 +521,8 @@ test_that("get_acoustic_detections() allows selecting on station_name", {
 })
 
 test_that("get_acoustic_detections() allows to limit to 100 records", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_limit_param")
   # Errors
   expect_error(get_acoustic_detections(limit = "not_a_logical"))
@@ -502,6 +536,8 @@ test_that("get_acoustic_detections() allows to limit to 100 records", {
 })
 
 test_that("get_acoustic_detections() allows selecting on multiple parameters", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_multiple_parameters")
   multiple_parameters_df <- get_acoustic_detections(
     start_date = "2014-04-24",
@@ -517,6 +553,8 @@ test_that("get_acoustic_detections() allows selecting on multiple parameters", {
 })
 
 test_that("get_acoustic_detections() returns acoustic and acoustic-archival tags", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_acoustic_and_acoustic_archival_tags")
 
   acoustic_df <- get_acoustic_detections(acoustic_tag_id = "A69-1601-16130")
@@ -596,6 +634,8 @@ test_that("get_acoustic_detections() does not return duplicate detections when t
 })
 
 test_that("get_acoustic_detections() does not return detections out of date range when tag is associated with animal", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_tag_date_range")
   # A69-1303-20695 (tag_serial_number = 1097335) is associated with animal
   # 637 (2010_phd_reubens) from 2010-08-09 13:00:00 to 2011-05-19 00:00:00
@@ -619,6 +659,8 @@ test_that("get_acoustic_detections() does not return detections out of date rang
 })
 
 test_that("get_acoustic_detections() can return detections not (yet) associated with an animal", {
+  skip_if_no_authentication()
+
   vcr::local_cassette("detections_no_animal")
   # A180-1702-49684 (tag_serial_number = 1317386) is an "acoustic / animal" tag
   # not yet associated with an animal. It should return detections
@@ -626,6 +668,8 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
 })
 
 test_that("get_acoustic_detection() reports no progress when disabled", {
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   # Use a cached API response
@@ -649,6 +693,8 @@ test_that("get_acoustic_detection() reports no progress when disabled", {
 # count_acoustic_detections -----------------------------------------------
 
 test_that("count_acoustic_detections() returns numeric values", {
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   # Use a cached API response
@@ -659,6 +705,8 @@ test_that("count_acoustic_detections() returns numeric values", {
 })
 
 test_that("count_acoustic_detections() returns values within expected range", {
+  skip_if_no_authentication()
+
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   # Use a cached API response
