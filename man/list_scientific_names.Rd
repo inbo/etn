@@ -4,10 +4,12 @@
 \alias{list_scientific_names}
 \title{List all available scientific names}
 \usage{
-list_scientific_names(connection = con)
+list_scientific_names(connection)
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 }
 \value{
 A vector of all unique \code{scientific_name} present in
@@ -15,4 +17,9 @@ A vector of all unique \code{scientific_name} present in
 }
 \description{
 List all available scientific names
+}
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_scientific_names()
+\dontshow{\}) # examplesIf}
 }

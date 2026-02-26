@@ -5,7 +5,7 @@
 \title{Get animal data}
 \usage{
 get_animals(
-  connection = con,
+  connection,
   animal_id = NULL,
   tag_serial_number = NULL,
   animal_project_code = NULL,
@@ -13,7 +13,9 @@ get_animals(
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{animal_id}{Integer (vector). One or more animal identifiers.}
 
@@ -36,26 +38,25 @@ information is available in columns starting with \code{tag} and
 the information is comma-separated.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all animals
-get_animals(con)
+get_animals()
 
 # Get specific animals
-get_animals(con, animal_id = 305) # Or string value "305"
-get_animals(con, animal_id = c(304, 305, 2827))
+get_animals(animal_id = 305) # Or string value "305"
+get_animals(animal_id = c(304, 305, 2827))
 
 # Get animals from specific animal project(s)
-get_animals(con, animal_project_code = "2014_demer")
-get_animals(con, animal_project_code = c("2014_demer", "2015_dijle"))
+get_animals(animal_project_code = "2014_demer")
+get_animals(animal_project_code = c("2014_demer", "2015_dijle"))
 
 # Get animals associated with a specific tag_serial_number
-get_animals(con, tag_serial_number = "1187450")
+get_animals(tag_serial_number = "1187450")
 
 # Get animals of specific species (across all projects)
-get_animals(con, scientific_name = c("Rutilus rutilus", "Silurus glanis"))
+get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
 
 # Get animals of a specific species from a specific project
-get_animals(con, animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
+get_animals(animal_project_code = "2014_demer", scientific_name = "Rutilus rutilus")
+\dontshow{\}) # examplesIf}
 }

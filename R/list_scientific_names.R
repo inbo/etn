@@ -1,17 +1,19 @@
 #' List all available scientific names
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `scientific_name` present in
 #'   `common.animal_release`.
 #'
 #' @export
-list_scientific_names <- function(connection = con) {
-  query <- glue::glue_sql(
-    "SELECT DISTINCT scientific_name FROM common.animal_release",
-    .con = connection
-  )
-  data <- DBI::dbGetQuery(connection, query)
-
-  sort(data$scientific_name)
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_scientific_names()
+list_scientific_names <- function(connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
 }

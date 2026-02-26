@@ -1,17 +1,46 @@
-skip_if_not_localdb()
-
-con <- connect_to_etn()
-
-# Create a data package
-evaluate_download <- evaluate_promise({
-  download_acoustic_dataset(
-    con,
-    animal_project_code = "2014_demer",
-    directory = tempdir()
+# Create a data package using the API
+if (credentials_are_set()) {
+  vcr::use_cassette( # Cache HTTP response
+    "download_acoustic_dataset",
+    {
+      datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+      evalute_download_api <- evaluate_promise({
+        with_mocked_bindings(
+          {
+            download_acoustic_dataset(
+              animal_project_code = "2014_demer",
+              directory = datapackage_path
+            )
+          },
+          # Force an API request, otherwise vcr will fail.
+          select_protocol = \(x) "opencpu"
+        )
+      })
+    }
   )
-})
+}
 
-test_that("download_acoustic_dataset() creates the expected files", {
+# Create a data package using local database access, if available. Tests that
+# require local database access should be skipped when it's not available.
+if (localdb_is_available() & credentials_are_set()) {
+  localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
+  evalutate_download_localdb <- evaluate_promise({
+    with_mocked_bindings(
+      {
+        download_acoustic_dataset(
+          animal_project_code = "2014_demer",
+          directory = localdb_datapackage_path
+        )
+      },
+      # Force a query to the local database
+      select_protocol = \(x) "localdb"
+    )
+  })
+}
+
+test_that("download_acoustic_dataset() creates the expected files using api", {
+  skip_if_no_authentication()
+
   files_to_create <- c(
     "animals.csv",
     "tags.csv",
@@ -20,47 +49,66 @@ test_that("download_acoustic_dataset() creates the expected files", {
     "receivers.csv",
     "datapackage.json"
   )
+
   # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
+  expect_true(all(files_to_create %in% list.files(datapackage_path)))
+
 })
 
-test_that("download_acoustic_dataset() does not warnings for valid dataset", {
+test_that("download_acoustic_dataset() creates the expected files using local db", {
+  skip_if_no_authentication()
+  skip_if_not_localdb()
+
+  files_to_create <- c(
+    "animals.csv",
+    "tags.csv",
+    "detections.csv",
+    "deployments.csv",
+    "receivers.csv",
+    "datapackage.json"
+  )
+
+  # Function creates the expected files
+  expect_true(all(files_to_create %in% list.files(localdb_datapackage_path)))
+})
+
+test_that("download_acoustic_dataset() returns the expected messages using api", {
+  skip_if_no_authentication()
+
+  expect_snapshot(
+    cat(evalute_download_api$messages, sep = "\n"),
+    variant = "api",
+    # don't include the tempdir name
+    transform = ~ stringr::str_remove(.x, pattern = "(?<=directory ).+(?=:)")
+  )
+})
+
+test_that("download_acoustic_dataset() creates the expected messages using local db", {
+  skip_if_not_localdb()
+  skip_if_no_authentication()
+
+  expect_snapshot(
+    cat(evalutate_download_localdb$messages, sep = "\n"),
+    variant = "sql",
+    # don't include the tempdir name
+    transform = ~ stringr::str_remove(.x, pattern = "(?<=directory ).+(?=:)")
+  )
+
+})
+
+test_that("download_acoustic_dataset() does not return warnings for valid dataset api", {
+  skip_if_no_authentication()
+
   # Function returns no warnings (character of length 0)
-  expect_true(length(evaluate_download$warnings) == 0)
-})
-
-test_that("download_acoustic_dataset() returns message and summary stats", {
-  # call download_acoustic_dataset() and capture the output, compare to a local
-  # file. Covers warnings and messages, but will fail on an error.
-  expect_snapshot(cat(download_acoustic_dataset(
-    con,
-    animal_project_code = "2014_demer"
-  )))
-  # After running, remove the files we just created
-  withr::defer(unlink("2014_demer"))
-})
-
-test_that("download_acoustic_dataset() creates the expected files", {
-  files_to_create <- c(
-    "animals.csv",
-    "tags.csv",
-    "detections.csv",
-    "deployments.csv",
-    "receivers.csv",
-    "datapackage.json"
-  )
-
-  # Function creates the expected files
-  expect_true(all(files_to_create %in% list.files(tempdir())))
-
-  # Function returns no result
-  expect_null(evaluate_download$result)
+  expect_true(length(evalute_download_api$warnings) == 0)
 })
 
 test_that("download_acoustic_dataset() creates a valid Frictionless Data Package", {
+  skip_if_no_authentication()
+
   # This will fail when a field is added to a get_ function but not to datapackage.json
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   ## Check for errors when reading the resource
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "animals")))
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "tags")))
@@ -69,52 +117,55 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "receivers")))
 })
 
+test_that("download_acoustic_dataset() returns CSV files with expected number of columns", {
+  skip_if_no_authentication()
 
-test_that("download_acoustic_dataset() returns CSV files with expected columns", {
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
   # columns in the csv files
   expect_length(
-    fetch_schema_fields(datapackage, "animals"),
-    ncol(readr::read_csv(
-      file.path(tempdir(), "animals.csv"),
+    names(readr::read_csv(
+      file.path(datapackage_path, "animals.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "animals"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "tags"),
-    ncol(readr::read_csv(
-      file.path(tempdir(), "tags.csv"),
+    names(readr::read_csv(
+      file.path(datapackage_path, "tags.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "tags"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "detections"),
-    ncol(readr::read_csv(
-      file.path(tempdir(), "detections.csv"),
+    names(readr::read_csv(
+      file.path(datapackage_path, "detections.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "detections"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "deployments"),
-    ncol(readr::read_csv(
-      file.path(tempdir(), "deployments.csv"),
+    names(readr::read_csv(
+      file.path(datapackage_path, "deployments.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "deployments"))
   )
   expect_length(
-    fetch_schema_fields(datapackage, "receivers"),
-    ncol(readr::read_csv(
-      file.path(tempdir(), "receivers.csv"),
+    names(readr::read_csv(
+      file.path(datapackage_path, "receivers.csv"),
       n_max = 0, show_col_types = FALSE
-    ))
+    )),
+    length(fetch_schema_fields(datapackage, "receivers"))
   )
 })
 
 test_that("download_acoustic_dataset() returns CSV files with columns in expected order", {
+  skip_if_no_authentication()
+
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(tempdir(), "datapackage.json")))
+    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
   # Check if the schema fields in the data package are exactly the same
   # (thus also in the same order) as the header of the csv files
   expect_identical(
@@ -123,7 +174,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "animals.csv"),
+      file.path(datapackage_path, "animals.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -133,7 +184,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "tags.csv"),
+      file.path(datapackage_path, "tags.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -143,7 +194,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "detections.csv"),
+      file.path(datapackage_path, "detections.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -153,7 +204,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "deployments.csv"),
+      file.path(datapackage_path, "deployments.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )
@@ -163,7 +214,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
       function(x) x[["name"]]
     ),
     names(readr::read_csv(
-      file.path(tempdir(), "receivers.csv"),
+      file.path(datapackage_path, "receivers.csv"),
       n_max = 0, show_col_types = FALSE
     ))
   )

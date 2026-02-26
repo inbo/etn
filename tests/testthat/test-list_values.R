@@ -49,12 +49,8 @@ test_that("list_values() returns error for incorrect input", {
 
 test_that("list_values() returns a vector with unique values", {
   # Output has right class
-  expect_type(
-    suppressMessages(list_values(df, chr_col)), type = "character"
-  )
-  expect_type(
-    suppressMessages(list_values(df, num_col)), type = "double"
-  )
+  expect_type(list_values(df, chr_col), type = "character")
+  expect_type(list_values(df, num_col), type = "double")
 
   # Output value is correct with default split value (comma)
   expect_identical(

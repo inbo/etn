@@ -5,7 +5,7 @@
 \title{Transform ETN data to Darwin Core}
 \usage{
 write_dwc(
-  connection = con,
+  connection,
   animal_project_code,
   directory = ".",
   rights_holder = NULL,
@@ -13,14 +13,16 @@ write_dwc(
 )
 }
 \arguments{
-\item{connection}{Connection to the ETN database.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{animal_project_code}{Animal project code.}
 
 \item{directory}{Path to local directory to write file(s) to.
 If \code{NULL}, then a list of data frames is returned instead, which can be
 useful for extending/adapting the Darwin Core mapping before writing with
-\code{\link[readr:write_delim]{readr::write_csv()}}.}
+\code{\link[readr:write_delim]{readr::write_csv()}}. If the directory does not exist, it will be created.}
 
 \item{rights_holder}{Acronym of the organization owning or managing the
 rights over the data.}
@@ -69,3 +71,11 @@ tag malfunctioned right after deployment.
 }
 }
 
+\examples{
+\dontrun{
+# Return a list of data.frames in Darwin Core format.
+write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
+# Download files to disk
+write_dwc("2014_demer", directory = ".")
+}
+}

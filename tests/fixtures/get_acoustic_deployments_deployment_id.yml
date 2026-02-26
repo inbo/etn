@@ -1,0 +1,120 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_deployments/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"deployment_id":"not_a_deployment_id","receiver_id":null,"acoustic_project_code":null,"station_name":null,"open_only":false}'
+  response:
+    status: 400
+    headers:
+      date: Tue, 20 Jan 2026 09:18:41 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=300, public
+      x-ocpu-session: x095aa5e5b39917
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x095aa5e5b39917/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-01-20 09:18:43 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '607'
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      raw_gzip: |-
+        eJyVVM1um0AYvPspVlGkguQiw9oLRlEOjSr1EKlSD+3BimCDNzYKWaxl7bS3qoc+gZVTn85P
+        0t3B2Iv
+        r/lliBHhmvvn4Prjh8pUmD6WcEyUKUW6Eyso5yWWtM57NxaqqvzwJqc3NnJQyJWE0
+        ToYWpxYnI2AIjI
+        AUOAZOgAwYA6GdQMugZdAyaBm0DFoGLYOKgR+DH4MZgxmDGYMZgxmDmYCZ
+        gJmAmVgmjSyH0hEwAjJge
+        z8BWgc6tqko8lPkp8hPkZ8iP0V+ivwU+SmSUySnLAiCwRtePGrF
+        C5EOiP3tXr6bkzAgu+2P3far2PBq
+        zbVI0+7MMyrfUCJL+ban3fPGUJ5LvfwgGs2Vbjoa7Wj2
+        2O6pxKvqglc+cRS3ZaM98XmlhmbMrYfVj49
+        64hTrObyXYm/i/dlw9lqqO9+5npnrO1tm0i9z
+        Nuy8/tQvpoReK4kaR1Prxvpu/9l2m9LYxK7Nb42cQC
+        c+s/C27S7pG521+vfupu7kjwuC8WdL
+        LueVUN38w5E7/+OqWJln6laWE7oc99Gf8KJzu9TWvTGUUi7en
+        VSn55f0Y9mU95Xw4N4+NCE3
+        pfKt5rBxJylcnqHtN4b8lciCkwkKLRuhNqV559KFMB+xol43uiycb9mh
+        gTj4ZWquPC2WonjM
+        7Ay6FzNMXEkn4o3RaL3kOk3b88xedJppX9NvqtH1ymtFb5Wqlce1VmY9miG5eGo
+        WF759bBEG
+        vXU24rBZ+dWDvM69/Mp4wOI6twIz9a7OM9emEXW5WjdLr5Bz+3cUOEH2W3UpUB/t+oOfWm
+        8Q
+        ew==
+  recorded_at: 2026-01-20 09:18:42
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_deployments/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"deployment_id":["1437","not_a_deployment_id"],"receiver_id":null,"acoustic_project_code":null,"station_name":null,"open_only":false}'
+  response:
+    status: 400
+    headers:
+      date: Tue, 20 Jan 2026 09:18:43 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=300, public
+      x-ocpu-session: x0546539cc9fb9e
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0546539cc9fb9e/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-01-20 09:18:44 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '618'
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      raw_gzip: |-
+        eJyVVM2K2zAYvOcpxLJQB1I3thLZMcseuhR6WCj00B7CYmttbWLWKwdZyba30kOfIPTUp8uT
+        VBrHiZy
+        mf4EMdjIz33z+PvmGyxeaPJSyIErkotwIlZYFyYIJjTLCZfGqViSTtU55WohVVX9+
+        ElIbSkZKmZAgnM
+        QjizOL0zEwAIZACpwAp0AGjIDQTqFl0DJoGbQMWgYtg5ZBxcCPwI/AjMCM
+        wIzAjMCMwIzBjMGMwYwtk
+        4aWQ+kYGAIZsP09BloHOrGpKPJT5KfIT5GfIj9Ffor8FPkpklMk
+        p8z3/cFrnj9qxXORDIj97L5/MxeB
+        T3bbH7vtF7Hh1ZprkSTdlWdUQ0MJLeXrnnbPG0N5LvXy
+        vWg0V7rpaLSj2e92TyVeVee8GhJHcVs22hO
+        fVmpkht56WP3kqCdOsZ7DOyn2Jt6fDecvpbob
+        Ovdzc39ny0z7Zc6GLeqP/WJK6LWSqHE0tW6s7/afbb
+        cpjU3k2vzWyAl04jMPbtvu4r7RWat/
+        727mTv64IBh/ujTHsxKqm38wdud/XBUr80zdynICl+M++hNee
+        G6X2ro3hlLKxduT6vT8kn4o
+        m/K+Eh7c24cm5KZUQ6s5bNxJCpdnaPuNIX8lMv9kgkLLRqhNac5cshDm
+        JZbX60aXufMuOzQQ
+        +b9MzZUn+VLkj6mdQXcwg9iVdCLeGI3WS66TpL1O7U2nmfU1/aYaXa+8VvRGqVp
+        5XGtl1qMZ
+        kYunZnExtI8txKC3zkYcNiu7epDXmZddGQ9YXGdWYKbe1Xnm2jSiLlfrZunlsrB/h74TZL
+        9V
+        lwL10e5w8BNfyhSN
+  recorded_at: 2026-01-20 09:18:44
+recorded_with: VCR-vcr/2.0.0

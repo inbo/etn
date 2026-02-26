@@ -7,5 +7,6 @@ bibentry(
   author   = authors,
   year     = format(Sys.Date(), "%Y"),
   note = sprintf("R package version %s", meta$Version),
-  url = "https://inbo.github.io/etn/"
+  url = "https://inbo.github.io/etn/",
+  doi = "10.5281/zenodo.15235747"
 )

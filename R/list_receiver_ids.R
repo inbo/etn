@@ -1,16 +1,24 @@
 #' List all available receiver ids
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
 #'
 #' @export
-list_receiver_ids <- function(connection = con) {
-  query <- glue::glue_sql(
-    "SELECT DISTINCT receiver FROM acoustic.receivers",
-    .con = connection
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_receiver_ids()
+list_receiver_ids <- function(connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  ## Return receiver_ids and drop NA (issue on database side inbo/etn#333)
+  receiver_ids <- conduct_parent_to_helpers(
+    protocol = select_protocol(),
+    json = TRUE
   )
-  data <- DBI::dbGetQuery(connection, query)
 
-  stringr::str_sort(data$receiver, numeric = TRUE)
+  receiver_ids[!is.na(receiver_ids)]
 }

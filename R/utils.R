@@ -1,17 +1,4 @@
-# HELPER FUNCTIONS
-
-#' Check the validity of the database connection
-#'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#' @family helper functions
-#' @noRd
-check_connection <- function(connection) {
-  assertthat::assert_that(
-    methods::is(connection, "PostgreSQL"),
-    msg = "Not a connection object to database."
-  )
-  assertthat::assert_that(connection@info$dbname == "ETN")
-}
+# HELPER FUNCTIONS ----
 
 #' Check input value against valid values
 #'
@@ -26,7 +13,7 @@ check_connection <- function(connection) {
 #' @noRd
 check_value <- function(x, y, name = "value", lowercase = FALSE) {
   # Remove NA from valid values
-  y <- y[!is.na(x)]
+  y <- y[!is.na(y)]
 
   # Ignore case
   if (lowercase) {
@@ -47,42 +34,241 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
-#' Check if the string input can be converted to a date
+#' Get credentials from environment variables, or set them manually
 #'
-#' Returns `FALSE`` or the cleaned character version of the date
-#' (acknowledgments to micstr/isdate.R).
+#' By default, it's not necessary to set any values in this function as it's
+#' used in the background by other functions. However, if you wish to provide
+#' your username and password on a per function basis, this function allows you
+#' to do so.
 #'
-#' @param date_time Character. A character representation of a date.
-#' @param date_name Character. Informative description to user about type of
-#'   date.
-#' @return `FALSE` | character
+#' @param username Username to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
+#' @param password Password to the ETN database. By default read from the
+#'   environment, but you can set it manually too.
+#' @return A string as it is ingested by other functions that need
+#'   authentication.
+#' @family helper functions
+#' @noRd
+get_credentials <- function(username = Sys.getenv("ETN_USER"),
+                            password = Sys.getenv("ETN_PWD")) {
+  if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
+    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+    if (is_interactive()) {
+      cli::cli_alert_info(
+        "No credentials stored. See {.vignette etn::authentication} to configure
+         credentials."
+      )
+      username <- prompt_user(prompt = "Please enter your username: ")
+      password <- ask_pass()
+    } else {
+      # No credentials, not interactive
+      cli::cli_abort(
+        c(
+          "No credentials stored. Can't prompt for credentials since this is not
+           running in interactive mode.",
+          "i" = "See {.vignette etn::authentication} to configure credentials."
+        )
+      )
+    }
+  }
+  invisible(list(username = username, password = password))
+}
+
+#' Lifecycle warning for the deprecated connection argument
+#'
+#' @param function_identity Character of length one with the name
+#'   of the function the warning is being generated from
+#'
+#' @family helper functions
+#' @noRd
+deprecate_warn_connection <- function() {
+  lifecycle::deprecate_warn(
+    when = "3.0.0",
+    what = glue::glue("{function_identity}(connection)",
+      function_identity = get_parent_fn_name(depth = 2)
+    ),
+    details = cli::format_inline(
+      "Database connections are handled automatically.
+       See {.vignette etn::authentication} to configure credentials."
+    ),
+    env = rlang::caller_env(),
+    user_env = rlang::caller_env(2),
+    always = TRUE
+  )
+}
+
+#' Get the name (symbol) of the parent function
+#'
+#' @return A length one Character with the name of the parent function.
+#'
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' child_fn <- function() {
+#'   get_parent_fn_name()
+#' }
+#'
+#' parent_fn <- function() {
+#'   print(get_parent_fn_name())
+#'   print(paste("nested:", child_fn()))
+#' }
+#'
+#' parent_fn()
+get_parent_fn_name <- function(depth = 1) {
+  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = depth)))
+}
+
+#' Determine testing status
+#'
+#' Copy of testthat::is_testing() implementation to avoid a runtime dependency
+#' on testthat.
+#'
+#' @return `TRUE` inside a test.
+#' @family helper functions
+#' @noRd
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
+#' Get the system's nodename
+#'
+#' A simple wrapper around `Sys.info()["nodename"]` to facilitate mocking in
+#' tests.
+#'
+#' @returns Character of length one with the system's nodename.
 #' @family helper functions
 #' @noRd
 #' @examples
-#' \dontrun{
-#' check_date_time("1985-11-21")
-#' check_date_time("1985-11")
-#' check_date_time("1985")
-#' check_date_time("1985-04-31") # invalid date
-#' check_date_time("01-03-1973") # invalid format
-#' }
-check_date_time <- function(date_time, date_name = "start_date") {
-  parsed <- tryCatch(
-    lubridate::parse_date_time(date_time, orders = c("ymd", "ym", "y")),
-    warning = function(warning) {
-      if (grepl("No formats found", warning$message)) {
-        stop(glue::glue(
-          "The given {date_name}, {date_time}, is not in a valid ",
-          "date format. Use a yyyy-mm-dd format or shorter, ",
-          "e.g. 2012-11-21, 2012-11 or 2012."
-        ))
-      } else {
-        stop(glue::glue(
-          "The given {date_name}, {date_time} can not be interpreted ",
-          "as a valid date."
-        ))
-      }
-    }
+#' get_nodename()
+get_nodename <- function() {
+  Sys.info()["nodename"]
+}
+
+#' Check if the local database protocol is available
+#'
+#' This function checks if the local database is available by checking the
+#' nodename.
+#'
+#' The nodename check is a simple string check to see if the system's nodename
+#' ends with "vliz.be", which is a convention for systems that have access to
+#' the local database.#'
+#'
+#' @returns Logical. `TRUE` if the local database is available, `FALSE`
+#'   otherwise.
+#' @family helper functions
+#' @noRd
+#' @examples
+#' # This should return FALSE unless you are running this example from the VLIZ
+#' # RStudio server.
+#' localdb_is_available()
+localdb_is_available <- function() {
+  # As discussed with VLIZ, all systems that have access to the local database
+  # should have nodenames ending on vliz.be
+  endsWith(get_nodename(), "vliz.be")
+}
+
+#' Select the protocol to use
+#'
+#' The protocol is the way data is fetched. This is in addition to the source,
+#' which is where the data comes from.
+#'
+#' This function is used to centrally control the decision tree for which
+#' protocol to use for ´conduct_parent_to_helper()´. When there is a local
+#' database connection available, use this by default. If not, use the OpenCPU
+#' API. Both these protocols use the ETN database as a source.
+#'
+#' @returns Character of length one with one of the available protocols.
+#'
+#' @family helper functions
+#' @noRd
+select_protocol <- function() {
+  # ALlow overwriting of protocol logic by environmental variable
+  user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
+                                       unset = "no_protocol_set")
+  if (user_selected_protocol != "no_protocol_set") {
+    return(user_selected_protocol)
+  }
+
+  # If there is a local database connection available, use it.
+  if (localdb_is_available()) {
+    return("localdb")
+  }
+
+  # Fallback on API
+  return("opencpu")
+}
+
+#' Test if ETN credentials are stored
+#'
+#' This function checks if the ETN credentials are set in the environment
+#' variables. It returns `TRUE` if both credentials are set, and `FALSE`
+#' otherwise. This can be used in tests or examples to conditionally skip if the
+#' credentials are not available.
+#'
+#' @returns A boolean indicating whether the ETN credentials are set in the
+#'   environment variables.
+#' @family helper functions
+#' @noRd
+credentials_are_set <- function(){
+    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+}
+
+# WRAPPER FUNCTIONS ----
+
+#' Wrapper of askpass::askpass
+#'
+#' This function is wrapped so it can be mocked in
+#' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behaviour of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+ask_pass <- function(...) {
+  askpass::askpass(...)
+}
+
+#' Wrapper of rlang::is_interactive
+#'
+#' This function is wrapped so it can be mocked in
+#' `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behaviour of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+is_interactive <- function(...) {
+  rlang::is_interactive(...)
+}
+
+#' Wrapper for base::readline
+#'
+#' This function is wrapped because I find it easier to read, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
+#' behaviour of `get_credentials()`
+#'
+#' @family wrappers
+#' @noRd
+prompt_user <- function(...) {
+  readline(...)
+}
+
+# rlang null handling -----------------------------------------------------
+#' @importFrom rlang %||%
+NULL
+
+
+# onLoad ------------------------------------------------------------------
+
+.onLoad <- function(libname, pkgname) {
+  # Memoisation: Every 15 minutes, check the deployed version of etnservice.
+  # Checking this on every call would slow down the package.
+  get_etnservice_version <<-
+    memoise::memoise(get_etnservice_version,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
+    )
+  # Memoisation: only validate the login credentials every 15 minutes.
+  validate_login <<-
+    memoise::memoise(validate_login,
+                     cache = cachem::cache_mem(max_age = 60 * 15)
   )
-  as.character(parsed)
 }

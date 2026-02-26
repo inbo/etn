@@ -1,0 +1,41 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/list_scientific_names/json/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"}}'
+  response:
+    status: 201
+    headers:
+      date: Tue, 20 Jan 2026 09:27:51 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=300, public
+      x-ocpu-session: x01ef526b69a5a4
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x01ef526b69a5a4/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-01-20 09:27:52 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '1399'
+      content-type: application/json
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      string: |
+        ["Abramis brama", "Abramis brama Rutilus rutilus", "Acipenser", "Acipenser oxyrinchus", "Acipenser sturio", "Aetomylaeus bovinus", "Alosa alosa", "Alosa fallax", "Anarhichas lupus", "Anguilla anguilla", "Anguilla rostrata", "Argyrosomus regius", "Aspius aspius", "Balistes capriscus", "Barbus barbus", "Belone belone", "Blicca bjoerkna", "Built-in", "Callinectes sapidus", "Cancer pagurus", "Castor fiber", "Cetorhinus maximus", "Chelidonichthys cuculus", "Chelon labrosus", "Chelon ramada", "Chelon saliens", "Chondrostoma nasus", "Clupea harengus", "Conger conger", "Coregonus lavaretus", "Coregonus lavaretus oxyrinchus", "Coregonus oxyrinchus", "Coryphaena hippurus", "Cyclopterus lumpus", "Cyprinus carpio", "Dactylopterus volitans", "Dasyatis pastinaca", "Dentex dentex", "Dicentrarchus labrax", "Diplodus cervinus", "Diplodus puntazzo", "Diplodus sargus", "Diplodus vulgaris", "Epinephelus costae", "Epinephelus marginatus", "Eriocheir sinensis", "Eriphia verrucosa", "Esox lucius", "Gadus morhua", "Galeorhinus galeus", "Glaucostegus cemiculus", "Gymnura altavela", "Hexanchus griseus", "Homarus gammarus", "Homo sapiens sapiens", "Isurus oxyrinchus", "Labrus bergylta", "Labrus mixtus", "Lamna nasus", "Lampetra fluviatilis", "Leuciscus idus", "Lichia amia", "Limanda limanda", "Lithognathus mormyrus", "Liza aurata", "Liza ramada", "Lota lota", "Maja brachydactyla", "Melanogrammus aeglefinus", "Merlangius merlangus", "Merluccius merluccius", "Microstomus kitt", "Mola mola", "Mugil", "Mullus surmuletus", "Muraena helena", "Mustelus", "Mustelus asterias", "Mustelus mustelus", "Mycteroperca rubra", "Myliobatis aquila", "Myoxocephalus scorpius", "Oblada melanurus", "Octopus vulgaris", "Oncorhynchus mykiss", "Osmerus eperlanus", "Pagellus bogaraveo", "Pagellus erythrinus", "Pagrus pagrus", "Palinurus elephas", "Perca fluviatilis", "Petromyzon marinus", "Plastic", "Platichthys flesus", "Pleuronectes platessa", "Pollachius pollachius", "Pomadasys incisus", "Pomatomus saltatrix", "Prionace glauca", "Pseudocaranx dentex", "Pteroplatytrygon violacea", "Raja asterias", "Raja brachyura", "Raja clavata", "Raja montagui", "Raja polystigma", "Raja radula", "Raja undulata", "Range tag", "range test", "Range test", "Reference Tag D-2LP13", "Reference Tag D-2LP9L", "Rhincodon typus", "Rostroraja alba", "Rutilus rutilus", "Salmo salar", "Salmo salar/Salmo trutta", "Salmo t. trutta", "Salmo trutta", "Salmo trutta trutta", "Salvelinus alpinus", "Sander lucioperca", "Sarpa salpa", "Sciaena umbra", "Scomber scombrus", "Scophthalmus maximus", "Scorpaena scrofa", "Scyliorhinus canicula", "Scyliorhinus stellaris", "Scyllarides latus", "Sensor tag", "Sepia officinalis", "Seriola dumerili", "Seriola rivoliana", "Serranus atricauda", "Serranus scriba", "Silurus glanis", "Solea senegalensis", "Solea solea", "Somniosus microcephalus", "Sparisoma cretense", "Sparus aurata", "Sphyraena barracuda", "Sphyraena viridensis", "Spondyliosoma cantharus", "Squalius cephalus", "Squalus acanthias", "Symphodus bailloni", "Symphodus melops", "Sync tag", "Synctag R-HP16", "Tetrapturus belone", "Thunnus thynnus", "Tinca tinca", "Torpedo marmorata", "Torpedo torpedo", "Trachurus trachurus", "Umbrina cirrosa", "Vimba vimba", "Xyrichtys novacula"]
+  recorded_at: 2026-01-20 09:27:51
+recorded_with: VCR-vcr/2.0.0

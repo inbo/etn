@@ -13,28 +13,52 @@ knitr::opts_chunk$set(
 )
 ```
 
-# etn <img src="man/figures/logo.png" align="right" alt="" width="120">
+# etn <a href="https://inbo.github.io/etn/"><img src="man/figures/logo.png" align="right" height="138" alt="etn website" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
-[![repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R-universe version](https://inbo.r-universe.dev/etn/badges/version)](https://inbo.r-universe.dev/etn)
 [![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/inbo/etn/branch/main/graph/badge.svg)](https://app.codecov.io/gh/inbo/etn)
+[![repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15235747.svg)](https://doi.org/10.5281/zenodo.15235747)
 <!-- badges: end -->
 
-Etn provides functionality to access data from the [European Tracking Network (ETN)](http://www.lifewatch.be/etn/) database hosted by the Flanders Marine Institute (VLIZ) as part of the Flemish contribution to LifeWatch. ETN data is subject to the [ETN data policy](http://www.lifewatch.be/etn/assets/docs/ETN-DataPolicy.pdf) and can be:
- 
-- restricted: under moratorium and only accessible to logged-in data owners/collaborators
-- unrestricted: publicly accessible without login and routinely published to international biodiversity facilities
- 
-The ETN infrastructure currently requires the package to be run within the [LifeWatch.be RStudio server](http://rstudio.lifewatch.be/), which is password protected. A login can be requested at http://www.lifewatch.be/etn/contact.
+etn is an R package to access data from the [European Tracking Network (ETN)](https://www.lifewatch.be/etn/). With etn you can query metadata (animals, tags, deployments, receivers, projects) and data (acoustic detections, sensor data) from the ETN database and use these in your analyses. Data access requires user credentials and is subject to a [data policy](https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use).
+
+To get started, see:
+
+- [Configure credentials](https://inbo.github.io/etn/articles/authentication.html).
+- [Function reference](https://inbo.github.io/etn/reference/index.html): overview of all functions.
+- [Explore acoustic telemetry data](https://inbo.github.io/etn/articles/acoustic_telemetry.html).
 
 ## Installation
 
 You can install the development version of etn from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("inbo/etn")
+# install.packages("pak")
+pak::pak("inbo/etn")
+```
+
+## Usage
+
+Before you can access data from the European Tracking Network, you need to register for a MarinePass account at the Flanders Marine Institute (VLIZ). See [authentication](https://inbo.github.io/etn/articles/authentication.html#dont-have-an-account-to-etn) for instructions.
+
+With etn you can query ETN (meta)data:
+
+```{r example}
+library(etn)
+
+# Get animal metadata for a project
+get_animals(animal_project_code = "2014_demer")
+
+# Get acoustic detections for a tag and time period
+get_acoustic_detections(
+  tag_serial_number = "1171781",
+  start_date = "2014-06-01",
+  end_date = "2014-06-15"
+)
 ```
 
 ## Meta

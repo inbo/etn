@@ -5,7 +5,7 @@
 \title{Get acoustic deployment data}
 \usage{
 get_acoustic_deployments(
-  connection = con,
+  connection,
   deployment_id = NULL,
   receiver_id = NULL,
   acoustic_project_code = NULL,
@@ -14,7 +14,9 @@ get_acoustic_deployments(
 )
 }
 \arguments{
-\item{connection}{A connection to the ETN database. Defaults to \code{con}.}
+\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
+database. This argument is no longer used. You will be prompted for
+credentials instead.}
 
 \item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
@@ -39,24 +41,23 @@ Get data for deployments of acoustic receivers, with options to filter
 results.
 }
 \examples{
-# Set default connection variable
-con <- connect_to_etn()
-
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all acoustic deployments
-get_acoustic_deployments(con)
+get_acoustic_deployments()
 
 # Get specific acoustic deployment
-get_acoustic_deployments(con, deployment_id = 1437)
+get_acoustic_deployments(deployment_id = 1437)
 
 # Get acoustic deployments for a specific receiver
-get_acoustic_deployments(con, receiver_id = "VR2W-124070")
+get_acoustic_deployments(receiver_id = "VR2W-124070")
 
 # Get open acoustic deployments for a specific receiver
-get_acoustic_deployments(con, receiver_id = "VR2W-124070", open_only = TRUE)
+get_acoustic_deployments(receiver_id = "VR2W-124070", open_only = TRUE)
 
 # Get acoustic deployments for a specific acoustic project
-get_acoustic_deployments(con, acoustic_project_code = "demer")
+get_acoustic_deployments(acoustic_project_code = "demer")
 
 # Get acoustic deployments for two specific stations
-get_acoustic_deployments(con, station_name = c("de-9", "de-10"))
+get_acoustic_deployments(station_name = c("de-9", "de-10"))
+\dontshow{\}) # examplesIf}
 }

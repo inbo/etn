@@ -1,17 +1,19 @@
 #' List all available tag serial numbers
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `tag_serial_numbers` present in
 #'   `common.tag_device`.
 #'
 #' @export
-list_tag_serial_numbers <- function(connection = con) {
-  query <- glue::glue_sql(
-    "SELECT DISTINCT serial_number FROM common.tag_device",
-    .con = connection
-  )
-  data <- DBI::dbGetQuery(connection, query)
-
-  stringr::str_sort(data$serial_number, numeric = TRUE)
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_tag_serial_numbers()
+list_tag_serial_numbers <- function(connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
 }

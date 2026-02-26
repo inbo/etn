@@ -1,13 +1,11 @@
-skip_if_not_localdb()
-
-test_that("connect_to_etn() allows to create a connection with default parameters", {
-  con <- connect_to_etn()
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
+test_that("connect_to_etn() returns deprecation warning when used with named arguments", {
+  lifecycle::expect_deprecated(
+    connect_to_etn(username = "my name", password = "my password")
+  )
 })
 
-test_that("connect_to_etn() allows to create a connection with specific parameters", {
-  con <- connect_to_etn(Sys.getenv("userid"), Sys.getenv("pwd"))
-  expect_true(check_connection(con))
-  expect_true(isClass(con, "PostgreSQL"))
+test_that("connect_to_etn() returns NULL invisibly", {
+  # connect_to_etn() is hard deprecated and no longer used
+  # It should return NULL rather than connection information
+  expect_null(suppressWarnings(connect_to_etn()))
 })

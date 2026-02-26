@@ -1,9 +1,9 @@
-skip_if_not_localdb()
-
-con <- connect_to_etn()
-
 test_that("list_acoustic_tag_ids() returns unique list of values", {
-  vector <- list_acoustic_tag_ids(con)
+  skip_if_no_authentication()
+
+  vcr::use_cassette("list_acoustic_tag_ids", {
+    vector <- list_acoustic_tag_ids()
+  })
 
   expect_type(vector, "character")
   expect_false(any(duplicated(vector)))

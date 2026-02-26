@@ -8,13 +8,13 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Package with functions to access and process data from the European Tracking Network hosted by VLIZ.
+Access data from the European Tracking Network ('ETN', \url{https://www.lifewatch.be/etn/}). With etn you can query metadata (animals, tags, deployments, receivers, projects) and data (acoustic detections, sensor data) from the 'ETN' database and use these in your analyses. Data access requires user credentials and is subject to a data policy.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/inbo/etn}
-  \item \url{https://inbo.github.io/etn}
+  \item \url{https://inbo.github.io/etn/}
   \item Report bugs at \url{https://github.com/inbo/etn/issues}
 }
 
@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Research Institute for Nature and Forest (INBO) (https://www.vlaanderen.be/inbo/en-gb/) [copyright holder]
+  \item Research Institute for Nature and Forest (INBO) (\href{https://ror.org/00j54wy13}{ROR}) [copyright holder]
   \item Research Foundation - Flanders (https://lifewatch.be) [funder]
 }
 

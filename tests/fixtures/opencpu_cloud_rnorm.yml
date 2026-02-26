@@ -1,0 +1,45 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://cloud.opencpu.org/ocpu/library/stats/R/rnorm
+    body:
+      string: '{"n":10,"mean":5}'
+  response:
+    status: 201
+    headers:
+      date: Mon, 29 Sep 2025 08:44:46 GMT
+      content-type: text/plain; charset=utf-8
+      content-length: '110'
+      location: https://cloud.opencpu.org/ocpu/tmp/x0a29a981c268e1/
+      server: cloudflare
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      cache-control: max-age=300, public
+      x-ocpu-session: x0a29a981c268e1
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: Origin, Content-Type, Accept, Accept-Encoding,
+        Cache-Control, Authorization
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-locale: en_US.UTF-8
+      x-ocpu-time: 2025-09-29 08:44:45 UTC
+      x-ocpu-version: 2.2.14
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-ocpu-cache: EXPIRED
+      cf-cache-status: DYNAMIC
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dMm5n3rhDT5pScuZAmnXWwAnzODhQEVFk1QViYsEerwLBs8alO%2BidT4eiAvgOVtfSN2fVmn0OqTyTc7SS3%2FM1dA3gcAAV09BCSSrY6k%3D"}]}'
+      cf-ray: 986a334dff35fba8-AMS
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: |
+        /ocpu/tmp/x0a29a981c268e1/R/.val
+        /ocpu/tmp/x0a29a981c268e1/R/rnorm
+        /ocpu/tmp/x0a29a981c268e1/stdout
+        /ocpu/tmp/x0a29a981c268e1/source
+        /ocpu/tmp/x0a29a981c268e1/console
+        /ocpu/tmp/x0a29a981c268e1/info
+        /ocpu/tmp/x0a29a981c268e1/files/DESCRIPTION
+  recorded_at: 2025-09-29 08:44:46
+recorded_with: VCR-vcr/2.0.0

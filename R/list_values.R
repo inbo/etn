@@ -15,23 +15,20 @@
 #'
 #' @export
 #'
-#' @examples
-#' # Set default connection variable
-#' con <- connect_to_etn()
-#' library(dplyr) # For %>%
+#' @examplesIf etn:::credentials_are_set()
 #'
 #' # List unique scientific_name from a dataframe containing animal information
-#' df <- get_animals(con, animal_project_code = "2014_demer")
+#' df <- get_animals(animal_project_code = "2014_demer")
 #' list_values(df, "scientific_name")
 #'
 #' # Or using pipe and unquoted column name
-#' df %>% list_values(scientific_name)
+#' df |> list_values(scientific_name)
 #'
 #' # Or using column position
-#' df %>% list_values(8)
+#' df |> list_values(8)
 #'
 #' # tag_serial_number can contain comma-separated values
-#' df <- get_animals(con, animal_id = 5841)
+#' df <- get_animals(animal_id = 5841)
 #' df$tag_serial_number
 #'
 #' # list_values() will split those and return unique values
@@ -78,7 +75,7 @@ list_values <- function(.data, column, split = ",") {
     )
 
     # extract values
-    if (class(arguments$column) == "name") {
+    if (methods::is(arguments$column, "name")) {
       values <- eval(arguments$column, .data)
     } else {
       if (is.character(arguments$column)) {

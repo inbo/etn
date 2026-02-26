@@ -1,17 +1,19 @@
 #' List all available station names
 #'
-#' @param connection A connection to the ETN database. Defaults to `con`.
-#'
+#' @inheritParams list_animal_ids
 #' @return A vector of all unique `station_name` present in
 #'   `acoustic.deployments`.
 #'
 #' @export
-list_station_names <- function(connection = con) {
-  query <- glue::glue_sql(
-    "SELECT DISTINCT station_name FROM acoustic.deployments WHERE station_name IS NOT NULL",
-    .con = connection
-  )
-  data <- DBI::dbGetQuery(connection, query)
-
-  stringr::str_sort(data$station_name, numeric = TRUE)
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_station_names()
+list_station_names <- function(connection) {
+  # Check arguments
+  # The connection argument has been depreciated
+  if (lifecycle::is_present(connection)) {
+    deprecate_warn_connection()
+  }
+  # Either use the API, or the SQL helper.
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
 }
