@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.4.3 (2025-02-28)",
   "author": [
     {
       "@type": "Person",
@@ -419,7 +419,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "80492.649KB",
+  "fileSize": "80501.699KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -461,5 +461,10 @@
       "@id": "https://doi.org/10.5281/zenodo.15235747",
       "sameAs": "https://doi.org/10.5281/zenodo.15235747"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/inbo/etn/blob/main/NEWS.md",
+  "readme": "https://github.com/inbo/etn/blob/main/README.md",
+  "contIntegration": ["https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/inbo/etn"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": ["r", "fish", "animal-movement", "animal-tracking", "biologging", "data-access", "oscibio", "lifewatch", "r-package", "rstats"]
 }
