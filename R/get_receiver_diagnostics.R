@@ -138,6 +138,9 @@ get_receiver_diagnostics <- function(
         )
       )
 
+  # Drop duplicate rows
+  diagnostics <- dplyr::distinct(diagnostics)
+
   # Collapse log_data columns into single rows per deployment_id, receiver_id,
   # record_type, datetime combination
 
