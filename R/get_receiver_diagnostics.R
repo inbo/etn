@@ -7,14 +7,16 @@
 #'
 #' @return A tibble with receiver diagnostics data
 #' @export
-get_receiver_diagnostics <- function(connection = con,
+get_receiver_diagnostics <- function(
                                      deployment_id,
                                      start_date = NULL,
                                      end_date = NULL,
                                      receiver_id = NULL,
                                      limit = FALSE) {
-  # Check connection
-  check_connection(connection)
+
+
+  connection <-
+    etnservice::connect_to_etn(Sys.getenv("ETN_USER"), Sys.getenv("ETN_PWD"))
 
   # Check deployment_id
   if(assertthat::validate_that(!missing(deployment_id))){
@@ -98,6 +100,8 @@ get_receiver_diagnostics <- function(connection = con,
 
   ## Query database
   diagnostics <- DBI::dbGetQuery(connection, query)
+  # Close connection
+  DBI::dbDisconnect(connection)
 
   ## Return early if no log_data
   if(nrow(diagnostics) == 0){
