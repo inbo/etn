@@ -109,11 +109,17 @@ get_receiver_diagnostics <- function(
     return(diagnostics)
   }
 
-  # Parse out log_data column into wider format
-  diagnostics <-
-    diagnostics %>%
-    dplyr::mutate(log_data = purrr::map(log_data, jsonlite::fromJSON)) %>%
-    tidyr::unnest_wider(log_data)
+  ## combine json strings into single array and parse
+  log_data <-
+    paste0("[",paste(diagnostics$log_data, collapse = ","), "]") |>
+    yyjsonr::read_json_str()
+
+  # Add log data as seperate columns
+
+  diagnostics <- dplyr::bind_cols(
+    dplyr::select(diagnostics, -dplyr::all_of("log_data")),
+    log_data
+    )
 
   # Replace empty strings with NA
   diagnostics <-
