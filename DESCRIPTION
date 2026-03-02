@@ -13,7 +13,9 @@ Authors@R: c(
     person("Research Institute for Nature and Forest (INBO)", role = "cph",
            comment = c(ROR = "00j54wy13")),
     person("Research Foundation - Flanders", role = "fnd",
-           comment = "https://lifewatch.be")
+           comment = "https://lifewatch.be"),
+    person("European Union", role = "fnd",
+           comment = "https://doi.org/10.3030/101094649")          
   )
 Description: Access data from the European Tracking Network ('ETN',
     <https://www.lifewatch.be/etn/>). With etn you can query metadata (animals, 
