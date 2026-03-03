@@ -3,11 +3,15 @@
 ## Authors
 
 - **Pieter Huybrechts**. Author, maintainer.
-  [](https://orcid.org/0000-0002-6658-6062)
+  [](https://orcid.org/0000-0002-6658-6062)  
+  Research Institute for Nature and Forest (INBO)
 
-- **Peter Desmet**. Author. [](https://orcid.org/0000-0002-8442-8025)
+- **Peter Desmet**. Author. [](https://orcid.org/0000-0002-8442-8025)  
+  Research Institute for Nature and Forest (INBO)
 
-- **Damiano Oldoni**. Author. [](https://orcid.org/0000-0003-3445-7562)
+- **Damiano Oldoni**. Author.
+  [](https://orcid.org/0000-0003-3445-7562)  
+  Research Institute for Nature and Forest (INBO)
 
 - **Stijn Van Hoey**. Author. [](https://orcid.org/0000-0001-6413-3185)
 
@@ -16,6 +20,9 @@
 
 - **Research Foundation - Flanders**. Funder.  
   https://lifewatch.be
+
+- **European Union**. Funder.  
+  https://doi.org/10.3030/101094649
 
 ## Citation
 

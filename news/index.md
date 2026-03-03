@@ -2,6 +2,10 @@
 
 ## etn (development version)
 
+- Add European Union as funder (for
+  [STRAITS](https://doi.org/10.3030/101094649))
+  ([\#497](https://github.com/inbo/etn/issues/497)).
+
 ## etn 3.0.0
 
 ### Use etn on your computer 🎉
