@@ -6,6 +6,9 @@
 #'
 #' @inheritParams list_animal_ids
 #' @export
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_acoustic_project_codes()
 list_acoustic_project_codes <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

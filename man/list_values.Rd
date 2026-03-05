@@ -25,6 +25,7 @@ Concatenated values (\verb{A,B}) in the column can be returned as single values
 (\code{A} and \code{B}).
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 
 # List unique scientific_name from a dataframe containing animal information
 df <- get_animals(animal_project_code = "2014_demer")
@@ -45,4 +46,5 @@ list_values(df, tag_serial_number)
 
 # Another expression can be defined to split values (here ".")
 list_values(df, tag_serial_number, split = "\\\\.")
+\dontshow{\}) # examplesIf}
 }

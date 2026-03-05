@@ -48,7 +48,7 @@ extract_temp_key <- function(response) {
 #' @noRd
 #' @examples
 #' \dontrun{
-#' etn:::extract_temp_key(response) |> get_val()
+#' extract_temp_key(response) |> get_val()
 #' }
 #'
 #' # using the opencpu test instance
@@ -66,7 +66,10 @@ get_val <- function(temp_key,
   format <- rlang::arg_match(format)
   reading_function <-
     switch(format,
-      "rds" = \(raw_response) {
+      "rds" = \(request) {
+        raw_response <- request |>
+          req_perform_opencpu() |>
+          httr2::resp_body_raw()
         raw_connection <- rawConnection(raw_response)
         rds_response <-
           raw_connection |>
@@ -77,7 +80,12 @@ get_val <- function(temp_key,
         # return R object
         rds_response
       },
-      "feather" = arrow::read_feather
+      "feather" = \(request) {
+        temp_featherfile <- withr::local_tempfile(fileext = ".feather")
+        req_perform_opencpu(request, path = temp_featherfile)
+        arrow::read_feather(temp_featherfile,
+                            mmap = FALSE)
+      }
     )
 
   # early return in case of return_url
@@ -91,17 +99,14 @@ get_val <- function(temp_key,
   }
 
   # request data and open connection
-  raw_response <-
+  query_request <-
     httr2::request(api_domain) |>
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) |>
     httr2::req_url_query(...) |>
-    httr2::req_retry(max_tries = 5) |>
-    req_perform_opencpu() |>
-    httr2::resp_body_raw()
+    httr2::req_retry(max_tries = 5)
 
   # read response via connection
-  api_response <-
-    raw_response |>
+  api_response <- query_request |>
     (\(x) reading_function(x))()
 
   # Return OpenCPU return object
@@ -136,7 +141,7 @@ return_parent_arguments <- function(depth = 1, compact = TRUE) {
     function(x) rlang::env_get(env = parent_env, nm = x)
   )
   if (compact) {
-    compact(parent_arguments)
+    purrr::compact(parent_arguments)
   }
   parent_arguments
 }
@@ -166,8 +171,8 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
   if (!login_valid) {
     rlang::abort(
       glue::glue(
-        "Failed to login with username: {get_credentials()$username}.",
-        " Please check username/password."
+        "Failed to log in with username: {get_credentials()$username}.",
+        " Please check credentials."
       ),
       caller = rlang::env_parent()
     )
@@ -202,7 +207,7 @@ get_hostname <- function(url_str) {
 #'
 #' This function is useful because it allows us to mock the version of
 #' etnservice for tests via `testhat::with_mocked_bindings()`. Thus allowing us
-#' to test the error messaging in [conduct_parent_to_helpers()].
+#' to test the error messaging in `conduct_parent_to_helpers()`.
 #'
 #' Setting `which = "local"` is the same as a direct call to
 #' `etnservice::get_version()`. This option is still useful for mocking in

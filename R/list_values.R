@@ -15,7 +15,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #'
 #' # List unique scientific_name from a dataframe containing animal information
 #' df <- get_animals(animal_project_code = "2014_demer")

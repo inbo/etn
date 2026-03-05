@@ -1,14 +1,17 @@
 # Force using the OpenCPU API and cache the response
-withr::with_envvar(
-  c("ETN_PROTOCOL" = "opencpu"),
-  {
-    vcr::use_cassette("get_animals", {
-      df <- get_animals()
-    })
-  }
-)
+if (credentials_are_set()) {
+  withr::with_envvar(
+    c("ETN_PROTOCOL" = "opencpu"),
+    {
+      vcr::use_cassette("get_animals", {
+        df <- get_animals()
+      })
+    }
+  )
+}
 
 test_that("get_animals() returns a tibble", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
 
   expect_s3_class(df, "data.frame")
@@ -19,10 +22,14 @@ test_that("get_animals() returns a tibble", {
 })
 
 test_that("get_animals() returns unique animal_id", {
+  skip_if_no_authentication()
+
   expect_identical(nrow(df), nrow(df |> dplyr::distinct(animal_id)))
 })
 
 test_that("get_animals() returns the expected columns", {
+  skip_if_no_authentication()
+
   expected_col_names <- c(
     "animal_id",
     "animal_project_code",
@@ -95,6 +102,9 @@ test_that("get_animals() returns the expected columns", {
 })
 
 test_that("get_animals() allows selecting on animal_id", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_animals(animal_id = 0),
@@ -129,6 +139,9 @@ test_that("get_animals() allows selecting on animal_id", {
 })
 
 test_that("get_animals() allows selecting on animal_project_code", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_animals(animal_project_code = "not_a_project"),
@@ -165,6 +178,9 @@ test_that("get_animals() allows selecting on animal_project_code", {
 })
 
 test_that("get_animals() allows selecting on tag_serial_number", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_animals(tag_serial_number = "0"),
@@ -196,6 +212,9 @@ test_that("get_animals() allows selecting on tag_serial_number", {
 })
 
 test_that("get_animals() allows selecting on scientific_name", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_animals(scientific_name = "not_a_sciname"),
@@ -230,6 +249,9 @@ test_that("get_animals() allows selecting on scientific_name", {
 })
 
 test_that("get_animals() allows selecting on multiple parameters", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   multiple_parameters_df <- get_animals(
     animal_project_code = "2014_demer",
     scientific_name = "Rutilus rutilus"
@@ -239,6 +261,9 @@ test_that("get_animals() allows selecting on multiple parameters", {
 })
 
 test_that("get_animals() collapses multiple associated tags to one row", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Animal 5841 (project SPAWNSEIS) has 2 associated tags (1280688,1280688)
   animal_two_tags_df <- get_animals(animal_id = 5841)
 
@@ -263,6 +288,8 @@ test_that("get_animals() collapses multiple associated tags to one row", {
 })
 
 test_that("get_animals() returns correct tag_type and tag_subtype", {
+  skip_if_no_authentication()
+
   df <- df |> dplyr::filter(!stringr::str_detect(tag_type, ",")) # Remove multiple associated tags
   df <- df |> dplyr::filter(tag_type != "") # TODO: remove after https://github.com/inbo/etn/issues/249
   expect_identical(
@@ -276,6 +303,8 @@ test_that("get_animals() returns correct tag_type and tag_subtype", {
 })
 
 test_that("get_animals() does not return animals without tags", {
+  skip_if_no_authentication()
+
   # All animals should be related with a tag
   expect_identical(df |> dplyr::filter(is.na(tag_serial_number)) |> nrow(), 0L)
 })

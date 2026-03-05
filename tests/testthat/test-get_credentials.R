@@ -1,7 +1,7 @@
 test_that("get_credentials() returns list with values from sys.env", {
   expect_type(
     withr::with_envvar(
-      list(ENT_USER = "testid",
+      list(ETN_USER = "testid",
            ETN_PWD = "testpwd"),
       get_credentials()
     ),
@@ -47,8 +47,8 @@ test_that("get_credentials() prompts the user for credentials if not stored", {
           ),
           get_credentials()
         ),
-        "No credentials stored, prompting..",
-        fixed = TRUE
+        "No credentials stored.",
+        fixed = FALSE
       )
     },
     ask_pass = function(...) "entered_pwd",
@@ -100,7 +100,8 @@ test_that("get_credentials() returns error when no credentials are stored and ru
           ),
           get_credentials()
         ),
-        "No credentials stored, not running in interactive mode"
+        "No credentials stored. Can't prompt for credentials",
+        fixed = FALSE
       )
     },
     ask_pass = function(...) "entered_pwd",

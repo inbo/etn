@@ -5,6 +5,9 @@
 #'   `common.animal_release`.
 #'
 #' @export
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_scientific_names()
 list_scientific_names <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

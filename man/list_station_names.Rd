@@ -18,3 +18,8 @@ A vector of all unique \code{station_name} present in
 \description{
 List all available station names
 }
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_station_names()
+\dontshow{\}) # examplesIf}
+}

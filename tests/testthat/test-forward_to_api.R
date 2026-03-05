@@ -1,5 +1,7 @@
 test_that("forward_to_api() can forward call to api using JSON retrieval", {
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_type(
     forward_to_api("list_animal_ids", payload = list(), json = TRUE),
     "integer"
@@ -8,6 +10,8 @@ test_that("forward_to_api() can forward call to api using JSON retrieval", {
 
 test_that("forward_to_api() can forward call to api using two step retrieval", {
   skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_type(
     forward_to_api("list_animal_ids", payload = list(), json = FALSE),
     "integer"
@@ -16,7 +20,8 @@ test_that("forward_to_api() can forward call to api using two step retrieval", {
 
 test_that("forward_to_api() can send requests to domains other than etn", {
   skip_if_offline("cloud.opencpu.org")
-  # Direct request via JSON
+  skip_if_http_error("https://cloud.opencpu.org/ocpu/library/stats/R/")
+  # Direct request via JSON)
   expect_type(
     forward_to_api(
       "rnorm",
@@ -57,6 +62,9 @@ test_that("forward_to_api() can send requests to test domain", {
 })
 
 test_that("forward_to_api() can forward R errors to client console", {
+  skip_if_offline("cloud.opencpu.org")
+  skip_if_http_error("https://cloud.opencpu.org/ocpu/library/stats/R/")
+
   expect_error(
     forward_to_api("rnorm",
       payload = list(mean = 4), # results in error: "n" is missing,

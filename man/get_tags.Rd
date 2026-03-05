@@ -40,6 +40,7 @@ can be multiple records (\code{acoustic_tag_id}) per tag device
 (\code{tag_serial_number}).
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all tags
 get_tags()
 
@@ -53,4 +54,5 @@ get_tags(tag_subtype = c("built-in", "range"))
 get_tags(tag_serial_number = "1187450")
 get_tags(acoustic_tag_id = "A69-1601-16130")
 get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
+\dontshow{\}) # examplesIf}
 }

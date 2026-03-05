@@ -7,6 +7,9 @@
 #' @return A vector of all unique `id_pk` present in `common.animal_release`.
 #'
 #' @export
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_animal_ids()
 list_animal_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

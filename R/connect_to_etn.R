@@ -1,20 +1,28 @@
 #' Connect to the ETN database
 #'
-#' This function is `r lifecycle::badge("deprecated")` since etn version 2.3.0.
+#' This function is `r lifecycle::badge("deprecated")` since etn version 3.0.0.
 #' Its use is no longer supported or needed. All connections to the ETN database
-#' are now made automatically when you use a function. If your credentials are not saved
-#' in the system environement, you will be prompted to enter them.
+#' are now handled automatically when you use a function. If your credentials
+#' are not stored in the system environment, you will be prompted to enter them.
 #'
 #' @param ... Any arguments passed to this function are ignored.
 #'
-#' @return This function is no longer in use, and returns NULL invisibly.
+#' @return This function is no longer in use, and returns `NULL` invisibly.
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' # This will result in a deprecation warning!
+#' my_connection <- connect_to_etn()
+#' }
 connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
-    when = "2.3.0",
+    when = "3.0.0",
     what = "connect_to_etn()",
-    details = "You will be prompted for credentials instead.",
+    details = cli::format_inline(
+      "Database connections are handled automatically.
+       See {.vignette etn::authentication} to configure credentials."
+    ),
     always = TRUE
   )
   invisible(NULL)

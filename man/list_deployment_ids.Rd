@@ -17,3 +17,8 @@ A vector of all unique \code{id_pk} present in \code{acoustic.deployments}.
 \description{
 List all available receiver ids
 }
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_deployment_ids()
+\dontshow{\}) # examplesIf}
+}

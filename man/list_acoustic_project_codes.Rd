@@ -18,3 +18,8 @@ A vector of all unique \code{project_code} of \code{type = "acoustic"} in
 \description{
 List all available acoustic project codes
 }
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_acoustic_project_codes()
+\dontshow{\}) # examplesIf}
+}

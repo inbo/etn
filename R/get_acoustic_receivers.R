@@ -14,7 +14,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' # Get all acoustic receivers
 #' get_acoustic_receivers()
 #'

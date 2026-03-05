@@ -26,6 +26,7 @@ the group.
 Get data for acoustic receivers, with options to filter results.
 }
 \examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 # Get all acoustic receivers
 get_acoustic_receivers()
 
@@ -34,4 +35,5 @@ get_acoustic_receivers(status = c("lost", "broken"))
 
 # Get a specific acoustic receiver
 get_acoustic_receivers(receiver_id = "VR2W-124070")
+\dontshow{\}) # examplesIf}
 }

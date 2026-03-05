@@ -30,7 +30,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf etn:::credentials_are_set()
 #' # Get limited sample of acoustic detections
 #' get_acoustic_detections(limit = TRUE)
 #'
@@ -278,7 +278,15 @@ get_acoustic_detections <- function(connection,
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::open_dataset(fetched_page_path, format = "feather")
+    fetched_page <- arrow::read_feather(fetched_page_path,
+                                        # Only read what we need.
+                                        col_select = "detection_id",
+                                        # Windows suffers memory allocation
+                                        # issues with the arrow::open_dataset()
+                                        # call later on. mmap = FALSE and
+                                        # read_feather over open_dataset force
+                                        # eager read into RAM.
+                                        mmap = FALSE)
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
@@ -293,7 +301,6 @@ get_acoustic_detections <- function(connection,
       fetched_page |>
       # Arrow does not support slicing with ties
       dplyr::slice_max(.data$detection_id, n = 1, with_ties = FALSE) |>
-      dplyr::collect() |>
       dplyr::pull("detection_id")
 
     # Iterate the progress bar by one page
@@ -317,13 +324,18 @@ get_acoustic_detections <- function(connection,
         stringr::str_remove_all(.data$acoustic_tag_id, "[^0-9]")
       )
     ) |>
-    # Arrange by the text part, then the numeric part
-    dplyr::arrange(.data$text_part, .data$num_part) |>
-    dplyr::select(-dplyr::all_of(c("text_part", "num_part")))
-
+    # Arrange by the text part, then the numeric part, then deployment_id to
+    # ensure the same result regardless of protocol
+    dplyr::arrange(.data$text_part, .data$num_part, .data$deployment_id) |>
+    dplyr::select(-dplyr::all_of(c("text_part", "num_part"))) |>
+    # Set the column classes explicitly
+    dplyr::mutate(
+      qc_flag = as.logical(.data$qc_flag)
+    )
 
   # Return single detections table
   dplyr::collect(detections)
+
 }
 
 #' Count acoustic detections

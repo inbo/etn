@@ -5,6 +5,9 @@
 #' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 #'
 #' @export
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_acoustic_tag_ids()
 list_acoustic_tag_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated

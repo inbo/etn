@@ -18,3 +18,8 @@ A vector of all unique \code{tag_serial_numbers} present in
 \description{
 List all available tag serial numbers
 }
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_tag_serial_numbers()
+\dontshow{\}) # examplesIf}
+}

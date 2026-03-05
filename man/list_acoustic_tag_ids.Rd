@@ -17,3 +17,8 @@ A vector of all unique \code{acoustic_tag_id} in \code{acoustic_tag_id.sql}.
 \description{
 List all available acoustic tag ids
 }
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+list_acoustic_tag_ids()
+\dontshow{\}) # examplesIf}
+}

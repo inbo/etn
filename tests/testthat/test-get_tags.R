@@ -1,18 +1,24 @@
-df <- get_tags()
-
-# Test with local database, skip if not available
-skip_if_not_localdb()
-df_sql <- get_tags()
+# Fetch tags using the API
+if (credentials_are_set()) {
+  # Force using the API
+  df <- withr::with_envvar(
+    new = c("ETN_PROTOCOL" = "opencpu"),
+    code = get_tags()
+  )
+}
 
 test_that("get_tags() returns a tibble", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
-
-  expect_s3_class(df_sql, "data.frame")
-  expect_s3_class(df_sql, "tbl")
 })
 
 test_that("get_tags() returns the expected columns", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   expected_col_names <- c(
     "tag_serial_number",
     "tag_type",
@@ -73,6 +79,9 @@ test_that("get_tags() returns the expected columns", {
 })
 
 test_that("get_tags() allows selecting on tag_serial_number", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_tags(tag_serial_number = "0"),
@@ -102,6 +111,9 @@ test_that("get_tags() allows selecting on tag_serial_number", {
 })
 
 test_that("get_tags() allows selecting on tag_type", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_tags(tag_type = "not_a_tag_type"),
@@ -130,6 +142,9 @@ test_that("get_tags() allows selecting on tag_type", {
 })
 
 test_that("get_tags() allows selecting on tag_subtype", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_tags(tag_subtype = "not_a_tag_subtype"),
@@ -158,6 +173,9 @@ test_that("get_tags() allows selecting on tag_subtype", {
 })
 
 test_that("get_tags() allows selecting on acoustic_tag_id", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_tags(acoustic_tag_id = "not_a_tag_id"),
@@ -187,6 +205,9 @@ test_that("get_tags() allows selecting on acoustic_tag_id", {
 })
 
 test_that("get_tags() allows selecting on multiple parameters", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   multiple_parameters_df <- get_tags(
     tag_serial_number = "1187450",
     tag_type = "acoustic",
@@ -197,6 +218,9 @@ test_that("get_tags() allows selecting on multiple parameters", {
 })
 
 test_that("get_tags() can return multiple rows for a single tag", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # A sentinel acoustic-archival tag with temperature + pressure sensor
   tag_1_df <- get_tags(tag_serial_number = 1400185)
   expect_equal(nrow(tag_1_df), 2) # 2 rows: temperature + presure
@@ -231,6 +255,9 @@ test_that("get_tags() can return multiple rows for a single tag", {
 })
 
 test_that("get_tags() returns correct tag_type and tag_subtype", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   expect_equal(
     df |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
     c("acoustic", "acoustic-archival", "archival")

@@ -112,8 +112,8 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
           reason = paste(
             "ensure consistent results,",
             glue::glue(
-              "to {update_or_install} etnservice to version ",
-              "{deployed_version} to ensure consistent results with the API.",
+              "please {update_or_install} etnservice to version ",
+              "{deployed_version} to avoid possible errors.",
               update_or_install =
                 ifelse(
                   rlang::is_installed("etnservice"),

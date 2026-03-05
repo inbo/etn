@@ -4,6 +4,9 @@
 #' @return A vector of all unique `id_pk` present in `acoustic.deployments`.
 #'
 #' @export
+#'
+#' @examplesIf etn:::credentials_are_set()
+#' list_deployment_ids()
 list_deployment_ids <- function(connection) {
   # Check arguments
   # The connection argument has been depreciated
@@ -11,5 +14,7 @@ list_deployment_ids <- function(connection) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE)
+  conduct_parent_to_helpers(protocol = select_protocol(), json = TRUE) |>
+    # Set the column classes explicitly
+    as.integer()
 }

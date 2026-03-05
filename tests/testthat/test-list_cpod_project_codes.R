@@ -1,4 +1,6 @@
 test_that("list_cpod_project_codes() returns unique list of values using api", {
+  skip_if_no_authentication()
+
   vcr::use_cassette("list_cpod_project_codes", {
     vector <- list_cpod_project_codes()
   })
@@ -13,6 +15,7 @@ test_that("list_cpod_project_codes() returns unique list of values using api", {
 })
 
 test_that("list_cpod_project_codes() returns unique list of values using local db", {
+  skip_if_no_authentication()
   skip_if_not_localdb()
 
   vector_sql <- list_cpod_project_codes()
