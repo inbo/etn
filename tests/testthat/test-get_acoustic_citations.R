@@ -32,6 +32,13 @@ test_that("get_acoustic_citations() can handle multiple project codes", {
   )
 
   # Even if some don't have citations
+  one_citation_missing <-
+    get_acoustic_citations(
+      c("Pelfish", "2011_bovenschelde")
+    )
+
+  expect_length(one_citation_missing, 1L)
+
   expect_snapshot(
     get_acoustic_citations(
       c("Pelfish", "2011_bovenschelde")
