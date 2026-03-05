@@ -68,14 +68,11 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
 
   # If a doi is registered, fetch and format it
-  citation_df <- purrr::map(imis_metadata, "dois")
-  if (!is.null(citation_df)) {
-    # citations <- dplyr::pull(citation_df, "Citation")
-    doi_urls <- glue::glue_col(
-      "https://doi.org/",
-      dplyr::pull(citation_df, "DOI")
-    )
-  }
+  publication_dois <-
+    purrr::map(imis_metadata, list("dois", "DOI"), .default = NA)
+  doi_urls <-
+    glue::glue("https://doi.org/","{publication_dois}",
+               .na = NULL)
   # Format and output the citation
   cli::cli_h2("{acronym} : {title}")
   cli::cli_ul(paste(
