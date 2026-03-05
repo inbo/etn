@@ -75,3 +75,7 @@ test_that("get_acoustic_citations() can group citations for multiple acoustic_pr
     )
   )
 })
+
+test_that("get_acoustic_citations() returns DOIs when available", {
+
+})
