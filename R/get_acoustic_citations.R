@@ -15,13 +15,10 @@
 get_acoustic_citations <- function(acoustic_project_code = NULL) {
   # Check if required packages are installed --------------------------------
   rlang::check_installed("jsonlite",
-    reason = "To read metadata from the IMIS API"
+    reason = "To read metadata from the IMIS/MarineINFO API"
   )
 
-  rlang::check_installed("purrr",
-    reason = "For list wrangling, to help format the citations."
-  )
-  # Query the IMIS dataset ids ----------------------------------------------
+    # Query the IMIS dataset ids ----------------------------------------------
   imis_dataset_ids <-
     get_acoustic_projects(acoustic_project_code = acoustic_project_code) |>
     dplyr::pull("imis_dataset_id")
