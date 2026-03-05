@@ -215,8 +215,8 @@ select_protocol <- function() {
 #' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
 remove_html_tags <- function(x){
   # Early return
-  if(is.null(x)) {
-    return(NULL)
+  if(is.na(x)) {
+    return(NA)
   }
 
   # Check if xml2 is installed
