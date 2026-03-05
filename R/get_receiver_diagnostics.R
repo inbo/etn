@@ -153,25 +153,34 @@ get_receiver_diagnostics <- function(
   # Collapse log_data columns into single rows per deployment_id, receiver_id,
   # record_type, datetime combination
 
+  # diagnostics <- arrow::as_arrow_table(diagnostics)
+
   diagnostics <-
     diagnostics %>%
     ## Drop any columns that are all NA
-    dplyr::select(dplyr::where(~ !all(is.na(.)))) %>%
-    dplyr::group_by(.data$deployment_id,
-                    .data$receiver_id,
-                    .data$record_type,
-                    .data$datetime) %>%
+    dplyr::select(dplyr::where(~ !all(is.na(.)))) |>
+    # dplyr::group_by(.data$deployment_id,
+    #                 .data$receiver_id,
+    #                 .data$record_type,
+    #                 .data$datetime) %>%
     ## If a column only contains NA values, keep it, if not, keep the first non
     ## NA value per group
     dplyr::summarise(
       dplyr::across(
         dplyr::everything(),
-        ~ ifelse(all(is.na(.)),
-          NA,
-          dplyr::coalesce(.[!is.na(.)], .)
-        )
+        # ~ ifelse(all(is.na(.)),
+        #   NA,
+        #   dplyr::coalesce(.[!is.na(.)], .)
+        # )
+        ~dplyr::first(.x, na_rm = TRUE)
       ),
-      .groups = "drop"
+      # .groups = "drop",
+      .by = dplyr::all_of(c(
+        "deployment_id",
+        "receiver_id",
+        "record_type",
+        "datetime"
+      ))
     )
 
   # Convert column classes to classes based on base parsing
