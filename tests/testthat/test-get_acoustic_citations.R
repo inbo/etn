@@ -62,6 +62,7 @@ test_that("get_acoustic_citations() invisibly returns a list", {
   # The list names should correspond with the acoustic project names
   expect_named(get_acoustic_citations("2004_Gudena"),
                "2004_Gudena")
+
   # acoustic project code that exposed a bug in missing response element
   # `datasetrec` earlier
   expect_type(
