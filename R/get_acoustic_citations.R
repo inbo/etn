@@ -58,6 +58,15 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
       class = "etn_no_citation_found"
     )
   }
+
+  # Drop any acoustic project codes for which no Citations exist
+  imis_metadata <-
+    imis_metadata |>
+    purrr::discard(~ is.na(purrr::pluck(.x, "datasetrec", "Citation",
+      .default = NA
+    )))
+
+
   # If a doi is registered, fetch and format it
   citation_df <- purrr::map(imis_metadata, "dois")
   if (!is.null(citation_df)) {
