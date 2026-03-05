@@ -16,7 +16,24 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
   )
 
   expect_snapshot(get_acoustic_citations("2011_Bovenschelde"))
+})
 
+test_that("get_acoustic_citations() invisibly returns a data.frame", {
+  expect_invisible(
+    get_acoustic_citations("2004_Gudena")
+  )
+
+  expect_s3_class(
+    get_acoustic_citations("2004_Gudena"),
+    "data.frame"
+  )
+
+  # acoustic project code that exposed a bug in missing response element
+  # `datasetrec` earlier
+  expect_s3_class(
+    get_acoustic_citations("Mrc_vliz"),
+    "data.frame"
+  )
 })
 
 test_that("get_acoustic_citations() can return multiple citations for a single acoustic_project_code", {
