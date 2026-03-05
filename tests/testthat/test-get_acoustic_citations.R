@@ -19,6 +19,29 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
   expect_snapshot(get_acoustic_citations("2011_Bovenschelde"))
 })
 
+test_that("get_acoustic_citations() can handle multiple project codes", {
+  expect_snapshot(
+    get_acoustic_citations(
+      c("2011_Loire", "2011_Warnow", "2013_Foyle")
+    )
+  )
+
+  # Even if some don't have citations
+  expect_snapshot(
+    get_acoustic_citations(
+      c("Pelfish", "2011_bovenschelde")
+    )
+  )
+
+  expect_warning(
+    get_acoustic_citations(
+      c("Pelfish", "2011_bovenschelde")
+    ),
+    class = "etn_no_citation_found"
+  )
+
+})
+
 test_that("get_acoustic_citations() invisibly returns a data.frame", {
   expect_invisible(
     get_acoustic_citations("2004_Gudena")
