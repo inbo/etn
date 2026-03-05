@@ -6,7 +6,7 @@
 #'
 #' @inheritParams get_acoustic_projects
 #'
-#' @returns (Invisible) A tibble with the citations for the specified acoustic
+#' @returns (Invisible) A named vector citations for the specified acoustic
 #'   projects. And prints to console the formatted citations as shown on IMIS.
 #' @export
 #'
@@ -85,5 +85,5 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
 
   # Invisibly return citations ----------------------------------------------
-  invisible(citation_df)
+  invisible(citations)
 }
