@@ -50,7 +50,7 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
     )
   }
   # If a doi is registered, fetch and format it
-  citation_df <- purrr::pluck(imis_metadata, "dois")
+  citation_df <- purrr::map(imis_metadata, "dois")
   if (!is.null(citation_df)) {
     # citations <- dplyr::pull(citation_df, "Citation")
     doi_urls <- glue::glue_col(
