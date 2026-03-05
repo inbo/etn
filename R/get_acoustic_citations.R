@@ -30,8 +30,17 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
   imis_metadata <-
     purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
-    purrr::set_names(acoustic_project_code)
-
+    # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
+    # results so we can't just get this from the acoustic_project_codes argument
+    (\(returned_list) {
+      purrr::set_names(
+        returned_list,
+        purrr::map(
+          returned_list,
+          list("datasetrec", "Acronym")
+        )
+      )
+    })()
 
   # Parse the returned value ------------------------------------------------
 
