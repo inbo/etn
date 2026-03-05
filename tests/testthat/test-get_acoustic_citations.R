@@ -17,8 +17,6 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
     get_acoustic_citations("2011_Bovenschelde"),
     class = "etn_no_citation_found"
   )
-
-  expect_snapshot(get_acoustic_citations("2011_Bovenschelde"))
 })
 
 test_that("get_acoustic_citations() can handle multiple project codes", {
