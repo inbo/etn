@@ -20,15 +20,18 @@ Useful links:
 ## Author
 
 **Maintainer**: Pieter Huybrechts <pieter.huybrechts@inbo.be>
-([ORCID](https://orcid.org/0000-0002-6658-6062))
+([ORCID](https://orcid.org/0000-0002-6658-6062)) (Research Institute for
+Nature and Forest (INBO))
 
 Authors:
 
 - Peter Desmet <peter.desmet@inbo.be>
-  ([ORCID](https://orcid.org/0000-0002-8442-8025))
+  ([ORCID](https://orcid.org/0000-0002-8442-8025)) (Research Institute
+  for Nature and Forest (INBO))
 
 - Damiano Oldoni <damiano.oldoni@inbo.be>
-  ([ORCID](https://orcid.org/0000-0003-3445-7562))
+  ([ORCID](https://orcid.org/0000-0003-3445-7562)) (Research Institute
+  for Nature and Forest (INBO))
 
 - Stijn Van Hoey <stijnvanhoey@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-6413-3185))
@@ -39,3 +42,5 @@ Other contributors:
   ([ROR](https://ror.org/00j54wy13)) \[copyright holder\]
 
 - Research Foundation - Flanders (https://lifewatch.be) \[funder\]
+
+- European Union (https://doi.org/10.3030/101094649) \[funder\]

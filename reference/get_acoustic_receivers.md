@@ -36,7 +36,7 @@ of the group.
 ``` r
 # Get all acoustic receivers
 get_acoustic_receivers()
-#> # A tibble: 8,867 × 23
+#> # A tibble: 8,894 × 23
 #>    receiver_id  manufacturer receiver_model receiver_serial_number modem_address
 #>    <chr>        <chr>        <chr>          <chr>                  <chr>        
 #>  1 ADTT-3       THELMA BIOT… ADTT           3                      NA           
@@ -49,7 +49,7 @@ get_acoustic_receivers()
 #>  8 BATTERY PAC… INNOVASEA    BATTERY PACK   159                    NA           
 #>  9 BATTERY-153  INNOVASEA    BATTERY        153                    NA           
 #> 10 BENTHIC POD… INNOVASEA    BENTHIC POD    BENTHIC POD-162        NA           
-#> # ℹ 8,857 more rows
+#> # ℹ 8,884 more rows
 #> # ℹ 18 more variables: status <chr>, battery_estimated_life <chr>,
 #> #   owner_organization <chr>, financing_project <chr>,
 #> #   built_in_acoustic_tag_id <chr>, ar_model <chr>, ar_serial_number <chr>,
