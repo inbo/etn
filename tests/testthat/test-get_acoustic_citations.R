@@ -3,8 +3,10 @@ test_that("get_acoustic_citations() prints citations to console", {
     get_acoustic_citations("Orstedcod")
   )
 
-  expect_snapshot(
-    get_acoustic_citations("Pelfish")
+  expect_message(
+    get_acoustic_citations("Orstedcod"),
+    regexp = "Winter, Erwin. (2021). ORSTED COD project",
+    fixed = TRUE
   )
 })
 
