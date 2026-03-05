@@ -47,21 +47,24 @@ test_that("get_acoustic_citations() can handle multiple project codes", {
 
 })
 
-test_that("get_acoustic_citations() invisibly returns a data.frame", {
+test_that("get_acoustic_citations() invisibly returns a list", {
   expect_invisible(
     get_acoustic_citations("2004_Gudena")
   )
 
-  expect_s3_class(
+  expect_type(
     get_acoustic_citations("2004_Gudena"),
-    "data.frame"
+    "list"
   )
 
+  # The list names should correspond with the acoustic project names
+  expect_named(get_acoustic_citations("2004_Gudena"),
+               "2004_Gudena")
   # acoustic project code that exposed a bug in missing response element
   # `datasetrec` earlier
-  expect_s3_class(
+  expect_type(
     get_acoustic_citations("Mrc_vliz"),
-    "data.frame"
+    "list"
   )
 })
 
