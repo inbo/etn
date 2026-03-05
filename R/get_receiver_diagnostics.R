@@ -103,6 +103,9 @@ get_receiver_diagnostics <- function(
   # # Close connection
   # DBI::dbDisconnect(connection)
 
+  diagnostics <- readr::read_rds("diagnostics6028.rds") |>
+    dplyr::distinct() # duplicate rows present
+
   ## Return early if no log_data
   if(nrow(diagnostics) == 0){
     warning("No receiver logs found.")
