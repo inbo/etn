@@ -78,3 +78,23 @@ test_that("get_acoustic_citations() can group citations for multiple acoustic_pr
 test_that("get_acoustic_citations() returns DOIs when available", {
 
 })
+
+test_that("get_acoustic_citations() shouldn't include DOI when unknown", {
+  # Pelfish doesn't supply a DOI
+  pelfish_message <- expect_message(
+    get_acoustic_citations("Pelfish"),
+    regexp = NULL # capture message
+  )
+
+  # Check for the presense of a DOI url ending on NA
+  expect_false(
+    stringr::str_detect(pelfish_message$message,
+                        stringr::fixed("https://doi.org/NA"))
+  )
+
+  # Check for the presence of a DOI
+  expect_false(
+    stringr::str_detect(pelfish_message$message,
+                        stringr::fixed("doi"))
+  )
+})
