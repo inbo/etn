@@ -54,7 +54,7 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
   if (any(is.na(citations))) {
     rlang::warn(
-      message = "No citation found on IMIS for: {names(citations)[is.na(citations)]}",
+      message = glue::glue("No citation found on IMIS for: {names(citations)[is.na(citations)]}"),
       class = "etn_no_citation_found"
     )
   }
