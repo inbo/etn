@@ -1,5 +1,20 @@
 test_that("get_acoustic_citations() prints citations to console", {
-  # Doesn't have a citation
+  expect_snapshot(
+    get_acoustic_citations("Orstedcod")
+  )
+
+  expect_snapshot(
+    get_acoustic_citations("Pelfish")
+  )
+})
+
+test_that("get_acoustic_citations() returns a warning when a citation can't be found", {
+  # 2011 Bovenschelde Doesn't have a citation
+
+  expect_warning(
+    get_acoustic_citations("2011_Bovenschelde")
+  )
+
   expect_snapshot(get_acoustic_citations("2011_Bovenschelde"))
 
 })
