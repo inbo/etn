@@ -28,14 +28,12 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
   # Query the IMIS API ------------------------------------------------------
 
+  marineinfo_dataset_endpoints <-
+    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+
   imis_metadata <-
-    httr2::request("https://www.vliz.be/en/imis") |>
-    httr2::req_url_query(
-      dasid = imis_dataset_ids,
-      show = "json"
-    ) |>
-    httr2::req_get_url() |>
-    jsonlite::fromJSON()
+    purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
+    purrr::set_names(acoustic_project_code)
 
 
   # Parse the returned value ------------------------------------------------
