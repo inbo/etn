@@ -1,4 +1,6 @@
 test_that("get_acoustic_citations() prints citations to console", {
+  skip_if_offline("marineinfo.org")
+
   expect_snapshot(
     get_acoustic_citations("Orstedcod")
   )
@@ -11,6 +13,8 @@ test_that("get_acoustic_citations() prints citations to console", {
 })
 
 test_that("get_acoustic_citations() returns a warning when a citation can't be found", {
+  skip_if_offline("marineinfo.org")
+
   # 2011 Bovenschelde Doesn't have a citation
   expect_warning(
     get_acoustic_citations("2011_Bovenschelde"),
@@ -19,6 +23,8 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
 })
 
 test_that("get_acoustic_citations() can handle multiple project codes", {
+  skip_if_offline("marineinfo.org")
+
   expect_snapshot(
     get_acoustic_citations(
       c("2011_Loire", "2011_Warnow", "2013_Foyle")
@@ -67,6 +73,8 @@ test_that("get_acoustic_citations() can return multiple citations for a single a
 })
 
 test_that("get_acoustic_citations() can group citations for multiple acoustic_project_codes", {
+  skip_if_offline("marineinfo.org")
+
   expect_snapshot(
     get_acoustic_citations(
       c("2004_Gudena", "2011_bovenschelde", "2011_Loire", "2011_Warnow",
@@ -76,10 +84,12 @@ test_that("get_acoustic_citations() can group citations for multiple acoustic_pr
 })
 
 test_that("get_acoustic_citations() returns DOIs when available", {
-
+  skip_if_offline("marineinfo.org")
 })
 
 test_that("get_acoustic_citations() shouldn't include DOI when unknown", {
+  skip_if_offline("marineinfo.org")
+
   # Pelfish doesn't supply a DOI
   pelfish_message <- expect_message(
     get_acoustic_citations("Pelfish"),
