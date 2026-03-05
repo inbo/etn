@@ -43,8 +43,11 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
     # Citations sometimes contain HTML formatting, let's remove them.
     purrr::map(remove_html_tags)
 
-  if(is.null(citations)){
-    cli::cli_warn("No citation found on IMIS for: {acoustic_project_code}")
+  if (any(is.na(citations))) {
+    rlang::warn(
+      message = "No citation found on IMIS for: {names(citations)[is.na(citations)]}",
+      class = "etn_no_citation_found"
+    )
   }
   # If a doi is registered, fetch and format it
   citation_df <- purrr::pluck(imis_metadata, "dois")
