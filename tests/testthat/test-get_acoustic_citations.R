@@ -38,6 +38,7 @@ test_that("get_acoustic_citations() can handle multiple project codes", {
     )
   )
 
+  # A warning should still be returned for the missing citation
   expect_warning(
     get_acoustic_citations(
       c("Pelfish", "2011_bovenschelde")
