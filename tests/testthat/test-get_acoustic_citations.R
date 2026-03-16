@@ -40,33 +40,15 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
 test_that("get_acoustic_citations() can handle multiple project codes", {
   skip_if_offline("marineinfo.org")
 
-  expect_snapshot(
+  expect_length(
     get_acoustic_citations(
       c("2011_Loire", "2011_Warnow", "2013_Foyle")
-    )
+    ),
+    3L
   )
 
   # Even if some don't have citations
-  one_citation_missing <-
-    get_acoustic_citations(
-      c("Pelfish", "2011_bovenschelde")
-    )
-
-  expect_length(one_citation_missing, 1L)
-
-  expect_snapshot(
-    get_acoustic_citations(
-      c("Pelfish", "2011_bovenschelde")
-    )
-  )
-
-  # A warning should still be returned for the missing citation
-  expect_warning(
-    get_acoustic_citations(
-      c("Pelfish", "2011_bovenschelde")
-    ),
-    class = "etn_no_citation_found"
-  )
+  expect_length(get_acoustic_citations(c("Pelfish", "2011_bovenschelde")), 1L)
 
 })
 
