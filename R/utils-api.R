@@ -313,6 +313,7 @@ req_perform_opencpu <- function(req,
 #'
 #' @examples
 #' from_json("https://marineinfo.org/id/dataset/7959.json")
+#' from_json("https://marineinfo.org/id/dataset/8856.json")
 from_json <- function(url, ...){
   httr2::request(url) |>
   httr2::req_retry(max_tries = 3) |>
