@@ -18,10 +18,33 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
     reason = "To read metadata from the IMIS/MarineINFO API"
   )
 
-    # Query the IMIS dataset ids ----------------------------------------------
+  # Query the IMIS dataset ids ----------------------------------------------
   imis_dataset_ids <-
     get_acoustic_projects(acoustic_project_code = acoustic_project_code) |>
     dplyr::pull("imis_dataset_id")
+
+
+  # Handle missing IMIS dataset ids -----------------------------------------
+
+  if (all(is.na(imis_dataset_ids))) {
+    cli::cli_abort(
+      message = glue::glue(
+        "No IMIS dataset ids found for: {codes_col}",
+        codes_col = glue::glue_collapse(acoustic_project_code,
+                                        sep = ", ",
+                                        last = " & ")
+      ),
+      class = "etn_none_imis_dataset_id"
+    )
+    return(invisible(NULL))
+  }
+
+  if(any(is.na(imis_dataset_ids))) {
+    cli::cli_warn(
+      message = glue::glue("No IMIS dataset ids found for: {acoustic_project_code[is.na(imis_dataset_ids)]}"),
+      class = "etn_some_imis_dataset_id"
+    )
+  }
 
   # Query the IMIS API ------------------------------------------------------
 
@@ -52,7 +75,7 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
     purrr::map(remove_html_tags)
 
   if (any(is.na(citations))) {
-    rlang::warn(
+    cli::cli_warn(
       message = glue::glue("No citation found on IMIS for: {names(citations)[is.na(citations)]}"),
       class = "etn_no_citation_found"
     )
