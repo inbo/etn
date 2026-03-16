@@ -14,14 +14,14 @@
   [etnservice](https://github.com/inbo/etnservice) package
   ([\#280](https://github.com/inbo/etn/issues/280)). This means you can
   use the package from your own computer. Note that this will be slower
-  than running it from the [VLIZ RStudio
-  server](https://rstudio4.vliz.be/).
+  than running it from the [ETN RStudio
+  server](https://rstudio.europeantrackingnetwork.org).
 - etn will automatically switch to a local database connection when
-  available (e.g. the VLIZ RStudio server). Use
+  available (e.g. the ETN RStudio server). Use
   `Sys.setenv(ETN_PROTOCOL = "opencpu")` to override this behaviour and
   force the package to use the API
   ([\#398](https://github.com/inbo/etn/issues/398)).
-- Queries via the API and the VLIZ RStudio Server will return the same
+- Queries via the API and the ETN RStudio Server will return the same
   results ([\#317](https://github.com/inbo/etn/issues/317)).
 - When using a local database connection, etn will check if the
   installed helper package etnservice that is used to place these
@@ -53,9 +53,10 @@ retrieved from your `.Renviron` file every time you run a function.
 
 Here is how you can migrate:
 
-1.  Use the new RStudio server (<https://rstudio4.vliz.be/>). The
-    LifeWatch RStudio server (<https://rstudio.lifewatch.be>) won’t work
-    with this version of etn and will be discontinued.
+1.  Use the new ETN RStudio server
+    (<https://rstudio.europeantrackingnetwork.org>). The LifeWatch
+    RStudio server (<https://rstudio.lifewatch.be>) won’t work with this
+    version of etn and will be discontinued.
 
 2.  Follow the steps in
     [`vignette("authentication")`](https://inbo.github.io/etn/articles/authentication.md)

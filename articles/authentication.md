@@ -55,8 +55,8 @@ above “Where do you find your credentials?”.
 1.  [Register for a MarinePass
     account](https://rshiny.lifewatch.be/account?p=register). It grants
     you access to several services at VLIZ: [MDA](https://mda.vliz.be/),
-    [ETN](https://www.lifewatch.be/etn/), and the [VLIZ RStudio
-    server](https://rstudio4.vliz.be).
+    [ETN](https://www.lifewatch.be/etn/), and the [ETN RStudio
+    server](https://rstudio.europeantrackingnetwork.org).
 2.  Select access to `ETN_data` and `rstudio_vliz`.
 3.  Confirm registration via email.
 4.  Wait for an email indicating that your account was approved by a
