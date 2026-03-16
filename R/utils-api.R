@@ -300,3 +300,24 @@ req_perform_opencpu <- function(req,
   }
   resp
 }
+
+
+#' Fetch a json object from a url and parse it
+#'
+#' @param url Character of length one with the url to fetch the json object from
+#' @param ... Additional arguments passed on to `jsonlite::fromJSON()`
+#'
+#' @returns The parsed json object as returned by `jsonlite::fromJSON()`
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' from_json("https://marineinfo.org/id/dataset/7959.json")
+from_json <- function(url, ...){
+  # Check if required packages are installed --------------------------------
+  rlang::check_installed("jsonlite",
+                         reason = "To read metadata from the IMIS/MarineINFO API"
+  )
+
+  jsonlite::fromJSON(url, ...)
+}

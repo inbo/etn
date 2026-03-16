@@ -13,11 +13,6 @@
 #' @examples
 #' get_acoustic_citations("2004_Gudena")
 get_acoustic_citations <- function(acoustic_project_code = NULL) {
-  # Check if required packages are installed --------------------------------
-  rlang::check_installed("jsonlite",
-    reason = "To read metadata from the IMIS/MarineINFO API"
-  )
-
   # Query the IMIS dataset ids ----------------------------------------------
   imis_dataset_ids <-
     get_acoustic_projects(acoustic_project_code = acoustic_project_code) |>
@@ -56,7 +51,7 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
     glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
   imis_metadata <-
-    purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
+    purrr::map(marineinfo_dataset_endpoints, from_json) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
