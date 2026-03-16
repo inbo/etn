@@ -318,7 +318,6 @@ from_json <- function(url, ...){
   httr2::request(url) |>
   httr2::req_retry(max_tries = 3) |>
   httr2::req_perform() |>
-    # simplifyVector is convenient to fetch DOIs more easily from the returned
-    # object
-  httr2::resp_body_json(simplifyVector = TRUE, encoding = "UTF-8")
+  httr2::resp_body_string(encoding = "UTF-8") |>
+    jsonlite::fromJSON()
 }
