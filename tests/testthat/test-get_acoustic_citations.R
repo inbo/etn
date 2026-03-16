@@ -42,7 +42,7 @@ test_that("get_acoustic_citations() returns error if no IMIS dataset ids are fou
 
 test_that("get_acoustic_citations() returns warning if no IMIS dataset ids are found for some projects", {
   expect_warning(
-    get_acoustic_citations(acoustic_project_code = c("2013_Maas", "IBASS")),
+    suppressMessages(get_acoustic_citations(acoustic_project_code = c("2013_Maas", "IBASS"))),
     class = "etn_some_imis_dataset_id"
   )
 })
@@ -60,32 +60,34 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
 test_that("get_acoustic_citations() can handle multiple project codes", {
   skip_if_offline("marineinfo.org")
 
-  expect_length(
-    get_acoustic_citations(
-      c("2011_Loire", "2011_Warnow", "2013_Foyle")
-    ),
-    3L
-  )
+  expect_length(suppressMessages(get_acoustic_citations(
+    c("2011_Loire", "2011_Warnow", "2013_Foyle")
+  )), 3L)
 
   # Even if some don't have citations
-  expect_length(get_acoustic_citations(c("Pelfish", "2011_bovenschelde")), 1L)
+  expect_warning(
+    one_citation_one_warning <-
+      suppressMessages(get_acoustic_citations(c("Pelfish", "2011_Bovenschelde"))),
+    class = "etn_no_citation_found"
+  )
 
+  expect_length(one_citation_one_warning, 1L)
 })
 
 test_that("get_acoustic_citations() invisibly returns a list", {
   skip_if_offline("marineinfo.org")
 
   expect_invisible(
-    get_acoustic_citations("2004_Gudena")
+    suppressMessages(get_acoustic_citations("2004_Gudena"))
   )
 
   expect_type(
-    get_acoustic_citations("2004_Gudena"),
+    suppressMessages(get_acoustic_citations("2004_Gudena")),
     "list"
   )
 
   # The list names should correspond with the acoustic project names
-  expect_named(get_acoustic_citations("2004_Gudena"),
+  expect_named(suppressMessages(get_acoustic_citations("2004_Gudena")),
                "2004_Gudena")
 })
 
