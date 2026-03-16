@@ -318,6 +318,7 @@ from_json <- function(url, ...){
   httr2::request(url) |>
   httr2::req_retry(max_tries = 3) |>
   httr2::req_perform() |>
-    # Needed to fetch DOIs more easily
-  httr2::resp_body_json(simplifyVector = TRUE)
+    # simplifyVector is convenient to fetch DOIs more easily from the returned
+    # object
+  httr2::resp_body_json(simplifyVector = TRUE, encoding = "UTF-8")
 }
