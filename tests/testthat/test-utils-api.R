@@ -198,3 +198,18 @@ test_that("validate_login() returns error on bad credentials", {
     }
   )
 })
+
+
+# from_json() -------------------------------------------------------------
+
+test_that("from_json() returns correct strings regardless of OS locale", {
+  # jsonlite::fromJSON returns encoding errors from marineinfo depending on the
+  # os
+
+  withr::with_locale(
+    new = c(LC_CTYPE = "en_US.UTF-8"),
+    code = {
+      from_json("https://marineinfo.org/id/dataset/8856.json")$dois$Citation
+    }
+  )
+})
