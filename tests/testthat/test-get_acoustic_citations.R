@@ -27,6 +27,26 @@ test_that("get_acoustic_citations() removes HTML tags from printed citation", {
 
 })
 
+test_that("get_acoustic_citations() returns error if no IMIS dataset ids are found for any projects", {
+  # 1 Project
+  expect_error(
+    get_acoustic_citations(acoustic_project_code = "Mrc_vliz"),
+    class = "etn_none_imis_dataset_id"
+  )
+  # Several projects
+  expect_error(
+    get_acoustic_citations(acoustic_project_code = c("EBAMAR_array", "BOATS_network")),
+    class = "etn_none_imis_dataset_id"
+  )
+})
+
+test_that("get_acoustic_citations() returns warning if no IMIS dataset ids are found for some projects", {
+  expect_warning(
+    get_acoustic_citations(acoustic_project_code = c("2013_Maas", "IBASS")),
+    class = "etn_some_imis_dataset_id"
+  )
+})
+
 test_that("get_acoustic_citations() returns a warning when a citation can't be found", {
   skip_if_offline("marineinfo.org")
 
@@ -98,6 +118,12 @@ test_that("get_acoustic_citations() can group citations for multiple acoustic_pr
 
 test_that("get_acoustic_citations() returns DOIs when available", {
   skip_if_offline("marineinfo.org")
+
+  expect_message(
+    get_acoustic_citations(acoustic_project_code = "2011_Warnow"),
+    regexp = "doi",
+    fixed = FALSE
+  )
 })
 
 test_that("get_acoustic_citations() shouldn't include DOI when unknown", {
