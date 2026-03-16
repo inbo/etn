@@ -28,12 +28,12 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
   if (all(is.na(imis_dataset_ids))) {
     cli::cli_abort(
-      message = glue::glue(
+      message =
         "No IMIS dataset ids found for: {codes_col}",
-        codes_col = glue::glue_collapse(acoustic_project_code,
+        .envir = list2env(list(codes_col = glue::glue_collapse(acoustic_project_code,
                                         sep = ", ",
-                                        last = " & ")
-      ),
+                                        last = " & ")))
+      ,
       class = "etn_none_imis_dataset_id"
     )
     return(invisible(NULL))
@@ -41,9 +41,13 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
 
   if(any(is.na(imis_dataset_ids))) {
     cli::cli_warn(
-      message = glue::glue("No IMIS dataset ids found for: {acoustic_project_code[is.na(imis_dataset_ids)]}"),
+      message = "No IMIS dataset ids found for: {codes_col}",
+      .envir = list2env(list(codes_col = acoustic_project_code[is.na(imis_dataset_ids)])),
       class = "etn_some_imis_dataset_id"
     )
+
+    imis_dataset_ids <-
+      imis_dataset_ids[!is.na(imis_dataset_ids)]
   }
 
   # Query the IMIS API ------------------------------------------------------
