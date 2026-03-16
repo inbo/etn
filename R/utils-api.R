@@ -314,10 +314,9 @@ req_perform_opencpu <- function(req,
 #' @examples
 #' from_json("https://marineinfo.org/id/dataset/7959.json")
 from_json <- function(url, ...){
-  # Check if required packages are installed --------------------------------
-  rlang::check_installed("jsonlite",
-                         reason = "To read metadata from the IMIS/MarineINFO API"
-  )
-
-  jsonlite::fromJSON(url, ...)
+  httr2::request(url) |>
+  httr2::req_retry(max_tries = 3) |>
+  httr2::req_perform() |>
+    # Needed to fetch DOIs more easily
+  httr2::resp_body_json(simplifyVector = TRUE)
 }
