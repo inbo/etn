@@ -12,6 +12,21 @@ test_that("get_acoustic_citations() prints citations to console", {
   )
 })
 
+test_that("get_acoustic_citations() removes HTML tags from printed citation", {
+  loire_message <- expect_message(get_acoustic_citations("2011_Loire"),
+                                  "2011_Loire",
+                                  fixed = FALSE
+  )
+
+  # Loire returns a <i> italic tag in the title, get_acoustic_citations() should
+  # remove this
+  expect_no_match(
+    as.character(loire_message),
+                 regexp = "<i>"
+  )
+
+})
+
 test_that("get_acoustic_citations() returns a warning when a citation can't be found", {
   skip_if_offline("marineinfo.org")
 
