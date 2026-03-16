@@ -165,7 +165,8 @@ get_nodename <- function() {
 localdb_is_available <- function() {
   # As discussed with VLIZ, all systems that have access to the local database
   # should have nodenames ending on vliz.be
-  endsWith(get_nodename(), "vliz.be")
+  endsWith(get_nodename(), "vliz.be") |
+    endsWith(get_nodename(), "europeantrackingnetwork.org")
 }
 
 #' Select the protocol to use
