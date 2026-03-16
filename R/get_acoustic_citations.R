@@ -68,8 +68,10 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
   citations <- purrr::discard(citations, is.na)
 
   # Get dataset title and acroynm
-  acronym <- purrr::map(imis_metadata, list("datasetrec", "Acronym"))
-  title <- purrr::map(imis_metadata, list("datasetrec", "StandardTitle"))
+  acronym <- purrr::map(imis_metadata, list("datasetrec", "Acronym")) |>
+    purrr::map(remove_html_tags)
+  title <- purrr::map(imis_metadata, list("datasetrec", "StandardTitle")) |>
+    purrr::map(remove_html_tags)
 
   # If a doi is registered, fetch and format it
   publication_dois <-
