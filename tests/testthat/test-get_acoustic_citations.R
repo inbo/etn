@@ -49,20 +49,6 @@ test_that("get_acoustic_citations() returns error if no IMIS dataset ids are fou
     class = "etn_none_imis_dataset_id"
   )
 
-  # Invisibly returns NULL
-  expect_invisible(
-    expect_error(
-      get_acoustic_citations("RTT"),
-      regexp = NULL # capture return
-    )
-  )
-
-  expect_null(
-    expect_error(
-      get_acoustic_citations("RTT"),
-      regexp = NULL # capture return
-    )
-  )
 })
 
 test_that("get_acoustic_citations() returns warning if no IMIS dataset ids are found for some projects", {

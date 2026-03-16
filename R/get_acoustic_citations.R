@@ -36,7 +36,6 @@ get_acoustic_citations <- function(acoustic_project_code = NULL) {
       ,
       class = "etn_none_imis_dataset_id"
     )
-    return(invisible(NULL))
   }
 
   if(any(is.na(imis_dataset_ids))) {
