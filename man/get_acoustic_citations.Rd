@@ -11,7 +11,7 @@ get_acoustic_citations(acoustic_project_code = NULL)
 project codes. Case-insensitive.}
 }
 \value{
-(Invisible) A tibble with the citations for the specified acoustic
+(Invisible) A named vector citations for the specified acoustic
 projects. And prints to console the formatted citations as shown on IMIS.
 }
 \description{

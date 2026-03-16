@@ -1,5 +1,7 @@
 test_that("get_acoustic_citations() prints citations to console", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_snapshot(
     get_acoustic_citations("Orstedcod")
@@ -13,6 +15,10 @@ test_that("get_acoustic_citations() prints citations to console", {
 })
 
 test_that("get_acoustic_citations() removes HTML tags from printed citation", {
+  skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   loire_message <- expect_message(get_acoustic_citations("2011_Loire"),
                                   "2011_Loire",
                                   fixed = FALSE
@@ -28,6 +34,10 @@ test_that("get_acoustic_citations() removes HTML tags from printed citation", {
 })
 
 test_that("get_acoustic_citations() returns error if no IMIS dataset ids are found for any projects", {
+  skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # 1 Project
   expect_error(
     get_acoustic_citations(acoustic_project_code = "Mrc_vliz"),
@@ -41,6 +51,10 @@ test_that("get_acoustic_citations() returns error if no IMIS dataset ids are fou
 })
 
 test_that("get_acoustic_citations() returns warning if no IMIS dataset ids are found for some projects", {
+  skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expect_warning(
     suppressMessages(get_acoustic_citations(acoustic_project_code = c("2013_Maas", "IBASS"))),
     class = "etn_some_imis_dataset_id"
@@ -49,6 +63,8 @@ test_that("get_acoustic_citations() returns warning if no IMIS dataset ids are f
 
 test_that("get_acoustic_citations() returns a warning when a citation can't be found", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   # 2011 Bovenschelde Doesn't have a citation
   expect_warning(
@@ -59,6 +75,8 @@ test_that("get_acoustic_citations() returns a warning when a citation can't be f
 
 test_that("get_acoustic_citations() can handle multiple project codes", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_length(suppressMessages(get_acoustic_citations(
     c("2011_Loire", "2011_Warnow", "2013_Foyle")
@@ -76,6 +94,8 @@ test_that("get_acoustic_citations() can handle multiple project codes", {
 
 test_that("get_acoustic_citations() invisibly returns a list", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_invisible(
     suppressMessages(get_acoustic_citations("2004_Gudena"))
@@ -93,6 +113,8 @@ test_that("get_acoustic_citations() invisibly returns a list", {
 
 test_that("get_acoustic_citations() can group citations for multiple acoustic_project_codes", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_snapshot(
     get_acoustic_citations(
@@ -104,6 +126,8 @@ test_that("get_acoustic_citations() can group citations for multiple acoustic_pr
 
 test_that("get_acoustic_citations() returns DOIs when available", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_message(
     get_acoustic_citations(acoustic_project_code = "2011_Warnow"),
@@ -114,6 +138,8 @@ test_that("get_acoustic_citations() returns DOIs when available", {
 
 test_that("get_acoustic_citations() shouldn't include DOI when unknown", {
   skip_if_offline("marineinfo.org")
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   # Pelfish doesn't supply a DOI
   pelfish_message <- expect_message(
