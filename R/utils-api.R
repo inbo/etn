@@ -305,9 +305,9 @@ req_perform_opencpu <- function(req,
 #' Fetch a json object from a url and parse it
 #'
 #' @param url Character of length one with the url to fetch the json object from
-#' @param ... Additional arguments passed on to `jsonlite::fromJSON()`
+#' @param ... Additional arguments passed on to `httr2::resp_body_json()`
 #'
-#' @returns The parsed json object as returned by `jsonlite::fromJSON()`
+#' @returns The parsed json object
 #' @family helper functions
 #' @noRd
 #'
