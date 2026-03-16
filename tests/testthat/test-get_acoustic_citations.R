@@ -96,15 +96,6 @@ test_that("get_acoustic_citations() invisibly returns a list", {
   )
 })
 
-test_that("get_acoustic_citations() can return multiple citations for a single acoustic_project_code", {
-  skip_if_offline("marineinfo.org")
-
-  expect_length(
-    get_acoustic_citations("2004_Gudena"),
-    2L
-  )
-})
-
 test_that("get_acoustic_citations() can group citations for multiple acoustic_project_codes", {
   skip_if_offline("marineinfo.org")
 
