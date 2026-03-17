@@ -212,9 +212,10 @@ test_that("from_json() returns correct strings regardless of OS locale", {
       from_json("https://marineinfo.org/id/dataset/8856.json")$dois$Citation
     }
   )
-  # Windows-1252
+
+  # Latin-1
   withr::with_locale(
-    new = c(LC_CTYPE = "French_France.1252"),
+    new = c(LC_CTYPE = "en_US.ISO8859-1"),
     code = {
       from_json("https://marineinfo.org/id/dataset/8856.json")$dois$Citation
     }
