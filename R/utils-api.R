@@ -314,11 +314,12 @@ req_perform_opencpu <- function(req,
 #' @examples
 #' from_json("https://marineinfo.org/id/dataset/7959.json")
 #' from_json("https://marineinfo.org/id/dataset/8856.json")
-from_json <- function(url, ...){
-  httr2::request(url) |>
-  httr2::req_retry(max_tries = 3) |>
-  httr2::req_perform() |>
-  httr2::resp_body_raw() |>
-    rawToChar() |>
-    jsonlite::fromJSON()
+from_json <- function(url, ...) {
+  json_string <- httr2::request(url) |>
+    httr2::req_retry(max_tries = 3) |>
+    httr2::req_perform() |>
+    httr2::resp_body_raw() |>
+    rawToChar()
+  Encoding(json_string) <- "UTF-8"
+  jsonlite::fromJSON(json_string)
 }
