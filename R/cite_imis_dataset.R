@@ -12,7 +12,7 @@
 #' @returns A data.frame with 5 columns:
 #'  - The `imis_dataset_id`
 #'  - A formatted `citation` with DOI if available.
-#'  - The `DOI`.
+#'  - The `doi`.
 #'  - The contact person, usually the first author. If no contact person is entered, the first author with status creator..
 #'  - The corresponding `email`.
 #'  - The corresponding `institute`.
