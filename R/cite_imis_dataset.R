@@ -29,12 +29,12 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
     # correct column names.
     return(
       dplyr::tibble(
-        imis_dataset_id = NA,
-        citation = NA,
-        doi = NA,
-        name = NA,
-        email = NA,
-        institute = NA
+        imis_dataset_id = integer(),
+        citation = character(),
+        doi = character(),
+        name = character(),
+        email = character(),
+        institute = character()
       )
     )
   }
