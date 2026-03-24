@@ -73,8 +73,9 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
 
   # Combine the parsed information ------------------------------------------
 
-  purrr::reduce(
-    list(marineinfo_citation, marineinfo_ownerships),
-    dplyr::full_join
+  dplyr::full_join(
+    marineinfo_citation,
+    marineinfo_ownerships,
+    dplyr::join_by("acoustic_project_code")
   )
 }
