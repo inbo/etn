@@ -42,17 +42,18 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
   # it with the `doi:` prefix and end on a period.
   marineinfo_citation <- purrr::map(marineinfo_metadata, "datasetrec") |>
     purrr::map(\(datasetrec) {
-      glue::glue(
+      dplyr::tibble(citation =
+                      # Convert to character so the returned colclasses are as
+                      # close to base as possible
+      as.character(glue::glue(
         "{citation}.{doi_prefix}{doi}{doi_suffix}",
         citation = purrr::pluck(datasetrec, "Citation", .default = ""),
         doi = purrr::pluck(datasetrec, "DOI", .default = ""),
         doi_prefix = ifelse(doi != "", " doi:", ""),
         doi_suffix = ifelse(doi != "", ".", "")
+      )),
+      doi = purrr::pluck(datasetrec, "DOI", .default = NA)
       )
-    }) |>
-    purrr::map(\(citation) {
-      # Return the column classes as close to base as possible.
-      data.frame(citation = as.character(citation))
     }) |>
     purrr::list_rbind(names_to = "imis_dataset_id")
 
