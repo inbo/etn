@@ -457,6 +457,34 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
+test_that("get_acoustic_detections() allows selecting on deployment_id", {
+  skip_if_no_authentication()
+
+  vcr::local_cassette("detections_deployment_id")
+  # Select single value
+  single_deployment_id <- 1436L # From demer
+  expect_identical(
+    get_acoustic_detections(
+      deployment_id = single_deployment_id
+    ) |>
+      dplyr::pull(deployment_id) |>
+    unique(),
+    single_deployment_id
+  )
+
+  # Select multiple values
+  multiple_deployment_ids <- c(1427L, 1432L)
+  expect_identical(
+    get_acoustic_detections(
+      deployment_id = multiple_deployment_ids
+    ) |>
+      dplyr::distinct(deployment_id) |>
+      dplyr::pull() |>
+      sort(),
+    multiple_deployment_ids
+  )
+})
+
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
   skip_if_no_authentication()
 
