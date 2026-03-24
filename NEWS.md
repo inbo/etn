@@ -1,6 +1,7 @@
 # etn (development version)
 
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
+* Fixed a bug in `get_acoustic_detections()` where the `deployment_id` argument was missing (#504).
 
 # etn 3.0.0
 
