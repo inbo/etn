@@ -1,17 +1,18 @@
-#' Get Acoustic Citations
+#' Get the citation and associated first author information for an IMIS dataset.
 #'
-#' This function returns the the citations for all acoustic (= network) projects
-#' included in a dataset. These citations will be retrieved from
-#' [IMIS](https://www.vliz.be/nl/imis).
+#' This function returns the the citations and some information for the first
+#' author for a dataset as stored on [IMIS](https://www.vliz.be/nl/imis) These
+#' citations will be retrieved from
+#' [MarineInfo](https://https://marineinfo.org).
 #'
 #' @inheritParams get_acoustic_projects
-#' @param imis_dataset_ids A vector of IMIS dataset ids. This is an optional argument, if not provided, the function will attempt to retrieve the dataset ids using the `get_acoustic_projects()` function. This allows for more flexibility in case the user already has the dataset ids or wants to retrieve citations for a specific set of dataset ids without having to go through the process of retrieving acoustic project codes first.(Integer) IMIS dataset ids as returned by
-#'   `get_acoustic_projects()`.
+#' @param imis_dataset_ids A vector of IMIS dataset ids as returned by
+#'   `get_acoustic_projects()` or `get_animal_projects()`.
 #'
 #' @returns A data.frame with 5 columns:
-#'  - The `acoustic_project_code`
-#'  - A formatted `citation` with DOI if available
-#'  - The `DOI`
+#'  - The `imis_dataset_id`
+#'  - A formatted `citation` with DOI if available.
+#'  - The `DOI`.
 #'  - The contact person, usually the first author. If no contact person is entered, the first author with status creator..
 #'  - The corresponding `email`.
 #'  - The corresponding `institute`.
@@ -19,8 +20,8 @@
 #' @noRd
 #'
 #' @examplesIf interactive() # Cite the 2014_gudena acoustic project:
-#' cite_acoustic_project(8856)
-cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
+#'   cite_imis_dataset(8856)
+cite_imis_dataset <- function(imis_dataset_ids = NULL) {
   # Query the IMIS API ------------------------------------------------------
 
   marineinfo_dataset_endpoints <-
@@ -32,7 +33,7 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
       purrr::set_names(returned_list,
-                       purrr::map(returned_list, list("datasetrec", "Acronym")))
+                       purrr::map(returned_list, list("datasetrec", "DasID")))
     })()
 
   # Parse the Citation and DOI ----------------------------------------------
@@ -50,9 +51,10 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
       )
     }) |>
     purrr::map(\(citation) {
-      data.frame(citation = citation)
+      # Return the column classes as close to base as possible.
+      data.frame(citation = as.character(citation))
     }) |>
-    purrr::list_rbind(names_to = "acoustic_project_code")
+    purrr::list_rbind(names_to = "imis_dataset_id")
 
   # Parse the person information --------------------------------------------
 
@@ -65,11 +67,11 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
         ownership_df,
         name = paste(.data$Surname, .data$Firstname),
         email = .data$Email,
-        instituteFullAcronym = .data$FullAcronym,
+        institute = .data$FullAcronym,
         .keep = "none"
       )
     }) |>
-    purrr::list_rbind(names_to = "acoustic_project_code")
+    purrr::list_rbind(names_to = "imis_dataset_id")
 
 
   # Combine the parsed information ------------------------------------------
@@ -77,6 +79,8 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
   dplyr::full_join(
     marineinfo_citation,
     marineinfo_ownerships,
-    dplyr::join_by("acoustic_project_code")
-  )
+    dplyr::join_by("imis_dataset_id")
+  ) |>
+    # Return as tibble to be consistent within the package. Displays nice.
+    dplyr::as_tibble()
 }
