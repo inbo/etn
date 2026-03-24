@@ -29,8 +29,7 @@ both, find those with \code{acoustic-archival}.}
 identifiers, i.e. identifiers found in \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
 }
 \value{
-A tibble with tags data, sorted by \code{tag_serial_number}. See also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+A tibble with tags data, sorted by \code{tag_serial_number}.
 Values for \code{owner_organization} and \code{owner_pi} will only be visible if you
 are member of the group.
 }

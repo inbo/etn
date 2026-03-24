@@ -6,9 +6,7 @@
 #'   codes. Case-insensitive.
 #'
 #' @inheritParams list_animal_ids
-#' @return A tibble with animal project data, sorted by `project_code`. See
-#'   also
-#'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+#' @return A tibble with animal project data, sorted by `project_code`.
 #'
 #' @export
 #'

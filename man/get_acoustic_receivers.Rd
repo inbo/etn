@@ -16,9 +16,7 @@ credentials instead.}
 \item{status}{Character. One or more statuses, e.g. \code{available} or \code{broken}.}
 }
 \value{
-A tibble with acoustic receiver data, sorted by \code{receiver_id}. See
-also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+A tibble with acoustic receiver data, sorted by \code{receiver_id}.
 Values for \code{owner_organization} will only be visible if you are member of
 the group.
 }
