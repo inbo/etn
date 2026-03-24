@@ -58,8 +58,8 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
 
   expect_true(
     stringr::str_ends(
-      cite_imis_dataset(imis_dataset_ids = 8856),
-      stringr::fixed("10.14284/735")
+      cite_imis_dataset(imis_dataset_ids = 8856)$citation,
+      stringr::fixed("10.14284/735.")
     )
   )
 })
