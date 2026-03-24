@@ -82,6 +82,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
   # Parse the person information --------------------------------------------
 
   marineinfo_ownerships <- purrr::map(marineinfo_metadata, list("ownerships")) |>
+    # Don't parse datasets without ownership information
+    purrr::compact() |>
     purrr::map(\(ownership_df) {
       dplyr::filter(ownership_df, .data$OrderNr == 1)
     }) |>
@@ -95,7 +97,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
       )
     }) |>
     purrr::list_rbind(names_to = "imis_dataset_id")
-
 
   # Combine the parsed information ------------------------------------------
 
