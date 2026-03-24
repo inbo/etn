@@ -695,7 +695,7 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
 
-test_that("get_acoustic_detection() reports no progress when disabled", {
+test_that("get_acoustic_detections() reports no progress when disabled", {
   skip_if_no_authentication()
 
   # Test via the OpenCPU API
