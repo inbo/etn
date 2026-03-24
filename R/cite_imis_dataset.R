@@ -81,6 +81,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
     marineinfo_ownerships,
     dplyr::join_by("imis_dataset_id")
   ) |>
+    dplyr::mutate(
+      # Return as integer to match input.
+      imis_dataset_id = as.integer(imis_dataset_id)
+    ) |>
     # Return as tibble to be consistent within the package. Displays nice.
     dplyr::as_tibble()
 }
