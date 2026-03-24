@@ -22,6 +22,28 @@
 #' @examplesIf interactive() # Cite the 2014_gudena acoustic project:
 #'   cite_imis_dataset(8856)
 cite_imis_dataset <- function(imis_dataset_ids = NULL) {
+
+  # Handle missing IMIS dataset ids -----------------------------------------
+  if (all(is.na(imis_dataset_ids))) {
+    # Early return: if all dataset ids are NA, return an empty tibble with the
+    # correct column names.
+    return(
+      dplyr::tibble(
+        imis_dataset_id = NA,
+        citation = NA,
+        doi = NA,
+        name = NA,
+        email = NA,
+        institute = NA
+      )
+    )
+  }
+
+  if (any(is.na(imis_dataset_ids))) {
+    # Still query for any non NA dataset_ids.
+    imis_dataset_ids <- imis_dataset_ids[!is.na(imis_dataset_ids)]
+  }
+
   # Query the IMIS API ------------------------------------------------------
 
   marineinfo_dataset_endpoints <-
