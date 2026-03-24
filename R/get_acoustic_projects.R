@@ -19,16 +19,29 @@
 #' # Get a specific acoustic project
 #' get_acoustic_projects(acoustic_project_code = "demer")
 get_acoustic_projects <- function(connection,
-                                  acoustic_project_code = NULL) {
+                                  acoustic_project_code = NULL,
+                                  citation = FALSE) {
   # Check arguments
   # The connection argument has been depreciated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(protocol = select_protocol()) |>
+  out <- conduct_parent_to_helpers(protocol = select_protocol(),
+                                   ignored_arguments = "citation") |>
     # Set the column classes explicitly
     dplyr::mutate(moratorium = as.logical(as.integer(.data$moratorium)))
 
-  return(out)
+  # Optionally add citation information from IMIS/MarineInfo
+  if(citation){
+    imis_dataset_ids <- unique(dplyr::pull(out, "imis_dataset_id"))
+    citation_df <- cite_imis_dataset(imis_dataset_ids)
+
+    out <- dplyr::full_join(out,
+                            citation_df,
+                            by = dplyr::join_by("imis_dataset_id"))
+  }
+
+  # Return the animal project data
+  out
 }
