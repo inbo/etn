@@ -31,7 +31,8 @@ cite_acoustic_projects <- function(imis_dataset_ids = NULL) {
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
-      purrr::set_names(returned_list, purrr::map(returned_list, list("datasetrec", "Acronym")))
+      purrr::set_names(returned_list,
+                       purrr::map(returned_list, list("datasetrec", "Acronym")))
     })()
 
   # Parse the Citation and DOI ----------------------------------------------
