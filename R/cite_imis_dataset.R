@@ -50,31 +50,54 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
     glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
   marineinfo_metadata <-
-    purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
+    purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
+    purrr::map(\(req)    {
+      tryCatch( # resp_perform_sequential with on_error = "continue" with purrr::discard() is probably a better idea
+        expr = {
+          httr2::req_perform(req)
+        },
+        httr2_http_404 = function(cnd) {
+          rlang::inform(glue::glue("{imis_dataset_ids} not found"))
+        }
+      )
+    }) |>
+    purrr::compact() |>
+    purrr::map(httr2::resp_body_json, simplifyDataFrame = TRUE) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
-      purrr::set_names(returned_list,
-                       purrr::map(returned_list, list("datasetrec", "DasID")))
+      purrr::set_names(returned_list, purrr::map(returned_list, list("datasetrec", "DasID")))
     })()
+
+
+  # marineinfo_metadata <-
+  #   purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
+  #   # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
+  #   # results so we can't just get this from the acoustic_project_codes argument
+  #   (\(returned_list) {
+  #     purrr::set_names(returned_list,
+  #                      purrr::map(returned_list, list("datasetrec", "DasID")))
+  #   })()
 
   # Parse the Citation and DOI ----------------------------------------------
 
   # If there is no citation, return an empty string. If there is a doi, append
   # it with the `doi:` prefix and end on a period.
-  marineinfo_citation <- purrr::map(marineinfo_metadata, "datasetrec") |>
-    purrr::map(\(datasetrec) {
+  marineinfo_citation <-
+    marineinfo_metadata |>
+    # purrr::map(marineinfo_metadata, "datasetrec") |>
+    purrr::map(\(dataset_metadata) {
       dplyr::tibble(citation =
                       # Convert to character so the returned colclasses are as
                       # close to base as possible
       as.character(glue::glue(
         "{citation}.{doi_prefix}{doi}{doi_suffix}",
-        citation = purrr::pluck(datasetrec, "Citation", .default = ""),
-        doi = purrr::pluck(datasetrec, "DOI", .default = ""),
+        citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation", .default = ""),
+        doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
         doi_prefix = ifelse(doi != "", " doi:", ""),
         doi_suffix = ifelse(doi != "", ".", "")
       )),
-      doi = purrr::pluck(datasetrec, "DOI", .default = NA)
+      doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = NA)
       )
     }) |>
     purrr::list_rbind(names_to = "imis_dataset_id")
