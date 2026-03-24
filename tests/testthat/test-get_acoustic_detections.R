@@ -460,6 +460,9 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
 test_that("get_acoustic_detections() allows selecting on deployment_id", {
   skip_if_no_authentication()
 
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+
   vcr::local_cassette("detections_deployment_id")
   # Select single value
   single_deployment_id <- 1436L # From demer
