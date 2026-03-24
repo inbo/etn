@@ -33,7 +33,7 @@ test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
   # Still return the columns
   expect_length(
     cite_imis_dataset(imis_dataset_ids = NA),
-    5L
+    6L
   )
 
   # Return 0 row tibble.
