@@ -57,7 +57,7 @@ write_dwc <- function(connection,
                       rights_holder = NULL,
                       license = "CC-BY") {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }

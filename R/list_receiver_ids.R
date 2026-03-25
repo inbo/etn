@@ -9,7 +9,7 @@
 #' list_receiver_ids()
 list_receiver_ids <- function(connection) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
