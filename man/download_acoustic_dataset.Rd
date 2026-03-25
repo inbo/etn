@@ -27,7 +27,7 @@ Defaults to creating a directory named after animal project code. Existing
 files of the same name will be overwritten.}
 }
 \value{
-CSV and JSON files written to disk.
+Acoustic Data Package written to disk.
 }
 \description{
 Download all acoustic data related to an \strong{animal project} as a data
@@ -69,7 +69,7 @@ performed by validation tools of the Frictionless Framework, e.g.
 }
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
-# Download data for the 2012_leopoldkanaal animal project (all scientific names)
+# Get data package for the 2012_leopoldkanaal animal project (all scientific names)
 download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
                          directory = tempdir())
 #> Downloading data to directory `2012_leopoldkanaal`:
@@ -78,7 +78,7 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
 #> * (3/6): downloading detections.csv
 #> * (4/6): downloading deployments.csv
 #> * (5/6): downloading receivers.csv
-#> * (6/6): adding datapackage.json as file metadata
+#> * (6/6): create package
 #>
 #> Summary statistics for dataset `2012_leopoldkanaal`:
 #> * number of animals:           104
