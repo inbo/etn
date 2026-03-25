@@ -1,17 +1,19 @@
 #' Get acoustic data package
 #'
+#' Get all acoustic data related to an **animal project**  as a data package.
+#'
 #' Get all acoustic data related to an **animal project**  as a
 #' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
 #' containing:
 #'
-#' file | description
+#' **file** | **description**
 #' --- | ---
-#' `animals.csv` | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by `get_animals()`.
+#' `animals.csv` | Animals related to an `animal_project_code`, as returned by `get_animals()`.
 #' `tags.csv` | Tags associated with the selected animals, as returned by `get_tags()`.
 #' `detections.csv` | Acoustic detections for the selected animals, as returned by `get_acoustic_detections()`.
 #' `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by `get_acoustic_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
 #' `receivers.csv` | Acoustic receivers for the selected deployments, as returned by `get_acoustic_receivers()`.
-#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file can be used to validate the data package.
+#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files.
 #'
 #' **Important**: The data are downloaded _as is_ from the database, i.e. no
 #' quality or consistency checks are performed by this function. We therefore
