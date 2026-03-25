@@ -3,8 +3,6 @@
     Code
       cat(evalute_download_api$messages, sep = "\n")
     Output
-      Downloading data to directory :
-      
       * (1/6): downloading animals.csv
       
       * (2/6): downloading tags.csv
@@ -15,7 +13,7 @@
       
       * (5/6): downloading receivers.csv
       
-      * (6/6): adding datapackage.json as file metadata
+      * (6/6): create package
       
       
       
