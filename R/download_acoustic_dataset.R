@@ -43,13 +43,13 @@
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
 #'
-#' @return CSV and JSON files written to disk.
+#' @return Acoustic Data Package written to disk.
 #'
 #' @inheritParams list_animal_ids
 #' @export
 #'
 #' @examplesIf etn:::credentials_are_set() & interactive()
-#' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
+#' # Get data package for the 2012_leopoldkanaal animal project (all scientific names)
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
 #'                          directory = tempdir())
 #' #> Downloading data to directory `2012_leopoldkanaal`:
@@ -58,7 +58,7 @@
 #' #> * (3/6): downloading detections.csv
 #' #> * (4/6): downloading deployments.csv
 #' #> * (5/6): downloading receivers.csv
-#' #> * (6/6): adding datapackage.json as file metadata
+#' #> * (6/6): create package
 #' #>
 #' #> Summary statistics for dataset `2012_leopoldkanaal`:
 #' #> * number of animals:           104
@@ -84,18 +84,6 @@ download_acoustic_dataset <- function(connection,
     deprecate_warn_connection()
   }
 
-  # Check animal_project_code
-  assertthat::assert_that(
-    length(animal_project_code) == 1,
-    msg = "`animal_project_code` must be a single value."
-  )
-  animal_project_code <- check_value(
-    animal_project_code,
-    list_animal_project_codes(),
-    "animal_project_code",
-    lowercase = TRUE
-  )
-
   # Check scientific_name
   if (!is.null(scientific_name)) {
     scientific_name <- check_value(
@@ -109,91 +97,22 @@ download_acoustic_dataset <- function(connection,
   dir.create(directory, recursive = TRUE, showWarnings = FALSE)
   message(glue::glue("Downloading data to directory `{directory}`:"))
 
-  # ANIMALS
-  message("* (1/6): downloading animals.csv")
-  # Select on animal_project_code and scientific_name
-  animals <- get_animals(
-    animal_project_code = animal_project_code,
-    scientific_name = scientific_name
-  )
-  readr::write_csv(animals, file.path(directory, "animals.csv"), na = "")
+  package <- get_package(animal_project_code = animal_project_code)
+  frictionless::write_package(package, directory = directory)
 
-  # TAGS
-  message("* (2/6): downloading tags.csv")
-  # Select on tags associated with animals
-  tag_serial_numbers <-
-    animals |>
-    dplyr::distinct(.data$tag_serial_number) |>
-    dplyr::pull() |>
-    # To parse out multiple tags (e.g. "A69-9006-904,A69-9006-903"), combine
-    # all tags and split them again on comma
-    paste(collapse = ",") |>
-    strsplit("\\,") |>
-    unlist() |>
-    unique()
-  tags <- get_tags(tag_serial_number = tag_serial_numbers)
-  readr::write_csv(tags, file.path(directory, "tags.csv"), na = "")
+  # Read resources
+  animals <- frictionless::read_resource(package, "animals")
+  tags <- frictionless::read_resource(package, "tags")
+  detections <- frictionless::read_resource(package, "detections")
+  deployments <- frictionless::read_resource(package, "deployments")
+  receivers <- frictionless::read_resource(package, "receivers")
 
-  # DETECTIONS
-  message("* (3/6): downloading detections.csv")
-  # Select on animal_project_code and scientific_name
-  detections <- get_acoustic_detections(
-    animal_project_code = animal_project_code,
-    scientific_name = scientific_name,
-    limit = FALSE
-  )
-  # Keep unique records
   detections_orig_count <- nrow(detections)
-  detections <-
-    detections |>
-    dplyr::distinct(.data$detection_id, .keep_all = TRUE)
-  readr::write_csv(detections, file.path(directory, "detections.csv"), na = "")
-
-  # DEPLOYMENTS
-  message("* (4/6): downloading deployments.csv")
-  # Select on acoustic_project_codes found in detections to get all deployments,
-  # including those without detections for animal_project_code
   acoustic_project_codes <-
     detections |>
     dplyr::distinct(.data$acoustic_project_code) |>
     dplyr::pull() |>
     stringr::str_sort()
-  deployments <- get_acoustic_deployments(
-    acoustic_project_code = acoustic_project_codes,
-    open_only = FALSE
-  )
-  # Remove linebreaks in deployment comments to get single lines in csv:
-  deployments <-
-    deployments |>
-    dplyr::mutate(
-      comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
-    )
-  readr::write_csv(
-    deployments,
-    file.path(directory, "deployments.csv"),
-    na = ""
-  )
-
-  # RECEIVERS
-  message("* (5/6): downloading receivers.csv")
-  # Select on receivers associated with deployments
-  receiver_ids <-
-    deployments |>
-    dplyr::distinct(.data$receiver_id) |>
-    dplyr::pull()
-  receivers <- get_acoustic_receivers(
-    receiver_id = receiver_ids
-  )
-  readr::write_csv(receivers, file.path(directory, "receivers.csv"), na = "")
-
-  # DATAPACKAGE.JSON
-  message("* (6/6): adding datapackage.json as file metadata")
-  datapackage <- system.file("assets", "datapackage.json", package = "etn")
-  file.copy(
-    datapackage,
-    file.path(directory, "datapackage.json"),
-    overwrite = TRUE
-  )
 
   # Create summary stats
   scientific_names <-
