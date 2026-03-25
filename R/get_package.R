@@ -11,7 +11,7 @@
 #' `detections.csv` | Acoustic detections for the selected animals, as returned by `get_acoustic_detections()`.
 #' `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by `get_acoustic_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
 #' `receivers.csv` | Acoustic receivers for the selected deployments, as returned by `get_acoustic_receivers()`.
-#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
+#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file can be used to validate the data package.
 #'
 #' **Important**: The data are downloaded _as is_ from the database, i.e. no
 #' quality or consistency checks are performed by this function. We therefore
@@ -30,6 +30,19 @@
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Get data package for the 2012_leopoldkanaal animal project
 #' get_package(animal_project_code = "2012_leopoldkanaal")
+#' #> * (1/6): downloading animals.csv
+#' #> * (2/6): downloading tags.csv
+#' #> * (3/6): downloading detections.csv
+#' #> * (4/6): downloading deployments.csv
+#' #> * (5/6): downloading receivers.csv
+#' #> * (6/6): create package
+#' #> A Data Package with 5 resources:
+#' #> • animals
+#' #> • tags
+#' #> • detections
+#' #> • deployments
+#' #> • receivers
+#' #> Use `unclass()` to print the Data Package as a list.
 get_package <- function(animal_project_code) {
   # Check animal_project_code
   assertthat::assert_that(
@@ -106,4 +119,16 @@ get_package <- function(animal_project_code) {
   receivers <- get_acoustic_receivers(
     receiver_id = receiver_ids
   )
+
+  # CREATE PACKAGE
+  message("* (6/6): create package")
+  package <-
+    frictionless::create_package() |>
+    frictionless::add_resource("animals", animals) |>
+    frictionless::add_resource("tags", tags) |>
+    frictionless::add_resource("detections", detections) |>
+    frictionless::add_resource("deployments", deployments) |>
+    frictionless::add_resource("receivers", receivers)
+
+  return(package)
 }
