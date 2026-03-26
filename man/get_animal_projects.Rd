@@ -4,7 +4,7 @@
 \alias{get_animal_projects}
 \title{Get animal project data}
 \usage{
-get_animal_projects(connection, animal_project_code = NULL)
+get_animal_projects(connection, animal_project_code = NULL, citation = FALSE)
 }
 \arguments{
 \item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
