@@ -120,8 +120,7 @@ test_that("cite_imis_dataset() can handle getting all citations in a single call
   skip_if_offline("marineinfo.org")
 
   all_imis_dataset_codes <- get_acoustic_projects() |>
-    # This one returns a 404 for some reason
-    dplyr::filter(!imis_dataset_id %in% c(7922, 8177, 6176, 8955, 7931)) |>
+    # Some IMIS dataset_ids will result in a 404 on marineinfo.
     dplyr::pull(imis_dataset_id)
 
   expect_identical(
