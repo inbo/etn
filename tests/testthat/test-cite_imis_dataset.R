@@ -67,6 +67,10 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
 test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is no DOI", {
   skip_if_offline("marineinfo.org")
 
+  expect_no_match(
+    cite_imis_dataset(imis_dataset_ids = 6336)$citation,
+    "doi"
+  )
 })
 
 test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
