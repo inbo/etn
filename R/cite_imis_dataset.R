@@ -98,20 +98,27 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
     marineinfo_metadata |>
     # purrr::map(marineinfo_metadata, "datasetrec") |>
     purrr::map(\(dataset_metadata) {
-      dplyr::tibble(citation =
-                      # Convert to character so the returned colclasses are as
-                      # close to base as possible
-      as.character(glue::glue(
-        "{citation}.{doi_prefix}{doi}{doi_suffix}",
-        citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation", .default = ""),
-        doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
-        doi_prefix = ifelse(doi != "", " doi:", ""),
-        doi_suffix = ifelse(doi != "", ".", "")
-      )),
-      doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = NA)
+      dplyr::tibble(
+        citation =
+        # Convert to character so the returned colclasses are as
+        # close to base as possible
+          as.character(glue::glue(
+            "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
+            citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation", .default = ""),
+            dot = ifelse(citation != "", ".", ""),
+            doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
+            doi_prefix = ifelse(doi != "", " doi:", ""),
+            doi_suffix = ifelse(doi != "", ".", ""),
+            .na = NA_character_
+          )),
+        doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = NA)
       )
     }) |>
-    purrr::list_rbind(names_to = "imis_dataset_id")
+    purrr::list_rbind(names_to = "imis_dataset_id") |>
+    # Replace empty strings with NA
+    dplyr::mutate(dplyr::across(dplyr::where(is.character), \(string) {
+      dplyr::na_if(string, "")
+    }))
 
   # Parse the person information --------------------------------------------
 
