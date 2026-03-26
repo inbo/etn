@@ -218,12 +218,18 @@ remove_html_tags <- function(x) {
   # Check if xml2 is installed
   rlang::check_installed("xml2", reason = "To parse HTML")
 
-  # Convert to raw so it's not interpreted as a path
+
   purrr::map_chr(x, \(string) {
     if (is.na(string)) {
       return(NA_character_)
     }
-    xml2::read_html(charToRaw(string)) |> xml2::xml_text()
+    # Remove HTML non breaking spaces explicitly, this causes encoding issues
+    # due to differences between ISO-8859-1 and UTF-8.
+    stringr::str_remove(string, stringr::fixed("&nbsp;")) |>
+      # Convert to raw so it's not interpreted as a path
+      charToRaw() |>
+      xml2::read_html() |>
+      xml2::xml_text()
   })
 }
 
