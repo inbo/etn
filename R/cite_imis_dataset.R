@@ -137,7 +137,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     }) |>
     purrr::list_rbind(names_to = "imis_dataset_id") |>
     # Replace empty strings with NA
-    dplyr::mutate(dplyr::across(dplyr::where(is.character), \(string) {
+    dplyr::mutate(dplyr::across(dplyr::all_of("citation"), \(string) {
       dplyr::na_if(string, "")
     })) |>
     # Citations sometimes contain HTML formatting, let's remove them.
