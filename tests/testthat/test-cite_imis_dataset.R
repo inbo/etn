@@ -147,7 +147,7 @@ test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo reques
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7934,
                       warn = FALSE),
-    tibble::tibble(
+    dplyr::tibble(
       imis_dataset_id = integer(),
       citation = character(),
       doi = character(),
