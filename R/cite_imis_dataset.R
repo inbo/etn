@@ -118,7 +118,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
     # Replace empty strings with NA
     dplyr::mutate(dplyr::across(dplyr::where(is.character), \(string) {
       dplyr::na_if(string, "")
-    }))
+    })) |>
+    # Citations sometimes contain HTML formatting, let's remove them.
+    dplyr::mutate(dplyr::across(dplyr::where(is.character), remove_html_tags))
+
 
   # Parse the person information --------------------------------------------
 

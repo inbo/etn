@@ -70,12 +70,29 @@ test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is
 })
 
 test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
+  skip_if_offline("marineinfo.org")
+
   # Previous bug in citation and doi collation
 
   # A missing citation should be returned as NA
   expect_identical(
     cite_imis_dataset(5877)$citation,
     NA_character_
+  )
+})
+
+test_that("cite_imis_dataset() removes html tags from citations", {
+  # Some citations have html formatting embedded eg: <i>example</i>
+  skip_if_offline("marineinfo.org")
+
+  expect_no_match(
+    cite_imis_dataset(6336)$citation,
+    "<[a-z]+>.+</[a-z]+>"
+  )
+
+  expect_no_match(
+    cite_imis_dataset(8536)$citation,
+    "<[a-z]+>.+</[a-z]+>"
   )
 })
 
