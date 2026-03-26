@@ -119,12 +119,24 @@ test_that("cite_imis_dataset() can handle getting all citations in a single call
   skip_if_no_authentication()
   skip_if_offline("marineinfo.org")
 
-  all_imis_dataset_codes <- get_acoustic_projects() |>
+  all_imis_acoustic_codes <- get_acoustic_projects() |>
     # Some IMIS dataset_ids will result in a 404 on marineinfo.
     dplyr::pull(imis_dataset_id)
 
-  expect_identical(
-    nrow(cite_imis_dataset(all_imis_dataset_codes)),
-    length(all_imis_dataset_codes)
+  # Some IMIS dataset_ids will result in a 404 on marineinfo, but we should be
+  # able to get most of them.
+  expect_gte(
+    nrow(cite_imis_dataset(all_imis_acoustic_codes)),
+    0.8 * length(all_imis_dataset_codes)
+  )
+
+  all_imis_animal_codes <- get_animal_projects() |>
+    dplyr::pull(imis_dataset_id)
+
+  # Some IMIS dataset_ids will result in a 404 on marineinfo, but we should be
+  # able to get most of them.
+  expect_gte(
+    nrow(cite_imis_dataset(all_imis_animal_codes)),
+    0.8 * length(all_imis_animal_codes)
   )
 })
