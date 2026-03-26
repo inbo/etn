@@ -65,8 +65,15 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue",
-                                progress = "Getting citations")
+    httr2::req_perform_parallel(
+      on_error = "continue",
+      # Don't show progress bar when testing to avoid
+      # cluttering testthat output, or when disabled.
+      progress = ifelse(progress & !is_testing(),
+        yes = "Getting citations",
+        no = FALSE
+      )
+    )
 
     # Discard any responses that contain errors
   marineinfo_metadata <- marineinfo_responses |>
