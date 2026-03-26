@@ -214,17 +214,17 @@ select_protocol <- function() {
 #'
 #' @examples
 #' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
-remove_html_tags <- function(x){
-  # Early return
-  if(is.na(x)) {
-    return(NA)
-  }
-
+remove_html_tags <- function(x) {
   # Check if xml2 is installed
   rlang::check_installed("xml2", reason = "To parse HTML")
 
   # Convert to raw so it's not interpreted as a path
-  xml2::read_html(charToRaw(x)) |> xml2::xml_text()
+  purrr::map_chr(x, \(string) {
+    if (is.na(string)) {
+      return(NA_character_)
+    }
+    xml2::read_html(charToRaw(string)) |> xml2::xml_text()
+  })
 }
 
 #' Test if ETN credentials are stored
