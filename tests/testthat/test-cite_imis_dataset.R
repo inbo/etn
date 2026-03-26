@@ -81,6 +81,12 @@ test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
   )
 })
 
+test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
+  expect_no_match(cite_imis_dataset(6331)$citation, "n\\.a\\.")
+  expect_no_match(cite_imis_dataset(6328)$citation, "n\\.a\\.")
+  expect_no_match(cite_imis_dataset(6329)$citation, "n\\.a\\.")
+})
+
 test_that("cite_imis_dataset() removes html tags from citations", {
   # Some citations have html formatting embedded eg: <i>example</i>
   skip_if_offline("marineinfo.org")
