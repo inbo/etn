@@ -89,7 +89,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       })()
 
   # Return a warning for any failed requests if any failed
-  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition))) {
+  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition)) & warn) {
    failed_ids <- marineinfo_responses |>
      purrr::keep(rlang::is_condition) |>
      purrr::map("resp", "url") |>
