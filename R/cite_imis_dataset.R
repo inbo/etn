@@ -145,7 +145,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       dplyr::na_if(string, "n.a.") # Very strict matching on exactly this string
     })) |>
     # Citations sometimes contain HTML formatting, let's remove them.
-    dplyr::mutate(dplyr::across(dplyr::where(is.character), remove_html_tags))
+    dplyr::mutate(dplyr::across(dplyr::all_of("citation"), \(string) {
+      remove_html_tags(string)
+    }))
 
 
   # Parse the person information --------------------------------------------
