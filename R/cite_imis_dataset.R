@@ -126,7 +126,13 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
           as.character(glue::glue(
             "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
             citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation", .default = ""),
-            dot = ifelse(citation != "", ".", ""),
+            # Add a period between the citation and the doi if the citation
+            # doesn't already end on one, if there is no doi, don't mess with
+            # the citation.
+            dot = ifelse(citation != "" &
+                           !stringr::str_ends(citation, stringr::fixed(".")),
+                         yes = ".",
+                         no = ""),
             doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
             doi_prefix = ifelse(doi != "", " doi:", ""),
             doi_suffix = ifelse(doi != "", ".", ""),
