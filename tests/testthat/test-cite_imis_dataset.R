@@ -69,7 +69,19 @@ test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is
 
 })
 
+test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
+  # Previous bug in citation and doi collation
+
+  # A missing citation should be returned as NA
+  expect_identical(
+    cite_imis_dataset(5877)$citation,
+    NA_character_
+  )
+})
+
 test_that("cite_imis_dataset() can handle getting all citations in a single call", {
+  # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
+
   skip_if_no_authentication()
   skip_if_offline("marineinfo.org")
 
