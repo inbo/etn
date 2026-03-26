@@ -49,35 +49,46 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
   marineinfo_dataset_endpoints <-
     glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
-  marineinfo_metadata <-
+  marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
-    purrr::map(\(req)    {
-      tryCatch( # resp_perform_sequential with on_error = "continue" with purrr::discard() is probably a better idea
-        expr = {
-          httr2::req_perform(req)
-        },
-        httr2_http_404 = function(cnd) {
-          rlang::inform(glue::glue("{imis_dataset_ids} not found"))
-        }
-      )
-    }) |>
-    purrr::compact() |>
+    httr2::req_perform_parallel(on_error = "continue",
+                                progress = "Getting citations")
+
+    # Discard any responses that contain errors
+  marineinfo_metadata <- marineinfo_responses |>
+    purrr::discard(rlang::is_condition) |>
     purrr::map(httr2::resp_body_json, simplifyDataFrame = TRUE) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
-      purrr::set_names(returned_list, purrr::map(returned_list, list("datasetrec", "DasID")))
-    })()
+      purrr::set_names(returned_list, purrr::map(returned_list,
+                                                 list("datasetrec", "DasID")
+                                                 )
+                       )
+      })()
 
+  # Return a warning for any failed requests if any failed
+  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition))) {
+   failed_ids <- marineinfo_responses |>
+     purrr::keep(rlang::is_condition) |>
+     purrr::map("resp", "url") |>
+     purrr::map(\(resp) {
+       purrr::set_names(
+         httr2::resp_body_json(resp),
+         # Name the response by the IMIS id extracted from the response url
+         stringr::str_extract(httr2::resp_url(resp), "[0-9]+")
+       )
+     }) |>
+     purrr::map(\(error) {
+       paste(names(error), paste(error, collapse = " : "))
+     }) |>
+     purrr::list_c() |>
+     unique()
 
-  # marineinfo_metadata <-
-  #   purrr::map(marineinfo_dataset_endpoints, jsonlite::fromJSON) |>
-  #   # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
-  #   # results so we can't just get this from the acoustic_project_codes argument
-  #   (\(returned_list) {
-  #     purrr::set_names(returned_list,
-  #                      purrr::map(returned_list, list("datasetrec", "DasID")))
-  #   })()
+   rlang::warn(c("!" = "Couldn't find IMIS metadata:"),
+     footer = purrr::set_names(failed_ids, "*")
+   )
+  }
 
   # Parse the Citation and DOI ----------------------------------------------
 
@@ -114,8 +125,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL) {
       dplyr::mutate(
         ownership_df,
         name = paste(.data$Surname, .data$Firstname),
-        email = .data$Email,
-        institute = .data$FullAcronym,
+        email = as.character(.data$Email),
+        institute = as.character(.data$FullAcronym),
         .keep = "none"
       )
     }) |>
