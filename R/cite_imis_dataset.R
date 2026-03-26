@@ -106,7 +106,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
      purrr::list_c() |>
      unique()
 
-   rlang::warn(c("!" = "Couldn't find IMIS metadata:"),
+   rlang::warn(c("!" = "MarineInfo API returned errors:"),
      footer = purrr::set_names(failed_ids, "*")
    )
   }
