@@ -128,7 +128,6 @@ if (length(succesful_responses) == 0) {
   # it with the `doi:` prefix and end on a period.
   marineinfo_citation <-
     marineinfo_metadata |>
-    # purrr::map(marineinfo_metadata, "datasetrec") |>
     purrr::map(\(dataset_metadata) {
       dplyr::tibble(
         citation =
