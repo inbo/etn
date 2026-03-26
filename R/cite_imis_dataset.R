@@ -19,7 +19,8 @@
 #' @family citation helpers
 #' @noRd
 #'
-#' @examplesIf interactive() # Cite the 2014_gudena acoustic project:
+#' @examplesIf interactive()
+#' # Cite the 2014_gudena acoustic project:
 #'   cite_imis_dataset(8856)
 cite_imis_dataset <- function(imis_dataset_ids = NULL) {
 
