@@ -102,6 +102,17 @@ test_that("cite_imis_dataset() removes html tags from citations", {
   )
 })
 
+test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
+  # Some citations end on a period, some do not. A period should be added if a
+  # doi is suffixed, except when one is already present.
+  skip_if_offline("marineinfo.org")
+
+  expect_no_match(
+    cite_imis_dataset(8853)$citation,
+    "\\.\\.$"
+  )
+})
+
 test_that("cite_imis_dataset() can handle getting all citations in a single call", {
   # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
 
