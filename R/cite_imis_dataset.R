@@ -140,6 +140,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     dplyr::mutate(dplyr::across(dplyr::all_of("citation"), \(string) {
       dplyr::na_if(string, "")
     })) |>
+    # Replace `n.a.` string value with NA
+    dplyr::mutate(dplyr::across(dplyr::all_of("citation"), \(string) {
+      dplyr::na_if(string, "n.a.") # Very strict matching on exactly this string
+    })) |>
     # Citations sometimes contain HTML formatting, let's remove them.
     dplyr::mutate(dplyr::across(dplyr::where(is.character), remove_html_tags))
 
