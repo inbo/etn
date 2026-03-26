@@ -80,7 +80,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     purrr::discard(rlang::is_condition)
 
   # Return a warning for any failed requests if any failed
-  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition)) & warn) {
+  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition)) && warn) {
     failed_ids <- marineinfo_responses |>
       purrr::keep(rlang::is_condition) |>
       purrr::map("resp", "url") |>
@@ -135,7 +135,8 @@ if (length(succesful_responses) == 0) {
         # close to base as possible
           as.character(glue::glue(
             "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
-            citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation", .default = ""),
+            citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
+                                    .default = ""),
             # Add a period between the citation and the doi if the citation
             # doesn't already end on one, if there is no doi, don't mess with
             # the citation.
@@ -168,7 +169,8 @@ if (length(succesful_responses) == 0) {
 
   # Parse the person information --------------------------------------------
 
-  marineinfo_ownerships <- purrr::map(marineinfo_metadata, list("ownerships")) |>
+  marineinfo_ownerships <- purrr::map(marineinfo_metadata,
+                                      list("ownerships")) |>
     # Don't parse datasets without ownership information
     purrr::compact() |>
     purrr::map(\(ownership_df) {
@@ -194,7 +196,7 @@ if (length(succesful_responses) == 0) {
   ) |>
     dplyr::mutate(
       # Return as integer to match input.
-      imis_dataset_id = as.integer(imis_dataset_id)
+      imis_dataset_id = as.integer(.data$imis_dataset_id)
     ) |>
     # Return as tibble to be consistent within the package. Displays nice.
     dplyr::as_tibble()
