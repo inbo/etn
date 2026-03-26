@@ -8,6 +8,17 @@
 #' @inheritParams get_acoustic_projects
 #' @param imis_dataset_ids A vector of IMIS dataset ids as returned by
 #'   `get_acoustic_projects()` or `get_animal_projects()`.
+#' @param warn Logical. If `TRUE`, return a warning if any of the API requests
+#'   fail, with the IMIS dataset id and error message for each failed request.
+#'   Default is `FALSE` to avoid overwhelming users with warnings when querying
+#'   many datasets, but can be set to `TRUE` for troubleshooting.ogical. If
+#'   `TRUE`, return a warning if any of the API requests fail, with the IMIS
+#'   dataset id and error message for each failed request. Default is `FALSE` to
+#'   avoid overwhelming users with warnings when querying many datasets, but can
+#'   be set to `TRUE` for troubleshooting.
+#' @param progress Logical. If `TRUE`, show a progress bar for the API requests.
+#'   Default is `TRUE`, but will be automatically set to `FALSE` when testing to
+#'   avoid cluttering testthat output.
 #'
 #' @returns A data.frame with 5 columns:
 #'  - The `imis_dataset_id`
@@ -22,7 +33,9 @@
 #' @examplesIf interactive()
 #' # Cite the 2014_gudena acoustic project:
 #'   cite_imis_dataset(8856)
-cite_imis_dataset <- function(imis_dataset_ids = NULL) {
+cite_imis_dataset <- function(imis_dataset_ids = NULL,
+                              warn = FALSE,
+                              progress = TRUE) {
 
   # Handle missing IMIS dataset ids -----------------------------------------
   if (all(is.na(imis_dataset_ids))) {
