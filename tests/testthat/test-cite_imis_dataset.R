@@ -102,6 +102,15 @@ test_that("cite_imis_dataset() removes html tags from citations", {
   )
 })
 
+test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", {
+  # Compare against known group of citations of which some showed encoding
+  # issues
+  expect_snapshot(
+    cite_imis_dataset(imis_dataset_ids = c(8856, 6336, 8857, 6333, 6716)) |>
+      dplyr::pull("citation")
+  )
+})
+
 test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   # Some citations end on a period, some do not. A period should be added if a
   # doi is suffixed, except when one is already present.
