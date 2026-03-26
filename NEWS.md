@@ -1,6 +1,7 @@
 # etn (development version)
 
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
+* A new argument `citations` was added to `get_acoustic_projects()` and `get_animal_projects()`. Setting this argument to `TRUE` (the default is `FALSE`) will add a few extra columns to the output data.frames: `citation`, `doi`, `name`, and `institute` to make citing network or animal projects much easier. The citation information is provided by [MarineInfo](marineinfo.org).
 
 # etn 3.0.0
 
