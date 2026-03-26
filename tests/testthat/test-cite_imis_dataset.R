@@ -127,7 +127,7 @@ test_that("cite_imis_dataset() can handle getting all citations in a single call
   # able to get most of them.
   expect_gte(
     nrow(cite_imis_dataset(all_imis_acoustic_codes)),
-    0.8 * length(all_imis_dataset_codes)
+    0.8 * length(all_imis_acoustic_codes)
   )
 
   all_imis_animal_codes <- get_animal_projects() |>
