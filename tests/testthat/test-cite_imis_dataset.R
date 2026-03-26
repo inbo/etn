@@ -82,6 +82,8 @@ test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
 })
 
 test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
+  skip_if_offline("marineinfo.org")
+
   expect_no_match(cite_imis_dataset(6331)$citation, "n\\.a\\.")
   expect_no_match(cite_imis_dataset(6328)$citation, "n\\.a\\.")
   expect_no_match(cite_imis_dataset(6329)$citation, "n\\.a\\.")
@@ -103,6 +105,8 @@ test_that("cite_imis_dataset() removes html tags from citations", {
 })
 
 test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", {
+  skip_if_offline("marineinfo.org")
+
   # Compare against known group of citations of which some showed encoding
   # issues
   expect_snapshot(
