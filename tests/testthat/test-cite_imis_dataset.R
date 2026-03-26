@@ -130,6 +130,34 @@ test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   )
 })
 
+test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
+  skip_if_offline("marineinfo.org")
+
+  # Some IMIS dataset_id's can't be found on MarineInfo
+  expect_warning(
+    cite_imis_dataset(imis_dataset_ids = 7934,
+                      warn = TRUE),
+    class = "marineinfo_api_warning"
+  )
+})
+
+test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo requests fail", {
+  skip_if_offline("marineinfo.org")
+
+  expect_identical(
+    cite_imis_dataset(imis_dataset_ids = 7934,
+                      warn = FALSE),
+    tibble::tibble(
+      imis_dataset_id = integer(),
+      citation = character(),
+      doi = character(),
+      name = character(),
+      email = character(),
+      institute = character()
+    )
+  )
+})
+
 test_that("cite_imis_dataset() can handle getting all citations in a single call", {
   # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
 
