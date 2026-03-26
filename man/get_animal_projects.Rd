@@ -13,6 +13,16 @@ credentials instead.}
 
 \item{animal_project_code}{Character (vector). One or more animal project
 codes. Case-insensitive.}
+
+\item{citation}{Logical. If \code{TRUE}, add citation information from IMIS/MarineInfo for each
+project, based on the \code{imis_dataset_id} field. This will add the following columns to the output:
+\itemize{
+\item \code{citation}: A formatted citation with DOI if available.
+\item \code{doi}: The DOI for the dataset if available.
+\item \code{name}: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
+\item \code{email}: The email of the contact person.
+\item \code{institute}: The institute of the contact person.
+}}
 }
 \value{
 A tibble with animal project data, sorted by \code{project_code}. See

@@ -10,6 +10,7 @@
 #'   [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
 #'
 #' @inheritParams list_animal_ids
+#' @inheritParams get_animal_projects
 #' @export
 #'
 #' @examplesIf etn:::credentials_are_set()
