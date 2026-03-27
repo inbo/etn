@@ -196,7 +196,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   dplyr::full_join(
     marineinfo_citation,
     marineinfo_ownerships,
-    dplyr::join_by("imis_dataset_id")
+    dplyr::join_by("imis_dataset_id"),
+    relationship = "many-to-many"
   ) |>
     dplyr::mutate(
       # Return as integer to match input.
