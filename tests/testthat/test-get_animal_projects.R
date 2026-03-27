@@ -90,3 +90,33 @@ test_that("get_animal_projects() returns projects of type 'animal'", {
     "animal"
   )
 })
+
+test_that("get_animal_projects() returns citation information when requested", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("marineinfo.org")
+
+  citation_columns <- c(
+    "imis_dataset_id", # to make fetching citations possible
+    "citation",
+    "doi",
+    "name",
+    "email",
+    "institute"
+  )
+
+  animal_project_codes <- c(
+    "PTN/PROTECT2013/Moray",
+    "hunzeenaas",
+    "PTN-Silver-eel-Mondego",
+    "FISHGAL"
+  )
+
+  expect_contains(
+    names(get_animal_projects(
+      animal_project_code = animal_project_codes,
+      citation = TRUE
+    )),
+    citation_columns
+  )
+})
