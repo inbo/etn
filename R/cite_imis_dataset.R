@@ -32,11 +32,10 @@
 #'
 #' @examplesIf interactive()
 #' # Cite the 2014_gudena acoustic project:
-#'   cite_imis_dataset(8856)
+#' cite_imis_dataset(8856)
 cite_imis_dataset <- function(imis_dataset_ids = NULL,
                               warn = FALSE,
                               progress = TRUE) {
-
   # Handle missing IMIS dataset ids -----------------------------------------
   early_return_object <-
     dplyr::tibble(
@@ -103,10 +102,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     )
   }
 
-# Early return if all requests failed
-if (length(succesful_responses) == 0) {
-  return(early_return_object)
-}
+  # Early return if all requests failed
+  if (length(succesful_responses) == 0) {
+    return(early_return_object)
+  }
 
   # Parse the JSON ----------------------------------------------------------
 
@@ -136,14 +135,17 @@ if (length(succesful_responses) == 0) {
           as.character(glue::glue(
             "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
             citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
-                                    .default = ""),
+              .default = ""
+            ),
             # Add a period between the citation and the doi if the citation
             # doesn't already end on one, if there is no doi, don't mess with
             # the citation.
-            dot = ifelse(citation != "" &
-                           !stringr::str_ends(citation, stringr::fixed(".")),
-                         yes = ".",
-                         no = ""),
+            dot = ifelse(
+              citation != "" &
+                !stringr::str_ends(citation, stringr::fixed(".")),
+              yes = ".",
+              no = ""
+            ),
             doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
             doi_prefix = ifelse(doi != "", " doi:", ""),
             doi_suffix = ifelse(doi != "", ".", ""),
@@ -169,8 +171,10 @@ if (length(succesful_responses) == 0) {
 
   # Parse the person information --------------------------------------------
 
-  marineinfo_ownerships <- purrr::map(marineinfo_metadata,
-                                      list("ownerships")) |>
+  marineinfo_ownerships <- purrr::map(
+    marineinfo_metadata,
+    list("ownerships")
+  ) |>
     # Don't parse datasets without ownership information
     purrr::compact() |>
     purrr::map(\(ownership_df) {
