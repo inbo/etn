@@ -79,7 +79,7 @@ download_acoustic_dataset <- function(connection,
                                       scientific_name = NULL,
                                       directory = animal_project_code) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
