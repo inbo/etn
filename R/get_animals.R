@@ -44,7 +44,7 @@ get_animals <- function(connection,
                         animal_project_code = NULL,
                         scientific_name = NULL) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }

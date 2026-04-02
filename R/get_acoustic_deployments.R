@@ -44,7 +44,7 @@ get_acoustic_deployments <- function(connection,
                                      station_name = NULL,
                                      open_only = FALSE) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
