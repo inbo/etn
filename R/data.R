@@ -3,7 +3,7 @@
 #' An example ETN dataset "2014_DEMER", with river telemetry data, formatted as
 #' a [Frictionless Data Package](
 #' https://specs.frictionlessdata.io/data-package/) and read by
-#' [read_package()].
+#' [frictionless::read_package()].
 #'
 #' ["2014_DEMER"](https://www.vliz.be/en/imis?dasid=5871&doiid=432) is a dataset
 #' of acoustic telemetry data collected for four fish species in the Demer
