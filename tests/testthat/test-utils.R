@@ -21,6 +21,12 @@ test_that("localdb_is_available() returns TRUE when nodename ends on vliz.be", {
     # Mock running on the RStudio server
     get_nodename = function(...) "rstudio4.web.vliz.be"
   )
+
+  with_mocked_bindings(
+    expect_true(localdb_is_available()),
+    # Mock running from new RStudio server
+    get_nodename = function(...) "rstudio.europeantrackingnetwork.org"
+  )
 })
 
 
@@ -31,6 +37,12 @@ test_that("select_protocol() returns 'localdb' when nodename ends on vliz.be", {
     expect_equal(select_protocol(), "localdb"),
     # Mock running on the RStudio server
     get_nodename = function(...) "rstudio4.web.vliz.be"
+  )
+
+  with_mocked_bindings(
+    expect_equal(select_protocol(), "localdb"),
+    # Mock running from new RStudio server
+    get_nodename = function(...) "rstudio.europeantrackingnetwork.org"
   )
 })
 

@@ -21,7 +21,7 @@
 get_acoustic_projects <- function(connection,
                                   acoustic_project_code = NULL) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
