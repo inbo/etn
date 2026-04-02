@@ -85,7 +85,7 @@ get_acoustic_detections <- function(connection,
                                     limit = FALSE,
                                     progress = TRUE) {
   # Check arguments
-  # The connection argument has been depreciated
+  # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
