@@ -81,3 +81,58 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
     expect_false(credentials_are_set())
   )
 })
+
+
+# convert_units() ---------------------------------------------------------
+
+test_that("convert_units() correctly adds unit info to cols with unit suffix", {
+  df_with_units <- tibble::tibble(
+    depth_m = c(1, 4, -4),
+    height_m = c(44, 89, 44)
+  ) |>
+    convert_units()
+
+  # Check for unit class
+  expect_identical(
+    purrr::map(df_with_units, class),
+    list(
+      depth_m = "units",
+      height_m = "units"
+    )
+  )
+
+  # Check for unit value
+  expect_identical(
+    purrr::map(df_with_units, units),
+    list(
+      depth_m = structure(list(
+        numerator = "m", denominator = character(0)
+      ), class = "symbolic_units"),
+      height_m = structure(list(
+        numerator = "m", denominator = character(0)
+      ), class = "symbolic_units")
+    )
+  )
+})
+
+test_that("convert_units() leaves columns without a unit unscaved", {
+  df_no_units <- tibble::tibble("receiver_id" = c(11, 22, 33))
+
+  expect_identical(
+    convert_units(df_no_units),
+    df_no_units
+  )
+
+  df_mixed <- tibble::tibble(
+    depth_m = c(1, 4, -4),
+    receiver_id = c(11, 22, 33)
+  )
+
+  expect_identical(
+    purrr::map(convert_units(df_mixed), class),
+    list(
+      depth_m = "units",
+      receiver_id = "integer"
+    )
+  )
+})
