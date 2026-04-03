@@ -14,7 +14,7 @@ test_that("get_receiver_logs() returns an error on missing deployment_id", {
   )
 })
 
-test_that("get_receiver_logs() supports both integer and string deployment_id", {
+test_that("get_receiver_logs() supports both int and chr deployment_id", {
   expect_identical(
     get_receiver_logs(deployment_id = as.character(test_deployment_id),
                       limit = TRUE),
@@ -23,7 +23,7 @@ test_that("get_receiver_logs() supports both integer and string deployment_id", 
   )
 })
 
-test_that("get_receiver_logs() returns a 0-row tibble if no receiver logs found", {
+test_that("get_receiver_logs() returns a 0-row tbl if no receiver logs found", {
   expect_length(
     dplyr::pull(get_receiver_logs(deployment_id = 1758), "deployment_id"),
     0L
@@ -274,7 +274,7 @@ test_that("get_receiver_logs() returns no empty string values in log fields", {
     expect_length(0L)
 })
 
-test_that("get_receiver_logs() returns unique rows per ids, datetime, record_type", {
+test_that("get_receiver_logs() returns unique rows default columns", {
   receiver_log <-
     get_receiver_logs(deployment_id = 65434)
 
