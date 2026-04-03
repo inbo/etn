@@ -114,6 +114,18 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
 })
 
 test_that("get_receiver_logs() returns the expected column classes", {
+  expected_column_classes <- list(
+    "deployment_id" = "integer",
+    "receiver_id" = "character",
+    "station_name" = "character",
+    "datetime" = c("POSIXct", "POSIXt"),
+    "record_type" = "character"
+  )
+
+  get_receiver_logs(deployment_id = test_deployment_id) |>
+    dplyr::select(dplyr::all_of(names(expected_column_classes))) |>
+    purrr::map(class) |>
+    expect_identical(expected_column_classes)
 
 })
 
