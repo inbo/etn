@@ -312,6 +312,19 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
     expect_length(0L)
 })
 
-  # this deployment causes an error on the pings column
-  expect_no_error(get_receiver_logs(deployment_id = 6028))
+test_that("get_receiver_logs() handles duplicate columns by repairing them", {
+  # deployment_id 6028 includes the station_name column in its log_data, causing
+  # a collision with the station_name column added by the query.
+  dup_col_deployment_id <- 6028
+
+  # Message when repairing takes place
+  expect_message(
+    with_mocked_bindings(
+      get_receiver_logs(deployment_id = dup_col_deployment_id),
+      is_testing = \(x) {
+        FALSE
+      }
+    ),
+    class = "rlib_message_name_repair"
+  )
 })
