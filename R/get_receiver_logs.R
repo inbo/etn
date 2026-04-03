@@ -8,7 +8,7 @@
 #' @return A tibble with receiver diagnostics data
 #' @export
 #' @examplesIf etn:::credentials_are_set()
-#' get_receiver_logs(deployment_id = 1758, limit = TRUE)
+#' get_receiver_logs(deployment_id = 25259, limit = TRUE)
 #' get_receiver_logs(deployment_id = 74535,
 #'                   station_name = "Tijdenskan. - Hamdijk 12 Bad Nieuwesch")
 #' get_receiver_logs(deployment_id = 6028,
