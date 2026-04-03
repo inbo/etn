@@ -295,8 +295,22 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
   )
 })
 
-test_that("get_receiver_logs() can handle logs with multiple values", {
-  #coalesce works
+  dplyr::count(receiver_log,
+               .data$deployment_id,
+               .data$receiver_id,
+               .data$station_name,
+               .data$datetime,
+               .data$record_type,
+               name = "n",
+               .drop = FALSE) |>
+    # Only keep rows with more than one occurrence of the same combination of
+    # identifying columns
+    dplyr::filter(n > 1) |>
+    # Pull deployment_id to check if any duplicate rows are present, expect 0
+    # rows to result from the filter
+    dplyr::pull("deployment_id") |>
+    expect_length(0L)
+})
 
   # this deployment causes an error on the pings column
   expect_no_error(get_receiver_logs(deployment_id = 6028))
