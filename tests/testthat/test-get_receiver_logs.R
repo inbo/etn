@@ -30,8 +30,6 @@ test_that("get_receiver_logs() returns a 0-row tibble if no receiver logs found"
   )
 })
 
-
-
 test_that("get_receiver_logs() can filter on start_date", {
 
 })
