@@ -60,6 +60,11 @@
 - [`list_values()`](https://inbo.github.io/etn/reference/list_values.md)
   : List all unique values from a data.frame column
 
+## Example datasets
+
+- [`river_telemetry`](https://inbo.github.io/etn/reference/river_telemetry.md)
+  : Example ETN dataset with river telemetry data
+
 ## Deprecated functions
 
 - [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)

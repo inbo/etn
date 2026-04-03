@@ -5,6 +5,8 @@
 - Add European Union as funder (for
   [STRAITS](https://doi.org/10.3030/101094649))
   ([\#497](https://github.com/inbo/etn/issues/497)).
+- New example dataset `river_telemetry` is added to the package
+  ([\#524](https://github.com/inbo/etn/issues/524)).
 
 ## etn 3.0.0
 
