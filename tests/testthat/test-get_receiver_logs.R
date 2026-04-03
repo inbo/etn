@@ -8,7 +8,10 @@ test_that("get_receiver_logs() returns a tibble", {
 })
 
 test_that("get_receiver_logs() returns an error on missing deployment_id", {
-
+  expect_error(
+    get_receiver_logs(),
+    class = "etn_no_dep_id_supplied"
+  )
 })
 
 test_that("get_receiver_logs() returns a warning if no receiver logs found", {
