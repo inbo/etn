@@ -16,7 +16,12 @@ test_that("get_receiver_logs() returns a warning if no receiver logs found", {
 })
 
 test_that("get_receiver_logs() supports both integer and string deployment_id", {
-
+  expect_identical(
+    get_receiver_logs(deployment_id = as.character(test_deployment_id),
+                      limit = TRUE),
+    get_receiver_logs(deployment_id = test_deployment_id,
+                      limit = TRUE)
+  )
 })
 
 test_that("get_receiver_logs() returns a 0-row tibble if no receiver logs found", {
