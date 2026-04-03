@@ -6,22 +6,26 @@
 \usage{
 get_receiver_logs(
   deployment_id,
+  receiver_id = NULL,
+  station_name = NULL,
   start_date = NULL,
   end_date = NULL,
-  receiver_id = NULL,
   limit = FALSE
 )
 }
 \arguments{
 \item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
+\item{receiver_id}{Character (vector). One or more receiver identifiers.}
+
+\item{station_name}{Character (vector). One or more deployment station
+names.}
+
 \item{start_date}{Character. Start date (inclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
 
 \item{end_date}{Character. End date (exclusive) in ISO 8601 format (
 \code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
-
-\item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
@@ -31,4 +35,14 @@ A tibble with receiver diagnostics data
 }
 \description{
 Get diagnostics information for a receiver for a deployment id.
+}
+\examples{
+\dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
+get_receiver_logs(deployment_id = 1758, limit = TRUE)
+get_receiver_logs(deployment_id = 74535,
+                  station_name = "Tijdenskan. - Hamdijk 12 Bad Nieuwesch")
+get_receiver_logs(deployment_id = 6028,
+                  start_date = "2020",
+                  end_date = "2020-02-01")
+\dontshow{\}) # examplesIf}
 }
