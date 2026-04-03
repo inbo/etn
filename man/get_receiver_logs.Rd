@@ -34,7 +34,17 @@ for testing purposes). Defaults to \code{FALSE}.}
 A tibble with receiver diagnostics data
 }
 \description{
-Get diagnostics information for a receiver for a deployment id.
+This function retrieves diagnostics information for a receiver for a
+deployment id. This may be useful to figure out what happened to a receiver
+during deployment. For example, a deviation in tilt angle may decrease
+detection capabilities. For some receivers, information about the water
+temperature can be available.
+}
+\details{
+The diagnostics information is returned as a tibble with one
+row per log entry. The columns of the tibble may vary depending on the
+deployment and receiver. If no log entries are found for the specified
+arguments, an 0-row tibble is returned.
 }
 \section{Name repair}{
 
