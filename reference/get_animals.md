@@ -44,8 +44,7 @@ get_animals(
 ## Value
 
 A tibble with animals data, sorted by `animal_project_code`,
-`release_date_time` and `tag_serial_number`. See also [field
-definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+`release_date_time` and `tag_serial_number`.
 
 ## Examples
 

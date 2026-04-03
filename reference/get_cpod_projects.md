@@ -21,9 +21,7 @@ get_cpod_projects(connection, cpod_project_code = NULL)
 
 ## Value
 
-A tibble with animal project data, sorted by `project_code`. See also
-[field
-definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+A tibble with animal project data, sorted by `project_code`.
 
 ## Examples
 

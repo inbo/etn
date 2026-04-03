@@ -44,10 +44,9 @@ get_tags(
 
 ## Value
 
-A tibble with tags data, sorted by `tag_serial_number`. See also [field
-definitions](https://inbo.github.io/etn/articles/etn_fields.html).
-Values for `owner_organization` and `owner_pi` will only be visible if
-you are member of the group.
+A tibble with tags data, sorted by `tag_serial_number`. Values for
+`owner_organization` and `owner_pi` will only be visible if you are
+member of the group.
 
 ## Examples
 

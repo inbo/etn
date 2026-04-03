@@ -25,11 +25,9 @@ get_acoustic_receivers(connection, receiver_id = NULL, status = NULL)
 
 ## Value
 
-A tibble with acoustic receiver data, sorted by `receiver_id`. See also
-[field
-definitions](https://inbo.github.io/etn/articles/etn_fields.html).
-Values for `owner_organization` will only be visible if you are member
-of the group.
+A tibble with acoustic receiver data, sorted by `receiver_id`. Values
+for `owner_organization` will only be visible if you are member of the
+group.
 
 ## Examples
 

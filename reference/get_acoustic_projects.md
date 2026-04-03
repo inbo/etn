@@ -22,9 +22,7 @@ get_acoustic_projects(connection, acoustic_project_code = NULL)
 
 ## Value
 
-A tibble with acoustic project data, sorted by `project_code`. See also
-[field
-definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+A tibble with acoustic project data, sorted by `project_code`.
 
 ## Examples
 
