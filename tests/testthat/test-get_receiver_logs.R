@@ -20,7 +20,10 @@ test_that("get_receiver_logs() supports both integer and string deployment_id", 
 })
 
 test_that("get_receiver_logs() returns a 0-row tibble if no receiver logs found", {
-
+  expect_length(
+    dplyr::pull(get_receiver_logs(deployment_id = 1758), "deployment_id"),
+    0L
+  )
 })
 
 

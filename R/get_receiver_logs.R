@@ -48,6 +48,11 @@ get_receiver_logs <- function(
     log_data
     )
 
+  # Early return when no log_data has been found
+  if (nrow(diagnostics) == 0) {
+    return(diagnostics)
+  }
+
   # Replace empty strings with NA
   diagnostics <-
     diagnostics |>
