@@ -9,9 +9,10 @@
 #' @export
 get_receiver_logs <- function(
                                      deployment_id,
+                                     receiver_id = NULL,
+                                     station_name = NULL,
                                      start_date = NULL,
                                      end_date = NULL,
-                                     receiver_id = NULL,
                                      limit = FALSE) {
 
   # Either use the API, or the SQL helper.
