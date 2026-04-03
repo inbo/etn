@@ -67,6 +67,7 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
     c(
       "deployment_id",
       "receiver_id",
+      "station_name",
       "record_type",
       "datetime",
       "firmware_version",
@@ -144,16 +145,17 @@ test_that("get_receiver_logs() returns unique rows per ids, datetime, record_typ
   receiver_log <-
     get_receiver_logs(deployment_id = 65434)
 
-  identifying_columns <-
-    c("deployment_id",
-      "receiver_id",
-      "datetime",
-      "record_type")
-
   expect_identical(
     receiver_log,
-    dplyr::distinct(receiver_log,
-                    {{ identifying_columns}})
+    dplyr::distinct(
+      receiver_log,
+      deployment_id,
+      receiver_id,
+      station_name,
+      datetime,
+      record_type,
+      .keep_all = TRUE
+    )
   )
 })
 
