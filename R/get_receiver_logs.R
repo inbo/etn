@@ -38,18 +38,18 @@ get_receiver_logs <- function(
 
   # Replace empty strings with NA
   diagnostics <-
-    diagnostics %>%
+    diagnostics |>
     dplyr::mutate(dplyr::across(is.character, ~dplyr::na_if(.x, "")))
 
   # Tidy up column names
   diagnostics <-
-    diagnostics %>%
+    diagnostics |>
       ## Remove UPPERCASE except for the units in brackets
       dplyr::rename_with(
         ~stringr::str_replace_all(.x, "[A-Z](?=[a-z])", tolower)
-      ) %>%
+      ) |>
       ## Remove braces
-      dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) %>%
+      dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) |>
       ## Remove spaces
       dplyr::rename_with(
         ~ stringr::str_replace_all(
@@ -66,13 +66,13 @@ get_receiver_logs <- function(
   # record_type, datetime combination
 
   diagnostics <-
-    diagnostics %>%
+    diagnostics |>
     ## Drop any columns that are all NA
     dplyr::select(dplyr::where(~ !all(is.na(.)))) |>
     # dplyr::group_by(.data$deployment_id,
     #                 .data$receiver_id,
     #                 .data$record_type,
-    #                 .data$datetime) %>%
+    #                 .data$datetime) |>
     ## If a column only contains NA values, keep it, if not, keep the first non
     ## NA value per group
     dplyr::summarise(
@@ -95,7 +95,7 @@ get_receiver_logs <- function(
 
   # Convert column classes to classes based on base parsing
   diagnostics <-
-    diagnostics %>%
+    diagnostics |>
     dplyr::mutate(dplyr::across(dplyr::where(is.character),
                                 ~ type.convert(.x, as.is = TRUE)),
                   dplyr::across(dplyr::ends_with("_UTC"),
