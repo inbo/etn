@@ -1,4 +1,8 @@
+# Test on a known deployment that has log_data.
+test_deployment_id <- 53790
+
 test_that("get_receiver_logs() returns a tibble", {
+  df <- get_receiver_logs(deployment_id = test_deployment_id)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
@@ -32,7 +36,10 @@ test_that("get_receiver_logs() can filter on end_date", {
 test_that("get_receiver_logs() can return a limited subset", {
   # This test assumes that there are more than 100 logs for the test deployment
   expect_length(
-    get_receiver_logs(test_deployment_id, limit = TRUE)[1],
+    dplyr::pull(
+      get_receiver_logs(deployment_id = test_deployment_id, limit = TRUE),
+      "deployment_id"
+    ),
     100L
   )
 })
@@ -156,4 +163,3 @@ test_that("get_receiver_logs() can handle logs with multiple values", {
   # this deployment causes an error on the pings column
   expect_no_error(get_receiver_logs(deployment_ids = 6028))
 })
-
