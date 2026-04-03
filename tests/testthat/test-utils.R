@@ -148,3 +148,22 @@ test_that("convert_units() doesn't error on columns without a _", {
     df_no_underscore
   )
 })
+
+## NOTE : It might actually be better to correct this client side, and have
+## `get_receiver_logs() convert known cases of  this to the correct `_°C`
+## instead
+test_that("convert_units() can handle _C as a synonm for _°C", {
+  df_celsius <- tibble::tibble(
+    temp_C = c(1, 4, -4)
+  ) |>
+    convert_units()
+
+  expect_identical(
+    purrr::map(df_celsius, units),
+    list(
+      temp_C = structure(list(
+        numerator = "°C", denominator = character(0)
+      ), class = "symbolic_units")
+    )
+  )
+})
