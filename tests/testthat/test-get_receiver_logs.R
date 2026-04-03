@@ -326,4 +326,11 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
     ),
     class = "rlib_message_name_repair"
   )
+
+  # Check that the duplicate column is repaired by make.unique and both columns
+  # are present in the output
+  expect_in(
+    names(get_receiver_logs(deployment_id = dup_col_deployment_id)),
+    c("station_name", "station_name.1")
+  )
 })
