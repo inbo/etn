@@ -30,6 +30,48 @@ test_that("get_receiver_logs() returns a 0-row tibble if no receiver logs found"
   )
 })
 
+test_that("get_receiver_logs() can filter on station_name", {
+  # Errors
+  expect_error(
+    get_receiver_logs(deployment_id = test_deployment_id,
+                      station_name = "not_a_station_name"),
+    regexp = "Can't find station_name"
+  )
+
+  expect_error(
+    get_receiver_logs(deployment_id = test_deployment_id,
+                      station_name = c("G09", "not_a_station_name")),
+    regexp = "Can't find station_name"
+  )
+
+  # Select single value
+  single_select <- "G09" # From deployment_id = 53790
+  single_select_df <-
+    get_receiver_logs(deployment_id = test_deployment_id,
+                      station_name = single_select)
+
+  expect_equal(
+    single_select_df |> dplyr::distinct(station_name) |> dplyr::pull(),
+    c(single_select)
+  )
+
+  expect_gt(nrow(single_select_df), 0)
+
+  # Select multiple values
+  multi_select <- c("G09", "ws-VH8")
+  multi_select_df <-
+    get_receiver_logs(deployment_id = c(test_deployment_id, 64321),
+                      station_name = multi_select
+                      )
+
+  expect_equal(
+    multi_select_df |> dplyr::distinct(station_name) |> dplyr::pull() |> sort(),
+    c(multi_select)
+  )
+
+  expect_gt(nrow(multi_select_df), nrow(single_select_df))
+})
+
 test_that("get_receiver_logs() can filter on start_date", {
 
 })
