@@ -14,9 +14,8 @@ get_receiver_logs <- function(
                                      receiver_id = NULL,
                                      limit = FALSE) {
 
-  diagnostics <- readr::read_rds("diagnostics6028.rds") |>
-    dplyr::distinct() # duplicate rows present
-
+  # Either use the API, or the SQL helper.
+  log_data <- conduct_parent_to_helpers(protocol = select_protocol())
   ## combine json strings into single array and parse
   log_data <-
     paste0("[",paste(diagnostics$log_data, collapse = ","), "]") |>
