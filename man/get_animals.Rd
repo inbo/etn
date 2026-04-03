@@ -28,8 +28,7 @@ codes. Case-insensitive.}
 }
 \value{
 A tibble with animals data, sorted by \code{animal_project_code},
-\code{release_date_time} and \code{tag_serial_number}. See also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+\code{release_date_time} and \code{tag_serial_number}.
 }
 \description{
 Get data for animals, with options to filter results. Associated tag
