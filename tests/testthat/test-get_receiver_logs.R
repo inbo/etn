@@ -157,6 +157,23 @@ test_that("get_receiver_logs() returns units in column names correctly", {
 test_that("get_receiver_logs() returns no empty string values in log fields", {
   # "" should be replaced with NA in any fields that are not deployment_id,
   # receiver_id, datetime or record_type
+
+
+  get_receiver_logs(deployment_id = 65434) |>
+    # Drop default columns
+    dplyr::select(-dplyr::any_of(c("deployment_id",
+                                   "receiver_id",
+                                   "record_type",
+                                   "datetime",
+                                   "station_name"))) |>
+    # Only keep rows with at least one empty string value
+    dplyr::filter(
+      dplyr::if_any(dplyr::where(is.character),
+                    ~.x == "")
+    ) |>
+    # Count the number of rows, expect 0 rows to result from the filter
+    dplyr::pull(var = 1) |>
+    expect_length(0L)
 })
 
 test_that("get_receiver_logs() returns unique rows per ids, datetime, record_type", {
