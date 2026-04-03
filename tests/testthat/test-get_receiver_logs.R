@@ -213,7 +213,7 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
                       # Limiting will return less columns
                       limit = FALSE),
     expected = expected_columns_known_id,
-    ingore.order = TRUE # returned order is not guaranteed at the moment.
+    ignore.order = TRUE # returned order is not guaranteed at the moment.
   )
 })
 
