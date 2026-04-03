@@ -5,6 +5,18 @@
 #' @inheritParams get_acoustic_detections
 #' @inheritParams get_acoustic_deployments
 #'
+#' @section Name repair:
+#'
+#' It is possible that the columns contained in a receiver log overlap with
+#' the default columns always returned by `get_receiver_logs()`. If
+#' duplicate columns are found, their names are made unique with
+#' [base::make.unique()]. When this happens, a message is printed to the
+#' console. The message can be muffled with [base::suppressMessages()] or
+#' silenced with the global option `rlib_name_repair_verbosity`. See
+#' [rlang::names_inform_repair()] for more information.
+#' @name get_receiver_logs
+#'
+NULL
 #' @return A tibble with receiver diagnostics data
 #' @export
 #' @examplesIf etn:::credentials_are_set()
@@ -52,11 +64,19 @@ get_receiver_logs <- function(
       dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) |>
       ## Remove spaces
       dplyr::rename_with(
-        ~ stringr::str_replace_all(
-          .x,
+        \(old_name) {
+          new_name <-
+          stringr::str_replace_all(
+          old_name,
           stringr::fixed(" "),
           "_"
-        )
+          )
+
+          new_name_repaired <-
+            make.unique(new_name)
+
+          rlang::names_inform_repair(new_name, new_name_repaired)
+          new_name_repaired}
       )
 
   # Drop duplicate rows
