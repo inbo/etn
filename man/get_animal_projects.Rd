@@ -15,9 +15,7 @@ credentials instead.}
 codes. Case-insensitive.}
 }
 \value{
-A tibble with animal project data, sorted by \code{project_code}. See
-also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+A tibble with animal project data, sorted by \code{project_code}.
 }
 \description{
 Get data for animal projects, with options to filter results.
