@@ -7,6 +7,15 @@
   ([\#497](https://github.com/inbo/etn/issues/497)).
 - New example dataset `river_telemetry` is added to the package
   ([\#524](https://github.com/inbo/etn/issues/524)).
+- [`read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html)
+  and
+  [`write_package()`](https://docs.ropensci.org/frictionless/reference/write_package.html),
+  to read and write data packages, are reexported functionality from
+  frictionless, see
+  [`frictionless::read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html)
+  and
+  [`frictionless::write_package()`](https://docs.ropensci.org/frictionless/reference/write_package.html)
+  ([\#525](https://github.com/inbo/etn/issues/525)).
 
 ## etn 3.0.0
 
