@@ -89,8 +89,11 @@ get_receiver_logs <- function(
 
           new_name_repaired <-
             make.unique(new_name)
-
-          rlang::names_inform_repair(new_name, new_name_repaired)
+          # Inform about name repair if any names were repaired, but only when
+          # not testing
+          if(!is_testing()) {
+            rlang::names_inform_repair(new_name, new_name_repaired)
+          }
           new_name_repaired}
       )
 
