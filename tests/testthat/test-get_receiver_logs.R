@@ -274,7 +274,7 @@ test_that("get_receiver_logs() returns no empty string values in log fields", {
     expect_length(0L)
 })
 
-test_that("get_receiver_logs() returns unique rows default columns", {
+test_that("get_receiver_logs() returns unique rows for default columns", {
   receiver_log <-
     get_receiver_logs(deployment_id = 65434)
 
