@@ -293,7 +293,6 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
       .keep_all = TRUE
     )
   )
-})
 
   dplyr::count(receiver_log,
                .data$deployment_id,
