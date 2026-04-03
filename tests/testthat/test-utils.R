@@ -136,3 +136,15 @@ test_that("convert_units() leaves columns without a unit unscaved", {
     )
   )
 })
+
+test_that("convert_units() doesn't error on columns without a _", {
+  df_no_underscore <- tibble::tibble(
+    depth = c(1, 4, -4),
+    height = c(44, 89, 44)
+  )
+
+  expect_identical(
+    convert_units(df_no_underscore),
+    df_no_underscore
+  )
+})
