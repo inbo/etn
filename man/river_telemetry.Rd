@@ -28,7 +28,7 @@ code:
 \dontrun{
 # The data in river_telemetry was created with the code below
 package_path <- system.file("extdata", "datapackage.json", package = "etn")
-river_telemetry <- frictionless::read_package(package_path)
+river_telemetry <- read_package(package_path)
 usethis::use_data(river_telemetry, overwrite = TRUE)
 }
 }
