@@ -278,15 +278,18 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
   receiver_log <-
     get_receiver_logs(deployment_id = 65434)
 
+  # coalesce works: per group of identifying columns, no duplicate rows should
+  # be present
+
   expect_identical(
     receiver_log,
     dplyr::distinct(
       receiver_log,
-      deployment_id,
-      receiver_id,
-      station_name,
-      datetime,
-      record_type,
+      .data$deployment_id,
+      .data$receiver_id,
+      .data$station_name,
+      .data$datetime,
+      .data$record_type,
       .keep_all = TRUE
     )
   )
