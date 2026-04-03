@@ -23,16 +23,16 @@ get_receiver_logs <- function(
                                      limit = FALSE) {
 
   # Either use the API, or the SQL helper.
-  log_data <- conduct_parent_to_helpers(protocol = select_protocol())
+  api_return <- conduct_parent_to_helpers(protocol = select_protocol())
   ## combine json strings into single array and parse
   log_data <-
-    paste0("[",paste(diagnostics$log_data, collapse = ","), "]") |>
+    paste0("[",paste(api_return$log_data, collapse = ","), "]") |>
     yyjsonr::read_json_str()
 
   # Add log data as seperate columns
 
   diagnostics <- dplyr::bind_cols(
-    dplyr::select(diagnostics, -dplyr::all_of("log_data")),
+    dplyr::select(api_return, -dplyr::all_of("log_data")),
     log_data
     )
 
@@ -64,8 +64,6 @@ get_receiver_logs <- function(
 
   # Collapse log_data columns into single rows per deployment_id, receiver_id,
   # record_type, datetime combination
-
-  # diagnostics <- arrow::as_arrow_table(diagnostics)
 
   diagnostics <-
     diagnostics %>%
