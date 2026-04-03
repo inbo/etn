@@ -17,12 +17,6 @@ get_receiver_logs <- function(
   diagnostics <- readr::read_rds("diagnostics6028.rds") |>
     dplyr::distinct() # duplicate rows present
 
-  ## Return early if no log_data
-  if(nrow(diagnostics) == 0){
-    warning("No receiver logs found.")
-    return(diagnostics)
-  }
-
   ## combine json strings into single array and parse
   log_data <-
     paste0("[",paste(diagnostics$log_data, collapse = ","), "]") |>
