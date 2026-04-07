@@ -1,33 +1,36 @@
 #' Transform ETN data to Darwin Core
 #'
-#' Transforms and downloads data from a European Tracking Network
-#' **animal project** to [Darwin Core](https://dwc.tdwg.org/).
-#' The resulting CSV file(s) can be uploaded to an [IPT](
-#' https://www.gbif.org/ipt) for publication to OBIS and/or GBIF.
-#' A `meta.xml` or `eml.xml` file are not created.
+#' Transforms data from the European Tracking Network (ETN) to
+#' [Darwin Core](https://dwc.tdwg.org/). The resulting CSV and meta.xml file
+#' can be uploaded to an [IPT](https://www.gbif.org/ipt) for publication to
+#' OBIS and/or GBIF.
+#' An `eml.xml` file is not created.
 #'
-#' @param animal_project_code Animal project code.
-#' @param directory Path to local directory to write file(s) to.
+#' @param package A Frictionless Data Package of ETN data, as returned by
+#'   [frictionless::read_package()].
+#'   It is expected to contain an `animals`, `detections` and `tags` resource.
+#' @param directory Path to local directory to write files to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
 #'   useful for extending/adapting the Darwin Core mapping before writing with
-#'   [readr::write_csv()]. If the directory does not exist, it will be created.
-#' @param rights_holder Acronym of the organization owning or managing the
-#'   rights over the data.
+#'   [readr::write_csv()].
+#' @param dataset_id Identifier for the dataset.
+#' @param dataset_name Title of the dataset.
+#' @param institution_code Acronym of the institution publishing the data.
 #' @param license Identifier of the license under which the data will be
 #'   published.
-#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
+#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode)
+#'   (default).
 #'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
-#' @inheritParams list_animal_ids
-#' @return CSV file(s) written to disk or list of data frames when
-#'   `directory = NULL`.
+#' @param rights_holder Acronym of the organization owning or managing the
+#'   rights over the data.
+#' @return CSV and `meta.xml` files written to disk.
+#'   And invisibly, a list of data frames with the transformed data.
 #' @export
 #' @section Transformation details:
 #' Data are transformed into an
 #' [Occurrence core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
 #' This **follows recommendations** discussed and created by Peter Desmet,
 #' Jonas Mortelmans, Jonathan Pye, John Wieczorek and others.
-#' See the [SQL file(s)](https://github.com/inbo/etn/tree/main/inst/sql)
-#' used by this function for details.
 #'
 #' Key features of the Darwin Core transformation:
 #' - Deployments (animal+tag associations) are parent events, with capture,
@@ -42,48 +45,143 @@
 #'   to reduce the size of high-frequency data.
 #'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
-#'   tag malfunctioned right after deployment.
-#'
+#'   tag malfunctioned right after deployment.#'
 #' @examples
-#' \dontrun{
-#' # Return a list of data.frames in Darwin Core format.
-#' write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
-#' # Download files to disk
-#' write_dwc("2014_demer", directory = ".")
-#' }
-write_dwc <- function(connection,
-                      animal_project_code,
-                      directory = ".",
-                      rights_holder = NULL,
-                      license = "CC-BY") {
-  # Check arguments
-  # The connection argument has been deprecated
-  if (lifecycle::is_present(connection)) {
-    deprecate_warn_connection()
+#' package <- river_telemetry
+#' write_dwc(
+#'   package,
+#'   directory = "my_directory",
+#'   dataset_id = "https://www.vliz.be/en/imis?module=dataset&dasid=5871",
+#'   dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
+#'   "species in the Demer river (Belgium)"),
+#'   institution_code = "VLIZ",
+#'   license = "CC0",
+#'   rights_holder = "INBO"
+#' )
+#'
+#' # Clean up (don't do this if you want to keep your files)
+#' unlink("my_directory", recursive = TRUE)
+write_dwc <- function(package, directory, dataset_id = NULL,
+                      dataset_name = NULL, institution_code = NULL,
+                      license = "CC-BY", rights_holder = NULL) {
+
+  # Check license
+  licenses <- c("CC-BY", "CC0")
+  if (is.null(license)) {
+    cli::cli_abort(
+      "{.arg licence} must be one of {.val licenses}.",
+      class = "etnpub_error_license_missing"
+    )
+  }
+  if (!license %in% licenses) {
+    cli::cli_abort(
+      "{.arg licence} must be one of {.val licenses}.",
+      class = "etnpub_error_license_missing"
+    )
   }
 
-  # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(protocol = select_protocol(),
-                                   json = FALSE,
-                                   ignored_arguments = "directory")
+  license <- switch(
+    license,
+    "CC-BY" = "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+  )
 
-  # Return the object or write out to file
-  if (is.null(directory)) {
-    ## Return a list of dataframes
-    return(out)
-  } else {
-    ## Write to file
-    dwc_occurrence_path <- file.path(directory, "dwc_occurrence.csv")
-    message(glue::glue(
-      "Writing data to:",
-      dwc_occurrence_path,
-      .sep = "\n"
-    ))
-    if (!dir.exists(directory)) {
-      dir.create(directory, recursive = TRUE)
-    }
-    readr::write_csv(x = out$dwc_occurrence, file = dwc_occurrence_path, na = "")
+  # Check input parameters
+  if (is.null(dataset_id)) {
+    dataset_id <- NA_character_
+  }
+  if (is.null(dataset_name)) {
+    dataset_name <- NA_character_
+  }
+  if (is.null(rights_holder)) {
+    rights_holder <- NA_character_
+  }
+  if (is.null(institution_code)) {
+    institution_code <- NA_character_
   }
 
-  invisible(out)
+  # Read data from package
+  cli::cli_h2("Reading data")
+  if (!"animals" %in% frictionless::resources(package)) {
+    cli::cli_abort(
+      "{.arg package} must contain resource {.val animals}.",
+      class = "etnpub_error_animals_data_missing"
+    )
+  }
+  animals <-
+    frictionless::read_resource(package, "animals")
+
+  if (!"tags" %in% frictionless::resources(package)) {
+    cli::cli_abort(
+      "{.arg package} must contain resource {.val tags}.",
+      class = "etnpub_error_tags_data_missing"
+    )
+  }
+  tags <-
+    frictionless::read_resource(package, "tags")
+
+  if (!"detections" %in% frictionless::resources(package)) {
+    cli::cli_abort(
+      "{.arg package} must contain resource {.val detections}.",
+      class = "etnpub_error_detections_data_missing"
+    )
+  }
+  detections <-
+    frictionless::read_resource(package, "detections")
+
+  if (!"deployments" %in% frictionless::resources(package)) {
+    cli::cli_abort(
+      "{.arg package} must contain resource {.val deployemts}.",
+      class = "etnpub_error_deployments_data_missing"
+    )
+  }
+  deployments <-
+    frictionless::read_resource(package, "deployments")
+
+  # Start transformation
+  cli::cli_h2("Transforming data to Darwin Core")
+  animals_occurrence <- create_animals_occurrence(animals, tags)
+  detections_occurrence <-
+    create_detections_occurrence(detections, animals, deployments)
+
+  # Bind the occurrence df from the helper functions
+  occurrence <-
+    animals_occurrence |>
+    dplyr::bind_rows(detections_occurrence) |>
+    dplyr::mutate(
+      # DATASET-LEVEL
+      type = "Event",
+      license = license,
+      rightsHolder = rights_holder,
+      datasetID = dataset_id,
+      institutionCode = institution_code,
+      collectionCode = "ETN",
+      datasetName = dataset_name,
+      # RECORD-LEVEL
+      .before = "basisOfRecord"
+    ) |>
+    dplyr::arrange(.data$parentEventID, .data$eventDate)
+
+  # Write files
+  occurrence_path <- file.path(directory, "occurrence.csv")
+  meta_xml_path <- file.path(directory, "meta.xml")
+  cli::cli_h2("Writing files")
+  cli::cli_ul(c(
+    "{.file {occurrence_path}}",
+    "{.file {meta_xml_path}}"
+  ))
+  if (!dir.exists(directory)) {
+    dir.create(directory, recursive = TRUE)
+  }
+  readr::write_csv(occurrence, occurrence_path, na = "")
+  file.copy(
+    system.file("extdata", "meta.xml", package = "movepub"), # Static meta.xml
+    meta_xml_path
+  )
+
+  # Return list with Darwin Core data invisibly
+  return <- list(
+    occurrence = dplyr::as_tibble(occurrence)
+  )
+  invisible(return)
 }
