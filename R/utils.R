@@ -287,5 +287,5 @@ NULL
 expand_cols <- function(df, colnames) {
   cols_to_add <- setdiff(colnames, colnames(df))
   df[, cols_to_add] <- NA_character_
-  return(df)
+  df
 }
