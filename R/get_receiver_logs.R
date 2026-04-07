@@ -21,9 +21,7 @@
 #' the default columns always returned by `get_receiver_logs()`. If
 #' duplicate columns are found, their names are made unique with
 #' [base::make.unique()]. When this happens, a message is printed to the
-#' console. The message can be muffled with [base::suppressMessages()] or
-#' silenced with the global option `rlib_name_repair_verbosity`. See
-#' [rlang::names_inform_repair()] for more information.
+#' console. The message can be muffled with [base::suppressMessages()].
 #' @name get_receiver_logs
 #'
 NULL
@@ -79,33 +77,31 @@ get_receiver_logs <- function(
   # Tidy up column names
   diagnostics <-
     diagnostics |>
-      ## Remove UPPERCASE except for the units in brackets
-      dplyr::rename_with(
-        ~stringr::str_replace_all(.x, "[A-Z](?=[a-z])", tolower)
-      ) |>
-      ## Remove braces
-      dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) |>
-      ## Remove spaces
-      dplyr::rename_with(
-        \(old_name) {
-          new_name <-
-          stringr::str_replace_all(
-          old_name,
-          stringr::fixed(" "),
-          "_"
-          )
+    ## Remove UPPERCASE except for the units in brackets
+    dplyr::rename_with(
+      ~ stringr::str_replace_all(.x, "[A-Z](?=[a-z])", tolower)
+    ) |>
+    ## Remove braces
+    dplyr::rename_with(~ stringr::str_remove_all(.x, "[\\(\\)]")) |>
+    ## Remove spaces
+    dplyr::rename_with(\(old_name) {
+      new_name <-
+        stringr::str_replace_all(old_name, stringr::fixed(" "), "_")
 
-          new_name_repaired <-
-            make.unique(new_name)
-          # Inform about name repair if any names were repaired, but only when
-          # not testing
-          if(!is_testing()) {
-            cli::cli_inform(c("Not all field names were unique."
-                            ,"Name repair took place:"))
-            rlang::names_inform_repair(new_name, new_name_repaired)
-          }
-          new_name_repaired}
-      )
+      new_name_repaired <-
+        make.unique(new_name)
+      # Inform about name repair if any names were repaired, but only when
+      # not testing
+      if (!is_testing()) {
+        cli::cli_alert_info(
+          c("Not all field names were unique. ",
+            "Name repair took place:"),
+          class = "etn_message_name_repair"
+        )
+        rlang::names_inform_repair(new_name, new_name_repaired)
+      }
+      new_name_repaired
+    })
 
   # Drop duplicate rows
   diagnostics <- dplyr::distinct(diagnostics)
