@@ -184,10 +184,11 @@ expect_meta_match <- function(file, core = "occurrence.csv", ...) {
   xml_file_fields <-
     xml_list |>
     purrr::chuck("archive", core_or_extension) |>
-    purrr::map_dfr(~ dplyr::tibble(
+    purrr::map(~ dplyr::tibble(
       index = as.numeric(attr(.x, which = "index")),
       term = attr(.x, which = "term")
     )) |>
+    purrr::list_rbind() |>
     dplyr::filter(!is.na(term)) |>
     dplyr::mutate(field = basename(term), .keep = "unused")
 
