@@ -46,7 +46,8 @@ Imports:
     rlang,
     stringr,
     utils,
-    withr
+    withr,
+    xml2
 Suggests:
     formattable,
     frictionless,
