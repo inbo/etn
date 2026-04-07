@@ -316,12 +316,12 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   # a collision with the station_name column added by the query.
   dup_col_deployment_id <- 6028
 
-  # Message to list repaired column names
+  # Message to list repaired column names, silence cli message
   expect_message(
     with_mocked_bindings(
       suppressMessages(
         get_receiver_logs(deployment_id = dup_col_deployment_id),
-        classes = "rlib_message_name_repair"
+        classes = "etn_message_name_repair"
       ),
       is_testing = \(x) {
         FALSE
@@ -330,12 +330,12 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
     class = "rlib_message_name_repair"
   )
 
-  # Message informing name repair took place (cli)
+  # Message informing name repair took place (cli), silence rlang message
   expect_message(
     with_mocked_bindings(
       suppressMessages(
         get_receiver_logs(deployment_id = dup_col_deployment_id),
-        classes = "rlib_message_name_repair"
+        classes = "rlang_message"
       ),
       is_testing = \(x) {
         FALSE
