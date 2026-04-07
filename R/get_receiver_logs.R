@@ -117,10 +117,6 @@ get_receiver_logs <- function(
     diagnostics |>
     ## Drop any columns that are all NA
     dplyr::select(dplyr::where(~ any(!is.na(.)))) |>
-    # dplyr::group_by(.data$deployment_id,
-    #                 .data$receiver_id,
-    #                 .data$record_type,
-    #                 .data$datetime) |>
     ## If a column only contains NA values, keep it, if not, keep the first non
     ## NA value per group
     dplyr::summarise(
