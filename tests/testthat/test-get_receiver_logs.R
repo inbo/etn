@@ -2,6 +2,9 @@
 test_deployment_id <- 53790
 
 test_that("get_receiver_logs() returns a tibble", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   df <- get_receiver_logs(deployment_id = test_deployment_id)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -15,6 +18,9 @@ test_that("get_receiver_logs() returns an error on missing deployment_id", {
 })
 
 test_that("get_receiver_logs() supports both int and chr deployment_id", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expect_identical(
     get_receiver_logs(deployment_id = as.character(test_deployment_id),
                       limit = TRUE),
@@ -24,6 +30,9 @@ test_that("get_receiver_logs() supports both int and chr deployment_id", {
 })
 
 test_that("get_receiver_logs() returns a 0-row tbl if no receiver logs found", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expect_length(
     dplyr::pull(get_receiver_logs(deployment_id = 1758), "deployment_id"),
     0L
@@ -31,6 +40,9 @@ test_that("get_receiver_logs() returns a 0-row tbl if no receiver logs found", {
 })
 
 test_that("get_receiver_logs() can filter on station_name", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Errors
   expect_error(
     get_receiver_logs(deployment_id = test_deployment_id,
@@ -73,6 +85,9 @@ test_that("get_receiver_logs() can filter on station_name", {
 })
 
 test_that("get_receiver_logs() can filter on start_date", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expect_error(
     get_receiver_logs(deployment_id = test_deployment_id,
                       start_date = "not_a_date")
@@ -93,6 +108,9 @@ test_that("get_receiver_logs() can filter on start_date", {
 })
 
 test_that("get_receiver_logs() can filter on end_date", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expect_error(
     get_receiver_logs(deployment_id = test_deployment_id,
                       end_date = "not_a_date"),
@@ -112,6 +130,9 @@ test_that("get_receiver_logs() can filter on end_date", {
 })
 
 test_that("get_receiver_logs() can filter on both start and end date", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Test querying between two dates.
   between_year_df <- get_receiver_logs(start_date = "2020",
                                        end_date = "2021",
@@ -137,6 +158,9 @@ test_that("get_receiver_logs() can filter on both start and end date", {
 })
 
 test_that("get_receiver_logs() can return a limited subset", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # This test assumes that there are more than 100 logs for the test deployment
   expect_length(
     dplyr::pull(
@@ -148,6 +172,9 @@ test_that("get_receiver_logs() can return a limited subset", {
 })
 
 test_that("get_receiver_logs() returns at least the expected columns", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expected_column_names <- c(
     "deployment_id",
     "receiver_id",
@@ -162,6 +189,9 @@ test_that("get_receiver_logs() returns at least the expected columns", {
 })
 
 test_that("get_receiver_logs() returns expected columns for known deployment", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Not every receiver log contains the same columns, this test check for
   # columns known to occur for this specific deployment id
 
@@ -218,6 +248,9 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
 })
 
 test_that("get_receiver_logs() returns the expected column classes", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   expected_column_classes <- list(
     "deployment_id" = "integer",
     "receiver_id" = "character",
@@ -234,6 +267,9 @@ test_that("get_receiver_logs() returns the expected column classes", {
 })
 
 test_that("get_receiver_logs() has no fully uppercase column names", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Testing conversion of uppercase database field names
   case_deployment_id <- 93144
   colnames_to_test_case <-
@@ -248,6 +284,9 @@ test_that("get_receiver_logs() has no fully uppercase column names", {
 })
 
 test_that("get_receiver_logs() returns units in column names correctly", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # Test that the conversion of uppercase doesn't result in incorrect units
 
   # Query with some units in log_data
@@ -265,6 +304,9 @@ test_that("get_receiver_logs() returns units in column names correctly", {
 })
 
 test_that("get_receiver_logs() returns no empty string values in log fields", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # "" should be replaced with NA in any fields that are not deployment_id,
   # receiver_id, datetime or record_type
 
@@ -287,6 +329,9 @@ test_that("get_receiver_logs() returns no empty string values in log fields", {
 })
 
 test_that("get_receiver_logs() returns unique rows for default columns", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   receiver_log <-
     get_receiver_logs(deployment_id = 65434)
 
@@ -324,6 +369,9 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
 })
 
 test_that("get_receiver_logs() handles duplicate columns by repairing them", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
   # deployment_id 6028 includes the station_name column in its log_data, causing
   # a collision with the station_name column added by the query.
   dup_col_deployment_id <- 6028
