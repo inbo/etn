@@ -122,11 +122,9 @@ get_receiver_logs <- function(
     dplyr::summarise(
       dplyr::across(
         dplyr::everything(),
-        # ~ ifelse(all(is.na(.)),
-        #   NA,
-        #   dplyr::coalesce(.[!is.na(.)], .)
-        # )
-        ~dplyr::first(.x, na_rm = TRUE)
+        # Use a base primitive to get the first non NA value per column, much
+        # faster than dplyr::first()
+        ~.x[!is.na(.x)][1L]
       ),
       # .groups = "drop",
       .by = dplyr::all_of(c(
