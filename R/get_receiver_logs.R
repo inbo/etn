@@ -92,13 +92,13 @@ get_receiver_logs <- function(
         make.unique(new_name)
       # Inform about name repair if any names were repaired, but only when
       # not testing
-      if (!is_testing()) {
+      if (!is_testing() && any(new_name != new_name_repaired)) {
         cli::cli_inform(
           c("Not all field names were unique. ",
             "Name repair took place:"),
           class = "etn_message_name_repair"
         )
-        rlang::names_inform_repair(new_name, new_name_repaired)
+        rlang::names_inform_repair(old_name, new_name_repaired)
       }
       new_name_repaired
     })
