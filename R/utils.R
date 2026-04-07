@@ -229,8 +229,8 @@ convert_units <- function(x){
                          reason = "display unit information.")
 
   colinfo <-
-    tibble::tibble(col_name = names(x),
                    unit_suffix = stringr::str_extract(col_name,
+    dplyr::tibble(col_name = names(x),
                                                       pattern = "[^_]*$"),
                    values = purrr::map(x, \(column) column))
 
