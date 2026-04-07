@@ -100,6 +100,8 @@ get_receiver_logs <- function(
           # Inform about name repair if any names were repaired, but only when
           # not testing
           if(!is_testing()) {
+            cli::cli_inform("Not all field names were unique."
+                            ,"Name repair took place:")
             rlang::names_inform_repair(new_name, new_name_repaired)
           }
           new_name_repaired}
