@@ -201,6 +201,6 @@ expect_meta_match <- function(file, core = "occurrence.csv", ...) {
     dplyr::mutate(index = seq(1:length(csv_file_cols)) - 1, .before = field) # Add index
 
   # Compare
-  testthat::expect_identical(csv_file_fields, xml_file_fields, )
+  testthat::expect_identical(csv_file_fields, xml_file_fields)
   testthat::expect_identical(basename(file), xml_file_location)
 }
