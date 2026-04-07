@@ -70,13 +70,13 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (is.null(license)) {
     cli::cli_abort(
       "{.arg licence} must be one of {.val licenses}.",
-      class = "etnpub_error_license_missing"
+      class = "etn_error_license_missing"
     )
   }
   if (!license %in% licenses) {
     cli::cli_abort(
       "{.arg licence} must be one of {.val licenses}.",
-      class = "etnpub_error_license_missing"
+      class = "etn_error_license_missing"
     )
   }
 
@@ -105,7 +105,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (!"animals" %in% frictionless::resources(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val animals}.",
-      class = "etnpub_error_animals_data_missing"
+      class = "etn_error_animals_data_missing"
     )
   }
   animals <-
@@ -114,7 +114,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (!"tags" %in% frictionless::resources(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val tags}.",
-      class = "etnpub_error_tags_data_missing"
+      class = "etn_error_tags_data_missing"
     )
   }
   tags <-
@@ -123,7 +123,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (!"detections" %in% frictionless::resources(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val detections}.",
-      class = "etnpub_error_detections_data_missing"
+      class = "etn_error_detections_data_missing"
     )
   }
   detections <-
@@ -132,7 +132,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (!"deployments" %in% frictionless::resources(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val deployemts}.",
-      class = "etnpub_error_deployments_data_missing"
+      class = "etn_error_deployments_data_missing"
     )
   }
   deployments <-
@@ -175,7 +175,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   }
   readr::write_csv(occurrence, occurrence_path, na = "")
   file.copy(
-    system.file("extdata", "meta.xml", package = "movepub"), # Static meta.xml
+    system.file("extdata", "meta.xml", package = "etn"), # Static meta.xml
     meta_xml_path
   )
 

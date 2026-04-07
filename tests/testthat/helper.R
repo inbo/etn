@@ -176,7 +176,7 @@ expect_meta_match <- function(file, core = "occurrence.csv", ...) {
 
   # Parse reference meta.xml from inst/extdata/meta.xml
   xml_list <-
-    xml2::read_xml(system.file("extdata", "meta.xml", package = "etnpub")) |>
+    xml2::read_xml(system.file("extdata", "meta.xml", package = "etn")) |>
     xml2::as_list()
   xml_file_location <-
     purrr::chuck(xml_list, "archive", core_or_extension, "files", "location") |>
