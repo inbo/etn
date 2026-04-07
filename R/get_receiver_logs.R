@@ -44,6 +44,14 @@ get_receiver_logs <- function(
                                      end_date = NULL,
                                      limit = FALSE) {
 
+  # Return error on missing required arguments: deployment_id
+  if (missing(deployment_id)) {
+    cli::cli_abort(
+      message = "Please provide at least one {.arg deployment_id}.",
+      class = "etn_no_dep_id_supplied"
+    )
+  }
+
   # Either use the API, or the SQL helper.
   api_return <- conduct_parent_to_helpers(protocol = select_protocol())
   ## combine json strings into single array and parse
