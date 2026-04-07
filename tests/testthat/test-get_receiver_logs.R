@@ -320,7 +320,9 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_receiver_logs(deployment_id = dup_col_deployment_id),
+        get_receiver_logs(deployment_id = dup_col_deployment_id,
+                          start_date = "2019-09-24",
+                          end_date = "2019-09-25"),
         classes = "etn_message_name_repair"
       ),
       is_testing = \(x) {
@@ -334,7 +336,9 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_receiver_logs(deployment_id = dup_col_deployment_id),
+        get_receiver_logs(deployment_id = dup_col_deployment_id,
+                          start_date = "2019-09-24",
+                          end_date = "2019-09-25"),
         classes = "rlang_message"
       ),
       is_testing = \(x) {
@@ -347,7 +351,9 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   # Check that the duplicate column is repaired by make.unique and both columns
   # are present in the output
   expect_contains(
-    names(get_receiver_logs(deployment_id = dup_col_deployment_id)),
+    names(get_receiver_logs(deployment_id = dup_col_deployment_id,
+                            start_date = "2019-09-24",
+                            end_date = "2019-09-25")),
     c("station_name", "station_name.1")
   )
 })
