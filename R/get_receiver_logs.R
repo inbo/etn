@@ -57,7 +57,7 @@ get_receiver_logs <- function(
   ## combine json strings into single array and parse
   log_data <-
     paste0("[",paste(api_return$log_data, collapse = ","), "]") |>
-    yyjsonr::read_json_str()
+    jsonlite::fromJSON()
 
   # Add log data as seperate columns
 

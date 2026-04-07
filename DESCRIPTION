@@ -37,6 +37,7 @@ Imports:
     etnservice (>= 0.5.0),
     glue,
     httr2,
+    jsonlite,
     lifecycle,
     memoise,
     methods,
