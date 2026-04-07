@@ -250,6 +250,18 @@ test_that("get_receiver_logs() has no fully uppercase column names", {
 test_that("get_receiver_logs() returns units in column names correctly", {
   # Test that the conversion of uppercase doesn't result in incorrect units
 
+  # Query with some units in log_data
+  receiver_log_data <- get_receiver_logs(
+    deployment_id = 6028,
+    start_date = "2020-02-23",
+    end_date = "2020-02-24"
+  )
+
+  expect_match(
+    names(receiver_log_data),
+    regexp = "[A-Z]",
+    all = FALSE # not all columns have uppercase units, but some do.
+  )
 })
 
 test_that("get_receiver_logs() returns no empty string values in log fields", {
