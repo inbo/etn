@@ -12,7 +12,7 @@ database. This argument is no longer used. You will be prompted for
 credentials instead.}
 }
 \value{
-A vector of all unique \code{acoustic_tag_id} in \code{acoustic_tag_id.sql}.
+A vector of all unique \code{acoustic_tag_id} values that are available.
 }
 \description{
 List all available acoustic tag ids
