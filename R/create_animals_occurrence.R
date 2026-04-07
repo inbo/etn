@@ -171,14 +171,14 @@ create_animals_occurrence <- function(animals, tags) {
       scientificName = .data$scientific_name,
       kingdom = "Animalia",
     ) |>
-    dplyr::select(
+    dplyr::select(dplyr::all_of(c(
       "basisOfRecord", "dataGeneralizations", "occurrenceID", "sex",
       "lifeStage", "occurrenceStatus", "organismID", "organismName", "eventID",
       "parentEventID", "eventDate", "samplingProtocol", "eventRemarks",
       "locationID", "locality", "decimalLatitude", "decimalLongitude",
       "geodeticDatum", "coordinateUncertaintyInMeters", "scientificNameID",
       "scientificName", "kingdom"
-    ) |>
+    ))) |>
     dplyr::arrange(.data$parentEventID, .data$eventDate, .data$samplingProtocol)
 
   return(animals_occurrence)
