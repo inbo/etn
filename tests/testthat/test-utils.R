@@ -86,7 +86,7 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
 # convert_units() ---------------------------------------------------------
 
 test_that("convert_units() correctly adds unit info to cols with unit suffix", {
-  df_with_units <- tibble::tibble(
+  df_with_units <- dplyr::tibble(
     depth_m = c(1, 4, -4),
     height_m = c(44, 89, 44)
   ) |>
@@ -116,14 +116,14 @@ test_that("convert_units() correctly adds unit info to cols with unit suffix", {
 })
 
 test_that("convert_units() leaves columns without a unit unscaved", {
-  df_no_units <- tibble::tibble("receiver_id" = c(11, 22, 33))
+  df_no_units <- dplyr::tibble("receiver_id" = c(11, 22, 33))
 
   expect_identical(
     convert_units(df_no_units),
     df_no_units
   )
 
-  df_mixed <- tibble::tibble(
+  df_mixed <- dplyr::tibble(
     depth_m = c(1, 4, -4),
     receiver_id = c(11, 22, 33)
   )
@@ -138,7 +138,7 @@ test_that("convert_units() leaves columns without a unit unscaved", {
 })
 
 test_that("convert_units() doesn't error on columns without a _", {
-  df_no_underscore <- tibble::tibble(
+  df_no_underscore <- dplyr::tibble(
     depth = c(1, 4, -4),
     height = c(44, 89, 44)
   )
@@ -153,7 +153,7 @@ test_that("convert_units() doesn't error on columns without a _", {
 ## `get_receiver_logs() convert known cases of  this to the correct `_°C`
 ## instead
 test_that("convert_units() can handle _C as a synonm for _°C", {
-  df_celsius <- tibble::tibble(
+  df_celsius <- dplyr::tibble(
     temp_C = c(1, 4, -4)
   ) |>
     convert_units()
