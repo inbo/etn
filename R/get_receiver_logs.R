@@ -93,7 +93,7 @@ get_receiver_logs <- function(
       # Inform about name repair if any names were repaired, but only when
       # not testing
       if (!is_testing()) {
-        cli::cli_alert_info(
+        cli::cli_inform(
           c("Not all field names were unique. ",
             "Name repair took place:"),
           class = "etn_message_name_repair"

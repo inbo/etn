@@ -339,7 +339,7 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
         get_receiver_logs(deployment_id = dup_col_deployment_id,
                           start_date = "2019-09-24",
                           end_date = "2019-09-25"),
-        classes = "rlang_message"
+        classes = "rlib_message_name_repair"
       ),
       is_testing = \(x) {
         FALSE
