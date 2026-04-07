@@ -5,44 +5,52 @@
 \title{Transform ETN data to Darwin Core}
 \usage{
 write_dwc(
-  connection,
-  animal_project_code,
-  directory = ".",
-  rights_holder = NULL,
-  license = "CC-BY"
+  package,
+  directory,
+  dataset_id = NULL,
+  dataset_name = NULL,
+  institution_code = NULL,
+  license = "CC-BY",
+  rights_holder = NULL
 )
 }
 \arguments{
-\item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
-database. This argument is no longer used. You will be prompted for
-credentials instead.}
+\item{package}{A Frictionless Data Package of ETN data, as returned by
+\code{\link[frictionless:read_package]{frictionless::read_package()}}.
+It is expected to contain an \code{animals}, \code{detections} and \code{tags} resource.}
 
-\item{animal_project_code}{Animal project code.}
-
-\item{directory}{Path to local directory to write file(s) to.
+\item{directory}{Path to local directory to write files to.
 If \code{NULL}, then a list of data frames is returned instead, which can be
 useful for extending/adapting the Darwin Core mapping before writing with
-\code{\link[readr:write_delim]{readr::write_csv()}}. If the directory does not exist, it will be created.}
+\code{\link[readr:write_delim]{readr::write_csv()}}.}
 
-\item{rights_holder}{Acronym of the organization owning or managing the
-rights over the data.}
+\item{dataset_id}{Identifier for the dataset.}
+
+\item{dataset_name}{Title of the dataset.}
+
+\item{institution_code}{Acronym of the institution publishing the data.}
 
 \item{license}{Identifier of the license under which the data will be
 published.
 \itemize{
-\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}} (default).
+\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}}
+(default).
 \item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
 }}
+
+\item{rights_holder}{Acronym of the organization owning or managing the
+rights over the data.}
 }
 \value{
-CSV file(s) written to disk or list of data frames when
-\code{directory = NULL}.
+CSV and \code{meta.xml} files written to disk.
+And invisibly, a list of data frames with the transformed data.
 }
 \description{
-Transforms and downloads data from a European Tracking Network
-\strong{animal project} to \href{https://dwc.tdwg.org/}{Darwin Core}.
-The resulting CSV file(s) can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for publication to OBIS and/or GBIF.
-A \code{meta.xml} or \code{eml.xml} file are not created.
+Transforms data from the European Tracking Network (ETN) to
+\href{https://dwc.tdwg.org/}{Darwin Core}. The resulting CSV and meta.xml file
+can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for publication to
+OBIS and/or GBIF.
+An \code{eml.xml} file is not created.
 }
 \section{Transformation details}{
 
@@ -50,8 +58,6 @@ Data are transformed into an
 \href{https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml}{Occurrence core}.
 This \strong{follows recommendations} discussed and created by Peter Desmet,
 Jonas Mortelmans, Jonathan Pye, John Wieczorek and others.
-See the \href{https://github.com/inbo/etn/tree/main/inst/sql}{SQL file(s)}
-used by this function for details.
 
 Key features of the Darwin Core transformation:
 \itemize{
@@ -67,15 +73,12 @@ lifestage, comments) and deployment as a whole.
 to reduce the size of high-frequency data.
 Duplicate detections (same animal, tag and timestamp) are excluded.
 It is possible for a deployment to contain no detections, e.g. if the
-tag malfunctioned right after deployment.
+tag malfunctioned right after deployment.#'
 }
 }
 
 \examples{
-\dontrun{
-# Return a list of data.frames in Darwin Core format.
-write_dwc(animal_project_code = "2010_phd_reubens", directory = NULL)
-# Download files to disk
-write_dwc("2014_demer", directory = ".")
-}
+
+# Clean up (don't do this if you want to keep your files)
+unlink("my_directory", recursive = TRUE)
 }
