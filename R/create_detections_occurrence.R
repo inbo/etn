@@ -51,7 +51,7 @@ create_detections_occurrence <- function(detections, animals,
       ),
       # OCCURRENCE
       occurrenceID = as.character(.data$detection_id),
-      sex = dplyr::case_match(
+      sex = dplyr::recode_values(
         tolower(.data$sex),
         c("male", "m") ~ "male",
         c("female", "f") ~ "female",

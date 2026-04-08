@@ -92,18 +92,18 @@ create_animals_occurrence <- function(animals, tags) {
       occurrenceID =paste(
         .data$animal_id, .data$tag_serial_number, .data$protocol, sep = "_"
       ),
-      sex = dplyr::case_match(
+      sex = dplyr::recode_values(
         tolower(.data$sex),
         c("male", "m") ~ "male",
         c("female", "f") ~ "female",
         "hermaphrodite" ~ "hermaphrodite",
         c("unknown", "u") ~ "unknown",
-        .default = "unknown"
+        default = "unknown"
       ),
       lifeStage = dplyr::if_else(
         # Only at release, life stage can change over time
         .data$protocol == "release",
-        dplyr::case_match(
+        dplyr::recode_values(
           .data$life_stage,
           # Follows http://vocab.nerc.ac.uk/collection/S11/current/
           # See https://github.com/inbo/etn/issues/262
