@@ -25,6 +25,8 @@ create_detections_occurrence <- function(detections, animals,
   # Transform data
   occurrence <-
     detections |>
+    # Remove duplicates by removing records with qc_flag = FALSE.
+    # qc_flag is either FALSE or NA.
     dplyr::filter(!isFALSE(.data$qc_flag)) |>
     dplyr::mutate(
       time_per_hour = strftime(.data$date_time, "%y-%m-%d %H %Z", tz = "UTC")
