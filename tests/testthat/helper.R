@@ -194,8 +194,8 @@ expect_meta_match <- function(file, core = "occurrence.csv", ...) {
 
   # Get fields from csv
   csv_file_cols <-
-    read.csv(file) |>
-    colnames() |>
+    readr::read_csv(file, show_col_types = FALSE, n_max = 0) |>
+    names() |>
     purrr::map_chr(~ stringr::str_remove(.x, "^[A-Za-z]+:")) # Remove namespace like "dcterms:"
   csv_file_fields <-
     dplyr::tibble(field = csv_file_cols) |>

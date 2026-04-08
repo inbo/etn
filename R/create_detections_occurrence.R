@@ -29,7 +29,7 @@ create_detections_occurrence <- function(detections, animals,
     # qc_flag is either FALSE or NA.
     dplyr::filter(!isFALSE(.data$qc_flag)) |>
     dplyr::mutate(
-      time_per_hour = strftime(.data$date_time, "%y-%m-%d %H %Z", tz = "UTC")
+      time_per_hour = lubridate::floor_date(.data$date_time, unit = "hour")
     ) |>
     # Group by animal+tag+date+hour combination
     dplyr::group_by(
@@ -38,11 +38,11 @@ create_detections_occurrence <- function(detections, animals,
       .data$time_per_hour
     ) |>
     dplyr::arrange(.data$date_time) |>
-    dplyr::mutate(subsample_count = dplyr::n()) |>
+    dplyr::add_count(name = "subsample_count") |>
     # Take first record/timestamp within group
     dplyr::filter(dplyr::row_number() == 1) |>
     dplyr::ungroup() |>
-    dplyr::left_join(animals_subset, by = "animal_id") |>
+    dplyr::left_join(animals_subset, by = dplyr::join_by("animal_id")) |>
     dplyr::left_join(deployments_subset, by = "deployment_id") |>
     dplyr::mutate(
       .keep = "none",
