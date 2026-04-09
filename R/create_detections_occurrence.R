@@ -95,6 +95,8 @@ create_detections_occurrence <- function(detections, animals,
         1000,
         NA_real_
       ),
+      # IDENTIFICATION
+      identificationVerificationStatus = "verified by expert",
       # TAXON
       scientificNameID =
         paste0("urn:lsid:marinespecies.org:taxname:", .data$aphia_id),
@@ -106,7 +108,8 @@ create_detections_occurrence <- function(detections, animals,
       "lifeStage", "occurrenceStatus", "organismID", "organismName", "eventID",
       "parentEventID", "eventDate", "samplingProtocol", "eventRemarks",
       "locationID", "locality", "decimalLatitude", "decimalLongitude",
-      "geodeticDatum", "coordinateUncertaintyInMeters", "scientificNameID",
+      "geodeticDatum", "coordinateUncertaintyInMeters",
+      "identificationVerificationStatus", "scientificNameID",
       "scientificName", "kingdom"
     ) |>
     dplyr::arrange(.data$parentEventID, .data$eventDate, .data$samplingProtocol)

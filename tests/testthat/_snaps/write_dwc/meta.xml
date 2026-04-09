@@ -30,8 +30,9 @@
     <field index="23" term="http://rs.tdwg.org/dwc/terms/decimalLongitude"/>
     <field index="24" term="http://rs.tdwg.org/dwc/terms/geodeticDatum"/>
     <field index="25" term="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters"/>
-    <field index="26" term="http://rs.tdwg.org/dwc/terms/scientificNameID"/>
-    <field index="27" term="http://rs.tdwg.org/dwc/terms/scientificName"/>
-    <field index="28" term="http://rs.tdwg.org/dwc/terms/kingdom"/>
+    <field index="26" term="http://rs.tdwg.org/dwc/terms/identificationVerificationStatus"/>
+    <field index="27" term="http://rs.tdwg.org/dwc/terms/scientificNameID"/>
+    <field index="28" term="http://rs.tdwg.org/dwc/terms/scientificName"/>
+    <field index="29" term="http://rs.tdwg.org/dwc/terms/kingdom"/>
   </core>
 </archive>
