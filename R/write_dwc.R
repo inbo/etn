@@ -160,7 +160,12 @@ write_dwc <- function(package, directory, dataset_id = NULL,
       # RECORD-LEVEL
       .before = "basisOfRecord"
     ) |>
-    dplyr::arrange(.data$parentEventID, .data$eventDate)
+    dplyr::arrange(
+      .data$parentEventID,
+      .data$eventDate,
+      .data$eventID,
+      .data$occurrenceID
+      )
 
   # Write files
   occurrence_path <- file.path(directory, "occurrence.csv")
