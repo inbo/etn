@@ -215,53 +215,6 @@ credentials_are_set <- function(){
     nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
-
-#' Convert a vector to units based on its name.
-#'
-#' @param x
-#'
-#' @returns
-#' @family helper functions
-#' @noRd
-#' @examples
-convert_units <- function(x){
-  rlang::check_installed("units",
-                         reason = "display unit information.")
-
-  colinfo <-
-    dplyr::tibble(col_name = names(x),
-                   unit_suffix = stringr::str_extract(.data$col_name,
-                                                      pattern = "[^_]*$"),
-                   values = purrr::map(x, \(column) column))
-
-  # Get available units
-  available_units <- units::valid_udunits(quiet = TRUE)
-
-  ### TODO : Escape columns that have a suffix but not a unit ###
-  dplyr::left_join(
-    colinfo,
-    available_units,
-    by = dplyr::join_by(colinfo$unit_suffix == available_units$symbol)
-  ) |>
-    dplyr::mutate(
-      values = purrr::map2(.data$values,
-                           .data$unit_suffix,
-                           \(value_vec,
-                             unit_suffix){
-                             units::set_units(
-                               # Convert from tibble to vector
-                               value_vec,
-                               unit_suffix,
-                               # Escape evaluation of unit_suffix as a bare
-                               # expression
-                               mode = "standard")}
-                           )
-    ) |>
-    dplyr::pull(.data$values) |>
-    dplyr::bind_cols()
-
-}
-
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
