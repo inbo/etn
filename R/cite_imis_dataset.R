@@ -124,34 +124,43 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Parse the Citation and DOI ----------------------------------------------
 
+  # Avoid missing global variable R CMD NOTE
+  doi <- NULL
+  citation <- NULL
+
   # If there is no citation, return an empty string. If there is a doi, append
   # it with the `doi:` prefix and end on a period.
   marineinfo_citation <-
     marineinfo_metadata |>
     purrr::map(\(dataset_metadata) {
-      doi <- purrr::pluck(dataset_metadata, "dois", "DOI", .default = "")
-      citation <- purrr::pluck(dataset_metadata, "datasetrec", "Citation",
-        .default = ""
-      )
       dplyr::tibble(
         citation =
           # Convert to character so the returned colclasses are as
           # close to base as possible
-          as.character(glue::glue(
-            "{citation}{dot}{doi_prefix}{doi}{doi_suffix}", ,
-            # Add a period between the citation and the doi if the citation
-            # doesn't already end on one, if there is no doi, don't mess with
-            # the citation.
-            dot = ifelse(
-              citation != "" &
-                !stringr::str_ends(citation, stringr::fixed(".")),
-              yes = ".",
-              no = ""
-            ),
-            doi_prefix = ifelse(doi != "", " doi:", ""),
-            doi_suffix = ifelse(doi != "", ".", ""),
-            .na = NA_character_
-          )),
+          as.character(
+            glue::glue_data(
+              .x = list(
+                citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
+                                        .default = ""
+                ),
+                doi = purrr::pluck(dataset_metadata, "dois", "DOI",
+                                   .default = "")
+              ),
+              "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
+              # Add a period between the citation and the doi if the citation
+              # doesn't already end on one, if there is no doi, don't mess with
+              # the citation.
+              dot = ifelse(
+                citation != "" &
+                  !stringr::str_ends(citation, stringr::fixed(".")),
+                yes = ".",
+                no = ""
+              ),
+              doi_prefix = ifelse(doi != "", " doi:", ""),
+              doi_suffix = ifelse(doi != "", ".", ""),
+              .na = NA_character_
+              )
+          ),
         doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = NA)
       )
     }) |>
