@@ -54,7 +54,7 @@ test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7970) |>
-      dplyr::select(dplyr::all_of(c("dataname", "email", "institute"))),
+      dplyr::select(dplyr::all_of(c("name", "email", "institute"))),
     dplyr::tibble(
       name = NA_character_,
       email = NA_character_,
