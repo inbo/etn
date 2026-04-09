@@ -25,8 +25,8 @@ example_dataset <- function(dataset = "2014_DEMER") {
   if (!dataset %in% available_datasets) {
     cli::cli_abort(
       c(
-        "Available example datasets are: {.val {available_datasets}}.",
-        "i" = "{.val {dataset}} is not an available example dataset."
+        "{.val {dataset}} is not an available example dataset.",
+        "i" = "Available dataset{?s}: {.val {available_datasets}}."
       ),
       class = "etn_error_example_dataset_not_available"
       )
