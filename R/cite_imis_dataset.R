@@ -189,6 +189,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
    }) |>
    purrr::compact() |>
    purrr::map(\(ownership_df) {
+     # Take the lowest rated owner, sometimes OrderNr 1 is missing.
      dplyr::slice_min(ownership_df,
        n = 1,
        order_by = .data$OrderNr,
@@ -199,6 +200,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
    purrr::map(\(ownership_df) {
      dplyr::mutate(
        ownership_df,
+       # Support missing fields, fall back to NA.
        name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
        email = purrr::pluck(ownership_df, "Email", .default = NA_character_),
        institute = purrr::pluck(ownership_df, "OrigName", .default = NA_character_),
