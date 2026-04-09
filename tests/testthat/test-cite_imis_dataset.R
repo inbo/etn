@@ -186,9 +186,9 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues", {
 })
 
 test_that("cite_imis_dataset() doesn't cause encoding issue: all citations", {
-  skip_on_ci()
-  skip_on_covr()
   skip_if_offline("marineinfo.org")
+
+  skip("Encoding issue on the API ISSUE#521")
 
   # Super-duper snapshot of all possible citations, probably want to remove this
   # one
