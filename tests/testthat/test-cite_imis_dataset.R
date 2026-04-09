@@ -1,6 +1,8 @@
 test_that("cite_imis_dataset() returns a tibble", {
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-8296")
+
   expect_s3_class(
     cite_imis_dataset(imis_dataset_ids = 8296),
     "tbl_df"
@@ -9,6 +11,8 @@ test_that("cite_imis_dataset() returns a tibble", {
 
 test_that("cite_imis_dataset() returns expected columns", {
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-7915")
 
   expect_named(
     cite_imis_dataset(imis_dataset_ids = 7915),
@@ -19,12 +23,34 @@ test_that("cite_imis_dataset() returns expected columns", {
 test_that("cite_imis_dataset() returns remaining data if some provided ids are NA", {
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-one-missing")
+
   expect_identical(
     nrow(cite_imis_dataset(
       imis_dataset_ids = c(NA, 8468, 5929)
     )),
     2L
   )
+})
+
+test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
+  # When MarineInfo/IMIS doesn't contain any ownerships information, return
+  # empty columns
+
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-7970")
+
+  expect_identical(
+    cite_imis_dataset(imis_dataset_ids = 7970) |>
+      dplyr::select(dplyr::all_of(c("dataname", "email", "institute"))),
+    dplyr::tibble(
+      name = NA_character_,
+      email = NA_character_,
+      institute = NA_character_
+    )
+  )
+
 })
 
 test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
@@ -46,6 +72,8 @@ test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
 test_that("cite_imis_dataset() returns DOI for known dataset with DOI", {
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-8856")
+
   expect_identical(
     # acoustic_project_code: 2004_gudena has a DOI
     cite_imis_dataset(imis_dataset_ids = 8856)$doi,
@@ -56,16 +84,20 @@ test_that("cite_imis_dataset() returns DOI for known dataset with DOI", {
 test_that("cite_imis_dataset() can append doi to citation if available", {
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-8859")
+
   expect_true(
     stringr::str_ends(
-      cite_imis_dataset(imis_dataset_ids = 8856)$citation,
-      stringr::fixed("10.14284/735.")
+      cite_imis_dataset(imis_dataset_ids = 8859)$citation,
+      stringr::fixed("10.14284/744.")
     )
   )
 })
 
 test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is no DOI", {
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-no-doi")
 
   expect_no_match(
     cite_imis_dataset(imis_dataset_ids = 6336)$citation,
@@ -75,6 +107,8 @@ test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is
 
 test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
   skip_if_offline("marineinfo.org")
+
+   vcr::local_cassette("citations-5877")
 
   # Previous bug in citation and doi collation
 
@@ -88,6 +122,8 @@ test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
 test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-na-conv")
+
   expect_no_match(cite_imis_dataset(6331)$citation, "n\\.a\\.")
   expect_no_match(cite_imis_dataset(6328)$citation, "n\\.a\\.")
   expect_no_match(cite_imis_dataset(6329)$citation, "n\\.a\\.")
@@ -96,6 +132,8 @@ test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
 test_that("cite_imis_dataset() removes html tags from citations", {
   # Some citations have html formatting embedded eg: <i>example</i>
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-html")
 
   expect_no_match(
     cite_imis_dataset(6336)$citation,
@@ -110,6 +148,8 @@ test_that("cite_imis_dataset() removes html tags from citations", {
 
 test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", {
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-encoding")
 
   # skip("Encoding issue on the API ISSUE#521")
 
@@ -135,6 +175,8 @@ test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   # doi is suffixed, except when one is already present.
   skip_if_offline("marineinfo.org")
 
+  vcr::local_cassette("citations-period")
+
   expect_no_match(
     cite_imis_dataset(8853)$citation,
     "\\.\\.$"
@@ -143,6 +185,8 @@ test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
 
 test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-api-warning")
 
   # Some IMIS dataset_id's can't be found on MarineInfo
   expect_warning(
@@ -154,6 +198,8 @@ test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
 
 test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo requests fail", {
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-api-warning")
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7934,
