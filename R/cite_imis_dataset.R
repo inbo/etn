@@ -186,7 +186,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     purrr::map(\(ownership_df) {
       dplyr::mutate(
         ownership_df,
-        name = paste(.data$Surname, .data$Firstname),
+        name = stringr::str_c(.data$Surname, .data$Firstname),
         email = as.character(.data$Email),
         institute = as.character(.data$OrigName),
         .keep = "none"
