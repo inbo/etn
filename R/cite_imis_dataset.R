@@ -174,25 +174,38 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Parse the person information --------------------------------------------
 
-  marineinfo_ownerships <- purrr::map(
-    marineinfo_metadata,
-    list("ownerships")
-  ) |>
-    # Don't parse datasets without ownership information
-    purrr::compact() |>
-    purrr::map(\(ownership_df) {
-      dplyr::filter(ownership_df, .data$OrderNr == 1)
-    }) |>
-    purrr::map(\(ownership_df) {
-      dplyr::mutate(
-        ownership_df,
-        name = stringr::str_c(.data$Surname, .data$Firstname),
-        email = as.character(.data$Email),
-        institute = as.character(.data$OrigName),
-        .keep = "none"
-      )
-    }) |>
-    purrr::list_rbind(names_to = "imis_dataset_id")
+  marineinfo_ownerships <-
+   purrr::map(marineinfo_metadata, \(dataset) {
+     purrr::pluck(dataset,
+       "ownerships",
+       .default = dplyr::tibble(
+         OrderNr = 1L,
+         Firstname = NA_character_,
+         Surname = NA_character_,
+         Email = NA_character_,
+         OrigName = NA_character_
+       )
+     )
+   }) |>
+   purrr::compact() |>
+   purrr::map(\(ownership_df) {
+     dplyr::slice_min(ownership_df,
+       n = 1,
+       order_by = .data$OrderNr,
+       # Support shared first authorship
+       with_ties = TRUE
+     )
+   }) |>
+   purrr::map(\(ownership_df) {
+     dplyr::mutate(
+       ownership_df,
+       name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
+       email = purrr::pluck(ownership_df, "Email", .default = NA_character_),
+       institute = purrr::pluck(ownership_df, "OrigName", .default = NA_character_),
+       .keep = "none"
+     )
+   }) |>
+   purrr::list_rbind(names_to = "imis_dataset_id")
 
   # Combine the parsed information ------------------------------------------
 
