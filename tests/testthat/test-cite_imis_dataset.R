@@ -9,7 +9,7 @@ test_that("cite_imis_dataset() returns a tibble", {
   )
 })
 
-test_that("cite_imis_dataset() can handle multiple datasets at a time",{
+test_that("cite_imis_dataset() can handle multiple datasets at a time", {
   skip_if_offline("marineinfo.org")
 
   vcr::local_cassette("citations-multiple")
@@ -31,7 +31,7 @@ test_that("cite_imis_dataset() returns expected columns", {
   )
 })
 
-test_that("cite_imis_dataset() returns remaining data if some provided ids are NA", {
+test_that("cite_imis_dataset() returns remaining data if some ids are NA", {
   skip_if_offline("marineinfo.org")
 
   vcr::local_cassette("citations-one-missing")
@@ -118,7 +118,7 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
   )
 })
 
-test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is no DOI", {
+test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
   skip_if_offline("marineinfo.org")
 
   vcr::local_cassette("citations-no-doi")
@@ -132,7 +132,7 @@ test_that("cite_imis_dataset() doesn't append doi prefix or suffix when there is
 test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
   skip_if_offline("marineinfo.org")
 
-   vcr::local_cassette("citations-5877")
+  vcr::local_cassette("citations-5877")
 
   # Previous bug in citation and doi collation
 
@@ -170,12 +170,12 @@ test_that("cite_imis_dataset() removes html tags from citations", {
   )
 })
 
-test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", {
+test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   skip_if_offline("marineinfo.org")
 
   vcr::local_cassette("citations-encoding")
 
-  # skip("Encoding issue on the API ISSUE#521")
+  skip("Encoding issue on the API ISSUE#521")
 
   # Compare against known group of citations of which some showed encoding
   # issues
@@ -227,7 +227,7 @@ test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
   )
 })
 
-test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo requests fail", {
+test_that("cite_imis_dataset() returns 0 a row tibble when all requests fail", {
   skip_if_offline("marineinfo.org")
 
   vcr::local_cassette("citations-api-warning")
@@ -246,7 +246,7 @@ test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo reques
   )
 })
 
-test_that("cite_imis_dataset() can handle getting all citations in a single call", {
+test_that("cite_imis_dataset() can handle getting all citations in one go", {
   # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
   skip_if_no_authentication()
   skip_if_offline("marineinfo.org")

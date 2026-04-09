@@ -24,7 +24,8 @@
 #'  - The `imis_dataset_id`
 #'  - A formatted `citation` with DOI if available.
 #'  - The `doi`.
-#'  - The contact person, usually the first author. If no contact person is entered, the first author with status creator..
+#'  - The contact person, usually the first author. If no contact person is
+#'  entered, the first author with status creator.
 #'  - The corresponding `email`.
 #'  - The corresponding `institute`.
 #' @family citation helpers
@@ -32,7 +33,7 @@
 #'
 #' @examplesIf interactive()
 #' # Cite the 2014_gudena acoustic project:
-#' cite_imis_dataset(8856)
+#'   cite_imis_dataset(8856)
 cite_imis_dataset <- function(imis_dataset_ids = NULL,
                               warn = FALSE,
                               progress = TRUE) {
@@ -59,9 +60,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   }
 
   # Query the IMIS API ------------------------------------------------------
-
-  # marineinfo_dataset_endpoints <-
-  #   glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
   marineinfo_dataset_endpoints <-
     glue::glue("https://vliz.be/en/imis?dasid={imis_dataset_ids}&show=json")
@@ -131,15 +129,16 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   marineinfo_citation <-
     marineinfo_metadata |>
     purrr::map(\(dataset_metadata) {
+      doi <- purrr::pluck(dataset_metadata, "dois", "DOI", .default = "")
+      citation <- purrr::pluck(dataset_metadata, "datasetrec", "Citation",
+        .default = ""
+      )
       dplyr::tibble(
         citation =
-        # Convert to character so the returned colclasses are as
-        # close to base as possible
+          # Convert to character so the returned colclasses are as
+          # close to base as possible
           as.character(glue::glue(
-            "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
-            citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
-              .default = ""
-            ),
+            "{citation}{dot}{doi_prefix}{doi}{doi_suffix}", ,
             # Add a period between the citation and the doi if the citation
             # doesn't already end on one, if there is no doi, don't mess with
             # the citation.
@@ -149,7 +148,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
               yes = ".",
               no = ""
             ),
-            doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = ""),
             doi_prefix = ifelse(doi != "", " doi:", ""),
             doi_suffix = ifelse(doi != "", ".", ""),
             .na = NA_character_
@@ -174,40 +172,45 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Parse the person information --------------------------------------------
 
+
   marineinfo_ownerships <-
-   purrr::map(marineinfo_metadata, \(dataset) {
-     purrr::pluck(dataset,
-       "ownerships",
-       .default = dplyr::tibble(
-         OrderNr = 1L,
-         Firstname = NA_character_,
-         Surname = NA_character_,
-         Email = NA_character_,
-         StandardName = NA_character_
-       )
-     )
-   }) |>
-   purrr::compact() |>
-   purrr::map(\(ownership_df) {
-     # Take the lowest rated owner, sometimes OrderNr 1 is missing.
-     dplyr::slice_min(ownership_df,
-       n = 1,
-       order_by = .data$OrderNr,
-       # Support shared first authorship
-       with_ties = TRUE
-     )
-   }) |>
-   purrr::map(\(ownership_df) {
-     dplyr::mutate(
-       ownership_df,
-       # Support missing fields, fall back to NA.
-       name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
-       email = purrr::pluck(ownership_df, "Email", .default = NA_character_),
-       institute = purrr::pluck(ownership_df, "StandardName", .default = NA_character_),
-       .keep = "none"
-     )
-   }) |>
-   purrr::list_rbind(names_to = "imis_dataset_id")
+    purrr::map(marineinfo_metadata, \(dataset) {
+      purrr::pluck(
+        dataset,
+        "ownerships",
+        .default = dplyr::tibble(
+          OrderNr = 1L,
+          Firstname = NA_character_,
+          Surname = NA_character_,
+          Email = NA_character_,
+          StandardName = NA_character_
+        )
+      )
+    }) |>
+    purrr::compact() |>
+    purrr::map(\(ownership_df) {
+      # Take the lowest rated owner, sometimes OrderNr 1 is missing.
+      dplyr::slice_min(
+        ownership_df,
+        n = 1,
+        order_by = .data$OrderNr,
+        # Support shared first authorship
+        with_ties = TRUE
+      )
+    }) |>
+    purrr::map(\(ownership_df) {
+      dplyr::mutate(
+        ownership_df,
+        # Support missing fields, fall back to NA.
+        name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
+        email = purrr::pluck(ownership_df, "Email",
+                             .default = NA_character_),
+        institute = purrr::pluck(ownership_df, "StandardName",
+                                 .default = NA_character_),
+        .keep = "none"
+      )
+    }) |>
+    purrr::list_rbind(names_to = "imis_dataset_id")
 
   # Combine the parsed information ------------------------------------------
 
