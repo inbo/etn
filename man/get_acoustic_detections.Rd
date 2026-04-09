@@ -59,8 +59,7 @@ for testing purposes). Defaults to \code{FALSE}.}
 }
 \value{
 A tibble with acoustic detections data, sorted by \code{acoustic_tag_id}
-and \code{date_time}. See also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+and \code{date_time}.
 }
 \description{
 Get data for acoustic detections, with options to filter results. Use

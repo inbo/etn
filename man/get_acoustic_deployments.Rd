@@ -33,8 +33,7 @@ open (i.e. no end date defined). Defaults to \code{FALSE}.}
 }
 \value{
 A tibble with acoustic deployment data, sorted by
-\code{acoustic_project_code}, \code{station_name} and \code{deploy_date_time}. See also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+\code{acoustic_project_code}, \code{station_name} and \code{deploy_date_time}.
 }
 \description{
 Get data for deployments of acoustic receivers, with options to filter
