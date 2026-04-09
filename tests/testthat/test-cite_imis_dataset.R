@@ -111,7 +111,7 @@ test_that("cite_imis_dataset() removes html tags from citations", {
 test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", {
   skip_if_offline("marineinfo.org")
 
-  skip("Encoding issue on the API ISSUE#521")
+  # skip("Encoding issue on the API ISSUE#521")
 
   # Compare against known group of citations of which some showed encoding
   # issues

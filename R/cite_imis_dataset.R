@@ -60,8 +60,11 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Query the IMIS API ------------------------------------------------------
 
+  # marineinfo_dataset_endpoints <-
+  #   glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+
   marineinfo_dataset_endpoints <-
-    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+    glue::glue("https://vliz.be/en/imis?dasid={imis_dataset_ids}&show=json")
 
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
