@@ -1,0 +1,71 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=6349&show=json
+  response:
+    status: 200
+    headers:
+      content-length: '7134'
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Thu, 09 Apr 2026 12:03:25 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=JBxgmwZVaQ8zPsZ2l7YUOFAldqG26PPEzapuqlE4eQfdqMSw;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":6349,"Acronym":"Ars","StandardTitle":"Acoustic
+        telemetry studies in the artificial reefs off Aegean Sea coast of Turkey.","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"Acoustic
+        receivers (69 kHz) were deployed around artificial reefs in the Aegean Sea,
+        to specify the behaviour and movement patterns of the fish in the reef area
+        and using this information, to contribute to the management of small scale
+        fisheries in artificial reef areas.80 individuals of fish species such as
+        Sciaena umbra, Scorpaena scrofa, Scorpaena porcus, Sparus aurata, Diplodus
+        vulgaris and Pomatomus saltatrix were tagged and tracking with VPS method.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"\u00d6zg\u00fcl
+        A., L\u00f6k A., Ula\u015f A., D\u00fczbast\u0131lar F. O., Tanr\u0131kul
+        T.T 2016. 3. Determining movement patterns of fish around of artificial reefs
+        and use for small scale fisheries. T\u00dcB\u0130TAK-TOVAG 112O383 Ankara,
+        192 pp.","AccessConstraints":null,"UDate":"2023-05-22","CDate":"2019-10-25","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-03-27
+        01:42:29.872571","timezone_type":1,"timezone":"+01:00"},"CheckedFlag":1,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
+        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_c4d65583","Description":null,"OrigThesTerm":"Tracking","DutchTerm":"Tracking;
+        het volgen","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_c4d65583","DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":2,"Surname":"\u00d6zg\u00fcl","Firstname":"Ayta\u00e7","Initials":"A.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":38091,"InsID":5605,"FullInstitute":"Ege
+        University","RoleID":61,"Role":"Data creator","OrigName":null,"StandardName":"Ege
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7706-9012","ROR":null},{"OrderNr":3,"Surname":"\u00d6zg\u00fcl","Firstname":"Ayta\u00e7","Initials":"A.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":38091,"InsID":5605,"FullInstitute":"Ege
+        University","RoleID":24,"Role":"Contact","OrigName":null,"StandardName":"Ege
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7706-9012","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"}],"frameworks":null,"otherterms":null,"temporal":[{"DasDateID":5096,"StartYear":2013,"EndYear":2016,"StartDay":1,"EndDay":1,"StartDate":"2013-08-01","EndDate":"2016-08-01","DasDate":null,"Resolution":"Quasi
+        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":8,"StartMonth":"August","StartMonthNL":"Augustus","EndMonth0":8,"EndMonth":"August","EndMonthNL":"Augustus","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10533,"DasGeoTerm":null,"DasID":6349,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Aegean
+        Sea","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":38.364486999999997,"OrigCoordMinY":26.771184000000002,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"10.1016\/j.fishres.2018.10.008","externalID":null,"URLTypeCode":"DOI","URLType":"DOI","URLTypID":13,"downloadURL":null,"FileName":null},{"URL":"10.1111\/jai.12922","externalID":null,"URLTypeCode":"DOI","URLType":"DOI","URLTypID":13,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-09 12:03:26
+recorded_with: VCR-vcr/2.1.0

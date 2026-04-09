@@ -61,7 +61,20 @@ test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
       institute = NA_character_
     )
   )
+})
 
+test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
+  # dataset 6349 has OrderNr 2 and 3, but not 1 under ownerships.
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-no-first-auth")
+
+  # Previously, a hard filter on OrderNr resulted in NA for all `ownership`
+  # child elements
+  expect_identical(
+    dplyr::pull(cite_imis_dataset(imis_dataset_ids = 6349), "institute"),
+    "Ege University"
+  )
 })
 
 test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
