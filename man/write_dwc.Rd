@@ -78,6 +78,17 @@ tag malfunctioned right after deployment.#'
 }
 
 \examples{
+package <- example_dataset()
+write_dwc(
+  package,
+  directory = "my_directory",
+  dataset_id = "https://www.vliz.be/en/imis?module=dataset&dasid=5871",
+  dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
+  "species in the Demer river (Belgium)"),
+  institution_code = "VLIZ",
+  license = "CC0",
+  rights_holder = "INBO"
+)
 
 # Clean up (don't do this if you want to keep your files)
 unlink("my_directory", recursive = TRUE)
