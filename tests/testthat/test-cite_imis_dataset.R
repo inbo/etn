@@ -9,6 +9,17 @@ test_that("cite_imis_dataset() returns a tibble", {
   )
 })
 
+test_that("cite_imis_dataset() can handle multiple datasets at a time",{
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-multiple")
+
+  expect_identical(
+    nrow(cite_imis_dataset(imis_dataset_ids = c(8296, 7915))),
+    2L
+  )
+})
+
 test_that("cite_imis_dataset() returns expected columns", {
   skip_if_offline("marineinfo.org")
 
