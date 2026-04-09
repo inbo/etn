@@ -188,7 +188,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         ownership_df,
         name = paste(.data$Surname, .data$Firstname),
         email = as.character(.data$Email),
-        institute = as.character(.data$FullAcronym),
+        institute = as.character(.data$OrigName),
         .keep = "none"
       )
     }) |>
