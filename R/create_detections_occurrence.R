@@ -76,7 +76,7 @@ create_detections_occurrence <- function(detections, animals,
       ),
       eventDate = format(.data$date_time, format = "%Y-%m-%dT%H:%M:%SZ"),
       samplingProtocol = "acoustic telemetry",
-      eventRemarks = paste("detected on receiver", .data$receiver_id),
+      eventRemarks = paste("detected by receiver", .data$receiver_id),
       # LOCATION
       locationID = .data$station_name,
       locality = .data$station_description,
