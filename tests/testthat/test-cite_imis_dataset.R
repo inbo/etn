@@ -168,6 +168,7 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues in citations", 
       cite_imis_dataset(warn = FALSE) |>
       dplyr::pull("citation")
   )
+
 })
 
 test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
@@ -217,9 +218,10 @@ test_that("cite_imis_dataset() returns 0 a row tibble when all MarineInfo reques
 
 test_that("cite_imis_dataset() can handle getting all citations in a single call", {
   # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
-
   skip_if_no_authentication()
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-all")
 
   all_imis_acoustic_codes <- get_acoustic_projects() |>
     # Some IMIS dataset_ids will result in a 404 on marineinfo.
