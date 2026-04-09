@@ -82,7 +82,7 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_id = "https://www.vliz.be/en/imis?module=dataset&dasid=5871",
+  dataset_id = "https://www.vliz.be/en/imis?dataset&dasid=5871",
   dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
   "species in the Demer river (Belgium)"),
   institution_code = "VLIZ",
