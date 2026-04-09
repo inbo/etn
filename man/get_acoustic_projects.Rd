@@ -29,9 +29,7 @@ project, based on the \code{imis_dataset_id} field. This will add the following 
 }}
 }
 \value{
-A tibble with acoustic project data, sorted by \code{project_code}. See
-also
-\href{https://inbo.github.io/etn/articles/etn_fields.html}{field definitions}.
+A tibble with acoustic project data, sorted by \code{project_code}.
 }
 \description{
 Get data for acoustic projects, with options to filter results.

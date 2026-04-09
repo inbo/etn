@@ -14,8 +14,7 @@
 #'
 #' @inheritParams list_animal_ids
 #' @return A tibble with acoustic deployment data, sorted by
-#'   `acoustic_project_code`, `station_name` and `deploy_date_time`. See also
-#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+#'   `acoustic_project_code`, `station_name` and `deploy_date_time`.
 #'
 #' @export
 #'

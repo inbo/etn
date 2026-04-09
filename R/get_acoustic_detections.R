@@ -25,8 +25,7 @@
 #' @inheritParams list_animal_ids
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
-#'  and `date_time`. See also
-#'  [field definitions](https://inbo.github.io/etn/articles/etn_fields.html).
+#'  and `date_time`.
 #'
 #' @export
 #'

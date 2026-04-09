@@ -31,5 +31,9 @@ reference:
 - title: Example datasets
   contents:
   - river_telemetry
+- title: Frictionless data package functions
+  contents:
+  - read_package
+  - write_package
 - title: Deprecated functions
   contents: connect_to_etn
