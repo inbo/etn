@@ -251,7 +251,7 @@ test_that("cite_imis_dataset() can handle getting all citations in one go", {
   skip_if_no_authentication()
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-all")
+  vcr::local_cassette("citations-all", serialize_with = "qs2")
 
   all_imis_acoustic_codes <- get_acoustic_projects() |>
     # Some IMIS dataset_ids will result in a 404 on marineinfo.
