@@ -8,10 +8,10 @@ example_dataset(dataset = "2014_DEMER")
 }
 \arguments{
 \item{dataset}{Name of the example dataset to load. Defaults to the only
-available dataset "2014_DEMER".}
+available dataset: \code{"2014_DEMER"}.}
 }
 \value{
-Frictionless data package of ETN dataset.
+Frictionless data package.
 }
 \description{
 An example ETN dataset, formatted as a \href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package} and read by
@@ -26,6 +26,8 @@ code:
 
 \verb{download_acoustic_dataset( animal_project_code = "2014_DEMER", directory = here::here("inst", "extdata", "2014_DEMER")) )}
 }
+
 \examples{
 example_dataset()
 }
+\concept{sample data}

@@ -15,8 +15,9 @@
 #' directory = here::here("inst", "extdata", "2014_DEMER"))
 #' )`
 #' @param dataset Name of the example dataset to load. Defaults to the only
-#' available dataset "2014_DEMER".
-#' @return Frictionless data package of ETN dataset.
+#' available dataset: `"2014_DEMER"`.
+#' @return Frictionless data package.
+#' @family sample data
 #' @export
 #' @examples
 #' example_dataset()
