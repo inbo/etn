@@ -2,7 +2,7 @@
 % Please edit documentation in R/example_dataset.R
 \name{example_dataset}
 \alias{example_dataset}
-\title{Example ETN dataset}
+\title{Read an example dataset}
 \usage{
 example_dataset(dataset = "2014_DEMER")
 }

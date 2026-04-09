@@ -1,4 +1,4 @@
-#' Example ETN dataset
+#' Read an example dataset
 #'
 #' An example ETN dataset, formatted as a [Frictionless Data Package](
 #' https://specs.frictionlessdata.io/data-package/) and read by
