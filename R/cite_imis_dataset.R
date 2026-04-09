@@ -183,7 +183,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
          Firstname = NA_character_,
          Surname = NA_character_,
          Email = NA_character_,
-         OrigName = NA_character_
+         StandardName = NA_character_
        )
      )
    }) |>
@@ -203,7 +203,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
        # Support missing fields, fall back to NA.
        name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
        email = purrr::pluck(ownership_df, "Email", .default = NA_character_),
-       institute = purrr::pluck(ownership_df, "OrigName", .default = NA_character_),
+       institute = purrr::pluck(ownership_df, "StandardName", .default = NA_character_),
        .keep = "none"
      )
    }) |>
