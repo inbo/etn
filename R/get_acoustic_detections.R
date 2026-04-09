@@ -23,6 +23,7 @@
 #' @param progress Logical. Show a progress bar while fetching data. Defaults to
 #'   `TRUE`.
 #' @inheritParams list_animal_ids
+#' @inheritParams get_acoustic_deployments
 #'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
 #'  and `date_time`.
@@ -77,6 +78,7 @@ get_acoustic_detections <- function(connection,
                                     animal_project_code = NULL,
                                     scientific_name = NULL,
                                     acoustic_project_code = NULL,
+                                    deployment_id = NULL,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
