@@ -46,6 +46,3 @@ pgpass
 .Renviron*
 /doc/
 /Meta/
-
-# Ensure test snapshots are consistent across platforms
-tests/testthat/_snaps/**/*.csv text eol=lf
