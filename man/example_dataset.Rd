@@ -14,17 +14,18 @@ available dataset: \code{"2014_DEMER"}.}
 Frictionless data package.
 }
 \description{
-An example ETN dataset, formatted as a \href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package} and read by
-\code{\link[frictionless:read_package]{frictionless::read_package()}}.
+Reads an example dataset, formatted as a \href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}.
 }
-\details{
-\href{https://www.vliz.be/en/imis?dasid=5871&doiid=432}{"2014_DEMER"} is a dataset
-of acoustic river telemetry data collected for four fish species in the Demer
-River, Belgium, in 2014. The example dataset is included in the ETN R
-package, but can also be downloaded from the ETN database using the following
-code:
+\section{2014_DEMER}{
 
-\verb{download_acoustic_dataset( animal_project_code = "2014_DEMER", directory = here::here("inst", "extdata", "2014_DEMER")) )}
+
+\verb{2014_DEMER} is a \strong{river acoustic telemetry} dataset. It contains 66 tagged
+animals across four species. Over 235,000 detections were observed between
+2014 and 2019 by acoustic receivers deployed in Belgian rivers.
+
+Data are deposited at \url{https://doi.org/10.14284/432} and can be downloaded
+from the ETN database with
+\code{download_acoustic_dataset(animal_project_code = "2014_DEMER")}.
 }
 
 \examples{
