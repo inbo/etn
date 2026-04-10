@@ -15,8 +15,8 @@
 #' # Get all animal projects
 #' get_cpod_projects()
 #'
-#' # Get a specific animal project
-#' get_cpod_projects(cpod_project_code = "cpod-lifewatch")
+#' # Get a specific animal project with citation
+#' get_cpod_projects(cpod_project_code = "cpod-lifewatch", citation = TRUE)
 get_cpod_projects <- function(connection,
                               cpod_project_code = NULL,
                               citation = FALSE) {
