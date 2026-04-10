@@ -107,7 +107,10 @@ test_that("write_dwc() returns the expected Darwin Core mapping for the example
       example_dataset(),
       temp_dir,
       dataset_id = "https://doi.org/10.14284/432",
-      dataset_name = "My Dataset",
+      dataset_name = paste(
+        "2014_DEMER - Acoustic telemetry data for four fish species in the",
+        "Demer river (Belgium)"
+      ),
       rights_holder = "INBO",
       license = "CC0-1.0"
     )
