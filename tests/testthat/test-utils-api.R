@@ -131,6 +131,41 @@ test_that("deprecate_warn_connection() returns warning with function symbol", {
   )
 })
 
+test_that("deprecate_warn_connection() is triggered on all functions with connection arg", {
+  # List all functions with a conneciton argument
+  etn_namespace <- asNamespace("etn")
+  getNamespaceExports(etn_namespace) |>
+    purrr::keep(\(fn) {
+      "connection" %in% names(
+        formals(get(fn, envir = etn_namespace))
+      )
+    }) |>
+    # For every of these functions, run them with an invalid connection. But
+    # don't fail on any other errors. To fail early, I'm sabotaging fetching
+    # local credentials. As this happens in a downstream helper, the connection
+    # warning should fire first. This greatly speeds up the test.
+    purrr::walk(~
+      expect_warning(tryCatch(
+        expr = {
+          with_mocked_bindings(
+            code = {
+              do.call(.x,
+                args = list(connection = "not a connection object")
+              )
+            },
+            # Sabotage get_credentials() so we fail early.
+            get_credentials = function() {
+              NULL
+            }
+          )
+        },
+        # Suppress all errors downstream
+        error = function(e) {
+          NULL
+        }
+      ), class = "lifecycle_warning_deprecated"))
+})
+
 # get_parent_fn_name() ----------------------------------------------------
 
 
