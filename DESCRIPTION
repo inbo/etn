@@ -50,6 +50,7 @@ Imports:
     withr
 Suggests:
     formattable,
+    jsonlite,
     kableExtra,
     knitr,
     leaflet,
@@ -58,7 +59,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
-    vcr
+    vcr,
+    xml2
 VignetteBuilder: 
     knitr
 Remotes: 

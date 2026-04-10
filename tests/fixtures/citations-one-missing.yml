@@ -1,0 +1,408 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=8468&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:17:58 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=IzLTxboTSfvUzutmi2pKvyPAKw4dwUX-etHoeNhsRlJ9%2CkBS;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":8468,"Acronym":"Swiss_AcTel","StandardTitle":"Swiss
+        Acoustic Telemetry Network","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
+        Swiss acoustic telemetry project is concerned with identifying the seasonal
+        movement and migration of several fish species. These movements will be linked
+        to different environmental cues, with a special interest for heat stress and
+        cold water refugia<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2028-09-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":null,"DescrTransFlag":null,"Citation":"eawag-FishEc
+        (2024); Swiss Acoustic Telemetry Network. Finding broad-scale movement patterns
+        and utilization of cold-water refuges by freshwater fish.&nbsp;","AccessConstraints":null,"UDate":"2024-02-02","CDate":"2024-02-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"This work is
+        licensed under <a target=''_blank'' href=''http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO''>http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO<\/a>
+        meaning it is under moratorium until 2028-09-01","AccConstrEN":"This work
+        licensed under http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO meaning
+        it is under moratorium until 2028-09-01","AccConstrDisplay":null,"License":"http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO\/","AccConstrDescription":null,"Lineage":null,"AccConID":21,"UnderEmbargo":true},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic arrays","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
+        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Acoustic detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        pingers","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        pingers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags
+        that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic
+        Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
+        metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal
+        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Cold-water
+        refugia","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Cold-water
+        refugia","DutchTerm":"","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
+        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live
+        fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live
+        fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Microphones","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3423b7c3","Description":null,"OrigThesTerm":"Microphones","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3423b7c3","DasKeywordDescr":null},{"ThesaurusTerm":"Movement
+        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
+        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network
+        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
+        metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network
+        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Pingers","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Pingers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Refugia","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Refugia","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Seasonal
+        movements","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Seasonal
+        movements","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Switzerland","ThesTypID":34,"ThesType":"ASFA
+        Geoterms","Code":null,"Description":null,"OrigThesTerm":"Switzerland","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking
+        data","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        devices","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Tracking devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Tracking
+        systems","DutchTerm":"Volgsystemen","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":3,"ThesType":"Transportation Research Thesaurus","Code":"Dcnsby","Description":"For
+        ground vehicle monitoring refer to Dmby: DETECTION AND IDENTIFICATION SYSTEM
+        APPLICATIONS","OrigThesTerm":"Tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Underwater
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Underwater
+        tracking systems","DutchTerm":"Onderwatertraceersystemen","URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":null,"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":27045,"TaxTerm":"Cyprinidae [Pisces]","AphiaID":154163,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21554,"TaxTerm":"Percidae","AphiaID":151300,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21058,"TaxTerm":"Salmonidae","AphiaID":125587,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21118,"TaxTerm":"Siluridae","AphiaID":154199,"DutchTerm":"Meerval"}],"frameworks":null,"otherterms":[{"OtherTerm":"Animal
+        movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Cold-water refugia"},{"OtherTerm":"Fish
+        movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Seasonal
+        movements"},{"OtherTerm":"Tracking data"}],"temporal":[{"DasDateID":6079,"StartYear":2024,"EndYear":2028,"StartDay":1,"EndDay":1,"StartDate":"2024-09-01","EndDate":"2028-09-01","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":9,"StartMonth":"September","StartMonthNL":"September","EndMonth0":9,"EndMonth":"September","EndMonthNL":"September","Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Switzerland","DasGeoID":14112,"DasGeoTerm":"Rhine-Aare
+        Basin","DasID":8468,"GeotID":5485,"X":8.2367000000000008,"Y":47.497199999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2179,"OrigGeoTerm":"Switzerland","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14855,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Acoustic
+        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
+        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":13,"DasTheme":"Physical
+        > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
+        geluidstechniek"}],"projects":null,"refs":null,"urls":[],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:17:59
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=5929&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:17:59 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=QEgmiZTmkEI7EjwMXkai2fTiN-hSAXXURhZDti8Fpl1WPF5a;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":5929,"Acronym":"INFORBIOMARES","StandardTitle":"Information
+        and monitoring systems: conservation and management of species and marine
+        habitats in the Arr\u00e1bida MPA","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"Our
+        goal is to provide information of the spatial ecology of Octopus vulgaris,
+        Dicentrarchus labrax and some elasmobranchs (species yet to be defined)","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Abecasis,
+        David; Baeyaert, Joffrey; Erzini, Karim;(2018): INFORBIOMARES","AccessConstraints":null,"UDate":"2018-05-08","CDate":"2018-05-08","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":1,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"Unrestricted
+        after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
+        are initially restricted, but the access condition relaxes to academic or
+        unrestricted once a specified period of time after an event (such as collection,
+        publication, completion of QC procedures or project cessation) has elapsed","Lineage":null,"AccConID":8},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Data","ThesTypID":8,"ThesType":"Assemble
+        KO Types","Code":null,"Description":null,"OrigThesTerm":"Data","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Marine
+        Genomics","ThesTypID":10,"ThesType":"Assemble Sectors","Code":null,"Description":null,"OrigThesTerm":"Marine
+        Genomics","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Abecasis","Firstname":"David","Initials":"D.","PerPublicFlag":1,"AdrID":161009,"Email":"dabecassis@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35661,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":24,"Role":"Contact","OrigName":"Centro de Ciencas do Mar
+        do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-9802-8153","ROR":null},{"OrderNr":2,"Surname":"Abecasis","Firstname":"David","Initials":"D.","PerPublicFlag":1,"AdrID":161009,"Email":"dabecassis@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35661,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-9802-8153","ROR":null},{"OrderNr":3,"Surname":"Erzini","Firstname":"Karim","Initials":"K.","PerPublicFlag":1,"AdrID":144435,"Email":"kerzini@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":20790,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-1411-0126","ROR":null},{"OrderNr":4,"Surname":"Baeyaert","Firstname":"Joffrey","Initials":"J.","PerPublicFlag":1,"AdrID":161026,"Email":"jhbaeyaert@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35679,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0001-6830-4754","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12121,"TaxTerm":"Cephalopoda","AphiaID":11707,"DutchTerm":"Inktvissen"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"}],"frameworks":null,"otherterms":null,"temporal":[{"DasDateID":4681,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-05-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":5,"StartMonth":"May","StartMonthNL":"Mei","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Portuguese
+        Exclusive Economic Zone","DasGeoID":11152,"DasGeoTerm":null,"DasID":5929,"GeotID":9417,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5688,"OrigGeoTerm":"Portuguese
+        Exclusive Economic Zone","DutchTerm":null},{"GeoTerm":"Portuguese Exclusive
+        Economic Zone","DasGeoID":11191,"DasGeoTerm":null,"DasID":5929,"GeotID":9417,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5688,"OrigGeoTerm":"Portuguese
+        Exclusive Economic Zone","DutchTerm":null},{"GeoTerm":null,"DasGeoID":9776,"DasGeoTerm":null,"DasID":5929,"GeotID":null,"X":-9.0578090000000007,"Y":38.470531000000001,"MaxX":null,"MaxY":null,"StationName":"Arr\u00e1bida
+        MPA","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
+        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:17:59
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=8468&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:17:59 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=%2CspTH4HGNv950s4iDJWJMimaUZvNJxuvGrgB9d2jwU6lep7X;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":8468,"Acronym":"Swiss_AcTel","StandardTitle":"Swiss
+        Acoustic Telemetry Network","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
+        Swiss acoustic telemetry project is concerned with identifying the seasonal
+        movement and migration of several fish species. These movements will be linked
+        to different environmental cues, with a special interest for heat stress and
+        cold water refugia<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2028-09-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":null,"DescrTransFlag":null,"Citation":"eawag-FishEc
+        (2024); Swiss Acoustic Telemetry Network. Finding broad-scale movement patterns
+        and utilization of cold-water refuges by freshwater fish.&nbsp;","AccessConstraints":null,"UDate":"2024-02-02","CDate":"2024-02-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"This work is
+        licensed under <a target=''_blank'' href=''http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO''>http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO<\/a>
+        meaning it is under moratorium until 2028-09-01","AccConstrEN":"This work
+        licensed under http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO meaning
+        it is under moratorium until 2028-09-01","AccConstrDisplay":null,"License":"http:\/\/vocab.nerc.ac.uk\/collection\/L08\/current\/MO\/","AccConstrDescription":null,"Lineage":null,"AccConID":21,"UnderEmbargo":true},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic arrays","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
+        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Acoustic detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        pingers","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        pingers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags
+        that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic
+        Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
+        metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal
+        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Cold-water
+        refugia","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Cold-water
+        refugia","DutchTerm":"","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
+        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live
+        fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live
+        fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Microphones","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3423b7c3","Description":null,"OrigThesTerm":"Microphones","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3423b7c3","DasKeywordDescr":null},{"ThesaurusTerm":"Movement
+        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
+        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network
+        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
+        metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network
+        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Pingers","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Pingers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Refugia","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Refugia","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Seasonal
+        movements","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Seasonal
+        movements","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Switzerland","ThesTypID":34,"ThesType":"ASFA
+        Geoterms","Code":null,"Description":null,"OrigThesTerm":"Switzerland","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking
+        data","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        devices","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Tracking devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Tracking
+        systems","DutchTerm":"Volgsystemen","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
+        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        systems","ThesTypID":3,"ThesType":"Transportation Research Thesaurus","Code":"Dcnsby","Description":"For
+        ground vehicle monitoring refer to Dmby: DETECTION AND IDENTIFICATION SYSTEM
+        APPLICATIONS","OrigThesTerm":"Tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Underwater
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Underwater
+        tracking systems","DutchTerm":"Onderwatertraceersystemen","URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":null,"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":27045,"TaxTerm":"Cyprinidae [Pisces]","AphiaID":154163,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21554,"TaxTerm":"Percidae","AphiaID":151300,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21058,"TaxTerm":"Salmonidae","AphiaID":125587,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21118,"TaxTerm":"Siluridae","AphiaID":154199,"DutchTerm":"Meerval"}],"frameworks":null,"otherterms":[{"OtherTerm":"Animal
+        movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Cold-water refugia"},{"OtherTerm":"Fish
+        movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Seasonal
+        movements"},{"OtherTerm":"Tracking data"}],"temporal":[{"DasDateID":6079,"StartYear":2024,"EndYear":2028,"StartDay":1,"EndDay":1,"StartDate":"2024-09-01","EndDate":"2028-09-01","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":9,"StartMonth":"September","StartMonthNL":"September","EndMonth0":9,"EndMonth":"September","EndMonthNL":"September","Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Switzerland","DasGeoID":14112,"DasGeoTerm":"Rhine-Aare
+        Basin","DasID":8468,"GeotID":5485,"X":8.2367000000000008,"Y":47.497199999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2179,"OrigGeoTerm":"Switzerland","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14855,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Acoustic
+        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
+        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":13,"DasTheme":"Physical
+        > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
+        geluidstechniek"}],"projects":null,"refs":null,"urls":[],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:18:00
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=5929&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:18:00 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=oXp7z3n8Gia6J97dcic8Z3nzUfS8iiDtsqcJLwaK6Rg763OL;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":5929,"Acronym":"INFORBIOMARES","StandardTitle":"Information
+        and monitoring systems: conservation and management of species and marine
+        habitats in the Arr\u00e1bida MPA","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"Our
+        goal is to provide information of the spatial ecology of Octopus vulgaris,
+        Dicentrarchus labrax and some elasmobranchs (species yet to be defined)","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Abecasis,
+        David; Baeyaert, Joffrey; Erzini, Karim;(2018): INFORBIOMARES","AccessConstraints":null,"UDate":"2018-05-08","CDate":"2018-05-08","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":1,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"Unrestricted
+        after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
+        are initially restricted, but the access condition relaxes to academic or
+        unrestricted once a specified period of time after an event (such as collection,
+        publication, completion of QC procedures or project cessation) has elapsed","Lineage":null,"AccConID":8},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Data","ThesTypID":8,"ThesType":"Assemble
+        KO Types","Code":null,"Description":null,"OrigThesTerm":"Data","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Marine
+        Genomics","ThesTypID":10,"ThesType":"Assemble Sectors","Code":null,"Description":null,"OrigThesTerm":"Marine
+        Genomics","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Abecasis","Firstname":"David","Initials":"D.","PerPublicFlag":1,"AdrID":161009,"Email":"dabecassis@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35661,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":24,"Role":"Contact","OrigName":"Centro de Ciencas do Mar
+        do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-9802-8153","ROR":null},{"OrderNr":2,"Surname":"Abecasis","Firstname":"David","Initials":"D.","PerPublicFlag":1,"AdrID":161009,"Email":"dabecassis@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35661,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-9802-8153","ROR":null},{"OrderNr":3,"Surname":"Erzini","Firstname":"Karim","Initials":"K.","PerPublicFlag":1,"AdrID":144435,"Email":"kerzini@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":20790,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0002-1411-0126","ROR":null},{"OrderNr":4,"Surname":"Baeyaert","Firstname":"Joffrey","Initials":"J.","PerPublicFlag":1,"AdrID":161026,"Email":"jhbaeyaert@ualg.pt","InsPublicFlag":1,"Acronym":"CCMAR","OrigNameLangCode":"pt","OrigNameLangID":44,"FullOrigName":"Universidade
+        do Algarve; Centro de Ciencas do Mar do Algarve","InsOwnerCNT":4,"PersID":35679,"InsID":5257,"FullInstitute":"University
+        of Algarve; Faculty of Marine and Environmental Sciences; Centre of Marine
+        Sciences","RoleID":61,"Role":"Data creator","OrigName":"Centro de Ciencas
+        do Mar do Algarve","StandardName":"Centre of Marine Sciences","FullAcronym":"UALG-CCMAR","ORC":"https:\/\/orcid.org\/0000-0001-6830-4754","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12121,"TaxTerm":"Cephalopoda","AphiaID":11707,"DutchTerm":"Inktvissen"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"}],"frameworks":null,"otherterms":null,"temporal":[{"DasDateID":4681,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-05-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":5,"StartMonth":"May","StartMonthNL":"Mei","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Portuguese
+        Exclusive Economic Zone","DasGeoID":11152,"DasGeoTerm":null,"DasID":5929,"GeotID":9417,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5688,"OrigGeoTerm":"Portuguese
+        Exclusive Economic Zone","DutchTerm":null},{"GeoTerm":"Portuguese Exclusive
+        Economic Zone","DasGeoID":11191,"DasGeoTerm":null,"DasID":5929,"GeotID":9417,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5688,"OrigGeoTerm":"Portuguese
+        Exclusive Economic Zone","DutchTerm":null},{"GeoTerm":null,"DasGeoID":9776,"DasGeoTerm":null,"DasID":5929,"GeotID":null,"X":-9.0578090000000007,"Y":38.470531000000001,"MaxX":null,"MaxY":null,"StationName":"Arr\u00e1bida
+        MPA","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
+        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:18:01
+recorded_with: VCR-vcr/2.1.0
