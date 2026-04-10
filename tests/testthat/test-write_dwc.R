@@ -3,22 +3,10 @@ test_that("write_dwc() returns error on missing or wrong license", {
   on.exit(unlink(temp_dir, recursive = TRUE))
 
   expect_error(
-    suppressMessages(
-      write_dwc(
-        package = example_dataset(),
-        directory = temp_dir,
-        license = NULL
-      )
-    )
+    suppressMessages(write_dwc(example_dataset(), temp_dir, license = NULL))
   )
   expect_error(
-    suppressMessages(
-      write_dwc(
-        package = example_dataset(),
-        directory = temp_dir,
-        license = "bla"
-      )
-    )
+    suppressMessages(write_dwc(example_dataset(), temp_dir, license = "bla"))
   )
 })
 
@@ -36,27 +24,19 @@ test_that("write_dwc() returns error on missing resources", {
     frictionless::remove_resource(example_dataset(), "deployments")
 
   expect_error(
-    suppressMessages(
-      write_dwc(x_no_animals_data, temp_dir, license = "CC0-1.0")
-    ),
+    suppressMessages(write_dwc(x_no_animals_data, temp_dir)),
     class = "etn_error_animals_data_missing"
   )
   expect_error(
-    suppressMessages(
-      write_dwc(x_no_tags, temp_dir, license = "CC0-1.0")
-    ),
+    suppressMessages(write_dwc(x_no_tags, temp_dir)),
     class = "etn_error_tags_data_missing"
   )
   expect_error(
-    suppressMessages(
-      write_dwc(x_no_detections, temp_dir, license = "CC0-1.0")
-    ),
+    suppressMessages(write_dwc(x_no_detections, temp_dir)),
     class = "etn_error_detections_data_missing"
   )
   expect_error(
-    suppressMessages(
-      write_dwc(x_no_deployments, temp_dir, license = "CC0-1.0")
-    ),
+    suppressMessages(write_dwc(x_no_deployments, temp_dir)),
     class = "etn_error_deployments_data_missing"
   )
 })
@@ -65,10 +45,7 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
            a list of data frames invisibly", {
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir, recursive = TRUE))
-  result <- suppressMessages(write_dwc(
-    example_dataset(), temp_dir,
-    license = "CC0-1.0", dataset_name = "My Dataset"
-  ))
+  result <- suppressMessages(write_dwc(example_dataset(), temp_dir))
 
   expect_contains(
     list.files(temp_dir),
@@ -76,19 +53,13 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
   )
   expect_identical(names(result), c("occurrence"))
   expect_s3_class(result$occurrence, "tbl")
-  expect_invisible(suppressMessages(write_dwc(
-    example_dataset(), temp_dir,
-    license = "CC0-1.0", dataset_name = "My Dataset"
-  )))
+  expect_invisible(suppressMessages(write_dwc(example_dataset(), temp_dir)))
 })
 
 test_that("write_dwc() returns the expected Darwin Core terms as columns", {
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir, recursive = TRUE))
-  result <- suppressMessages(write_dwc(
-    example_dataset(), temp_dir,
-    license = "CC0-1.0", dataset_name = "My Dataset"
-  ))
+  result <- suppressMessages(write_dwc(example_dataset(), temp_dir))
 
   expect_identical(
     colnames(result$occurrence),
@@ -131,19 +102,29 @@ test_that("write_dwc() returns the expected Darwin Core mapping for the example
            dataset", {
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir, recursive = TRUE))
-  suppressMessages(write_dwc(
-    example_dataset(),
-    temp_dir,
-    dataset_name = "My Dataset",
-    dataset_id = "https://doi.org/10.14284/432",
-    rights_holder = "INBO",
-    license = "CC0-1.0"
-  ))
+  suppressMessages(
+    write_dwc(
+      example_dataset(),
+      temp_dir,
+      dataset_id = "https://doi.org/10.14284/432",
+      dataset_name = "My Dataset",
+      rights_holder = "INBO",
+      license = "CC0-1.0"
+    )
+  )
 
   expect_snapshot_file(file.path(temp_dir, "occurrence.csv"))
   expect_snapshot_file(file.path(temp_dir, "meta.xml"))
 })
 
+test_that("write_dwc() returns files that comply with the info in meta.xml", {
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir, recursive = TRUE))
+  suppressMessages(write_dwc(package = example_dataset(), directory = temp_dir))
+
+  # Use helper function to compare
+  expect_meta_match(file.path(temp_dir, "occurrence.csv"))
+})
 test_that("write_dwc() supports datasets that only have the required fields", {
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir, recursive = TRUE))
@@ -181,13 +162,4 @@ test_that("write_dwc() supports datasets that only have the required fields", {
     )
 
   expect_no_error(suppressMessages(write_dwc(x_minimal, temp_dir)))
-})
-
-test_that("write_dwc() returns files that comply with the info in meta.xml", {
-  temp_dir <- tempdir()
-  on.exit(unlink(temp_dir, recursive = TRUE))
-  suppressMessages(write_dwc(package = example_dataset(), directory = temp_dir))
-
-  # Use helper function to compare
-  expect_meta_match(file.path(temp_dir, "occurrence.csv"))
 })
