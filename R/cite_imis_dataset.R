@@ -15,14 +15,14 @@
 #'   Default is `TRUE`, but will be automatically set to `FALSE` when testing to
 #'   avoid cluttering testthat output.
 #'
-#' @returns A data.frame with 5 columns:
-#'  - The `imis_dataset_id`
-#'  - A formatted `citation` with DOI if available.
-#'  - The `doi`.
-#'  - The contact person, usually the first author. If no contact person is
-#'   entered, the first author with status creator.
-#'  - The corresponding `contact_email`.
-#'  - The corresponding `contact_affiliation`.
+#' @returns A data.frame with 6 columns:
+#'   - `imis_dataset_id`
+#'   - `citation`: Formatted citation with DOI if available.
+#'   - `doi`: DOI for the dataset if available.
+#'   - `contact_name`: Contact person, usually the first author.
+#'     If no contact person is provided, the first author with status `creator`.
+#'   - `contact_email`: Email address of the contact person.
+#'   - `contact_affiliation`: Institute of the contact person.
 #' @family citation helpers
 #' @noRd
 #'
