@@ -48,5 +48,5 @@ get_tags <- function(connection,
     # Set the column classes explicitly
     dplyr::mutate(floating = as.logical(.data$floating))
 
-  return(out)
+  out
 }

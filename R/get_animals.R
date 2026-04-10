@@ -50,5 +50,5 @@ get_animals <- function(connection,
   # Either use the API, or the SQL helper.
   out <- conduct_parent_to_helpers(protocol = select_protocol(),
                                    format = "rds")
-  return(out)
+  out
 }

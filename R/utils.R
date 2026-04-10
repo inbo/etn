@@ -31,7 +31,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     )
   )
 
-  return(x)
+  x
 }
 
 #' Get credentials from environment variables, or set them manually
@@ -197,7 +197,7 @@ select_protocol <- function() {
   }
 
   # Fallback on API
-  return("opencpu")
+  "opencpu"
 }
 
 #' Test if ETN credentials are stored

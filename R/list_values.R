@@ -95,5 +95,5 @@ list_values <- function(.data, column, split = ",") {
   # return a message on console
   message(glue::glue("{length(values)} unique {col_name} values"))
 
-  return(values)
+  values
 }

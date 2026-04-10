@@ -28,5 +28,5 @@ get_animal_projects <- function(connection,
     # Set the column classes explicitly
     dplyr::mutate(moratorium = as.logical(as.integer(.data$moratorium)))
 
-  return(out)
+  out
 }

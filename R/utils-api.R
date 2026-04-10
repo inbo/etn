@@ -110,7 +110,7 @@ get_val <- function(temp_key,
     (\(x) reading_function(x))()
 
   # Return OpenCPU return object
-  return(api_response)
+  api_response
 }
 
 #' Return the arguments as a named list of the parent environment
