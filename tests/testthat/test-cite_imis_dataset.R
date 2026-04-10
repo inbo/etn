@@ -47,7 +47,7 @@ test_that("cite_imis_dataset() returns remaining data if some ids are NA", {
     cite_imis_dataset(
       imis_dataset_ids = c(NA, 8468, 5929)
     ),
-    nrows = 2L
+    nrow = 2L
   )
 })
 
