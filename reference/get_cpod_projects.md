@@ -28,7 +28,7 @@ A tibble with animal project data, sorted by `project_code`.
 ``` r
 # Get all animal projects
 get_cpod_projects()
-#> # A tibble: 18 × 11
+#> # A tibble: 19 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1       1088 ARMS_MBON_Bel… cpod         NA             Underwater … 2018-07-12
@@ -37,18 +37,19 @@ get_cpod_projects()
 #>  4       1093 CODEVCO        cpod         NA             CODEVCO - m… 2021-10-31
 #>  5       1186 Lifewatch_ext… cpod         NA             Lifewatch: … 2025-05-01
 #>  6       1185 Lifewatch_test cpod         NA             Lifewatch: … 2025-03-26
-#>  7       1073 PAM-Borssele   cpod         NA             PAM Harbour… 2019-07-01
-#>  8       1066 PelFish        cpod         NA             Duurzame ec… 2023-01-01
-#>  9        948 PhD_Parcerisas cpod         NA             PhD_Parceri… 2021-03-09
-#> 10       1094 PureWind       cpod         NA             Noise impac… 2023-01-01
-#> 11       1063 SEAWave        cpod         NA             SEAWave: sm… 2021-08-20
-#> 12        902 SMGMIT         cpod         Acoustic       SeaMonitor … 2019-04-10
-#> 13       1079 STRAITS_PAM    cpod         NA             Passive Aco… 2023-01-02
-#> 14        838 VLIZ-MRC-AMUC… cpod         NA             VLIZ-MRC-AM… NA        
-#> 15        839 VLIZ-MRC-AMUC… cpod         NA             VLIZ-MRC-AM… NA        
-#> 16       1062 WaveHub        cpod         NA             Wave Hub: u… 2011-01-01
-#> 17        638 cpod-lifewatch cpod         NA             Lifewatch    2015-06-01
-#> 18        639 cpod-od-natuur cpod         NA             WinMon.be_C… 2010-01-01
+#>  7       1318 NOVANA         cpod         NA             The Nationa… 2004-01-01
+#>  8       1073 PAM-Borssele   cpod         NA             PAM Harbour… 2019-07-01
+#>  9       1066 PelFish        cpod         NA             Duurzame ec… 2023-01-01
+#> 10        948 PhD_Parcerisas cpod         NA             PhD_Parceri… 2021-03-09
+#> 11       1094 PureWind       cpod         NA             Noise impac… 2023-01-01
+#> 12       1063 SEAWave        cpod         NA             SEAWave: sm… 2021-08-20
+#> 13        902 SMGMIT         cpod         Acoustic       SeaMonitor … 2019-04-10
+#> 14       1079 STRAITS_PAM    cpod         NA             Passive Aco… 2023-01-02
+#> 15        838 VLIZ-MRC-AMUC… cpod         NA             VLIZ-MRC-AM… NA        
+#> 16        839 VLIZ-MRC-AMUC… cpod         NA             VLIZ-MRC-AM… NA        
+#> 17       1062 WaveHub        cpod         NA             Wave Hub: u… 2011-01-01
+#> 18        638 cpod-lifewatch cpod         NA             Lifewatch    2015-06-01
+#> 19        639 cpod-od-natuur cpod         NA             WinMon.be_C… 2010-01-01
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 

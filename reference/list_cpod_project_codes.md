@@ -26,8 +26,9 @@ A vector of all unique `project_code` of `type = "cpod"` in
 list_cpod_project_codes()
 #>  [1] "Apelafico_acoustics"  "Apelafico_underwater" "ARMS_MBON_Belgium"   
 #>  [4] "CODEVCO"              "cpod-lifewatch"       "cpod-od-natuur"      
-#>  [7] "Lifewatch_extra"      "Lifewatch_test"       "PAM-Borssele"        
-#> [10] "PelFish"              "PhD_Parcerisas"       "PureWind"            
-#> [13] "SEAWave"              "SMGMIT"               "STRAITS_PAM"         
-#> [16] "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"    "WaveHub"             
+#>  [7] "Lifewatch_extra"      "Lifewatch_test"       "NOVANA"              
+#> [10] "PAM-Borssele"         "PelFish"              "PhD_Parcerisas"      
+#> [13] "PureWind"             "SEAWave"              "SMGMIT"              
+#> [16] "STRAITS_PAM"          "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"   
+#> [19] "WaveHub"             
 ```
