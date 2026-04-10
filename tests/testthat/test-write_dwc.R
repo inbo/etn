@@ -179,7 +179,7 @@ test_that("[SQL] write_dwc() allows setting of rights_holder", {
 test_that("[SQL] write_dwc() returns an empty column for rights holder by default", {
   skip_if_not_localdb()
   skip_if_no_authentication()
-  
+
   result <- suppressMessages(
     write_dwc(
       animal_project_code = "2014_demer",
