@@ -130,7 +130,7 @@ list_animal_project_codes()
 #> [207] "MICHIMIT"                       "MIGRATOEBRE"                   
 #> [209] "MMERMAID"                       "Mobula_IMAR"                   
 #> [211] "MOPP"                           "MorayFirth"                    
-#> [213] "MOS"                            "MOVE_CCMAR"                    
+#> [213] "MOS"                            "MOVE_CCMAR_ANIMALS"            
 #> [215] "MustelusAsterias_NEA"           "NAAT"                          
 #> [217] "NARVAEEL"                       "NETFISH_ANIMALS"               
 #> [219] "Noordzeekanaal"                 "nortrack_ifremer"              

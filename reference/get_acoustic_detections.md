@@ -89,10 +89,10 @@ A tibble with acoustic detections data, sorted by `acoustic_tag_id` and
 # Get limited sample of acoustic detections
 get_acoustic_detections(limit = TRUE)
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 100  detections [13ms]
+#> ✔ Preparing : will fetch 100  detections [11ms]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [117ms]
+#> ✔ Wrapping up [106ms]
 #> 
 #> # A tibble: 100 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -118,26 +118,26 @@ get_acoustic_detections(limit = TRUE)
 # Get all acoustic detections from a specific animal project
 get_acoustic_detections(animal_project_code = "2014_demer")
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 235.81 k detections [2.3s]
+#> ✔ Preparing : will fetch 235.81 k detections [3.1s]
 #> 
-#> Getting detections. ■■■■■■■■■■■                       33% [7s] | ETA: 14s
-#> Getting detections. ■■■■■■■■■■■■■■■■■■■■■             67% [13.6s] | ETA:  7s
+#> Getting detections. ■■■■■■■■■■■                       33% [11.9s] | ETA: 24s
+#> Getting detections. ■■■■■■■■■■■■■■■■■■■■■             67% [21.6s] | ETA: 11s
 #> ℹ Wrapping up
-#> ✔ Wrapping up [390ms]
+#> ✔ Wrapping up [380ms]
 #> 
 #> # A tibble: 235,809 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
 #>           <int> <dttm>              <chr>             <chr>          
-#>  1     21655610 2014-04-18 16:02:26 1187449           A69-1601-16129 
-#>  2     21676626 2014-04-18 15:45:00 1187449           A69-1601-16129 
-#>  3     21745679 2014-04-18 15:47:45 1187449           A69-1601-16129 
-#>  4     21746517 2014-04-18 15:55:08 1187449           A69-1601-16129 
-#>  5     21801130 2014-04-18 15:57:00 1187449           A69-1601-16129 
-#>  6     21823882 2014-04-18 15:49:00 1187449           A69-1601-16129 
-#>  7     21919770 2014-04-18 15:47:00 1187449           A69-1601-16129 
-#>  8     21966500 2014-04-18 15:58:00 1187449           A69-1601-16129 
-#>  9     21976905 2014-04-18 15:49:02 1187449           A69-1601-16129 
-#> 10     20582652 2014-04-18 15:52:33 1187449           A69-1601-16129 
+#>  1     22452992 2014-04-18 15:57:26 1187449           A69-1601-16129 
+#>  2     22502640 2014-04-18 15:59:00 1187449           A69-1601-16129 
+#>  3     22524167 2014-04-18 15:45:09 1187449           A69-1601-16129 
+#>  4     22531464 2014-04-18 15:53:00 1187449           A69-1601-16129 
+#>  5     22657782 2014-04-18 15:59:55 1187449           A69-1601-16129 
+#>  6     21655610 2014-04-18 16:02:26 1187449           A69-1601-16129 
+#>  7     21676626 2014-04-18 15:45:00 1187449           A69-1601-16129 
+#>  8     21745679 2014-04-18 15:47:45 1187449           A69-1601-16129 
+#>  9     21746517 2014-04-18 15:55:08 1187449           A69-1601-16129 
+#> 10     21801130 2014-04-18 15:57:00 1187449           A69-1601-16129 
 #> # ℹ 235,799 more rows
 #> # ℹ 16 more variables: animal_project_code <chr>, animal_id <int>,
 #> #   scientific_name <chr>, acoustic_project_code <chr>, receiver_id <chr>,
@@ -156,7 +156,7 @@ get_acoustic_detections(
 #> ✔ Preparing : will fetch 23.70 k detections [2.5s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [115ms]
+#> ✔ Wrapping up [112ms]
 #> 
 #> # A tibble: 23,695 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -186,10 +186,10 @@ get_acoustic_detections(
   end_date = "2015-05",
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 442  detections [1.7s]
+#> ✔ Preparing : will fetch 442  detections [2.2s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [57ms]
+#> ✔ Wrapping up [54ms]
 #> 
 #> # A tibble: 442 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -219,10 +219,10 @@ get_acoustic_detections(
   end_date = "2015-04-25",
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 2  detections [1.4s]
+#> ✔ Preparing : will fetch 2  detections [1.5s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [58ms]
+#> ✔ Wrapping up [56ms]
 #> 
 #> # A tibble: 2 × 20
 #>   detection_id date_time           tag_serial_number acoustic_tag_id
@@ -242,10 +242,10 @@ get_acoustic_detections(
   station_name = c("de-9", "de-10")
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 50  detections [1.7s]
+#> ✔ Preparing : will fetch 50  detections [2s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [58ms]
+#> ✔ Wrapping up [56ms]
 #> 
 #> # A tibble: 50 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -275,10 +275,10 @@ get_acoustic_detections(
   acoustic_project_code = "demer"
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 38  detections [1.4s]
+#> ✔ Preparing : will fetch 38  detections [3.1s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [55ms]
+#> ✔ Wrapping up [52ms]
 #> 
 #> # A tibble: 38 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id

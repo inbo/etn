@@ -110,7 +110,7 @@ list_acoustic_project_codes()
 #> [167] "MI_ClewBay_Achill_network"      "MIGRATOEBRE"                   
 #> [169] "MMERMAID"                       "MOBEIA"                        
 #> [171] "Mobula_IMAR"                    "MOPP"                          
-#> [173] "MorayFirth"                     "MOVE_CCMAR"                    
+#> [173] "MorayFirth"                     "MOVE_CCMAR_NETWORK"            
 #> [175] "mrc_vliz"                       "NARVAEEL"                      
 #> [177] "NETFISH_ARRAY"                  "no_info"                       
 #> [179] "none"                           "Noordzeekanaal"                

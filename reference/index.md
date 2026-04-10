@@ -62,8 +62,8 @@
 
 ## Example datasets
 
-- [`river_telemetry`](https://inbo.github.io/etn/reference/river_telemetry.md)
-  : Example ETN dataset with river telemetry data
+- [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
+  : Read an example dataset
 
 ## Frictionless data package functions
 
