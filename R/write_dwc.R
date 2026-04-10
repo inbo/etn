@@ -37,6 +37,8 @@
 #'   life stage, comments) and deployment as a whole.
 #' - Acoustic detections are downsampled to the **first detection per hour**,
 #'   to reduce the size of high-frequency data.
+#'   The `coordinateUncertaintyInMeters` is set to 1000m to account for
+#'   imprecise receiver location and acoustic detection range.
 #'   Duplicate detections (same animal, tag, and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.

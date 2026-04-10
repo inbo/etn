@@ -18,7 +18,7 @@ create_animals_occurrence <- function(animals, tags) {
   tags_cols <- c("manufacturer", "model")
   tags <- expand_cols(tags, tags_cols)
 
-  # 'animals' contains multiple events (capture, release, surgery, recapture) as
+  # 'animals' contains multiple events (capture, surgery, release, recapture) as
   # columns. Transpose events to rows and exclude those without date information.
   captures <-
     animals |>
@@ -157,7 +157,7 @@ create_animals_occurrence <- function(animals, tags) {
       ),
       coordinateUncertaintyInMeters = dplyr::if_else(
         !is.na(.data$latitude),
-        # Assume coordinate precision of 0.001 degree (157m) and recording
+        # Assume coordinate precision of 0.001 degree (157m) and recorded
         # by GPS (30m)
         187,
         NA_real_

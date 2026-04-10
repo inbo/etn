@@ -84,8 +84,8 @@ create_detections_occurrence <- function(detections, animals,
       ),
       coordinateUncertaintyInMeters = dplyr::if_else(
         !is.na(.data$deploy_latitude),
-        # Assume coordinate precision of 0.001 degree (157m), recording by GPS
-        # (30m) and detection range of around 800m ≈ 1000m.
+        # Assume receiver coordinate precision of 0.001 degree (157m) and
+        # recorded by GPS + an upper detection range of around 800m ≈ 1000m.
         # See https://github.com/inbo/etn/issues/256#issuecomment-1332224935.
         1000,
         NA_real_
