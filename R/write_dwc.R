@@ -132,7 +132,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
       .data$eventDate,
       .data$eventID,
       .data$occurrenceID
-      )
+    )
 
   # Write files
   occurrence_path <- file.path(directory, "occurrence.csv")
@@ -145,7 +145,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
   if (!dir.exists(directory)) {
     dir.create(directory, recursive = TRUE)
   }
-  readr::write_csv(occurrence, occurrence_path, na = "", append = FALSE)
+  readr::write_csv(occurrence, occurrence_path, na = "")
   file.copy(
     system.file("extdata", "meta.xml", package = "etn"), # Static meta.xml
     meta_xml_path
