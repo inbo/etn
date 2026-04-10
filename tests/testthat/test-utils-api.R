@@ -150,8 +150,7 @@ test_that("deprecate_warn_connection() is triggered on all functions with connec
   # tree to select what protocol path to follow. As this happens early in a
   # downstream helper, the connection warning should fire first. This greatly
   # speeds up the test.
-  for (fn in fns_with_connection_arg)
-  {
+  for (fn in fns_with_connection_arg) {
     expect_warning(tryCatch(
       expr = {
         with_mocked_bindings(
