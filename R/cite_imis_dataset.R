@@ -119,7 +119,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   # Parse the Citation and DOI ----------------------------------------------
 
   # Avoid missing global variable R CMD NOTE
-  doi <- NULL
   citation <- NULL
 
   # If there is no citation, return an empty string. If there is a doi, append
@@ -127,6 +126,11 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   marineinfo_citation <-
     marineinfo_metadata |>
     purrr::map(\(dataset_metadata) {
+      # Using str_c so an NA results in NA_character_
+      doi <-
+        stringr::str_c("https://doi.org/",
+        purrr::pluck(dataset_metadata, "dois", "DOI",
+                          .default = NA_character_))
       dplyr::tibble(
         citation =
           # Convert to character so the returned colclasses are as
@@ -137,10 +141,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
                 citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
                                         .default = ""
                 ),
-                doi = purrr::pluck(dataset_metadata, "dois", "DOI",
-                                   .default = "")
+                doi = doi
               ),
-              "{citation}{dot}{doi_prefix}{doi}{doi_suffix}",
+              "{citation}{dot}{doi_prefix}{doi}",
               # Add a period between the citation and the doi if the citation
               # doesn't already end on one, if there is no doi, don't mess with
               # the citation.
@@ -150,12 +153,11 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
                 yes = ".",
                 no = ""
               ),
-              doi_prefix = ifelse(doi != "", " doi:", ""),
-              doi_suffix = ifelse(doi != "", ".", ""),
+              doi_prefix = " ",
               .na = NA_character_
               )
           ),
-        doi = purrr::pluck(dataset_metadata, "dois", "DOI", .default = NA)
+        doi = doi
       )
     }) |>
     purrr::list_rbind(names_to = "imis_dataset_id") |>
