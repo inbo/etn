@@ -85,3 +85,34 @@ test_that("get_cpod_projects() returns projects of type 'cpod'", {
     "cpod"
   )
 })
+
+test_that("get_cpod_projects() returns citation information when requested", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("marineinfo.org")
+
+  cpod_project_codes <- c(
+    "Apelafico_underwater",
+    "cpod-lifewatch",
+    "SEAWave"
+  )
+
+  citation_columns <- c(
+    "imis_dataset_id", # to make fetching citations possible
+    "citation",
+    "doi",
+    "name",
+    "email",
+    "institute"
+  )
+
+  expect_contains(
+    names(
+      get_cpod_projects(
+        cpod_project_code = cpod_project_codes,
+        citation = TRUE
+      )
+    ),
+    citation_columns
+  )
+})
