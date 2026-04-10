@@ -1,13 +1,14 @@
-#' Transform ETN data to Darwin Core
+#' Transform ETN data to a Darwin Core Archive
 #'
-#' Transforms data from the European Tracking Network (ETN) to
-#' [Darwin Core](https://dwc.tdwg.org/). The resulting CSV and meta.xml file
-#' can be uploaded to an [IPT](https://www.gbif.org/ipt) for publication to
-#' OBIS and/or GBIF.
-#' An `eml.xml` file is not created.
+#' Transforms a European Tracking Network (ETN) dataset to a [Darwin Core
+#' Archive](https://dwc.tdwg.org/text/).
+#'
+#' The resulting files can be uploaded to an [IPT](https://www.gbif.org/ipt) for
+#' publication to GBIF and/or OBIS.
+#' A corresponding `eml.xml` metadata file is not created.
 #'
 #' @param package A Frictionless Data Package of ETN data, as returned by
-#'   [frictionless::read_package()].
+#'   [read_package()].
 #'   It is expected to contain an `animals`, `detections` and `tags` resource.
 #' @param directory Path to local directory to write files to.
 #'   If `NULL`, then a list of data frames is returned instead, which can be
@@ -26,10 +27,10 @@
 #'   And invisibly, a list of data frames with the transformed data.
 #' @export
 #' @section Transformation details:
-#' Data are transformed into an
-#' [Occurrence core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
 #' This **follows recommendations** discussed and created by Peter Desmet,
-#' Jonas Mortelmans, Jonathan Pye, John Wieczorek and others.
+#' Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and transforms data
+#' to:
+#' - An [Occurrence core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
 #'
 #' Key features of the Darwin Core transformation:
 #' - Deployments (animal+tag associations) are parent events, with capture,
@@ -39,21 +40,23 @@
 #'   meaning that data can be expressed in an Occurrence Core with one row per
 #'   observation and `parentEventID` shared by all occurrences in a deployment.
 #' - The release event often contains metadata about the animal (sex,
-#'   lifestage, comments) and deployment as a whole.
+#'   life stage, comments) and deployment as a whole.
 #' - Acoustic detections are downsampled to the **first detection per hour**,
 #'   to reduce the size of high-frequency data.
-#'   Duplicate detections (same animal, tag and timestamp) are excluded.
+#'   Duplicate detections (same animal, tag, and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
-#'   tag malfunctioned right after deployment.#'
+#'   tag malfunctioned right after deployment.
 #' @examples
 #' package <- example_dataset()
 #' write_dwc(
 #'   package,
 #'   directory = "my_directory",
-#'   dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
-#'   "species in the Demer river (Belgium)"),
 #'   institution_code = "VLIZ",
 #'   license = "CC0",
+#'   dataset_name = paste(
+#'     "2014_DEMER - Acoustic telemetry data for four fish species in the",
+#'     "Demer river (Belgium)"
+#'   ),
 #'   rights_holder = "INBO"
 #' )
 #'
