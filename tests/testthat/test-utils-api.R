@@ -9,7 +9,7 @@ test_that("get_etnservice_version() returns package_version object", {
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
   testthat::skip_if_offline()
-# Skip if there is a mismatch between the locally installed version and the deployed version
+  # Skip if there is a mismatch between the locally installed version and the deployed version
   skip_if(utils::packageVersion("etnservice") != get_etnservice_version(),
           "locally installed version of etnservice does not match")
 

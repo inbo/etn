@@ -29,7 +29,7 @@ example_dataset <- function(dataset = "2014_DEMER") {
         "i" = "Available dataset{?s}: {.val {available_datasets}}."
       ),
       class = "etn_error_example_dataset_not_available"
-      )
+    )
   } else {
     path <- system.file(
       "extdata", dataset, "datapackage.json",

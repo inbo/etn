@@ -45,11 +45,11 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   expect_error(
     get_acoustic_projects(acoustic_project_code = "not_a_project"),
     regexp = "Can't find acoustic_project_code `not_a_project` in"
-    )
+  )
   expect_error(
     get_acoustic_projects(acoustic_project_code = c("demer", "not_a_project")),
     regexp = "Can't find acoustic_project_code `demer` and/or `not_a_project` in"
-    )
+  )
 
   # Select single value
   single_select <- "demer"

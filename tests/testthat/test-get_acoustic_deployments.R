@@ -150,11 +150,11 @@ test_that("[API] get_acoustic_deployments() allows selecting on deployment_id", 
   expect_error(
     get_acoustic_deployments(deployment_id = "not_a_deployment_id"),
     regexp = "Can't find receiver_id `not_a_deployment_id` in"
-    )
+  )
   expect_error(
     get_acoustic_deployments(deployment_id = c("1437", "not_a_deployment_id")),
     regexp = "Can't find receiver_id `1437` and/or `not_a_deployment_id` in:"
-    )
+  )
 
   # Select single value
   single_select <- 1437 # From demer
@@ -221,11 +221,11 @@ test_that("[API] get_acoustic_deployments() allows selecting on receiver_id", {
   expect_error(
     get_acoustic_deployments(receiver_id = "not_a_receiver_id"),
     regexp = "Can't find receiver_id `not_a_receiver_id` in"
-    )
+  )
   expect_error(
     get_acoustic_deployments(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
     regexp = "Can't find receiver_id `VR2W-124070` and/or `not_a_receiver_id` in"
-    )
+  )
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
@@ -288,11 +288,11 @@ test_that("[API] get_acoustic_deployments() allows selecting on acoustic_project
   expect_error(
     get_acoustic_deployments(acoustic_project_code = "not_a_project"),
     regexp = "Can't find acoustic_project_code `not_a_project` in"
-    )
+  )
   expect_error(
     get_acoustic_deployments(acoustic_project_code = c("demer", "not_a_project")),
     regexp = "Can't find acoustic_project_code `demer` and/or `not_a_project` in"
-    )
+  )
 
   # Select single value
   single_select <- "demer"
@@ -366,11 +366,11 @@ test_that("[API] get_acoustic_deployments() allows selecting on station_name", {
   expect_error(
     get_acoustic_deployments(station_name = "not_a_station_name"),
     regexp = "Can't find station_name `not_a_station_name` in"
-    )
+  )
   expect_error(
     get_acoustic_deployments(station_name = c("de-9", "not_a_station_name")),
     regexp = "Can't find station_name `de-9` and/or `not_a_station_name` in"
-    )
+  )
 
   # Select single value
   single_select <- "de-9" # From demer
@@ -432,7 +432,7 @@ test_that("[API] get_acoustic_deployments() allows selecting on open deployments
   expect_error(
     get_acoustic_deployments(open_only = "not_a_logical"),
     regexp = "argument is not interpretable as logical"
-    )
+  )
 
   # ws1 is an open ended acoustic project
   all_df <-

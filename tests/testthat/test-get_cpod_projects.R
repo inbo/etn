@@ -46,11 +46,11 @@ test_that("get_cpod_projects() allows selecting on cpod_project_code", {
   expect_error(
     get_cpod_projects(cpod_project_code = "not_a_project"),
     regexp = "Can't find cpod_project_code `not_a_project` in"
-    )
+  )
   expect_error(
     get_cpod_projects(cpod_project_code = c("cpod-lifewatch", "not_a_project")),
     regexp = "Can't find cpod_project_code `cpod-lifewatch` and/or `not_a_project` in"
-    )
+  )
 
   # Select single value
   single_select <- "cpod-lifewatch"

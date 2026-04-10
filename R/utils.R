@@ -265,11 +265,11 @@ NULL
   # Checking this on every call would slow down the package.
   get_etnservice_version <<-
     memoise::memoise(get_etnservice_version,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
+      cache = cachem::cache_mem(max_age = 60 * 15)
     )
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
-  )
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
 }

@@ -5,7 +5,7 @@ test_that("get_acoustic_detections() can pass errors over the api", {
   # Test via the OpenCPU API
   withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
   vcr::local_cassette("detections_error")
-    expect_error(
+  expect_error(
     get_acoustic_detections(start_date = "not_a_date"),
     regexp = "The given start_date, not_a_date, is not in a valid date format."
   )

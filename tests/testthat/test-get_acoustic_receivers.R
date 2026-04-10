@@ -58,11 +58,11 @@ test_that("get_acoustic_receivers() allows selecting on receiver_id", {
   expect_error(
     get_acoustic_receivers(receiver_id = "not_a_receiver_id"),
     regexp = "Can't find receiver_id `not_a_receiver_id` in"
-    )
+  )
   expect_error(
     get_acoustic_receivers(receiver_id = c("VR2W-124070", "not_a_receiver_id")),
     regexp = "Can't find receiver_id `VR2W-124070` and/or `not_a_receiver_id` in"
-    )
+  )
 
   # Select single value
   single_select <- "VR2W-124070" # From demer
@@ -93,11 +93,11 @@ test_that("get_acoustic_receivers() allows selecting on status", {
   expect_error(
     get_acoustic_receivers(status = "not_a_status"),
     regexp = "Can't find status `not_a_status` in"
-    )
+  )
   expect_error(
     get_acoustic_receivers(status = c("broken", "not_a_status")),
     regexp = "Can't find status `broken` and/or `not_a_status` in"
-    )
+  )
 
   # Select single value
   single_select <- "broken"

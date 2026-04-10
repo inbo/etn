@@ -50,11 +50,11 @@ test_that("get_animal_projects() allows selecting on animal_project_code", {
   expect_error(
     get_animal_projects(animal_project_code = "not_a_project"),
     regexp = "Can't find animal_project_code `not_a_project` in"
-    )
+  )
   expect_error(
     get_animal_projects(animal_project_code = c("2014_demer", "not_a_project")),
     regexp = "Can't find animal_project_code `2014_demer` and/or `not_a_project` in"
-    )
+  )
 
   # Select single value
   single_select <- "2014_demer"
