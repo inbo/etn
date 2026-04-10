@@ -97,9 +97,9 @@ test_that("get_animal_projects() returns citation information when requested", {
     "imis_dataset_id", # To make fetching citations possible
     "citation",
     "doi",
-    "name",
-    "email",
-    "institute"
+    "contact_name",
+    "contact_email",
+    "contact_affiliation"
   )
 
   animal_project_codes <- c(
