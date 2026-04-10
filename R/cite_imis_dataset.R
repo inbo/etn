@@ -26,8 +26,8 @@
 #'  - The `doi`.
 #'  - The contact person, usually the first author. If no contact person is
 #'  entered, the first author with status creator.
-#'  - The corresponding `email`.
-#'  - The corresponding `institute`.
+#'  - The corresponding `contact_email`.
+#'  - The corresponding `contact_affiliation`.
 #' @family citation helpers
 #' @noRd
 #'
@@ -43,9 +43,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       imis_dataset_id = integer(),
       citation = character(),
       doi = character(),
-      name = character(),
-      email = character(),
-      institute = character()
+      contact_name = character(),
+      contact_email = character(),
+      contact_affiliation = character()
     )
 
   if (all(is.na(imis_dataset_ids))) {
@@ -211,10 +211,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       dplyr::mutate(
         ownership_df,
         # Support missing fields, fall back to NA.
-        name = stringr::str_c(.data$Firstname, .data$Surname, sep = " "),
-        email = purrr::pluck(ownership_df, "Email",
+        contact_name = stringr::str_c(.data$Firstname, .data$Surname, sep = " "),
+        contact_email = purrr::pluck(ownership_df, "Email",
                              .default = NA_character_),
-        institute = purrr::pluck(ownership_df, "StandardName",
+        contact_affiliation = purrr::pluck(ownership_df, "StandardName",
                                  .default = NA_character_),
         .keep = "none"
       )

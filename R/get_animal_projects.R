@@ -8,9 +8,9 @@
 #'  project, based on the `imis_dataset_id` field. This will add the following columns to the output:
 #'  - `citation`: A formatted citation with DOI if available.
 #'  - `doi`: The DOI for the dataset if available.
-#'  - `name`: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
-#'  - `email`: The email of the contact person.
-#'  - `institute`: The institute of the contact person.
+#'  - `contact_name`: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
+#'  - `contact_email`: The email of the contact person.
+#'  - `contact_affiliation`: The institute of the contact person.
 #'
 #' @inheritParams list_animal_ids
 #' @return A tibble with animal project data, sorted by `project_code`.

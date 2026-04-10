@@ -19,9 +19,9 @@ project, based on the \code{imis_dataset_id} field. This will add the following 
 \itemize{
 \item \code{citation}: A formatted citation with DOI if available.
 \item \code{doi}: The DOI for the dataset if available.
-\item \code{name}: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
-\item \code{email}: The email of the contact person.
-\item \code{institute}: The institute of the contact person.
+\item \code{contact_name}: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
+\item \code{contact_email}: The email of the contact person.
+\item \code{contact_affiliation}: The institute of the contact person.
 }}
 }
 \value{

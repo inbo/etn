@@ -27,7 +27,7 @@ test_that("cite_imis_dataset() returns expected columns", {
 
   expect_named(
     cite_imis_dataset(imis_dataset_ids = 7915),
-    c("imis_dataset_id", "citation", "doi", "name", "email", "institute")
+    c("imis_dataset_id", "citation", "doi", "contact_name", "contact_email", "contact_affiliation")
   )
 })
 
@@ -54,11 +54,11 @@ test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7970) |>
-      dplyr::select(dplyr::all_of(c("name", "email", "institute"))),
+      dplyr::select(dplyr::all_of(c("contact_name", "contact_email", "contact_affiliation"))),
     dplyr::tibble(
-      name = NA_character_,
-      email = NA_character_,
-      institute = NA_character_
+      contact_name = NA_character_,
+      contact_email = NA_character_,
+      contact_affiliation = NA_character_
     )
   )
 })
@@ -72,7 +72,7 @@ test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
   # Previously, a hard filter on OrderNr resulted in NA for all `ownership`
   # child elements
   expect_identical(
-    dplyr::pull(cite_imis_dataset(imis_dataset_ids = 6349), "institute"),
+    dplyr::pull(cite_imis_dataset(imis_dataset_ids = 6349), "contact_affiliation"),
     "Ege University"
   )
 })
@@ -82,9 +82,12 @@ test_that("cite_imis_dataset() can handle `ownerships` with missing order", {
 
   vcr::local_cassette("citations-auth-unordered")
 
-  # 6657 has NA for it's ownerships$OrderNr
+  get_animal_projects(animal_project_code = "ADST-Shark") |>
+    dplyr::pull("imis_dataset_id")
+
+  # 6557 has NA for it's ownerships$OrderNr
   expect_shape(
-    cite_imis_dataset(6657),
+    cite_imis_dataset(6557),
     nrow = 1
   )
 })
@@ -251,9 +254,9 @@ test_that("cite_imis_dataset() returns 0 a row tibble when all requests fail", {
       imis_dataset_id = integer(),
       citation = character(),
       doi = character(),
-      name = character(),
-      email = character(),
-      institute = character()
+      contact_name = character(),
+      contact_email = character(),
+      contact_affiliation = character()
     )
   )
 })
