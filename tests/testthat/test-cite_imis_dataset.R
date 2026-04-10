@@ -99,6 +99,12 @@ test_that("cite_imis_dataset() can handle `ownerships` with missing order", {
     cite_imis_dataset(6557),
     nrow = 1
   )
+
+  # 8029 has only one missing OrderNr but the rest is present
+  expect_shape(
+    cite_imis_dataset(6557),
+    nrow = 1
+  )
 })
 
 test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
