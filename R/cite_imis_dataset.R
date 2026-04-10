@@ -118,9 +118,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Parse the Citation and DOI ----------------------------------------------
 
-  # Avoid missing global variable R CMD NOTE
-  citation <- NULL
-
   # If there is no citation, return an empty string. If there is a doi, append
   # it with the `doi:` prefix and end on a period.
   marineinfo_citation <-
@@ -128,34 +125,41 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     purrr::map(\(dataset_metadata) {
       # Using str_c so an NA results in NA_character_
       doi <-
-        stringr::str_c("https://doi.org/",
-        purrr::pluck(dataset_metadata, "dois", "DOI",
-                          .default = NA_character_))
+        stringr::str_c(
+          "https://doi.org/",
+          purrr::pluck(dataset_metadata, "dois", "DOI",
+            .default = NA_character_
+          )
+        )
+      citation_raw <-
+        purrr::pluck(dataset_metadata, "datasetrec", "Citation",
+          .default = NA_character_
+        )
       dplyr::tibble(
         citation =
-          # Convert to character so the returned colclasses are as
-          # close to base as possible
-          as.character(
-            glue::glue_data(
-              .x = list(
-                citation = purrr::pluck(dataset_metadata, "datasetrec", "Citation",
-                                        .default = ""
-                ),
-                doi = doi
-              ),
-              "{citation}{dot}{doi_prefix}{doi}",
-              # Add a period between the citation and the doi if the citation
-              # doesn't already end on one, if there is no doi, don't mess with
-              # the citation.
-              dot = ifelse(
-                citation != "" &
-                  !stringr::str_ends(citation, stringr::fixed(".")),
-                yes = ".",
-                no = ""
-              ),
-              doi_prefix = " ",
-              .na = NA_character_
-              )
+        # Convert to character so the returned colclasses are as
+        # close to base as possible
+
+          stringr::str_c(
+            # Naming parts of the string just for readability
+            "citation" = citation_raw,
+            # Add a period between the citation and the doi if the citation
+            # doesn't already end on one, if there is no doi, don't mess with
+            # the citation.
+            "dot" = ifelse(
+              !is.na(citation_raw) &
+                !stringr::str_ends(citation_raw, stringr::fixed(".")) &
+                !is.na(doi),
+              yes = ".",
+              no = NA_character_
+            ),
+            # Only add a space when there is a doi
+            "space" = ifelse(
+              !is.na(doi),
+              yes = " ",
+              no = NA_character_
+            ),
+            "doi" = doi
           ),
         doi = doi
       )
