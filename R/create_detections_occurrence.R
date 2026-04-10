@@ -7,7 +7,7 @@
 create_detections_occurrence <- function(detections, animals,
                                          deployments) {
   # Expand data with non-required columns used in Darwin Core transformation
-  detections_cols <- c("qc_flag", "station_name")
+  detections_cols <- c("station_name")
   detections <- expand_cols(detections, detections_cols)
 
   animals_cols <- c("sex", "animal_nickname", "animal_nickname")
@@ -25,9 +25,6 @@ create_detections_occurrence <- function(detections, animals,
   # Transform data
   occurrence <-
     detections |>
-    # Remove duplicates by removing records with qc_flag = FALSE.
-    # qc_flag is either FALSE or NA.
-    dplyr::filter(!isFALSE(.data$qc_flag)) |>
     dplyr::mutate(
       time_per_hour = lubridate::floor_date(.data$date_time, unit = "hour")
     ) |>
