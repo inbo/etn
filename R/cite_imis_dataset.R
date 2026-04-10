@@ -203,8 +203,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         ownership_df,
         n = 1,
         order_by = .data$OrderNr,
-        # Support shared first authorship
-        with_ties = TRUE
+        # Do not support shared first authorship
+        with_ties = FALSE
       )
     }) |>
     purrr::map(\(ownership_df) {

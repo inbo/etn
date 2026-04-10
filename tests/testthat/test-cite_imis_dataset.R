@@ -77,6 +77,18 @@ test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
   )
 })
 
+test_that("cite_imis_dataset() can handle `ownerships` with missing order", {
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-auth-unordered")
+
+  # 6657 has NA for it's ownerships$OrderNr
+  expect_shape(
+    cite_imis_dataset(6657),
+    nrow = 1
+  )
+})
+
 test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
   # No internet is actually needed for this test.
 
