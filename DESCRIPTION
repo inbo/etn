@@ -56,7 +56,6 @@ Suggests:
     leaflet,
     lubridate,
     pak,
-    qs2,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,

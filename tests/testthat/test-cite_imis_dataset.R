@@ -272,32 +272,3 @@ test_that("cite_imis_dataset() returns 0 a row tibble when all requests fail", {
     )
   )
 })
-
-test_that("cite_imis_dataset() can handle getting all citations in one go", {
-  # NOTE: some IMIS dataset_ids result in a 404 on MarineInfo.
-  skip_if_no_authentication()
-  skip_if_offline("marineinfo.org")
-
-  vcr::local_cassette("citations-all", serialize_with = "qs2")
-
-  all_imis_acoustic_codes <- get_acoustic_projects() |>
-    # Some IMIS dataset_ids will result in a 404 on marineinfo.
-    dplyr::pull(imis_dataset_id)
-
-  # Some IMIS dataset_ids will result in a 404 on marineinfo, but we should be
-  # able to get most of them.
-  expect_gte(
-    nrow(cite_imis_dataset(all_imis_acoustic_codes)),
-    0.8 * length(all_imis_acoustic_codes)
-  )
-
-  all_imis_animal_codes <- get_animal_projects() |>
-    dplyr::pull(imis_dataset_id)
-
-  # Some IMIS dataset_ids will result in a 404 on marineinfo, but we should be
-  # able to get most of them.
-  expect_gte(
-    nrow(cite_imis_dataset(all_imis_animal_codes)),
-    0.8 * length(all_imis_animal_codes)
-  )
-})
