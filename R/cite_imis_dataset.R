@@ -209,7 +209,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         # fields if missing, then fall back to the first element as provided.
         if("Role" %in% names(ownership_df)) {.data$Role != "Contact" | is.na(.data$Role)} else {FALSE},
         if("Role" %in% names(ownership_df)) {.data$Role != "Creator" | is.na(.data$Role)} else {FALSE},
-        if("OrderNr" %in% names(ownership_df)) {.data$OrderNr} else {FALSE}
+        if("OrderNr" %in% names(ownership_df)) {.data$OrderNr | is.na(.data$OrderNr)} else {FALSE}
       ) |>
         dplyr::slice_head(n = 1)
     }) |>
