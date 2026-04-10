@@ -41,6 +41,10 @@ test_that("write_dwc() returns error on missing resources", {
   )
 })
 
+test_that("write_dwc() returns error on missing required fields", {
+  # TODO
+})
+
 test_that("write_dwc() writes CSV and meta.xml files to a directory and
            a list of data frames invisibly", {
   temp_dir <- tempdir()
@@ -128,6 +132,11 @@ test_that("write_dwc() returns files that comply with the info in meta.xml", {
   # Use helper function to compare
   expect_meta_match(file.path(temp_dir, "occurrence.csv"))
 })
+
+test_that("write_dwc() supports custom dataset id, name, license, rights_holder", {
+  # TODO
+})
+
 test_that("write_dwc() supports datasets that only have the required fields", {
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir, recursive = TRUE))
