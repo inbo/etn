@@ -9,13 +9,11 @@ create_detections_occurrence <- function(detections, animals,
   # Expand data with non-required columns used in Darwin Core transformation
   detections_cols <- c("station_name")
   detections <- expand_cols(detections, detections_cols)
-
   animals_cols <- c("sex", "animal_nickname", "animal_nickname")
   animals <- expand_cols(animals, animals_cols)
   animals_subset <-
     animals |>
     dplyr::select("animal_id", "sex", "animal_nickname", "aphia_id")
-
   deployment_cols <- c("station_description")
   deployments <- expand_cols(deployments, deployment_cols)
   deployments_subset <-
@@ -54,7 +52,7 @@ create_detections_occurrence <- function(detections, animals,
         tolower(.data$sex),
         c("male", "m") ~ "male",
         c("female", "f") ~ "female",
-        "hermaphrodite" ~ "hermaphrodite",
+        c("hermaphrodite") ~ "hermaphrodite",
         c("unknown", "u") ~ "unknown",
       ),
       # Value at start of deployment might not apply to all records

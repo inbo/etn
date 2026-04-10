@@ -15,9 +15,7 @@ create_animals_occurrence <- function(animals, tags) {
     "capture_method", "tagging_type", "wild_or_hatchery"
   )
   animals <- expand_cols(animals, animals_cols)
-  tags_cols <- c(
-    "manufacturer", "model"
-  )
+  tags_cols <- c("manufacturer", "model")
   tags <- expand_cols(tags, tags_cols)
 
   # 'animals' contains multiple events (capture, release, surgery, recapture) as
@@ -89,14 +87,14 @@ create_animals_occurrence <- function(animals, tags) {
       basisOfRecord = "HumanObservation",
       dataGeneralizations = NA_character_,
       # OCCURRENCE
-      occurrenceID =paste(
+      occurrenceID = paste(
         .data$animal_id, .data$tag_serial_number, .data$protocol, sep = "_"
       ),
       sex = dplyr::recode_values(
         tolower(.data$sex),
         c("male", "m") ~ "male",
         c("female", "f") ~ "female",
-        "hermaphrodite" ~ "hermaphrodite",
+        c("hermaphrodite") ~ "hermaphrodite",
         c("unknown", "u") ~ "unknown",
         default = "unknown"
       ),
@@ -131,20 +129,19 @@ create_animals_occurrence <- function(animals, tags) {
         .data$protocol == "capture" & !is.na(.data$capture_method) ~
           paste("Caught using", trimws(tolower(.data$capture_method))),
         .data$protocol == "release" ~
-          paste0(.data$manufacturer, " ", .data$model, " tag ",
-                 dplyr::case_when(
-                   .data$tagging_type == "internal" ~ "implanted in ",
-                   .data$tagging_type == "external" ~ "attached to ",
-                   #Includes `Acoustic and pit`
-                   .default = "implanted in or attached to "
-                 ),
-                 dplyr::case_when(
-                   .data$wild_or_hatchery %in% c("wild", "w") ~
-                     "free-ranging animal",
-                   .data$wild_or_hatchery %in% c("hatchery", "h") ~
-                     "hatchesd animal",
-                   .default = "likely free-ranging animal"
-                 )
+          paste0(
+            .data$manufacturer, " ", .data$model, " tag ",
+            dplyr::case_when(
+              .data$tagging_type == "internal" ~ "implanted in ",
+              .data$tagging_type == "external" ~ "attached to ",
+              # Includes `Acoustic and pit`
+              .default = "implanted in or attached to "
+            ),
+            dplyr::case_when(
+              .data$wild_or_hatchery %in% c("wild", "w") ~ "free-ranging animal",
+              .data$wild_or_hatchery %in% c("hatchery", "h") ~ "hatchesd animal",
+              .default = "likely free-ranging animal"
+            )
           ),
         .default = NA_character_
       ),
