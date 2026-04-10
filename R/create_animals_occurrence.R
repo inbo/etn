@@ -1,7 +1,7 @@
 #' Create Darwin Core Occurrence from animals data
 #'
 #' @param animals A data frame derived from an `animals` resource.
-#' @return A data frame with Darwin Core occurrences
+#' @return A data frame with Darwin Core occurrences.
 #' @family dwc functions
 #' @noRd
 create_animals_occurrence <- function(animals, tags) {
@@ -139,7 +139,7 @@ create_animals_occurrence <- function(animals, tags) {
             ),
             dplyr::case_when(
               .data$wild_or_hatchery %in% c("wild", "w") ~ "free-ranging animal",
-              .data$wild_or_hatchery %in% c("hatchery", "h") ~ "hatchesd animal",
+              .data$wild_or_hatchery %in% c("hatchery", "h") ~ "hatched animal",
               .default = "likely free-ranging animal"
             )
           ),
