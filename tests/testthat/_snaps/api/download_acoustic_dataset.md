@@ -15,7 +15,7 @@
       
       * (5/6): downloading receivers.csv
       
-      * (6/6): adding datapackage.json as file metadata
+      * (6/6): create package
       
       
       

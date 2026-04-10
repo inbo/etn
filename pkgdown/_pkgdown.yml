@@ -17,6 +17,7 @@ reference:
   - get_acoustic_detections
   - get_acoustic_deployments
   - get_acoustic_receivers
+  - get_package
   - download_acoustic_dataset
   - write_dwc
 - title: Explore archival data
