@@ -10,12 +10,6 @@
 #'   `get_acoustic_projects()`, `get_animal_projects()` or `get_cpod_projects()`.
 #' @param warn Logical. If `TRUE`, return a warning if any of the API requests
 #'   fail, with the IMIS dataset id and error message for each failed request.
-#'   Default is `FALSE` to avoid overwhelming users with warnings when querying
-#'   many datasets, but can be set to `TRUE` for troubleshooting.ogical. If
-#'   `TRUE`, return a warning if any of the API requests fail, with the IMIS
-#'   dataset id and error message for each failed request. Default is `FALSE` to
-#'   avoid overwhelming users with warnings when querying many datasets, but can
-#'   be set to `TRUE` for troubleshooting.
 #' @param progress Logical. If `TRUE`, show a progress bar for the API requests.
 #'   Default is `TRUE`, but will be automatically set to `FALSE` when testing to
 #'   avoid cluttering testthat output.
