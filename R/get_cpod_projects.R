@@ -26,7 +26,8 @@ get_cpod_projects <- function(connection,
     deprecate_warn_connection()
   }
   # Either use the API, or the SQL helper.
-  out <- conduct_parent_to_helpers(protocol = select_protocol()) |>
+  out <- conduct_parent_to_helpers(protocol = select_protocol(),
+                                   ignored_arguments = "citation") |>
     # Set the column classes explicitly
     dplyr::mutate(moratorium = as.logical(as.integer(.data$moratorium)))
 
