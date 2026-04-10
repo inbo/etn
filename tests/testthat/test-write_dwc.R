@@ -135,7 +135,6 @@ test_that("write_dwc() returns the expected Darwin Core mapping for the example
     example_dataset(),
     temp_dir,
     dataset_name = "My Dataset",
-    institution_code = "VLIZ",
     rights_holder = "INBO",
     license = "CC0-1.0"
   ))

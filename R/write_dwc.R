@@ -15,7 +15,6 @@
 #'   useful for extending/adapting the Darwin Core mapping before writing with
 #'   [readr::write_csv()].
 #' @param dataset_name Title of the dataset.
-#' @param institution_code Acronym of the institution publishing the data.
 #' @param license License of the dataset.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
@@ -47,7 +46,6 @@
 #' write_dwc(
 #'   package,
 #'   directory = "my_directory",
-#'   institution_code = "VLIZ",
 #'   dataset_name = paste(
 #'     "2014_DEMER - Acoustic telemetry data for four fish species in the",
 #'     "Demer river (Belgium)"
@@ -59,8 +57,8 @@
 #' # Clean up (don't do this if you want to keep your files)
 #' unlink("my_directory", recursive = TRUE)
 write_dwc <- function(package, directory, dataset_name = NULL,
-                      institution_code = NULL, license = c("CC-BY-4.0",
-                      "CC0-1.0"), rights_holder = NULL) {
+                      license = c("CC-BY-4.0", "CC0-1.0"),
+                      rights_holder = NULL) {
 
   # Check license
   license <- rlang::arg_match(license)
@@ -70,9 +68,6 @@ write_dwc <- function(package, directory, dataset_name = NULL,
   }
   if (is.null(rights_holder)) {
     rights_holder <- NA_character_
-  }
-  if (is.null(institution_code)) {
-    institution_code <- NA_character_
   }
 
   # Read data from package
@@ -129,7 +124,7 @@ write_dwc <- function(package, directory, dataset_name = NULL,
       license = license,
       rightsHolder = rights_holder,
       datasetID = NA_character_,
-      institutionCode = institution_code,
+      institutionCode = "VLIZ",
       collectionCode = "ETN",
       datasetName = dataset_name,
       # RECORD-LEVEL
