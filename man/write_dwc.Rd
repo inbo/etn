@@ -2,38 +2,30 @@
 % Please edit documentation in R/write_dwc.R
 \name{write_dwc}
 \alias{write_dwc}
-\title{Transform ETN data to Darwin Core}
+\title{Transform ETN data to a Darwin Core Archive}
 \usage{
 write_dwc(
   package,
   directory,
+  dataset_id = NULL,
   dataset_name = NULL,
-  institution_code = NULL,
-  license = "CC-BY",
+  license = c("CC-BY-4.0", "CC0-1.0"),
   rights_holder = NULL
 )
 }
 \arguments{
 \item{package}{A Frictionless Data Package of ETN data, as returned by
-\code{\link[frictionless:read_package]{frictionless::read_package()}}.
-It is expected to contain an \code{animals}, \code{detections} and \code{tags} resource.}
+\code{\link[=read_package]{read_package()}}.
+It is expected to contain the resources \code{animals}, \code{tags}, \code{detections} and
+\code{deployments}.}
 
-\item{directory}{Path to local directory to write files to.
-If \code{NULL}, then a list of data frames is returned instead, which can be
-useful for extending/adapting the Darwin Core mapping before writing with
-\code{\link[readr:write_delim]{readr::write_csv()}}.}
+\item{directory}{Path to local directory to write files to.}
+
+\item{dataset_id}{Identifier for the dataset.}
 
 \item{dataset_name}{Title of the dataset.}
 
-\item{institution_code}{Acronym of the institution publishing the data.}
-
-\item{license}{Identifier of the license under which the data will be
-published.
-\itemize{
-\item \href{https://creativecommons.org/licenses/by/4.0/legalcode}{\code{CC-BY}}
-(default).
-\item \href{https://creativecommons.org/publicdomain/zero/1.0/legalcode}{\code{CC0}}.
-}}
+\item{license}{License of the dataset.}
 
 \item{rights_holder}{Acronym of the organization owning or managing the
 rights over the data.}
@@ -43,18 +35,21 @@ CSV and \code{meta.xml} files written to disk.
 And invisibly, a list of data frames with the transformed data.
 }
 \description{
-Transforms data from the European Tracking Network (ETN) to
-\href{https://dwc.tdwg.org/}{Darwin Core}. The resulting CSV and meta.xml file
-can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for publication to
-OBIS and/or GBIF.
-An \code{eml.xml} file is not created.
+Transforms a European Tracking Network (ETN) dataset to a \href{https://dwc.tdwg.org/text/}{Darwin Core Archive}.
+}
+\details{
+The resulting files can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for
+publication to GBIF and/or OBIS.
+A corresponding \code{eml.xml} metadata file is not created.
 }
 \section{Transformation details}{
 
-Data are transformed into an
-\href{https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml}{Occurrence core}.
-This \strong{follows recommendations} discussed and created by Peter Desmet,
-Jonas Mortelmans, Jonathan Pye, John Wieczorek and others.
+This function \strong{follows recommendations} discussed and created by Peter
+Desmet, Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and
+transforms data to:
+\itemize{
+\item An \href{https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml}{Occurrence core}.
+}
 
 Key features of the Darwin Core transformation:
 \itemize{
@@ -65,12 +60,21 @@ No information about the parent event is provided other than its ID,
 meaning that data can be expressed in an Occurrence Core with one row per
 observation and \code{parentEventID} shared by all occurrences in a deployment.
 \item The release event often contains metadata about the animal (sex,
-lifestage, comments) and deployment as a whole.
+life stage, comments) and deployment as a whole.
 \item Acoustic detections are downsampled to the \strong{first detection per hour},
 to reduce the size of high-frequency data.
+The \code{coordinateUncertaintyInMeters} is set to 1000 m to account for
+imprecise receiver location and acoustic detection range.
 Duplicate detections (same animal, tag and timestamp) are excluded.
 It is possible for a deployment to contain no detections, e.g. if the
-tag malfunctioned right after deployment.#'
+tag malfunctioned right after deployment.
+\item Parameters or metadata are used to set the following record-level terms:
+\itemize{
+\item \code{dwc:datasetID}: \code{dataset_id}.
+\item \code{dwc:datasetName}: \code{dataset_name}.
+\item \code{dcterms:license}: \code{license}.
+\item \code{dcterms:rightsHolder}: \code{rights_holder}.
+}
 }
 }
 
@@ -79,10 +83,12 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
-  "species in the Demer river (Belgium)"),
-  institution_code = "VLIZ",
-  license = "CC0",
+  dataset_id = "https://doi.org/10.14284/432",
+  dataset_name = paste(
+    "2014_DEMER - Acoustic telemetry data for four fish species in the",
+    "Demer river (Belgium)"
+  ),
+  license = "CC0-1.0",
   rights_holder = "INBO"
 )
 

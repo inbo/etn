@@ -9,8 +9,8 @@
 #'
 #' @param package A Frictionless Data Package of ETN data, as returned by
 #'   [read_package()].
-#'   It is expected to contain an `animals`, `tags`, `detections` and
-#'   `deployments` resource.
+#'   It is expected to contain the resources `animals`, `tags`, `detections` and
+#'   `deployments`.
 #' @param directory Path to local directory to write files to.
 #' @param dataset_id Identifier for the dataset.
 #' @param dataset_name Title of the dataset.
@@ -21,9 +21,9 @@
 #'   And invisibly, a list of data frames with the transformed data.
 #' @export
 #' @section Transformation details:
-#' This **follows recommendations** discussed and created by Peter Desmet,
-#' Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and transforms data
-#' to:
+#' This function **follows recommendations** discussed and created by Peter
+#' Desmet, Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and
+#' transforms data to:
 #' - An [Occurrence core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
 #'
 #' Key features of the Darwin Core transformation:
@@ -37,9 +37,9 @@
 #'   life stage, comments) and deployment as a whole.
 #' - Acoustic detections are downsampled to the **first detection per hour**,
 #'   to reduce the size of high-frequency data.
-#'   The `coordinateUncertaintyInMeters` is set to 1000m to account for
+#'   The `coordinateUncertaintyInMeters` is set to 1000 m to account for
 #'   imprecise receiver location and acoustic detection range.
-#'   Duplicate detections (same animal, tag, and timestamp) are excluded.
+#'   Duplicate detections (same animal, tag and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 #' - Parameters or metadata are used to set the following record-level terms:
