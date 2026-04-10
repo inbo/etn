@@ -1,7 +1,8 @@
 # etn (development version)
 
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
-* New example dataset `river_telemetry` is added to the package (#524).
+* New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a data package (#530).
+* `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write data packages (#525).
 
 # etn 3.0.0
 

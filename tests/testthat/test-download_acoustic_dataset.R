@@ -108,7 +108,7 @@ test_that("download_acoustic_dataset() creates a valid Frictionless Data Package
 
   # This will fail when a field is added to a get_ function but not to datapackage.json
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
+    suppressMessages(read_package(file.path(datapackage_path, "datapackage.json")))
   ## Check for errors when reading the resource
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "animals")))
   expect_no_warning(suppressMessages(frictionless::read_resource(datapackage, "tags")))
@@ -121,7 +121,7 @@ test_that("download_acoustic_dataset() returns CSV files with expected number of
   skip_if_no_authentication()
 
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
+    suppressMessages(read_package(file.path(datapackage_path, "datapackage.json")))
   # Check the number of schema fields in the datapackage against the number of
   # columns in the csv files
   expect_length(
@@ -165,7 +165,7 @@ test_that("download_acoustic_dataset() returns CSV files with columns in expecte
   skip_if_no_authentication()
 
   datapackage <-
-    suppressMessages(frictionless::read_package(file.path(datapackage_path, "datapackage.json")))
+    suppressMessages(read_package(file.path(datapackage_path, "datapackage.json")))
   # Check if the schema fields in the data package are exactly the same
   # (thus also in the same order) as the header of the csv files
   expect_identical(

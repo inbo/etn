@@ -516,7 +516,7 @@
     },
     {
       "name": "detections",
-      "path": "detections.csv",
+      "path": "detections.csv.gz",
       "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",

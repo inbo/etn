@@ -30,6 +30,10 @@ reference:
   contents: starts_with("list_")
 - title: Example datasets
   contents:
-  - river_telemetry
+  - example_dataset
+- title: Frictionless data package functions
+  contents:
+  - read_package
+  - write_package
 - title: Deprecated functions
   contents: connect_to_etn
