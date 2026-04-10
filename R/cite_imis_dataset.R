@@ -186,7 +186,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   # Parse the person information --------------------------------------------
 
-
   marineinfo_ownerships <-
     purrr::map(marineinfo_metadata, \(dataset) {
       purrr::pluck(
