@@ -116,7 +116,7 @@ test_that("cite_imis_dataset() returns DOI for known dataset with DOI", {
   expect_identical(
     # acoustic_project_code: 2004_gudena has a DOI
     cite_imis_dataset(imis_dataset_ids = 8856)$doi,
-    "10.14284/735"
+    "https://doi.org/10.14284/735"
   )
 })
 
@@ -128,7 +128,7 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
   expect_true(
     stringr::str_ends(
       cite_imis_dataset(imis_dataset_ids = 8859)$citation,
-      stringr::fixed("10.14284/744.")
+      stringr::fixed("https://doi.org/10.14284/744.")
     )
   )
 })
