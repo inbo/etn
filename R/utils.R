@@ -211,8 +211,8 @@ select_protocol <- function() {
 #'   environment variables.
 #' @family helper functions
 #' @noRd
-credentials_are_set <- function(){
-    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+credentials_are_set <- function() {
+  nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
 # WRAPPER FUNCTIONS ----
