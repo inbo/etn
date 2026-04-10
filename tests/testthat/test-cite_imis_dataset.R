@@ -14,9 +14,9 @@ test_that("cite_imis_dataset() can handle multiple datasets at a time", {
 
   vcr::local_cassette("citations-multiple")
 
-  expect_identical(
-    nrow(cite_imis_dataset(imis_dataset_ids = c(8296, 7915))),
-    2L
+  expect_shape(
+    cite_imis_dataset(imis_dataset_ids = c(8296, 7915)),
+    nrow = 2L
   )
 })
 
