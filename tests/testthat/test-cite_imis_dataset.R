@@ -27,7 +27,14 @@ test_that("cite_imis_dataset() returns expected columns", {
 
   expect_named(
     cite_imis_dataset(imis_dataset_ids = 7915),
-    c("imis_dataset_id", "citation", "doi", "contact_name", "contact_email", "contact_affiliation")
+    c(
+      "imis_dataset_id",
+      "citation",
+      "doi",
+      "contact_name",
+      "contact_email",
+      "contact_affiliation"
+    )
   )
 })
 
@@ -36,11 +43,11 @@ test_that("cite_imis_dataset() returns remaining data if some ids are NA", {
 
   vcr::local_cassette("citations-one-missing")
 
-  expect_identical(
-    nrow(cite_imis_dataset(
+  expect_shape(
+    cite_imis_dataset(
       imis_dataset_ids = c(NA, 8468, 5929)
-    )),
-    2L
+    ),
+    nrows = 2L
   )
 })
 
@@ -54,7 +61,9 @@ test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7970) |>
-      dplyr::select(dplyr::all_of(c("contact_name", "contact_email", "contact_affiliation"))),
+      dplyr::select(dplyr::all_of(
+        c("contact_name", "contact_email", "contact_affiliation")
+      )),
     dplyr::tibble(
       contact_name = NA_character_,
       contact_email = NA_character_,
@@ -72,7 +81,10 @@ test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
   # Previously, a hard filter on OrderNr resulted in NA for all `ownership`
   # child elements
   expect_identical(
-    dplyr::pull(cite_imis_dataset(imis_dataset_ids = 6349), "contact_affiliation"),
+    dplyr::pull(
+      cite_imis_dataset(imis_dataset_ids = 6349),
+      "contact_affiliation"
+    ),
     "Ege University"
   )
 })
@@ -102,9 +114,10 @@ test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
   )
 
   # Return 0 row tibble.
-  expect_identical(
-    nrow(cite_imis_dataset(imis_dataset_ids = NA)),
-    0L
+  expect_shape(
+    cite_imis_dataset(imis_dataset_ids = NA),
+    nrow = 0L,
+    ncol = 6L
   )
 })
 
