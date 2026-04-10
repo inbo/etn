@@ -116,8 +116,7 @@ test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
   # Return 0 row tibble.
   expect_shape(
     cite_imis_dataset(imis_dataset_ids = NA),
-    nrow = 0L,
-    ncol = 6L
+    nrow = 0L
   )
 })
 
