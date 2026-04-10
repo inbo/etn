@@ -23,9 +23,6 @@ test_that("get_acoustic_projects() returns the expected columns", {
     "project_type",
     "telemetry_type",
     "project_name",
-    # "coordinating_organization",
-    # "principal_investigator",
-    # "principal_investigator_email",
     "start_date",
     "end_date",
     "latitude",
@@ -98,7 +95,7 @@ test_that("get_acoustic_projects() returns citation information when requested",
   )
 
   citation_columns <- c(
-    "imis_dataset_id", # to make fetching citations possible
+    "imis_dataset_id", # To make fetching citations possible
     "citation",
     "doi",
     "name",
