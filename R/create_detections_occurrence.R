@@ -37,7 +37,7 @@ create_detections_occurrence <- function(detections, animals,
       .data$tag_serial_number,
       .data$time_per_hour
     ) |>
-    dplyr::arrange(.data$date_time) |>
+    dplyr::arrange(.data$date_time, .data$detection_id) |>
     dplyr::add_count(name = "subsample_count") |>
     # Take first record/timestamp within group
     dplyr::filter(dplyr::row_number() == 1) |>
