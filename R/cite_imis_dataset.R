@@ -7,7 +7,8 @@
 #'
 #' @inheritParams get_acoustic_projects
 #' @param imis_dataset_ids A vector of IMIS dataset ids as returned by
-#'   `get_acoustic_projects()`, `get_animal_projects()` or `get_cpod_projects()`.
+#'   `get_acoustic_projects()`, `get_animal_projects()` or
+#'   `get_cpod_projects()`.
 #' @param warn Logical. If `TRUE`, return a warning if any of the API requests
 #'   fail, with the IMIS dataset id and error message for each failed request.
 #' @param progress Logical. If `TRUE`, show a progress bar for the API requests.
@@ -19,7 +20,7 @@
 #'  - A formatted `citation` with DOI if available.
 #'  - The `doi`.
 #'  - The contact person, usually the first author. If no contact person is
-#'  entered, the first author with status creator.
+#'   entered, the first author with status creator.
 #'  - The corresponding `contact_email`.
 #'  - The corresponding `contact_affiliation`.
 #' @family citation helpers
@@ -137,9 +138,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         )
       dplyr::tibble(
         citation =
-        # Convert to character so the returned colclasses are as
-        # close to base as possible
-
           stringr::str_c(
             # Naming parts of the string just for readability
             "citation" = citation_raw,
@@ -211,11 +209,15 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       dplyr::mutate(
         ownership_df,
         # Support missing fields, fall back to NA.
-        contact_name = stringr::str_c(.data$Firstname, .data$Surname, sep = " "),
-        contact_email = purrr::pluck(ownership_df, "Email",
-                             .default = NA_character_),
-        contact_affiliation = purrr::pluck(ownership_df, "StandardName",
-                                 .default = NA_character_),
+        contact_name = stringr::str_c(.data$Firstname,
+                                      .data$Surname,
+                                      sep = " "),
+        contact_email = purrr::pluck(ownership_df,
+                                     "Email",
+                                     .default = NA_character_),
+        contact_affiliation = purrr::pluck(ownership_df,
+                                           "StandardName",
+                                           .default = NA_character_),
         .keep = "none"
       )
     }) |>
