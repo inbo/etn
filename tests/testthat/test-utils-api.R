@@ -169,7 +169,9 @@ test_that("deprecate_warn_connection() is triggered on all functions with connec
       error = function(e) {
         NULL
       }
-    ), class = "lifecycle_warning_deprecated")
+    ), class = "lifecycle_warning_deprecated",
+    label = sprintf("`%s()` to warn for connection deprecation",
+                    fn))
   }
 })
 
