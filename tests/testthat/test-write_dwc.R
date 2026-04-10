@@ -69,7 +69,7 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
   on.exit(unlink(temp_dir, recursive = TRUE))
   result <- suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_id = 1, dataset_name = "My Dataset"
+    license = "CC0", dataset_name = "My Dataset"
   ))
 
   expect_contains(
@@ -80,7 +80,7 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
   expect_s3_class(result$occurrence, "tbl")
   expect_invisible(suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_id = 1, dataset_name = "My Dataset"
+    license = "CC0", dataset_name = "My Dataset"
   )))
 })
 
@@ -89,7 +89,7 @@ test_that("write_dwc() returns the expected Darwin Core terms as columns", {
   on.exit(unlink(temp_dir, recursive = TRUE))
   result <- suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_id = 1, dataset_name = "My Dataset"
+    license = "CC0", dataset_name = "My Dataset"
   ))
 
   expect_identical(
@@ -136,7 +136,6 @@ test_that("write_dwc() returns the expected Darwin Core mapping for the example
   suppressMessages(write_dwc(
     example_dataset(),
     temp_dir,
-    dataset_id = 1,
     dataset_name = "My Dataset",
     institution_code = "VLIZ",
     rights_holder = "INBO",

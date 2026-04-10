@@ -7,7 +7,6 @@
 write_dwc(
   package,
   directory,
-  dataset_id = NULL,
   dataset_name = NULL,
   institution_code = NULL,
   license = "CC-BY",
@@ -23,8 +22,6 @@ It is expected to contain an \code{animals}, \code{detections} and \code{tags} r
 If \code{NULL}, then a list of data frames is returned instead, which can be
 useful for extending/adapting the Darwin Core mapping before writing with
 \code{\link[readr:write_delim]{readr::write_csv()}}.}
-
-\item{dataset_id}{Identifier for the dataset.}
 
 \item{dataset_name}{Title of the dataset.}
 
@@ -82,7 +79,6 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_id = "https://www.vliz.be/en/imis?dataset&dasid=5871",
   dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
   "species in the Demer river (Belgium)"),
   institution_code = "VLIZ",

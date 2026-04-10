@@ -13,7 +13,6 @@
 #'   If `NULL`, then a list of data frames is returned instead, which can be
 #'   useful for extending/adapting the Darwin Core mapping before writing with
 #'   [readr::write_csv()].
-#' @param dataset_id Identifier for the dataset.
 #' @param dataset_name Title of the dataset.
 #' @param institution_code Acronym of the institution publishing the data.
 #' @param license Identifier of the license under which the data will be
@@ -51,7 +50,6 @@
 #' write_dwc(
 #'   package,
 #'   directory = "my_directory",
-#'   dataset_id = "https://www.vliz.be/en/imis?dataset&dasid=5871",
 #'   dataset_name = paste("2014_DEMER - Acoustic telemetry data for four fish",
 #'   "species in the Demer river (Belgium)"),
 #'   institution_code = "VLIZ",
@@ -61,9 +59,9 @@
 #'
 #' # Clean up (don't do this if you want to keep your files)
 #' unlink("my_directory", recursive = TRUE)
-write_dwc <- function(package, directory, dataset_id = NULL,
-                      dataset_name = NULL, institution_code = NULL,
-                      license = "CC-BY", rights_holder = NULL) {
+write_dwc <- function(package, directory, dataset_name = NULL,
+                      institution_code = NULL, license = "CC-BY",
+                      rights_holder = NULL) {
 
   # Check license
   licenses <- c("CC-BY", "CC0")
@@ -86,10 +84,6 @@ write_dwc <- function(package, directory, dataset_id = NULL,
     "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
   )
 
-  # Check input parameters
-  if (is.null(dataset_id)) {
-    dataset_id <- NA_character_
-  }
   if (is.null(dataset_name)) {
     dataset_name <- NA_character_
   }
@@ -153,7 +147,7 @@ write_dwc <- function(package, directory, dataset_id = NULL,
       type = "Event",
       license = license,
       rightsHolder = rights_holder,
-      datasetID = dataset_id,
+      datasetID = NA_character_,
       institutionCode = institution_code,
       collectionCode = "ETN",
       datasetName = dataset_name,
