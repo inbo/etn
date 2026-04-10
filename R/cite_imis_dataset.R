@@ -207,6 +207,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         ownership_df,
         # Role creator first since FALSE < TRUE, then sort by orderNr. Ignore
         # fields if missing, then fall back to the first element as provided.
+        if("Role" %in% names(ownership_df)) {.data$Role != "Contact" | is.na(.data$Role)} else {FALSE},
         if("Role" %in% names(ownership_df)) {.data$Role != "Creator" | is.na(.data$Role)} else {FALSE},
         if("OrderNr" %in% names(ownership_df)) {.data$OrderNr} else {FALSE}
       ) |>
