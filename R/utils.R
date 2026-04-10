@@ -136,7 +136,7 @@ is_testing <- function() {
 #' A simple wrapper around `Sys.info()["nodename"]` to facilitate mocking in
 #' tests.
 #'
-#' @returns Character of length one with the system's nodename.
+#' @return Character of length one with the system's nodename.
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -154,7 +154,7 @@ get_nodename <- function() {
 #' ends with "vliz.be", which is a convention for systems that have access to
 #' the local database.#'
 #'
-#' @returns Logical. `TRUE` if the local database is available, `FALSE`
+#' @return Logical. `TRUE` if the local database is available, `FALSE`
 #'   otherwise.
 #' @family helper functions
 #' @noRd
@@ -179,7 +179,7 @@ localdb_is_available <- function() {
 #' database connection available, use this by default. If not, use the OpenCPU
 #' API. Both these protocols use the ETN database as a source.
 #'
-#' @returns Character of length one with one of the available protocols.
+#' @return Character of length one with one of the available protocols.
 #'
 #' @family helper functions
 #' @noRd
@@ -207,7 +207,7 @@ select_protocol <- function() {
 #' otherwise. This can be used in tests or examples to conditionally skip if the
 #' credentials are not available.
 #'
-#' @returns A boolean indicating whether the ETN credentials are set in the
+#' @return A boolean indicating whether the ETN credentials are set in the
 #'   environment variables.
 #' @family helper functions
 #' @noRd

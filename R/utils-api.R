@@ -220,7 +220,7 @@ get_hostname <- function(url_str) {
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
 #'
-#' @returns Either a character string with the version number of etnservice. Or
+#' @return Either a character string with the version number of etnservice. Or
 #'   a list with the full output which includes the version number, And the
 #'   checksums of all functions in etnservice.
 #' @noRd
