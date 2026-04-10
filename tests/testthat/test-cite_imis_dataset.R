@@ -94,10 +94,7 @@ test_that("cite_imis_dataset() can handle `ownerships` with missing order", {
 
   vcr::local_cassette("citations-auth-unordered")
 
-  get_animal_projects(animal_project_code = "ADST-Shark") |>
-    dplyr::pull("imis_dataset_id")
-
-  # 6557 has NA for it's ownerships$OrderNr
+   # 6557 has NA for it's ownerships$OrderNr
   expect_shape(
     cite_imis_dataset(6557),
     nrow = 1
