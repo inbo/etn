@@ -212,22 +212,6 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   )
 })
 
-test_that("cite_imis_dataset() doesn't cause encoding issue: all citations", {
-  skip_if_offline("marineinfo.org")
-
-  skip("Encoding issue on the API ISSUE#521")
-
-  # Super-duper snapshot of all possible citations, probably want to remove this
-  # one
-  expect_snapshot(
-    c(get_acoustic_projects()$imis_dataset_id,
-      get_animal_projects()$imis_dataset_id) |>
-      cite_imis_dataset(warn = FALSE) |>
-      dplyr::pull("citation")
-  )
-
-})
-
 test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   # Some citations end on a period, some do not. A period should be added if a
   # doi is suffixed, except when one is already present.
