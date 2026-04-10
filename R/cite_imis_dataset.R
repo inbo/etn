@@ -203,13 +203,14 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     purrr::compact() |>
     purrr::map(\(ownership_df) {
       # Take the lowest rated owner, sometimes OrderNr 1 is missing.
-      dplyr::slice_min(
+      dplyr::arrange(
         ownership_df,
-        n = 1,
-        order_by = .data$OrderNr,
-        # Do not support shared first authorship
-        with_ties = FALSE
-      )
+        # Role creator first since FALSE < TRUE, then sort by orderNr. Ignore
+        # fields if missing, then fall back to the first element as provided.
+        if("Role" %in% names(ownership_df)) {.data$Role != "Creator" | is.na(.data$Role)} else {FALSE},
+        if("OrderNr" %in% names(ownership_df)) {.data$OrderNr} else {FALSE}
+      ) |>
+        dplyr::slice_head(n = 1)
     }) |>
     purrr::map(\(ownership_df) {
       dplyr::mutate(
