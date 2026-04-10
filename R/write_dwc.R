@@ -9,11 +9,9 @@
 #'
 #' @param package A Frictionless Data Package of ETN data, as returned by
 #'   [read_package()].
-#'   It is expected to contain an `animals`, `detections` and `tags` resource.
+#'   It is expected to contain an `animals`, `tags`, `detections` and
+#'   `deployments` resource.
 #' @param directory Path to local directory to write files to.
-#'   If `NULL`, then a list of data frames is returned instead, which can be
-#'   useful for extending/adapting the Darwin Core mapping before writing with
-#'   [readr::write_csv()].
 #' @param dataset_name Title of the dataset.
 #' @param license License of the dataset.
 #' @param rights_holder Acronym of the organization owning or managing the
@@ -41,6 +39,10 @@
 #'   Duplicate detections (same animal, tag, and timestamp) are excluded.
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
+#' - Parameters or metadata are used to set the following record-level terms:
+#'   - `dwc:datasetName`: `dataset_name`.
+#'   - `dcterms:license`: `license`.
+#'   - `dcterms:rightsHolder`: `rights_holder`.
 #' @examples
 #' package <- example_dataset()
 #' write_dwc(
@@ -60,15 +62,10 @@ write_dwc <- function(package, directory, dataset_name = NULL,
                       license = c("CC-BY-4.0", "CC0-1.0"),
                       rights_holder = NULL) {
 
-  # Check license
+  # Set properties
+  dataset_name <- dataset_name %||% NA_character_
   license <- rlang::arg_match(license)
-
-  if (is.null(dataset_name)) {
-    dataset_name <- NA_character_
-  }
-  if (is.null(rights_holder)) {
-    rights_holder <- NA_character_
-  }
+  rights_holder <- rights_holder %||% NA_character_
 
   # Read data from package
   cli::cli_h2("Reading data")
@@ -78,8 +75,7 @@ write_dwc <- function(package, directory, dataset_name = NULL,
       class = "etn_error_animals_data_missing"
     )
   }
-  animals <-
-    frictionless::read_resource(package, "animals")
+  animals <- frictionless::read_resource(package, "animals")
 
   if (!"tags" %in% frictionless::resources(package)) {
     cli::cli_abort(
@@ -87,8 +83,7 @@ write_dwc <- function(package, directory, dataset_name = NULL,
       class = "etn_error_tags_data_missing"
     )
   }
-  tags <-
-    frictionless::read_resource(package, "tags")
+  tags <- frictionless::read_resource(package, "tags")
 
   if (!"detections" %in% frictionless::resources(package)) {
     cli::cli_abort(
@@ -96,8 +91,7 @@ write_dwc <- function(package, directory, dataset_name = NULL,
       class = "etn_error_detections_data_missing"
     )
   }
-  detections <-
-    frictionless::read_resource(package, "detections")
+  detections <- frictionless::read_resource(package, "detections")
 
   if (!"deployments" %in% frictionless::resources(package)) {
     cli::cli_abort(
@@ -105,8 +99,7 @@ write_dwc <- function(package, directory, dataset_name = NULL,
       class = "etn_error_deployments_data_missing"
     )
   }
-  deployments <-
-    frictionless::read_resource(package, "deployments")
+  deployments <- frictionless::read_resource(package, "deployments")
 
   # Start transformation
   cli::cli_h2("Transforming data to Darwin Core")
