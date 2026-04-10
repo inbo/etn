@@ -16,11 +16,7 @@
 #'   [readr::write_csv()].
 #' @param dataset_name Title of the dataset.
 #' @param institution_code Acronym of the institution publishing the data.
-#' @param license Identifier of the license under which the data will be
-#'   published.
-#'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode)
-#'   (default).
-#'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+#' @param license License of the dataset.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
 #' @return CSV and `meta.xml` files written to disk.
@@ -52,40 +48,22 @@
 #'   package,
 #'   directory = "my_directory",
 #'   institution_code = "VLIZ",
-#'   license = "CC0",
 #'   dataset_name = paste(
 #'     "2014_DEMER - Acoustic telemetry data for four fish species in the",
 #'     "Demer river (Belgium)"
 #'   ),
+#'   license = "CC0-1.0",
 #'   rights_holder = "INBO"
 #' )
 #'
 #' # Clean up (don't do this if you want to keep your files)
 #' unlink("my_directory", recursive = TRUE)
 write_dwc <- function(package, directory, dataset_name = NULL,
-                      institution_code = NULL, license = "CC-BY",
-                      rights_holder = NULL) {
+                      institution_code = NULL, license = c("CC-BY-4.0",
+                      "CC0-1.0"), rights_holder = NULL) {
 
   # Check license
-  licenses <- c("CC-BY", "CC0")
-  if (is.null(license)) {
-    cli::cli_abort(
-      "{.arg licence} must be one of {.val licenses}.",
-      class = "etn_error_license_missing"
-    )
-  }
-  if (!license %in% licenses) {
-    cli::cli_abort(
-      "{.arg licence} must be one of {.val licenses}.",
-      class = "etn_error_license_missing"
-    )
-  }
-
-  license <- switch(
-    license,
-    "CC-BY" = "https://creativecommons.org/licenses/by/4.0/legalcode",
-    "CC0" = "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
-  )
+  license <- rlang::arg_match(license)
 
   if (is.null(dataset_name)) {
     dataset_name <- NA_character_

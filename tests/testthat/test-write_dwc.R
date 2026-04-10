@@ -9,8 +9,7 @@ test_that("write_dwc() returns error on missing or wrong license", {
         directory = temp_dir,
         license = NULL
       )
-    ),
-    class = "etn_error_license_missing"
+    )
   )
   expect_error(
     suppressMessages(
@@ -19,8 +18,7 @@ test_that("write_dwc() returns error on missing or wrong license", {
         directory = temp_dir,
         license = "bla"
       )
-    ),
-    class = "etn_error_license_missing"
+    )
   )
 })
 
@@ -39,25 +37,25 @@ test_that("write_dwc() returns error on missing resources", {
 
   expect_error(
     suppressMessages(
-      write_dwc(x_no_animals_data, temp_dir, license = "CC0")
+      write_dwc(x_no_animals_data, temp_dir, license = "CC0-1.0")
     ),
     class = "etn_error_animals_data_missing"
   )
   expect_error(
     suppressMessages(
-      write_dwc(x_no_tags, temp_dir, license = "CC0")
+      write_dwc(x_no_tags, temp_dir, license = "CC0-1.0")
     ),
     class = "etn_error_tags_data_missing"
   )
   expect_error(
     suppressMessages(
-      write_dwc(x_no_detections, temp_dir, license = "CC0")
+      write_dwc(x_no_detections, temp_dir, license = "CC0-1.0")
     ),
     class = "etn_error_detections_data_missing"
   )
   expect_error(
     suppressMessages(
-      write_dwc(x_no_deployments, temp_dir, license = "CC0")
+      write_dwc(x_no_deployments, temp_dir, license = "CC0-1.0")
     ),
     class = "etn_error_deployments_data_missing"
   )
@@ -69,7 +67,7 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
   on.exit(unlink(temp_dir, recursive = TRUE))
   result <- suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_name = "My Dataset"
+    license = "CC0-1.0", dataset_name = "My Dataset"
   ))
 
   expect_contains(
@@ -80,7 +78,7 @@ test_that("write_dwc() writes CSV and meta.xml files to a directory and
   expect_s3_class(result$occurrence, "tbl")
   expect_invisible(suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_name = "My Dataset"
+    license = "CC0-1.0", dataset_name = "My Dataset"
   )))
 })
 
@@ -89,7 +87,7 @@ test_that("write_dwc() returns the expected Darwin Core terms as columns", {
   on.exit(unlink(temp_dir, recursive = TRUE))
   result <- suppressMessages(write_dwc(
     example_dataset(), temp_dir,
-    license = "CC0", dataset_name = "My Dataset"
+    license = "CC0-1.0", dataset_name = "My Dataset"
   ))
 
   expect_identical(
@@ -139,7 +137,7 @@ test_that("write_dwc() returns the expected Darwin Core mapping for the example
     dataset_name = "My Dataset",
     institution_code = "VLIZ",
     rights_holder = "INBO",
-    license = "CC0"
+    license = "CC0-1.0"
   ))
 
   expect_snapshot_file(file.path(temp_dir, "occurrence.csv"))
