@@ -211,7 +211,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       dplyr::mutate(
         ownership_df,
         # Support missing fields, fall back to NA.
-        name = stringr::str_c(.data$Surname, .data$Firstname, sep = " "),
+        name = stringr::str_c(.data$Firstname, .data$Surname, sep = " "),
         email = purrr::pluck(ownership_df, "Email",
                              .default = NA_character_),
         institute = purrr::pluck(ownership_df, "StandardName",
