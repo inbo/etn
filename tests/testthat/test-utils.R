@@ -56,8 +56,16 @@ test_that("select_protocol() returns 'opencpu' when nodename does not end on vli
 
 test_that("select_protocol() allows user override by environmental variable", {
   withr::with_envvar(
-    new = c(ETN_PROTOCOL = "myprotocol"),
-    expect_equal(select_protocol(), "myprotocol")
+    new = c(ETN_PROTOCOL = "public"),
+    expect_equal(select_protocol(), "public")
+  )
+})
+
+test_that("select_protocol() returns error on disallowed values", {
+  withr::with_envvar(
+    new = c(ETN_PROTOCOL = "not a protocol"),
+            expect_error(select_protocol(),
+                         regexp = 'not "not a protocol"')
   )
 })
 
