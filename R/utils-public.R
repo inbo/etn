@@ -66,6 +66,11 @@ get_public_detections <- function(project_code, ...) {
 #'
 #' @family parquet helpers
 #' @noRd
+#'
+#' @examplesIf interactive()
+#' read_public_metadata("animals", tag_type == "acoustic")
+#' read_public_metadata("projects", telemetry_type = "Acoustic")
+#' read_public_metadata("projects", start_date > lubridate::ymd(20150101))
 read_public_metadata <- function(table = c(
                                            "animals",
                                            "deployments",
