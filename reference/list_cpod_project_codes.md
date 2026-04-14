@@ -17,8 +17,8 @@ list_cpod_project_codes(connection)
 
 ## Value
 
-A vector of all unique `project_code` of `type = "cpod"` in
-`project.sql`.
+A vector of all unique `project_code` of `type = "cpod"` that are
+available.
 
 ## Examples
 

@@ -19,7 +19,7 @@
 - [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
   : Download acoustic data package
 - [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) :
-  Transform ETN data to Darwin Core
+  Transform ETN data to a Darwin Core Archive
 
 ## Explore archival data
 

@@ -99,7 +99,7 @@ are member of the group.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all tags</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 63,030 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 63,055 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0A4E2699          acoustic animal      <span style="color: #BB0000;">NA</span>          OPI-2699       </span>
@@ -112,7 +112,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0A6G              acoustic animal      <span style="color: #BB0000;">NA</span>          R64K-2383      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0A6H              acoustic animal      <span style="color: #BB0000;">NA</span>          R64K-2384      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0A6I              acoustic animal      <span style="color: #BB0000;">NA</span>          R64K-2385      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 63,020 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 63,045 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
@@ -122,7 +122,7 @@ are member of the group.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get archival tags, including acoustic-archival</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span>tag_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"archival"</span>, <span class="st">"acoustic-archival"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16,303 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16,293 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0AE6              acoustic-archival animal      P           OPS-4207       </span>
@@ -135,7 +135,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0B4U              acoustic-archival animal      P           Ops-4557       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0B4V              acoustic-archival animal      A           Ops-4558       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0B4V              acoustic-archival animal      P           Ops-4559       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16,293 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16,283 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>
@@ -145,7 +145,7 @@ are member of the group.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get tags of specific subtype</span></span></span>
 <span class="r-in"><span><span class="fu">get_tags</span><span class="op">(</span>tag_subtype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"built-in"</span>, <span class="st">"range"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,937 × 54</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,942 × 54</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 04HD              acoustic-archival range       P           S64K-9795      </span>
@@ -158,7 +158,7 @@ are member of the group.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 04HH              acoustic-archival range       A           S64K-9804      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 04HI              acoustic-archival range       P           S64K-9805      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 04HI              acoustic-archival range       A           S64K-9806      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,927 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,932 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more variables: acoustic_tag_id_alternative &lt;chr&gt;, manufacturer &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   model &lt;chr&gt;, frequency &lt;chr&gt;, status &lt;chr&gt;, activation_date &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   battery_estimated_life &lt;chr&gt;, battery_estimated_end_date &lt;dttm&gt;,</span></span>

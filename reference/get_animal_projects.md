@@ -29,7 +29,7 @@ A tibble with animal project data, sorted by `project_code`.
 ``` r
 # Get all animal projects
 get_animal_projects()
-#> # A tibble: 353 × 11
+#> # A tibble: 354 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1        793 2004_Gudena    animal       Acoustic       Silver eel … 2004-01-01
@@ -42,7 +42,7 @@ get_animal_projects()
 #>  8        757 2013_Foyle     animal       Acoustic       2013_Foyle   2013-07-01
 #>  9         18 2013_albertka… animal       Acoustic       2013 Albert… 2013-10-10
 #> 10        801 2014_Frome     animal       NA             2014_Frome   2014-10-01
-#> # ℹ 343 more rows
+#> # ℹ 344 more rows
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 

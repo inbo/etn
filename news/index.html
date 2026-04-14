@@ -43,6 +43,15 @@
 <li>New <code><a href="../reference/example_dataset.html">example_dataset()</a></code> reads an example dataset (<code>"2014_DEMER"</code>) as a data package (<a href="https://github.com/inbo/etn/issues/530" class="external-link">#530</a>).</li>
 <li>
 <code><a href="https://docs.ropensci.org/frictionless/reference/read_package.html" class="external-link">read_package()</a></code> and <code><a href="https://docs.ropensci.org/frictionless/reference/write_package.html" class="external-link">write_package()</a></code> are reexported from <a href="https://github.com/frictionlessdata/frictionless-r" class="external-link">frictionless</a> to read and write data packages (<a href="https://github.com/inbo/etn/issues/525" class="external-link">#525</a>).</li>
+<li>
+<code><a href="../reference/write_dwc.html">write_dwc()</a></code> now uses a data package as input, rather than reading from the ETN database (<a href="https://github.com/inbo/etn/issues/528" class="external-link">#528</a>). This means the function can be used locally. In addition:
+<ul><li>
+<a href="http://rs.tdwg.org/dwc/terms/institutionCode" class="external-link">institutionCode</a> is always set to <code>"VLIZ"</code> as maintainer of ETN. The <code>institution_code</code> parameter has been removed.</li>
+<li>
+<a href="http://purl.org/dc/terms/license" class="external-link">license</a> is set to <code>"CC-BY-4.0"</code> or <code>"CC0-1.0"</code> rather than a URL. The input for the <code>license</code> parameter has been updated accordingly.</li>
+<li>
+<a href="http://rs.tdwg.org/dwc/terms/identificationVerificationStatus" class="external-link">identificationVerificationStatus</a> has been added and is set to <code>"verified by expert"</code> for all records, since the taxon is assumed to be well-known before the tag was attached.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.0.0" id="etn-300">etn 3.0.0<a class="anchor" aria-label="anchor" href="#etn-300"></a></h2>

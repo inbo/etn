@@ -29,7 +29,7 @@ A tibble with acoustic project data, sorted by `project_code`.
 ``` r
 # Get all acoustic projects
 get_acoustic_projects()
-#> # A tibble: 314 × 11
+#> # A tibble: 316 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1        794 2004_Gudena    acoustic     Acoustic       Acoustic re… 2004-01-01
@@ -42,7 +42,7 @@ get_acoustic_projects()
 #>  8        819 2014_Nene      acoustic     Acoustic       2014_Nene    2014-10-31
 #>  9        815 2015_PhD_Gutm… acoustic     Acoustic       2015_PhD_Gu… 2015-09-22
 #> 10        773 2016_Diaccia_… acoustic     PIT            2016_Diacci… 2016-01-01
-#> # ℹ 304 more rows
+#> # ℹ 306 more rows
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 
