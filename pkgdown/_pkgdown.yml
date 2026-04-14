@@ -31,8 +31,9 @@ reference:
 - title: Example datasets
   contents:
   - example_dataset
-- title: Frictionless data package functions
+- title: Data package functions
   contents:
+  - get_package
   - read_package
   - write_package
 - title: Deprecated functions
