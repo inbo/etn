@@ -159,6 +159,25 @@ test_that("cite_imis_dataset() doesn't destroy citation upon appending doi", {
   )
 })
 
+test_that("cite_imis_dataset() returns citation even when there is no doi", {
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-6336")
+  # animal project 2011_Loire has a Citation, but not a doi
+  expect_true(
+    is.na(cite_imis_dataset(imis_dataset_ids = 6336)$doi)
+  )
+
+  expect_false(
+    is.na(cite_imis_dataset(imis_dataset_ids = 6336)$citation)
+  )
+
+  expect_match(
+    cite_imis_dataset(imis_dataset_ids = 6336)$citation,
+    "telemetry\\.$"
+  )
+})
+
 test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
   skip_if_offline("marineinfo.org")
 

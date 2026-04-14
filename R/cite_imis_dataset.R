@@ -136,11 +136,13 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         stringr::str_c(
           "https://doi.org/",
           purrr::pluck(dataset_metadata, "dois", "DOI",
+                       # When DOI is missing, this object is NA_character_
             .default = NA_character_
           )
         )
       citation_raw <-
         purrr::pluck(dataset_metadata, "datasetrec", "Citation",
+                     # When Citation is missing, this object is NA_character_
           .default = NA_character_
         )
 
@@ -164,9 +166,14 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
             "space" = ifelse(
               !is.na(doi),
               yes = " ",
-              no = NA_character_
+              # When doi is NA_character, add nothing. If you add NA, the whole
+              # string turns into NA
+              no = ""
             ),
-            "doi" = doi
+            # If there is a doi, add the doi, if not, add nothing. Again, if you
+            # add NA, the whole string turns into NA, so we add an empty string
+            # instead.
+            "doi" = stringr::str_replace_na(doi, replacement = "")
           ),
         doi = doi
       )
