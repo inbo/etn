@@ -1,0 +1,264 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=5871&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Tue, 14 Apr 2026 08:24:53 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=3s5vYJ24hn20s%2C1DpXeKeOYnTXa7-kqTwMBa5MDS3t6nEnAW;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":5871,"Acronym":null,"StandardTitle":"2014_DEMER
+        - Acoustic telemetry data for four fish species in the Demer river (Belgium)","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"This
+        is an acoustic telemetry dataset published by the Research Institute for Nature
+        and Forest (INBO). It contains animal (fish) tracking data collected by the
+        Permanent Belgian Acoustic Receiver Network <a href=\"https:\/\/lifewatch.be\/en\/fish-acoustic-receiver-network\">(https:\/\/lifewatch.be\/en\/fish-acoustic-receiver-network)<\/a>
+        for the project\/study 2014_demer, using VEMCO tags (V7, V13) and receivers
+        (VR2W). In total 16 adult individuals of four local wild fish species (<i>Petromyzon
+        marinus<\/i>, <i>Rutilus rutilus<\/i>, <i>Silurus glanis<\/i>, <i>Squalius
+        cephalus<\/i>) were captured, tagged and released in 2014, to study the effect
+        of a specific barrier on their upstream\/downstream migration in the Demer
+        basin.","EngDescr":"<p>Longitudinal and lateral connectivity of rivers is
+        necessary for fish to successfully fulfill their life cycle. In Flanders,
+        fish are obstructed in their essential free migrations by weirs, sluices,
+        mills, and pumping stations, which are needed to control the water level.
+        The Demer river drains the eastern part of the Scheldt basin. Fish migrating
+        from the sea to the Demer river are obstructed by three hydraulic constructions.
+        In this study we aimed to evaluate the possibilities for fish migration around
+        the most upstream of these three constructions, the Grote Steunbeer in the
+        city of Diest. Therefore, behaviour of two sea lamprey (<i>Petromyzon marinus<\/i>),
+        two roach (<i>Rutilus rutilus<\/i>), nine Wels catfish (<i>Silurus glanis<\/i>)
+        and three chub (<i>Squalius cephalus<\/i>) was investigated by acoustic telemetry
+        in the areas up-, downstream and around the fish migration barrier. The results
+        indicated that free upstream fish migration in the Demer river is obstructed
+        by the Grote Steunbeer barrier in its current state, and that adaptations
+        to this barrier should get priority as the tributary of the Zwarte beek only
+        partly offers an alternative route for fish to qualitative spawning habitats
+        upstream.<\/p><br\/>\r\n\r\nThis dataset was collected using infrastructure
+        provided by VLIZ and INBO funded by the Research Foundation - Flanders (FWO)
+        as part of the Belgian contribution to LifeWatch. The study was commissioned
+        by the Flemish Environment Agency (VMM). Data were exported from the European
+        Tracking Network data portal (<a href=\"http:\/\/www.lifewatch.be\/etn\">http:\/\/www.lifewatch.be\/etn<\/a>)
+        developed by VLIZ using the ETN R package (<a href=\"https:\/\/inbo.github.io\/etn\/\">https:\/\/inbo.github.io\/etn\/<\/a>)
+        developed by INBO. Field definitions can be found at <a href=\"https:\/\/inbo.github.io\/etn\/articles\/etn_fields.html\">https:\/\/inbo.github.io\/etn\/articles\/etn_fields.html<\/a>.<\/p>","OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":"Nov
+        22 2024 12:00AM","ReleaseDate0":"2024-11-22","OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Pauwels,
+        I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.;
+        Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020):
+        2014_DEMER - Acoustic telemetry data for four fish species in the Demer river
+        (Belgium). Marine Data Archive.","AccessConstraints":null,"UDate":"2026-01-26","CDate":"2018-01-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Sensor
+        platform","Progress":"Completed","AccessConstraint":"CC 0 (No Rights Reserved)","AccConstrEN":"CC
+        0 (No Rights Reserved)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/\"
+        target=\"_blank\"><img alt=\"CC0\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/cc-zero.png\" \/><\/a>
+        To the extent possible under law, the person who associated CC0 with this
+        dataset has waived all copyright and related or neighboring rights to this
+        dataset.","License":"https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/","AccConstrDescription":"CC0
+        enables scientists, educators, artists and other creators and owners of copyright-
+        or database-protected content to waive those interests in their works and
+        thereby place them as completely as possible in the public domain, so that
+        others may freely build upon, enhance and reuse the works for any purposes
+        without restriction under copyright or database law.","Lineage":"Prior to
+        publication data undergo quality control checked which are described in https:\/\/github.com\/EMODnet\/EMODnetBiocheck?tab=readme-ov-file#understanding-the-output","AccConID":19},"dois":[{"DOIID":432,"PublicationYear":2020,"DOI":"10.14284\/432","Citation":"Pauwels,
+        I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.;
+        Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020):
+        2014_DEMER - Acoustic telemetry data for four fish species in the Demer river
+        (Belgium). Marine Data Archive.","MDAID":"VLIZ_00000844_5fbb983959140226777868","Moratorium":0,"MDAURL":"https:\/\/mda.vliz.be\/directlink.php?fid=VLIZ_00000844_5fbb983959140226777868","CurrentDOI":1,"Active":1,"URL":null,"downloadURL":"https:\/\/mda.vliz.be\/download.php?file=VLIZ_00000844_5fbb983959140226777868"}],"spcols":[{"SpColID":619,"SpName":"available
+        through EurOBIS"},{"SpColID":552,"SpName":"EMODNET"},{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
+        tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Bio-geographical
+        regions","ThesTypID":7,"ThesType":"INSPIRE themes","Code":"br","Description":"Areas
+        of relatively homogeneous ecological conditions with common characteristics.","OrigThesTerm":"Bio-geographical
+        regions","DutchTerm":"Biogeografische gebieden","URI":"https:\/\/inspire.ec.europa.eu\/theme\/br","DasKeywordDescr":null},{"ThesaurusTerm":"Biologging","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Biologging","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Biota","ThesTypID":16,"ThesType":"INSPIRE
+        Topics","Code":"biota","Description":"Flora and\/or fauna in natural environment.","OrigThesTerm":"Biota","DutchTerm":"Biota","URI":"https:\/\/inspire.ec.europa.eu\/metadata-codelist\/TopicCategory\/biota","DasKeywordDescr":null},{"ThesaurusTerm":"Environment","ThesTypID":16,"ThesType":"INSPIRE
+        Topics","Code":"environment","Description":"Environmental resources, protection
+        and conservation.","OrigThesTerm":"Environment","DutchTerm":"Milieu","URI":"https:\/\/inspire.ec.europa.eu\/metadata-codelist\/TopicCategory\/environment","DasKeywordDescr":null},{"ThesaurusTerm":"EurOBIS
+        calculated BBOX","ThesTypID":35,"ThesType":"Geoterms no link Marine Regions","Code":null,"Description":null,"OrigThesTerm":"EurOBIS
+        calculated BBOX","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Geoscientific
+        Information","ThesTypID":16,"ThesType":"INSPIRE Topics","Code":"geoscientificInformation","Description":"Information
+        pertaining to earth sciences.","OrigThesTerm":"Geoscientific Information","DutchTerm":"Geowetenschappelijke
+        informatie","URI":"https:\/\/inspire.ec.europa.eu\/metadata-codelist\/TopicCategory\/geoscientificInformation","DasKeywordDescr":null},{"ThesaurusTerm":"Habitats
+        and biotopes","ThesTypID":7,"ThesType":"INSPIRE themes","Code":"hb","Description":"Geographical
+        areas characterised by specific ecological conditions, processes, structure,
+        and (life support) functions that physically support the organisms that live
+        there. Includes terrestrial and aquatic areas distinguished by geographical,
+        abiotic and biotic features, whether entirely natural or semi-natural.","OrigThesTerm":"Habitats
+        and biotopes","DutchTerm":"Habitats en biotopen","URI":"https:\/\/inspire.ec.europa.eu\/theme\/hb","DasKeywordDescr":null},{"ThesaurusTerm":"Impact
+        assessment","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Impact
+        assessment","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"LifeWatch","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"LifeWatch","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Metadata
+        non conformant","ThesTypID":17,"ThesType":"INSPIRE Conformity","Code":null,"Description":null,"OrigThesTerm":"Metadata
+        non conformant","DutchTerm":"Metadata niet conform","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Metadata
+        not evaluated","ThesTypID":17,"ThesType":"INSPIRE Conformity","Code":null,"Description":null,"OrigThesTerm":"Metadata
+        not evaluated","DutchTerm":"Metadata niet gecontroleerd","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Migration","ThesTypID":2,"ThesType":"CSA
+        Technology Research Database Master Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Migration","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Migration
+        barriers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Migration
+        barriers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"No
+        limitations to public access","ThesTypID":20,"ThesType":"INSPIRE Limitations
+        on public access","Code":"http:\/\/inspire.ec.europa.eu\/metadata-codelist\/LimitationsOnPublicAccess\/noLimitations","Description":"There
+        are no limitations on public access to spatial data sets and services.","OrigThesTerm":"No
+        limitations to public access","DutchTerm":"Geen beperkingen op publieke toegang","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Oceans","ThesTypID":16,"ThesType":"INSPIRE
+        Topics","Code":"oceans","Description":"Features and characteristics of salt
+        water bodies (excluding inland waters).","OrigThesTerm":"Oceans","DutchTerm":"Oceanen","URI":"https:\/\/inspire.ec.europa.eu\/metadata-codelist\/TopicCategory\/oceans","DasKeywordDescr":null},{"ThesaurusTerm":"Sea
+        regions","ThesTypID":7,"ThesType":"INSPIRE themes","Code":"sr","Description":"Physical
+        conditions of seas and saline water bodies divided into regions and sub-regions
+        with common characteristics.","OrigThesTerm":"Sea regions","DutchTerm":"Zeegebieden","URI":"https:\/\/inspire.ec.europa.eu\/theme\/sr","DasKeywordDescr":null},{"ThesaurusTerm":"VEMCO","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"VEMCO","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"WGS84
+        (EPSG:4326)","ThesTypID":18,"ThesType":"Coordinate Reference System","Code":null,"Description":null,"OrigThesTerm":"WGS84
+        (EPSG:4326)","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"XYZ
+        ASCII","ThesTypID":19,"ThesType":"Spatial data formats","Code":null,"Description":null,"OrigThesTerm":"XYZ
+        ASCII","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null},{"DasID":5250,"Acronym":null,"EngAbstract":"As
+        part of the Belgian LifeWatch observatory, a permanent acoustic receiver network
+        for fish tracking is established in the Belgian Part of the North Sea and
+        the Western Scheldt. Using acoustic telemetry distribution, movements and
+        habitat use of tagged migratory fish can be tracked. Tags or transmitters
+        are surgically implanted in the belly of individual fish. When swimming in
+        the vicinity of an acoustic receiver (Vemco), the information of the unique
+        ID-code of the transmitter is stored on the receiver together with an exact
+        timing of the event. When signals are simultaneously received by multiple
+        receivers, an exact positioning of the tagged individuals can be derived from
+        the raw data. In total 40 transmitters are implanted and 51 acoustic receivers
+        are installed on buoys and other platforms.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"LifeWatch
+        observatory data: fish acoustic receiver network","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":1510,"Acronym":"EurOBIS","StandardTitle":"European
+        Ocean Biodiversity Information System","Relation":"Published dataset","RelationY":"Published
+        in","RelID":13,"doi":null,"vlizDoi":null}],"ownerships":[{"OrderNr":1,"Surname":null,"Firstname":null,"Initials":null,"PerPublicFlag":null,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":null,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":68,"Role":"Data
+        provider","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Pauwels","Firstname":"Ine","Initials":"I.","PerPublicFlag":1,"AdrID":163190,"Email":"ine.pauwels@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":33411,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-2856-8787","ROR":null},{"OrderNr":3,"Surname":"Pauwels","Firstname":"Ine","Initials":"I.","PerPublicFlag":1,"AdrID":163190,"Email":"ine.pauwels@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":33411,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":24,"Role":"Contact","OrigName":"Research
+        Institute for Nature and Forest","StandardName":"Instituut voor Natuur- en
+        Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-2856-8787","ROR":null},{"OrderNr":4,"Surname":"Baeyens","Firstname":"Raf","Initials":"R.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":8918,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-0651-3056","ROR":null},{"OrderNr":5,"Surname":"De
+        Maerteleire","Firstname":"Nico","Initials":"N.","PerPublicFlag":1,"AdrID":161546,"Email":"nico.demaerteleire@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":36616,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null},{"OrderNr":6,"Surname":"Desmet","Firstname":"Peter","Initials":"P.","PerPublicFlag":1,"AdrID":159617,"Email":"\r\nPeter.Desmet@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":12364,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-8442-8025","ROR":null},{"OrderNr":7,"Surname":"Gelaude","Firstname":"Emilie","Initials":"E.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":21679,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null},{"OrderNr":8,"Surname":"Milotic","Firstname":"Tanja","Initials":"T.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":21798,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-3129-6196","ROR":null},{"OrderNr":9,"Surname":"Pieters","Firstname":"S\u00e9bastien","Initials":"S.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":21721,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null},{"OrderNr":10,"Surname":"Reyserhove","Firstname":"Lien","Initials":"L.","PerPublicFlag":1,"AdrID":161549,"Email":"lien.reyserhove@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":36618,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0001-7484-9267","ROR":null},{"OrderNr":11,"Surname":"Robberechts","Firstname":"Karen","Initials":"K.","PerPublicFlag":1,"AdrID":163191,"Email":"karen.robberechts@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":38726,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null},{"OrderNr":12,"Surname":"Verhelst","Firstname":"Pieterjan","Initials":"P.-J.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"MARBIOL","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Ghent
+        University; Faculty of Sciences; Biology Department; Marine Biology Section","InsOwnerCNT":1,"PersID":30781,"InsID":13,"FullInstitute":"Universiteit
+        Gent; Faculteit Wetenschappen; Vakgroep Biologie; Onderzoeksgroep Mariene
+        Biologie","RoleID":61,"Role":"Data creator","OrigName":"Marine Biology Research
+        Group","StandardName":"Onderzoeksgroep Mariene Biologie","FullAcronym":"UGent-MARBIOL","ORC":"https:\/\/orcid.org\/0000-0002-2610-6941","ROR":null},{"OrderNr":13,"Surname":"Coeck","Firstname":"Johan","Initials":"J.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":12,"PersID":7223,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0003-2732-7428","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":37994,"TaxTerm":"Petromyzon marinus Linnaeus, 1758","AphiaID":101174,"DutchTerm":"Zeeprik"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":35276,"TaxTerm":"Rutilus rutilus (Linnaeus, 1758)","AphiaID":154333,"DutchTerm":"Blankvoorn"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":36014,"TaxTerm":"Silurus glanis Linnaeus, 1758","AphiaID":154677,"DutchTerm":"Europese
+        meerval"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":43330,"TaxTerm":"Squalius
+        cephalus (Linnaeus, 1758)","AphiaID":282855,"DutchTerm":null}],"frameworks":null,"otherterms":[{"OtherTerm":"Animal
+        movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Biologging"},{"OtherTerm":"Impact
+        assessment"},{"OtherTerm":"LifeWatch"},{"OtherTerm":"Migration barriers"},{"OtherTerm":"VEMCO"}],"temporal":[{"DasDateID":4619,"StartYear":2014,"EndYear":2018,"StartDay":18,"EndDay":15,"StartDate":"2014-04-18","EndDate":"2018-09-15","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":4,"StartMonth":"April","StartMonthNL":"April","EndMonth0":9,"EndMonth":"September","EndMonthNL":"September","Progress":"Completed","ProgressNL":"Afgelopen"},{"DasDateID":6494,"StartYear":2014,"EndYear":2018,"StartDay":17,"EndDay":15,"StartDate":"2014-04-17","EndDate":"2018-09-15","DasDate":"EurOBIS
+        harvested data","Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":4,"StartMonth":"April","StartMonthNL":"April","EndMonth0":9,"EndMonth":"September","EndMonthNL":"September","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Demer
+        R.","DasGeoID":9694,"DasGeoTerm":null,"DasID":5871,"GeotID":6563,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":3101,"OrigGeoTerm":"Demer
+        R.","DutchTerm":"Demer R."},{"GeoTerm":"EurOBIS calculated BBOX","DasGeoID":14765,"DasGeoTerm":null,"DasID":5871,"GeotID":9449,"X":3.9696500000000001,"Y":50.981969999999997,"MaxX":5.0780231999999996,"MaxY":51.242075999999997,"StationName":"Bounding
+        Box","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":"EurOBIS
+        calculated BBOX","DutchTerm":null},{"GeoTerm":"Flanders","DasGeoID":11279,"DasGeoTerm":null,"DasID":5871,"GeotID":6172,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2469,"OrigGeoTerm":"Flanders","DutchTerm":"Vlaanderen"}],"meastypes":[{"MethID":null,"DasMeasTypID":20607,"DasMeasType":"EurOBIS
+        harvested data","Matrix":null,"MatrixNL":null,"Parameter":"Development stage
+        of biological entity specified elsewhere","ParameterNL":null,"Description":"http:\/\/vocab.nerc.ac.uk\/collection\/P01\/current\/LSTAGE01\/","Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":"SeaDataNet
+        biological format biotic parameters","ParaCatCode":"SDN:P02::BPRP"},{"MethID":null,"DasMeasTypID":13355,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Fish
+        detections","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null},{"MethID":null,"DasMeasTypID":13358,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Fish
+        sex","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null},{"MethID":null,"DasMeasTypID":13356,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Fish
+        total length","ParameterNL":null,"Description":null,"Unit":"cm","Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null},{"MethID":null,"DasMeasTypID":20608,"DasMeasType":"EurOBIS
+        harvested data","Matrix":null,"MatrixNL":null,"Parameter":"Gender of biological
+        entity specified elsewhere","ParameterNL":null,"Description":"http:\/\/vocab.nerc.ac.uk\/collection\/P01\/current\/ENTSEX01\/","Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":"SeaDataNet
+        biological format biotic parameters","ParaCatCode":"SDN:P02::BPRP"},{"MethID":null,"DasMeasTypID":13357,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Wet
+        weight of fish","ParameterNL":null,"Description":null,"Unit":"g","Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":101,"DasTheme":"Biology
+        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":[{"ProID":5348,"Acronym":"DTO
+        - BioFlow","Progress":"In Progress","StandardTitle":"Integration of biodiversity
+        monitoring data into the Digital Twin Ocean","FP7Code":null,"GrantDOI":null,"FunderID":"101112823","FunderIDType":"EU
+        contract id","FunderCodes":["Horizon Europe"]}],"refs":[{"0":291634,"BRefID":291634,"1":"Based
+        on this dataset","Relation":"Based on this dataset","2":2,"RelationID":2,"3":"<b>Pauwels,
+        I. <i>et al.<\/i><\/b> (2016). Evaluatie van vismigratie in de Demer in Diest.
+        Evaluatie van de Grote Steunbeer als potentieel knelpunt en de Zwarte Beek
+        als alternatieve route voor vismigratie. <i>Rapporten van het Instituut voor
+        Natuur- en Bosonderzoek<\/i>, NBO.R.2016.7009776. Instituut voor Natuur- en
+        Bosonderzoek: Brussel.  64 pp.","RR":"<b>Pauwels, I. <i>et al.<\/i><\/b> (2016).
+        Evaluatie van vismigratie in de Demer in Diest. Evaluatie van de Grote Steunbeer
+        als potentieel knelpunt en de Zwarte Beek als alternatieve route voor vismigratie.
+        <i>Rapporten van het Instituut voor Natuur- en Bosonderzoek<\/i>, NBO.R.2016.7009776.
+        Instituut voor Natuur- en Bosonderzoek: Brussel.  64 pp.","4":"Evaluatie van
+        vismigratie in de Demer in Diest. Evaluatie van de Grote Steunbeer als potentieel
+        knelpunt en de Zwarte Beek als alternatieve route voor vismigratie","StT":"Evaluatie
+        van vismigratie in de Demer in Diest. Evaluatie van de Grote Steunbeer als
+        potentieel knelpunt en de Zwarte Beek als alternatieve route voor vismigratie","5":"Pauwels,
+        I.; Buysse, D.; Mouton, A.; Baeyens, R.; De Maerteleire, N.; Pieters, S.;
+        Robberechts, K.; Gelaude, E.; Coeck, J.","RSA":"Pauwels, I.; Buysse, D.; Mouton,
+        A.; Baeyens, R.; De Maerteleire, N.; Pieters, S.; Robberechts, K.; Gelaude,
+        E.; Coeck, J.","6":"Gebaseerd op deze dataset","DutchTerm":"Gebaseerd op deze
+        dataset","7":null,"AnaDate":null,"8":2016,"MonDate":2016,"9":". <i>Rapporten
+        van het Instituut voor Natuur- en Bosonderzoek<\/i>, NBO.R.2016.7009776. Instituut
+        voor Natuur- en Bosonderzoek: Brussel.  64 pp.","":". <i>Rapporten van het
+        Instituut voor Natuur- en Bosonderzoek<\/i>, NBO.R.2016.7009776. Instituut
+        voor Natuur- en Bosonderzoek: Brussel.  64 pp.","10":null,"doi":null}],"urls":[{"URL":"https:\/\/emodnet.ec.europa.eu\/geonetwork\/srv\/eng\/catalog.search#\/metadata\/6d617269-6e65-696e-666f-000000005871","externalID":null,"URLTypeCode":null,"URLType":"Dataset
+        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https:\/\/emodnet.ec.europa.eu\/geoviewer\/?layers=6d617269-6e65-696e-666f-000000001510:1:1&basemap=ebwbl&active=12639&bounds=-12530604,-7655416,12530604,7655416&filters=12639:datasetid__datasetid=5871--&projection=EPSG:3857","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/eurobis.org\/id\/dataprovider\/5871","externalID":null,"URLTypeCode":null,"URLType":"LOD
+        Dataset","URLTypID":52,"downloadURL":null,"FileName":null},{"URL":"https:\/\/www.eurobis.org\/toolbox\/en\/download\/occurrence\/dataset\/5871","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/www.gbif.org\/dataset\/8be8dcf1-6e83-4172-a7b7-c2032b933d23","externalID":null,"URLTypeCode":"GBIF_UUID","URLType":"GBIF
+        dataset","URLTypID":43,"downloadURL":null,"FileName":null},{"URL":"https:\/\/geo.vliz.be\/geoserver\/Dataportal\/wfs?service=wfs&version=1.1.0&typeName=eurobis-obisenv_full&request=GetFeature&outputFormat=text%2Fcsv&viewParams=datasetid%3A5871","externalID":null,"URLTypeCode":null,"URLType":"INSPIRE
+        Download Service (WFS)","URLTypID":50,"downloadURL":null,"FileName":null},{"URL":"https:\/\/geo.vliz.be\/geoserver\/wms?service=WMS&request=getCapabilities&layer=Dataportal:eurobis_rasters-obisenv","externalID":null,"URLTypeCode":null,"URLType":"INSPIRE
+        WMS","URLTypID":49,"downloadURL":null,"FileName":null},{"URL":"https:\/\/ipt.inbo.be\/archive.do?r=2014_demer","externalID":null,"URLTypeCode":null,"URLType":"IPT","URLTypID":33,"downloadURL":null,"FileName":null},{"URL":"ipt.inbo.be\/resource?r=2014_demer","externalID":null,"URLTypeCode":null,"URLType":"IPT","URLTypID":33,"downloadURL":null,"FileName":null},{"URL":"https:\/\/obis.org\/dataset\/4961ff53-d090-497f-9ddb-39b6c485bb66","externalID":"4961ff53-d090-497f-9ddb-39b6c485bb66","URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":[{"SpatRep":"Tabular
+        data","SpatRes":null,"Unit":null,"MapScale":null,"GeoObject":null,"CountOfFeats":null}],"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-14 08:24:53
+recorded_with: VCR-vcr/2.1.0

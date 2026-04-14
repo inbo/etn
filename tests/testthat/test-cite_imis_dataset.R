@@ -148,6 +148,17 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
   )
 })
 
+test_that("cite_imis_dataset() doesn't destroy citation upon appending doi", {
+  skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("citations-5871")
+
+  # value should not be NA
+  expect_false(
+    is.na(cite_imis_dataset(imis_dataset_ids = 5871)$citation)
+  )
+})
+
 test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
   skip_if_offline("marineinfo.org")
 
