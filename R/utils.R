@@ -306,3 +306,19 @@ NULL
                      cache = cachem::cache_mem(max_age = 60 * 15)
   )
 }
+
+#' Expand columns
+#'
+#' Expands a data frame with columns. Added columns will have `NA_character_`
+#' values, existing columns of the same name will not be overwritten.
+#'
+#' @param df A data frame.
+#' @param colnames A character vector of column names.
+#' @return Data frame expanded with columns that were not yet present.
+#' @family helper functions
+#' @noRd
+expand_cols <- function(df, colnames) {
+  cols_to_add <- setdiff(colnames, colnames(df))
+  df[, cols_to_add] <- NA_character_
+  df
+}
