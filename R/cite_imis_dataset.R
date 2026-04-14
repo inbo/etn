@@ -143,6 +143,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         purrr::pluck(dataset_metadata, "datasetrec", "Citation",
           .default = NA_character_
         )
+
       dplyr::tibble(
         citation =
           stringr::str_c(
@@ -156,7 +157,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
                 !stringr::str_ends(citation_raw, stringr::fixed(".")) &
                 !is.na(doi),
               yes = ".",
-              no = NA_character_
+              # Empty string, because NA converts whole string to NA
+              no = ""
             ),
             # Only add a space when there is a doi
             "space" = ifelse(
