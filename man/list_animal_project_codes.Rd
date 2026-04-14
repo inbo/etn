@@ -12,8 +12,7 @@ database. This argument is no longer used. You will be prompted for
 credentials instead.}
 }
 \value{
-A vector of all unique \code{project_code} of \code{type = "animal"} in
-\code{project.sql}.
+A vector of all unique \code{project_code} of \code{type = "animal"} that are available.
 }
 \description{
 List all available animal project codes
