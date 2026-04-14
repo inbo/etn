@@ -1,8 +1,7 @@
 #' List all available animal project codes
 #'
 #' @inheritParams list_animal_ids
-#' @return A vector of all unique `project_code` of `type = "animal"` in
-#'   `project.sql`.
+#' @return A vector of all unique `project_code` of `type = "animal"` that are available.
 #'
 #' @export
 #'
