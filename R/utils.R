@@ -229,6 +229,29 @@ credentials_are_set <- function(){
     nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
+#' Port of tools::file_path_sans_ext
+#'
+#' This function is a port of `tools::file_path_sans_ext` to avoid a direct
+#' dependency on the tools package. The function is used to remove the file
+#' extension from a file path. See `tools::file_path_sans_ext()` for more
+#' information.
+#'
+#' @param x Character vector of file paths.
+#' @param compression Logical. If `TRUE`, also remove compression extensions
+#'   (".gz", ".bz2", ".xz").
+#'
+#' @returns Returns the file paths without extensions (and the leading dot).
+#'   (Only purely alphanumeric extensions are recognized.)
+#'
+#' @family helper functions
+#' @noRd
+path_sans_ext <- function(x, compression = FALSE) {
+  if (compression) {
+    x <- sub("[.](gz|bz2|xz)$", "", x)
+    }
+    sub("([^.]+)\\.[[:alnum:]]+$", "\\1", x)
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
