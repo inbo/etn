@@ -2,8 +2,7 @@
 #'
 #' @inheritParams list_animal_ids
 #' 
-#' @return A vector of all unique `station_name` present in
-#'   `acoustic.deployments`.
+#' @return A vector of all unique `station_name` present in the deployments table.
 #'
 #' @export
 #'

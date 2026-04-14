@@ -14,8 +14,8 @@
 #'
 #' @inheritParams list_animal_ids
 #' 
-#' @return A tibble with acoustic deployment data, sorted by
-#'   `acoustic_project_code`, `station_name` and `deploy_date_time`.
+#' @return A tibble with acoustic deployment data, sorted by 
+#' `acoustic_project_code`, `station_name` and `deploy_date_time`.
 #'
 #' @export
 #'

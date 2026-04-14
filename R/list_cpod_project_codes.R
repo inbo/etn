@@ -2,8 +2,7 @@
 #'
 #' @inheritParams list_animal_ids
 #' 
-#' @return A vector of all unique `project_code` of `type = "cpod"` in
-#'   `project.sql`.
+#' @return A vector of all unique `project_code` of `type = "cpod"`.
 #'
 #' @export
 #'

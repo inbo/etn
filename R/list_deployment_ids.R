@@ -2,7 +2,7 @@
 #'
 #' @inheritParams list_animal_ids
 #' 
-#' @return A vector of all unique `id_pk` present in `acoustic.deployments`.
+#' @return A vector of all unique `id_pk` present in the deployments table.
 #'
 #' @export
 #'
