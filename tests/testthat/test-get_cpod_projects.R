@@ -1,5 +1,6 @@
 test_that("get_cpod_projects() returns a tibble", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   df <- get_cpod_projects()
 
@@ -9,6 +10,7 @@ test_that("get_cpod_projects() returns a tibble", {
 
 test_that("get_cpod_projects() returns unique project_id", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   df <- get_cpod_projects()
   expect_identical(nrow(df), nrow(df |> dplyr::distinct(project_id)))
@@ -16,6 +18,7 @@ test_that("get_cpod_projects() returns unique project_id", {
 
 test_that("get_cpod_projects() returns the expected columns", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expected_col_names <- c(
     "project_id",
@@ -41,6 +44,7 @@ test_that("get_cpod_projects() returns the expected columns", {
 
 test_that("get_cpod_projects() allows selecting on cpod_project_code", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   # Errors
   expect_error(
@@ -79,6 +83,7 @@ test_that("get_cpod_projects() allows selecting on cpod_project_code", {
 
 test_that("get_cpod_projects() returns projects of type 'cpod'", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_equal(
     get_cpod_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
