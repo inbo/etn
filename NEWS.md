@@ -1,6 +1,8 @@
 # etn (development version)
 
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
+* New function `get_receiver_logs()` allows retrieving log files/diagnostic information for acoustic receivers (#254).
+* `read_package()` and `write_package()`, to read and write data packages, are reexported functionality from frictionless, see [`frictionless::read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html) and [`frictionless::write_package()`](https://docs.ropensci.org/frictionless/reference/write_package.html) (#525).
 * New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a data package (#530).
 * `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write data packages (#525).
 * `write_dwc()` now uses a data package as input, rather than reading from the ETN database (#528). This means the function can be used locally. In addition:
