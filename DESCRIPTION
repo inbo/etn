@@ -33,8 +33,7 @@ Imports:
     assertthat,
     cachem,
     cli,
-    dplyr (>= 1.2.0),
-    etnservice (>= 0.5.0),
+    dplyr,
     frictionless,
     glue,
     httr2,
@@ -49,6 +48,7 @@ Imports:
     utils,
     withr
 Suggests:
+    etnservice (>= 0.5.0),
     formattable,
     kableExtra,
     knitr,
