@@ -11,7 +11,7 @@
 #' @param response The response resulting from a POST request to a opencpu api
 #'   service
 #'
-#' @return the OCPU temp key to be used as part of a GET request to an opencpu
+#' The OCPU temp key to be used as part of a GET request to an opencpu
 #'   api service
 #' @family helper functions
 #' @noRd
@@ -42,7 +42,7 @@ extract_temp_key <- function(response) {
 #'   `compression = "lz4"` in the case of `format = "feather"` is passed to
 #'   `arrow::write_feather()`. Other encoders include `base::saveRDS`.
 #'
-#' @return the uncompressed object resulting form a GET request to the API. If
+#' @return The uncompressed object resulting form a GET request to the API. If
 #'   `return_url` is `TRUE`, the url of the result object is returned instead.
 #' @family helper functions
 #' @noRd
@@ -125,7 +125,7 @@ get_val <- function(temp_key,
 #' @param compact Logical, if `TRUE` (default) `NULL` values are removed from the
 #' returned list. Similar (but not identical to) to [purrr::compact()].
 #'
-#' @return a named list of name value pairs form the parent environement
+#' @return A named list of name value pairs form the parent environement
 #'
 #' @family helper functions
 #' @noRd
@@ -220,7 +220,7 @@ get_hostname <- function(url_str) {
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
 #'
-#' @returns Either a character string with the version number of etnservice. Or
+#' @return Either a character string with the version number of etnservice. Or
 #'   a list with the full output which includes the version number, And the
 #'   checksums of all functions in etnservice.
 #' @noRd

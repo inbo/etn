@@ -20,7 +20,7 @@
 #' @param ... options on how to fetch the response. Forwarded to
 #'   `forward_to_api()`
 #'
-#' @return parsed R object as resulting from the API
+#' Parsed R object as resulting from the API
 #'
 #' @family helper functions
 #' @noRd
