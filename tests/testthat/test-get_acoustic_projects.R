@@ -23,9 +23,6 @@ test_that("get_acoustic_projects() returns the expected columns", {
     "project_type",
     "telemetry_type",
     "project_name",
-    # "coordinating_organization",
-    # "principal_investigator",
-    # "principal_investigator_email",
     "start_date",
     "end_date",
     "latitude",
@@ -82,5 +79,37 @@ test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
   expect_identical(
     get_acoustic_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "acoustic"
+  )
+})
+
+test_that("get_acoustic_projects() returns citation information when requested", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("marineinfo.org")
+
+  acoustic_project_codes <- c(
+    "SGB",
+    "ARAISOLA03",
+    "Eel_migration_Test_2023",
+    "rt2020_zeeschelde"
+  )
+
+  citation_columns <- c(
+    "imis_dataset_id", # To make fetching citations possible
+    "citation",
+    "doi",
+    "contact_name",
+    "contact_email",
+    "contact_affiliation"
+  )
+
+  expect_contains(
+    names(
+      get_acoustic_projects(
+        acoustic_project_code = acoustic_project_codes,
+        citation = TRUE
+      )
+    ),
+    citation_columns
   )
 })
