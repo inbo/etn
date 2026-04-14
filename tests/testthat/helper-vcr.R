@@ -9,6 +9,7 @@ library("vcr") # *Required* as vcr is set up on loading
 #'
 #' @return Logical, `TRUE` if the tests are running on the test deployment,
 #' `FALSE` if the tests are running on the production deployment.
+#' 
 #' @family helper functions
 #' @noRd
 #' @examples

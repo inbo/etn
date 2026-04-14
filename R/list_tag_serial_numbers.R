@@ -1,6 +1,7 @@
 #' List all available tag serial numbers
 #'
 #' @inheritParams list_animal_ids
+#' 
 #' @return A vector of all unique `tag_serial_numbers` present in
 #'   `common.tag_device`.
 #'

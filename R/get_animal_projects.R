@@ -6,6 +6,7 @@
 #'   codes. Case-insensitive.
 #'
 #' @inheritParams list_animal_ids
+#' 
 #' @return A tibble with animal project data, sorted by `project_code`.
 #'
 #' @export

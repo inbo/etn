@@ -2,6 +2,7 @@
 #'
 #'
 #' @inheritParams list_animal_ids
+#' 
 #' @return A vector of all unique `acoustic_tag_id` in `acoustic_tag_id.sql`.
 #'
 #' @export

@@ -1,6 +1,7 @@
 #' List all available station names
 #'
 #' @inheritParams list_animal_ids
+#' 
 #' @return A vector of all unique `station_name` present in
 #'   `acoustic.deployments`.
 #'

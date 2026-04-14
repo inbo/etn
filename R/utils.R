@@ -8,7 +8,9 @@
 #' @param name Name of the parameter.
 #' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
 #'   `x` values will be returned lowercase.
+#' 
 #' @return Error or (lowercase) `x` values.
+#' 
 #' @family helper functions
 #' @noRd
 check_value <- function(x, y, name = "value", lowercase = FALSE) {
@@ -45,8 +47,10 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'   environment, but you can set it manually too.
 #' @param password Password to the ETN database. By default read from the
 #'   environment, but you can set it manually too.
+#' 
 #' @return A string as it is ingested by other functions that need
 #'   authentication.
+#' 
 #' @family helper functions
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
@@ -125,6 +129,7 @@ get_parent_fn_name <- function(depth = 1) {
 #' on testthat.
 #'
 #' @return `TRUE` inside a test.
+#' 
 #' @family helper functions
 #' @noRd
 is_testing <- function() {
@@ -137,6 +142,7 @@ is_testing <- function() {
 #' tests.
 #'
 #' @return Character of length one with the system's nodename.
+#' 
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -156,6 +162,7 @@ get_nodename <- function() {
 #'
 #' @return Logical. `TRUE` if the local database is available, `FALSE`
 #'   otherwise.
+#' 
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -209,6 +216,7 @@ select_protocol <- function() {
 #'
 #' @return A boolean indicating whether the ETN credentials are set in the
 #'   environment variables.
+#' 
 #' @family helper functions
 #' @noRd
 credentials_are_set <- function(){

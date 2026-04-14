@@ -44,6 +44,7 @@ extract_temp_key <- function(response) {
 #'
 #' @return The uncompressed object resulting form a GET request to the API. If
 #'   `return_url` is `TRUE`, the url of the result object is returned instead.
+#' 
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -125,7 +126,7 @@ get_val <- function(temp_key,
 #' @param compact Logical, if `TRUE` (default) `NULL` values are removed from the
 #' returned list. Similar (but not identical to) to [purrr::compact()].
 #'
-#' @return A named list of name value pairs form the parent environement
+#' @return A named list of name value pairs form the parent environement.
 #'
 #' @family helper functions
 #' @noRd
@@ -186,7 +187,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 #' @param url_str A character string containing a URL
 #'
 #' @return The hostname extracted from the URL string including the scheme (eg.
-#'   https)
+#'   https).
 #'
 #' @family helper functions
 #' @noRd
@@ -223,6 +224,7 @@ get_hostname <- function(url_str) {
 #' @return Either a character string with the version number of etnservice. Or
 #'   a list with the full output which includes the version number, And the
 #'   checksums of all functions in etnservice.
+#' 
 #' @noRd
 #' @family helper functions
 get_etnservice_version <- function(return_as = c("version", "all"),
@@ -260,7 +262,8 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #'  function.
 #' @param ... Additional arguments passed on to `httr2::req_perform()`
 #'
-#' @return The response object from the request
+#' @return The response object from the request.
+#' 
 #' @family helper functions
 #' @noRd
 req_perform_opencpu <- function(req,

@@ -18,8 +18,10 @@
 #'   - [`CC-BY`](https://creativecommons.org/licenses/by/4.0/legalcode) (default).
 #'   - [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
 #' @inheritParams list_animal_ids
+#' 
 #' @return CSV file(s) written to disk or list of data frames when
 #'   `directory = NULL`.
+#' 
 #' @export
 #' @section Transformation details:
 #' Data are transformed into an

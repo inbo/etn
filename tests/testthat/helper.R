@@ -72,6 +72,7 @@ expect_protocol_agnostic <- function(expression) {
 #' @param table_name Name of the Data Resource to retrieve the fields from.
 #'
 #' @return List containing the schema fields of the requested resource.
+#' 
 #' @family helper functions
 #' @noRd
 fetch_schema_fields <- function(datapackage = datapackage, table_name) {
@@ -145,6 +146,7 @@ skip_if_no_authentication <- function() {
 #'
 #' @return An `httr2` response object containing the HTTP response for the
 #'   specified status code.
+#' 
 #' @family helper functions
 #' @noRd
 #' @examples

@@ -1,6 +1,7 @@
 #' List all available receiver ids
 #'
 #' @inheritParams list_animal_ids
+#' 
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
 #'
 #' @export
