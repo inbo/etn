@@ -5,6 +5,16 @@
 - Add European Union as funder (for
   [STRAITS](https://doi.org/10.3030/101094649))
   ([\#497](https://github.com/inbo/etn/issues/497)).
+- `get_acoustic_project()`,
+  [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
+  and
+  [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
+  now have an optional argument `citation`, which adds the columns
+  `citation`, `doi`, `contact_name`, `contact_email` and
+  `contact_affiliation` to the data frame. This makes it easier to cite
+  projects or contact the responsible. The citation information is
+  obtained via [MarineInfo](https://marineinfo.org)
+  ([\#518](https://github.com/inbo/etn/issues/518)).
 - New
   [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
   reads an example dataset (`"2014_DEMER"`) as a data package

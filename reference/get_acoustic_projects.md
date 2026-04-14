@@ -5,7 +5,11 @@ Get data for acoustic projects, with options to filter results.
 ## Usage
 
 ``` r
-get_acoustic_projects(connection, acoustic_project_code = NULL)
+get_acoustic_projects(
+  connection,
+  acoustic_project_code = NULL,
+  citation = FALSE
+)
 ```
 
 ## Arguments
@@ -19,6 +23,23 @@ get_acoustic_projects(connection, acoustic_project_code = NULL)
 
   Character (vector). One or more acoustic project codes.
   Case-insensitive.
+
+- citation:
+
+  Logical. If `TRUE`, adds extra columns with citation information for
+  each project from [MarineInfo](https://marineinfo.org/) using the
+  `imis_dataset_id`:
+
+  - `citation`: Formatted citation with DOI if available.
+
+  - `doi`: DOI for the dataset if available.
+
+  - `contact_name`: Contact person, usually the first author. If no
+    contact person is provided, the first author with status `creator`.
+
+  - `contact_email`: Email address of the contact person.
+
+  - `contact_affiliation`: Institute of the contact person.
 
 ## Value
 
@@ -46,12 +67,13 @@ get_acoustic_projects()
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 
-# Get a specific acoustic project
-get_acoustic_projects(acoustic_project_code = "demer")
-#> # A tibble: 1 × 11
+# Get a specific acoustic project with citation
+get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
+#> # A tibble: 1 × 16
 #>   project_id project_code project_type telemetry_type project_name start_date
 #>        <int> <chr>        <chr>        <chr>          <chr>        <date>    
 #> 1          7 demer        acoustic     Acoustic       Demer        2014-04-10
-#> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
-#> #   moratorium <lgl>, imis_dataset_id <int>
+#> # ℹ 10 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
+#> #   moratorium <lgl>, imis_dataset_id <int>, citation <chr>, doi <chr>,
+#> #   contact_name <chr>, contact_email <chr>, contact_affiliation <chr>
 ```
