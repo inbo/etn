@@ -1,5 +1,6 @@
 test_that("get_acoustic_projects() returns a tibble", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   df <- get_acoustic_projects()
 
@@ -9,6 +10,7 @@ test_that("get_acoustic_projects() returns a tibble", {
 
 test_that("get_acoustic_projects() returns unique project_id", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   df <- get_acoustic_projects()
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
@@ -16,6 +18,7 @@ test_that("get_acoustic_projects() returns unique project_id", {
 
 test_that("get_acoustic_projects() returns the expected columns", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expected_col_names <- c(
     "project_id",
@@ -37,6 +40,7 @@ test_that("get_acoustic_projects() returns the expected columns", {
 
 test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   # Errors
   expect_error(
@@ -75,6 +79,7 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
 
 test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
   skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
 
   expect_identical(
     get_acoustic_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
