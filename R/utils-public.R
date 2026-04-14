@@ -68,10 +68,13 @@ get_public_detections <- function(project_code, ...) {
 #' @noRd
 #'
 #' @examplesIf interactive()
-#' read_public_metadata("animals", tag_type == "acoustic")
-#' read_public_metadata("projects", telemetry_type = "Acoustic")
-#' read_public_metadata("projects", start_date > lubridate::ymd(20150101))
-read_public_metadata <- function(table = c(
+#' get_public_metadata("animals", tag_type == "acoustic")
+#' get_public_metadata("projects", telemetry_type == "Acoustic")
+#' # Equivalent to get_animal_projects() |> dplyr::filter(start_date > lubridate::ymd(20150101))
+#' get_public_metadata("projects", start_date > lubridate::ymd(20150101))
+#' # Equivalent to list_animal_project_codes()
+#' get_public_metadata("projects", project_type == "animal")$project_code
+get_public_metadata <- function(table = c(
                                            "animals",
                                            "deployments",
                                            "projects",
