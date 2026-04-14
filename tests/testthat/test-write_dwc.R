@@ -41,10 +41,6 @@ test_that("write_dwc() returns error on missing resources", {
   )
 })
 
-test_that("write_dwc() returns error on missing required fields", {
-  # TODO
-})
-
 test_that("write_dwc() writes CSV and meta.xml files to a directory and
            a list of data frames invisibly", {
   temp_dir <- tempdir()
