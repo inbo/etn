@@ -24,7 +24,7 @@ create_detections_occurrence <- function(detections, animals,
   occurrence <-
     detections |>
     dplyr::mutate(
-      time_per_hour = strftime(.data$timestamp, "%y-%m-%d %H %Z", tz = "UTC")
+      time_per_hour = strftime(.data$date_time, "%y-%m-%d %H %Z", tz = "UTC")
     ) |>
     # Group by animal+tag+date+hour combination
     dplyr::group_by(
