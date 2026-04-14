@@ -22,7 +22,7 @@ read_child_catalog <- function(catalog = c(
   jsonlite::fromJSON(file.path(catalog_root, catalog, "collection.json"))
 }
 
-get_public_detection_catalog <- function() {
+list_public_detections <- function() {
   read_child_catalog(catalog = "detection_files") |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
@@ -32,6 +32,28 @@ get_public_detection_catalog <- function() {
       project_code = path_sans_ext(basename(.data$href)),
       path = .data$href
     )
+}
+
+get_public_detections <- function(project_code, ...) {
+  public_detections <- list_public_detections()
+  selected_project_code <- rlang::arg_match0(
+    project_code,
+    values = public_detections$project_code
+  )
+
+  detections_path <-
+    list_public_detections() |>
+    dplyr::filter(project_code == selected_project_code) |>
+    dplyr::pull("path")
+
+  catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
+
+  jsonlite::fromJSON(file.path(catalog_root, "detection_files",
+                                 detections_path)) |>
+      purrr::chuck("assets", "data", "href") |>
+      purrr::map(arrow::read_parquet) |>
+      purrr::list_rbind() |>
+      dplyr::filter(...)
 }
 
 #' Read values from the parquet dump metadata files
