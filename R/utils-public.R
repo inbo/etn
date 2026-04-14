@@ -64,6 +64,27 @@ list_public_detections <- function() {
     )
 }
 
+#' Get public detections
+#'
+#' Read the public detection files for a given project code and filter the
+#' detections based on the provided filter conditions.
+#'
+#' @param project_code The project code for which to read the public detection
+#'   files. The project code must be one of the project codes listed in the
+#'   output of `list_public_detections()`.
+#' @param ... Filter conditions to apply to the detections. These conditions
+#'   will be passed to `dplyr::filter()` to filter the detections after reading
+#'   them from the parquet files.
+#'
+#' @returns A tibble with the public detections for the specified project code,
+#'   filtered based on the provided filter conditions.
+#'
+#' @family parquet helpers
+#' @noRd
+#'
+#' @examplesIf interactive()
+#' get_public_detections("ETN_001", timestamp >= lubridate::ymd(20220101))
+#'
 get_public_detections <- function(project_code, ...) {
   public_detections <- list_public_detections()
   selected_project_code <-
