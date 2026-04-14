@@ -43,9 +43,7 @@ get_package <- function(animal_project_code) {
   # Check animal_project_code
   if (length(animal_project_code) != 1) {
     cli::cli_abort(
-      c(
-        "{.val animal_project_code} must be a single value.",
-      ),
+      "{.arg animal_project_code} must be a single value.",
       class = "etn_error_code_value"
     )
   }
