@@ -1,15 +1,12 @@
-# Fetch tags using the API
-if (credentials_are_set()) {
+test_that("get_tags() returns a tibble", {
+  skip_if_no_authentication()
+  testthat::skip_if_offline("opencpu.lifewatch.be")
+
   # Force using the API
   df <- withr::with_envvar(
     new = c("ETN_PROTOCOL" = "opencpu"),
     code = get_tags()
   )
-}
-
-test_that("get_tags() returns a tibble", {
-  skip_if_no_authentication()
-  testthat::skip_if_offline("opencpu.lifewatch.be")
 
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
