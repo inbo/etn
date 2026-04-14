@@ -15,8 +15,8 @@
 #' # Get all acoustic projects
 #' get_acoustic_projects()
 #'
-#' # Get a specific acoustic project
-#' get_acoustic_projects(acoustic_project_code = "demer")
+#' # Get a specific acoustic project with citation
+#' get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
 get_acoustic_projects <- function(connection,
                                   acoustic_project_code = NULL,
                                   citation = FALSE) {

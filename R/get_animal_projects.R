@@ -4,13 +4,15 @@
 #'
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
-#' @param citation Logical. If `TRUE`, add citation information from IMIS/MarineInfo for each
-#'  project, based on the `imis_dataset_id` field. This will add the following columns to the output:
-#'  - `citation`: A formatted citation with DOI if available.
-#'  - `doi`: The DOI for the dataset if available.
-#'  - `contact_name`: The contact person, usually the first author. If no contact person is entered, the first author with status creator.
-#'  - `contact_email`: The email of the contact person.
-#'  - `contact_affiliation`: The institute of the contact person.
+#' @param citation Logical. If `TRUE`, adds extra columns with citation
+#'   information for each project from [MarineInfo](https://marineinfo.org/)
+#'   using the `imis_dataset_id`:
+#'   - `citation`: Formatted citation with DOI if available.
+#'   - `doi`: DOI for the dataset if available.
+#'   - `contact_name`: Contact person, usually the first author.
+#'     If no contact person is provided, the first author with status `creator`.
+#'   - `contact_email`: Email address of the contact person.
+#'   - `contact_affiliation`: Institute of the contact person.
 #'
 #' @inheritParams list_animal_ids
 #' @return A tibble with animal project data, sorted by `project_code`.
@@ -21,8 +23,8 @@
 #' # Get all animal projects
 #' get_animal_projects()
 #'
-#' # Get a specific animal project
-#' get_animal_projects(animal_project_code = "2014_demer")
+#' # Get a specific animal project with citation
+#' get_animal_projects(animal_project_code = "2014_demer", citation = TRUE)
 get_animal_projects <- function(connection,
                                 animal_project_code = NULL,
                                 citation = FALSE) {
