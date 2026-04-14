@@ -1,16 +1,20 @@
-read_catalog <- function(catalog = c(".",
-                                     "metadata_files",
-                                     "detection_files",
-                                     "archival_files")){
+read_catalog <- function(catalog = c(
+                           ".",
+                           "metadata_files",
+                           "detection_files",
+                           "archival_files"
+                         )) {
   catalog <- rlang::arg_match(catalog)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
-  jsonlite::fromJSON(file.path(catalog_root,"catalog.json"))
+  jsonlite::fromJSON(file.path(catalog_root, "catalog.json"))
 }
 
-read_child_catalog <- function(catalog = c("metadata_files",
-                                           "detection_files",
-                                           "archival_files")){
+read_child_catalog <- function(catalog = c(
+                                 "metadata_files",
+                                 "detection_files",
+                                 "archival_files"
+                               )) {
   catalog <- rlang::arg_match(catalog)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
@@ -18,7 +22,7 @@ read_child_catalog <- function(catalog = c("metadata_files",
   jsonlite::fromJSON(file.path(catalog_root, catalog, "collection.json"))
 }
 
-get_public_detection_catalog <- function(){
+get_public_detection_catalog <- function() {
   read_child_catalog(catalog = "detection_files") |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
