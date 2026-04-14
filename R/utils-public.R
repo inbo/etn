@@ -1,9 +1,7 @@
-read_catalog <- function(catalog = c(
-                           ".",
-                           "metadata_files",
-                           "detection_files",
-                           "archival_files"
-                         )) {
+read_catalog <- function(catalog = c(".",
+                                     "metadata_files",
+                                     "detection_files",
+                                     "archival_files")) {
   catalog <- rlang::arg_match(catalog)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
@@ -30,11 +28,9 @@ read_catalog <- function(catalog = c(
 #' @examplesIf interactive()
 #' read_child_catalog(catalog = "detection_files")
 #' read_child_catalog(catalog = "metadata_files")
-read_child_catalog <- function(catalog = c(
-                                 "metadata_files",
-                                 "detection_files",
-                                 "archival_files"
-                               )) {
+read_child_catalog <- function(catalog = c("metadata_files",
+                                           "detection_files",
+                                           "archival_files")) {
   catalog <- rlang::arg_match(catalog)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
@@ -70,10 +66,8 @@ list_public_detections <- function() {
 
 get_public_detections <- function(project_code, ...) {
   public_detections <- list_public_detections()
-  selected_project_code <- rlang::arg_match0(
-    project_code,
-    values = public_detections$project_code
-  )
+  selected_project_code <-
+    rlang::arg_match0(project_code, values = public_detections$project_code)
 
   detections_path <-
     list_public_detections() |>
@@ -82,12 +76,13 @@ get_public_detections <- function(project_code, ...) {
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
-  jsonlite::fromJSON(file.path(catalog_root, "detection_files",
-                                 detections_path)) |>
-      purrr::chuck("assets", "data", "href") |>
-      purrr::map(arrow::read_parquet) |>
-      purrr::list_rbind() |>
-      dplyr::filter(...)
+  jsonlite::fromJSON(file.path(catalog_root,
+                               "detection_files",
+                               detections_path)) |>
+    purrr::chuck("assets", "data", "href") |>
+    purrr::map(arrow::read_parquet) |>
+    purrr::list_rbind() |>
+    dplyr::filter(...)
 }
 
 #' Read values from the parquet dump metadata files
@@ -104,18 +99,17 @@ get_public_detections <- function(project_code, ...) {
 #' @examplesIf interactive()
 #' get_public_metadata("animals", tag_type == "acoustic")
 #' get_public_metadata("projects", telemetry_type == "Acoustic")
-#' # Equivalent to get_animal_projects() |> dplyr::filter(start_date > lubridate::ymd(20150101))
+#' # Equivalent to get_animal_projects() |>
+#' #   dplyr::filter(start_date > lubridate::ymd(20150101))
 #' get_public_metadata("projects", start_date > lubridate::ymd(20150101))
 #' # Equivalent to list_animal_project_codes()
 #' get_public_metadata("projects", project_type == "animal")$project_code
-get_public_metadata <- function(table = c(
-                                           "animals",
-                                           "deployments",
-                                           "projects",
-                                           "receivers",
-                                           "tags"
-                                         ),
-                                         ...) {
+get_public_metadata <- function(table = c("animals",
+                                          "deployments",
+                                          "projects",
+                                          "receivers",
+                                          "tags"),
+                                ...) {
   selected_table <- rlang::arg_match(table)
 
   catalog_paths <-
