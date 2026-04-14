@@ -187,10 +187,24 @@ select_protocol <- function() {
   # ALlow overwriting of protocol logic by environmental variable
   user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
                                        unset = "no_protocol_set")
+  # Check for allowed values of `ETN_PROTOCOL`
+  user_selected_protocol <-
+    rlang::arg_match0(
+      user_selected_protocol,
+      values = c(
+        "opencpu",
+        "localdb",
+        "public",
+        "no_protocol_set"
+      )
+    )
+
+  # If the user has set a protocol, use it.
   if (user_selected_protocol != "no_protocol_set") {
     return(user_selected_protocol)
   }
 
+  # Automatic selection -----------------------------------------------------
   # If there is a local database connection available, use it.
   if (localdb_is_available()) {
     return("localdb")
