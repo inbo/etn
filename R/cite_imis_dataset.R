@@ -1,9 +1,7 @@
-#' Get the citation and associated first author information for an IMIS dataset.
+#' Get citation information for a project
 #'
-#' This function returns the the citations and some information for the first
-#' author for a dataset as stored on [IMIS](https://www.vliz.be/nl/imis) These
-#' citations will be retrieved from
-#' [MarineInfo](https://https://marineinfo.org).
+#' Retrieves citation and contact information for a project from [MarineInfo](
+#' https://https://marineinfo.org), based on its `imis_dataset_id`.
 #'
 #' @inheritParams get_acoustic_projects
 #' @param imis_dataset_ids A vector of IMIS dataset ids as returned by
@@ -14,7 +12,6 @@
 #' @param progress Logical. If `TRUE`, show a progress bar for the API requests.
 #'   Default is `TRUE`, but will be automatically set to `FALSE` when testing to
 #'   avoid cluttering testthat output.
-#'
 #' @returns A data.frame with 6 columns:
 #'   - `imis_dataset_id`
 #'   - `citation`: Formatted citation with DOI if available.
@@ -25,10 +22,9 @@
 #'   - `contact_affiliation`: Institute of the contact person.
 #' @family citation helpers
 #' @noRd
-#'
 #' @examplesIf interactive()
 #' # Cite the 2014_gudena acoustic project:
-#'   cite_imis_dataset(8856)
+#' cite_imis_dataset(8856)
 cite_imis_dataset <- function(imis_dataset_ids = NULL,
                               warn = FALSE,
                               progress = TRUE) {
