@@ -37,6 +37,7 @@ Imports:
     frictionless,
     glue,
     httr2,
+    jsonlite,
     lifecycle,
     memoise,
     methods,
