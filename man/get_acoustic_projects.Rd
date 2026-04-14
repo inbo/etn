@@ -4,7 +4,11 @@
 \alias{get_acoustic_projects}
 \title{Get acoustic project data}
 \usage{
-get_acoustic_projects(connection, acoustic_project_code = NULL)
+get_acoustic_projects(
+  connection,
+  acoustic_project_code = NULL,
+  citation = FALSE
+)
 }
 \arguments{
 \item{connection}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A connection to the ETN
@@ -13,6 +17,18 @@ credentials instead.}
 
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
+
+\item{citation}{Logical. If \code{TRUE}, adds extra columns with citation
+information for each project from \href{https://marineinfo.org/}{MarineInfo}
+using the \code{imis_dataset_id}:
+\itemize{
+\item \code{citation}: Formatted citation with DOI if available.
+\item \code{doi}: DOI for the dataset if available.
+\item \code{contact_name}: Contact person, usually the first author.
+If no contact person is provided, the first author with status \code{creator}.
+\item \code{contact_email}: Email address of the contact person.
+\item \code{contact_affiliation}: Institute of the contact person.
+}}
 }
 \value{
 A tibble with acoustic project data, sorted by \code{project_code}.
@@ -25,7 +41,7 @@ Get data for acoustic projects, with options to filter results.
 # Get all acoustic projects
 get_acoustic_projects()
 
-# Get a specific acoustic project
-get_acoustic_projects(acoustic_project_code = "demer")
+# Get a specific acoustic project with citation
+get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
 \dontshow{\}) # examplesIf}
 }

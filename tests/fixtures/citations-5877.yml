@@ -1,0 +1,121 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=5877&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Thu, 09 Apr 2026 10:45:31 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=ju4jE3MWH%2CrPyFHipFONJm4-bcfyrk%2CarAZYoKoUJf6oPXpI;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":5877,"Acronym":"2011_Bovenschelde","StandardTitle":"Temporarily
+        acoustic receiver network in the Upper Scheldt river, for river lamprey tracking
+        in the Scheldt river basin","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"In
+        2011 and 2012 forty-one adult river lamprey were followed during their upstream
+        migration in the tidal and\/or non-tidal part of the River Scheldt and its
+        tributaries using acoustic telemetry (Vemco technology: V7 and V8 transmitters;
+        VR2 and VR2W data loggers). The migration patterns in the river catchment
+        and their behaviour at a tidal barrier, lock-weir complexes and fish bypasses
+        (passage timing and delay) show that the disrupted water management of the
+        river and in consequence of its barriers and bypasses are the key to (un)successful
+        spawning migration in the catchment.","EngDescr":"The disruption of longitudinal
+        and lateral connectivity of rivers has led to ecological catastrophes such
+        as the extinction of several diadromous fish species. River lamprey is an
+        important indicator species for the integrity of ecosystems and connectivity
+        within and between catchment areas. In the highly fragmented River Scheldt
+        basin first restoration actions are undertaken, such as the building of nature-like
+        bypasses.","OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":null,"AccessConstraints":null,"UDate":"2024-07-02","CDate":"2018-01-03","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Belgium,
+        Upper Sea Scheldt","ThesTypID":35,"ThesType":"Geoterms no link Marine Regions","Code":null,"Description":null,"OrigThesTerm":"Belgium,
+        Upper Sea Scheldt","DutchTerm":"Boven Zeeschelde","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Migration
+        barriers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Migration
+        barriers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spawning
+        migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_4d1412b7","Description":null,"OrigThesTerm":"Spawning
+        migrations","DutchTerm":"Paaimigraties","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_4d1412b7","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
+        data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking
+        data","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null},{"DasID":5250,"Acronym":null,"EngAbstract":"As
+        part of the Belgian LifeWatch observatory, a permanent acoustic receiver network
+        for fish tracking is established in the Belgian Part of the North Sea and
+        the Western Scheldt. Using acoustic telemetry distribution, movements and
+        habitat use of tagged migratory fish can be tracked. Tags or transmitters
+        are surgically implanted in the belly of individual fish. When swimming in
+        the vicinity of an acoustic receiver (Vemco), the information of the unique
+        ID-code of the transmitter is stored on the receiver together with an exact
+        timing of the event. When signals are simultaneously received by multiple
+        receivers, an exact positioning of the tagged individuals can be derived from
+        the raw data. In total 40 transmitters are implanted and 51 acoustic receivers
+        are installed on buoys and other platforms.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"LifeWatch
+        observatory data: fish acoustic receiver network","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":8600,"Acronym":"2024_bovenschelde","StandardTitle":"Acoustic
+        telemetry network in the non-tidal River Scheldt and its tributaries","Relation":"Related
+        Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":null}],"ownerships":[{"OrderNr":1,"Surname":"Coeck","Firstname":"Johan","Initials":"J.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":5,"PersID":7223,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":24,"Role":"Contact","OrigName":"Research
+        Institute for Nature and Forest","StandardName":"Instituut voor Natuur- en
+        Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0003-2732-7428","ROR":null},{"OrderNr":2,"Surname":"Coeck","Firstname":"Johan","Initials":"J.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":5,"PersID":7223,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0003-2732-7428","ROR":null},{"OrderNr":3,"Surname":"Pauwels","Firstname":"Ine","Initials":"I.","PerPublicFlag":1,"AdrID":163190,"Email":"ine.pauwels@inbo.be","InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":5,"PersID":33411,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-2856-8787","ROR":null},{"OrderNr":4,"Surname":"Buysse","Firstname":"David","Initials":"D.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":5,"PersID":8908,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":"https:\/\/orcid.org\/0000-0002-4437-5678","ROR":null},{"OrderNr":5,"Surname":"Vandamme","Firstname":"Lore","Initials":"L.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"INBO","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flemish
+        Government; Policy Domain Environment; Research Institute for Nature and Forest","InsOwnerCNT":5,"PersID":35344,"InsID":5443,"FullInstitute":"Vlaamse
+        overheid; Beleidsdomein Omgeving; Instituut voor Natuur- en Bosonderzoek","RoleID":61,"Role":"Data
+        creator","OrigName":"Research Institute for Nature and Forest","StandardName":"Instituut
+        voor Natuur- en Bosonderzoek","FullAcronym":"LNE-INBO","ORC":null,"ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":37865,"TaxTerm":"Lampetra fluviatilis (Linnaeus, 1758)","AphiaID":101172,"DutchTerm":"Rivierprik"}],"frameworks":null,"otherterms":[{"OtherTerm":"Migration
+        barriers"},{"OtherTerm":"Tracking data"}],"temporal":[{"DasDateID":4625,"StartYear":2011,"EndYear":2012,"StartDay":null,"EndDay":null,"StartDate":"2011-01-01","EndDate":"2012-01-01","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Belgian
+        Coast","DasGeoID":9715,"DasGeoTerm":null,"DasID":5877,"GeotID":6234,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2550,"OrigGeoTerm":"Belgian
+        Coast","DutchTerm":"Belgische kust"},{"GeoTerm":"Gent - Oostende Canal","DasGeoID":9708,"DasGeoTerm":null,"DasID":5877,"GeotID":6885,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":31014,"OrigGeoTerm":"Gent
+        - Oostende Canal","DutchTerm":"Kanaal Gent - Oostende"},{"GeoTerm":"Gent -
+        Terneuzen Canal","DasGeoID":9707,"DasGeoTerm":null,"DasID":5877,"GeotID":6701,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":21706,"OrigGeoTerm":"Gent
+        - Terneuzen Canal","DutchTerm":"Kanaal Gent - Terneuzen"},{"GeoTerm":"Leie
+        R.","DasGeoID":9709,"DasGeoTerm":null,"DasID":5877,"GeotID":6293,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2545,"OrigGeoTerm":"Leie
+        R.","DutchTerm":"Leie R."},{"GeoTerm":null,"DasGeoID":9705,"DasGeoTerm":null,"DasID":5877,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":20220,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Acoustic
+        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-09 10:45:32
+recorded_with: VCR-vcr/2.1.0

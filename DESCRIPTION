@@ -51,6 +51,7 @@ Imports:
 Suggests:
     etnservice (>= 0.5.0),
     formattable,
+    jsonlite,
     kableExtra,
     knitr,
     leaflet,
