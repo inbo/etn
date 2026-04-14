@@ -88,11 +88,13 @@ list_public_detections <- function() {
 get_public_detections <- function(project_code, ...) {
   public_detections <- list_public_detections()
   selected_project_code <-
-    rlang::arg_match0(project_code, values = public_detections$project_code)
+    rlang::arg_match(project_code,
+                     values = public_detections$project_code,
+                     multiple = TRUE)
 
   detections_path <-
     list_public_detections() |>
-    dplyr::filter(project_code == selected_project_code) |>
+    dplyr::filter(project_code %in% selected_project_code) |>
     dplyr::pull("path")
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
