@@ -34,7 +34,6 @@ Imports:
     cachem,
     cli,
     dplyr,
-    etnservice (>= 0.6.0),
     frictionless,
     glue,
     httr2,
@@ -50,6 +49,7 @@ Imports:
     utils,
     withr
 Suggests:
+    etnservice (>= 0.6.0),
     formattable,
     kableExtra,
     knitr,
@@ -60,7 +60,8 @@ Suggests:
     testthat (>= 3.0.0),
     tidyr,
     units,
-    vcr
+    vcr,
+    xml2
 VignetteBuilder: 
     knitr
 Remotes: 
