@@ -17,7 +17,7 @@
 #'   authors to not disclose this test url.
 #' @param ... Additional arguments passed to the `get_val` function, such as
 #'  `return_url`.
-#' @return The same return object of the `function_identity` function
+#' @return The same return object of the `function_identity` function.
 #'
 #' @family helper functions
 #' @noRd
