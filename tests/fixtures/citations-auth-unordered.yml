@@ -10,207 +10,11 @@ http_interactions:
         www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 10 Apr 2026 14:45:57 GMT
+      date: Tue, 14 Apr 2026 08:25:05 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=ROVuMVuh2QYYYOdfPWThy8YxBWh05OlAXhtwE5xjuL-HQEYf;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
-    body:
-      string: '{"datasetrec":{"DasID":6557,"Acronym":null,"StandardTitle":"ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"In
-        this field study the potential of Acoustic-Data-Storage-Tags (ADST) is tested
-        using starry smooth hound (<i>Mustelas asterias<\/i>) as a model species.
-        ADST tags are a novel product of Vemco -Innovasea combining acoustic tag technology
-        with DST. In this study the movement behaviour of the species in the Southern
-        North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
-        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
-        license lets others distribute, remix, tweak, and build upon your work, even
-        commercially, as long as they credit you for the original creation. This is
-        the most accommodating of licenses offered. Recommended for maximum dissemination
-        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":[{"DOIID":855,"PublicationYear":2023,"DOI":"10.14284\/605","Citation":"Reubens,
-        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","MDAID":"VLIZ_00000311_64799ab2e6512664675076","Moratorium":0,"MDAURL":"https:\/\/mda.vliz.be\/directlink.php?fid=VLIZ_00000311_64799ab2e6512664675076","CurrentDOI":1,"Active":1,"URL":null,"downloadURL":"https:\/\/mda.vliz.be\/download.php?file=VLIZ_00000311_64799ab2e6512664675076"}],"spcols":[{"SpColID":1000,"SpName":"European
-        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic Archival","ThesTypID":30,"ThesType":"ETN
-        Context","Code":null,"Description":"For devices that combine Acoustic Telemetry
-        with Archival Data","OrigThesTerm":"Acoustic Archival","DutchTerm":"Acoustic
-        Archival","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic data
-        storage tag (ADST)","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        data storage tag (ADST)","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
-        North Sea, Southern Bight","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
-        North Sea, Southern Bight","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Electronic
-        tagging","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Electronic
-        tagging","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
-        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
-        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
-        European Tracking Network is a pan-European biotelemetry network that aims
-        at the integration of regional telemetry initiatives into a sustainable, efficient
-        and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":8158,"Acronym":null,"StandardTitle":"Archival
-        data series and acoustic detections of acoustic data storage tags in the southern
-        North Sea","Relation":"Related Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284\/581"}],"ownerships":[{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":24,"Role":"Contact","OrigName":"Flanders Marine
-        Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":171964,"Email":"lotte.pohl@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":42096,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":167320,"Email":"lotte.pohl@imbrsea.eu","InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Ghent
-        University; Faculty of Sciences","InsOwnerCNT":1,"PersID":42096,"InsID":4802,"FullInstitute":"Universiteit
-        Gent; Faculteit Wetenschappen","RoleID":24,"Role":"Contact","OrigName":"Faculty
-        of Sciences","StandardName":"Faculteit Wetenschappen","FullAcronym":"UGent","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":null},{"OrderNr":null,"Surname":"Deneudt","Firstname":"Klaas","Initials":"K.","PerPublicFlag":1,"AdrID":171088,"Email":"klaas.deneudt@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":3362,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-8559-3508","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":null,"Firstname":null,"Initials":null,"PerPublicFlag":null,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":null,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":null,"ROR":"https:\/\/ror.org\/0496vr396"}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":12166,"TaxTerm":"Mustelus asterias Cloquet, 1821","AphiaID":105821,"DutchTerm":"Gevlekte
-        gladde haai"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic data
-        storage tag (ADST)"},{"OtherTerm":"Electronic tagging"},{"OtherTerm":"Movement
-        ecology"}],"temporal":[{"DasDateID":5306,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-07-01","EndDate":null,"DasDate":null,"Resolution":"Quasi
-        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Southern
-        Bight","DasGeoID":13884,"DasGeoTerm":null,"DasID":6557,"GeotID":395,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2399,"OrigGeoTerm":"Southern
-        Bight","DutchTerm":"Zuidelijke Bocht"},{"GeoTerm":"Western Scheldt","DasGeoID":13883,"DasGeoTerm":null,"DasID":6557,"GeotID":9386,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4752,"OrigGeoTerm":"Western
-        Scheldt","DutchTerm":null}],"meastypes":[{"MethID":null,"DasMeasTypID":14589,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Acoustic
-        detections","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":28,"DasTheme":"Biology
-        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
-        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
-        home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-10 14:45:58
-- request:
-    method: GET
-    uri: https://vliz.be/en/imis?dasid=6557&show=json
-  response:
-    status: 200
-    headers:
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
-      content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Fri, 10 Apr 2026 14:45:58 GMT
-      referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
-      set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=DY%2CXhvmE41QNoCL4GH-3QtJT2DtptBea0qfUudWWCkZdeBvH;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
-    body:
-      string: '{"datasetrec":{"DasID":6557,"Acronym":null,"StandardTitle":"ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"In
-        this field study the potential of Acoustic-Data-Storage-Tags (ADST) is tested
-        using starry smooth hound (<i>Mustelas asterias<\/i>) as a model species.
-        ADST tags are a novel product of Vemco -Innovasea combining acoustic tag technology
-        with DST. In this study the movement behaviour of the species in the Southern
-        North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
-        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
-        license lets others distribute, remix, tweak, and build upon your work, even
-        commercially, as long as they credit you for the original creation. This is
-        the most accommodating of licenses offered. Recommended for maximum dissemination
-        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":[{"DOIID":855,"PublicationYear":2023,"DOI":"10.14284\/605","Citation":"Reubens,
-        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
-        Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","MDAID":"VLIZ_00000311_64799ab2e6512664675076","Moratorium":0,"MDAURL":"https:\/\/mda.vliz.be\/directlink.php?fid=VLIZ_00000311_64799ab2e6512664675076","CurrentDOI":1,"Active":1,"URL":null,"downloadURL":"https:\/\/mda.vliz.be\/download.php?file=VLIZ_00000311_64799ab2e6512664675076"}],"spcols":[{"SpColID":1000,"SpName":"European
-        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic Archival","ThesTypID":30,"ThesType":"ETN
-        Context","Code":null,"Description":"For devices that combine Acoustic Telemetry
-        with Archival Data","OrigThesTerm":"Acoustic Archival","DutchTerm":"Acoustic
-        Archival","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic data
-        storage tag (ADST)","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        data storage tag (ADST)","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
-        North Sea, Southern Bight","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
-        North Sea, Southern Bight","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Electronic
-        tagging","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Electronic
-        tagging","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
-        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
-        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
-        European Tracking Network is a pan-European biotelemetry network that aims
-        at the integration of regional telemetry initiatives into a sustainable, efficient
-        and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":8158,"Acronym":null,"StandardTitle":"Archival
-        data series and acoustic detections of acoustic data storage tags in the southern
-        North Sea","Relation":"Related Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284\/581"}],"ownerships":[{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":24,"Role":"Contact","OrigName":"Flanders Marine
-        Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":171964,"Email":"lotte.pohl@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":42096,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":167320,"Email":"lotte.pohl@imbrsea.eu","InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Ghent
-        University; Faculty of Sciences","InsOwnerCNT":1,"PersID":42096,"InsID":4802,"FullInstitute":"Universiteit
-        Gent; Faculteit Wetenschappen","RoleID":24,"Role":"Contact","OrigName":"Faculty
-        of Sciences","StandardName":"Faculteit Wetenschappen","FullAcronym":"UGent","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":null},{"OrderNr":null,"Surname":"Deneudt","Firstname":"Klaas","Initials":"K.","PerPublicFlag":1,"AdrID":171088,"Email":"klaas.deneudt@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":3362,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-8559-3508","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":null,"Firstname":null,"Initials":null,"PerPublicFlag":null,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
-        Marine Institute","InsOwnerCNT":5,"PersID":null,"InsID":36,"FullInstitute":"Vlaams
-        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
-        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":null,"ROR":"https:\/\/ror.org\/0496vr396"}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":12166,"TaxTerm":"Mustelus asterias Cloquet, 1821","AphiaID":105821,"DutchTerm":"Gevlekte
-        gladde haai"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic data
-        storage tag (ADST)"},{"OtherTerm":"Electronic tagging"},{"OtherTerm":"Movement
-        ecology"}],"temporal":[{"DasDateID":5306,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-07-01","EndDate":null,"DasDate":null,"Resolution":"Quasi
-        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Southern
-        Bight","DasGeoID":13884,"DasGeoTerm":null,"DasID":6557,"GeotID":395,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2399,"OrigGeoTerm":"Southern
-        Bight","DutchTerm":"Zuidelijke Bocht"},{"GeoTerm":"Western Scheldt","DasGeoID":13883,"DasGeoTerm":null,"DasID":6557,"GeotID":9386,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4752,"OrigGeoTerm":"Western
-        Scheldt","DutchTerm":null}],"meastypes":[{"MethID":null,"DasMeasTypID":14589,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Acoustic
-        detections","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":28,"DasTheme":"Biology
-        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
-        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
-        home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-10 14:45:58
-- request:
-    method: GET
-    uri: https://vliz.be/en/imis?dasid=6557&show=json
-  response:
-    status: 200
-    headers:
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
-      content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Fri, 10 Apr 2026 14:45:58 GMT
-      referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
-      set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=b5F3vrNTesV%2CEnJEubGtW3LOfD1rmHk9xAeafKumIi8Sd6R3;
+      - SSESSb1decfcf957c461d54e509db58033a53=G6PCoIC4d2p7GVjVZyGokKR4LOEzxYIvmTMfnG%2CT4wk-HdUU;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -292,7 +96,7 @@ http_interactions:
         > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-10 14:45:59
+  recorded_at: 2026-04-14 08:25:05
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6557&show=json
@@ -304,11 +108,11 @@ http_interactions:
         www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 10 Apr 2026 14:45:59 GMT
+      date: Tue, 14 Apr 2026 08:25:06 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=RpbihnVRhw5YJoS9i2qZXEVqj8c6SF5VNinw2NCkA8rzVEFT;
+      - SSESSb1decfcf957c461d54e509db58033a53=XVxZVgiED2un6ZJllNsTX8zN63oD%2C8LT-Ev3qI0WaKWDrWow;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -390,5 +194,201 @@ http_interactions:
         > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-10 14:45:59
+  recorded_at: 2026-04-14 08:25:06
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=6557&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Tue, 14 Apr 2026 08:25:06 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=Bh4HyZvseTa-tBS8SJ3ZcHRxzWEc6H3bbLnkxDLhQrrcX7i0;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":6557,"Acronym":null,"StandardTitle":"ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"In
+        this field study the potential of Acoustic-Data-Storage-Tags (ADST) is tested
+        using starry smooth hound (<i>Mustelas asterias<\/i>) as a model species.
+        ADST tags are a novel product of Vemco -Innovasea combining acoustic tag technology
+        with DST. In this study the movement behaviour of the species in the Southern
+        North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
+        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags.
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
+        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":[{"DOIID":855,"PublicationYear":2023,"DOI":"10.14284\/605","Citation":"Reubens,
+        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags.
+        Marine Data Archive.","MDAID":"VLIZ_00000311_64799ab2e6512664675076","Moratorium":0,"MDAURL":"https:\/\/mda.vliz.be\/directlink.php?fid=VLIZ_00000311_64799ab2e6512664675076","CurrentDOI":1,"Active":1,"URL":null,"downloadURL":"https:\/\/mda.vliz.be\/download.php?file=VLIZ_00000311_64799ab2e6512664675076"}],"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic Archival","ThesTypID":30,"ThesType":"ETN
+        Context","Code":null,"Description":"For devices that combine Acoustic Telemetry
+        with Archival Data","OrigThesTerm":"Acoustic Archival","DutchTerm":"Acoustic
+        Archival","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic data
+        storage tag (ADST)","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        data storage tag (ADST)","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
+        North Sea, Southern Bight","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
+        North Sea, Southern Bight","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Electronic
+        tagging","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Electronic
+        tagging","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
+        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
+        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":8158,"Acronym":null,"StandardTitle":"Archival
+        data series and acoustic detections of acoustic data storage tags in the southern
+        North Sea","Relation":"Related Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284\/581"}],"ownerships":[{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":24,"Role":"Contact","OrigName":"Flanders Marine
+        Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":171964,"Email":"lotte.pohl@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":42096,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":167320,"Email":"lotte.pohl@imbrsea.eu","InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Ghent
+        University; Faculty of Sciences","InsOwnerCNT":1,"PersID":42096,"InsID":4802,"FullInstitute":"Universiteit
+        Gent; Faculteit Wetenschappen","RoleID":24,"Role":"Contact","OrigName":"Faculty
+        of Sciences","StandardName":"Faculteit Wetenschappen","FullAcronym":"UGent","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":null},{"OrderNr":null,"Surname":"Deneudt","Firstname":"Klaas","Initials":"K.","PerPublicFlag":1,"AdrID":171088,"Email":"klaas.deneudt@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":3362,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-8559-3508","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":null,"Firstname":null,"Initials":null,"PerPublicFlag":null,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":null,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":null,"ROR":"https:\/\/ror.org\/0496vr396"}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12166,"TaxTerm":"Mustelus asterias Cloquet, 1821","AphiaID":105821,"DutchTerm":"Gevlekte
+        gladde haai"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic data
+        storage tag (ADST)"},{"OtherTerm":"Electronic tagging"},{"OtherTerm":"Movement
+        ecology"}],"temporal":[{"DasDateID":5306,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-07-01","EndDate":null,"DasDate":null,"Resolution":"Quasi
+        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Southern
+        Bight","DasGeoID":13884,"DasGeoTerm":null,"DasID":6557,"GeotID":395,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2399,"OrigGeoTerm":"Southern
+        Bight","DutchTerm":"Zuidelijke Bocht"},{"GeoTerm":"Western Scheldt","DasGeoID":13883,"DasGeoTerm":null,"DasID":6557,"GeotID":9386,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4752,"OrigGeoTerm":"Western
+        Scheldt","DutchTerm":null}],"meastypes":[{"MethID":null,"DasMeasTypID":14589,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Acoustic
+        detections","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":28,"DasTheme":"Biology
+        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
+        home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-14 08:25:06
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=6557&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Tue, 14 Apr 2026 08:25:06 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=KQBX5gzGpLYPjXEXHN1sdj4%2CcqNhT%2C8N6PZLUKwjYnjQmz%2Cu;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":6557,"Acronym":null,"StandardTitle":"ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"In
+        this field study the potential of Acoustic-Data-Storage-Tags (ADST) is tested
+        using starry smooth hound (<i>Mustelas asterias<\/i>) as a model species.
+        ADST tags are a novel product of Vemco -Innovasea combining acoustic tag technology
+        with DST. In this study the movement behaviour of the species in the Southern
+        North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
+        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags.
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
+        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":[{"DOIID":855,"PublicationYear":2023,"DOI":"10.14284\/605","Citation":"Reubens,
+        J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
+        Unravelling the movement behaviour of starry smooth hound using ADST tags.
+        Marine Data Archive.","MDAID":"VLIZ_00000311_64799ab2e6512664675076","Moratorium":0,"MDAURL":"https:\/\/mda.vliz.be\/directlink.php?fid=VLIZ_00000311_64799ab2e6512664675076","CurrentDOI":1,"Active":1,"URL":null,"downloadURL":"https:\/\/mda.vliz.be\/download.php?file=VLIZ_00000311_64799ab2e6512664675076"}],"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic Archival","ThesTypID":30,"ThesType":"ETN
+        Context","Code":null,"Description":"For devices that combine Acoustic Telemetry
+        with Archival Data","OrigThesTerm":"Acoustic Archival","DutchTerm":"Acoustic
+        Archival","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic data
+        storage tag (ADST)","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        data storage tag (ADST)","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
+        North Sea, Southern Bight","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
+        North Sea, Southern Bight","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Electronic
+        tagging","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Electronic
+        tagging","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
+        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
+        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":[{"DasID":8158,"Acronym":null,"StandardTitle":"Archival
+        data series and acoustic detections of acoustic data storage tags in the southern
+        North Sea","Relation":"Related Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284\/581"}],"ownerships":[{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Reubens","Firstname":"Jan","Initials":"J.","PerPublicFlag":1,"AdrID":167762,"Email":"jan.reubens@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":14823,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":24,"Role":"Contact","OrigName":"Flanders Marine
+        Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-9823-5670","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":171964,"Email":"lotte.pohl@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":42096,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":"Pohl","Firstname":"Lotte","Initials":"L.","PerPublicFlag":1,"AdrID":167320,"Email":"lotte.pohl@imbrsea.eu","InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Ghent
+        University; Faculty of Sciences","InsOwnerCNT":1,"PersID":42096,"InsID":4802,"FullInstitute":"Universiteit
+        Gent; Faculteit Wetenschappen","RoleID":24,"Role":"Contact","OrigName":"Faculty
+        of Sciences","StandardName":"Faculteit Wetenschappen","FullAcronym":"UGent","ORC":"https:\/\/orcid.org\/0000-0002-7607-7018","ROR":null},{"OrderNr":null,"Surname":"Deneudt","Firstname":"Klaas","Initials":"K.","PerPublicFlag":1,"AdrID":171088,"Email":"klaas.deneudt@vliz.be","InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":3362,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":"https:\/\/orcid.org\/0000-0002-8559-3508","ROR":"https:\/\/ror.org\/0496vr396"},{"OrderNr":null,"Surname":null,"Firstname":null,"Initials":null,"PerPublicFlag":null,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"VLIZ","OrigNameLangCode":"en","OrigNameLangID":15,"FullOrigName":"Flanders
+        Marine Institute","InsOwnerCNT":5,"PersID":null,"InsID":36,"FullInstitute":"Vlaams
+        Instituut voor de Zee","RoleID":61,"Role":"Data creator","OrigName":"Flanders
+        Marine Institute","StandardName":"Vlaams Instituut voor de Zee","FullAcronym":"VLIZ","ORC":null,"ROR":"https:\/\/ror.org\/0496vr396"}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12166,"TaxTerm":"Mustelus asterias Cloquet, 1821","AphiaID":105821,"DutchTerm":"Gevlekte
+        gladde haai"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic data
+        storage tag (ADST)"},{"OtherTerm":"Electronic tagging"},{"OtherTerm":"Movement
+        ecology"}],"temporal":[{"DasDateID":5306,"StartYear":2018,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2018-07-01","EndDate":null,"DasDate":null,"Resolution":"Quasi
+        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Southern
+        Bight","DasGeoID":13884,"DasGeoTerm":null,"DasID":6557,"GeotID":395,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":2399,"OrigGeoTerm":"Southern
+        Bight","DutchTerm":"Zuidelijke Bocht"},{"GeoTerm":"Western Scheldt","DasGeoID":13883,"DasGeoTerm":null,"DasID":6557,"GeotID":9386,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4752,"OrigGeoTerm":"Western
+        Scheldt","DutchTerm":null}],"meastypes":[{"MethID":null,"DasMeasTypID":14589,"DasMeasType":"","Matrix":null,"MatrixNL":null,"Parameter":"Acoustic
+        detections","ParameterNL":null,"Description":null,"Unit":null,"Methodology":null,"Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":28,"DasTheme":"Biology
+        > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http:\/\/www.lifewatch.be\/","externalID":null,"URLTypeCode":null,"URLType":"Project
+        home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-14 08:25:06
 recorded_with: VCR-vcr/2.1.0
