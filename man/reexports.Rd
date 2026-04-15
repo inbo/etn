@@ -6,6 +6,14 @@
 \alias{read_package}
 \alias{write_package}
 \title{Objects exported from other packages}
+\seealso{
+Other frictionless functions: 
+\code{\link{add_resource}()}
+
+Other frictionless functions: 
+\code{\link{add_resource}()}
+}
+\concept{frictionless functions}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
