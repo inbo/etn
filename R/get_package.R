@@ -127,7 +127,12 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
-    append(c(profile = "tabular-data-package"), after = 0) |>
+    append(c(
+      profile = "tabular-data-package",
+      name = tolower(animal_project_code)
+      ),
+      after = 0
+      ) |>
     frictionless::create_package()
 
   return(package)
