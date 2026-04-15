@@ -33,7 +33,7 @@ test_that("get_package() creates the expected package", {
 
   # Function creates the expected files
   expect_true(all(files_to_create %in% list.files(datapackage_path)))
-  # expect_snapshot_file(file.path(datapackage_path, "datapackage.json"))
+  expect_snapshot_file(file.path(datapackage_path, "datapackage.json"))
   expect_snapshot_file(file.path(datapackage_path, "animals.csv"))
   expect_snapshot_file(file.path(datapackage_path, "tags.csv"))
   expect_snapshot_file(file.path(datapackage_path, "detections.csv"))
