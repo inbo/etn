@@ -8,7 +8,7 @@
 #' A corresponding `eml.xml` metadata file is not created.
 #'
 #' @param package A Frictionless Data Package of ETN data, as returned by
-#'   [read_package()].
+#'   [read_package()] or [get_package()].
 #'   It is expected to contain the resources `animals`, `tags`, `detections` and
 #'   `deployments`.
 #' @param directory Path to local directory to write files to.

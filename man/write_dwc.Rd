@@ -15,7 +15,7 @@ write_dwc(
 }
 \arguments{
 \item{package}{A Frictionless Data Package of ETN data, as returned by
-\code{\link[=read_package]{read_package()}}.
+\code{\link[=read_package]{read_package()}} or \code{\link[=get_package]{get_package()}}.
 It is expected to contain the resources \code{animals}, \code{tags}, \code{detections} and
 \code{deployments}.}
 
