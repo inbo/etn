@@ -126,7 +126,9 @@ get_package <- function(animal_project_code) {
     etn::add_resource("tags", tags) |>
     etn::add_resource("detections", detections) |>
     etn::add_resource("deployments", deployments) |>
-    etn::add_resource("receivers", receivers)
+    etn::add_resource("receivers", receivers) |>
+    append(c(profile = "tabular-data-package"), after = 0) |>
+    frictionless::create_package()
 
   return(package)
 }
