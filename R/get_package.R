@@ -122,11 +122,11 @@ get_package <- function(animal_project_code) {
   message("* (6/6): create package")
   package <-
     frictionless::create_package() |>
-    frictionless::add_resource("animals", animals) |>
-    frictionless::add_resource("tags", tags) |>
-    frictionless::add_resource("detections", detections) |>
-    frictionless::add_resource("deployments", deployments) |>
-    frictionless::add_resource("receivers", receivers)
+    etn::add_resource("animals", animals) |>
+    etn::add_resource("tags", tags) |>
+    etn::add_resource("detections", detections) |>
+    etn::add_resource("deployments", deployments) |>
+    etn::add_resource("receivers", receivers)
 
   return(package)
 }
