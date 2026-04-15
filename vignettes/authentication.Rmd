@@ -18,7 +18,7 @@ etn functions require credentials (username and password) to connect to the ETN 
 
 ## Where do you find your credentials?
 
-1. Go to the ETN Data Platform (<https://www.lifewatch.be/etn/>).
+1. Go to the [ETN Data Platform](https://www.lifewatch.be/etn/).
 2. Log in with your MarinePass account.
 3. In the top right, click your name, then choose `ETN R access`.
 4. See your credentials to connect to the ETN database.
@@ -60,6 +60,6 @@ Forgot the credentials to connect to the ETN database? See the section above "Wh
 ## Don't have an account to ETN?
 
 1. [Register for a MarinePass account](https://rstudio.europeantrackingnetwork.org/account.php?p=register). It grants you access to several services at VLIZ: the [Marine Data Archive](https://mda.vliz.be/) and [the ETN Data Platform](https://www.lifewatch.be/etn/). You can request additional access to the [ETN RStudio server](https://rstudio.europeantrackingnetwork.org).
-2. Select access to `ETN_data` and (optional) `rstudio_vliz`.
+2. Select access to `ETN_data` and (optional) `rstudio_etn`.
 3. Confirm registration via email.
 4. Wait for an email indicating that your account was approved by a human.
