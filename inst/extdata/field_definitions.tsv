@@ -1,0 +1,254 @@
+table	name	alternative_name	definition	type	unit	example	comments
+animals	acoustic_tag_id			string			
+animals	acoustic_tag_id_alternative			string			
+animals	age		Age of animal that carries tag, the units are specified in 'Age units'.	integer		2	
+animals	age_unit		Units of age.	string		durif index	
+animals	anaesthetic		Name of anaesthetic used if applicable.	string		Clove oil	
+animals	anaesthetic_concentration		Concentration of anaesthetic.	string		0.5 ml/l	free text
+animals	anaesthetic_concentration_in_recirculation		Concentration of anaesthetic in recirculation bath.	string		0.5 ml/l	free text
+animals	animal_id			integer			
+animals	animal_label		Identification code that uniquely identifies each animal, as specified by the researcher.	string		A82	
+animals	animal_nickname		Nickname given to the tagged animal.	string		John	free text
+animals	animal_project_code	animal_code	Animal project code; predefined options. Check your dashboard (https://www.lifewatch.be/etn/dashboard); new project names can only be added by administrators	string		CodNoise	
+animals	aphia_id		The Aphia ID linked to the scientific name. The Aphia ID can be found at http://www.marinespecies.org/aphia.php?p=webservice	integer		126436	
+animals	buffer		Name of buffer used if applicable.	string		Sodium Bicarbonate	
+animals	buffer_concentration_in_anaesthetic		Concentration of buffer in anaesthetic.	string		0.1 ml/l	free text
+animals	buffer_concentration_in_recirculation		Concentration of buffer in recirculation bath.	string		0.1 ml/l	free text
+animals	capture_date_time		Date and time that animal was caught, in 24h UTC. Datetime fields should follow the ISO-8601 format.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+animals	capture_depth		Water depth at which the animal was caught.	string	metres	25 m	free text
+animals	capture_latitude		Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
+animals	capture_location		Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.	string		Reefballs C-Power	free text
+animals	capture_longitude		Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
+animals	capture_method		Name of the method and materials used to capture animal.	string		line fishing	free text
+animals	capture_temperature_change		Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.	string	degrees celsius	5ºC	
+animals	comments		Any comments deemed to have scientific relevance by the tagger.	string			free text
+animals	common_name		The species' common English name.	string		Atlantic cod	
+animals	dissolved_oxygen		This measure is the lowest oxygen level the fish will experience during the surgery.	string		6 mg/l	free text
+animals	dna_sample		Indicates whether the animal that carries the acoustic tag is also sampled for DNA.	string		y	y or n
+animals	holding_temperature		This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond	string	degrees celsius	5ºC	
+animals	length1		Length of animal that carries tag, depending on 'Length type', in units specified in 'Length units'.	number		46	
+animals	length1_type		Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).	string		total length	free text
+animals	length1_unit		Units of length.	string		cm	
+animals	length2		Secondary length measurement, depending on 'Length2 type', in units specified in 'Length2 units'.	number		9.5	
+animals	length2_type		Specify type of secondary size measurement (e.g. width).	string		horizontal eye diameter	free text
+animals	length2_unit		Units of secondary length.	string		mm	
+animals	length3		Tertiary length measurement, depending on 'Length3 type', in units specified in 'Length3 units'.	number		7.23	
+animals	length3_type		Specify type of tertiary size measurement (e.g. width).	string		vertical eye diameter	free text
+animals	length3_unit		Units of tertiary length.	string		mm	
+animals	length4		Quaternary length measurement, depending on 'Length4 type', in units specified in 'Length4 units'.	number		46.73	
+animals	length4_type		Specify type of quaternary size measurement (e.g. width).	string		pectoral fin length	free text
+animals	length4_unit		Units of quaternary length.	string		mm	
+animals	life_stage		Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.	string		FV	
+animals	person_id		ID linked to the person conducting tagging	integer		25	
+animals	pit_tag_number		PIT tag serial number			A69-9004-2210	
+animals	post_surgery_holding_period		Time the animal is held after surgery until release.	string	hours	2	
+animals	pre_surgery_holding_period		Time that animal is held prior to surgery.	string	hours	0.5	
+animals	recapture_date_time		If applicable, date of recapture of the tagged animal.	datetime		2017-07-10T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+animals	recapture_description		Description of recapture				free text
+animals	recapture_latitude		Latitude of recapture location			51.36324	dd.ddddd
+animals	recapture_location		Name of recapture location			Reefballs C-Power	free text
+animals	recapture_longitude		Longitude of recapture location			2.5902	ddd.ddddd
+animals	release_date_time		Date and time that tagged animal was released, in UTC.	datetime		2016-04-04T12:30:00Z	yyyy-mm-ddThh:mm:ssZ
+animals	release_latitude		Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
+animals	release_location		Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.	string		Reefballs C-Power	
+animals	release_longitude		Longitude of release location. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
+animals	scientific_name		Scientific name of animal that carries the tag.	string		Gadus morhua	
+animals	sedative		Name of sedative used if applicable.	string		aquacalm	
+animals	sedative_concentration		Concentration of sedative.	string		0.5 ml/l	free text
+animals	sensor_id_code		Tag sensor id code, only required when adding sensor settings in the metadata			96811 or 648910	
+animals	sex		Sex of animal. "M" or "F". Can enter unknown ("U").	string		M	
+animals	stock		Water body of origin. Can enter unknown or not applicable.	string		Southern Bight	
+animals	surgery_date_time		Date that surgery was conducted. Date fields should follow the ISO-8601 format.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+animals	surgery_latitude		Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
+animals	surgery_location		Short name of surgery location (i.e. hatchery name).	string		onboard RV	free text
+animals	surgery_longitude		Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	dd.ddddd
+animals	tag_context		context of tag	string			
+animals	tag_end_date		Estimated date at which a tag will stop transmitting. This date is calculated automatically as the (Animals/Utc release date time) + (Tags/Estimated lifetime). When a tag was previously used in another animal for a certain period, this is incorporated			2017-07-10T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+animals	tag_id		Select a tag. A tag code space will only appear here after adding the tag metadata in the tab 'Tags'.			A69-9004-2210	
+animals	tag_serial_number		Tag serial number. If your animal is double tagged, add the serial numbers of both tags, separated by a comma.	string		123456 or 123456,A1234 if double tagged	
+animals	tag_subtype			string			
+animals	tag_type			string			
+animals	tagger		Person conducting tagging	string		Pieterjan Verhelst	
+animals	tagging_methodology		Describe method and materials used to attach tag to animal.	string		inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures.	
+animals	tagging_type		Indicates how tag was attached to animal (e.g. "internal", "external", "oral", "gastric", "subcutaneous", etc.).	string		internal	
+animals	treatment_type		Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).	string		Control	free text
+animals	weight		Weight of animal that carries tag, in units specified in 'Weight units'.	number		806.9	
+animals	weight_unit		Units of weight.	string		g	
+animals	wild_or_hatchery		Origin of animal that carries the tag.  Enter "wild", "hatchery" or "unknown".	string		wild	
+deployments	acoustic_project_code			string			
+deployments	activation_date_time			datetime			
+deployments	ar_battery_installation_date		Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.	datetime		2017-06-27	yyyy-mm-dd
+deployments	ar_confirm		Did the acoustic release report a confirmed release? Yes or no.	string		y	y or n
+deployments	arraylocationno		arrayLocationNo				
+deployments	arrayname		The Name of the array to which the deployment belogs.			Westerschelde 1	free text
+deployments	battery_estimated_end_date		Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).	datetime		2017-06-04 0:00	yyyy-mm-dd hh:mm
+deployments	battery_installation_date		Date when the receiver was fitted with fresh batteries.	datetime		2017-06-27	yyyy-mm-dd
+deployments	battery_overwrite_end_date		manual entered end date, that overwrites the system generated one			2017-06-27	yyyy-mm-dd
+deployments	bottom_depth		Depth at deployment location as recorded by the vessel's depth sounder.	integer	metres	25	
+deployments	check_complete_time		A check of the equipment's function should be performed post-deployment when possible. This field describes the time at which this check is complete.			2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+deployments	comments		Any comments deemed to have scientific relevance by the tagger.	string			free text
+deployments	commstatus						
+deployments	deploy_date_time		Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint. Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+deployments	deploy_depth		Depth of the instrument.	integer	metres	20	
+deployments	deploy_latitude		Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
+deployments	deploy_longitude		Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
+deployments	deployment_id			integer			
+deployments	distancetomouth		The distance (in kilometers) from the deployment location to the river mouth.			25	
+deployments	download_date_time		Date and time that data were downloaded, in 24-hour UTC.	datetime		2017-06-27T12:00Z	yyyy-mm-ddThh:mmZ
+deployments	download_file_name		Were data downloaded? Yes or no. If no, please add comment.	string		y	y or n
+deployments	intended_latitude		Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
+deployments	intended_longitude		Longitude of the intended deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
+deployments	location_description		Any additional description of the location.			at surface buoy	free text
+deployments	log_depth_sample_period		Time interval between the sample values of depth. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.	integer	seconds	3600	
+deployments	log_depth_stats_period		Time interval between the recording of depth statistic, as calculated from sample values.	integer	seconds	600	
+deployments	log_noise_sample_period		Time interval between the sample values of noise. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.	integer	seconds	600	
+deployments	log_noise_stats_period		Time interval between the recording of noise statistic, as calculated from sample values.	integer	seconds	600	
+deployments	log_temperature_sample_period		Time interval between the sample values of temperature. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.	integer	seconds	21600	
+deployments	log_temperature_stats_period		Time interval between the recording of temperature statistic, as calculated from sample values.	integer	seconds	3600	
+deployments	log_tilt_sample_period		Time interval between the sample values of tilt. This field is specific to VR2AR receivers.	integer	seconds	600	
+deployments	mooring_type		Type of mooring to which the receiver is attached. Predefined options: "surface-buoy", "surface-wind-turbine" or "bottom-mooring".	string		"surface-wind-turbine", "surface-buoy" or "bottom-mooring"	
+deployments	protocol		Protocol or protocol combination that the receiver listens to in the current deployment. Predefined options, check 'Protocols'. Send an email to info@europeantrackingnetwork.org if your protocol/receiver is missing from the table			R64K S256 R01M S64K	
+deployments	rcv_project		Select a network project; predefined options; new project names can only be added by administrators			BPNS	
+deployments	rcv_voltage_at_deploy		Voltage as reported by a receiver with this capability, as near as possible to the time of deployment.	number	volt	12.2	
+deployments	receiver_id		Receiver ID linked to the deployment. Composed by 'Model number'-'Serial number'.	string		TBR700-234	
+deployments	recover_date_time		Date and time that the equipment was recovered, in 24-hour UTC. ISO-8601 format.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+deployments	recover_latitude		Latitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central latitude of the recovery sea.	number		51.36324	dd.ddddd
+deployments	recover_longitude		Longitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central longitude of the recovery sea	number		2.5902	ddd.ddddd
+deployments	riser_length		Length from the anchor to the topmost float or structure of the mooring assembly.	integer	metres	10	
+deployments	station_description		Name of receiver location. The location name serves as an additional descriptive name of the receiver station. It can refer to a specific nearby point of land, town, island, or body of water that identifies this receiver location.	string		upstream weir	
+deployments	station_manager		Name of the person or institution managing the location.	string		Jan Reubens	
+deployments	station_name		Name of the station where the deployment of the receiver takes place. Related to a specific latitude and longitude.	string		OH6	free text
+deployments	sync_date_time		Date and time when a receiver's clock is synchronized to correct UTC, in 24-hour UTC. ISO-8601 format.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+deployments	time_drift		Displayed difference in time between the instrument's clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.	string		12:00:00Z	hh:mm:ssZ
+deployments	transmit_power_output		Predefined options: "Low", "Medium", "High", "Very high".	string		High	
+deployments	transmit_profile		Predefined options: "Range test(random)", "Range test(90s)" or "Sync".	string		Sync	
+deployments	valid_data_until_date_time			datetime			
+deployments	voltage_at_download		Voltage during download as reported by a receiver with this capability. Note: This must be recorded in the field for Vemco model VR3 receivers because it is not contained in the log file.	number	volt	2	
+detections	acoustic_project_code	network_project_code	Code of the network project linked to this detection.	string		BPNS	
+detections	acoustic_tag_id			string			
+detections	animal_id		Foreign Key linked to the Animal_ID	integer			
+detections	animal_moratorium		States whether the animal data are under moratorium, can be "false" or "true".			FALSE	
+detections	animal_project_code		Code of the animal project linked to this detection.	string		BPNS	
+detections	animal_project_name		Title of the project linked to this detection.			2010_phd_reubens	
+detections	application_type						
+detections	date_time		Date and time at which the tagged animal was detected at the receiver. Information from detection file.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+detections	deploy_date_time		Date and time that the equipment was deployed, in 24-hour UTC. ISO-8601 format.			2017-07-10T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
+detections	deploy_latitude		Latitude of the location of the deployment.	number		51.32098	dd.ddddd
+detections	deploy_longitude		Longitude of the location of the deployment.	number		3.13661	ddd.ddddd
+detections	deployment_id	deployment_fk	Foreign key linked to the deployment information	integer			
+detections	deployment_station_name		Name of the station where the detection occurred.			"OH1" or "Canal"	
+detections	detection_file_id		Technical identifier of the detection file in the database.			34	
+detections	detection_id			integer			
+detections	lat		Latitude of receiver location. Note: in the southern hemisphere all latitudes must be negative.			51.32098	dd.ddddd
+detections	location_name		Name of receiver location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this receiver location.			Reefballs	free text
+detections	long		Longitude of receiver location. Note: in the western hemisphere all longitudes must be negative.			3.13661	ddd.ddddd
+detections	network_moratorium		States whether the network data are under moratorium, can be "false" or "true".			FALSE	
+detections	network_project_name		Title of the project linked to this detection.			2010_phd_reubens	
+detections	pk		Technical identifier of the detection record in the database.				
+detections	qc_flag		Identifies whether there are quality check issues for the given detection.	boolean			
+detections	receiver_id		Receiver name, composed of 'Model number'-'Serial number'. Info comes from 'Detection_table'.	string		VR2W-103255	
+detections	scientific_name		Scientific name of the animal that carries the tag.	string		"Anguilla anguilla" or "Gadus morhua"	
+detections	sensor_type		Type of tag sensor. Predefined options: "P", "T" or "A". P = pressure, T = temperature, A = acceleration.			Pressure	
+detections	sensor_unit		Unit of measured sensor value.	string		P	
+detections	sensor_value		Value recorded by the tag sensor.	number		35 or 0.13	
+detections	sensor_value_acceleration		Value recorded by the acceleration sensor.			0.13	
+detections	sensor_value_depth		Value recorded by the pressure sensor.			15	
+detections	sensor_value_temperature		Value recorded by the temperature sensor.			15	
+detections	sensor2_unit		Unit of measured secondary sensor value.	string		P	
+detections	sensor2_value		Value recorded by secondary tag sensor.	number		0.5	
+detections	signal_to_noise_ratio		Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.	integer			
+detections	source_file		Name of the detection file.	string			
+detections	station_name		Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.	string		Reefballs	
+detections	tag_fk		Foreign key linked to the tag.				
+detections	tag_id		Tag ID of the detected tag.			A69-1010-12345	
+detections	tag_serial_number			string			
+detections	transmitter_name						
+receivers	application_type		The receiver context type			CPOD or Acoustic	
+receivers	ar_battery_estimated_life		Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.	integer	months	12	
+receivers	ar_disable_code		Code used to disable the release.	string		H	free text
+receivers	ar_enable_code_address		Code used to enable the release; differs among release models.	string		G	free text
+receivers	ar_interrogate_code		Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.	integer		1003	
+receivers	ar_model	ar_model_number	Model number of the acoustic release as provided by the manufacturer.	string		867	
+receivers	ar_ping_rate		Ping rate of the release.	integer	seconds	1	
+receivers	ar_receive_frequency		Interrogate or receive frequency at which the release receives data.	string	kHz	7.75	
+receivers	ar_release_code		Code used to release the release; differs among release models.	string		A	free text
+receivers	ar_reply_frequency		Frequency at which the release sends data.	string	kHz	10	
+receivers	ar_serial_number		Serial number of the acoustic release as provided by the manufacturer.	string		48635	
+receivers	ar_tilt_after_deploy		Tilt after deploy of receiver	integer		1003	
+receivers	ar_tilt_code		Tilt code of the release.	string		B	free text
+receivers	ar_voltage_at_deploy		Voltage reported by an acoustic release as near as possible to the time of deployment.	number	volt	12.2	
+receivers	battery_estimated_life		Expected duration for which the battery will provide adequate power for proper functioning of the receiver.	integer	days	365	
+receivers	built_in_acoustic_tag_id	built_in_tag_id	Tag full ID of the receiver's built in tag.	string		R01M-801234	
+receivers	financing_project		Receiver financing project.	string		project	
+receivers	manufacturer		Name of receiver manufacturer. Predefined options: "INNOVASEA", "CHELONIA", "LOTEK" or "THELMA BIOTEL". Check KNOWN MODELS	string		THELMA BIOTEL	
+receivers	modem_address		This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is	string		121	3-digit code from 001 to 249
+receivers	op_enabled		checked, when open protocol is enabled			true/false	
+receivers	order_number		order number				free text
+receivers	owner_organization	owner_organisation	Affiliation of the Principal Investigator for the project.	string		VLIZ	
+receivers	pk		Primary Key linked to the tag. This field is automatically generated by the database when a new entry is made.			1	
+receivers	receiver_id		The receiver name is composed of 'Model number'-'Serial number'.	string		VR2W-120620	
+receivers	receiver_model		Predefined options. Needs to match receiver in 'KNOWN MODELS'. Send an email to info@europeantrackingnetwork.org if your model is missing from the list	string		TBR800RELEASE	
+receivers	receiver_serial_number	receiver_id_serial_number	Serial number assigned by receiver manufacturer to uniquely identify receiver.	string		106252	
+receivers	status		Current status of receiver. Predefined options: "Available" when uploading the receivers; will automatically be set to "Active" when deployments for the receiver get uploaded; need to be manually set when: "Broken", "Lost" or "Returned to manufacturer".	string		"Available"	
+tags	accelerometer_algorithm		There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.	string		Activity	
+tags	accelerometer_samples_per_second		Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10  Hertz (10 measurements/s).	number	Hertz	5	
+tags	accelerometersamplespersecond						
+tags	acoustic_tag_id			string			
+tags	acoustic_tag_id_alternative			string			
+tags	activation_date	activation_date_time	Date and time the tag was activated, in UTC	datetime		2020-01-01T12:30:00Z	yyyy-mm-ddThh:mm:ssZ
+tags	archive_memory			string			
+tags	battery_estimated_end_date		Estimated date at which tag will stop transmitting.  Date fields should follow the ISO-8601 format.	datetime		2017-06-27T	yyyy-mm-ddT
+tags	battery_estimated_life		Estimated duration of time during which the tag will be transmitting.	string	days	90	
+tags	diameter			number			
+tags	financing_project		Tag financing project.	string		project	
+tags	floating			string			
+tags	frequency		Frequency (in Hz) at which the tag emits a signal.	string	Hz	069k	
+tags	length			number			
+tags	manufacturer		Name of tag manufacturer. Predefined options: "INNOVASEA", "CHELONIA", "LOTEK", "STAR-ODDI","THELMA BIOTEL".	string			
+tags	model		Predefined options. Needs to match tags in 'KNOWN MODELS'. Send an email to info@europeantrackingnetwork.org if your model is missing from the list (currently all set to 'NOT YET SET')	string			
+tags	owner_organization		Group owner of the tag. Use the exact group name to which the tag belongs.	string		VLIZ	
+tags	owner_pi		First and last name of the Principal Investigator for the project.	string		Jan Reubens	
+tags	pk		Primary Key linked to the tag. This field is automatically generated by the database when a new entry is made.			1	
+tags	sensor_accuracy			number			
+tags	sensor_intercept		Raw value of intercept, as used for sensor calibration.	number		-0.6065	
+tags	sensor_range		Maximum range of sensor.	string		34	
+tags	sensor_range_max			number			
+tags	sensor_range_min			number			
+tags	sensor_resolution			number			
+tags	sensor_slope		Raw value of slope, as used for sensor calibration.	number		0.1516	
+tags	sensor_transmit_ratio		Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.	integer		1	
+tags	sensor_type		Type of sensor in the tag device. Predefined options: P = pressure, T = temperature, A = acceleration, M(A) = Mortality(Alive), M(D) = Mortality(Dead), EMF, Mo = Motion	string		P	
+tags	sensor_unit	sensor_units	Unit of the sensor	string		m/s²	
+tags	status		Current status of the tag. Three options: "available" when uploading the tags. Will automatically be set to "active" when animals get uploaded. Will automatically be set to "ended" when the battery estimated lifetime  is reached	string		available	
+tags	step1_acceleration_duration		Time window over which acceleration is sampled (in seconds).	integer	seconds	37	
+tags	step1_duration		Duration of step 1, in days	integer	days	120	
+tags	step1_max_delay		Maximum delay, in seconds, between the pings transmitted by the tag for step 1.	string	seconds	60	
+tags	step1_min_delay		Minimum delay, in seconds, between the pings transmitted by the tag for step 1.	string	seconds	30	
+tags	step1_power		Acoustic power level. "H" or "L".	string		H	
+tags	step2_acceleration_duration		Time window over which acceleration is sampled (in seconds).	integer	seconds	37	
+tags	step2_duration		Duration of step 2.	integer	days	120	
+tags	step2_max_delay		Maximum delay between the pings transmitted by the tag for step 2.	string	seconds	60	
+tags	step2_min_delay		Minimum delay between the pings transmitted by the tag for step 2.	string	seconds	30	
+tags	step2_power		Acoustic power level. "H" or "L".	string		L	
+tags	step3_acceleration_duration		Time window over which acceleration is sampled (in seconds).	integer	seconds	37	
+tags	step3_duration		Duration of step 3.	integer	days	360	
+tags	step3_max_delay		Maximum delay between the pings transmitted by the tag for step 3.	string	seconds	60	
+tags	step3_min_delay		Minimum delay between the pings transmitted by the tag for step 3.	string	seconds	30	
+tags	step3_power		Acoustic power level. "H" or "L".	string		H	
+tags	step4_acceleration_duration		Time window over which acceleration is sampled (in seconds).	integer	seconds	37	
+tags	step4_duration		Duration of step 4.	integer	days	360	
+tags	step4_max_delay		Maximum delay between the pings transmitted by the tag for step 4.	string	seconds	60	
+tags	step4_min_delay		Minimum delay between the pings transmitted by the tag for step 4.	string	seconds	30	
+tags	step4_power		Acoustic power level. "H" or "L".	string		H	
+tags	steps_count		Amount of steps			5	
+tags	tag_device_id			integer			
+tags	tag_id			string			
+tags	tag_id_alternative		Converted Code			A69-0001-00001	
+tags	tag_id_code		In the case of an acoustic tag or Vemco mobile transceiver, this is the identification code transmitted by the tag, which is available from the tag manufacturer.			1450	
+tags	tag_id_protocol		Tag code space of the detected tag.			"S256" or "A69-1105"	
+tags	tag_serial_number			string			
+tags	tag_subtype	tag_sub_type	Type of acoustic tag. Predefined options: "animal", "built-in tag", "sentinel tag" or "range tag".	string		animal	
+tags	tag_type		Type of tag attached to animal. Fixed options: sensor-tag, id-tag, combined-tag (=sensor-tag + id-tag)	string		sensor-tag	
+tags	telemetry_type		Type of tag attached to animal. Fixed options: Id-tag or sensor-tag			id-tag	
+tags	type		Type of the tag.			sensor-tag or id-tag	
+tags	weight			number			

@@ -1,23 +1,22 @@
-# Fetch tags using the API
-if (credentials_are_set()) {
-  # Force using the API
-  df <- withr::with_envvar(
-    new = c("ETN_PROTOCOL" = "opencpu"),
-    code = get_tags()
-  )
-}
-
 test_that("get_tags() returns a tibble", {
   skip_if_no_authentication()
   testthat::skip_if_offline("opencpu.lifewatch.be")
 
-  expect_s3_class(df, "data.frame")
-  expect_s3_class(df, "tbl")
+  vcr::local_cassette("all-tags")
+  withr::local_envvar(new = c("ETN_PROTOCOL" = "opencpu"))
+  tags <- get_tags()
+
+  expect_s3_class(tags, "data.frame")
+  expect_s3_class(tags, "tbl")
 })
 
 test_that("get_tags() returns the expected columns", {
   skip_if_no_authentication()
   testthat::skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("all-tags")
+  withr::local_envvar(new = c("ETN_PROTOCOL" = "opencpu"))
+  tags <- get_tags()
 
   expected_col_names <- c(
     "tag_serial_number",
@@ -75,7 +74,7 @@ test_that("get_tags() returns the expected columns", {
     "tag_id",
     "tag_device_id"
   )
-  expect_identical(names(df), expected_col_names)
+  expect_identical(names(tags), expected_col_names)
 })
 
 test_that("get_tags() allows selecting on tag_serial_number", {
@@ -258,12 +257,17 @@ test_that("get_tags() returns correct tag_type and tag_subtype", {
   skip_if_no_authentication()
   testthat::skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("all-tags")
+  withr::local_envvar(new = c("ETN_PROTOCOL" = "opencpu"))
+  tags <- get_tags()
+
   expect_equal(
-    df |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
+    tags |> dplyr::distinct(tag_type) |> dplyr::pull() |> sort(),
     c("acoustic", "acoustic-archival", "archival")
   )
+
   expect_identical(
-    df |> dplyr::distinct(tag_subtype) |> dplyr::pull() |> sort(),
+    tags |> dplyr::distinct(tag_subtype) |> dplyr::pull() |> sort(),
     c("animal", "built-in", "range", "sentinel")
   )
 })

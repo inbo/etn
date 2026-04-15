@@ -1,0 +1,398 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=8296&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:04:27 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=uVWRz2bVktLuwS-bykmq-D9URZrwD2c3NnqwipJjr5hqc7IQ;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":8296,"Acronym":null,"StandardTitle":"VFM_Vattern","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"gustav.hellstrom@slu.se","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
+        Department of Wildlife, Fish and Environmental Studies, at the Swedish University
+        of Agricultural Sciences (SLU), operates a number of acoustic telemetry networks
+        both nationally and internationally. We consider some of our networks as permanent,
+        as we aim to keep some infrastructure in place indefinitely. That said, the
+        exact position and the number of receivers will change over time.<\/p><p>Here
+        we present our 69kHz network in lake V\u00e4ttern. This network is led primarily
+        by Dr. Gustav Hellstr\u00f6m. &nbsp;<br>&nbsp;<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-01-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":null,"DescrTransFlag":null,"Citation":"Hellstr\u00f6m,
+        G. Swedish University of Agricultural Sciences (2023): \"Acoustic telemetry
+        network in lake V\u00e4ttern\u201d","AccessConstraints":null,"UDate":"2023-07-04","CDate":"2023-05-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"Attribution
+        (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic arrays","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
+        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detectors","ThesTypID":3,"ThesType":"Transportation Research Thesaurus","Code":"Dmgdeb","Description":null,"OrigThesTerm":"Acoustic
+        detectors","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        behaviour","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        behaviour","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        migration","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        migration","DutchTerm":"Vismigratie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
+        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Fresh-water","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fresh-water","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Hellstr\u00f6m","Firstname":"Gustav","Initials":"G.","PerPublicFlag":1,"AdrID":163217,"Email":"gustav.hellstrom@slu.se","InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":38859,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":59,"Role":"Principal Investigator","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Lundberg","Firstname":"Petter","Initials":"P.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42006,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":68,"Role":"Data provider","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":"https:\/\/orcid.org\/0000-0003-3481-5163","ROR":null},{"OrderNr":3,"Surname":"Palm","Firstname":"Daniel","Initials":"D.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42010,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":61,"Role":"Data creator","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Brodin","Firstname":"Tomas","Initials":"T.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42008,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":17,"Role":"Partner","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":"https:\/\/orcid.org\/0000-0003-1086-7567","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21648,"TaxTerm":"Esox lucius Linnaeus, 1758","AphiaID":154210,"DutchTerm":"Snoek"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21839,"TaxTerm":"Lota lota (Linneaus, 1758)","AphiaID":154388,"DutchTerm":"Kwabaal"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":18898,"TaxTerm":"Salmo salar Linnaeus, 1758","AphiaID":127186,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":16643,"TaxTerm":"Salmo trutta Linnaeus, 1758","AphiaID":127187,"DutchTerm":"Zeeforel"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12511,"TaxTerm":"Salvelinus alpinus (Linneaus, 1758)","AphiaID":127188,"DutchTerm":"Riddervis"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21811,"TaxTerm":"Thymallus thymallus (Linneaus, 1758)","AphiaID":154375,"DutchTerm":null}],"frameworks":null,"otherterms":[{"OtherTerm":"Fish
+        behaviour"},{"OtherTerm":"Fish migration"},{"OtherTerm":"Fresh-water"}],"temporal":[{"DasDateID":5917,"StartYear":2021,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2021-01-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":"End
+        date not specified","StartMonth0":1,"StartMonth":"January","StartMonthNL":"Januari","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Lake V\u00e4ttern","DasGeoID":13796,"DasGeoTerm":null,"DasID":8296,"GeotID":9532,"X":14.519399999999999,"Y":58.358899999999998,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":17695,"OrigGeoTerm":"Lake
+        V\u00e4ttern","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14559,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":null,"ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":101,"DasTheme":"Biology
+        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/www.slu.se\/institutioner\/vilt-fisk-miljo\/forskning\/akvatisk-ekologi\/","externalID":null,"URLTypeCode":null,"URLType":"Additional
+        info","URLTypID":37,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:04:28
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=7915&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:04:28 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=SpXPoODhhrVa462dxyB4kX5uFIqZBPstKY5VdC4QvkzlZ2ik;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":7915,"Acronym":"BOORAMA","StandardTitle":"Buoys
+        of Opportunity - Research Moored Array for African-Asian-Australian Monsoon
+        Analysis and Prediction","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"fwhoriskey@dal.ca","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
+        RAMA project is a joint effort among the United States, Japan, India, Indonesia,
+        China, Africa, France, and Thailand to collect oceanic and meteorological
+        observations in the historically data-sparse Indian Ocean to enhance monsoon
+        research and forecasting.","EngDescr":"Collaborating institutions are: the
+        U.S. National Oceanic and Atmospheric Administration Pacific Marine Environmental
+        Laboratory (NOAA-PMEL), Japan Agency for Marine-Earth Science and Technology
+        (JAMSTEC), Indian Ministry of Earth Sciences (MoES), Indian National Centre
+        for Ocean Information Services (INCOIS), Indian National Institute of Ocean
+        Technology (NIOT), Indian National Institute of Oceanography (NIO), Indonesian
+        Agency for the Assessment and Application of Technology (BPPT), Indonesian
+        Ministry of Marine Affairs and Fisheries (KKP), Chinese First Institute of
+        Oceanography\/State Oceanic Administration (FIO\/SOA), Agulhas and Somali
+        Large Marine Ecosystems Project (ASCLME), French Institut de Recherche pour
+        le Developpement (IRD), French Institut National des Sciences de l''Univers
+        (INSU), French National Meteorological Service (Meteo-France), and Bay of
+        Bengal Large Marine Ecosystem Project (BOBLME). In 2014, OTN began providing
+        VR2W receivers for deployment on RAMA moorings to capture opportunistic acoustic
+        detections. The first four VR2Ws were deployed in late 2014 by NOAA-PMEL in
+        Bay of Bengal.","OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Whoriskey,
+        F. 2014. Buoys of Opportunity - Research Moored Array for African-Asian-Australian
+        Monsoon Analysis and Prediction","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-11-25","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-03-27
+        01:42:29.872571","timezone_type":1,"timezone":"+01:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":null,"keywords":[{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Asian
+        monsoon","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Asian
+        monsoon","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ISW,
+        Bengal Bay","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ISW,
+        Bengal Bay","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Monsoons","ThesTypID":2,"ThesType":"CSA
+        Technology Research Database Master Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Monsoons","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"USA
+        Coasts","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"USA
+        Coasts","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Weather
+        forecasting","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"124236","Description":null,"OrigThesTerm":"Weather
+        forecasting","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/124236","DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Whoriskey","Firstname":"Fred","Initials":"F.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":31255,"InsID":1550,"FullInstitute":"Dalhousie
+        University","RoleID":24,"Role":"Contact","OrigName":null,"StandardName":"Dalhousie
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7024-3284","ROR":null},{"OrderNr":2,"Surname":"Whoriskey","Firstname":"Fred","Initials":"F.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":31255,"InsID":1550,"FullInstitute":"Dalhousie
+        University","RoleID":61,"Role":"Data creator","OrigName":null,"StandardName":"Dalhousie
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7024-3284","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"}],"frameworks":null,"otherterms":[{"OtherTerm":"Asian
+        monsoon"}],"temporal":[{"DasDateID":5606,"StartYear":2014,"EndYear":null,"StartDay":null,"EndDay":null,"StartDate":"2014-01-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Bay of Bengal","DasGeoID":13013,"DasGeoTerm":null,"DasID":7915,"GeotID":3526,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4273,"OrigGeoTerm":"Bay
+        of Bengal","DutchTerm":null},{"GeoTerm":null,"DasGeoID":13014,"DasGeoTerm":null,"DasID":7915,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14125,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish
+        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/members.oceantrack.org\/OTN\/project?ccode=BOORAMA","externalID":null,"URLTypeCode":null,"URLType":"Dataset
+        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:04:29
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=8296&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:04:29 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=ZojsLtnQaR892G9Nupl9LnNgTxMW95iIuoUIHV3nmO4F6qPS;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":8296,"Acronym":null,"StandardTitle":"VFM_Vattern","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"gustav.hellstrom@slu.se","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
+        Department of Wildlife, Fish and Environmental Studies, at the Swedish University
+        of Agricultural Sciences (SLU), operates a number of acoustic telemetry networks
+        both nationally and internationally. We consider some of our networks as permanent,
+        as we aim to keep some infrastructure in place indefinitely. That said, the
+        exact position and the number of receivers will change over time.<\/p><p>Here
+        we present our 69kHz network in lake V\u00e4ttern. This network is led primarily
+        by Dr. Gustav Hellstr\u00f6m. &nbsp;<br>&nbsp;<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-01-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":null,"DescrTransFlag":null,"Citation":"Hellstr\u00f6m,
+        G. Swedish University of Agricultural Sciences (2023): \"Acoustic telemetry
+        network in lake V\u00e4ttern\u201d","AccessConstraints":null,"UDate":"2023-07-04","CDate":"2023-05-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"In Progress","AccessConstraint":"Attribution
+        (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
+        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic arrays","ThesTypID":1,"ThesType":"ASFA
+        Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
+        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        detectors","ThesTypID":3,"ThesType":"Transportation Research Thesaurus","Code":"Dmgdeb","Description":null,"OrigThesTerm":"Acoustic
+        detectors","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        tracking systems","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
+        tracking systems","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        behaviour","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        behaviour","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        migration","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
+        migration","DutchTerm":"Vismigratie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
+        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
+        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Fresh-water","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fresh-water","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Hellstr\u00f6m","Firstname":"Gustav","Initials":"G.","PerPublicFlag":1,"AdrID":163217,"Email":"gustav.hellstrom@slu.se","InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":38859,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":59,"Role":"Principal Investigator","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Lundberg","Firstname":"Petter","Initials":"P.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42006,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":68,"Role":"Data provider","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":"https:\/\/orcid.org\/0000-0003-3481-5163","ROR":null},{"OrderNr":3,"Surname":"Palm","Firstname":"Daniel","Initials":"D.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42010,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":61,"Role":"Data creator","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Brodin","Firstname":"Tomas","Initials":"T.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":"SLU","OrigNameLangCode":"sv","OrigNameLangID":53,"FullOrigName":"Sveriges
+        lantbruksuniversitet","InsOwnerCNT":4,"PersID":42008,"InsID":11145,"FullInstitute":"Swedish
+        University of Agricultural Sciences","RoleID":17,"Role":"Partner","OrigName":"Sveriges
+        lantbruksuniversitet","StandardName":"Swedish University of Agricultural Sciences","FullAcronym":"SLU","ORC":"https:\/\/orcid.org\/0000-0003-1086-7567","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21648,"TaxTerm":"Esox lucius Linnaeus, 1758","AphiaID":154210,"DutchTerm":"Snoek"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21839,"TaxTerm":"Lota lota (Linneaus, 1758)","AphiaID":154388,"DutchTerm":"Kwabaal"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":18898,"TaxTerm":"Salmo salar Linnaeus, 1758","AphiaID":127186,"DutchTerm":null},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":16643,"TaxTerm":"Salmo trutta Linnaeus, 1758","AphiaID":127187,"DutchTerm":"Zeeforel"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":12511,"TaxTerm":"Salvelinus alpinus (Linneaus, 1758)","AphiaID":127188,"DutchTerm":"Riddervis"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":21811,"TaxTerm":"Thymallus thymallus (Linneaus, 1758)","AphiaID":154375,"DutchTerm":null}],"frameworks":null,"otherterms":[{"OtherTerm":"Fish
+        behaviour"},{"OtherTerm":"Fish migration"},{"OtherTerm":"Fresh-water"}],"temporal":[{"DasDateID":5917,"StartYear":2021,"EndYear":null,"StartDay":1,"EndDay":null,"StartDate":"2021-01-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":"End
+        date not specified","StartMonth0":1,"StartMonth":"January","StartMonthNL":"Januari","EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Lake V\u00e4ttern","DasGeoID":13796,"DasGeoTerm":null,"DasID":8296,"GeotID":9532,"X":14.519399999999999,"Y":58.358899999999998,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":17695,"OrigGeoTerm":"Lake
+        V\u00e4ttern","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14559,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":null,"ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":101,"DasTheme":"Biology
+        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/www.slu.se\/institutioner\/vilt-fisk-miljo\/forskning\/akvatisk-ekologi\/","externalID":null,"URLTypeCode":null,"URLType":"Additional
+        info","URLTypID":37,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:04:29
+- request:
+    method: GET
+    uri: https://vliz.be/en/imis?dasid=7915&show=json
+  response:
+    status: 200
+    headers:
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
+      content-type: application/json; charset=utf-8;
+      cross-origin-opener-policy: same-origin
+      date: Fri, 10 Apr 2026 13:04:29 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: Apache/2.4.62 (Win64)
+      set-cookie:
+      - SSESSb1decfcf957c461d54e509db58033a53=fGKzLE0OmYkHH-Q5jYX-xi5qmTH2AZnUiznE8p4cZo04Vuwy;
+        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc1; path=/
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+    body:
+      string: '{"datasetrec":{"DasID":7915,"Acronym":"BOORAMA","StandardTitle":"Buoys
+        of Opportunity - Research Moored Array for African-Asian-Australian Monsoon
+        Analysis and Prediction","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"fwhoriskey@dal.ca","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
+        RAMA project is a joint effort among the United States, Japan, India, Indonesia,
+        China, Africa, France, and Thailand to collect oceanic and meteorological
+        observations in the historically data-sparse Indian Ocean to enhance monsoon
+        research and forecasting.","EngDescr":"Collaborating institutions are: the
+        U.S. National Oceanic and Atmospheric Administration Pacific Marine Environmental
+        Laboratory (NOAA-PMEL), Japan Agency for Marine-Earth Science and Technology
+        (JAMSTEC), Indian Ministry of Earth Sciences (MoES), Indian National Centre
+        for Ocean Information Services (INCOIS), Indian National Institute of Ocean
+        Technology (NIOT), Indian National Institute of Oceanography (NIO), Indonesian
+        Agency for the Assessment and Application of Technology (BPPT), Indonesian
+        Ministry of Marine Affairs and Fisheries (KKP), Chinese First Institute of
+        Oceanography\/State Oceanic Administration (FIO\/SOA), Agulhas and Somali
+        Large Marine Ecosystems Project (ASCLME), French Institut de Recherche pour
+        le Developpement (IRD), French Institut National des Sciences de l''Univers
+        (INSU), French National Meteorological Service (Meteo-France), and Bay of
+        Bengal Large Marine Ecosystem Project (BOBLME). In 2014, OTN began providing
+        VR2W receivers for deployment on RAMA moorings to capture opportunistic acoustic
+        detections. The first four VR2Ws were deployed in late 2014 by NOAA-PMEL in
+        Bay of Bengal.","OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Whoriskey,
+        F. 2014. Buoys of Opportunity - Research Moored Array for African-Asian-Australian
+        Monsoon Analysis and Prediction","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-11-25","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-03-27
+        01:42:29.872571","timezone_type":1,"timezone":"+01:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
+        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        license lets others distribute, remix, tweak, and build upon your work, even
+        commercially, as long as they credit you for the original creation. This is
+        the most accommodating of licenses offered. Recommended for maximum dissemination
+        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":null,"keywords":[{"ThesaurusTerm":"Acoustic
+        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
+        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
+        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Asian
+        monsoon","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Asian
+        monsoon","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ISW,
+        Bengal Bay","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ISW,
+        Bengal Bay","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Monsoons","ThesTypID":2,"ThesType":"CSA
+        Technology Research Database Master Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Monsoons","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"USA
+        Coasts","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"USA
+        Coasts","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Weather
+        forecasting","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"124236","Description":null,"OrigThesTerm":"Weather
+        forecasting","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/124236","DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
+        European Tracking Network is a pan-European biotelemetry network that aims
+        at the integration of regional telemetry initiatives into a sustainable, efficient
+        and integrated network embedded in the international context. Data is integrated
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Whoriskey","Firstname":"Fred","Initials":"F.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":31255,"InsID":1550,"FullInstitute":"Dalhousie
+        University","RoleID":24,"Role":"Contact","OrigName":null,"StandardName":"Dalhousie
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7024-3284","ROR":null},{"OrderNr":2,"Surname":"Whoriskey","Firstname":"Fred","Initials":"F.","PerPublicFlag":1,"AdrID":null,"Email":null,"InsPublicFlag":1,"Acronym":null,"OrigNameLangCode":null,"OrigNameLangID":null,"FullOrigName":null,"InsOwnerCNT":2,"PersID":31255,"InsID":1550,"FullInstitute":"Dalhousie
+        University","RoleID":61,"Role":"Data creator","OrigName":null,"StandardName":"Dalhousie
+        University","FullAcronym":null,"ORC":"https:\/\/orcid.org\/0000-0001-7024-3284","ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
+        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"}],"frameworks":null,"otherterms":[{"OtherTerm":"Asian
+        monsoon"}],"temporal":[{"DasDateID":5606,"StartYear":2014,"EndYear":null,"StartDay":null,"EndDay":null,"StartDate":"2014-01-01","EndDate":null,"DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"In
+        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Bay of Bengal","DasGeoID":13013,"DasGeoTerm":null,"DasID":7915,"GeotID":3526,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":4273,"OrigGeoTerm":"Bay
+        of Bengal","DutchTerm":null},{"GeoTerm":null,"DasGeoID":13014,"DasGeoTerm":null,"DasID":7915,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14125,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish
+        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
+        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":30,"DasTheme":"Biology
+        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":37,"DasTheme":"Fisheries
+        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/members.oceantrack.org\/OTN\/project?ccode=BOORAMA","externalID":null,"URLTypeCode":null,"URLType":"Dataset
+        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
+  recorded_at: 2026-04-10 13:04:29
+recorded_with: VCR-vcr/2.1.0
