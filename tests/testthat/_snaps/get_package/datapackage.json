@@ -5,8 +5,9 @@
       "name": "animals",
       "path": "animals.csv",
       "profile": "tabular-data-resource",
-      "encoding": "utf-8",
       "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
       "schema": {
         "fields": [
           {
@@ -19,7 +20,7 @@
           },
           {
             "name": "tag_serial_number",
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "tag_type",
@@ -291,12 +292,13 @@
       "path": "tags.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
+      "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
         "fields": [
           {
             "name": "tag_serial_number",
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "tag_type",
@@ -360,7 +362,7 @@
           },
           {
             "name": "floating",
-            "type": "boolean"
+            "type": "string"
           },
           {
             "name": "archive_memory",
@@ -380,11 +382,11 @@
           },
           {
             "name": "sensor_range_min",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "sensor_range_max",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "sensor_resolution",
@@ -519,6 +521,7 @@
       "path": "detections.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
+      "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
         "fields": [
@@ -532,7 +535,7 @@
           },
           {
             "name": "tag_serial_number",
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "acoustic_tag_id",
@@ -584,7 +587,7 @@
           },
           {
             "name": "sensor2_unit",
-            "type": "number"
+            "type": "string"
           },
           {
             "name": "signal_to_noise_ratio",
@@ -641,6 +644,7 @@
       "path": "deployments.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
+      "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
         "fields": [
@@ -814,6 +818,7 @@
       "path": "receivers.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
+      "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
         "fields": [
