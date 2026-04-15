@@ -36,5 +36,6 @@ reference:
   - get_package
   - read_package
   - write_package
+  - add_resource
 - title: Deprecated functions
   contents: connect_to_etn
