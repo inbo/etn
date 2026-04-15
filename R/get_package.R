@@ -84,7 +84,8 @@ get_package <- function(animal_project_code) {
   # Keep unique records
   detections <-
     detections |>
-    dplyr::distinct(.data$detection_id, .keep_all = TRUE)
+    dplyr::distinct(.data$detection_id, .keep_all = TRUE) |>
+    dplyr::arrange(.data$tag_serial_number, .data$detection_id)
 
   # DEPLOYMENTS
   message("* (4/6): downloading deployments.csv")
