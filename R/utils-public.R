@@ -133,7 +133,7 @@ get_public_detections <- function(project_code = NULL, ...) {
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
     duckdbfs::open_dataset(format = "parquet",
-                           unify_schemas = FALSE)
+                           unify_schemas = TRUE)
 
   # Combine the projects into a single table and filter
   duckdb_view |>
