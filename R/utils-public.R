@@ -106,7 +106,7 @@ get_public_detections <- function(project_code, ...) {
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href"))
 
   # Read the contents of the parquet files and row bind them.
-  parquet_contents <-
+  arrow_tables <-
     parquet_paths |>
     # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
     purrr::map(\(path) {
@@ -115,15 +115,14 @@ get_public_detections <- function(project_code, ...) {
         stringr::fixed("https://www.lifewatch.be/etn/parquet/detections/"),
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
-    purrr::map(arrow::read_parquet,
-               .progress = TRUE) |>
-    # In the case multiple parquet files were read per project, combine them
-    purrr::map_if(.p = \(obj) {!is.data.frame(obj)}, .f = purrr::list_rbind)
+    purrr::map(\(uri) {arrow::read_parquet(uri,
+                                           as_data_frame = FALSE)},
+               .progress = TRUE)
 
   # Combine the projects into a single table and filter
-  purrr::list_rbind(parquet_contents) |>
-    dplyr::filter(...)
-  gc()
+  do.call(arrow::concat_tables, arrow_tables) |>
+    dplyr::filter(...) |>
+    dplyr::collect()
 }
 
 #' Read values from the parquet dump metadata files
