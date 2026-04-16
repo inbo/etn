@@ -42,12 +42,10 @@
 #' @param directory Character. Relative path to local download directory.
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
-#'
-#' @return CSV and JSON files written to disk.
-#'
 #' @inheritParams list_animal_ids
+#' @return CSV and JSON files written to disk.
+#' @family download functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",

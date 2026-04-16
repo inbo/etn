@@ -3,9 +3,8 @@
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `tag_serial_numbers` present in
 #'   `common.tag_device`.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_tag_serial_numbers()
 list_tag_serial_numbers <- function(connection) {

@@ -45,3 +45,14 @@ get_acoustic_projects()
 get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other access functions: 
+\code{\link{get_acoustic_deployments}()},
+\code{\link{get_acoustic_detections}()},
+\code{\link{get_acoustic_receivers}()},
+\code{\link{get_animal_projects}()},
+\code{\link{get_animals}()},
+\code{\link{get_cpod_projects}()},
+\code{\link{get_tags}()}
+}
+\concept{access functions}

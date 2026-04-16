@@ -96,3 +96,4 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
 #> Found tags associated with multiple animals: 1145373
 \dontshow{\}) # examplesIf}
 }
+\concept{download functions}

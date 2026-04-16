@@ -10,13 +10,11 @@
 #'   codes. Case-insensitive.
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param scientific_name Character (vector). One or more scientific names.
-#'
+#' @inheritParams list_animal_ids
 #' @return A tibble with animals data, sorted by `animal_project_code`,
 #' `release_date_time` and `tag_serial_number`.
-#'
-#' @inheritParams list_animal_ids
+#' @family access functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' # Get all animals
 #' get_animals()
