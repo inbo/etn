@@ -37,7 +37,33 @@ test_that("read_child_catalog() returns expected list elements", {
 })
 
 # list_public_detections() ------------------------------------------------
+test_that("list_public_detections() returns public animal_project_codes", {
+  expect_in(
+    list_public_detections()$project_code,
+    list_animal_project_codes()
+  )
+})
 
+test_that("list_public_detections() returns all available projects", {
+  skip("Not all public animal projects have been dumped to parquet")
+
+  # Fetch non-moratorium animal_projects_codes from the database
+  public_animal_projects <-
+    dplyr::filter(get_animal_projects(), !.data$moratorium) |>
+    dplyr::pull("project_code")
+
+  expect_length(
+    list_public_detections()$project_code,
+    length(public_animal_projects)
+  )
+})
+
+test_that("list_public_detections() returns paths to resource json metadata", {
+  expect_in(
+    list_public_detections(),
+    "path"
+  )
+})
 
 # get_public_detections() -------------------------------------------------
 
