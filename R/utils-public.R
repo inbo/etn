@@ -186,5 +186,16 @@ get_public_metadata <- function(table = c("animals",
   # arrow::concat_tables() expects different objects as arguments, so we can't
   # directly pass a list
 
-  rlang::exec(arrow::concat_tables, !!!arrow_tables)
+  metadata <- rlang::exec(arrow::concat_tables, !!!arrow_tables) |>
+    dplyr::filter(...) |>
+    dplyr::collect()
+
+  # Release arrow memory ----------------------------------------------------
+
+  # Because arrow uses it's own memory allocation, not the one from R, R will
+  # not automatically release the used RAM by arrow.
+
+  rm(arrow_tables)
+  # Return the metadata -----------------------------------------------------
+  metadata
 }
