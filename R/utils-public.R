@@ -116,6 +116,13 @@ get_public_detections <- function(project_code = NULL, ...) {
       )
 
   # Read the contents of the parquet files and row bind them.
+  duckdbfs::duckdb_config(
+    # If a request fails, retry up to 5 times (eg too many requests)
+    http_retries = 5,
+    # Wait 2 seconds between retries
+    http_retry_wait_ms = 2000
+  )
+
   duckdb_view <-
     parquet_paths |>
     # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
