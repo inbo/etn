@@ -8,6 +8,7 @@
   * [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.
   * [license](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
   * [identificationVerificationStatus](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
+* The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
 
 # etn 3.0.0
 
