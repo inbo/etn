@@ -85,12 +85,18 @@ list_public_detections <- function() {
 #' @examplesIf interactive()
 #' get_public_detections("2011_Loire", timestamp >= lubridate::ymd(20220101))
 #'
-get_public_detections <- function(project_code, ...) {
+get_public_detections <- function(project_code = NULL, ...) {
   public_detections <- list_public_detections()
-  selected_project_code <-
-    rlang::arg_match(project_code,
-                     values = public_detections$project_code,
-                     multiple = TRUE)
+  if (is.null(project_code)) {
+    selected_project_code <-
+      public_detections$project_code
+  } else {
+    selected_project_code <-
+      rlang::arg_match(project_code,
+        values = public_detections$project_code,
+        multiple = TRUE
+      )
+  }
 
   detections_path <-
     list_public_detections() |>
