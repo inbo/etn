@@ -99,13 +99,31 @@ get_public_detections <- function(project_code, ...) {
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
-  jsonlite::fromJSON(file.path(catalog_root,
-                               "detection_files",
-                               detections_path)) |>
-    purrr::chuck("assets", "data", "href") |>
-    purrr::map(arrow::read_parquet) |>
-    purrr::list_rbind() |>
+  # Read the parquet paths from the catalog
+  parquet_paths <-
+    file.path(catalog_root, "detection_files", detections_path) |>
+    purrr::map(jsonlite::fromJSON) |>
+    purrr::map( ~ purrr::chuck(.x, "assets", "data", "href"))
+
+  # Read the contents of the parquet files and row bind them.
+  parquet_contents <-
+    parquet_paths |>
+    # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
+    purrr::map(\(path) {
+      stringr::str_replace(
+        path,
+        stringr::fixed("https://www.lifewatch.be/etn/parquet/detections/"),
+        "https://www.lifewatch.be/etn/parquet/staging/detections/")
+      }) |>
+    purrr::map(arrow::read_parquet,
+               .progress = TRUE) |>
+    # In the case multiple parquet files were read per project, combine them
+    purrr::map_if(.p = \(obj) {!is.data.frame(obj)}, .f = purrr::list_rbind)
+
+  # Combine the projects into a single table and filter
+  purrr::list_rbind(parquet_contents) |>
     dplyr::filter(...)
+  gc()
 }
 
 #' Read values from the parquet dump metadata files
@@ -133,8 +151,11 @@ get_public_metadata <- function(table = c("animals",
                                           "receivers",
                                           "tags"),
                                 ...) {
+
+  # Check input arguments ---------------------------------------------------
   selected_table <- rlang::arg_match(table)
 
+  # Look for available tables -----------------------------------------------
   catalog_paths <-
     read_child_catalog(catalog = "metadata_files") |>
     purrr::chuck("links") |>
@@ -146,10 +167,12 @@ get_public_metadata <- function(table = c("animals",
       path = .data$href
     )
 
+  # Fetch the correct table path --------------------------------------------
   table_path <-
     dplyr::filter(catalog_paths, table == {{ selected_table }}) |>
     dplyr::pull("path")
 
+  # Read parquet files with arrow -------------------------------------------
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
   jsonlite::fromJSON(file.path(catalog_root, "metadata_files", table_path)) |>
     purrr::chuck("assets", "data", "href") |>
