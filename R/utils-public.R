@@ -110,21 +110,20 @@ get_public_detections <- function(project_code, ...) {
       )
 
   # Read the contents of the parquet files and row bind them.
-  arrow_tables <-
+  duckdb_view <-
     parquet_paths |>
     # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
-    purrr::map(\(path) {
+    purrr::map_chr(\(path) {
       stringr::str_replace(
         path,
         stringr::fixed("https://www.lifewatch.be/etn/parquet/detections/"),
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
-    purrr::map(\(uri) {arrow::read_parquet(uri,
-                                           as_data_frame = FALSE)},
-               .progress = TRUE)
+    duckdbfs::open_dataset(format = "parquet",
+                           unify_schemas = FALSE)
 
   # Combine the projects into a single table and filter
-  do.call(arrow::concat_tables, arrow_tables) |>
+  duckdb_view |>
     dplyr::filter(...) |>
     dplyr::collect()
 }
