@@ -85,7 +85,8 @@ list_public_detections <- function() {
 #' @examplesIf interactive()
 #' get_public_detections("2011_Loire", timestamp >= lubridate::ymd(20220101))
 #'
-get_public_detections <- function(project_code = NULL, ...) {
+get_public_detections <- function(project_code = NULL, ...,
+                                  limit = FALSE) {
   public_detections <- list_public_detections()
   if (is.null(project_code)) {
     selected_project_code <-
@@ -135,10 +136,16 @@ get_public_detections <- function(project_code = NULL, ...) {
     duckdbfs::open_dataset(format = "parquet",
                            unify_schemas = TRUE)
 
-  # Combine the projects into a single table and filter
-  duckdb_view |>
-    dplyr::filter(...) |>
-    dplyr::collect()
+
+  # Collect and return the table --------------------------------------------
+  # Limit it if needed
+  if(limit){
+    head(duckdb_view, 100) |>
+      dplyr::collect()
+  } else {
+    duckdb_view |>
+      dplyr::collect()
+  }
 }
 
 #' Read values from the parquet dump metadata files
