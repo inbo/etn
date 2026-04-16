@@ -92,7 +92,7 @@ test_that("get_public_detections() works with animal_project = NULL", {
   # able to fetch detections
   expect_type(
     get_public_detections(
-      animal_project = NULL,
+      project_code = NULL,
       animal_scientific_name == "Lampetra fluviatilis"
     ),
     "list"
