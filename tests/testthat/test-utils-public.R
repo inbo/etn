@@ -61,7 +61,10 @@ test_that("list_public_detections() returns all available projects", {
 test_that("list_public_detections() returns paths to resource json metadata", {
   expect_in(
     list_public_detections(),
-    "path"
+    c(
+      "project_code",
+      "path"
+    )
   )
 })
 
