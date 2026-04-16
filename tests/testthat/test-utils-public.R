@@ -66,7 +66,39 @@ test_that("list_public_detections() returns paths to resource json metadata", {
 })
 
 # get_public_detections() -------------------------------------------------
+test_that("get_public_detections() can combine multiple animal_projects", {
+  expect_type(
+    get_public_detections(c("OTN-Hemnfjorden", "DAK")),
+    "list"
+    )
+})
 
+test_that("get_public_detections() can pass filter arguments", {
+  # project with mutliple species
+  expect_type(
+    get_public_detections(
+      "2011_Warnow",
+      animal_scientific_name == "Anguilla rostrata"
+    ),
+    "list"
+  )
+})
+
+test_that("get_public_detections() works with animal_project = NULL", {
+  # Even without providing an animal_project_code, the function should still be
+  # able to fetch detections
+  expect_type(
+    get_public_detections(
+      animal_project = NULL,
+      animal_scientific_name == "Lampetra fluviatilis"
+    ),
+    "list"
+  )
+})
+
+test_that("get_public_detections() supports same arg names as get_acoustic_detections()", {
+
+})
 
 # get_public_metadata() ---------------------------------------------------
 
