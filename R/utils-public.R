@@ -83,7 +83,7 @@ list_public_detections <- function() {
 #' @noRd
 #'
 #' @examplesIf interactive()
-#' get_public_detections("ETN_001", timestamp >= lubridate::ymd(20220101))
+#' get_public_detections("2011_Loire", timestamp >= lubridate::ymd(20220101))
 #'
 get_public_detections <- function(project_code, ...) {
   public_detections <- list_public_detections()
