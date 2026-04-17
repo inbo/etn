@@ -143,7 +143,22 @@ test_that("read_stac() returns natural sorting for list_x identities", {
 })
 
 test_that("read_stac() supports all exported functions", {
+  exported_functions <- getNamespaceExports("etn") |>
+    purrr::keep(~ dplyr::when_any(
+      stringr::str_starts(.x, stringr::fixed("get_")),
+      stringr::str_starts(.x, stringr::fixed("list_"))
+    )) |>
+    # Except list_values(), which isn't a data fetching function.
+    purrr::discard(.p = ~.x == "list_values")
 
+  supported_functions <- as.character(formals(read_stac)$function_identity) |>
+    # Except c(), which isn't an etn function
+    purrr::discard(.p = ~.x == "c")
+
+  expect_setequal(
+    supported_functions,
+    exported_functions
+  )
 })
 
 test_that("read_stac() supports vectors as payload to filter on", {
