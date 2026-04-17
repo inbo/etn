@@ -255,6 +255,7 @@ read_stac <- function(function_identity = c(
                         "list_deployment_ids",
                         "list_receiver_ids",
                         "list_scientific_names",
+                        "list_station_names",
 
                         "get_acoustic_deployments",
                         "get_acoustic_detections",
@@ -320,6 +321,12 @@ read_stac <- function(function_identity = c(
       get_public_metadata("animals") |>
         dplyr::filter(!is.na(.data$scientific_name)) |>
         dplyr::pull("scientific_name") |>
+        unique()
+    },
+    list_station_names = {
+      get_public_metadata("deployments") |>
+        dplyr::filter(!is.na(.data$station_name)) |>
+        dplyr::pull("station_name") |>
         unique()
     },
     get_acoustic_deployments = {
