@@ -323,56 +323,30 @@ read_stac <- function(function_identity = c(
         unique()
     },
     get_acoustic_deployments = {
-      filter_expressions <- purrr::imap(payload, \(value, field) {
-        rlang::expr(.data[[field]] == !!value)
-      }) |>
-        purrr::set_names(NULL)
-
       get_public_metadata("deployments") |>
-        dplyr::filter(!!!filter_expressions)
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     },
     get_acoustic_detections = {
       # TODO: implement get_public_detections()
     },
     get_acoustic_receivers = {
-      filter_expressions <- purrr::imap(payload, \(value, field) {
-        rlang::expr(.data[[field]] == !!value)
-      }) |>
-        purrr::set_names(NULL)
-      # TODO support multiple filter arguments via SQL: sep out to multiple
-      # filter expressions
       get_public_metadata("receivers") |>
-        dplyr::filter(!!!filter_expressions)
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     },
     get_acoustic_projects = {
-      filter_expressions <- purrr::imap(payload, \(value, field) {
-        rlang::expr(.data[[field]] == !!value)
-      }) |>
-        purrr::set_names(NULL)
-
       get_public_metadata("projects") |>
         dplyr::filter(.data$project_type == "acoustic") |>
-        dplyr::filter(!!!filter_expressions)
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     },
     get_cpod_projects = {
-      filter_expressions <- purrr::imap(payload, \(value, field) {
-        rlang::expr(.data[[field]] == !!value)
-      }) |>
-        purrr::set_names(NULL)
-
       get_public_metadata("projects") |>
         dplyr::filter(.data$project_type == "cpod") |>
-        dplyr::filter(!!!filter_expressions)
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     },
     get_animal_projects = {
-      filter_expressions <- purrr::imap(payload, \(value, field) {
-        rlang::expr(.data[[field]] == !!value)
-      }) |>
-        purrr::set_names(NULL)
-
       get_public_metadata("projects") |>
         dplyr::filter(.data$project_type == "animal") |>
-        dplyr::filter(!!!filter_expressions)
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     }
   )
 
