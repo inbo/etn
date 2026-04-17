@@ -245,12 +245,11 @@ read_stac <- function(function_identity = c(
                         "list_deployment_ids",
                         "list_receiver_ids",
                         "list_scientific_names"
-
                       ),
                       payload = NULL) {
   function_identity <- rlang::arg_match(function_identity)
 
-  switch(function_identity,
+  stac_result <- switch(function_identity,
     list_acoustic_project_codes = {
       get_public_metadata("projects") |>
         # should this be project_type? See
@@ -280,6 +279,31 @@ read_stac <- function(function_identity = c(
       get_public_metadata("tags") |>
         dplyr::filter(!is.na(.data$tag_serial_number)) |>
         dplyr::pull("tag_serial_number")
+    },
+    list_animal_ids = {
+      get_public_metadata("animals") |>
+        dplyr::pull("animal_id") |>
+        unique()
+    },
+    list_deployment_ids = {
+      get_public_metadata("deployments") |>
+        dplyr::pull("deployment_id") |>
+        unique()
+    },
+    list_receiver_ids = {
+      get_public_metadata("receivers") |>
+        dplyr::pull("receiver_id") |>
+        unique()
+    },
+    list_scientific_names = {
+      get_public_metadata("animals") |>
+        dplyr::filter(!is.na(.data$scientific_name)) |>
+        dplyr::pull("scientific_name") |>
+        unique()
     }
   )
+
+  # Sort the returned values ------------------------------------------------
+
+  stringr::str_sort(stac_result, numeric = TRUE)
 }
