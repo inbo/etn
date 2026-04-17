@@ -86,7 +86,8 @@ list_public_detections <- function() {
 #' get_public_detections("2011_Loire", timestamp >= lubridate::ymd(20220101))
 #'
 get_public_detections <- function(project_code = NULL, ...,
-                                  limit = FALSE) {
+                                  limit = FALSE,
+                                  progress = TRUE) {
   public_detections <- list_public_detections()
   if (is.null(project_code)) {
     selected_project_code <-
@@ -109,7 +110,10 @@ get_public_detections <- function(project_code = NULL, ...,
   # Read the parquet paths from the catalog
   parquet_paths <-
     file.path(catalog_root, "detection_files", detections_path) |>
-    purrr::map(jsonlite::fromJSON, .progress = "Reading metadata") |>
+    purrr::map(jsonlite::fromJSON, .progress = ifelse(progress & !is_testing(),
+                                                      yes = "Reading metadata",
+                                                      no = FALSE
+    )) |>
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
     purrr::set_names(
