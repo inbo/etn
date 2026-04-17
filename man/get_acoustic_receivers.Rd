@@ -35,3 +35,14 @@ get_acoustic_receivers(status = c("lost", "broken"))
 get_acoustic_receivers(receiver_id = "VR2W-124070")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other access functions: 
+\code{\link{get_acoustic_deployments}()},
+\code{\link{get_acoustic_detections}()},
+\code{\link{get_acoustic_projects}()},
+\code{\link{get_animal_projects}()},
+\code{\link{get_animals}()},
+\code{\link{get_cpod_projects}()},
+\code{\link{get_tags}()}
+}
+\concept{access functions}

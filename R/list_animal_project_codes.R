@@ -2,9 +2,8 @@
 #'
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `project_code` of `type = "animal"` that are available.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_animal_project_codes()
 list_animal_project_codes <- function(connection) {

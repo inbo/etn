@@ -105,3 +105,14 @@ get_acoustic_detections(
 )
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other access functions: 
+\code{\link{get_acoustic_deployments}()},
+\code{\link{get_acoustic_projects}()},
+\code{\link{get_acoustic_receivers}()},
+\code{\link{get_animal_projects}()},
+\code{\link{get_animals}()},
+\code{\link{get_cpod_projects}()},
+\code{\link{get_tags}()}
+}
+\concept{access functions}

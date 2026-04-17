@@ -6,6 +6,7 @@
 \alias{read_package}
 \alias{write_package}
 \title{Objects exported from other packages}
+\concept{frictionless functions}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links

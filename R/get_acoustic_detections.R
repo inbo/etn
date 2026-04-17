@@ -23,12 +23,10 @@
 #' @param progress Logical. Show a progress bar while fetching data. Defaults to
 #'   `TRUE`.
 #' @inheritParams list_animal_ids
-#'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
 #'  and `date_time`.
-#'
+#' @family access functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' # Get limited sample of acoustic detections
 #' get_acoustic_detections(limit = TRUE)

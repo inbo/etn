@@ -2,9 +2,8 @@
 #'
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `id_pk` present in `acoustic.deployments`.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_deployment_ids()
 list_deployment_ids <- function(connection) {
