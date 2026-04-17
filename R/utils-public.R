@@ -244,7 +244,18 @@ read_stac <- function(function_identity = c(
                         "list_animal_ids",
                         "list_deployment_ids",
                         "list_receiver_ids",
-                        "list_scientific_names"
+                        "list_scientific_names",
+
+                        "get_acoustic_deployments",
+                        "get_acoustic_detections",
+                        "get_acoustic_receivers",
+
+                        "get_animals",
+                        "get_tags",
+
+                        "get_acoustic_projects",
+                        "get_cpod_projects",
+                        "get_animal_projects"
                       ),
                       payload = NULL) {
   function_identity <- rlang::arg_match(function_identity)
