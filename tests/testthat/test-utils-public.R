@@ -160,7 +160,7 @@ test_that("read_stac() supports public detection queries", {
   # parquet instead of public metadata.
 
   expect_type(
-    read_stac("get_public_detections",
+    read_stac("get_acoustic_detections",
       payload = list(
         project_code = "2013_albertkanaal",
         animal_scientific_name = "Anguilla anguilla"
