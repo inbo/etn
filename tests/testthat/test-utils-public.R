@@ -155,6 +155,36 @@ test_that("read_stac() supports vectors as payload to filter on", {
   )
 })
 
+test_that("read_stac() correctly forwards multiple payload members", {
+  # Multiple members should be forwarded as AND queries, vectors within a single
+  # member are OR queries
+
+  # This query should return more rows than the same query with an additional
+  # filter
+  expect_gt(
+    nrow(read_stac("get_acoustic_deployments",
+      payload = list(receiver_id = "VR2W-111604")
+    )),
+    nrow(read_stac("get_acoustic_deployments",
+      payload = list(
+        receiver_id = "VR2W-111604",
+        deployment_id = "93099"
+      )
+    ))
+  )
+
+  # This query should return less rows than the same query with an additional
+  # allowed value
+  expect_lt(
+    nrow(read_stac("get_acoustic_receivers",
+      payload = list(status = "lost")
+    )),
+    nrow(read_stac("get_acoustic_receivers",
+      payload = list(status = c("lost", "broken"))
+    ))
+  )
+})
+
 test_that("read_stac() supports public detection queries", {
   # These type of queries are more complex because they read the detections
   # parquet instead of public metadata.
