@@ -89,3 +89,24 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
     expect_false(credentials_are_set())
   )
 })
+
+# arg_to_filter_expression ------------------------------------------------
+
+test_that("arg_to_filter_expression() returns a call for a single value", {
+  expect_equal(
+    arg_to_filter_expression(list(status = "lost")),
+    list(rlang::expr(.data[["status"]] == "lost"))
+  )
+})
+
+test_that("arg_to_filter_expression() returns calls for multiple values", {
+  expect_equal(
+    arg_to_filter_expression(list(animal_project_code = "2014_demer",
+                                  start_date = "2015-04-24",
+                                  end_date = "2015-04-25")),
+    list(rlang::expr(.data[["animal_project_code"]] == "2014_demer"),
+         rlang::expr(.data[["start_date"]] == "2015-04-24"),
+         rlang::expr(.data[["end_date"]] == "2015-04-25")
+         )
+  )
+})
