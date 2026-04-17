@@ -285,6 +285,39 @@ path_sans_ext <- function(x, compression = FALSE) {
     sub("([^.]+)\\.[[:alnum:]]+$", "\\1", x)
 }
 
+#' Convert function arguments as a list, to a vector of filter expressions
+#'
+#' @param fn_arguments A list of function arguments, typically a payload as
+#'   would be forwarded to an api or database endpoint.
+#'
+#' @returns An unnamed list of filter expressions (calls), to be used by
+#'   `dplyr::filter()`
+#'
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' arg_to_filter_expression(list("scientific_name = "Umbrina cirrosa"))
+#' arg_to_filter_expression(list(status = c("lost", "broken")))
+#' arg_to_filter_expression(list(animal_project_code = "2014_demer",
+#'                               start_date = "2015-04-24",
+#'                               end_date = "2015-04-25",))
+arg_to_filter_expression <- function(fn_arguments){
+  fn_arguments |>
+    # If there are vectors in the arguments, we want to create multiple filter
+    # expressions for them. They will get executed as OR queries by
+    # dplyr::filter
+    purrr::map_if(.p = \(values) {length(values) > 1},
+                  .f = \(arg) {purrr::map(arg, ~.x)}) |>
+    purrr::list_flatten(name_spec = "{outer}") |>
+    purrr::imap(\(value, field) {
+      rlang::expr(.data[[field]] == !!value)
+    }) |>
+    # Set names to NULL to pavoid issues with named vectors in filter
+    # expressions.
+    purrr::set_names(NULL)
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
