@@ -114,3 +114,30 @@ test_that("get_public_detections() supports limiting to 100 rows", {
 # get_public_metadata() ---------------------------------------------------
 
 
+# read_stac() -------------------------------------------------------------
+
+test_that("read_stac() results should not include NA on list_x identities", {
+  list_identities <-
+    formals(read_stac)$function_identity |>
+    as.character() |>
+    purrr::keep(.p = ~ stringr::str_starts(.x, stringr::fixed("list_")))
+  for (list_function in list_identities) {
+    expect_false(anyNA(
+      read_stac(function_identity = list_function)
+    ))
+  }
+})
+
+test_that("read_stac() returns natural sorting for list_x identities", {
+  list_identities <-
+    formals(read_stac)$function_identity |>
+    as.character() |>
+    purrr::keep(.p = ~ stringr::str_starts(.x, stringr::fixed("list_")))
+  for (list_function in list_identities) {
+    expect_equal(
+      read_stac(function_identity = list_function),
+      stringr::str_sort(read_stac(function_identity = list_function),
+                        numeric = TRUE)
+    )
+  }
+})
