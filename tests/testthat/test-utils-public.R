@@ -145,3 +145,27 @@ test_that("read_stac() returns natural sorting for list_x identities", {
 test_that("read_stac() supports all exported functions", {
 
 })
+
+test_that("read_stac() supports vectors as payload to filter on", {
+  expect_type(
+    read_stac("get_acoustic_receivers",
+      payload = list(status = c("lost", "broken"))
+    ),
+    "list"
+  )
+})
+
+test_that("read_stac() supports public detection queries", {
+  # These type of queries are more complex because they read the detections
+  # parquet instead of public metadata.
+
+  expect_type(
+    read_stac("get_public_detections",
+      payload = list(
+        project_code = "2013_albertkanaal",
+        animal_scientific_name = "Anguilla anguilla"
+      )
+    ),
+    "list"
+  )
+})

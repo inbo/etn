@@ -237,6 +237,10 @@ get_public_metadata <- function(table = c("animals",
 #' read_stac("list_acoustic_project_codes")
 #' read_stac("get_acoustic_deployments",
 #'           payload = list(receiver_id = "VR2TX-483009"))
+#' read_stac("get_acoustic_receivers",
+#'           payload = list(status = "lost",
+#'                          receiver_id = "VR2W-124070"))
+
 read_stac <- function(function_identity = c(
                         "list_acoustic_project_codes",
                         "list_animal_project_codes",
@@ -322,7 +326,20 @@ read_stac <- function(function_identity = c(
 
       get_public_metadata("deployments") |>
         dplyr::filter(!!!filter_expressions)
-    }
+    },
+    get_acoustic_detections = {
+      # TODO: implement get_public_detections()
+    },
+    get_acoustic_receivers = {
+      filter_expressions <- purrr::imap(payload, \(value, field) {
+        rlang::expr(.data[[field]] == !!value)
+      }) |>
+        purrr::set_names(NULL)
+      # TODO support multiple filter arguments via SQL: sep out to multiple
+      # filter expressions
+      get_public_metadata("receivers") |>
+        dplyr::filter(!!!filter_expressions)
+    },
   )
 
   # Sort the returned values ------------------------------------------------
