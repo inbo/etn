@@ -235,6 +235,8 @@ get_public_metadata <- function(table = c("animals",
 #'
 #' @examples
 #' read_stac("list_acoustic_project_codes")
+#' read_stac("get_acoustic_deployments",
+#'           payload = list(receiver_id = "VR2TX-483009"))
 read_stac <- function(function_identity = c(
                         "list_acoustic_project_codes",
                         "list_animal_project_codes",
