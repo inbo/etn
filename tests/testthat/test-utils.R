@@ -101,12 +101,44 @@ test_that("arg_to_filter_expression() returns a call for a single value", {
 
 test_that("arg_to_filter_expression() returns calls for multiple values", {
   expect_equal(
-    arg_to_filter_expression(list(animal_project_code = "2014_demer",
-                                  start_date = "2015-04-24",
-                                  end_date = "2015-04-25")),
-    list(rlang::expr(.data[["animal_project_code"]] == "2014_demer"),
-         rlang::expr(.data[["start_date"]] == "2015-04-24"),
-         rlang::expr(.data[["end_date"]] == "2015-04-25")
-         )
+    arg_to_filter_expression(list(
+      animal_project_code = "2014_demer",
+      start_date = "2015-04-24",
+      end_date = "2015-04-25"
+    )),
+    list(
+      rlang::expr(.data[["animal_project_code"]] == "2014_demer"),
+      rlang::expr(.data[["start_date"]] == "2015-04-24"),
+      rlang::expr(.data[["end_date"]] == "2015-04-25")
+    )
+  )
+})
+
+test_that("arg_to_filter_expression() can parse a argument with a vector value to an OR query", {
+  # We expect dplyr::when_any() to be used to chain vector values into
+  # individual expressions
+
+  expect_equal(
+    arg_to_filter_expression(list(status = c("lost", "broken"))),
+    list(rlang::expr(dplyr::when_any(
+      .data[["status"]] == "lost",
+      .data[["status"]] == "broken"
+    )))
+  )
+})
+
+test_that("arg_to_filter_expression() can parse both OR and AND queries simultaniously", {
+  expect_equal(
+    arg_to_filter_expression(list(
+      status = c("lost", "broken"),
+      animal_project_code = "2014_demer"
+    )),
+    list(
+      rlang::expr(dplyr::when_any(
+        .data[["status"]] == "lost",
+        .data[["status"]] == "broken"
+      )),
+      rlang::expr(.data[["animal_project_code"]] == "2014_demer")
+    )
   )
 })
