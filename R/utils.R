@@ -301,7 +301,7 @@ path_sans_ext <- function(x, compression = FALSE) {
 #' arg_to_filter_expression(list(status = c("lost", "broken")))
 #' arg_to_filter_expression(list(animal_project_code = "2014_demer",
 #'                               start_date = "2015-04-24",
-#'                               end_date = "2015-04-25",))
+#'                               end_date = "2015-04-25"))
 arg_to_filter_expression <- function(fn_arguments){
   fn_arguments |>
     # If there are vectors in the arguments, we want to create multiple filter
