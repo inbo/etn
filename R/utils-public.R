@@ -240,11 +240,12 @@ read_stac <- function(function_identity = c(
                         "list_animal_project_codes",
                         "list_cpod_project_codes",
                         "list_acoustic_tag_ids",
+                        "list_tag_serial_numbers",
                         "list_animal_ids",
                         "list_deployment_ids",
                         "list_receiver_ids",
-                        "list_scientific_names",
-                        "list_tag_serial_numbers"
+                        "list_scientific_names"
+
                       ),
                       payload = NULL) {
   function_identity <- rlang::arg_match(function_identity)
@@ -252,9 +253,33 @@ read_stac <- function(function_identity = c(
   switch(function_identity,
     list_acoustic_project_codes = {
       get_public_metadata("projects") |>
+        # should this be project_type? See
+        # etnservice::list_acoustic_project_codes()
         dplyr::filter(.data$telemetry_type == "Acoustic") |>
         dplyr::pull("project_code") |>
         unique()
+    },
+    list_animal_project_codes = {
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$project_type == "animal") |>
+        dplyr::pull("project_code") |>
+        unique()
+    },
+    list_cpod_project_codes = {
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$project_type == "cpod") |>
+        dplyr::pull("project_code") |>
+        unique()
+    },
+    list_acoustic_tag_ids = {
+      get_public_metadata("tags") |>
+        dplyr::filter(!is.na(.data$tag_id)) |>
+        dplyr::pull("tag_id")
+    },
+    list_tag_serial_numbers = {
+      get_public_metadata("tags") |>
+        dplyr::filter(!is.na(.data$tag_serial_number)) |>
+        dplyr::pull("tag_serial_number")
     }
   )
 }
