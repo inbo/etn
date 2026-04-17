@@ -297,7 +297,7 @@ path_sans_ext <- function(x, compression = FALSE) {
 #' @noRd
 #'
 #' @examples
-#' arg_to_filter_expression(list("scientific_name = "Umbrina cirrosa"))
+#' arg_to_filter_expression(list(scientific_name = "Umbrina cirrosa"))
 #' arg_to_filter_expression(list(status = c("lost", "broken")))
 #' arg_to_filter_expression(list(animal_project_code = "2014_demer",
 #'                               start_date = "2015-04-24",
