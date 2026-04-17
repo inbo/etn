@@ -144,7 +144,7 @@ get_public_detections <- function(project_code = NULL, ...,
   # Collect and return the table --------------------------------------------
   # Limit it if needed
   if(limit){
-    dplyr::slice_head(duckdb_view, 100) |>
+    dplyr::slice_min(duckdb_view, n = 100) |>
       dplyr::collect()
   } else {
     duckdb_view |>
