@@ -134,8 +134,8 @@ get_public_detections <- function(project_code = NULL, ...,
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
     duckdbfs::open_dataset(format = "parquet",
-                           unify_schemas = TRUE)
-
+                           unify_schemas = TRUE) |>
+    dplyr::filter(...)
 
   # Collect and return the table --------------------------------------------
   # Limit it if needed
