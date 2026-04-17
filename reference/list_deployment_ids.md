@@ -19,6 +19,20 @@ list_deployment_ids(connection)
 
 A vector of all unique `id_pk` present in `acoustic.deployments`.
 
+## See also
+
+Other list functions:
+[`list_acoustic_project_codes()`](https://inbo.github.io/etn/reference/list_acoustic_project_codes.md),
+[`list_acoustic_tag_ids()`](https://inbo.github.io/etn/reference/list_acoustic_tag_ids.md),
+[`list_animal_ids()`](https://inbo.github.io/etn/reference/list_animal_ids.md),
+[`list_animal_project_codes()`](https://inbo.github.io/etn/reference/list_animal_project_codes.md),
+[`list_cpod_project_codes()`](https://inbo.github.io/etn/reference/list_cpod_project_codes.md),
+[`list_receiver_ids()`](https://inbo.github.io/etn/reference/list_receiver_ids.md),
+[`list_scientific_names()`](https://inbo.github.io/etn/reference/list_scientific_names.md),
+[`list_station_names()`](https://inbo.github.io/etn/reference/list_station_names.md),
+[`list_tag_serial_numbers()`](https://inbo.github.io/etn/reference/list_tag_serial_numbers.md),
+[`list_values()`](https://inbo.github.io/etn/reference/list_values.md)
+
 ## Examples
 
 ``` r

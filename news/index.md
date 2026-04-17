@@ -5,7 +5,7 @@
 - Add European Union as funder (for
   [STRAITS](https://doi.org/10.3030/101094649))
   ([\#497](https://github.com/inbo/etn/issues/497)).
-- `get_acoustic_project()`,
+- [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
   [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
   and
   [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
@@ -40,6 +40,9 @@
     has been added and is set to `"verified by expert"` for all records,
     since the taxon is assumed to be well-known before the tag was
     attached.
+- The [function
+  reference](https://inbo.github.io/etn/reference/index.html) has been
+  reorganized ([\#549](https://github.com/inbo/etn/issues/549))
 
 ## etn 3.0.0
 

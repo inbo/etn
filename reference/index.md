@@ -1,39 +1,37 @@
 # Package index
 
-## Explore acoustic telemetry data
+## Access data from ETN
 
-- [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
-  : Get animal project data
-- [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
-  : Get animal data
-- [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md) : Get
-  tag data
-- [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md)
-  : Get acoustic project data
-- [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
-  : Get acoustic detections data
 - [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md)
   : Get acoustic deployment data
+- [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  : Get acoustic detections data
+- [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md)
+  : Get acoustic project data
 - [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md)
   : Get acoustic receiver data
-- [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
-  : Download acoustic data package
-- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) :
-  Transform ETN data to a Darwin Core Archive
-
-## Explore archival data
-
 - [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md)
   : Get animal project data
 - [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
   : Get animal data
+- [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
+  : Get cpod project data
 - [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md) : Get
   tag data
 
-## Explore CPOD data
+## Work with animal project datasets
 
-- [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
-  : Get cpod project data
+- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) :
+  Transform ETN data to a Darwin Core Archive
+- [`reexports`](https://inbo.github.io/etn/reference/reexports.md)
+  [`read_package`](https://inbo.github.io/etn/reference/reexports.md)
+  [`write_package`](https://inbo.github.io/etn/reference/reexports.md) :
+  Objects exported from other packages
+
+## Sample datasets
+
+- [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
+  : Read an example dataset
 
 ## List parameter options
 
@@ -60,19 +58,9 @@
 - [`list_values()`](https://inbo.github.io/etn/reference/list_values.md)
   : List all unique values from a data.frame column
 
-## Example datasets
-
-- [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
-  : Read an example dataset
-
-## Frictionless data package functions
-
-- [`reexports`](https://inbo.github.io/etn/reference/reexports.md)
-  [`read_package`](https://inbo.github.io/etn/reference/reexports.md)
-  [`write_package`](https://inbo.github.io/etn/reference/reexports.md) :
-  Objects exported from other packages
-
 ## Deprecated functions
 
 - [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)
   **\[deprecated\]** : Connect to the ETN database
+- [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
+  : Download acoustic data package

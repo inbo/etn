@@ -46,6 +46,17 @@ get_animals(
 A tibble with animals data, sorted by `animal_project_code`,
 `release_date_time` and `tag_serial_number`.
 
+## See also
+
+Other access functions:
+[`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
+[`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
+[`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
+[`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
+[`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
+[`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
+[`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md)
+
 ## Examples
 
 ``` r

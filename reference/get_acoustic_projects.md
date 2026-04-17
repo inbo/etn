@@ -45,6 +45,17 @@ get_acoustic_projects(
 
 A tibble with acoustic project data, sorted by `project_code`.
 
+## See also
+
+Other access functions:
+[`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
+[`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
+[`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
+[`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
+[`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
+[`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md)
+
 ## Examples
 
 ``` r
@@ -69,11 +80,8 @@ get_acoustic_projects()
 
 # Get a specific acoustic project with citation
 get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
-#> # A tibble: 1 × 16
-#>   project_id project_code project_type telemetry_type project_name start_date
-#>        <int> <chr>        <chr>        <chr>          <chr>        <date>    
-#> 1          7 demer        acoustic     Acoustic       Demer        2014-04-10
-#> # ℹ 10 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
-#> #   moratorium <lgl>, imis_dataset_id <int>, citation <chr>, doi <chr>,
-#> #   contact_name <chr>, contact_email <chr>, contact_affiliation <chr>
+#> Error in purrr::map(succesful_responses, httr2::resp_body_json, simplifyDataFrame = TRUE): ℹ In index: 1.
+#> Caused by error in `.f()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 ```

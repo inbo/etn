@@ -78,6 +78,17 @@ If no contact person is provided, the first author with status <code>creator</co
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A tibble with animal project data, sorted by <code>project_code</code>.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other access functions:
+<code><a href="get_acoustic_deployments.html">get_acoustic_deployments()</a></code>,
+<code><a href="get_acoustic_detections.html">get_acoustic_detections()</a></code>,
+<code><a href="get_acoustic_projects.html">get_acoustic_projects()</a></code>,
+<code><a href="get_acoustic_receivers.html">get_acoustic_receivers()</a></code>,
+<code><a href="get_animals.html">get_animals()</a></code>,
+<code><a href="get_cpod_projects.html">get_cpod_projects()</a></code>,
+<code><a href="get_tags.html">get_tags()</a></code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -102,13 +113,10 @@ If no contact person is provided, the first author with status <code>creator</co
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get a specific animal project with citation</span></span></span>
 <span class="r-in"><span><span class="fu">get_animal_projects</span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="st">"2014_demer"</span>, citation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id project_code project_type telemetry_type project_name start_date</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;, citation &lt;chr&gt;, doi &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   contact_name &lt;chr&gt;, contact_email &lt;chr&gt;, contact_affiliation &lt;chr&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(succesful_responses, httr2::resp_body_json, simplifyDataFrame = TRUE):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.f()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Unexpected content type "text/html".</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Expecting type "application/json" or suffix "json".</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

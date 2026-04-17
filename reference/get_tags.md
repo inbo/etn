@@ -48,6 +48,17 @@ A tibble with tags data, sorted by `tag_serial_number`. Values for
 `owner_organization` and `owner_pi` will only be visible if you are
 member of the group.
 
+## See also
+
+Other access functions:
+[`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
+[`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
+[`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
+[`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
+[`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
+[`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
+
 ## Examples
 
 ``` r
