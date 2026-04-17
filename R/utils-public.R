@@ -344,6 +344,36 @@ read_stac <- function(function_identity = c(
       get_public_metadata("receivers") |>
         dplyr::filter(!!!filter_expressions)
     },
+    get_acoustic_projects = {
+      filter_expressions <- purrr::imap(payload, \(value, field) {
+        rlang::expr(.data[[field]] == !!value)
+      }) |>
+        purrr::set_names(NULL)
+
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$project_type == "acoustic") |>
+        dplyr::filter(!!!filter_expressions)
+    },
+    get_cpod_projects = {
+      filter_expressions <- purrr::imap(payload, \(value, field) {
+        rlang::expr(.data[[field]] == !!value)
+      }) |>
+        purrr::set_names(NULL)
+
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$project_type == "cpod") |>
+        dplyr::filter(!!!filter_expressions)
+    },
+    get_animal_projects = {
+      filter_expressions <- purrr::imap(payload, \(value, field) {
+        rlang::expr(.data[[field]] == !!value)
+      }) |>
+        purrr::set_names(NULL)
+
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$project_type == "animal") |>
+        dplyr::filter(!!!filter_expressions)
+    }
   )
 
   # Sort the returned values ------------------------------------------------
