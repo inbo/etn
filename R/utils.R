@@ -302,14 +302,16 @@ path_sans_ext <- function(x, compression = FALSE) {
 #' arg_to_filter_expression(list(animal_project_code = "2014_demer",
 #'                               start_date = "2015-04-24",
 #'                               end_date = "2015-04-25"))
-arg_to_filter_expression <- function(fn_arguments){
+arg_to_filter_expression <- function(fn_arguments) {
   fn_arguments |>
     # If there are vectors in the arguments, we want to create multiple filter
     # expressions for them.
     purrr::imap(\(value, field) {
       if (length(value) > 1) {
         # Wrap multiple values in dplyr::when_any() for OR semantics
-        exprs <- purrr::map(value, \(v) rlang::expr(.data[[!!field]] == !!v))
+        exprs <- purrr::map(value, \(value) {
+          rlang::expr(.data[[!!field]] == !!value)
+        })
         rlang::expr(dplyr::when_any(!!!exprs))
       } else {
         # All other arguments can be converted to a simple equality filter
