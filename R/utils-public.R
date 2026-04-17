@@ -221,3 +221,40 @@ get_public_metadata <- function(table = c("animals",
   # Return the metadata -----------------------------------------------------
   metadata
 }
+
+#' Read data from the STAC catalogue, either from metadata or from parquet dumps
+#'
+#' @param function_identity The identity of the function call to replicate.
+#' @param payload The query arguments to pass to the function call.
+#'
+#' @returns The output of the function call identified by `function_identity`
+#'   with the provided `payload` as query arguments.
+#'
+#' @family parquet helpers
+#' @noRd
+#'
+#' @examples
+#' read_stac("list_acoustic_project_codes")
+read_stac <- function(function_identity = c(
+                        "list_acoustic_project_codes",
+                        "list_animal_project_codes",
+                        "list_cpod_project_codes",
+                        "list_acoustic_tag_ids",
+                        "list_animal_ids",
+                        "list_deployment_ids",
+                        "list_receiver_ids",
+                        "list_scientific_names",
+                        "list_tag_serial_numbers"
+                      ),
+                      payload = NULL) {
+  function_identity <- rlang::arg_match(function_identity)
+
+  switch(function_identity,
+    list_acoustic_project_codes = {
+      get_public_metadata("projects") |>
+        dplyr::filter(.data$telemetry_type == "Acoustic") |>
+        dplyr::pull("project_code") |>
+        unique()
+    }
+  )
+}
