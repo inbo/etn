@@ -141,3 +141,7 @@ test_that("read_stac() returns natural sorting for list_x identities", {
     )
   }
 })
+
+test_that("read_stac() supports all exported functions", {
+
+})
