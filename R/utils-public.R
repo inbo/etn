@@ -109,7 +109,7 @@ get_public_detections <- function(project_code = NULL, ...,
   # Read the parquet paths from the catalog
   parquet_paths <-
     file.path(catalog_root, "detection_files", detections_path) |>
-    purrr::map(jsonlite::fromJSON) |>
+    purrr::map(jsonlite::fromJSON, .progress = "Reading metadata") |>
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
     purrr::set_names(
