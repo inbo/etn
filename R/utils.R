@@ -305,16 +305,18 @@ path_sans_ext <- function(x, compression = FALSE) {
 arg_to_filter_expression <- function(fn_arguments){
   fn_arguments |>
     # If there are vectors in the arguments, we want to create multiple filter
-    # expressions for them. They will get executed as OR queries by
-    # dplyr::filter
-    purrr::map_if(.p = \(values) {length(values) > 1},
-                  .f = \(arg) {purrr::map(arg, ~.x)}) |>
-    purrr::list_flatten(name_spec = "{outer}") |>
+    # expressions for them.
     purrr::imap(\(value, field) {
-      rlang::expr(.data[[field]] == !!value)
+      if (length(value) > 1) {
+        # Wrap multiple values in dplyr::when_any() for OR semantics
+        exprs <- purrr::map(value, \(v) rlang::expr(.data[[!!field]] == !!v))
+        rlang::expr(dplyr::when_any(!!!exprs))
+      } else {
+        # All other arguments can be converted to a simple equality filter
+        # expression, these are handled as AND semantics
+        rlang::expr(.data[[!!field]] == !!value)
+      }
     }) |>
-    # Set names to NULL to pavoid issues with named vectors in filter
-    # expressions.
     purrr::set_names(NULL)
 }
 
