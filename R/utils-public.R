@@ -311,6 +311,15 @@ read_stac <- function(function_identity = c(
         dplyr::filter(!is.na(.data$scientific_name)) |>
         dplyr::pull("scientific_name") |>
         unique()
+    },
+    get_acoustic_deployments = {
+      filter_expressions <- purrr::imap(payload, \(value, field) {
+        rlang::expr(.data[[field]] == !!value)
+      }) |>
+        purrr::set_names(NULL)
+
+      get_public_metadata("deployments") |>
+        dplyr::filter(!!!filter_expressions)
     }
   )
 
