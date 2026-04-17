@@ -325,5 +325,10 @@ read_stac <- function(function_identity = c(
 
   # Sort the returned values ------------------------------------------------
 
-  stringr::str_sort(stac_result, numeric = TRUE)
+  if(is.character(stac_result)){
+    stringr::str_sort(stac_result, numeric = TRUE)
+  } else {
+    stac_result
+  }
+
 }
