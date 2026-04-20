@@ -6,16 +6,22 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-6658-6062", affiliation = "Research Institute for Nature and Forest (INBO)")),
     person("Peter", "Desmet", , "peter.desmet@inbo.be", role = "aut",
            comment = c(ORCID = "0000-0002-8442-8025", affiliation = "Research Institute for Nature and Forest (INBO)")),
+    person("Sanne", "Govaert", , "sanne.govaert@inbo.be", role = "aut",
+           comment = c(ORCID = "0000-0002-8939-1305", affiliation = "Research Institute for Nature and Forest (INBO)")),
     person("Damiano", "Oldoni", , "damiano.oldoni@inbo.be", role = "aut",
            comment = c(ORCID = "0000-0003-3445-7562", affiliation = "Research Institute for Nature and Forest (INBO)")),
     person("Stijn", "Van Hoey", , "stijnvanhoey@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-6413-3185")),
+    person("Claudia", "Meneses", , "claudia.meneses@vliz.be", role = "ctb",
+           comment = c(ORCID = "0000-0002-9397-5442", affiliation = "Flanders Marine Institute (VLIZ)")),
+    person("Lotte", "Pohl", , "lotte.pohl@vliz.be", role = "ctb",
+           comment = c(ORCID = "0000-0002-7607-7018", affiliation = "Flanders Marine Institute (VLIZ)")),
     person("Research Institute for Nature and Forest (INBO)", role = "cph",
            comment = c(ROR = "00j54wy13")),
     person("Research Foundation - Flanders", role = "fnd",
            comment = "https://lifewatch.be"),
     person("European Union", role = "fnd",
-           comment = "https://doi.org/10.3030/101094649")          
+           comment = "https://doi.org/10.3030/101094649")
   )
 Description: Access data from the European Tracking Network ('ETN',
     <https://www.lifewatch.be/etn/>). With etn you can query metadata (animals, 
