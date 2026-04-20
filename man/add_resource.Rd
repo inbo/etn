@@ -12,7 +12,7 @@ add_resource(package, resource_name, data)
 
 \item{resource_name}{Name of the Data Resource.}
 
-\item{data}{bla}
+\item{data}{Data frame to attach}
 }
 \value{
 Provided \code{package} with one additional resource.
