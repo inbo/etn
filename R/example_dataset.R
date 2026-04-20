@@ -37,6 +37,7 @@ example_dataset <- function(dataset = "2014_DEMER") {
     )
     package <- frictionless::read_package(path)
     package$profile <- NULL
+    package$id <- "https://doi.org/10.14284/432"
     return(package)
   }
 }
