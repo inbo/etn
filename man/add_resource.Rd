@@ -12,7 +12,7 @@ add_resource(package, resource_name, data)
 
 \item{resource_name}{Name of the Data Resource.}
 
-\item{data}{Data frame to attach}
+\item{data}{Data frame to attach.}
 }
 \value{
 Provided \code{package} with one additional resource.
@@ -21,6 +21,8 @@ Provided \code{package} with one additional resource.
 Adds ETN data (\code{animals}, \code{deployments}, \code{detections}, \code{receivers}, \code{tags})
 as a  Data Resource to a Frictionless Data Package.
 The function extends \code{\link[frictionless:add_resource]{frictionless::add_resource()}}.
+The definition of each field is included in the Table Schema of the resource,
+along with the field type, unit and an example value.
 }
 \seealso{
 Other frictionless functions: 
