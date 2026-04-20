@@ -8,7 +8,8 @@ test_that("get_package() errors on invalid animal_project_code length", {
 test_that("get_package() returns a valid package", {
   skip_if_no_authentication()
 
-  vcr::local_cassette("package_valid")
+  vcr::local_cassette("package_demer")
+
   package <- get_package("2014_demer")
   expect_no_error(suppressMessages(frictionless::check_package(package)))
 })
@@ -16,7 +17,7 @@ test_that("get_package() returns a valid package", {
 test_that("get_package() creates the expected package", {
   skip_if_no_authentication()
 
-  vcr::local_cassette("package_valid")
+  vcr::local_cassette("package_demer")
 
   datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
   package <- get_package("2014_demer")
