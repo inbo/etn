@@ -5,7 +5,7 @@
 #' The function extends [frictionless::add_resource()].
 #'
 #' @inheritParams frictionless::read_resource
-#' @param data bla
+#' @param data Data frame to attach
 #' @return Provided `package` with one additional resource.
 #' @family frictionless functions
 #' @export
