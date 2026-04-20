@@ -28,14 +28,29 @@ read_catalog <- function(catalog = c(".",
 #' @examplesIf interactive()
 #' read_child_catalog(catalog = "detection_files")
 #' read_child_catalog(catalog = "metadata_files")
-read_child_catalog <- function(catalog = c("metadata_files",
-                                           "detection_files",
-                                           "archival_files")) {
-  catalog <- rlang::arg_match(catalog)
+read_child_catalog <- function(catalog = c(
+                                 "metadata_files",
+                                 "detection_files",
+                                 "archival_files"
+                               )) {
+  catalog <- rlang::arg_match(catalog,
+    multiple = TRUE
+  )
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
-  jsonlite::fromJSON(file.path(catalog_root, catalog, "collection.json"))
+  file.path(catalog_root, catalog, "collection.json") |>
+    purrr::map(httr2::request) |>
+    purrr::map(\(req) {
+      httr2::req_retry(req, max_tries = 3)
+    }) |>
+    # Never place more then 2 requests a second
+    purrr::map(\(req) {
+      httr2::req_throttle(req, capacity = 120, fill_time_s = 60)
+    }) |>
+    httr2::req_perform_sequential() |>
+    # simplifyVector to get data.frames out.
+    purrr::map(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE))
 }
 
 #' List public detection files
