@@ -35,6 +35,8 @@ example_dataset <- function(dataset = "2014_DEMER") {
       "extdata", dataset, "datapackage.json",
       package = "etn"
     )
-    frictionless::read_package(path)
+    package <- frictionless::read_package(path)
+    package$profile <- NULL
+    return(package)
   }
 }
