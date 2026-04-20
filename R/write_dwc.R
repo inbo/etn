@@ -137,18 +137,24 @@ write_dwc <- function(package, directory, dataset_id = NULL,
       .data$occurrenceID
     )
 
+  # Create extended measurements or facts
+  emof <- create_emof(animals_occurrence)
+
   # Write files
   occurrence_path <- file.path(directory, "occurrence.csv")
   meta_xml_path <- file.path(directory, "meta.xml")
+  emof_path <- file.path(directory, "emof.csv")
   cli::cli_h2("Writing files")
   cli::cli_ul(c(
     "{.file {occurrence_path}}",
-    "{.file {meta_xml_path}}"
+    "{.file {meta_xml_path}}",
+    "{.file {emof_path}}"
   ))
   if (!dir.exists(directory)) {
     dir.create(directory, recursive = TRUE)
   }
   readr::write_csv(occurrence, occurrence_path, na = "")
+  readr::write_csv(emof, emof_path, na = "")
   file.copy(
     system.file("extdata", "meta.xml", package = "etn"), # Static meta.xml
     meta_xml_path
@@ -156,7 +162,8 @@ write_dwc <- function(package, directory, dataset_id = NULL,
 
   # Return list with Darwin Core data invisibly
   return <- list(
-    occurrence = dplyr::as_tibble(occurrence)
-  )
+    occurrence = dplyr::as_tibble(occurrence),
+    emof = dplyr::as_tibble(emof)
+    )
   invisible(return)
 }
