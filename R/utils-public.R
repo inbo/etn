@@ -120,14 +120,7 @@ get_public_detections <- function(project_code = NULL, ...,
       purrr::map_chr(detections_path, ~basename(path_sans_ext(.x)))
       )
 
-  # Read the contents of the parquet files and row bind them.
-  duckdbfs::duckdb_config(
-    # If a request fails, retry up to 5 times (eg too many requests)
-    http_retries = 5,
-    # Wait 2 seconds between retries
-    http_retry_wait_ms = 2000
-  )
-
+  # Read the contents of the parquet files as a single lazy view
   duckdb_view <-
     parquet_paths |>
     # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
@@ -138,7 +131,15 @@ get_public_detections <- function(project_code = NULL, ...,
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
     duckdbfs::open_dataset(format = "parquet",
-                           unify_schemas = TRUE) |>
+                           unify_schemas = TRUE,
+                           conn = duckdbfs::cached_connection(
+                             config = list(
+                               # If a request fails, retry up to 5 times (eg too many requests)
+                               http_retries = 5,
+                               # Wait 2 seconds between retries
+                               http_retry_wait_ms = 2000
+                             )
+                           )) |>
     dplyr::filter(...)
 
   # Collect and return the table --------------------------------------------
