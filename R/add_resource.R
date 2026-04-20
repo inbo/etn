@@ -40,8 +40,8 @@ add_resource <- function(package, resource_name, data) {
 
     list(
       name = field$name,
-      type = type,
       description = definition,
+      type = type,
       unit = unit,
       example = example
     )
