@@ -41,3 +41,12 @@ test_that("get_package() creates the expected package", {
   expect_snapshot_file(file.path(datapackage_path, "deployments.csv"))
   expect_snapshot_file(file.path(datapackage_path, "receivers.csv"))
 })
+
+# test_that("get_package() sets dataset_id when doi is missing", {
+#   skip_if_no_authentication()
+#
+#   vcr::local_cassette("package_bla")
+#
+#   package <- get_package() #TODO
+#   expect_equal(package$dataset_id, "https://marineinfo.org/id/dataset/")
+# })
