@@ -118,6 +118,16 @@ get_package <- function(animal_project_code) {
     receiver_id = receiver_ids
   )
 
+  # Obtain imis_dataset_id and doi
+  project_info <- get_animal_projects(
+    animal_project_code = animal_project_code, citation = TRUE
+    )
+  doi <- if (!is.na(project_info$doi)) {
+    project_info$doi
+  } else {
+   paste0("https://marineinfo.org/id/dataset/", project_info$imis_dataset_id)
+  }
+
   # CREATE PACKAGE
   message("* (6/6): create package")
   package <-
@@ -127,7 +137,10 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
-    append(c(name = tolower(animal_project_code)), after = 0) |>
+    append(c(
+      id = doi,
+      name = tolower(animal_project_code)
+    ), after = 0) |>
     frictionless::create_package()
 
   return(package)
