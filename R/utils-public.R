@@ -124,9 +124,9 @@ get_public_detections <- function(project_code = NULL, ...,
     purrr::map(\(req) httr2::req_retry(req, max_tries = 3)) |>
     # Never place more then 2 requests a second
     purrr::map(\(req) httr2::req_throttle(req,
-                                          capacity = 120,
-                                          fill_time_s = 60)) |>
-    httr2::req_perform_sequential() |>
+                                          capacity = 12,
+                                          fill_time_s = 6)) |>
+    httr2::req_perform_parallel() |>
     purrr::map(httr2::resp_body_json) |>
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
