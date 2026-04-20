@@ -15,8 +15,7 @@ reference:
   contents:
   - get_package
   - has_concept("transformation functions")
-  - read_package
-  - write_package
+  - has_concept("frictionless functions")
 - title: Sample datasets
   contents:
   - has_concept("sample data")
