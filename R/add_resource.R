@@ -34,7 +34,8 @@ add_resource <- function(package, resource_name, data) {
     dplyr::filter(table == resource_name)
 
   fields <- purrr::map(schema$fields, function(field) {
-    fields_per_name <- dplyr::filter(field_definitions, name == field$name)
+    fields_per_name <-
+      dplyr::filter(field_definitions, .data$name == field$name)
     definition <- dplyr::pull(fields_per_name, definition)
     type <- dplyr::pull(fields_per_name, type)
     unit <- dplyr::pull(fields_per_name, unit)
