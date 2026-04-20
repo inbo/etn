@@ -1,11 +1,9 @@
 #' List all available acoustic tag ids
 #'
-#'
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `acoustic_tag_id` values that are available.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_acoustic_tag_ids()
 list_acoustic_tag_ids <- function(connection) {

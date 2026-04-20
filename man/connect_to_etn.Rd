@@ -24,3 +24,4 @@ are not stored in the system environment, you will be prompted to enter them.
 my_connection <- connect_to_etn()
 }
 }
+\concept{connect functions}

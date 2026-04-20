@@ -13,12 +13,10 @@
 #'     If no contact person is provided, the first author with status `creator`.
 #'   - `contact_email`: Email address of the contact person.
 #'   - `contact_affiliation`: Institute of the contact person.
-#'
 #' @inheritParams list_animal_ids
 #' @return A tibble with animal project data, sorted by `project_code`.
-#'
+#' @family access functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' # Get all animal projects
 #' get_animal_projects()

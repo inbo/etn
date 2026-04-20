@@ -3,9 +3,8 @@
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `scientific_name` present in
 #'   `common.animal_release`.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_scientific_names()
 list_scientific_names <- function(connection) {

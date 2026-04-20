@@ -6,9 +6,8 @@
 #' are not stored in the system environment, you will be prompted to enter them.
 #'
 #' @param ... Any arguments passed to this function are ignored.
-#'
 #' @return This function is no longer in use, and returns `NULL` invisibly.
-#'
+#' @family connect functions
 #' @export
 #' @examples
 #' \dontrun{
