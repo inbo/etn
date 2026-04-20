@@ -92,7 +92,7 @@ add_resource <- function(package, resource_name, data) {
   }
 
   # Add resource to package
-  package <- frictionless::add_resource(
+  frictionless::add_resource(
     package = package,
     resource_name = resource_name,
     data = data,
