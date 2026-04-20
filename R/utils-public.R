@@ -50,7 +50,8 @@ read_child_catalog <- function(catalog = c(
     }) |>
     httr2::req_perform_sequential() |>
     # simplifyVector to get data.frames out.
-    purrr::map(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE))
+    purrr::map(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE)) |>
+    purrr::set_names(catalog)
 }
 
 #' List public detection files
