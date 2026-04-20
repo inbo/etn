@@ -110,10 +110,14 @@ get_public_detections <- function(project_code = NULL, ...,
   # Read the parquet paths from the catalog
   parquet_paths <-
     file.path(catalog_root, "detection_files", detections_path) |>
-    purrr::map(jsonlite::fromJSON, .progress = ifelse(progress & !is_testing(),
-                                                      yes = "Reading metadata",
-                                                      no = FALSE
-    )) |>
+    purrr::map(httr2::request) |>
+    purrr::map(\(req) httr2::req_retry(req, max_tries = 3)) |>
+    # Never place more then 2 requests a second
+    purrr::map(\(req) httr2::req_throttle(req,
+                                          capacity = 120,
+                                          fill_time_s = 60)) |>
+    httr2::req_perform_sequential() |>
+    purrr::map(httr2::resp_body_json) |>
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
     purrr::set_names(
