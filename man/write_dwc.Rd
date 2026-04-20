@@ -7,7 +7,7 @@
 write_dwc(
   package,
   directory,
-  dataset_id = NULL,
+  dataset_id = package$id,
   dataset_name = NULL,
   license = c("CC-BY-4.0", "CC0-1.0"),
   rights_holder = NULL
@@ -70,7 +70,7 @@ It is possible for a deployment to contain no detections, e.g. if the
 tag malfunctioned right after deployment.
 \item Parameters or metadata are used to set the following record-level terms:
 \itemize{
-\item \code{dwc:datasetID}: \code{dataset_id}.
+\item \code{dwc:datasetID}: \code{dataset_id}, defaulting to package$id.
 \item \code{dwc:datasetName}: \code{dataset_name}.
 \item \code{dcterms:license}: \code{license}.
 \item \code{dcterms:rightsHolder}: \code{rights_holder}.
@@ -83,7 +83,6 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_id = "https://doi.org/10.14284/432",
   dataset_name = paste(
     "2014_DEMER - Acoustic telemetry data for four fish species in the",
     "Demer river (Belgium)"
