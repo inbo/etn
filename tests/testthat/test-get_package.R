@@ -16,7 +16,7 @@ test_that("get_package() returns a valid package", {
 test_that("get_package() creates the expected package", {
   skip_if_no_authentication()
 
-  vcr::local_cassette("package_expected")
+  vcr::local_cassette("package_valid")
 
   datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
   package <- get_package("2014_demer")
@@ -40,4 +40,3 @@ test_that("get_package() creates the expected package", {
   expect_snapshot_file(file.path(datapackage_path, "deployments.csv"))
   expect_snapshot_file(file.path(datapackage_path, "receivers.csv"))
 })
-
