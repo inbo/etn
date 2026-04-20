@@ -233,8 +233,6 @@ test_that("cite_imis_dataset() removes html tags from citations", {
 test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-encoding")
-
   # Compare against known group of citations of which some showed encoding
   # issues
   expect_snapshot(
