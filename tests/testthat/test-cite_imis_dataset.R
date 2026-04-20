@@ -235,8 +235,6 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues", {
 
   vcr::local_cassette("citations-encoding")
 
-  skip("Encoding issue on the API ISSUE#521")
-
   # Compare against known group of citations of which some showed encoding
   # issues
   expect_snapshot(
