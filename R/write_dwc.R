@@ -44,7 +44,7 @@
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 #' - Parameters or metadata are used to set the following record-level terms:
-#'   - `dwc:datasetID`: `dataset_id`.
+#'   - `dwc:datasetID`: `dataset_id`, defaulting to package$id.
 #'   - `dwc:datasetName`: `dataset_name`.
 #'   - `dcterms:license`: `license`.
 #'   - `dcterms:rightsHolder`: `rights_holder`.
@@ -53,7 +53,6 @@
 #' write_dwc(
 #'   package,
 #'   directory = "my_directory",
-#'   dataset_id = "https://doi.org/10.14284/432",
 #'   dataset_name = paste(
 #'     "2014_DEMER - Acoustic telemetry data for four fish species in the",
 #'     "Demer river (Belgium)"
@@ -64,7 +63,7 @@
 #'
 #' # Clean up (don't do this if you want to keep your files)
 #' unlink("my_directory", recursive = TRUE)
-write_dwc <- function(package, directory, dataset_id = NULL,
+write_dwc <- function(package, directory, dataset_id = package$id,
                       dataset_name = NULL, license = c("CC-BY-4.0", "CC0-1.0"),
                       rights_holder = NULL) {
 
