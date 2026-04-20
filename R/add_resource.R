@@ -26,6 +26,29 @@ add_resource <- function(package, resource_name, data) {
   # Create schema
   schema <- frictionless::create_schema(data)
 
+  # Add field definition, type, unit and example to schema
+  path <- system.file("extdata", "field_definitions.tsv", package = "etn")
+  field_definitions <- readr::read_tsv(path, show_col_types = FALSE) |>
+    dplyr::filter(table == resource_name)
+
+  fields <- purrr::map(schema$fields, function(field) {
+    fields_per_name <- dplyr::filter(field_definitions, name == field$name)
+    definition <- dplyr::pull(fields_per_name, definition)
+    type <- dplyr::pull(fields_per_name, type)
+    unit <- dplyr::pull(fields_per_name, unit)
+    example <- dplyr::pull(fields_per_name, example)
+
+    list(
+      name = field$name,
+      type = type,
+      description = definition,
+      unit = unit,
+      example = example
+    )
+  })
+
+  schema$fields <- fields
+
   # Add keys
   if (resource_name == "animals") {
     schema$primaryKey <- "animal_id"
