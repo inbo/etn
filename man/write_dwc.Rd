@@ -14,7 +14,7 @@ write_dwc(
 )
 }
 \arguments{
-\item{package}{A Data Package of ETN data, as returned by
+\item{package}{A Data Package with ETN data, as returned by
 \code{\link[=read_package]{read_package()}} or \code{\link[=get_package]{get_package()}}.
 It is expected to contain the resources \code{animals}, \code{tags}, \code{detections} and
 \code{deployments}.}
@@ -35,7 +35,8 @@ CSV and \code{meta.xml} files written to disk.
 And invisibly, a list of data frames with the transformed data.
 }
 \description{
-Transforms a European Tracking Network (ETN) dataset to a \href{https://dwc.tdwg.org/text/}{Darwin Core Archive}.
+Transforms a Data Package with European Tracking Network (ETN) data to a
+\href{https://dwc.tdwg.org/text/}{Darwin Core Archive}.
 }
 \details{
 The resulting files can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for

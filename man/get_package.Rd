@@ -7,47 +7,51 @@
 get_package(animal_project_code)
 }
 \arguments{
-\item{animal_project_code}{Character. Animal project you want to get an
-acoustic data package for. Required.}
+\item{animal_project_code}{Animal project you want to get data from.}
 }
 \value{
 A Data Package object.
 }
 \description{
-Get all acoustic data related to an \strong{animal project}  as a data package.
+Gets data related to an \strong{animal project} as a \href{https://specs.frictionlessdata.io/data-package/}{Data Package}.
 }
-\details{
-Get all acoustic data related to an \strong{animal project}  as a
-\strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
-containing:\tabular{ll}{
-   \strong{file} \tab \strong{description} \cr
-   \code{animals.csv} \tab Animals related to an \code{animal_project_code}, as returned by \code{get_animals()}. \cr
-   \code{tags.csv} \tab Tags associated with the selected animals, as returned by \code{get_tags()}. \cr
-   \code{detections.csv} \tab Acoustic detections for the selected animals, as returned by \code{get_acoustic_detections()}. \cr
-   \code{deployments.csv} \tab Acoustic deployments for the \code{acoustic_project_code}(s) found in detections, as returned by \code{get_acoustic_deployments()}. This allows users to see when receivers were deployed, even if these did not detect the selected animals. \cr
-   \code{receivers.csv} \tab Acoustic receivers for the selected deployments, as returned by \code{get_acoustic_receivers()}. \cr
-   \code{datapackage.json} \tab A \href{https://specs.frictionlessdata.io/table-schema/}{Frictionless Table Schema} metadata file describing the fields and relations of the above csv files. \cr
+\section{Included resources}{
+
+The Data Package will contain and describe the following resources:
+\itemize{
+\item \code{animals}: Animals related to an \code{animal_project_code}, as returned by
+\code{\link[=get_animals]{get_animals()}}.
+\item \code{tags}: Tags associated with the selected animals, as returned by
+\code{\link[=get_tags]{get_tags()}}.
+\item \code{detections}: Acoustic detections for the selected animals, as returned by
+\code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.
+\item \code{deployments}: Acoustic deployments for the \code{acoustic_project_code}(s)
+found in detections, as returned by \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}}.
+This allows you to see when receivers were deployed, even if these did
+not detect the selected animals.
+\item \code{receivers}: Acoustic receivers for the selected deployments, as returned
+by \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}}.
 }
 
-
-\strong{Important}: The data are downloaded \emph{as is} from the database, i.e. no
-quality or consistency checks are performed by this function. We therefore
-recommend to verify the data before publication. A consistency check can be
-performed by validation tools of the Frictionless Framework, e.g.
-\verb{frictionless validate datapackage.json} on the command line using
-\href{https://github.com/frictionlessdata/frictionless-py}{frictionless-py}.
+You can write the Data Package to disk with \code{\link[=write_package]{write_package()}}.
 }
+
+\section{Data quality}{
+
+The data are downloaded from the ETN database \emph{as is}, i.e. no quality or
+consistency checks are performed.
+We therefore recommend to verify the data before publication.
+A consistency check can be performed on the files using:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{pip install frictionless
+frictionless validate datapackage.json
+}\if{html}{\out{</div>}}
+}
+
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
-# Get data package for the 2014_demer animal project
+# Get a Data Package for a project
 get_package(animal_project_code = "2014_demer")
-#> A Data Package with 5 resources:
-#> • animals
-#> • tags
-#> • detections
-#> • deployments
-#> • receivers
-#> Use `unclass()` to print the Data Package as a list.
 \dontshow{\}) # examplesIf}
 }
 \seealso{

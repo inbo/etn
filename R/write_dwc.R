@@ -1,13 +1,13 @@
-#' Transform ETN data to a Darwin Core Archive
+#' Transform a Data Package with ETN data to a Darwin Core Archive
 #'
-#' Transforms a European Tracking Network (ETN) dataset to a [Darwin Core
-#' Archive](https://dwc.tdwg.org/text/).
+#' Transforms a Data Package with European Tracking Network (ETN) data to a
+#' [Darwin Core Archive](https://dwc.tdwg.org/text/).
 #'
 #' The resulting files can be uploaded to an [IPT](https://www.gbif.org/ipt) for
 #' publication to GBIF and/or OBIS.
 #' A corresponding `eml.xml` metadata file is not created.
 #'
-#' @param package A Data Package of ETN data, as returned by
+#' @param package A Data Package with ETN data, as returned by
 #'   [read_package()] or [get_package()].
 #'   It is expected to contain the resources `animals`, `tags`, `detections` and
 #'   `deployments`.

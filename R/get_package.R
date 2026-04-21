@@ -1,42 +1,42 @@
 #' Get animal project data as a Data Package
 #'
-#' Get all acoustic data related to an **animal project**  as a data package.
+#' Gets data related to an **animal project** as a [Data Package](
+#' https://specs.frictionlessdata.io/data-package/).
 #'
-#' Get all acoustic data related to an **animal project**  as a
-#' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
-#' containing:
-#'
-#' **file** | **description**
-#' --- | ---
-#' `animals.csv` | Animals related to an `animal_project_code`, as returned by `get_animals()`.
-#' `tags.csv` | Tags associated with the selected animals, as returned by `get_tags()`.
-#' `detections.csv` | Acoustic detections for the selected animals, as returned by `get_acoustic_detections()`.
-#' `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by `get_acoustic_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
-#' `receivers.csv` | Acoustic receivers for the selected deployments, as returned by `get_acoustic_receivers()`.
-#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files.
-#'
-#' **Important**: The data are downloaded _as is_ from the database, i.e. no
-#' quality or consistency checks are performed by this function. We therefore
-#' recommend to verify the data before publication. A consistency check can be
-#' performed by validation tools of the Frictionless Framework, e.g.
-#' `frictionless validate datapackage.json` on the command line using
-#' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
-#'
-#' @param animal_project_code Character. Animal project you want to get an
-#' acoustic data package for. Required.
+#' @param animal_project_code Animal project you want to get data from.
 #' @return A Data Package object.
 #' @family access functions
 #' @export
+#' @section Included resources:
+#' The Data Package will contain and describe the following resources:
+#' - `animals`: Animals related to an `animal_project_code`, as returned by
+#'   [get_animals()].
+#' - `tags`: Tags associated with the selected animals, as returned by
+#'   [get_tags()].
+#' - `detections`: Acoustic detections for the selected animals, as returned by
+#'   [get_acoustic_detections()].
+#' - `deployments`: Acoustic deployments for the `acoustic_project_code`(s)
+#'   found in detections, as returned by [get_acoustic_deployments()].
+#'   This allows you to see when receivers were deployed, even if these did
+#'   not detect the selected animals.
+#' - `receivers`: Acoustic receivers for the selected deployments, as returned
+#'   by [get_acoustic_receivers()].
+#'
+#' You can write the Data Package to disk with [write_package()].
+#'
+#' @section Data quality:
+#' The data are downloaded from the ETN database _as is_, i.e. no quality or
+#' consistency checks are performed.
+#' We therefore recommend to verify the data before publication.
+#' A consistency check can be performed on the files using:
+#'
+#' ```
+#' pip install frictionless
+#' frictionless validate datapackage.json
+#' ```
 #' @examplesIf etn:::credentials_are_set() & interactive()
-#' # Get data package for the 2014_demer animal project
+#' # Get a Data Package for a project
 #' get_package(animal_project_code = "2014_demer")
-#' #> A Data Package with 5 resources:
-#' #> • animals
-#' #> • tags
-#' #> • detections
-#' #> • deployments
-#' #> • receivers
-#' #> Use `unclass()` to print the Data Package as a list.
 get_package <- function(animal_project_code) {
   # Check animal_project_code
   if (length(animal_project_code) != 1) {
