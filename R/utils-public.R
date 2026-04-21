@@ -151,8 +151,10 @@ get_public_detections <- function(project_code = NULL, ...,
                            unify_schemas = FALSE,
                            conn = duckdbfs::cached_connection(
                              config = list(
-                               # If a request fails, retry up to 5 times (eg too many requests)
-                               http_retries = 5,
+                               # If a request fails, retry up to 8 times (eg too
+                               # many requests), setting too low a value will
+                               # result in failures.
+                               http_retries = 8,
                                # Wait 2 seconds between retries
                                http_retry_wait_ms = 2000,
                                http_retry_backoff = 2,
