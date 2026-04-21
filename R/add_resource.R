@@ -46,6 +46,7 @@ add_resource <- function(package, resource_name, data) {
       name = field$name, # Field name from schema
       description = purrr::pluck(field_definition, "definition"),
       type = purrr::pluck(field_definition, "type"), # Overwrite guessed type
+      format = "default", # Needed for example validation of datetimes
       unit = purrr::pluck(field_definition, "unit"),
       example = purrr::pluck(field_definition, "example")
     )

@@ -13,106 +13,125 @@
         "fields": [
           {
             "name": "animal_id",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           },
           {
             "name": "animal_project_code",
             "description": "Animal project code; predefined options. Check your dashboard (https://www.lifewatch.be/etn/dashboard); new project names can only be added by administrators",
             "type": "string",
+            "format": "default",
             "example": "CodNoise"
           },
           {
             "name": "tag_serial_number",
             "description": "Tag serial number. If your animal is double tagged, add the serial numbers of both tags, separated by a comma.",
             "type": "string",
+            "format": "default",
             "example": "123456 or 123456,A1234 if double tagged"
           },
           {
             "name": "tag_type",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "tag_subtype",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "acoustic_tag_id",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "acoustic_tag_id_alternative",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "scientific_name",
             "description": "Scientific name of animal that carries the tag.",
             "type": "string",
+            "format": "default",
             "example": "Gadus morhua"
           },
           {
             "name": "common_name",
             "description": "The species' common English name.",
             "type": "string",
+            "format": "default",
             "example": "Atlantic cod"
           },
           {
             "name": "aphia_id",
             "description": "The Aphia ID linked to the scientific name. The Aphia ID can be found at http://www.marinespecies.org/aphia.php?p=webservice",
             "type": "integer",
+            "format": "default",
             "example": "126436"
           },
           {
             "name": "animal_label",
             "description": "Identification code that uniquely identifies each animal, as specified by the researcher.",
             "type": "string",
+            "format": "default",
             "example": "A82"
           },
           {
             "name": "animal_nickname",
             "description": "Nickname given to the tagged animal.",
             "type": "string",
+            "format": "default",
             "example": "John"
           },
           {
             "name": "tagger",
             "description": "Person conducting tagging",
             "type": "string",
+            "format": "default",
             "example": "Pieterjan Verhelst"
           },
           {
             "name": "capture_date_time",
             "description": "Date and time that animal was caught, in 24h UTC. Datetime fields should follow the ISO-8601 format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "capture_location",
             "description": "Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.",
             "type": "string",
+            "format": "default",
             "example": "Reefballs C-Power"
           },
           {
             "name": "capture_latitude",
             "description": "Latitude of capture location. Leave blank if same as release location. Note: in the southern hemisphere all latitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "capture_longitude",
             "description": "Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "capture_method",
             "description": "Name of the method and materials used to capture animal.",
             "type": "string",
+            "format": "default",
             "example": "line fishing"
           },
           {
             "name": "capture_depth",
             "description": "Water depth at which the animal was caught.",
             "type": "string",
+            "format": "default",
             "unit": "metres",
             "example": "25"
           },
@@ -120,6 +139,7 @@
             "name": "capture_temperature_change",
             "description": "Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.",
             "type": "string",
+            "format": "default",
             "unit": "degrees celsius",
             "example": "5"
           },
@@ -127,258 +147,301 @@
             "name": "release_date_time",
             "description": "Date and time that tagged animal was released, in UTC.",
             "type": "datetime",
+            "format": "default",
             "example": "2016-04-04T12:30:00Z"
           },
           {
             "name": "release_location",
             "description": "Name of release location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location.",
             "type": "string",
+            "format": "default",
             "example": "Reefballs C-Power"
           },
           {
             "name": "release_latitude",
             "description": "Latitude of release location. Note: in the southern hemisphere all latitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "release_longitude",
             "description": "Longitude of release location. Note: in the western hemisphere all longitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "recapture_date_time",
             "description": "If applicable, date of recapture of the tagged animal.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-07-10T12:00:00Z"
           },
           {
             "name": "length1_type",
             "description": "Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).",
             "type": "string",
+            "format": "default",
             "example": "total length"
           },
           {
             "name": "length1",
             "description": "Length of animal that carries tag, depending on 'Length type', in units specified in 'Length units'.",
             "type": "number",
+            "format": "default",
             "example": "46"
           },
           {
             "name": "length1_unit",
             "description": "Units of length.",
             "type": "string",
+            "format": "default",
             "example": "cm"
           },
           {
             "name": "length2_type",
             "description": "Specify type of secondary size measurement (e.g. width).",
             "type": "string",
+            "format": "default",
             "example": "horizontal eye diameter"
           },
           {
             "name": "length2",
             "description": "Secondary length measurement, depending on 'Length2 type', in units specified in 'Length2 units'.",
             "type": "number",
+            "format": "default",
             "example": "9.5"
           },
           {
             "name": "length2_unit",
             "description": "Units of secondary length.",
             "type": "string",
+            "format": "default",
             "example": "mm"
           },
           {
             "name": "length3_type",
             "description": "Specify type of tertiary size measurement (e.g. width).",
             "type": "string",
+            "format": "default",
             "example": "vertical eye diameter"
           },
           {
             "name": "length3",
             "description": "Tertiary length measurement, depending on 'Length3 type', in units specified in 'Length3 units'.",
             "type": "number",
+            "format": "default",
             "example": "7.23"
           },
           {
             "name": "length3_unit",
             "description": "Units of tertiary length.",
             "type": "string",
+            "format": "default",
             "example": "mm"
           },
           {
             "name": "length4_type",
             "description": "Specify type of quaternary size measurement (e.g. width).",
             "type": "string",
+            "format": "default",
             "example": "pectoral fin length"
           },
           {
             "name": "length4",
             "description": "Quaternary length measurement, depending on 'Length4 type', in units specified in 'Length4 units'.",
             "type": "number",
+            "format": "default",
             "example": "46.73"
           },
           {
             "name": "length4_unit",
             "description": "Units of quaternary length.",
             "type": "string",
+            "format": "default",
             "example": "mm"
           },
           {
             "name": "weight",
             "description": "Weight of animal that carries tag, in units specified in 'Weight units'.",
             "type": "number",
+            "format": "default",
             "example": "806.9"
           },
           {
             "name": "weight_unit",
             "description": "Units of weight.",
             "type": "string",
+            "format": "default",
             "example": "g"
           },
           {
             "name": "age",
             "description": "Age of animal that carries tag, the units are specified in 'Age units'.",
             "type": "integer",
+            "format": "default",
             "example": "2"
           },
           {
             "name": "age_unit",
             "description": "Units of age.",
             "type": "string",
+            "format": "default",
             "example": "durif index"
           },
           {
             "name": "sex",
             "description": "Sex of animal. \"M\" or \"F\". Can enter unknown (\"U\").",
             "type": "string",
+            "format": "default",
             "example": "M"
           },
           {
             "name": "life_stage",
             "description": "Life stage of animal. This will depend on the species being studied and can be a standard code used for that species, a description, or both.",
             "type": "string",
+            "format": "default",
             "example": "FV"
           },
           {
             "name": "wild_or_hatchery",
             "description": "Origin of animal that carries the tag.  Enter \"wild\", \"hatchery\" or \"unknown\".",
             "type": "string",
+            "format": "default",
             "example": "wild"
           },
           {
             "name": "stock",
             "description": "Water body of origin. Can enter unknown or not applicable.",
             "type": "string",
+            "format": "default",
             "example": "Southern Bight"
           },
           {
             "name": "surgery_date_time",
             "description": "Date that surgery was conducted. Date fields should follow the ISO-8601 format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "surgery_location",
             "description": "Short name of surgery location (i.e. hatchery name).",
             "type": "string",
+            "format": "default",
             "example": "onboard RV"
           },
           {
             "name": "surgery_latitude",
             "description": "Latitude of surgery location. Note: in the southern hemisphere all latitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "surgery_longitude",
             "description": "Longitude of surgery location. Note: in the western hemisphere all longitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "treatment_type",
             "description": "Contains a designation of treatment group as appropriate for the particular study. Researchers will have to contact the authors directly for definitions. Try to make these as clear as possible (e.g. use Control instead of C, Lake release instead of Lake).",
             "type": "string",
+            "format": "default",
             "example": "Control"
           },
           {
             "name": "tagging_type",
             "description": "Indicates how tag was attached to animal (e.g. \"internal\", \"external\", \"oral\", \"gastric\", \"subcutaneous\", etc.).",
             "type": "string",
+            "format": "default",
             "example": "internal"
           },
           {
             "name": "tagging_methodology",
             "description": "Describe method and materials used to attach tag to animal.",
             "type": "string",
+            "format": "default",
             "example": "inserted into abdominal cavity through midventral line incision, closed using 2 polydioxanone monofilament sutures."
           },
           {
             "name": "dna_sample",
             "description": "Indicates whether the animal that carries the acoustic tag is also sampled for DNA.",
             "type": "string",
+            "format": "default",
             "example": "y"
           },
           {
             "name": "sedative",
             "description": "Name of sedative used if applicable.",
             "type": "string",
+            "format": "default",
             "example": "aquacalm"
           },
           {
             "name": "sedative_concentration",
             "description": "Concentration of sedative.",
             "type": "string",
+            "format": "default",
             "example": "0.5 ml/l"
           },
           {
             "name": "anaesthetic",
             "description": "Name of anaesthetic used if applicable.",
             "type": "string",
+            "format": "default",
             "example": "Clove oil"
           },
           {
             "name": "buffer",
             "description": "Name of buffer used if applicable.",
             "type": "string",
+            "format": "default",
             "example": "Sodium Bicarbonate"
           },
           {
             "name": "anaesthetic_concentration",
             "description": "Concentration of anaesthetic.",
             "type": "string",
+            "format": "default",
             "example": "0.5 ml/l"
           },
           {
             "name": "buffer_concentration_in_anaesthetic",
             "description": "Concentration of buffer in anaesthetic.",
             "type": "string",
+            "format": "default",
             "example": "0.1 ml/l"
           },
           {
             "name": "anaesthetic_concentration_in_recirculation",
             "description": "Concentration of anaesthetic in recirculation bath.",
             "type": "string",
+            "format": "default",
             "example": "0.5 ml/l"
           },
           {
             "name": "buffer_concentration_in_recirculation",
             "description": "Concentration of buffer in recirculation bath.",
             "type": "string",
+            "format": "default",
             "example": "0.1 ml/l"
           },
           {
             "name": "dissolved_oxygen",
             "description": "This measure is the lowest oxygen level the fish will experience during the surgery.",
             "type": "string",
+            "format": "default",
             "example": "6 mg/l"
           },
           {
             "name": "pre_surgery_holding_period",
             "description": "Time that animal is held prior to surgery.",
             "type": "string",
+            "format": "default",
             "unit": "hours",
             "example": "0.5"
           },
@@ -386,6 +449,7 @@
             "name": "post_surgery_holding_period",
             "description": "Time the animal is held after surgery until release.",
             "type": "string",
+            "format": "default",
             "unit": "hours",
             "example": "2"
           },
@@ -393,13 +457,15 @@
             "name": "holding_temperature",
             "description": "This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond",
             "type": "string",
+            "format": "default",
             "unit": "degrees celsius",
             "example": "5"
           },
           {
             "name": "comments",
             "description": "Any comments deemed to have scientific relevance by the tagger.",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           }
         ],
         "primaryKey": "animal_id",
@@ -425,48 +491,57 @@
         "fields": [
           {
             "name": "tag_serial_number",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "tag_type",
             "description": "Type of tag attached to animal. Fixed options: sensor-tag, id-tag, combined-tag (=sensor-tag + id-tag)",
             "type": "string",
+            "format": "default",
             "example": "sensor-tag"
           },
           {
             "name": "tag_subtype",
             "description": "Type of acoustic tag. Predefined options: \"animal\", \"built-in tag\", \"sentinel tag\" or \"range tag\".",
             "type": "string",
+            "format": "default",
             "example": "animal"
           },
           {
             "name": "sensor_type",
             "description": "Type of sensor in the tag device. Predefined options: P = pressure, T = temperature, A = acceleration, M(A) = Mortality(Alive), M(D) = Mortality(Dead), EMF, Mo = Motion",
             "type": "string",
+            "format": "default",
             "example": "P"
           },
           {
             "name": "acoustic_tag_id",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "acoustic_tag_id_alternative",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "manufacturer",
             "description": "Name of tag manufacturer. Predefined options: \"INNOVASEA\", \"CHELONIA\", \"LOTEK\", \"STAR-ODDI\",\"THELMA BIOTEL\".",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "model",
             "description": "Predefined options. Needs to match tags in 'KNOWN MODELS'. Send an email to info@europeantrackingnetwork.org if your model is missing from the list (currently all set to 'NOT YET SET')",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "frequency",
             "description": "Frequency (in Hz) at which the tag emits a signal.",
             "type": "string",
+            "format": "default",
             "unit": "Hz",
             "example": "069k"
           },
@@ -474,18 +549,21 @@
             "name": "status",
             "description": "Current status of the tag. Three options: \"available\" when uploading the tags. Will automatically be set to \"active\" when animals get uploaded. Will automatically be set to \"ended\" when the battery estimated lifetime  is reached",
             "type": "string",
+            "format": "default",
             "example": "available"
           },
           {
             "name": "activation_date",
             "description": "Date and time the tag was activated, in UTC",
             "type": "datetime",
+            "format": "default",
             "example": "2020-01-01T12:30:00Z"
           },
           {
             "name": "battery_estimated_life",
             "description": "Estimated duration of time during which the tag will be transmitting.",
             "type": "string",
+            "format": "default",
             "unit": "days",
             "example": "90"
           },
@@ -493,84 +571,101 @@
             "name": "battery_estimated_end_date",
             "description": "Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T"
           },
           {
             "name": "length",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "diameter",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "weight",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "floating",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "archive_memory",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "sensor_slope",
             "description": "Raw value of slope, as used for sensor calibration.",
             "type": "number",
+            "format": "default",
             "example": "0.1516"
           },
           {
             "name": "sensor_intercept",
             "description": "Raw value of intercept, as used for sensor calibration.",
             "type": "number",
+            "format": "default",
             "example": "-0.6065"
           },
           {
             "name": "sensor_range",
             "description": "Maximum range of sensor.",
             "type": "string",
+            "format": "default",
             "example": "34"
           },
           {
             "name": "sensor_range_min",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "sensor_range_max",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "sensor_resolution",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "sensor_unit",
             "description": "Unit of the sensor",
             "type": "string",
+            "format": "default",
             "example": "m/s^2"
           },
           {
             "name": "sensor_accuracy",
-            "type": "number"
+            "type": "number",
+            "format": "default"
           },
           {
             "name": "sensor_transmit_ratio",
             "description": "Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.",
             "type": "integer",
+            "format": "default",
             "example": "1"
           },
           {
             "name": "accelerometer_algorithm",
             "description": "There are two possible modes of operation of the accelerometer algorithm: Activity or Tailbeat.",
             "type": "string",
+            "format": "default",
             "example": "Activity"
           },
           {
             "name": "accelerometer_samples_per_second",
             "description": "Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10 Hertz (10 measurements/s).",
             "type": "number",
+            "format": "default",
             "unit": "Hertz",
             "example": "5"
           },
@@ -578,24 +673,28 @@
             "name": "owner_organization",
             "description": "Group owner of the tag. Use the exact group name to which the tag belongs.",
             "type": "string",
+            "format": "default",
             "example": "VLIZ"
           },
           {
             "name": "owner_pi",
             "description": "First and last name of the Principal Investigator for the project.",
             "type": "string",
+            "format": "default",
             "example": "Jan Reubens"
           },
           {
             "name": "financing_project",
             "description": "Tag financing project.",
             "type": "string",
+            "format": "default",
             "example": "project"
           },
           {
             "name": "step1_min_delay",
             "description": "Minimum delay, in seconds, between the pings transmitted by the tag for step 1.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "30"
           },
@@ -603,6 +702,7 @@
             "name": "step1_max_delay",
             "description": "Maximum delay, in seconds, between the pings transmitted by the tag for step 1.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "60"
           },
@@ -610,12 +710,14 @@
             "name": "step1_power",
             "description": "Acoustic power level. \"H\" or \"L\".",
             "type": "string",
+            "format": "default",
             "example": "H"
           },
           {
             "name": "step1_duration",
             "description": "Duration of step 1, in days",
             "type": "integer",
+            "format": "default",
             "unit": "days",
             "example": "120"
           },
@@ -623,6 +725,7 @@
             "name": "step1_acceleration_duration",
             "description": "Time window over which acceleration is sampled (in seconds).",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "37"
           },
@@ -630,6 +733,7 @@
             "name": "step2_min_delay",
             "description": "Minimum delay between the pings transmitted by the tag for step 2.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "30"
           },
@@ -637,6 +741,7 @@
             "name": "step2_max_delay",
             "description": "Maximum delay between the pings transmitted by the tag for step 2.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "60"
           },
@@ -644,12 +749,14 @@
             "name": "step2_power",
             "description": "Acoustic power level. \"H\" or \"L\".",
             "type": "string",
+            "format": "default",
             "example": "L"
           },
           {
             "name": "step2_duration",
             "description": "Duration of step 2.",
             "type": "integer",
+            "format": "default",
             "unit": "days",
             "example": "120"
           },
@@ -657,6 +764,7 @@
             "name": "step2_acceleration_duration",
             "description": "Time window over which acceleration is sampled (in seconds).",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "37"
           },
@@ -664,6 +772,7 @@
             "name": "step3_min_delay",
             "description": "Minimum delay between the pings transmitted by the tag for step 3.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "30"
           },
@@ -671,6 +780,7 @@
             "name": "step3_max_delay",
             "description": "Maximum delay between the pings transmitted by the tag for step 3.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "60"
           },
@@ -678,12 +788,14 @@
             "name": "step3_power",
             "description": "Acoustic power level. \"H\" or \"L\".",
             "type": "string",
+            "format": "default",
             "example": "H"
           },
           {
             "name": "step3_duration",
             "description": "Duration of step 3.",
             "type": "integer",
+            "format": "default",
             "unit": "days",
             "example": "360"
           },
@@ -691,6 +803,7 @@
             "name": "step3_acceleration_duration",
             "description": "Time window over which acceleration is sampled (in seconds).",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "37"
           },
@@ -698,6 +811,7 @@
             "name": "step4_min_delay",
             "description": "Minimum delay between the pings transmitted by the tag for step 4.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "30"
           },
@@ -705,6 +819,7 @@
             "name": "step4_max_delay",
             "description": "Maximum delay between the pings transmitted by the tag for step 4.",
             "type": "string",
+            "format": "default",
             "unit": "seconds",
             "example": "60"
           },
@@ -712,12 +827,14 @@
             "name": "step4_power",
             "description": "Acoustic power level. \"H\" or \"L\".",
             "type": "string",
+            "format": "default",
             "example": "H"
           },
           {
             "name": "step4_duration",
             "description": "Duration of step 4.",
             "type": "integer",
+            "format": "default",
             "unit": "days",
             "example": "360"
           },
@@ -725,16 +842,19 @@
             "name": "step4_acceleration_duration",
             "description": "Time window over which acceleration is sampled (in seconds).",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "37"
           },
           {
             "name": "tag_id",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "tag_device_id",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           }
         ],
         "primaryKey": "tag_id"
@@ -751,112 +871,132 @@
         "fields": [
           {
             "name": "detection_id",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           },
           {
             "name": "date_time",
             "description": "Date and time at which the tagged animal was detected at the receiver. Information from detection file.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "tag_serial_number",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "acoustic_tag_id",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "animal_project_code",
             "description": "Code of the animal project linked to this detection.",
             "type": "string",
+            "format": "default",
             "example": "BPNS"
           },
           {
             "name": "animal_id",
             "description": "Foreign Key linked to the Animal_ID",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           },
           {
             "name": "scientific_name",
             "description": "Scientific name of the animal that carries the tag.",
             "type": "string",
+            "format": "default",
             "example": "Anguilla anguilla or Gadus morhua"
           },
           {
             "name": "acoustic_project_code",
             "description": "Code of the network project linked to this detection.",
             "type": "string",
+            "format": "default",
             "example": "BPNS"
           },
           {
             "name": "receiver_id",
             "description": "Receiver name, composed of 'Model number'-'Serial number'. Info comes from 'Detection_table'.",
             "type": "string",
+            "format": "default",
             "example": "VR2W-103255"
           },
           {
             "name": "station_name",
             "description": "Name of receiver station. The station name refers to a unique location, related to a specific latitude and longitude.",
             "type": "string",
+            "format": "default",
             "example": "Reefballs"
           },
           {
             "name": "deploy_latitude",
             "description": "Latitude of the location of the deployment.",
             "type": "number",
+            "format": "default",
             "example": "51.32098"
           },
           {
             "name": "deploy_longitude",
             "description": "Longitude of the location of the deployment.",
             "type": "number",
+            "format": "default",
             "example": "3.13661"
           },
           {
             "name": "sensor_value",
             "description": "Value recorded by the tag sensor.",
             "type": "number",
+            "format": "default",
             "example": "35 or 0.13"
           },
           {
             "name": "sensor_unit",
             "description": "Unit of measured sensor value.",
             "type": "string",
+            "format": "default",
             "example": "P"
           },
           {
             "name": "sensor2_value",
             "description": "Value recorded by secondary tag sensor.",
             "type": "number",
+            "format": "default",
             "example": "0.5"
           },
           {
             "name": "sensor2_unit",
             "description": "Unit of measured secondary sensor value.",
             "type": "string",
+            "format": "default",
             "example": "P"
           },
           {
             "name": "signal_to_noise_ratio",
             "description": "Signal-to-noise ratio. This is the difference between the background noise level and the signal level. Info comes from detection file.",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           },
           {
             "name": "source_file",
             "description": "Name of the detection file.",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "qc_flag",
             "description": "Identifies whether there are quality check issues for the given detection.",
-            "type": "boolean"
+            "type": "boolean",
+            "format": "default"
           },
           {
             "name": "deployment_id",
             "description": "Foreign key linked to the deployment information",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           }
         ],
         "primaryKey": "detection_id",
@@ -903,76 +1043,89 @@
         "fields": [
           {
             "name": "deployment_id",
-            "type": "integer"
+            "type": "integer",
+            "format": "default"
           },
           {
             "name": "receiver_id",
             "description": "Receiver ID linked to the deployment. Composed by 'Model number'-'Serial number'.",
             "type": "string",
+            "format": "default",
             "example": "TBR700-234"
           },
           {
             "name": "acoustic_project_code",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           },
           {
             "name": "station_name",
             "description": "Name of the station where the deployment of the receiver takes place. Related to a specific latitude and longitude.",
             "type": "string",
+            "format": "default",
             "example": "OH6"
           },
           {
             "name": "station_description",
             "description": "Name of receiver location. The location name serves as an additional descriptive name of the receiver station. It can refer to a specific nearby point of land, town, island, or body of water that identifies this receiver location.",
             "type": "string",
+            "format": "default",
             "example": "upstream weir"
           },
           {
             "name": "station_manager",
             "description": "Name of the person or institution managing the location.",
             "type": "string",
+            "format": "default",
             "example": "Jan Reubens"
           },
           {
             "name": "deploy_date_time",
             "description": "Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint. Datetime fields should follow the ISO-8601 format (e.g. 2017-01-01T12:07:23Z)",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "deploy_latitude",
             "description": "Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "deploy_longitude",
             "description": "Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "intended_latitude",
             "description": "Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "intended_longitude",
             "description": "Longitude of the intended deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "mooring_type",
             "description": "Type of mooring to which the receiver is attached. Predefined options: \"surface-buoy\", \"surface-wind-turbine\" or \"bottom-mooring\".",
             "type": "string",
+            "format": "default",
             "example": "surface-wind-turbine, surface-buoy or bottom-mooring"
           },
           {
             "name": "bottom_depth",
             "description": "Depth at deployment location as recorded by the vessel's depth sounder.",
             "type": "integer",
+            "format": "default",
             "unit": "metres",
             "example": "25"
           },
@@ -980,6 +1133,7 @@
             "name": "riser_length",
             "description": "Length from the anchor to the topmost float or structure of the mooring assembly.",
             "type": "integer",
+            "format": "default",
             "unit": "metres",
             "example": "10"
           },
@@ -987,6 +1141,7 @@
             "name": "deploy_depth",
             "description": "Depth of the instrument.",
             "type": "integer",
+            "format": "default",
             "unit": "metres",
             "example": "20"
           },
@@ -994,92 +1149,108 @@
             "name": "battery_installation_date",
             "description": "Date when the receiver was fitted with fresh batteries.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27"
           },
           {
             "name": "battery_estimated_end_date",
             "description": "Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-04 0:00"
           },
           {
             "name": "activation_date_time",
-            "type": "datetime"
+            "type": "datetime",
+            "format": "default"
           },
           {
             "name": "recover_date_time",
             "description": "Date and time that the equipment was recovered, in 24-hour UTC. ISO-8601 format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "recover_latitude",
             "description": "Latitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central latitude of the recovery sea.",
             "type": "number",
+            "format": "default",
             "example": "51.36324"
           },
           {
             "name": "recover_longitude",
             "description": "Longitude where the equipment was recovered, in decimal degrees. Unless it is found a substantial distance from its expected location, this can be left blank. For failed recovery attempts, use this field to record the central longitude of the recovery sea",
             "type": "number",
+            "format": "default",
             "example": "2.5902"
           },
           {
             "name": "download_date_time",
             "description": "Date and time that data were downloaded, in 24-hour UTC.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00Z"
           },
           {
             "name": "download_file_name",
             "description": "Were data downloaded? Yes or no. If no, please add comment.",
             "type": "string",
+            "format": "default",
             "example": "y"
           },
           {
             "name": "valid_data_until_date_time",
-            "type": "datetime"
+            "type": "datetime",
+            "format": "default"
           },
           {
             "name": "sync_date_time",
             "description": "Date and time when a receiver's clock is synchronized to correct UTC, in 24-hour UTC. ISO-8601 format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "time_drift",
             "description": "Displayed difference in time between the instrument's clock and correct UTC. Note: This must be recorded in the field for Vemco model VR3 receivers when there are no detections because no log file is created under those circumstances.",
             "type": "string",
+            "format": "default",
             "example": "12:00:00Z"
           },
           {
             "name": "ar_battery_installation_date",
             "description": "Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.",
             "type": "datetime",
+            "format": "default",
             "example": "2017-06-27"
           },
           {
             "name": "ar_confirm",
             "description": "Did the acoustic release report a confirmed release? Yes or no.",
             "type": "string",
+            "format": "default",
             "example": "y"
           },
           {
             "name": "transmit_profile",
             "description": "Predefined options: \"Range test(random)\", \"Range test(90s)\" or \"Sync\".",
             "type": "string",
+            "format": "default",
             "example": "Sync"
           },
           {
             "name": "transmit_power_output",
             "description": "Predefined options: \"Low\", \"Medium\", \"High\", \"Very high\".",
             "type": "string",
+            "format": "default",
             "example": "High"
           },
           {
             "name": "log_temperature_stats_period",
             "description": "Time interval between the recording of temperature statistic, as calculated from sample values.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "3600"
           },
@@ -1087,6 +1258,7 @@
             "name": "log_temperature_sample_period",
             "description": "Time interval between the sample values of temperature. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "21600"
           },
@@ -1094,6 +1266,7 @@
             "name": "log_tilt_sample_period",
             "description": "Time interval between the sample values of tilt. This field is specific to VR2AR receivers.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "600"
           },
@@ -1101,6 +1274,7 @@
             "name": "log_noise_stats_period",
             "description": "Time interval between the recording of noise statistic, as calculated from sample values.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "600"
           },
@@ -1108,6 +1282,7 @@
             "name": "log_noise_sample_period",
             "description": "Time interval between the sample values of noise. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "600"
           },
@@ -1115,6 +1290,7 @@
             "name": "log_depth_stats_period",
             "description": "Time interval between the recording of depth statistic, as calculated from sample values.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "600"
           },
@@ -1122,13 +1298,15 @@
             "name": "log_depth_sample_period",
             "description": "Time interval between the sample values of depth. This field is specific to VR2AR receivers. By default, sample values are not logged on the VR2AR receivers.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "3600"
           },
           {
             "name": "comments",
             "description": "Any comments deemed to have scientific relevance by the tagger.",
-            "type": "string"
+            "type": "string",
+            "format": "default"
           }
         ],
         "primaryKey": "deployment_id",
@@ -1156,42 +1334,49 @@
             "name": "receiver_id",
             "description": "The receiver name is composed of 'Model number'-'Serial number'.",
             "type": "string",
+            "format": "default",
             "example": "VR2W-120620"
           },
           {
             "name": "manufacturer",
             "description": "Name of receiver manufacturer. Predefined options: \"INNOVASEA\", \"CHELONIA\", \"LOTEK\" or \"THELMA BIOTEL\". Check KNOWN MODELS",
             "type": "string",
+            "format": "default",
             "example": "THELMA BIOTEL"
           },
           {
             "name": "receiver_model",
             "description": "Predefined options. Needs to match receiver in 'KNOWN MODELS'. Send an email to info@europeantrackingnetwork.org if your model is missing from the list",
             "type": "string",
+            "format": "default",
             "example": "TBR800RELEASE"
           },
           {
             "name": "receiver_serial_number",
             "description": "Serial number assigned by receiver manufacturer to uniquely identify receiver.",
             "type": "string",
+            "format": "default",
             "example": "106252"
           },
           {
             "name": "modem_address",
             "description": "This field is mandatory for Vemco VR4UWM receivers. It is a three-digit code from 001 to 249, as provided by the manufacturer, that is used to communicate with the Benthos modem. For VR4 receivers manufactured prior to September 2011, the modem address is",
             "type": "string",
+            "format": "default",
             "example": "121"
           },
           {
             "name": "status",
             "description": "Current status of receiver. Predefined options: \"Available\" when uploading the receivers; will automatically be set to \"Active\" when deployments for the receiver get uploaded; need to be manually set when: \"Broken\", \"Lost\" or \"Returned to manufacturer\".",
             "type": "string",
+            "format": "default",
             "example": "Available"
           },
           {
             "name": "battery_estimated_life",
             "description": "Expected duration for which the battery will provide adequate power for proper functioning of the receiver.",
             "type": "integer",
+            "format": "default",
             "unit": "days",
             "example": "365"
           },
@@ -1199,36 +1384,42 @@
             "name": "owner_organization",
             "description": "Affiliation of the Principal Investigator for the project.",
             "type": "string",
+            "format": "default",
             "example": "VLIZ"
           },
           {
             "name": "financing_project",
             "description": "Receiver financing project.",
             "type": "string",
+            "format": "default",
             "example": "project"
           },
           {
             "name": "built_in_acoustic_tag_id",
             "description": "Tag full ID of the receiver's built in tag.",
             "type": "string",
+            "format": "default",
             "example": "R01M-801234"
           },
           {
             "name": "ar_model",
             "description": "Model number of the acoustic release as provided by the manufacturer.",
             "type": "string",
+            "format": "default",
             "example": "867"
           },
           {
             "name": "ar_serial_number",
             "description": "Serial number of the acoustic release as provided by the manufacturer.",
             "type": "string",
+            "format": "default",
             "example": "48635"
           },
           {
             "name": "ar_battery_estimated_life",
             "description": "Expected duration for which the battery will provide adequate power for proper functioning of the acoustic release.",
             "type": "integer",
+            "format": "default",
             "unit": "months",
             "example": "12"
           },
@@ -1236,6 +1427,7 @@
             "name": "ar_voltage_at_deploy",
             "description": "Voltage reported by an acoustic release as near as possible to the time of deployment.",
             "type": "number",
+            "format": "default",
             "unit": "volt",
             "example": "12.2"
           },
@@ -1243,12 +1435,14 @@
             "name": "ar_interrogate_code",
             "description": "Interrogate code or code range command of the release. Used to ping a specific release, rather than send a general ping to all releases in the vicinity.",
             "type": "integer",
+            "format": "default",
             "example": "1003"
           },
           {
             "name": "ar_receive_frequency",
             "description": "Interrogate or receive frequency at which the release receives data.",
             "type": "string",
+            "format": "default",
             "unit": "kHz",
             "example": "7.75"
           },
@@ -1256,6 +1450,7 @@
             "name": "ar_reply_frequency",
             "description": "Frequency at which the release sends data.",
             "type": "string",
+            "format": "default",
             "unit": "kHz",
             "example": "10"
           },
@@ -1263,6 +1458,7 @@
             "name": "ar_ping_rate",
             "description": "Ping rate of the release.",
             "type": "integer",
+            "format": "default",
             "unit": "seconds",
             "example": "1"
           },
@@ -1270,30 +1466,35 @@
             "name": "ar_enable_code_address",
             "description": "Code used to enable the release; differs among release models.",
             "type": "string",
+            "format": "default",
             "example": "G"
           },
           {
             "name": "ar_release_code",
             "description": "Code used to release the release; differs among release models.",
             "type": "string",
+            "format": "default",
             "example": "A"
           },
           {
             "name": "ar_disable_code",
             "description": "Code used to disable the release.",
             "type": "string",
+            "format": "default",
             "example": "H"
           },
           {
             "name": "ar_tilt_code",
             "description": "Tilt code of the release.",
             "type": "string",
+            "format": "default",
             "example": "B"
           },
           {
             "name": "ar_tilt_after_deploy",
             "description": "Tilt after deploy of receiver",
             "type": "integer",
+            "format": "default",
             "example": "1003"
           }
         ],
