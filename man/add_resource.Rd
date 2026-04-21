@@ -26,6 +26,7 @@ along with the field type, unit and an example value.
 }
 \seealso{
 Other frictionless functions: 
-\code{\link{reexports}}
+\code{\link{read_package}()},
+\code{\link{write_package}()}
 }
 \concept{frictionless functions}
