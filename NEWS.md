@@ -3,6 +3,7 @@
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
 * `get_acoustic_projects()`, `get_animal_projects()` and `get_cpod_projects()` now have an optional argument `citation`, which adds the columns `citation`, `doi`, `contact_name`, `contact_email` and `contact_affiliation` to the data frame. This makes it easier to cite projects or contact the responsible. The citation information is obtained via [MarineInfo](https://marineinfo.org) (#518).
 * New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a data package (#530).
+* New `get_package()` gets all data related to an animal project as a [Data Package](https://specs.frictionlessdata.io/data-package/). Use this in combination with `write_package()` to download a dataset (#544).
 * `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write data packages (#525).
 * `write_dwc()` now uses a data package as input, rather than reading from the ETN database (#528). This means the function can be used locally. In addition:
   * [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.

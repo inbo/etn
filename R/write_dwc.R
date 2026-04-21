@@ -1,14 +1,14 @@
-#' Transform ETN data to a Darwin Core Archive
+#' Transform a Data Package with ETN data to a Darwin Core Archive
 #'
-#' Transforms a European Tracking Network (ETN) dataset to a [Darwin Core
-#' Archive](https://dwc.tdwg.org/text/).
+#' Transforms a Data Package with European Tracking Network (ETN) data to a
+#' [Darwin Core Archive](https://dwc.tdwg.org/text/).
 #'
 #' The resulting files can be uploaded to an [IPT](https://www.gbif.org/ipt) for
 #' publication to GBIF and/or OBIS.
 #' A corresponding `eml.xml` metadata file is not created.
 #'
-#' @param package A Frictionless Data Package of ETN data, as returned by
-#'   [read_package()].
+#' @param package A Data Package with ETN data, as returned by
+#'   [read_package()] or [get_package()].
 #'   It is expected to contain the resources `animals`, `tags`, `detections` and
 #'   `deployments`.
 #' @param directory Path to local directory to write files to.
@@ -44,7 +44,7 @@
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 #' - Parameters or metadata are used to set the following record-level terms:
-#'   - `dwc:datasetID`: `dataset_id`.
+#'   - `dwc:datasetID`: `dataset_id`, defaulting to `package$id`.
 #'   - `dwc:datasetName`: `dataset_name`.
 #'   - `dcterms:license`: `license`.
 #'   - `dcterms:rightsHolder`: `rights_holder`.
@@ -53,7 +53,6 @@
 #' write_dwc(
 #'   package,
 #'   directory = "my_directory",
-#'   dataset_id = "https://doi.org/10.14284/432",
 #'   dataset_name = paste(
 #'     "2014_DEMER - Acoustic telemetry data for four fish species in the",
 #'     "Demer river (Belgium)"
@@ -64,7 +63,7 @@
 #'
 #' # Clean up (don't do this if you want to keep your files)
 #' unlink("my_directory", recursive = TRUE)
-write_dwc <- function(package, directory, dataset_id = NULL,
+write_dwc <- function(package, directory, dataset_id = package$id,
                       dataset_name = NULL, license = c("CC-BY-4.0", "CC0-1.0"),
                       rights_holder = NULL) {
 

@@ -63,6 +63,7 @@ Other access functions:
 \code{\link{get_acoustic_receivers}()},
 \code{\link{get_animal_projects}()},
 \code{\link{get_animals}()},
-\code{\link{get_cpod_projects}()}
+\code{\link{get_cpod_projects}()},
+\code{\link{get_package}()}
 }
 \concept{access functions}

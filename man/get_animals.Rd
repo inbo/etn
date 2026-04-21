@@ -67,6 +67,7 @@ Other access functions:
 \code{\link{get_acoustic_receivers}()},
 \code{\link{get_animal_projects}()},
 \code{\link{get_cpod_projects}()},
+\code{\link{get_package}()},
 \code{\link{get_tags}()}
 }
 \concept{access functions}
