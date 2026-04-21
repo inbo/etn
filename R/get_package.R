@@ -24,11 +24,9 @@
 #'
 #' @param animal_project_code Character. Animal project you want to get an
 #' acoustic data package for. Required.
-#'
 #' @return A Data Package object.
-#'
+#' @family access functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Get data package for the 2014_demer animal project
 #' get_package(animal_project_code = "2014_demer")
