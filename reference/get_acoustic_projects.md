@@ -80,8 +80,11 @@ get_acoustic_projects()
 
 # Get a specific acoustic project with citation
 get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
-#> Error in purrr::map(succesful_responses, httr2::resp_body_json, simplifyDataFrame = TRUE): ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! Unexpected content type "text/html".
-#> • Expecting type "application/json" or suffix "json".
+#> # A tibble: 1 × 16
+#>   project_id project_code project_type telemetry_type project_name start_date
+#>        <int> <chr>        <chr>        <chr>          <chr>        <date>    
+#> 1          7 demer        acoustic     Acoustic       Demer        2014-04-10
+#> # ℹ 10 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
+#> #   moratorium <lgl>, imis_dataset_id <int>, citation <chr>, doi <chr>,
+#> #   contact_name <chr>, contact_email <chr>, contact_affiliation <chr>
 ```

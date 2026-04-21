@@ -57,7 +57,7 @@ Other access functions:
 ``` r
 # Get all animal projects
 get_animal_projects()
-#> # A tibble: 354 × 11
+#> # A tibble: 355 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1        793 2004_Gudena    animal       Acoustic       Silver eel … 2004-01-01
@@ -70,14 +70,17 @@ get_animal_projects()
 #>  8        757 2013_Foyle     animal       Acoustic       2013_Foyle   2013-07-01
 #>  9         18 2013_albertka… animal       Acoustic       2013 Albert… 2013-10-10
 #> 10        801 2014_Frome     animal       NA             2014_Frome   2014-10-01
-#> # ℹ 344 more rows
+#> # ℹ 345 more rows
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 
 # Get a specific animal project with citation
 get_animal_projects(animal_project_code = "2014_demer", citation = TRUE)
-#> Error in purrr::map(succesful_responses, httr2::resp_body_json, simplifyDataFrame = TRUE): ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! Unexpected content type "text/html".
-#> • Expecting type "application/json" or suffix "json".
+#> # A tibble: 1 × 16
+#>   project_id project_code project_type telemetry_type project_name start_date
+#>        <int> <chr>        <chr>        <chr>          <chr>        <date>    
+#> 1         21 2014_demer   animal       Acoustic       2014 Demer   2014-04-10
+#> # ℹ 10 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
+#> #   moratorium <lgl>, imis_dataset_id <int>, citation <chr>, doi <chr>,
+#> #   contact_name <chr>, contact_email <chr>, contact_affiliation <chr>
 ```
