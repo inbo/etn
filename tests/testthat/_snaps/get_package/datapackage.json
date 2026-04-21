@@ -149,7 +149,7 @@
             "description": "Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.",
             "type": "string",
             "unit": "degrees celsius",
-            "example": "5ºC"
+            "example": "5°C"
           },
           {
             "name": "release_date_time",
@@ -464,7 +464,7 @@
             "description": "This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond",
             "type": "string",
             "unit": "degrees celsius",
-            "example": "5ºC"
+            "example": "5°C"
           },
           {
             "name": "comments",
@@ -668,7 +668,7 @@
             "description": "Unit of the sensor",
             "type": "string",
             "unit": null,
-            "example": "m/s²"
+            "example": "m/s^2"
           },
           {
             "name": "sensor_accuracy",

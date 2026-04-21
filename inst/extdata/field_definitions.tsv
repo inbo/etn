@@ -20,12 +20,12 @@ animals	capture_latitude		Latitude of capture location. Leave blank if same as r
 animals	capture_location		Name of capture location. Please refer to a specific nearby point of land, town, island, or body of water that uniquely identifies this tagging location. Okay to leave blank if same as release location.	string		Reefballs C-Power	free text
 animals	capture_longitude		Longitude of capture location. Leave blank if same as release location. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
 animals	capture_method		Name of the method and materials used to capture animal.	string		line fishing	free text
-animals	capture_temperature_change		Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.	string	degrees celsius	5ºC	
+animals	capture_temperature_change		Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.	string	degrees celsius	5°C	
 animals	comments		Any comments deemed to have scientific relevance by the tagger.	string			free text
 animals	common_name		The species' common English name.	string		Atlantic cod	
 animals	dissolved_oxygen		This measure is the lowest oxygen level the fish will experience during the surgery.	string		6 mg/l	free text
 animals	dna_sample		Indicates whether the animal that carries the acoustic tag is also sampled for DNA.	string		y	y or n
-animals	holding_temperature		This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond	string	degrees celsius	5ºC	
+animals	holding_temperature		This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond	string	degrees celsius	5°C	
 animals	length1		Length of animal that carries tag, depending on 'Length type', in units specified in 'Length units'.	number		46	
 animals	length1_type		Specify type of length recorded (e.g. hood length, fork length, standard length, etc.).	string		total length	free text
 animals	length1_unit		Units of length.	string		cm	
@@ -218,7 +218,7 @@ tags	sensor_resolution			number
 tags	sensor_slope		Raw value of slope, as used for sensor calibration.	number		0.1516	
 tags	sensor_transmit_ratio		Ratio of transmission between sensors present. If for example both a T and P sensor are present and T transmits twice as often as P, the range is 2 to 1.	integer		1	
 tags	sensor_type		Type of sensor in the tag device. Predefined options: P = pressure, T = temperature, A = acceleration, M(A) = Mortality(Alive), M(D) = Mortality(Dead), EMF, Mo = Motion	string		P	
-tags	sensor_unit	sensor_units	Unit of the sensor	string		m/s²	
+tags	sensor_unit	sensor_units	Unit of the sensor	string		m/s^2	
 tags	status		Current status of the tag. Three options: "available" when uploading the tags. Will automatically be set to "active" when animals get uploaded. Will automatically be set to "ended" when the battery estimated lifetime  is reached	string		available	
 tags	step1_acceleration_duration		Time window over which acceleration is sampled (in seconds).	integer	seconds	37	
 tags	step1_duration		Duration of step 1, in days	integer	days	120	
