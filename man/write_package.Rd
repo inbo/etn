@@ -11,7 +11,6 @@ Write a Data Package to disk
 }
 \seealso{
 Other frictionless functions: 
-\code{\link{add_resource}()},
 \code{\link{read_package}()}
 }
 \concept{frictionless functions}

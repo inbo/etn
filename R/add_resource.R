@@ -10,7 +10,7 @@
 #' @param data Data frame to attach.
 #' @return `package` with one additional resource.
 #' @family frictionless functions
-#' @export
+#' @noRd
 add_resource <- function(package, resource_name, data) {
   # Check resource names
   allowed_names <- c("animals", "deployments", "detections", "receivers", "tags")
