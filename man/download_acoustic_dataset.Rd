@@ -30,11 +30,29 @@ files of the same name will be overwritten.}
 CSV and JSON files written to disk.
 }
 \description{
-Download all acoustic data related to an \strong{animal project} as a data
-package that can be deposited in a research data repository. Includes option
-to filter on scientific names.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{download_acoustic_dataset()} is deprecated since etn version 3.1.0. Please
+use \code{\link[=get_package]{get_package()}} and \code{\link[=write_package]{write_package()}} instead.
+
+\code{my_package <- get_package(animal_project_code = "2014_demer")}
+
+\code{write_package(my_package, "my_directory")}
+
+Differences with \code{download_acoustic_dataset()}:
+\itemize{
+\item \code{\link[=get_package]{get_package()}} does allow filtering by \code{scientific_name}
+\item \code{\link[=get_package]{get_package()}} adss the field definitions, units and examples to the
+metadata.
 }
-\details{
+}
+\section{download_acoustic_dataset()}{
+
+
+This function allows you to download all acoustic data related to an
+\strong{animal project} as a data package that can be deposited in a research data
+repository. Includes option to filter on scientific names.
+
 The data are downloaded as a
 \strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
 containing:\tabular{ll}{
@@ -67,6 +85,7 @@ performed by validation tools of the Frictionless Framework, e.g.
 \verb{frictionless validate datapackage.json} on the command line using
 \href{https://github.com/frictionlessdata/frictionless-py}{frictionless-py}.
 }
+
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Download data for the 2012_leopoldkanaal animal project (all scientific names)
