@@ -14,7 +14,7 @@ write_dwc(
 )
 }
 \arguments{
-\item{package}{A Frictionless Data Package of ETN data, as returned by
+\item{package}{A Data Package of ETN data, as returned by
 \code{\link[=read_package]{read_package()}} or \code{\link[=get_package]{get_package()}}.
 It is expected to contain the resources \code{animals}, \code{tags}, \code{detections} and
 \code{deployments}.}
@@ -70,7 +70,7 @@ It is possible for a deployment to contain no detections, e.g. if the
 tag malfunctioned right after deployment.
 \item Parameters or metadata are used to set the following record-level terms:
 \itemize{
-\item \code{dwc:datasetID}: \code{dataset_id}, defaulting to package$id.
+\item \code{dwc:datasetID}: \code{dataset_id}, defaulting to \code{package$id}.
 \item \code{dwc:datasetName}: \code{dataset_name}.
 \item \code{dcterms:license}: \code{license}.
 \item \code{dcterms:rightsHolder}: \code{rights_holder}.

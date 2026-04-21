@@ -7,7 +7,7 @@
 #' publication to GBIF and/or OBIS.
 #' A corresponding `eml.xml` metadata file is not created.
 #'
-#' @param package A Frictionless Data Package of ETN data, as returned by
+#' @param package A Data Package of ETN data, as returned by
 #'   [read_package()] or [get_package()].
 #'   It is expected to contain the resources `animals`, `tags`, `detections` and
 #'   `deployments`.
@@ -44,7 +44,7 @@
 #'   It is possible for a deployment to contain no detections, e.g. if the
 #'   tag malfunctioned right after deployment.
 #' - Parameters or metadata are used to set the following record-level terms:
-#'   - `dwc:datasetID`: `dataset_id`, defaulting to package$id.
+#'   - `dwc:datasetID`: `dataset_id`, defaulting to `package$id`.
 #'   - `dwc:datasetName`: `dataset_name`.
 #'   - `dcterms:license`: `license`.
 #'   - `dcterms:rightsHolder`: `rights_holder`.

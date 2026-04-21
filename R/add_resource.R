@@ -1,6 +1,6 @@
 #' Add ETN data to a Data Package
 #'
-#' Adds ETN data (`animals`, `deployments`, `detections`, `receivers` or `tags`)
+#' Adds ETN data (`animals`, `tags`, `detections`, `deployments` or `receivers`)
 #' as a Data Resource to a Data Package.
 #' The function extends [frictionless::add_resource()] by adding the following
 #' to the Table Schema of the resource:
