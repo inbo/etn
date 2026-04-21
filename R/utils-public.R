@@ -111,7 +111,7 @@ get_public_detections <- function(project_code = NULL, ...,
   }
 
   detections_path <-
-    list_public_detections() |>
+    public_detections |>
     dplyr::filter(project_code %in% selected_project_code) |>
     dplyr::pull("path")
 
