@@ -126,7 +126,10 @@ get_public_detections <- function(project_code = NULL, ...,
     purrr::map(\(req) httr2::req_throttle(req,
                                           capacity = 12,
                                           fill_time_s = 6)) |>
-    httr2::req_perform_parallel() |>
+    httr2::req_perform_parallel(progress =
+                                  ifelse(progress & !is_testing(),
+                                         yes = "Reading table metadata",
+                                         no = FALSE)) |>
     purrr::map(httr2::resp_body_json) |>
     purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
