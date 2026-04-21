@@ -53,17 +53,6 @@ if (localdb_is_available() & credentials_are_set()) {
   })
 }
 
-test_that("download_acoustic_dataset() is deprecated", {
-  skip_if_offline()
-  x <- example_dataset()
-  lifecycle::expect_deprecated(
-    download_acoustic_dataset(
-      animal_project_code = "2014_demer", directory = datapackage_path),
-    regex = "was deprecated in etn 3.1.0."
-    )
-})
-
-
 test_that("download_acoustic_dataset() creates the expected files using api", {
   skip_if_no_authentication()
 
