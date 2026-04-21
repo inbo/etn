@@ -6,6 +6,15 @@
 \usage{
 write_package(package, directory, compress = FALSE)
 }
+\arguments{
+\item{package}{Data Package object, as returned by \code{\link[frictionless:read_package]{read_package()}} or
+\code{\link[frictionless:create_package]{create_package()}}.}
+
+\item{directory}{Path to local directory to write files to.}
+
+\item{compress}{If \code{TRUE}, data of added resources will be gzip compressed
+before being written to disk (e.g. \code{deployments.csv.gz}).}
+}
 \description{
 Write a Data Package to disk
 }

@@ -6,6 +6,9 @@
 \usage{
 read_package(file = "datapackage.json")
 }
+\arguments{
+\item{file}{Path or URL to a \code{datapackage.json} file.}
+}
 \description{
 Read a Data Package descriptor file (\code{datapackage.json})
 }
