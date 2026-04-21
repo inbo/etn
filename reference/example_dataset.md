@@ -41,5 +41,6 @@ example_dataset()
 #> • detections
 #> • deployments
 #> • receivers
+#> For more information, see <https://doi.org/10.14284/432>.
 #> Use `unclass()` to print the Data Package as a list.
 ```

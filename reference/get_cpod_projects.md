@@ -49,6 +49,7 @@ Other access functions:
 [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
 [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
 [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_package()`](https://inbo.github.io/etn/reference/get_package.md),
 [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md)
 
 ## Examples

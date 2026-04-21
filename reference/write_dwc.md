@@ -1,7 +1,7 @@
-# Transform ETN data to a Darwin Core Archive
+# Transform a Data Package with ETN data to a Darwin Core Archive
 
-Transforms a European Tracking Network (ETN) dataset to a [Darwin Core
-Archive](https://dwc.tdwg.org/text/).
+Transforms a Data Package with European Tracking Network (ETN) data to a
+[Darwin Core Archive](https://dwc.tdwg.org/text/).
 
 ## Usage
 
@@ -9,7 +9,7 @@ Archive](https://dwc.tdwg.org/text/).
 write_dwc(
   package,
   directory,
-  dataset_id = NULL,
+  dataset_id = package$id,
   dataset_name = NULL,
   license = c("CC-BY-4.0", "CC0-1.0"),
   rights_holder = NULL
@@ -20,8 +20,10 @@ write_dwc(
 
 - package:
 
-  A Frictionless Data Package of ETN data, as returned by
-  [`read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html).
+  A Data Package with ETN data, as returned by
+  [`read_package()`](https://inbo.github.io/etn/reference/read_package.md)
+  or
+  [`get_package()`](https://inbo.github.io/etn/reference/get_package.md).
   It is expected to contain the resources `animals`, `tags`,
   `detections` and `deployments`.
 
@@ -90,7 +92,7 @@ Key features of the Darwin Core transformation:
 - Parameters or metadata are used to set the following record-level
   terms:
 
-  - `dwc:datasetID`: `dataset_id`.
+  - `dwc:datasetID`: `dataset_id`, defaulting to `package$id`.
 
   - `dwc:datasetName`: `dataset_name`.
 
@@ -105,7 +107,6 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_id = "https://doi.org/10.14284/432",
   dataset_name = paste(
     "2014_DEMER - Acoustic telemetry data for four fish species in the",
     "Demer river (Belgium)"

@@ -103,6 +103,7 @@ codes. Case-insensitive.</p></dd>
 <code><a href="get_acoustic_receivers.html">get_acoustic_receivers()</a></code>,
 <code><a href="get_animal_projects.html">get_animal_projects()</a></code>,
 <code><a href="get_cpod_projects.html">get_cpod_projects()</a></code>,
+<code><a href="get_package.html">get_package()</a></code>,
 <code><a href="get_tags.html">get_tags()</a></code></p></div>
     </div>
 
@@ -110,7 +111,7 @@ codes. Case-insensitive.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all animals</span></span></span>
 <span class="r-in"><span><span class="fu">get_animals</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 30,683 × 66</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 30,703 × 66</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    animal_id animal_project_code tag_serial_number tag_type tag_subtype</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>      <span style="text-decoration: underline;">5</span>923 2004_Gudena         1208              acoustic animal     </span>
@@ -123,7 +124,7 @@ codes. Case-insensitive.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      <span style="text-decoration: underline;">5</span>920 2004_Gudena         7421              acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      <span style="text-decoration: underline;">5</span>921 2004_Gudena         7422              acoustic animal     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>      <span style="text-decoration: underline;">5</span>922 2004_Gudena         7423              acoustic animal     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 30,673 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 30,693 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 61 more variables: acoustic_tag_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   acoustic_tag_id_alternative &lt;chr&gt;, scientific_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   common_name &lt;chr&gt;, aphia_id &lt;int&gt;, animal_label &lt;chr&gt;,</span></span>

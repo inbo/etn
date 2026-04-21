@@ -131,17 +131,26 @@ get_acoustic_detections(
   : Get animal data
 - [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
   : Get cpod project data
+- [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  : Get animal project data as a Data Package
 - [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md) : Get
   tag data
 
-## Work with animal project datasets
+## Work with Data Packages
+
+- [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  : Get animal project data as a Data Package
+
+- [`read_package()`](https://inbo.github.io/etn/reference/read_package.md)
+  :
+
+  Read a Data Package descriptor file (`datapackage.json`)
+
+- [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
+  : Write a Data Package to disk
 
 - [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) :
-  Transform ETN data to a Darwin Core Archive
-- [`reexports`](https://inbo.github.io/etn/reference/reexports.md)
-  [`read_package`](https://inbo.github.io/etn/reference/reexports.md)
-  [`write_package`](https://inbo.github.io/etn/reference/reexports.md) :
-  Objects exported from other packages
+  Transform a Data Package with ETN data to a Darwin Core Archive
 
 ## Sample datasets
 

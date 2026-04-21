@@ -19,9 +19,17 @@
   [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
   reads an example dataset (`"2014_DEMER"`) as a data package
   ([\#530](https://github.com/inbo/etn/issues/530)).
-- [`read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html)
+- New
+  [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  gets all data related to an animal project as a [Data
+  Package](https://specs.frictionlessdata.io/data-package/). Use this in
+  combination with
+  [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
+  to download a dataset
+  ([\#544](https://github.com/inbo/etn/issues/544)).
+- [`read_package()`](https://inbo.github.io/etn/reference/read_package.md)
   and
-  [`write_package()`](https://docs.ropensci.org/frictionless/reference/write_package.html)
+  [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
   are reexported from
   [frictionless](https://github.com/frictionlessdata/frictionless-r) to
   read and write data packages

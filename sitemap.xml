@@ -26,6 +26,7 @@
 <url><loc>https://inbo.github.io/etn/reference/get_animal_projects.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/get_animals.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/get_cpod_projects.html</loc></url>
+<url><loc>https://inbo.github.io/etn/reference/get_package.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/get_tags.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/index.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/list_acoustic_project_codes.html</loc></url>
@@ -39,7 +40,8 @@
 <url><loc>https://inbo.github.io/etn/reference/list_station_names.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/list_tag_serial_numbers.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/list_values.html</loc></url>
-<url><loc>https://inbo.github.io/etn/reference/reexports.html</loc></url>
+<url><loc>https://inbo.github.io/etn/reference/read_package.html</loc></url>
 <url><loc>https://inbo.github.io/etn/reference/write_dwc.html</loc></url>
+<url><loc>https://inbo.github.io/etn/reference/write_package.html</loc></url>
 </urlset>
 
