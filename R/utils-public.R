@@ -163,7 +163,7 @@ get_public_detections <- function(project_code = NULL, ...,
                                threads = 1
                              )
                            )) |>
-    dplyr::filter(...) |>
+    dplyr::filter(...)
 
   # Collect and return the table --------------------------------------------
   # Limit it if needed
