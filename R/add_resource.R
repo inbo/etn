@@ -37,20 +37,19 @@ add_resource <- function(package, resource_name, data) {
     dplyr::filter(table == resource_name)
 
   fields <- purrr::map(schema$fields, function(field) {
-    fields_per_name <-
-      dplyr::filter(field_definitions, .data$name == field$name)
-    definition <- dplyr::pull(fields_per_name, definition)
-    type <- dplyr::pull(fields_per_name, type)
-    unit <- dplyr::pull(fields_per_name, unit)
-    example <- dplyr::pull(fields_per_name, example)
+    field_definition <-
+      dplyr::filter(field_definitions, .data$name == field$name) |>
+      head(1) |> # Choose first row in case there are more
+      as.list()
 
-    list(
-      name = field$name,
-      description = definition,
-      type = type,
-      unit = unit,
-      example = example
+    field_output <- list(
+      name = field$name, # Field name from schema
+      description = purrr::pluck(field_definition, "definition"),
+      type = purrr::pluck(field_definition, "type"), # Overwrite guessed type
+      unit = purrr::pluck(field_definition, "unit"),
+      example = purrr::pluck(field_definition, "example")
     )
+    purrr::discard(field_output, function(x) is.na(x)) # Remove NA properties
   })
   schema$fields <- fields
 
