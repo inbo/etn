@@ -154,7 +154,11 @@ get_public_detections <- function(project_code = NULL, ...,
                                # If a request fails, retry up to 5 times (eg too many requests)
                                http_retries = 5,
                                # Wait 2 seconds between retries
-                               http_retry_wait_ms = 2000
+                               http_retry_wait_ms = 2000,
+                               http_retry_backoff = 2,
+                               # Reduce parallelism to avoid HTTP 429 too many
+                               # requests
+                               threads = 1
                              )
                            )) |>
     dplyr::filter(...)
