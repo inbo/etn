@@ -118,24 +118,31 @@ get_public_detections <- function(project_code = NULL, ...,
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
   # Read the parquet paths from the catalog
+
+  # parquet_paths <-
+  #   file.path(catalog_root, "detection_files", detections_path) |>
+  #   purrr::map(httr2::request) |>
+  #   purrr::map(\(req) httr2::req_retry(req, max_tries = 3)) |>
+  #   # Never place more then 2 requests a second
+  #   purrr::map(\(req) httr2::req_throttle(req,
+  #                                         capacity = 12,
+  #                                         fill_time_s = 6)) |>
+  #   httr2::req_perform_parallel(progress =
+  #                                 ifelse(progress & !is_testing(),
+  #                                        yes = "Reading table metadata",
+  #                                        no = FALSE)) |>
+  #   purrr::map(httr2::resp_body_json) |>
+  #   purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
+  #   # Set the project_codes as names, for ease of debugging.
+  #   purrr::set_names(
+  #     purrr::map_chr(detections_path, ~basename(path_sans_ext(.x)))
+  #     )
+
+  # Assume one parquet file per project
   parquet_paths <-
-    file.path(catalog_root, "detection_files", detections_path) |>
-    purrr::map(httr2::request) |>
-    purrr::map(\(req) httr2::req_retry(req, max_tries = 3)) |>
-    # Never place more then 2 requests a second
-    purrr::map(\(req) httr2::req_throttle(req,
-                                          capacity = 12,
-                                          fill_time_s = 6)) |>
-    httr2::req_perform_parallel(progress =
-                                  ifelse(progress & !is_testing(),
-                                         yes = "Reading table metadata",
-                                         no = FALSE)) |>
-    purrr::map(httr2::resp_body_json) |>
-    purrr::map( ~ purrr::chuck(.x, "assets", "data", "href")) |>
-    # Set the project_codes as names, for ease of debugging.
-    purrr::set_names(
-      purrr::map_chr(detections_path, ~basename(path_sans_ext(.x)))
-      )
+    file.path("https://www.lifewatch.be/etn/parquet/staging/detections",
+              selected_project_code,
+              "part-0.parquet")
 
   # Read the contents of the parquet files as a single lazy view
   con_duckdb <-
