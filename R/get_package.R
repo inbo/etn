@@ -52,13 +52,18 @@ get_package <- function(animal_project_code) {
     lowercase = TRUE
   )
 
-  # ANIMALS
-  message("* (1/6): downloading animals.csv")
+  # Get data
+  cli::cli_h2("Getting data")
+  cli::cli_ol()
+
+  # Animals
+  cli::cli_li("Getting {.val animals}.")
   # Select on animal_project_code
   animals <- get_animals(animal_project_code = animal_project_code)
 
-  # TAGS
-  message("* (2/6): downloading tags.csv")
+
+  # Tags
+  cli::cli_li("Getting {.val tags}.")
   # Select on tags associated with animals
   tag_serial_numbers <-
     animals |>
@@ -72,8 +77,8 @@ get_package <- function(animal_project_code) {
     unique()
   tags <- get_tags(tag_serial_number = tag_serial_numbers)
 
-  # DETECTIONS
-  message("* (3/6): downloading detections.csv")
+  # Detections
+  cli::cli_li("Getting {.val detections}.")
   # Select on animal_project_code
   detections <- get_acoustic_detections(
     animal_project_code = animal_project_code,
@@ -85,8 +90,8 @@ get_package <- function(animal_project_code) {
     dplyr::distinct(.data$detection_id, .keep_all = TRUE) |>
     dplyr::arrange(.data$tag_serial_number, .data$detection_id)
 
-  # DEPLOYMENTS
-  message("* (4/6): downloading deployments.csv")
+  # Deployments
+  cli::cli_li("Getting {.val deployments}.")
   # Select on acoustic_project_codes found in detections to get all deployments,
   # including those without detections for animal_project_code
   acoustic_project_codes <-
@@ -105,8 +110,8 @@ get_package <- function(animal_project_code) {
       comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
     )
 
-  # RECEIVERS
-  message("* (5/6): downloading receivers.csv")
+  # Receivers
+  cli::cli_li("Getting {.val receivers}.")
   # Select on receivers associated with deployments
   receiver_ids <-
     deployments |>
@@ -115,19 +120,20 @@ get_package <- function(animal_project_code) {
   receivers <- get_acoustic_receivers(
     receiver_id = receiver_ids
   )
+  cli::cli_end()
 
   # Obtain imis_dataset_id and doi
   project_info <- get_animal_projects(
     animal_project_code = animal_project_code, citation = TRUE
-    )
+  )
   doi <- if (!is.na(project_info$doi)) {
     project_info$doi
   } else {
-   paste0("https://marineinfo.org/id/dataset/", project_info$imis_dataset_id)
+    paste0("https://marineinfo.org/id/dataset/", project_info$imis_dataset_id)
   }
 
-  # CREATE PACKAGE
-  message("* (6/6): create package")
+  # Create package
+  cli::cli_h2("Creating Data Package")
   package <-
     frictionless::create_package() |>
     add_resource("animals", animals) |>
