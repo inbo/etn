@@ -142,14 +142,14 @@
             "description": "Water depth at which the animal was caught.",
             "type": "string",
             "unit": "metres",
-            "example": "25 m"
+            "example": "25"
           },
           {
             "name": "capture_temperature_change",
             "description": "Difference between water temperature of the system where the fish was caught and the water temperature of the holding reservoir.",
             "type": "string",
             "unit": "degrees celsius",
-            "example": "5°C"
+            "example": "5"
           },
           {
             "name": "release_date_time",
@@ -464,7 +464,7 @@
             "description": "This measure is the highest or lowest water bath temperature the fish will experience during holding (depends if surgical water temperatures are increasing or decreasing relative to initial water temperature reading). For example, if tagging is being cond",
             "type": "string",
             "unit": "degrees celsius",
-            "example": "5°C"
+            "example": "5"
           },
           {
             "name": "comments",
@@ -581,7 +581,7 @@
           },
           {
             "name": "battery_estimated_end_date",
-            "description": "Estimated date at which tag will stop transmitting.  Date fields should follow the ISO-8601 format.",
+            "description": "Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.",
             "type": "datetime",
             "unit": null,
             "example": "2017-06-27T"
@@ -693,7 +693,7 @@
           },
           {
             "name": "accelerometer_samples_per_second",
-            "description": "Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10  Hertz (10 measurements/s).",
+            "description": "Number of acceleration samples taken on each axis per second. Sampling rate can be 5 Hertz (5 measurements/s) or 10 Hertz (10 measurements/s).",
             "type": "number",
             "unit": "Hertz",
             "example": "5"
