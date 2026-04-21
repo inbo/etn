@@ -11,9 +11,10 @@ get_package(animal_project_code)
 }
 \value{
 A Data Package object.
+Write it to disk with \code{\link[=write_package]{write_package()}}.
 }
 \description{
-Gets data related to an \strong{animal project} as a \href{https://specs.frictionlessdata.io/data-package/}{Data Package}.
+Gets all data related to an \strong{animal project} as a \href{https://specs.frictionlessdata.io/data-package/}{Data Package}.
 }
 \section{Included resources}{
 
@@ -32,16 +33,15 @@ not detect the selected animals.
 \item \code{receivers}: Acoustic receivers for the selected deployments, as returned
 by \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}}.
 }
-
-You can write the Data Package to disk with \code{\link[=write_package]{write_package()}}.
 }
 
 \section{Data quality}{
 
 The data are downloaded from the ETN database \emph{as is}, i.e. no quality or
 consistency checks are performed.
-We therefore recommend to verify the data before publication.
-A consistency check can be performed on the files using:
+Verifying the data before publication is therefore recommended.
+You can validate the technical consistency of your Data Package using
+\href{https://framework.frictionlessdata.io/}{Frictionless Framework} with:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{pip install frictionless
 frictionless validate datapackage.json

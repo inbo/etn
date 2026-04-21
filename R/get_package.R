@@ -1,10 +1,11 @@
 #' Get animal project data as a Data Package
 #'
-#' Gets data related to an **animal project** as a [Data Package](
+#' Gets all data related to an **animal project** as a [Data Package](
 #' https://specs.frictionlessdata.io/data-package/).
 #'
 #' @param animal_project_code Animal project you want to get data from.
 #' @return A Data Package object.
+#'   Write it to disk with [write_package()].
 #' @family access functions
 #' @export
 #' @section Included resources:
@@ -22,13 +23,12 @@
 #' - `receivers`: Acoustic receivers for the selected deployments, as returned
 #'   by [get_acoustic_receivers()].
 #'
-#' You can write the Data Package to disk with [write_package()].
-#'
 #' @section Data quality:
 #' The data are downloaded from the ETN database _as is_, i.e. no quality or
 #' consistency checks are performed.
-#' We therefore recommend to verify the data before publication.
-#' A consistency check can be performed on the files using:
+#' Verifying the data before publication is therefore recommended.
+#' You can validate the technical consistency of your Data Package using
+#' [Frictionless Framework](https://framework.frictionlessdata.io/) with:
 #'
 #' ```
 #' pip install frictionless
