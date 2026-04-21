@@ -99,8 +99,10 @@ download_acoustic_dataset <- function(connection,
     when = "3.1.0",
     what = "download_acoustic_dataset()",
     with = "get_package()",
-    details = "This is now a 2-step workflow: call [get_package()], then [write_package().].",
-    id = "etn-download-acoustic-dataset",
+    details = cli::format_inline(
+      "To download dataset to disk use {.fun get_package} and then {.fun
+       write_package}."
+    ),
     always = TRUE
   )
 
