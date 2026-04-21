@@ -1,14 +1,14 @@
-#' Add ETN data to a Frictionless Data Package
+#' Add ETN data to a Data Package
 #'
 #' Adds ETN data (`animals`, `deployments`, `detections`, `receivers`, `tags`)
-#' as a  Data Resource to a Frictionless Data Package.
+#' as a Data Resource to a Data Package.
 #' The function extends [frictionless::add_resource()].
-#' The definition of each field is included in the Table Schema of the resource,
-#' along with the field type, unit and an example value.
+#' The definition, type, unit and example for each field are included in the
+#' Table Schema of the resource.
 #'
-#' @inheritParams frictionless::read_resource
+#' @inheritParams frictionless::add_resource
 #' @param data Data frame to attach.
-#' @return Provided `package` with one additional resource.
+#' @return `package` with one additional resource.
 #' @family frictionless functions
 #' @export
 add_resource <- function(package, resource_name, data) {
