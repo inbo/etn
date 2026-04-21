@@ -55,6 +55,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   marineinfo_dataset_endpoints <-
     glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
+  json_tempdir <- withr::local_tempdir(pattern = "marineinfo_json",
+                                       .local_envir = environment())
+
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
     # Retry if a request fails, max_tries is ignored for parallel requests but
@@ -71,7 +74,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       progress = ifelse(progress & !is_testing(),
         yes = "Getting citations",
         no = FALSE
-      )
+      ),
+      # Save to disk, reading from disk later on avoids Encoding issue?
+      paths = file.path(json_tempdir, paste0(imis_dataset_ids, ".json"))
     )
   # Discard any responses that contain errors
   succesful_responses <- marineinfo_responses |>
@@ -110,7 +115,14 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_metadata <-
     succesful_responses |>
-    purrr::map(httr2::resp_body_json, simplifyDataFrame = TRUE) |>
+    # See which id's resulted in errors, get the url and error message for each, and return as a named list with the id as name. This is used for the warning message later on.ful response, read those response files
+    purrr::map_chr(\(resp) {httr2::resp_url(resp) |>
+        stringr::str_extract("[0-9]+")}) |>
+    purrr::map(\(imis_dataset_id) {
+      # Create the path where the json file is stored
+      file.path(json_tempdir, paste0(imis_dataset_id,".json"))}) |>
+    # Read the json from disk
+    purrr::map(\(json_path) {jsonlite::fromJSON(json_path)}) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
