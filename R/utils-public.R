@@ -138,6 +138,26 @@ get_public_detections <- function(project_code = NULL, ...,
       )
 
   # Read the contents of the parquet files as a single lazy view
+  con_duckdb <-
+    duckdbfs::cached_connection()
+  # Close it when we're done with it, or when the function fails
+  withr::defer(duckdbfs::close_connection(conn = con_duckdb))
+
+  # Configure duckdbfs to be more resilient to HTTP 429 errors.
+  duckdbfs::duckdb_config(
+    conn = con_duckdb,
+    # If a request fails, retry up to 8 times (eg too
+    # many requests), setting too low a value will
+    # result in failures.
+    http_retries = 8,
+    # Wait 2 seconds between retries
+    http_retry_wait_ms = 2000,
+    http_retry_backoff = 2.5,
+    # Reduce parallelism to avoid HTTP 429 too many
+    # requests
+    threads = 1
+  )
+
   duckdb_view <-
     parquet_paths |>
     # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
@@ -149,20 +169,8 @@ get_public_detections <- function(project_code = NULL, ...,
       }) |>
     duckdbfs::open_dataset(format = "parquet",
                            unify_schemas = TRUE,
-                           conn = duckdbfs::cached_connection(
-                             config = list(
-                               # If a request fails, retry up to 8 times (eg too
-                               # many requests), setting too low a value will
-                               # result in failures.
-                               http_retries = 8,
-                               # Wait 2 seconds between retries
-                               http_retry_wait_ms = 2000,
-                               http_retry_backoff = 2,
-                               # Reduce parallelism to avoid HTTP 429 too many
-                               # requests
-                               threads = 1
-                             )
-                           )) |>
+                           conn = con_duckdb
+                           ) |>
     dplyr::filter(...)
 
   # Collect and return the table --------------------------------------------
