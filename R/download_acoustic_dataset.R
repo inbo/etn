@@ -1,8 +1,25 @@
 #' Download acoustic data package
 #'
-#' Download all acoustic data related to an **animal project** as a data
-#' package that can be deposited in a research data repository. Includes option
-#' to filter on scientific names.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `download_acoustic_dataset()` is deprecated since etn version 3.1.0. Please
+#' use [get_package()] and [write_package()] instead.
+#'
+#' `my_package <- get_package(animal_project_code = "2014_demer")`
+#'
+#' `write_package(my_package, "my_directory")`
+#'
+#' Differences with `download_acoustic_dataset()`:
+#' * [get_package()] does allow filtering by `scientific_name`
+#' * [get_package()] adss the field definitions, units and examples to the
+#' metadata.
+#'
+#' @section download_acoustic_dataset():
+#'
+#' This function allows you to download all acoustic data related to an
+#' **animal project** as a data package that can be deposited in a research data
+#' repository. Includes option to filter on scientific names.
 #'
 #' The data are downloaded as a
 #' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
@@ -76,6 +93,16 @@ download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
                                       directory = animal_project_code) {
+
+  lifecycle::deprecate_warn(
+    when = "3.1.0",
+    what = "download_acoustic_dataset()",
+    with = "get_package()",
+    details = "This is now a 2-step workflow: call [get_package()], then [write_package().].",
+    id = "etn-download-acoustic-dataset",
+    always = TRUE
+  )
+
   # Check arguments
   # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
