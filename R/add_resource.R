@@ -39,7 +39,7 @@ add_resource <- function(package, resource_name, data) {
   fields <- purrr::map(schema$fields, function(field) {
     field_definition <-
       dplyr::filter(field_definitions, .data$name == field$name) |>
-      head(1) |> # Choose first row in case there are more
+      dplyr::slice_head(n = 1) |> # Choose first row in case there are more
       as.list()
 
     field_output <- list(
