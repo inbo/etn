@@ -3,19 +3,21 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `download_acoustic_dataset()` is deprecated. Please use [get_package()] and
-#' [write_package()] instead.
+#' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
+#' instead, which is more versatile, adds field definitions, and returns a
+#' Data Package object that can be passed to other functions. Note that
+#' [get_package()] does not support filtering on `scientific_name` or print
+#' summary statistics.
 #'
-#' `my_package <- get_package(animal_project_code = "2014_demer")`
-#'
-#' `write_package(my_package, "my_directory")`
-#'
-#' Differences with `download_acoustic_dataset()`:
-#' * [get_package()] does allow filtering by `scientific_name`
-#' * [get_package()] adss the field definitions, units and examples to the
-#' metadata.
+#' ```R
+#' # Before
+#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #'
 #' @section download_acoustic_dataset():
+#' # Now
+#' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+#' write_package(my_package, directory = "2012_leopoldkanaal")
+#' ```
 #'
 #' This function allows you to download all acoustic data related to an
 #' **animal project** as a data package that can be deposited in a research data
