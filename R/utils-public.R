@@ -179,8 +179,7 @@ get_public_detections <- function(project_code = NULL, ...,
     utils::head(duckdb_view, n = 100L) |>
       dplyr::collect()
   } else {
-    duckdb_view |>
-      dplyr::collect()
+      dplyr::collect(duckdb_view)
   }
 }
 
