@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_package.R
 \name{get_package}
 \alias{get_package}
-\title{Get acoustic data package}
+\title{Get animal project data as a Data Package}
 \usage{
 get_package(animal_project_code)
 }

@@ -11,7 +11,7 @@ reference:
 - title: Access data from ETN
   contents:
   - has_concept("access functions")
-- title: Work with animal project datasets
+- title: Work with Data Packages
   contents:
   - get_package
   - has_concept("frictionless functions")

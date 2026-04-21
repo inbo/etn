@@ -1,4 +1,4 @@
-#' Get acoustic data package
+#' Get animal project data as a Data Package
 #'
 #' Get all acoustic data related to an **animal project**  as a data package.
 #'

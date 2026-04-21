@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_dwc.R
 \name{write_dwc}
 \alias{write_dwc}
-\title{Transform ETN data to a Darwin Core Archive}
+\title{Transform a Data Package with ETN data to a Darwin Core Archive}
 \usage{
 write_dwc(
   package,
