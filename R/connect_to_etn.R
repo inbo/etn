@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `connect_to_etn()` is deprecated. Its is no longer supported or needed. All
+#' `connect_to_etn()` is deprecated. It is no longer supported or needed. All
 #' connections to the ETN database are now handled automatically when you use a
 #' function. If your credentials are not stored in the system environment, you
 #' will be prompted to enter them.
