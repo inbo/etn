@@ -3,7 +3,6 @@ test_that("add_resource() returns a valid Data Package", {
   animals_file <-
     system.file("extdata", "2014_DEMER", "animals.csv", package = "etn")
   animals <- readr::read_csv(animals_file, show_col_types = FALSE)
-
   package <- frictionless::remove_resource(package, "animals")
 
   expect_no_error(
@@ -19,7 +18,6 @@ test_that("add_resource() returns error on invalid Data Package", {
     system.file("extdata", "2014_DEMER", "animals.csv", package = "etn")
   animals <- readr::read_csv(animals_file, show_col_types = FALSE)
 
-
   expect_error(
     add_resource(list(), "animals", animals),
     class = "frictionless_error_package_invalid"
@@ -31,7 +29,6 @@ test_that("add_resource() returns error on invalid resource name", {
   animals_file <-
     system.file("extdata", "2014_DEMER", "animals.csv", package = "etn")
   animals <- readr::read_csv(animals_file, show_col_types = FALSE)
-
 
   expect_error(
     add_resource(package, "not_a_resource_name", animals),

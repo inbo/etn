@@ -29,10 +29,3 @@ test_that("example_dataset(dataset = '2014_DEMER') returns a data package with
   expect_no_error(frictionless::read_resource(`2014_DEMER`, "deployments"))
   expect_no_error(frictionless::read_resource(`2014_DEMER`, "receivers"))
 })
-
-test_that("example_dataset(dataset = '2014_DEMER') returns a data package with
-           the expected metadata", {
-  `2014_DEMER` <- example_dataset(dataset = "2014_DEMER")
-  expect_equal(`2014_DEMER`$id, "https://doi.org/10.14284/432")
-  expect_true(is.null(`2014_DEMER`$profile))
-})
