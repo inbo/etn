@@ -3,8 +3,8 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `download_acoustic_dataset()` is deprecated since etn version 3.1.0. Please
-#' use [get_package()] and [write_package()] instead.
+#' `download_acoustic_dataset()` is deprecated. Please use [get_package()] and
+#' [write_package()] instead.
 #'
 #' `my_package <- get_package(animal_project_code = "2014_demer")`
 #'
