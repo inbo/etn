@@ -100,7 +100,8 @@ test_that("get_public_detections() works with animal_project = NULL", {
 })
 
 test_that("get_public_detections() supports same arg names as get_acoustic_detections()", {
-
+    # Rerun `get_acoustic_detections()` tests but with protocol forced to
+    # public?
 })
 
 test_that("get_public_detections() supports limiting to 100 rows", {
