@@ -149,7 +149,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         purrr::pluck(dataset_metadata, "datasetrec", "Citation",
                      # When Citation is missing, this object is NA_character_
           .default = NA_character_
-        )
+        ) |>
+        # Replace all whitespace (including newlines) with a single space, then trimClean the whitespace, was causing snapshot failures on Mac and Windows
+        stringr::str_replace_all("\\s", " ") |>
+        stringr::str_squish()
 
       dplyr::tibble(
         citation =
