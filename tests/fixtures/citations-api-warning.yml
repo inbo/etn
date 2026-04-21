@@ -1,26 +1,39 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://vliz.be/en/imis?dasid=7934&show=json
+    uri: https://marineinfo.org/id/dataset/7934.json
   response:
     status: 404
     headers:
       content-length: '54'
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+      content-security-policy:
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
       content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 10:52:32 GMT
-      referrer-policy: no-referrer-when-downgrade
+      cross-origin-opener-policy:
+      - same-origin
+      - same-origin
+      date: Tue, 21 Apr 2026 08:28:23 GMT
+      referrer-policy:
+      - no-referrer-when-downgrade
+      - no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=kgPeuiUzhS8GSUu2asPeMySeVXICWqsmkWk5740uXeYP1UEe;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
+      - SSESS0644de4064d87e682cd38ac55f1136d3=7%2CWubReO-UpvrtpdTfvwPTAmqqhOL8QI5QGNogAdsa5llnvV;
+        path=/; domain=.marineinfo.org; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=31536000
+      vary: Accept
+      x-content-type-options:
+      - nosniff
+      - nosniff
     body:
       string: '{"status":"error","message":"Requested id not found."}'
-  recorded_at: 2026-04-09 10:52:33
+  recorded_at: 2026-04-21 08:28:24
 recorded_with: VCR-vcr/2.1.0
