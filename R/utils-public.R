@@ -165,29 +165,35 @@ get_public_detections <- function(project_code = NULL, ...,
     threads = 1
   )
 
-  duckdb_view <-
-    parquet_paths |>
-    # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
-    purrr::map_chr(\(path) {
-      stringr::str_replace(
-        path,
-        stringr::fixed("https://www.lifewatch.be/etn/parquet/detections/"),
-        "https://www.lifewatch.be/etn/parquet/staging/detections/")
+  suppress_nanosecond_warning({
+    duckdb_view <-
+      parquet_paths |>
+      # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
+      purrr::map_chr(\(path) {
+        stringr::str_replace(
+          path,
+          stringr::fixed("https://www.lifewatch.be/etn/parquet/detections/"),
+          "https://www.lifewatch.be/etn/parquet/staging/detections/"
+        )
       }) |>
-    duckdbfs::open_dataset(format = "parquet",
-                           unify_schemas = TRUE,
-                           conn = con_duckdb
-                           ) |>
-    dplyr::filter(...)
+      duckdbfs::open_dataset(
+        format = "parquet",
+        unify_schemas = TRUE,
+        conn = con_duckdb
+      )
 
-  # Collect and return the table --------------------------------------------
-  # Limit it if needed
-  if(limit){
-    utils::head(duckdb_view, n = 100L) |>
-      dplyr::collect()
-  } else {
-      dplyr::collect(duckdb_view)
-  }
+
+    # Apply filters
+    duckdb_view <- dplyr::filter(duckdb_view, ...)
+
+    # Collect and return the table --------------------------------------------
+    # Limit it if needed
+    if (limit) {
+      duckdb_view <- utils::head(duckdb_view, n = 100L)
+    }
+
+    dplyr::collect(duckdb_view)
+  })
 }
 
 #' Read values from the parquet dump metadata files

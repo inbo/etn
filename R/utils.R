@@ -322,6 +322,35 @@ arg_to_filter_expression <- function(fn_arguments) {
     purrr::set_names(NULL)
 }
 
+#' Suppress the warning about converting nanoseconds to a lower resolution
+#'
+#' ETN passes datetime fields with nanosecond resolution to duckdb, which then
+#' warns that it will convert these to a lower resolution. This helper allows
+#' you to suppress this specific warning for a code block. Beware of lazy
+#' execution!
+#'
+#' @param expr An expression to evaluate while suppressing the warning about converting
+#'  nanoseconds to a lower resolution.
+#'
+#' @returns The result of evaluating `expr`
+#'
+#' @family helper functions
+#' @noRd
+suppress_nanosecond_warning <- function(expr) {
+  withCallingHandlers(
+    expr,
+    warning = function(w) {
+      if (grepl("nanoseconds to a lower resolution",
+        conditionMessage(w),
+        ignore.case = TRUE
+      )) {
+        # Securely muffle the warning
+        tryInvokeRestart("muffleWarning")
+      }
+    }
+  )
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
