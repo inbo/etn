@@ -32,22 +32,19 @@ CSV and JSON files written to disk.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{download_acoustic_dataset()} is deprecated since etn version 3.1.0. Please
-use \code{\link[=get_package]{get_package()}} and \code{\link[=write_package]{write_package()}} instead.
+\code{download_acoustic_dataset()} is deprecated. Please use \code{\link[=get_package]{get_package()}}
+instead, which is more versatile, adds field definitions, and returns a
+Data Package object that can be passed to other functions. Note that
+\code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
+summary statistics.
 
-\code{my_package <- get_package(animal_project_code = "2014_demer")}
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Before
+download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 
-\code{write_package(my_package, "my_directory")}
-
-Differences with \code{download_acoustic_dataset()}:
-\itemize{
-\item \code{\link[=get_package]{get_package()}} does allow filtering by \code{scientific_name}
-\item \code{\link[=get_package]{get_package()}} adss the field definitions, units and examples to the
-metadata.
-}
-}
-\section{download_acoustic_dataset()}{
-
+# Now
+my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+write_package(my_package, directory = "2012_leopoldkanaal")
+}\if{html}{\out{</div>}}
 
 This function allows you to download all acoustic data related to an
 \strong{animal project} as a data package that can be deposited in a research data
@@ -85,7 +82,6 @@ performed by validation tools of the Frictionless Framework, e.g.
 \verb{frictionless validate datapackage.json} on the command line using
 \href{https://github.com/frictionlessdata/frictionless-py}{frictionless-py}.
 }
-
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Download data for the 2012_leopoldkanaal animal project (all scientific names)
