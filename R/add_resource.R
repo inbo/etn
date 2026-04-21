@@ -1,10 +1,12 @@
 #' Add ETN data to a Data Package
 #'
-#' Adds ETN data (`animals`, `deployments`, `detections`, `receivers`, `tags`)
+#' Adds ETN data (`animals`, `deployments`, `detections`, `receivers` or `tags`)
 #' as a Data Resource to a Data Package.
-#' The function extends [frictionless::add_resource()].
-#' The definition, type, unit and example for each field are included in the
-#' Table Schema of the resource.
+#' The function extends [frictionless::add_resource()] by adding the following
+#' to the Table Schema of the resource:
+#' - The definition, type, unit and example for each field, from
+#'   `inst/extdata/field_definitions.tsv`.
+#' - The primary key of the resource and foreign keys between resources.
 #'
 #' @inheritParams frictionless::add_resource
 #' @param data Data frame to attach.
@@ -30,7 +32,8 @@ add_resource <- function(package, resource_name, data) {
 
   # Add field definition, type, unit and example to schema
   path <- system.file("extdata", "field_definitions.tsv", package = "etn")
-  field_definitions <- readr::read_tsv(path, show_col_types = FALSE) |>
+  field_definitions <-
+    readr::read_tsv(path, show_col_types = FALSE) |>
     dplyr::filter(table == resource_name)
 
   fields <- purrr::map(schema$fields, function(field) {
@@ -49,7 +52,6 @@ add_resource <- function(package, resource_name, data) {
       example = example
     )
   })
-
   schema$fields <- fields
 
   # Add keys
@@ -72,17 +74,10 @@ add_resource <- function(package, resource_name, data) {
     schema$primaryKey <- "detection_id"
     schema$foreignKeys <- list(
       list(
-        fields = c("receiver_id"),
-        reference = list(
-          resource = "receivers",
-          fields = c("receiver_id")
-        )
-      ),
-      list(
-        fields = c("acoustic_tag_id"),
+        fields = c("tag_serial_number"),
         reference = list(
           resource = "tags",
-          fields = c("acoustic_tag_id")
+          fields = c("tag_serial_number")
         )
       ),
       list(
@@ -90,6 +85,13 @@ add_resource <- function(package, resource_name, data) {
         reference = list(
           resource = "animals",
           fields = c("animal_id")
+        )
+      ),
+      list(
+        fields = c("receiver_id"),
+        reference = list(
+          resource = "receivers",
+          fields = c("receiver_id")
         )
       ),
       list(

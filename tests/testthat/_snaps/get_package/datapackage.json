@@ -1030,17 +1030,10 @@
         "primaryKey": "detection_id",
         "foreignKeys": [
           {
-            "fields": "receiver_id",
-            "reference": {
-              "resource": "receivers",
-              "fields": "receiver_id"
-            }
-          },
-          {
-            "fields": "acoustic_tag_id",
+            "fields": "tag_serial_number",
             "reference": {
               "resource": "tags",
-              "fields": "acoustic_tag_id"
+              "fields": "tag_serial_number"
             }
           },
           {
@@ -1048,6 +1041,13 @@
             "reference": {
               "resource": "animals",
               "fields": "animal_id"
+            }
+          },
+          {
+            "fields": "receiver_id",
+            "reference": {
+              "resource": "receivers",
+              "fields": "receiver_id"
             }
           },
           {
