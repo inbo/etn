@@ -241,6 +241,22 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   )
 })
 
+test_that("Encoding issue persists starting from identical file", {
+  expect_snapshot(
+    cite_imis_dataset(8856)
+  )
+})
+
+test_that("IMIS/MarineInfo file response is identical", {
+  json_tmpfile <- file.path(withr::local_tempdir(), "8856.json")
+
+  httr2::request("https://vliz.be/en/imis?dasid=8856&show=json") |>
+    httr2::req_retry(max_tries = 2) |>
+    httr2::req_perform(path = json_tmpfile)
+
+  expect_snapshot_file(json_tmpfile)
+})
+
 test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   # Some citations end on a period, some do not. A period should be added if a
   # doi is suffixed, except when one is already present.

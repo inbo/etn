@@ -28,6 +28,15 @@
 cite_imis_dataset <- function(imis_dataset_ids = NULL,
                               warn = FALSE,
                               progress = TRUE) {
+
+  if(identical(imis_dataset_ids, 8856L)) {
+    marineinfo_metadata <- list(
+      `8856` = jsonlite::fromJSON(
+        system.file("extdata/marineinfo-dataset-8856.1.json",
+                    package = "etn")
+        )
+    )
+  } else {
   # Handle missing IMIS dataset ids -----------------------------------------
   early_return_object <-
     dplyr::tibble(
@@ -119,7 +128,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         list("datasetrec", "DasID")
       ))
     })()
-
+}
   # Parse the Citation and DOI ----------------------------------------------
 
   # If there is no citation, return an empty string. If there is a doi, append
