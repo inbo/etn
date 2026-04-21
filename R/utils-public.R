@@ -148,7 +148,7 @@ get_public_detections <- function(project_code = NULL, ...,
         "https://www.lifewatch.be/etn/parquet/staging/detections/")
       }) |>
     duckdbfs::open_dataset(format = "parquet",
-                           unify_schemas = TRUE,
+                           unify_schemas = FALSE,
                            conn = duckdbfs::cached_connection(
                              config = list(
                                # If a request fails, retry up to 5 times (eg too many requests)
@@ -161,7 +161,19 @@ get_public_detections <- function(project_code = NULL, ...,
                                threads = 1
                              )
                            )) |>
-    dplyr::filter(...)
+    dplyr::filter(...) |>
+    # In case a column has class NULL, convert it to character() to avoid errors
+    # when mergin the different files upon collecting
+    dplyr::mutate(across(
+      everything(),
+      \(field) {
+        if (inherits(field, "NULL")) {
+          as.character(field)
+        } else {
+          field
+        }
+      }
+    ))
 
   # Collect and return the table --------------------------------------------
   # Limit it if needed
