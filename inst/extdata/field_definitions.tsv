@@ -77,12 +77,12 @@ animals	weight_unit		Units of weight.	string		g
 animals	wild_or_hatchery		Origin of animal that carries the tag.  Enter "wild", "hatchery" or "unknown".	string		wild	
 deployments	acoustic_project_code			string			
 deployments	activation_date_time			datetime			
-deployments	ar_battery_installation_date		Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.	datetime		2017-06-27	yyyy-mm-dd
+deployments	ar_battery_installation_date		Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.	datetime		2017-06-27T00:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	ar_confirm		Did the acoustic release report a confirmed release? Yes or no.	string		y	y or n
 deployments	arraylocationno		arrayLocationNo				
 deployments	arrayname		The Name of the array to which the deployment belogs.			Westerschelde 1	free text
-deployments	battery_estimated_end_date		Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).	datetime		2017-06-04 0:00	yyyy-mm-dd hh:mm
-deployments	battery_installation_date		Date when the receiver was fitted with fresh batteries.	datetime		2017-06-27	yyyy-mm-dd
+deployments	battery_estimated_end_date		Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).	datetime		2017-04-06T00:00:00Z	yyyy-mm-ddThh:mm:ssZ
+deployments	battery_installation_date		Date when the receiver was fitted with fresh batteries.	datetime		2017-06-27T00:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	battery_overwrite_end_date		manual entered end date, that overwrites the system generated one			2017-06-27	yyyy-mm-dd
 deployments	bottom_depth		Depth at deployment location as recorded by the vessel's depth sounder.	integer	metres	25	
 deployments	check_complete_time		A check of the equipment's function should be performed post-deployment when possible. This field describes the time at which this check is complete.			2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
@@ -94,7 +94,7 @@ deployments	deploy_latitude		Latitude of the actual deployment location, in deci
 deployments	deploy_longitude		Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
 deployments	deployment_id			integer			
 deployments	distancetomouth		The distance (in kilometers) from the deployment location to the river mouth.			25	
-deployments	download_date_time		Date and time that data were downloaded, in 24-hour UTC.	datetime		2017-06-27T12:00Z	yyyy-mm-ddThh:mmZ
+deployments	download_date_time		Date and time that data were downloaded, in 24-hour UTC.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	download_file_name		Were data downloaded? Yes or no. If no, please add comment.	string		y	y or n
 deployments	intended_latitude		Latitude of the intended deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
 deployments	intended_longitude		Longitude of the intended deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
@@ -150,7 +150,7 @@ detections	receiver_id		Receiver name, composed of 'Model number'-'Serial number
 detections	scientific_name		Scientific name of the animal that carries the tag.	string		"Anguilla anguilla" or "Gadus morhua"	
 detections	sensor_type		Type of tag sensor. Predefined options: "P", "T" or "A". P = pressure, T = temperature, A = acceleration.			Pressure	
 detections	sensor_unit		Unit of measured sensor value.	string		P	
-detections	sensor_value		Value recorded by the tag sensor.	number		35 or 0.13	
+detections	sensor_value		Value recorded by the tag sensor.	number		35	
 detections	sensor_value_acceleration		Value recorded by the acceleration sensor.			0.13	
 detections	sensor_value_depth		Value recorded by the pressure sensor.			15	
 detections	sensor_value_temperature		Value recorded by the temperature sensor.			15	
@@ -197,7 +197,7 @@ tags	acoustic_tag_id			string
 tags	acoustic_tag_id_alternative			string			
 tags	activation_date	activation_date_time	Date and time the tag was activated, in UTC	datetime		2020-01-01T12:30:00Z	yyyy-mm-ddThh:mm:ssZ
 tags	archive_memory			string			
-tags	battery_estimated_end_date		Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.	datetime		2017-06-27T	yyyy-mm-ddT
+tags	battery_estimated_end_date		Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
 tags	battery_estimated_life		Estimated duration of time during which the tag will be transmitting.	string	days	90	
 tags	diameter			number			
 tags	financing_project		Tag financing project.	string		project	

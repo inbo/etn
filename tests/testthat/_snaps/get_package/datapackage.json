@@ -572,7 +572,7 @@
             "description": "Estimated date at which tag will stop transmitting. Date fields should follow the ISO-8601 format.",
             "type": "datetime",
             "format": "default",
-            "example": "2017-06-27T"
+            "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "length",
@@ -951,7 +951,7 @@
             "description": "Value recorded by the tag sensor.",
             "type": "number",
             "format": "default",
-            "example": "35 or 0.13"
+            "example": "35"
           },
           {
             "name": "sensor_unit",
@@ -1150,14 +1150,14 @@
             "description": "Date when the receiver was fitted with fresh batteries.",
             "type": "datetime",
             "format": "default",
-            "example": "2017-06-27"
+            "example": "2017-06-27T00:00:00Z"
           },
           {
             "name": "battery_estimated_end_date",
             "description": "Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).",
             "type": "datetime",
             "format": "default",
-            "example": "2017-06-04 0:00"
+            "example": "2017-04-06T00:00:00Z"
           },
           {
             "name": "activation_date_time",
@@ -1190,7 +1190,7 @@
             "description": "Date and time that data were downloaded, in 24-hour UTC.",
             "type": "datetime",
             "format": "default",
-            "example": "2017-06-27T12:00Z"
+            "example": "2017-06-27T12:00:00Z"
           },
           {
             "name": "download_file_name",
@@ -1223,7 +1223,7 @@
             "description": "Date when the acoustic release was fitted with fresh batteries, in 24-hour UTC format.",
             "type": "datetime",
             "format": "default",
-            "example": "2017-06-27"
+            "example": "2017-06-27T00:00:00Z"
           },
           {
             "name": "ar_confirm",
