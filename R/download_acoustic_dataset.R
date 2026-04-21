@@ -13,7 +13,6 @@
 #' # Before
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #'
-#' @section download_acoustic_dataset():
 #' # Now
 #' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
 #' write_package(my_package, directory = "2012_leopoldkanaal")
