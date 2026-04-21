@@ -14,8 +14,8 @@ reference:
 - title: Work with animal project datasets
   contents:
   - get_package
-  - has_concept("transformation functions")
   - has_concept("frictionless functions")
+  - has_concept("transformation functions")
 - title: Sample datasets
   contents:
   - has_concept("sample data")
