@@ -28,7 +28,7 @@
             "description": "Tag serial number. If your animal is double tagged, add the serial numbers of both tags, separated by a comma.",
             "type": "string",
             "format": "default",
-            "example": "123456 or 123456,A1234 if double tagged"
+            "example": "123456"
           },
           {
             "name": "tag_type",
@@ -909,7 +909,7 @@
             "description": "Scientific name of the animal that carries the tag.",
             "type": "string",
             "format": "default",
-            "example": "Anguilla anguilla or Gadus morhua"
+            "example": "Anguilla anguilla"
           },
           {
             "name": "acoustic_project_code",
@@ -1119,7 +1119,7 @@
             "description": "Type of mooring to which the receiver is attached. Predefined options: \"surface-buoy\", \"surface-wind-turbine\" or \"bottom-mooring\".",
             "type": "string",
             "format": "default",
-            "example": "surface-wind-turbine, surface-buoy or bottom-mooring"
+            "example": "surface-wind-turbine"
           },
           {
             "name": "bottom_depth",
