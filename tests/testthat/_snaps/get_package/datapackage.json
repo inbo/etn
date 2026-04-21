@@ -1124,7 +1124,7 @@
           {
             "name": "bottom_depth",
             "description": "Depth at deployment location as recorded by the vessel's depth sounder.",
-            "type": "integer",
+            "type": "number",
             "format": "default",
             "unit": "metres",
             "example": "25"
@@ -1140,7 +1140,7 @@
           {
             "name": "deploy_depth",
             "description": "Depth of the instrument.",
-            "type": "integer",
+            "type": "number",
             "format": "default",
             "unit": "metres",
             "example": "20"

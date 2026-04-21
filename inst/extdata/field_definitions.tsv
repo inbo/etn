@@ -84,12 +84,12 @@ deployments	arrayname		The Name of the array to which the deployment belogs.	str
 deployments	battery_estimated_end_date		Estimated date at which receiver will stop recording. This date is calculated automatically from (Deployments/Battery install date) and (Receivers/Expected battery life).	datetime		2017-04-06T00:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	battery_installation_date		Date when the receiver was fitted with fresh batteries.	datetime		2017-06-27T00:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	battery_overwrite_end_date		Manually entered end date, that overwrites the system generated one.	date		2017-06-27	yyyy-mm-dd
-deployments	bottom_depth		Depth at deployment location as recorded by the vessel's depth sounder.	integer	metres	25	
+deployments	bottom_depth		Depth at deployment location as recorded by the vessel's depth sounder.	number	metres	25	
 deployments	check_complete_time		A check of the equipment's function should be performed post-deployment when possible. This field describes the time at which this check is complete.	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
 deployments	comments		Any comments deemed to have scientific relevance by the tagger.	string			free text
 deployments	commstatus						
 deployments	deploy_date_time		Date and time that the equipment was deployed, in 24-hour UTC. Corresponds to the time of the captured waypoint. Datetime fields should follow the ISO-8601 format (e.g. "2017-01-01T12:07:23Z").	datetime		2017-06-27T12:00:00Z	yyyy-mm-ddThh:mm:ssZ
-deployments	deploy_depth		Depth of the instrument.	integer	metres	20	
+deployments	deploy_depth		Depth of the instrument.	number	metres	20	
 deployments	deploy_latitude		Latitude of the actual deployment location, in decimal degrees. Note: in the southern hemisphere all latitudes must be negative.	number		51.36324	dd.ddddd
 deployments	deploy_longitude		Longitude of the actual deployment location, in decimal degrees. Note: in the western hemisphere all longitudes must be negative.	number		2.5902	ddd.ddddd
 deployments	deployment_id			integer			
