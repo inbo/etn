@@ -1,9 +1,9 @@
 #' Create Extended Measurements Or Facts from `animals` resource
 #'
-#' Pulls the **sex** and **life stage** information from an `animals` resource
-#' and maps these values to a controlled vocabulary recommended by
-#' [OBIS](https://obis.org/). All measurement or facts are linked to the
-#' release occurrence of an animal.
+#' Pulls the **sex**, **life stage** and ** weight** information from an
+#' `animals` resource and maps these values to a controlled vocabulary
+#' recommended by [OBIS](https://obis.org/). All measurement or facts are linked
+#' to the release occurrence of an animal.
 #'
 #' @param animals A data frame derived from an `animals` resource.
 #' @return Data frame with [Extended Measurement Or Facts](
@@ -13,16 +13,15 @@
 create_emof <- function(animals) {
   # Expand data with non-required columns used in emof transformation
   animals_cols <- c(
-    "release_date_time", "animal_nickname", "sex", "life_stage"
+    "release_date_time", "animal_nickname", "sex", "life_stage", "weight"
   )
   animals <-
     expand_cols(animals, animals_cols) |>
     dplyr::filter(!is.na(.data$release_date_time)) |>
     dplyr::select(
-      "animal_id", "sex", "life_stage", "tag_serial_number"
+      "animal_id", "sex", "life_stage", "weight", "tag_serial_number"
     ) |>
     dplyr::mutate(
-      .keep = "none",
       occurrenceID = paste(
         .data$animal_id, .data$tag_serial_number, "release", sep = "_"
       ),
@@ -35,19 +34,19 @@ create_emof <- function(animals) {
         default = "unknown"
       ),
       lifeStage = dplyr::recode_values(
-          .data$life_stage,
-          # Follows http://vocab.nerc.ac.uk/collection/S11/current/
-          # See https://github.com/inbo/etn/issues/262
-          c("juvenile", "i", "fii", "fiii") ~ "juvenile",
-          c("sub-adult", "fiv", "fv", "mii", "silver") ~ "sub-adult",
-          c("adult", "mature") ~ "adult",
-          c("immature", "imature") ~ "immature",
-          c("smolt") ~ "smolt"
-          # Exclude unknown, and other values
-        )
-      ) |>
+        .data$life_stage,
+        # Follows http://vocab.nerc.ac.uk/collection/S11/current/
+        # See https://github.com/inbo/etn/issues/262
+        c("juvenile", "i", "fii", "fiii") ~ "juvenile",
+        c("sub-adult", "fiv", "fv", "mii", "silver") ~ "sub-adult",
+        c("adult", "mature") ~ "adult",
+        c("immature", "imature") ~ "immature",
+        c("smolt") ~ "smolt"
+        # Exclude unknown, and other values
+      )
+    ) |>
     dplyr::select(dplyr::all_of(c(
-      "occurrenceID", "sex", "lifeStage"
+      "occurrenceID", "sex", "lifeStage", "weight"
     )))
 
   sex <-
@@ -93,8 +92,21 @@ create_emof <- function(animals) {
       measurementUnitID = "http://vocab.nerc.ac.uk/collection/P06/current/XXXX/"
     )
 
+  weight <-
+    animals |>
+    dplyr::mutate(
+      .keep = "none",
+      occurrenceID = .data$occurrenceID,
+      measurementType = "weight",
+      measurementTypeID = "https://vocab.nerc.ac.uk/collection/P01/current/SPWGXX01/",
+      measurementValue = as.character(.data$weight),
+      measurementValueID = NA_character_,
+      measurementUnit = "g",
+      measurementUnitID = "http://vocab.nerc.ac.uk/collection/P06/current/UGRM/"
+    )
+
   emof <-
-    dplyr::bind_rows(sex, lifestage) |>
+    dplyr::bind_rows(sex, lifestage, weight) |>
     dplyr::arrange(.data$occurrenceID)
 
   # Remove the measurementType if all values of that type are NA in animals
@@ -103,6 +115,9 @@ create_emof <- function(animals) {
   }
   if (all(is.na(animals$lifeStage))) {
     emof <- dplyr::filter(emof, .data$measurementType != "life stage")
+  }
+  if (all(is.na(animals$weight))) {
+    emof <- dplyr::filter(emof, .data$measurementType != "weight")
   }
 
   return(emof)
