@@ -6,11 +6,11 @@
 * New `get_package()` gets all data related to an animal project as a [Data Package](https://specs.frictionlessdata.io/data-package/). Use this in combination with `write_package()` to download a dataset (#544).
 * `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write Data Packages (#525).
 * `download_acoustic_dataset()` is deprecated. Please use `get_package()` and then `write_package()` instead (#559).
-  * [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.
-  * [license](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
-  * [identificationVerificationStatus](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
   * `write_dwc` now writes an Extended Measurement Or Facts extension, including sex, life stage and weight (#555).
 * `write_dwc()` now uses a Data Package as input, rather than reading from the ETN database. This means the function can be used locally (#528). In addition:
+  * [`dwc:institutionCode`](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.
+  * [`dc:license`](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
+  * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
 * The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
 
 # etn 3.0.0
