@@ -35,7 +35,7 @@
     <field index="28" term="http://rs.tdwg.org/dwc/terms/scientificName"/>
     <field index="29" term="http://rs.tdwg.org/dwc/terms/kingdom"/>
   </core>
-    <extension encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="1" rowType="http://rs.iobis.org/obis/terms/ExtendedMeasurementOrFact">
+  <extension encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="1" rowType="http://rs.iobis.org/obis/terms/ExtendedMeasurementOrFact">
     <files>
       <location>emof.csv</location>
     </files>
