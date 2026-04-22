@@ -30,11 +30,26 @@ files of the same name will be overwritten.}
 CSV and JSON files written to disk.
 }
 \description{
-Download all acoustic data related to an \strong{animal project} as a data
-package that can be deposited in a research data repository. Includes option
-to filter on scientific names.
-}
-\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{download_acoustic_dataset()} is deprecated. Please use \code{\link[=get_package]{get_package()}}
+instead, which is more versatile, adds field definitions, and returns a
+Data Package object that can be passed to other functions. Note that
+\code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
+summary statistics.
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Before
+download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
+
+# Now
+my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+write_package(my_package, directory = "2012_leopoldkanaal")
+}\if{html}{\out{</div>}}
+
+This function allows you to download all acoustic data related to an
+\strong{animal project} as a data package that can be deposited in a research data
+repository. Includes option to filter on scientific names.
+
 The data are downloaded as a
 \strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
 containing:\tabular{ll}{

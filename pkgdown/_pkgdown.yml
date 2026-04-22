@@ -11,12 +11,11 @@ reference:
 - title: Access data from ETN
   contents:
   - has_concept("access functions")
-- title: Work with animal project datasets
+- title: Work with Data Packages
   contents:
-  # - get_package
+  - get_package
+  - has_concept("frictionless functions")
   - has_concept("transformation functions")
-  - read_package
-  - write_package
 - title: Sample datasets
   contents:
   - has_concept("sample data")
