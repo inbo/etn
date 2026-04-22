@@ -1,20 +1,22 @@
-#' Create Extended Measurements Or Facts from `animals` resource
+#' Create Extended Measurement Or Facts from `animals` resource
 #'
 #' Pulls the **sex**, **life stage** and ** weight** information from an
 #' `animals` resource and maps these values to a controlled vocabulary
 #' recommended by [OBIS](https://obis.org/). All measurement or facts are linked
 #' to the release occurrence of an animal.
 #'
-#' @param animals A data frame derived from an `animals` resource.
+#' @param animals Data frame derived from an `animals` resource.
 #' @return Data frame with [Extended Measurement Or Facts](
 #'   https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml).
-#' @family transformation functions
+#' @family dwc functions
 #' @noRd
 create_emof <- function(animals) {
   # Expand data with non-required columns used in emof transformation
   animals_cols <- c(
     "release_date_time", "animal_nickname", "sex", "life_stage", "weight"
   )
+
+  # Create release occurrenceID & standardize sex/life stage values
   animals <-
     expand_cols(animals, animals_cols) |>
     dplyr::filter(!is.na(.data$release_date_time)) |>
