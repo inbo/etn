@@ -63,10 +63,10 @@ create_emof <- function(animals) {
       measurementValueID = dplyr::recode_values(
         .data$sex,
         "female" ~ "http://vocab.nerc.ac.uk/collection/S10/current/S102/",
-        "male" ~ "https://vocab.nerc.ac.uk/collection/S10/current/S103/",
+        "male" ~ "http://vocab.nerc.ac.uk/collection/S10/current/S103/",
         "hermaphrodite" ~ "TODO",
-        "unknown" ~ "https://vocab.nerc.ac.uk/collection/S10/current/S105/", # indeterminate
-        NA ~ "https://vocab.nerc.ac.uk/collection/S10/current/S104/", # not specified
+        "unknown" ~ "http://vocab.nerc.ac.uk/collection/S10/current/S105/", # indeterminate
+        NA ~ "http://vocab.nerc.ac.uk/collection/S10/current/S104/", # not specified
         default = NA_character_ # Don't map other values
       ),
       measurementUnit = NA_character_,
@@ -85,8 +85,8 @@ create_emof <- function(animals) {
       measurementValueID = dplyr::recode_values(
         .data$lifeStage,
         "adult" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1116/",
-        "subadult" ~ "https://vocab.nerc.ac.uk/collection/S11/current/S120/", # sub-adult
-        "juvenile" ~ "https://vocab.nerc.ac.uk/collection/S11/current/S1127/",
+        "subadult" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S120/", # sub-adult
+        "juvenile" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1127/",
         "immature" ~ "TODO",
         "smolt" ~ "TODO",
         "unknown" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1152/", # indeterminate
@@ -103,7 +103,7 @@ create_emof <- function(animals) {
       .keep = "none",
       occurrenceID = .data$occurrenceID,
       measurementType = "weight",
-      measurementTypeID = "https://vocab.nerc.ac.uk/collection/P01/current/SPWGXX01/",
+      measurementTypeID = "http://vocab.nerc.ac.uk/collection/P01/current/SPWGXX01/",
       measurementValue = as.character(.data$weight),
       measurementValueID = NA_character_,
       measurementUnit = "g",
