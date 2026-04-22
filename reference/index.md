@@ -72,4 +72,4 @@
 - [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)
   **\[deprecated\]** : Connect to the ETN database
 - [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
-  : Download acoustic data package
+  **\[deprecated\]** : Download acoustic data package

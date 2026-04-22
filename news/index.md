@@ -34,6 +34,12 @@
   [frictionless](https://github.com/frictionlessdata/frictionless-r) to
   read and write data packages
   ([\#525](https://github.com/inbo/etn/issues/525)).
+- [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
+  is deprecated. Please use
+  [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  and then
+  [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
+  instead ([\#559](https://github.com/inbo/etn/issues/559)).
 - [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) now
   uses a data package as input, rather than reading from the ETN
   database ([\#528](https://github.com/inbo/etn/issues/528)). This means

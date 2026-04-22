@@ -1,8 +1,61 @@
 # Download acoustic data package
 
-Download all acoustic data related to an **animal project** as a data
-package that can be deposited in a research data repository. Includes
-option to filter on scientific names.
+**\[deprecated\]**
+
+`download_acoustic_dataset()` is deprecated. Please use
+[`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+instead, which is more versatile, adds field definitions, and returns a
+Data Package object that can be passed to other functions. Note that
+[`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+does not support filtering on `scientific_name` or print summary
+statistics.
+
+    # Before
+    download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
+
+    # Now
+    my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+    write_package(my_package, directory = "2012_leopoldkanaal")
+
+This function allows you to download all acoustic data related to an
+**animal project** as a data package that can be deposited in a research
+data repository. Includes option to filter on scientific names.
+
+The data are downloaded as a **[Frictionless Data
+Package](https://specs.frictionlessdata.io/data-package/)** containing:
+
+|                    |                                                                                                                                                                                                                                                                                                              |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| file               | description                                                                                                                                                                                                                                                                                                  |
+| `animals.csv`      | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md).                                                                                                                             |
+| `tags.csv`         | Tags associated with the selected animals, as returned by [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md).                                                                                                                                                                                  |
+| `detections.csv`   | Acoustic detections for the selected animals, as returned by [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md).                                                                                                                                                 |
+| `deployments.csv`  | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md). This allows users to see when receivers were deployed, even if these did not detect the selected animals.      |
+| `receivers.csv`    | Acoustic receivers for the selected deployments, as returned by [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md).                                                                                                                                                |
+| `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package. |
+
+The function will report the number of records per csv file, as well as
+the included scientific names and acoustic projects. Warnings will be
+raised for:
+
+- Animals with multiple tags
+
+- Tags associated with multiple animals
+
+- Deployments without acoustic project: these deployments will not be
+  listed in `deployments.csv` and will therefore raise a foreign key
+  validation error.
+
+- Duplicate detections: detections with the duplicate `detection_id`.
+  These are removed by the function in `detections.csv`.
+
+**Important**: The data are downloaded *as is* from the database, i.e.
+no quality or consistency checks are performed by this function. We
+therefore recommend to verify the data before publication. A consistency
+check can be performed by validation tools of the Frictionless
+Framework, e.g. `frictionless validate datapackage.json` on the command
+line using
+[frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 
 ## Usage
 
@@ -40,44 +93,6 @@ download_acoustic_dataset(
 ## Value
 
 CSV and JSON files written to disk.
-
-## Details
-
-The data are downloaded as a **[Frictionless Data
-Package](https://specs.frictionlessdata.io/data-package/)** containing:
-
-|                    |                                                                                                                                                                                                                                                                                                              |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| file               | description                                                                                                                                                                                                                                                                                                  |
-| `animals.csv`      | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md).                                                                                                                             |
-| `tags.csv`         | Tags associated with the selected animals, as returned by [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md).                                                                                                                                                                                  |
-| `detections.csv`   | Acoustic detections for the selected animals, as returned by [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md).                                                                                                                                                 |
-| `deployments.csv`  | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md). This allows users to see when receivers were deployed, even if these did not detect the selected animals.      |
-| `receivers.csv`    | Acoustic receivers for the selected deployments, as returned by [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md).                                                                                                                                                |
-| `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package. |
-
-The function will report the number of records per csv file, as well as
-the included scientific names and acoustic projects. Warnings will be
-raised for:
-
-- Animals with multiple tags
-
-- Tags associated with multiple animals
-
-- Deployments without acoustic project: these deployments will not be
-  listed in `deployments.csv` and will therefore raise a foreign key
-  validation error.
-
-- Duplicate detections: detections with the duplicate `detection_id`.
-  These are removed by the function in `detections.csv`.
-
-**Important**: The data are downloaded *as is* from the database, i.e.
-no quality or consistency checks are performed by this function. We
-therefore recommend to verify the data before publication. A consistency
-check can be performed by validation tools of the Frictionless
-Framework, e.g. `frictionless validate datapackage.json` on the command
-line using
-[frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 
 ## Examples
 
