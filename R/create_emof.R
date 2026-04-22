@@ -64,6 +64,7 @@ create_emof <- function(animals) {
         .data$sex,
         "female" ~ "http://vocab.nerc.ac.uk/collection/S10/current/S102/",
         "male" ~ "https://vocab.nerc.ac.uk/collection/S10/current/S103/",
+        "hermaphrodite" ~ "TODO",
         "unknown" ~ "https://vocab.nerc.ac.uk/collection/S10/current/S105/", # indeterminate
         NA ~ "https://vocab.nerc.ac.uk/collection/S10/current/S104/", # not specified
         default = NA_character_ # Don't map other values
@@ -86,6 +87,8 @@ create_emof <- function(animals) {
         "adult" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1116/",
         "subadult" ~ "https://vocab.nerc.ac.uk/collection/S11/current/S120/", # sub-adult
         "juvenile" ~ "https://vocab.nerc.ac.uk/collection/S11/current/S1127/",
+        "immature" ~ "TODO",
+        "smolt" ~ "TODO",
         "unknown" ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1152/", # indeterminate
         NA ~ "http://vocab.nerc.ac.uk/collection/S11/current/S1131/", # not specified
         default = NA_character_ # Don't map other values
