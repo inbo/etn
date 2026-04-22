@@ -1,65 +1,33 @@
 occurrenceID,measurementType,measurementTypeID,measurementValue,measurementValueID,measurementUnit,measurementUnitID
-304_1187449_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-304_1187449_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 304_1187449_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 304_1187449_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-305_1187450_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-305_1187450_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 305_1187450_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 305_1187450_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-306_1187468_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-306_1187468_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 306_1187468_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 306_1187468_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-365_1171775_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-365_1171775_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 365_1171775_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 365_1171775_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-366_1171776_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-366_1171776_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 366_1171776_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 366_1171776_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-367_1171777_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-367_1171777_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 367_1171777_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 367_1171777_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-368_1171780_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-368_1171780_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 368_1171780_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 368_1171780_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-369_1171781_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-369_1171781_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 369_1171781_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 369_1171781_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-370_1171782_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-370_1171782_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 370_1171782_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 370_1171782_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-371_1171783_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-371_1171783_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 371_1171783_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,unknown,https://vocab.nerc.ac.uk/collection/S10/current/S105/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 371_1171783_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-372_1171784_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-372_1171784_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 372_1171784_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 372_1171784_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-382_1157779_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-382_1157779_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 382_1157779_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 382_1157779_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-383_1157780_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-383_1157780_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 383_1157780_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,female,http://vocab.nerc.ac.uk/collection/S10/current/S102/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 383_1157780_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-384_1157781_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-384_1157781_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 384_1157781_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 384_1157781_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-385_1157782_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-385_1157782_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 385_1157782_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 385_1157782_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-386_1157783_capture,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
-386_1157783_capture,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,,http://vocab.nerc.ac.uk/collection/S11/current/S1131/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 386_1157783_release,sex,http://vocab.nerc.ac.uk/collection/P01/current/ENTSEX01/,male,https://vocab.nerc.ac.uk/collection/S10/current/S103/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/
 386_1157783_release,life stage,http://vocab.nerc.ac.uk/collection/P01/current/LSTAGE01/,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,http://vocab.nerc.ac.uk/collection/P06/current/XXXX/

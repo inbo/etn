@@ -56,6 +56,7 @@ create_emof <- function(animals_occurrence) {
 
   emof <-
     dplyr::bind_rows(sex, lifestage) |>
+    dplyr::filter(!endsWith(.data$occurrenceID, "_capture")) |>
     dplyr::arrange(.data$occurrenceID)
 
   # Remove the measurementType if all values of that type are NA in animals_occurrence
