@@ -53,7 +53,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   # Query the IMIS API ------------------------------------------------------
 
   marineinfo_dataset_endpoints <-
-    glue::glue("https://vliz.be/en/imis?dasid={imis_dataset_ids}&show=json")
+    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+
+  json_tempdir <- withr::local_tempdir(pattern = "marineinfo_json",
+                                       .local_envir = environment())
 
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
@@ -71,7 +74,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       progress = ifelse(progress & !is_testing(),
         yes = "Getting citations",
         no = FALSE
-      )
+      ),
+      # Save to disk, reading from disk later on avoids Encoding issue?
+      paths = file.path(json_tempdir, paste0(imis_dataset_ids, ".json"))
     )
   # Discard any responses that contain errors
   succesful_responses <- marineinfo_responses |>
@@ -110,7 +115,14 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_metadata <-
     succesful_responses |>
-    purrr::map(httr2::resp_body_json, simplifyDataFrame = TRUE) |>
+    # See which id's resulted in errors, get the url and error message for each, and return as a named list with the id as name. This is used for the warning message later on.ful response, read those response files
+    purrr::map_chr(\(resp) {httr2::resp_url(resp) |>
+        stringr::str_extract("[0-9]+")}) |>
+    purrr::map(\(imis_dataset_id) {
+      # Create the path where the json file is stored
+      file.path(json_tempdir, paste0(imis_dataset_id,".json"))}) |>
+    # Read the json from disk
+    purrr::map(\(json_path) {jsonlite::fromJSON(json_path)}) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
@@ -140,7 +152,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         purrr::pluck(dataset_metadata, "datasetrec", "Citation",
                      # When Citation is missing, this object is NA_character_
           .default = NA_character_
-        )
+        ) |>
+        # Replace all whitespace (including newlines) with a single space, then trimClean the whitespace, was causing snapshot failures on Mac and Windows
+        stringr::str_replace_all("\\s", " ") |>
+        stringr::str_squish()
 
       dplyr::tibble(
         citation =

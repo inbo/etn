@@ -1,350 +1,94 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://vliz.be/en/imis?dasid=6336&show=json
+    uri: https://marineinfo.org/id/dataset/6336.json
   response:
     status: 200
     headers:
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+      access-control-allow-headers: X-Requested-With, Content-Type, Accept, Origin,
+        Authorization
+      access-control-allow-methods: GET
+      access-control-allow-origin: '*'
+      cache-control: max-age=21600, must-revalidate
+      content-disposition: attachment; filename="marineinfo-dataset-6336.json"
+      content-security-policy:
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
       content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 10:45:30 GMT
-      referrer-policy: no-referrer-when-downgrade
+      cross-origin-opener-policy:
+      - same-origin
+      - same-origin
+      - same-origin
+      date: Tue, 21 Apr 2026 08:28:20 GMT
+      last-modified: Fri, 03 Apr 2026 01:47:42 GMT
+      link: https://marineinfo.org/id/dataset/6336; rel="describedby"; type="text/turtle"
+      referrer-policy:
+      - no-referrer-when-downgrade
+      - no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=xcPTD48pCRSt2ILtOZKrThJB8mkxEeNcciBR4Jqh5zC%2CS8JO;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - SSESS0644de4064d87e682cd38ac55f1136d3=k31vM7uJf9K97J6jxttIMN1tVQhIY7RWQ4penCk9Jj898Xij;
+        path=/; domain=.marineinfo.org; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=31536000
+      vary: Accept,Accept-profile
+      x-content-type-options:
+      - nosniff
+      - nosniff
     body:
-      string: '{"datasetrec":{"DasID":6336,"Acronym":"2011_Loire","StandardTitle":"Migration
-        behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of
-        Western Europe inferred from acoustic telemetry","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>Despite
-        intensive research on eels, the behaviour of silver eels in estuaries during
-        their migration remains poorly documented which creates serious gaps in planning
-        the restoration of the European eel population. Estuaries are complex environments
-        that can be exposed to large human pressures which could impede, delay migration
-        or impact fish reproductive potential. This study investigated the estuarine
-        migration of female silver eels in the Loire River using an acoustic telemetry
-        system. An array of 31 hydrophones was deployed in the Loire estuary and 51
-        female seaward migrants were tagged with acoustic transmitters and released
-        20 km upstream of the estuary, at 100 km from the river mouth. 94% of the
-        silver eels could be followed down to the river mouth. Mean global estuarine
-        speed was 4.5 km days 1, i.e., 0.05 m s 1 and residence times varied significantly
-        between upstream and lower compartments. Mean directional migration speed
-        was found to be 48.6 km days 1, i.e., 0.56 m s 1, and appeared correlated
-        with total length and body weight. Also, daily escapement rate was highly
-        influenced by river flow.<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel,
-        E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014)
-        Migration behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large
-        estuary of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
-        license lets others distribute, remix, tweak, and build upon your work, even
-        commercially, as long as they credit you for the original creation. This is
-        the most accommodating of licenses offered. Recommended for maximum dissemination
-        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
-        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic data","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
-        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        receivers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        receivers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags
-        that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic
-        Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
-        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
-        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
-        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic
-        tracking","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Animal
-        migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
-        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
-        metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal
-        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
-        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        fish","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        fish","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_1b5ddce2","Description":null,"OrigThesTerm":"Catadromous
-        migrations","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_1b5ddce2","DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        migrations","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        species","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        species","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
-        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
-        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
-        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
-        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live
-        fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live
-        fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
-        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
-        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network
-        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
-        metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network
-        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spawning migrations","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_4d1412b7","Description":null,"OrigThesTerm":"Spawning
-        migrations","DutchTerm":"Paaimigraties","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_4d1412b7","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_c4d65583","Description":null,"OrigThesTerm":"Tracking","DutchTerm":"Tracking;
-        het volgen","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_c4d65583","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
-        data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking
-        data","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
-        European Tracking Network is a pan-European biotelemetry network that aims
-        at the integration of regional telemetry initiatives into a sustainable, efficient
-        and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":24,"Role":"Contact","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Feunteun","Firstname":"Eric","Initials":"E.","PerPublicFlag":1,"AdrID":162426,"Email":"eric.feunteun@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":18936,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":3,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Acou","Firstname":"Anthony","Initials":"A.","PerPublicFlag":1,"AdrID":171017,"Email":"anthony.acou@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37825,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":"https:\/\/orcid.org\/0000-0001-5166-0912","ROR":null},{"OrderNr":5,"Surname":"Bultel","Firstname":"Elise","Initials":"E.","PerPublicFlag":1,"AdrID":162990,"Email":"elise.bultel@gmail.com","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":38417,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"},{"DasTaxtTypID":2,"DasTaxtType":"Target
-        species","TaxtID":16735,"TaxTerm":"Anguilla anguilla (Linnaeus, 1758)","AphiaID":126281,"DutchTerm":"Paling"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic
-        receivers"},{"OtherTerm":"Animal movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Fish
-        movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Tracking
-        data"}],"temporal":[{"DasDateID":5079,"StartYear":2011,"EndYear":2012,"StartDay":11,"EndDay":25,"StartDate":"2011-11-11","EndDate":"2012-02-25","DasDate":null,"Resolution":"Quasi
-        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":11,"StartMonth":"November","StartMonthNL":"November","EndMonth0":2,"EndMonth":"February","EndMonthNL":"Februari","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Estuaire
-        de La Loire","DasGeoID":10506,"DasGeoTerm":null,"DasID":6336,"GeotID":9624,"X":-1.9827999999999999,"Y":47.288499999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":28417,"OrigGeoTerm":"Estuaire
-        de La Loire","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":20487,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish
-        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
-        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
-        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
-        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
-        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries
-        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"},{"DasThemeID":13,"DasTheme":"Physical
-        > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
-        geluidstechniek"}],"projects":null,"refs":[{"0":413844,"BRefID":413844,"1":"Based
-        on this dataset","Relation":"Based on this dataset","2":2,"RelationID":2,"3":"<b>Bultel,
-        E. <i>et al.<\/i><\/b> (2014). Migration behaviour of silver eels (<i>Anguilla
-        anguilla<\/i>) in a large estuary of Western Europe inferred from acoustic
-        telemetry. <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","RR":"<b>Bultel,
-        E. <i>et al.<\/i><\/b> (2014). Migration behaviour of silver eels (<i>Anguilla
-        anguilla<\/i>) in a large estuary of Western Europe inferred from acoustic
-        telemetry. <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","4":"Migration
-        behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of
-        Western Europe inferred from acoustic telemetry","StT":"Migration behaviour
-        of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of Western Europe
-        inferred from acoustic telemetry","5":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau,
-        J.; Bertier, C.; Feunteun, E.","RSA":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau,
-        J.; Bertier, C.; Feunteun, E.","6":"Gebaseerd op deze dataset","DutchTerm":"Gebaseerd
-        op deze dataset","7":2014,"AnaDate":2014,"8":null,"MonDate":null,"9":". <i>Est.,
-        Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","":".
-        <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","10":"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023","doi":"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023"}],"urls":[{"URL":"http:\/\/www.lifewatch.be\/etn\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-09 10:45:31
+      string: |2
+            {"datasetrec":{"DasID":6336,"Acronym":"2011_Loire","StandardTitle":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>Despite intensive research on eels, the behaviour of silver eels in estuaries during their migration remains poorly documented which creates serious gaps in planning the restoration of the European eel population. Estuaries are complex environments that can be exposed to large human pressures which could impede, delay migration or impact fish reproductive potential. This study investigated the estuarine migration of female silver eels in the Loire River using an acoustic telemetry system. An array of 31 hydrophones was deployed in the Loire estuary and 51 female seaward migrants were tagged with acoustic transmitters and released 20 km upstream of the estuary, at 100 km from the river mouth. 94% of the silver eels could be followed down to the river mouth. Mean global estuarine speed was 4.5 km days 1, i.e., 0.05 m s 1 and residence times varied significantly between upstream and lower compartments. Mean directional migration speed was found to be 48.6 km days 1, i.e., 0.56 m s 1, and appeared correlated with total length and body weight. Also, daily escapement rate was highly influenced by river flow.</p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel, E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014) Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03 01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research: field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\" src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered. Recommended for maximum dissemination and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic data","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic receivers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic receivers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic telemetry","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic telemetry uses acoustic signals (also called ‘pings’) which propagate into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic tracking","DutchTerm":null,"URI":"https://id.cabi.org/cabt/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Animal migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Animal migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous fish","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Catadromous fish","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_1b5ddce2","Description":null,"OrigThesTerm":"Catadromous migrations","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_1b5ddce2","DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous migrations","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous species","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous species","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish tracking","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spawning migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_4d1412b7","Description":null,"OrigThesTerm":"Spawning migrations","DutchTerm":"Paaimigraties","URI":"http://aims.fao.org/aos/agrovoc/c_4d1412b7","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_c4d65583","Description":null,"OrigThesTerm":"Tracking","DutchTerm":"Tracking; het volgen","URI":"http://aims.fao.org/aos/agrovoc/c_c4d65583","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking data","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The European Tracking Network is a pan-European biotelemetry network that aims at the integration of regional telemetry initiatives into a sustainable, efficient and integrated network embedded in the international context. Data is integrated in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https://creativecommons.org/licenses/by/4.0/","StandardTitle":"European Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":24,"Role":"Contact","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Feunteun","Firstname":"Eric","Initials":"E.","PerPublicFlag":1,"AdrID":162426,"Email":"eric.feunteun@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":18936,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":3,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Acou","Firstname":"Anthony","Initials":"A.","PerPublicFlag":1,"AdrID":171017,"Email":"anthony.acou@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37825,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":"https://orcid.org/0000-0001-5166-0912","ROR":null},{"OrderNr":5,"Surname":"Bultel","Firstname":"Elise","Initials":"E.","PerPublicFlag":1,"AdrID":162990,"Email":"elise.bultel@gmail.com","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":38417,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"},{"DasTaxtTypID":2,"DasTaxtType":"Target species","TaxtID":16735,"TaxTerm":"Anguilla anguilla (Linnaeus, 1758)","AphiaID":126281,"DutchTerm":"Paling"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic receivers"},{"OtherTerm":"Animal movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Fish movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Tracking data"}],"temporal":[{"DasDateID":5079,"StartYear":2011,"EndYear":2012,"StartDay":11,"EndDay":25,"StartDate":"2011-11-11","EndDate":"2012-02-25","DasDate":null,"Resolution":"Quasi continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":11,"StartMonth":"November","StartMonthNL":"November","EndMonth0":2,"EndMonth":"February","EndMonthNL":"Februari","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Estuaire de La Loire","DasGeoID":10506,"DasGeoTerm":null,"DasID":6336,"GeotID":9624,"X":-1.9827999999999999,"Y":47.288499999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":28417,"OrigGeoTerm":"Estuaire de La Loire","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":20487,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"},{"DasThemeID":13,"DasTheme":"Physical > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater geluidstechniek"}],"projects":null,"refs":[{"0":413844,"BRefID":413844,"1":"Based on this dataset","Relation":"Based on this dataset","2":2,"RelationID":2,"3":"<b>Bultel, E. <i>et al.</i></b> (2014). Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry. <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","RR":"<b>Bultel, E. <i>et al.</i></b> (2014). Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry. <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","4":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","StT":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","5":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.","RSA":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.","6":"Gebaseerd op deze dataset","DutchTerm":"Gebaseerd op deze dataset","7":2014,"AnaDate":2014,"8":null,"MonDate":null,"9":". <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","":". <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}
+  recorded_at: 2026-04-21 08:28:21
 - request:
     method: GET
-    uri: https://vliz.be/en/imis?dasid=6336&show=json
+    uri: https://marineinfo.org/id/dataset/6336.json
   response:
     status: 200
     headers:
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+      access-control-allow-headers: X-Requested-With, Content-Type, Accept, Origin,
+        Authorization
+      access-control-allow-methods: GET
+      access-control-allow-origin: '*'
+      cache-control: max-age=21600, must-revalidate
+      content-disposition: attachment; filename="marineinfo-dataset-6336.json"
+      content-security-policy:
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
       content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 10:45:31 GMT
-      referrer-policy: no-referrer-when-downgrade
+      cross-origin-opener-policy:
+      - same-origin
+      - same-origin
+      - same-origin
+      date: Tue, 21 Apr 2026 08:28:21 GMT
+      last-modified: Fri, 03 Apr 2026 01:47:42 GMT
+      link: https://marineinfo.org/id/dataset/6336; rel="describedby"; type="text/turtle"
+      referrer-policy:
+      - no-referrer-when-downgrade
+      - no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=Vfa9uoJRccpk2nnEITO4JHDcH5XCrEbYJpRnBr3x1s2fsoz7;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
+      - SSESS0644de4064d87e682cd38ac55f1136d3=cnbB2qgEQqot%2CHomUa%2CmZ6az39wMWYZISuE36Csv8hi6aUWh;
+        path=/; domain=.marineinfo.org; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=31536000
+      vary: Accept,Accept-profile
+      x-content-type-options:
+      - nosniff
+      - nosniff
     body:
-      string: '{"datasetrec":{"DasID":6336,"Acronym":"2011_Loire","StandardTitle":"Migration
-        behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of
-        Western Europe inferred from acoustic telemetry","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>Despite
-        intensive research on eels, the behaviour of silver eels in estuaries during
-        their migration remains poorly documented which creates serious gaps in planning
-        the restoration of the European eel population. Estuaries are complex environments
-        that can be exposed to large human pressures which could impede, delay migration
-        or impact fish reproductive potential. This study investigated the estuarine
-        migration of female silver eels in the Loire River using an acoustic telemetry
-        system. An array of 31 hydrophones was deployed in the Loire estuary and 51
-        female seaward migrants were tagged with acoustic transmitters and released
-        20 km upstream of the estuary, at 100 km from the river mouth. 94% of the
-        silver eels could be followed down to the river mouth. Mean global estuarine
-        speed was 4.5 km days 1, i.e., 0.05 m s 1 and residence times varied significantly
-        between upstream and lower compartments. Mean directional migration speed
-        was found to be 48.6 km days 1, i.e., 0.56 m s 1, and appeared correlated
-        with total length and body weight. Also, daily escapement rate was highly
-        influenced by river flow.<\/p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel,
-        E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014)
-        Migration behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large
-        estuary of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
-        license lets others distribute, remix, tweak, and build upon your work, even
-        commercially, as long as they credit you for the original creation. This is
-        the most accommodating of licenses offered. Recommended for maximum dissemination
-        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
-        Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic data","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
-        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        receivers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        receivers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags
-        that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic
-        Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
-        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
-        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
-        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic
-        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic
-        tracking","DutchTerm":null,"URI":"https:\/\/id.cabi.org\/cabt\/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Animal
-        migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
-        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal
-        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
-        metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal
-        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal
-        tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        fish","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        fish","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_1b5ddce2","Description":null,"OrigThesTerm":"Catadromous
-        migrations","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_1b5ddce2","DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        migrations","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous
-        species","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous
-        species","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
-        movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish
-        movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish
-        tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish
-        tracking","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live
-        fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live
-        fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement
-        ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement
-        ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network
-        Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project
-        metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network
-        Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spawning migrations","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_4d1412b7","Description":null,"OrigThesTerm":"Spawning
-        migrations","DutchTerm":"Paaimigraties","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_4d1412b7","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_c4d65583","Description":null,"OrigThesTerm":"Tracking","DutchTerm":"Tracking;
-        het volgen","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_c4d65583","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking
-        data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking
-        data","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
-        European Tracking Network is a pan-European biotelemetry network that aims
-        at the integration of regional telemetry initiatives into a sustainable, efficient
-        and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":24,"Role":"Contact","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Feunteun","Firstname":"Eric","Initials":"E.","PerPublicFlag":1,"AdrID":162426,"Email":"eric.feunteun@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":18936,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":3,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Acou","Firstname":"Anthony","Initials":"A.","PerPublicFlag":1,"AdrID":171017,"Email":"anthony.acou@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":37825,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":"https:\/\/orcid.org\/0000-0001-5166-0912","ROR":null},{"OrderNr":5,"Surname":"Bultel","Firstname":"Elise","Initials":"E.","PerPublicFlag":1,"AdrID":162990,"Email":"elise.bultel@gmail.com","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","InsOwnerCNT":5,"PersID":38417,"InsID":4397,"FullInstitute":"National
-        Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Mus\u00e9um
-        National d''Histoire Naturelle","StandardName":"National Natural History Museum
-        Paris","FullAcronym":"MNHN","ORC":null,"ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"},{"DasTaxtTypID":2,"DasTaxtType":"Target
-        species","TaxtID":16735,"TaxTerm":"Anguilla anguilla (Linnaeus, 1758)","AphiaID":126281,"DutchTerm":"Paling"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic
-        receivers"},{"OtherTerm":"Animal movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Fish
-        movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Tracking
-        data"}],"temporal":[{"DasDateID":5079,"StartYear":2011,"EndYear":2012,"StartDay":11,"EndDay":25,"StartDate":"2011-11-11","EndDate":"2012-02-25","DasDate":null,"Resolution":"Quasi
-        continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":11,"StartMonth":"November","StartMonthNL":"November","EndMonth0":2,"EndMonth":"February","EndMonthNL":"Februari","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Estuaire
-        de La Loire","DasGeoID":10506,"DasGeoTerm":null,"DasID":6336,"GeotID":9624,"X":-1.9827999999999999,"Y":47.288499999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":28417,"OrigGeoTerm":"Estuaire
-        de La Loire","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":20487,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish
-        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
-        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
-        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
-        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
-        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries
-        > Fish stocks\/catches\/taggings","DasTheme0":"Fish stocks\/catches\/taggings","DutchTerm":"Visstocks\/vangsten\/merken"},{"DasThemeID":13,"DasTheme":"Physical
-        > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
-        geluidstechniek"}],"projects":null,"refs":[{"0":413844,"BRefID":413844,"1":"Based
-        on this dataset","Relation":"Based on this dataset","2":2,"RelationID":2,"3":"<b>Bultel,
-        E. <i>et al.<\/i><\/b> (2014). Migration behaviour of silver eels (<i>Anguilla
-        anguilla<\/i>) in a large estuary of Western Europe inferred from acoustic
-        telemetry. <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","RR":"<b>Bultel,
-        E. <i>et al.<\/i><\/b> (2014). Migration behaviour of silver eels (<i>Anguilla
-        anguilla<\/i>) in a large estuary of Western Europe inferred from acoustic
-        telemetry. <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","4":"Migration
-        behaviour of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of
-        Western Europe inferred from acoustic telemetry","StT":"Migration behaviour
-        of silver eels (<i>Anguilla anguilla<\/i>) in a large estuary of Western Europe
-        inferred from acoustic telemetry","5":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau,
-        J.; Bertier, C.; Feunteun, E.","RSA":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau,
-        J.; Bertier, C.; Feunteun, E.","6":"Gebaseerd op deze dataset","DutchTerm":"Gebaseerd
-        op deze dataset","7":2014,"AnaDate":2014,"8":null,"MonDate":null,"9":". <i>Est.,
-        Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","":".
-        <i>Est., Coast. and Shelf Sci. 137<\/i>: 23-31. <a href=\"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023\"
-        target=\"_blank\">https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023<\/a>","10":"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023","doi":"https:\/\/dx.doi.org\/10.1016\/j.ecss.2013.11.023"}],"urls":[{"URL":"http:\/\/www.lifewatch.be\/etn\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-09 10:45:31
+      string: |2
+            {"datasetrec":{"DasID":6336,"Acronym":"2011_Loire","StandardTitle":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>Despite intensive research on eels, the behaviour of silver eels in estuaries during their migration remains poorly documented which creates serious gaps in planning the restoration of the European eel population. Estuaries are complex environments that can be exposed to large human pressures which could impede, delay migration or impact fish reproductive potential. This study investigated the estuarine migration of female silver eels in the Loire River using an acoustic telemetry system. An array of 31 hydrophones was deployed in the Loire estuary and 51 female seaward migrants were tagged with acoustic transmitters and released 20 km upstream of the estuary, at 100 km from the river mouth. 94% of the silver eels could be followed down to the river mouth. Mean global estuarine speed was 4.5 km days 1, i.e., 0.05 m s 1 and residence times varied significantly between upstream and lower compartments. Mean directional migration speed was found to be 48.6 km days 1, i.e., 0.56 m s 1, and appeared correlated with total length and body weight. Also, daily escapement rate was highly influenced by river flow.</p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel, E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014) Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03 01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research: field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\" src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered. Recommended for maximum dissemination and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European Tracking Network"}],"keywords":[{"ThesaurusTerm":"Acoustic data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic data","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic detection","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic detection","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic devices","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic devices","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic receivers","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Acoustic receivers","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tags","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic tags","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic Tags","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Tags that transmit acoustic signals","OrigThesTerm":"Acoustic Tags","DutchTerm":"Acoustic Tags","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic telemetry","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic telemetry uses acoustic signals (also called ‘pings’) which propagate into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Acoustic tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic tracking","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":"5296","Description":null,"OrigThesTerm":"Acoustic tracking","DutchTerm":null,"URI":"https://id.cabi.org/cabt/5296","DasKeywordDescr":null},{"ThesaurusTerm":"Animal migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Animal migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project metadata related to animals and tags","OrigThesTerm":"Animal Project","DutchTerm":"Animal Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Animal tracking","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Animal tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous fish","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":null,"Description":null,"OrigThesTerm":"Catadromous fish","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_1b5ddce2","Description":null,"OrigThesTerm":"Catadromous migrations","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_1b5ddce2","DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous migrations","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous migrations","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Catadromous species","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Catadromous species","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Fish tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_5731a296","Description":null,"OrigThesTerm":"Fish tracking","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_5731a296","DasKeywordDescr":null},{"ThesaurusTerm":"Live fish movement","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Live fish movement","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Movement ecology","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Movement ecology","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Network Project","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Project metadata related to receivers and deployments","OrigThesTerm":"Network Project","DutchTerm":"Network Project","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spawning migrations","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_4d1412b7","Description":null,"OrigThesTerm":"Spawning migrations","DutchTerm":"Paaimigraties","URI":"http://aims.fao.org/aos/agrovoc/c_4d1412b7","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_c4d65583","Description":null,"OrigThesTerm":"Tracking","DutchTerm":"Tracking; het volgen","URI":"http://aims.fao.org/aos/agrovoc/c_c4d65583","DasKeywordDescr":null},{"ThesaurusTerm":"Tracking data","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Tracking data","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The European Tracking Network is a pan-European biotelemetry network that aims at the integration of regional telemetry initiatives into a sustainable, efficient and integrated network embedded in the international context. Data is integrated in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https://creativecommons.org/licenses/by/4.0/","StandardTitle":"European Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":24,"Role":"Contact","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":2,"Surname":"Feunteun","Firstname":"Eric","Initials":"E.","PerPublicFlag":1,"AdrID":162426,"Email":"eric.feunteun@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":18936,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":3,"Surname":"Trancart","Firstname":"Thomas","Initials":"T.","PerPublicFlag":1,"AdrID":162425,"Email":"thomas.trancart@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37824,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null},{"OrderNr":4,"Surname":"Acou","Firstname":"Anthony","Initials":"A.","PerPublicFlag":1,"AdrID":171017,"Email":"anthony.acou@mnhn.fr","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":37825,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":"https://orcid.org/0000-0001-5166-0912","ROR":null},{"OrderNr":5,"Surname":"Bultel","Firstname":"Elise","Initials":"E.","PerPublicFlag":1,"AdrID":162990,"Email":"elise.bultel@gmail.com","InsPublicFlag":1,"Acronym":"MNHN","OrigNameLangCode":"fr","OrigNameLangID":22,"FullOrigName":"Muséum National d'Histoire Naturelle","InsOwnerCNT":5,"PersID":38417,"InsID":4397,"FullInstitute":"National Natural History Museum Paris","RoleID":61,"Role":"Data creator","OrigName":"Muséum National d'Histoire Naturelle","StandardName":"National Natural History Museum Paris","FullAcronym":"MNHN","ORC":null,"ROR":null}],"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":11873,"TaxTerm":"Pisces","AphiaID":11676,"DutchTerm":"Vissen"},{"DasTaxtTypID":2,"DasTaxtType":"Target species","TaxtID":16735,"TaxTerm":"Anguilla anguilla (Linnaeus, 1758)","AphiaID":126281,"DutchTerm":"Paling"}],"frameworks":null,"otherterms":[{"OtherTerm":"Acoustic receivers"},{"OtherTerm":"Animal movement"},{"OtherTerm":"Animal tracking"},{"OtherTerm":"Fish movement"},{"OtherTerm":"Live fish movement"},{"OtherTerm":"Movement ecology"},{"OtherTerm":"Tracking data"}],"temporal":[{"DasDateID":5079,"StartYear":2011,"EndYear":2012,"StartDay":11,"EndDay":25,"StartDate":"2011-11-11","EndDate":"2012-02-25","DasDate":null,"Resolution":"Quasi continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":11,"StartMonth":"November","StartMonthNL":"November","EndMonth0":2,"EndMonth":"February","EndMonthNL":"Februari","Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":"Estuaire de La Loire","DasGeoID":10506,"DasGeoTerm":null,"DasID":6336,"GeotID":9624,"X":-1.9827999999999999,"Y":47.288499999999999,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":28417,"OrigGeoTerm":"Estuaire de La Loire","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":20487,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"},{"DasThemeID":13,"DasTheme":"Physical > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater geluidstechniek"}],"projects":null,"refs":[{"0":413844,"BRefID":413844,"1":"Based on this dataset","Relation":"Based on this dataset","2":2,"RelationID":2,"3":"<b>Bultel, E. <i>et al.</i></b> (2014). Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry. <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","RR":"<b>Bultel, E. <i>et al.</i></b> (2014). Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry. <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","4":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","StT":"Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary of Western Europe inferred from acoustic telemetry","5":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.","RSA":"Bultel, E.; Lasne, E.; Acou, A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.","6":"Gebaseerd op deze dataset","DutchTerm":"Gebaseerd op deze dataset","7":2014,"AnaDate":2014,"8":null,"MonDate":null,"9":". <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","":". <i>Est., Coast. and Shelf Sci. 137</i>: 23-31. <a href=\"https://dx.doi.org/10.1016/j.ecss.2013.11.023\" target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}
+  recorded_at: 2026-04-21 08:28:21
 recorded_with: VCR-vcr/2.1.0

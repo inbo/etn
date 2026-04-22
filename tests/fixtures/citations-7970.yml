@@ -1,97 +1,48 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://vliz.be/en/imis?dasid=7970&show=json
+    uri: https://marineinfo.org/id/dataset/7970.json
   response:
     status: 200
     headers:
-      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+      access-control-allow-headers: X-Requested-With, Content-Type, Accept, Origin,
+        Authorization
+      access-control-allow-methods: GET
+      access-control-allow-origin: '*'
+      cache-control: max-age=21600, must-revalidate
+      content-disposition: attachment; filename="marineinfo-dataset-7970.json"
+      content-security-policy:
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
+      - upgrade-insecure-requests; script-src * 'unsafe-inline' 'unsafe-eval' blob:;
+        object-src *; frame-ancestors 'self' www.vliz.be vliz.be form.vliz.be www.omes-monitoring.be
+        omes-monitoring.be;
       content-type: application/json; charset=utf-8;
-      cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 09:42:16 GMT
-      referrer-policy: no-referrer-when-downgrade
+      cross-origin-opener-policy:
+      - same-origin
+      - same-origin
+      - same-origin
+      date: Tue, 21 Apr 2026 08:28:18 GMT
+      last-modified: Tue, 14 Apr 2026 01:43:53 GMT
+      link: https://marineinfo.org/id/dataset/7970; rel="describedby"; type="text/turtle"
+      referrer-policy:
+      - no-referrer-when-downgrade
+      - no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=ipdqRl330ikYEfBTNUqfcY0x7sIE-tdECg-ncLHgbpnoCGWk;
-        path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
-      strict-transport-security: max-age=31536000
-      x-content-type-options: nosniff
+      - SSESS0644de4064d87e682cd38ac55f1136d3=QppliCusFZKwXuW9eVygq%2COTuNpOlce7QhBYUhYlUmuTRAAT;
+        path=/; domain=.marineinfo.org; secure; HttpOnly; SameSite=Strict
+      - vliz_webc=vliz_webc2; path=/
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=31536000
+      vary: Accept,Accept-profile
+      x-content-type-options:
+      - nosniff
+      - nosniff
     body:
-      string: '{"datasetrec":{"DasID":7970,"Acronym":"V2LSMQUB","StandardTitle":"SeaMonitor
-        (QUB): Assessing the regional connectivity of endangered flapper skate and
-        basking sharks in the NE Atlantic","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
-        SeaMonitor project aims at delivering Europe''s largest telemetric marine
-        array to produce spatial models supporting the conservation of a wide range
-        of marine species. Within these broader project aims, the team from Queen''s
-        University Belfast are responsible for the work packages focussed on critically
-        endangered flapper skate (also known as common skate) and the globally endangered
-        basking shark. Overall, our study aims to assess the regional connectivity
-        (Ireland, Northern Ireland, western Scotland) and spatial ecology of these
-        species using satellite and acoustic telemetry combined with genetics techniques,
-        to provide evidence based management recommendations for government conservation
-        efforts.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Phillips,
-        N., Garbett, A., Finlay, C., Houghton, J., Collins, P. 2019. SeaMonitor (QUB):
-        Assessing the regional connectivity of endangered flapper skate and basking
-        sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-09
-        01:43:43.386022","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC
-        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
-        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
-        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
-        license lets others distribute, remix, tweak, and build upon your work, even
-        commercially, as long as they credit you for the original creation. This is
-        the most accommodating of licenses offered. Recommended for maximum dissemination
-        and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":null,"keywords":[{"ThesaurusTerm":"Acoustic
-        arrays","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
-        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
-        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
-        Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
-        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
-        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
-        Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
-        British Isles, Northern Ireland, Antrim","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
-        British Isles, Northern Ireland, Antrim","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
-        Eire, Donegal","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
-        Eire, Donegal","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
-        Eire, Mayo","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
-        Eire, Mayo","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Basking
-        Shark","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Basking
-        Shark","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Connectivity","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity
-        analysis","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
-        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Connectivity analysis","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Genetics","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_3222","Description":null,"OrigThesTerm":"Genetics","DutchTerm":"Genetica","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3222","DasKeywordDescr":null},{"ThesaurusTerm":"Satellite
-        tracking","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
-        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Satellite tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Skates","ThesTypID":4,"ThesType":"CAB
-        Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Skates","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spatial
-        modelling","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Spatial
-        modelling","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The
-        European Tracking Network is a pan-European biotelemetry network that aims
-        at the integration of regional telemetry initiatives into a sustainable, efficient
-        and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":null,"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":31745,"TaxTerm":"Cetorhinus maximus (Gunnerus, 1765)","AphiaID":105837,"DutchTerm":"Reuzehaai"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":20609,"TaxTerm":"Elasmobranchii","AphiaID":10193,"DutchTerm":"Kraakbeenvissen"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
-        coverage","TaxtID":20346,"TaxTerm":"Rajiformes","AphiaID":10216,"DutchTerm":"Roggen"}],"frameworks":null,"otherterms":[{"OtherTerm":"Basking
-        Shark"},{"OtherTerm":"Connectivity"},{"OtherTerm":"Spatial modelling"}],"temporal":[{"DasDateID":5660,"StartYear":2019,"EndYear":2022,"StartDay":null,"EndDay":null,"StartDate":"2019-07-01","EndDate":"2022-12-01","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":12,"EndMonth":"December","EndMonthNL":"December","Progress":"In
-        Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Antrim","DasGeoID":13104,"DasGeoTerm":null,"DasID":7970,"GeotID":155,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Loch
-        Sunart","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":3249,"OrigGeoTerm":"Antrim","DutchTerm":null},{"GeoTerm":"Donegal","DasGeoID":13102,"DasGeoTerm":null,"DasID":7970,"GeotID":234,"X":-10.9,"Y":54.229999999999997,"MaxX":-4.6100000000000003,"MaxY":57.850000000000001,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5566,"OrigGeoTerm":"Donegal","DutchTerm":null},{"GeoTerm":"Mayo","DasGeoID":13103,"DasGeoTerm":null,"DasID":7970,"GeotID":246,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5544,"OrigGeoTerm":"Mayo","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14202,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish
-        detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic
-        telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
-        > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
-        > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
-        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/www.loughs-agency.org\/managing-our-loughs\/funded-programmes\/current-programmes\/sea-monitor\/","externalID":null,"URLTypeCode":null,"URLType":"Programme","URLTypID":20,"downloadURL":null,"FileName":null},{"URL":"https:\/\/members.oceantrack.org\/OTN\/project?ccode=V2LSMQUB","externalID":null,"URLTypeCode":null,"URLType":"Dataset
-        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/twitter.com\/seamonitor1?lang=en","externalID":null,"URLTypeCode":null,"URLType":"Reference
-        materials","URLTypID":10,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-09 09:42:17
+      string: |2
+            {"datasetrec":{"DasID":7970,"Acronym":"V2LSMQUB","StandardTitle":"SeaMonitor (QUB): Assessing the regional connectivity of endangered flapper skate and basking sharks in the NE Atlantic","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The SeaMonitor project aims at delivering Europe's largest telemetric marine array to produce spatial models supporting the conservation of a wide range of marine species. Within these broader project aims, the team from Queen's University Belfast are responsible for the work packages focussed on critically endangered flapper skate (also known as common skate) and the globally endangered basking shark. Overall, our study aims to assess the regional connectivity (Ireland, Northern Ireland, western Scotland) and spatial ecology of these species using satellite and acoustic telemetry combined with genetics techniques, to provide evidence based management recommendations for government conservation efforts.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Phillips, N., Garbett, A., Finlay, C., Houghton, J., Collins, P. 2019. SeaMonitor (QUB): Assessing the regional connectivity of endangered flapper skate and basking sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14 01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research: field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\" src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered. Recommended for maximum dissemination and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":null,"keywords":[{"ThesaurusTerm":"Acoustic arrays","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic arrays","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic data","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic telemetry","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic telemetry uses acoustic signals (also called ‘pings’) which propagate into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE, British Isles, Northern Ireland, Antrim","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE, British Isles, Northern Ireland, Antrim","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE, Eire, Donegal","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE, Eire, Donegal","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE, Eire, Mayo","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE, Eire, Mayo","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Basking Shark","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Basking Shark","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Connectivity","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity analysis","ThesTypID":2,"ThesType":"CSA Technology Research Database Master Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Connectivity analysis","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Genetics","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3222","Description":null,"OrigThesTerm":"Genetics","DutchTerm":"Genetica","URI":"http://aims.fao.org/aos/agrovoc/c_3222","DasKeywordDescr":null},{"ThesaurusTerm":"Satellite tracking","ThesTypID":2,"ThesType":"CSA Technology Research Database Master Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Satellite tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Skates","ThesTypID":4,"ThesType":"CAB Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Skates","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spatial modelling","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Spatial modelling","DutchTerm":null,"URI":null,"DasKeywordDescr":null}],"parents":[{"DasID":5912,"Acronym":null,"EngAbstract":"The European Tracking Network is a pan-European biotelemetry network that aims at the integration of regional telemetry initiatives into a sustainable, efficient and integrated network embedded in the international context. Data is integrated in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https://creativecommons.org/licenses/by/4.0/","StandardTitle":"European Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":null,"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":31745,"TaxTerm":"Cetorhinus maximus (Gunnerus, 1765)","AphiaID":105837,"DutchTerm":"Reuzehaai"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":20609,"TaxTerm":"Elasmobranchii","AphiaID":10193,"DutchTerm":"Kraakbeenvissen"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic coverage","TaxtID":20346,"TaxTerm":"Rajiformes","AphiaID":10216,"DutchTerm":"Roggen"}],"frameworks":null,"otherterms":[{"OtherTerm":"Basking Shark"},{"OtherTerm":"Connectivity"},{"OtherTerm":"Spatial modelling"}],"temporal":[{"DasDateID":5660,"StartYear":2019,"EndYear":2022,"StartDay":null,"EndDay":null,"StartDate":"2019-07-01","EndDate":"2022-12-01","DasDate":null,"Resolution":null,"ResolutionNL":null,"Notes":null,"StartMonth0":7,"StartMonth":"July","StartMonthNL":"Juli","EndMonth0":12,"EndMonth":"December","EndMonthNL":"December","Progress":"In Progress","ProgressNL":"Gestart"}],"geographical":[{"GeoTerm":"Antrim","DasGeoID":13104,"DasGeoTerm":null,"DasID":7970,"GeotID":155,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Loch Sunart","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":3249,"OrigGeoTerm":"Antrim","DutchTerm":null},{"GeoTerm":"Donegal","DasGeoID":13102,"DasGeoTerm":null,"DasID":7970,"GeotID":234,"X":-10.9,"Y":54.229999999999997,"MaxX":-4.6100000000000003,"MaxY":57.850000000000001,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5566,"OrigGeoTerm":"Donegal","DutchTerm":null},{"GeoTerm":"Mayo","DasGeoID":13103,"DasGeoTerm":null,"DasID":7970,"GeotID":246,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":null,"Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":5544,"OrigGeoTerm":"Mayo","DutchTerm":null}],"meastypes":[{"MethID":522,"DasMeasTypID":14202,"DasMeasType":"","Matrix":"Water","MatrixNL":"Water","Parameter":"Fish detections","ParameterNL":null,"Description":null,"Unit":"Hz","Methodology":"Acoustic telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https://www.loughs-agency.org/managing-our-loughs/funded-programmes/current-programmes/sea-monitor/","externalID":null,"URLTypeCode":null,"URLType":"Programme","URLTypID":20,"downloadURL":null,"FileName":null},{"URL":"https://members.oceantrack.org/OTN/project?ccode=V2LSMQUB","externalID":null,"URLTypeCode":null,"URLType":"Dataset information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://twitter.com/seamonitor1?lang=en","externalID":null,"URLTypeCode":null,"URLType":"Reference materials","URLTypID":10,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}
+  recorded_at: 2026-04-21 08:28:19
 recorded_with: VCR-vcr/2.1.0

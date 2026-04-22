@@ -1,7 +1,7 @@
 test_that("cite_imis_dataset() returns a tibble", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-8296")
+  #vcr::local_cassette("citations-8296")
 
   expect_s3_class(
     cite_imis_dataset(imis_dataset_ids = 8296),
@@ -12,7 +12,7 @@ test_that("cite_imis_dataset() returns a tibble", {
 test_that("cite_imis_dataset() can handle multiple datasets at a time", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-multiple")
+  #vcr::local_cassette("citations-multiple")
 
   expect_shape(
     cite_imis_dataset(imis_dataset_ids = c(8296, 7915)),
@@ -23,7 +23,7 @@ test_that("cite_imis_dataset() can handle multiple datasets at a time", {
 test_that("cite_imis_dataset() returns expected columns", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-7915")
+  #vcr::local_cassette("citations-7915")
 
   expect_named(
     cite_imis_dataset(imis_dataset_ids = 7915),
@@ -41,7 +41,7 @@ test_that("cite_imis_dataset() returns expected columns", {
 test_that("cite_imis_dataset() returns remaining data if some ids are NA", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-one-missing")
+  #vcr::local_cassette("citations-one-missing")
 
   expect_shape(
     cite_imis_dataset(
@@ -57,7 +57,7 @@ test_that("cite_imis_dataset() returns empty fields on missing `ownerships`", {
 
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-7970")
+  #vcr::local_cassette("citations-7970")
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7970) |>
@@ -76,7 +76,7 @@ test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
   # dataset 6349 has OrderNr 2 and 3, but not 1 under ownerships.
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-no-first-auth")
+  #vcr::local_cassette("citations-no-first-auth")
 
   # Previously, a hard filter on OrderNr resulted in NA for all `ownership`
   # child elements
@@ -92,7 +92,7 @@ test_that("cite_imis_dataset() can handle `ownerships` with no first owner", {
 test_that("cite_imis_dataset() can handle `ownerships` with missing order", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-auth-unordered")
+  #vcr::local_cassette("citations-auth-unordered")
 
    # 6557 has NA for it's ownerships$OrderNr
   expect_shape(
@@ -126,7 +126,7 @@ test_that("cite_imis_dataset() returns a 0 row tibble early on missing id", {
 test_that("cite_imis_dataset() returns DOI for known dataset with DOI", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-8856")
+  #vcr::local_cassette("citations-8856")
 
   expect_identical(
     # acoustic_project_code: 2004_gudena has a DOI
@@ -138,7 +138,7 @@ test_that("cite_imis_dataset() returns DOI for known dataset with DOI", {
 test_that("cite_imis_dataset() can append doi to citation if available", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-8859")
+  #vcr::local_cassette("citations-8859")
 
   expect_true(
     stringr::str_ends(
@@ -151,7 +151,7 @@ test_that("cite_imis_dataset() can append doi to citation if available", {
 test_that("cite_imis_dataset() doesn't destroy citation upon appending doi", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-5871")
+  #vcr::local_cassette("citations-5871")
 
   # value should not be NA
   expect_false(
@@ -162,7 +162,7 @@ test_that("cite_imis_dataset() doesn't destroy citation upon appending doi", {
 test_that("cite_imis_dataset() returns citation even when there is no doi", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-6336")
+  #vcr::local_cassette("citations-6336")
   # animal project 2011_Loire has a Citation, but not a doi
   expect_true(
     is.na(cite_imis_dataset(imis_dataset_ids = 6336)$doi)
@@ -181,7 +181,7 @@ test_that("cite_imis_dataset() returns citation even when there is no doi", {
 test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-no-doi")
+  #vcr::local_cassette("citations-no-doi")
 
   expect_no_match(
     cite_imis_dataset(imis_dataset_ids = 6336)$citation,
@@ -192,7 +192,7 @@ test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
 test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-5877")
+  #vcr::local_cassette("citations-5877")
 
   # Previous bug in citation and doi collation
 
@@ -206,7 +206,7 @@ test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
 test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-na-conv")
+  #vcr::local_cassette("citations-na-conv")
 
   expect_no_match(cite_imis_dataset(6331)$citation, "n\\.a\\.")
   expect_no_match(cite_imis_dataset(6328)$citation, "n\\.a\\.")
@@ -217,7 +217,7 @@ test_that("cite_imis_dataset() removes html tags from citations", {
   # Some citations have html formatting embedded eg: <i>example</i>
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-html")
+  #vcr::local_cassette("citations-html")
 
   expect_no_match(
     cite_imis_dataset(6336)$citation,
@@ -233,10 +233,6 @@ test_that("cite_imis_dataset() removes html tags from citations", {
 test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-encoding")
-
-  skip("Encoding issue on the API ISSUE#521")
-
   # Compare against known group of citations of which some showed encoding
   # issues
   expect_snapshot(
@@ -245,12 +241,28 @@ test_that("cite_imis_dataset() doesn't introduce encoding issues", {
   )
 })
 
+test_that("Encoding issue persists starting from identical file", {
+  expect_snapshot(
+    cite_imis_dataset(8856)
+  )
+})
+
+test_that("IMIS/MarineInfo file response is identical", {
+  json_tmpfile <- file.path(withr::local_tempdir(), "8856.json")
+
+  httr2::request("https://vliz.be/en/imis?dasid=8856&show=json") |>
+    httr2::req_retry(max_tries = 2) |>
+    httr2::req_perform(path = json_tmpfile)
+
+  expect_snapshot_file(json_tmpfile)
+})
+
 test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
   # Some citations end on a period, some do not. A period should be added if a
   # doi is suffixed, except when one is already present.
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-period")
+  #vcr::local_cassette("citations-period")
 
   expect_no_match(
     cite_imis_dataset(8853)$citation,
@@ -261,7 +273,7 @@ test_that("cite_imis_dataset() doesn't suffix extra period behind citations", {
 test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-api-warning")
+  #vcr::local_cassette("citations-api-warning")
 
   # Some IMIS dataset_id's can't be found on MarineInfo
   expect_warning(
@@ -274,7 +286,7 @@ test_that("cite_imis_dataset() can forward MarineInfo API errors as warnings", {
 test_that("cite_imis_dataset() returns 0 a row tibble when all requests fail", {
   skip_if_offline("marineinfo.org")
 
-  vcr::local_cassette("citations-api-warning")
+  #vcr::local_cassette("citations-api-warning")
 
   expect_identical(
     cite_imis_dataset(imis_dataset_ids = 7934,
