@@ -62,6 +62,9 @@ meaning that data can be expressed in an Occurrence Core with one row per
 observation and \code{parentEventID} shared by all occurrences in a deployment.
 \item The release event often contains metadata about the animal (sex,
 life stage, comments) and deployment as a whole.
+Sex, life stage and weight are additionally provided in an Extended
+Measurement Or Facts extension, where values are mapped to a controlled
+vocabulary recommended by \href{https://obis.org/}{OBIS}.
 \item Acoustic detections are downsampled to the \strong{first detection per hour},
 to reduce the size of high-frequency data.
 The \code{coordinateUncertaintyInMeters} is set to 1000 m to account for
