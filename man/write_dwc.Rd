@@ -50,6 +50,8 @@ Desmet, Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and
 transforms data to:
 \itemize{
 \item An \href{https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml}{Occurrence core}.
+\item An \href{https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml}{Extended Measurement Or Facts extension}
+\item A \code{meta.xml} file.
 }
 
 Key features of the Darwin Core transformation:
@@ -62,7 +64,7 @@ meaning that data can be expressed in an Occurrence Core with one row per
 observation and \code{parentEventID} shared by all occurrences in a deployment.
 \item The release event often contains metadata about the animal (sex,
 life stage, comments) and deployment as a whole.
-Sex, life stage and weight are additionally provided in an Extended
+Sex, life stage and weight are (additionally) provided in an Extended
 Measurement Or Facts extension, where values are mapped to a controlled
 vocabulary recommended by \href{https://obis.org/}{OBIS}.
 \item Acoustic detections are downsampled to the \strong{first detection per hour},

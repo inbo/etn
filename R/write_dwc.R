@@ -25,7 +25,11 @@
 #' This function **follows recommendations** discussed and created by Peter
 #' Desmet, Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and
 #' transforms data to:
-#' - An [Occurrence core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
+#' - An [Occurrence core](
+#'   https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
+#' - An [Extended Measurement Or Facts extension](
+#'   https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml)
+#' - A `meta.xml` file.
 #'
 #' Key features of the Darwin Core transformation:
 #' - Deployments (animal+tag associations) are parent events, with capture,
@@ -36,7 +40,7 @@
 #'   observation and `parentEventID` shared by all occurrences in a deployment.
 #' - The release event often contains metadata about the animal (sex,
 #'   life stage, comments) and deployment as a whole.
-#'   Sex, life stage and weight are additionally provided in an Extended
+#'   Sex, life stage and weight are (additionally) provided in an Extended
 #'   Measurement Or Facts extension, where values are mapped to a controlled
 #'   vocabulary recommended by [OBIS](https://obis.org/).
 #' - Acoustic detections are downsampled to the **first detection per hour**,
@@ -166,6 +170,6 @@ write_dwc <- function(package, directory, dataset_id = package$id,
   return <- list(
     occurrence = dplyr::as_tibble(occurrence),
     emof = dplyr::as_tibble(emof)
-    )
+  )
   invisible(return)
 }
