@@ -1,18 +1,57 @@
-#' Create Extended Measurements Or Facts from Darwin Core Occurrence data
+#' Create Extended Measurements Or Facts from `animals` resource
 #'
-#' Pulls the **sex** and **life stage** information from the Darwin Core
-#' Occurrence data created with `create_animals_occurrence()` and maps these
-#' values to a controlled vocabulary recommended by [OBIS](https://obis.org/).
+#' Pulls the **sex** and **life stage** information from an `animals` resource
+#' and maps these values to a controlled vocabulary recommended by
+#' [OBIS](https://obis.org/). All measurement or facts are linked to the
+#' release occurrence of an animal.
 #'
-#' @param animals_occurrence Data frame with Darwin Core occurrences derived
-#' from `animals` resource, as returned by `create_animals_occurrence()`.
+#' @param animals A data frame derived from an `animals` resource.
 #' @return Data frame with [Extended Measurement Or Facts](
 #'   https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml).
 #' @family transformation functions
 #' @noRd
-create_emof <- function(animals_occurrence) {
+create_emof <- function(animals) {
+  # Expand data with non-required columns used in emof transformation
+  animals_cols <- c(
+    "release_date_time", "animal_nickname", "sex", "life_stage"
+  )
+  animals <-
+    expand_cols(animals, animals_cols) |>
+    dplyr::filter(!is.na(.data$release_date_time)) |>
+    dplyr::select(
+      "animal_id", "sex", "life_stage", "tag_serial_number"
+    ) |>
+    dplyr::mutate(
+      .keep = "none",
+      occurrenceID = paste(
+        .data$animal_id, .data$tag_serial_number, "release", sep = "_"
+      ),
+      sex = dplyr::recode_values(
+        tolower(.data$sex),
+        c("male", "m") ~ "male",
+        c("female", "f") ~ "female",
+        c("hermaphrodite") ~ "hermaphrodite",
+        c("unknown", "u") ~ "unknown",
+        default = "unknown"
+      ),
+      lifeStage = dplyr::recode_values(
+          .data$life_stage,
+          # Follows http://vocab.nerc.ac.uk/collection/S11/current/
+          # See https://github.com/inbo/etn/issues/262
+          c("juvenile", "i", "fii", "fiii") ~ "juvenile",
+          c("sub-adult", "fiv", "fv", "mii", "silver") ~ "sub-adult",
+          c("adult", "mature") ~ "adult",
+          c("immature", "imature") ~ "immature",
+          c("smolt") ~ "smolt"
+          # Exclude unknown, and other values
+        )
+      ) |>
+    dplyr::select(dplyr::all_of(c(
+      "occurrenceID", "sex", "lifeStage"
+    )))
+
   sex <-
-    animals_occurrence |>
+    animals |>
     dplyr::mutate(
       .keep = "none",
       occurrenceID = .data$occurrenceID,
@@ -33,7 +72,7 @@ create_emof <- function(animals_occurrence) {
     )
 
   lifestage <-
-    animals_occurrence |>
+    animals |>
     dplyr::mutate(
       .keep = "none",
       occurrenceID = .data$occurrenceID,
@@ -56,14 +95,13 @@ create_emof <- function(animals_occurrence) {
 
   emof <-
     dplyr::bind_rows(sex, lifestage) |>
-    dplyr::filter(!endsWith(.data$occurrenceID, "_capture")) |>
     dplyr::arrange(.data$occurrenceID)
 
-  # Remove the measurementType if all values of that type are NA in animals_occurrence
-  if (all(is.na(animals_occurrence$sex))) {
+  # Remove the measurementType if all values of that type are NA in animals
+  if (all(is.na(animals$sex))) {
     emof <- dplyr::filter(emof, .data$measurementType != "sex")
   }
-  if (all(is.na(animals_occurrence$lifeStage))) {
+  if (all(is.na(animals$lifeStage))) {
     emof <- dplyr::filter(emof, .data$measurementType != "life stage")
   }
 

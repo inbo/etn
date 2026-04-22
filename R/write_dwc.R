@@ -137,7 +137,7 @@ write_dwc <- function(package, directory, dataset_id = package$id,
     )
 
   # Create extended measurements or facts
-  emof <- create_emof(animals_occurrence)
+  emof <- create_emof(animals)
 
   # Write files
   occurrence_path <- file.path(directory, "occurrence.csv")
