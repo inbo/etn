@@ -8,6 +8,7 @@
 * `download_acoustic_dataset()` is deprecated. Please use `get_package()` and then `write_package()` instead (#559).
   * `write_dwc` now writes an Extended Measurement Or Facts extension, including sex, life stage and weight (#555).
 * `write_dwc()` now uses a Data Package as input, rather than reading from the ETN database. This means the function can be used locally (#528). In addition:
+  * The function writes the output file as `occurrence.csv` (previously `dwc_occurrence.csv`) and adds a `meta.xml` file.
   * [`dwc:institutionCode`](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.
   * [`dc:license`](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
   * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
