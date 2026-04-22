@@ -102,8 +102,7 @@ download_acoustic_dataset <- function(connection,
     details = cli::format_inline(
       "To download dataset to disk use {.fun get_package} and then {.fun
        write_package}."
-    ),
-    always = TRUE
+    )
   )
 
   # Check arguments
