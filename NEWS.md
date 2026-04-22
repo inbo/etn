@@ -5,6 +5,7 @@
 * New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a data package (#530).
 * New `get_package()` gets all data related to an animal project as a [Data Package](https://specs.frictionlessdata.io/data-package/). Use this in combination with `write_package()` to download a dataset (#544).
 * `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write data packages (#525).
+* `download_acoustic_dataset()` is deprecated. Please use `get_package()` and then `write_package()` instead (#559).
 * `write_dwc()` now uses a data package as input, rather than reading from the ETN database (#528). This means the function can be used locally. In addition:
   * [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode) is always set to `"VLIZ"` as maintainer of ETN. The `institution_code` parameter has been removed.
   * [license](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
