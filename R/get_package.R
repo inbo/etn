@@ -126,7 +126,7 @@ get_package <- function(animal_project_code) {
 
   etn_ref <-
     etn_ref <- sprintf(
-      "European Tracking Network – Data Platform. Flanders Marine Institute (VLIZ), %s, accessed %s",
+      "European Tracking Network - Data Platform. Flanders Marine Institute (VLIZ), %s, accessed %s",
       lubridate::year(lubridate::today()),
       lubridate::today()
     )
