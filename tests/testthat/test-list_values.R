@@ -7,7 +7,8 @@ df <- data.frame(
 
 test_that("list_values() returns error for incorrect input", {
   # .data must be a data.frame
-  expect_error(list_values(1, "num_col"), ".data is not a data.frame")
+  expect_error(list_values(1, "num_col"),
+               class = "etn_error_not_df")
 
   # column must be a character, a column name or a column position
   expect_error(
