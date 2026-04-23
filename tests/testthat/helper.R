@@ -20,6 +20,8 @@
 #'
 #'
 #' @param expression The expression to be tested.
+#' @param protocols Character vector of protocol names to test.
+#'
 #' @inherits testthat::expect_identical return
 #'
 #' @examples
@@ -27,7 +29,12 @@
 #' expect_protocol_agnostic(list_animal_projects())
 #'
 #' @export
-expect_protocol_agnostic <- function(expression) {
+expect_protocol_agnostic <- function(expression,
+                                     protocols = c(
+                                       "opencpu",
+                                       "localdb",
+                                       "public"
+                                     )) {
   # Skip if no credentials are stored
   skip_if_no_authentication()
 
@@ -40,25 +47,26 @@ expect_protocol_agnostic <- function(expression) {
 
   # Test if the provided expression returns identical results regardless of
   # the return value of select_protocol()
-
-  testthat::expect_identical(
-    testthat::with_mocked_bindings(
-      code = rlang::eval_tidy(rlang::enquo(expression)),
-      # Object, is a call to opencpu
-      select_protocol = function(...) {
-        "opencpu"
-      }
-    ),
-    testthat::with_mocked_bindings(
-      code = rlang::eval_tidy(rlang::enquo(expression)),
-      # Expectation is a call to the local database
-      select_protocol = function(...) {
-        "localdb"
-      }
-    ),
-    label = "api",
-    expected.label = "sql"
-  )
+  for (protocol_to_test in purrr::keep(protocols, ~ .x != "localdb")) {
+    testthat::expect_identical(
+      object = testthat::with_mocked_bindings(
+        code = rlang::eval_tidy(rlang::enquo(expression)),
+        # Object, is a call to opencpu
+        select_protocol = function(...) {
+          protocol_to_test
+        }
+      ),
+      expected = testthat::with_mocked_bindings(
+        code = rlang::eval_tidy(rlang::enquo(expression)),
+        # Expectation is a call to the local database
+        select_protocol = function(...) {
+          "localdb"
+        }
+      ),
+      label = "api",
+      expected.label = "sql"
+    )
+  }
 }
 
 #' Get schema fields for a resource in a Frictionless Data Package.
