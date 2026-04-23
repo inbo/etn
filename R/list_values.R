@@ -38,7 +38,7 @@ list_values <- function(.data, column, split = ",") {
   if (!is.data.frame(.data)) {
     cli::cli_abort(
       "Argument {.arg .data} must be a data.frame.",
-      class = "etn_error_invalid_data"
+      class = "etn_error_not_df"
     )
   }
   # check split
