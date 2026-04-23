@@ -85,6 +85,13 @@ list_public_detections <- function() {
 #' @param ... Filter conditions to apply to the detections. These conditions
 #'   will be passed to `dplyr::filter()` to filter the detections after reading
 #'   them from the parquet files.
+#' @param ...
+#' @param limit description
+#' @param return_as The format in which to return the detections. One of
+#'   "tibble" or "lazy". If "tibble", the function will return a tibble with the
+#'   filtered detections. If "lazy", the function will return a lazy duckdb view
+#'   of the detections.
+#' @param progress Whether to show a progress bar while reading.
 #'
 #' @returns A tibble with the public detections for the specified project code,
 #'   filtered based on the provided filter conditions.
@@ -93,11 +100,19 @@ list_public_detections <- function() {
 #' @noRd
 #'
 #' @examplesIf interactive()
-#' get_public_detections("2011_Loire", timestamp >= lubridate::ymd(20220101))
-#'
-get_public_detections <- function(project_code = NULL, ...,
+#' get_public_detections("2011_Loire", timestamp >=
+#'   lubridate::ymd(20220101))
+#' get_public_detections(")
+get_public_detections <- function(project_code = NULL,
+                                  ...,
                                   limit = FALSE,
+                                  return_as = c("tibble",
+                                                "lazy"),
                                   progress = TRUE) {
+
+  # Check inputs ------------------------------------------------------------
+  return_as <- rlang::arg_match(return_as)
+
   public_detections <- list_public_detections()
   if (is.null(project_code)) {
     selected_project_code <-
@@ -110,6 +125,7 @@ get_public_detections <- function(project_code = NULL, ...,
       )
   }
 
+  # Read the parquet paths from the catalogue -------------------------------
   detections_path <-
     public_detections |>
     dplyr::filter(project_code %in% selected_project_code) |>
@@ -117,7 +133,7 @@ get_public_detections <- function(project_code = NULL, ...,
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
-  # Read the parquet paths from the catalog
+  # Read the parquet paths from the catalog ---------------------------------
 
   parquet_paths <-
     file.path(catalog_root, "detection_files", detections_path) |>
@@ -143,10 +159,10 @@ get_public_detections <- function(project_code = NULL, ...,
     )
 
   # Read the contents of the parquet files as a single lazy view
+  # this connection, the function will fail to return a lazy view. So we have to
+  # leave it openn.
   con_duckdb <-
     duckdbfs::cached_connection()
-  # Close it when we're done with it, or when the function fails
-  withr::defer(duckdbfs::close_connection(conn = con_duckdb))
 
   # Configure duckdbfs to be more resilient to HTTP 429 errors.
   duckdbfs::duckdb_config(
@@ -160,7 +176,8 @@ get_public_detections <- function(project_code = NULL, ...,
     http_retry_backoff = 2.5,
     # Reduce parallelism to avoid HTTP 429 too many
     # requests
-    threads = 1
+    threads = 1,
+    enable_progress_bar = TRUE
   )
 
   suppress_nanosecond_warning({
@@ -190,7 +207,10 @@ get_public_detections <- function(project_code = NULL, ...,
       duckdb_view <- utils::head(duckdb_view, n = 100L)
     }
 
-    dplyr::collect(duckdb_view)
+    switch (return_as,
+      "lazy" = duckdbfs::as_view(duckdb_view),
+      "tibble" = dplyr::collect(duckdb_view)
+    )
   })
 }
 
