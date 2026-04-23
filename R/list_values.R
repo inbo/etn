@@ -35,26 +35,42 @@
 #' list_values(df, tag_serial_number, split = "\\.")
 list_values <- function(.data, column, split = ",") {
   # check .data
-  assertthat::assert_that(is.data.frame(.data))
+  if (!is.data.frame(.data)) {
+    cli::cli_abort(
+      "Argument {.arg .data} must be a data.frame.",
+      class = "etn_error_invalid_data"
+    )
+  }
   # check split
-  assertthat::assert_that(is.character(split))
+  if (!is.character(split)) {
+    cli::cli_abort(
+      "Argument {.arg split} must be a character.",
+      class = "etn_error_invalid_split"
+    )
+  }
 
   arguments <- as.list(match.call())
 
   if (is.numeric(arguments$column)) {
     col_number <- arguments$column
     n_col_df <- ncol(.data)
-    assertthat::assert_that(
-      as.integer(col_number) == col_number,
-      msg = "column number must be an integer"
-    )
-    assertthat::assert_that(
-      col_number <= ncol(.data),
-      msg = glue::glue(
-        "column number exceeds the number of columns ",
-        "of .data ({n_col_df})"
+    if(as.integer(col_number) != col_number) {
+      cli::cli_abort(
+        "Argument {.arg col_number} must be a single whole number.",
+        class = "etn_error_no_int_colnumber"
       )
-    )
+    }
+
+    if(col_number > ncol(.data)) {}
+      cli::cli_abort(
+        glue::glue(
+          "column number exceeds the number of columns ",
+          "of .data ({n_col_df})"
+        ),
+        class = "etn_error_colnumber_exceeds_ncol"
+      )
+    }
+
     # extract values
     values <- .data[, col_number]
     # extract column name
@@ -62,14 +78,19 @@ list_values <- function(.data, column, split = ",") {
   } else {
     # check column name
     col_name <- as.character(arguments$column)
-    assertthat::assert_that(
-      length(col_name) == 1,
-      msg = "invalid column value"
-    )
-    assertthat::assert_that(
-      col_name %in% names(.data),
-      msg = glue::glue("column {col_name} not found in .data")
-    )
+    if (length(col_name) != 1) {
+      cli::cli_abort(
+        "Argument {.arg column} must be a single column name or position.",
+        class = "etn_error_multiple_columns"
+      )
+    }
+
+    if (!col_name %in% names(.data)) {
+      cli::cli_abort(
+        glue::glue("column {col_name} not found in .data"),
+        class = "etn_error_invalid_column"
+      )
+    }
 
     # extract values
     if (methods::is(arguments$column, "name")) {

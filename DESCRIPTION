@@ -37,7 +37,6 @@ Depends:
 Imports:
     arrow,
     askpass,
-    assertthat,
     cachem,
     cli,
     dplyr,

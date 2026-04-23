@@ -112,10 +112,12 @@ download_acoustic_dataset <- function(connection,
   }
 
   # Check animal_project_code
-  assertthat::assert_that(
-    length(animal_project_code) == 1,
-    msg = "`animal_project_code` must be a single value."
-  )
+  if (length(animal_project_code) != 1) {
+    cli::cli_abort("`animal_project_code` must be a single value.",
+      class = "etn_multiple_animal_project_code"
+    )
+  }
+
   animal_project_code <- check_value(
     animal_project_code,
     list_animal_project_codes(),
