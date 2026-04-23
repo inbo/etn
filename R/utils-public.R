@@ -158,7 +158,7 @@ get_public_detections <- function(project_code = NULL,
       purrr::map_chr(detections_path, ~ basename(path_sans_ext(.x)))
     )
 
-  # Read the contents of the parquet files as a single lazy view
+  # Read the contents of the parquet files as a single lazy view. If we close
   # this connection, the function will fail to return a lazy view. So we have to
   # leave it openn.
   con_duckdb <-
