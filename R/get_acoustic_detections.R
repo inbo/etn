@@ -179,10 +179,10 @@ get_acoustic_detections <- function(connection,
     page_size <- 100
   } else if (n_records_expected > 5e6) {
     # Increase page_size in case of over 5M records
-    page_size <- 1e5
+    page_size <- 5e5
   } else {
     # default page size
-    page_size <- 5e4
+    page_size <- 1e5
   }
 
   # Update progress bar with total number of pages expected: plus one for the
