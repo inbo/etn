@@ -122,36 +122,27 @@ get_package <- function(animal_project_code) {
   )
 
   ## Reference ----
-  cli::cli_li("Getting reference information.")
+  cli::cli_li("Getting {.val references}.")
 
-  get_animal_projects(animal_project_code = animal_project_code,
+  etn_ref <-
+    etn_ref <- sprintf(
+      "European Tracking Network – Data Platform. Flanders Marine Institute (VLIZ), %s, accessed %s",
+      lubridate::year(lubridate::today()),
+      lubridate::today()
+    )
+
+  animal_ref <- get_animal_projects(animal_project_code = animal_project_code,
                       citation = TRUE) |>
     dplyr::pull("citation")
-  get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
+  acoustic_refs <- get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
                         citation = TRUE) |>
     dplyr::pull("citation")
 
   references <-
-    # Building the reference table from back to front:
-    # Acoustic projects first
-    dplyr::tibble(reference_for = acoustic_project_codes) |>
-    dplyr::mutate(reference = get_acoustic_projects(acoustic_project_code = reference_for,
-                                        citation = TRUE)$citation) |>
-    # Add animal project references to top of table
-    dplyr::add_row(reference_for = animal_project_code,
-                   reference = get_animal_projects(animal_project_code = animal_project_code,
-                                       citation = TRUE)$citation,
-                   .before = 1L) |>
-    # Finally add the ETN reference to the top of the table
-    dplyr::add_row(
-      reference_for = "ETN",
-      reference =
-        sprintf("European Tracking Network – Data Platform. Flanders Marine Institute (VLIZ), %i, accessed %s",
-                lubridate::year(lubridate::now()), lubridate::today()),
-      # ETN comes first
-      .before = 1L
+    dplyr::tibble(
+      reference_for = c("ETN", animal_project_code, acoustic_project_codes),
+      reference = c(etn_ref, animal_ref, acoustic_refs)
     )
-
 
   cli::cli_end()
 
