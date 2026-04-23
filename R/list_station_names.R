@@ -3,9 +3,8 @@
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `station_name` present in
 #'   `acoustic.deployments`.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_station_names()
 list_station_names <- function(connection) {

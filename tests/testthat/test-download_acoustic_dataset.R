@@ -1,3 +1,16 @@
+test_that("download_acoustic_dataset() returns deprecation warning", {
+  skip_if_no_authentication()
+  vcr::local_cassette("dataset_demer")
+
+  datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
+  lifecycle::expect_deprecated(
+    download_acoustic_dataset(
+      animal_project_code = "2014_demer",
+      directory = datapackage_path
+    )
+  )
+})
+
 # Create a data package using the API
 if (credentials_are_set()) {
   vcr::use_cassette( # Cache HTTP response
@@ -5,6 +18,7 @@ if (credentials_are_set()) {
     {
       datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
       evalute_download_api <- evaluate_promise({
+        withr::local_options(lifecycle_verbosity = "quiet")
         with_mocked_bindings(
           {
             download_acoustic_dataset(
@@ -25,6 +39,7 @@ if (credentials_are_set()) {
 if (localdb_is_available() & credentials_are_set()) {
   localdb_datapackage_path <- withr::local_tempdir(pattern = "local_2014_demer")
   evalutate_download_localdb <- evaluate_promise({
+    withr::local_options(lifecycle_verbosity = "quiet")
     with_mocked_bindings(
       {
         download_acoustic_dataset(

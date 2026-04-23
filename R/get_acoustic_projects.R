@@ -4,13 +4,11 @@
 #'
 #' @param acoustic_project_code Character (vector). One or more acoustic
 #'   project codes. Case-insensitive.
-#'
-#' @return A tibble with acoustic project data, sorted by `project_code`.
-#'
 #' @inheritParams list_animal_ids
 #' @inheritParams get_animal_projects
+#' @return A tibble with acoustic project data, sorted by `project_code`.
+#' @family access functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' # Get all acoustic projects
 #' get_acoustic_projects()

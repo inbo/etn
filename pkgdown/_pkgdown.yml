@@ -8,32 +8,21 @@ home:
   - text: Go to the ETN data portal
     href: http://lifewatch.be/etn/
 reference:
-- title: Explore acoustic telemetry data
+- title: Access data from ETN
   contents:
-  - get_animal_projects
-  - get_animals
-  - get_tags
-  - get_acoustic_projects
-  - get_acoustic_detections
-  - get_acoustic_deployments
-  - get_acoustic_receivers
-  - download_acoustic_dataset
-  - write_dwc
-- title: Explore archival data
+  - has_concept("access functions")
+- title: Work with Data Packages
   contents:
-  - get_animal_projects
-  - get_animals
-  - get_tags
-- title: Explore CPOD data
-  contents: get_cpod_projects
+  - get_package
+  - has_concept("frictionless functions")
+  - has_concept("transformation functions")
+- title: Sample datasets
+  contents:
+  - has_concept("sample data")
 - title: List parameter options
-  contents: starts_with("list_")
-- title: Example datasets
   contents:
-  - example_dataset
-- title: Frictionless data package functions
-  contents:
-  - read_package
-  - write_package
+  - has_concept("list functions")
 - title: Deprecated functions
-  contents: connect_to_etn
+  contents:
+  - connect_to_etn
+  - download_acoustic_dataset

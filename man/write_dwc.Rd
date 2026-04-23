@@ -2,20 +2,20 @@
 % Please edit documentation in R/write_dwc.R
 \name{write_dwc}
 \alias{write_dwc}
-\title{Transform ETN data to a Darwin Core Archive}
+\title{Transform a Data Package with ETN data to a Darwin Core Archive}
 \usage{
 write_dwc(
   package,
   directory,
-  dataset_id = NULL,
+  dataset_id = package$id,
   dataset_name = NULL,
   license = c("CC-BY-4.0", "CC0-1.0"),
   rights_holder = NULL
 )
 }
 \arguments{
-\item{package}{A Frictionless Data Package of ETN data, as returned by
-\code{\link[=read_package]{read_package()}}.
+\item{package}{A Data Package with ETN data, as returned by
+\code{\link[=read_package]{read_package()}} or \code{\link[=get_package]{get_package()}}.
 It is expected to contain the resources \code{animals}, \code{tags}, \code{detections} and
 \code{deployments}.}
 
@@ -35,7 +35,8 @@ CSV and \code{meta.xml} files written to disk.
 And invisibly, a list of data frames with the transformed data.
 }
 \description{
-Transforms a European Tracking Network (ETN) dataset to a \href{https://dwc.tdwg.org/text/}{Darwin Core Archive}.
+Transforms a Data Package with European Tracking Network (ETN) data to a
+\href{https://dwc.tdwg.org/text/}{Darwin Core Archive}.
 }
 \details{
 The resulting files can be uploaded to an \href{https://www.gbif.org/ipt}{IPT} for
@@ -70,7 +71,7 @@ It is possible for a deployment to contain no detections, e.g. if the
 tag malfunctioned right after deployment.
 \item Parameters or metadata are used to set the following record-level terms:
 \itemize{
-\item \code{dwc:datasetID}: \code{dataset_id}.
+\item \code{dwc:datasetID}: \code{dataset_id}, defaulting to \code{package$id}.
 \item \code{dwc:datasetName}: \code{dataset_name}.
 \item \code{dcterms:license}: \code{license}.
 \item \code{dcterms:rightsHolder}: \code{rights_holder}.
@@ -83,7 +84,6 @@ package <- example_dataset()
 write_dwc(
   package,
   directory = "my_directory",
-  dataset_id = "https://doi.org/10.14284/432",
   dataset_name = paste(
     "2014_DEMER - Acoustic telemetry data for four fish species in the",
     "Demer river (Belgium)"
@@ -95,3 +95,4 @@ write_dwc(
 # Clean up (don't do this if you want to keep your files)
 unlink("my_directory", recursive = TRUE)
 }
+\concept{transformation functions}

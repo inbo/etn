@@ -60,3 +60,15 @@ get_acoustic_deployments(acoustic_project_code = "demer")
 get_acoustic_deployments(station_name = c("de-9", "de-10"))
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other access functions: 
+\code{\link{get_acoustic_detections}()},
+\code{\link{get_acoustic_projects}()},
+\code{\link{get_acoustic_receivers}()},
+\code{\link{get_animal_projects}()},
+\code{\link{get_animals}()},
+\code{\link{get_cpod_projects}()},
+\code{\link{get_package}()},
+\code{\link{get_tags}()}
+}
+\concept{access functions}
