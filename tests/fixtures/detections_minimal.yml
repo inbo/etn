@@ -7,7 +7,7 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Thu, 23 Apr 2026 14:14:43 GMT
+      date: Thu, 23 Apr 2026 14:37:39 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -17,15 +17,15 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0e5799da93d7ab
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0e5799da93d7ab/
+      x-ocpu-session: x0924000758e4b3
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0924000758e4b3/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-04-23 14:14:44 UTC
+      x-ocpu-time: 2026-04-23 14:37:40 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -33,11 +33,11 @@ http_interactions:
       content-length: '27'
       content-type: application/json
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc2; path=/
+      set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
         [true]
-  recorded_at: 2026-04-23 14:14:44
+  recorded_at: 2026-04-23 14:37:40
 - request:
     method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections_page/json/
@@ -46,7 +46,7 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Thu, 23 Apr 2026 14:14:44 GMT
+      date: Thu, 23 Apr 2026 14:37:40 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -56,15 +56,15 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0554ddf52898d3
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0554ddf52898d3/
+      x-ocpu-session: x0fefcb3b82f906
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0fefcb3b82f906/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-04-23 14:14:46 UTC
+      x-ocpu-time: 2026-04-23 14:37:41 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -72,7 +72,7 @@ http_interactions:
       content-length: '44'
       content-type: application/json
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc2; path=/
+      set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
         [
@@ -80,16 +80,16 @@ http_interactions:
             "count": 7
           }
         ]
-  recorded_at: 2026-04-23 14:14:46
+  recorded_at: 2026-04-23 14:37:42
 - request:
     method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections_page/
     body:
-      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"protocol":"opencpu","start_date":"2014-04-10","end_date":"2014-04-11","tag_serial_number":null,"acoustic_tag_id":null,"animal_project_code":null,"scientific_name":null,"acoustic_project_code":null,"receiver_id":null,"station_name":"de-9","next_id_pk":0,"page_size":50000,"credentials.1":null}'
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"protocol":"opencpu","start_date":"2014-04-10","end_date":"2014-04-11","tag_serial_number":null,"acoustic_tag_id":null,"animal_project_code":null,"scientific_name":null,"acoustic_project_code":null,"receiver_id":null,"station_name":"de-9","next_id_pk":0,"page_size":100000,"credentials.1":null}'
   response:
     status: 201
     headers:
-      date: Thu, 23 Apr 2026 14:14:46 GMT
+      date: Thu, 23 Apr 2026 14:37:42 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -99,41 +99,41 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x023978d2b56224
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x023978d2b56224/
+      x-ocpu-session: x01b589b1248284
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x01b589b1248284/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-04-23 14:14:47 UTC
+      x-ocpu-time: 2026-04-23 14:37:43 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
       content-encoding: gzip
-      content-length: '138'
+      content-length: '139'
       content-type: text/plain; charset=utf-8
       access-control-allow-methods: '*'
       set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
-        /ocpu/tmp/x023978d2b56224/R/.val
-        /ocpu/tmp/x023978d2b56224/R/credentials
-        /ocpu/tmp/x023978d2b56224/R/get_acoustic_detections_page
-        /ocpu/tmp/x023978d2b56224/stdout
-        /ocpu/tmp/x023978d2b56224/source
-        /ocpu/tmp/x023978d2b56224/console
-        /ocpu/tmp/x023978d2b56224/info
-        /ocpu/tmp/x023978d2b56224/files/DESCRIPTION
-  recorded_at: 2026-04-23 14:14:47
+        /ocpu/tmp/x01b589b1248284/R/.val
+        /ocpu/tmp/x01b589b1248284/R/credentials
+        /ocpu/tmp/x01b589b1248284/R/get_acoustic_detections_page
+        /ocpu/tmp/x01b589b1248284/stdout
+        /ocpu/tmp/x01b589b1248284/source
+        /ocpu/tmp/x01b589b1248284/console
+        /ocpu/tmp/x01b589b1248284/info
+        /ocpu/tmp/x01b589b1248284/files/DESCRIPTION
+  recorded_at: 2026-04-23 14:37:43
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be//tmp/x023978d2b56224/R/.val/feather
+    uri: https://opencpu.lifewatch.be//tmp/x01b589b1248284/R/.val/feather
   response:
     status: 200
     headers:
-      date: Thu, 23 Apr 2026 14:14:47 GMT
+      date: Thu, 23 Apr 2026 14:37:43 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -150,7 +150,7 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-04-23 14:14:48 UTC
+      x-ocpu-time: 2026-04-23 14:37:44 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -158,7 +158,7 @@ http_interactions:
       content-length: '1274'
       content-type: application/feather
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc2; path=/
+      set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       raw_gzip: |-
         eJztWE1sG0UUfuusHdOa1kBArtSA6Q8KhQjb/Y2Ug0MllJZGddO0DT/S1rE36SJ719jrqEgI
@@ -206,5 +206,5 @@ http_interactions:
         c93PEjcF11sfvQa7DztJHMI0DrDbZNi5cyKanHHvtGRTjR+m93l9Vfp+br2tnbL1tt56W2+9
         r
         Vv+/Fdva3pTj7H/Df4FWKvTuQ==
-  recorded_at: 2026-04-23 14:14:48
+  recorded_at: 2026-04-23 14:37:44
 recorded_with: VCR-vcr/2.1.0
