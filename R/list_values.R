@@ -54,6 +54,7 @@ list_values <- function(.data, column, split = ",") {
   if (is.numeric(arguments$column)) {
     col_number <- arguments$column
     n_col_df <- ncol(.data)
+
     if(as.integer(col_number) != col_number) {
       cli::cli_abort(
         "Argument {.arg col_number} must be a single whole number.",
@@ -61,7 +62,7 @@ list_values <- function(.data, column, split = ",") {
       )
     }
 
-    if(col_number > ncol(.data)) {}
+    if(col_number > ncol(.data)) {
       cli::cli_abort(
         glue::glue(
           "column number exceeds the number of columns ",
@@ -75,7 +76,7 @@ list_values <- function(.data, column, split = ",") {
     values <- .data[, col_number]
     # extract column name
     col_name <- names(.data)[col_number]
-  } else {
+
     # check column name
     col_name <- as.character(arguments$column)
     if (length(col_name) != 1) {
