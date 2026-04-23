@@ -120,6 +120,39 @@ get_package <- function(animal_project_code) {
   receivers <- get_acoustic_receivers(
     receiver_id = receiver_ids
   )
+
+  ## Reference ----
+  cli::cli_li("Getting reference information.")
+
+  get_animal_projects(animal_project_code = animal_project_code,
+                      citation = TRUE) |>
+    dplyr::pull("citation")
+  get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
+                        citation = TRUE) |>
+    dplyr::pull("citation")
+
+  references <-
+    # Building the reference table from back to front:
+    # Acoustic projects first
+    dplyr::tibble(reference_for = acoustic_project_codes) |>
+    dplyr::mutate(reference = get_acoustic_projects(acoustic_project_code = reference_for,
+                                        citation = TRUE)$citation) |>
+    # Add animal project references to top of table
+    dplyr::add_row(reference_for = animal_project_code,
+                   reference = get_animal_projects(animal_project_code = animal_project_code,
+                                       citation = TRUE)$citation,
+                   .before = 1L) |>
+    # Finally add the ETN reference to the top of the table
+    dplyr::add_row(
+      reference_for = "ETN",
+      reference =
+        sprintf("European Tracking Network – Data Platform. Flanders Marine Institute (VLIZ), %i, accessed %s",
+                lubridate::year(lubridate::now()), lubridate::today()),
+      # ETN comes first
+      .before = 1L
+    )
+
+
   cli::cli_end()
 
   # Obtain imis_dataset_id and doi ----
@@ -141,6 +174,7 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
+    add_resource("references", references) |>
     append(c(
       id = doi,
       name = tolower(animal_project_code)
