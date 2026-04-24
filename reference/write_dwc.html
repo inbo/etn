@@ -107,6 +107,8 @@ A corresponding <code>eml.xml</code> metadata file is not created.</p>
 <p>This function <strong>follows recommendations</strong> discussed and created by Peter
 Desmet, Jonas Mortelmans, Jonathan Pye, John Wieczorek and others and
 transforms data to:</p><ul><li><p>An <a href="https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml" class="external-link">Occurrence core</a>.</p></li>
+<li><p>An <a href="https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml" class="external-link">Extended Measurement Or Facts extension</a></p></li>
+<li><p>A <code>meta.xml</code> file.</p></li>
 </ul><p>Key features of the Darwin Core transformation:</p><ul><li><p>Deployments (animal+tag associations) are parent events, with capture,
 surgery, release, recapture (human observations) and acoustic detections
 (machine observations) as child events.
@@ -114,7 +116,10 @@ No information about the parent event is provided other than its ID,
 meaning that data can be expressed in an Occurrence Core with one row per
 observation and <code>parentEventID</code> shared by all occurrences in a deployment.</p></li>
 <li><p>The release event often contains metadata about the animal (sex,
-life stage, comments) and deployment as a whole.</p></li>
+life stage, comments) and deployment as a whole.
+Sex, life stage and weight are (additionally) provided in an Extended
+Measurement Or Facts extension, where values are mapped to a controlled
+vocabulary recommended by <a href="https://obis.org/" class="external-link">OBIS</a>.</p></li>
 <li><p>Acoustic detections are downsampled to the <strong>first detection per hour</strong>,
 to reduce the size of high-frequency data.
 The <code>coordinateUncertaintyInMeters</code> is set to 1000 m to account for
@@ -151,6 +156,7 @@ tag malfunctioned right after deployment.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">my_directory/occurrence.csv</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">my_directory/meta.xml</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #0000BB;">my_directory/emof.csv</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up (don't do this if you want to keep your files)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"my_directory"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

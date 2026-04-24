@@ -68,6 +68,11 @@ transforms data to:
 - An [Occurrence
   core](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml).
 
+- An [Extended Measurement Or Facts
+  extension](https://rs.gbif.org/extension/obis/extended_measurement_or_fact_2023-08-28.xml)
+
+- A `meta.xml` file.
+
 Key features of the Darwin Core transformation:
 
 - Deployments (animal+tag associations) are parent events, with capture,
@@ -79,7 +84,10 @@ Key features of the Darwin Core transformation:
   deployment.
 
 - The release event often contains metadata about the animal (sex, life
-  stage, comments) and deployment as a whole.
+  stage, comments) and deployment as a whole. Sex, life stage and weight
+  are (additionally) provided in an Extended Measurement Or Facts
+  extension, where values are mapped to a controlled vocabulary
+  recommended by [OBIS](https://obis.org/).
 
 - Acoustic detections are downsampled to the **first detection per
   hour**, to reduce the size of high-frequency data. The
@@ -123,6 +131,7 @@ write_dwc(
 #> 
 #> • my_directory/occurrence.csv
 #> • my_directory/meta.xml
+#> • my_directory/emof.csv
 
 # Clean up (don't do this if you want to keep your files)
 unlink("my_directory", recursive = TRUE)

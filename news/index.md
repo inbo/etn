@@ -17,7 +17,7 @@
   ([\#518](https://github.com/inbo/etn/issues/518)).
 - New
   [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
-  reads an example dataset (`"2014_DEMER"`) as a data package
+  reads an example dataset (`"2014_DEMER"`) as a Data Package
   ([\#530](https://github.com/inbo/etn/issues/530)).
 - New
   [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
@@ -32,7 +32,7 @@
   [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
   are reexported from
   [frictionless](https://github.com/frictionlessdata/frictionless-r) to
-  read and write data packages
+  read and write Data Packages
   ([\#525](https://github.com/inbo/etn/issues/525)).
 - [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
   is deprecated. Please use
@@ -41,19 +41,24 @@
   [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
   instead ([\#559](https://github.com/inbo/etn/issues/559)).
 - [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) now
-  uses a data package as input, rather than reading from the ETN
-  database ([\#528](https://github.com/inbo/etn/issues/528)). This means
-  the function can be used locally. In addition:
-  - [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode) is
-    always set to `"VLIZ"` as maintainer of ETN. The `institution_code`
-    parameter has been removed.
-  - [license](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"`
-    or `"CC0-1.0"` rather than a URL. The input for the `license`
-    parameter has been updated accordingly.
-  - [identificationVerificationStatus](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus)
+  uses a Data Package as input, rather than reading from the ETN
+  database. This means the function can be used locally
+  ([\#528](https://github.com/inbo/etn/issues/528)). In addition:
+  - The function writes the output file as `occurrence.csv` (previously
+    `dwc_occurrence.csv`) and adds a `meta.xml` file.
+  - [`dwc:institutionCode`](http://rs.tdwg.org/dwc/terms/institutionCode)
+    is always set to `"VLIZ"` as maintainer of ETN. The
+    `institution_code` parameter has been removed.
+  - [`dc:license`](http://purl.org/dc/terms/license) is set to
+    `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the
+    `license` parameter has been updated accordingly.
+  - [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus)
     has been added and is set to `"verified by expert"` for all records,
     since the taxon is assumed to be well-known before the tag was
     attached.
+  - The animal sex, life stage and weight are added to an Extended
+    Measurement Or Facts extension file (`emof.csv`), for better support
+    with OBIS ([\#555](https://github.com/inbo/etn/issues/555)).
 - The [function
   reference](https://inbo.github.io/etn/reference/index.html) has been
   reorganized ([\#549](https://github.com/inbo/etn/issues/549))
