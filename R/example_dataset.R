@@ -17,6 +17,9 @@
 #'   write_package("inst/extdata/2014_demer")
 #' ```
 #'
+#' After which the `detections.csv` file was compressed and its path manually
+#' updated in `datapackage.json`.
+#'
 #' @param dataset Name of the example dataset to load. Defaults to the only
 #' available dataset: `"2014_DEMER"`.
 #' @return Frictionless data package.

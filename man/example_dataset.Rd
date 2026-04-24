@@ -29,6 +29,9 @@ The dataset was included in the package with:
 \if{html}{\out{<div class="sourceCode R">}}\preformatted{get_package(animal_project_code = "2014_demer") |>
   write_package("inst/extdata/2014_demer")
 }\if{html}{\out{</div>}}
+
+After which the \code{detections.csv} file was compressed and its path manually
+updated in \code{datapackage.json}.
 }
 
 \examples{
