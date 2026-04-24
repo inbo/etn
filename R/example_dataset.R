@@ -36,7 +36,7 @@ example_dataset <- function(dataset = "2014_DEMER") {
       )
   } else {
     path <- system.file(
-      "extdata", dataset, "datapackage.json",
+      "extdata", tolower(dataset), "datapackage.json",
       package = "etn"
     )
     frictionless::read_package(path)
