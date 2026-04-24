@@ -7,7 +7,8 @@ df <- data.frame(
 
 test_that("list_values() returns error for incorrect input", {
   # .data must be a data.frame
-  expect_error(list_values(1, "num_col"), ".data is not a data.frame")
+  expect_error(list_values(1, "num_col"),
+               class = "etn_error_not_df")
 
   # column must be a character, a column name or a column position
   expect_error(
@@ -15,11 +16,11 @@ test_that("list_values() returns error for incorrect input", {
   )
   # column must be the name of a valid column of .data
   expect_error(
-    list_values(df, strange_col), "column strange_col not found in .data"
+    list_values(df, strange_col), "! object 'strange_col' not found"
   )
   # column must be the character version of the name of a valid column of .data
   expect_error(
-    list_values(df, "strange_col"), "column strange_col not found in .data"
+    list_values(df, "strange_col"), "Can't extract columns that don't exist."
   )
   # Not more than one column allowed
   expect_error(
@@ -49,8 +50,8 @@ test_that("list_values() returns error for incorrect input", {
 
 test_that("list_values() returns a vector with unique values", {
   # Output has right class
-  expect_type(list_values(df, chr_col), type = "character")
-  expect_type(list_values(df, num_col), type = "double")
+  expect_type(suppressMessages(list_values(df, chr_col)), type = "character")
+  expect_type(suppressMessages(list_values(df, num_col)), type = "double")
 
   # Output value is correct with default split value (comma)
   expect_identical(
@@ -60,17 +61,17 @@ test_that("list_values() returns a vector with unique values", {
 
   # Output value is correct with non default split value
   expect_identical(
-    suppressMessages(list_values(df, dot_sep_col, "\\.")),
+    suppressMessages(list_values(df, dot_sep_col, split =  "\\.")),
     c("A", "B", "C", "D")
   )
 
   # Output value doesn't depend on the way column is passed
   expect_identical(
-    suppressMessages(list_values(df, column = chr_col)),
+    suppressMessages(list_values(df, var = chr_col)),
     suppressMessages(list_values(df, "chr_col"))
   )
   expect_identical(
-    suppressMessages(list_values(df, column = chr_col)),
+    suppressMessages(list_values(df, var = chr_col)),
     suppressMessages(list_values(df, 1))
   )
   expect_identical(
@@ -87,11 +88,11 @@ test_that("list_values() returns a vector with unique values", {
 
 test_that("list_values() returns message on console", {
   expect_message(list_values(df, "num_col"),
-    regexp = "3 unique num_col values",
+    regexp = '3 unique "num_col" values',
     fixed = TRUE
   )
   expect_message(list_values(df, "chr_col", split = ","),
-    regexp = "4 unique chr_col values",
+    regexp = '4 unique "chr_col" values',
     fixed = TRUE
   )
 })

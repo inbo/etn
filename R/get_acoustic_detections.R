@@ -84,7 +84,12 @@ get_acoustic_detections <- function(connection,
   if (lifecycle::is_present(connection)) {
     deprecate_warn_connection()
   }
-  assertthat::assert_that(assertthat::is.flag(limit))
+  if(!is.logical(limit) || length(limit) != 1){
+    cli::cli_abort(
+      "Argument `limit` should be a single logical value.",
+      class = "etn_invalid_limit"
+    )
+  }
 
   # Decide how we're going to retrieve the data
   protocol <- select_protocol()
