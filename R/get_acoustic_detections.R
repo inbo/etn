@@ -179,7 +179,7 @@ get_acoustic_detections <- function(connection,
     page_size <- 100
   } else if (n_records_expected > 5e6) {
     # Increase page_size in case of over 5M records
-    page_size <- 1e6
+    page_size <- 2.5e5
   } else {
     # default page size
     page_size <- 1e5
