@@ -17,9 +17,10 @@
 #' - `detections`: Acoustic detections for the selected animals, as returned by
 #'   [get_acoustic_detections()].
 #' - `deployments`: Acoustic deployments for the `acoustic_project_code`(s)
-#'   found in detections, as returned by [get_acoustic_deployments()].
-#'   This allows you to see when receivers were deployed, even if these did
-#'   not detect the selected animals.
+#'   found in detections, as returned by [get_acoustic_deployments()], but
+#'   excluding deployments that started after the last detection.
+#'   This allows you to see when and where receivers were deployed, even if
+#'   these did not detect the selected animals.
 #' - `receivers`: Acoustic receivers for the selected deployments, as returned
 #'   by [get_acoustic_receivers()].
 #'
@@ -103,6 +104,13 @@ get_package <- function(animal_project_code) {
     acoustic_project_code = acoustic_project_codes,
     open_only = FALSE
   )
+
+  # Exclude (irrelevant) deployments that started after last detection date
+  last_detection_date <- max(detections$date_time)
+  deployments <-
+    deployments |>
+    dplyr::filter(deploy_date_time <= last_detection_date)
+
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
     deployments |>
