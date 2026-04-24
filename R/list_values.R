@@ -33,7 +33,7 @@
 #'
 #' # Another expression can be defined to split values (here ".")
 #' list_values(df, tag_serial_number, split = "\\.")
-list_values <- function(.data, column, split = ",") {
+list_values <- function(.data, ... , split = ",") {
   # check .data
   if (!is.data.frame(.data)) {
     cli::cli_abort(
@@ -49,59 +49,23 @@ list_values <- function(.data, column, split = ",") {
     )
   }
 
-  arguments <- as.list(match.call())
+  # Check column selection type
+  col_select_chr_or_numeric <-
+    purrr::map_lgl(rlang::enquos(...), \(cols) {is.character(cols) ||
+      is.numeric(cols)}) |>
+    all()
 
-  if (is.numeric(arguments$column)) {
-    col_number <- arguments$column
-    n_col_df <- ncol(.data)
-
-    if(as.integer(col_number) != col_number) {
-      cli::cli_abort(
-        "Argument {.arg col_number} must be a single whole number.",
-        class = "etn_error_no_int_colnumber"
-      )
-    }
-
-    if(col_number > ncol(.data)) {
-      cli::cli_abort(
-        glue::glue(
-          "column number exceeds the number of columns ",
-          "of .data ({n_col_df})"
-        ),
-        class = "etn_error_colnumber_exceeds_ncol"
-      )
-    }
-
-    # extract values
-    values <- .data[, col_number]
-    # extract column name
-    col_name <- names(.data)[col_number]
-
-    # check column name
-    col_name <- as.character(arguments$column)
-    if (length(col_name) != 1) {
-      cli::cli_abort(
-        "Argument {.arg column} must be a single column name or position.",
-        class = "etn_error_multiple_columns"
-      )
-    }
-
-    if (!col_name %in% names(.data)) {
-      cli::cli_abort(
-        glue::glue("column {col_name} not found in .data"),
-        class = "etn_error_invalid_column"
-      )
-    }
-
-    # extract values
-    if (methods::is(arguments$column, "name")) {
-      values <- eval(arguments$column, .data)
-    } else {
-      if (is.character(arguments$column)) {
-        values <- .data[[arguments$column]]
-      }
-    }
+  if(!col_select_chr_or_numeric){
+    cli::cli_abort(
+      paste("Could not resolve supplied {.arg column}.",
+        "Must be a valid column name or index: ","
+        {purrr::map_chr(rlang::enquos(...), rlang::as_label)}"),
+      class = "etn_error_invalid_column"
+    )
   }
+
+    # extract values
+  values <- dplyr::pull(.data, ...)
 
   if (is.character(values)) {
     # extract all values by splitting strings using split value
@@ -112,7 +76,12 @@ list_values <- function(.data, column, split = ",") {
   values <- unique(values)
 
   # return a message on console
-  message(glue::glue("{length(values)} unique {col_name} values"))
+  rlang::inform(message = paste(
+    length(values),
+    "unique",
+    purrr::map_chr(rlang::enquos(...), rlang::as_label),
+    "values"
+  ))
 
   return(values)
 }
