@@ -3,9 +3,9 @@
 #' Reads an example dataset, formatted as a [Frictionless Data Package](
 #' https://specs.frictionlessdata.io/data-package/).
 #'
-#' @section 2014_DEMER:
+#' @section 2014_demer:
 #'
-#' `2014_DEMER` is a **river acoustic telemetry** dataset. It contains 66 tagged
+#' `2014_demer` is a **river acoustic telemetry** dataset. It contains 66 tagged
 #' animals across four species. Over 235,000 detections were observed between
 #' 2014 and 2019 by acoustic receivers deployed in Belgian rivers. Data are
 #' deposited at <https://doi.org/10.14284/432>.
@@ -27,8 +27,8 @@
 #' @export
 #' @examples
 #' example_dataset()
-example_dataset <- function(dataset = "2014_DEMER") {
-  available_datasets <- c("2014_DEMER")
+example_dataset <- function(dataset = "2014_demer") {
+  available_datasets <- c("2014_demer")
   if (!dataset %in% available_datasets) {
     cli::cli_abort(
       c(
@@ -39,7 +39,7 @@ example_dataset <- function(dataset = "2014_DEMER") {
       )
   } else {
     path <- system.file(
-      "extdata", tolower(dataset), "datapackage.json",
+      "extdata", dataset, "datapackage.json",
       package = "etn"
     )
     frictionless::read_package(path)
