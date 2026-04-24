@@ -52,17 +52,17 @@ get_package <- function(animal_project_code) {
     lowercase = TRUE
   )
 
-  # Get data
+  # Get data ----
   cli::cli_h2("Getting data")
   cli::cli_ol()
 
-  # Animals
+  ## Animals ----
   cli::cli_li("Getting {.val animals}.")
   # Select on animal_project_code
   animals <- get_animals(animal_project_code = animal_project_code)
 
 
-  # Tags
+  ## Tags ----
   cli::cli_li("Getting {.val tags}.")
   # Select on tags associated with animals
   tag_serial_numbers <-
@@ -77,7 +77,7 @@ get_package <- function(animal_project_code) {
     unique()
   tags <- get_tags(tag_serial_number = tag_serial_numbers)
 
-  # Detections
+  ## Detections ----
   cli::cli_li("Getting {.val detections}.")
   # Select on animal_project_code
   detections <- get_acoustic_detections(
@@ -90,7 +90,7 @@ get_package <- function(animal_project_code) {
     dplyr::distinct(.data$detection_id, .keep_all = TRUE) |>
     dplyr::arrange(.data$tag_serial_number, .data$detection_id)
 
-  # Deployments
+  ## Deployments ----
   cli::cli_li("Getting {.val deployments}.")
   # Select on acoustic_project_codes found in detections to get all deployments,
   # including those without detections for animal_project_code
@@ -110,7 +110,7 @@ get_package <- function(animal_project_code) {
       comments = stringr::str_replace_all(.data$comments, "[\r\n]+", " ")
     )
 
-  # Receivers
+  ## Receivers ----
   cli::cli_li("Getting {.val receivers}.")
   # Select on receivers associated with deployments
   receiver_ids <-
@@ -120,9 +120,33 @@ get_package <- function(animal_project_code) {
   receivers <- get_acoustic_receivers(
     receiver_id = receiver_ids
   )
+
+  ## Reference ----
+  cli::cli_li("Getting {.val references}.")
+
+  etn_ref <-
+    etn_ref <- sprintf(
+      "European Tracking Network - Data Platform. Flanders Marine Institute (VLIZ), %s, accessed %s",
+      lubridate::year(lubridate::today()),
+      lubridate::today()
+    )
+
+  animal_ref <- get_animal_projects(animal_project_code = animal_project_code,
+                      citation = TRUE) |>
+    dplyr::pull("citation")
+  acoustic_refs <- get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
+                        citation = TRUE) |>
+    dplyr::pull("citation")
+
+  references <-
+    dplyr::tibble(
+      reference_for = c("ETN", animal_project_code, acoustic_project_codes),
+      reference = c(etn_ref, animal_ref, acoustic_refs)
+    )
+
   cli::cli_end()
 
-  # Obtain imis_dataset_id and doi
+  # Obtain imis_dataset_id and doi ----
   project_info <- get_animal_projects(
     animal_project_code = animal_project_code, citation = TRUE
   )
@@ -132,7 +156,7 @@ get_package <- function(animal_project_code) {
     paste0("https://marineinfo.org/id/dataset/", project_info$imis_dataset_id)
   }
 
-  # Create package
+  # Create package ----
   cli::cli_h2("Creating Data Package")
   package <-
     frictionless::create_package() |>
@@ -141,6 +165,7 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
+    add_resource("references", references) |>
     append(c(
       id = doi,
       name = tolower(animal_project_code)
