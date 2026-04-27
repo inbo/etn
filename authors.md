@@ -42,7 +42,7 @@ Source:
 
 Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S (2026). *etn:
 Access Data from the European Tracking Network*.
-[doi:10.5281/zenodo.15235747](https://doi.org/10.5281/zenodo.15235747),
+[doi:10.5281/zenodo.15235747](https://doi.org/10.5281/zenodo.15235747).
 R package version 3.0.0.9000, <https://inbo.github.io/etn/>.
 
     @Manual{,
