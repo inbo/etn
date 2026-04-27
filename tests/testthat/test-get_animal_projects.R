@@ -29,9 +29,6 @@ test_that("get_animal_projects() returns the expected columns", {
     "project_type",
     "telemetry_type",
     "project_name",
-    # "coordinating_organization",
-    # "principal_investigator",
-    # "principal_investigator_email",
     "start_date",
     "end_date",
     "latitude",
@@ -88,5 +85,35 @@ test_that("get_animal_projects() returns projects of type 'animal'", {
   expect_identical(
     get_animal_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "animal"
+  )
+})
+
+test_that("get_animal_projects() returns citation information when requested", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("marineinfo.org")
+
+  citation_columns <- c(
+    "imis_dataset_id", # To make fetching citations possible
+    "citation",
+    "doi",
+    "contact_name",
+    "contact_email",
+    "contact_affiliation"
+  )
+
+  animal_project_codes <- c(
+    "PTN/PROTECT2013/Moray",
+    "hunzeenaas",
+    "PTN-Silver-eel-Mondego",
+    "FISHGAL"
+  )
+
+  expect_contains(
+    names(get_animal_projects(
+      animal_project_code = animal_project_codes,
+      citation = TRUE
+    )),
+    citation_columns
   )
 })
