@@ -92,8 +92,8 @@ create_animals_occurrence <- function(animals, tags) {
       ),
       sex = dplyr::recode_values(
         tolower(.data$sex),
-        c("male", "m") ~ "male",
         c("female", "f") ~ "female",
+        c("male", "m") ~ "male",
         c("hermaphrodite") ~ "hermaphrodite",
         c("unknown", "u") ~ "unknown",
         default = "unknown"
@@ -105,9 +105,9 @@ create_animals_occurrence <- function(animals, tags) {
           .data$life_stage,
           # Follows http://vocab.nerc.ac.uk/collection/S11/current/
           # See https://github.com/inbo/etn/issues/262
-          c("juvenile", "i", "fii", "fiii") ~ "juvenile",
-          c("sub-adult", "fiv", "fv", "mii", "silver") ~ "sub-adult",
           c("adult", "mature") ~ "adult",
+          c("sub-adult", "fiv", "fv", "mii", "silver") ~ "sub-adult",
+          c("juvenile", "i", "fii", "fiii") ~ "juvenile",
           c("immature", "imature") ~ "immature",
           c("smolt") ~ "smolt"
           # Exclude unknown, and other values
