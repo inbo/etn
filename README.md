@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
 [![R-universe
 version](https://inbo.r-universe.dev/etn/badges/version)](https://inbo.r-universe.dev/etn)
 [![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
