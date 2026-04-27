@@ -2,9 +2,8 @@
 #'
 #' @inheritParams list_animal_ids
 #' @return A vector of all unique `receiver` present in `acoustic.receivers`.
-#'
+#' @family list functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set()
 #' list_receiver_ids()
 list_receiver_ids <- function(connection) {

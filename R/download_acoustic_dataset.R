@@ -1,8 +1,26 @@
 #' Download acoustic data package
 #'
-#' Download all acoustic data related to an **animal project** as a data
-#' package that can be deposited in a research data repository. Includes option
-#' to filter on scientific names.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
+#' instead, which is more versatile, adds field definitions, and returns a
+#' Data Package object that can be passed to other functions. Note that
+#' [get_package()] does not support filtering on `scientific_name` or print
+#' summary statistics.
+#'
+#' ```R
+#' # Before
+#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
+#'
+#' # Now
+#' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+#' write_package(my_package, directory = "2012_leopoldkanaal")
+#' ```
+#'
+#' This function allows you to download all acoustic data related to an
+#' **animal project** as a data package that can be deposited in a research data
+#' repository. Includes option to filter on scientific names.
 #'
 #' The data are downloaded as a
 #' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
@@ -42,12 +60,10 @@
 #' @param directory Character. Relative path to local download directory.
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
-#'
-#' @return CSV and JSON files written to disk.
-#'
 #' @inheritParams list_animal_ids
+#' @return CSV and JSON files written to disk.
+#' @family download functions
 #' @export
-#'
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
@@ -78,6 +94,17 @@ download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
                                       directory = animal_project_code) {
+
+  lifecycle::deprecate_warn(
+    when = "3.1.0",
+    what = "download_acoustic_dataset()",
+    with = "get_package()",
+    details = cli::format_inline(
+      "To download dataset to disk use {.fun get_package} and then {.fun
+       write_package}."
+    )
+  )
+
   # Check arguments
   # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {

@@ -12,8 +12,7 @@ database. This argument is no longer used. You will be prompted for
 credentials instead.}
 }
 \value{
-A vector of all unique \code{project_code} of \code{type = "animal"} in
-\code{project.sql}.
+A vector of all unique \code{project_code} of \code{type = "animal"} that are available.
 }
 \description{
 List all available animal project codes
@@ -23,3 +22,17 @@ List all available animal project codes
 list_animal_project_codes()
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other list functions: 
+\code{\link{list_acoustic_project_codes}()},
+\code{\link{list_acoustic_tag_ids}()},
+\code{\link{list_animal_ids}()},
+\code{\link{list_cpod_project_codes}()},
+\code{\link{list_deployment_ids}()},
+\code{\link{list_receiver_ids}()},
+\code{\link{list_scientific_names}()},
+\code{\link{list_station_names}()},
+\code{\link{list_tag_serial_numbers}()},
+\code{\link{list_values}()}
+}
+\concept{list functions}

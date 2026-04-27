@@ -131,6 +131,50 @@ test_that("deprecate_warn_connection() returns warning with function symbol", {
   )
 })
 
+test_that("deprecate_warn_connection() is triggered on all functions with connection arg", {
+  # List all functions with a conneciton argument
+  etn_namespace <- asNamespace("etn")
+  fns_with_connection_arg <-
+    getNamespaceExports(etn_namespace) |>
+    purrr::keep(\(fn) {
+      "connection" %in% names(
+        formals(get(fn, envir = etn_namespace))
+      )
+    })
+
+  # Check that there are still functions with a `connection` argument
+  expect_true(length(fns_with_connection_arg) > 0)
+
+  # For every of these functions, run them with an invalid connection. But
+  # don't fail on any other errors. To fail early, I'm sabotaging the decision
+  # tree to select what protocol path to follow. As this happens early in a
+  # downstream helper, the connection warning should fire first. This greatly
+  # speeds up the test.
+  for (fn in fns_with_connection_arg) {
+    expect_warning(tryCatch(
+      expr = {
+        with_mocked_bindings(
+          code = {
+            do.call(fn,
+              args = list(connection = "not a connection object")
+            )
+          },
+          # Sabotage conduct_parent_to_helpers() so we fail early.
+          select_protocol = function(...) {
+            rlang::abort(class = "etn_no_protocol")
+          }
+        )
+      },
+      # Suppress all errors downstream
+      error = function(e) {
+        NULL
+      }
+    ), class = "lifecycle_warning_deprecated",
+    label = sprintf("`%s()` to warn for connection deprecation",
+                    fn))
+  }
+})
+
 # get_parent_fn_name() ----------------------------------------------------
 
 
