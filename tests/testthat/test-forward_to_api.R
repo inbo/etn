@@ -76,3 +76,18 @@ test_that("forward_to_api() can forward R errors to client console", {
     fixed = FALSE # don't check for caller
   )
 })
+
+test_that("opencpu should not pass backtrace", {
+  # This test doesn't test R package functionality, but rather server settings.
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_no_authentication()
+
+  # Errors from the API should be forwarded, but backtrace should not be.
+  error_message <- expect_error(
+    forward_to_api("get_animals",
+                   payload = list(animal_id = "not_an_animal_id"),
+                  )
+  )
+  expect_no_match(error_message$message, "Backtrace")
+})
+
