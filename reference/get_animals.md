@@ -63,7 +63,16 @@ Other access functions:
 ``` r
 # Get all animals
 get_animals()
-#> # A tibble: 30,703 × 66
+#> Waiting 4s for retry backoff ■■■■■■■■■                       
+#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■           
+#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 6s for retry backoff ■■■■■■                          
+#> Waiting 6s for retry backoff ■■■■■■■                         
+#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■       
+#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
+#> Waiting 4s for retry backoff ■■■■■■■■■                       
+#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> # A tibble: 30,735 × 66
 #>    animal_id animal_project_code tag_serial_number tag_type tag_subtype
 #>        <int> <chr>               <chr>             <chr>    <chr>      
 #>  1      5923 2004_Gudena         1208              acoustic animal     
@@ -76,7 +85,7 @@ get_animals()
 #>  8      5920 2004_Gudena         7421              acoustic animal     
 #>  9      5921 2004_Gudena         7422              acoustic animal     
 #> 10      5922 2004_Gudena         7423              acoustic animal     
-#> # ℹ 30,693 more rows
+#> # ℹ 30,725 more rows
 #> # ℹ 61 more variables: acoustic_tag_id <chr>,
 #> #   acoustic_tag_id_alternative <chr>, scientific_name <chr>,
 #> #   common_name <chr>, aphia_id <int>, animal_label <chr>,

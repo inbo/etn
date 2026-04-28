@@ -38,11 +38,5 @@ Other list functions:
 
 ``` r
 list_cpod_project_codes()
-#>  [1] "Apelafico_acoustics"  "Apelafico_underwater" "ARMS_MBON_Belgium"   
-#>  [4] "CODEVCO"              "cpod-lifewatch"       "cpod-od-natuur"      
-#>  [7] "Lifewatch_extra"      "Lifewatch_test"       "NOVANA"              
-#> [10] "PAM-Borssele"         "PelFish"              "PhD_Parcerisas"      
-#> [13] "PureWind"             "SEAWave"              "SMGMIT"              
-#> [16] "STRAITS_PAM"          "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"   
-#> [19] "WaveHub"             
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 ```
