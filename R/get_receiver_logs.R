@@ -25,7 +25,10 @@
 #' @name get_receiver_logs
 #'
 NULL
-#' @return A tibble with receiver diagnostics data
+#'
+#' @return A tibble with receiver diagnostics data.
+#'
+#' @family access functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()
 #' get_receiver_logs(deployment_id = 25259, limit = TRUE)
