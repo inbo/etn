@@ -33,7 +33,6 @@ Other list functions:
 \code{\link{list_deployment_ids}()},
 \code{\link{list_receiver_ids}()},
 \code{\link{list_scientific_names}()},
-\code{\link{list_station_names}()},
-\code{\link{list_values}()}
+\code{\link{list_station_names}()}
 }
 \concept{list functions}
