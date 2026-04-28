@@ -31,7 +31,7 @@ names.}
 for testing purposes). Defaults to \code{FALSE}.}
 }
 \value{
-A tibble with receiver diagnostics data
+A tibble with receiver diagnostics data.
 }
 \description{
 This function retrieves diagnostics information for a receiver for a
@@ -66,3 +66,16 @@ get_receiver_logs(deployment_id = 6028,
                   end_date = "2020-02-01")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other access functions: 
+\code{\link{get_acoustic_deployments}()},
+\code{\link{get_acoustic_detections}()},
+\code{\link{get_acoustic_projects}()},
+\code{\link{get_acoustic_receivers}()},
+\code{\link{get_animal_projects}()},
+\code{\link{get_animals}()},
+\code{\link{get_cpod_projects}()},
+\code{\link{get_package}()},
+\code{\link{get_tags}()}
+}
+\concept{access functions}
