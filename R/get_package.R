@@ -124,12 +124,7 @@ get_package <- function(animal_project_code) {
   ## Reference ----
   cli::cli_li("Getting {.val references}.")
 
-  etn_ref <-
-    etn_ref <- sprintf(
-      "European Tracking Network - Data Platform. Flanders Marine Institute (VLIZ), %s, accessed %s",
-      lubridate::year(lubridate::today()),
-      lubridate::today()
-    )
+  etn_ref <- "European Tracking Network - Data Platform. Flanders Marine Institute (VLIZ)"
 
   animal_ref <- get_animal_projects(animal_project_code = animal_project_code,
                       citation = TRUE) |>
