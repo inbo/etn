@@ -39,6 +39,29 @@ test_that("get_package() creates the expected package", {
   expect_snapshot_file(file.path(datapackage_path, "deployments.csv"))
   expect_snapshot_file(file.path(datapackage_path, "receivers.csv"))
   expect_snapshot_file(file.path(datapackage_path, "references.csv"))
+  expect_snapshot_file(file.path(datapackage_path, "receivers.csv"),
+  # Receiver status values are always changing, we do not want to trigger a
+  # snapshot change on this data field change.
+    transform = \(line) {
+      stringr::str_replace(
+        line,
+        stringr::fixed(",available,"),
+        ",<redacted_status_value>,"
+      ) |>
+        stringr::str_replace(
+          stringr::fixed(",active,"),
+          ",<redacted_status_value>,"
+        ) |>
+        stringr::str_replace(
+          stringr::fixed(",lost,"),
+          ",<redacted_status_value>,"
+        ) |>
+        stringr::str_replace(
+          stringr::fixed(",broken,"),
+          ",<redacted_status_value>,"
+        )
+    }
+  )
 })
 
 test_that("get_package() sets dataset_id when doi is missing", {
