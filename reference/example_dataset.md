@@ -6,7 +6,7 @@ Package](https://specs.frictionlessdata.io/data-package/).
 ## Usage
 
 ``` r
-example_dataset(dataset = "2014_DEMER")
+example_dataset(dataset = "2014_demer")
 ```
 
 ## Arguments
@@ -20,16 +20,20 @@ example_dataset(dataset = "2014_DEMER")
 
 Frictionless data package.
 
-## 2014_DEMER
+## 2014_demer
 
-`2014_DEMER` is a **river acoustic telemetry** dataset. It contains 66
+`2014_demer` is a **river acoustic telemetry** dataset. It contains 66
 tagged animals across four species. Over 235,000 detections were
 observed between 2014 and 2019 by acoustic receivers deployed in Belgian
-rivers.
+rivers. Data are deposited at <https://doi.org/10.14284/432>.
 
-Data are deposited at <https://doi.org/10.14284/432> and can be
-downloaded from the ETN database with
-`download_acoustic_dataset(animal_project_code = "2014_DEMER")`.
+The dataset was included in the package with:
+
+    get_package(animal_project_code = "2014_demer") |>
+      write_package("inst/extdata/2014_demer")
+
+After which the `detections.csv` file was compressed and its path
+manually updated in `datapackage.json`.
 
 ## Examples
 

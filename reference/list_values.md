@@ -50,29 +50,40 @@ Other list functions:
 ``` r
 # List unique scientific_name from a dataframe containing animal information
 df <- get_animals(animal_project_code = "2014_demer")
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 list_values(df, "scientific_name")
-#> Error: .data is not a data frame
+#> 4 unique scientific_name values
+#> [1] "Rutilus rutilus"    "Silurus glanis"     "Squalius cephalus" 
+#> [4] "Petromyzon marinus"
 
 # Or using pipe and unquoted column name
 df |> list_values(scientific_name)
-#> Error: .data is not a data frame
+#> 4 unique scientific_name values
+#> [1] "Rutilus rutilus"    "Silurus glanis"     "Squalius cephalus" 
+#> [4] "Petromyzon marinus"
 
 # Or using column position
 df |> list_values(8)
-#> Error: .data is not a data frame
+#> 1 unique scientific_name values
+#> # A tibble: 4 × 1
+#>   scientific_name   
+#>   <chr>             
+#> 1 Rutilus rutilus   
+#> 2 Silurus glanis    
+#> 3 Squalius cephalus 
+#> 4 Petromyzon marinus
 
 # tag_serial_number can contain comma-separated values
 df <- get_animals(animal_id = 5841)
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 df$tag_serial_number
-#> Error in df$tag_serial_number: object of type 'closure' is not subsettable
+#> [1] "1280688,1280688"
 
 # list_values() will split those and return unique values
 list_values(df, tag_serial_number)
-#> Error: .data is not a data frame
+#> 1 unique tag_serial_number values
+#> [1] "1280688"
 
 # Another expression can be defined to split values (here ".")
 list_values(df, tag_serial_number, split = "\\.")
-#> Error: .data is not a data frame
+#> 1 unique tag_serial_number values
+#> [1] "1280688,1280688"
 ```
