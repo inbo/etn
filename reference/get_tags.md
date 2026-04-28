@@ -65,92 +65,21 @@ Other access functions:
 ``` r
 # Get all tags
 get_tags()
-#> # A tibble: 63,350 × 54
-#>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
-#>    <chr>             <chr>    <chr>       <chr>       <chr>          
-#>  1 0A4E2699          acoustic animal      NA          OPI-2699       
-#>  2 0A4F2700          acoustic animal      NA          OPI-2700       
-#>  3 0A4G2701          acoustic animal      NA          OPI-2701       
-#>  4 0A4H2702          acoustic animal      NA          OPI-2702       
-#>  5 0A4J2704          acoustic animal      NA          OPI-2704       
-#>  6 0A6E              acoustic animal      NA          R64K-2381      
-#>  7 0A6F              acoustic animal      NA          R64K-2382      
-#>  8 0A6G              acoustic animal      NA          R64K-2383      
-#>  9 0A6H              acoustic animal      NA          R64K-2384      
-#> 10 0A6I              acoustic animal      NA          R64K-2385      
-#> # ℹ 63,340 more rows
-#> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
-#> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
-#> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
-#> #   length <dbl>, diameter <dbl>, weight <dbl>, floating <lgl>,
-#> #   archive_memory <chr>, sensor_slope <dbl>, sensor_intercept <dbl>,
-#> #   sensor_range <chr>, sensor_range_min <dbl>, sensor_range_max <dbl>, …
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 
 # Get archival tags, including acoustic-archival
 get_tags(tag_type = c("archival", "acoustic-archival"))
-#> Waiting 3s for retry backoff ■■■■■■■■■■■■                    
-#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■                  
-#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 5s for retry backoff ■■■■■■■                         
-#> Waiting 5s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 5s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 6s for retry backoff ■■■■■■                          
-#> Waiting 6s for retry backoff ■■■■■■■■■■■                     
-#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Error in value[[3L]](cond): Server side error
-#> • Please try again.
-#> • If the error persists, please report it to the package authors
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 
 # Get tags of specific subtype
 get_tags(tag_subtype = c("built-in", "range"))
-#> Waiting 4s for retry backoff ■■■■■■■■■                       
-#> Waiting 4s for retry backoff ■■■■■■■■■■                      
-#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 3s for retry backoff ■■■■■■■■■■■■■                   
-#> Waiting 3s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Error in value[[3L]](cond): Server side error
-#> • Please try again.
-#> • If the error persists, please report it to the package authors
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 
 # Get specific tags (note that these can return multiple records)
 get_tags(tag_serial_number = "1187450")
-#> Waiting 4s for retry backoff ■■■■■■■■                        
-#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Error in value[[3L]](cond): Server side error
-#> • Please try again.
-#> • If the error persists, please report it to the package authors
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 get_tags(acoustic_tag_id = "A69-1601-16130")
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 6s for retry backoff ■■■■■■                          
-#> Waiting 6s for retry backoff ■■■■■■■■                        
-#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 6s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 12s for retry backoff ■■■                             
-#> Waiting 12s for retry backoff ■■■■■■■■                        
-#> Waiting 12s for retry backoff ■■■■■■■■■■■■■■■■                
-#> Waiting 12s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 12s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 12s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Error in value[[3L]](cond): Server side error
-#> • Please try again.
-#> • If the error persists, please report it to the package authors
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 4s for retry backoff ■■■■■■■■■                       
-#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 4s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 9s for retry backoff ■■■■                            
-#> Waiting 9s for retry backoff ■■■■■■                          
-#> Waiting 9s for retry backoff ■■■■■■■■■■■■■■■■                
-#> Waiting 9s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 9s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Error in value[[3L]](cond): Server side error
-#> • Please try again.
-#> • If the error persists, please report it to the package authors
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_url_path_append(httr2::request(domain),     "validate_login", "json/"), data = credentials)): HTTP 503 Service Unavailable.
 ```
