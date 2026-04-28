@@ -200,6 +200,39 @@ select_protocol <- function() {
   return("opencpu")
 }
 
+#' Remove HTML tags from a string
+#'
+#' This function uses the xml2 package to parse the HTML and extract the text
+#' content.
+#'
+#'
+#' @param x Character string with HTML tags.
+#'
+#' @returns Character string without HTML tags.
+#' @family helper functions
+#' @noRd
+#'
+#' @examples
+#' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
+remove_html_tags <- function(x) {
+  # Check if xml2 is installed
+  rlang::check_installed("xml2", reason = "To parse HTML")
+
+
+  purrr::map_chr(x, \(string) {
+    if (is.na(string)) {
+      return(NA_character_)
+    }
+    # Remove HTML non breaking spaces explicitly, this causes encoding issues
+    # due to differences between ISO-8859-1 and UTF-8.
+    stringr::str_remove(string, stringr::fixed("&nbsp;")) |>
+      # Convert to raw so it's not interpreted as a path
+      charToRaw() |>
+      xml2::read_html() |>
+      xml2::xml_text()
+  })
+}
+
 #' Test if ETN credentials are stored
 #'
 #' This function checks if the ETN credentials are set in the environment
