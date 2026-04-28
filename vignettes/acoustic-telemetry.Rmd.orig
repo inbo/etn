@@ -166,12 +166,13 @@ detections_silurus |>
   count()
 ```
 
-Which stations have been involved? You can retrieve them using `list_values` function applied to column `station_name`:
+Which stations have been involved? 
 
 ```{r stations_silurus}
 stations_silurus <-
   detections_silurus |>
-  list_values(station_name)
+  pull("station_name") |> 
+  unique()
 stations_silurus
 ```
 

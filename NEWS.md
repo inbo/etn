@@ -13,6 +13,7 @@
   * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
   * The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (`emof.csv`), for better support with OBIS (#555).
 * The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
+* 
 
 # etn 3.0.0
 
