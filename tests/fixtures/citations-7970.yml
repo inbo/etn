@@ -10,11 +10,11 @@ http_interactions:
         www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 09:42:16 GMT
+      date: Thu, 23 Apr 2026 16:33:35 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=ipdqRl330ikYEfBTNUqfcY0x7sIE-tdECg-ncLHgbpnoCGWk;
+      - SSESSb1decfcf957c461d54e509db58033a53=WXXeN766nqzx7TGRqSfsQTmwOchpLqI8bLuhZSwGZnc-caFo;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -35,28 +35,28 @@ http_interactions:
         efforts.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Phillips,
         N., Garbett, A., Finlay, C., Houghton, J., Collins, P. 2019. SeaMonitor (QUB):
         Assessing the regional connectivity of endangered flapper skate and basking
-        sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-09
-        01:43:43.386022","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14
+        01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC
         BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
-        href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\" target=\"_blank\"><img
+        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
         alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
-        src=\"https:\/\/www.marinespecies.org\/aphia\/images\/cc\/by.png\" \/><\/a>
-        This dataset is licensed under a <a rel=\"license\" href=\"https:\/\/creativecommons.org\/licenses\/by\/4.0\/\"
-        target=\"_blank\">Creative Commons Attribution 4.0 International License<\/a>.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","AccConstrDescription":"This
+        src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
+        is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
+        target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
         license lets others distribute, remix, tweak, and build upon your work, even
         commercially, as long as they credit you for the original creation. This is
         the most accommodating of licenses offered. Recommended for maximum dissemination
         and use of licensed materials.","Lineage":null,"AccConID":21},"dois":null,"spcols":null,"keywords":[{"ThesaurusTerm":"Acoustic
         arrays","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_2cdfca90","Description":null,"OrigThesTerm":"Acoustic
-        arrays","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        arrays","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_2cdfca90","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
         data","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_54b338c3","Description":null,"OrigThesTerm":"Acoustic
-        data","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        data","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_54b338c3","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
         telemetry","ThesTypID":1,"ThesType":"ASFA Thesaurus List","Code":"c_3563933f","Description":null,"OrigThesTerm":"Acoustic
-        telemetry","DutchTerm":null,"URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
+        telemetry","DutchTerm":null,"URI":"http://aims.fao.org/aos/agrovoc/c_3563933f","DasKeywordDescr":null},{"ThesaurusTerm":"Acoustic
         Telemetry","ThesTypID":30,"ThesType":"ETN Context","Code":null,"Description":"Acoustic
-        telemetry uses acoustic signals (also called \u2018pings\u2019) which propagate
-        into the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
+        telemetry uses acoustic signals (also called ‘pings’) which propagate into
+        the water, and are detected by acoustic receivers","OrigThesTerm":"Acoustic
         Telemetry","DutchTerm":"Akoestische Telemetrie","URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
         British Isles, Northern Ireland, Antrim","ThesTypID":34,"ThesType":"ASFA Geoterms","Code":null,"Description":null,"OrigThesTerm":"ANE,
         British Isles, Northern Ireland, Antrim","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"ANE,
@@ -68,7 +68,7 @@ http_interactions:
         Shark","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity","ThesTypID":0,"ThesType":null,"Code":null,"Description":null,"OrigThesTerm":"Connectivity","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Connectivity
         analysis","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
         Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Connectivity analysis","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Genetics","ThesTypID":1,"ThesType":"ASFA
-        Thesaurus List","Code":"c_3222","Description":null,"OrigThesTerm":"Genetics","DutchTerm":"Genetica","URI":"http:\/\/aims.fao.org\/aos\/agrovoc\/c_3222","DasKeywordDescr":null},{"ThesaurusTerm":"Satellite
+        Thesaurus List","Code":"c_3222","Description":null,"OrigThesTerm":"Genetics","DutchTerm":"Genetica","URI":"http://aims.fao.org/aos/agrovoc/c_3222","DasKeywordDescr":null},{"ThesaurusTerm":"Satellite
         tracking","ThesTypID":2,"ThesType":"CSA Technology Research Database Master
         Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Satellite tracking","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Skates","ThesTypID":4,"ThesType":"CAB
         Thesaurus","Code":null,"Description":null,"OrigThesTerm":"Skates","DutchTerm":null,"URI":null,"DasKeywordDescr":null},{"ThesaurusTerm":"Spatial
@@ -77,7 +77,7 @@ http_interactions:
         European Tracking Network is a pan-European biotelemetry network that aims
         at the integration of regional telemetry initiatives into a sustainable, efficient
         and integrated network embedded in the international context. Data is integrated
-        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https:\/\/creativecommons.org\/licenses\/by\/4.0\/","StandardTitle":"European
+        in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https://creativecommons.org/licenses/by/4.0/","StandardTitle":"European
         Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":null,"othrelrev":null,"ownerships":null,"taxterms":[{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
         coverage","TaxtID":31745,"TaxTerm":"Cetorhinus maximus (Gunnerus, 1765)","AphiaID":105837,"DutchTerm":"Reuzehaai"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
         coverage","TaxtID":20609,"TaxTerm":"Elasmobranchii","AphiaID":10193,"DutchTerm":"Kraakbeenvissen"},{"DasTaxtTypID":1,"DasTaxtType":"Taxonomic
@@ -89,9 +89,9 @@ http_interactions:
         telemetry","Protocol":null,"QualityControl":null,"Precision":null,"Detectionlimit":null,"Instrument":null,"InstrumentUrl":null,"MethFull":"","ParaCategoryTitle":null,"ParaCatCode":null}],"dasthemes":[{"DasThemeID":21,"DasTheme":"Biology","DasTheme0":"Biology","DutchTerm":"Biologie"},{"DasThemeID":101,"DasTheme":"Biology
         > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":30,"DasTheme":"Biology
         > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
-        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https:\/\/www.loughs-agency.org\/managing-our-loughs\/funded-programmes\/current-programmes\/sea-monitor\/","externalID":null,"URLTypeCode":null,"URLType":"Programme","URLTypID":20,"downloadURL":null,"FileName":null},{"URL":"https:\/\/members.oceantrack.org\/OTN\/project?ccode=V2LSMQUB","externalID":null,"URLTypeCode":null,"URLType":"Dataset
-        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https:\/\/rshiny.lifewatch.be\/etn-data\/","externalID":null,"URLTypeCode":null,"URLType":"Online
-        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https:\/\/twitter.com\/seamonitor1?lang=en","externalID":null,"URLTypeCode":null,"URLType":"Reference
+        - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https://www.loughs-agency.org/managing-our-loughs/funded-programmes/current-programmes/sea-monitor/","externalID":null,"URLTypeCode":null,"URLType":"Programme","URLTypID":20,"downloadURL":null,"FileName":null},{"URL":"https://members.oceantrack.org/OTN/project?ccode=V2LSMQUB","externalID":null,"URLTypeCode":null,"URLType":"Dataset
+        information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
+        dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://twitter.com/seamonitor1?lang=en","externalID":null,"URLTypeCode":null,"URLType":"Reference
         materials","URLTypID":10,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-09 09:42:17
+  recorded_at: 2026-04-23 16:33:35
 recorded_with: VCR-vcr/2.1.0
