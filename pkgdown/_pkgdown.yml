@@ -22,6 +22,3 @@ reference:
 - title: List parameter options
   contents:
   - has_concept("list functions")
-- title: Deprecated functions
-  contents:
-  - download_acoustic_dataset

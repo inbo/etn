@@ -63,7 +63,7 @@
 #' @inheritParams list_animal_ids
 #' @return CSV and JSON files written to disk.
 #' @family download functions
-#' @export
+#' @keywords internal
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
