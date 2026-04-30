@@ -109,7 +109,7 @@ get_package <- function(animal_project_code) {
   last_detection_date <- max(detections$date_time)
   deployments <-
     deployments |>
-    dplyr::filter(deploy_date_time <= last_detection_date)
+    dplyr::filter(.data$deploy_date_time <= last_detection_date)
 
   # Remove linebreaks in deployment comments to get single lines in csv:
   deployments <-
