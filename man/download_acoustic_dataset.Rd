@@ -38,14 +38,6 @@ Data Package object that can be passed to other functions. Note that
 \code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
 summary statistics.
 
-\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Before
-download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
-
-# Now
-my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
-write_package(my_package, directory = "2012_leopoldkanaal")
-}\if{html}{\out{</div>}}
-
 This function allows you to download all acoustic data related to an
 \strong{animal project} as a data package that can be deposited in a research data
 repository. Includes option to filter on scientific names.
@@ -84,9 +76,8 @@ performed by validation tools of the Frictionless Framework, e.g.
 }
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
-# Download data for the 2012_leopoldkanaal animal project (all scientific names)
-download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
-                         directory = tempdir())
+# Before
+download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> Downloading data to directory `2012_leopoldkanaal`:
 #> * (1/6): downloading animals.csv
 #> * (2/6): downloading tags.csv
@@ -109,6 +100,10 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
 #> Warning message:
 #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #> Found tags associated with multiple animals: 1145373
+
+# Now
+my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+write_package(my_package, directory = "2012_leopoldkanaal")
 \dontshow{\}) # examplesIf}
 }
 \concept{download functions}
