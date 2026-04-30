@@ -29,4 +29,5 @@ write_package(package, directory, compress = FALSE)
 ## See also
 
 Other frictionless functions:
-[`read_package()`](https://inbo.github.io/etn/reference/read_package.md)
+[`read_package()`](https://inbo.github.io/etn/reference/read_package.md),
+[`read_resource()`](https://inbo.github.io/etn/reference/read_resource.md)

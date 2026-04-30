@@ -31,6 +31,9 @@
 
   Read a Data Package descriptor file (`datapackage.json`)
 
+- [`read_resource()`](https://inbo.github.io/etn/reference/read_resource.md)
+  : Read data from a Data Resource into a tibble data frame
+
 - [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
   : Write a Data Package to disk
 

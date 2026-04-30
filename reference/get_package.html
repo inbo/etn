@@ -107,7 +107,10 @@ You can validate the technical consistency of your Data Package using
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># etn:::credentials_are_set() &amp; interactive()</span></span></span>
 <span class="r-in"><span><span class="co"># Get a Data Package for a project</span></span></span>
-<span class="r-in"><span><span class="fu">get_package</span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="st">"2014_demer"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">package</span> <span class="op">&lt;-</span> <span class="fu">get_package</span><span class="op">(</span>animal_project_code <span class="op">=</span> <span class="st">"2014_demer"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Read a resource</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="read_resource.html">read_resource</a></span><span class="op">(</span><span class="va">package</span>, <span class="st">"animals"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

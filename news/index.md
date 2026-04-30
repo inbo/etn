@@ -27,13 +27,15 @@
   [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
   to download a dataset
   ([\#544](https://github.com/inbo/etn/issues/544)).
-- [`read_package()`](https://inbo.github.io/etn/reference/read_package.md)
-  and
+- [`read_package()`](https://inbo.github.io/etn/reference/read_package.md),
   [`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
+  and
+  [`read_resource()`](https://inbo.github.io/etn/reference/read_resource.md)
   are reexported from
   [frictionless](https://github.com/frictionlessdata/frictionless-r) to
-  read and write Data Packages
-  ([\#525](https://github.com/inbo/etn/issues/525)).
+  read, write and access data from Data Packages
+  ([\#525](https://github.com/inbo/etn/issues/525),
+  [\#570](https://github.com/inbo/etn/issues/570)).
 - [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
   is deprecated. Please use
   [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)

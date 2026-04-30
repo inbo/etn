@@ -73,6 +73,9 @@ Other access functions:
 ``` r
 if (FALSE) { # etn:::credentials_are_set() & interactive()
 # Get a Data Package for a project
-get_package(animal_project_code = "2014_demer")
+(package <- get_package(animal_project_code = "2014_demer"))
+
+# Read a resource
+read_resource(package, "animals")
 }
 ```
