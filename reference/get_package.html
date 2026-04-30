@@ -71,9 +71,10 @@ Write it to disk with <code><a href="write_package.html">write_package()</a></co
 <li><p><code>detections</code>: Acoustic detections for the selected animals, as returned by
 <code><a href="get_acoustic_detections.html">get_acoustic_detections()</a></code>.</p></li>
 <li><p><code>deployments</code>: Acoustic deployments for the <code>acoustic_project_code</code>(s)
-found in detections, as returned by <code><a href="get_acoustic_deployments.html">get_acoustic_deployments()</a></code>.
-This allows you to see when receivers were deployed, even if these did
-not detect the selected animals.</p></li>
+found in detections, as returned by <code><a href="get_acoustic_deployments.html">get_acoustic_deployments()</a></code>, but
+excluding deployments that started after the last detection.
+This allows you to see when and where receivers were deployed, even if
+these did not detect the selected animals.</p></li>
 <li><p><code>receivers</code>: Acoustic receivers for the selected deployments, as returned
 by <code><a href="get_acoustic_receivers.html">get_acoustic_receivers()</a></code>.</p></li>
 </ul></div>

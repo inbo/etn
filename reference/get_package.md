@@ -36,9 +36,10 @@ The Data Package will contain and describe the following resources:
 
 - `deployments`: Acoustic deployments for the `acoustic_project_code`(s)
   found in detections, as returned by
-  [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md).
-  This allows you to see when receivers were deployed, even if these did
-  not detect the selected animals.
+  [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
+  but excluding deployments that started after the last detection. This
+  allows you to see when and where receivers were deployed, even if
+  these did not detect the selected animals.
 
 - `receivers`: Acoustic receivers for the selected deployments, as
   returned by

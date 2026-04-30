@@ -64,7 +64,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.0.0" id="etn-300">etn 3.0.0<a class="anchor" aria-label="anchor" href="#etn-300"></a></h2>
 <div class="section level3">
-<h3 id="use-etn-on-your-computer--3-0-0">Use etn on your computer 🎉<a class="anchor" aria-label="anchor" href="#use-etn-on-your-computer--3-0-0"></a></h3>
+<h3 id="use-etn-on-your-computer-tada-3-0-0">Use etn on your computer 🎉<a class="anchor" aria-label="anchor" href="#use-etn-on-your-computer-tada-3-0-0"></a></h3>
 <ul><li>etn now connects to the ETN database with an API provided by the <a href="https://github.com/inbo/etnservice" class="external-link">etnservice</a> package (<a href="https://github.com/inbo/etn/issues/280" class="external-link">#280</a>). This means you can use the package from your own computer. Note that this will be slower than running it from the <a href="https://rstudio.europeantrackingnetwork.org" class="external-link">ETN RStudio server</a>.</li>
 <li>etn will automatically switch to a local database connection when available (e.g. the ETN RStudio server). Use <code>Sys.setenv(ETN_PROTOCOL = "opencpu")</code> to override this behaviour and force the package to use the API (<a href="https://github.com/inbo/etn/issues/398" class="external-link">#398</a>).</li>
 <li>Queries via the API and the ETN RStudio Server will return the same results (<a href="https://github.com/inbo/etn/issues/317" class="external-link">#317</a>).</li>

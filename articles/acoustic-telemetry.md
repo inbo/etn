@@ -12,12 +12,14 @@ visualizations.
 To start, load the etn package:
 
 ``` r
+
 library(etn)
 ```
 
 And the other packages (with installation if necessary):
 
 ``` r
+
 other_pkgs <- c("dplyr", "lubridate", "leaflet", "htmlwidgets", "htmltools")
 
 # install missing packages
@@ -44,12 +46,14 @@ projects*. As the project codes are not always easy to remember, let’s
 start by getting an overview of all projects:
 
 ``` r
+
 all_projects <- get_animal_projects()
 ```
 
 Show a preview:
 
 ``` r
+
 all_projects |> head(10)
 ```
 
@@ -85,6 +89,7 @@ get more information about it, you can specify it in the
 function directly:
 
 ``` r
+
 projects_code <- c("2014_demer", "2015_dijle")
 projects_study <- get_animal_projects(animal_project_code = projects_code)
 projects_study
@@ -104,6 +109,7 @@ This is exactly the same as retrieving all projects first and filtering
 them afterwards based on column `project_code`:
 
 ``` r
+
 all_projects |>
   filter(project_code %in% c(projects_code))
 ```
@@ -124,6 +130,7 @@ one of the etn functions in the [`list_*`
 family](https://inbo.github.io/etn/reference/index.html#section-list-parameter-options):
 
 ``` r
+
 list_animal_project_codes() |> head(10)
 ```
 
@@ -141,6 +148,7 @@ scientific name, length, capture/release date and location, and the
 attached tag(s) (`tag_serial_number`):
 
 ``` r
+
 animals <- get_animals(animal_project_code = projects_code)
 animals |> head(10)
 ```
@@ -182,6 +190,7 @@ What species and how many individuals are tracked for the projects
 `2014_demer` and `2015_dijle`?
 
 ``` r
+
 animals |>
   count(scientific_name)
 ```
@@ -204,6 +213,7 @@ Let’s say we are interested in the tracking data of Wels catfish
 [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md):
 
 ``` r
+
 detections_silurus <- get_acoustic_detections(
   animal_project_code = projects_code,
   start_date = "2014-01-01",
@@ -215,6 +225,7 @@ detections_silurus <- get_acoustic_detections(
 Preview:
 
 ``` r
+
 detections_silurus |> head(10)
 ```
 
@@ -252,6 +263,7 @@ detections_silurus |> head(10)
 Which individuals have been detected (`animal_id`) and in which period?
 
 ``` r
+
 detections_silurus_period <-
   detections_silurus |>
   mutate(date = date(date_time)) |>
@@ -282,6 +294,7 @@ could use `acoustic_tag_id` as well, i.e. the identifier picked up by
 acoustic receivers:
 
 ``` r
+
 detections_silurus |>
   mutate(date = date(date_time)) |>
   group_by(acoustic_tag_id) |>
@@ -307,6 +320,7 @@ detections_silurus |>
 We can also get the tracking duration of each fish:
 
 ``` r
+
 detections_silurus_duration <-
   detections_silurus |>
   group_by(animal_id) |>
@@ -330,6 +344,7 @@ detections_silurus_duration
 How many times has an individual has been detected?
 
 ``` r
+
 detections_silurus |>
   group_by(animal_id) |>
   count()
@@ -354,6 +369,7 @@ detections_silurus |>
 At how many detection stations have the individuals been detected?
 
 ``` r
+
 detections_silurus |>
   group_by(animal_id) |>
   distinct(station_name) |>
@@ -378,6 +394,7 @@ Which stations have been involved? You can retrieve them using
 `list_values` function applied to column `station_name`:
 
 ``` r
+
 stations_silurus <-
   detections_silurus |>
   list_values(station_name)
@@ -386,6 +403,7 @@ stations_silurus <-
     ## 23 unique station_name values
 
 ``` r
+
 stations_silurus
 ```
 
@@ -396,6 +414,7 @@ stations_silurus
 Notice how a detection station can be linked to multiple deployments:
 
 ``` r
+
 detections_silurus |>
   distinct(station_name, deployment_id) |>
   group_by(station_name) |>
@@ -422,6 +441,7 @@ detections_silurus |>
 Sometimes it’s interesting to know the number of detections per station:
 
 ``` r
+
 n_detect_station <-
   detections_silurus |>
   group_by(station_name) |>
@@ -449,6 +469,7 @@ It’s also interesting to know the number of unique individuals per
 station:
 
 ``` r
+
 n_silurus_station <-
   detections_silurus |>
   distinct(station_name, animal_id) |>
@@ -480,12 +501,14 @@ you can use the function `get_tags`, which returns tag related
 information such as serial number, manufacturer, model, and frequency:
 
 ``` r
+
 tags_id <- list_values(detections_silurus, acoustic_tag_id)
 ```
 
     ## 9 unique acoustic_tag_id values
 
 ``` r
+
 tags_silurus <- get_tags(acoustic_tag_id = tags_id)
 tags_silurus
 ```
@@ -524,6 +547,7 @@ tags_silurus
 You can also retrieve such information by `tag_serial_number`:
 
 ``` r
+
 tags_serial <- unique(detections_silurus$tag_serial_number)
 tags_silurus <- get_tags(tag_serial_number = tags_serial)
 tags_silurus
@@ -569,6 +593,7 @@ All possible `acoustic_tag_id` can be retrieved with the correspondent
 `list_*` function:
 
 ``` r
+
 list_acoustic_tag_ids() |> head(10)
 ```
 
@@ -583,6 +608,7 @@ You can retrieve them via the *list* function
 [`list_values()`](https://inbo.github.io/etn/reference/list_values.md):
 
 ``` r
+
 acoustic_project_codes <- detections_silurus |>
   list_values(acoustic_project_code)
 ```
@@ -590,6 +616,7 @@ acoustic_project_codes <- detections_silurus |>
     ## 2 unique acoustic_project_code values
 
 ``` r
+
 acoustic_project_codes
 ```
 
@@ -600,6 +627,7 @@ function
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md)
 
 ``` r
+
 acoustic_projects_silurus <- get_acoustic_projects(
   acoustic_project_code = acoustic_project_codes
 )
@@ -620,6 +648,7 @@ You can retrieve the full list of acoustic network projects with the
 correspondent `list_*` function:
 
 ``` r
+
 list_acoustic_project_codes() |> head(10)
 ```
 
@@ -637,6 +666,7 @@ in `acoustic_project_codes` by using
 function:
 
 ``` r
+
 deployments <- get_acoustic_deployments(
   acoustic_project_code = acoustic_project_codes
 )
@@ -680,6 +710,7 @@ These are the deployments of the acoustic receivers involved in
 `detections_silurus`:
 
 ``` r
+
 deploys_silurus <-
   detections_silurus |>
   list_values(deployment_id)
@@ -688,6 +719,7 @@ deploys_silurus <-
     ## 33 unique deployment_id values
 
 ``` r
+
 deploys_silurus
 ```
 
@@ -700,6 +732,7 @@ More information about them can be retrieved via
 function with argument `deployment_id`:
 
 ``` r
+
 deployments_silurus <- get_acoustic_deployments(
   deployment_id = deploys_silurus
 )
@@ -742,6 +775,7 @@ deployments_silurus
 Deployment duration:
 
 ``` r
+
 deployments_silurus_duration <-
   deployments_silurus |>
   mutate(duration = as.duration(recover_date_time - deploy_date_time)) |>
@@ -769,6 +803,7 @@ Number of days a deployment detected the passage of one or more
 individuals:
 
 ``` r
+
 n_active_days_deployments_silurus <-
   detections_silurus |>
   mutate(date = date(date_time)) |>
@@ -798,6 +833,7 @@ Relative detection duration, i.e. number of days with at least one
 detection divided by deployment duration:
 
 ``` r
+
 rel_det_duration_silurus <-
   n_active_days_deployments_silurus |>
   left_join(
@@ -837,6 +873,7 @@ station name and the acoustic project code it belongs to as pop-ups.
 First, we retrieve the coordinates of the stations:
 
 ``` r
+
 geo_info_stations <-
   detections_silurus |>
   distinct(
@@ -867,6 +904,7 @@ geo_info_stations
 To be able to produce the desired map:
 
 ``` r
+
 leaflet(geo_info_stations) |>
   addTiles() |>
   addMarkers(
@@ -881,6 +919,7 @@ We can visualize the number of detections per station,
 `n_detect_station`, by joining it with `geo_info_stations`:
 
 ``` r
+
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
@@ -919,6 +958,7 @@ In a similar way we can visualize the number of detected individuals per
 station, `n_silurus_station`:
 
 ``` r
+
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",
@@ -958,6 +998,7 @@ deployments. First, we have to retrieve the deployment geographical
 coordinates:
 
 ``` r
+
 geo_info_deploys <-
   detections_silurus |>
   distinct(
@@ -1002,6 +1043,7 @@ We are ready to create the desired map, where we show the deployment ID,
 the station name and the network project as popups:
 
 ``` r
+
 # Create a continuous colour palette function
 pal <- colorNumeric(
   palette = "viridis",

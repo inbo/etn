@@ -122,6 +122,7 @@ Here is how you can migrate:
 3.  Update your scripts:
 
     ``` r
+
     # Good
     get_animals(animal_id = 305)
 

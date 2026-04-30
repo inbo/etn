@@ -22,6 +22,7 @@ etn will use those rather than asking every time.
 1.  Open your `.Renviron` file with:
 
     ``` r
+
     # install.packages("usethis")
     usethis::edit_r_environ()
     ```
@@ -38,6 +39,7 @@ etn will use those rather than asking every time.
 4.  Try:
 
     ``` r
+
     library(etn)
     get_animal_projects() # This should return a data frame
     ```

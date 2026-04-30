@@ -8,6 +8,7 @@ Variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html).
 To temporarily set an option for the duration of an R session, use:
 
 ``` r
+
 Sys.setenv(ETN_PROTOCOL = "opencpu")
 # Retrieve with Sys.getenv("ETN_PROTOCOL")
 ```

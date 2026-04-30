@@ -23,6 +23,7 @@ You can install the development version of etn from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("inbo/etn")
 ```
@@ -38,6 +39,7 @@ for instructions.
 With etn you can query ETN (meta)data:
 
 ``` r
+
 library(etn)
 
 # Get animal metadata for a project

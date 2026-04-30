@@ -24,14 +24,14 @@ data repository. Includes option to filter on scientific names.
 The data are downloaded as a **[Frictionless Data
 Package](https://specs.frictionlessdata.io/data-package/)** containing:
 
-|                    |                                                                                                                                                                                                                                                                                                              |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| file               | description                                                                                                                                                                                                                                                                                                  |
-| `animals.csv`      | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md).                                                                                                                             |
-| `tags.csv`         | Tags associated with the selected animals, as returned by [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md).                                                                                                                                                                                  |
-| `detections.csv`   | Acoustic detections for the selected animals, as returned by [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md).                                                                                                                                                 |
-| `deployments.csv`  | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md). This allows users to see when receivers were deployed, even if these did not detect the selected animals.      |
-| `receivers.csv`    | Acoustic receivers for the selected deployments, as returned by [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md).                                                                                                                                                |
+|  |  |
+|----|----|
+| file | description |
+| `animals.csv` | Animals related to an `animal_project_code`, optionally filtered on `scientific_name`(s), as returned by [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md). |
+| `tags.csv` | Tags associated with the selected animals, as returned by [`get_tags()`](https://inbo.github.io/etn/reference/get_tags.md). |
+| `detections.csv` | Acoustic detections for the selected animals, as returned by [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md). |
+| `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md). This allows users to see when receivers were deployed, even if these did not detect the selected animals. |
+| `receivers.csv` | Acoustic receivers for the selected deployments, as returned by [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md). |
 | `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package. |
 
 The function will report the number of records per csv file, as well as
