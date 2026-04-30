@@ -69,10 +69,3 @@
   : List all available tag serial numbers
 - [`list_values()`](https://inbo.github.io/etn/reference/list_values.md)
   : List all unique values from a data.frame column
-
-## Deprecated functions
-
-- [`connect_to_etn()`](https://inbo.github.io/etn/reference/connect_to_etn.md)
-  **\[deprecated\]** : Connect to the ETN database
-- [`download_acoustic_dataset()`](https://inbo.github.io/etn/reference/download_acoustic_dataset.md)
-  **\[deprecated\]** : Download acoustic data package

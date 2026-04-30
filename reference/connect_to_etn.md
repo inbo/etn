@@ -27,7 +27,11 @@ This function is no longer in use, and returns `NULL` invisibly.
 
 ``` r
 if (FALSE) { # \dontrun{
-# This will result in a deprecation warning!
+# Before
 my_connection <- connect_to_etn()
+get_animals(connection = my_connection)
+
+# Now
+get_animals()
 } # }
 ```

@@ -75,8 +75,12 @@ will be prompted to enter them.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># This will result in a deprecation warning!</span></span></span>
+<span class="r-in"><span><span class="co"># Before</span></span></span>
 <span class="r-in"><span><span class="va">my_connection</span> <span class="op">&lt;-</span> <span class="fu">connect_to_etn</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span>connection <span class="op">=</span> <span class="va">my_connection</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Now</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="get_animals.html">get_animals</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
