@@ -24,5 +24,4 @@ reference:
   - has_concept("list functions")
 - title: Deprecated functions
   contents:
-  - connect_to_etn
   - download_acoustic_dataset

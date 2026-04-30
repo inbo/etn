@@ -11,11 +11,15 @@
 #' @param ... Any arguments passed to this function are ignored.
 #' @return This function is no longer in use, and returns `NULL` invisibly.
 #' @family connect functions
-#' @export
+#' @keywords internal
 #' @examples
 #' \dontrun{
-#' # This will result in a deprecation warning!
+#' # Before
 #' my_connection <- connect_to_etn()
+#' get_animals(connection = my_connection)
+#'
+#' # Now
+#' get_animals()
 #' }
 connect_to_etn <- function(...) {
   lifecycle::deprecate_warn(
