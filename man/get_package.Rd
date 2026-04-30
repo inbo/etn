@@ -52,7 +52,10 @@ frictionless validate datapackage.json
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Get a Data Package for a project
-get_package(animal_project_code = "2014_demer")
+(package <- get_package(animal_project_code = "2014_demer"))
+
+# Read a resource
+read_resource(package, "animals")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
