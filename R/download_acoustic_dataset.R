@@ -55,6 +55,7 @@
 #' @return CSV and JSON files written to disk.
 #' @family download functions
 #' @keywords internal
+#' @export
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Before
 #' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
