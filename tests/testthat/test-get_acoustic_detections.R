@@ -457,6 +457,37 @@ test_that("get_acoustic_detections() allows selecting on multiple acoustic_proje
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
+test_that("get_acoustic_detections() allows selecting on deployment_id", {
+  skip_if_no_authentication()
+
+  # Test via the OpenCPU API
+  withr::local_envvar(ETNSERVICE_PROTOCOL = "opencpu")
+
+  vcr::local_cassette("detections_deployment_id")
+  # Select single value
+  single_deployment_id <- 1436L # From demer
+  expect_identical(
+    get_acoustic_detections(
+      deployment_id = single_deployment_id
+    ) |>
+      dplyr::pull(deployment_id) |>
+    unique(),
+    single_deployment_id
+  )
+
+  # Select multiple values
+  multiple_deployment_ids <- c(1427L, 1432L)
+  expect_identical(
+    get_acoustic_detections(
+      deployment_id = multiple_deployment_ids
+    ) |>
+      dplyr::distinct(deployment_id) |>
+      dplyr::pull() |>
+      sort(),
+    multiple_deployment_ids
+  )
+})
+
 test_that("get_acoustic_detections() allows selecting on receiver_id", {
   skip_if_no_authentication()
 
@@ -667,7 +698,7 @@ test_that("get_acoustic_detections() can return detections not (yet) associated 
   expect_gt(nrow(get_acoustic_detections(acoustic_tag_id = "A180-1702-49684")), 0)
 })
 
-test_that("get_acoustic_detection() reports no progress when disabled", {
+test_that("get_acoustic_detections() reports no progress when disabled", {
   skip_if_no_authentication()
 
   # Test via the OpenCPU API

@@ -13,6 +13,7 @@ get_acoustic_detections(
   animal_project_code = NULL,
   scientific_name = NULL,
   acoustic_project_code = NULL,
+  deployment_id = NULL,
   receiver_id = NULL,
   station_name = NULL,
   limit = FALSE,
@@ -42,6 +43,8 @@ codes. Case-insensitive.}
 
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
+
+\item{deployment_id}{Integer (vector). One or more deployment identifiers.}
 
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
