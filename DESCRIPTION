@@ -40,7 +40,7 @@ Imports:
     assertthat,
     cachem,
     cli,
-    dplyr,
+    dplyr (>= 1.2.0),
     frictionless,
     glue,
     httr2,
