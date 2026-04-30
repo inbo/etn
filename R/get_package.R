@@ -36,8 +36,9 @@
 #' ```
 #' @examplesIf etn:::credentials_are_set() & interactive()
 #' # Get a Data Package for a project
-#' package <- get_package(animal_project_code = "2014_demer")
-#' # Data sources can be read with `read_resource()`, e.g.:
+#' (package <- get_package(animal_project_code = "2014_demer"))
+#'
+#' # Read a resource
 #' read_resource(package, "animals")
 get_package <- function(animal_project_code) {
   # Check animal_project_code
