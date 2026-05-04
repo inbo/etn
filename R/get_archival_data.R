@@ -46,7 +46,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Parse responses ---------------------------------------------------------
 
-  sensor_data |>
+  sensor_data <-
     purrr::map(
     responses,
     \(response) {
