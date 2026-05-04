@@ -51,7 +51,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     responses,
     \(response) {
       httr2::resp_body_raw(response) |>
-        readr::read_csv()
+        readr::read_csv(show_col_types = FALSE)
     }
   ) |>
     purrr::list_rbind()
