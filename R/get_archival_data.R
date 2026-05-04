@@ -56,6 +56,8 @@ get_archival_data <- function(tag_serial_number = NULL,
   ) |>
     purrr::list_rbind()
 
+  sensor_data
+
 }
 
 #' Fetch a table with UUID references to archival data files
