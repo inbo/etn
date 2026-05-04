@@ -31,7 +31,7 @@ get_archival_data <- function(tag_serial_number = NULL,
           httr2::req_url_path_append(uuid)
       }
     ) |>
-    purrr::map(\(req) {httr2::req_retry(max_tries = 2)}) |>
+    purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)}) |>
     purrr::map(\(req) {httr2::req_throttle(req,
                                            capacity = 5,
                                            fill_time_s = 20,
