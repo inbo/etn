@@ -37,13 +37,12 @@ NULL
 #' get_receiver_logs(deployment_id = 6028,
 #'                   start_date = "2020",
 #'                   end_date = "2020-02-01")
-get_receiver_logs <- function(
-                                     deployment_id,
-                                     receiver_id = NULL,
-                                     station_name = NULL,
-                                     start_date = NULL,
-                                     end_date = NULL,
-                                     limit = FALSE) {
+get_receiver_logs <- function(deployment_id,
+                              receiver_id = NULL,
+                              station_name = NULL,
+                              start_date = NULL,
+                              end_date = NULL,
+                              limit = FALSE) {
 
   # Return error on missing required arguments: deployment_id
   if (missing(deployment_id)) {
@@ -57,7 +56,7 @@ get_receiver_logs <- function(
   api_return <- conduct_parent_to_helpers(protocol = select_protocol())
   ## combine json strings into single array and parse
   log_data <-
-    paste0("[",paste(api_return$log_data, collapse = ","), "]") |>
+    paste0("[", paste(api_return$log_data, collapse = ","), "]") |>
     jsonlite::fromJSON()
 
   # Add log data as seperate columns
@@ -65,7 +64,7 @@ get_receiver_logs <- function(
   diagnostics <- dplyr::bind_cols(
     dplyr::select(api_return, -dplyr::all_of("log_data")),
     log_data
-    )
+  )
 
   # Early return when no log_data has been found
   if (nrow(diagnostics) == 0) {
