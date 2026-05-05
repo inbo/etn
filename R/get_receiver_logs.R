@@ -125,7 +125,6 @@ get_receiver_logs <- function(
         # faster than dplyr::first()
         ~.x[!is.na(.x)][1L]
       ),
-      # .groups = "drop",
       .by = dplyr::all_of(c(
         "deployment_id",
         "receiver_id",
