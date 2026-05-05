@@ -36,7 +36,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     ) |>
     purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)}) |>
     purrr::map(\(req) {httr2::req_throttle(req,
-                                           capacity = 5,
+                                           capacity = 10,
                                            fill_time_s = 20,
                                            realm = "https://www.lifewatch.be")}
                )
