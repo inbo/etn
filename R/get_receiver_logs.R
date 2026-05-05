@@ -137,11 +137,16 @@ get_receiver_logs <- function(
   # Convert column classes to classes based on base parsing
   diagnostics <-
     diagnostics |>
-    dplyr::mutate(dplyr::across(dplyr::where(is.character),
-                                ~ type.convert(.x, as.is = TRUE)),
-                  dplyr::across(dplyr::ends_with("_UTC"),
-                                lubridate::ymd_hms)
-                  )
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::where(is.character),
+        ~ type.convert(.x, as.is = TRUE)
+      ),
+      dplyr::across(
+        dplyr::ends_with("_UTC"),
+        lubridate::ymd_hms
+      )
+    )
 
   # Return a tibble
   dplyr::as_tibble(diagnostics)
