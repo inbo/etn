@@ -75,7 +75,8 @@ get_receiver_logs <- function(
   # Replace empty strings with NA
   diagnostics <-
     diagnostics |>
-    dplyr::mutate(dplyr::across(is.character, ~dplyr::na_if(.x, "")))
+    dplyr::mutate(dplyr::across(dplyr::where(is.character),
+                                ~ dplyr::na_if(.x, "")))
 
   # Tidy up column names
   diagnostics <-
