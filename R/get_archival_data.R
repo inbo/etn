@@ -2,7 +2,7 @@
 #'
 #' @inheritParams get_animals
 #'
-#' @returns
+#' @returns A data.frame with the archival data values.
 #' @export
 #'
 #' @examplesIf interactive() & credentials_are_set()
@@ -73,8 +73,9 @@ get_archival_data <- function(tag_serial_number = NULL,
 #'   `animal_id`, `tag_serial_number`, and `animal_project_code`.
 #'
 #' @family helper functions
-#' @examplesIf interactive() & credentials_are_set() get_archival_data_uuid()
-#'   get_archival_data_uuid(tag_serial_number = "22035610")
+#' @examplesIf interactive() & credentials_are_set()
+#' get_archival_data_uuid()
+#' get_archival_data_uuid(tag_serial_number = "22035610")
 get_archival_data_uuid <- function(
   tag_serial_number = NULL,
   animal_id = NULL,
