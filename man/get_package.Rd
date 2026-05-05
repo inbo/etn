@@ -27,9 +27,10 @@ The Data Package will contain and describe the following resources:
 \item \code{detections}: Acoustic detections for the selected animals, as returned by
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.
 \item \code{deployments}: Acoustic deployments for the \code{acoustic_project_code}(s)
-found in detections, as returned by \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}}.
-This allows you to see when receivers were deployed, even if these did
-not detect the selected animals.
+found in detections, as returned by \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}}, but
+excluding deployments that started after the last detection.
+This allows you to see when and where receivers were deployed, even if
+these did not detect the selected animals.
 \item \code{receivers}: Acoustic receivers for the selected deployments, as returned
 by \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}}.
 }
@@ -51,7 +52,10 @@ frictionless validate datapackage.json
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Get a Data Package for a project
-get_package(animal_project_code = "2014_demer")
+(package <- get_package(animal_project_code = "2014_demer"))
+
+# Read a resource
+read_resource(package, "animals")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

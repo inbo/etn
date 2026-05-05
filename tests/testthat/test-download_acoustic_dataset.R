@@ -4,10 +4,10 @@ test_that("download_acoustic_dataset() returns deprecation warning", {
 
   datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
   lifecycle::expect_deprecated(
-    download_acoustic_dataset(
+    suppressMessages(download_acoustic_dataset(
       animal_project_code = "2014_demer",
       directory = datapackage_path
-    )
+    ))
   )
 })
 

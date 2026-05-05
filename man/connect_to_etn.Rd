@@ -22,8 +22,13 @@ will be prompted to enter them.
 }
 \examples{
 \dontrun{
-# This will result in a deprecation warning!
+# Before
 my_connection <- connect_to_etn()
+get_animals(connection = my_connection)
+
+# Now
+get_animals()
 }
 }
 \concept{connect functions}
+\keyword{internal}
