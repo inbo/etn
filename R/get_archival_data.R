@@ -1,6 +1,8 @@
 #' Get processed tag archival data
 #'
 #' @inheritParams get_animals
+#' @param ... Additional arguments passed to `readr::read_csv()` when reading
+#'   the csv files.
 #'
 #' @returns A data.frame with the archival data values.
 #' @export
@@ -9,7 +11,8 @@
 #'
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
-                              animal_project_code = NULL
+                              animal_project_code = NULL,
+                              ...
                               ) {
 
   # Fetch file uuids --------------------------------------------------------
@@ -51,7 +54,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     responses,
     \(response) {
       httr2::resp_body_raw(response) |>
-        readr::read_csv(show_col_types = FALSE)
+        readr::read_csv(show_col_types = FALSE, ...)
     }
   ) |>
     purrr::list_rbind()
