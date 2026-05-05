@@ -54,7 +54,15 @@ get_archival_data <- function(tag_serial_number = NULL,
     responses,
     \(response) {
       httr2::resp_body_raw(response) |>
-        readr::read_csv(show_col_types = FALSE, ...)
+        readr::read_csv(show_col_types = FALSE,
+                        col_types =
+                          readr::cols(
+                            tag_id = readr::col_character(),
+                            timestamp_utc = readr::col_datetime(),
+                            measurement_type = readr::col_character(),
+                            measurement_value = readr::col_double(),
+                            measurement_unit = readr::col_character()),
+                        ...)
     }
   ) |>
     purrr::list_rbind()
