@@ -12,6 +12,7 @@
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
+                              progress = TRUE,
                               ...
                               ) {
 
