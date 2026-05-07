@@ -40,26 +40,37 @@ get_archival_data <- function(tag_serial_number = NULL,
       }
     ) |>
     purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)}) |>
-    purrr::map(\(req) {httr2::req_throttle(req,
-                                           capacity = 10,
-                                           fill_time_s = 20,
-                                           realm = "https://www.lifewatch.be")}
-               )
+    # purrr::map(\(req) {httr2::req_throttle(req,
+    #                                        capacity = 10,
+    #                                        fill_time_s = 20,
+    #                                        realm = "https://www.lifewatch.be")}
+    #            )
+    purrr::map(\(req) {httr2::req_progress(req, type = "down")})
 
 
   ## Perform requests -------------------------------------------------------
 
-  responses <-
-    httr2::req_perform_parallel(requests)
+  temp_dir <- withr::local_tempdir(pattern = "archivaldata_")
+  temp_file_paths <- file.path(temp_dir, names(requests)) |>
+    purrr::set_names(nm = names(requests))
+  # responses <-
+  #   httr2::req_perform_sequential(requests,
+  #                                 paths = file.path(temp_dir, names(requests)),
+  #                                 progress = progress)
 
+  responses <-
+    purrr::map2(requests, temp_file_paths, \(req, path) {
+      httr2::req_perform(req, path = path)
+    }, .progress = progress)
   # Parse responses ---------------------------------------------------------
 
   sensor_data <-
+    temp_file_paths |>
     purrr::map(
-    responses,
-    \(response) {
-      httr2::resp_body_raw(response) |>
-        readr::read_csv(show_col_types = FALSE,
+    \(csv_path) {
+        readr::read_csv(
+          file = csv_path,
+          show_col_types = FALSE,
                         col_types =
                           readr::cols(
                             tag_id = readr::col_character(),
@@ -70,7 +81,8 @@ get_archival_data <- function(tag_serial_number = NULL,
                         ...)
     }
   ) |>
-    purrr::list_rbind()
+    purrr::list_rbind(names_to = "uuid")
+
 
   sensor_data
 
