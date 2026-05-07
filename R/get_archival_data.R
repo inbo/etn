@@ -31,8 +31,8 @@ get_archival_data <- function(tag_serial_number = NULL,
   ## Prepare requests -------------------------------------------------------
 
   requests <-
+    purrr::set_names(uuids, nm = uuids) |>
     purrr::map(
-      uuids,
       \(uuid) {
         httr2::request("https://www.lifewatch.be") |>
           httr2::req_url_path_append("etn", "archival-data", "file") |>
