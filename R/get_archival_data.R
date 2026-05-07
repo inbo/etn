@@ -16,10 +16,14 @@ get_archival_data <- function(tag_serial_number = NULL,
                               ) {
 
   # Fetch file uuids --------------------------------------------------------
+  uuid_tbl <-
+    get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code)
   uuids <-
-    get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code) |>
-    dplyr::pull("converted_archival_file_uuid")
-
+    uuid_tbl |>
+    dplyr::pull("converted_archival_file_uuid") |>
+    # Sometimes, multiple uuids are passed. We only need to download every file
+    # once.
+    unique()
 
   # Read files from web -----------------------------------------------------
 
