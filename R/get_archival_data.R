@@ -84,7 +84,19 @@ get_archival_data <- function(tag_serial_number = NULL,
     purrr::list_rbind(names_to = "uuid")
 
 
-  sensor_data
+  ## Add metadata ------------------------------------------------------------
+
+  # Add the metadata returned by get_archive_data_uuid() so at least the
+  # function arguments are included in the returned  table as columns.
+
+  sensor_data |>
+    dplyr::left_join(uuid_tbl,
+      by = c("uuid" = "converted_archival_file_uuid"),
+      # Every metadata entry should match many sensor records
+      relationship = "many-to-one"
+    ) |>
+    # Don't return the UUID
+    dplyr::select(-"uuid")
 
 }
 
