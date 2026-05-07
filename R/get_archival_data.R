@@ -39,14 +39,7 @@ get_archival_data <- function(tag_serial_number = NULL,
           httr2::req_url_path_append(uuid)
       }
     ) |>
-    purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)}) |>
-    # purrr::map(\(req) {httr2::req_throttle(req,
-    #                                        capacity = 10,
-    #                                        fill_time_s = 20,
-    #                                        realm = "https://www.lifewatch.be")}
-    #            )
-    purrr::map(\(req) {httr2::req_progress(req, type = "down")})
-
+    purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)})
 
   ## Perform requests -------------------------------------------------------
 
