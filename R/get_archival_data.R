@@ -1,8 +1,6 @@
 #' Get processed tag archival data
 #'
 #' @inheritParams get_animals
-#' @param ... Additional arguments passed to `readr::read_csv()` when reading
-#'   the csv files.
 #'
 #' @returns A data.frame with the archival data values.
 #' @export
@@ -12,8 +10,7 @@
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
-                              progress = TRUE,
-                              ...
+                              progress = TRUE
                               ) {
 
   # Fetch file uuids --------------------------------------------------------
@@ -66,24 +63,23 @@ get_archival_data <- function(tag_serial_number = NULL,
     length(readLines(filepath, n = 2)) > 1
   })
 
-  sensor_data <-
-    temp_file_paths |>
-    purrr::map(
-    \(csv_path) {
-        readr::read_csv(
-          file = csv_path,
-          show_col_types = FALSE,
-                        col_types =
-                          readr::cols(
-                            tag_id = readr::col_character(),
-                            timestamp_utc = readr::col_datetime(),
-                            measurement_type = readr::col_character(),
-                            measurement_value = readr::col_double(),
-                            measurement_unit = readr::col_character()),
-                        ...)
-    }
-  ) |>
-    purrr::list_rbind(names_to = "uuid")
+  # sensor_data <-
+  #   temp_file_paths |>
+  #   purrr::map(
+  #   \(csv_path) {
+  #       readr::read_csv(
+  #         file = csv_path,
+  #         show_col_types = FALSE,
+  #                       col_types =
+  #                         readr::cols(
+  #                           tag_id = readr::col_character(),
+  #                           timestamp_utc = readr::col_datetime(),
+  #                           measurement_type = readr::col_character(),
+  #                           measurement_value = readr::col_double(),
+  #                           measurement_unit = readr::col_character()))
+  #   }
+  # ) |>
+  #   purrr::list_rbind(names_to = "uuid")
 
   csv_schema <- arrow::schema(
     tag_id            = arrow::string(),
