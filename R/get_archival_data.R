@@ -117,7 +117,8 @@ get_archival_data <- function(tag_serial_number = NULL,
     # since we provide a schema, we should skip reading the header
     skip = 1
   ) |>
-    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = 49))
+    # Take the last 36 characters of the filename (length of a UUID)
+    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = -36L))
 
   # also duckdb
   # duckdbfs::open_dataset(sources = temp_file_paths,
