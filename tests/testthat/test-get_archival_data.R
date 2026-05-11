@@ -68,7 +68,7 @@ test_that("get_archival_data() returns error on no archival data found", {
 test_that("get_archival_data() can filter on tag_serial_number", {
   expect_identical(
     get_archival_data(tag_serial_number = "A15757") |>
-      dplyr::pull("tag_id") |>
+      dplyr::pull("tag_serial_number") |>
       unique(),
     "A15757"
   )
