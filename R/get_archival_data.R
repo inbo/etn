@@ -49,7 +49,11 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   responses <-
     purrr::map2(requests, temp_file_paths, \(req, path) {
-      httr2::req_perform(req, path = path)
+      if (file.exists(path) & file.size(path) > 0) {
+        NULL
+      } else {
+        httr2::req_perform(req, path = path)
+      }
     }, .progress = progress)
 
   # Parse responses ---------------------------------------------------------
