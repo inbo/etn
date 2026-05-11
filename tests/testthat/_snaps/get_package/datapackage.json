@@ -1500,6 +1500,28 @@
         ],
         "primaryKey": "receiver_id"
       }
+    },
+    {
+      "name": "references",
+      "path": "references.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "reference_for",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "reference",
+            "type": "string",
+            "format": "default"
+          }
+        ]
+      }
     }
   ]
 }
