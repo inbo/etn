@@ -48,6 +48,7 @@ test_that("get_archival_data() returns the expected column classes", {
 })
 
 test_that("get_archival_data() has values for identifier columns", {
+  skip("unfinished test")
   archival_data <- get_archival_data()
   expect_all_false(
     is.na()
