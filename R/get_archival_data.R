@@ -46,16 +46,20 @@ get_archival_data <- function(tag_serial_number = NULL,
   temp_dir <- withr::local_tempdir(pattern = "archivaldata_")
   temp_file_paths <- file.path(temp_dir, names(requests)) |>
     purrr::set_names(nm = names(requests))
-  # responses <-
-  #   httr2::req_perform_sequential(requests,
-  #                                 paths = file.path(temp_dir, names(requests)),
-  #                                 progress = progress)
 
   responses <-
     purrr::map2(requests, temp_file_paths, \(req, path) {
       httr2::req_perform(req, path = path)
     }, .progress = progress)
+
   # Parse responses ---------------------------------------------------------
+
+  # drop csv files that have a header but no records (issue in view), this
+  # shouldn't really happen. It's a bug in the view. Arrow can't handle reading
+  # this file, duckdb and readr can.
+  temp_file_paths <- purrr::keep(temp_file_paths, \(filepath){
+    length(readLines(filepath, n = 2)) > 1
+  })
 
   sensor_data <-
     temp_file_paths |>
@@ -75,6 +79,51 @@ get_archival_data <- function(tag_serial_number = NULL,
     }
   ) |>
     purrr::list_rbind(names_to = "uuid")
+
+  csv_schema <- arrow::schema(
+    tag_id            = arrow::string(),
+    timestamp_utc     = arrow::timestamp("s", timezone = "UTC"),
+    measurement_type  = arrow::string(),
+    measurement_value = arrow::float64(),
+    measurement_unit  = arrow::string()
+  )
+
+  # arrow only
+  arrow::open_csv_dataset(
+    temp_file_paths,
+    schema = csv_schema,
+    # since we provide a schema, we should skip reading the header
+    skip = 1
+  ) |>
+    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = 49)) |>
+    dplyr::collect()
+
+  # also duckdb
+  duckdbfs::open_dataset(sources = temp_file_paths,
+                         schema = csv_schema,
+                         format = "csv",
+                         filename = TRUE) |>
+    dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
+    dplyr::collect()
+
+  # duckdb, no httr2
+  uuid_tbl_ddb <- arrow::to_duckdb(uuid_tbl,
+                                   con = duckdbfs::cached_connection())
+
+  requests |>
+    # get urls, you'd just make them as urls instead of going url to request to
+    # url
+    purrr::map_chr(httr2::req_get_url) |>
+    duckdbfs::open_dataset(format = "csv",
+                           schema = csv_schema,
+                           filename = TRUE) |>
+    dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
+    dplyr::left_join(uuid_tbl_ddb,
+                     by = c("uuid" = "converted_archival_file_uuid")
+    ) |>
+    # Don't return the UUID
+    dplyr::select(-c("uuid", "filename")) |>
+    dplyr::collect()
 
 
   ## Add metadata ------------------------------------------------------------
