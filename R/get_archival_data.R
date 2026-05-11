@@ -1,6 +1,16 @@
 #' Get processed tag archival data
 #'
 #' @inheritParams get_animals
+#' @inheritParams get_acoustic_detections
+#' @param animal_project_code `r lifecycle::badge("experimental")` Character
+#'   (vector). One or more animal project codes. Case-insensitive. An animal
+#'   project can contain many gigabytes of archival data. Downloading this data
+#'   may take a while and  exceed the available RAM or Storage of your computer
+#' @param return_as `r lifecycle::badge("experimental")` Character. One of "tibble" or "arrow". Whether to return the
+#'   data as an in memory tibble or an out of memory arrow dataset. The latter
+#'   is recommended for large datasets, but requires more disk space and may be
+#'   slower to query. When selecting "arrow" keep in mind that the downloaded
+#'   data will remain stored on your computer until R is restarted.
 #'
 #' @returns A data.frame with the archival data values.
 #' @export
