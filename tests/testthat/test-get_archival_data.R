@@ -1,20 +1,24 @@
 test_that("get_archival_data() returns a tibble by default", {
   expect_s3_class(
-    get_archival_data(tag_serial_number = "A15757"),
+    get_archival_data(tag_serial_number = "A15757",
+                      limit = TRUE),
     "tbl"
   )
 })
 
 test_that("get_archival_data() can return an arrow datasetquery", {
   expect_s3_class(
-    get_archival_data(tag_serial_number = "A15757", return_as = "arrow"),
+    get_archival_data(tag_serial_number = "A15757",
+                      return_as = "arrow",
+                      limit = TRUE),
     "arrow_dplyr_query"
   )
 })
 
 test_that("get_archival_data() returns the expected fields", {
   expect_named(
-    get_archival_data(tag_serial_number = "A15757"),
+    get_archival_data(tag_serial_number = "A15757",
+                      limit = TRUE),
     c(
       "tag_id",
       "timestamp_utc",
@@ -31,7 +35,8 @@ test_that("get_archival_data() returns the expected fields", {
 test_that("get_archival_data() returns the expected column classes", {
   expect_identical(
     purrr::map(
-      get_archival_data(tag_serial_number = "A15757"),
+      get_archival_data(tag_serial_number = "A15757",
+                        limit = TRUE),
       class
     ),
     list(
@@ -50,7 +55,8 @@ test_that("get_archival_data() returns the expected column classes", {
 test_that("get_archival_data() has values for identifier columns", {
   # These columns are fetched via get_archival_data_uuid() from a database view,
   # and should never be empty.
-  archival_data <- get_archival_data(tag_serial_number = "A15757")
+  archival_data <- get_archival_data(tag_serial_number = "A15757",
+                                     limit = TRUE)
   expect_all_false(is.na(archival_data$tag_serial_number))
   expect_all_false(is.na(archival_data$animal_id))
   expect_all_false(is.na(archival_data$animal_project_code))
@@ -78,7 +84,8 @@ test_that("get_archival_data() can filter on tag_serial_number", {
 
 test_that("get_archival_data() can filter on animal_id", {
   expect_identical(
-    get_archival_data(animal_id = 18113) |>
+    get_archival_data(animal_id = 18113,
+                      limit = TRUE) |>
       dplyr::pull("animal_id") |>
       unique(),
     18113L
@@ -86,12 +93,18 @@ test_that("get_archival_data() can filter on animal_id", {
 })
 
 test_that("get_archival_data() can filter on animal_project_code", {
-  skip("THIS WILL CRASH YOUR SESSION")
   expect_identical(
-    get_archival_data(animal_project_code = "2018_EC") |>
+    get_archival_data(animal_project_code = "2018_EC", limit = TRUE) |>
       dplyr::pull("animal_project_code") |>
       unique(),
     "2018_EC"
+  )
+})
+
+test_that("get_archival_data() returns 100 rows when limit is set", {
+  expect_shape(
+    get_archival_data(animal_project_code = "2018_EC", limit = TRUE),
+    nrow = 100L
   )
 })
 

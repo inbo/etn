@@ -20,6 +20,7 @@
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
+                              limit = FALSE,
                               progress = TRUE,
                               return_as = c("tibble", "arrow")
                               ) {
@@ -45,13 +46,9 @@ get_archival_data <- function(tag_serial_number = NULL,
   uuids <-
     uuid_tbl |>
     dplyr::pull("converted_archival_file_uuid") |>
-    # Sometimes, multiple uuids are passed. We only need to download every file
-    # once.
     unique()
 
-
   ## Stop if no data found --------------------------------------------------
-
   if(length(uuids) == 0){
     cli::cli_abort(
       "No archival data found for the provided filters.",
@@ -92,7 +89,6 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Read files from web -----------------------------------------------------
 
   ## Prepare requests -------------------------------------------------------
-
   requests <-
     purrr::set_names(uuids, nm = uuids) |>
     purrr::map(
@@ -103,6 +99,11 @@ get_archival_data <- function(tag_serial_number = NULL,
       }
     ) |>
     purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)})
+
+  # If limit is TRUE, we only want to fetch a single file.
+  if(limit){
+    requests <- requests[1]
+  }
 
   ## Perform requests -------------------------------------------------------
 
@@ -121,15 +122,24 @@ get_archival_data <- function(tag_serial_number = NULL,
   temp_file_paths <- file.path(temp_dir, names(requests)) |>
     purrr::set_names(nm = names(requests))
 
-  responses <-
-    purrr::map2(requests, temp_file_paths, \(req, path) {
-      if (file.exists(path) & file.size(path) > 0) {
-        NULL
-      } else {
-        httr2::req_perform(req, path = path)
-      }
-    }, .progress = ifelse(progress, "Downloading", FALSE)
-    )
+  if (limit) {
+    # Only fetch the first file
+    requests |>
+      purrr::map(httr2::req_perform_connection) |>
+      # Read the header, and 100 lines
+      purrr::map(\(req) {httr2::resp_stream_lines(req, lines = 101)}) |>
+      # Write to temp file, same as normally
+      purrr::walk2(temp_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
+  } else {
+    responses <-
+      purrr::map2(requests, temp_file_paths, \(req, path) {
+        if (file.exists(path) & file.size(path) > 0) {
+          NULL
+        } else {
+          httr2::req_perform(req, path = path)
+        }
+      }, .progress = ifelse(progress, "Downloading", FALSE))
+  }
 
   # Parse responses ---------------------------------------------------------
 
@@ -148,7 +158,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     measurement_unit  = arrow::string()
   )
 
-  # arrow only
+  # Use arrow to process and combine the local csv files out of memory
   sensor_data <-
     arrow::open_csv_dataset(
     temp_file_paths,
