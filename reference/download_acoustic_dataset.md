@@ -4,8 +4,9 @@
 
 `download_acoustic_dataset()` is deprecated. Please use
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
-instead, which is more versatile, adds field definitions, and returns a
-Data Package object that can be passed to other functions. Note that
+instead, which is more versatile, adds field definition and references,
+and returns a Data Package object that can be passed to other functions.
+Note that
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
 does not support filtering on `scientific_name` or print summary
 statistics.

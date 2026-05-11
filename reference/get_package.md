@@ -45,6 +45,10 @@ The Data Package will contain and describe the following resources:
   returned by
   [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md).
 
+- `references`: References for ETN, the R package, the animal project
+  and acoustic projects that returned detections. It is recommended to
+  cite these when using the dataset.
+
 ## Data quality
 
 The data are downloaded from the ETN database *as is*, i.e. no quality
