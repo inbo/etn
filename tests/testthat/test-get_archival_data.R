@@ -6,7 +6,10 @@ test_that("get_archival_data() returns a tibble by default", {
 })
 
 test_that("get_archival_data() can return an arrow datasetquery", {
-
+  expect_s3_class(
+    get_archival_data(tag_serial_number = "A15757", return_as = "arrow"),
+    "arrow_dplyr_query"
+  )
 })
 
 test_that("get_archival_data() returns the expected fields", {
