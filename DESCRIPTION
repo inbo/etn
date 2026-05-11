@@ -33,14 +33,14 @@ License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 4.1)
+    R (>= 4.1.0)
 Imports:
     arrow,
     askpass,
     assertthat,
     cachem,
     cli,
-    dplyr,
+    dplyr (>= 1.2.0),
     frictionless,
     glue,
     httr2,

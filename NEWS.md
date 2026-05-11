@@ -4,7 +4,7 @@
 * `get_acoustic_projects()`, `get_animal_projects()` and `get_cpod_projects()` now have an optional argument `citation`, which adds the columns `citation`, `doi`, `contact_name`, `contact_email` and `contact_affiliation` to the data frame. This makes it easier to cite projects or contact the responsible. The citation information is obtained via [MarineInfo](https://marineinfo.org) (#518).
 * New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a Data Package (#530).
 * New `get_package()` gets all data related to an animal project as a [Data Package](https://specs.frictionlessdata.io/data-package/). Use this in combination with `write_package()` to download a dataset (#544).
-* `read_package()` and `write_package()` are reexported from `{frictionless}` to read and write Data Packages (#525).
+* `read_package()`, `write_package()` and `read_resource()` are reexported from `{frictionless}` to read, write and access data from Data Packages (#525, #570).
 * `download_acoustic_dataset()` is deprecated. Please use `get_package()` and then `write_package()` instead (#559).
 * `write_dwc()` now uses a Data Package as input, rather than reading from the ETN database. This means the function can be used locally (#528). In addition:
   * The function writes the output file as `occurrence.csv` (previously `dwc_occurrence.csv`) and adds a `meta.xml` file.
