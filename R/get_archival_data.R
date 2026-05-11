@@ -49,6 +49,46 @@ get_archival_data <- function(tag_serial_number = NULL,
     # once.
     unique()
 
+
+  ## Stop if no data found --------------------------------------------------
+
+  if(length(uuids) == 0){
+    cli::cli_abort(
+      "No archival data found for the provided filters.",
+      class = "archival_data_not_found"
+    )
+  }
+
+  ## Warn if some filters return no data ------------------------------------
+  used_filters <- rlang::call_args(rlang::call_match()) |>
+    purrr::map(eval)
+  # drop arguments that are not columns
+  used_filters <-
+    purrr::keep_at(used_filters, names(used_filters) %in% colnames(uuid_tbl))
+
+  # Find query values that we didn't find files for
+  indexes_no_file_found <-
+    purrr::imap(used_filters, ~ !.x %in% dplyr::pull(uuid_tbl, .y))
+
+  values_no_file_found <-
+    used_filters |>
+    purrr::imap(~ purrr::keep_at(.x, purrr::chuck(indexes_no_file_found, .y))) |>
+    purrr::compact()
+
+  if (length(values_no_file_found) > 0) {
+    cli::cli_warn(
+      c("No archival data was found for:",
+        "x" = purrr::imap_chr(
+          values_no_file_found,
+          ~ glue::glue("{.y}: {glue::glue_collapse(.x, sep = ', ')}")
+        ) |>
+          # Drop names so CLI can do in line formatting instead
+          purrr::set_names(nm = NULL)
+      ),
+      class = "archival_data_not_found_for_filter"
+    )
+  }
+
   # Read files from web -----------------------------------------------------
 
   ## Prepare requests -------------------------------------------------------
@@ -157,7 +197,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     dplyr::left_join(uuid_tbl,
       by = c("uuid" = "converted_archival_file_uuid"),
       # Every metadata entry should match many sensor records
-      relationship = "many-to-one"
+      # relationship = "many-to-one"
     ) |>
     # Don't return the UUID
     dplyr::select(-"uuid")
