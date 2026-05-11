@@ -23,6 +23,9 @@
 #'   these did not detect the selected animals.
 #' - `receivers`: Acoustic receivers for the selected deployments, as returned
 #'   by [get_acoustic_receivers()].
+#' - `references`: References for ETN, the R package, the animal project and
+#'   acoustic projects that returned detections.
+#'   It is recommended to cite these when using the dataset.
 #'
 #' @section Data quality:
 #' The data are downloaded from the ETN database _as is_, i.e. no quality or
