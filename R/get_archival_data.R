@@ -28,6 +28,17 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Validate inputs ---------------------------------------------------------
   return_as <- rlang::arg_match(return_as)
 
+  # Control progress reporting ----------------------------------------------
+  # Don't show the progress bar when testing: clutters up console and CI output
+  if (is_testing()) {
+    progress <- FALSE
+  }
+  # Only show the progress bar if less than 50% of records have been fetched in
+  # 24h: workaround to control progress reporting
+  if (!progress) {
+    withr::local_options(cli.progress_show_after = 60 * 60 * 24)
+  }
+
   # Fetch file uuids --------------------------------------------------------
   uuid_tbl <-
     get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code)
@@ -78,7 +89,8 @@ get_archival_data <- function(tag_serial_number = NULL,
       } else {
         httr2::req_perform(req, path = path)
       }
-    }, .progress = progress)
+    }, .progress = ifelse(progress, "Downloading", FALSE)
+    )
 
   # Parse responses ---------------------------------------------------------
 
