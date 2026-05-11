@@ -48,11 +48,12 @@ test_that("get_archival_data() returns the expected column classes", {
 })
 
 test_that("get_archival_data() has values for identifier columns", {
-  skip("unfinished test")
-  archival_data <- get_archival_data()
-  expect_all_false(
-    is.na()
-  )
+  # These columns are fetched via get_archival_data_uuid() from a database view,
+  # and should never be empty.
+  archival_data <- get_archival_data(tag_serial_number = "A15757")
+  expect_all_false(is.na(archival_data$tag_serial_number))
+  expect_all_false(is.na(archival_data$animal_id))
+  expect_all_false(is.na(archival_data$animal_project_code))
 })
 
 test_that("get_archival_data() returns error on no archival data found", {
