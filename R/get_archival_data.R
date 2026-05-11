@@ -43,7 +43,8 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   ## Perform requests -------------------------------------------------------
 
-  temp_dir <- withr::local_tempdir(pattern = "archivaldata_")
+  # temp_dir <- withr::local_tempdir(pattern = "archivaldata_")
+  temp_dir <- tempdir()
   temp_file_paths <- file.path(temp_dir, names(requests)) |>
     purrr::set_names(nm = names(requests))
 
