@@ -37,7 +37,6 @@ test_that("get_package() creates the expected package", {
   expect_snapshot_file(file.path(datapackage_path, "tags.csv"))
   expect_snapshot_file(file.path(datapackage_path, "detections.csv"))
   expect_snapshot_file(file.path(datapackage_path, "deployments.csv"))
-  expect_snapshot_file(file.path(datapackage_path, "receivers.csv"))
   expect_snapshot_file(file.path(datapackage_path, "references.csv"))
   expect_snapshot_file(file.path(datapackage_path, "receivers.csv"),
   # Receiver status values are always changing, we do not want to trigger a
