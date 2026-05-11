@@ -204,7 +204,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     dplyr::left_join(uuid_tbl,
       by = c("uuid" = "converted_archival_file_uuid"),
       # Every metadata entry should match many sensor records
-      # relationship = "many-to-one"
+      relationship = "many-to-one"
     ) |>
     # Don't return the UUID
     dplyr::select(-"uuid")
