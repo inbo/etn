@@ -10,8 +10,13 @@
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
-                              progress = TRUE
+                              progress = TRUE,
+                              return_as = c("tibble", "arrow")
                               ) {
+
+
+  # Validate inputs ---------------------------------------------------------
+  return_as <- rlang::arg_match(return_as)
 
   # Fetch file uuids --------------------------------------------------------
   uuid_tbl <-
@@ -40,8 +45,19 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   ## Perform requests -------------------------------------------------------
 
-  # temp_dir <- withr::local_tempdir(pattern = "archivaldata_")
-  temp_dir <- tempdir()
+  # We don't need to store csv files on disk after the function call is
+  # completed if we are returning an in memory tibble, we do if we are
+  # returniing an out of memory object.
+
+  switch(return_as,
+    tibble = {
+      temp_dir <- withr::local_tempdir(
+        pattern = "archivaldata_"
+      )
+    },
+    arrow = temp_dir <- tempdir()
+  )
+
   temp_file_paths <- file.path(temp_dir, names(requests)) |>
     purrr::set_names(nm = names(requests))
 
@@ -90,14 +106,14 @@ get_archival_data <- function(tag_serial_number = NULL,
   )
 
   # arrow only
-  arrow::open_csv_dataset(
+  sensor_data <-
+    arrow::open_csv_dataset(
     temp_file_paths,
     schema = csv_schema,
     # since we provide a schema, we should skip reading the header
     skip = 1
   ) |>
-    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = 49)) |>
-    dplyr::collect()
+    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = 49))
 
   # also duckdb
   # duckdbfs::open_dataset(sources = temp_file_paths,
@@ -132,7 +148,8 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Add the metadata returned by get_archive_data_uuid() so at least the
   # function arguments are included in the returned  table as columns.
 
-  sensor_data |>
+  sensor_data <-
+    sensor_data |>
     dplyr::left_join(uuid_tbl,
       by = c("uuid" = "converted_archival_file_uuid"),
       # Every metadata entry should match many sensor records
@@ -140,6 +157,13 @@ get_archival_data <- function(tag_serial_number = NULL,
     ) |>
     # Don't return the UUID
     dplyr::select(-"uuid")
+
+  # Return object -----------------------------------------------------------
+
+  switch (return_as,
+    arrow = sensor_data,
+    tibble = dplyr::collect(sensor_data)
+  )
 
 }
 
