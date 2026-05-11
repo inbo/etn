@@ -69,7 +69,6 @@ get_archival_data <- function(tag_serial_number = NULL,
   # We don't need to store csv files on disk after the function call is
   # completed if we are returning an in memory tibble, we do if we are
   # returniing an out of memory object.
-
   switch(return_as,
     tibble = {
       temp_dir <- withr::local_tempdir(
