@@ -7,7 +7,9 @@
 get_archival_data(
   tag_serial_number = NULL,
   animal_id = NULL,
-  animal_project_code = NULL
+  animal_project_code = NULL,
+  progress = TRUE,
+  return_as = c("tibble", "arrow")
 )
 }
 \arguments{
@@ -15,8 +17,19 @@ get_archival_data(
 
 \item{animal_id}{Integer (vector). One or more animal identifiers.}
 
-\item{animal_project_code}{Character (vector). One or more animal project
-codes. Case-insensitive.}
+\item{animal_project_code}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Character
+(vector). One or more animal project codes. Case-insensitive. An animal
+project can contain many gigabytes of archival data. Downloading this data
+may take a while and  exceed the available RAM or Storage of your computer}
+
+\item{progress}{Logical. Show a progress bar while fetching data. Defaults to
+\code{TRUE}.}
+
+\item{return_as}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Character. One of "tibble" or "arrow". Whether to return the
+data as an in memory tibble or an out of memory arrow dataset. The latter
+is recommended for large datasets, but requires more disk space and may be
+slower to query. When selecting "arrow" keep in mind that the downloaded
+data will remain stored on your computer until R is restarted.}
 }
 \value{
 A data.frame with the archival data values.
