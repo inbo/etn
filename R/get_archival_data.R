@@ -100,31 +100,31 @@ get_archival_data <- function(tag_serial_number = NULL,
     dplyr::collect()
 
   # also duckdb
-  duckdbfs::open_dataset(sources = temp_file_paths,
-                         schema = csv_schema,
-                         format = "csv",
-                         filename = TRUE) |>
-    dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
-    dplyr::collect()
+  # duckdbfs::open_dataset(sources = temp_file_paths,
+  #                        schema = csv_schema,
+  #                        format = "csv",
+  #                        filename = TRUE) |>
+  #   dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
+  #   dplyr::collect()
 
-  # duckdb, no httr2
-  uuid_tbl_ddb <- arrow::to_duckdb(uuid_tbl,
-                                   con = duckdbfs::cached_connection())
-
-  requests |>
-    # get urls, you'd just make them as urls instead of going url to request to
-    # url
-    purrr::map_chr(httr2::req_get_url) |>
-    duckdbfs::open_dataset(format = "csv",
-                           schema = csv_schema,
-                           filename = TRUE) |>
-    dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
-    dplyr::left_join(uuid_tbl_ddb,
-                     by = c("uuid" = "converted_archival_file_uuid")
-    ) |>
-    # Don't return the UUID
-    dplyr::select(-c("uuid", "filename")) |>
-    dplyr::collect()
+  # # duckdb, no httr2
+  # uuid_tbl_ddb <- arrow::to_duckdb(uuid_tbl,
+  #                                  con = duckdbfs::cached_connection())
+  #
+  # requests |>
+  #   # get urls, you'd just make them as urls instead of going url to request to
+  #   # url
+  #   purrr::map_chr(httr2::req_get_url) |>
+  #   duckdbfs::open_dataset(format = "csv",
+  #                          schema = csv_schema,
+  #                          filename = TRUE) |>
+  #   dplyr::mutate(uuid = stringr::str_sub(filename, start = 49)) |>
+  #   dplyr::left_join(uuid_tbl_ddb,
+  #                    by = c("uuid" = "converted_archival_file_uuid")
+  #   ) |>
+  #   # Don't return the UUID
+  #   dplyr::select(-c("uuid", "filename")) |>
+  #   dplyr::collect()
 
 
   ## Add metadata ------------------------------------------------------------
