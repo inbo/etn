@@ -147,13 +147,6 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Parse responses ---------------------------------------------------------
 
-  # drop csv files that have a header but no records (issue in view), this
-  # shouldn't really happen. It's a bug in the view. Arrow can't handle reading
-  # this file, duckdb and readr can.
-  temp_file_paths <- purrr::keep(temp_file_paths, \(filepath){
-    length(readLines(filepath, n = 2)) > 1
-  })
-
   csv_schema <- arrow::schema(
     tag_id            = arrow::string(),
     timestamp_utc     = arrow::timestamp("s", timezone = "UTC"),
