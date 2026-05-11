@@ -132,18 +132,24 @@ get_package <- function(animal_project_code) {
     receiver_id = receiver_ids
   )
 
-  ## Reference ----
+  ## References ----
   cli::cli_li("Getting {.val references}.")
-
-  etn_ref <- "European Tracking Network - Data Platform. Flanders Marine Institute (VLIZ)"
-
-  animal_ref <- get_animal_projects(animal_project_code = animal_project_code,
-                      citation = TRUE) |>
+  etn_ref <- paste(
+    "European Tracking Network - Data Platform.",
+    "Flanders Marine Institute (VLIZ)"
+  )
+  animal_ref <-
+    get_animal_projects(
+      animal_project_code = animal_project_code,
+      citation = TRUE
+    ) |>
     dplyr::pull("citation")
-  acoustic_refs <- get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
-                        citation = TRUE) |>
+  acoustic_refs <-
+    get_acoustic_projects(
+      acoustic_project_code = acoustic_project_codes,
+      citation = TRUE
+    ) |>
     dplyr::pull("citation")
-
   references <-
     dplyr::tibble(
       reference_for = c("ETN", animal_project_code, acoustic_project_codes),
