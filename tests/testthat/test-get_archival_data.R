@@ -122,3 +122,26 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
   )
 })
 
+test_that("get_archival_data() can write out to a path", {
+  loc_tempdir <- withr::local_tempdir()
+
+  get_archival_data(tag_serial_number = "A15757", path = loc_tempdir)
+  # Assume that if the files in the folder created for this test have the right
+  # header, they are the right files.
+  csv_files_to_test <- list.files(loc_tempdir, full.names = TRUE)
+  csv_files_to_test |>
+    purrr::map(
+      \(file_to_test){
+        readr::read_csv(file_to_test, n_max = 2, show_col_types = FALSE) |>
+          expect_named(
+            c(
+              "tag_id",
+              "timestamp_utc",
+              "measurement_type",
+              "measurement_value",
+              "measurement_unit"
+            )
+          )
+      }
+    )
+})
