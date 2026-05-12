@@ -107,7 +107,18 @@ test_that("get_archival_data() returns 100 rows when limit is set", {
   )
 })
 
-test_that("get_archival_data() is case insensitive for animal_project_code", {})
+test_that("get_archival_data() is case insensitive for animal_project_code", {
+  expect_identical(
+    get_archival_data(animal_project_code = "Lumpfish", limit = TRUE),
+    get_archival_data(animal_project_code = "LUMPFISH", limit = TRUE)
+  )
+})
 
-test_that("get_archival_data() returns error on invalid animal_project_code", {})
+test_that("get_archival_data() returns error on invalid animal_project_code", {
+  expect_error(
+    get_archival_data(animal_project_code = "not_an_animal_project_code"),
+    regexp = "Can't find animal_project_code",
+    fixed = FALSE
+  )
+})
 
