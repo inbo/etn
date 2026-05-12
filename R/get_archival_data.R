@@ -22,7 +22,8 @@
 #' @export
 #'
 #' @examplesIf interactive() & credentials_are_set()
-#'
+#' get_archival_data(tag_serial_number = "A15757",
+#'                   limit = TRUE)
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
