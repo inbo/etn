@@ -100,7 +100,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     )
   }
 
-  # Read files from web -----------------------------------------------------
+  # Fetch and read files ----------------------------------------------------
 
   ## Prepare requests -------------------------------------------------------
   requests <-
@@ -120,7 +120,6 @@ get_archival_data <- function(tag_serial_number = NULL,
   }
 
   ## Perform requests -------------------------------------------------------
-
 
   if (!is.null(path)) {
     # If the user provided a path, store the csv files there.
