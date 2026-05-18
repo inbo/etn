@@ -8,6 +8,7 @@ get_archival_data(
   tag_serial_number = NULL,
   animal_id = NULL,
   animal_project_code = NULL,
+  limit = FALSE,
   progress = TRUE,
   return_as = c("tibble", "arrow")
 )
@@ -21,6 +22,9 @@ get_archival_data(
 (vector). One or more animal project codes. Case-insensitive. An animal
 project can contain many gigabytes of archival data. Downloading this data
 may take a while and  exceed the available RAM or Storage of your computer}
+
+\item{limit}{Logical. Limit the number of returned records to 100 (useful
+for testing purposes). Defaults to \code{FALSE}.}
 
 \item{progress}{Logical. Show a progress bar while fetching data. Defaults to
 \code{TRUE}.}
@@ -36,8 +40,4 @@ A data.frame with the archival data values.
 }
 \description{
 Get processed tag archival data
-}
-\examples{
-\dontshow{if (interactive() & credentials_are_set()) withAutoprint(\{ # examplesIf}
-\dontshow{\}) # examplesIf}
 }

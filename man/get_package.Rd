@@ -59,14 +59,14 @@ read_resource(package, "animals")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other access functions: 
-\code{\link{get_acoustic_deployments}()},
-\code{\link{get_acoustic_detections}()},
-\code{\link{get_acoustic_projects}()},
-\code{\link{get_acoustic_receivers}()},
-\code{\link{get_animal_projects}()},
-\code{\link{get_animals}()},
-\code{\link{get_cpod_projects}()},
-\code{\link{get_tags}()}
+Other access functions:
+\code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
+\code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
+\code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
+\code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
+\code{\link[=get_animal_projects]{get_animal_projects()}},
+\code{\link[=get_animals]{get_animals()}},
+\code{\link[=get_cpod_projects]{get_cpod_projects()}},
+\code{\link[=get_tags]{get_tags()}}
 }
 \concept{access functions}
