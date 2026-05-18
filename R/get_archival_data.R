@@ -5,21 +5,29 @@
 #' @param animal_project_code `r lifecycle::badge("experimental")` Character
 #'   (vector). One or more animal project codes. Case-insensitive. An animal
 #'   project can contain many gigabytes of archival data. Downloading this data
-#'   may take a while and  exceed the available RAM or Storage of your computer
-#' @param return_as `r lifecycle::badge("experimental")` Character. One of "tibble" or "arrow". Whether to return the
-#'   data as an in memory tibble or an out of memory arrow dataset. The latter
-#'   is recommended for large datasets, but requires more disk space and may be
-#'   slower to query. When selecting "arrow" keep in mind that the downloaded
-#'   data will remain stored on your computer until R is restarted.
+#'   may take a while and  exceed the available RAM or Storage of your computer.
+#' @param path `r lifecycle::badge("experimental")` Character. A path to a
+#'   directory where the csv files will be stored. If NULL, the csv files will
+#'   be stored in a temporary directory that is deleted when R is restarted. If
+#'   you want to keep the csv files, provide a path. Keep in mind that the csv
+#'   files can be quite large and may take up a lot of disk space.
+#' @param return_as `r lifecycle::badge("experimental")` Character. One of
+#'   "tibble" or "arrow". Whether to return the data as an in memory tibble or
+#'   an out of memory arrow dataset. The latter is recommended for large
+#'   datasets, but requires more disk space and may be slower to query. When
+#'   selecting "arrow" keep in mind that the downloaded data will remain stored
+#'   on your computer until R is restarted.
 #'
 #' @returns A data.frame with the archival data values.
 #' @export
 #'
 #' @examplesIf interactive() & credentials_are_set()
-#'
+#' get_archival_data(tag_serial_number = "A15757",
+#'                   limit = TRUE)
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
+                              path = NULL,
                               limit = FALSE,
                               progress = TRUE,
                               return_as = c("tibble", "arrow")
@@ -62,7 +70,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   ## Warn if some filters return no data ------------------------------------
   used_filters <- rlang::call_args(rlang::call_match()) |>
-    purrr::map(eval)
+    purrr::map(eval, envir = parent.frame())
   # drop arguments that are not columns
   used_filters <-
     purrr::keep_at(used_filters, names(used_filters) %in% colnames(uuid_tbl))
@@ -111,19 +119,27 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   ## Perform requests -------------------------------------------------------
 
-  # We don't need to store csv files on disk after the function call is
-  # completed if we are returning an in memory tibble, we do if we are
-  # returniing an out of memory object.
-  switch(return_as,
-    tibble = {
-      temp_dir <- withr::local_tempdir(
-        pattern = "archivaldata_"
-      )
-    },
-    arrow = temp_dir <- tempdir()
-  )
 
-  temp_file_paths <- file.path(temp_dir, names(requests)) |>
+  if (!is.null(path)) {
+    # If the user provided a path, store the csv files there.
+    csv_dir <- is_writeable(path, call = rlang::caller_env())
+  } else {
+    switch(return_as,
+      # We don't need to store csv files on disk after the function call is
+      # completed if we are returning an in memory tibble, we do if we are
+      # returning an out of memory object.
+      tibble = {
+        csv_dir <- withr::local_tempdir(
+          pattern = "archivaldata_"
+        )
+      },
+      # When returning as a an arrow dplyr query object, store the files in a
+      # Session wide tempdir.
+      arrow = csv_dir <- tempdir()
+    )
+  }
+
+  temp_file_paths <- file.path(csv_dir, names(requests)) |>
     purrr::set_names(nm = names(requests))
 
   if (limit) {

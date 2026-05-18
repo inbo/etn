@@ -248,6 +248,38 @@ credentials_are_set <- function(){
     nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
+#' Check if a path is writeable
+#'
+#' @param path Character string of length one with the path to check.
+#' @param call Optional call object to include in the error message. This can be
+#'   used to provide more context in the error message, such as which function
+#'   is calling this helper function.
+#'
+#' @returns The input path invisibly if it is writeable, or an error if it is
+#'   not.
+#'
+#' @family helper functions
+#' @noRd
+#' @examplesIf interactive()
+#'   is_writeable(tempdir())
+is_writeable <- function(path, call = rlang::caller_env()) {
+  if (!is.character(path) || length(path) != 1) {
+    cli::cli_abort("{.arg path} must be a character string of length 1.",
+                   call = call)
+  }
+  if (!file.exists(path)) {
+    cli::cli_abort("{.path {path}} does not exist.",
+                   call = call)
+  }
+
+  if (file.access(path, mode = 2) != 0) {
+    cli::cli_abort("No write permission for {.path {path}}.",
+                   call = call)
+  }
+
+  invisible(path)
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
