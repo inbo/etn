@@ -77,7 +77,9 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Find query values that we didn't find files for
   indexes_no_file_found <-
-    purrr::imap(used_filters, ~ !.x %in% dplyr::pull(uuid_tbl, .y))
+    purrr::imap(used_filters, ~ {
+      !tolower(.x) %in% tolower(dplyr::pull(uuid_tbl, .y))
+    })
 
   values_no_file_found <-
     used_filters |>
