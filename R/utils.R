@@ -99,6 +99,16 @@ deprecate_warn_connection <- function() {
 
 #' Get the name (symbol) of the parent function
 #'
+#' This function walks up the call stack to find the name of the parent function
+#' that is exported by the etn package. This is useful for generating
+#' informative error messages that include the name of the function that the
+#' user called, rather than a helper function that the user may not be
+#' familiar with. If no exported function is found, it falls back to returning
+#' the name of the caller at the specified fallback depth.
+#'
+#' @param fallback_depth Integer of length one specifying how many levels up the
+#'   call stack to look for the caller's name if no exported function is found.
+#'
 #' @return A length one Character with the name of the parent function.
 #'
 #' @family helper functions
