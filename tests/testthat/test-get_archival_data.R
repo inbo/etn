@@ -1,4 +1,8 @@
 test_that("get_archival_data() returns a tibble by default", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_s3_class(
     get_archival_data(limit = TRUE),
     "tbl"
@@ -6,6 +10,10 @@ test_that("get_archival_data() returns a tibble by default", {
 })
 
 test_that("get_archival_data() can return an arrow datasetquery", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_s3_class(
     get_archival_data(return_as = "arrow",
                       limit = TRUE),
@@ -14,6 +22,10 @@ test_that("get_archival_data() can return an arrow datasetquery", {
 })
 
 test_that("get_archival_data() returns the expected fields", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_named(
     get_archival_data(tag_serial_number = "A15757",
                       limit = TRUE),
@@ -31,6 +43,10 @@ test_that("get_archival_data() returns the expected fields", {
 })
 
 test_that("get_archival_data() returns the expected column classes", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_identical(
     purrr::map(
       get_archival_data(tag_serial_number = "A15757",
@@ -51,6 +67,10 @@ test_that("get_archival_data() returns the expected column classes", {
 })
 
 test_that("get_archival_data() has values for identifier columns", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   # These columns are fetched via get_archival_data_uuid() from a database view,
   # and should never be empty.
   archival_data <- get_archival_data(tag_serial_number = "A15757",
@@ -61,6 +81,10 @@ test_that("get_archival_data() has values for identifier columns", {
 })
 
 test_that("get_archival_data() returns error on no archival data found", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_error(
     # This tag does not have archival data as of writing this test.
     get_archival_data(tag_serial_number = "A19163"),
@@ -72,6 +96,10 @@ test_that("get_archival_data() returns error on no archival data found", {
 })
 
 test_that("get_archival_data() can filter on tag_serial_number", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_identical(
     get_archival_data(tag_serial_number = "A15757",
                       limit = TRUE) |>
@@ -82,6 +110,10 @@ test_that("get_archival_data() can filter on tag_serial_number", {
 })
 
 test_that("get_archival_data() can filter on animal_id", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_identical(
     get_archival_data(animal_id = 18113,
                       limit = TRUE) |>
@@ -92,6 +124,10 @@ test_that("get_archival_data() can filter on animal_id", {
 })
 
 test_that("get_archival_data() can filter on animal_project_code", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_identical(
     get_archival_data(animal_project_code = "2018_EC", limit = TRUE) |>
       dplyr::pull("animal_project_code") |>
@@ -101,6 +137,10 @@ test_that("get_archival_data() can filter on animal_project_code", {
 })
 
 test_that("get_archival_data() returns 100 rows when limit is set", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_shape(
     get_archival_data(animal_project_code = "2018_EC", limit = TRUE),
     nrow = 100L
@@ -108,6 +148,10 @@ test_that("get_archival_data() returns 100 rows when limit is set", {
 })
 
 test_that("get_archival_data() is case insensitive for animal_project_code", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_identical(
     get_archival_data(animal_project_code = "Lumpfish", limit = TRUE),
     get_archival_data(animal_project_code = "LUMPFISH", limit = TRUE)
@@ -115,6 +159,10 @@ test_that("get_archival_data() is case insensitive for animal_project_code", {
 })
 
 test_that("get_archival_data() returns error on invalid animal_project_code", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_error(
     get_archival_data(animal_project_code = "not_an_animal_project_code"),
     regexp = "Can't find animal_project_code",
@@ -123,6 +171,10 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
 })
 
 test_that("get_archival_data() can write out to a path", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   loc_tempdir <- withr::local_tempdir()
 
   get_archival_data(tag_serial_number = "A15757", path = loc_tempdir)
@@ -147,6 +199,10 @@ test_that("get_archival_data() can write out to a path", {
 })
 
 test_that("get_archival_data() stores files with a csv extension", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   loc_tempdir <- withr::local_tempdir()
 
   get_archival_data(tag_serial_number = "A15757", path = loc_tempdir)
