@@ -59,7 +59,11 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Sometimes, multiple uuids are passed. We only need to download every file
   # once.
   uuid_tbl <-
-    get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code) |>
+    # Evaluate in a local namespace, so errors get reported as errors of
+    # get_archival_data() and not as errors of get_archival_data_uuid()
+    local({
+      get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code)
+    }) |>
     dplyr::distinct()
 
   uuids <-
@@ -236,6 +240,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 #'   `animal_id`, `tag_serial_number`, and `animal_project_code`.
 #'
 #' @family helper functions
+#' @noRd
 #' @examplesIf interactive() & credentials_are_set()
 #' get_archival_data_uuid()
 #' get_archival_data_uuid(tag_serial_number = "22035610")
