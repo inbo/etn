@@ -78,6 +78,10 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Find query values that we didn't find files for
   indexes_no_file_found <-
     purrr::imap(used_filters, ~ {
+      # Because all values are converted to lowercase strings to be compared,
+      # all variables become case insensitive. This is an easy workaround to
+      # ensure this error doesn't trip for case insensitive
+      # animal_project_codes.
       !tolower(.x) %in% tolower(dplyr::pull(uuid_tbl, .y))
     })
 
