@@ -96,7 +96,7 @@ test_that("get_parent_fn_name() can return the name of the parent function", {
 
 test_that("get_parent_fn_name() can return the name a higher level caller", {
   parent_function_with_a_cool_name <- function() {
-    get_parent_fn_name(depth = 2)
+    get_parent_fn_name(fallback_depth = 2)
   }
   grandparent_function <- function() {
     parent_function_with_a_cool_name()
