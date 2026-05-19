@@ -6,11 +6,11 @@
 #'   (vector). One or more animal project codes. Case-insensitive. An animal
 #'   project can contain many gigabytes of archival data. Downloading this data
 #'   may take a while and  exceed the available RAM or Storage of your computer.
-#' @param path `r lifecycle::badge("experimental")` Character. A path to a
-#'   directory where the csv files will be stored. If NULL, the csv files will
-#'   be stored in a temporary directory that is deleted when R is restarted. If
-#'   you want to keep the csv files, provide a path. Keep in mind that the csv
-#'   files can be quite large and may take up a lot of disk space.
+#' @param path `r lifecycle::badge("experimental")` Character. A path to an
+#'   existing directory where the csv files will be stored. If NULL, the csv
+#'   files will be stored in a temporary directory that is deleted when R is
+#'   restarted. If you want to keep the csv files, provide a path. Keep in mind
+#'   that the csv files can be quite large and may take up a lot of disk space.
 #' @param return_as `r lifecycle::badge("experimental")` Character. One of
 #'   "tibble" or "arrow". Whether to return the data as an in memory tibble or
 #'   an out of memory arrow dataset. The latter is recommended for large
@@ -18,8 +18,9 @@
 #'   selecting "arrow" keep in mind that the downloaded data will remain stored
 #'   on your computer until R is restarted.
 #'
-#' @returns Depending on the value of `return_as`, either an [arrow::Dataset] or a data.frame with the archival data
-#'   values. The resulting table has the following columns:
+#' @returns Depending on the value of `return_as`, either an [arrow::Dataset] or
+#'   a data.frame with the archival data values. The resulting table has the
+#'   following columns:
 #'   - `tag_id`: The tag id of the tag that recorded the data.
 #'   - `timestamp_utc`: The timestamp of the measurement in UTC.
 #'   - `measurement_type`: The type of measurement (e.g. "Temp", "Pressure, etc.).
