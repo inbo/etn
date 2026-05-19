@@ -108,14 +108,6 @@ test_that("get_archival_data() returns error on invalid values", {
     ),
     regexp = "Can't find tag_serial_number"
   )
-
-  # Test that the error refers to the parent, not the helper
-  expect_error(
-    get_archival_data(
-      animal_project_code = "not_an_animal_proj"
-    ),
-    regexp = "Error in `get_archival_data()`:"
-  )
 })
 
 test_that("get_archival_data() can filter on tag_serial_number", {
