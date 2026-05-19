@@ -268,7 +268,7 @@ is_writeable <- function(path, call = rlang::caller_env()) {
                    call = call)
   }
   if (!file.exists(path)) {
-    cli::cli_abort("{.path {path}} does not exist.",
+    cli::cli_abort("The provided path {.path {path}} does not exist.",
                    call = call)
   }
 
