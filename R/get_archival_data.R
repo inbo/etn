@@ -154,7 +154,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     )
   }
 
-  temp_file_paths <- file.path(csv_dir, names(requests)) |>
+  csv_file_paths <- file.path(csv_dir, names(requests)) |>
     paste0(".csv") |>
     purrr::set_names(nm = names(requests))
 
@@ -165,10 +165,10 @@ get_archival_data <- function(tag_serial_number = NULL,
       # Read the header, and 100 lines
       purrr::map(\(req) {httr2::resp_stream_lines(req, lines = 101)}) |>
       # Write to temp file, same as normally
-      purrr::walk2(temp_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
+      purrr::walk2(csv_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
   } else {
     responses <-
-      purrr::map2(requests, temp_file_paths, \(req, path) {
+      purrr::map2(requests, csv_file_paths, \(req, path) {
         if (file.exists(path) & file.size(path) > 0) {
           NULL
         } else {
@@ -190,7 +190,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Use arrow to process and combine the local csv files out of memory
   sensor_data <-
     arrow::open_csv_dataset(
-      temp_file_paths,
+      csv_file_paths,
       schema = csv_schema,
       # since we provide a schema, we should skip reading the header
       skip = 1
