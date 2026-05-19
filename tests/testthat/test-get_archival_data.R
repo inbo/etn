@@ -145,3 +145,17 @@ test_that("get_archival_data() can write out to a path", {
       }
     )
 })
+
+test_that("get_archival_data() stores files with a csv extension", {
+  loc_tempdir <- withr::local_tempdir()
+
+  get_archival_data(tag_serial_number = "A15757", path = loc_tempdir)
+  expect_true(
+    all(
+      stringr::str_ends(
+        list.files(loc_tempdir, full.names = TRUE),
+        stringr::fixed(".csv")
+      )
+    )
+  )
+})

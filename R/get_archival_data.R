@@ -145,6 +145,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   }
 
   temp_file_paths <- file.path(csv_dir, names(requests)) |>
+    paste0(".csv") |>
     purrr::set_names(nm = names(requests))
 
   if (limit) {
@@ -179,13 +180,17 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Use arrow to process and combine the local csv files out of memory
   sensor_data <-
     arrow::open_csv_dataset(
-    temp_file_paths,
-    schema = csv_schema,
-    # since we provide a schema, we should skip reading the header
-    skip = 1
-  ) |>
+      temp_file_paths,
+      schema = csv_schema,
+      # since we provide a schema, we should skip reading the header
+      skip = 1
+    ) |>
     # Take the last 36 characters of the filename (length of a UUID)
-    dplyr::mutate(uuid = stringr::str_sub(arrow::add_filename(), start = -36L))
+    dplyr::mutate(uuid = stringr::str_sub(
+      arrow::add_filename(),
+      start = -40L, # UUID is 36 characters + length of the extension.
+      end = -5L # -1L - length of the extension: `.csv`
+    ))
 
   ## Add metadata ------------------------------------------------------------
 
