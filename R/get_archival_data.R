@@ -59,11 +59,19 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Sometimes, multiple uuids are passed. We only need to download every file
   # once.
   uuid_tbl <-
-    # Evaluate in a local namespace, so errors get reported as errors of
-    # get_archival_data() and not as errors of get_archival_data_uuid()
-    local({
-      get_archival_data_uuid(tag_serial_number, animal_id, animal_project_code)
-    }) |>
+    tryCatch(
+      get_archival_data_uuid(tag_serial_number,
+                             animal_id,
+                             animal_project_code),
+      error = function(e) {
+        rlang::abort(
+          message = conditionMessage(e),
+          class = class(e),
+          parent = e,
+          call = quote(get_archival_data())
+        )
+      }
+    ) |>
     dplyr::distinct()
 
   uuids <-
