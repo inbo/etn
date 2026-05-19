@@ -121,9 +121,11 @@ get_parent_fn_name <- function(fallback_depth = 1) {
     fn_name <-
       tryCatch(
         rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = i))),
-        error = function(e) NULL
+        error = function(e) {
+          NA_character_
+        }
       )
-    if(!is.na(fn_name) && fn_name %in% getNamespaceExports("etn")){
+    if (!is.na(fn_name) && fn_name %in% getNamespaceExports("etn")) {
       return(fn_name)
     }
   }
