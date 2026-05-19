@@ -105,4 +105,12 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
     grandparent_function(),
     "grandparent_function"
   )
+
+  with_mocked_bindings(
+    code = {expect_identical(
+      get_animals(),
+      "get_animals"
+    )},
+    get_animals = function(...) {get_parent_fn_name()}
+  )
 })
