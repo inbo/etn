@@ -85,7 +85,7 @@ deprecate_warn_connection <- function() {
   lifecycle::deprecate_warn(
     when = "3.0.0",
     what = glue::glue("{function_identity}(connection)",
-      function_identity = get_parent_fn_name(fallback_fallback_depth = 2)
+      function_identity = get_parent_fn_name(fallback_depth = 2)
     ),
     details = cli::format_inline(
       "Database connections are handled automatically.
