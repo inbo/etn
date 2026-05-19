@@ -117,7 +117,7 @@ deprecate_warn_connection <- function() {
 #' parent_fn()
 get_parent_fn_name <- function(fallback_depth = 1) {
   # Try walking up the frame environements to find a function exported by etn
-  for(i in seq(sys.nframe())){
+  for (i in seq(sys.nframe())) {
     fn_name <-
       tryCatch(
         rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = i))),
@@ -132,7 +132,11 @@ get_parent_fn_name <- function(fallback_depth = 1) {
   # If we can't find an exported function, just return the name of the caller at
   # the specified fallback_depth, even if it's not exported by etn. This is a
   # fallback to ensure we always return a name, even if it's not perfect.
-  rlang::call_name(rlang::frame_call(frame = rlang::caller_env(n = fallback_depth)))
+  rlang::call_name(
+    rlang::frame_call(
+      frame = rlang::caller_env(n = fallback_depth)
+      )
+    )
 }
 
 #' Determine testing status
