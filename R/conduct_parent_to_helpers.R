@@ -35,7 +35,7 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
 
   # Lock in the name of the parent function
   function_identity <-
-    get_parent_fn_name(fallback_depth = 2)
+    get_parent_fn_name(depth = 2)
 
   # Get the argument values from the parent function, drop arguments set to NULL
   arguments_to_pass <-

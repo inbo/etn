@@ -256,7 +256,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #' @inheritParams httr2::req_perform
 #' @param function_identity Character of length one with the name
 #'  of the function the warning is being generated from, defaults to
-#'  `get_parent_fn_name(fallback_depth = 3)`: the function calling this helper
+#'  `get_parent_fn_name(depth = 3)`: the function calling this helper
 #'  function.
 #' @param ... Additional arguments passed on to `httr2::req_perform()`
 #'
