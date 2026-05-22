@@ -3,7 +3,7 @@
 #'
 #' @export
 #'
-count_acoustic_detections <- function(credentials = list(username = Sys.getenv("ETN_USER"),
+count_acoustic_detections2 <- function(credentials = list(username = Sys.getenv("ETN_USER"),
                                                          password = Sys.getenv("ETN_PWD")),
                                       start_date = NULL,
                                       end_date = NULL,
