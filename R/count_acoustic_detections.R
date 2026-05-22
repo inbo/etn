@@ -3,8 +3,10 @@
 #'
 #' @export
 #'
-count_acoustic_detections <- function(credentials = list(username = Sys.getenv("ETN_USER"),
-                                                         password = Sys.getenv("ETN_PWD")),
+count_acoustic_detections <- function(credentials = list(
+                                        username = Sys.getenv("ETN_USER"),
+                                        password = Sys.getenv("ETN_PWD")
+                                      ),
                                       start_date = NULL,
                                       end_date = NULL,
                                       tag_serial_number = NULL,
@@ -45,9 +47,11 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
   if (is.null(tag_serial_number)) {
     tag_serial_number_query <- "True"
   } else {
-    tag_serial_number <- check_value(tag_serial_number,
-                                     list_tag_serial_numbers(credentials),
-                                     "tag_serial_number")
+    tag_serial_number <- check_value(
+      tag_serial_number,
+      list_tag_serial_numbers(credentials),
+      "tag_serial_number"
+    )
     tag_serial_number_query <- glue::glue_sql("det.tag_serial_number IN ({tag_serial_number*})", .con = connection)
   }
 
@@ -55,9 +59,11 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
   if (is.null(acoustic_tag_id)) {
     acoustic_tag_id_query <- "True"
   } else {
-    acoustic_tag_id <- check_value(acoustic_tag_id,
-                                   list_acoustic_tag_ids(credentials),
-                                   "acoustic_tag_id")
+    acoustic_tag_id <- check_value(
+      acoustic_tag_id,
+      list_acoustic_tag_ids(credentials),
+      "acoustic_tag_id"
+    )
     acoustic_tag_id_query <- glue::glue_sql("det.transmitter IN ({acoustic_tag_id*})", .con = connection)
   }
 
@@ -72,16 +78,19 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
       lowercase = TRUE
     )
     animal_project_code_query <- glue::glue_sql("LOWER(animal_project_code) IN ({animal_project_code*})",
-                                                .con = connection)
+      .con = connection
+    )
   }
 
   # Check scientific_name
   if (is.null(scientific_name)) {
     scientific_name_query <- "True"
   } else {
-    scientific_name <- check_value(scientific_name,
-                                   list_scientific_names(credentials),
-                                   "scientific_name")
+    scientific_name <- check_value(
+      scientific_name,
+      list_scientific_names(credentials),
+      "scientific_name"
+    )
     scientific_name_query <- glue::glue_sql("animal_scientific_name IN ({scientific_name*})", .con = connection)
   }
 
@@ -96,16 +105,19 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
       lowercase = TRUE
     )
     acoustic_project_code_query <- glue::glue_sql("LOWER(network_project_code) IN ({acoustic_project_code*})",
-                                                  .con = connection)
+      .con = connection
+    )
   }
 
   # Check deployment id
   if (is.null(deployment_id)) {
     deployment_id_query <- "True"
   } else {
-    deployment_id <- check_value(deployment_id,
-                                 list_deployment_ids(credentials),
-                                 "deployment_id")
+    deployment_id <- check_value(
+      deployment_id,
+      list_deployment_ids(credentials),
+      "deployment_id"
+    )
     deployment_id_query <- glue::glue_sql("det.deployment_fk IN ({deployment_id*})", .con = connection)
   }
 
@@ -113,9 +125,11 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
   if (is.null(receiver_id)) {
     receiver_id_query <- "True"
   } else {
-    receiver_id <- check_value(receiver_id,
-                               list_receiver_ids(credentials),
-                               "receiver_id")
+    receiver_id <- check_value(
+      receiver_id,
+      list_receiver_ids(credentials),
+      "receiver_id"
+    )
     receiver_id_query <- glue::glue_sql("det.receiver IN ({receiver_id*})", .con = connection)
   }
 
@@ -123,9 +137,11 @@ count_acoustic_detections <- function(credentials = list(username = Sys.getenv("
   if (is.null(station_name)) {
     station_name_query <- "True"
   } else {
-    station_name <- check_value(station_name,
-                                list_station_names(credentials),
-                                "station_name")
+    station_name <- check_value(
+      station_name,
+      list_station_names(credentials),
+      "station_name"
+    )
     station_name_query <- glue::glue_sql("deployment_station_name IN ({station_name*})", .con = connection)
   }
 
