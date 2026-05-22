@@ -124,16 +124,19 @@ get_acoustic_detections <- function(connection,
   }
 
   n_records_expected <-
-    if (limit && count) {
+    if (limit) {
       # If limit is set to TRUE, we expect 100 records
       100
-    } else {
+    } else if (count) {
       # otherwise query the number of records
 
       do.call(count_acoustic_detections, append(
         arguments_to_pass,
         list(protocol = protocol)
       ))
+    } else {
+      # Fallback to a large value if count is not supplied
+      100e6
     }
 
   # Update progress step with number of records we'll be fetching.
