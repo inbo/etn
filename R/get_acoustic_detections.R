@@ -78,7 +78,8 @@ get_acoustic_detections <- function(connection,
                                     receiver_id = NULL,
                                     station_name = NULL,
                                     limit = FALSE,
-                                    progress = TRUE) {
+                                    progress = TRUE,
+                                    count = TRUE) {
   # Check arguments
   # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
@@ -123,7 +124,7 @@ get_acoustic_detections <- function(connection,
   }
 
   n_records_expected <-
-    if (limit) {
+    if (limit && count) {
       # If limit is set to TRUE, we expect 100 records
       100
     } else {
