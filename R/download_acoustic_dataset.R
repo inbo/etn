@@ -4,10 +4,10 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
-#' instead, which is more versatile, adds field definitions, and returns a
-#' Data Package object that can be passed to other functions. Note that
-#' [get_package()] does not support filtering on `scientific_name` or print
-#' summary statistics.
+#' instead, which is more versatile, adds field definition and references, and
+#' returns a Data Package object that can be passed to other functions.
+#' Note that [get_package()] does not support filtering on `scientific_name` or
+#' print summary statistics.
 #'
 #' This function allows you to download all acoustic data related to an
 #' **animal project** as a data package that can be deposited in a research data
