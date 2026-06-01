@@ -44,6 +44,7 @@ Imports:
     frictionless,
     glue,
     httr2,
+    jsonlite,
     lifecycle,
     memoise,
     methods,
@@ -55,7 +56,7 @@ Imports:
     utils,
     withr
 Suggests:
-    etnservice (>= 0.5.0),
+    etnservice (>= 0.6.0),
     formattable,
     jsonlite,
     kableExtra,
@@ -66,6 +67,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
+    units,
     vcr,
     xml2
 VignetteBuilder: 

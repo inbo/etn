@@ -50,6 +50,7 @@ Other access functions:
 \code{\link{get_animal_projects}()},
 \code{\link{get_animals}()},
 \code{\link{get_package}()},
+\code{\link{get_receiver_logs}()},
 \code{\link{get_tags}()}
 }
 \concept{access functions}
