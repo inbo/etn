@@ -14,7 +14,9 @@
 #' @param deployment_id Integer (vector). One or more deployment identifiers.
 #' @inheritParams get_acoustic_detections
 #' @inheritParams get_acoustic_deployments
-#'
+#' @return A tibble with receiver diagnostics data.
+#' @family access functions
+#' @export
 #' @section Name repair:
 #'
 #' It is possible that the columns contained in a receiver log overlap with
@@ -22,14 +24,7 @@
 #' duplicate columns are found, their names are made unique with
 #' [base::make.unique()]. When this happens, a message is printed to the
 #' console. The message can be muffled with [base::suppressMessages()].
-#' @name get_receiver_logs
 #'
-NULL
-#'
-#' @return A tibble with receiver diagnostics data.
-#'
-#' @family access functions
-#' @export
 #' @examplesIf etn:::credentials_are_set()
 #' get_receiver_logs(deployment_id = 25259, limit = TRUE)
 #' get_receiver_logs(deployment_id = 74535,
