@@ -22,14 +22,16 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   }
 
   # Check value(s) against valid values
-  assertthat::assert_that(
-    all(x %in% y), # Returns TRUE for x = NULL
-    msg = glue::glue(
-      "Can't find {name} `{x}` in: {y}",
-      x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
-      y = glue::glue_collapse(y, sep = ", ", width = 300)
+  # Returns TRUE for x = NULL
+  if (!all(x %in% y)) {
+    cli::cli_abort(
+      message = glue::glue(
+        "Can't find {name} `{x}` in: {y}",
+        x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
+        y = glue::glue_collapse(y, sep = ", ", width = 300)
+      )
     )
-  )
+  }
 
   return(x)
 }
