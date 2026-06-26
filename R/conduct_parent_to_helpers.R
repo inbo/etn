@@ -16,9 +16,9 @@
 #'
 #' @param api Logical, Should the API be used?
 #' @param ignored_arguments Character vector of arguments not to pass to the API
-#'   or SQL helper
+#'   or SQL helper.
 #' @param ... options on how to fetch the response. Forwarded to
-#'   `forward_to_api()`
+#'   `forward_to_api()`.
 #' @returns parsed R object as resulting from the API
 #' @family helper functions
 #' @noRd

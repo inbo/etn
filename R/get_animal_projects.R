@@ -2,6 +2,7 @@
 #'
 #' Get data for animal projects, with options to filter results.
 #'
+#' @inheritParams list_animal_ids
 #' @param animal_project_code Character (vector). One or more animal project
 #'   codes. Case-insensitive.
 #' @param citation Logical. If `TRUE`, adds extra columns with citation
@@ -13,7 +14,6 @@
 #'     If no contact person is provided, the first author with status `creator`.
 #'   - `contact_email`: Email address of the contact person.
 #'   - `contact_affiliation`: Institute of the contact person.
-#' @inheritParams list_animal_ids
 #' @returns A tibble with animal project data, sorted by `project_code`.
 #' @family access functions
 #' @export

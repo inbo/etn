@@ -2,9 +2,9 @@
 #'
 #' Get data for acoustic receivers, with options to filter results.
 #'
+#' @inheritParams list_animal_ids
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param status Character. One or more statuses, e.g. `available` or `broken`.
-#' @inheritParams list_animal_ids
 #' @returns A tibble with acoustic receiver data, sorted by `receiver_id`.
 #'   Values for `owner_organization` will only be visible if you are member of
 #'   the group.

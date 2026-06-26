@@ -19,14 +19,12 @@
 #' skipped if the machine is offline or if the ETN database is not available.
 #'
 #'
-#' @param expression The expression to be tested.
 #' @inherits testthat::expect_identical return
-#'
+#' @param expression The expression to be tested.
+#' @export
 #' @examples
 #' expect_protocol_agnostic(list_acoustic_projects())
 #' expect_protocol_agnostic(list_animal_projects())
-#'
-#' @export
 expect_protocol_agnostic <- function(expression) {
   # Skip if no credentials are stored
   skip_if_no_authentication()
@@ -163,9 +161,10 @@ get_http_response <- function(http_code = 200) {
 #' with (respectively) the `location` and `fields` as defined in the `meta.xml`
 #' file.
 #'
+#' @inheritDotParams expect_identical info label
 #' @param file Path to CSV file.
 #' @param core Name of core CSV file.
-#' @inheritDotParams expect_identical info label
+#' @returns [testthat::expect_identical()] result.
 #' @noRd
 #' @examples
 #' expect_meta_match("tests/testthat/_snaps/write_dwc/occurrence.csv")

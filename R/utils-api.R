@@ -207,9 +207,9 @@ get_hostname <- function(url_str) {
 #' `etnservice::get_version()`. This option is still useful for mocking in
 #' tests.
 #'
+#' @inheritParams list_animal_ids
 #' @inheritDotParams forward_to_api format domain
 #' @inheritDotParams get_val return_url
-#' @inheritParams list_animal_ids
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
