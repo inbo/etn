@@ -29,5 +29,5 @@ read_resource(package, resource_name, col_select = NULL)
 ## See also
 
 Other frictionless functions:
-[`read_package()`](https://inbo.github.io/etn/reference/read_package.md),
-[`write_package()`](https://inbo.github.io/etn/reference/write_package.md)
+[`read_package`](https://inbo.github.io/etn/reference/read_package.md),
+[`write_package`](https://inbo.github.io/etn/reference/write_package.md)

@@ -20,22 +20,26 @@ Useful links:
 ## Author
 
 **Maintainer**: Pieter Huybrechts <pieter.huybrechts@inbo.be>
-([ORCID](https://orcid.org/0000-0002-6658-6062)) (Research Institute for
-Nature and Forest (INBO))
+([ORCID](https://orcid.org/0000-0002-6658-6062)) (affiliation: Research
+Institute for Nature and Forest (INBO))
 
 Authors:
 
+- Pieter Huybrechts <pieter.huybrechts@inbo.be>
+  ([ORCID](https://orcid.org/0000-0002-6658-6062)) (affiliation:
+  Research Institute for Nature and Forest (INBO))
+
 - Peter Desmet <peter.desmet@inbo.be>
-  ([ORCID](https://orcid.org/0000-0002-8442-8025)) (Research Institute
-  for Nature and Forest (INBO))
+  ([ORCID](https://orcid.org/0000-0002-8442-8025)) (affiliation:
+  Research Institute for Nature and Forest (INBO))
 
 - Sanne Govaert <sanne.govaert@inbo.be>
-  ([ORCID](https://orcid.org/0000-0002-8939-1305)) (Research Institute
-  for Nature and Forest (INBO))
+  ([ORCID](https://orcid.org/0000-0002-8939-1305)) (affiliation:
+  Research Institute for Nature and Forest (INBO))
 
 - Damiano Oldoni <damiano.oldoni@inbo.be>
-  ([ORCID](https://orcid.org/0000-0003-3445-7562)) (Research Institute
-  for Nature and Forest (INBO))
+  ([ORCID](https://orcid.org/0000-0003-3445-7562)) (affiliation:
+  Research Institute for Nature and Forest (INBO))
 
 - Stijn Van Hoey <stijnvanhoey@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-6413-3185))
@@ -43,12 +47,12 @@ Authors:
 Other contributors:
 
 - Claudia Meneses <claudia.meneses@vliz.be>
-  ([ORCID](https://orcid.org/0000-0002-9397-5442)) (Flanders Marine
-  Institute (VLIZ)) \[contributor\]
+  ([ORCID](https://orcid.org/0000-0002-9397-5442)) (affiliation:
+  Flanders Marine Institute (VLIZ)) \[contributor\]
 
 - Lotte Pohl <lotte.pohl@vliz.be>
-  ([ORCID](https://orcid.org/0000-0002-7607-7018)) (Flanders Marine
-  Institute (VLIZ)) \[contributor\]
+  ([ORCID](https://orcid.org/0000-0002-7607-7018)) (affiliation:
+  Flanders Marine Institute (VLIZ)) \[contributor\]
 
 - Research Institute for Nature and Forest (INBO)
   ([ROR](https://ror.org/00j54wy13)) \[copyright holder\]
