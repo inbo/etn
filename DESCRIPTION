@@ -43,7 +43,7 @@ Imports:
     dplyr (>= 1.2.0),
     frictionless,
     glue,
-    httr2,
+    httr2 (>= 1.2.0),
     lifecycle,
     memoise,
     methods,
