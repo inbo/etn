@@ -22,7 +22,7 @@
 #'
 #' @param dataset Name of the example dataset to load. Defaults to the only
 #' available dataset: `"2014_DEMER"`.
-#' @return Frictionless data package.
+#' @returns Frictionless data package.
 #' @family sample data
 #' @export
 #' @examples

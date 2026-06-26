@@ -3,6 +3,7 @@
 #' Get data for deployments of acoustic receivers, with options to filter
 #' results.
 #'
+#' @inheritParams list_animal_ids
 #' @param deployment_id Integer (vector). One or more deployment identifiers.
 #' @param receiver_id Character (vector). One or more receiver identifiers.
 #' @param acoustic_project_code Character (vector). One or more acoustic
@@ -11,8 +12,7 @@
 #'   names.
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `FALSE`.
-#' @inheritParams list_animal_ids
-#' @return A tibble with acoustic deployment data, sorted by
+#' @returns A tibble with acoustic deployment data, sorted by
 #'   `acoustic_project_code`, `station_name` and `deploy_date_time`.
 #' @family access functions
 #' @export
