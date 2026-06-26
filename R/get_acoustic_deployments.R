@@ -12,7 +12,7 @@
 #' @param open_only Logical. Restrict deployments to those that are currently
 #'   open (i.e. no end date defined). Defaults to `FALSE`.
 #' @inheritParams list_animal_ids
-#' @return A tibble with acoustic deployment data, sorted by
+#' @returns A tibble with acoustic deployment data, sorted by
 #'   `acoustic_project_code`, `station_name` and `deploy_date_time`.
 #' @family access functions
 #' @export

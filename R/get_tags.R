@@ -12,7 +12,7 @@
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag
 #'   identifiers, i.e. identifiers found in [get_acoustic_detections()].
 #' @inheritParams list_animal_ids
-#' @return A tibble with tags data, sorted by `tag_serial_number`.
+#' @returns A tibble with tags data, sorted by `tag_serial_number`.
 #'  Values for `owner_organization` and `owner_pi` will only be visible if you
 #'  are member of the group.
 #' @family access functions

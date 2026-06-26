@@ -1,7 +1,7 @@
 #' List all available acoustic project codes
 #'
 #' @inheritParams list_animal_ids
-#' @return A vector of all unique `project_code` of `type = "acoustic"` in
+#' @returns A vector of all unique `project_code` of `type = "acoustic"` in
 #'   `project.sql`.
 #' @family list functions
 #' @export

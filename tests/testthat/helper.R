@@ -70,8 +70,7 @@ expect_protocol_agnostic <- function(expression) {
 #' @param datapackage List describing a Data Package as returned by
 #'   [frictionless::read_package()].
 #' @param table_name Name of the Data Resource to retrieve the fields from.
-#'
-#' @return List containing the schema fields of the requested resource.
+#' @returns List containing the schema fields of the requested resource.
 #' @family helper functions
 #' @noRd
 fetch_schema_fields <- function(datapackage = datapackage, table_name) {
@@ -142,8 +141,7 @@ skip_if_no_authentication <- function() {
 #'
 #' @param http_code An integer representing the HTTP status code to retrieve.
 #'   Defaults to 200.
-#'
-#' @return An `httr2` response object containing the HTTP response for the
+#' @returns An `httr2` response object containing the HTTP response for the
 #'   specified status code.
 #' @family helper functions
 #' @noRd

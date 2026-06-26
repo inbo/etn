@@ -8,11 +8,10 @@
 #' request, it is convenient to retrieve this temp key from the original
 #' response object
 #'
-#' @param response The response resulting from a POST request to a opencpu api
-#'   service
-#'
-#' @return the OCPU temp key to be used as part of a GET request to an opencpu
-#'   api service
+#' @param response The response resulting from a POST request to a OpenCPU API
+#'   service.
+#' @returns The OCPU temp key to be used as part of a GET request to an OpenCPU
+#'   API service.
 #' @family helper functions
 #' @noRd
 extract_temp_key <- function(response) {
@@ -41,8 +40,7 @@ extract_temp_key <- function(response) {
 #'   encoders](https://www.opencpu.org/api.html#api-formats). For example:
 #'   `compression = "lz4"` in the case of `format = "feather"` is passed to
 #'   `arrow::write_feather()`. Other encoders include `base::saveRDS`.
-#'
-#' @return the uncompressed object resulting form a GET request to the API. If
+#' @returns The uncompressed object resulting form a GET request to the API. If
 #'   `return_url` is `TRUE`, the url of the result object is returned instead.
 #' @family helper functions
 #' @noRd
@@ -124,9 +122,7 @@ get_val <- function(temp_key,
 #' the parent, etc.
 #' @param compact Logical, if `TRUE` (default) `NULL` values are removed from the
 #' returned list. Similar (but not identical to) to [purrr::compact()].
-#'
-#' @return a named list of name value pairs form the parent environement
-#'
+#' @returns A named list of name value pairs form the parent environement.
 #' @family helper functions
 #' @noRd
 return_parent_arguments <- function(depth = 1, compact = TRUE) {
@@ -184,10 +180,8 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
 #' Get the hostname from a URL string
 #'
 #' @param url_str A character string containing a URL
-#'
-#' @return The hostname extracted from the URL string including the scheme (eg.
-#'   https)
-#'
+#' @returns The hostname extracted from the URL string including the scheme
+#'   (e.g. https).
 #' @family helper functions
 #' @noRd
 #' @examples
@@ -219,7 +213,6 @@ get_hostname <- function(url_str) {
 #' @param return_as Character, either "version" or "all", indicating if only the
 #'   version number should be returned, or the full output of
 #'   `etnservice::get_version()` (either locally or via the API).
-#'
 #' @returns Either a character string with the version number of etnservice. Or
 #'   a list with the full output which includes the version number, And the
 #'   checksums of all functions in etnservice.
@@ -259,8 +252,7 @@ get_etnservice_version <- function(return_as = c("version", "all"),
 #'  `get_parent_fn_name(depth = 3)`: the function calling this helper
 #'  function.
 #' @param ... Additional arguments passed on to `httr2::req_perform()`
-#'
-#' @return The response object from the request
+#' @returns The response object from the request.
 #' @family helper functions
 #' @noRd
 req_perform_opencpu <- function(req,

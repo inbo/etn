@@ -17,7 +17,7 @@
 #' @param license License of the dataset.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
-#' @return CSV and `meta.xml` files written to disk.
+#' @returns CSV and `meta.xml` files written to disk.
 #'   And invisibly, a list of data frames with the transformed data.
 #' @family transformation functions
 #' @export

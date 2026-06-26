@@ -52,7 +52,7 @@
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
 #' @inheritParams list_animal_ids
-#' @return CSV and JSON files written to disk.
+#' @returns CSV and JSON files written to disk.
 #' @family download functions
 #' @keywords internal
 #' @export

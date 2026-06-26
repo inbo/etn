@@ -9,7 +9,7 @@
 #' will be prompted to enter them.
 #'
 #' @param ... Any arguments passed to this function are ignored.
-#' @return This function is no longer in use, and returns `NULL` invisibly.
+#' @returns This function is no longer in use, and returns `NULL` invisibly.
 #' @family connect functions
 #' @keywords internal
 #' @export

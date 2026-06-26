@@ -11,7 +11,7 @@
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param scientific_name Character (vector). One or more scientific names.
 #' @inheritParams list_animal_ids
-#' @return A tibble with animals data, sorted by `animal_project_code`,
+#' @returns A tibble with animals data, sorted by `animal_project_code`,
 #' `release_date_time` and `tag_serial_number`.
 #' @family access functions
 #' @export

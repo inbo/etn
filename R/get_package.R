@@ -4,7 +4,7 @@
 #' https://specs.frictionlessdata.io/data-package/).
 #'
 #' @param animal_project_code Animal project you want to get data from.
-#' @return A Data Package object.
+#' @returns A Data Package object.
 #'   Write it to disk with [write_package()].
 #' @family access functions
 #' @export

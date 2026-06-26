@@ -6,7 +6,7 @@
 #'   project codes. Case-insensitive.
 #' @inheritParams list_animal_ids
 #' @inheritParams get_animal_projects
-#' @return A tibble with acoustic project data, sorted by `project_code`.
+#' @returns A tibble with acoustic project data, sorted by `project_code`.
 #' @family access functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()

@@ -19,9 +19,7 @@
 #'   or SQL helper
 #' @param ... options on how to fetch the response. Forwarded to
 #'   `forward_to_api()`
-#'
-#' @return parsed R object as resulting from the API
-#'
+#' @returns parsed R object as resulting from the API
 #' @family helper functions
 #' @noRd
 conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
