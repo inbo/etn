@@ -13,9 +13,9 @@ read_resource(package, resource_name, col_select = NULL)
 - package:
 
   Data Package object, as returned by
-  [`read_package()`](https://rdrr.io/pkg/frictionless/man/read_package.html)
+  [`read_package()`](https://docs.ropensci.org/frictionless/reference/read_package.html)
   or
-  [`create_package()`](https://rdrr.io/pkg/frictionless/man/create_package.html).
+  [`create_package()`](https://docs.ropensci.org/frictionless/reference/create_package.html).
 
 - resource_name:
 

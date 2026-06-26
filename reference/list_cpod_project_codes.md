@@ -38,11 +38,15 @@ Other list functions:
 
 ``` r
 list_cpod_project_codes()
-#>  [1] "Apelafico_acoustics"  "Apelafico_underwater" "ARMS_MBON_Belgium"   
-#>  [4] "CODEVCO"              "cpod-lifewatch"       "cpod-od-natuur"      
-#>  [7] "Lifewatch_extra"      "Lifewatch_test"       "NOVANA"              
-#> [10] "PAM-Borssele"         "PelFish"              "PhD_Parcerisas"      
-#> [13] "PureWind"             "SEAWave"              "SMGMIT"              
-#> [16] "STRAITS_PAM"          "VLIZ-MRC-AMUC-001"    "VLIZ-MRC-AMUC-002"   
-#> [19] "WaveHub"             
+#>  [1] "Apelafico_acoustics"           "Apelafico_underwater"         
+#>  [3] "ARMS_MBON_Belgium"             "Blueconnect"                  
+#>  [5] "CODEVCO"                       "cpod-lifewatch"               
+#>  [7] "cpod-od-natuur"                "Lifewatch_additional_stations"
+#>  [9] "Lifewatch_performance_test"    "mare_wind_finescale"          
+#> [11] "NOVANA"                        "PAM-Borssele"                 
+#> [13] "PelFish"                       "PhD_Parcerisas"               
+#> [15] "PureWind"                      "SEAWave"                      
+#> [17] "SMGMIT"                        "STRAITS_PAM"                  
+#> [19] "VLIZ_SANDEEL"                  "VLIZ-MRC-AMUC-001"            
+#> [21] "VLIZ-MRC-AMUC-002"             "WaveHub"                      
 ```
