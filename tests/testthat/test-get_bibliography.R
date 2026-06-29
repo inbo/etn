@@ -91,7 +91,7 @@ test_that("get_bibliography() handles missing project codes", {
         animal_project_code = "not an animal project code"
       )
     ),
-    class = ""
+    regexp = "Can't find"
   )
 
   expect_error(
@@ -103,7 +103,7 @@ test_that("get_bibliography() handles missing project codes", {
         acoustic_project_code = "not an acoustic project code"
       )
     ),
-    class = ""
+    regexp = "Can't find"
   )
 })
 
