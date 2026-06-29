@@ -51,19 +51,20 @@ get_bibliography <- function(x) {
     dplyr::pull(x, "acoustic_project_code") |>
     unique()
 
-  animal_project_codes <- rlang::arg_match0(
-    provided_animal_project_codes,
-    values = list_animal_project_codes(),
-    arg_nm = "animal_project_code",
-    error_call = rlang::caller_env()
-  )
+  animal_project_codes <-
+    check_value(
+      provided_animal_project_codes,
+      list_animal_project_codes(),
+      name = "animal_project_code"
+    )
 
-  acoustic_project_codes <- rlang::arg_match0(
-    provided_acoustic_project_codes,
-    values = list_acoustic_project_codes(),
-    arg_nm = "acoustic_project_code",
-    error_call = rlang::caller_env()
-  )
+  acoustic_project_codes <-
+    check_value(
+      provided_acoustic_project_codes,
+      list_acoustic_project_codes(),
+      name = "acoustic_project_code"
+    )
+
 
   # Fetch project citations -------------------------------------------------
   animal_citations <- get_animal_projects(
