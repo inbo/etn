@@ -81,3 +81,28 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
     expect_false(credentials_are_set())
   )
 })
+
+# get_parent_fn_name() ----------------------------------------------------
+
+test_that("get_parent_fn_name() can return the name of the parent function", {
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name()
+  }
+  expect_identical(
+    parent_function_with_a_cool_name(),
+    "parent_function_with_a_cool_name"
+  )
+})
+
+test_that("get_parent_fn_name() can return the name a higher level caller", {
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name(depth = 2)
+  }
+  grandparent_function <- function() {
+    parent_function_with_a_cool_name()
+  }
+  expect_identical(
+    grandparent_function(),
+    "grandparent_function"
+  )
+})
