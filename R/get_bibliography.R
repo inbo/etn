@@ -41,7 +41,7 @@ get_bibliography <- function(x) {
   provided_acoustic_project_codes <-
     dplyr::pull(x, name = "acoustic_project_code")
 
-  rlang::arg_match0(
+  animal_project_codes <- rlang::arg_match0(
     provided_animal_project_codes,
     choices = list_animal_project_codes(),
     error_arg = "animal_project_code",
@@ -49,7 +49,7 @@ get_bibliography <- function(x) {
     error_call = rlang::caller_env()
   )
 
-  rlang::arg_match0(
+  acoustic_project_codes <- rlang::arg_match0(
     provided_acoustic_project_codes,
     choices = list_acoustic_project_codes(),
     error_arg = "acoustic_project_code",
