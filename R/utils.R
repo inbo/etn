@@ -254,13 +254,10 @@ credentials_are_set <- function(){
 #' @family helper functions
 #' @noRd
 etn_citation <- function(){
-  # Set width to a large value to avoid line breaks in the citation text as
-  # citation() tries to account for the console width.
-  withr::local_options(
-    width = 10000L
-  )
   citation("etn") |>
-    format(style = "text")
+    format(style = "text") |>
+    # Remove linebreaks that may have been introduced based on console width.
+    stringr::str_squish()
 }
 
 # WRAPPER FUNCTIONS ----
