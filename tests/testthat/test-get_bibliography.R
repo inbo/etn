@@ -127,7 +127,11 @@ test_that("get_bibliography() returns data.frame with expected shape", {
 
   expect_shape(
     get_bibliography(read_resource(example_dataset(), "detections")),
-    ncol = length(expected_columns),
+    ncol = length(expected_columns)
+  )
+
+  expect_shape(
+    get_bibliography(read_resource(example_dataset(), "detections")),
     nrow = length(c(
       "ETN datasystem citation", "etn R package citation"
     )) + n_animal_projects + n_acoustic_projects
