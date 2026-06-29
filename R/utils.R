@@ -254,7 +254,7 @@ credentials_are_set <- function(){
 #' @family helper functions
 #' @noRd
 etn_citation <- function(){
-  citation("etn") |>
+  utils::citation("etn") |>
     format(style = "text") |>
     # Remove markup: emphasis
     stringr::str_remove_all(stringr::fixed("_")) |>
