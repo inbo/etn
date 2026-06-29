@@ -92,7 +92,7 @@ get_bibliography <- function(x) {
   ) |>
     # Rename columns
     purrr::map(\(df) {
-      dplyr::rename(df, item = .data$project_code)
+      dplyr::rename(df, item = "project_code")
     }) |>
     dplyr::bind_rows(.id = "type") |>
     dplyr::add_row(
