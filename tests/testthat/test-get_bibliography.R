@@ -51,7 +51,7 @@ test_that("get_bibliography() returns error on missing columns", {
         animal_project_code = "STRAITS_GIBRALTAR_ANIMAL"
       )
     ),
-    class = ""
+    class = "etn_error_missing_columns"
   )
 
   expect_error(
@@ -60,7 +60,7 @@ test_that("get_bibliography() returns error on missing columns", {
         acoustic_project_code = "MOVE_CCMAR_NETWORK"
       )
     ),
-    class = ""
+    class = "etn_error_missing_columns"
   )
 
   expect_error(
@@ -70,7 +70,7 @@ test_that("get_bibliography() returns error on missing columns", {
         another_column = "bar"
       )
     ),
-    class = ""
+    class = "etn_error_missing_columns"
   )
 })
 
