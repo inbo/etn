@@ -5,7 +5,7 @@ test_that("get_bibiograpy() returns a data.frame", {
       acoustic_project_code = "MOVE_CCMAR_NETWORK"
     )
   expect_s3_class(
-    get_bibiography(test_input),
+    get_bibliography(test_input),
     "data.frame"
   )
 })
@@ -18,7 +18,7 @@ test_that("get_bibliography() returns data.frame with expected columns", {
     )
 
   expect_named(
-    get_bibiography(test_input),
+    get_bibliography(test_input),
     # Test for the names of the columns
     c("item", "type", "citation"),
     # Test for the order of the columns
@@ -28,7 +28,7 @@ test_that("get_bibliography() returns data.frame with expected columns", {
 
 test_that("get_bibliography() accepts dataframes with expected columns", {
     expect_s3_class(
-      get_bibiography(read_resource(example_dataset(), "detections")),
+      get_bibliography(read_resource(example_dataset(), "detections")),
     "data.frame"
   )
 
@@ -39,14 +39,14 @@ test_that("get_bibliography() accepts dataframes with expected columns", {
     )
 
   expect_s3_class(
-    get_bibiography(test_input),
+    get_bibliography(test_input),
     "data.frame"
   )
 })
 
 test_that("get_bibliography() returns error on missing columns", {
   expect_error(
-    get_bibiography(
+    get_bibliography(
       data.frame(
         animal_project_code = "STRAITS_GIBRALTAR_ANIMAL"
       )
@@ -55,7 +55,7 @@ test_that("get_bibliography() returns error on missing columns", {
   )
 
   expect_error(
-    get_bibiography(
+    get_bibliography(
       data.frame(
         acoustic_project_code = "MOVE_CCMAR_NETWORK"
       )
@@ -64,7 +64,7 @@ test_that("get_bibliography() returns error on missing columns", {
   )
 
   expect_error(
-    get_bibiography(
+    get_bibliography(
       data.frame(
         other_column = "foo",
         another_column = "bar"
@@ -84,7 +84,7 @@ test_that("get_bibliography() returns error on unexpected input type", {
 
 test_that("get_bibliography() handles missing project codes", {
   expect_error(
-    get_bibiography(
+    get_bibliography(
       data.frame(
         # valid code
         acoustic_project_code = "MOVE_CCMAR_NETWORK",
@@ -96,7 +96,7 @@ test_that("get_bibliography() handles missing project codes", {
   )
 
   expect_error(
-    get_bibiography(
+    get_bibliography(
       data.frame(
         # valid code
         animal_project_code = "STRAITS_GIBRALTAR_ANIMAL",
@@ -127,7 +127,7 @@ test_that("get_bibliography() returns data.frame with expected shape", {
   expected_columns <- c("item", "type", "citation")
 
   expect_shape(
-    get_bibiography(read_resource(example_dataset(), "detections")),
+    get_bibliography(read_resource(example_dataset(), "detections")),
     ncol = length(expected_columns),
     nrow = length(c(
       "ETN datasystem citation", "etn R package citation"
@@ -148,7 +148,7 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
     )
 
   expect_identical(
-    get_bibiography(test_input) |>
+    get_bibliography(test_input) |>
       dplyr::filter(.data$item == "ETN",
                     .data$type == "data platform") |>
       dplyr::pull("citation"),
@@ -175,7 +175,7 @@ test_that("get_bibliography() returns package citation", {
 
 test_that("get_bibliography() returns animal and project citations", {
   bibiography <-
-    get_bibiography(read_resource(example_dataset(), "detections"))
+    get_bibliography(read_resource(example_dataset(), "detections"))
   # Expect at least one animal project and one acoustic project in the bibliography
   expect_gte(dplyr::filter(bibiography, .data$type == "animal project"),
     expected = 1L
@@ -210,7 +210,7 @@ test_that("get_bibliography() returns animal and project citations", {
     dplyr::select(dplyr::all_of(c("project_code", "citation")))
 
   expect_setequal(
-    get_bibiography(
+    get_bibliography(
       dplyr::tibble(
         animal_project_code = animal_project_codes,
         acoustic_project_code = acoustic_project_codes,
@@ -225,9 +225,9 @@ test_that("get_bibliography() returns animal and project citations", {
   )
 })
 
-test_that("get_bibiography() returns expected values for type", {
+test_that("get_bibliography() returns expected values for type", {
   expect_setequal(
-    get_bibiography(
+    get_bibliography(
       read_resource(example_dataset(), "detections")
     ) |>
       dplyr::pull("type"),
@@ -235,7 +235,7 @@ test_that("get_bibiography() returns expected values for type", {
   )
 })
 
-test_that("get_bibiography() returns expected values for item", {
+test_that("get_bibliography() returns expected values for item", {
   project_codes <-
     read_resource(example_dataset(), "detections", col_select =
   c("acoustic_project_code", "animal_project_code")) |>
@@ -243,7 +243,7 @@ test_that("get_bibiography() returns expected values for item", {
     unique()
 
   expect_setequal(
-    get_bibiography(
+    get_bibliography(
       read_resource(example_dataset(), "detections")
     ) |>
       dplyr::pull("item"),
