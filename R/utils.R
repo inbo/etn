@@ -257,7 +257,7 @@ etn_citation <- function(){
   # Set width to a large value to avoid line breaks in the citation text as
   # citation() tries to account for the console width.
   withr::local_options(
-    width = 100000L
+    width = 10000L
   )
   citation("etn") |>
     format(style = "text")
