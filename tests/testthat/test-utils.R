@@ -81,3 +81,36 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
     expect_false(credentials_are_set())
   )
 })
+
+# etn_citation() ----------------------------------------------------------
+
+test_that("etn_citation() returns a character vector", {
+  expect_type(etn_citation(), "character")
+})
+
+test_that("etn_citation() returns the expected package citation", {
+  # Rebuild the citation so we have something to check against
+  raw_citation <- citation("etn") |>
+    format() |>
+    # Skip the first row, contains instructions
+    purrr::pluck(2L)
+
+  # Clean up the citation so we have something to compare to
+  formatted_citation <- stringr::str_sub(
+    raw_citation,
+    start = 1L,
+    # Bibtex instructions start after the link
+    end = stringr::str_locate(raw_citation,
+                              stringr::fixed("<https://inbo.github.io/etn/>"))[2]
+  ) |>
+    # Clean up whitespace
+    stringr::str_squish() |>
+    # Citation ends on a period
+    paste0(".")
+
+  expect_identical(
+    etn_citation(),
+    expected = formatted_citation
+  )
+})
+
