@@ -86,8 +86,8 @@ get_bibliography <- function(x) {
   )
 
   list(
-    animal_project = animal_citations,
-    acoustic_project = acoustic_citations
+    `animal project` = animal_citations,
+    `acoustic project` = acoustic_citations
   ) |>
     # Rename columns
     purrr::map(\(df) {
