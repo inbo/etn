@@ -77,8 +77,8 @@ test_that("get_bibliography() returns error on missing columns", {
 test_that("get_bibliography() returns error on unexpected input type", {
 
   expect_error(
-    get_biography("not a data.frame"),
     class = ""
+    get_bibliography("not a data.frame"),
   )
 })
 
