@@ -36,26 +36,63 @@ get_bibliography <- function(x) {
 
   # Check that all the provided project codes can be found in the database
   provided_animal_project_codes <-
-    dplyr::pull(x, name = "animal_project_code")
+    dplyr::pull(x, "animal_project_code") |>
+    unique()
   # Check that all provided project codes are valid
   provided_acoustic_project_codes <-
-    dplyr::pull(x, name = "acoustic_project_code")
+    dplyr::pull(x, "acoustic_project_code") |>
+    unique()
 
   animal_project_codes <- rlang::arg_match0(
     provided_animal_project_codes,
-    choices = list_animal_project_codes(),
-    error_arg = "animal_project_code",
-    multiple = TRUE,
+    values = list_animal_project_codes(),
+    arg_nm = "animal_project_code",
     error_call = rlang::caller_env()
   )
 
   acoustic_project_codes <- rlang::arg_match0(
     provided_acoustic_project_codes,
-    choices = list_acoustic_project_codes(),
-    error_arg = "acoustic_project_code",
-    multiple = TRUE,
+    values = list_acoustic_project_codes(),
+    arg_nm = "acoustic_project_code",
     error_call = rlang::caller_env()
   )
 
+  # Fetch project citations -------------------------------------------------
+  animal_citations <- get_animal_projects(
+    animal_project_code = animal_project_codes,
+    citation = TRUE
+  ) |>
+    dplyr::select(dplyr::all_of(c("project_code", "citation")))
 
+  acoustic_citations <- get_acoustic_projects(
+    acoustic_project_code = acoustic_project_codes,
+    citation = TRUE
+  ) |>
+    dplyr::select(dplyr::all_of(c("project_code", "citation")))
+
+  # Format output -----------------------------------------------------------
+
+  etn_ref <- paste(
+    "European Tracking Network - Data Platform.",
+    "Flanders Marine Institute (VLIZ)"
+  )
+
+  list(
+    animal_project = animal_citations,
+    acoustic_project = acoustic_citations) |>
+    # Rename columns
+    purrr::map(\(df) {dplyr::rename(df, item = .data$project_code)}) |>
+    dplyr::bind_rows(.id = "type") |>
+    dplyr::add_row(
+      .before = 1L,
+      item = "ETN",
+      type = "data platfrom",
+      citation = etn_ref
+    ) |>
+    dplyr::add_row(
+      .after = 1L,
+      item = "etn",
+      type = "R package",
+      citation = etn_citation()
+    )
 }
