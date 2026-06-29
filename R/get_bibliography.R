@@ -18,16 +18,17 @@
 #'
 #' # Altough mainly meant for the above use cases, you can also provide any
 #' # data.frame as long as the project code columns are present
-#' data.frame(animal_project_code = "2014_demer",
-#'            acoustic_project_code = "demer") |>
-#'  get_bibliography()
+#' data.frame(
+#'   animal_project_code = "2014_demer",
+#'   acoustic_project_code = "demer"
+#' ) |>
+#'   get_bibliography()
 get_bibliography <- function(x) {
-
   # Check inputs ------------------------------------------------------------
 
   # Check if at least the required columns are present
   required_columns <- c("animal_project_code", "acoustic_project_code")
-  if(!all(required_columns %in% colnames(x))){
+  if (!all(required_columns %in% colnames(x))) {
     cli::cli_abort(
       "x must contain the following columns: {.val {required_columns}}",
       class = "etn_error_missing_columns"
@@ -79,9 +80,12 @@ get_bibliography <- function(x) {
 
   list(
     animal_project = animal_citations,
-    acoustic_project = acoustic_citations) |>
+    acoustic_project = acoustic_citations
+  ) |>
     # Rename columns
-    purrr::map(\(df) {dplyr::rename(df, item = .data$project_code)}) |>
+    purrr::map(\(df) {
+      dplyr::rename(df, item = .data$project_code)
+    }) |>
     dplyr::bind_rows(.id = "type") |>
     dplyr::add_row(
       .before = 1L,
