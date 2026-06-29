@@ -19,7 +19,10 @@ test_that("get_bibliography() returns data.frame with expected columns", {
 
   expect_named(
     get_bibiography(test_input),
-    c("item", "type", "citation")
+    # Test for the names of the columns
+    c("item", "type", "citation"),
+    # Test for the order of the columns
+    ignore.order = FALSE
   )
 })
 
