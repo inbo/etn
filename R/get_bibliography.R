@@ -26,6 +26,13 @@
 get_bibliography <- function(x) {
   # Check inputs ------------------------------------------------------------
 
+  if(!is.data.frame(x)){
+    cli::cli_abort(
+      "x must be a data.frame",
+      class = "etn_error_invalid_input_type"
+    )
+  }
+
   # Check if at least the required columns are present
   required_columns <- c("animal_project_code", "acoustic_project_code")
   if (!all(required_columns %in% colnames(x))) {

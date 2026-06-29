@@ -75,10 +75,9 @@ test_that("get_bibliography() returns error on missing columns", {
 })
 
 test_that("get_bibliography() returns error on unexpected input type", {
-
   expect_error(
-    class = ""
     get_bibliography("not a data.frame"),
+    class = "etn_error_invalid_input_type"
   )
 })
 
