@@ -21,7 +21,7 @@
 #' data.frame(animal_project_code = "2014_demer",
 #'            acoustic_project_code = "demer") |>
 #'  get_bibliography()
-get_bibiography <- function(x) {
+get_bibliography <- function(x) {
 
   # Check inputs ------------------------------------------------------------
 
