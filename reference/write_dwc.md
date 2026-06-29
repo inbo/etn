@@ -89,7 +89,7 @@ Key features of the Darwin Core transformation:
   extension, where values are mapped to a controlled vocabulary
   recommended by [OBIS](https://obis.org/).
 
-- Acoustic detections are downsampled to the **first detection per
+- Acoustic detections are subsampled to the **first detection per
   hour**, to reduce the size of high-frequency data. The
   `coordinateUncertaintyInMeters` is set to 1000 m to account for
   imprecise receiver location and acoustic detection range. Duplicate
