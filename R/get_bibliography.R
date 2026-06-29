@@ -97,7 +97,7 @@ get_bibliography <- function(x) {
     dplyr::add_row(
       .before = 1L,
       item = "ETN",
-      type = "data platfrom",
+      type = "data platform",
       citation = etn_ref
     ) |>
     dplyr::add_row(
