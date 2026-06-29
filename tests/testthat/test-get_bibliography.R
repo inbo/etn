@@ -169,7 +169,7 @@ test_that("get_bibliography() returns package citation", {
   expect_identical(
     get_bibliography(test_input) |>
       dplyr::filter(.data$item == "etn",
-                    .data$type == "R Package") |>
+                    .data$type == "R package") |>
       dplyr::pull("citation"),
     expected = etn_citation()
   )
