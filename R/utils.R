@@ -243,6 +243,26 @@ credentials_are_set <- function(){
     nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
+#' Get the citation for the etn package as plain text
+#'
+#' This function retrieves the citation information for the `etn` package and
+#' formats it as plain text.
+#'
+#' @returns A character vector containing the citation information for the `etn`
+#'   package in plain text format.
+#'
+#' @family helper functions
+#' @noRd
+etn_citation <- function(){
+  # Set width to a large value to avoid line breaks in the citation text as
+  # citation() tries to account for the console width.
+  withr::local_options(
+    width = 100000L
+  )
+  citation("etn") |>
+    format(style = "text")
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
