@@ -174,14 +174,14 @@ test_that("get_bibliography() returns package citation", {
 })
 
 test_that("get_bibliography() returns animal and project citations", {
-  bibiography <-
+  bibliography <-
     get_bibliography(read_resource(example_dataset(), "detections"))
   # Expect at least one animal project and one acoustic project in the bibliography
-  expect_gte(dplyr::filter(bibiography, .data$type == "animal project"),
+  expect_gte(dplyr::filter(bibliography, .data$type == "animal project"),
     expected = 1L
   )
 
-  expect_gte(dplyr::filter(bibiography, .data$type == "acoustic project"),
+  expect_gte(dplyr::filter(bibliography, .data$type == "acoustic project"),
     expected = 1L
   )
 
