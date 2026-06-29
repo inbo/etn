@@ -98,5 +98,9 @@ get_bibliography <- function(x) {
       item = "etn",
       type = "R package",
       citation = etn_citation()
+    ) |>
+    # Set columns in correct order
+    dplyr::relocate(
+      dplyr::all_of(c("item", "type", "citation"))
     )
 }
