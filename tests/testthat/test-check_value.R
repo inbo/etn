@@ -50,3 +50,10 @@ test_that("check_value() can handle NA in reference", {
     class = "etn_value_not_found"
   )
 })
+
+test_that("check_value() can offer a suggestion for typos", {
+  expect_error(
+    check_value("seeschelde", c("demer", "dijle", "zeeschelde")),
+    class = "etn_value_not_found_suggest"
+  )
+})
