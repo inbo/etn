@@ -252,5 +252,6 @@ tags	tag_type		Type of tag attached to animal. Fixed options: sensor-tag, id-tag
 tags	telemetry_type		Type of tag attached to animal. Fixed options: Id-tag or sensor-tag.	string		id-tag	
 tags	type		Type of the tag.	string		sensor-tag	
 tags	weight			number			
-references	reference_for			string			
-references	reference			string			
+bibliography	item			string		2014_demer	
+bibliography	type			string		animal project	
+bibliography	citation			string		Pauwels, I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.; Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020): 2014_DEMER - Acoustic telemetry data for four fish species in the Demer river (Belgium). Marine Data Archive. https://doi.org/10.14284/432	
