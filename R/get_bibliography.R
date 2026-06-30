@@ -81,9 +81,12 @@ get_bibliography <- function(x) {
 
   # Format output -----------------------------------------------------------
 
-  etn_ref <- paste(
-    "European Tracking Network - Data Platform.",
-    "Flanders Marine Institute (VLIZ)"
+  etn_ref <- paste0(
+    "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
+    " The European tracking network through time: united efforts to advance",
+    " aquatic conservation in Europe.",
+    " Anim Biotelemetry (2026).",
+    " https://doi.org/10.1186/s40317-026-00475-z"
   )
 
   list(
