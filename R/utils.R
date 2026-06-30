@@ -52,8 +52,6 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
       call = rlang::caller_env()
     )
   }
-
-  NULL
 }
 
 #' Get credentials from environment variables, or set them manually
