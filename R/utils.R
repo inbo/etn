@@ -256,14 +256,15 @@ credentials_are_set <- function(){
 etn_citation <- function(){
   utils::citation("etn") |>
     format(style = "text") |>
+    # Remove linebreaks that may have been introduced based on console width
+    stringr::str_squish() |>
     # Remove markup: emphasis
     stringr::str_remove_all(stringr::fixed("_")) |>
     # Remove markup: links
     stringr::str_remove_all("[<>]") |>
     # Only mention doi once, so remove the doi: string
     stringr::str_remove("doi:.*?(?= )") |>
-    # Remove linebreaks that may have been introduced based on console width as
-    # well as double spaces.
+    # Finally, get rid of any superflous whitespace
     stringr::str_squish()
 }
 

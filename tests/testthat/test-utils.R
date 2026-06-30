@@ -92,7 +92,9 @@ test_that("etn_citation() returns the expected package citation", {
   expect_identical(
     etn_citation(),
     paste0(
-      "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S (2026). etn: Access Data from the European Tracking Network. https://doi.org/10.5281/zenodo.15235747, R package version ",
+      "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S (2026).",
+      " etn: Access Data from the European Tracking Network.",
+      " https://doi.org/10.5281/zenodo.15235747, R package version ",
       packageVersion("etn"),
       ", https://inbo.github.io/etn/."
     )
