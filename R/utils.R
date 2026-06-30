@@ -20,18 +20,39 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     x <- tolower(x)
     y <- tolower(y)
   }
-
   # Check value(s) against valid values
-  assertthat::assert_that(
-    all(x %in% y), # Returns TRUE for x = NULL
-    msg = glue::glue(
-      "Can't find {name} `{x}` in: {y}",
-      x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
-      y = glue::glue_collapse(y, sep = ", ", width = 300)
+  if (x %in% y) {
+    return(x)
+  }
+  # If the value is not found, check if it's a typo by calculating the
+  # Levenshtein distance.
+  relative_distances <- adist(x, y) / nchar(y)
+  # If any candidate string is less than 50% different from the reference, we
+  # can assume it's a typo and suggest it to the user.
+  candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
+  if (any(relative_distances <= 0.5)) {
+    closest_match <- y[which.min(relative_distances)]
+    # If there are many candidates, truncate the list to 5 items for the error
+    # message.
+    cli::cli_abort(
+      "Can't find {.var {name}}: {.val {x}} in: {.or {.str {candidates_col}}}.
+      Did you mean {.strong {.val {closest_match}}}?",
+      class = "etn_value_not_found_suggest",
+      call = rlang::caller_env()
     )
-  )
+  } else {
+    # Sort the references so the closest matches are mentioned. Only show 5
+    # members.
+    candidates_col <- y[order(as.vector(relative_distances))] |>
+      cli::cli_vec(list("vec-trunc" = 5))
+    cli::cli_abort(
+      "Can't find {.var {name}}: {.val {x}} in: {.or {.str {candidates_col}}}.",
+      class = "etn_value_not_found",
+      call = rlang::caller_env()
+    )
+  }
 
-  return(x)
+  NULL
 }
 
 #' Get credentials from environment variables, or set them manually
