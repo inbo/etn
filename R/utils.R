@@ -21,12 +21,13 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     y <- tolower(y)
   }
   # Check value(s) against valid values
-  if (x %in% y) {
+  if (all(x %in% y)) {
     return(x)
   }
+  missing_value <- x[!x %in% y]
   # If the value is not found, check if it's a typo by calculating the
   # Levenshtein distance.
-  relative_distances <- adist(x, y) / nchar(y)
+  relative_distances <- adist(missing_value, y) / nchar(y)
   # If any candidate string is less than 50% different from the reference, we
   # can assume it's a typo and suggest it to the user.
   candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
@@ -35,7 +36,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     # If there are many candidates, truncate the list to 5 items for the error
     # message.
     cli::cli_abort(
-      "Can't find {.var {name}}: {.val {x}} in: {.or {.str {candidates_col}}}.
+      "Can't find {.var {name}}: {.val {missing_value}} in: {.or {.str {candidates_col}}}.
       Did you mean {.strong {.val {closest_match}}}?",
       class = "etn_value_not_found_suggest",
       call = rlang::caller_env()
@@ -46,7 +47,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     candidates_col <- y[order(as.vector(relative_distances))] |>
       cli::cli_vec(list("vec-trunc" = 5))
     cli::cli_abort(
-      "Can't find {.var {name}}: {.val {x}} in: {.or {.str {candidates_col}}}.",
+      "Can't find {.var {name}}: {.val {missing_value}} in: {.or {.str {candidates_col}}}.",
       class = "etn_value_not_found",
       call = rlang::caller_env()
     )
