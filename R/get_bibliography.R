@@ -12,6 +12,7 @@
 #'   first row contains the citation for the ETN platform, the second row the
 #'   citation for the etn R package, and subsequent rows contain citations for
 #'   the animal and acoustic projects present in the input data.frame.
+#' @family access functions
 #' @export
 #'
 #' @examplesIf interactive() && etn:::credentials_are_set()
