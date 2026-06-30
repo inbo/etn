@@ -33,10 +33,10 @@ CSV and JSON files written to disk.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{download_acoustic_dataset()} is deprecated. Please use \code{\link[=get_package]{get_package()}}
-instead, which is more versatile, adds field definition and references, and
-returns a Data Package object that can be passed to other functions.
-Note that \code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or
-print summary statistics.
+instead, which is more versatile, adds field definition and a bibliography,
+and returns a Data Package object that can be passed to other functions. Note
+that \code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
+summary statistics.
 
 This function allows you to download all acoustic data related to an
 \strong{animal project} as a data package that can be deposited in a research data
