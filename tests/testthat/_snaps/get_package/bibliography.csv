@@ -1,0 +1,8 @@
+item,type,citation
+ETN,data platform,"Reubens, J., Aarestrup, K., Abecasis, D. et al. The European tracking network through time: united efforts to advance aquatic conservation in Europe. Anim Biotelemetry (2026). https://doi.org/10.1186/s40317-026-00475-z"
+etn,R package,"Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S (2026). etn: Access Data from the European Tracking Network. https://doi.org/10.5281/zenodo.15235747, R package version 3.0.0.9000, https://inbo.github.io/etn/."
+2014_demer,animal project,"Pauwels, I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.; Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020): 2014_DEMER - Acoustic telemetry data for four fish species in the Demer river (Belgium). Marine Data Archive. https://doi.org/10.14284/432"
+albert,acoustic project,
+demer,acoustic project,
+dijle,acoustic project,
+zeeschelde,acoustic project,
