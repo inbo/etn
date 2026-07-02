@@ -45,7 +45,9 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   # If any candidate string is less 3 transformations away from the reference,
   # we can assume it's a typo and suggest it to the user.
   candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
-  if (any(purrr::map_lgl(distances, \(dist_for_value) {any(dist_for_value <= 3)}))) {
+  if (any(purrr::map_lgl(distances, \(dist_for_value) {
+    any(dist_for_value <= max_dist)
+  }))) {
     # We need to repeat the candidates so we can get the minimum distance
     # for each missing value
     closest_match <-
