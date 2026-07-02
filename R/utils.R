@@ -203,7 +203,8 @@ localdb_is_available <- function() {
 select_protocol <- function() {
   # ALlow overwriting of protocol logic by environmental variable
   user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
-                                       unset = "no_protocol_set")
+    unset = "no_protocol_set"
+  )
   if (user_selected_protocol != "no_protocol_set") {
     return(user_selected_protocol)
   }
@@ -259,8 +260,8 @@ remove_html_tags <- function(x) {
 #'   environment variables.
 #' @family helper functions
 #' @noRd
-credentials_are_set <- function(){
-    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+credentials_are_set <- function() {
+  nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
 #' Get the citation for the etn package as plain text
@@ -273,14 +274,13 @@ credentials_are_set <- function(){
 #'
 #' @family helper functions
 #' @noRd
-etn_citation <- function(){
-
+etn_citation <- function() {
   authors <-
     "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
   title <-
     "etn: Access Data from the European Tracking Network"
 
-  doi_url = "https://doi.org/10.5281/zenodo.15235747"
+  doi_url <- "https://doi.org/10.5281/zenodo.15235747"
 
   version_str <- paste("R package version", utils::packageVersion("etn"))
 
@@ -339,13 +339,13 @@ NULL
   # Checking this on every call would slow down the package.
   get_etnservice_version <<-
     memoise::memoise(get_etnservice_version,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
+      cache = cachem::cache_mem(max_age = 60 * 15)
     )
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
-  )
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
 }
 
 #' Expand columns
