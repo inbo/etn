@@ -274,18 +274,19 @@ credentials_are_set <- function(){
 #' @family helper functions
 #' @noRd
 etn_citation <- function(){
-  utils::citation("etn") |>
-    format(style = "text") |>
-    # Remove linebreaks that may have been introduced based on console width
-    stringr::str_squish() |>
-    # Remove markup: emphasis
-    stringr::str_remove_all(stringr::fixed("_")) |>
-    # Remove markup: links
-    stringr::str_remove_all("[<>]") |>
-    # Only mention doi once, so remove the doi: string
-    stringr::str_remove("doi:.*?(?= )") |>
-    # Finally, get rid of any superflous whitespace
-    stringr::str_squish()
+
+  authors <-
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
+  title <-
+    "etn: Access Data from the European Tracking Network"
+
+  doi_url = "https://doi.org/10.5281/zenodo.15235747"
+
+  version_str <- paste("R package version", utils::packageVersion("etn"))
+
+  docs_url <- "https://inbo.github.io/etn/"
+
+  sprintf("%s. %s. %s, %s, %s.", authors, title, doi_url, version_str, docs_url)
 }
 
 # WRAPPER FUNCTIONS ----
