@@ -27,7 +27,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   missing_value <- x[!x %in% y]
   # If the value is not found, check if it's a typo by calculating the
   # Levenshtein distance.
-  relative_distances <- adist(missing_value, y) / nchar(y)
+  relative_distances <- utils::adist(missing_value, y) / nchar(y)
   # If any candidate string is less than 50% different from the reference, we
   # can assume it's a typo and suggest it to the user.
   candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
