@@ -57,3 +57,12 @@ test_that("check_value() can offer a suggestion for typos", {
     class = "etn_value_not_found_suggest"
   )
 })
+
+test_that("check_value() offers suggestions for multiple typos", {
+  expect_error(
+    check_value(x = c("2000_Loire", "seeschelde"),
+                y = c("2011_Loire", "zeeschelde")
+    ),
+    class = "etn_value_not_found_suggest"
+  )
+})
