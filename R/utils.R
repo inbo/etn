@@ -27,12 +27,12 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   missing_values <- x[!x %in% y]
   # If the value is not found, check if it's a typo by calculating the
   # Levenshtein distance.
-  relative_distances <- utils::adist(missing_values, y) / nchar(y)
-  # If any candidate string is less than 50% different from the reference, we
-  # can assume it's a typo and suggest it to the user.
+  distances <- utils::adist(missing_values, y)
+  # If any candidate string is less 3 transformations away from the reference,
+  # we can assume it's a typo and suggest it to the user.
   candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
-  if (any(relative_distances <= 0.5)) {
-    closest_match <- y[which.min(relative_distances)]
+  if (any(distances <= 3)) {
+    closest_match <- y[which.min(distances)]
     # If there are many candidates, truncate the list to 5 items for the error
     # message.
     cli::cli_abort(
@@ -44,7 +44,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   } else {
     # Sort the references so the closest matches are mentioned. Only show 5
     # members.
-    candidates_col <- y[order(as.vector(relative_distances))] |>
+    candidates_col <- y[order(as.vector(distances))] |>
       cli::cli_vec(list("vec-trunc" = 5))
     cli::cli_abort(
       "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.str {candidates_col}}}.",
