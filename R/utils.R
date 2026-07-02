@@ -2,16 +2,28 @@
 
 #' Check input value against valid values
 #'
+#' This function checks if the input value(s) `x` are present in the valid
+#' values `y`. If any value in `x` is not found in `y`, an error is thrown. If
+#' `lowercase` is set to `TRUE`, the case of the values will be ignored during
+#' the comparison, and the returned values will be converted to lowercase.
+#'
+#' A suggestion will be offered when a value is not found, based on the
+#' Levenshtein distance to the valid values.
+#'
+#' This function was inspired by `rlang:::stop_arg_match()`.
+#'
 #' @param x Value(s) to test.
 #'   `NULL` values will automatically pass.
 #' @param y Value(s) to test against.
 #' @param name Name of the parameter.
 #' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
 #'   `x` values will be returned lowercase.
+#' @param max_dist Maximum Levenshtein distance to consider a value a typo.
+#'   This variable is used to offer suggestions when a typo is suspected.
 #' @returns Error or (lowercase) `x` values.
 #' @family helper functions
 #' @noRd
-check_value <- function(x, y, name = "value", lowercase = FALSE) {
+check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   # Remove NA from valid values
   y <- y[!is.na(y)]
 
@@ -20,18 +32,54 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     x <- tolower(x)
     y <- tolower(y)
   }
-
   # Check value(s) against valid values
-  assertthat::assert_that(
-    all(x %in% y), # Returns TRUE for x = NULL
-    msg = glue::glue(
-      "Can't find {name} `{x}` in: {y}",
-      x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
-      y = glue::glue_collapse(y, sep = ", ", width = 300)
+  if (all(x %in% y)) {
+    return(x)
+  }
+  missing_values <- x[!x %in% y]
+  # If the value is not found, check if it's a typo by calculating the
+  # Levenshtein distance.
+  distances <- utils::adist(missing_values, y) |>
+    # Transpose the matrix so we can get the minimum distance per candidate
+    t() |>
+    as.data.frame() |>
+    purrr::set_names(missing_values)
+  # If any candidate string is less 3 transformations away from the reference,
+  # we can assume it's a typo and suggest it to the user.
+  candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
+  if (any(purrr::map_lgl(distances, \(dist_for_value) {
+    any(dist_for_value <= max_dist)
+  }))) {
+    # We need to repeat the candidates so we can get the minimum distance
+    # for each missing value
+    closest_match <-
+      rep(y, length(missing_values))[purrr::map_int(distances, which.min)]
+    # If there are many candidates, truncate the list to 5 items for the error
+    # message.
+    cli::cli_abort(
+      "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.str {candidates_col}}}.
+      Did you mean {.strong {.val {closest_match}}}?",
+      class = "etn_value_not_found_suggest",
+      call = rlang::caller_env()
     )
-  )
-
-  return(x)
+  } else {
+    # Sort the references so the closest matches are mentioned. Only show 5
+    # members.
+    candidates_col <- purrr::map(distances, \(dist_for_value){
+      y[order(as.vector(dist_for_value))]
+    }) |>
+      # Convert into a vector and truncate for the error message
+      purrr::reduce(rbind) |>
+      c() |>
+      # Don't repeat yourself
+      unique() |>
+      cli::cli_vec(list("vec-trunc" = 5))
+    cli::cli_abort(
+      "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.str {candidates_col}}}.",
+      class = "etn_value_not_found",
+      call = rlang::caller_env()
+    )
+  }
 }
 
 #' Get credentials from environment variables, or set them manually
@@ -183,7 +231,8 @@ localdb_is_available <- function() {
 select_protocol <- function() {
   # ALlow overwriting of protocol logic by environmental variable
   user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
-                                       unset = "no_protocol_set")
+    unset = "no_protocol_set"
+  )
   if (user_selected_protocol != "no_protocol_set") {
     return(user_selected_protocol)
   }
@@ -239,8 +288,8 @@ remove_html_tags <- function(x) {
 #'   environment variables.
 #' @family helper functions
 #' @noRd
-credentials_are_set <- function(){
-    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+credentials_are_set <- function() {
+  nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
 }
 
 #' Get the citation for the etn package as plain text
@@ -253,19 +302,19 @@ credentials_are_set <- function(){
 #'
 #' @family helper functions
 #' @noRd
-etn_citation <- function(){
-  utils::citation("etn") |>
-    format(style = "text") |>
-    # Remove linebreaks that may have been introduced based on console width
-    stringr::str_squish() |>
-    # Remove markup: emphasis
-    stringr::str_remove_all(stringr::fixed("_")) |>
-    # Remove markup: links
-    stringr::str_remove_all("[<>]") |>
-    # Only mention doi once, so remove the doi: string
-    stringr::str_remove("doi:.*?(?= )") |>
-    # Finally, get rid of any superflous whitespace
-    stringr::str_squish()
+etn_citation <- function() {
+  authors <-
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
+  title <-
+    "etn: Access Data from the European Tracking Network"
+
+  doi_url <- "https://doi.org/10.5281/zenodo.15235747"
+
+  version_str <- paste("R package version", utils::packageVersion("etn"))
+
+  docs_url <- "https://inbo.github.io/etn/"
+
+  sprintf("%s. %s. %s, %s, %s.", authors, title, doi_url, version_str, docs_url)
 }
 
 # WRAPPER FUNCTIONS ----
@@ -318,13 +367,13 @@ NULL
   # Checking this on every call would slow down the package.
   get_etnservice_version <<-
     memoise::memoise(get_etnservice_version,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
+      cache = cachem::cache_mem(max_age = 60 * 15)
     )
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
-  )
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
 }
 
 #' Expand columns

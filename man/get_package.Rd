@@ -69,6 +69,7 @@ Other access functions:
 \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
 \code{\link[=get_animal_projects]{get_animal_projects()}},
 \code{\link[=get_animals]{get_animals()}},
+\code{\link[=get_bibliography]{get_bibliography()}},
 \code{\link[=get_cpod_projects]{get_cpod_projects()}},
 \code{\link[=get_tags]{get_tags()}}
 }
