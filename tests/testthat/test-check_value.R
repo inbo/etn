@@ -1,18 +1,19 @@
 test_that("check_value() returns error for incorrect values", {
   expect_error(
     check_value("invalid", c("a", "b")),
-    "Can't find value `invalid` in: a, b",
-    fixed = TRUE
+    class = "etn_value_not_found"
   )
   expect_error(
     check_value(c("a", "invalid"), c("a", "b")),
-    "Can't find value `a` and/or `invalid` in: a, b",
-    fixed = TRUE
+    class = "etn_value_not_found"
   )
   expect_error(
     check_value("invalid", c("a", "b"), name = "param_name"),
-    "Can't find param_name `invalid` in: a, b",
-    fixed = TRUE
+    class = "etn_value_not_found"
+  )
+  expect_error(
+    check_value(c("missing", "misval"), c("a", "b", "c")),
+    class = "etn_value_not_found"
   )
 })
 
@@ -29,9 +30,8 @@ test_that("check_value() returns x for correct values", {
 
 test_that("check_value() can ignore case", {
   expect_error(
-    check_value("A", c("a", "B")),
-    "Can't find value `A` in: a, B",
-    fixed = TRUE
+    check_value("AAAA", c("aaaa", "BBBB")),
+    class = "etn_value_not_found"
   )
   expect_identical(
     check_value("A", c("a", "B"), lowercase = TRUE),
@@ -51,7 +51,22 @@ test_that("check_value() can handle NA in reference", {
 
   expect_error(
     check_value("invalid", c("A", NA, "C")),
-    "Can't find value `invalid` in: A, C",
-    fixed = TRUE
+    class = "etn_value_not_found"
+  )
+})
+
+test_that("check_value() can offer a suggestion for typos", {
+  expect_error(
+    check_value("seeschelde", c("demer", "dijle", "zeeschelde")),
+    class = "etn_value_not_found_suggest"
+  )
+})
+
+test_that("check_value() offers suggestions for multiple typos", {
+  expect_error(
+    check_value(x = c("2000_Loire", "seeschelde"),
+                y = c("2011_Loire", "zeeschelde")
+    ),
+    class = "etn_value_not_found_suggest"
   )
 })

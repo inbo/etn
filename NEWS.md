@@ -13,6 +13,8 @@
   * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
   * The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (`emof.csv`), for better support with OBIS (#555).
 * The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
+* New `get_bibliography()` creates a bibliography (ETN data platform, R package, animal projects and acoustic projects) for a data.frame of detections, e.g. as returned by `get_acoustic_detections()` or read from a Data Package (#587).
+* `get_package()` now includes a bibliography resource (replacing the previous references resource), built with `get_bibliography()` (#587).
 
 # etn 3.0.0
 

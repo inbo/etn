@@ -81,3 +81,16 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
     expect_false(credentials_are_set())
   )
 })
+
+# etn_citation() ----------------------------------------------------------
+
+test_that("etn_citation() returns a character vector", {
+  expect_type(etn_citation(), "character")
+})
+
+test_that("etn_citation() returns the expected package citation", {
+  expect_match(
+    etn_citation(),
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
+  )
+})
