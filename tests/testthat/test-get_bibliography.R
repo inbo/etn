@@ -1,4 +1,10 @@
 test_that("get_bibiograpy() returns a data.frame", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-gibraltar")
+
   test_input <-
     data.frame(
       animal_project_code = "STRAITS_GIBRALTAR_ANIMAL",
@@ -11,6 +17,12 @@ test_that("get_bibiograpy() returns a data.frame", {
 })
 
 test_that("get_bibliography() returns data.frame with expected columns", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-gibraltar")
+
   test_input <-
     data.frame(
       animal_project_code = "STRAITS_GIBRALTAR_ANIMAL",
@@ -27,15 +39,21 @@ test_that("get_bibliography() returns data.frame with expected columns", {
 })
 
 test_that("get_bibliography() accepts dataframes with expected columns", {
-    expect_s3_class(
-      get_bibliography(read_resource(example_dataset(), "detections")),
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-2014demer")
+
+  expect_s3_class(
+    get_bibliography(read_resource(example_dataset(), "detections")),
     "data.frame"
   )
 
   test_input <-
     data.frame(
-      animal_project_code = "STRAITS_GIBRALTAR_ANIMAL",
-      acoustic_project_code = "MOVE_CCMAR_NETWORK"
+      animal_project_code = "2014_demer",
+      acoustic_project_code = "dijle"
     )
 
   expect_s3_class(
@@ -82,6 +100,9 @@ test_that("get_bibliography() returns error on unexpected input type", {
 })
 
 test_that("get_bibliography() handles missing project codes", {
+  # Needed for list functions
+  skip_if_no_authentication()
+
   expect_error(
     get_bibliography(
       data.frame(
@@ -91,7 +112,7 @@ test_that("get_bibliography() handles missing project codes", {
         animal_project_code = "not an animal project code"
       )
     ),
-    regexp = "Can't find"
+    class = "etn_value_not_found"
   )
 
   expect_error(
@@ -103,11 +124,17 @@ test_that("get_bibliography() handles missing project codes", {
         acoustic_project_code = "not an acoustic project code"
       )
     ),
-    regexp = "Can't find"
+    class = "etn_value_not_found"
   )
 })
 
 test_that("get_bibliography() returns data.frame with expected shape", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-2014demer")
+
   # One row for the ETN data system, with a hardcoded citation
   # One row for the etn R package, with a citation to the latest (non-dev) release
   # One row for each animal project
@@ -125,13 +152,16 @@ test_that("get_bibliography() returns data.frame with expected shape", {
 
   expected_columns <- c("item", "type", "citation")
 
+  bibliography <-
+    get_bibliography(read_resource(example_dataset(), "detections"))
+
   expect_shape(
-    get_bibliography(read_resource(example_dataset(), "detections")),
+    bibliography,
     ncol = length(expected_columns)
   )
 
   expect_shape(
-    get_bibliography(read_resource(example_dataset(), "detections")),
+    bibliography,
     nrow = length(c(
       "ETN datasystem citation", "etn R package citation"
     )) + n_animal_projects + n_acoustic_projects
@@ -139,6 +169,12 @@ test_that("get_bibliography() returns data.frame with expected shape", {
 })
 
 test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-gibraltar")
+
   etn_ref <- paste0(
     "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
     " The European tracking network through time: united efforts to advance",
@@ -163,6 +199,12 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
 })
 
 test_that("get_bibliography() returns package citation", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-gibraltar")
+
   test_input <-
     data.frame(
       animal_project_code = "STRAITS_GIBRALTAR_ANIMAL",
@@ -180,6 +222,12 @@ test_that("get_bibliography() returns package citation", {
 })
 
 test_that("get_bibliography() returns animal and project citations", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-citations")
+
   bibliography <-
     get_bibliography(read_resource(example_dataset(), "detections"))
   # Expect at least one animal project and one acoustic project in the bibliography
@@ -232,6 +280,12 @@ test_that("get_bibliography() returns animal and project citations", {
 })
 
 test_that("get_bibliography() returns expected values for type", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-2014demer")
+
   expect_setequal(
     get_bibliography(
       read_resource(example_dataset(), "detections")
@@ -242,6 +296,12 @@ test_that("get_bibliography() returns expected values for type", {
 })
 
 test_that("get_bibliography() returns expected values for item", {
+  skip_if_offline("marineinfo.org")
+  # Needed for list functions
+  skip_if_no_authentication()
+
+  vcr::local_cassette("bibliography-2014demer")
+
   project_codes <-
     read_resource(example_dataset(), "detections", col_select =
   c("acoustic_project_code", "animal_project_code")) |>
