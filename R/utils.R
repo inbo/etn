@@ -10,6 +10,8 @@
 #' A suggestion will be offered when a value is not found, based on the
 #' Levenshtein distance to the valid values.
 #'
+#' This function was inspired by `rlang:::stop_arg_match()`.
+#'
 #' @param x Value(s) to test.
 #'   `NULL` values will automatically pass.
 #' @param y Value(s) to test against.
