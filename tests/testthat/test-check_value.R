@@ -30,7 +30,7 @@ test_that("check_value() returns x for correct values", {
 
 test_that("check_value() can ignore case", {
   expect_error(
-    check_value("A", c("a", "B")),
+    check_value("AAAA", c("aaaa", "BBBB")),
     class = "etn_value_not_found"
   )
   expect_identical(
