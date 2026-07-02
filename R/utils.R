@@ -8,10 +8,12 @@
 #' @param name Name of the parameter.
 #' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
 #'   `x` values will be returned lowercase.
+#' @param max_dist Maximum Levenshtein distance to consider a value a typo.
+#'   This variable is used to offer suggestions when a typo is suspected.
 #' @returns Error or (lowercase) `x` values.
 #' @family helper functions
 #' @noRd
-check_value <- function(x, y, name = "value", lowercase = FALSE) {
+check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   # Remove NA from valid values
   y <- y[!is.na(y)]
 
