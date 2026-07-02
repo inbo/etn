@@ -3,7 +3,9 @@ test_that("get_bibiograpy() returns a data.frame", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-gibraltar")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-gibraltar",
+                      serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -21,7 +23,9 @@ test_that("get_bibliography() returns data.frame with expected columns", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-gibraltar")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-gibraltar",
+                      serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -43,7 +47,9 @@ test_that("get_bibliography() accepts dataframes with expected columns", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-2014demer")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-2014demer",
+                      serialize_with = "qs2")
 
   expect_s3_class(
     get_bibliography(read_resource(example_dataset(), "detections")),
@@ -133,7 +139,9 @@ test_that("get_bibliography() returns data.frame with expected shape", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-2014demer")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-2014demer",
+                      serialize_with = "qs2")
 
   # One row for the ETN data system, with a hardcoded citation
   # One row for the etn R package, with a citation to the latest (non-dev) release
@@ -173,7 +181,9 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-gibraltar")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-gibraltar",
+                      serialize_with = "qs2")
 
   etn_ref <- paste0(
     "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
@@ -203,7 +213,9 @@ test_that("get_bibliography() returns package citation", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-gibraltar")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-gibraltar",
+                      serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -226,7 +238,9 @@ test_that("get_bibliography() returns animal and project citations", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-citations")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-citations",
+                      serialize_with = "qs2")
 
   bibliography <-
     get_bibliography(read_resource(example_dataset(), "detections"))
@@ -284,7 +298,9 @@ test_that("get_bibliography() returns expected values for type", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-2014demer")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-2014demer",
+                      serialize_with = "qs2")
 
   expect_setequal(
     get_bibliography(
@@ -300,7 +316,9 @@ test_that("get_bibliography() returns expected values for item", {
   # Needed for list functions
   skip_if_no_authentication()
 
-  vcr::local_cassette("bibliography-2014demer")
+  skip_if_not_installed("qs2")
+  vcr::local_cassette("bibliography-2014demer",
+                      serialize_with = "qs2")
 
   project_codes <-
     read_resource(example_dataset(), "detections", col_select =
