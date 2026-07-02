@@ -27,12 +27,19 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   missing_values <- x[!x %in% y]
   # If the value is not found, check if it's a typo by calculating the
   # Levenshtein distance.
-  distances <- utils::adist(missing_values, y)
+  distances <- utils::adist(missing_values, y) |>
+    # Transpose the matrix so we can get the minimum distance per candidate
+    t() |>
+    as.data.frame() |>
+    purrr::set_names(missing_values)
   # If any candidate string is less 3 transformations away from the reference,
   # we can assume it's a typo and suggest it to the user.
   candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
-  if (any(distances <= 3)) {
-    closest_match <- y[which.min(distances)]
+  if (any(purrr::map_lgl(distances, \(dist_for_value) {any(dist_for_value <= 3)}))) {
+    # We need to repeat the candidates so we can get the minimum distance
+    # for each missing value
+    closest_match <-
+      rep(y, length(missing_values))[purrr::map_int(distances, which.min)]
     # If there are many candidates, truncate the list to 5 items for the error
     # message.
     cli::cli_abort(
