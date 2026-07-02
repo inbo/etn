@@ -11,6 +11,10 @@ test_that("check_value() returns error for incorrect values", {
     check_value("invalid", c("a", "b"), name = "param_name"),
     class = "etn_value_not_found"
   )
+  expect_error(
+    check_value(c("missing", "misval"), c("a", "b", "c")),
+    class = "etn_value_not_found"
+  )
 })
 
 test_that("check_value() returns x for correct values", {
