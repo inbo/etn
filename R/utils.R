@@ -51,7 +51,14 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   } else {
     # Sort the references so the closest matches are mentioned. Only show 5
     # members.
-    candidates_col <- y[order(as.vector(distances))] |>
+    candidates_col <- purrr::map(distances, \(dist_for_value){
+      y[order(as.vector(dist_for_value))]
+    }) |>
+      # Convert into a vector and truncate for the error message
+      purrr::reduce(rbind) |>
+      c() |>
+      # Don't repeat yourself
+      unique() |>
       cli::cli_vec(list("vec-trunc" = 5))
     cli::cli_abort(
       "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.str {candidates_col}}}.",
