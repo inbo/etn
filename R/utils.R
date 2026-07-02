@@ -2,6 +2,14 @@
 
 #' Check input value against valid values
 #'
+#' This function checks if the input value(s) `x` are present in the valid
+#' values `y`. If any value in `x` is not found in `y`, an error is thrown. If
+#' `lowercase` is set to `TRUE`, the case of the values will be ignored during
+#' the comparison, and the returned values will be converted to lowercase.
+#'
+#' A suggestion will be offered when a value is not found, based on the
+#' Levenshtein distance to the valid values.
+#'
 #' @param x Value(s) to test.
 #'   `NULL` values will automatically pass.
 #' @param y Value(s) to test against.
