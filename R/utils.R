@@ -8,7 +8,7 @@
 #' @param name Name of the parameter.
 #' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
 #'   `x` values will be returned lowercase.
-#' @return Error or (lowercase) `x` values.
+#' @returns Error or (lowercase) `x` values.
 #' @family helper functions
 #' @noRd
 check_value <- function(x, y, name = "value", lowercase = FALSE) {
@@ -45,7 +45,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'   environment, but you can set it manually too.
 #' @param password Password to the ETN database. By default read from the
 #'   environment, but you can set it manually too.
-#' @return A string as it is ingested by other functions that need
+#' @returns A string as it is ingested by other functions that need
 #'   authentication.
 #' @family helper functions
 #' @noRd
@@ -99,11 +99,9 @@ deprecate_warn_connection <- function() {
 
 #' Get the name (symbol) of the parent function
 #'
-#' @return A length one Character with the name of the parent function.
-#'
+#' @returns A length one Character with the name of the parent function.
 #' @family helper functions
 #' @noRd
-#'
 #' @examples
 #' child_fn <- function() {
 #'   get_parent_fn_name()
@@ -124,7 +122,7 @@ get_parent_fn_name <- function(depth = 1) {
 #' Copy of testthat::is_testing() implementation to avoid a runtime dependency
 #' on testthat.
 #'
-#' @return `TRUE` inside a test.
+#' @returns `TRUE` inside a test.
 #' @family helper functions
 #' @noRd
 is_testing <- function() {
@@ -180,7 +178,6 @@ localdb_is_available <- function() {
 #' API. Both these protocols use the ETN database as a source.
 #'
 #' @returns Character of length one with one of the available protocols.
-#'
 #' @family helper functions
 #' @noRd
 select_protocol <- function() {
@@ -207,11 +204,9 @@ select_protocol <- function() {
 #'
 #'
 #' @param x Character string with HTML tags.
-#'
 #' @returns Character string without HTML tags.
 #' @family helper functions
 #' @noRd
-#'
 #' @examples
 #' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
 remove_html_tags <- function(x) {
@@ -314,7 +309,7 @@ NULL
 #'
 #' @param df A data frame.
 #' @param colnames A character vector of column names.
-#' @return Data frame expanded with columns that were not yet present.
+#' @returns Data frame expanded with columns that were not yet present.
 #' @family helper functions
 #' @noRd
 expand_cols <- function(df, colnames) {

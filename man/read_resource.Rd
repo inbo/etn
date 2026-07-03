@@ -20,8 +20,8 @@ Selecting columns can improve read speed.}
 Read data from a Data Resource into a tibble data frame
 }
 \seealso{
-Other frictionless functions: 
-\code{\link{read_package}()},
-\code{\link{write_package}()}
+Other frictionless functions:
+\code{\link{read_package}},
+\code{\link{write_package}}
 }
 \concept{frictionless functions}

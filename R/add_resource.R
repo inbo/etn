@@ -10,7 +10,7 @@
 #'
 #' @inheritParams frictionless::add_resource
 #' @param data Data frame to attach.
-#' @return `package` with one additional resource.
+#' @returns `package` with one additional resource.
 #' @family frictionless functions
 #' @noRd
 add_resource <- function(package, resource_name, data) {

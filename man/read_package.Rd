@@ -13,8 +13,8 @@ read_package(file = "datapackage.json")
 Read a Data Package descriptor file (\code{datapackage.json})
 }
 \seealso{
-Other frictionless functions: 
-\code{\link{read_resource}()},
-\code{\link{write_package}()}
+Other frictionless functions:
+\code{\link{read_resource}},
+\code{\link{write_package}}
 }
 \concept{frictionless functions}

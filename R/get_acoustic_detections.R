@@ -23,8 +23,8 @@
 #' @param progress Logical. Show a progress bar while fetching data. Defaults to
 #'   `TRUE`.
 #' @inheritParams list_animal_ids
-#' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
-#'  and `date_time`.
+#' @returns A tibble with acoustic detections data, sorted by `acoustic_tag_id`
+#'   and `date_time`.
 #' @family access functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()
@@ -343,12 +343,10 @@ get_acoustic_detections <- function(connection,
 #' to count the number of records that would be returned by
 #' [`get_acoustic_detections()`][get_acoustic_detections].
 #'
-#'
-#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
 #' @inheritParams get_acoustic_detections
-#'
-#' @return A numeric value with the number of acoustic detections that match the
-#'     given parameters.
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
+#' @returns A numeric value with the number of acoustic detections that match the
+#'   given parameters.
 #' @family helper functions
 #' @noRd
 #' @examples
