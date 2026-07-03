@@ -53,7 +53,7 @@ It is possible that the columns contained in a receiver log overlap with
 the default columns always returned by \code{get_receiver_logs()}. If
 duplicate columns are found, their names are made unique with
 \code{\link[base:make.unique]{base::make.unique()}}. When this happens, a message is printed to the
-console. The message can be muffled with \code{\link[base:message]{base::suppressMessages()}}.
+console. The message can be muffled with \code{\link[base:suppressMessages]{base::suppressMessages()}}.
 }
 
 \examples{
@@ -67,15 +67,15 @@ get_receiver_logs(deployment_id = 6028,
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other access functions: 
-\code{\link{get_acoustic_deployments}()},
-\code{\link{get_acoustic_detections}()},
-\code{\link{get_acoustic_projects}()},
-\code{\link{get_acoustic_receivers}()},
-\code{\link{get_animal_projects}()},
-\code{\link{get_animals}()},
-\code{\link{get_cpod_projects}()},
-\code{\link{get_package}()},
-\code{\link{get_tags}()}
+Other access functions:
+\code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
+\code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
+\code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
+\code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
+\code{\link[=get_animal_projects]{get_animal_projects()}},
+\code{\link[=get_animals]{get_animals()}},
+\code{\link[=get_cpod_projects]{get_cpod_projects()}},
+\code{\link[=get_package]{get_package()}},
+\code{\link[=get_tags]{get_tags()}}
 }
 \concept{access functions}
