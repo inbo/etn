@@ -37,6 +37,15 @@
 #'   - `animal_id`: The animal id of the animal that recorded the data.
 #'   - `tag_serial_number`: The tag serial number of the tag that recorded the data.
 #'
+#' @section Returning large amounts of data out of memory:
+#'  If you are fetching a large amount of data, it is recommended to use
+#'  `return_as = "arrow"` to return an out of memory object. This will allow you
+#'  to query the data without loading it all into memory at once. Keep in mind
+#'  that the downloaded data will remain stored on your computer until R is
+#'  restarted. If you want to keep the data, you can provide a path to an
+#'  existing directory where the csv files will be stored via the `path`
+#'  argument. See [arrow::Dataset] for more information.
+#'
 #' @export
 #'
 #' @examplesIf interactive() & credentials_are_set()
