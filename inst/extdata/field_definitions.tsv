@@ -252,3 +252,5 @@ tags	tag_type		Type of tag attached to animal. Fixed options: sensor-tag, id-tag
 tags	telemetry_type		Type of tag attached to animal. Fixed options: Id-tag or sensor-tag.	string		id-tag	
 tags	type		Type of the tag.	string		sensor-tag	
 tags	weight			number			
+references	reference_for			string			
+references	reference			string			

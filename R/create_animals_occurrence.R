@@ -1,7 +1,7 @@
 #' Create Darwin Core Occurrence from animals data
 #'
 #' @param animals A data frame derived from an `animals` resource.
-#' @return A data frame with Darwin Core occurrences.
+#' @returns A data frame with Darwin Core occurrences.
 #' @family dwc functions
 #' @noRd
 create_animals_occurrence <- function(animals, tags) {

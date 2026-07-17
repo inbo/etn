@@ -103,7 +103,9 @@ test_that("get_animal_projects() returns citation information when requested", {
   )
 
   animal_project_codes <- c(
-    "PTN/PROTECT2013/Moray",
+    "amsterdam",
+    "PhD_Goossens",
+    "SMOLTRACK-Skjern-2017",
     "hunzeenaas",
     "PTN-Silver-eel-Mondego",
     "FISHGAL"

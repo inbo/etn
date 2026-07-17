@@ -33,6 +33,9 @@ This allows you to see when and where receivers were deployed, even if
 these did not detect the selected animals.
 \item \code{receivers}: Acoustic receivers for the selected deployments, as returned
 by \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}}.
+\item \code{references}: References for ETN, the R package, the animal project and
+acoustic projects that returned detections.
+It is recommended to cite these when using the dataset.
 }
 }
 

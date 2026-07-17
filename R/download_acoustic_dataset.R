@@ -4,10 +4,10 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
-#' instead, which is more versatile, adds field definitions, and returns a
-#' Data Package object that can be passed to other functions. Note that
-#' [get_package()] does not support filtering on `scientific_name` or print
-#' summary statistics.
+#' instead, which is more versatile, adds field definition and references, and
+#' returns a Data Package object that can be passed to other functions.
+#' Note that [get_package()] does not support filtering on `scientific_name` or
+#' print summary statistics.
 #'
 #' This function allows you to download all acoustic data related to an
 #' **animal project** as a data package that can be deposited in a research data
@@ -44,6 +44,7 @@
 #' `frictionless validate datapackage.json` on the command line using
 #' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
+#' @inheritParams list_animal_ids
 #' @param animal_project_code Character. Animal project you want to download
 #'   data for. Required.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -51,8 +52,7 @@
 #' @param directory Character. Relative path to local download directory.
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
-#' @inheritParams list_animal_ids
-#' @return CSV and JSON files written to disk.
+#' @returns CSV and JSON files written to disk.
 #' @family download functions
 #' @keywords internal
 #' @export
