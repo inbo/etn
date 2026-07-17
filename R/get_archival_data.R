@@ -11,6 +11,8 @@
 #'   files will be stored in a temporary directory that is deleted when R is
 #'   restarted. If you want to keep the csv files, provide a path. Keep in mind
 #'   that the csv files can be quite large and may take up a lot of disk space.
+#'   If the requested files are already present in the provided path, they will
+#'   not be downloaded again.
 #' @param return_as `r lifecycle::badge("experimental")` Character. One of
 #'   "tibble" or "arrow". Whether to return the data as an in memory tibble or
 #'   an out of memory arrow dataset. The latter is recommended for large
@@ -170,6 +172,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     responses <-
       purrr::map2(requests, csv_file_paths, \(req, path) {
         if (file.exists(path) & file.size(path) > 0) {
+          # Skip files that have already been downloaded.
           NULL
         } else {
           httr2::req_perform(req, path = path)
