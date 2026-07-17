@@ -80,6 +80,10 @@ get_archival_data <- function(tag_serial_number = NULL,
     )
   }
 
+  if(progress){
+    cli::cli_progress_step("Preparing to download {length(uuids)} files.")
+  }
+
   ## Warn if some filters return no data ------------------------------------
   used_filters <- rlang::call_args(rlang::call_match()) |>
     purrr::map(eval, envir = parent.frame())
