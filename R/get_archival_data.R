@@ -1,5 +1,10 @@
 #' Get processed tag archival data
 #'
+#' This function fetches processed archival data from tags. The data is stored
+#' in csv files hosted on lifewatch.com. Providing at least one of the following
+#' arguments is required: `tag_serial_number`, `animal_id`, or
+#' `animal_project_code`.
+#'
 #' @inheritParams get_animals
 #' @inheritParams get_acoustic_detections
 #' @param animal_project_code `r lifecycle::badge("experimental")` Character
@@ -46,6 +51,19 @@ get_archival_data <- function(tag_serial_number = NULL,
                               ) {
   # Validate inputs ---------------------------------------------------------
   return_as <- rlang::arg_match(return_as)
+
+  # At least one of the query parameters must be supplied
+  non_query_args <- c("path", "limit", "return_as", "progress")
+  query_args <- setdiff(rlang::fn_fmls_names(), non_query_args) |>
+    mget()
+  provided_query_args <- purrr::discard(query_args, is.null)
+  if(length(provided_query_args) == 0){
+    cli::cli_abort(
+      c(cli::cli_h2("Attempting to download all available archival data is unwise."),
+      "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."),
+      class = "archival_data_no_query_args"
+    )
+  }
 
   # Control progress reporting ----------------------------------------------
   # Don't show the progress bar when testing: clutters up console and CI output
