@@ -244,9 +244,37 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Return object -----------------------------------------------------------
 
+
+
   switch (return_as,
     arrow = sensor_data,
-    tibble = dplyr::collect(sensor_data)
+    tibble = {
+      # Check object size to warn if too large to return as tibble: 1 GB
+      total_size_bytes <- sum(file.size(csv_file_paths))
+      one_gb <- 10e8 #bytes
+      total_n_rows <- sensor_data |>
+        dplyr::summarise(n_rows = dplyr::n()) |>
+        dplyr::collect() |>
+        dplyr::pull("n_rows")
+      if(total_size_bytes > one_gb) {
+        modified_call <-
+          rlang::call_modify(rlang::call_match(), return_as = "arrow")
+        cli::cli_warn(
+          c("The total size of the downloaded data is
+            {prettyunits::pretty_num(total_n_rows, style = '6')} rows and
+            {.strong {prettyunits::pretty_bytes(total_size_bytes)}}.",
+            "!" = "Returning this data as a tibble may exceed the available
+            memory of your computer and crash R.",
+            "i" = 'Consider using
+            {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
+            to return an out of memory object instead.',
+            "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
+          ),
+          class = "archival_data_large_return"
+        )
+      }
+
+      dplyr::collect(sensor_data)}
   )
 
 }
