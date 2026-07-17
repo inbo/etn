@@ -66,6 +66,17 @@ in csv files hosted on lifewatch.com. Providing at least one of the following
 arguments is required: \code{tag_serial_number}, \code{animal_id}, or
 \code{animal_project_code}.
 }
+\section{Returning large amounts of data out of memory}{
+
+If you are fetching a large amount of data, it is recommended to use
+\code{return_as = "arrow"} to return an out of memory object. This will allow you
+to query the data without loading it all into memory at once. Keep in mind
+that the downloaded data will remain stored on your computer until R is
+restarted. If you want to keep the data, you can provide a path to an
+existing directory where the csv files will be stored via the \code{path}
+argument. See \link[arrow:Dataset]{arrow::Dataset} for more information.
+}
+
 \examples{
 \dontshow{if (interactive() & credentials_are_set()) withAutoprint(\{ # examplesIf}
   get_archival_data(tag_serial_number = "A15757", limit = TRUE)
