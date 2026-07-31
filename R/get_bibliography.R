@@ -85,13 +85,11 @@ get_bibliography <- function(x) {
     dplyr::select(dplyr::all_of(c("project_code", "citation")))
 
   # Format output -----------------------------------------------------------
-
-  etn_ref <- paste0(
-    "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
-    " The European tracking network through time: united efforts to advance",
-    " aquatic conservation in Europe.",
-    " Anim Biotelemetry (2026).",
-    " https://doi.org/10.1186/s40317-026-00475-z"
+  etn_ref <- paste(
+    "Reubens J, Aarestrup K, Abecasis D et al. (2026)",
+    "The European tracking network through time: united efforts to advance",
+    "aquatic conservation in Europe. Animal Biotelemetry.",
+    "https://doi.org/10.1186/s40317-026-00475-z"
   )
 
   list(

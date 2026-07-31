@@ -184,12 +184,11 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
   skip_if_not_installed("qs2")
   vcr::local_cassette("bibliography-gibraltar", serialize_with = "qs2")
 
-  etn_ref <- paste0(
-    "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
-    " The European tracking network through time: united efforts to advance",
-    " aquatic conservation in Europe.",
-    " Anim Biotelemetry (2026).",
-    " https://doi.org/10.1186/s40317-026-00475-z"
+  etn_ref <- paste(
+    "Reubens J, Aarestrup K, Abecasis D et al. (2026)",
+    "The European tracking network through time: united efforts to advance",
+    "aquatic conservation in Europe. Animal Biotelemetry.",
+    "https://doi.org/10.1186/s40317-026-00475-z"
   )
 
   test_input <-
