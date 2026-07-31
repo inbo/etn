@@ -1,11 +1,10 @@
-test_that("get_bibiograpy() returns a data.frame", {
+test_that("get_bibiograpy() returns a data frame", {
   skip_if_offline("marineinfo.org")
   # Needed for list functions
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-gibraltar",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-gibraltar", serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -18,14 +17,13 @@ test_that("get_bibiograpy() returns a data.frame", {
   )
 })
 
-test_that("get_bibliography() returns data.frame with expected columns", {
+test_that("get_bibliography() returns data frame with expected columns", {
   skip_if_offline("marineinfo.org")
   # Needed for list functions
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-gibraltar",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-gibraltar", serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -42,14 +40,13 @@ test_that("get_bibliography() returns data.frame with expected columns", {
   )
 })
 
-test_that("get_bibliography() accepts dataframes with expected columns", {
+test_that("get_bibliography() accepts data frames with expected columns", {
   skip_if_offline("marineinfo.org")
   # Needed for list functions
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-2014demer",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-2014demer", serialize_with = "qs2")
 
   expect_s3_class(
     get_bibliography(read_resource(example_dataset(), "detections")),
@@ -140,8 +137,7 @@ test_that("get_bibliography() returns data.frame with expected shape", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-2014demer",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-2014demer", serialize_with = "qs2")
 
   # One row for the ETN data system, with a hardcoded citation
   # One row for the etn R package, with a citation to the latest (non-dev) release
@@ -149,13 +145,17 @@ test_that("get_bibliography() returns data.frame with expected shape", {
   # One row for each acoustic project
 
   n_animal_projects <-
-    read_resource(example_dataset(), "detections",
-                  col_select = "animal_project_code") |>
+    read_resource(
+      example_dataset(), "detections",
+      col_select = "animal_project_code"
+    ) |>
     dplyr::n_distinct("animal_project_code")
 
   n_acoustic_projects <-
-    read_resource(example_dataset(), "detections",
-                  col_select = "acoustic_project_code") |>
+    read_resource(
+      example_dataset(), "detections",
+      col_select = "acoustic_project_code"
+    ) |>
     dplyr::n_distinct("acoustic_project_code")
 
   expected_columns <- c("item", "type", "citation")
@@ -182,8 +182,7 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-gibraltar",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-gibraltar", serialize_with = "qs2")
 
   etn_ref <- paste0(
     "Reubens, J., Aarestrup, K., Abecasis, D. et al.",
@@ -201,8 +200,10 @@ test_that("get_bibliography() returns data.frame hardcoded ETN citation", {
 
   expect_identical(
     get_bibliography(test_input) |>
-      dplyr::filter(.data$item == "ETN",
-                    .data$type == "data platform") |>
+      dplyr::filter(
+        .data$item == "ETN",
+        .data$type == "data platform"
+      ) |>
       dplyr::pull("citation"),
     expected = etn_ref
   )
@@ -214,8 +215,7 @@ test_that("get_bibliography() returns package citation", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-gibraltar",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-gibraltar", serialize_with = "qs2")
 
   test_input <-
     data.frame(
@@ -225,8 +225,10 @@ test_that("get_bibliography() returns package citation", {
 
   expect_identical(
     get_bibliography(test_input) |>
-      dplyr::filter(.data$item == "etn",
-                    .data$type == "R package") |>
+      dplyr::filter(
+        .data$item == "etn",
+        .data$type == "R package"
+      ) |>
       dplyr::pull("citation"),
     expected = etn_citation()
   )
@@ -239,17 +241,18 @@ test_that("get_bibliography() returns animal and project citations", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-citations",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-citations", serialize_with = "qs2")
 
   bibliography <-
     get_bibliography(read_resource(example_dataset(), "detections"))
   # Expect at least one animal project and one acoustic project in the bibliography
-  expect_gte(nrow(dplyr::filter(bibliography, .data$type == "animal project")),
+  expect_gte(
+    nrow(dplyr::filter(bibliography, .data$type == "animal project")),
     expected = 1L
   )
 
-  expect_gte(nrow(dplyr::filter(bibliography, .data$type == "acoustic project")),
+  expect_gte(
+    nrow(dplyr::filter(bibliography, .data$type == "acoustic project")),
     expected = 1L
   )
 
@@ -261,8 +264,10 @@ test_that("get_bibliography() returns animal and project citations", {
     "2011_rivierprik"
   )
   animal_citations <-
-    get_animal_projects(animal_project_code = animal_project_codes,
-                        citation = TRUE) |>
+    get_animal_projects(
+      animal_project_code = animal_project_codes,
+      citation = TRUE
+    ) |>
     dplyr::select(dplyr::all_of(c("project_code", "citation")))
 
   acoustic_project_codes <- c(
@@ -273,8 +278,10 @@ test_that("get_bibliography() returns animal and project citations", {
     "2013_Foyle"
   )
   acoustic_citations <-
-    get_acoustic_projects(acoustic_project_code = acoustic_project_codes,
-                          citation = TRUE) |>
+    get_acoustic_projects(
+      acoustic_project_code = acoustic_project_codes,
+      citation = TRUE
+    ) |>
     dplyr::select(dplyr::all_of(c("project_code", "citation")))
 
   expect_setequal(
@@ -299,14 +306,13 @@ test_that("get_bibliography() returns expected values for type", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-2014demer",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-2014demer", serialize_with = "qs2")
 
   expect_setequal(
     get_bibliography(
       read_resource(example_dataset(), "detections")
     ) |>
-      dplyr::pull("type"),
+    dplyr::pull("type"),
     expected = c("data platform", "R package", "animal project", "acoustic project")
   )
 })
@@ -317,8 +323,7 @@ test_that("get_bibliography() returns expected values for item", {
   skip_if_no_authentication()
 
   skip_if_not_installed("qs2")
-  vcr::local_cassette("bibliography-2014demer",
-                      serialize_with = "qs2")
+  vcr::local_cassette("bibliography-2014demer", serialize_with = "qs2")
 
   project_codes <-
     read_resource(example_dataset(), "detections", col_select =
@@ -330,7 +335,7 @@ test_that("get_bibliography() returns expected values for item", {
     get_bibliography(
       read_resource(example_dataset(), "detections")
     ) |>
-      dplyr::pull("item"),
+    dplyr::pull("item"),
     expected = c("ETN", "etn", project_codes)
   )
 })
