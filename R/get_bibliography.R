@@ -1,34 +1,33 @@
-#' Generate a bibliography for a data.frame of detections
+#' Create bibliography from detections
 #'
-#' This function generates a bibliography for a data.frame containing
-#' detections, including citations for the ETN platform, the etn R package, and
-#' any animal and acoustic projects present in the input data.frame.
+#' @description
+#' Creates a bibliography from a table of detections with references for:
 #'
-#' @param x A data.frame containing at least the columns `animal_project_code`
-#'   and `acoustic_project_code`. For example a data.frame returned by
-#'   `get_detections()`.
+#' - The ETN data platform.
+#' - The etn R package.
+#' - Animal project(s) associated with the animals that were detected.
+#' - Network project(s) associated with the receivers from which the detections
+#'   were obtained.
 #'
-#' @returns A data.frame with three columns: `item`, `type`, and `citation`. The
-#'   first row contains the citation for the ETN platform, the second row the
-#'   citation for the etn R package, and subsequent rows contain citations for
-#'   the animal and acoustic projects present in the input data.frame.
+#' It is recommended to cite these references when using the data, see the [ETN Citation
+#' Guidelines](https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use)
+#' for details.
+#'
+#' @param x A data frame containing at least the columns `animal_project_code`
+#'   and `acoustic_project_code`. Typically a data frame returned by
+#'   [get_acoustic_detections()].
+#'
+#' @returns A data frame with three columns (`item`, `type`, and `citation`)
+#'   containing the references.
 #' @family access functions
 #' @export
-#'
 #' @examplesIf interactive() && etn:::credentials_are_set()
-#' # Create a bibliography for a data.frame created by get_detections()
-#' my_detections <-
-#'   get_acoustic_detections(scientific_name = "Mola mola")
-#'   get_bibliography(my_detections)
-#'
-#' # Or from a frictionless datapackage containing detections
-#' read_resource(example_dataset(), "detections") |> get_bibliography()
-#'
-#' # Altough mainly meant for the above use cases, you can also provide any
-#' # data.frame as long as the project code columns are present.
-#' data.frame(
-#'   animal_project_code = "2014_demer", acoustic_project_code = "demer" ) |>
+#' # Create a bibliography from queried detections
+#' get_acoustic_detections(scientific_name = "Mola mola") |>
 #'   get_bibliography()
+#'
+#' # Or obtain the bibliography from a Data Package
+#' read_resource(example_dataset(), "bibliography")
 get_bibliography <- function(x) {
   # Check inputs ------------------------------------------------------------
 

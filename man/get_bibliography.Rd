@@ -2,41 +2,40 @@
 % Please edit documentation in R/get_bibliography.R
 \name{get_bibliography}
 \alias{get_bibliography}
-\title{Generate a bibliography for a data.frame of detections}
+\title{Create bibliography from detections}
 \usage{
 get_bibliography(x)
 }
 \arguments{
-\item{x}{A data.frame containing at least the columns \code{animal_project_code}
-and \code{acoustic_project_code}. For example a data.frame returned by
-\code{get_detections()}.}
+\item{x}{A data frame containing at least the columns \code{animal_project_code}
+and \code{acoustic_project_code}. Typically a data frame returned by
+\code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
 }
 \value{
-A data.frame with three columns: \code{item}, \code{type}, and \code{citation}. The
-first row contains the citation for the ETN platform, the second row the
-citation for the etn R package, and subsequent rows contain citations for
-the animal and acoustic projects present in the input data.frame.
+A data frame with three columns (\code{item}, \code{type}, and \code{citation})
+containing the references.
 }
 \description{
-This function generates a bibliography for a data.frame containing
-detections, including citations for the ETN platform, the etn R package, and
-any animal and acoustic projects present in the input data.frame.
+Creates a bibliography from a table of detections with references for:
+\itemize{
+\item The ETN data platform.
+\item The etn R package.
+\item Animal project(s) associated with the animals that were detected.
+\item Network project(s) associated with the receivers from which the detections
+were obtained.
+}
+
+It is recommended to cite these references when using the data, see the \href{https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use}{ETN Citation Guidelines}
+for details.
 }
 \examples{
 \dontshow{if (interactive() && etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
-# Create a bibliography for a data.frame created by get_detections()
-my_detections <-
-  get_acoustic_detections(scientific_name = "Mola mola")
-  get_bibliography(my_detections)
-
-# Or from a frictionless datapackage containing detections
-read_resource(example_dataset(), "detections") |> get_bibliography()
-
-# Altough mainly meant for the above use cases, you can also provide any
-# data.frame as long as the project code columns are present.
-data.frame(
-  animal_project_code = "2014_demer", acoustic_project_code = "demer" ) |>
+# Create a bibliography from queried detections
+get_acoustic_detections(scientific_name = "Mola mola") |>
   get_bibliography()
+
+# Or obtain the bibliography from a Data Package
+read_resource(example_dataset(), "bibliography")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
