@@ -16,16 +16,16 @@ A data frame with three columns (\code{item}, \code{type}, and \code{citation})
 containing the references.
 }
 \description{
-Creates a bibliography from a table of detections with references for:
+Creates a bibliography from a table of detections, with references for:
 \itemize{
 \item The ETN data platform.
 \item The etn R package.
 \item Animal project(s) associated with the animals that were detected.
-\item Network project(s) associated with the receivers from which the detections
+\item Acoustic project(s) associated with the receivers from which the detections
 were obtained.
 }
 
-It is recommended to cite these references when using the data, see the \href{https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use}{ETN Citation Guidelines}
+It is recommended to cite these when using the data, see the \href{https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use}{ETN Citation Guidelines}
 for details.
 }
 \examples{

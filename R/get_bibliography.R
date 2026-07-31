@@ -1,15 +1,15 @@
 #' Create bibliography from detections
 #'
 #' @description
-#' Creates a bibliography from a table of detections with references for:
+#' Creates a bibliography from a table of detections, with references for:
 #'
 #' - The ETN data platform.
 #' - The etn R package.
 #' - Animal project(s) associated with the animals that were detected.
-#' - Network project(s) associated with the receivers from which the detections
+#' - Acoustic project(s) associated with the receivers from which the detections
 #'   were obtained.
 #'
-#' It is recommended to cite these references when using the data, see the [ETN Citation
+#' It is recommended to cite these when using the data, see the [ETN Citation
 #' Guidelines](https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use)
 #' for details.
 #'
