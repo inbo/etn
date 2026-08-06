@@ -7,7 +7,7 @@ library("vcr") # *Required* as vcr is set up on loading
 #' If the tests are running on the OpenCPU test deployment, the production
 #' cassettes will not work. And all tests need to run on the live test API.
 #'
-#' @return Logical, `TRUE` if the tests are running on the test deployment,
+#' @returns Logical, `TRUE` if the tests are running on the test deployment,
 #' `FALSE` if the tests are running on the production deployment.
 #' @family helper functions
 #' @noRd

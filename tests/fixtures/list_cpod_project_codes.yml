@@ -7,7 +7,7 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Tue, 20 Jan 2026 09:27:47 GMT
+      date: Thu, 23 Apr 2026 16:48:51 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -17,25 +17,25 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0eb8de8c803929
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0eb8de8c803929/
+      x-ocpu-session: x0f6450bce68ae9
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0f6450bce68ae9/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
       access-control-allow-credentials: 'true'
-      x-ocpu-r: R version 4.5.1 (2025-06-13)
+      x-ocpu-r: R version 4.5.0 (2025-04-11)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-01-20 09:27:48 UTC
+      x-ocpu-time: 2026-04-23 16:48:52 UTC
       x-ocpu-version: 2.2.14
       x-ocpu-server: rApache
       vary: Accept-Encoding
       content-encoding: gzip
-      content-length: '211'
+      content-length: '217'
       content-type: application/json
       access-control-allow-methods: '*'
       set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
-        ["Apelafico_acoustics", "Apelafico_underwater", "ARMS_MBON_Belgium", "CODEVCO", "cpod-lifewatch", "cpod-od-natuur", "Lifewatch_extra", "Lifewatch_test", "PAM-Borssele", "PelFish", "PhD_Parcerisas", "PureWind", "SEAWave", "SMGMIT", "STRAITS_PAM", "VLIZ-MRC-AMUC-001", "VLIZ-MRC-AMUC-002", "WaveHub"]
-  recorded_at: 2026-01-20 09:27:47
-recorded_with: VCR-vcr/2.0.0
+        ["Apelafico_acoustics", "Apelafico_underwater", "ARMS_MBON_Belgium", "CODEVCO", "cpod-lifewatch", "cpod-od-natuur", "Lifewatch_extra", "Lifewatch_test", "NOVANA", "PAM-Borssele", "PelFish", "PhD_Parcerisas", "PureWind", "SEAWave", "SMGMIT", "STRAITS_PAM", "VLIZ-MRC-AMUC-001", "VLIZ-MRC-AMUC-002", "WaveHub"]
+  recorded_at: 2026-04-23 16:48:52
+recorded_with: VCR-vcr/2.1.0

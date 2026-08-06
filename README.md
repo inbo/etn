@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/etn)](https://CRAN.R-project.org/package=etn)
 [![R-universe
 version](https://inbo.r-universe.dev/etn/badges/version)](https://inbo.r-universe.dev/etn)
 [![R-CMD-check](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml)
@@ -124,7 +122,7 @@ get_acoustic_detections(
 - We welcome [contributions](.github/CONTRIBUTING.md) including bug
   reports.
 - License: MIT
-- Get citation information for etn in R doing `citation("etn")`.
+- Get citation information for etn in R with `citation("etn")`.
 - Please note that this project is released with a [Contributor Code of
   Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
   you agree to abide by its terms.

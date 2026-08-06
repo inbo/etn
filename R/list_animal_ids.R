@@ -3,7 +3,7 @@
 #' @param connection `r lifecycle::badge("deprecated")` A connection to the ETN
 #'   database. This argument is no longer used. You will be prompted for
 #'   credentials instead.
-#' @return A vector of all unique `id_pk` present in `common.animal_release`.
+#' @returns A vector of all unique `id_pk` present in `common.animal_release`.
 #' @family list functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()

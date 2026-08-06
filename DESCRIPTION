@@ -33,18 +33,18 @@ License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 4.1)
+    R (>= 4.1.0)
 Imports:
     arrow,
     askpass,
     assertthat,
     cachem,
     cli,
-    dplyr,
+    dplyr (>= 1.2.0),
     duckdbfs,
     frictionless,
     glue,
-    httr2,
+    httr2 (>= 1.2.0),
     jsonlite,
     lifecycle,
     memoise,
@@ -79,4 +79,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.0.0

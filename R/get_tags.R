@@ -4,6 +4,7 @@
 #' can be multiple records (`acoustic_tag_id`) per tag device
 #' (`tag_serial_number`).
 #'
+#' @inheritParams list_animal_ids
 #' @param tag_serial_number Character (vector). One or more tag serial numbers.
 #' @param tag_type Character (vector). `acoustic` or `archival`. Some tags are
 #'   both, find those with `acoustic-archival`.
@@ -11,8 +12,7 @@
 #'   `sentinel`.
 #' @param acoustic_tag_id Character (vector). One or more acoustic tag
 #'   identifiers, i.e. identifiers found in [get_acoustic_detections()].
-#' @inheritParams list_animal_ids
-#' @return A tibble with tags data, sorted by `tag_serial_number`.
+#' @returns A tibble with tags data, sorted by `tag_serial_number`.
 #'  Values for `owner_organization` and `owner_pi` will only be visible if you
 #'  are member of the group.
 #' @family access functions

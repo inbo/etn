@@ -4,7 +4,7 @@
 \alias{example_dataset}
 \title{Read an example dataset}
 \usage{
-example_dataset(dataset = "2014_DEMER")
+example_dataset(dataset = "2014_demer")
 }
 \arguments{
 \item{dataset}{Name of the example dataset to load. Defaults to the only
@@ -16,16 +16,22 @@ Frictionless data package.
 \description{
 Reads an example dataset, formatted as a \href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}.
 }
-\section{2014_DEMER}{
+\section{2014_demer}{
 
 
-\verb{2014_DEMER} is a \strong{river acoustic telemetry} dataset. It contains 66 tagged
+\verb{2014_demer} is a \strong{river acoustic telemetry} dataset. It contains 66 tagged
 animals across four species. Over 235,000 detections were observed between
-2014 and 2019 by acoustic receivers deployed in Belgian rivers.
+2014 and 2019 by acoustic receivers deployed in Belgian rivers. Data are
+deposited at \url{https://doi.org/10.14284/432}.
 
-Data are deposited at \url{https://doi.org/10.14284/432} and can be downloaded
-from the ETN database with
-\code{download_acoustic_dataset(animal_project_code = "2014_DEMER")}.
+The dataset was included in the package with:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{get_package(animal_project_code = "2014_demer") |>
+  write_package("inst/extdata/2014_demer")
+}\if{html}{\out{</div>}}
+
+After which the \code{detections.csv} file was compressed and its path manually
+updated in \code{datapackage.json}.
 }
 
 \examples{

@@ -5,16 +5,16 @@ test_that("example_dataset() returns error for an invalid dataset name ", {
   )
 })
 
-test_that("example_dataset(dataset = '2014_DEMER') returns a valid frictionless
+test_that("example_dataset(dataset = '2014_demer') returns a valid frictionless
            data package", {
   expect_no_error(
-    frictionless::check_package(example_dataset(dataset = "2014_DEMER"))
+    frictionless::check_package(example_dataset(dataset = "2014_demer"))
   )
 })
 
-test_that("example_dataset(dataset = '2014_DEMER') returns a data package with
+test_that("example_dataset(dataset = '2014_demer') returns a data package with
            5 valid resources", {
-  `2014_DEMER` <- example_dataset(dataset = "2014_DEMER")
+  `2014_demer` <- example_dataset(dataset = "2014_demer")
   expected_resource_names <- c(
     "animals",
     "tags",
@@ -22,10 +22,10 @@ test_that("example_dataset(dataset = '2014_DEMER') returns a data package with
     "deployments",
     "receivers"
   )
-  expect_equal(frictionless::resources(`2014_DEMER`), expected_resource_names)
-  expect_no_error(frictionless::read_resource(`2014_DEMER`, "animals"))
-  expect_no_error(frictionless::read_resource(`2014_DEMER`, "tags"))
-  expect_no_error(frictionless::read_resource(`2014_DEMER`, "detections"))
-  expect_no_error(frictionless::read_resource(`2014_DEMER`, "deployments"))
-  expect_no_error(frictionless::read_resource(`2014_DEMER`, "receivers"))
+  expect_equal(frictionless::resources(`2014_demer`), expected_resource_names)
+  expect_no_error(frictionless::read_resource(`2014_demer`, "animals"))
+  expect_no_error(frictionless::read_resource(`2014_demer`, "tags"))
+  expect_no_error(frictionless::read_resource(`2014_demer`, "detections"))
+  expect_no_error(frictionless::read_resource(`2014_demer`, "deployments"))
+  expect_no_error(frictionless::read_resource(`2014_demer`, "receivers"))
 })

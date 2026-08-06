@@ -11,16 +11,16 @@ http_interactions:
         www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 09 Apr 2026 10:52:32 GMT
+      date: Thu, 23 Apr 2026 16:33:39 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=kgPeuiUzhS8GSUu2asPeMySeVXICWqsmkWk5740uXeYP1UEe;
+      - SSESSb1decfcf957c461d54e509db58033a53=2iW5kBYUwGTXmm0JD3t%2ClcuIT%2CYW4cIgorsJQU10FKVM7Z6a;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
       string: '{"status":"error","message":"Requested id not found."}'
-  recorded_at: 2026-04-09 10:52:33
+  recorded_at: 2026-04-23 16:33:39
 recorded_with: VCR-vcr/2.1.0
