@@ -108,64 +108,65 @@ get_etn_items <- function(
   items_merge(items_lst)
 }
 
-items_merge <- function(items_lst){
-
-  purrr::map(items_lst, "features") |> 
-  purrr::flatten()
+items_merge <- function(items_lst) {
+  purrr::map(items_lst, "features") |>
+    purrr::flatten()
   # first item as a template
   items_merged <- items_lst[[1]]
   items_merged$features <- purrr::map(
-    items_lst, "features"
-  ) |> 
+    items_lst,
+    "features"
+  ) |>
     purrr::flatten()
-  items_merged 
+  items_merged
 }
 
 ## Read some detections
 
-parquet_paths <- 
-  get_etn_items() |> 
-  rstac::assets_url() |> 
+parquet_paths <-
+  get_etn_items() |>
+  rstac::assets_url() |>
   head(5)
 
-  # Read the contents of the parquet files as a single lazy view. If we close
-  # this connection, the function will fail to return a lazy view. So we have to
-  # leave it openn.
-  con_duckdb <-
-    duckdbfs::cached_connection()
+# Read the contents of the parquet files as a single lazy view. If we close
+# this connection, the function will fail to return a lazy view. So we have to
+# leave it openn.
+con_duckdb <-
+  duckdbfs::cached_connection()
 
-  # Configure duckdbfs to be more resilient to HTTP 429 errors.
-  duckdbfs::duckdb_config(
-    conn = con_duckdb,
-    # If a request fails, retry up to 8 times (eg too
-    # many requests), setting too low a value will
-    # result in failures.
-    http_retries = 8,
-    # Wait 2 seconds between retries
-    http_retry_wait_ms = 2000,
-    http_retry_backoff = 2.5,
-    # Reduce parallelism to avoid HTTP 429 too many
-    # requests
-    threads = 1,
-    enable_progress_bar = TRUE
-  )
+# Configure duckdbfs to be more resilient to HTTP 429 errors.
+duckdbfs::duckdb_config(
+  conn = con_duckdb,
+  # If a request fails, retry up to 8 times (eg too
+  # many requests), setting too low a value will
+  # result in failures.
+  http_retries = 8,
+  # Wait 2 seconds between retries
+  http_retry_wait_ms = 2000,
+  http_retry_backoff = 2.5,
+  # Reduce parallelism to avoid HTTP 429 too many
+  # requests
+  threads = 1,
+  enable_progress_bar = TRUE
+)
 
-get_etn_items() |>
-  rstac::assets_url() |>
+duckdb_view <- get_etn_items() |>
+  # Only fetch the parquet file urls, not the data viewer urls as well
+  rstac::assets_url(asset_names = "data") |>
   # skip urls that can not be found, I'm requesting data from an experimental platform
   purrr::discard(
-    \(url){
-      httr2::request(url) |> 
-        httr2::req_error(is_error = \(response){
+    \(url) {
+      httr2::request(url) |>
+        httr2::req_error(is_error = \(response) {
           FALSE
-        }) |> 
-        httr2::req_method("HEAD") |> 
-          httr2::req_perform() |> 
-          httr2::resp_is_error()
+        }) |>
+        httr2::req_method("HEAD") |>
+        httr2::req_perform() |>
+        httr2::resp_is_error()
     }
-  ) |> 
+  ) |>
   duckdbfs::open_dataset(
-        format = "parquet",
-        unify_schemas = TRUE,
-        conn = con_duckdb
-      )
+    format = "parquet",
+    unify_schemas = TRUE,
+    conn = con_duckdb
+  )
