@@ -75,23 +75,26 @@ rstac::stac("https://api.dive.edito.eu/data/catalogs/projects/european_tracking_
   purrr::pluck(1) |>
   rstac::link_open()
 
-next_page <- function(items) {
-  items |>
-    rstac::links(rel == "next") |>
-    purrr::map_chr("href") |>
-    rstac::read_stac()
-}
-
 etn_url <-
   "https://api.dive.edito.eu/data/search?q=projects%2Feuropean_tracking_network"
-out <- rstac::read_stac(etn_url)
-url <- rstac::links(rel == "next") |>
-  purrr::pluck(1)
+# init objects for loop
+next_page_url <- etn_url
+items_tbl <- list()
+repeat {
+  items <- rstac::read_stac(next_page_url)
+  items_tbl <- append(items_tbl,
+      list(rstac::items_as_tibble(items)))
 
-  # read as a static catalog
-  page <- rstac::read_stac(url) |>
-  rstac::links(rel == "next") |>
-  purrr::pluck(1) |>
-  rstac::link_open()
 
-  out <- append(out, rstac::items_as_tibble(page))
+  next_page_links <- items |> 
+    rstac::links(rel == "next") 
+  if(length(next_page_links) < 1) {break}
+  
+  next_page_url <-
+    next_page_links |>
+    purrr::chuck(1) |> 
+    # if not found, return NULL
+    purrr::pluck("href", .default = NA)
+  
+}
+purrr::list_rbind(items_tbl)
