@@ -53,6 +53,7 @@ Imports:
     purrr,
     readr,
     rlang,
+    rstac,
     stringr,
     utils,
     withr
