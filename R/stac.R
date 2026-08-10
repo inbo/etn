@@ -64,7 +64,7 @@ rstac::stac(
   # read as a static catalog
   rstac::read_stac() |>
   # Here we would have to fetch all items first, via pagination, before filtering
-  rstac::items_filter("Chondrichthyes" %in% properties$taxa) |>
+  rstac::items_filter("Chondrichthyes" %in% properties$taxa) |> # This is exact name matching, I probably want to be slightly more lenient here because sometimes (but not always!) authors and years are included
   # Downloading the parquet file: you'll have to filter it down again as the
   # catalog filter only selects the files that pass the query, but doesn't
   # actually filter records within a query.
