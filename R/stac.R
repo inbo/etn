@@ -122,7 +122,7 @@ items_merge <- function(items_lst) {
 }
 
 ## Read some detections
-
+tictoc::tic()
 parquet_paths <-
   get_etn_items() |>
   rstac::assets_url() |>
@@ -170,3 +170,7 @@ duckdb_view <- get_etn_items() |>
     unify_schemas = TRUE,
     conn = con_duckdb
   )
+tictoc::toc()
+tictoc::tic()
+dplyr::summarise(duckdb_view, n = dplyr::n())
+tictoc::toc()
