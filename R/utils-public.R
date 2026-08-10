@@ -1,11 +1,24 @@
-read_catalog <- function(catalog = c(".",
-                                     "metadata_files",
-                                     "detection_files",
-                                     "archival_files")) {
+read_catalog <- function(
+  catalog = c(".", "metadata_files", "detection_files", "archival_files")
+) {
   catalog <- rlang::arg_match(catalog)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
   jsonlite::fromJSON(file.path(catalog_root, "catalog.json"))
+
+  stac_source <-
+    rstac::stac(
+      "https://www.lifewatch.be/etn/parquet/staging/detection_files/collection.json"
+    )
+
+  stac_source |>
+    rstac::stac_read()
+
+  rstac::stac_search(
+    q = stac_source,
+    collections = "detection_files"
+  ) |>
+    rstac::get_request()
 }
 
 #' Read a child catalog
@@ -28,20 +41,20 @@ read_catalog <- function(catalog = c(".",
 #' @examplesIf interactive()
 #' read_child_catalog(catalog = "detection_files")
 #' read_child_catalog(catalog = "metadata_files")
-read_child_catalog <- function(catalog = c(
-                                 "metadata_files",
-                                 "detection_files",
-                                 "archival_files"
-                               )) {
-  catalog <- rlang::arg_match(catalog,
-    multiple = TRUE
+read_child_catalog <- function(
+  catalog = c(
+    "metadata_files",
+    "detection_files",
+    "archival_files"
   )
+) {
+  catalog <- rlang::arg_match(catalog, multiple = TRUE)
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
 
   file.path(catalog_root, catalog, "collection.json") |>
     httr2::request() |>
-      httr2::req_retry(max_tries = 3) |>
+    httr2::req_retry(max_tries = 3) |>
     # Never place more then 2 requests a second
     httr2::req_perform() |>
     # simplifyVector to get data.frames out.
@@ -103,13 +116,13 @@ list_public_detections <- function() {
 #' get_public_detections("2011_Loire", timestamp >=
 #'   lubridate::ymd(20220101))
 #' get_public_detections(")
-get_public_detections <- function(project_code = NULL,
-                                  ...,
-                                  limit = FALSE,
-                                  return_as = c("tibble",
-                                                "lazy"),
-                                  progress = TRUE) {
-
+get_public_detections <- function(
+  project_code = NULL,
+  ...,
+  limit = FALSE,
+  return_as = c("tibble", "lazy"),
+  progress = TRUE
+) {
   # Check inputs ------------------------------------------------------------
   return_as <- rlang::arg_match(return_as)
 
@@ -119,7 +132,8 @@ get_public_detections <- function(project_code = NULL,
       public_detections$project_code
   } else {
     selected_project_code <-
-      rlang::arg_match(project_code,
+      rlang::arg_match(
+        project_code,
         values = public_detections$project_code,
         multiple = TRUE
       )
@@ -140,16 +154,15 @@ get_public_detections <- function(project_code = NULL,
     purrr::map(httr2::request) |>
     purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
     # Never place more then 2 requests a second
-    purrr::map(\(req) httr2::req_throttle(req,
-      capacity = 15,
-      fill_time_s = 5
-    )) |>
+    purrr::map(\(req) {
+      httr2::req_throttle(req, capacity = 15, fill_time_s = 5)
+    }) |>
     httr2::req_perform_parallel(
-      progress =
-        ifelse(progress & !is_testing(),
-          yes = "Reading table metadata",
-          no = FALSE
-        )
+      progress = ifelse(
+        progress & !is_testing(),
+        yes = "Reading table metadata",
+        no = FALSE
+      )
     ) |>
     purrr::map(httr2::resp_body_json) |>
     purrr::map(~ purrr::chuck(.x, "assets", "data", "href")) |>
@@ -197,7 +210,6 @@ get_public_detections <- function(project_code = NULL,
         conn = con_duckdb
       )
 
-
     # Apply filters
     duckdb_view <- dplyr::filter(duckdb_view, ...)
 
@@ -207,7 +219,8 @@ get_public_detections <- function(project_code = NULL,
       duckdb_view <- utils::head(duckdb_view, n = 100L)
     }
 
-    switch (return_as,
+    switch(
+      return_as,
       "lazy" = duckdbfs::as_view(duckdb_view),
       "tibble" = dplyr::collect(duckdb_view)
     )
@@ -233,13 +246,10 @@ get_public_detections <- function(project_code = NULL,
 #' get_public_metadata("projects", start_date > lubridate::ymd(20150101))
 #' # Equivalent to list_animal_project_codes()
 #' get_public_metadata("projects", project_type == "animal")$project_code
-get_public_metadata <- function(table = c("animals",
-                                          "deployments",
-                                          "projects",
-                                          "receivers",
-                                          "tags"),
-                                ...) {
-
+get_public_metadata <- function(
+  table = c("animals", "deployments", "projects", "receivers", "tags"),
+  ...
+) {
   # Check input arguments ---------------------------------------------------
   selected_table <- rlang::arg_match(table)
 
@@ -268,8 +278,9 @@ get_public_metadata <- function(table = c("animals",
   arrow_tables <-
     jsonlite::fromJSON(file.path(catalog_root, "metadata_files", table_path)) |>
     purrr::chuck("assets", "data", "href") |>
-    purrr::map(\(uri) {arrow::read_parquet(file = uri,
-                                           as_data_frame = FALSE)})
+    purrr::map(\(uri) {
+      arrow::read_parquet(file = uri, as_data_frame = FALSE)
+    })
 
   # arrow::concat_tables() expects different objects as arguments, so we can't
   # directly pass a list
@@ -307,33 +318,36 @@ get_public_metadata <- function(table = c("animals",
 #'           payload = list(status = "lost",
 #'                          receiver_id = "VR2W-124070"))
 
-read_stac <- function(function_identity = c(
-                        "list_acoustic_project_codes",
-                        "list_animal_project_codes",
-                        "list_cpod_project_codes",
-                        "list_acoustic_tag_ids",
-                        "list_tag_serial_numbers",
-                        "list_animal_ids",
-                        "list_deployment_ids",
-                        "list_receiver_ids",
-                        "list_scientific_names",
-                        "list_station_names",
+read_stac <- function(
+  function_identity = c(
+    "list_acoustic_project_codes",
+    "list_animal_project_codes",
+    "list_cpod_project_codes",
+    "list_acoustic_tag_ids",
+    "list_tag_serial_numbers",
+    "list_animal_ids",
+    "list_deployment_ids",
+    "list_receiver_ids",
+    "list_scientific_names",
+    "list_station_names",
 
-                        "get_acoustic_deployments",
-                        "get_acoustic_detections",
-                        "get_acoustic_receivers",
+    "get_acoustic_deployments",
+    "get_acoustic_detections",
+    "get_acoustic_receivers",
 
-                        "get_animals",
-                        "get_tags",
+    "get_animals",
+    "get_tags",
 
-                        "get_acoustic_projects",
-                        "get_cpod_projects",
-                        "get_animal_projects"
-                      ),
-                      payload = NULL) {
+    "get_acoustic_projects",
+    "get_cpod_projects",
+    "get_animal_projects"
+  ),
+  payload = NULL
+) {
   function_identity <- rlang::arg_match(function_identity)
 
-  stac_result <- switch(function_identity,
+  stac_result <- switch(
+    function_identity,
     list_acoustic_project_codes = {
       get_public_metadata("projects") |>
         # should this be project_type? See
@@ -421,10 +435,9 @@ read_stac <- function(function_identity = c(
 
   # Sort the returned values ------------------------------------------------
 
-  if(is.vector(stac_result)){
+  if (is.vector(stac_result)) {
     stringr::str_sort(stac_result, numeric = TRUE)
   } else {
     stac_result
   }
-
 }
