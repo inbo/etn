@@ -1,11 +1,11 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   acoustic-telemetry: acoustic-telemetry.html
   authentication: authentication.html
   options: options.html
-last_built: 2026-06-29T09:03Z
+last_built: 2026-08-11T10:19Z
 urls:
   reference: https://inbo.github.io/etn/reference
   article: https://inbo.github.io/etn/articles

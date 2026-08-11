@@ -39,7 +39,7 @@ manually updated in `datapackage.json`.
 
 ``` r
 example_dataset()
-#> A Data Package with 5 resources:
+#> A Data Package (version 1.0) with 5 resources:
 #> • animals
 #> • tags
 #> • detections
