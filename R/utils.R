@@ -34,6 +34,19 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
+#' Prompt the user for confirmation
+#'
+#' This function was inspired by `testthat::ui_yeah()` and duplicates it's
+#' functionality.
+#'
+#' @param x Message to display to the user. Supports `{cli}`/`{glue}` syntax.
+#' @param shuffle Logical. If `TRUE`, the order of the options will be shuffled.
+#'
+#' @returns Logical. `TRUE` if the user selected a "yes" option, `FALSE`
+#'   otherwise.
+#'
+#' @family helper functions
+#' @noRd
 cli_yes <- function(x, shuffle = TRUE){
   yes_options <- c("Yes", "By all means", "Indeed", "Certainly", "Yeah")
   no_options <- c("No", "Negative", "Nope", "Let's not", "Nah", "Never")
