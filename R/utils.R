@@ -34,6 +34,19 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
   return(x)
 }
 
+cli_yes <- function(x, shuffle = TRUE){
+  yes_options <- c("Yes", "By all means", "Indeed", "Certainly", "Yeah")
+  no_options <- c("No", "Negative", "Nope", "Let's not", "Nah", "Never")
+  choices <- c(sample(yes_options, 1L), sample(no_options, 2L))
+
+  if(shuffle){
+    choices <- sample(choices)
+  }
+  cli::cli_alert_info(x)
+  result <- menu(choices)
+  choices[[result]] %in% yes_options && result != 0
+}
+
 #' Get credentials from environment variables, or set them manually
 #'
 #' By default, it's not necessary to set any values in this function as it's
