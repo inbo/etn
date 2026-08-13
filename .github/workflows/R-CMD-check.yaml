@@ -4,6 +4,8 @@ on:
   push:
     branches: [main, master]
   pull_request:
+    types:
+      - opened
 
 name: R-CMD-check.yaml
 
