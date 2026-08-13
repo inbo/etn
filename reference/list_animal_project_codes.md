@@ -181,7 +181,7 @@ list_animal_project_codes()
 #> [281] "SARTELTG"                       "SARTELZINGARO"                 
 #> [283] "Scytrack"                       "seabass_2026_vliz"             
 #> [285] "SEAMONITOR_STRAITS_animals"     "SEM_animals"                   
-#> [287] "SEMP"                           "severn_multi_species"          
+#> [287] "SEMP"                           "severn_multi_species_animals"  
 #> [289] "shad_scheldt_dst"               "Shark_Levant_tracking"         
 #> [291] "sharks_dtu"                     "sharks_vliz"                   
 #> [293] "SIARC_ANIMALS"                  "Siganid_East_Med"              

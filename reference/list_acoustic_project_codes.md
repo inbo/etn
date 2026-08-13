@@ -161,7 +161,7 @@ list_acoustic_project_codes()
 #> [241] "SARTELZINGARO"                  "SCHUFI"                        
 #> [243] "Scytrack"                       "SeaMonitor"                    
 #> [245] "SEAMONITOR_ARRAY"               "SEM_array"                     
-#> [247] "SEMP"                           "severn_multi_species"          
+#> [247] "SEMP"                           "severn_multi_species_network"  
 #> [249] "SGB"                            "Shark_Levant_tracking"         
 #> [251] "SIARC_ARRAY"                    "Siganid_East_Med"              
 #> [253] "Siganid_Gulf_Aqaba"             "Skagerrak-NorthSea-array"      

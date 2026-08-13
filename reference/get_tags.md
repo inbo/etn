@@ -65,7 +65,7 @@ Other access functions:
 ``` r
 # Get all tags
 get_tags()
-#> # A tibble: 68,477 × 54
+#> # A tibble: 68,482 × 54
 #>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>    <chr>       <chr>       <chr>          
 #>  1 0A4E2699          acoustic animal      NA          OPI-2699       
@@ -78,7 +78,7 @@ get_tags()
 #>  8 0A6G              acoustic animal      NA          R64K-2383      
 #>  9 0A6H              acoustic animal      NA          R64K-2384      
 #> 10 0A6I              acoustic animal      NA          R64K-2385      
-#> # ℹ 68,467 more rows
+#> # ℹ 68,472 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
