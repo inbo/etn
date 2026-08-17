@@ -78,7 +78,7 @@ argument. See \link[arrow:Dataset]{arrow::Dataset} for more information.
 }
 
 \examples{
-\dontshow{if (interactive() & credentials_are_set()) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive() & etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
   get_archival_data(tag_serial_number = "A15757", limit = TRUE)
 \dontshow{\}) # examplesIf}
 }
