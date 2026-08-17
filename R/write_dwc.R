@@ -108,7 +108,7 @@ write_dwc <- function(package, directory, dataset_id = package$id,
 
   if (!"deployments" %in% frictionless::resource_names(package)) {
     cli::cli_abort(
-      "{.arg package} must contain resource {.val deployemts}.",
+      "{.arg package} must contain resource {.val deployments}.",
       class = "etn_error_deployments_data_missing"
     )
   }
