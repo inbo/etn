@@ -56,7 +56,7 @@ cli_yes <- function(x, shuffle = TRUE){
     choices <- sample(choices)
   }
   cli::cli_alert_info(x)
-  result <- menu(choices)
+  result <- utils::menu(choices)
   choices[[result]] %in% yes_options && result != 0
 }
 
