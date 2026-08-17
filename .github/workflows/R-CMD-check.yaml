@@ -17,6 +17,7 @@ jobs:
     steps:
       - run: echo "Approved and running R CMD CHECK"
   R-CMD-check:
+    needs: approval-gate 
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
