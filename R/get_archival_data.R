@@ -231,7 +231,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     ) |>
     # Take the last 36 characters of the filename (length of a UUID)
     dplyr::mutate(uuid = stringr::str_sub(
-      arrow::add_filename(),
+      arrow:::add_filename(),
       start = -40L, # UUID is 36 characters + length of the extension.
       end = -5L # -1L - length of the extension: `.csv`
     ))
