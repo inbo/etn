@@ -101,10 +101,10 @@ Other access functions:
 # Get limited sample of acoustic detections
 get_acoustic_detections(limit = TRUE)
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 100  detections [12ms]
+#> ✔ Preparing : will fetch 100  detections [13ms]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [112ms]
+#> ✔ Wrapping up [117ms]
 #> 
 #> # A tibble: 100 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -130,12 +130,12 @@ get_acoustic_detections(limit = TRUE)
 # Get all acoustic detections from a specific animal project
 get_acoustic_detections(animal_project_code = "2014_demer")
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 235.81 k detections [33.9s]
+#> ✔ Preparing : will fetch 235.81 k detections [2.4s]
 #> 
-#> Getting detections. ■■■■■■■■■■■                       33% [11.4s] | ETA: 23s
-#> Getting detections. ■■■■■■■■■■■■■■■■■■■■■             67% [22.3s] | ETA: 11s
+#> Getting detections. ■■■■■■■■■■■                       33% [8s] | ETA: 16s
+#> Getting detections. ■■■■■■■■■■■■■■■■■■■■■             67% [14.9s] | ETA:  7s
 #> ℹ Wrapping up
-#> ✔ Wrapping up [390ms]
+#> ✔ Wrapping up [399ms]
 #> 
 #> # A tibble: 235,809 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -165,7 +165,7 @@ get_acoustic_detections(
   end_date = "2016",
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 23.70 k detections [4.9s]
+#> ✔ Preparing : will fetch 23.70 k detections [3.1s]
 #> 
 #> ℹ Wrapping up
 #> ✔ Wrapping up [105ms]
@@ -198,10 +198,10 @@ get_acoustic_detections(
   end_date = "2015-05",
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 442  detections [9.8s]
+#> ✔ Preparing : will fetch 442  detections [6.9s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [54ms]
+#> ✔ Wrapping up [62ms]
 #> 
 #> # A tibble: 442 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -231,10 +231,10 @@ get_acoustic_detections(
   end_date = "2015-04-25",
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 2  detections [2.8s]
+#> ✔ Preparing : will fetch 2  detections [2.5s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [48ms]
+#> ✔ Wrapping up [53ms]
 #> 
 #> # A tibble: 2 × 20
 #>   detection_id date_time           tag_serial_number acoustic_tag_id
@@ -254,10 +254,10 @@ get_acoustic_detections(
   station_name = c("de-9", "de-10")
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 50  detections [5.5s]
+#> ✔ Preparing : will fetch 50  detections [2.7s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [52ms]
+#> ✔ Wrapping up [57ms]
 #> 
 #> # A tibble: 50 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
@@ -287,10 +287,10 @@ get_acoustic_detections(
   acoustic_project_code = "demer"
 )
 #> ℹ Preparing 
-#> ✔ Preparing : will fetch 38  detections [3.8s]
+#> ✔ Preparing : will fetch 38  detections [3.4s]
 #> 
 #> ℹ Wrapping up
-#> ✔ Wrapping up [53ms]
+#> ✔ Wrapping up [55ms]
 #> 
 #> # A tibble: 38 × 20
 #>    detection_id date_time           tag_serial_number acoustic_tag_id
