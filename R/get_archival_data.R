@@ -66,7 +66,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   query_args <- setdiff(rlang::fn_fmls_names(), non_query_args) |>
     mget()
   provided_query_args <- purrr::discard(query_args, is.null)
-  if(length(provided_query_args) == 0){
+  if(length(provided_query_args) == 0 && !limit){
     cli::cli_abort(
       c(cli::cli_h2("Attempting to download all available archival data is unwise."),
       "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."),
