@@ -281,6 +281,15 @@ get_archival_data <- function(tag_serial_number = NULL,
           ),
           class = "archival_data_large_return"
         )
+        user_is_confident <-
+          cli_yes("Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?")
+        if(!user_is_confident){
+          cli::cli_abort(
+            "Aborting. Consider using {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
+            to return an out of memory object instead.",
+            class = "archival_data_large_return_abort"
+          )
+        }
       }
 
       dplyr::collect(sensor_data)}
