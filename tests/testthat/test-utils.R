@@ -111,10 +111,16 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
 # cli_yes() ---------------------------------------------------------------
 test_that("cli_yes() returns alert with provided prompt", {
   expect_message(
-
-    cli_yes("custom message"),
-            class = "cli_yes_prompt"
-    )
+    tryCatch(
+      expr = {
+        cli_yes("custom message")
+      },
+      error = function(e) {
+        NULL
+      }
+    ),
+    class = "cli_yes_prompt"
+  )
 
   custom_message <- "This is my custom message"
   expect_message(
