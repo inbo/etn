@@ -161,7 +161,3 @@ test_that("cli_yes() supports glue/cli syntax", {
     fixed = TRUE
   )
 })
-
-# file_size() -------------------------------------------------------------
-
-
