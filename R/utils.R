@@ -41,23 +41,28 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'
 #' @param x Message to display to the user. Supports `{cli}`/`{glue}` syntax.
 #' @param shuffle Logical. If `TRUE`, the order of the options will be shuffled.
+#' @param .envir Environment in which to evaluate the message. Defaults to the
+#'   parent frame.
 #'
 #' @returns Logical. `TRUE` if the user selected a "yes" option, `FALSE`
 #'   otherwise.
 #'
 #' @family helper functions
 #' @noRd
-cli_yes <- function(x, shuffle = TRUE){
+cli_yes <- function(x, shuffle = TRUE, .envir = parent.frame()) {
   yes_options <- c("Yes", "By all means", "Indeed", "Certainly", "Yeah")
   no_options <- c("No", "Negative", "Nope", "Let's not", "Nah", "Never")
   choices <- c(sample(yes_options, 1L), sample(no_options, 2L))
 
-  if(shuffle){
+  if (shuffle) {
     choices <- sample(choices)
   }
-  cli::cli_inform(x,
-                      class = "cli_yes_prompt")
-  if(!is_interactive()){
+  cli::cli_inform(
+    x,
+    class = "cli_yes_prompt",
+    .envir = .envir
+  )
+  if (!is_interactive()) {
     cli::cli_abort(
       "Prompting for confirmation failed, please retry in interactive mode",
       class = "cli_yes_non_interactive"
