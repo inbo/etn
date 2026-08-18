@@ -106,3 +106,27 @@ test_that("get_parent_fn_name() can return the name a higher level caller", {
     "grandparent_function"
   )
 })
+
+
+# cli_yes() ---------------------------------------------------------------
+test_that("cli_yes() returns alert with provided prompt", {
+  expect_message(
+
+    cli_yes("custom message"),
+            class = "cli_yes_prompt"
+    )
+
+  custom_message <- "This is my custom message"
+  expect_message(
+    cli_yes(custom_message),
+    regexp = custom_message,
+    fixed = TRUE
+  )
+})
+
+test_that("cli_yes() supports glue/cli syntax", {
+
+})
+# file_size() -------------------------------------------------------------
+
+

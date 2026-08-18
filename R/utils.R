@@ -55,7 +55,8 @@ cli_yes <- function(x, shuffle = TRUE){
   if(shuffle){
     choices <- sample(choices)
   }
-  cli::cli_alert_info(x)
+  cli::cli_alert_info(x,
+                      class = "cli_yes_prompt")
   result <- utils::menu(choices)
   choices[[result]] %in% yes_options && result != 0
 }
@@ -361,6 +362,8 @@ is_interactive <- function(...) {
 prompt_user <- function(...) {
   readline(...)
 }
+
+
 
 # rlang null handling -----------------------------------------------------
 #' @importFrom rlang %||%
