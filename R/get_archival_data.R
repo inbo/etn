@@ -200,11 +200,11 @@ get_archival_data <- function(tag_serial_number = NULL,
       # Write to temp file, same as normally
       purrr::walk2(csv_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
   } else {
-    responses <-
-      purrr::map2(requests, csv_file_paths, \(req, path) {
-        if (file.exists(path) & file.size(path) > 0) {
+    # Download files, called for side effect of writing files to disk only, we
+    # don't store the response objects in memory.
+      purrr::walk2(requests, csv_file_paths, \(req, path) {
+        if (file.exists(path) & file_size(path) > 0) {
           # Skip files that have already been downloaded.
-          NULL
         } else {
           httr2::req_perform(req, path = path)
         }
@@ -259,7 +259,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     arrow = sensor_data,
     tibble = {
       # Check object size to warn if too large to return as tibble: 1 GB
-      total_size_bytes <- sum(file.size(csv_file_paths))
+      total_size_bytes <- sum(file_size(csv_file_paths))
       one_gb <- 10e8 #bytes
       total_n_rows <- sensor_data |>
         dplyr::summarise(n_rows = dplyr::n()) |>
