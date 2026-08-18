@@ -265,7 +265,7 @@ get_archival_data <- function(tag_serial_number = NULL,
         dplyr::summarise(n_rows = dplyr::n()) |>
         dplyr::collect() |>
         dplyr::pull("n_rows")
-      if(total_size_bytes > one_gb) {
+      if (total_size_bytes > one_gb) {
         modified_call <-
           rlang::call_modify(rlang::call_match(), return_as = "arrow")
         cli::cli_warn(
@@ -274,14 +274,14 @@ get_archival_data <- function(tag_serial_number = NULL,
             {.strong {prettyunits::pretty_bytes(total_size_bytes)}}.",
             "!" = "Returning this data as a tibble may exceed the available
             memory of your computer and crash R.",
-            "i" = 'Consider using
+            "i" = "Consider using
             {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
-            to return an out of memory object instead.',
+            to return an out of memory object instead.",
             "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
           ),
           class = "archival_data_large_return"
         )
-        if(is_interactive()) {
+        if (is_interactive()) {
           user_is_confident <-
             cli_yes(
               "Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?"
@@ -291,7 +291,7 @@ get_archival_data <- function(tag_serial_number = NULL,
           # they want to query this much data so we fall back to the error.
           user_is_confident <- FALSE
         }
-        if(!user_is_confident){
+        if (!user_is_confident) {
           cli::cli_abort(
             "Aborting. Consider using {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
