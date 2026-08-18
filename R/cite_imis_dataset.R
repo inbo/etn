@@ -155,7 +155,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         ) |>
         # Replace all whitespace (including newlines) with a single space, then trimClean the whitespace, was causing snapshot failures on Mac and Windows
         stringr::str_replace_all("\\s", " ") |>
-        stringr::str_squish()
+        stringr::str_squish() |>
+        # Make sure the string is in NFC form, otherwise the snapshot tests fail
+        # on Windows and MacOS
+        stringi::stri_trans_nfc()
 
       dplyr::tibble(
         citation =
