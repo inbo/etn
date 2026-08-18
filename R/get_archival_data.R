@@ -281,8 +281,16 @@ get_archival_data <- function(tag_serial_number = NULL,
           ),
           class = "archival_data_large_return"
         )
-        user_is_confident <-
-          cli_yes("Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?")
+        if(is_interactive()) {
+          user_is_confident <-
+            cli_yes(
+              "Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?"
+            )
+        } else {
+          # When running non interactively, I can't prompt the user to make sure
+          # they want to query this much data so we fall back to the error.
+          user_is_confident <- FALSE
+        }
         if(!user_is_confident){
           cli::cli_abort(
             "Aborting. Consider using {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
