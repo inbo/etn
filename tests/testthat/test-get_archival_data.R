@@ -188,6 +188,10 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
 test_that("get_archival_data() returns error on no query arguments",{
   # It's not a good idea to try to fetch all archival data in one call.
 
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_error(
     get_archival_data(),
     class = "archival_data_no_query_args"
@@ -195,6 +199,10 @@ test_that("get_archival_data() returns error on no query arguments",{
 })
 
 test_that("get_archival_data() returns warning on filters with no data", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_warning(
     get_archival_data(
       tag_serial_number = "A15757",
