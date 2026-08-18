@@ -145,8 +145,23 @@ test_that("cli_yes() returns alert with provided prompt", {
 })
 
 test_that("cli_yes() supports glue/cli syntax", {
-
+  my_var <- "superb"
+  custom_message <- "This is my {my_var} message using glue"
+  expect_message(
+    tryCatch(
+      expr = {
+        cli_yes(custom_message)
+      },
+      error = function(e) {
+        NULL
+      }
+    ),
+    regexp =
+      stringr::str_replace(custom_message, stringr::fixed("{my_var}"), my_var),
+    fixed = TRUE
+  )
 })
+
 # file_size() -------------------------------------------------------------
 
 
