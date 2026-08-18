@@ -186,6 +186,8 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
 })
 
 test_that("get_archival_data() returns error on no query arguments",{
+  # It's not a good idea to try to fetch all archival data in one call.
+
   expect_error(
     get_archival_data(),
     class = "archival_data_no_query_args"
