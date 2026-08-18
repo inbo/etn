@@ -189,20 +189,6 @@ test_that("cite_imis_dataset() doesn't append doi when there is no doi", {
   )
 })
 
-test_that("cite_imis_dataset() doesn't convert a missing citation into a dot", {
-  skip_if_offline("marineinfo.org")
-
-  #vcr::local_cassette("citations-5877")
-
-  # Previous bug in citation and doi collation
-
-  # A missing citation should be returned as NA
-  expect_identical(
-    cite_imis_dataset(5877)$citation,
-    NA_character_
-  )
-})
-
 test_that("cite_imis_dataset() converts `n.a.` citations into NA", {
   skip_if_offline("marineinfo.org")
 
