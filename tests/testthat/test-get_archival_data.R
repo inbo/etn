@@ -185,6 +185,13 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
   )
 })
 
+test_that("get_archival_data() returns error on no query arguments",{
+  expect_error(
+    get_archival_data(),
+    class = "archival_data_no_query_args"
+  )
+})
+
 test_that("get_archival_data() can write out to a path", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
