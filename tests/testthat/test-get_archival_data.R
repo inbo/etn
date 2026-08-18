@@ -241,6 +241,40 @@ test_that("get_archival_data() can write out to a path", {
     )
 })
 
+test_that("get_archival_data() warns when lots of data is requested in memory", {
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
+  expect_warning(
+    tryCatch(
+      expr = {
+        with_mocked_bindings(
+          code = {
+            get_archival_data(
+              animal_project_code = "2018_EC",
+              # the mocked file_size() function will force the function to behave
+              # as if a lot of data is about to be returned, so we can safely
+              # place a small request to test.
+              limit = TRUE,
+              return_as = "tibble"
+            )
+          },
+          # pretend return is 30GB
+          file_size = function(...) {
+            30 * 10e8
+          }
+        )
+      },
+      # Suppress all errors downstream
+      error = function(e) {
+        NULL
+      }
+    ),
+    class = "archival_data_large_return"
+  )
+})
+
 test_that("get_archival_data() stores files with a csv extension", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
