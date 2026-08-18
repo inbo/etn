@@ -301,6 +301,29 @@ is_writeable <- function(path, call = rlang::caller_env()) {
   invisible(path)
 }
 
+#' Get file sizes for a vector of file paths
+#'
+#' This is a slight variant on the base function file.size. I've decided to wrap
+#' it so it can be more easily mocked in tests, allowing me to trigger tests
+#' that depend on certain downloaded files being size 0.
+#'
+#' This function also differs from it's base equivalent in that it returns a
+#' named integer vector so the file paths are retained.
+#'
+#' @param x A character vector of file paths.
+#'
+#' @returns An integer vector of file sizes in bytes, with names corresponding
+#'   to the input file paths.
+#'
+#' @family helper functions
+#' @noRd
+file_size <- function(x){
+  purrr::map_int(
+    x, file.size
+  ) |>
+    purrr::set_names(x)
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
