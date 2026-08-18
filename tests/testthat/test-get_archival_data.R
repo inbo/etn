@@ -192,6 +192,17 @@ test_that("get_archival_data() returns error on no query arguments",{
   )
 })
 
+test_that("get_archival_data() returns warning on filters with no data", {
+  expect_warning(
+    get_archival_data(
+      tag_serial_number = "A15757",
+      animal_id = c(226, # Animal not connected to the tag
+                    18113)
+    ),
+    class = "archival_data_not_found_for_filter"
+  )
+})
+
 test_that("get_archival_data() can write out to a path", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
