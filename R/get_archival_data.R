@@ -253,8 +253,6 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Return object -----------------------------------------------------------
 
-
-
   switch (return_as,
     arrow = sensor_data,
     tibble = {
@@ -268,19 +266,27 @@ get_archival_data <- function(tag_serial_number = NULL,
       if (total_size_bytes > one_gb) {
         modified_call <-
           rlang::call_modify(rlang::call_match(), return_as = "arrow")
-        cli::cli_warn(
-          c("The total size of the downloaded data is
+        # Locally change the option so the warning is displayed before cli_yes()
+        # prints to console.
+        withr::with_options(
+          list(warn = 1),
+          code = {
+            cli::cli_warn(
+              c("The total size of the downloaded data is
             {prettyunits::pretty_num(total_n_rows, style = '6')} rows and
             {.strong {prettyunits::pretty_bytes(total_size_bytes)}}.",
-            "!" = "Returning this data as a tibble may exceed the available
+                "!" = "Returning this data as a tibble may exceed the available
             memory of your computer and crash R.",
-            "i" = "Consider using
+                "i" = "Consider using
             {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
-            "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
-          ),
-          class = "archival_data_large_return"
+                "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
+              ),
+              class = "archival_data_large_return"
+            )
+          }
         )
+
         if (is_interactive()) {
           user_is_confident <-
             cli_yes(
