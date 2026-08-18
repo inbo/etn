@@ -280,40 +280,38 @@ test_that("get_archival_data() asks for ok on lots of data in memory", {
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
 
-  expect_message(
-    tryCatch(
-      expr = {
-        with_mocked_bindings(
-          code = {
-            get_archival_data(
-              animal_project_code = "2018_EC",
-              # the mocked file_size() function will force the function to
-              # behave as if a lot of data is about to be returned, so we can
-              # safely place a small request to test.
-              limit = TRUE,
-              return_as = "tibble"
-            )
-          },
-          is_interactive = function(...) {
-            TRUE
-          },
-          # pretend return is 30GB
-          file_size = function(...) {
-            30 * 10e8
-          }
-        )
-      },
-      # Suppress all errors downstream, specifically the interactive check in
-      # utils::menu()
-      error = function(e) {
-        NULL
-      },
-      # Suppress the size warning, we are testing the user prompt here.
-      warning = function(w) {
-        NULL
-      }
-    ),
-    class = "cli_yes_prompt"
+  suppressWarnings(
+    expect_message(
+      tryCatch(
+        expr = {
+          with_mocked_bindings(
+            code = {
+              get_archival_data(
+                animal_project_code = "2018_EC",
+                # the mocked file_size() function will force the function to
+                # behave as if a lot of data is about to be returned, so we can
+                # safely place a small request to test.
+                limit = TRUE,
+                return_as = "tibble"
+              )
+            },
+            is_interactive = function(...) {
+              TRUE
+            },
+            # pretend return is 30GB
+            file_size = function(...) {
+              30 * 10e8
+            }
+          )
+        },
+        # Suppress all errors downstream, specifically the interactive check in
+        # utils::menu()
+        error = function(e) {
+          NULL
+        }
+      ),
+      class = "cli_yes_prompt"
+    )
   )
 })
 
