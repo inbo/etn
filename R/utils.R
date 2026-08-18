@@ -57,6 +57,12 @@ cli_yes <- function(x, shuffle = TRUE){
   }
   cli::cli_inform(x,
                       class = "cli_yes_prompt")
+  if(!is_interactive()){
+    cli::cli_abort(
+      "Prompting for confirmation failed, please retry in interactive mode",
+      class = "cli_yes_non_interactive"
+    )
+  }
   result <- utils::menu(choices)
   choices[[result]] %in% yes_options && result != 0
 }
