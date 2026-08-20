@@ -273,7 +273,9 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
-  vcr::local_cassette("deployment_logs_6028")
+  vcr::local_cassette("deployment_logs_6028",
+                      # Use qs2 serializer for a smaller cassette
+                      serialize_with = "qs2")
 
   # deployment_id 6028 includes the station_name column in its log_data, causing
   # a collision with the station_name column added by the query.
@@ -297,7 +299,8 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id),
+        repaired <-
+          get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id),
         classes = "rlib_message_name_repair"
       ),
       is_testing = \(x) {
@@ -310,7 +313,7 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   # Check that the duplicate column is repaired by make.unique and both columns
   # are present in the output
   expect_contains(
-    names(get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id)),
+    names(repaired),
     c("station_name", "station_name.1")
   )
 })
