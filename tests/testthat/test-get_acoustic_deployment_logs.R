@@ -166,6 +166,8 @@ test_that("get_acoustic_deployment_logs() has no fully uppercase column names", 
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("deployment_logs_93144")
+
   # Testing conversion of uppercase database field names
   case_deployment_id <- 93144
   colnames_to_test_case <-
