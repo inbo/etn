@@ -4,28 +4,10 @@
 \alias{get_acoustic_deployment_logs}
 \title{Get diagnostics information for a receiver for a deployment id.}
 \usage{
-get_acoustic_deployment_logs(
-  deployment_id,
-  receiver_id = NULL,
-  station_name = NULL,
-  start_date = NULL,
-  end_date = NULL,
-  limit = FALSE
-)
+get_acoustic_deployment_logs(deployment_id, limit = FALSE)
 }
 \arguments{
 \item{deployment_id}{Integer (vector). One or more deployment identifiers.}
-
-\item{receiver_id}{Character (vector). One or more receiver identifiers.}
-
-\item{station_name}{Character (vector). One or more deployment station
-names.}
-
-\item{start_date}{Character. Start date (inclusive) in ISO 8601 format (
-\code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
-
-\item{end_date}{Character. End date (exclusive) in ISO 8601 format (
-\code{yyyy-mm-dd}, \code{yyyy-mm} or \code{yyyy}).}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
