@@ -16,6 +16,7 @@
 * New `get_bibliography()` creates a bibliography from a table of detections, with references for ETN, the etn R package, and animal and acoustic projects associated with the detections (#587).
 * `get_package()` now includes a bibliography resource built with `get_bibliography()`, replacing the previous references resource (#587).
 * Error messages now provide suggestions when providing an incorrect value to parameters such as `animal_project_code` or `scientific_name` (#587).
+* etn now relies on R >= 4.2.0 (because of the `{arrow}` dependency) (#611).
 
 # etn 3.0.0
 
