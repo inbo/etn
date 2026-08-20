@@ -20,19 +20,19 @@
 #' @section Name repair:
 #'
 #' It is possible that the columns contained in a receiver log overlap with
-#' the default columns always returned by `get_receiver_logs()`. If
+#' the default columns always returned by `get_acoustic_deployment_logs()`. If
 #' duplicate columns are found, their names are made unique with
 #' [base::make.unique()]. When this happens, a message is printed to the
 #' console. The message can be muffled with [base::suppressMessages()].
 #'
 #' @examplesIf etn:::credentials_are_set()
-#' get_receiver_logs(deployment_id = 25259, limit = TRUE)
-#' get_receiver_logs(deployment_id = 74535,
+#' get_acoustic_deployment_logs(deployment_id = 25259, limit = TRUE)
+#' get_acoustic_deployment_logs(deployment_id = 74535,
 #'                   station_name = "Tijdenskan. - Hamdijk 12 Bad Nieuwesch")
-#' get_receiver_logs(deployment_id = 6028,
+#' get_acoustic_deployment_logs(deployment_id = 6028,
 #'                   start_date = "2020",
 #'                   end_date = "2020-02-01")
-get_receiver_logs <- function(deployment_id,
+get_acoustic_deployment_logs <- function(deployment_id,
                               receiver_id = NULL,
                               station_name = NULL,
                               start_date = NULL,
