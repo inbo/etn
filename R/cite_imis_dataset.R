@@ -115,17 +115,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_metadata <-
     succesful_responses |>
-    # See which id's resulted in errors, get the url and error message for each,
-    # and return as a named list with the id as name. This is used for the
-    # warning message later on.
-    purrr::map_chr(\(resp) {httr2::resp_url(resp) |>
-        stringr::str_extract("[0-9]+")}) |>
-    purrr::map(\(imis_dataset_id) {
-      # Create the path where the json file is stored
-      file.path(json_tempdir, paste0(imis_dataset_id,".json"))}) |>
-    # Read the json from disk
-    purrr::map(\(json_path) {jsonlite::read_json(path = json_path,
-                                                 simplifyVector = TRUE)}) |>
+    purrr::map(\(response) {
+      httr2::resp_body_json(response, simplifyVector = TRUE)
+    }) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
