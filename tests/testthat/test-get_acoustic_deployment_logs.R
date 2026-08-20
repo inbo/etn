@@ -260,9 +260,7 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
-                          start_date = "2019-09-24",
-                          end_date = "2019-09-25"),
+        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id),
         classes = "etn_message_name_repair"
       ),
       is_testing = \(x) {
@@ -276,9 +274,7 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
-                          start_date = "2019-09-24",
-                          end_date = "2019-09-25"),
+        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id),
         classes = "rlib_message_name_repair"
       ),
       is_testing = \(x) {
@@ -291,9 +287,7 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   # Check that the duplicate column is repaired by make.unique and both columns
   # are present in the output
   expect_contains(
-    names(get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
-                            start_date = "2019-09-24",
-                            end_date = "2019-09-25")),
+    names(get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id)),
     c("station_name", "station_name.1")
   )
 })
