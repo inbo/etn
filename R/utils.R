@@ -2,7 +2,7 @@
 
 #' Check input value against valid values
 #'
-#' This function checks if the input value(s) `x` are present in the valid
+#' Checks if the input value(s) `x` are present in the valid
 #' values `y`. If any value in `x` is not found in `y`, an error is thrown. If
 #' `lowercase` is set to `TRUE`, the case of the values will be ignored during
 #' the comparison, and the returned values will be converted to lowercase.
