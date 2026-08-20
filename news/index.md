@@ -64,6 +64,9 @@
 - The [function
   reference](https://inbo.github.io/etn/reference/index.html) has been
   reorganized ([\#549](https://github.com/inbo/etn/issues/549))
+- etn now relies on R \>= 4.2.0 (because of the
+  [arrow](https://github.com/apache/arrow/) dependency)
+  ([\#611](https://github.com/inbo/etn/issues/611)).
 
 ## etn 3.0.0
 
