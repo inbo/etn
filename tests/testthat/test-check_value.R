@@ -70,3 +70,15 @@ test_that("check_value() offers suggestions for multiple typos", {
     class = "etn_value_not_found_suggest"
   )
 })
+
+test_that("check_value() doesn't offer duplicate suggestions", {
+  # Duplicate suggestions could take place if multiple missing values are
+  # equally close to a candidate.
+  expect_snapshot(
+    check_value(
+      c("a", "b"),
+      c("Ars", "SEAMONITOR_ARRAY", "Siganid_Gulf_Aqaba")
+    ),
+    error = TRUE
+  )
+})

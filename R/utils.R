@@ -53,7 +53,10 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
     # We need to repeat the candidates so we can get the minimum distance
     # for each missing value
     closest_match <-
-      rep(y, length(missing_values))[purrr::map_int(distances, which.min)]
+      rep(y, length(missing_values))[purrr::map_int(distances, which.min)] |>
+      # If multiple missing values result in the same suggestion, then don't
+      # repeat the suggestion.
+      unique()
     # If there are many candidates, truncate the list to 5 items for the error
     # message.
     cli::cli_abort(
