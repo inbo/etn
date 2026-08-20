@@ -1,57 +1,57 @@
 # Test on a known deployment that has log_data.
 test_deployment_id <- 53790
 
-test_that("get_receiver_logs() returns a tibble", {
+test_that("get_acoustic_deployment_logs() returns a tibble", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
-  df <- get_receiver_logs(deployment_id = test_deployment_id)
+  df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
 })
 
-test_that("get_receiver_logs() returns an error on missing deployment_id", {
+test_that("get_acoustic_deployment_logs() returns an error on missing deployment_id", {
   expect_error(
-    get_receiver_logs(),
+    get_acoustic_deployment_logs(),
     class = "etn_no_dep_id_supplied"
   )
 })
 
-test_that("get_receiver_logs() supports both int and chr deployment_id", {
+test_that("get_acoustic_deployment_logs() supports both int and chr deployment_id", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   expect_identical(
-    get_receiver_logs(deployment_id = as.character(test_deployment_id),
+    get_acoustic_deployment_logs(deployment_id = as.character(test_deployment_id),
                       limit = TRUE),
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       limit = TRUE)
   )
 })
 
-test_that("get_receiver_logs() returns a 0-row tbl if no receiver logs found", {
+test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver logs found", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   expect_length(
-    dplyr::pull(get_receiver_logs(deployment_id = 1758), "deployment_id"),
+    dplyr::pull(get_acoustic_deployment_logs(deployment_id = 1758), "deployment_id"),
     0L
   )
 })
 
-test_that("get_receiver_logs() can filter on station_name", {
+test_that("get_acoustic_deployment_logs() can filter on station_name", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   # Errors
   expect_error(
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       station_name = "not_a_station_name"),
     regexp = "Can't find station_name"
   )
 
   expect_error(
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       station_name = c("G09", "not_a_station_name")),
     regexp = "Can't find station_name"
   )
@@ -59,7 +59,7 @@ test_that("get_receiver_logs() can filter on station_name", {
   # Select single value
   single_select <- "G09" # From deployment_id = 53790
   single_select_df <-
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       station_name = single_select)
 
   expect_equal(
@@ -72,7 +72,7 @@ test_that("get_receiver_logs() can filter on station_name", {
   # Select multiple values
   multi_select <- c("G09", "ws-VH8")
   multi_select_df <-
-    get_receiver_logs(deployment_id = c(test_deployment_id, 64321),
+    get_acoustic_deployment_logs(deployment_id = c(test_deployment_id, 64321),
                       station_name = multi_select
                       )
 
@@ -84,71 +84,71 @@ test_that("get_receiver_logs() can filter on station_name", {
   expect_gt(nrow(multi_select_df), nrow(single_select_df))
 })
 
-test_that("get_receiver_logs() can filter on start_date", {
+test_that("get_acoustic_deployment_logs() can filter on start_date", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   expect_error(
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       start_date = "not_a_date")
   )
 
   # Start date (inclusive) <= min(date_time)
-  start_year_df <- get_receiver_logs(deployment_id = test_deployment_id,
+  start_year_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                                      start_date = "2021")
   expect_lte(as.POSIXct("2021-01-01", tz = "UTC"), min(start_year_df$datetime))
-  start_month_df <- get_receiver_logs(deployment_id = test_deployment_id,
+  start_month_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                                       start_date = "2020-09")
   expect_lte(as.POSIXct("2020-09-01", tz = "UTC"), min(start_month_df$datetime))
-  start_day_df <- get_receiver_logs(deployment_id = test_deployment_id,
+  start_day_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                                     start_date = "2020-10-12")
   expect_lte(as.POSIXct("2020-10-12", tz = "UTC"), min(start_day_df$datetime))
 
 
 })
 
-test_that("get_receiver_logs() can filter on end_date", {
+test_that("get_acoustic_deployment_logs() can filter on end_date", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   expect_error(
-    get_receiver_logs(deployment_id = test_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
                       end_date = "not_a_date"),
     regexp = "is not in a valid date format"
   )
 
   # End date (exclusive) > max(date_time)
-  end_year_df <- get_receiver_logs(end_date = "2021",
+  end_year_df <- get_acoustic_deployment_logs(end_date = "2021",
                                    deployment_id = test_deployment_id)
   expect_gt(as.POSIXct("2021-01-01", tz = "UTC"), max(end_year_df$datetime))
-  end_month_df <- get_receiver_logs(end_date = "2020-09",
+  end_month_df <- get_acoustic_deployment_logs(end_date = "2020-09",
                                     deployment_id = test_deployment_id)
   expect_gt(as.POSIXct("2020-09-01", tz = "UTC"), max(end_month_df$datetime))
-  end_day_df <- get_receiver_logs(end_date = "2021-02-10",
+  end_day_df <- get_acoustic_deployment_logs(end_date = "2021-02-10",
                                   deployment_id = test_deployment_id)
   expect_gt(as.POSIXct("2021-02-10", tz = "UTC"), max(end_day_df$datetime))
 })
 
-test_that("get_receiver_logs() can filter on both start and end date", {
+test_that("get_acoustic_deployment_logs() can filter on both start and end date", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   # Test querying between two dates.
-  between_year_df <- get_receiver_logs(start_date = "2020",
+  between_year_df <- get_acoustic_deployment_logs(start_date = "2020",
                                        end_date = "2021",
                                        deployment_id = test_deployment_id)
   expect_lte(as.POSIXct("2020-01-01", tz = "UTC"),
              min(between_year_df$datetime))
   expect_gt(as.POSIXct("2021-01-01", tz = "UTC"),
             max(between_year_df$datetime))
-  between_month_df <- get_receiver_logs(start_date = "2020-09",
+  between_month_df <- get_acoustic_deployment_logs(start_date = "2020-09",
                                         end_date = "2020-11",
                                         deployment_id = test_deployment_id)
   expect_lte(as.POSIXct("2020-09-01", tz = "UTC"),
              min(between_month_df$datetime))
   expect_gt(as.POSIXct("2020-11-01", tz = "UTC"),
             max(between_month_df$datetime))
-  between_day_df <- get_receiver_logs(start_date = "2021-04-24",
+  between_day_df <- get_acoustic_deployment_logs(start_date = "2021-04-24",
                                       end_date = "2021-04-25",
                                       deployment_id = test_deployment_id)
   expect_lte(as.POSIXct("2021-04-24", tz = "UTC"),
@@ -157,21 +157,21 @@ test_that("get_receiver_logs() can filter on both start and end date", {
             max(between_day_df$datetime))
 })
 
-test_that("get_receiver_logs() can return a limited subset", {
+test_that("get_acoustic_deployment_logs() can return a limited subset", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   # This test assumes that there are more than 100 logs for the test deployment
   expect_length(
     dplyr::pull(
-      get_receiver_logs(deployment_id = test_deployment_id, limit = TRUE),
+      get_acoustic_deployment_logs(deployment_id = test_deployment_id, limit = TRUE),
       "deployment_id"
     ),
     100L
   )
 })
 
-test_that("get_receiver_logs() returns at least the expected columns", {
+test_that("get_acoustic_deployment_logs() returns at least the expected columns", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
@@ -183,12 +183,12 @@ test_that("get_receiver_logs() returns at least the expected columns", {
   )
 
   expect_contains(
-    colnames(get_receiver_logs(test_deployment_id, limit = TRUE)),
+    colnames(get_acoustic_deployment_logs(test_deployment_id, limit = TRUE)),
     expected_column_names
   )
 })
 
-test_that("get_receiver_logs() returns expected columns for known deployment", {
+test_that("get_acoustic_deployment_logs() returns expected columns for known deployment", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
@@ -239,7 +239,7 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
     )
 
   expect_named(
-    get_receiver_logs(deployment_id = known_cols_deployment_id,
+    get_acoustic_deployment_logs(deployment_id = known_cols_deployment_id,
                       # Limiting will return less columns
                       limit = FALSE),
     expected = expected_columns_known_id,
@@ -247,7 +247,7 @@ test_that("get_receiver_logs() returns expected columns for known deployment", {
   )
 })
 
-test_that("get_receiver_logs() returns the expected column classes", {
+test_that("get_acoustic_deployment_logs() returns the expected column classes", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
@@ -259,21 +259,21 @@ test_that("get_receiver_logs() returns the expected column classes", {
     "record_type" = "character"
   )
 
-  get_receiver_logs(deployment_id = test_deployment_id) |>
+  get_acoustic_deployment_logs(deployment_id = test_deployment_id) |>
     dplyr::select(dplyr::all_of(names(expected_column_classes))) |>
     purrr::map(class) |>
     expect_identical(expected_column_classes)
 
 })
 
-test_that("get_receiver_logs() has no fully uppercase column names", {
+test_that("get_acoustic_deployment_logs() has no fully uppercase column names", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   # Testing conversion of uppercase database field names
   case_deployment_id <- 93144
   colnames_to_test_case <-
-    colnames(get_receiver_logs(deployment_id = case_deployment_id))
+    colnames(get_acoustic_deployment_logs(deployment_id = case_deployment_id))
 
   expect_false(
     identical(
@@ -283,14 +283,14 @@ test_that("get_receiver_logs() has no fully uppercase column names", {
   )
 })
 
-test_that("get_receiver_logs() returns units in column names correctly", {
+test_that("get_acoustic_deployment_logs() returns units in column names correctly", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   # Test that the conversion of uppercase doesn't result in incorrect units
 
   # Query with some units in log_data
-  receiver_log_data <- get_receiver_logs(
+  receiver_log_data <- get_acoustic_deployment_logs(
     deployment_id = 6028,
     start_date = "2020-02-23",
     end_date = "2020-02-24"
@@ -303,7 +303,7 @@ test_that("get_receiver_logs() returns units in column names correctly", {
   )
 })
 
-test_that("get_receiver_logs() returns no empty string values in log fields", {
+test_that("get_acoustic_deployment_logs() returns no empty string values in log fields", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
@@ -311,7 +311,7 @@ test_that("get_receiver_logs() returns no empty string values in log fields", {
   # receiver_id, datetime or record_type
 
 
-  get_receiver_logs(deployment_id = 65434) |>
+  get_acoustic_deployment_logs(deployment_id = 65434) |>
     # Drop default columns
     dplyr::select(-dplyr::any_of(c("deployment_id",
                                    "receiver_id",
@@ -328,12 +328,12 @@ test_that("get_receiver_logs() returns no empty string values in log fields", {
     expect_length(0L)
 })
 
-test_that("get_receiver_logs() returns unique rows for default columns", {
+test_that("get_acoustic_deployment_logs() returns unique rows for default columns", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
   receiver_log <-
-    get_receiver_logs(deployment_id = 65434)
+    get_acoustic_deployment_logs(deployment_id = 65434)
 
   # Per group of identifying columns, no duplicate rows should
   # be present.
@@ -368,7 +368,7 @@ test_that("get_receiver_logs() returns unique rows for default columns", {
     expect_length(0L)
 })
 
-test_that("get_receiver_logs() handles duplicate columns by repairing them", {
+test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing them", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
@@ -380,7 +380,7 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_receiver_logs(deployment_id = dup_col_deployment_id,
+        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
                           start_date = "2019-09-24",
                           end_date = "2019-09-25"),
         classes = "etn_message_name_repair"
@@ -396,7 +396,7 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   expect_message(
     with_mocked_bindings(
       suppressMessages(
-        get_receiver_logs(deployment_id = dup_col_deployment_id,
+        get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
                           start_date = "2019-09-24",
                           end_date = "2019-09-25"),
         classes = "rlib_message_name_repair"
@@ -411,7 +411,7 @@ test_that("get_receiver_logs() handles duplicate columns by repairing them", {
   # Check that the duplicate column is repaired by make.unique and both columns
   # are present in the output
   expect_contains(
-    names(get_receiver_logs(deployment_id = dup_col_deployment_id,
+    names(get_acoustic_deployment_logs(deployment_id = dup_col_deployment_id,
                             start_date = "2019-09-24",
                             end_date = "2019-09-25")),
     c("station_name", "station_name.1")
