@@ -4,10 +4,10 @@
 \alias{get_bibliography}
 \title{Create bibliography from detections}
 \usage{
-get_bibliography(x)
+get_bibliography(detections)
 }
 \arguments{
-\item{x}{A data frame containing at least the columns \code{animal_project_code}
+\item{detections}{A data frame containing at least the columns \code{animal_project_code}
 and \code{acoustic_project_code}. Typically a data frame returned by
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.}
 }

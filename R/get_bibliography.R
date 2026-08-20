@@ -13,7 +13,7 @@
 #' Guidelines](https://europeantrackingnetwork.org/en/4-data-policy-permissions-citation-guidelines-and-data-use)
 #' for details.
 #'
-#' @param x A data frame containing at least the columns `animal_project_code`
+#' @param detections A data frame containing at least the columns `animal_project_code`
 #'   and `acoustic_project_code`. Typically a data frame returned by
 #'   [get_acoustic_detections()].
 #'
@@ -28,10 +28,10 @@
 #'
 #' # Or obtain the bibliography from a Data Package
 #' read_resource(example_dataset(), "bibliography")
-get_bibliography <- function(x) {
+get_bibliography <- function(detections) {
   # Check inputs ------------------------------------------------------------
 
-  if(!is.data.frame(x)){
+  if(!is.data.frame(detections)){
     cli::cli_abort(
       "x must be a data.frame",
       class = "etn_error_invalid_input_type"
@@ -40,7 +40,7 @@ get_bibliography <- function(x) {
 
   # Check if at least the required columns are present
   required_columns <- c("animal_project_code", "acoustic_project_code")
-  if (!all(required_columns %in% colnames(x))) {
+  if (!all(required_columns %in% colnames(detections))) {
     cli::cli_abort(
       "x must contain the following columns: {.val {required_columns}}",
       class = "etn_error_missing_columns"
@@ -49,11 +49,11 @@ get_bibliography <- function(x) {
 
   # Check that all the provided project codes can be found in the database
   provided_animal_project_codes <-
-    dplyr::pull(x, "animal_project_code") |>
+    dplyr::pull(detections, "animal_project_code") |>
     unique()
   # Check that all provided project codes are valid
   provided_acoustic_project_codes <-
-    dplyr::pull(x, "acoustic_project_code") |>
+    dplyr::pull(detections, "acoustic_project_code") |>
     unique()
 
   animal_project_codes <-
