@@ -39,12 +39,13 @@ manually updated in `datapackage.json`.
 
 ``` r
 example_dataset()
-#> A Data Package (version 1.0) with 5 resources:
+#> A Data Package (version 1.0) with 6 resources:
 #> • animals
 #> • tags
 #> • detections
 #> • deployments
 #> • receivers
+#> • bibliography
 #> For more information, see <https://doi.org/10.14284/432>.
 #> Use `unclass()` to print the Data Package as a list.
 ```

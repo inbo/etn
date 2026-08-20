@@ -60,6 +60,10 @@
 <li>The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (<code>emof.csv</code>), for better support with OBIS (<a href="https://github.com/inbo/etn/issues/555" class="external-link">#555</a>).</li>
 </ul></li>
 <li>The <a href="https://inbo.github.io/etn/reference/index.html">function reference</a> has been reorganized (<a href="https://github.com/inbo/etn/issues/549" class="external-link">#549</a>)</li>
+<li>New <code><a href="../reference/get_bibliography.html">get_bibliography()</a></code> creates a bibliography from a table of detections, with references for ETN, the etn R package, and animal and acoustic projects associated with the detections (<a href="https://github.com/inbo/etn/issues/587" class="external-link">#587</a>).</li>
+<li>
+<code><a href="../reference/get_package.html">get_package()</a></code> now includes a bibliography resource built with <code><a href="../reference/get_bibliography.html">get_bibliography()</a></code>, replacing the previous references resource (<a href="https://github.com/inbo/etn/issues/587" class="external-link">#587</a>).</li>
+<li>Error messages now provide suggestions when providing an incorrect value to parameters such as <code>animal_project_code</code> or <code>scientific_name</code> (<a href="https://github.com/inbo/etn/issues/587" class="external-link">#587</a>).</li>
 <li>etn now relies on R &gt;= 4.2.0 (because of the <a href="https://github.com/apache/arrow/" class="external-link">arrow</a> dependency) (<a href="https://github.com/inbo/etn/issues/611" class="external-link">#611</a>).</li>
 </ul></div>
     <div class="section level2">

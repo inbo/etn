@@ -14,6 +14,8 @@
   : Get animal project data
 - [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md)
   : Get animal data
+- [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md)
+  : Create bibliography from detections
 - [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md)
   : Get cpod project data
 - [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)

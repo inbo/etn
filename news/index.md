@@ -64,6 +64,19 @@
 - The [function
   reference](https://inbo.github.io/etn/reference/index.html) has been
   reorganized ([\#549](https://github.com/inbo/etn/issues/549))
+- New
+  [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md)
+  creates a bibliography from a table of detections, with references for
+  ETN, the etn R package, and animal and acoustic projects associated
+  with the detections ([\#587](https://github.com/inbo/etn/issues/587)).
+- [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  now includes a bibliography resource built with
+  [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md),
+  replacing the previous references resource
+  ([\#587](https://github.com/inbo/etn/issues/587)).
+- Error messages now provide suggestions when providing an incorrect
+  value to parameters such as `animal_project_code` or `scientific_name`
+  ([\#587](https://github.com/inbo/etn/issues/587)).
 - etn now relies on R \>= 4.2.0 (because of the
   [arrow](https://github.com/apache/arrow/) dependency)
   ([\#611](https://github.com/inbo/etn/issues/611)).
