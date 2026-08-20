@@ -159,5 +159,15 @@ test_that("cli_yes() supports glue/cli syntax", {
     regexp =
       stringr::str_replace(custom_message, stringr::fixed("{my_var}"), my_var),
     fixed = TRUE
+# etn_citation() ----------------------------------------------------------
+
+test_that("etn_citation() returns a character vector", {
+  expect_type(etn_citation(), "character")
+})
+
+test_that("etn_citation() returns the expected package citation", {
+  expect_match(
+    etn_citation(),
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
   )
 })
