@@ -5,6 +5,8 @@ test_that("get_acoustic_deployment_logs() returns a tibble", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("deployment_logs")
+
   df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id)
   expect_s3_class(df, "data.frame")
   expect_s3_class(df, "tbl")
@@ -21,6 +23,8 @@ test_that("get_acoustic_deployment_logs() supports both int and chr deployment_i
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("deployment_logs_int_chr")
+
   expect_identical(
     get_acoustic_deployment_logs(deployment_id = as.character(test_deployment_id),
                       limit = TRUE),
@@ -33,6 +37,8 @@ test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver log
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("deployment_logs_none_found")
+
   expect_length(
     dplyr::pull(get_acoustic_deployment_logs(deployment_id = 1758), "deployment_id"),
     0L
@@ -42,6 +48,8 @@ test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver log
 test_that("get_acoustic_deployment_logs() can return a limited subset", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_limit")
 
   # This test assumes that there are more than 100 logs for the test deployment
   expect_length(
@@ -56,6 +64,8 @@ test_that("get_acoustic_deployment_logs() can return a limited subset", {
 test_that("get_acoustic_deployment_logs() returns at least the expected columns", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_limit")
 
   expected_column_names <- c(
     "deployment_id",
@@ -73,6 +83,8 @@ test_that("get_acoustic_deployment_logs() returns at least the expected columns"
 test_that("get_acoustic_deployment_logs() returns expected columns for known deployment", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_74145")
 
   # Not every receiver log contains the same columns, this test check for
   # columns known to occur for this specific deployment id
@@ -133,6 +145,8 @@ test_that("get_acoustic_deployment_logs() returns the expected column classes", 
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("deployment_logs")
+
   expected_column_classes <- list(
     "deployment_id" = "integer",
     "receiver_id" = "character",
@@ -171,6 +185,8 @@ test_that("get_acoustic_deployment_logs() returns units in column names correctl
 
   # Test that the conversion of uppercase doesn't result in incorrect units
 
+  vcr::local_cassette("deployment_logs_units")
+
   # Query with some units in log_data
   receiver_log_data <- get_acoustic_deployment_logs(
     deployment_id = 6028
@@ -190,6 +206,7 @@ test_that("get_acoustic_deployment_logs() returns no empty string values in log 
   # "" should be replaced with NA in any fields that are not deployment_id,
   # receiver_id, datetime or record_type
 
+  vcr::local_cassette("deployment_logs_na_field")
 
   get_acoustic_deployment_logs(deployment_id = 65434) |>
     # Drop default columns
@@ -211,6 +228,8 @@ test_that("get_acoustic_deployment_logs() returns no empty string values in log 
 test_that("get_acoustic_deployment_logs() returns unique rows for default columns", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_na_field")
 
   receiver_log <-
     get_acoustic_deployment_logs(deployment_id = 65434)
@@ -251,6 +270,8 @@ test_that("get_acoustic_deployment_logs() returns unique rows for default column
 test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing them", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_6028")
 
   # deployment_id 6028 includes the station_name column in its log_data, causing
   # a collision with the station_name column added by the query.
