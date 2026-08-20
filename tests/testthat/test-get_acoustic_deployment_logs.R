@@ -39,124 +39,6 @@ test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver log
   )
 })
 
-test_that("get_acoustic_deployment_logs() can filter on station_name", {
-  skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
-  # Errors
-  expect_error(
-    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                      station_name = "not_a_station_name"),
-    regexp = "Can't find station_name"
-  )
-
-  expect_error(
-    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                      station_name = c("G09", "not_a_station_name")),
-    regexp = "Can't find station_name"
-  )
-
-  # Select single value
-  single_select <- "G09" # From deployment_id = 53790
-  single_select_df <-
-    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                      station_name = single_select)
-
-  expect_equal(
-    single_select_df |> dplyr::distinct(station_name) |> dplyr::pull(),
-    c(single_select)
-  )
-
-  expect_gt(nrow(single_select_df), 0)
-
-  # Select multiple values
-  multi_select <- c("G09", "ws-VH8")
-  multi_select_df <-
-    get_acoustic_deployment_logs(deployment_id = c(test_deployment_id, 64321),
-                      station_name = multi_select
-                      )
-
-  expect_equal(
-    multi_select_df |> dplyr::distinct(station_name) |> dplyr::pull() |> sort(),
-    c(multi_select)
-  )
-
-  expect_gt(nrow(multi_select_df), nrow(single_select_df))
-})
-
-test_that("get_acoustic_deployment_logs() can filter on start_date", {
-  skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
-  expect_error(
-    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                      start_date = "not_a_date")
-  )
-
-  # Start date (inclusive) <= min(date_time)
-  start_year_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                                     start_date = "2021")
-  expect_lte(as.POSIXct("2021-01-01", tz = "UTC"), min(start_year_df$datetime))
-  start_month_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                                      start_date = "2020-09")
-  expect_lte(as.POSIXct("2020-09-01", tz = "UTC"), min(start_month_df$datetime))
-  start_day_df <- get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                                    start_date = "2020-10-12")
-  expect_lte(as.POSIXct("2020-10-12", tz = "UTC"), min(start_day_df$datetime))
-
-
-})
-
-test_that("get_acoustic_deployment_logs() can filter on end_date", {
-  skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
-  expect_error(
-    get_acoustic_deployment_logs(deployment_id = test_deployment_id,
-                      end_date = "not_a_date"),
-    regexp = "is not in a valid date format"
-  )
-
-  # End date (exclusive) > max(date_time)
-  end_year_df <- get_acoustic_deployment_logs(end_date = "2021",
-                                   deployment_id = test_deployment_id)
-  expect_gt(as.POSIXct("2021-01-01", tz = "UTC"), max(end_year_df$datetime))
-  end_month_df <- get_acoustic_deployment_logs(end_date = "2020-09",
-                                    deployment_id = test_deployment_id)
-  expect_gt(as.POSIXct("2020-09-01", tz = "UTC"), max(end_month_df$datetime))
-  end_day_df <- get_acoustic_deployment_logs(end_date = "2021-02-10",
-                                  deployment_id = test_deployment_id)
-  expect_gt(as.POSIXct("2021-02-10", tz = "UTC"), max(end_day_df$datetime))
-})
-
-test_that("get_acoustic_deployment_logs() can filter on both start and end date", {
-  skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
-  # Test querying between two dates.
-  between_year_df <- get_acoustic_deployment_logs(start_date = "2020",
-                                       end_date = "2021",
-                                       deployment_id = test_deployment_id)
-  expect_lte(as.POSIXct("2020-01-01", tz = "UTC"),
-             min(between_year_df$datetime))
-  expect_gt(as.POSIXct("2021-01-01", tz = "UTC"),
-            max(between_year_df$datetime))
-  between_month_df <- get_acoustic_deployment_logs(start_date = "2020-09",
-                                        end_date = "2020-11",
-                                        deployment_id = test_deployment_id)
-  expect_lte(as.POSIXct("2020-09-01", tz = "UTC"),
-             min(between_month_df$datetime))
-  expect_gt(as.POSIXct("2020-11-01", tz = "UTC"),
-            max(between_month_df$datetime))
-  between_day_df <- get_acoustic_deployment_logs(start_date = "2021-04-24",
-                                      end_date = "2021-04-25",
-                                      deployment_id = test_deployment_id)
-  expect_lte(as.POSIXct("2021-04-24", tz = "UTC"),
-             min(between_day_df$datetime))
-  expect_gt(as.POSIXct("2021-04-25", tz = "UTC"),
-            max(between_day_df$datetime))
-})
-
 test_that("get_acoustic_deployment_logs() can return a limited subset", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
@@ -291,9 +173,7 @@ test_that("get_acoustic_deployment_logs() returns units in column names correctl
 
   # Query with some units in log_data
   receiver_log_data <- get_acoustic_deployment_logs(
-    deployment_id = 6028,
-    start_date = "2020-02-23",
-    end_date = "2020-02-24"
+    deployment_id = 6028
   )
 
   expect_match(
