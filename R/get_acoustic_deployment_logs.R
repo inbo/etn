@@ -32,14 +32,8 @@
 #' get_acoustic_deployment_logs(deployment_id = 6028,
 #'                   start_date = "2020",
 #'                   end_date = "2020-02-01")
-get_acoustic_deployment_logs <- function(deployment_id,
-                              receiver_id = NULL,
-                              station_name = NULL,
-                              start_date = NULL,
-                              end_date = NULL,
-                              limit = FALSE) {
-
-  # Return error on missing required arguments: deployment_id
+get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
+    # Return error on missing required arguments: deployment_id
   if (missing(deployment_id)) {
     cli::cli_abort(
       message = "Please provide at least one {.arg deployment_id}.",
