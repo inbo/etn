@@ -1,4 +1,5 @@
-test_that("connect_to_etn() returns deprecation warning when used with named arguments", {
+test_that("connect_to_etn() returns deprecation warning when used with named
+           arguments", {
   lifecycle::expect_deprecated(
     connect_to_etn(username = "my name", password = "my password")
   )

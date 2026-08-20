@@ -23,16 +23,16 @@ list_receiver_ids()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other list functions: 
-\code{\link{list_acoustic_project_codes}()},
-\code{\link{list_acoustic_tag_ids}()},
-\code{\link{list_animal_ids}()},
-\code{\link{list_animal_project_codes}()},
-\code{\link{list_cpod_project_codes}()},
-\code{\link{list_deployment_ids}()},
-\code{\link{list_scientific_names}()},
-\code{\link{list_station_names}()},
-\code{\link{list_tag_serial_numbers}()},
-\code{\link{list_values}()}
+Other list functions:
+\code{\link[=list_acoustic_project_codes]{list_acoustic_project_codes()}},
+\code{\link[=list_acoustic_tag_ids]{list_acoustic_tag_ids()}},
+\code{\link[=list_animal_ids]{list_animal_ids()}},
+\code{\link[=list_animal_project_codes]{list_animal_project_codes()}},
+\code{\link[=list_cpod_project_codes]{list_cpod_project_codes()}},
+\code{\link[=list_deployment_ids]{list_deployment_ids()}},
+\code{\link[=list_scientific_names]{list_scientific_names()}},
+\code{\link[=list_station_names]{list_station_names()}},
+\code{\link[=list_tag_serial_numbers]{list_tag_serial_numbers()}},
+\code{\link[=list_values]{list_values()}}
 }
 \concept{list functions}

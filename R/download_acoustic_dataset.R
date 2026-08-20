@@ -1,8 +1,17 @@
 #' Download acoustic data package
 #'
-#' Download all acoustic data related to an **animal project** as a data
-#' package that can be deposited in a research data repository. Includes option
-#' to filter on scientific names.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
+#' instead, which is more versatile, adds field definition and references, and
+#' returns a Data Package object that can be passed to other functions.
+#' Note that [get_package()] does not support filtering on `scientific_name` or
+#' print summary statistics.
+#'
+#' This function allows you to download all acoustic data related to an
+#' **animal project** as a data package that can be deposited in a research data
+#' repository. Includes option to filter on scientific names.
 #'
 #' The data are downloaded as a
 #' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
@@ -35,6 +44,7 @@
 #' `frictionless validate datapackage.json` on the command line using
 #' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
+#' @inheritParams list_animal_ids
 #' @param animal_project_code Character. Animal project you want to download
 #'   data for. Required.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -42,14 +52,13 @@
 #' @param directory Character. Relative path to local download directory.
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
-#' @inheritParams list_animal_ids
-#' @return CSV and JSON files written to disk.
+#' @returns CSV and JSON files written to disk.
 #' @family download functions
+#' @keywords internal
 #' @export
 #' @examplesIf etn:::credentials_are_set() & interactive()
-#' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
-#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
-#'                          directory = tempdir())
+#' # Before
+#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #' #> Downloading data to directory `2012_leopoldkanaal`:
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
@@ -72,10 +81,25 @@
 #' #> Warning message:
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
+#'
+#' # Now
+#' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+#' write_package(my_package, directory = "2012_leopoldkanaal")
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,
                                       directory = animal_project_code) {
+
+  lifecycle::deprecate_warn(
+    when = "3.1.0",
+    what = "download_acoustic_dataset()",
+    with = "get_package()",
+    details = cli::format_inline(
+      "To download dataset to disk use {.fun get_package} and then {.fun
+       write_package}."
+    )
+  )
+
   # Check arguments
   # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
