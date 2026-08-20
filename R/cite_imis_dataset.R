@@ -74,9 +74,7 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       progress = ifelse(progress & !is_testing(),
         yes = "Getting citations",
         no = FALSE
-      ),
-      # Save to disk, reading from disk later on avoids Encoding issue?
-      paths = file.path(json_tempdir, paste0(imis_dataset_ids, ".json"))
+      )
     )
   # Discard any responses that contain errors
   succesful_responses <- marineinfo_responses |>
