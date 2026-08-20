@@ -124,7 +124,8 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
       # Create the path where the json file is stored
       file.path(json_tempdir, paste0(imis_dataset_id,".json"))}) |>
     # Read the json from disk
-    purrr::map(\(json_path) {jsonlite::fromJSON(json_path)}) |>
+    purrr::map(\(json_path) {jsonlite::read_json(path = json_path,
+                                                 simplifyVector = TRUE)}) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
