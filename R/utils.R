@@ -60,8 +60,8 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
     # If there are many candidates, truncate the list to 5 items for the error
     # message.
     cli::cli_abort(
-      "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.val {candidates_col}}}.
-      Did you mean {.strong {.val {closest_match}}}?",
+      c("x" = "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.val {candidates_col}}}",
+        "i" = "Did you mean {.strong {.val {closest_match}}}?"),
       class = "etn_value_not_found_suggest",
       call = rlang::caller_env()
     )
