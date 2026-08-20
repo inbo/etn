@@ -115,7 +115,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_metadata <-
     succesful_responses |>
-    # See which id's resulted in errors, get the url and error message for each, and return as a named list with the id as name. This is used for the warning message later on.ful response, read those response files
+    # See which id's resulted in errors, get the url and error message for each,
+    # and return as a named list with the id as name. This is used for the
+    # warning message later on.
     purrr::map_chr(\(resp) {httr2::resp_url(resp) |>
         stringr::str_extract("[0-9]+")}) |>
     purrr::map(\(imis_dataset_id) {
