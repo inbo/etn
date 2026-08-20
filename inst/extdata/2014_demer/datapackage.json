@@ -1500,6 +1500,36 @@
         ],
         "primaryKey": "receiver_id"
       }
+    },
+    {
+      "name": "bibliography",
+      "path": "bibliography.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "item",
+            "type": "string",
+            "format": "default",
+            "example": "2014_demer"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "format": "default",
+            "example": "animal project"
+          },
+          {
+            "name": "citation",
+            "type": "string",
+            "format": "default",
+            "example": "Pauwels, I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.; Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020): 2014_DEMER - Acoustic telemetry data for four fish species in the Demer river (Belgium). Marine Data Archive. https://doi.org/10.14284/432"
+          }
+        ]
+      }
     }
   ]
 }
