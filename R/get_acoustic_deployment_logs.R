@@ -1,6 +1,6 @@
 #' Get diagnostics information for a receiver for a deployment id.
 #'
-#' This function retrieves diagnostics information for a receiver for a
+#' Retrieves diagnostics information for a receiver for a
 #' deployment id. This may be useful to figure out what happened to a receiver
 #' during deployment. For example, a deviation in tilt angle may decrease
 #' detection capabilities. For some receivers, information about the water
