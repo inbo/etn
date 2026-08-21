@@ -46,9 +46,12 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
   # Warn for deployment_ids for which we couldn't retreive log data
   ids_with_data <- dplyr::pull(api_return, "deployment_id")
   if(!all(deployment_id %in% ids_with_data)){
-    ids_no_logs <- setdiff(deployment_id, ids_with_data)
+    ids_no_logs <- setdiff(deployment_id, ids_with_data) |>
+      # Convert to a character in order for cli pluralisation to work
+      as.character()
     cli::cli_warn(
-      message = "No deployment logs could be found for {.val {ids_no_logs}}",
+      c("x" = "No deployment logs could be found for deployment id{?s} {.val {ids_no_logs}}",
+        "i" = "You can get more information about these deployments with {.help [{.fun get_acoustic_deployments}](etn::get_acoustic_deployments)}"),
       class = "etn_no_deployment_logs_found"
     )
   }
