@@ -6,15 +6,16 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:35 GMT
+      date: Fri, 21 Aug 2026 10:19:09 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=WXXeN766nqzx7TGRqSfsQTmwOchpLqI8bLuhZSwGZnc-caFo;
+      - SSESSb1decfcf957c461d54e509db58033a53=JGwVHWVrW5GejyWLfRyGLjRfcMmcoNKjBohmkjxk2d0sfldI;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -35,8 +36,8 @@ http_interactions:
         efforts.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Phillips,
         N., Garbett, A., Finlay, C., Houghton, J., Collins, P. 2019. SeaMonitor (QUB):
         Assessing the regional connectivity of endangered flapper skate and basking
-        sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14
-        01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        sharks in the NE Atlantic","AccessConstraints":null,"UDate":"2024-01-30","CDate":"2021-12-16","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field survey","Progress":"In Progress","AccessConstraint":"Attribution (CC
         BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
         href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
@@ -93,5 +94,5 @@ http_interactions:
         information","URLTypID":17,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://twitter.com/seamonitor1?lang=en","externalID":null,"URLTypeCode":null,"URLType":"Reference
         materials","URLTypID":10,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:35
+  recorded_at: 2026-08-21 10:19:09
 recorded_with: VCR-vcr/2.1.0

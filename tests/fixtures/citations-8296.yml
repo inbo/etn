@@ -6,21 +6,22 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:33 GMT
+      date: Fri, 21 Aug 2026 10:19:07 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=vMXjrCSRT7Y%2CeVcHtSBx6eA5jVcSHEPuX3c1QKb2SFhLSU-v;
+      - SSESSb1decfcf957c461d54e509db58033a53=da6jmZrB-NqoRh-Hd2C7DqB4HfNd%2CWMN5pLuAPVldEDnpdQI;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
-      string: '{"datasetrec":{"DasID":8296,"Acronym":null,"StandardTitle":"VFM_Vattern","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"gustav.hellstrom@slu.se","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
+      string: '{"datasetrec":{"DasID":8296,"Acronym":"VFM_Vattern","StandardTitle":"VFM_Vattern","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":"gustav.hellstrom@slu.se","VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"<p>The
         Department of Wildlife, Fish and Environmental Studies, at the Swedish University
         of Agricultural Sciences (SLU), operates a number of acoustic telemetry networks
         both nationally and internationally. We consider some of our networks as permanent,
@@ -29,8 +30,8 @@ http_interactions:
         we present our 69kHz network in lake Vättern. This network is led primarily
         by Dr. Gustav Hellström. &nbsp;<br>&nbsp;</p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-01-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":null,"DescrTransFlag":null,"Citation":"Hellström,
         G. Swedish University of Agricultural Sciences (2023): \"Acoustic telemetry
-        network in lake Vättern”","AccessConstraints":null,"UDate":"2023-07-04","CDate":"2023-05-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14
-        01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        network in lake Vättern”","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2023-05-02","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":0,"FreshFlag":1,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"In Progress","AccessConstraint":"Attribution
         (CC BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
         href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
@@ -101,5 +102,5 @@ http_interactions:
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://www.slu.se/institutioner/vilt-fisk-miljo/forskning/akvatisk-ekologi/","externalID":null,"URLTypeCode":null,"URLType":"Additional
         info","URLTypID":37,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:33
+  recorded_at: 2026-08-21 10:19:08
 recorded_with: VCR-vcr/2.1.0

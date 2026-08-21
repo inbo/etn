@@ -6,15 +6,16 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:36 GMT
+      date: Fri, 21 Aug 2026 10:19:10 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=A6OWsOvfOoCbm0NAkN1z7dGhwztDjDrfhRGPc9NAhT6obFCF;
+      - SSESSb1decfcf957c461d54e509db58033a53=bH8ZC134tRo%2CpRAYoSL3xdIDWS4VyoCj7BUfh9nNxfe8gdZ1;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -79,9 +80,9 @@ http_interactions:
         at the integration of regional telemetry initiatives into a sustainable, efficient
         and integrated network embedded in the international context. Data is integrated
         in the ETN data system that is part of the ETN virtual lab developed by LifeWatch.","License":"https://creativecommons.org/licenses/by/4.0/","StandardTitle":"European
-        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":[{"DasID":6361,"Acronym":"2004_Gudena","StandardTitle":"Silver
-        eel migration in the Gudena River, Denmark","Relation":"Related Dataset","RelationY":"Related
-        Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284/734"}],"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Aarestrup","Firstname":"Kim","Initials":"K.","PerPublicFlag":1,"AdrID":161019,"Email":"kaa@aqua.dtu.dk","InsPublicFlag":1,"Acronym":"DTU
+        Tracking Network (ETN) data","doi":null,"vlizDoi":null}],"children":null,"othrel":[{"DasID":6361,"Acronym":"2004_Gudena
+        ","StandardTitle":"Silver eel migration in the Gudena River, Denmark","Relation":"Related
+        Dataset","RelationY":"Related Dataset","RelID":11,"doi":null,"vlizDoi":"10.14284/734"}],"othrelrev":null,"ownerships":[{"OrderNr":1,"Surname":"Aarestrup","Firstname":"Kim","Initials":"K.","PerPublicFlag":1,"AdrID":161019,"Email":"kaa@aqua.dtu.dk","InsPublicFlag":1,"Acronym":"DTU
         Aqua","OrigNameLangCode":"da","OrigNameLangID":12,"FullOrigName":"Danmarks
         Tekniske Universitet; Institut for Akvatiske Ressourcer","InsOwnerCNT":7,"PersID":35670,"InsID":9029,"FullInstitute":"Technical
         University of Denmark; National Institute of Aquatic Resources","RoleID":24,"Role":"Contact","OrigName":"Institut
@@ -139,5 +140,5 @@ http_interactions:
         geluidstechniek"}],"projects":null,"refs":null,"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.vsc.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:36
+  recorded_at: 2026-08-21 10:19:10
 recorded_with: VCR-vcr/2.1.0

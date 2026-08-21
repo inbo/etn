@@ -7,20 +7,21 @@ http_interactions:
     headers:
       content-length: '54'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:39 GMT
+      date: Fri, 21 Aug 2026 10:19:13 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=2iW5kBYUwGTXmm0JD3t%2ClcuIT%2CYW4cIgorsJQU10FKVM7Z6a;
+      - SSESSb1decfcf957c461d54e509db58033a53=zfBahnCAu0uWjstntfUttscp1HqD47DM8WiPUA71BBGn9mA9;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
       string: '{"status":"error","message":"Requested id not found."}'
-  recorded_at: 2026-04-23 16:33:39
+  recorded_at: 2026-08-21 10:19:13
 recorded_with: VCR-vcr/2.1.0

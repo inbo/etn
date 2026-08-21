@@ -6,15 +6,16 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:35 GMT
+      date: Fri, 21 Aug 2026 10:19:09 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=3QOocCn6nTZTKHAWu6zV-uTB30Yl%2CgsT2pVPKAASQADDMjNZ;
+      - SSESSb1decfcf957c461d54e509db58033a53=6u%2CJNEkWKzX6AqTu4tM3aW88VEgSCVTZt5IQRMlM3C0cn9hn;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -29,11 +30,12 @@ http_interactions:
         North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
         J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
         Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -96,7 +98,7 @@ http_interactions:
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http://www.lifewatch.be/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:35
+  recorded_at: 2026-08-21 10:19:10
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6557&show=json
@@ -104,17 +106,18 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:35 GMT
+      date: Fri, 21 Aug 2026 10:19:09 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=HFJ%2CwTConls5pf0N5r4tVICgUTXxazmZ-%2CI-sIj1zX81wcoG;
+      - SSESSb1decfcf957c461d54e509db58033a53=rfa8W5%2CQpcUZLQ2G0CU3jyE3ZnUc-aVtfJkeYfoOdW8KV9I6;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -127,11 +130,12 @@ http_interactions:
         North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
         J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
         Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -194,7 +198,7 @@ http_interactions:
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http://www.lifewatch.be/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:35
+  recorded_at: 2026-08-21 10:19:10
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6557&show=json
@@ -202,17 +206,18 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:35 GMT
+      date: Fri, 21 Aug 2026 10:19:10 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=mkxwPTTv6C2yMKantCne1X%2CSRAiiAMzDKVv2xPTJ9EKVkWxo;
+      - SSESSb1decfcf957c461d54e509db58033a53=uSE-3OQzrFqmaRh5n7C%2C5X6--mFu8q272EQRIkLKNBf0bJvd;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -225,11 +230,12 @@ http_interactions:
         North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
         J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
         Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -292,7 +298,7 @@ http_interactions:
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http://www.lifewatch.be/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:35
+  recorded_at: 2026-08-21 10:19:10
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6557&show=json
@@ -300,15 +306,16 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
-        www.lifewatch.be lifewatch.be;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
+        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
+        datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Thu, 23 Apr 2026 16:33:35 GMT
+      date: Fri, 21 Aug 2026 10:19:10 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.62 (Win64)
+      server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=9mBIK2tvluvfvFmEqhyt3JN9bfjR%2CjYwv41s22dpGlcx7FVV;
+      - SSESSb1decfcf957c461d54e509db58033a53=RTfBTuV3PyNGe40AjYBOrwtjNJ6eshKOvwCHgft2ehiWqRNF;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -323,11 +330,12 @@ http_interactions:
         North Sea is investigated.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2025-07-01","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Reubens,
         J.; Pohl, L.; Deneudt, K.; Flanders Marine Institute: Belgium; (2023): ADST-Shark:
         Unravelling the movement behaviour of starry smooth hound using ADST tags.
-        Marine Data Archive.","AccessConstraints":null,"UDate":"2025-02-03","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
-        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
-        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
-        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        Marine Data Archive.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2020-09-04","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
+        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
+        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
+        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
+        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -390,5 +398,5 @@ http_interactions:
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"http://www.lifewatch.be/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-04-23 16:33:36
+  recorded_at: 2026-08-21 10:19:10
 recorded_with: VCR-vcr/2.1.0
