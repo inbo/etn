@@ -40,11 +40,7 @@ console. The message can be muffled with \code{\link[base:suppressMessages]{base
 \examples{
 \dontshow{if (etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
 get_acoustic_deployment_logs(deployment_id = 25259, limit = TRUE)
-get_acoustic_deployment_logs(deployment_id = 74535,
-                  station_name = "Tijdenskan. - Hamdijk 12 Bad Nieuwesch")
-get_acoustic_deployment_logs(deployment_id = 6028,
-                  start_date = "2020",
-                  end_date = "2020-02-01")
+get_acoustic_deployment_logs(deployment_id = 74535)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
