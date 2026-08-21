@@ -302,6 +302,7 @@ test_that("get_acoustic_deployment_logs() handles duplicate columns by repairing
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  skip_if_not_installed("qs2")
   vcr::local_cassette("deployment_logs_6028",
                       # Use qs2 serializer for a smaller cassette
                       serialize_with = "qs2")
