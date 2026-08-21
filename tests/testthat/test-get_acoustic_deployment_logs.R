@@ -38,16 +38,22 @@ test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver log
   skip_if_offline("opencpu.lifewatch.be")
 
   vcr::local_cassette("deployment_logs_none_found")
+  # Turn off warnings for this test, I don't want to modify the actual function
+  # call so the vcr cassette still finds a match.
+  withr::local_options(warn = -1)
 
-  expect_length(
-    dplyr::pull(get_acoustic_deployment_logs(deployment_id = 1758), "deployment_id"),
-    0L
+  expect_shape(
+    # The warning has it's own test
+    get_acoustic_deployment_logs(deployment_id = 1758),
+    nrow = 0L
   )
 })
 
 test_that("get_acoustic_deployment_logs() returns a warning for ids without logs", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("deployment_logs_none_found")
 
   expect_warning(
     no_logs <- get_acoustic_deployment_logs(1758),
