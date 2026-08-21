@@ -32,6 +32,10 @@ invisible(vcr::vcr_configure(
     "<<<my_userid>>>" = Sys.getenv("ETN_USER"),
     "<<<my_pwd>>>" = Sys.getenv("ETN_PWD")
   ),
+  filter_sensitive_data_regex = list(
+    # vcr uses perl = FALSE in gsub() so lookbehinds are not supported
+    "tmp/<<<opencpu_key>>>" = "tmp/.{15}"
+  ),
   dir = vcr::vcr_test_path("fixtures")
 ))
 
