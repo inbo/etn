@@ -42,6 +42,17 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
 
   # Either use the API, or the SQL helper.
   api_return <- conduct_parent_to_helpers(protocol = select_protocol())
+
+  # Warn for deployment_ids for which we couldn't retreive log data
+  ids_with_data <- dplyr::pull(api_return, "deployment_id")
+  if(!all(deployment_id %in% ids_with_data)){
+    ids_no_logs <- setdiff(deployment_id, ids_with_data)
+    cli::cli_warn(
+      message = "No deployment logs could be found for {.val {ids_no_logs}}",
+      class = "etn_no_deployment_logs_found"
+    )
+  }
+
   ## combine json strings into single array and parse
   log_data <-
     paste0("[", paste(api_return$log_data, collapse = ","), "]") |>
