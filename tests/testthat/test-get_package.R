@@ -22,8 +22,10 @@ test_that("get_package() creates the expected package", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
 
-  datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-  package <- suppressMessages(get_package("2014_demer"))
+  vcr::local_cassette("package_pelfish")
+
+  datapackage_path <- withr::local_tempdir(pattern = "PelFish"))
+  package <- suppressMessages(get_package("PelFish")))
   write_package(package, datapackage_path)
   files_to_create <- c(
     "animals.csv",
