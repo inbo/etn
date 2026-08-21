@@ -15,7 +15,15 @@
 #' @noRd
 add_resource <- function(package, resource_name, data) {
   # Check resource names
-  allowed_names <- c("animals", "deployments", "detections", "receivers", "tags", "bibliography")
+  allowed_names <- c(
+    "animals",
+    "deployments",
+    "detections",
+    "receivers",
+    "tags",
+    "archival",
+    "bibliography"
+  )
   if (!resource_name %in% allowed_names) {
     cli::cli_abort(
       c(
