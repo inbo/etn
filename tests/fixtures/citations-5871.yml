@@ -11,13 +11,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:10 GMT
+      date: Fri, 21 Aug 2026 12:39:44 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=EeXPZo9QzzoXxRLJxpVv4nPap-pO9l5vdikS23tYvmAKUKBW;
+      - SSESSb1decfcf957c461d54e509db58033a53=epdf58%2Ckqkpij2AZK3a%2C3wv6LWdu0rH7Yx76fcgHWuOERyOY;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -259,5 +259,5 @@ http_interactions:
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":[{"SpatRep":"Tabular
         data","SpatRes":null,"Unit":null,"MapScale":null,"GeoObject":null,"CountOfFeats":null}],"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:10
+  recorded_at: 2026-08-21 12:39:45
 recorded_with: VCR-vcr/2.1.0

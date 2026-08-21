@@ -7,7 +7,7 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Fri, 21 Aug 2026 10:28:03 GMT
+      date: Fri, 21 Aug 2026 12:51:49 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -17,7 +17,7 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x07d60709ad89db
+      x-ocpu-session: <<<opencpu_key>>>
       location: http://opencpu.lifewatch.be/ocpu/tmp/<<<opencpu_key>>>/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
@@ -25,7 +25,7 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.6.0 (2026-04-24)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-08-21 10:28:05 UTC
+      x-ocpu-time: 2026-08-21 12:51:50 UTC
       x-ocpu-version: 2.2.15
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -41,7 +41,7 @@ http_interactions:
             "count": 84
           }
         ]
-  recorded_at: 2026-08-21 10:28:05
+  recorded_at: 2026-08-21 12:51:51
 - request:
     method: POST
     uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_detections_page/
@@ -50,7 +50,7 @@ http_interactions:
   response:
     status: 201
     headers:
-      date: Fri, 21 Aug 2026 10:28:05 GMT
+      date: Fri, 21 Aug 2026 12:51:51 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -60,7 +60,7 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x04e814bf340043
+      x-ocpu-session: <<<opencpu_key>>>
       location: http://opencpu.lifewatch.be/ocpu/tmp/<<<opencpu_key>>>/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
@@ -68,7 +68,7 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.6.0 (2026-04-24)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-08-21 10:28:07 UTC
+      x-ocpu-time: 2026-08-21 12:51:52 UTC
       x-ocpu-version: 2.2.15
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -76,7 +76,7 @@ http_interactions:
       content-length: '137'
       content-type: text/plain; charset=utf-8
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc1; path=/
+      set-cookie: vliz_webc=vliz_webc2; path=/
     body:
       string: |
         /ocpu/tmp/<<<opencpu_key>>>/R/.val
@@ -87,14 +87,14 @@ http_interactions:
         /ocpu/tmp/<<<opencpu_key>>>/console
         /ocpu/tmp/<<<opencpu_key>>>/info
         /ocpu/tmp/<<<opencpu_key>>>/files/DESCRIPTION
-  recorded_at: 2026-08-21 10:28:07
+  recorded_at: 2026-08-21 12:51:52
 - request:
     method: GET
     uri: https://opencpu.lifewatch.be//tmp/<<<opencpu_key>>>/R/.val/feather
   response:
     status: 200
     headers:
-      date: Fri, 21 Aug 2026 10:28:07 GMT
+      date: Fri, 21 Aug 2026 12:51:52 GMT
       server: Apache/2.4.58 (Ubuntu)
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
         'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
@@ -111,7 +111,7 @@ http_interactions:
       access-control-allow-credentials: 'true'
       x-ocpu-r: R version 4.6.0 (2026-04-24)
       x-ocpu-locale: C.UTF-8
-      x-ocpu-time: 2026-08-21 10:28:08 UTC
+      x-ocpu-time: 2026-08-21 12:51:53 UTC
       x-ocpu-version: 2.2.15
       x-ocpu-server: rApache
       vary: Accept-Encoding
@@ -119,7 +119,7 @@ http_interactions:
       content-length: '3195'
       content-type: application/feather
       access-control-allow-methods: '*'
-      set-cookie: vliz_webc=vliz_webc1; path=/
+      set-cookie: vliz_webc=vliz_webc2; path=/
     body:
       raw_gzip: |-
         eJzt2gl0U1UawPGbNG0jFFoEHUSgBRQrm01bSsGKAQsIssSyVba0tqENdrNNiyCjESrggiDu
@@ -234,5 +234,5 @@ http_interactions:
         GNHOZJ016o1zZdI4LXGtTfkT19lUcuJqm8o6c42NIXvNuWZ8wPh9xpxE4phCYoxfNxLM30A4
         WiaD4G
         8scop6Pe/t1dvQ30fkdeq3XvN16rfeU7/1nvqtt+l+fqvfeuU33gHG/1X5JxWkh7U=
-  recorded_at: 2026-08-21 10:28:08
+  recorded_at: 2026-08-21 12:51:53
 recorded_with: VCR-vcr/2.1.0

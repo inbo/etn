@@ -12,13 +12,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:09 GMT
+      date: Fri, 21 Aug 2026 12:39:42 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=avfhp15xrKWVHHlKmI1tvwB8I9AHDAjNNEPUftQK3Aw5i-g0;
+      - SSESSb1decfcf957c461d54e509db58033a53=e8df4fJHSlDERjlIT-NFc%2CNmRIi8En5i0bO36n9OntqSILCd;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -68,5 +68,5 @@ http_interactions:
         Sea","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":38.364486999999997,"OrigCoordMinY":26.771184000000002,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"},{"DasThemeID":37,"DasTheme":"Fisheries
         > Fish stocks/catches/taggings","DasTheme0":"Fish stocks/catches/taggings","DutchTerm":"Visstocks/vangsten/merken"}],"projects":null,"refs":null,"urls":[{"URL":"10.1016/j.fishres.2018.10.008","externalID":null,"URLTypeCode":"DOI","URLType":"DOI","URLTypID":13,"downloadURL":null,"FileName":null},{"URL":"10.1111/jai.12922","externalID":null,"URLTypeCode":"DOI","URLType":"DOI","URLTypID":13,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:09
+  recorded_at: 2026-08-21 12:39:42
 recorded_with: VCR-vcr/2.1.0

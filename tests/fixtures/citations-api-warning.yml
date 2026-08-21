@@ -12,16 +12,16 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:13 GMT
+      date: Fri, 21 Aug 2026 12:39:51 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=zfBahnCAu0uWjstntfUttscp1HqD47DM8WiPUA71BBGn9mA9;
+      - SSESSb1decfcf957c461d54e509db58033a53=pSui%2CXE24tVTI8%2CTL4G0Bg9SWNHdZiJgCUn68Pw2qDd5xo1S;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
       string: '{"status":"error","message":"Requested id not found."}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:51
 recorded_with: VCR-vcr/2.1.0

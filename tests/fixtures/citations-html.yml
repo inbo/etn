@@ -11,13 +11,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:49 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=93w5PKJ4-7IkIDqNj8pMLITZ9VBWwHBBKhNXF6-mXy8pRxy8;
+      - SSESSb1decfcf957c461d54e509db58033a53=B5w8YNgLK9x6WBBqonvSatN-rV1TGZxR8dwjHpT1GbGls9va;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -174,7 +174,7 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:49
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6336&show=json
@@ -187,11 +187,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:49 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=XnXqSgbJ5HaPeX8AzVGfDHNgl18FMHd1i3CGEdZUJQTiA6w2;
+      - SSESSb1decfcf957c461d54e509db58033a53=FfbOIIEpbsbKPBh3tVZurioNtCOgv6qkJitBVexTS%2CL%2COE8g;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -350,7 +350,7 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:50
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8536&show=json
@@ -363,11 +363,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:13 GMT
+      date: Fri, 21 Aug 2026 12:39:50 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=-SjN7Kfw5anwSyqTAfEE2BPIb96sNuRawOIDCR3hwHVyDwJz;
+      - SSESSb1decfcf957c461d54e509db58033a53=CK1SzNjFuzSiD7j%2CSATK2zlxDFS2NQKXy52k-dZjiIrHIP8L;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -445,7 +445,7 @@ http_interactions:
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":[{"URL":"med-lter.haifa.ac.il","externalID":null,"URLTypeCode":null,"URLType":"Institute
         home page","URLTypID":16,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:50
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8536&show=json
@@ -458,11 +458,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:13 GMT
+      date: Fri, 21 Aug 2026 12:39:50 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=F872z4mVETeho7thBnBYWH0VJCsv0xFxvEMbg-8eg2aECZgP;
+      - SSESSb1decfcf957c461d54e509db58033a53=bJXDzzxs6yPTAkNHLVA8dgMrgLPPz8IM7ea0XwTSqQ4zqC0G;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -540,5 +540,5 @@ http_interactions:
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":[{"URL":"med-lter.haifa.ac.il","externalID":null,"URLTypeCode":null,"URLType":"Institute
         home page","URLTypID":16,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:50
 recorded_with: VCR-vcr/2.1.0

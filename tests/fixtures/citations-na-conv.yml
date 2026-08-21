@@ -12,11 +12,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:11 GMT
+      date: Fri, 21 Aug 2026 12:39:47 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=Qrz7uetEeZWYLcdctw9xksARUCSaDWoRfo2zvWaUvLf--EOH;
+      - SSESSb1decfcf957c461d54e509db58033a53=vSXtnTMxHYhVUjnv7QkqyGLtQ1mCN2ryXBSemD2VbXvJyxp%2C;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -59,7 +59,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10501,"DasGeoTerm":null,"DasID":6331,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Delfzijl","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:47
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6331&show=json
@@ -73,13 +73,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:47 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=0vBqCwlSZMW-NDmXXO5a7qjIBCukN8EDTH8i0F3mpsbyJSp8;
+      - SSESSb1decfcf957c461d54e509db58033a53=7ZYXo1<<<opencpu_key>>>WOkowGy8RGWetjThIoai8ahpN%2Cp;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -120,7 +120,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10501,"DasGeoTerm":null,"DasID":6331,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Delfzijl","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:47
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6328&show=json
@@ -134,11 +134,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:47 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=2xP4s1RmGPr12AZJ%2CmV7NWGvuWCBpmZGMsMWXY0i-grv3wNc;
+      - SSESSb1decfcf957c461d54e509db58033a53=r87fNnarg0QUmzufKNPr7owUyClHza3egQkjWB6OlMNZ%2Cjil;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -181,7 +181,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10498,"DasGeoTerm":null,"DasID":6328,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Friesland","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:47
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6328&show=json
@@ -195,11 +195,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:47 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=nf2Z4UH-cbFFIjMjHaKWrE-HNXFdW04WIgWztL9sJS2uOGLN;
+      - SSESSb1decfcf957c461d54e509db58033a53=64x-RMsbeGqVJKYS0jsljTHA0pAsOGN-frgZ6QXzDBQVLIIW;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -242,7 +242,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10498,"DasGeoTerm":null,"DasID":6328,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Friesland","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:47
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6329&show=json
@@ -256,11 +256,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:47 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=ZqmBnIsdLL3T95gB-lhtjpehKreQPtiaQ%2CdtrSoUQY0kpqPT;
+      - SSESSb1decfcf957c461d54e509db58033a53=7BTweYnVVkcWeFAin-zW9ifYJ79%2C5oaYKL0eoh8AB2psNW5J;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -301,7 +301,7 @@ http_interactions:
         coverage","TaxtID":37865,"TaxTerm":"Lampetra fluviatilis (Linnaeus, 1758)","AphiaID":101172,"DutchTerm":"Rivierprik"}],"frameworks":null,"otherterms":null,"temporal":null,"geographical":[{"GeoTerm":null,"DasGeoID":10499,"DasGeoTerm":null,"DasID":6329,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Lauwersmeer","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:49
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6329&show=json
@@ -315,13 +315,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:12 GMT
+      date: Fri, 21 Aug 2026 12:39:49 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=z261UCPBDamnNsid6cvEB3BDVJNQ9Rx5B%2CFv1DtLSQdoBpNI;
+      - SSESSb1decfcf957c461d54e509db58033a53=PSYoss9sTS1ZSKO2kqS5X%2C5ItGGaW6h%2C93SQwBAdu8X9J3AD;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -360,5 +360,5 @@ http_interactions:
         coverage","TaxtID":37865,"TaxTerm":"Lampetra fluviatilis (Linnaeus, 1758)","AphiaID":101172,"DutchTerm":"Rivierprik"}],"frameworks":null,"otherterms":null,"temporal":null,"geographical":[{"GeoTerm":null,"DasGeoID":10499,"DasGeoTerm":null,"DasID":6329,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Lauwersmeer","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:12
+  recorded_at: 2026-08-21 12:39:49
 recorded_with: VCR-vcr/2.1.0

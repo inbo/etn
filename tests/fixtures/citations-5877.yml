@@ -11,13 +11,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:11 GMT
+      date: Fri, 21 Aug 2026 12:39:46 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=I9FuAnyGwul4H6DOhWFBg1DGzXZ-MjY51pgZLyinpN-y6wWQ;
+      - SSESSb1decfcf957c461d54e509db58033a53=N0-fsv-bvCa-7tacpRS5BfxD06h7PO01KmKej6OFnGTEP4vN;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -121,5 +121,5 @@ http_interactions:
         > Ecology - biodiversity","DasTheme0":"Ecology - biodiversity","DutchTerm":"Ecologie
         - biodiversiteit"},{"DasThemeID":28,"DasTheme":"Biology > Fish","DasTheme0":"Fish","DutchTerm":"Vis"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:11
+  recorded_at: 2026-08-21 12:39:46
 recorded_with: VCR-vcr/2.1.0

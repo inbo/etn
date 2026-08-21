@@ -11,11 +11,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:11 GMT
+      date: Fri, 21 Aug 2026 12:39:46 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=KA3CB3GBRsKgZoGK6Repy112oRLqWAKzFjdtPfC6BIK6DvNx;
+      - SSESSb1decfcf957c461d54e509db58033a53=408RvDlxFrEC8L0nKXV3ySpF4hFUVz3LsM2cTX6mIvFd4E7X;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -174,7 +174,7 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:11
+  recorded_at: 2026-08-21 12:39:46
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6336&show=json
@@ -187,13 +187,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:11 GMT
+      date: Fri, 21 Aug 2026 12:39:46 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=68R8cZe1cdrgIicvEqPuYPxX-K12jsBvNJvL258V%2CFlgLYw5;
+      - SSESSb1decfcf957c461d54e509db58033a53=SkHpqW9kLqWsOPQlfDf54QjFcFdLjOfGRKvOEoIVWf9Hifk3;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -350,5 +350,5 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:11
+  recorded_at: 2026-08-21 12:39:46
 recorded_with: VCR-vcr/2.1.0

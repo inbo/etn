@@ -11,11 +11,11 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:13 GMT
+      date: Fri, 21 Aug 2026 12:39:50 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=cSNIxiOIimSCIi%2CvpTeZ9npsKYo7spq1UPI7R712Y9nHf09b;
+      - SSESSb1decfcf957c461d54e509db58033a53=wlb5YLmfRs3C-niIFVlsfmQrI13ToNrIUXE3N3aNzmJ19WCW;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -86,7 +86,7 @@ http_interactions:
         > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":13,"DasTheme":"Physical
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":null,"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:50
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8853&show=json
@@ -99,13 +99,13 @@ http_interactions:
         datalab.dive.edito.eu;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 10:19:13 GMT
+      date: Fri, 21 Aug 2026 12:39:50 GMT
       referrer-policy: no-referrer-when-downgrade
       server: Apache/2.4.67 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=e4z6uLI1M33Vjlsmq0dEMqmJhZr00eYlZOILInT0x558NUuc;
+      - SSESSb1decfcf957c461d54e509db58033a53=pOyfCOFHlabBglPet5Owg4X9LAPKTainUGnR%2ClIx%2ChtEE8Id;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -174,5 +174,5 @@ http_interactions:
         > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":13,"DasTheme":"Physical
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":null,"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 10:19:13
+  recorded_at: 2026-08-21 12:39:51
 recorded_with: VCR-vcr/2.1.0
