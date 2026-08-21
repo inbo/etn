@@ -16,17 +16,16 @@ for testing purposes). Defaults to \code{FALSE}.}
 A tibble with receiver diagnostics data.
 }
 \description{
-This function retrieves diagnostics information for a receiver for a
-deployment id. This may be useful to figure out what happened to a receiver
-during deployment. For example, a deviation in tilt angle may decrease
-detection capabilities. For some receivers, information about the water
-temperature can be available.
+Retrieves diagnostics information for a receiver for a deployment id. This
+may be useful to figure out what happened to a receiver during deployment.
+For example, a deviation in tilt angle may decrease detection capabilities.
+For some receivers, other information such as water temperature is available.
 }
 \details{
-The diagnostics information is returned as a tibble with one
-row per log entry. The columns of the tibble may vary depending on the
-deployment and receiver. If no log entries are found for the specified
-arguments, an 0-row tibble is returned.
+The diagnostics information is returned as a tibble with one row per log
+entry. The columns of the tibble may vary depending on the deployment and
+receiver. If no log entries are found for a deployment id, an 0-row tibble is
+returned.
 }
 \section{Name repair}{
 
@@ -56,6 +55,7 @@ Other access functions:
 \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
 \code{\link[=get_animal_projects]{get_animal_projects()}},
 \code{\link[=get_animals]{get_animals()}},
+\code{\link[=get_bibliography]{get_bibliography()}},
 \code{\link[=get_cpod_projects]{get_cpod_projects()}},
 \code{\link[=get_package]{get_package()}},
 \code{\link[=get_tags]{get_tags()}}
