@@ -159,6 +159,9 @@ test_that("cli_yes() supports glue/cli syntax", {
     regexp =
       stringr::str_replace(custom_message, stringr::fixed("{my_var}"), my_var),
     fixed = TRUE
+  )
+})
+
 # etn_citation() ----------------------------------------------------------
 
 test_that("etn_citation() returns a character vector", {
