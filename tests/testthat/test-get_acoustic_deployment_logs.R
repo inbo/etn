@@ -45,6 +45,29 @@ test_that("get_acoustic_deployment_logs() returns a 0-row tbl if no receiver log
   )
 })
 
+test_that("get_acoustic_deployment_logs() returns a warning for ids without logs", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
+  expect_warning(
+    no_logs <- get_acoustic_deployment_logs(1758),
+    class = "etn_no_deployment_logs_found"
+  )
+})
+
+test_that("get_acoustic_deployment_logs() returns nice message on missing logs", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
+  # Test a mixture of ids with and without logs available for formatting of
+  # warning message.
+  ids_no_logs <- c(1758, 2489)
+  ids_with_logs <- test_deployment_id
+  expect_snapshot(
+    get_acoustic_deployment_logs(c(ids_no_logs, ids_with_logs))
+  )
+})
+
 test_that("get_acoustic_deployment_logs() can return a limited subset", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
