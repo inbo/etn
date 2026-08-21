@@ -34,7 +34,7 @@ invisible(vcr::vcr_configure(
   ),
   filter_sensitive_data_regex = list(
     # vcr uses perl = FALSE in gsub() so lookbehinds are not supported
-    "tmp/<<<opencpu_key>>>" = "tmp/.{15}"
+    "<<<opencpu_key>>>" = "x0.{13}"
   ),
   dir = vcr::vcr_test_path("fixtures")
 ))
