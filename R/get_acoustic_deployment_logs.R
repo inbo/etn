@@ -26,11 +26,7 @@
 #'
 #' @examplesIf etn:::credentials_are_set()
 #' get_acoustic_deployment_logs(deployment_id = 25259, limit = TRUE)
-#' get_acoustic_deployment_logs(deployment_id = 74535,
-#'                   station_name = "Tijdenskan. - Hamdijk 12 Bad Nieuwesch")
-#' get_acoustic_deployment_logs(deployment_id = 6028,
-#'                   start_date = "2020",
-#'                   end_date = "2020-02-01")
+#' get_acoustic_deployment_logs(deployment_id = 74535)
 get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
     # Return error on missing required arguments: deployment_id
   if (missing(deployment_id)) {
