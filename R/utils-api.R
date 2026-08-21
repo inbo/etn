@@ -6,7 +6,8 @@
 #' response object is returned containing all the generated objects, with a
 #' unique temp key in the path. To retrieve these objects in a subsequent GET
 #' request, it is convenient to retrieve this temp key from the original
-#' response object
+#' response object. The key is extracted from the `x-ocpu-session` response
+#' header.
 #'
 #' @param response The response resulting from a POST request to a OpenCPU API
 #'   service.
@@ -15,9 +16,7 @@
 #' @family helper functions
 #' @noRd
 extract_temp_key <- function(response) {
-  response |>
-    httr2::resp_body_string() |>
-    stringr::str_extract("(?<=tmp\\/).{15}(?=\\/)")
+  httr2::resp_header(response, "x-ocpu-session")
 }
 
 #' Retrieve the result of a function called to the opencpu api
