@@ -34,7 +34,6 @@ test_that("get_package() creates the expected package", {
     "deployments.csv",
     "receivers.csv",
     "bibliography.csv",
-    "archival.csv",
     "datapackage.json"
   )
 
