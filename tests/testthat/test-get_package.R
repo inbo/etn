@@ -24,8 +24,8 @@ test_that("get_package() creates the expected package", {
 
   vcr::local_cassette("package_pelfish")
 
-  datapackage_path <- withr::local_tempdir(pattern = "PelFish"))
-  package <- suppressMessages(get_package("PelFish")))
+  datapackage_path <- withr::local_tempdir(pattern = "PelFish")
+  package <- suppressMessages(get_package("PelFish"))
   write_package(package, datapackage_path)
   files_to_create <- c(
     "animals.csv",
