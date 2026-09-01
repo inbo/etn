@@ -22,7 +22,7 @@
 #' @returns parsed R object as resulting from the API
 #' @family helper functions
 #' @noRd
-conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
+conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb", "public"),
                                       ignored_arguments = NULL,
                                       ...) {
   # Check arguments
