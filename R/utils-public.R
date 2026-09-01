@@ -85,7 +85,6 @@ list_public_detections <- function() {
 #' @param ... Filter conditions to apply to the detections. These conditions
 #'   will be passed to `dplyr::filter()` to filter the detections after reading
 #'   them from the parquet files.
-#' @param ...
 #' @param limit description
 #' @param return_as The format in which to return the detections. One of
 #'   "tibble" or "lazy". If "tibble", the function will return a tibble with the
