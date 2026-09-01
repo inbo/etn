@@ -29,8 +29,10 @@ export(read_resource)
 export(write_dwc)
 export(write_package)
 importFrom(dplyr,.data)
-importFrom(frictionless,read_package)
-importFrom(frictionless,read_resource)
-importFrom(frictionless,write_package)
+importFrom(frictionless,
+  read_package,
+  read_resource,
+  write_package
+)
 importFrom(lifecycle,deprecated)
 importFrom(rlang,"%||%")
