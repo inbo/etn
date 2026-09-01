@@ -335,6 +335,9 @@ read_stac <- function(function_identity = c(
                       ...) {
   function_identity <- rlang::arg_match(function_identity)
 
+  # Drop arguments set to NULL
+  payload <- purrr::discard(payload, .p = is.null)
+
   stac_result <- switch(function_identity,
     list_acoustic_project_codes = {
       get_public_metadata("projects") |>
