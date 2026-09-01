@@ -101,7 +101,6 @@ list_public_detections <- function() {
 #' @examplesIf interactive()
 #' get_public_detections("2011_Loire", timestamp >=
 #'   lubridate::ymd(20220101))
-#' get_public_detections(")
 get_public_detections <- function(project_code = NULL,
                                   ...,
                                   limit = FALSE,
