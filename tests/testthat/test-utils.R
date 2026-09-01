@@ -140,5 +140,16 @@ test_that("arg_to_filter_expression() can parse both OR and AND queries simultan
       )),
       rlang::expr(.data[["animal_project_code"]] == "2014_demer")
     )
+    
+# etn_citation() ----------------------------------------------------------
+
+test_that("etn_citation() returns a character vector", {
+  expect_type(etn_citation(), "character")
+})
+
+test_that("etn_citation() returns the expected package citation", {
+  expect_match(
+    etn_citation(),
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
   )
 })

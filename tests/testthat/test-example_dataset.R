@@ -20,9 +20,10 @@ test_that("example_dataset(dataset = '2014_demer') returns a data package with
     "tags",
     "detections",
     "deployments",
-    "receivers"
+    "receivers",
+    "bibliography"
   )
-  expect_equal(frictionless::resources(`2014_demer`), expected_resource_names)
+  expect_equal(frictionless::resource_names(`2014_demer`), expected_resource_names)
   expect_no_error(frictionless::read_resource(`2014_demer`, "animals"))
   expect_no_error(frictionless::read_resource(`2014_demer`, "tags"))
   expect_no_error(frictionless::read_resource(`2014_demer`, "detections"))

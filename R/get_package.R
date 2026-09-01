@@ -23,8 +23,8 @@
 #'   these did not detect the selected animals.
 #' - `receivers`: Acoustic receivers for the selected deployments, as returned
 #'   by [get_acoustic_receivers()].
-#' - `references`: References for ETN, the R package, the animal project and
-#'   acoustic projects that returned detections.
+#' - `bibliography`: Bibliography with references for ETN, the etn R package,
+#'   and animal and acoustic projects associated with the detections.
 #'   It is recommended to cite these when using the dataset.
 #'
 #' @section Data quality:
@@ -135,29 +135,9 @@ get_package <- function(animal_project_code) {
     receiver_id = receiver_ids
   )
 
-  ## References ----
-  cli::cli_li("Getting {.val references}.")
-  etn_ref <- paste(
-    "European Tracking Network - Data Platform.",
-    "Flanders Marine Institute (VLIZ)"
-  )
-  animal_ref <-
-    get_animal_projects(
-      animal_project_code = animal_project_code,
-      citation = TRUE
-    ) |>
-    dplyr::pull("citation")
-  acoustic_refs <-
-    get_acoustic_projects(
-      acoustic_project_code = acoustic_project_codes,
-      citation = TRUE
-    ) |>
-    dplyr::pull("citation")
-  references <-
-    dplyr::tibble(
-      reference_for = c("ETN", animal_project_code, acoustic_project_codes),
-      reference = c(etn_ref, animal_ref, acoustic_refs)
-    )
+  ## Bibliography ----
+  cli::cli_li("Getting {.val bibliography}.")
+  bibliography <- get_bibliography(detections)
 
   cli::cli_end()
 
@@ -180,7 +160,7 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
-    add_resource("references", references) |>
+    add_resource("bibliography", bibliography) |>
     append(c(
       id = doi,
       name = tolower(animal_project_code)

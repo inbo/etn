@@ -53,7 +53,10 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   # Query the IMIS API ------------------------------------------------------
 
   marineinfo_dataset_endpoints <-
-    glue::glue("https://vliz.be/en/imis?dasid={imis_dataset_ids}&show=json")
+    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+
+  json_tempdir <- withr::local_tempdir(pattern = "marineinfo_json",
+                                       .local_envir = environment())
 
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
@@ -110,7 +113,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_metadata <-
     succesful_responses |>
-    purrr::map(httr2::resp_body_json, simplifyDataFrame = TRUE) |>
+    purrr::map(\(response) {
+      httr2::resp_body_json(response, simplifyVector = TRUE)
+    }) |>
     # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
     # results so we can't just get this from the acoustic_project_codes argument
     (\(returned_list) {
@@ -140,7 +145,13 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
         purrr::pluck(dataset_metadata, "datasetrec", "Citation",
                      # When Citation is missing, this object is NA_character_
           .default = NA_character_
-        )
+        ) |>
+        # Replace all whitespace (including newlines) with a single space, then trimClean the whitespace, was causing snapshot failures on Mac and Windows
+        stringr::str_replace_all("\\s", " ") |>
+        stringr::str_squish() |>
+        # Make sure the string is in NFC form, otherwise the snapshot tests fail
+        # on Windows and MacOS
+        stringi::stri_trans_nfc()
 
       dplyr::tibble(
         citation =
