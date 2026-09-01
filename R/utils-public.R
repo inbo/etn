@@ -419,6 +419,10 @@ read_stac <- function(function_identity = c(
     get_tags = {
       get_public_metadata("tags") |>
         dplyr::filter(!!!arg_to_filter_expression(payload))
+    },
+    get_animals = {
+      get_public_metadata("animals") |>
+        dplyr::filter(!!!arg_to_filter_expression(payload))
     }
   )
 
