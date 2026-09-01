@@ -101,7 +101,7 @@ list_public_detections <- function() {
 #' @examplesIf interactive()
 #' get_public_detections("2011_Loire", timestamp >=
 #'   lubridate::ymd(20220101))
-get_public_detections <- function(project_code = NULL,
+get_public_detections <- function(animal_project_code = NULL,
                                   ...,
                                   limit = FALSE,
                                   return_as = c("tibble",
@@ -112,12 +112,12 @@ get_public_detections <- function(project_code = NULL,
   return_as <- rlang::arg_match(return_as)
 
   public_detections <- list_public_detections()
-  if (is.null(project_code)) {
+  if (is.null(animal_project_code)) {
     selected_project_code <-
       public_detections$project_code
   } else {
     selected_project_code <-
-      rlang::arg_match(project_code,
+      rlang::arg_match(animal_project_code,
         values = public_detections$project_code,
         multiple = TRUE
       )
@@ -126,7 +126,7 @@ get_public_detections <- function(project_code = NULL,
   # Read the parquet paths from the catalogue -------------------------------
   detections_path <-
     public_detections |>
-    dplyr::filter(project_code %in% selected_project_code) |>
+    dplyr::filter(.data$project_code %in% selected_project_code) |>
     dplyr::pull("path")
 
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
