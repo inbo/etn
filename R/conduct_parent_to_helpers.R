@@ -142,6 +142,16 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),
           after = 0
         )
       )
+    },
+    public = {
+      do.call(
+        read_stac,
+        list(
+          function_identity = function_identity,
+          payload = arguments_to_pass,
+          ...
+        )
+      )
     }
   )
 }
