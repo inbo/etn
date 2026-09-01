@@ -291,6 +291,8 @@ get_public_metadata <- function(table = c("animals",
 #'
 #' @param function_identity The identity of the function call to replicate.
 #' @param payload The query arguments to pass to the function call.
+#' @param ... Additional arguments to pass to the function call.onal arguments for future extensibility. Unused. Also used
+#'   to ignore unimplemented options such as `format`.
 #'
 #' @returns The output of the function call identified by `function_identity`
 #'   with the provided `payload` as query arguments.
@@ -329,7 +331,8 @@ read_stac <- function(function_identity = c(
                         "get_cpod_projects",
                         "get_animal_projects"
                       ),
-                      payload = NULL) {
+                      payload = NULL,
+                      ...) {
   function_identity <- rlang::arg_match(function_identity)
 
   stac_result <- switch(function_identity,
