@@ -218,6 +218,7 @@ get_public_detections <- function(project_code = NULL,
 #'
 #' @param table What table to read the metadata file of. One of "animals",
 #'   "deployments", "projects", "receivers", or "tags".
+#' @inheritDotParams dplyr::filter ... .by .preserve
 #'
 #' @returns A tibble with the contents of the parquet dump metadata file for the
 #'   selected table.
