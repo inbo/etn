@@ -335,7 +335,7 @@ read_stac <- function(function_identity = c(
                       ...) {
   function_identity <- rlang::arg_match(function_identity)
 
-  # Drop arguments set to NULL
+  # Drop arguments set to NULL: no need to create clauses for them.
   payload <- purrr::discard(payload, .p = is.null)
 
   stac_result <- switch(function_identity,
