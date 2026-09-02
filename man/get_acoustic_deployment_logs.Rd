@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_acoustic_deployment_logs.R
 \name{get_acoustic_deployment_logs}
 \alias{get_acoustic_deployment_logs}
-\title{Get diagnostics information for a receiver for a deployment id.}
+\title{Get acoustic deployment logs}
 \usage{
 get_acoustic_deployment_logs(deployment_id, limit = FALSE)
 }
@@ -13,28 +13,28 @@ get_acoustic_deployment_logs(deployment_id, limit = FALSE)
 for testing purposes). Defaults to \code{FALSE}.}
 }
 \value{
-A tibble with receiver diagnostics data.
+A tibble with acoustic deployment log data.
 }
 \description{
-Retrieves diagnostics information for a receiver for a deployment id. This
-may be useful to figure out what happened to a receiver during deployment.
+Get log data for deployments of acoustic receivers.
+These contain diagnostic information that may be helpful to figure what
+happened with a receiver during deployment.
 For example, a deviation in tilt angle may decrease detection capabilities.
 For some receivers, other information such as water temperature is available.
 }
 \details{
-The diagnostics information is returned as a tibble with one row per log
-entry. The columns of the tibble may vary depending on the deployment and
-receiver. If no log entries are found for a deployment id, an 0-row tibble is
-returned.
+The log data are returned as a tibble with one row per log entry.
+The columns of the tibble may vary depending on the deployment and receiver.
+If no log entries are found for a deployment id, an empty tibble is returned.
 }
 \section{Name repair}{
 
 
-It is possible that the columns contained in a receiver log overlap with
-the default columns always returned by \code{get_acoustic_deployment_logs()}. If
-duplicate columns are found, their names are made unique with
-\code{\link[base:make.unique]{base::make.unique()}}. When this happens, a message is printed to the
-console. The message can be muffled with \code{\link[base:suppressMessages]{base::suppressMessages()}}.
+It is possible that the columns contained in the log data overlap with the
+default columns always returned by \code{get_acoustic_deployment_logs()}.
+If duplicate columns are found, their names are made unique with
+\code{\link[=make.unique]{make.unique()}} and a message is returned, which can be silenced with
+\code{\link[=suppressMessages]{suppressMessages()}}.
 }
 
 \examples{

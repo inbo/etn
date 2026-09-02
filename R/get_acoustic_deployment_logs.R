@@ -1,28 +1,27 @@
-#' Get diagnostics information for a receiver for a deployment id.
+#' Get acoustic deployment logs
 #'
-#' Retrieves diagnostics information for a receiver for a deployment id. This
-#' may be useful to figure out what happened to a receiver during deployment.
+#' Get log data for deployments of acoustic receivers.
+#' These contain diagnostic information that may be helpful to figure what
+#' happened with a receiver during deployment.
 #' For example, a deviation in tilt angle may decrease detection capabilities.
 #' For some receivers, other information such as water temperature is available.
 #'
-#' The diagnostics information is returned as a tibble with one row per log
-#' entry. The columns of the tibble may vary depending on the deployment and
-#' receiver. If no log entries are found for a deployment id, an 0-row tibble is
-#' returned.
+#' The log data are returned as a tibble with one row per log entry.
+#' The columns of the tibble may vary depending on the deployment and receiver.
+#' If no log entries are found for a deployment id, an empty tibble is returned.
 #'
-#' @param deployment_id Integer (vector). One or more deployment identifiers.
-#' @inheritParams get_acoustic_detections
 #' @inheritParams get_acoustic_deployments
-#' @return A tibble with receiver diagnostics data.
+#' @inheritParams get_acoustic_detections
+#' @returns A tibble with acoustic deployment log data.
 #' @family access functions
 #' @export
 #' @section Name repair:
 #'
-#' It is possible that the columns contained in a receiver log overlap with
-#' the default columns always returned by `get_acoustic_deployment_logs()`. If
-#' duplicate columns are found, their names are made unique with
-#' [base::make.unique()]. When this happens, a message is printed to the
-#' console. The message can be muffled with [base::suppressMessages()].
+#' It is possible that the columns contained in the log data overlap with the
+#' default columns always returned by `get_acoustic_deployment_logs()`.
+#' If duplicate columns are found, their names are made unique with
+#' [make.unique()] and a message is returned, which can be silenced with
+#' [suppressMessages()].
 #'
 #' @examplesIf etn:::credentials_are_set()
 #' get_acoustic_deployment_logs(deployment_id = 25259, limit = TRUE)
@@ -39,7 +38,7 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
   # Either use the API, or the SQL helper.
   api_return <- conduct_parent_to_helpers(protocol = select_protocol())
 
-  # Warn for deployment_ids for which we couldn't retreive log data
+  # Warn for deployment_ids for which we couldn't retrieve log data
   ids_with_data <- dplyr::pull(api_return, "deployment_id")
   if(!all(deployment_id %in% ids_with_data)){
     ids_no_logs <- setdiff(deployment_id, ids_with_data) |>
@@ -95,7 +94,6 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
       # not testing
       if (!is_testing() && any(new_name != new_name_repaired)) {
         cli::cli_inform(
-          c("Not all field names were unique. ",
             "Name repair took place:"),
           class = "etn_message_name_repair"
         )
