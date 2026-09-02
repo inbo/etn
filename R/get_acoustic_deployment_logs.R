@@ -45,8 +45,10 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
       # Convert to a character in order for cli pluralisation to work
       as.character()
     cli::cli_warn(
-      c("x" = "No deployment logs could be found for deployment id{?s} {.val {ids_no_logs}}",
-        "i" = "You can get more information about these deployments with {.help [{.fun get_acoustic_deployments}](etn::get_acoustic_deployments)}"),
+      c("x" = "Can't find any logs for {.arg deployment_id}
+               {.val {ids_no_logs}}.",
+        "i" = "Use {.fun get_acoustic_deployments} to get general information
+               for these deployment(s)."),
       class = "etn_no_deployment_logs_found"
     )
   }
@@ -94,7 +96,7 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
       # not testing
       if (!is_testing() && any(new_name != new_name_repaired)) {
         cli::cli_inform(
-            "Name repair took place:"),
+          "Not all field names were unique. Name repair took place:",
           class = "etn_message_name_repair"
         )
         rlang::names_inform_repair(old_name, new_name_repaired)

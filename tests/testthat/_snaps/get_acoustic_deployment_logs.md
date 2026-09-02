@@ -4,8 +4,8 @@
       get_acoustic_deployment_logs(c(ids_no_logs, ids_with_logs))
     Condition
       Warning:
-      x No deployment logs could be found for deployment ids "1758" and "2489"
-      i You can get more information about these deployments with `get_acoustic_deployments()` (`?etn::get_acoustic_deployments()`)
+      x Can't find any logs for `deployment_id` "1758" and "2489".
+      i Use `get_acoustic_deployments()` to get general information for these deployment(s).
     Output
       # A tibble: 10,108 x 20
          deployment_id receiver_id record_type datetime            station_name
