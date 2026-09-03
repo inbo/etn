@@ -261,7 +261,7 @@ get_public_metadata <- function(table = c("animals",
   # In principle, multiple parquet files could be read if a resource is
   # split up into multiple files.
   arrow_tables <-
-    jsonlite::fromJSON(file.path(catalog_root, "metadata_files", table_path)) |>
+    jsonlite::fromJSON(file.path(catalog_root, "acoustic_telemetry", table_path)) |>
     purrr::chuck("assets", "data", "href") |>
     purrr::map(\(uri) {arrow::read_parquet(file = uri,
                                            as_data_frame = FALSE)})
