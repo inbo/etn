@@ -445,6 +445,12 @@ use_staging_url <- function(url) {
       x,
       pattern = "(?<=parquet)\\/"
     )
-    do.call(file.path, list(url_split[1], "staging", url_split[2]))
+    do.call(file.path,
+            list(
+              url_split[1],
+              "staging",
+              # If the url ends on parquet, add an empty string to the end
+              # instead of NA
+              purrr::pluck(url_split, 2, .default = "")))
   })
 }
