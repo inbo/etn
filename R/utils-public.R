@@ -65,7 +65,13 @@ list_public_detections <- function() {
       .keep = "none",
       project_code = path_sans_ext(basename(.data$href)),
       path = .data$href
-    )
+    ) |>
+    # Remove metadata tables
+    dplyr::filter_out(project_code %in% c("animals",
+                                          "deployments",
+                                          "projects",
+                                          "receivers",
+                                          "tags"))
 }
 
 #' Get public detections
