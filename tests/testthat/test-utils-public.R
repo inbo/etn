@@ -209,20 +209,3 @@ test_that("read_stac() correctly forwards multiple payload members", {
     ))
   )
 })
-
-test_that("read_stac() supports public detection queries", {
-  # These type of queries are more complex because they read the detections
-  # parquet instead of public metadata.
-
-  skip("detections currently unsupported")
-
-  expect_type(
-    read_stac("get_acoustic_detections",
-      payload = list(
-        project_code = "2013_albertkanaal",
-        animal_scientific_name = "Anguilla anguilla"
-      )
-    ),
-    "list"
-  )
-})
