@@ -263,6 +263,7 @@ get_public_metadata <- function(table = c("animals",
   arrow_tables <-
     jsonlite::fromJSON(file.path(catalog_root, "acoustic_telemetry", table_path)) |>
     purrr::chuck("assets", "data", "href") |>
+    use_staging_url() |>
     purrr::map(\(uri) {arrow::read_parquet(file = uri,
                                            as_data_frame = FALSE)})
 
