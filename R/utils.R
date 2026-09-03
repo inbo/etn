@@ -374,6 +374,9 @@ path_sans_ext <- function(x, compression = FALSE) {
 #'                               end_date = "2015-04-25"))
 arg_to_filter_expression <- function(fn_arguments) {
   fn_arguments |>
+    # Drop any arguments set to default value NULL, we don't need to filter on
+    # NULL literal.
+    purrr::discard(.p = is.null) |>
     # If there are vectors in the arguments, we want to create multiple filter
     # expressions for them.
     purrr::imap(\(value, field) {
