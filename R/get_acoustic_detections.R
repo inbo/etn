@@ -105,14 +105,14 @@ get_acoustic_detections <- function(connection,
     # Early return; use public helper
     return(get_public_detections(
       animal_project_code = animal_project_code,
+      start_date = start_date,
+      end_date = end_date,
       limit = limit,
       return_as = "tibble",
       progress = progress,
       # Filter arguments:
       arg_to_filter_expression(
         list(
-          start_date = start_date,
-          end_date = end_date,
           tag_serial_number = tag_serial_number,
           acoustic_tag_id = acoustic_tag_id,
           scientific_name = scientific_name,
