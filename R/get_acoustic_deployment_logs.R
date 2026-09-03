@@ -31,7 +31,7 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
   if (missing(deployment_id)) {
     cli::cli_abort(
       message = "Please provide at least one {.arg deployment_id}.",
-      class = "etn_no_dep_id_supplied"
+      class = "etn_error_no_dep_id_supplied"
     )
   }
 
@@ -49,7 +49,7 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
                {.val {ids_no_logs}}.",
         "i" = "Use {.fun get_acoustic_deployments} to get general information
                for these deployment(s)."),
-      class = "etn_no_deployment_logs_found"
+      class = "etn_warning_no_deployment_logs_found"
     )
   }
 
