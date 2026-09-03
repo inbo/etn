@@ -246,7 +246,7 @@ select_protocol <- function() {
         "no_protocol_set"
       )
     )
-    
+
   if (user_selected_protocol != "no_protocol_set") {
     return(user_selected_protocol)
   }
