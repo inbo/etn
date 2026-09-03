@@ -240,7 +240,7 @@ get_public_metadata <- function(table = c("animals",
 
   # Look for available tables -----------------------------------------------
   catalog_paths <-
-    read_child_catalog(catalog = "metadata_files") |>
+    read_child_catalog(catalog = "acoustic_telemetry") |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
