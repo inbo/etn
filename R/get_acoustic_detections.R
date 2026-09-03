@@ -101,22 +101,26 @@ get_acoustic_detections <- function(connection,
   }
 
   # Public data only --------------------------------------------------------
-  if(protocol == "public"){
-   get_public_detections(
-     animal_project_code = animal_project_code,
-     limit = limit,
-     return_as = "tibble",
-     progress = progress,
-     # Filter arguments:
-     start_date = start_date,
-     end_date = end_date,
-     tag_serial_number = tag_serial_number,
-     acoustic_tag_id = acoustic_tag_id,
-     scientific_name = scientific_name,
-     acoustic_project_code = acoustic_project_code,
-     receiver_id = receiver_id,
-     station_name = station_name
-   )
+  if (protocol == "public") {
+    get_public_detections(
+      animal_project_code = animal_project_code,
+      limit = limit,
+      return_as = "tibble",
+      progress = progress,
+      # Filter arguments:
+      arg_to_filter_expression(
+        list(
+          start_date = start_date,
+          end_date = end_date,
+          tag_serial_number = tag_serial_number,
+          acoustic_tag_id = acoustic_tag_id,
+          scientific_name = scientific_name,
+          acoustic_project_code = acoustic_project_code,
+          receiver_id = receiver_id,
+          station_name = station_name
+        )
+      )
+    )
   }
 
   # Other protocols ---------------------------------------------------------
