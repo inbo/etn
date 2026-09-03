@@ -24,9 +24,8 @@ read_catalog <- function() {
 #' read_child_catalog(catalog = "detection_files")
 #' read_child_catalog(catalog = "metadata_files")
 read_child_catalog <- function(catalog = c(
-                                 "metadata_files",
-                                 "detection_files",
-                                 "archival_files"
+                                 "acoustic_telemetry",
+                                 "archival_data"
                                )) {
   catalog <- rlang::arg_match(catalog,
     multiple = TRUE
