@@ -15,7 +15,7 @@ test_that("get_acoustic_deployment_logs() returns a tibble", {
 test_that("get_acoustic_deployment_logs() returns an error on missing deployment_id", {
   expect_error(
     get_acoustic_deployment_logs(),
-    class = "etn_no_dep_id_supplied"
+    class = "etn_error_no_dep_id_supplied"
   )
 })
 
@@ -57,7 +57,7 @@ test_that("get_acoustic_deployment_logs() returns a warning for ids without logs
 
   expect_warning(
     no_logs <- get_acoustic_deployment_logs(1758),
-    class = "etn_no_deployment_logs_found"
+    class = "etn_warning_no_deployment_logs_found"
   )
 })
 
