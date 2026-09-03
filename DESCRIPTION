@@ -52,6 +52,7 @@ Imports:
     purrr,
     readr,
     rlang,
+    stringi,
     stringr,
     utils,
     withr
