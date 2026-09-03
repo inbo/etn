@@ -104,7 +104,7 @@ list_public_detections <- function() {
 #' @examplesIf interactive()
 #' get_public_detections("2011_Loire", timestamp >=
 #'   lubridate::ymd(20220101))
-get_public_detections <- function(animal_project_code = NULL,
+get_public_detections <- function(animal_project_code,
                                   start_date = NULL,
                                   end_date = NULL,
                                   ...,
@@ -117,14 +117,22 @@ get_public_detections <- function(animal_project_code = NULL,
   return_as <- rlang::arg_match(return_as)
 
   public_detections <- list_public_detections()
-  if (is.null(animal_project_code)) {
-    selected_project_code <-
-      public_detections$project_code
-  } else {
-    selected_project_code <-
-      check_value(animal_project_code,
-                  public_detections$project_code)
+
+  # Animal project code is a required field
+  if (rlang::is_missing(animal_project_code)) {
+    cli::cli_abort(
+      "When getting public detections data, providing an animal_project_code is
+      required. Use {.run [list_public_detections()](etn::list_public_detections())}
+      to see the available project codes.",
+      class = "etn_error_no_animal_proj_provided"
+    )
   }
+
+  selected_project_code <-
+    check_value(
+      animal_project_code,
+      public_detections$project_code
+    )
 
   # Read the parquet paths from the catalogue -------------------------------
   detections_path <-
