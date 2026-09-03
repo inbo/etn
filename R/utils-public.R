@@ -197,9 +197,16 @@ get_public_detections <- function(animal_project_code = NULL,
 
 
     # Apply filters
-    duckdb_view <- dplyr::filter(duckdb_view, ...) |>
-      dplyr::filter(.data$datetime >= start_date,
-                    .data$datetime < end_date)
+    if (rlang::dots_n() > 0) {
+      duckdb_view <- dplyr::filter(duckdb_view, ...)
+    }
+    # Optionally apply date filtering
+    if(!is.null(start_date)){
+      duckdb_view <- dplyr::filter(.data$datetime >= start_date)
+    }
+    if(!is.null(end_date)){
+      duckdb_view <- dplyr::filter(.data$datetime < end_date)
+    }
 
     # Collect and return the table --------------------------------------------
     # Limit it if needed
