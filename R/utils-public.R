@@ -134,7 +134,7 @@ get_public_detections <- function(animal_project_code = NULL,
   # Read the parquet paths from the catalog ---------------------------------
 
   parquet_paths <-
-    file.path(catalog_root, "detection_files", detections_path) |>
+    file.path(catalog_root, "acoustic_telemetry", detections_path) |>
     purrr::map(httr2::request) |>
     purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
     # Never place more then 2 requests a second
