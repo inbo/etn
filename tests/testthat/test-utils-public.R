@@ -75,7 +75,7 @@ test_that("get_public_detections() can pass filter arguments", {
   expect_type(
     get_public_detections(
       "2011_Warnow",
-      animal_scientific_name == "Anguilla rostrata"
+      animal_scientific_name = "Anguilla rostrata"
     ),
     "list"
   )
