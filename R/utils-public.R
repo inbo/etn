@@ -1,5 +1,6 @@
 read_catalog <- function() {
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
+  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
+    use_staging_url()
   jsonlite::fromJSON(file.path(catalog_root, "catalog.json"))
 }
 
@@ -31,7 +32,8 @@ read_child_catalog <- function(catalog = c(
     multiple = TRUE
   )
 
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
+  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
+    use_staging_url()
 
   file.path(catalog_root, catalog, "collection.json") |>
     httr2::request() |>
@@ -129,7 +131,8 @@ get_public_detections <- function(animal_project_code = NULL,
     dplyr::filter(.data$project_code %in% selected_project_code) |>
     dplyr::pull("path")
 
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
+  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
+    use_staging_url()
 
   # Read the parquet paths from the catalog ---------------------------------
 
@@ -256,7 +259,8 @@ get_public_metadata <- function(table = c("animals",
     dplyr::pull("path")
 
   # Read parquet files with arrow -------------------------------------------
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
+  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
+    use_staging_url()
 
   # In principle, multiple parquet files could be read if a resource is
   # split up into multiple files.
