@@ -99,6 +99,29 @@ get_acoustic_detections <- function(connection,
   if (!progress) {
     withr::local_options(cli.progress_show_after = 60 * 60 * 24)
   }
+
+  # Public data only --------------------------------------------------------
+  if(protocol == "public"){
+   get_public_detections(
+     animal_project_code = animal_project_code,
+     limit = limit,
+     return_as = "tibble",
+     progress = progress,
+     # Filter arguments:
+     start_date = start_date,
+     end_date = end_date,
+     tag_serial_number = tag_serial_number,
+     acoustic_tag_id = acoustic_tag_id,
+     scientific_name = scientific_name,
+     acoustic_project_code = acoustic_project_code,
+     receiver_id = receiver_id,
+     station_name = station_name
+   )
+  }
+
+  # Other protocols ---------------------------------------------------------
+
+
   # Some arguments don't need to be sent to etnservice, drop arguments set to
   # NULL
   arguments_to_pass <-
@@ -111,7 +134,7 @@ get_acoustic_detections <- function(connection,
       )
     ]
 
-  # Estimate number of pages ------------------------------------------------
+  ## Estimate number of pages ------------------------------------------------
 
   # Calculate the number of records we expect: for progress bar + page_size
   # Report on this step as it can take a while for large queries
@@ -194,7 +217,7 @@ get_acoustic_detections <- function(connection,
   # forwarded to openCPU, credentials are appended by default
   if (protocol != "opencpu") credentials <- get_credentials()
 
-  # Fetch pages -------------------------------------------------------------
+  ## Fetch pages -------------------------------------------------------------
   # Path to store pages on disk
   tmp_pagedir <- withr::local_tempdir(pattern = "detection_pages-")
 
@@ -223,7 +246,7 @@ get_acoustic_detections <- function(connection,
     payload <- append(arguments_to_pass, pagination_arguments)
 
 
-    ## store pages on disk -----------------------------------------------------
+    ### store pages on disk -----------------------------------------------------
 
 
     # Decide what helper to use, add any extra required arguments. Regardless of
@@ -304,7 +327,7 @@ get_acoustic_detections <- function(connection,
     cli::cli_progress_update()
   }
 
-  # combine pages -----------------------------------------------------------
+  ## combine pages -----------------------------------------------------------
 
   # Update the user on final time consuming step.
   if (progress) {
