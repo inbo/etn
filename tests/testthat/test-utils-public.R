@@ -101,7 +101,7 @@ test_that("get_public_detections() supports same arg names as get_acoustic_detec
 test_that("get_public_detections() supports limiting to 100 rows", {
   expect_shape(
     # This project has much more than 100 rows.
-    get_public_detections(project_code = "2013_albertkanaal",
+    get_public_detections(animal_project_code = "2013_albertkanaal",
                           limit = TRUE),
     nrow = 100L
   )
