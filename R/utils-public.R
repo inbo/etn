@@ -208,6 +208,8 @@ get_public_detections <- function(animal_project_code = NULL,
 
 #' Read values from the parquet dump metadata files
 #'
+#' Reads the root stac catalog and returns acoustic telemetry metadata tables.
+#'
 #' @param table What table to read the metadata file of. One of "animals",
 #'   "deployments", "projects", "receivers", or "tags".
 #' @inheritDotParams dplyr::filter ... .by .preserve
