@@ -71,7 +71,7 @@ test_that("list_public_detections() returns paths to resource json metadata", {
 # get_public_detections() -------------------------------------------------
 test_that("get_public_detections() can combine multiple animal_projects", {
   expect_type(
-    get_public_detections(c("OTN-Hemnfjorden", "DAK")),
+    get_public_detections(c("OTN-Tosenfjorden", "DAK")),
     "list"
     )
 })
