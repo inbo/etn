@@ -1,9 +1,4 @@
-read_catalog <- function(catalog = c(".",
-                                     "metadata_files",
-                                     "detection_files",
-                                     "archival_files")) {
-  catalog <- rlang::arg_match(catalog)
-
+read_catalog <- function() {
   catalog_root <- "https://www.lifewatch.be/etn/parquet/staging"
   jsonlite::fromJSON(file.path(catalog_root, "catalog.json"))
 }
