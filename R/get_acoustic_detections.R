@@ -102,7 +102,8 @@ get_acoustic_detections <- function(connection,
 
   # Public data only --------------------------------------------------------
   if (protocol == "public") {
-    get_public_detections(
+    # Early return; use public helper
+    return(get_public_detections(
       animal_project_code = animal_project_code,
       limit = limit,
       return_as = "tibble",
@@ -120,7 +121,7 @@ get_acoustic_detections <- function(connection,
           station_name = station_name
         )
       )
-    )
+    ))
   }
 
   # Other protocols ---------------------------------------------------------
