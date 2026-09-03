@@ -57,7 +57,7 @@ read_child_catalog <- function(catalog = c(
 #' @examplesIf interactive()
 #' list_public_detections()
 list_public_detections <- function() {
-  read_child_catalog(catalog = "detection_files") |>
+  read_child_catalog(catalog = "acoustic_telemetry") |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
