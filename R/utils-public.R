@@ -122,10 +122,8 @@ get_public_detections <- function(animal_project_code = NULL,
       public_detections$project_code
   } else {
     selected_project_code <-
-      rlang::arg_match(animal_project_code,
-        values = public_detections$project_code,
-        multiple = TRUE
-      )
+      check_value(animal_project_code,
+                  public_detections$project_code)
   }
 
   # Read the parquet paths from the catalogue -------------------------------
