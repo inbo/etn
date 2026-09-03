@@ -81,6 +81,7 @@ list_public_detections <- function() {
 #' Read the public detection files for a given project code and filter the
 #' detections based on the provided filter conditions.
 #'
+#' @inheritParams get_acoustic_detections
 #' @param project_code The project code for which to read the public detection
 #'   files. The project code must be one of the project codes listed in the
 #'   output of `list_public_detections()`.
@@ -104,6 +105,8 @@ list_public_detections <- function() {
 #' get_public_detections("2011_Loire", timestamp >=
 #'   lubridate::ymd(20220101))
 get_public_detections <- function(animal_project_code = NULL,
+                                  start_date = NULL,
+                                  end_date = NULL,
                                   ...,
                                   limit = FALSE,
                                   return_as = c("tibble",
@@ -194,7 +197,9 @@ get_public_detections <- function(animal_project_code = NULL,
 
 
     # Apply filters
-    duckdb_view <- dplyr::filter(duckdb_view, ...)
+    duckdb_view <- dplyr::filter(duckdb_view, ...) |>
+      dplyr::filter(.data$datetime >= start_date,
+                    .data$datetime < end_date)
 
     # Collect and return the table --------------------------------------------
     # Limit it if needed
