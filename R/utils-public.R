@@ -437,3 +437,13 @@ read_stac <- function(function_identity = c(
   }
 
 }
+
+use_staging_url <- function(url) {
+  purrr::map_chr(url, \(x){
+    url_split <- stringr::str_split_1(
+      x,
+      pattern = "(?<=parquet)\\/"
+    )
+    do.call(file.path, list(url_split[1], "staging", url_split[2]))
+  })
+}
