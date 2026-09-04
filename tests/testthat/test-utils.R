@@ -140,7 +140,9 @@ test_that("arg_to_filter_expression() can parse both OR and AND queries simultan
       )),
       rlang::expr(.data[["animal_project_code"]] == "2014_demer")
     )
-    
+  )
+})
+
 # etn_citation() ----------------------------------------------------------
 
 test_that("etn_citation() returns a character vector", {
