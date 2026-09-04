@@ -54,6 +54,14 @@ test_that("select_protocol() returns 'opencpu' when nodename does not end on vli
   )
 })
 
+test_that("select_protocol() returns 'public' when no credentials are set", {
+  with_mocked_bindings(
+    expect_equal(select_protocol(), "public"),
+    # Mock no credentials are set
+    get_credentials = function(...) list()
+  )
+})
+
 test_that("select_protocol() allows user override by environmental variable", {
   withr::with_envvar(
     new = c(ETN_PROTOCOL = "public"),
