@@ -118,7 +118,33 @@ test_that("get_public_detections() can return data as lazy duckdb view", {
 })
 
 # get_public_metadata() ---------------------------------------------------
+test_that("get_public_metadata() returns no error for supported tables", {
+  expect_no_error(get_public_metadata("animals"))
+  expect_no_error(get_public_metadata("deployments"))
+  expect_no_error(get_public_metadata("projects"))
+  expect_no_error(get_public_metadata("receivers"))
+  expect_no_error(get_public_metadata("tags"))
+})
 
+test_that("get_public_metadata() returns tibble for all metadata tables", {
+  supported_tables <- eval(formals(get_public_metadata)$table)
+
+  purrr::walk(
+    supported_tables,
+    ~ expect_s3_class(
+      get_public_metadata(!! .x),
+      "tbl_df",
+    )
+  )
+})
+
+test_that("get_public_metadata() can apply filters to it's output", {
+  # There is at least one "Anguilla anguilla" in the animals table
+  expect_s3_class(
+    get_public_metadata("animals", scientific_name == "Anguilla anguilla"),
+    "tbl_df"
+  )
+})
 
 # read_stac() -------------------------------------------------------------
 
