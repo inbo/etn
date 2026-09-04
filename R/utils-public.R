@@ -118,8 +118,9 @@ get_public_detections <- function(animal_project_code,
 
   public_detections <- list_public_detections()
 
-  # Animal project code is a required field
-  if (rlang::is_missing(animal_project_code)) {
+  # Animal project code is a required field, it may be passed as NULL by
+  # get_acoustic_detections().
+  if (rlang::is_missing(animal_project_code) || is.null(animal_project_code)) {
     cli::cli_abort(
       "When getting public detections data, providing an animal_project_code is
       required. Use {.run [list_public_detections()](etn::list_public_detections())}
