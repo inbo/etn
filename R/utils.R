@@ -252,13 +252,14 @@ select_protocol <- function() {
   }
 
   # Automatic selection -----------------------------------------------------
-  # If there is a local database connection available, use it.
-  if (localdb_is_available()) {
-    return("localdb")
-  }
-
-  # Fallback on API
-  return("opencpu")
+  dplyr::case_when(
+    # If there is a local database connection available, use it.
+    credentials_are_set() & localdb_is_available() ~ "localdb",
+    # Fallback on API if we have credentials
+    credentials_are_set() ~ "opencpu",
+    # If we have no credentials, use public data only
+    .default = "public"
+  )
 }
 
 #' Remove HTML tags from a string
