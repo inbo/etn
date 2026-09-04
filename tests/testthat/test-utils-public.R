@@ -39,7 +39,7 @@ test_that("list_public_detections() returns public animal_project_codes", {
 })
 
 test_that("list_public_detections() returns all available projects", {
-  skip("Not all public animal projects have been dumped to parquet")
+  skip("Not all public animal projects have detections")
 
   # Fetch non-moratorium animal_projects_codes from the database
   public_animal_projects <-
