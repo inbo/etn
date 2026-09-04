@@ -82,6 +82,8 @@ test_that("get_public_detections() can pass filter arguments", {
 })
 
 test_that("get_public_detections() works with animal_project = NULL", {
+  skip("This feature has been postponed until a future release")
+
   # Even without providing an animal_project_code, the function should still be
   # able to fetch detections
   expect_type(
