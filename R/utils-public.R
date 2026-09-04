@@ -401,7 +401,8 @@ read_stac <- function(function_identity = c(
     list_receiver_ids = {
       get_public_metadata("receivers") |>
         dplyr::pull("receiver_id") |>
-        unique()
+        unique() |>
+        purrr::discard(.p = is.na)
     },
     list_scientific_names = {
       get_public_metadata("animals") |>
