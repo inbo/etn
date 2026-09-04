@@ -109,7 +109,7 @@ test_that("get_public_detections() supports limiting to 100 rows", {
 
 test_that("get_public_detections() can return data as lazy duckdb view", {
   expect_s3_class(
-    get_public_detections(project_code = "2013_albertkanaal",
+    get_public_detections(animal_project_code = "2013_albertkanaal",
                           return_as = "lazy"),
     "tbl_dbi"
   )
