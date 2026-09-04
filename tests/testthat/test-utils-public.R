@@ -153,11 +153,20 @@ test_that("read_stac() supports all exported functions", {
       stringr::str_starts(.x, stringr::fixed("list_"))
     )) |>
     # Except list_values(), which isn't a data fetching function.
-    purrr::discard(.p = ~.x == "list_values")
+    purrr::discard(.p = ~.x == "list_values") |>
+    # Except functions that don't use etn data
+    purrr::discard(.p = ~ dplyr::when_any(
+      # get_package() wraps other etn functions to get data
+      stringr::str_detect(.x, stringr::fixed("get_package")),
+      # get_bibliography() uses IMIS to get data
+      stringr::str_detect(.x, stringr::fixed("get_bibliography"))
+      ))
 
   supported_functions <- as.character(formals(read_stac)$function_identity) |>
     # Except c(), which isn't an etn function
-    purrr::discard(.p = ~.x == "c")
+    purrr::discard(.p = ~.x == "c") |>
+    # get_acoustic_detections() uses it's own helper
+    append("get_acoustic_detections")
 
   expect_setequal(
     supported_functions,
