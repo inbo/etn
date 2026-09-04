@@ -58,7 +58,7 @@ test_that("select_protocol() returns 'public' when no credentials are set", {
   with_mocked_bindings(
     expect_equal(select_protocol(), "public"),
     # Mock no credentials are set
-    get_credentials = function(...) list()
+    credentials_are_set = function(...) FALSE
   )
 })
 
