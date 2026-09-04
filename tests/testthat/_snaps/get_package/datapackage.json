@@ -1,15 +1,18 @@
 {
   "id": "https://doi.org/10.14284/432",
   "name": "2014_demer",
+  "$schema": "https://datapackage.org/profiles/2.0/datapackage.json",
   "resources": [
     {
-      "name": "animals",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "animals.csv",
-      "profile": "tabular-data-resource",
+      "name": "animals",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "animal_id",
@@ -481,13 +484,15 @@
       }
     },
     {
-      "name": "tags",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "tags.csv",
-      "profile": "tabular-data-resource",
+      "name": "tags",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "tag_serial_number",
@@ -861,13 +866,15 @@
       }
     },
     {
-      "name": "detections",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "detections.csv",
-      "profile": "tabular-data-resource",
+      "name": "detections",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "detection_id",
@@ -1033,13 +1040,15 @@
       }
     },
     {
-      "name": "deployments",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "deployments.csv",
-      "profile": "tabular-data-resource",
+      "name": "deployments",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "deployment_id",
@@ -1322,13 +1331,15 @@
       }
     },
     {
-      "name": "receivers",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "receivers.csv",
-      "profile": "tabular-data-resource",
+      "name": "receivers",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "receiver_id",
@@ -1502,13 +1513,15 @@
       }
     },
     {
-      "name": "bibliography",
+      "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
       "path": "bibliography.csv",
-      "profile": "tabular-data-resource",
+      "name": "bibliography",
+      "type": "table",
       "format": "csv",
       "mediatype": "text/csv",
       "encoding": "utf-8",
       "schema": {
+        "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
         "fields": [
           {
             "name": "item",
