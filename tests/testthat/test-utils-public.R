@@ -117,6 +117,13 @@ test_that("get_public_detections() can return data as lazy duckdb view", {
   )
 })
 
+test_that("get_public_detections() returns error when no animal_project_code", {
+  expect_error(
+    get_public_detections(limit = TRUE),
+    class = "etn_error_no_animal_proj_provided"
+  )
+})
+
 # get_public_metadata() ---------------------------------------------------
 test_that("get_public_metadata() returns no error for supported tables", {
   expect_no_error(get_public_metadata("animals"))
