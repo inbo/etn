@@ -155,7 +155,7 @@ test_that("read_stac() results should not include NA on list_x identities", {
     purrr::keep(.p = ~ stringr::str_starts(.x, stringr::fixed("list_")))
   for (list_function in list_identities) {
     expect_false(anyNA(
-      read_stac(function_identity = list_function)
+      read_stac(function_identity = !! list_function)
     ))
   }
 })
