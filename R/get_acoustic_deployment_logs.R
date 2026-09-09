@@ -145,10 +145,7 @@ get_acoustic_deployment_logs <- function(deployment_id, limit = FALSE) {
       )
     )
 
-  # Return a tibble
+  # Return a tibble, sorted by deployment_id and chronologically
   dplyr::as_tibble(diagnostics) |>
-    dplyr::arrange(
-      # Logically order, oldest records first. Keep deployment_ids together.
-      "deployment_id", "datetime"
-    )
+    dplyr::arrange("deployment_id", "datetime")
 }
