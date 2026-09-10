@@ -61,7 +61,7 @@ expect_protocol_agnostic <- function(expression,
           "localdb"
         }
       ),
-      label = "api",
+      label = {{protocol_to_test}},
       expected.label = "sql"
     )
   }
