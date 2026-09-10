@@ -20,12 +20,24 @@ test_that("read_child_catalog() returns a list", {
 test_that("read_child_catalog() returns expected list elements", {
   expect_named(
     read_child_catalog(catalog = "acoustic_telemetry"),
-    c("type", "id", "stac_version", "description", "links", "extent",
+    c("type",
+      "id",
+      "stac_version",
+      "description",
+      "links",
+      "title",
+      "extent",
       "license")
   )
   expect_named(
     read_child_catalog(catalog = "archival_data"),
-    c("type", "id", "stac_version", "description", "links", "extent",
+    c("type",
+      "id",
+      "stac_version",
+      "description",
+      "links",
+      "title",
+      "extent",
       "license")
   )
 })
