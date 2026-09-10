@@ -1,6 +1,5 @@
 read_catalog <- function() {
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
-    use_staging_url()
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
   jsonlite::fromJSON(file.path(catalog_root, "catalog.json"))
 }
 
@@ -32,8 +31,7 @@ read_child_catalog <- function(catalog = c(
     multiple = TRUE
   )
 
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
-    use_staging_url()
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   file.path(catalog_root, catalog, "collection.json") |>
     httr2::request() |>
@@ -141,8 +139,7 @@ get_public_detections <- function(animal_project_code,
     dplyr::filter(.data$project_code %in% selected_project_code) |>
     dplyr::pull("path")
 
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
-    use_staging_url()
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # Read the parquet paths from the catalog ---------------------------------
 
@@ -194,8 +191,6 @@ get_public_detections <- function(animal_project_code,
   suppress_nanosecond_warning({
     duckdb_view <-
       parquet_paths |>
-      # Adapt the parquet paths to add `staging`, as per instructions from VLIZ
-      use_staging_url() |>
       duckdbfs::open_dataset(
         format = "parquet",
         unify_schemas = TRUE,
@@ -278,15 +273,13 @@ get_public_metadata <- function(table = c("animals",
     dplyr::pull("path")
 
   # Read parquet files with arrow -------------------------------------------
-  catalog_root <- "https://www.lifewatch.be/etn/parquet/" |>
-    use_staging_url()
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # In principle, multiple parquet files could be read if a resource is
   # split up into multiple files.
   arrow_tables <-
     jsonlite::fromJSON(file.path(catalog_root, "acoustic_telemetry", table_path)) |>
     purrr::chuck("assets", "data", "href") |>
-    use_staging_url() |>
     purrr::map(\(uri) {arrow::read_parquet(file = uri,
                                            as_data_frame = FALSE)})
 
@@ -461,20 +454,4 @@ read_stac <- function(function_identity = c(
     stac_result
   }
 
-}
-
-use_staging_url <- function(url) {
-  purrr::map_chr(url, \(x){
-    url_split <- stringr::str_split_1(
-      x,
-      pattern = "(?<=parquet)\\/"
-    )
-    do.call(file.path,
-            list(
-              url_split[1],
-              "staging",
-              # If the url ends on parquet, add an empty string to the end
-              # instead of NA
-              purrr::pluck(url_split, 2, .default = "")))
-  })
 }
