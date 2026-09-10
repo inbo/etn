@@ -38,6 +38,7 @@ containing the references.
 ## See also
 
 Other access functions:
+[`get_acoustic_deployment_logs()`](https://inbo.github.io/etn/reference/get_acoustic_deployment_logs.md),
 [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
 [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),

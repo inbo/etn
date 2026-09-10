@@ -16,6 +16,11 @@
   obtained via [MarineInfo](https://marineinfo.org)
   ([\#518](https://github.com/inbo/etn/issues/518)).
 - New
+  [`get_acoustic_deployment_logs()`](https://inbo.github.io/etn/reference/get_acoustic_deployment_logs.md)
+  gets acoustic deployment log data, which can be helpful to figure out
+  what happened with a receiver during deployment
+  ([\#254](https://github.com/inbo/etn/issues/254)).
+- New
   [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
   reads an example dataset (`"2014_DEMER"`) as a Data Package
   ([\#530](https://github.com/inbo/etn/issues/530)).

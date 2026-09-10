@@ -119,6 +119,8 @@ get_acoustic_detections(
 
 ## Access data from ETN
 
+- [`get_acoustic_deployment_logs()`](https://inbo.github.io/etn/reference/get_acoustic_deployment_logs.md)
+  : Get acoustic deployment logs
 - [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md)
   : Get acoustic deployment data
 - [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)

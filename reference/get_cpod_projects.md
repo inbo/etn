@@ -43,6 +43,7 @@ A tibble with animal project data, sorted by `project_code`.
 ## See also
 
 Other access functions:
+[`get_acoustic_deployment_logs()`](https://inbo.github.io/etn/reference/get_acoustic_deployment_logs.md),
 [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
 [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
@@ -58,7 +59,7 @@ Other access functions:
 ``` r
 # Get all animal projects
 get_cpod_projects()
-#> # A tibble: 23 × 11
+#> # A tibble: 24 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1       1088 ARMS_MBON_Bel… cpod         NA             Underwater … 2018-07-12
@@ -67,20 +68,22 @@ get_cpod_projects()
 #>  4       1337 Blueconnect    cpod         NA             BlueConnect… 2026-01-01
 #>  5       1093 CODEVCO        cpod         NA             CODEVCO - m… 2021-10-31
 #>  6       1361 HesseløOWF_20… cpod         NA             Baseline st… 2020-01-01
-#>  7       1186 Lifewatch_add… cpod         NA             Lifewatch: … 2025-05-01
-#>  8       1185 Lifewatch_per… cpod         NA             Lifewatch: … 2025-03-26
-#>  9       1318 NOVANA         cpod         NA             The Nationa… 2004-01-01
-#> 10       1073 PAM-Borssele   cpod         NA             PAM Harbour… 2019-07-01
-#> # ℹ 13 more rows
+#>  7       1364 HybridLabs     cpod         NA             Impact of f… 2026-09-01
+#>  8       1186 Lifewatch_add… cpod         NA             Lifewatch: … 2025-05-01
+#>  9       1185 Lifewatch_per… cpod         NA             Lifewatch: … 2025-03-26
+#> 10       1318 NOVANA         cpod         NA             The Nationa… 2004-01-01
+#> # ℹ 14 more rows
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 
 # Get a specific animal project with citation
 get_cpod_projects(cpod_project_code = "cpod-lifewatch", citation = TRUE)
-#> # A tibble: 1 × 16
+#> # A tibble: 3 × 16
 #>   project_id project_code   project_type telemetry_type project_name start_date
 #>        <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #> 1        638 cpod-lifewatch cpod         NA             Lifewatch    2015-06-01
+#> 2        638 cpod-lifewatch cpod         NA             Lifewatch    2015-06-01
+#> 3        638 cpod-lifewatch cpod         NA             Lifewatch    2015-06-01
 #> # ℹ 10 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>, citation <chr>, doi <chr>,
 #> #   contact_name <chr>, contact_email <chr>, contact_affiliation <chr>

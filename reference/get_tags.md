@@ -51,6 +51,7 @@ member of the group.
 ## See also
 
 Other access functions:
+[`get_acoustic_deployment_logs()`](https://inbo.github.io/etn/reference/get_acoustic_deployment_logs.md),
 [`get_acoustic_deployments()`](https://inbo.github.io/etn/reference/get_acoustic_deployments.md),
 [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md),
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
@@ -66,7 +67,7 @@ Other access functions:
 ``` r
 # Get all tags
 get_tags()
-#> # A tibble: 68,501 × 54
+#> # A tibble: 70,653 × 54
 #>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>    <chr>       <chr>       <chr>          
 #>  1 0A4E2699          acoustic animal      NA          OPI-2699       
@@ -79,7 +80,7 @@ get_tags()
 #>  8 0A6G              acoustic animal      NA          R64K-2383      
 #>  9 0A6H              acoustic animal      NA          R64K-2384      
 #> 10 0A6I              acoustic animal      NA          R64K-2385      
-#> # ℹ 68,491 more rows
+#> # ℹ 70,643 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
@@ -89,7 +90,7 @@ get_tags()
 
 # Get archival tags, including acoustic-archival
 get_tags(tag_type = c("archival", "acoustic-archival"))
-#> # A tibble: 16,911 × 54
+#> # A tibble: 18,550 × 54
 #>    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>             <chr>       <chr>       <chr>          
 #>  1 0AE6              acoustic-archival animal      P           OPS-4207       
@@ -102,7 +103,7 @@ get_tags(tag_type = c("archival", "acoustic-archival"))
 #>  8 0B4U              acoustic-archival animal      P           Ops-4557       
 #>  9 0B4V              acoustic-archival animal      A           Ops-4558       
 #> 10 0B4V              acoustic-archival animal      P           Ops-4559       
-#> # ℹ 16,901 more rows
+#> # ℹ 18,540 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
@@ -112,7 +113,7 @@ get_tags(tag_type = c("archival", "acoustic-archival"))
 
 # Get tags of specific subtype
 get_tags(tag_subtype = c("built-in", "range"))
-#> # A tibble: 3,060 × 54
+#> # A tibble: 3,107 × 54
 #>    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>             <chr>       <chr>       <chr>          
 #>  1 04HD              acoustic-archival range       P           S64K-9795      
@@ -125,7 +126,7 @@ get_tags(tag_subtype = c("built-in", "range"))
 #>  8 04HH              acoustic-archival range       A           S64K-9804      
 #>  9 04HI              acoustic-archival range       P           S64K-9805      
 #> 10 04HI              acoustic-archival range       A           S64K-9806      
-#> # ℹ 3,050 more rows
+#> # ℹ 3,097 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
