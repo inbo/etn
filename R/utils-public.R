@@ -57,7 +57,9 @@ read_child_catalog <- function(catalog = c(
 #' @examplesIf interactive()
 #' list_public_detections()
 list_public_detections <- function() {
-  read_child_catalog(catalog = "acoustic_telemetry") |>
+  metadata_catalog <- "acoustic_telemetry"
+
+  read_child_catalog(catalog = metadata_catalog) |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
@@ -65,6 +67,14 @@ list_public_detections <- function() {
       .keep = "none",
       project_code = path_sans_ext(basename(.data$href)),
       path = .data$href
+    ) |>
+    # Remove the metadata catalog prefix from the table name, this saves us from
+    # having to read the metadata for every item just to get the title
+    dplyr::mutate(
+      .keep = "all",
+      project_code = stringr::str_remove(
+        project_code, stringr::fixed(paste0(metadata_catalog, "_"))
+      )
     ) |>
     # Remove metadata tables
     dplyr::filter_out(project_code %in% c("animals",
@@ -256,8 +266,11 @@ get_public_metadata <- function(table = c("animals",
   selected_table <- rlang::arg_match(table)
 
   # Look for available tables -----------------------------------------------
+  # In what catalog should we look for the metadata table?
+  metadata_catalog <- "acoustic_telemetry"
+  # Fetch the path to read the metadata from
   catalog_paths <-
-    read_child_catalog(catalog = "acoustic_telemetry") |>
+    read_child_catalog(catalog = metadata_catalog) |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
@@ -265,6 +278,14 @@ get_public_metadata <- function(table = c("animals",
       .keep = "none",
       table = path_sans_ext(basename(.data$href)),
       path = .data$href
+    ) |>
+    # Remove the metadata catalog prefix from the table name, this saves us from
+    # having to read the metadata for every item just to get the title
+    dplyr::mutate(
+      .keep = "all",
+      table = stringr::str_remove(
+        table, stringr::fixed(paste0(metadata_catalog, "_"))
+      )
     )
 
   # Fetch the correct table path --------------------------------------------
