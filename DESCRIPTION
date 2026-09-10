@@ -43,7 +43,8 @@ Imports:
     dplyr (>= 1.2.0),
     frictionless (>= 1.3.0),
     glue,
-    httr2 (>= 1.2.0),
+    httr2,
+    jsonlite,
     lifecycle,
     memoise,
     methods,
@@ -56,9 +57,8 @@ Imports:
     utils,
     withr
 Suggests:
-    etnservice (>= 0.5.0),
+    etnservice (>= 0.6.0),
     formattable,
-    jsonlite,
     kableExtra,
     knitr,
     leaflet,
@@ -79,4 +79,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

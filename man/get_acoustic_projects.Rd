@@ -47,6 +47,7 @@ get_acoustic_projects(acoustic_project_code = "demer", citation = TRUE)
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
 \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},

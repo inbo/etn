@@ -1,0 +1,160 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://opencpu.lifewatch.be/library/etnservice/R/get_acoustic_deployment_logs/
+    body:
+      string: '{"credentials":{"username":"<<<my_userid>>>","password":"<<<my_pwd>>>"},"deployment_id":93144,"limit":false}'
+  response:
+    status: 201
+    headers:
+      date: Thu, 20 Aug 2026 15:07:32 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=300, public
+      x-ocpu-session: x0690dccaffab45
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0690dccaffab45/
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.6.0 (2026-04-24)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-08-20 15:07:49 UTC
+      x-ocpu-version: 2.2.15
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '136'
+      content-type: text/plain; charset=utf-8
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      string: |
+        /ocpu/tmp/x0690dccaffab45/R/.val
+        /ocpu/tmp/x0690dccaffab45/R/credentials
+        /ocpu/tmp/x0690dccaffab45/R/get_acoustic_deployment_logs
+        /ocpu/tmp/x0690dccaffab45/stdout
+        /ocpu/tmp/x0690dccaffab45/source
+        /ocpu/tmp/x0690dccaffab45/console
+        /ocpu/tmp/x0690dccaffab45/info
+        /ocpu/tmp/x0690dccaffab45/files/DESCRIPTION
+  recorded_at: 2026-08-20 15:07:49
+- request:
+    method: GET
+    uri: https://opencpu.lifewatch.be/tmp/x0690dccaffab45/R/.val/rds
+  response:
+    status: 200
+    headers:
+      date: Thu, 20 Aug 2026 15:07:49 GMT
+      server: Apache/2.4.58 (Ubuntu)
+      content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        form.vliz.be www.omes-monitoring.be omes-monitoring.be;
+      cross-origin-opener-policy: same-origin
+      strict-transport-security: max-age=31536000
+      x-content-type-options: nosniff
+      referrer-policy: no-referrer-when-downgrade
+      cache-control: max-age=86400, public
+      content-disposition: attachment;filename=.val.rds
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
+      access-control-allow-headers: '*'
+      access-control-allow-credentials: 'true'
+      x-ocpu-r: R version 4.6.0 (2026-04-24)
+      x-ocpu-locale: C.UTF-8
+      x-ocpu-time: 2026-08-20 15:07:54 UTC
+      x-ocpu-version: 2.2.15
+      x-ocpu-server: rApache
+      vary: Accept-Encoding
+      content-encoding: gzip
+      content-length: '2195'
+      content-type: application/r-rds
+      access-control-allow-methods: '*'
+      set-cookie: vliz_webc=vliz_webc2; path=/
+    body:
+      raw_gzip: |-
+        eJztHf1rHEV0k7Spba0oBUEQXIJiFJPO7N7HbgRpmg8bbJuQXmP1l+v1solX7yPcbauxihEE
+        QRAEoeA
+        vkn5/J+1f0CCIIIhCQRREKgiCP+h/0Di3u+9ye3vNze5MdjeXhVz23tzMm/fmvZl5
+        782bu+O7BEHoEr
+        Z1k//byVth+7HUaJ9CoL0EIKXCHvI6J3S8+2v0il7cX4LwpKFf24Sd5Ll7
+        alJ6sw9jnEAoKoqKoqKoK
+        CqKiqKiqCgqioq2cpHdUt6emhqR5QiIgAiIgAiIgAgIAyB0PUGA
+        c4P3L365n7whz78WjeeND0XjufSs
+        WX7nnvm88eKKCZ96YDxv9QjG8+qnK7bncmHF1u4qOmE8
+        L3xl4r39/QMb/kt/rtj6vfWD1f7pBeN55Xe
+        zn/P/mHiuf2zCy8+Y8PK3Zru7e036LydM+Mpn
+        i7b65wdN+Opvog0f0AV4luYWbXxefPWBnc6fTbpuPm
+        +WX/7chO/u+8bE9/eCrR3wc+vMCRve
+        mz+a/Vz7xISvyPtt+IHuS6pgwwd8Qf81vNZ4AR8gj2t9dvqgP
+        +gH2t2uLNjG7/Zz5hP0Y+k7
+        wTYOQAfwC/wAv3f3fb1i4PvDPk7XfjHxXXhtxSbH8+cEm3xA34AOkC/o
+        SU0f7ptP0CvQN8AH
+        /QB/jfVB3qDPMN5AL+jfzXmTbtBvgIE+kB/gu/7yog0fyAv6h/5gvIE/GMeavlr
+        8XPrC/gS5
+        An0wriAv4BvmdY1+a7xBntAO6IV5CeMH7UGOUA/oAzkB/zA+UB/0E+gG+cL6AHzAPAT9BP
+        pA
+        v0z5CcK2TvKvAxazbD5TqQimy9FpFe6YGD86djyrW2C3AeqNLfUPSkXNagmFXcdSQ+TxULD7
+        MDsO
+        DKZSI5NvWeDugyODh1IH01WnxyraOTw2+Hp9AU2dBrTrg5xbt0JHw1AgTVrXCID11jRy
+        14cmCPeMTI0
+        cSaXHR0cPjQ8ObySlrofQD3VzTQNFH0OHxofeSE+OjAatG564calhT9Wqp8eO
+        kPKxw96p4TOzPY3MBo
+        mEZ9EGMEGDwTXSDRo3PurjiUFeashjdLmsUH6sghux9rjeIjxaXZ4E
+        XofYbgn+d7YnlStoPQNiT88rY
+        s+BjK5r5XkxNT9XK6t+Lo7PzFQ0Xex956XGqhOlSk7PlYpQ
+        PqydyWU10WjVS8xPo4GEMO7DqA8lRYQG
+        jL96HFOlvJ6ZJfWnjNpyf1yt9TxUKpe1bLUHsbfi
+        6H1SK2RyxVxxVux9wfHhUa2cy+TFI6cLJ7Wy8eF
+        HFtt37GxPpoZEgOtIleSBuDoQV9YZhfW5
+        VWzcrsPOYa1QasaNqvarKI5rdHeepeYA13GQ9MYB5sOBos
+        pyEw58Vj0pJKrnK9vkL07JdrKt
+        2EZSONgOTN2xSjkASlvJHYdE7n6znQiHtNfUPSDFx/Qmhm8zf7m1s
+        YERs7GBMRdjIxaMCpP9
+        WQmb3ChMLCwzyo38xbiYWBgHJTgcEsPKheCItsWYJ5wU5yI4JRnYpoHDMeNo
+        5pnEPs9kPvMs
+        oAUS08+zRBuZNojeomtz0wapfTLahCstwuxxFImLaZNci0L863PYK0YnuHaauY4VN8z
+        7C1KY
+        9xekctlfJNXVvhhjDvFhPmYMSoYg5kFr0LRTzIMYorShnnaKeSD63TDo5QWxm6+Ij/mqorVI
+        f
+        EfKTvd4OTebKxIWR3P5VvJqaacmyYI0EItV6468T8aviteo/XapaCAnjZwfPgpVYgC32hnX
+        W5sUNdFS
+        zAcnxVRJJ4QMZrPanK5Ni8OabnZTgToTE4fXrxSYC45og/ztdLZB2A5J1JPGwGAP
+        FCE+gaJY0hXd7I4
+        34uN4Nz0FDe40MfJKHxEH2wyBW2PFZPZKE1x2ZEJAUOYy7fLpWzjB76Oi
+        kDiozSYxjVXJ6rQ6Tom96n
+        Bwhw9SSFy+n+xsHy2dLmcNyEpe3hBjmsFeriEazs3MaGWtSCiw
+        Pu5TFI9nKuz6KPEJoiSlwGJelJG+t
+        vLFMb0lHgJfnD0ejfnEo+WEK0uc9cQSN7qJnj2I2Lo7
+        l7s9jN0Ow3zsMEkKgUESkhNZv9mmXTR9M0Rp
+        39GE6FlTexwH9Z6PFqTAzr8o9XqDz79o1iOV
+        3YZBXNajugMVigQyKcF4EORIkPaqZc2MR3dmJHvivcQ
+        nbT2ZCCyySRteaq+ArrRZzEjD4mU2
+        x/hMODdmpJGtx2xw8bnWUpdJ1YpuM/eFOWDHJ0M26SKAjtgD6I
+        hPAF1FCZV+Q8HsAVKHU+jZ
+        3XAz3BK7PyHxIVtpdufJ3f0tzH5/i4enqqjxeGAb4Va8xuI47Q+BR0Qx9
+        zgs0TIfTychudnK
+        mSNCjmtHXunGgZ0FyVs08hCSs0u/l5etyLYjRTO87gUxQljzRYwrLjzWJBW7MncV
+        5jgE4nMm
+        6SbPxTh4Yt67eMR9yN6lUsYjlyh2NnYnFfNxUt3IQmbfj7m4esTuVahdJuKisuqQ84aHV90
+        P
+        LqUkJJc4aVYq9hmP+UgrFtidW0ybQh10AqURVWcOcPOJ/yDZVbyNdQl2XLD1HG9TXI03e9xK
+        4pP46
+        S4AxByXdXxJkdfxrgua+H3cRhk9aKfrZo5vWwpBzMRdtI91P8J89iNFlQKL9kmhS8j0
+        20Ol1eEA0spp
+        Njt2r5XL12GoqO4apd86HOJkFhoRst4odUSXPIswHvR8dGhjqOaj33q9WXwF
+        zJ5UiPkkFSoqanYISGP
+        FyuxhND4LacJVdoHEnlwr8TlKUQOKgTissPBOFMSeU+y4eupZzezZ
+        tw0/bVDMFDT4UYRuq3DPtDaXL8
+        0XtKKezk1bhbtJv1rujFZeK3q8omeqpKSrSKyyx6Yzuqbn
+        anC1Wak8ndaJSkCVfGk2TaplGmjZWS691
+        w/0VH+hu3OB/FtdXT1lVuxYtejsshp06yfz6ekZ
+        C+oikPV2VxV7/0y5SpYgPPwfjQLx9Q==
+  recorded_at: 2026-08-20 15:07:55
+recorded_with: VCR-vcr/2.1.0

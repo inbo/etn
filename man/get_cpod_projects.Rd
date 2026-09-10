@@ -43,6 +43,7 @@ get_cpod_projects(cpod_project_code = "cpod-lifewatch", citation = TRUE)
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
 \code{\link[=get_acoustic_projects]{get_acoustic_projects()}},

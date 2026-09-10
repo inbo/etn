@@ -107,6 +107,7 @@ get_acoustic_detections(
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
 \code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
 \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
