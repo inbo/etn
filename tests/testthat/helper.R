@@ -66,6 +66,57 @@ expect_protocol_agnostic <- function(expression,
   }
 }
 
+#' Do etn functions that use public data return at least a subset of the data
+#' returned by the other protocols?
+#'
+#' Because calls that use the public data will almost certainly return less data
+#' than the same call that uses a database connection or the opencpu api, this
+#' test helper makes use of `expect_in()` and `with_mocked_bindings()` to
+#' temporarily override the return value of `select_protocol()` and thus check
+#' if the values returned using the public protocol is at least a subset of
+#' those returned by the other protocols.
+#'
+#' @inherits testthat::expect_in returns
+#' @inheritParams expect_protocol_agnostic
+#'
+#' @export
+#'
+#' @examples
+#' expect_protocol_subset(list_animal_project_codes(),
+#'                        protocols = c("public", "opencpu"))
+expect_protocol_subset <- function(expression,
+                                   protocols = c("public",
+                                                 "opencpu",
+                                                 "localdb")) {
+  if(any(c("opencpu", "localdb") %in% protocols)) {
+    # Skip if no credentials are stored
+    skip_if_no_authentication()
+  }
+
+  # Skip if not both the API and the local database are available to compare
+  if("opencpu" %in% protocols) {
+    testthat::skip_if_offline(host = "opencpu.lifewatch.be")
+  }
+  if("localdb" %in% protocols) {
+    testthat::skip_if_not(localdb_is_available(),
+                          "ETN is not a local database on this machine")
+  }
+
+  # Test if the provided expression returns identical results regardless of
+  # the return value of select_protocol()
+  for (protocol_to_test in purrr::keep(protocols, ~ .x != "public")) {
+    testthat::with_mocked_bindings(
+      code = {
+        testthat::expect_in(
+          rlang::eval_tidy(rlang::enquo(expression)),
+          rlang::eval_tidy(rlang::enquo(expression))
+        )
+      },
+      select_protocol = testthat::mock_output_sequence("public", protocol_to_test)
+    )
+  }
+}
+
 #' Get schema fields for a resource in a Frictionless Data Package.
 #'
 #' This function returns the `fields` attribute from a Table Schema of a
