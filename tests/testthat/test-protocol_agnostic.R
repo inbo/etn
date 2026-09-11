@@ -9,7 +9,13 @@
 # as etnservice is the same version locally on the test machine and deployed on
 # OpenCPU
 test_that("list_animal_project_codes() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_animal_project_codes())
+  expect_protocol_agnostic(list_animal_project_codes(),
+                           protocols = c("opencpu", "localdb"))
+})
+
+test_that("list_animal_project_codes() returns public subset of all available codes", {
+  expect_protocol_subset(list_animal_project_codes(),
+                         protocols = c("public", "localdb"))
 })
 
 test_that("list_acoustic_project_codes() returns identical results independent of the used protocol", {
