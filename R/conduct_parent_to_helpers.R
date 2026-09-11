@@ -153,5 +153,18 @@ conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb", "public
         )
       )
     }
-  )
+  ) |>
+    (\(result) {
+      # If the parent function is a list_* function, perform a natural sort
+      if (
+        stringr::str_starts(
+          function_identity,
+          pattern = stringr::fixed("list_")
+        )
+      ) {
+        stringr::str_sort(result, numeric = TRUE)
+      } else {
+        result
+      }
+    })()
 }
