@@ -17,6 +17,7 @@
 * `get_package()` now includes a bibliography resource built with `get_bibliography()`, replacing the previous references resource (#587).
 * Error messages now provide suggestions when providing an incorrect value to parameters such as `animal_project_code` or `scientific_name` (#587).
 * etn now relies on R >= 4.2.0 (because of the `{arrow}` dependency) (#611).
+* `list_*` functions will now always return their results in naturally sorted order.
 
 # etn 3.0.0
 
