@@ -26,8 +26,6 @@
 #' @examples
 #' expect_protocol_agnostic(list_acoustic_projects())
 #' expect_protocol_agnostic(list_animal_projects())
-#'
-#' @export
 expect_protocol_agnostic <- function(expression,
                                      protocols = c(
                                        "opencpu",
