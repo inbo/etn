@@ -19,35 +19,43 @@ test_that("list_animal_project_codes() returns public subset of all available co
 })
 
 test_that("list_acoustic_project_codes() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_acoustic_project_codes())
+  expect_protocol_agnostic(list_acoustic_project_codes(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_animal_ids() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_animal_ids())
+  expect_protocol_agnostic(list_animal_ids(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_tag_serial_numbers() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_tag_serial_numbers())
+  expect_protocol_agnostic(list_tag_serial_numbers(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_station_names() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_station_names())
+  expect_protocol_agnostic(list_station_names(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_scientific_names() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_scientific_names())
+  expect_protocol_agnostic(list_scientific_names(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_receiver_ids() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_receiver_ids())
+  expect_protocol_agnostic(list_receiver_ids(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_cpod_project_codes() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_cpod_project_codes())
+  expect_protocol_agnostic(list_cpod_project_codes(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 test_that("list_deployment_ids() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(list_deployment_ids())
+  expect_protocol_agnostic(list_deployment_ids(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 # get_acoustic_detections -------------------------------------------------
@@ -114,29 +122,34 @@ test_that("get_acoustic_detections() returns identical results for multiple args
 # get_cpod_projects -------------------------------------------------------
 
 test_that("get_cpod_projects() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(get_cpod_projects())
+  expect_protocol_agnostic(get_cpod_projects(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 # get_animal_projects -----------------------------------------------------
 
 test_that("get_animal_projects() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(get_animal_projects())
+  expect_protocol_agnostic(get_animal_projects(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 # get_acoustic_projects ---------------------------------------------------
 
 test_that("get_acoustic_projects() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(get_acoustic_projects())
+  expect_protocol_agnostic(get_acoustic_projects(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 # get_animals -------------------------------------------------------------
 
 test_that("get_animals() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(get_animals())
+  expect_protocol_agnostic(get_animals(),
+                           protocols = c("opencpu", "localdb"))
 })
 
 # get_tags ----------------------------------------------------------------
 
 test_that("get_tags() returns identical results independent of the used protocol", {
-  expect_protocol_agnostic(get_tags())
+  expect_protocol_agnostic(get_tags(),
+                           protocols = c("opencpu", "localdb"))
 })
