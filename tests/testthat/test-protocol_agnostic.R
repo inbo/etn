@@ -166,11 +166,21 @@ test_that("get_cpod_projects() returns identical results independent of the used
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("get_cpod_projects() returns public subset of all available cpod projects", {
+  expect_protocol_subset(get_cpod_projects(),
+                         protocols = c("public", "localdb"))
+})
+
 # get_animal_projects -----------------------------------------------------
 
 test_that("get_animal_projects() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(get_animal_projects(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("get_animal_projects() returns public subset of all available animal projects", {
+  expect_protocol_subset(get_animal_projects(),
+                         protocols = c("public", "localdb"))
 })
 
 # get_acoustic_projects ---------------------------------------------------
@@ -180,6 +190,11 @@ test_that("get_acoustic_projects() returns identical results independent of the 
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("get_acoustic_projects() returns public subset of all available acoustic projects", {
+  expect_protocol_subset(get_acoustic_projects(),
+                         protocols = c("public", "localdb"))
+})
+
 # get_animals -------------------------------------------------------------
 
 test_that("get_animals() returns identical results independent of the used protocol", {
@@ -187,9 +202,19 @@ test_that("get_animals() returns identical results independent of the used proto
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("get_animals() returns public subset of all available animals", {
+  expect_protocol_subset(get_animals(),
+                         protocols = c("public", "localdb"))
+})
+
 # get_tags ----------------------------------------------------------------
 
 test_that("get_tags() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(get_tags(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("get_tags() returns public subset of all available tags", {
+  expect_protocol_subset(get_tags(),
+                         protocols = c("public", "localdb"))
 })
