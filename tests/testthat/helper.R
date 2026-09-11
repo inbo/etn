@@ -33,14 +33,20 @@ expect_protocol_agnostic <- function(expression,
                                        "public"
                                      )) {
   # Skip if no credentials are stored
-  skip_if_no_authentication()
+  if (any(c("opencpu", "localdb") %in% protocols)) {
+    skip_if_no_authentication()
+  }
 
   # Skip if not both the API and the local database are available to compare
-  testthat::skip_if_offline(host = "opencpu.lifewatch.be")
-  testthat::skip_if_not(
-    localdb_is_available(),
-    "ETN is not a local database on this machine"
-  )
+  if ("opencpu" %in% protocols) {
+    testthat::skip_if_offline(host = "opencpu.lifewatch.be")
+  }
+  if ("localdb" %in% protocols) {
+    testthat::skip_if_not(
+      localdb_is_available(),
+      "ETN is not a local database on this machine"
+    )
+  }
 
   # Test if the provided expression returns identical results regardless of
   # the return value of select_protocol()
