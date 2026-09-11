@@ -18,7 +18,8 @@
 #' reliable across different data retrieval methods. This expectation will be
 #' skipped if the machine is offline or if the ETN database is not available.
 #'
-#' @inherits testthat::expect_identical return
+#'
+#' @inherits testthat::expect_identical returns
 #' @param expression The expression to be tested.
 #' @param protocols Character vector of protocol names to test.
 #' @export
