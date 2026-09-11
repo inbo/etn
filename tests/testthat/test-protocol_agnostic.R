@@ -23,9 +23,19 @@ test_that("list_acoustic_project_codes() returns identical results independent o
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("list_acoustic_project_codes() returns public subset of all available codes", {
+  expect_protocol_subset(list_acoustic_project_codes(),
+                         protocols = c("public", "localdb"))
+})
+
 test_that("list_animal_ids() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_animal_ids(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("list_animal_ids() returns public subset of all available ids", {
+  expect_protocol_subset(list_animal_ids(),
+                         protocols = c("public", "localdb"))
 })
 
 test_that("list_tag_serial_numbers() returns identical results independent of the used protocol", {
@@ -33,9 +43,19 @@ test_that("list_tag_serial_numbers() returns identical results independent of th
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("list_tag_serial_numbers() returns public subset of all available serial numbers", {
+  expect_protocol_subset(list_tag_serial_numbers(),
+                         protocols = c("public", "localdb"))
+})
+
 test_that("list_station_names() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_station_names(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("list_station_names() returns public subset of all available station names", {
+  expect_protocol_subset(list_station_names(),
+                         protocols = c("public", "localdb"))
 })
 
 test_that("list_scientific_names() returns identical results independent of the used protocol", {
@@ -43,9 +63,19 @@ test_that("list_scientific_names() returns identical results independent of the 
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("list_scientific_names() returns public subset of all available scientific names", {
+  expect_protocol_subset(list_scientific_names(),
+                         protocols = c("public", "localdb"))
+})
+
 test_that("list_receiver_ids() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_receiver_ids(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("list_receiver_ids() returns public subset of all available receiver ids", {
+  expect_protocol_subset(list_receiver_ids(),
+                         protocols = c("public", "localdb"))
 })
 
 test_that("list_cpod_project_codes() returns identical results independent of the used protocol", {
@@ -53,9 +83,19 @@ test_that("list_cpod_project_codes() returns identical results independent of th
                            protocols = c("opencpu", "localdb"))
 })
 
+test_that("list_cpod_project_codes() returns public subset of all available cpod project codes", {
+  expect_protocol_subset(list_cpod_project_codes(),
+                         protocols = c("public", "localdb"))
+})
+
 test_that("list_deployment_ids() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(list_deployment_ids(),
                            protocols = c("opencpu", "localdb"))
+})
+
+test_that("list_deployment_ids() returns public subset of all available deployment ids", {
+  expect_protocol_subset(list_deployment_ids(),
+                         protocols = c("public", "localdb"))
 })
 
 # get_acoustic_detections -------------------------------------------------
