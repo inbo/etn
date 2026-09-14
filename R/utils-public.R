@@ -375,9 +375,7 @@ read_stac <- function(function_identity = c(
   stac_result <- switch(function_identity,
     list_acoustic_project_codes = {
       get_public_metadata("projects") |>
-        # should this be project_type? See
-        # etnservice::list_acoustic_project_codes()
-        dplyr::filter(.data$telemetry_type == "Acoustic") |>
+        dplyr::filter(.data$project_type == "Acoustic") |>
         dplyr::pull("project_code") |>
         unique()
     },
