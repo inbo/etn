@@ -57,7 +57,7 @@ Imports:
     utils,
     withr
 Suggests:
-    etnservice (>= 0.6.0),
+    etnservice (>= 0.7.0),
     formattable,
     kableExtra,
     knitr,
