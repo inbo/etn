@@ -57,6 +57,7 @@ get_tags(acoustic_tag_id = c("A69-1601-16129", "A69-1601-16130"))
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
 \code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
