@@ -1,6 +1,7 @@
-# This file contains tests that verify that certain listing functions in the ETN
-# package return identical results regardless of whether they are using the API
-# or a local database connection.
+# This file contains tests that verify that cfunctions in the ETN package return
+# identical results regardless of whether they are using the API or a local
+# database connection. When the public protocol is used, a subset of the
+# complete dataset is expected.
 
 # Test if listing functions are protocol agnostic -------------------------
 
