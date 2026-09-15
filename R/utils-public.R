@@ -143,6 +143,31 @@ get_public_detections <- function(animal_project_code,
       list_acoustic_project_codes()
     )
 
+
+  # Set the catalog to read detections from ---------------------------------
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
+
+  # Return empty tibble if no detections ------------------------------------
+  # Early return
+  if(!selected_project_code %in% list_public_detections()$project_code){
+
+    # Create emtpy tibble with the correct columns
+    empty_tbl <-
+      file.path(catalog_root, "acoustic_telemetry",
+              # Read the path of the first project of the catalog to get the
+              # columns from
+              list_public_detections()[1,"path"]) |>
+      jsonlite::read_json() |>
+      purrr::chuck("assets", "data", "href") |>
+      # Do not collect data, but create pointer
+      arrow::read_parquet(as_data_frame = FALSE) |>
+      # Drop all rows
+      head(0L)
+
+    # Collect column data only, no records.
+    return(dplyr::collect(empty_tbl))
+  }
+
   # Read the parquet paths from the catalogue -------------------------------
   detections_path <-
     public_detections |>
