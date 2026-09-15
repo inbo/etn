@@ -131,7 +131,7 @@ get_public_detections <- function(animal_project_code,
   if (rlang::is_missing(animal_project_code) || is.null(animal_project_code)) {
     cli::cli_abort(
       "When getting public detections data, providing an animal_project_code is
-      required. Use {.run [list_public_detections()](etn::list_public_detections())}
+      required. Use {.run [list_acoustic_project_codes()](etn::list_acoustic_project_codes())}
       to see the available project codes.",
       class = "etn_error_no_animal_proj_provided"
     )
