@@ -140,7 +140,7 @@ get_public_detections <- function(animal_project_code,
   selected_project_code <-
     check_value(
       animal_project_code,
-      public_detections$project_code
+      list_acoustic_project_codes()
     )
 
   # Read the parquet paths from the catalogue -------------------------------
@@ -148,8 +148,6 @@ get_public_detections <- function(animal_project_code,
     public_detections |>
     dplyr::filter(.data$project_code %in% selected_project_code) |>
     dplyr::pull("path")
-
-  catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # Read the parquet paths from the catalog ---------------------------------
 
