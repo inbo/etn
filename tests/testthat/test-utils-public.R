@@ -136,6 +136,28 @@ test_that("get_public_detections() returns error when no animal_project_code", {
   )
 })
 
+test_that("get_public_detections() returns an empty tibble on projects that are open but have no data", {
+  # Find an open project that is missing from the catalog (no detections)
+  no_det_projects <-
+    get_animal_projects() |>
+    dplyr::filter(!.data$moratorium,
+                  !.data$project_code %in% list_public_detections()$project_code,
+                  .data$telemetry_type == "Acoustic") |>
+    dplyr::pull(dplyr::all_of("project_code"))
+
+  purrr::walk(
+    # Test 5 projects
+    sample(no_det_projects, size = 5L),
+    \(project_to_test) {
+      expect_shape(
+        get_public_detections(animal_project_code = !!project_to_test),
+        nrow = 0L
+      )
+    }
+  )
+
+})
+
 # get_public_metadata() ---------------------------------------------------
 test_that("get_public_metadata() returns no error for supported tables", {
   expect_no_error(get_public_metadata("animals"))
