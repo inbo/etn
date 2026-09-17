@@ -115,31 +115,42 @@ expect_protocol_subset <- function(expression,
   # Test if the provided expression returns identical results regardless of
   # the return value of select_protocol()
   for (protocol_to_test in purrr::keep(protocols, ~ .x != "public")) {
-    testthat::with_mocked_bindings(
+    actual <- with_mocked_bindings(
       code = {
-        actual <- rlang::eval_tidy(rlang::enquo(expression))
-        expectation <- rlang::eval_tidy(rlang::enquo(expression))
-        # If the expression returns a data.frame we check if there is no rows
-        # that are in the returned value that aren't in the expectation.
-        if (is.data.frame(actual)) {
-          testthat::expect_shape(
-            dplyr::setdiff(
-              actual,
-              expectation
-            ),
-            nrow = 0L
-          )
-        } else {
-          # If the expression returns a vector we check if there is no values
-          # that are in the returned value that aren't in the expectation..
-          testthat::expect_in(
-            !!actual,
-            !!expectation
-          )
-        }
+        rlang::eval_tidy(rlang::enquo(expression))
       },
-      select_protocol = testthat::mock_output_sequence("public", protocol_to_test)
+      select_protocol = function(...) {
+        "public"
+      }
     )
+
+    expectation <- with_mocked_bindings(
+      code = {
+        rlang::eval_tidy(rlang::enquo(expression))
+      },
+      select_protocol = function(...) {
+        protocol_to_test
+      }
+    )
+
+    # If the expression returns a data.frame we check if there is no rows
+    # that are in the returned value that aren't in the expectation.
+    if (is.data.frame(actual)) {
+      testthat::expect_shape(
+        dplyr::setdiff(
+          actual,
+          expectation
+        ),
+        nrow = 0L
+      )
+    } else {
+      # If the expression returns a vector we check if there is no values
+      # that are in the returned value that aren't in the expectation..
+      testthat::expect_in(
+        !!actual,
+        !!expectation
+      )
+    }
   }
 }
 
