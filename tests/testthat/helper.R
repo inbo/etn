@@ -114,8 +114,8 @@ expect_protocol_subset <- function(expression,
     testthat::with_mocked_bindings(
       code = {
         testthat::expect_in(
-          rlang::eval_tidy(rlang::enquo(expression)),
-          rlang::eval_tidy(rlang::enquo(expression))
+          !!rlang::eval_tidy(rlang::enquo(expression)),
+          !!rlang::eval_tidy(rlang::enquo(expression))
         )
       },
       select_protocol = testthat::mock_output_sequence("public", protocol_to_test)
