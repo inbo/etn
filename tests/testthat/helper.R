@@ -122,7 +122,7 @@ expect_protocol_subset <- function(expression,
         # If the expression returns a data.frame we check if there is no rows
         # that are in the returned value that aren't in the expectation.
         if (is.data.frame(actual)) {
-          expect_shape(
+          testthat::expect_shape(
             dplyr::setdiff(
               actual,
               expectation
