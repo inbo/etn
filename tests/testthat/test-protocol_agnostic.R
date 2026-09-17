@@ -113,6 +113,13 @@ test_that("get_acoustic_detections() returns identical results on big query", {
   )
 })
 
+test_that("get_acoustic_detections() returns public subset on limit", {
+  expect_protocol_subset(
+    get_acoustic_detections(animal_project_code = "2011_Warnow", limit = TRUE),
+    protocols = c("public", "opencpu")
+  )
+})
+
 test_that("get_acoustic_detections() returns identical results for multiple stations", {
   expect_protocol_agnostic(
     get_acoustic_detections(
