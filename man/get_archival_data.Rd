@@ -56,7 +56,7 @@ following columns:
 \item \code{measurement_value}: The value of the measurement.
 \item \code{measurement_unit}: The unit of the measurement (e.g. "C", "Pa", etc.).
 \item \code{animal_project_code}: The animal project code of the animal that recorded the data.
-\item \code{animal_id}: The animal id of the animal that recorded the data.
+\item \code{animal_id}: The animal id of the animal the tag was attached to.
 \item \code{tag_serial_number}: The tag serial number of the tag that recorded the data.
 }
 }
@@ -79,7 +79,7 @@ argument. See \link[arrow:Dataset]{arrow::Dataset} for more information.
 
 \examples{
 \dontshow{if (interactive() & etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
-  get_archival_data(tag_serial_number = "A15757", limit = TRUE)
+get_archival_data(tag_serial_number = "A15757", limit = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
