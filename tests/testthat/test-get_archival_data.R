@@ -230,7 +230,7 @@ test_that("get_archival_data() returns warning on filters with no data", {
   )
 })
 
-test_that("get_archival_data() can write out to a path", {
+test_that("get_archival_data() can write to a path", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()

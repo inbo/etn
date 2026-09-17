@@ -34,7 +34,7 @@
 #'   - `measurement_value`: The value of the measurement.
 #'   - `measurement_unit`: The unit of the measurement (e.g. "C", "Pa", etc.).
 #'   - `animal_project_code`: The animal project code of the animal that recorded the data.
-#'   - `animal_id`: The animal id of the animal that recorded the data.
+#'   - `animal_id`: The animal id of the animal the tag was attached to.
 #'   - `tag_serial_number`: The tag serial number of the tag that recorded the data.
 #'
 #' @section Returning large amounts of data out of memory:
@@ -49,7 +49,7 @@
 #' @export
 #' @family access functions
 #' @examplesIf interactive() & etn:::credentials_are_set()
-#'   get_archival_data(tag_serial_number = "A15757", limit = TRUE)
+#' get_archival_data(tag_serial_number = "A15757", limit = TRUE)
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
@@ -322,7 +322,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 #' @inheritParams get_animals
 #'
 #' @returns A tibble with a column `converted_archival_file_uuid` that contains
-#'   the UUID pointing to the archival data csv file. Other columns are:
+#'   the UUID pointing to the archival data csv file. Other columns are
 #'   `animal_id`, `tag_serial_number`, and `animal_project_code`.
 #'
 #' @family helper functions
