@@ -89,9 +89,11 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Sometimes, multiple uuids are passed. We only need to download every file
   # once.
   uuid_tbl <-
-      get_archival_data_uuid(tag_serial_number,
-                             animal_id,
-                             animal_project_code)|>
+      get_archival_data_uuid(
+        tag_serial_number,
+        animal_id,
+        animal_project_code
+        )|>
     dplyr::distinct()
 
   uuids <-
