@@ -4,8 +4,7 @@ test_that("get_archival_data() returns a tibble by default", {
   skip_if_no_authentication()
 
   expect_s3_class(
-    get_archival_data(tag_serial_number = "A15757",
-                      limit = TRUE),
+    get_archival_data(tag_serial_number = "A15757", limit = TRUE),
     "tbl"
   )
 })
@@ -17,9 +16,7 @@ test_that("get_archival_data() can return an arrow datasetquery", {
 
   expect_s3_class(
     get_archival_data(
-      tag_serial_number = "A15757",
-      return_as = "arrow",
-      limit = TRUE
+      tag_serial_number = "A15757", return_as = "arrow", limit = TRUE
     ),
     "arrow_dplyr_query"
   )
@@ -31,8 +28,7 @@ test_that("get_archival_data() returns the expected fields", {
   skip_if_no_authentication()
 
   expect_named(
-    get_archival_data(tag_serial_number = "A15757",
-                      limit = TRUE),
+    get_archival_data(tag_serial_number = "A15757", limit = TRUE),
     c(
       "tag_id",
       "timestamp_utc",
@@ -53,8 +49,7 @@ test_that("get_archival_data() returns the expected column classes", {
 
   expect_identical(
     purrr::map(
-      get_archival_data(tag_serial_number = "A15757",
-                        limit = TRUE),
+      get_archival_data(tag_serial_number = "A15757", limit = TRUE),
       class
     ),
     list(
@@ -77,8 +72,7 @@ test_that("get_archival_data() has values for identifier columns", {
 
   # These columns are fetched via get_archival_data_uuid() from a database view,
   # and should never be empty.
-  archival_data <- get_archival_data(tag_serial_number = "A15757",
-                                     limit = TRUE)
+  archival_data <- get_archival_data(tag_serial_number = "A15757", limit = TRUE)
   expect_all_false(is.na(archival_data$tag_serial_number))
   expect_all_false(is.na(archival_data$animal_id))
   expect_all_false(is.na(archival_data$animal_project_code))
@@ -96,7 +90,6 @@ test_that("get_archival_data() returns error on no archival data found", {
   )
 
   # But it should return the remaining data if only some tags have no data
-
 })
 
 test_that("get_archival_data() returns error on invalid values", {
@@ -107,9 +100,7 @@ test_that("get_archival_data() returns error on invalid values", {
   # I'm testing the capability to forward errors from the API, the actual check
   # happens in etnservice. We don't need to test this for all aruguments.
   expect_error(
-    get_archival_data(
-      tag_serial_number = "not_a_tag_serial_no"
-    ),
+    get_archival_data(tag_serial_number = "not_a_tag_serial_no"),
     regexp = "Can't find tag_serial_number"
   )
 })
@@ -120,8 +111,7 @@ test_that("get_archival_data() can filter on tag_serial_number", {
   skip_if_no_authentication()
 
   expect_identical(
-    get_archival_data(tag_serial_number = "A15757",
-                      limit = TRUE) |>
+    get_archival_data(tag_serial_number = "A15757", limit = TRUE) |>
       dplyr::pull("tag_serial_number") |>
       unique(),
     "A15757"
@@ -134,8 +124,7 @@ test_that("get_archival_data() can filter on animal_id", {
   skip_if_no_authentication()
 
   expect_identical(
-    get_archival_data(animal_id = 18113,
-                      limit = TRUE) |>
+    get_archival_data(animal_id = 18113, limit = TRUE) |>
       dplyr::pull("animal_id") |>
       unique(),
     18113L
@@ -189,7 +178,7 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
   )
 })
 
-test_that("get_archival_data() returns error on no query arguments",{
+test_that("get_archival_data() returns error on no query arguments", {
   # It's not a good idea to try to fetch all archival data in one call.
 
   skip_if_offline("opencpu.lifewatch.be")
@@ -210,8 +199,10 @@ test_that("get_archival_data() returns warning on filters with no data", {
   expect_warning(
     get_archival_data(
       tag_serial_number = "A15757",
-      animal_id = c(226, # Animal not connected to the tag
-                    18113)
+      animal_id = c(
+        226, # Animal not connected to the tag
+        18113
+      )
     ),
     class = "archival_data_not_found_for_filter"
   )
