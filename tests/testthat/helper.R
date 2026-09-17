@@ -91,21 +91,25 @@ expect_protocol_agnostic <- function(expression,
 #' expect_protocol_subset(list_animal_project_codes(),
 #'                        protocols = c("public", "opencpu"))
 expect_protocol_subset <- function(expression,
-                                   protocols = c("public",
-                                                 "opencpu",
-                                                 "localdb")) {
-  if(any(c("opencpu", "localdb") %in% protocols)) {
+                                   protocols = c(
+                                     "public",
+                                     "opencpu",
+                                     "localdb"
+                                   )) {
+  if (any(c("opencpu", "localdb") %in% protocols)) {
     # Skip if no credentials are stored
     skip_if_no_authentication()
   }
 
   # Skip if not both the API and the local database are available to compare
-  if("opencpu" %in% protocols) {
+  if ("opencpu" %in% protocols) {
     testthat::skip_if_offline(host = "opencpu.lifewatch.be")
   }
-  if("localdb" %in% protocols) {
-    testthat::skip_if_not(localdb_is_available(),
-                          "ETN is not a local database on this machine")
+  if ("localdb" %in% protocols) {
+    testthat::skip_if_not(
+      localdb_is_available(),
+      "ETN is not a local database on this machine"
+    )
   }
 
   # Test if the provided expression returns identical results regardless of
@@ -113,10 +117,25 @@ expect_protocol_subset <- function(expression,
   for (protocol_to_test in purrr::keep(protocols, ~ .x != "public")) {
     testthat::with_mocked_bindings(
       code = {
-        testthat::expect_in(
-          !!rlang::eval_tidy(rlang::enquo(expression)),
-          !!rlang::eval_tidy(rlang::enquo(expression))
-        )
+        actual <- expectation <- rlang::eval_tidy(rlang::enquo(expression))
+        # If the expression returns a data.frame we check if there is no rows
+        # that are in the returned value that aren't in the expectation.
+        if (is.data.frame(actual)) {
+          expect_shape(
+            dplyr::setdiff(
+              actual,
+              expectation
+            ),
+            nrow = 0L
+          )
+        } else {
+          # If the expression returns a vector we check if there is no values
+          # that are in the returned value that aren't in the expectation..
+          testthat::expect_in(
+            !!actual,
+            !!expectation
+          )
+        }
       },
       select_protocol = testthat::mock_output_sequence("public", protocol_to_test)
     )
