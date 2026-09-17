@@ -117,7 +117,8 @@ expect_protocol_subset <- function(expression,
   for (protocol_to_test in purrr::keep(protocols, ~ .x != "public")) {
     testthat::with_mocked_bindings(
       code = {
-        actual <- expectation <- rlang::eval_tidy(rlang::enquo(expression))
+        actual <- rlang::eval_tidy(rlang::enquo(expression))
+        expectation <- rlang::eval_tidy(rlang::enquo(expression))
         # If the expression returns a data.frame we check if there is no rows
         # that are in the returned value that aren't in the expectation.
         if (is.data.frame(actual)) {
