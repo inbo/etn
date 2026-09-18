@@ -107,7 +107,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   ## Stop if no data found --------------------------------------------------
   if (length(uuids) == 0) {
     cli::cli_abort(
-      "No archival data found for the provided filters.",
+      "Can't find archival data the provided input.",
       class = "archival_data_not_found"
     )
   }
