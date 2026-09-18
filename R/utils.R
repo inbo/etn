@@ -441,9 +441,9 @@ is_interactive <- function(...) {
 
 #' Wrapper for base::readline
 #'
-#' This function is wrapped because I find it easier to read, and so it can be
-#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behaviour of `get_credentials()`
+#' This function is wrapped as an easier to read alias, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the
+#' prompting behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd
