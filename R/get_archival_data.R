@@ -28,6 +28,7 @@
 #' @returns Depending on the value of `return_as`, either an [arrow::Dataset] or
 #'   a data.frame with the archival data values. The resulting table has the
 #'   following columns:
+#'
 #'   - `tag_id`: The tag id of the tag that recorded the data.
 #'   - `timestamp_utc`: The timestamp of the measurement in UTC.
 #'   - `measurement_type`: The type of measurement (e.g. "Temp", "Pressure, etc.).
