@@ -392,12 +392,10 @@ is_writeable <- function(path, call = rlang::caller_env()) {
 
 #' Get file sizes for a vector of file paths
 #'
-#' This is a slight variant on the base function file.size. I've decided to wrap
-#' it so it can be more easily mocked in tests, allowing me to trigger tests
-#' that depend on certain downloaded files being size 0.
-#'
-#' This function also differs from it's base equivalent in that it returns a
-#' named integer vector so the file paths are retained.
+#' This is a slight variant on the base function file.size. Apart from allowing
+#' a vector of file paths this functon can also be more easily mocked in tests,
+#' allowing the triggering of tests that depend on certain downloaded files
+#' being size 0.
 #'
 #' @param x A character vector of file paths.
 #'
