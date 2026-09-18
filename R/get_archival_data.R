@@ -205,7 +205,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     # Download files, called for side effect of writing files to disk only, we
     # don't store the response objects in memory.
       purrr::walk2(requests, csv_file_paths, \(req, path) {
-        if (file.exists(path) & file_size(path) > 0) {
+        if (file.exists(path) && file_size(path) > 0) {
           # Skip files that have already been downloaded.
         } else {
           httr2::req_perform(req, path = path)
