@@ -270,13 +270,15 @@ get_archival_data <- function(tag_serial_number = NULL,
       # Check object size to warn if too large to return as tibble: 1 GB
       total_size_bytes <- sum(file_size(csv_file_paths))
       one_gb <- 10e8 # bytes
-      total_n_rows <- sensor_data |>
-        dplyr::summarise(n_rows = dplyr::n()) |>
-        dplyr::collect() |>
-        dplyr::pull("n_rows")
       if (total_size_bytes > one_gb) {
         modified_call <-
           rlang::call_modify(rlang::call_match(), return_as = "arrow")
+
+        total_n_rows <- sensor_data |>
+          dplyr::summarise(n_rows = dplyr::n()) |>
+          dplyr::collect() |>
+          dplyr::pull("n_rows")
+
         # Locally change the option so the warning is displayed before cli_yes()
         # prints to console.
         withr::with_options(
