@@ -68,7 +68,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   } else {
     # Sort the references so the closest matches are mentioned. Only show 5
     # members.
-    candidates_col <- purrr::map(distances, \(dist_for_value){
+    candidates_col <- purrr::map(distances, \(dist_for_value) {
       y[order(as.vector(dist_for_value))]
     }) |>
       # Convert into a vector and truncate for the error message
@@ -141,7 +141,7 @@ cli_yes <- function(x, shuffle = TRUE, .envir = parent.frame()) {
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
-    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+      is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
       cli::cli_alert_info(
         "No credentials stored. See {.vignette etn::authentication} to configure
@@ -406,7 +406,7 @@ is_writeable <- function(path, call = rlang::caller_env()) {
 #'
 #' @family helper functions
 #' @noRd
-file_size <- function(x){
+file_size <- function(x) {
   purrr::map_int(
     x, file.size
   ) |>
