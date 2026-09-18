@@ -140,7 +140,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   if (length(values_no_file_found) > 0) {
     cli::cli_warn(
-      c("No archival data was found for:",
+      c("Can't find archival data for:",
         "x" = purrr::imap_chr(
           values_no_file_found,
           ~ glue::glue("{.y}: {glue::glue_collapse(.x, sep = ', ')}")
