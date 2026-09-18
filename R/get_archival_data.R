@@ -190,8 +190,8 @@ get_archival_data <- function(tag_serial_number = NULL,
     )
   }
 
-  csv_file_paths <- file.path(csv_dir, names(requests)) |>
-    paste0(".csv") |>
+  csv_file_paths <-
+    file.path(csv_dir, paste0(names(requests), ".csv")) |>
     purrr::set_names(nm = names(requests))
 
   if (limit) {
