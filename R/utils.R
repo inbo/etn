@@ -284,7 +284,7 @@ select_protocol <- function() {
   }
 
   # Fallback on API
-  return("opencpu")
+  "opencpu"
 }
 
 #' Remove HTML tags from a string
