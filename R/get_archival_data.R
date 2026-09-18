@@ -67,10 +67,12 @@ get_archival_data <- function(tag_serial_number = NULL,
   query_args <- setdiff(rlang::fn_fmls_names(), non_query_args) |>
     mget()
   provided_query_args <- purrr::discard(query_args, is.null)
-  if(length(provided_query_args) == 0 && !limit){
+  if (length(provided_query_args) == 0 && !limit) {
     cli::cli_abort(
-      c("{.strong Attempting to download all available archival data in one go is unwise.}",
-      "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."),
+      c(
+        "{.strong Attempting to download all available archival data in one go is unwise.}",
+        "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."
+      ),
       class = "archival_data_no_query_args"
     )
   }
@@ -90,11 +92,11 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Sometimes, multiple uuids are passed. We only need to download every file
   # once.
   uuid_tbl <-
-      get_archival_data_uuid(
-        tag_serial_number,
-        animal_id,
-        animal_project_code
-        )|>
+    get_archival_data_uuid(
+      tag_serial_number,
+      animal_id,
+      animal_project_code
+    ) |>
     dplyr::distinct()
 
   uuids <-
@@ -103,14 +105,14 @@ get_archival_data <- function(tag_serial_number = NULL,
     unique()
 
   ## Stop if no data found --------------------------------------------------
-  if(length(uuids) == 0){
+  if (length(uuids) == 0) {
     cli::cli_abort(
       "No archival data found for the provided filters.",
       class = "archival_data_not_found"
     )
   }
 
-  if(progress && !limit){
+  if (progress && !limit) {
     cli::cli_progress_step("Preparing to download {length(uuids)} files.")
   }
 
@@ -162,10 +164,12 @@ get_archival_data <- function(tag_serial_number = NULL,
           httr2::req_url_path_append(uuid)
       }
     ) |>
-    purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)})
+    purrr::map(\(req) {
+      httr2::req_retry(req, max_tries = 2)
+    })
 
   # If limit is TRUE, we only want to fetch a single file.
-  if(limit){
+  if (limit) {
     requests <- requests[1]
   }
 
@@ -199,19 +203,23 @@ get_archival_data <- function(tag_serial_number = NULL,
     requests |>
       purrr::map(httr2::req_perform_connection) |>
       # Read the header, and 100 lines
-      purrr::map(\(req) {httr2::resp_stream_lines(req, lines = 101)}) |>
+      purrr::map(\(req) {
+        httr2::resp_stream_lines(req, lines = 101)
+      }) |>
       # Write to temp file, same as normally
-      purrr::walk2(csv_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
+      purrr::walk2(csv_file_paths, \(lines, path) {
+        readr::write_lines(lines, file = path)
+      })
   } else {
     # Download files, called for side effect of writing files to disk only, we
     # don't store the response objects in memory.
-      purrr::walk2(requests, csv_file_paths, \(req, path) {
-        if (file.exists(path) && file_size(path) > 0) {
-          # Skip files that have already been downloaded.
-        } else {
-          httr2::req_perform(req, path = path)
-        }
-      }, .progress = ifelse(progress, "Downloading", FALSE))
+    purrr::walk2(requests, csv_file_paths, \(req, path) {
+      if (file.exists(path) && file_size(path) > 0) {
+        # Skip files that have already been downloaded.
+      } else {
+        httr2::req_perform(req, path = path)
+      }
+    }, .progress = ifelse(progress, "Downloading", FALSE))
   }
 
   # Parse responses ---------------------------------------------------------
@@ -256,12 +264,12 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Return object -----------------------------------------------------------
 
-  switch (return_as,
+  switch(return_as,
     arrow = sensor_data,
     tibble = {
       # Check object size to warn if too large to return as tibble: 1 GB
       total_size_bytes <- sum(file_size(csv_file_paths))
-      one_gb <- 10e8 #bytes
+      one_gb <- 10e8 # bytes
       total_n_rows <- sensor_data |>
         dplyr::summarise(n_rows = dplyr::n()) |>
         dplyr::collect() |>
@@ -309,7 +317,8 @@ get_archival_data <- function(tag_serial_number = NULL,
         }
       }
 
-      dplyr::collect(sensor_data)}
+      dplyr::collect(sensor_data)
+    }
   )
 
 }
