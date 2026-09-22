@@ -108,7 +108,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   if (length(uuids) == 0) {
     cli::cli_abort(
       "Can't find archival data the provided input.",
-      class = "archival_data_not_found"
+      class = "etn_error_archival_data_not_found"
     )
   }
 
@@ -148,7 +148,7 @@ get_archival_data <- function(tag_serial_number = NULL,
           # Drop names so CLI can do in line formatting instead
           purrr::set_names(nm = NULL)
       ),
-      class = "archival_data_not_found_for_filter"
+      class = "etn_warning_archival_data_not_found_for_filter"
     )
   }
 

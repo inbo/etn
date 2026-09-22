@@ -100,7 +100,7 @@ test_that("get_archival_data() returns error on no archival data found", {
   expect_error(
     # This tag does not have archival data as of writing this test.
     get_archival_data(tag_serial_number = "A19163"),
-    class = "archival_data_not_found"
+    class = "etn_error_archival_data_not_found"
   )
 
   # But it should return the remaining data if only some tags have no data
@@ -226,7 +226,7 @@ test_that("get_archival_data() returns warning on filters with no data", {
         67441
       )
     ),
-    class = "archival_data_not_found_for_filter"
+    class = "etn_warning_archival_data_not_found_for_filter"
   )
 })
 
