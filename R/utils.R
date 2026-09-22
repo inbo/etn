@@ -68,7 +68,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   } else {
     # Sort the references so the closest matches are mentioned. Only show 5
     # members.
-    candidates_col <- purrr::map(distances, \(dist_for_value){
+    candidates_col <- purrr::map(distances, \(dist_for_value) {
       y[order(as.vector(dist_for_value))]
     }) |>
       # Convert into a vector and truncate for the error message
@@ -83,6 +83,44 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
       call = rlang::caller_env()
     )
   }
+}
+
+#' Prompt the user for confirmation
+#'
+#' This function was inspired by `testthat::ui_yeah()` and duplicates it's
+#' functionality.
+#'
+#' @param x Message to display to the user. Supports `{cli}`/`{glue}` syntax.
+#' @param shuffle Logical. If `TRUE`, the order of the options will be shuffled.
+#' @param .envir Environment in which to evaluate the message. Defaults to the
+#'   parent frame.
+#'
+#' @returns Logical. `TRUE` if the user selected a "yes" option, `FALSE`
+#'   otherwise.
+#'
+#' @family helper functions
+#' @noRd
+cli_yes <- function(x, shuffle = TRUE, .envir = parent.frame()) {
+  yes_options <- c("Yes", "By all means", "Indeed", "Certainly", "Yeah")
+  no_options <- c("No", "Negative", "Nope", "Let's not", "Nah", "Never")
+  choices <- c(sample(yes_options, 1L), sample(no_options, 2L))
+
+  if (shuffle) {
+    choices <- sample(choices)
+  }
+  cli::cli_inform(
+    x,
+    class = "cli_yes_prompt",
+    .envir = .envir
+  )
+  if (!is_interactive()) {
+    cli::cli_abort(
+      "Prompting for confirmation failed, please retry in interactive mode",
+      class = "cli_yes_non_interactive"
+    )
+  }
+  result <- utils::menu(choices)
+  choices[[result]] %in% yes_options && result != 0
 }
 
 #' Get credentials from environment variables, or set them manually
@@ -103,7 +141,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
-    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+      is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
       cli::cli_alert_info(
         "No credentials stored. See {.vignette etn::authentication} to configure
@@ -246,7 +284,7 @@ select_protocol <- function() {
   }
 
   # Fallback on API
-  return("opencpu")
+  "opencpu"
 }
 
 #' Remove HTML tags from a string
@@ -320,6 +358,59 @@ etn_citation <- function() {
   sprintf("%s. %s. %s, %s, %s.", authors, title, doi_url, version_str, docs_url)
 }
 
+#' Check if a path is writeable
+#'
+#' @param path Character string of length one with the path to check.
+#' @param call Optional call object to include in the error message. This can be
+#'   used to provide more context in the error message, such as which function
+#'   is calling this helper function.
+#'
+#' @returns The input path invisibly if it is writeable, or an error if it is
+#'   not.
+#'
+#' @family helper functions
+#' @noRd
+#' @examplesIf interactive()
+#'   is_writeable(tempdir())
+is_writeable <- function(path, call = rlang::caller_env()) {
+  if (!is.character(path) || length(path) != 1) {
+    cli::cli_abort("{.arg path} must be a character string of length 1.",
+                   call = call)
+  }
+  if (!file.exists(path)) {
+    cli::cli_abort("The provided path {.path {path}} does not exist.",
+                   call = call)
+  }
+
+  if (file.access(path, mode = 2) != 0) {
+    cli::cli_abort("No write permission for {.path {path}}.",
+                   call = call)
+  }
+
+  invisible(path)
+}
+
+#' Get file sizes for a vector of file paths
+#'
+#' This is a slight variant on the base function file.size. Apart from allowing
+#' a vector of file paths this functon can also be more easily mocked in tests,
+#' allowing the triggering of tests that depend on certain downloaded files
+#' being size 0.
+#'
+#' @param x A character vector of file paths.
+#'
+#' @returns An integer vector of file sizes in bytes, with names corresponding
+#'   to the input file paths.
+#'
+#' @family helper functions
+#' @noRd
+file_size <- function(x) {
+  purrr::map_int(
+    x, file.size
+  ) |>
+    purrr::set_names(x)
+}
+
 # WRAPPER FUNCTIONS ----
 
 #' Wrapper of askpass::askpass
@@ -348,15 +439,17 @@ is_interactive <- function(...) {
 
 #' Wrapper for base::readline
 #'
-#' This function is wrapped because I find it easier to read, and so it can be
-#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behaviour of `get_credentials()`
+#' This function is wrapped as an easier to read alias, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the
+#' prompting behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd
 prompt_user <- function(...) {
   readline(...)
 }
+
+
 
 # rlang null handling -----------------------------------------------------
 #' @importFrom rlang %||%
