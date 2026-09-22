@@ -260,6 +260,103 @@ get_public_detections <- function(animal_project_code,
   })
 }
 
+#' Get public archival data
+#'
+#' @param animal_project_code
+#' @param animal_id
+#' @param tag_serial_number
+#' @param limit
+#' @param ...
+#' @param return_as
+#'
+#' @returns
+#' @export
+#'
+#' @examplesIf interactive()
+#' get_public_archival(animal_project_code = "PelFish")
+get_public_archival <- function(animal_project_code,
+                                animal_id = NULL,
+                                tag_serial_number = NULL,
+                                limit = FALSE,
+                                progress = FALSE,
+                                ...,
+                                return_as = c("tibble", "lazy")) {
+  # Check inputs ------------------------------------------------------------
+  return_as <- rlang::arg_match(return_as)
+
+  public_archival_data <- list_items("archival_data")
+
+  selected_project_code <-
+    check_value(
+      animal_project_code,
+      list_animal_project_codes()
+    )
+
+  # Set the catalog to read archival data from -----------------------------
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
+
+
+  # Read the parquet paths from the catalogue -------------------------------
+  archival_path <-
+    public_archival_data |>
+    dplyr::filter(.data$project_code %in% selected_project_code) |>
+    dplyr::pull("path")
+
+  # Read the parquet paths from the catalog ---------------------------------
+
+  parquet_paths <-
+    file.path(catalog_root, "archival_data", archival_path) |>
+    purrr::map(httr2::request) |>
+    purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
+    # Never place more then 2 requests a second
+    purrr::map(\(req) httr2::req_throttle(req,
+      capacity = 15,
+      fill_time_s = 5
+    )) |>
+    httr2::req_perform_parallel(
+      progress =
+        ifelse(progress & !is_testing(),
+          yes = "Reading table metadata",
+          no = FALSE
+        )
+    ) |>
+    purrr::map(httr2::resp_body_json) |>
+    purrr::map(~ purrr::chuck(.x, "assets", "data", "href")) |>
+    # Set the project_codes as names, for ease of debugging.
+    purrr::set_names(
+      purrr::map_chr(archival_path, ~ basename(path_sans_ext(.x)))
+    )
+
+  # Read the contents of the parquet files as a single lazy view. If we close
+  # this connection, the function will fail to return a lazy view. So we have to
+  # leave it openn.
+  con_duckdb <-
+    duckdbfs::cached_connection()
+
+  duckdb_view <-
+      parquet_paths |>
+      duckdbfs::open_dataset(
+        format = "parquet",
+        unify_schemas = TRUE,
+        conn = con_duckdb
+      )
+
+  # Apply filters
+    if (rlang::dots_n() > 0) {
+      duckdb_view <- dplyr::filter(duckdb_view, ...)
+    }
+  # Limit it if needed
+    if (limit) {
+      duckdb_view <- utils::head(duckdb_view, n = 100L)
+    }
+
+    switch (return_as,
+      "lazy" = duckdbfs::as_view(duckdb_view),
+      "tibble" = dplyr::collect(duckdb_view)
+    )
+}
+
+
 #' Read values from the parquet dump metadata files
 #'
 #' Reads the root stac catalog and returns acoustic telemetry metadata tables.
