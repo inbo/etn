@@ -114,12 +114,12 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
 #' @noRd
 #'
 #' @examplesIf interactive()
-#' get_public_detections("2011_Loire", timestamp >=
+#' get_public_detections("2011_Loire", date_time >=
 #'   lubridate::ymd(20220101))
 get_public_detections <- function(animal_project_code,
+                                  ...,
                                   start_date = NULL,
                                   end_date = NULL,
-                                  ...,
                                   limit = FALSE,
                                   return_as = c("tibble",
                                                 "lazy"),
