@@ -42,12 +42,16 @@ read_child_catalog <- function(catalog = c(
     httr2::resp_body_json(simplifyVector = TRUE)
 }
 
-#' List public detection files
+#' List items within a stac catalog
 #'
-#' This function lists the public detection files available in the ETN public
-#' data parquet dumps. It reads the child catalog for detection files and
-#' extracts the project codes and paths to the detection files.
+#' This function lists the items within a stac catalog from the ETN public data
+#' parquet dumps. It reads the child catalog for detection files or archival
+#' files and extracts the project codes and paths.
 #'
+#' @param catalog Character . The name of the child catalog to read. One of
+#'   "acoustic_telemetry" or "archival_data".
+#' @param item_filter A character vector of project codes to filter out from the
+#' returned list. The default is to filter out metadata tables.
 #' @returns A tibble with two columns: `project_code` and `path`. The
 #'   `project_code` column.
 #'
@@ -55,11 +59,14 @@ read_child_catalog <- function(catalog = c(
 #' @noRd
 #'
 #' @examplesIf interactive()
-#' list_public_detections()
-list_public_detections <- function() {
-  metadata_catalog <- "acoustic_telemetry"
-
-  read_child_catalog(catalog = metadata_catalog) |>
+#' list_items("archival_data")
+list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
+                       item_filter = c("animals",
+                                          "deployments",
+                                          "projects",
+                                          "receivers",
+                                          "tags")){
+  read_child_catalog(catalog = catalog) |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
@@ -73,16 +80,13 @@ list_public_detections <- function() {
     dplyr::mutate(
       .keep = "all",
       project_code = stringr::str_remove(
-        project_code, stringr::fixed(paste0(metadata_catalog, "_"))
+        project_code, stringr::fixed(paste0(catalog, "_"))
       )
     ) |>
     # Remove metadata tables
-    dplyr::filter_out(project_code %in% c("animals",
-                                          "deployments",
-                                          "projects",
-                                          "receivers",
-                                          "tags"))
+    dplyr::filter_out(project_code %in% item_filter)
 }
+
 
 #' Get public detections
 #'
@@ -92,7 +96,7 @@ list_public_detections <- function() {
 #' @inheritParams get_acoustic_detections
 #' @param project_code The project code for which to read the public detection
 #'   files. The project code must be one of the project codes listed in the
-#'   output of `list_public_detections()`.
+#'   output of `list_items("acoustic_telemetry")`.
 #' @param ... Filter conditions to apply to the detections. These conditions
 #'   will be passed to `dplyr::filter()` to filter the detections after reading
 #'   them from the parquet files.
@@ -124,7 +128,7 @@ get_public_detections <- function(animal_project_code,
   # Check inputs ------------------------------------------------------------
   return_as <- rlang::arg_match(return_as)
 
-  public_detections <- list_public_detections()
+  public_detections <- list_items("acoustic_telemetry")
 
   # Animal project code is a required field, it may be passed as NULL by
   # get_acoustic_detections().
@@ -149,14 +153,14 @@ get_public_detections <- function(animal_project_code,
 
   # Return empty tibble if no detections ------------------------------------
   # Early return
-  if(!selected_project_code %in% list_public_detections()$project_code){
+  if(!selected_project_code %in% list_items("acoustic_telemetry")$project_code){
 
     # Create emtpy tibble with the correct columns
     empty_tbl <-
       file.path(catalog_root, "acoustic_telemetry",
               # Read the path of the first project of the catalog to get the
               # columns from
-              list_public_detections()[1,"path"]) |>
+              list_items("acoustic_telemetry")[1,"path"]) |>
       jsonlite::read_json() |>
       purrr::chuck("assets", "data", "href") |>
       # Do not collect data, but create pointer
