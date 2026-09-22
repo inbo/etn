@@ -224,7 +224,8 @@ test_that("get_archival_data() returns warning on filters with no data", {
       animal_id = c(
         226, # Animal not connected to the tag
         67441
-      )
+      ),
+      limit = TRUE
     ),
     class = "etn_warning_archival_data_not_found_for_filter"
   )
@@ -237,7 +238,9 @@ test_that("get_archival_data() can write to a path", {
 
   loc_tempdir <- withr::local_tempdir()
 
-  get_archival_data(tag_serial_number = "A19285", path = loc_tempdir)
+  get_archival_data(tag_serial_number = "A19285",
+                    path = loc_tempdir,
+                    limit = TRUE)
   # Assume that if the files in the folder created for this test have the right
   # header, they are the right files.
   csv_files_to_test <- list.files(loc_tempdir, full.names = TRUE)
@@ -339,7 +342,8 @@ test_that("get_archival_data() stores files with a csv extension", {
 
   loc_tempdir <- withr::local_tempdir()
 
-  get_archival_data(tag_serial_number = "A19285", path = loc_tempdir)
+  get_archival_data(tag_serial_number = "A19285", path = loc_tempdir,
+                    limit = TRUE)
   expect_true(
     all(
       stringr::str_ends(
