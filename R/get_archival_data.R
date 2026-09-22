@@ -113,7 +113,7 @@ get_archival_data <- function(tag_serial_number = NULL,
   }
 
   if (progress && !limit) {
-    cli::cli_progress_step("Preparing to download {length(uuids)} files.")
+    cli::cli_progress_step("Preparing to download {length(uuids)} file{?s}.")
   }
 
   ## Warn if some filters return no data ------------------------------------
