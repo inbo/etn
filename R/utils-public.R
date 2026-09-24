@@ -94,6 +94,41 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
   }
 }
 
+read_item_metadata <- function(metadata_path, catalog = 
+                               c("parse",
+                                 "acoustic_telemetry",
+                                 "archival_data"),
+                                progress = TRUE) {
+  catalog <- rlang::arg_match(catalog, multiple = FALSE)
+  # Get the default values for catalog, except parse. 
+  allowed_catalogs <- rlang::fn_fmls()$catalog |> 
+    purrr::discard(~.x == "parse") |> 
+    rlang::eval_tidy()
+  catalog_root <- "https://www.lifewatch.be/etn/parquet"
+
+  # Either parse the catalog from the item metadata path, or respect the user choice
+  ifelse(catalog == "parse",
+         stringr::str_extract(basename(catalog),
+         pattern = ".*?(?=_)")) |> 
+    rlang::arg_match0(values = allowed_catalogs)
+
+  file.path(catalog_root, catalog, metadata_path) |> 
+    purrr::map(httr2::request) |> 
+    purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
+    # Never place more then 2 requests a second
+    purrr::map(\(req) httr2::req_throttle(req,
+      capacity = 15,
+      fill_time_s = 5
+    )) |> 
+   httr2::req_perform_parallel(
+      progress =
+        ifelse(progress & !is_testing(),
+          yes = "Reading table metadata",
+          no = FALSE
+        )
+    ) |>
+    purrr::map(httr2::resp_body_json)
+}
 
 #' Get public detections
 #'
