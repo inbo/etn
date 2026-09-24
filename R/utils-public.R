@@ -333,13 +333,16 @@ get_public_archival <- function(animal_project_code,
   con_duckdb <-
     duckdbfs::cached_connection()
 
-  duckdb_view <-
-      parquet_paths |>
+  suppress_nanosecond_warning({
+    duckdb_view <-
       duckdbfs::open_dataset(
+        parquet_paths,
         format = "parquet",
-        unify_schemas = TRUE,
+        unify_schemas = FALSE,
+        mode = "VIEW",
         conn = con_duckdb
       )
+  })
 
   # Apply filters
     if (rlang::dots_n() > 0) {
