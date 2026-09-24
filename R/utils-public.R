@@ -61,12 +61,14 @@ read_child_catalog <- function(catalog = c(
 #' @examplesIf interactive()
 #' list_items("archival_data")
 list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
+                       ...,
                        item_filter = c("animals",
                                           "deployments",
                                           "projects",
                                           "receivers",
                                           "tags")){
-  read_child_catalog(catalog = catalog) |>
+  items <- 
+    read_child_catalog(catalog = catalog) |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
     dplyr::filter(.data$rel == "item") |>
@@ -85,6 +87,11 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
     ) |>
     # Remove metadata tables
     dplyr::filter_out(project_code %in% item_filter)
+  if(rlang::dots_n(...) > 0){
+    dplyr::filter(items, ...)
+  } else {
+    items
+  }
 }
 
 
@@ -284,8 +291,6 @@ get_public_archival <- function(animal_project_code,
   # Check inputs ------------------------------------------------------------
   return_as <- rlang::arg_match(return_as)
 
-  public_archival_data <- list_items("archival_data")
-
   selected_project_code <-
     check_value(
       animal_project_code,
@@ -298,8 +303,8 @@ get_public_archival <- function(animal_project_code,
 
   # Read the parquet paths from the catalogue -------------------------------
   archival_path <-
-    public_archival_data |>
-    dplyr::filter(.data$project_code %in% selected_project_code) |>
+    list_items("archival_data",
+               .data$project_code %in% selected_project_code) |> 
     dplyr::pull("path")
 
   # Read the parquet paths from the catalog ---------------------------------
