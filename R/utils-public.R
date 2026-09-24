@@ -67,6 +67,7 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
                                           "projects",
                                           "receivers",
                                           "tags")){
+  catalog <- rlang::arg_match(catalog)
   items <- 
     read_child_catalog(catalog = catalog) |>
     purrr::chuck("links") |>
