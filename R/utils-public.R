@@ -345,23 +345,11 @@ get_public_archival <- function(animal_project_code,
 
   # Read the parquet paths from the catalog ---------------------------------
 
-  parquet_paths <-
-    file.path(catalog_root, "archival_data", item_json_path) |>
-    purrr::map(httr2::request) |>
-    purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
-    # Never place more then 2 requests a second
-    purrr::map(\(req) httr2::req_throttle(req,
-      capacity = 15,
-      fill_time_s = 5
-    )) |>
-    httr2::req_perform_parallel(
-      progress =
-        ifelse(progress & !is_testing(),
-          yes = "Reading table metadata",
-          no = FALSE
-        )
-    ) |>
-    purrr::map(httr2::resp_body_json) |>
+  parquet_paths <- read_item_metadata(
+    item_json_path,
+    catalog = "archival_data",
+    progress = progress
+  ) |>
     purrr::map(~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
     purrr::set_names(
