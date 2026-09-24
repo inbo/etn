@@ -68,7 +68,7 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
                                           "receivers",
                                           "tags")){
   catalog <- rlang::arg_match(catalog, multiple = FALSE)
-  items <- 
+  items <-
     read_child_catalog(catalog = catalog) |>
     purrr::chuck("links") |>
     # Drop the root, only keep catalog items
@@ -95,32 +95,32 @@ list_items <- function(catalog = c("acoustic_telemetry", "archival_data"),
   }
 }
 
-read_item_metadata <- function(metadata_path, catalog = 
+read_item_metadata <- function(metadata_path, catalog =
                                c("parse",
                                  "acoustic_telemetry",
                                  "archival_data"),
                                 progress = TRUE) {
   catalog <- rlang::arg_match(catalog, multiple = FALSE)
-  # Get the default values for catalog, except parse. 
-  allowed_catalogs <- rlang::fn_fmls()$catalog |> 
-    purrr::discard(~.x == "parse") |> 
+  # Get the default values for catalog, except parse.
+  allowed_catalogs <- rlang::fn_fmls()$catalog |>
+    purrr::discard(~.x == "parse") |>
     rlang::eval_tidy()
   catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # Either parse the catalog from the item metadata path, or respect the user choice
   catalog <- ifelse(catalog == "parse",
          stringr::str_extract(basename(metadata_path),
-         pattern = "[a-z_]+(?=_)")) |> 
+         pattern = "[a-z_]+(?=_)")) |>
     rlang::arg_match0(values = allowed_catalogs)
 
-  file.path(catalog_root, catalog, metadata_path) |> 
-    purrr::map(httr2::request) |> 
+  file.path(catalog_root, catalog, metadata_path) |>
+    purrr::map(httr2::request) |>
     purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
     # Never place more then 2 requests a second
     purrr::map(\(req) httr2::req_throttle(req,
       capacity = 15,
       fill_time_s = 5
-    )) |> 
+    )) |>
    httr2::req_perform_parallel(
       progress =
         ifelse(progress & !is_testing(),
@@ -339,8 +339,10 @@ get_public_archival <- function(animal_project_code,
 
   # Read the parquet paths from the catalogue -------------------------------
   item_json_path <-
-    list_items("archival_data",
-               .data$project_code %in% selected_project_code) |> 
+    list_items(
+      "archival_data",
+      .data$project_code %in% selected_project_code
+    ) |>
     dplyr::pull("path")
 
   # Read the parquet paths from the catalog ---------------------------------
@@ -374,18 +376,18 @@ get_public_archival <- function(animal_project_code,
   })
 
   # Apply filters
-    if (rlang::dots_n() > 0) {
-      duckdb_view <- dplyr::filter(duckdb_view, ...)
-    }
+  if (rlang::dots_n() > 0) {
+    duckdb_view <- dplyr::filter(duckdb_view, ...)
+  }
   # Limit it if needed
-    if (limit) {
-      duckdb_view <- utils::head(duckdb_view, n = 100L)
-    }
+  if (limit) {
+    duckdb_view <- utils::head(duckdb_view, n = 100L)
+  }
 
-    switch (return_as,
-      "lazy" = duckdbfs::as_view(duckdb_view),
-      "tibble" = dplyr::collect(duckdb_view)
-    )
+  switch(return_as,
+    "lazy" = duckdbfs::as_view(duckdb_view),
+    "tibble" = dplyr::collect(duckdb_view)
+  )
 }
 
 
