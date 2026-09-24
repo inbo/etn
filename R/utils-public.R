@@ -302,7 +302,7 @@ get_public_archival <- function(animal_project_code,
 
 
   # Read the parquet paths from the catalogue -------------------------------
-  archival_path <-
+  item_json_path <-
     list_items("archival_data",
                .data$project_code %in% selected_project_code) |> 
     dplyr::pull("path")
@@ -310,7 +310,7 @@ get_public_archival <- function(animal_project_code,
   # Read the parquet paths from the catalog ---------------------------------
 
   parquet_paths <-
-    file.path(catalog_root, "archival_data", archival_path) |>
+    file.path(catalog_root, "archival_data", item_json_path) |>
     purrr::map(httr2::request) |>
     purrr::map(\(req) httr2::req_retry(req, max_tries = 2)) |>
     # Never place more then 2 requests a second
@@ -329,7 +329,7 @@ get_public_archival <- function(animal_project_code,
     purrr::map(~ purrr::chuck(.x, "assets", "data", "href")) |>
     # Set the project_codes as names, for ease of debugging.
     purrr::set_names(
-      purrr::map_chr(archival_path, ~ basename(path_sans_ext(.x)))
+      purrr::map_chr(item_json_path, ~ basename(path_sans_ext(.x)))
     )
 
   # Read the contents of the parquet files as a single lazy view. If we close
