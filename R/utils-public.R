@@ -108,9 +108,9 @@ read_item_metadata <- function(metadata_path, catalog =
   catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # Either parse the catalog from the item metadata path, or respect the user choice
-         pattern = ".*?(?=_)")) |> 
   catalog <- ifelse(catalog == "parse",
          stringr::str_extract(basename(metadata_path),
+         pattern = "[a-z_]+(?=_)")) |> 
     rlang::arg_match0(values = allowed_catalogs)
 
   file.path(catalog_root, catalog, metadata_path) |> 
