@@ -108,9 +108,13 @@ read_item_metadata <- function(metadata_path, catalog =
   catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
   # Either parse the catalog from the item metadata path, or respect the user choice
-  catalog <- ifelse(catalog == "parse",
-         stringr::str_extract(basename(metadata_path),
-         pattern = "[a-z_]+(?=_)")) |>
+  catalog <- ifelse(
+    catalog == "parse",
+    yes = stringr::str_extract(basename(metadata_path),
+      pattern = "[a-z_]+(?=_)"
+    ),
+    no = catalog
+  ) |>
     rlang::arg_match0(values = allowed_catalogs)
 
   file.path(catalog_root, catalog, metadata_path) |>
@@ -336,7 +340,6 @@ get_public_archival <- function(animal_project_code,
   # Set the catalog to read archival data from -----------------------------
   catalog_root <- "https://www.lifewatch.be/etn/parquet"
 
-
   # Read the parquet paths from the catalogue -------------------------------
   item_json_path <-
     list_items(
@@ -346,7 +349,6 @@ get_public_archival <- function(animal_project_code,
     dplyr::pull("path")
 
   # Read the parquet paths from the catalog ---------------------------------
-
   parquet_paths <- read_item_metadata(
     item_json_path,
     catalog = "archival_data",
