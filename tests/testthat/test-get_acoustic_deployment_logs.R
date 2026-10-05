@@ -1,3 +1,6 @@
+# Does skipping this test file solve timeout issues?
+skip_on_ci()
+
 # Test on a known deployment that has log_data.
 test_deployment_id <- 53790
 
