@@ -204,7 +204,7 @@ get_archival_data <- function(tag_serial_number = NULL,
       purrr::map(httr2::req_perform_connection) |>
       # Read the header, and 100 lines
       purrr::map(\(req) {httr2::resp_stream_lines(req, lines = 101)
-                         on.exit(expr = {close(resp)}, add = TRUE)}) |>
+                         on.exit(expr = {close(req)}, add = TRUE)}) |>
       # Write to temp file, same as normally
       purrr::walk2(csv_file_paths, \(lines, path) {
         readr::write_lines(lines, file = path)
