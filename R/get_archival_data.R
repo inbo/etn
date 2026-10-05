@@ -172,6 +172,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # If limit is TRUE, we only want to fetch a single file.
   if (limit) {
+    # Shorten the list to a single element
     requests <- requests[1]
   }
 
@@ -202,7 +203,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     # Close the connection after reading the first 100 lines of the first file.
     withr::with_connection(
       # Only fetch the first file
-      list(archival_data = httr2::req_perform_connection(requests)),
+      list(archival_data = httr2::req_perform_connection(purrr::chuck(requests, 1L))),
       code = {
         # Read the header, and 100 lines
         httr2::resp_stream_lines(archival_data, lines = 101) |>
