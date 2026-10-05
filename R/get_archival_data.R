@@ -170,6 +170,11 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   ## Perform requests -------------------------------------------------------
 
+  # If limit is TRUE, we only want to fetch a single file.
+  if (limit) {
+    requests <- requests[1]
+  }
+
   if (!is.null(path)) {
     # If the user provided a path, store the csv files there.
     csv_dir <- is_writeable(path, call = rlang::caller_env())
@@ -197,12 +202,12 @@ get_archival_data <- function(tag_serial_number = NULL,
     # Close the connection after reading the first 100 lines of the first file.
     withr::with_connection(
       # Only fetch the first file
-      list(archival_data = httr2::req_perform_connection(requests[[1]])),
+      list(archival_data = httr2::req_perform_connection(requests)),
       code = {
         # Read the header, and 100 lines
         httr2::resp_stream_lines(archival_data, lines = 101) |>
           # Write to temp file, same as normally
-          readr::write_lines(file = csv_file_paths[[1]])
+          readr::write_lines(file = csv_file_paths)
       }
     )
   } else {
