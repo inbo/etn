@@ -470,6 +470,12 @@ NULL
     memoise::memoise(validate_login,
       cache = cachem::cache_mem(max_age = 60 * 15)
     )
+
+  # Memoisation: only read the lines of a file every 15 minutes.
+  read_lines_cached <<-
+    memoise::memoise(readr::read_lines,
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
 }
 
 #' Expand columns

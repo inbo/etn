@@ -203,7 +203,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     # For the first request, pass the url to read_lines.
     purrr::chuck(requests, 1L, "url") |>
       # Read the header, and 100 lines
-      readr::read_lines(n_max = 101L, progress = FALSE) |>
+      read_lines_cached(n_max = 101L, progress = FALSE) |>
       # Write to temp file, same as normally
       readr::write_lines(file = csv_file_paths)
   } else {
