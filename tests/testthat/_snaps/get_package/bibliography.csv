@@ -1,8 +1,23 @@
 item,type,citation
 ETN,data platform,"Reubens J, Aarestrup K, Abecasis D et al. (2026) The European tracking network through time: united efforts to advance aquatic conservation in Europe. Animal Biotelemetry. https://doi.org/10.1186/s40317-026-00475-z"
 etn,R package,"Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S. etn: Access Data from the European Tracking Network. https://doi.org/10.5281/zenodo.15235747, R package version 3.0.0.9000, https://inbo.github.io/etn/."
-2014_demer,animal project,"Pauwels, I.; Baeyens, R.; De Maerteleire, N.; Desmet, P.; Gelaude, E.; Milotic, T.; Pieters, S.; Reyserhove, L.; Robberechts, K.; Verhelst, P.; Coeck, J.; (2020): 2014_DEMER - Acoustic telemetry data for four fish species in the Demer river (Belgium). Marine Data Archive. https://doi.org/10.14284/432"
-albert,acoustic project,
-demer,acoustic project,"Coeck, J.; Pauwels, I.; Verhelst, P.-J.; (2018): Temporarily acoustic receiver network in the river Demer for assessing fish behaviour around the third of three fish migration barriers preventing (diadromous) fish (such as sea lamprey, among others) to reach the spawning habitats in the Demer basin."
-dijle,acoustic project,"Coeck, J.; Pauwels, I.; Vermeersch, S.; (2018): Partly temporarily acoustic receiver network and partly permanent acoustic receiver network to assess diadromous fish migration in the Scheldt river basin, Belgium."
+PelFish,animal project,"Debusschere, E.; Muñiz, C.; Reubens, J.; Casals, D.; Conings, B.; Deneudt, K.; 2023. Duurzame economische dragers in Vlaamse kustvisserijgemeenschappen post-Brexit (PelFish)"
+2024_Anguilla_bb_Harlingen,acoustic project,"Kroes, R.; Weisbeek, T.; Vriese, F.T.; Peters, B.; Bleile, N.; Van Gent, S; Van Loon, E.E.; Verdonschot, P.F.M; Van der Geest, H.G; (2025); Acoustic telemetry receiver array in the harinxma channel in Harlingen."
+BTN-IMEDEA,acoustic project,"Alós, Josep; Aspillaga, Eneko; (2021). Balearic Tracking Network (BTN)."
+COD_OWF,acoustic project,"Baktoft, H.; Olesen, M.; Svendsen, J.; (2023): DTU-Aqua project - Acoustic telemetry data for Atlantic cod (Gadus morhua) in the Horns Rev 2 offshore windmill farm southern North Sea (Denmark)'."
+Danish_Straits,acoustic project,"Aarestrup, A. and Birnie-Gauvin, K. (2023). Danish Straits detection data."
+FISHINTEL,acoustic project,"Sheehan,E.;  Couturier, L.;  Hawkes, L.; Hooper, T.; Horton, T; Laurans, M.; Muñiz, C.; Reubens, J.; Stamp, T.; Witt, M.; Woillez, M.; 2021. Fisheries Innovation for sustainable SHared INTerchannEL resources (FISH INTEL)."
+FISHOWF,acoustic project,France Energies Marines; 2022; FISHOWF animal tagging program
+FISP,acoustic project,University of Plymouth. 2023. Fisheries Industry Science Partnership (FISP)
+FarmTrack_network,acoustic project,"Arechavala-Lopez, P.; 2022; FarmTrack: Studying species attracted to aquaculture production facilities in the Spanish Mediterranean coast"
+GTN,acoustic project,"Alonso-Fernández, Alexandre; Mucientes, Gonzalo. (2021). Galician (NW Spain) acoustic Tracking Network"
+KBTN,acoustic project,"Nordahl, O; Flink, H; Larsson, P; Tibblin, P. (2020) Acoustic recevier network in the southern coastal Baltic Sea"
+MMERMAID,acoustic project,France Energies Marines; 2024; Acoustic receiver network for the monitoring of marine megafauna around an Offshore Wind Farm in the English channel
+MOBEIA,acoustic project,"Alexandre Alonso-Fernández, David Villegas-Ríos, Gonzalo Mucientes (2019). Seasonal records of coastal fish species in a marine protected area in Galician waters (NW Spain)"
+SEM_array,acoustic project,"Sjöberg, N. van der Gemert R. Jacobson, P. Stavely, T. Sundin, J. Westerberg,H; (2023): Migration of eels in the Swedish part of the Baltic Sea"
+SW_Oude_Ijssel,acoustic project,"Klaver, M.; Verspui, R.; Acoustic telemetry array in the river Oude IJssel (Germany and the Netherlands)"
+bpns,acoustic project,"Reubens, J.; Hernandez, F; Deneudt, K.; (2017): LifeWatch observatory - Permanent acoustic receiver network in the Belgian Part of the North Sea"
+cpodnetwork,acoustic project,"Flanders Marine Institute (VLIZ), Belgium; (2021): LifeWatch observatory data: acoustic receivers data from the permanent Cetacean passive acoustic sensor network in the Belgian part of the North Sea. Marine Data Archive."
+ws1,acoustic project,"Reubens, J.; Hernandez, F; Deneudt, K.; (2017): LifeWatch observatory - Permanent acoustic receiver network in the Western Scheldt; Array 1: Between Breskens & Vlissingen"
+ws2,acoustic project,"Coeck, J.; Pauwels, I; Verhelst, P; (2017): LifeWatch observatory - Permanent acoustic receiver network in the Western Scheldt, Array 2: Between Borssele and Terneuzen"
 zeeschelde,acoustic project,
