@@ -200,17 +200,12 @@ get_archival_data <- function(tag_serial_number = NULL,
     purrr::set_names(nm = names(requests))
 
   if (limit) {
-    # Close the connection after reading the first 100 lines of the first file.
-    withr::with_connection(
-      # Only fetch the first file
-      list(archival_data = httr2::req_perform_connection(purrr::chuck(requests, 1L))),
-      code = {
-        # Read the header, and 100 lines
-        httr2::resp_stream_lines(archival_data, lines = 101) |>
-          # Write to temp file, same as normally
-          readr::write_lines(file = csv_file_paths)
-      }
-    )
+    # For the first request, pass the url to read_lines.
+    purrr::chuck(requests, 1L, "url") |>
+      # Read the header, and 100 lines
+      readr::read_lines(n_max = 101L, progress = FALSE) |>
+      # Write to temp file, same as normally
+      readr::write_lines(file = csv_file_paths)
   } else {
     # Download files, called for side effect of writing files to disk only, we
     # don't store the response objects in memory. Skip files that have already
