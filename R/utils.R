@@ -471,7 +471,9 @@ NULL
       cache = cachem::cache_mem(max_age = 60 * 15)
     )
 
-  # Memoisation: only read the lines of a file every 15 minutes.
+  # Memoisation: only read the lines of a file every 15 minutes. This is useful
+  # for reading stable lines from a url repeatingly. Such as is the case for
+  # archival data tests.
   read_lines_cached <<-
     memoise::memoise(readr::read_lines,
       cache = cachem::cache_mem(max_age = 60 * 15)
