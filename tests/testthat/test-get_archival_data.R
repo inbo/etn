@@ -6,7 +6,7 @@ test_that("get_archival_data() returns a tibble by default", {
   expect_s3_class(
     get_archival_data(
       tag_serial_number = "A19285",
-      limit = TRUE
+      limit = FALSE
     ),
     "tbl"
   )
@@ -21,7 +21,7 @@ test_that("get_archival_data() can return an arrow datasetquery", {
     get_archival_data(
       tag_serial_number = "A19285",
       return_as = "arrow",
-      limit = TRUE
+      limit = FALSE
     ),
     "arrow_dplyr_query"
   )
@@ -35,7 +35,7 @@ test_that("get_archival_data() returns the expected fields", {
   expect_named(
     get_archival_data(
       tag_serial_number = "A19285",
-      limit = TRUE
+      limit = FALSE
     ),
     c(
       "tag_id",
@@ -59,7 +59,7 @@ test_that("get_archival_data() returns the expected column classes", {
     purrr::map(
       get_archival_data(
         tag_serial_number = "A19285",
-        limit = TRUE
+        limit = FALSE
       ),
       class
     ),
@@ -85,7 +85,7 @@ test_that("get_archival_data() has values for identifier columns", {
   # and should never be empty.
   archival_data <- get_archival_data(
     tag_serial_number = "A19285",
-    limit = TRUE
+    limit = FALSE
   )
   expect_all_false(is.na(archival_data$tag_serial_number))
   expect_all_false(is.na(archival_data$animal_id))
@@ -129,7 +129,7 @@ test_that("get_archival_data() can filter on tag_serial_number", {
   expect_identical(
     get_archival_data(
       tag_serial_number = "A19285",
-      limit = TRUE
+      limit = FALSE
     ) |>
       dplyr::pull("tag_serial_number") |>
       unique(),
@@ -145,7 +145,7 @@ test_that("get_archival_data() can filter on animal_id", {
   expect_identical(
     get_archival_data(
       animal_id = 18113,
-      limit = TRUE
+      limit = FALSE
     ) |>
       dplyr::pull("animal_id") |>
       unique(),
@@ -159,7 +159,7 @@ test_that("get_archival_data() can filter on animal_project_code", {
   skip_if_no_authentication()
 
   expect_identical(
-    get_archival_data(animal_project_code = "PelFish", limit = TRUE) |>
+    get_archival_data(animal_project_code = "PelFish", limit = FALSE) |>
       dplyr::pull("animal_project_code") |>
       unique(),
     "PelFish"
@@ -172,7 +172,7 @@ test_that("get_archival_data() returns 100 rows when limit is set", {
   skip_if_no_authentication()
 
   expect_shape(
-    get_archival_data(animal_project_code = "PelFish", limit = TRUE),
+    get_archival_data(animal_project_code = "PelFish", limit = FALSE),
     nrow = 100L
   )
 })
@@ -183,8 +183,8 @@ test_that("get_archival_data() is case insensitive for animal_project_code", {
   skip_if_no_authentication()
 
   expect_identical(
-    get_archival_data(animal_project_code = "Lumpfish", limit = TRUE),
-    get_archival_data(animal_project_code = "LUMPFISH", limit = TRUE)
+    get_archival_data(animal_project_code = "Lumpfish", limit = FALSE),
+    get_archival_data(animal_project_code = "LUMPFISH", limit = FALSE)
   )
 })
 
@@ -225,7 +225,7 @@ test_that("get_archival_data() returns warning on filters with no data", {
         226, # Animal not connected to the tag
         67441
       ),
-      limit = TRUE
+      limit = FALSE
     ),
     class = "etn_warning_archival_data_not_found_for_filter"
   )
@@ -240,7 +240,7 @@ test_that("get_archival_data() can write to a path", {
 
   get_archival_data(tag_serial_number = "A19285",
                     path = loc_tempdir,
-                    limit = TRUE)
+                    limit = FALSE)
   # Assume that if the files in the folder created for this test have the right
   # header, they are the right files.
   csv_files_to_test <- list.files(loc_tempdir, full.names = TRUE)
@@ -276,7 +276,7 @@ test_that("get_archival_data() warns when lots of data is fetched in memory", {
               # the mocked file_size() function will force the function to
               # behave as if a lot of data is about to be returned, so we can
               # safely place a small request to test.
-              limit = TRUE,
+              limit = FALSE,
               return_as = "tibble"
             )
           },
@@ -311,7 +311,7 @@ test_that("get_archival_data() asks for ok on lots of data in memory", {
                 # the mocked file_size() function will force the function to
                 # behave as if a lot of data is about to be returned, so we can
                 # safely place a small request to test.
-                limit = TRUE,
+                limit = FALSE,
                 return_as = "tibble"
               )
             },
@@ -343,7 +343,7 @@ test_that("get_archival_data() stores files with a csv extension", {
   loc_tempdir <- withr::local_tempdir()
 
   get_archival_data(tag_serial_number = "A19285", path = loc_tempdir,
-                    limit = TRUE)
+                    limit = FALSE)
   expect_true(
     all(
       stringr::str_ends(
