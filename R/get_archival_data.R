@@ -215,7 +215,8 @@ get_archival_data <- function(tag_serial_number = NULL,
       file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
     ) |>
       httr2::req_perform_sequential(
-        paths = csv_file_paths,
+        paths = purrr::discard(csv_file_paths,
+                               file.exists(csv_file_paths) & file_size(csv_file_paths) > 0),
         progress = ifelse(progress, "Downloading", FALSE)
       )
   }
