@@ -1,3 +1,5 @@
+vcr::local_cassette("archival-uuid-requests", serialize_with = "qs2")
+
 test_that("get_archival_data() returns a tibble by default", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
