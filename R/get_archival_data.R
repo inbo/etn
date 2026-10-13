@@ -73,8 +73,10 @@ get_archival_data <- function(tag_serial_number = NULL,
   if (length(provided_query_args) == 0 && !limit) {
     cli::cli_abort(
       c(
-        "{.strong Attempting to download all available archival data in one go is unwise.}",
-        "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."
+        "{.strong Attempting to download all available archival data in one go
+        is unwise.}",
+        "At least one of the following arguments must be provided:
+        {.or {.arg {names(query_args)}}}."
       ),
       class = "archival_data_no_query_args"
     )
@@ -138,7 +140,9 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   values_no_file_found <-
     used_filters |>
-    purrr::imap(~ purrr::keep_at(.x, purrr::chuck(indexes_no_file_found, .y))) |>
+    purrr::imap(\(x, y) {
+      purrr::keep_at(x, purrr::chuck(indexes_no_file_found, y))
+    }) |>
     purrr::compact()
 
   if (length(values_no_file_found) > 0) {
@@ -218,8 +222,10 @@ get_archival_data <- function(tag_serial_number = NULL,
       file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
     ) |>
       httr2::req_perform_sequential(
-        paths = purrr::discard(csv_file_paths,
-                               file.exists(csv_file_paths) & file_size(csv_file_paths) > 0),
+        paths = purrr::discard(
+          csv_file_paths,
+          file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
+        ),
         progress = ifelse(progress, "Downloading", FALSE)
       )
   }
@@ -244,7 +250,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     ) |>
     # Take the last 36 characters of the filename (length of a UUID)
     dplyr::mutate(uuid = stringr::str_sub(
-      arrow:::add_filename(),
+      add_filename(),
       start = -40L, # UUID is 36 characters + length of the extension.
       end = -5L # -1L - length of the extension: `.csv`
     ))
@@ -295,7 +301,9 @@ get_archival_data <- function(tag_serial_number = NULL,
                 "i" = "Consider using
             {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
-                "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
+                "i" = "See
+                {.help [{.fun get_archival_data}](etn::get_archival_data)}
+                for more information."
               ),
               class = "archival_data_large_return"
             )
@@ -305,7 +313,9 @@ get_archival_data <- function(tag_serial_number = NULL,
         if (is_interactive()) {
           user_is_confident <-
             cli_yes(
-              "Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?"
+              "Are you sure you want to try to load a
+              {.strong {prettyunits::pretty_bytes(total_size_bytes)}}
+              data.frame?"
             )
         } else {
           # When running non interactively, I can't prompt the user to make sure
@@ -314,7 +324,8 @@ get_archival_data <- function(tag_serial_number = NULL,
         }
         if (!user_is_confident) {
           cli::cli_abort(
-            "Aborting. Consider using {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
+            "Aborting. Consider using
+            {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
             class = "archival_data_large_return_abort"
           )
