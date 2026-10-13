@@ -59,7 +59,7 @@ Other access functions:
 ``` r
 # Get all animal projects
 get_cpod_projects()
-#> # A tibble: 24 × 11
+#> # A tibble: 26 × 11
 #>    project_id project_code   project_type telemetry_type project_name start_date
 #>         <int> <chr>          <chr>        <chr>          <chr>        <date>    
 #>  1       1088 ARMS_MBON_Bel… cpod         NA             Underwater … 2018-07-12
@@ -67,12 +67,12 @@ get_cpod_projects()
 #>  3        973 Apelafico_und… cpod         NA             Acoustic Ec… 2021-01-01
 #>  4       1337 Blueconnect    cpod         NA             BlueConnect… 2026-01-01
 #>  5       1093 CODEVCO        cpod         NA             CODEVCO - m… 2021-10-31
-#>  6       1361 HesseløOWF_20… cpod         NA             Baseline st… 2020-01-01
-#>  7       1364 HybridLabs     cpod         NA             Impact of f… 2026-09-01
-#>  8       1186 Lifewatch_add… cpod         NA             Lifewatch: … 2025-05-01
-#>  9       1185 Lifewatch_per… cpod         NA             Lifewatch: … 2025-03-26
-#> 10       1318 NOVANA         cpod         NA             The Nationa… 2004-01-01
-#> # ℹ 14 more rows
+#>  6       1366 ETN_underwate… cpod         NA             Test projec… NA        
+#>  7       1361 HesseløOWF_20… cpod         NA             Baseline st… 2020-01-01
+#>  8       1364 HybridLabs     cpod         NA             Impact of f… 2026-09-01
+#>  9       1186 Lifewatch_add… cpod         NA             Lifewatch: … 2025-05-01
+#> 10       1185 Lifewatch_per… cpod         NA             Lifewatch: … 2025-03-26
+#> # ℹ 16 more rows
 #> # ℹ 5 more variables: end_date <date>, latitude <dbl>, longitude <dbl>,
 #> #   moratorium <lgl>, imis_dataset_id <int>
 
