@@ -52,12 +52,15 @@ following columns:
 \itemize{
 \item \code{tag_id}: The tag id of the tag that recorded the data.
 \item \code{timestamp_utc}: The timestamp of the measurement in UTC.
-\item \code{measurement_type}: The type of measurement (e.g. "Temp", "Pressure, etc.).
+\item \code{measurement_type}: The type of measurement
+(e.g. "Temp", "Pressure, etc.).
 \item \code{measurement_value}: The value of the measurement.
 \item \code{measurement_unit}: The unit of the measurement (e.g. "C", "Pa", etc.).
-\item \code{animal_project_code}: The animal project code of the animal that recorded the data.
+\item \code{animal_project_code}: The animal project code of the animal that
+recorded the data.
 \item \code{animal_id}: The animal id of the animal the tag was attached to.
-\item \code{tag_serial_number}: The tag serial number of the tag that recorded the data.
+\item \code{tag_serial_number}: The tag serial number of the tag that recorded the
+data.
 }
 }
 \description{
@@ -67,19 +70,19 @@ arguments is required: \code{tag_serial_number}, \code{animal_id}, or
 \code{animal_project_code}.
 }
 \section{Returning large amounts of data out of memory}{
-
-If you are fetching a large amount of data, it is recommended to use
-\code{return_as = "arrow"} to return an out of memory object. This will allow you
-to query the data without loading it all into memory at once. Keep in mind
-that the downloaded data will remain stored on your computer until R is
-restarted. If you want to keep the data, you can provide a path to an
-existing directory where the csv files will be stored via the \code{path}
-argument. See \link[arrow:Dataset]{arrow::Dataset} for more information.
+ If you are fetching a
+large amount of data, it is recommended to use \code{return_as = "arrow"} to
+return an out of memory object. This will allow you to query the data
+without loading it all into memory at once. Keep in mind that the
+downloaded data will remain stored on your computer until R is restarted.
+If you want to keep the data, you can provide a path to an existing
+directory where the csv files will be stored via the \code{path} argument. See
+\link[arrow:Dataset]{arrow::Dataset} for more information.
 }
 
 \examples{
 \dontshow{if (interactive() & etn:::credentials_are_set()) withAutoprint(\{ # examplesIf}
-get_archival_data(tag_serial_number = "A15757", limit = TRUE)
+  get_archival_data(tag_serial_number = "A15757", limit = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
