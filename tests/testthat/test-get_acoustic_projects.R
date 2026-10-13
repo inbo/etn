@@ -1,7 +1,5 @@
 test_that("get_acoustic_projects() returns a tibble", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects")
 
   df <- get_acoustic_projects()
@@ -12,8 +10,6 @@ test_that("get_acoustic_projects() returns a tibble", {
 
 test_that("get_acoustic_projects() returns unique project_id", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects")
 
   df <- get_acoustic_projects()
@@ -22,8 +18,6 @@ test_that("get_acoustic_projects() returns unique project_id", {
 
 test_that("get_acoustic_projects() returns the expected columns", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects")
 
   expected_col_names <- c(
@@ -46,8 +40,6 @@ test_that("get_acoustic_projects() returns the expected columns", {
 
 test_that("get_acoustic_projects() returns error on bad project code", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects-errors")
 
   # Errors
@@ -63,8 +55,6 @@ test_that("get_acoustic_projects() returns error on bad project code", {
 
 test_that("get_acoustic_projects() allows selecting on single project_code", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects-demer")
 
   # Select single value
@@ -85,8 +75,6 @@ test_that("get_acoustic_projects() allows selecting on single project_code", {
 
 test_that("get_acoustic_projects() allows selecting on multiple project_codes", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects-demer_dijle")
 
   # Select multiple values
@@ -101,8 +89,6 @@ test_that("get_acoustic_projects() allows selecting on multiple project_codes", 
 
 test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-
   vcr::local_cassette("acoustic-projects")
 
   expect_identical(
@@ -113,9 +99,6 @@ test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
 
 test_that("get_acoustic_projects() returns citation information when requested", {
   skip_if_no_authentication()
-  skip_if_offline("opencpu.lifewatch.be")
-  skip_if_offline("marineinfo.org")
-
   vcr::local_cassette("acoustic-projects-citation")
 
   acoustic_project_codes <- c(
