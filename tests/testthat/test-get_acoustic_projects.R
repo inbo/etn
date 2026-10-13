@@ -2,6 +2,8 @@ test_that("get_acoustic_projects() returns a tibble", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("acoustic-projects")
+
   df <- get_acoustic_projects()
 
   expect_s3_class(df, "data.frame")
@@ -12,6 +14,8 @@ test_that("get_acoustic_projects() returns unique project_id", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("acoustic-projects")
+
   df <- get_acoustic_projects()
   expect_equal(nrow(df), nrow(df |> dplyr::distinct(project_id)))
 })
@@ -19,6 +23,8 @@ test_that("get_acoustic_projects() returns unique project_id", {
 test_that("get_acoustic_projects() returns the expected columns", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("acoustic-projects")
 
   expected_col_names <- c(
     "project_id",
@@ -38,9 +44,11 @@ test_that("get_acoustic_projects() returns the expected columns", {
   expect_identical(names(df), expected_col_names)
 })
 
-test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
+test_that("get_acoustic_projects() returns error on bad project code", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("acoustic-projects-errors")
 
   # Errors
   expect_error(
@@ -51,6 +59,13 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
     get_acoustic_projects(acoustic_project_code = c("demer", "not_a_project")),
     regexp = "Can't find acoustic_project_code `demer` and/or `not_a_project` in"
     )
+})
+
+test_that("get_acoustic_projects() allows selecting on single project_code", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("acoustic-projects-demer")
 
   # Select single value
   single_select <- "demer"
@@ -66,6 +81,13 @@ test_that("get_acoustic_projects() allows selecting on acoustic_project_code", {
     get_acoustic_projects(acoustic_project_code = "demer"),
     get_acoustic_projects(acoustic_project_code = "DEMER")
   )
+})
+
+test_that("get_acoustic_projects() allows selecting on multiple project_codes", {
+  skip_if_no_authentication()
+  skip_if_offline("opencpu.lifewatch.be")
+
+  vcr::local_cassette("acoustic-projects-demer_dijle")
 
   # Select multiple values
   multi_select <- c("demer", "dijle")
@@ -81,6 +103,8 @@ test_that("get_acoustic_projects() returns projects of type 'acoustic'", {
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
 
+  vcr::local_cassette("acoustic-projects")
+
   expect_identical(
     get_acoustic_projects() |> dplyr::distinct(project_type) |> dplyr::pull(),
     "acoustic"
@@ -91,6 +115,8 @@ test_that("get_acoustic_projects() returns citation information when requested",
   skip_if_no_authentication()
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("marineinfo.org")
+
+  vcr::local_cassette("acoustic-projects-citation")
 
   acoustic_project_codes <- c(
     "SGB",
