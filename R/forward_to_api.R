@@ -61,7 +61,7 @@ forward_to_api <- function(
       max_tries = 5,
       is_transient = function(resp) {
         # OpenCPU server side errors, sometimes transient
-        httr2::resp_status(resp) %in% c(502, 503)
+        httr2::resp_status(resp) %in% c(500, 502, 503)
       },
       retry_on_failure = TRUE
     )
