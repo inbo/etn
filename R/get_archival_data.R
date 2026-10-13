@@ -31,26 +31,29 @@
 #'
 #'   - `tag_id`: The tag id of the tag that recorded the data.
 #'   - `timestamp_utc`: The timestamp of the measurement in UTC.
-#'   - `measurement_type`: The type of measurement (e.g. "Temp", "Pressure, etc.).
+#'   - `measurement_type`: The type of measurement
+#'   (e.g. "Temp", "Pressure, etc.).
 #'   - `measurement_value`: The value of the measurement.
 #'   - `measurement_unit`: The unit of the measurement (e.g. "C", "Pa", etc.).
-#'   - `animal_project_code`: The animal project code of the animal that recorded the data.
+#'   - `animal_project_code`: The animal project code of the animal that
+#'   recorded the data.
 #'   - `animal_id`: The animal id of the animal the tag was attached to.
-#'   - `tag_serial_number`: The tag serial number of the tag that recorded the data.
+#'   - `tag_serial_number`: The tag serial number of the tag that recorded the
+#'   data.
 #'
-#' @section Returning large amounts of data out of memory:
-#'  If you are fetching a large amount of data, it is recommended to use
-#'  `return_as = "arrow"` to return an out of memory object. This will allow you
-#'  to query the data without loading it all into memory at once. Keep in mind
-#'  that the downloaded data will remain stored on your computer until R is
-#'  restarted. If you want to keep the data, you can provide a path to an
-#'  existing directory where the csv files will be stored via the `path`
-#'  argument. See [arrow::Dataset] for more information.
+#' @section Returning large amounts of data out of memory: If you are fetching a
+#'   large amount of data, it is recommended to use `return_as = "arrow"` to
+#'   return an out of memory object. This will allow you to query the data
+#'   without loading it all into memory at once. Keep in mind that the
+#'   downloaded data will remain stored on your computer until R is restarted.
+#'   If you want to keep the data, you can provide a path to an existing
+#'   directory where the csv files will be stored via the `path` argument. See
+#'   [arrow::Dataset] for more information.
 #'
 #' @export
 #' @family access functions
 #' @examplesIf interactive() & etn:::credentials_are_set()
-#' get_archival_data(tag_serial_number = "A15757", limit = TRUE)
+#'   get_archival_data(tag_serial_number = "A15757", limit = TRUE)
 get_archival_data <- function(tag_serial_number = NULL,
                               animal_id = NULL,
                               animal_project_code = NULL,
