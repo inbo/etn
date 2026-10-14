@@ -170,7 +170,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
         "Failed to log in with username: {get_credentials()$username}.",
         " Please check credentials."
       ),
-      caller = rlang::env_parent()
+      call = rlang::env_parent()
     )
   }
 
