@@ -55,9 +55,6 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
   marineinfo_dataset_endpoints <-
     glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
 
-  json_tempdir <- withr::local_tempdir(pattern = "marineinfo_json",
-                                       .local_envir = environment())
-
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
     # Retry if a request fails, max_tries is ignored for parallel requests but
