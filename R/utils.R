@@ -375,8 +375,19 @@ NULL
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-      cache = cachem::cache_mem(max_age = 60 * 15)
+      cache = get_cache()
     )
+
+  # User changeable options: inspired by the R package book 2nd Edition
+  op <- options()
+  op.etn <- list(
+    etn.cache_msize_bytes = 100 * 1024^2,
+    etn.cache_mage_seconds = 60 * 15
+  )
+  toset <- !(names(op.etn) %in% names(op))
+  if (any(toset)) options(op.etn[toset])
+
+  invisible()
 }
 
 #' Expand columns
