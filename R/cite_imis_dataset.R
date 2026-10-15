@@ -50,77 +50,24 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     imis_dataset_ids <- imis_dataset_ids[!is.na(imis_dataset_ids)]
   }
 
-  # Query the IMIS API ------------------------------------------------------
 
-  marineinfo_dataset_endpoints <-
-    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
-
-  marineinfo_responses <-
-    purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
-    # Retry if a request fails, max_tries is ignored for parallel requests but
-    # will message if unset.
-    purrr::map(httr2::req_retry, max_tries = 2) |>
-    # Never place more then 2 requests a second
-    purrr::map(\(req) httr2::req_throttle(req,
-                                          capacity = 120,
-                                          fill_time_s = 60)) |>
-    httr2::req_perform_parallel(
-      on_error = "continue",
-      # Don't show progress bar when testing to avoid
-      # cluttering testthat output, or when disabled.
-      progress = ifelse(progress & !is_testing(),
-        yes = "Getting citations",
-        no = FALSE
-      )
-    )
-  # Discard any responses that contain errors
-  succesful_responses <- marineinfo_responses |>
-    purrr::discard(rlang::is_condition)
-
-  # Return a warning for any failed requests if any failed
-  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition)) && warn) {
-    failed_ids <- marineinfo_responses |>
-      purrr::keep(rlang::is_condition) |>
-      purrr::map("resp", "url") |>
-      purrr::map(\(resp) {
-        purrr::set_names(
-          httr2::resp_body_json(resp),
-          # Name the response by the IMIS id extracted from the response url
-          stringr::str_extract(httr2::resp_url(resp), "[0-9]+")
+  # Lookup value in cache ---------------------------------------------------
+  purrr::map(imis_dataset_ids, \(id) {
+    possible_cache_hit <- get_cache(id)
+    if (cachem::is.key_missing(possible_cache_hit)) {
+      marineinfo_metadata <-
+        get_marineinfo_metadata(
+          imis_dataset_ids = id,
+          warn = warn,
+          progress = progress
         )
-      }) |>
-      purrr::map(\(error) {
-        paste(names(error), paste(error, collapse = " : "))
-      }) |>
-      purrr::list_c() |>
-      unique()
-
-    rlang::warn(c("!" = "MarineInfo API returned errors:"),
-      footer = purrr::set_names(failed_ids, "*"),
-      class = "marineinfo_api_warning"
-    )
-  }
-
-  # Early return if all requests failed
-  if (length(succesful_responses) == 0) {
-    return(early_return_object)
-  }
-
-  # Parse the JSON ----------------------------------------------------------
-
-  marineinfo_metadata <-
-    succesful_responses |>
-    purrr::map(\(response) {
-      httr2::resp_body_json(response, simplifyVector = TRUE)
-    }) |>
-    # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
-    # results so we can't just get this from the acoustic_project_codes argument
-    (\(returned_list) {
-      purrr::set_names(returned_list, purrr::map(
-        returned_list,
-        list("datasetrec", "DasID")
-      ))
-    })()
+      set_cache(id, marineinfo_metadata)
+    } else {
+      marineinfo_metadata <- possible_cache_hit
+    }
+    list(id = marineinfo_metadata)
+  }) |>
+    purrr::compact()
 
   # Parse the Citation and DOI ----------------------------------------------
 
@@ -258,4 +205,94 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     ) |>
     # Return as tibble to be consistent within the package. Displays nice.
     dplyr::as_tibble()
+}
+
+
+get_marineinfo_metadata <- function(imis_dataset_ids,
+                                    progress = FALSE,
+                                    warn = FALSE) {
+  # Query the IMIS API ------------------------------------------------------
+
+  marineinfo_dataset_endpoints <-
+    glue::glue("https://marineinfo.org/id/dataset/{imis_dataset_ids}.json")
+
+  marineinfo_responses <-
+    purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
+    # Retry if a request fails, max_tries is ignored for parallel requests but
+    # will message if unset.
+    purrr::map(httr2::req_retry, max_tries = 3) |>
+    # Never place more then 2 requests a second
+    # purrr::map(\(req) httr2::req_throttle(req,
+    #                                       capacity = 120,
+    #                                       fill_time_s = 60)) |>
+    # httr2::req_perform_parallel(
+    httr2::req_perform_sequential(
+      on_error = "continue",
+      # Don't show progress bar when testing to avoid
+      # cluttering testthat output, or when disabled.
+      progress = ifelse(progress & !is_testing(),
+                        yes = "Getting citations",
+                        no = FALSE
+      )
+    )
+  # Discard any responses that contain errors
+  succesful_responses <- marineinfo_responses |>
+    purrr::discard(rlang::is_condition)
+
+  # Return a warning for any failed requests if any failed
+  if (any(purrr::map_lgl(marineinfo_responses, rlang::is_condition)) && warn) {
+    failed_ids <- marineinfo_responses |>
+      purrr::keep(rlang::is_condition) |>
+      purrr::map("resp", "url") |>
+      purrr::map(\(resp) {
+        purrr::set_names(
+          httr2::resp_body_json(resp),
+          # Name the response by the IMIS id extracted from the response url
+          stringr::str_extract(httr2::resp_url(resp), "[0-9]+")
+        )
+      }) |>
+      purrr::map(\(error) {
+        paste(names(error), paste(error, collapse = " : "))
+      }) |>
+      purrr::list_c() |>
+      unique()
+
+    rlang::warn(c("!" = "MarineInfo API returned errors:"),
+                footer = purrr::set_names(failed_ids, "*"),
+                class = "marineinfo_api_warning"
+    )
+  }
+
+  # Early return if all requests failed
+  if (length(succesful_responses) == 0) {
+    early_return_object <-
+      dplyr::tibble(
+        imis_dataset_id = integer(),
+        citation = character(),
+        doi = character(),
+        contact_name = character(),
+        contact_email = character(),
+        contact_affiliation = character()
+      )
+
+    return(early_return_object)
+  }
+
+  # Parse the JSON ----------------------------------------------------------
+
+  marineinfo_metadata <-
+    succesful_responses |>
+    purrr::map(\(response) {
+      httr2::resp_body_json(response, simplifyVector = TRUE)
+    }) |>
+    # Set names to acronym, get_acoustic_projects() doesn't guarantee order of
+    # results so we can't just get this from the acoustic_project_codes argument
+    (\(returned_list) {
+      purrr::set_names(returned_list, purrr::map(
+        returned_list,
+        list("datasetrec", "DasID")
+      ))
+    })()
+
+  marineinfo_metadata
 }
