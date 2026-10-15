@@ -375,7 +375,7 @@ NULL
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-      cache = get_cache()
+      cache = cachem::cache_mem(max_age = 60 * 15)
     )
 
   # User changeable options: inspired by the R package book 2nd Edition
