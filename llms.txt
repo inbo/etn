@@ -28,6 +28,17 @@ You can install the development version of etn from
 pak::pak("inbo/etn")
 ```
 
+Alternativly you can also install the latest release via the INBO
+R-Universe:
+
+``` r
+
+install.packages("etn", repos = c(inbo = "https://inbo.r-universe.dev"))
+```
+
+If you are having trouble installing etn in RStudio, it may be easier to
+run the install command in R directly.
+
 ## Usage
 
 Before you can access data from the European Tracking Network, you need
