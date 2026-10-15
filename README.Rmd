@@ -46,7 +46,7 @@ Or from the INBO R-universe:
 install.packages("etn", repos = c(inbo = "https://inbo.r-universe.dev"))
 ```
 
-If you are having trouble installing etn in RStudio, it may be easier to run the install command in R directly. 
+If you are having trouble running the above commands in RStudio, try running them in R directly.
 
 ## Usage
 
