@@ -40,7 +40,7 @@ You can install the development version of etn from [GitHub](https://github.com/
 pak::pak("inbo/etn")
 ```
 
-Alternativly you can also install the latest release via the INBO R-Universe: 
+Or from the INBO R-universe: 
 
 ``` r
 install.packages("etn", repos = c(inbo = "https://inbo.r-universe.dev"))
