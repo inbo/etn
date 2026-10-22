@@ -108,7 +108,7 @@ test_that("get_archival_data() returns error on no archival data found", {
   # But it should return the remaining data if only some tags have no data
 })
 
-test_that("get_archival_data() returns error on invalid values", {
+test_that("get_archival_data() forwards errors from the API", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
