@@ -64,6 +64,9 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
     purrr::map(\(req) {
       httr2::req_retry(req, max_tries = 2, retry_on_failure = TRUE)
     }) |>
+    purrr::map(\(req) httr2::req_throttle(req,
+                                          capacity = 120,
+                                          fill_time_s = 60)) |>
     httr2::req_perform_sequential(
       on_error = "continue",
       # Don't show progress bar when testing to avoid
