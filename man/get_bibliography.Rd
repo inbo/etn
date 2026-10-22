@@ -40,6 +40,7 @@ read_resource(example_dataset(), "bibliography")
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
 \code{\link[=get_acoustic_projects]{get_acoustic_projects()}},

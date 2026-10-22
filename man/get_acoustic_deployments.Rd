@@ -62,6 +62,7 @@ get_acoustic_deployments(station_name = c("de-9", "de-10"))
 }
 \seealso{
 Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
 \code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
 \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},

@@ -134,3 +134,10 @@ test_that("get_animals() returns identical results independent of the used proto
 test_that("get_tags() returns identical results independent of the used protocol", {
   expect_protocol_agnostic(get_tags())
 })
+
+# get_acoustic_deployment_logs -------------------------------------------------------
+
+test_that("get_acoustic_deployment_logs() returns identical results independent of the used protocol", {
+  # random deployment_id
+  expect_protocol_agnostic(get_acoustic_deployment_logs(deployment_id = 76914))
+})
