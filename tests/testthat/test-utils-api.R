@@ -175,32 +175,6 @@ test_that("deprecate_warn_connection() is triggered on all functions with connec
   }
 })
 
-# get_parent_fn_name() ----------------------------------------------------
-
-
-test_that("get_parent_fn_name() can return the name of the parent function", {
-  parent_function_with_a_cool_name <- function() {
-    get_parent_fn_name()
-  }
-  expect_identical(
-    parent_function_with_a_cool_name(),
-    "parent_function_with_a_cool_name"
-  )
-})
-
-test_that("get_parent_fn_name() can return the name a higher level caller", {
-  parent_function_with_a_cool_name <- function() {
-    get_parent_fn_name(depth = 2)
-  }
-  grandparent_function <- function() {
-    parent_function_with_a_cool_name()
-  }
-  expect_identical(
-    grandparent_function(),
-    "grandparent_function"
-  )
-})
-
 # validate_login() --------------------------------------------------------
 
 test_that("validate_login() returns TRUE on correct credentials", {
