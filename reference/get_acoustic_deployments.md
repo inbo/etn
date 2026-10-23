@@ -59,6 +59,7 @@ Other access functions:
 [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
 [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
 [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md),
 [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md),
 [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md),
@@ -69,7 +70,7 @@ Other access functions:
 ``` r
 # Get all acoustic deployments
 get_acoustic_deployments()
-#> # A tibble: 24,443 × 38
+#> # A tibble: 24,444 × 38
 #>    deployment_id receiver_id acoustic_project_code station_name
 #>            <int> <chr>       <chr>                 <chr>       
 #>  1          6660 VR20-2029   2004_Gudena           GUD1        
@@ -82,7 +83,7 @@ get_acoustic_deployments()
 #>  8          6672 VR2-3538    2004_Gudena           RAN1        
 #>  9          6663 VR2-1909    2004_Gudena           RAN2        
 #> 10          6673 VR2-1909    2004_Gudena           RAN2        
-#> # ℹ 24,433 more rows
+#> # ℹ 24,434 more rows
 #> # ℹ 34 more variables: station_description <chr>, station_manager <chr>,
 #> #   deploy_date_time <dttm>, deploy_latitude <dbl>, deploy_longitude <dbl>,
 #> #   intended_latitude <dbl>, intended_longitude <dbl>, mooring_type <chr>,

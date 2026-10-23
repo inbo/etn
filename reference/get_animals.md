@@ -55,6 +55,7 @@ Other access functions:
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
 [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
 [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
+[`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md),
 [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md),
 [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md),
@@ -65,7 +66,7 @@ Other access functions:
 ``` r
 # Get all animals
 get_animals()
-#> # A tibble: 36,060 × 66
+#> # A tibble: 36,062 × 66
 #>    animal_id animal_project_code tag_serial_number tag_type tag_subtype
 #>        <int> <chr>               <chr>             <chr>    <chr>      
 #>  1      5923 2004_Gudena         1208              acoustic animal     
@@ -78,7 +79,7 @@ get_animals()
 #>  8      5920 2004_Gudena         7421              acoustic animal     
 #>  9      5921 2004_Gudena         7422              acoustic animal     
 #> 10      5922 2004_Gudena         7423              acoustic animal     
-#> # ℹ 36,050 more rows
+#> # ℹ 36,052 more rows
 #> # ℹ 61 more variables: acoustic_tag_id <chr>,
 #> #   acoustic_tag_id_alternative <chr>, scientific_name <chr>,
 #> #   common_name <chr>, aphia_id <int>, animal_label <chr>,

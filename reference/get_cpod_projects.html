@@ -88,6 +88,7 @@ If no contact person is provided, the first author with status <code>creator</co
 <code><a href="get_acoustic_receivers.html">get_acoustic_receivers()</a></code>,
 <code><a href="get_animal_projects.html">get_animal_projects()</a></code>,
 <code><a href="get_animals.html">get_animals()</a></code>,
+<code><a href="get_archival_data.html">get_archival_data()</a></code>,
 <code><a href="get_bibliography.html">get_bibliography()</a></code>,
 <code><a href="get_package.html">get_package()</a></code>,
 <code><a href="get_tags.html">get_tags()</a></code></p></div>
@@ -97,7 +98,7 @@ If no contact person is provided, the first author with status <code>creator</co
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get all animal projects</span></span></span>
 <span class="r-in"><span><span class="fu">get_cpod_projects</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 24 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    project_id project_code   project_type telemetry_type project_name start_date</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>       <span style="text-decoration: underline;">1</span>088 ARMS_MBON_Bel… cpod         <span style="color: #BB0000;">NA</span>             Underwater … 2018-07-12</span>
@@ -105,12 +106,12 @@ If no contact person is provided, the first author with status <code>creator</co
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        973 Apelafico_und… cpod         <span style="color: #BB0000;">NA</span>             Acoustic Ec… 2021-01-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>       <span style="text-decoration: underline;">1</span>337 Blueconnect    cpod         <span style="color: #BB0000;">NA</span>             BlueConnect… 2026-01-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>       <span style="text-decoration: underline;">1</span>093 CODEVCO        cpod         <span style="color: #BB0000;">NA</span>             CODEVCO - m… 2021-10-31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       <span style="text-decoration: underline;">1</span>366 ETN_underwate… cpod         <span style="color: #BB0000;">NA</span>             Test projec… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       <span style="text-decoration: underline;">1</span>361 HesseløOWF_20… cpod         <span style="color: #BB0000;">NA</span>             Baseline st… 2020-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       <span style="text-decoration: underline;">1</span>364 HybridLabs     cpod         <span style="color: #BB0000;">NA</span>             Impact of f… 2026-09-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       <span style="text-decoration: underline;">1</span>186 Lifewatch_add… cpod         <span style="color: #BB0000;">NA</span>             Lifewatch: … 2025-05-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       <span style="text-decoration: underline;">1</span>185 Lifewatch_per… cpod         <span style="color: #BB0000;">NA</span>             Lifewatch: … 2025-03-26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       <span style="text-decoration: underline;">1</span>361 HesseløOWF_20… cpod         <span style="color: #BB0000;">NA</span>             Baseline st… 2020-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       <span style="text-decoration: underline;">1</span>364 HybridLabs     cpod         <span style="color: #BB0000;">NA</span>             Impact of f… 2026-09-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       <span style="text-decoration: underline;">1</span>186 Lifewatch_add… cpod         <span style="color: #BB0000;">NA</span>             Lifewatch: … 2025-05-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       <span style="text-decoration: underline;">1</span>185 Lifewatch_per… cpod         <span style="color: #BB0000;">NA</span>             Lifewatch: … 2025-03-26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       <span style="text-decoration: underline;">1</span>318 NOVANA         cpod         <span style="color: #BB0000;">NA</span>             The Nationa… 2004-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: end_date &lt;date&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   moratorium &lt;lgl&gt;, imis_dataset_id &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>

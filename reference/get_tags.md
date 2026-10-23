@@ -58,6 +58,7 @@ Other access functions:
 [`get_acoustic_receivers()`](https://inbo.github.io/etn/reference/get_acoustic_receivers.md),
 [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
 [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md),
 [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md),
 [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
@@ -67,7 +68,7 @@ Other access functions:
 ``` r
 # Get all tags
 get_tags()
-#> # A tibble: 71,690 × 54
+#> # A tibble: 71,761 × 54
 #>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>    <chr>       <chr>       <chr>          
 #>  1 0A4E2699          acoustic animal      NA          OPI-2699       
@@ -80,7 +81,7 @@ get_tags()
 #>  8 0A6G              acoustic animal      NA          R64K-2383      
 #>  9 0A6H              acoustic animal      NA          R64K-2384      
 #> 10 0A6I              acoustic animal      NA          R64K-2385      
-#> # ℹ 71,680 more rows
+#> # ℹ 71,751 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,

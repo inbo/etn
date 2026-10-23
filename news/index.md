@@ -66,6 +66,12 @@
   - The animal sex, life stage and weight are added to an Extended
     Measurement Or Facts extension file (`emof.csv`), for better support
     with OBIS ([\#555](https://github.com/inbo/etn/issues/555)).
+- New
+  [`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md)
+  downloads and reads processed tag archival data. The function has
+  experimental features to return an out of memory Arrow dataset in
+  order to allow the processing of very large amounts of data
+  ([\#409](https://github.com/inbo/etn/issues/409)).
 - The [function
   reference](https://inbo.github.io/etn/reference/index.html) has been
   reorganized ([\#549](https://github.com/inbo/etn/issues/549))

@@ -60,6 +60,7 @@
 <a href="http://rs.tdwg.org/dwc/terms/identificationVerificationStatus" class="external-link"><code>dwc:identificationVerificationStatus</code></a> has been added and is set to <code>"verified by expert"</code> for all records, since the taxon is assumed to be well-known before the tag was attached.</li>
 <li>The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (<code>emof.csv</code>), for better support with OBIS (<a href="https://github.com/inbo/etn/issues/555" class="external-link">#555</a>).</li>
 </ul></li>
+<li>New <code><a href="../reference/get_archival_data.html">get_archival_data()</a></code> downloads and reads processed tag archival data. The function has experimental features to return an out of memory Arrow dataset in order to allow the processing of very large amounts of data (<a href="https://github.com/inbo/etn/issues/409" class="external-link">#409</a>).</li>
 <li>The <a href="https://inbo.github.io/etn/reference/index.html">function reference</a> has been reorganized (<a href="https://github.com/inbo/etn/issues/549" class="external-link">#549</a>)</li>
 <li>New <code><a href="../reference/get_bibliography.html">get_bibliography()</a></code> creates a bibliography from a table of detections, with references for ETN, the etn R package, and animal and acoustic projects associated with the detections (<a href="https://github.com/inbo/etn/issues/587" class="external-link">#587</a>).</li>
 <li>

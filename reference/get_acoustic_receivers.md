@@ -38,6 +38,7 @@ Other access functions:
 [`get_acoustic_projects()`](https://inbo.github.io/etn/reference/get_acoustic_projects.md),
 [`get_animal_projects()`](https://inbo.github.io/etn/reference/get_animal_projects.md),
 [`get_animals()`](https://inbo.github.io/etn/reference/get_animals.md),
+[`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md),
 [`get_bibliography()`](https://inbo.github.io/etn/reference/get_bibliography.md),
 [`get_cpod_projects()`](https://inbo.github.io/etn/reference/get_cpod_projects.md),
 [`get_package()`](https://inbo.github.io/etn/reference/get_package.md),
