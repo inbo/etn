@@ -77,12 +77,13 @@ directory where the csv files will be stored via the \code{path} argument. See
 \link[arrow:Dataset]{arrow::Dataset} for more information.
 }
 
-\section{Caching}{
- The function caches the downloaded csv files in a temporary
-directory that is deleted when R is restarted. If you want to keep the csv
-files, provide a path to an existing directory where the csv files will be
-stored via the \code{path} argument. If the requested files are already present
-in the provided path, they will not be downloaded again.
+\section{Temporary storage of csv files}{
+ When \code{return_as} is set to \code{arrow},
+the downloaded csv fils will be stored in \code{tempdir()} even when no \code{path}
+has been provided. This is neccesairy because of the way arrow
+dataasetquery objects work; they need to be able to access the csv files on
+disk. To remove these files from your computer, you can either restart R or
+manually delete the files from the temporary directory.
 }
 
 \examples{

@@ -47,11 +47,12 @@
 #'   directory where the csv files will be stored via the `path` argument. See
 #'   [arrow::Dataset] for more information.
 #'
-#' @section Caching: The function caches the downloaded csv files in a temporary
-#'   directory that is deleted when R is restarted. If you want to keep the csv
-#'   files, provide a path to an existing directory where the csv files will be
-#'   stored via the `path` argument. If the requested files are already present
-#'   in the provided path, they will not be downloaded again.
+#' @section Temporary storage of csv files: When `return_as` is set to `arrow`,
+#'   the downloaded csv fils will be stored in `tempdir()` even when no `path`
+#'   has been provided. This is neccesairy because of the way arrow
+#'   dataasetquery objects work; they need to be able to access the csv files on
+#'   disk. To remove these files from your computer, you can either restart R or
+#'   manually delete the files from the temporary directory.
 #' @export
 #' @family access functions
 #' @examplesIf interactive() & etn:::credentials_are_set()
