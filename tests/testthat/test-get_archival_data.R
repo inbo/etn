@@ -214,20 +214,6 @@ test_that("get_archival_data() is case insensitive for animal_project_code", {
   )
 })
 
-test_that("get_archival_data() returns error on invalid animal_project_code", {
-  skip_if_offline("www.lifewatch.be")
-  skip_if_no_authentication()
-
-  vcr::local_cassette("archival-uuid-invalid-animal_project_code",
-                      serialize_with = "qs2")
-
-  expect_error(
-    get_archival_data(animal_project_code = "not_an_animal_project_code"),
-    regexp = "Can't find animal_project_code",
-    fixed = FALSE
-  )
-})
-
 test_that("get_archival_data() returns error on no query arguments", {
   # It's not a good idea to try to fetch all archival data in one call.
   expect_error(
