@@ -71,7 +71,7 @@ get_acoustic_receivers()
 
 # Get lost and broken acoustic receivers
 get_acoustic_receivers(status = c("lost", "broken"))
-#> # A tibble: 426 × 23
+#> # A tibble: 427 × 23
 #>    receiver_id  manufacturer receiver_model receiver_serial_number modem_address
 #>    <chr>        <chr>        <chr>          <chr>                  <chr>        
 #>  1 HR2-461210   INNOVASEA    HR2-180K-100-… 461210                 NA           
@@ -84,7 +84,7 @@ get_acoustic_receivers(status = c("lost", "broken"))
 #>  8 TBR700-0017… THELMA BIOT… TBR700         001768                 NA           
 #>  9 TBR700-1308  THELMA BIOT… TBR700         1308                   NA           
 #> 10 TBR700-1400  THELMA BIOT… TBR700         1400                   NA           
-#> # ℹ 416 more rows
+#> # ℹ 417 more rows
 #> # ℹ 18 more variables: status <chr>, battery_estimated_life <chr>,
 #> #   owner_organization <chr>, financing_project <chr>,
 #> #   built_in_acoustic_tag_id <chr>, ar_model <chr>, ar_serial_number <chr>,

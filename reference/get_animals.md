@@ -65,7 +65,7 @@ Other access functions:
 ``` r
 # Get all animals
 get_animals()
-#> # A tibble: 35,879 × 66
+#> # A tibble: 36,060 × 66
 #>    animal_id animal_project_code tag_serial_number tag_type tag_subtype
 #>        <int> <chr>               <chr>             <chr>    <chr>      
 #>  1      5923 2004_Gudena         1208              acoustic animal     
@@ -78,7 +78,7 @@ get_animals()
 #>  8      5920 2004_Gudena         7421              acoustic animal     
 #>  9      5921 2004_Gudena         7422              acoustic animal     
 #> 10      5922 2004_Gudena         7423              acoustic animal     
-#> # ℹ 35,869 more rows
+#> # ℹ 36,050 more rows
 #> # ℹ 61 more variables: acoustic_tag_id <chr>,
 #> #   acoustic_tag_id_alternative <chr>, scientific_name <chr>,
 #> #   common_name <chr>, aphia_id <int>, animal_label <chr>,
@@ -180,7 +180,7 @@ get_animals(tag_serial_number = "1187450")
 
 # Get animals of specific species (across all projects)
 get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
-#> # A tibble: 422 × 66
+#> # A tibble: 425 × 66
 #>    animal_id animal_project_code tag_serial_number tag_type tag_subtype
 #>        <int> <chr>               <chr>             <chr>    <chr>      
 #>  1       304 2014_demer          1187449           acoustic animal     
@@ -193,7 +193,7 @@ get_animals(scientific_name = c("Rutilus rutilus", "Silurus glanis"))
 #>  8       365 2014_demer          1171775           acoustic animal     
 #>  9       366 2014_demer          1171776           acoustic animal     
 #> 10       368 2014_demer          1171780           acoustic animal     
-#> # ℹ 412 more rows
+#> # ℹ 415 more rows
 #> # ℹ 61 more variables: acoustic_tag_id <chr>,
 #> #   acoustic_tag_id_alternative <chr>, scientific_name <chr>,
 #> #   common_name <chr>, aphia_id <int>, animal_label <chr>,
