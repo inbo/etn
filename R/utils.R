@@ -68,7 +68,7 @@ check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   } else {
     # Sort the references so the closest matches are mentioned. Only show 5
     # members.
-    candidates_col <- purrr::map(distances, \(dist_for_value){
+    candidates_col <- purrr::map(distances, \(dist_for_value) {
       y[order(as.vector(dist_for_value))]
     }) |>
       # Convert into a vector and truncate for the error message
@@ -141,7 +141,7 @@ cli_yes <- function(x, shuffle = TRUE, .envir = parent.frame()) {
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
-    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+      is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
       cli::cli_alert_info(
         "No credentials stored. See {.vignette etn::authentication} to configure
@@ -284,7 +284,7 @@ select_protocol <- function() {
   }
 
   # Fallback on API
-  return("opencpu")
+  "opencpu"
 }
 
 #' Remove HTML tags from a string
@@ -375,16 +375,19 @@ etn_citation <- function() {
 is_writeable <- function(path, call = rlang::caller_env()) {
   if (!is.character(path) || length(path) != 1) {
     cli::cli_abort("{.arg path} must be a character string of length 1.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_invalid")
   }
   if (!file.exists(path)) {
     cli::cli_abort("The provided path {.path {path}} does not exist.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_non-existant")
   }
 
   if (file.access(path, mode = 2) != 0) {
     cli::cli_abort("No write permission for {.path {path}}.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_not_writeable")
   }
 
   invisible(path)
@@ -392,12 +395,10 @@ is_writeable <- function(path, call = rlang::caller_env()) {
 
 #' Get file sizes for a vector of file paths
 #'
-#' This is a slight variant on the base function file.size. I've decided to wrap
-#' it so it can be more easily mocked in tests, allowing me to trigger tests
-#' that depend on certain downloaded files being size 0.
-#'
-#' This function also differs from it's base equivalent in that it returns a
-#' named integer vector so the file paths are retained.
+#' This is a slight variant on the base function file.size. Apart from allowing
+#' a vector of file paths this functon can also be more easily mocked in tests,
+#' allowing the triggering of tests that depend on certain downloaded files
+#' being size 0.
 #'
 #' @param x A character vector of file paths.
 #'
@@ -406,7 +407,7 @@ is_writeable <- function(path, call = rlang::caller_env()) {
 #'
 #' @family helper functions
 #' @noRd
-file_size <- function(x){
+file_size <- function(x) {
   purrr::map_int(
     x, file.size
   ) |>
@@ -441,9 +442,9 @@ is_interactive <- function(...) {
 
 #' Wrapper for base::readline
 #'
-#' This function is wrapped because I find it easier to read, and so it can be
-#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behaviour of `get_credentials()`
+#' This function is wrapped as an easier to read alias, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the
+#' prompting behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd
@@ -470,6 +471,14 @@ NULL
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
+
+  # Memoisation: only read the lines of a file every 15 minutes. This is useful
+  # for reading stable lines from a url repeatingly. Such as is the case for
+  # archival data tests.
+  read_lines_cached <<-
+    memoise::memoise(readr::read_lines,
       cache = cachem::cache_mem(max_age = 60 * 15)
     )
 }

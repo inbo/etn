@@ -1,8 +1,8 @@
 #' Get processed tag archival data
 #'
-#' This function fetches processed archival data from tags. The data is stored
-#' in csv files hosted on lifewatch.com. Providing at least one of the following
-#' arguments is required: `tag_serial_number`, `animal_id`, or
+#' Fetches processed archival data from tags. The data downloaded from csv files
+#' hosted on lifewatch.com and then read into R. Providing at least one of the
+#' following arguments is required: `tag_serial_number`, `animal_id`, or
 #' `animal_project_code`.
 #'
 #' @inheritParams get_animals
@@ -14,10 +14,7 @@
 #' @param path `r lifecycle::badge("experimental")` Character. A path to an
 #'   existing directory where the csv files will be stored. If NULL, the csv
 #'   files will be stored in a temporary directory that is deleted when R is
-#'   restarted. If you want to keep the csv files, provide a path. Keep in mind
-#'   that the csv files can be quite large and may take up a lot of disk space.
-#'   If the requested files are already present in the provided path, they will
-#'   not be downloaded again.
+#'   restarted.
 #' @param return_as `r lifecycle::badge("experimental")` Character. One of
 #'   "tibble" or "arrow". Whether to return the data as an in memory tibble or
 #'   an out of memory arrow dataset. The latter is recommended for large
@@ -28,24 +25,34 @@
 #' @returns Depending on the value of `return_as`, either an [arrow::Dataset] or
 #'   a data.frame with the archival data values. The resulting table has the
 #'   following columns:
+#'
 #'   - `tag_id`: The tag id of the tag that recorded the data.
 #'   - `timestamp_utc`: The timestamp of the measurement in UTC.
-#'   - `measurement_type`: The type of measurement (e.g. "Temp", "Pressure, etc.).
+#'   - `measurement_type`: The type of measurement
+#'   (e.g. "Temp", "Pressure, etc.).
 #'   - `measurement_value`: The value of the measurement.
 #'   - `measurement_unit`: The unit of the measurement (e.g. "C", "Pa", etc.).
-#'   - `animal_project_code`: The animal project code of the animal that recorded the data.
-#'   - `animal_id`: The animal id of the animal that recorded the data.
-#'   - `tag_serial_number`: The tag serial number of the tag that recorded the data.
+#'   - `animal_project_code`: The animal project code of the animal that
+#'   recorded the data.
+#'   - `animal_id`: The animal id of the animal the tag was attached to.
+#'   - `tag_serial_number`: The tag serial number of the tag that recorded the
+#'   data.
 #'
-#' @section Returning large amounts of data out of memory:
-#'  If you are fetching a large amount of data, it is recommended to use
-#'  `return_as = "arrow"` to return an out of memory object. This will allow you
-#'  to query the data without loading it all into memory at once. Keep in mind
-#'  that the downloaded data will remain stored on your computer until R is
-#'  restarted. If you want to keep the data, you can provide a path to an
-#'  existing directory where the csv files will be stored via the `path`
-#'  argument. See [arrow::Dataset] for more information.
+#' @section Returning large amounts of data out of memory: If you are fetching a
+#'   large amount of data, it is recommended to use `return_as = "arrow"` to
+#'   return an out of memory object. This will allow you to query the data
+#'   without loading it all into memory at once. Keep in mind that the
+#'   downloaded data will remain stored on your computer until R is restarted.
+#'   If you want to keep the data, you can provide a path to an existing
+#'   directory where the csv files will be stored via the `path` argument. See
+#'   [arrow::Dataset] for more information.
 #'
+#' @section Temporary storage of csv files: When `return_as` is set to `arrow`,
+#'   the downloaded csv fils will be stored in `tempdir()` even when no `path`
+#'   has been provided. This is neccesairy because of the way arrow
+#'   dataasetquery objects work; they need to be able to access the csv files on
+#'   disk. To remove these files from your computer, you can either restart R or
+#'   manually delete the files from the temporary directory.
 #' @export
 #' @family access functions
 #' @examplesIf interactive() & etn:::credentials_are_set()
@@ -66,10 +73,14 @@ get_archival_data <- function(tag_serial_number = NULL,
   query_args <- setdiff(rlang::fn_fmls_names(), non_query_args) |>
     mget()
   provided_query_args <- purrr::discard(query_args, is.null)
-  if(length(provided_query_args) == 0 && !limit){
+  if (length(provided_query_args) == 0 && !limit) {
     cli::cli_abort(
-      c("{.strong Attempting to download all available archival data in one go is unwise.}",
-      "At least one of the following arguments must be provided: {.or {.arg {names(query_args)}}}."),
+      c(
+        "At least one of the following arguments must be provided:
+        {.or {.arg {names(query_args)}}}.",
+        "{.strong Attempting to download all available archival data in one go
+        is unwise.}"
+      ),
       class = "archival_data_no_query_args"
     )
   }
@@ -89,9 +100,11 @@ get_archival_data <- function(tag_serial_number = NULL,
   # Sometimes, multiple uuids are passed. We only need to download every file
   # once.
   uuid_tbl <-
-      get_archival_data_uuid(tag_serial_number,
-                             animal_id,
-                             animal_project_code)|>
+    get_archival_data_uuid(
+      tag_serial_number,
+      animal_id,
+      animal_project_code
+    ) |>
     dplyr::distinct()
 
   uuids <-
@@ -100,15 +113,15 @@ get_archival_data <- function(tag_serial_number = NULL,
     unique()
 
   ## Stop if no data found --------------------------------------------------
-  if(length(uuids) == 0){
+  if (length(uuids) == 0) {
     cli::cli_abort(
-      "No archival data found for the provided filters.",
-      class = "archival_data_not_found"
+      "Can't find archival data the provided input.",
+      class = "etn_error_archival_data_not_found"
     )
   }
 
-  if(progress && !limit){
-    cli::cli_progress_step("Preparing to download {length(uuids)} files.")
+  if (progress && !limit) {
+    cli::cli_progress_step("Preparing to download {length(uuids)} file{?s}.")
   }
 
   ## Warn if some filters return no data ------------------------------------
@@ -130,12 +143,14 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   values_no_file_found <-
     used_filters |>
-    purrr::imap(~ purrr::keep_at(.x, purrr::chuck(indexes_no_file_found, .y))) |>
+    purrr::imap(\(x, y) {
+      purrr::keep_at(x, purrr::chuck(indexes_no_file_found, y))
+    }) |>
     purrr::compact()
 
   if (length(values_no_file_found) > 0) {
     cli::cli_warn(
-      c("No archival data was found for:",
+      c("Can't find archival data for:",
         "x" = purrr::imap_chr(
           values_no_file_found,
           ~ glue::glue("{.y}: {glue::glue_collapse(.x, sep = ', ')}")
@@ -143,7 +158,7 @@ get_archival_data <- function(tag_serial_number = NULL,
           # Drop names so CLI can do in line formatting instead
           purrr::set_names(nm = NULL)
       ),
-      class = "archival_data_not_found_for_filter"
+      class = "etn_warning_archival_data_not_found_for_filter"
     )
   }
 
@@ -159,14 +174,17 @@ get_archival_data <- function(tag_serial_number = NULL,
           httr2::req_url_path_append(uuid)
       }
     ) |>
-    purrr::map(\(req) {httr2::req_retry(req, max_tries = 2)})
-
-  # If limit is TRUE, we only want to fetch a single file.
-  if(limit){
-    requests <- requests[1]
-  }
+    purrr::map(\(req) {
+      httr2::req_retry(req, max_tries = 4)
+    })
 
   ## Perform requests -------------------------------------------------------
+
+  # If limit is TRUE, we only want to fetch a single file.
+  if (limit) {
+    # Shorten the list to a single element
+    requests <- requests[1]
+  }
 
   if (!is.null(path)) {
     # If the user provided a path, store the csv files there.
@@ -178,38 +196,53 @@ get_archival_data <- function(tag_serial_number = NULL,
       # returning an out of memory object.
       tibble = {
         csv_dir <- withr::local_tempdir(
-          pattern = "archivaldata_"
+          pattern = "etn-archivaldata_"
         )
       },
       # When returning as a an arrow dplyr query object, store the files in a
       # Session wide tempdir.
-      arrow = csv_dir <- tempdir()
+      arrow = {
+        csv_dir <- tempdir()
+      }
     )
   }
 
-  csv_file_paths <- file.path(csv_dir, names(requests)) |>
-    paste0(".csv") |>
+  csv_file_paths <-
+    file.path(csv_dir, paste0(names(requests), ".csv")) |>
     purrr::set_names(nm = names(requests))
 
   if (limit) {
-    # Only fetch the first file
-    requests |>
-      purrr::map(httr2::req_perform_connection) |>
+    # For the first request, pass the url to read_lines.
+    purrr::chuck(requests, 1L, "url") |>
       # Read the header, and 100 lines
-      purrr::map(\(req) {httr2::resp_stream_lines(req, lines = 101)
-                         on.exit(expr = {close(resp)}, add = TRUE)}) |>
+      read_lines_cached(n_max = 101L, progress = FALSE) |>
       # Write to temp file, same as normally
-      purrr::walk2(csv_file_paths, \(lines, path) {readr::write_lines(lines, file = path)})
+      readr::write_lines(file = csv_file_paths)
   } else {
     # Download files, called for side effect of writing files to disk only, we
-    # don't store the response objects in memory.
-      purrr::walk2(requests, csv_file_paths, \(req, path) {
-        if (file.exists(path) & file_size(path) > 0) {
-          # Skip files that have already been downloaded.
-        } else {
-          httr2::req_perform(req, path = path)
-        }
-      }, .progress = ifelse(progress, "Downloading", FALSE))
+    # don't store the response objects in memory. Skip files that have already
+    # been downloaded.
+    requests <-
+      purrr::discard(
+        requests,
+        file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
+      )
+    all_fetched <- length(uuids) != length(requests)
+    if (progress && !limit && all_fetched) {
+      cli::cli_progress_step(
+        "Reading {length(uuids) - length(requests)}
+    file{?s} from disk.
+    ({prettyunits::pretty_bytes(sum(file_size(csv_file_paths)))})"
+      )
+    }
+    httr2::req_perform_sequential(
+      requests,
+      paths = purrr::discard(
+        csv_file_paths,
+        file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
+      ),
+      progress = ifelse(progress, "Downloading", FALSE)
+    )
   }
 
   # Parse responses ---------------------------------------------------------
@@ -232,7 +265,7 @@ get_archival_data <- function(tag_serial_number = NULL,
     ) |>
     # Take the last 36 characters of the filename (length of a UUID)
     dplyr::mutate(uuid = stringr::str_sub(
-      arrow:::add_filename(),
+      add_filename(),
       start = -40L, # UUID is 36 characters + length of the extension.
       end = -5L # -1L - length of the extension: `.csv`
     ))
@@ -254,19 +287,21 @@ get_archival_data <- function(tag_serial_number = NULL,
 
   # Return object -----------------------------------------------------------
 
-  switch (return_as,
+  switch(return_as,
     arrow = sensor_data,
     tibble = {
       # Check object size to warn if too large to return as tibble: 1 GB
       total_size_bytes <- sum(file_size(csv_file_paths))
-      one_gb <- 10e8 #bytes
-      total_n_rows <- sensor_data |>
-        dplyr::summarise(n_rows = dplyr::n()) |>
-        dplyr::collect() |>
-        dplyr::pull("n_rows")
+      one_gb <- 10e8 # bytes
       if (total_size_bytes > one_gb) {
         modified_call <-
           rlang::call_modify(rlang::call_match(), return_as = "arrow")
+
+        total_n_rows <- sensor_data |>
+          dplyr::summarise(n_rows = dplyr::n()) |>
+          dplyr::collect() |>
+          dplyr::pull("n_rows")
+
         # Locally change the option so the warning is displayed before cli_yes()
         # prints to console.
         withr::with_options(
@@ -281,7 +316,9 @@ get_archival_data <- function(tag_serial_number = NULL,
                 "i" = "Consider using
             {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
-                "i" = "See {.help [{.fun get_archival_data}](etn::get_archival_data)} for more information."
+                "i" = "See
+                {.help [{.fun get_archival_data}](etn::get_archival_data)}
+                for more information."
               ),
               class = "archival_data_large_return"
             )
@@ -291,7 +328,9 @@ get_archival_data <- function(tag_serial_number = NULL,
         if (is_interactive()) {
           user_is_confident <-
             cli_yes(
-              "Are you sure you want to try to load a {.strong {prettyunits::pretty_bytes(total_size_bytes)}} data.frame?"
+              "Are you sure you want to try to load a
+              {.strong {prettyunits::pretty_bytes(total_size_bytes)}}
+              data.frame?"
             )
         } else {
           # When running non interactively, I can't prompt the user to make sure
@@ -300,16 +339,16 @@ get_archival_data <- function(tag_serial_number = NULL,
         }
         if (!user_is_confident) {
           cli::cli_abort(
-            "Aborting. Consider using {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
+            "Aborting. Consider using
+            {.run [{rlang::quo_text(modified_call)}](etn::{rlang::quo_text(modified_call)})}
             to return an out of memory object instead.",
             class = "archival_data_large_return_abort"
           )
         }
       }
-
-      dplyr::collect(sensor_data)}
+      dplyr::collect(sensor_data)
+    }
   )
-
 }
 
 #' Fetch a table with UUID references to archival data files
@@ -321,7 +360,7 @@ get_archival_data <- function(tag_serial_number = NULL,
 #' @inheritParams get_animals
 #'
 #' @returns A tibble with a column `converted_archival_file_uuid` that contains
-#'   the UUID pointing to the archival data csv file. Other columns are:
+#'   the UUID pointing to the archival data csv file. Other columns are
 #'   `animal_id`, `tag_serial_number`, and `animal_project_code`.
 #'
 #' @family helper functions

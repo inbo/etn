@@ -101,7 +101,8 @@ get_val <- function(temp_key,
     httr2::request(api_domain) |>
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) |>
     httr2::req_url_query(...) |>
-    httr2::req_retry(max_tries = 5)
+    httr2::req_retry(max_tries = 5,
+                     retry_on_failure = TRUE)
 
   # read response via connection
   api_response <- query_request |>

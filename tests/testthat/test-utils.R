@@ -162,6 +162,57 @@ test_that("cli_yes() supports glue/cli syntax", {
   )
 })
 
+
+# is_writeable() ----------------------------------------------------------
+
+test_that("is_writeable() returns error on multiple paths", {
+  expect_error(
+    is_writeable(c("a", "b")),
+    class = "etn_path_invalid"
+  )
+})
+
+test_that("is_writeable() returns error on non character paths", {
+  expect_error(
+    is_writeable(1),
+    class = "etn_path_invalid"
+  )
+})
+
+test_that("is_writeable() returns error on non existing path", {
+  non_existent_path <- file.path(tempdir(), "this-path-does-not-exist")
+  expect_false(
+    file.exists(non_existent_path)
+  )
+  expect_error(
+    is_writeable(non_existent_path),
+    class = "etn_path_non-existant"
+  )
+})
+
+test_that("is_writeable() returns error on missing write permission", {
+  withr::with_tempfile(
+    "temp_file",
+    code = {
+      # create a file with no write permission
+      file.create(temp_file)
+      # 444: read-only for owner, group, and others
+      Sys.chmod(temp_file, mode = "444")
+
+      expect_error(
+        is_writeable(temp_file),
+        class = "etn_path_not_writeable"
+      )
+    }
+  )
+})
+
+test_that("is_writeable() returns path invisibly on writeable path", {
+  expect_invisible(
+    is_writeable(tempdir())
+  )
+})
+
 # etn_citation() ----------------------------------------------------------
 
 test_that("etn_citation() returns a character vector", {
