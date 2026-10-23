@@ -27,10 +27,7 @@ may take a while and  exceed the available RAM or Storage of your computer.}
 \item{path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Character. A path to an
 existing directory where the csv files will be stored. If NULL, the csv
 files will be stored in a temporary directory that is deleted when R is
-restarted. If you want to keep the csv files, provide a path. Keep in mind
-that the csv files can be quite large and may take up a lot of disk space.
-If the requested files are already present in the provided path, they will
-not be downloaded again.}
+restarted.}
 
 \item{limit}{Logical. Limit the number of returned records to 100 (useful
 for testing purposes). Defaults to \code{FALSE}.}
@@ -64,9 +61,9 @@ data.
 }
 }
 \description{
-This function fetches processed archival data from tags. The data is stored
-in csv files hosted on lifewatch.com. Providing at least one of the following
-arguments is required: \code{tag_serial_number}, \code{animal_id}, or
+Fetches processed archival data from tags. The data downloaded from csv files
+hosted on lifewatch.com and then read into R. Providing at least one of the
+following arguments is required: \code{tag_serial_number}, \code{animal_id}, or
 \code{animal_project_code}.
 }
 \section{Returning large amounts of data out of memory}{
@@ -78,6 +75,14 @@ downloaded data will remain stored on your computer until R is restarted.
 If you want to keep the data, you can provide a path to an existing
 directory where the csv files will be stored via the \code{path} argument. See
 \link[arrow:Dataset]{arrow::Dataset} for more information.
+}
+
+\section{Caching}{
+ The function caches the downloaded csv files in a temporary
+directory that is deleted when R is restarted. If you want to keep the csv
+files, provide a path to an existing directory where the csv files will be
+stored via the \code{path} argument. If the requested files are already present
+in the provided path, they will not be downloaded again.
 }
 
 \examples{

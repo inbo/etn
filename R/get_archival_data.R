@@ -1,8 +1,8 @@
 #' Get processed tag archival data
 #'
-#' This function fetches processed archival data from tags. The data is stored
-#' in csv files hosted on lifewatch.com. Providing at least one of the following
-#' arguments is required: `tag_serial_number`, `animal_id`, or
+#' Fetches processed archival data from tags. The data downloaded from csv files
+#' hosted on lifewatch.com and then read into R. Providing at least one of the
+#' following arguments is required: `tag_serial_number`, `animal_id`, or
 #' `animal_project_code`.
 #'
 #' @inheritParams get_animals
@@ -14,10 +14,7 @@
 #' @param path `r lifecycle::badge("experimental")` Character. A path to an
 #'   existing directory where the csv files will be stored. If NULL, the csv
 #'   files will be stored in a temporary directory that is deleted when R is
-#'   restarted. If you want to keep the csv files, provide a path. Keep in mind
-#'   that the csv files can be quite large and may take up a lot of disk space.
-#'   If the requested files are already present in the provided path, they will
-#'   not be downloaded again.
+#'   restarted.
 #' @param return_as `r lifecycle::badge("experimental")` Character. One of
 #'   "tibble" or "arrow". Whether to return the data as an in memory tibble or
 #'   an out of memory arrow dataset. The latter is recommended for large
@@ -50,6 +47,11 @@
 #'   directory where the csv files will be stored via the `path` argument. See
 #'   [arrow::Dataset] for more information.
 #'
+#' @section Caching: The function caches the downloaded csv files in a temporary
+#'   directory that is deleted when R is restarted. If you want to keep the csv
+#'   files, provide a path to an existing directory where the csv files will be
+#'   stored via the `path` argument. If the requested files are already present
+#'   in the provided path, they will not be downloaded again.
 #' @export
 #' @family access functions
 #' @examplesIf interactive() & etn:::credentials_are_set()
