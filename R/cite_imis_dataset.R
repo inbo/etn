@@ -57,14 +57,14 @@ cite_imis_dataset <- function(imis_dataset_ids = NULL,
 
   marineinfo_responses <-
     purrr::map(marineinfo_dataset_endpoints, httr2::request) |>
-    # Retry if a request fails, max_tries is ignored for parallel requests but
-    # will message if unset.
-    purrr::map(httr2::req_retry, max_tries = 2) |>
-    # Never place more then 2 requests a second
+    # Retry if a request fails
+    purrr::map(\(req) {
+      httr2::req_retry(req, max_tries = 2, retry_on_failure = TRUE)
+    }) |>
     purrr::map(\(req) httr2::req_throttle(req,
                                           capacity = 120,
                                           fill_time_s = 60)) |>
-    httr2::req_perform_parallel(
+    httr2::req_perform_sequential(
       on_error = "continue",
       # Don't show progress bar when testing to avoid
       # cluttering testthat output, or when disabled.
