@@ -35,7 +35,6 @@ test_that("get_archival_data() returns the expected fields", {
 
   vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
-
   expect_named(
     get_archival_data(
       tag_serial_number = "A19285",
@@ -103,7 +102,6 @@ test_that("get_archival_data() returns error on no archival data found", {
   skip_if_no_authentication()
 
   vcr::local_cassette("archival-uuid-A19163", serialize_with = "qs2")
-
 
   expect_error(
     # This tag does not have archival data as of writing this test.
