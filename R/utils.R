@@ -375,16 +375,19 @@ etn_citation <- function() {
 is_writeable <- function(path, call = rlang::caller_env()) {
   if (!is.character(path) || length(path) != 1) {
     cli::cli_abort("{.arg path} must be a character string of length 1.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_invalid")
   }
   if (!file.exists(path)) {
     cli::cli_abort("The provided path {.path {path}} does not exist.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_non-existant")
   }
 
   if (file.access(path, mode = 2) != 0) {
     cli::cli_abort("No write permission for {.path {path}}.",
-                   call = call)
+                   call = call,
+                   class = "etn_path_not_writeable")
   }
 
   invisible(path)
