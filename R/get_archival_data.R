@@ -200,7 +200,9 @@ get_archival_data <- function(tag_serial_number = NULL,
       },
       # When returning as a an arrow dplyr query object, store the files in a
       # Session wide tempdir.
-      arrow = csv_dir <- tempdir(pattern = "etn-archivaldata_")
+      arrow = {
+        csv_dir <- tempdir(pattern = "etn-archivaldata_")
+      }
     )
   }
 
