@@ -1,9 +1,8 @@
-vcr::local_cassette("archival-uuid-requests", serialize_with = "qs2")
-
 test_that("get_archival_data() returns a tibble by default", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   expect_s3_class(
     get_archival_data(
@@ -15,9 +14,10 @@ test_that("get_archival_data() returns a tibble by default", {
 })
 
 test_that("get_archival_data() can return an arrow datasetquery", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   expect_s3_class(
     get_archival_data(
@@ -30,9 +30,11 @@ test_that("get_archival_data() can return an arrow datasetquery", {
 })
 
 test_that("get_archival_data() returns the expected fields", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
+
 
   expect_named(
     get_archival_data(
@@ -53,9 +55,10 @@ test_that("get_archival_data() returns the expected fields", {
 })
 
 test_that("get_archival_data() returns the expected column classes", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   expect_identical(
     purrr::map(
@@ -79,9 +82,10 @@ test_that("get_archival_data() returns the expected column classes", {
 })
 
 test_that("get_archival_data() has values for identifier columns", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   # These columns are fetched via get_archival_data_uuid() from a database view,
   # and should never be empty.
@@ -95,9 +99,11 @@ test_that("get_archival_data() has values for identifier columns", {
 })
 
 test_that("get_archival_data() returns error on no archival data found", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19163", serialize_with = "qs2")
+
 
   expect_error(
     # This tag does not have archival data as of writing this test.
@@ -109,9 +115,11 @@ test_that("get_archival_data() returns error on no archival data found", {
 })
 
 test_that("get_archival_data() forwards errors from the API", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-no_tag", serialize_with = "qs2")
+
 
   # I'm testing the capability to forward errors from the API, the actual check
   # happens in etnservice. We don't need to test this for all aruguments.
@@ -124,9 +132,10 @@ test_that("get_archival_data() forwards errors from the API", {
 })
 
 test_that("get_archival_data() can filter on tag_serial_number", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   expect_identical(
     get_archival_data(
@@ -140,9 +149,10 @@ test_that("get_archival_data() can filter on tag_serial_number", {
 })
 
 test_that("get_archival_data() can filter on animal_id", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-animal_id", serialize_with = "qs2")
 
   expect_identical(
     get_archival_data(
@@ -156,9 +166,10 @@ test_that("get_archival_data() can filter on animal_id", {
 })
 
 test_that("get_archival_data() can filter on animal_project_code", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-PelFish", serialize_with = "qs2")
 
   expect_identical(
     get_archival_data(animal_project_code = "PelFish", limit = TRUE) |>
@@ -169,18 +180,23 @@ test_that("get_archival_data() can filter on animal_project_code", {
 })
 
 test_that("get_archival_data() returns 100 rows when limit is set", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
 
+  vcr::local_cassette("archival-uuid-limit", serialize_with = "qs2")
+
   expect_shape(
-    get_archival_data(animal_project_code = "PelFish", limit = TRUE),
+    get_archival_data(animal_project_code = "shad_scheldt_dst", limit = TRUE),
     nrow = 100L
   )
 })
 
 test_that("get_archival_data() 100+ returns records when limit is FALSE", {
   # At least one test that follows the limit = FALSE logic.
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
+  skip_if_no_authentication()
+
   expect_gte(
     nrow(get_archival_data(tag_serial_number = "A19285", limit = FALSE)),
     # This tag should have 598036 records
@@ -189,9 +205,10 @@ test_that("get_archival_data() 100+ returns records when limit is FALSE", {
 })
 
 test_that("get_archival_data() is case insensitive for animal_project_code", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-Lumpfish", serialize_with = "qs2")
 
   expect_identical(
     get_archival_data(animal_project_code = "Lumpfish", limit = TRUE),
@@ -200,9 +217,11 @@ test_that("get_archival_data() is case insensitive for animal_project_code", {
 })
 
 test_that("get_archival_data() returns error on invalid animal_project_code", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-invalid-animal_project_code",
+                      serialize_with = "qs2")
 
   expect_error(
     get_archival_data(animal_project_code = "not_an_animal_project_code"),
@@ -213,11 +232,6 @@ test_that("get_archival_data() returns error on invalid animal_project_code", {
 
 test_that("get_archival_data() returns error on no query arguments", {
   # It's not a good idea to try to fetch all archival data in one call.
-
-  skip_if_offline("opencpu.lifewatch.be")
-  skip_if_offline("www.lifewatch.be")
-  skip_if_no_authentication()
-
   expect_error(
     get_archival_data(),
     class = "archival_data_no_query_args"
@@ -225,9 +239,10 @@ test_that("get_archival_data() returns error on no query arguments", {
 })
 
 test_that("get_archival_data() returns warning on filters with no data", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-no-data", serialize_with = "qs2")
 
   expect_warning(
     get_archival_data(
@@ -243,9 +258,10 @@ test_that("get_archival_data() returns warning on filters with no data", {
 })
 
 test_that("get_archival_data() can write to a path", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   loc_tempdir <- withr::local_tempdir()
 
@@ -273,9 +289,10 @@ test_that("get_archival_data() can write to a path", {
 })
 
 test_that("get_archival_data() warns when lots of data is fetched in memory", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-PelFish", serialize_with = "qs2")
 
   expect_warning(
     tryCatch(
@@ -307,9 +324,10 @@ test_that("get_archival_data() warns when lots of data is fetched in memory", {
 })
 
 test_that("get_archival_data() asks for ok on lots of data in memory", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-PelFish", serialize_with = "qs2")
 
   suppressWarnings(
     expect_message(
@@ -347,9 +365,10 @@ test_that("get_archival_data() asks for ok on lots of data in memory", {
 })
 
 test_that("get_archival_data() stores files with a csv extension", {
-  skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
   skip_if_no_authentication()
+
+  vcr::local_cassette("archival-uuid-A19285", serialize_with = "qs2")
 
   loc_tempdir <- withr::local_tempdir()
 
@@ -364,4 +383,3 @@ test_that("get_archival_data() stores files with a csv extension", {
     )
   )
 })
-
