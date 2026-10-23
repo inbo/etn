@@ -179,6 +179,15 @@ test_that("get_archival_data() returns 100 rows when limit is set", {
   )
 })
 
+test_that("get_archival_data() 100+ returns records when limit is FALSE", {
+  # At least one test that follows the limit = FALSE logic.
+  expect_gte(
+    nrow(get_archival_data(tag_serial_number = "A19285", limit = FALSE)),
+    # This tag should have 598036 records
+    10000L
+  )
+})
+
 test_that("get_archival_data() is case insensitive for animal_project_code", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
@@ -355,3 +364,4 @@ test_that("get_archival_data() stores files with a csv extension", {
     )
   )
 })
+
