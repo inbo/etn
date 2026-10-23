@@ -195,12 +195,12 @@ get_archival_data <- function(tag_serial_number = NULL,
       # returning an out of memory object.
       tibble = {
         csv_dir <- withr::local_tempdir(
-          pattern = "archivaldata_"
+          pattern = "etn-archivaldata_"
         )
       },
       # When returning as a an arrow dplyr query object, store the files in a
       # Session wide tempdir.
-      arrow = csv_dir <- tempdir()
+      arrow = csv_dir <- tempdir(pattern = "etn-archivaldata_")
     )
   }
 
