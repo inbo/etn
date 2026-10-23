@@ -75,10 +75,10 @@ get_archival_data <- function(tag_serial_number = NULL,
   if (length(provided_query_args) == 0 && !limit) {
     cli::cli_abort(
       c(
-        "{.strong Attempting to download all available archival data in one go
-        is unwise.}",
         "At least one of the following arguments must be provided:
-        {.or {.arg {names(query_args)}}}."
+        {.or {.arg {names(query_args)}}}.",
+        "{.strong Attempting to download all available archival data in one go
+        is unwise.}"
       ),
       class = "archival_data_no_query_args"
     )
