@@ -217,17 +217,27 @@ get_archival_data <- function(tag_serial_number = NULL,
     # Download files, called for side effect of writing files to disk only, we
     # don't store the response objects in memory. Skip files that have already
     # been downloaded.
-    purrr::discard(
-      requests,
-      file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
-    ) |>
-      httr2::req_perform_sequential(
-        paths = purrr::discard(
-          csv_file_paths,
-          file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
-        ),
-        progress = ifelse(progress, "Downloading", FALSE)
+    requests <-
+      purrr::discard(
+        requests,
+        file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
       )
+    all_fetched <- length(uuids) != length(requests)
+    if (progress && !limit && all_fetched) {
+      cli::cli_progress_step(
+        "Reading {length(uuids) - length(requests)}
+    file{?s} from disk.
+    ({prettyunits::pretty_bytes(sum(file_size(csv_file_paths)))})"
+      )
+    }
+    httr2::req_perform_sequential(
+      requests,
+      paths = purrr::discard(
+        csv_file_paths,
+        file.exists(csv_file_paths) & file_size(csv_file_paths) > 0
+      ),
+      progress = ifelse(progress, "Downloading", FALSE)
+    )
   }
 
   # Parse responses ---------------------------------------------------------
