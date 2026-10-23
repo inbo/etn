@@ -191,7 +191,7 @@ get_public_detections <- function(animal_project_code,
   selected_project_code <-
     check_value(
       animal_project_code,
-      list_acoustic_project_codes()
+      list_animal_project_codes()
     )
 
 
