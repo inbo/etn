@@ -867,7 +867,7 @@
     },
     {
       "$schema": "https://datapackage.org/profiles/2.0/dataresource.json",
-      "path": "detections.csv",
+      "path": "detections.csv.gz",
       "name": "detections",
       "type": "table",
       "format": "csv",
