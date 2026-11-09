@@ -1,7 +1,7 @@
 #' Get animal project data as a Data Package
 #'
 #' Gets all data related to an **animal project** as a [Data Package](
-#' https://specs.frictionlessdata.io/data-package/).
+#' https://datapackage.org/standard/data-package/).
 #'
 #' @param animal_project_code Animal project you want to get data from.
 #' @returns A Data Package object.
