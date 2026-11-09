@@ -81,7 +81,7 @@ get_val <- function(temp_key,
       "feather" = \(request) {
         temp_featherfile <- withr::local_tempfile(fileext = ".feather")
         req_perform_opencpu(request, path = temp_featherfile)
-        arrow::read_feather(temp_featherfile,
+        arrow::read_ipc_file(temp_featherfile,
                             mmap = FALSE)
       }
     )

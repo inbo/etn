@@ -275,13 +275,13 @@ get_acoustic_detections <- function(connection,
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::read_feather(fetched_page_path,
+    fetched_page <- arrow::read_ipc_file(fetched_page_path,
                                         # Only read what we need.
                                         col_select = "detection_id",
                                         # Windows suffers memory allocation
                                         # issues with the arrow::open_dataset()
                                         # call later on. mmap = FALSE and
-                                        # read_feather over open_dataset force
+                                        # read_ipc_file over open_dataset force
                                         # eager read into RAM.
                                         mmap = FALSE)
 
@@ -313,7 +313,7 @@ get_acoustic_detections <- function(connection,
 
   # Combine pages and sort on acoustic_tag_id
   detections <-
-    arrow::open_dataset(tmp_pagedir, format = "feather") |>
+    arrow::open_dataset(tmp_pagedir, format = "ipc") |>
     # perform a natural sort via Arrow C++ mapping
     dplyr::mutate(
       text_part = stringr::str_remove_all(.data$acoustic_tag_id, "[0-9]"),
