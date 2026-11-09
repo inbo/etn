@@ -35,7 +35,7 @@ BugReports: https://github.com/inbo/etn/issues
 Depends:
     R (>= 4.2.0)
 Imports:
-    arrow (>= 26.0.1),
+    arrow,
     askpass,
     assertthat,
     cachem,
