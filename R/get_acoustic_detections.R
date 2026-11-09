@@ -254,7 +254,7 @@ get_acoustic_detections <- function(connection,
       # Save the DBI returned data.frame as a feather file
       helper_to_use <- \(..., path) {
         etnservice::get_acoustic_detections_page(...) |>
-          arrow::write_feather(path, compression = "lz4")
+          arrow::write_ipc_file(path, compression = "lz4")
         invisible(path)
       }
     }
