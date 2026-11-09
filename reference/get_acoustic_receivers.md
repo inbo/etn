@@ -49,7 +49,7 @@ Other access functions:
 ``` r
 # Get all acoustic receivers
 get_acoustic_receivers()
-#> # A tibble: 9,609 × 23
+#> # A tibble: 9,671 × 23
 #>    receiver_id  manufacturer receiver_model receiver_serial_number modem_address
 #>    <chr>        <chr>        <chr>          <chr>                  <chr>        
 #>  1 ADTT-3       THELMA BIOT… ADTT           3                      NA           
@@ -62,7 +62,7 @@ get_acoustic_receivers()
 #>  8 BATTERY PAC… INNOVASEA    BATTERY PACK   159                    NA           
 #>  9 BATTERY-153  INNOVASEA    BATTERY        153                    NA           
 #> 10 BENTHIC POD… INNOVASEA    BENTHIC POD    BENTHIC POD-162        NA           
-#> # ℹ 9,599 more rows
+#> # ℹ 9,661 more rows
 #> # ℹ 18 more variables: status <chr>, battery_estimated_life <chr>,
 #> #   owner_organization <chr>, financing_project <chr>,
 #> #   built_in_acoustic_tag_id <chr>, ar_model <chr>, ar_serial_number <chr>,
@@ -72,7 +72,7 @@ get_acoustic_receivers()
 
 # Get lost and broken acoustic receivers
 get_acoustic_receivers(status = c("lost", "broken"))
-#> # A tibble: 427 × 23
+#> # A tibble: 442 × 23
 #>    receiver_id  manufacturer receiver_model receiver_serial_number modem_address
 #>    <chr>        <chr>        <chr>          <chr>                  <chr>        
 #>  1 HR2-461210   INNOVASEA    HR2-180K-100-… 461210                 NA           
@@ -85,7 +85,7 @@ get_acoustic_receivers(status = c("lost", "broken"))
 #>  8 TBR700-0017… THELMA BIOT… TBR700         001768                 NA           
 #>  9 TBR700-1308  THELMA BIOT… TBR700         1308                   NA           
 #> 10 TBR700-1400  THELMA BIOT… TBR700         1400                   NA           
-#> # ℹ 417 more rows
+#> # ℹ 432 more rows
 #> # ℹ 18 more variables: status <chr>, battery_estimated_life <chr>,
 #> #   owner_organization <chr>, financing_project <chr>,
 #> #   built_in_acoustic_tag_id <chr>, ar_model <chr>, ar_serial_number <chr>,
