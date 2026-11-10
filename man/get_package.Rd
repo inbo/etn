@@ -14,7 +14,7 @@ A Data Package object.
 Write it to disk with \code{\link[=write_package]{write_package()}}.
 }
 \description{
-Gets all data related to an \strong{animal project} as a \href{https://specs.frictionlessdata.io/data-package/}{Data Package}.
+Gets all data related to an \strong{animal project} as a \href{https://datapackage.org/standard/data-package/}{Data Package}.
 }
 \section{Included resources}{
 

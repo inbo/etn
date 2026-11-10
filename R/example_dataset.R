@@ -1,7 +1,7 @@
 #' Read an example dataset
 #'
 #' Reads an example dataset, formatted as a [Frictionless Data Package](
-#' https://specs.frictionlessdata.io/data-package/).
+#' https://datapackage.org/standard/data-package/).
 #'
 #' @section 2014_demer:
 #'
