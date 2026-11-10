@@ -68,7 +68,7 @@ Other access functions:
 ``` r
 # Get all tags
 get_tags()
-#> # A tibble: 72,930 × 54
+#> # A tibble: 72,931 × 54
 #>    tag_serial_number tag_type tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>    <chr>       <chr>       <chr>          
 #>  1 0A4E2699          acoustic animal      NA          OPI-2699       
@@ -81,7 +81,7 @@ get_tags()
 #>  8 0A6G              acoustic animal      NA          R64K-2383      
 #>  9 0A6H              acoustic animal      NA          R64K-2384      
 #> 10 0A6I              acoustic animal      NA          R64K-2385      
-#> # ℹ 72,920 more rows
+#> # ℹ 72,921 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
@@ -114,7 +114,7 @@ get_tags(tag_type = c("archival", "acoustic-archival"))
 
 # Get tags of specific subtype
 get_tags(tag_subtype = c("built-in", "range"))
-#> # A tibble: 3,254 × 54
+#> # A tibble: 3,255 × 54
 #>    tag_serial_number tag_type          tag_subtype sensor_type acoustic_tag_id
 #>    <chr>             <chr>             <chr>       <chr>       <chr>          
 #>  1 04HD              acoustic-archival range       P           S64K-9795      
@@ -127,7 +127,7 @@ get_tags(tag_subtype = c("built-in", "range"))
 #>  8 04HH              acoustic-archival range       A           S64K-9804      
 #>  9 04HI              acoustic-archival range       P           S64K-9805      
 #> 10 04HI              acoustic-archival range       A           S64K-9806      
-#> # ℹ 3,244 more rows
+#> # ℹ 3,245 more rows
 #> # ℹ 49 more variables: acoustic_tag_id_alternative <chr>, manufacturer <chr>,
 #> #   model <chr>, frequency <chr>, status <chr>, activation_date <dttm>,
 #> #   battery_estimated_life <chr>, battery_estimated_end_date <dttm>,
