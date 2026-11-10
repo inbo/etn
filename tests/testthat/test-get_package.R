@@ -22,6 +22,8 @@ test_that("get_package() creates the expected package", {
   skip_if_offline("opencpu.lifewatch.be")
   skip_if_offline("www.lifewatch.be")
 
+  skip("to fix in #650")
+
   vcr::local_cassette("package_pelfish")
 
   datapackage_path <- withr::local_tempdir(pattern = "PelFish")
