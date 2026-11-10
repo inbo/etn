@@ -135,6 +135,12 @@ get_package <- function(animal_project_code) {
     receiver_id = receiver_ids
   )
 
+
+  ## Archival ----
+  cli::cli_li("Getting {.val archival}.")
+  archival <- get_archival_data(animal_project_code = animal_project_code)
+
+
   ## Bibliography ----
   cli::cli_li("Getting {.val bibliography}.")
   bibliography <- get_bibliography(detections)
@@ -160,6 +166,7 @@ get_package <- function(animal_project_code) {
     add_resource("detections", detections) |>
     add_resource("deployments", deployments) |>
     add_resource("receivers", receivers) |>
+    add_resource("archival", archival) |>
     add_resource("bibliography", bibliography) |>
     append(c(
       id = doi,
