@@ -2,6 +2,7 @@
 
 * Add European Union as funder (for [STRAITS](https://doi.org/10.3030/101094649)) (#497).
 * `get_acoustic_projects()`, `get_animal_projects()` and `get_cpod_projects()` now have an optional argument `citation`, which adds the columns `citation`, `doi`, `contact_name`, `contact_email` and `contact_affiliation` to the data frame. This makes it easier to cite projects or contact the responsible. The citation information is obtained via [MarineInfo](https://marineinfo.org) (#518).
+* New `get_acoustic_deployment_logs()` gets acoustic deployment log data, which can be helpful to figure out what happened with a receiver during deployment (#254).
 * New `example_dataset()` reads an example dataset (`"2014_DEMER"`) as a Data Package (#530).
 * New `get_package()` gets all data related to an animal project as a [Data Package](https://specs.frictionlessdata.io/data-package/). Use this in combination with `write_package()` to download a dataset (#544).
 * `read_package()`, `write_package()` and `read_resource()` are reexported from `{frictionless}` to read, write and access data from Data Packages (#525, #570).
@@ -12,6 +13,7 @@
   * [`dc:license`](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
   * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
   * The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (`emof.csv`), for better support with OBIS (#555).
+* New `get_archival_data()` downloads and reads processed tag archival data. The function has experimental features to return an out of memory Arrow dataset in order to allow the processing of very large amounts of data (#409).
 * The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
 * New `get_bibliography()` creates a bibliography from a table of detections, with references for ETN, the etn R package, and animal and acoustic projects associated with the detections (#587).
 * `get_package()` now includes a bibliography resource built with `get_bibliography()`, replacing the previous references resource (#587).

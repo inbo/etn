@@ -39,7 +39,7 @@ extract_temp_key <- function(response) {
 #'   writing functions from the [supported
 #'   encoders](https://www.opencpu.org/api.html#api-formats). For example:
 #'   `compression = "lz4"` in the case of `format = "feather"` is passed to
-#'   `arrow::write_feather()`. Other encoders include `base::saveRDS`.
+#'   `arrow::write_ipc_file()`. Other encoders include `base::saveRDS`.
 #' @returns The uncompressed object resulting form a GET request to the API. If
 #'   `return_url` is `TRUE`, the url of the result object is returned instead.
 #' @family helper functions
@@ -81,7 +81,7 @@ get_val <- function(temp_key,
       "feather" = \(request) {
         temp_featherfile <- withr::local_tempfile(fileext = ".feather")
         req_perform_opencpu(request, path = temp_featherfile)
-        arrow::read_feather(temp_featherfile,
+        arrow::read_ipc_file(temp_featherfile,
                             mmap = FALSE)
       }
     )
@@ -101,7 +101,8 @@ get_val <- function(temp_key,
     httr2::request(api_domain) |>
     httr2::req_url_path_append("tmp", temp_key, "R", ".val", format) |>
     httr2::req_url_query(...) |>
-    httr2::req_retry(max_tries = 5)
+    httr2::req_retry(max_tries = 5,
+                     retry_on_failure = TRUE)
 
   # read response via connection
   api_response <- query_request |>
@@ -170,7 +171,7 @@ validate_login <- function(domain = Sys.getenv("ETN_TEST_API",
         "Failed to log in with username: {get_credentials()$username}.",
         " Please check credentials."
       ),
-      caller = rlang::env_parent()
+      call = rlang::env_parent()
     )
   }
 

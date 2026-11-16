@@ -82,6 +82,137 @@ test_that("credentials_are_set() returns FALSE when ETN_PWD is not set", {
   )
 })
 
+# get_parent_fn_name() ----------------------------------------------------
+
+test_that("get_parent_fn_name() can return the name of the parent function", {
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name()
+  }
+  expect_identical(
+    parent_function_with_a_cool_name(),
+    "parent_function_with_a_cool_name"
+  )
+})
+
+test_that("get_parent_fn_name() can return the name a higher level caller", {
+  parent_function_with_a_cool_name <- function() {
+    get_parent_fn_name(depth = 2)
+  }
+  grandparent_function <- function() {
+    parent_function_with_a_cool_name()
+  }
+  expect_identical(
+    grandparent_function(),
+    "grandparent_function"
+  )
+})
+
+
+# cli_yes() ---------------------------------------------------------------
+test_that("cli_yes() returns error on non interactive use" ,{
+  expect_error(
+    suppressMessages(cli_yes("Are you sure?")),
+    class = "cli_yes_non_interactive"
+  )
+})
+
+test_that("cli_yes() returns alert with provided prompt", {
+  expect_message(
+    tryCatch(
+      expr = {
+        cli_yes("custom message")
+      },
+      error = function(e) {
+        NULL
+      }
+    ),
+    class = "cli_yes_prompt"
+  )
+
+  custom_message <- "This is my custom message"
+  expect_message(
+    tryCatch(
+      expr = {
+        cli_yes(custom_message)
+      },
+      error = function(e) {
+        NULL
+      }
+    ),
+    regexp = custom_message,
+    fixed = TRUE
+  )
+})
+
+test_that("cli_yes() supports glue/cli syntax", {
+  my_var <- "superb"
+  custom_message <- "This is my {my_var} message using glue"
+  expect_message(
+    tryCatch(
+      expr = {
+        cli_yes(custom_message)
+      },
+      error = function(e) {
+        NULL
+      }
+    ),
+    regexp =
+      stringr::str_replace(custom_message, stringr::fixed("{my_var}"), my_var),
+    fixed = TRUE
+  )
+})
+
+
+# is_writeable() ----------------------------------------------------------
+
+test_that("is_writeable() returns error on multiple paths", {
+  expect_error(
+    is_writeable(c("a", "b")),
+    class = "etn_path_invalid"
+  )
+})
+
+test_that("is_writeable() returns error on non character paths", {
+  expect_error(
+    is_writeable(1),
+    class = "etn_path_invalid"
+  )
+})
+
+test_that("is_writeable() returns error on non existing path", {
+  non_existent_path <- file.path(tempdir(), "this-path-does-not-exist")
+  expect_false(
+    file.exists(non_existent_path)
+  )
+  expect_error(
+    is_writeable(non_existent_path),
+    class = "etn_path_non-existant"
+  )
+})
+
+test_that("is_writeable() returns error on missing write permission", {
+  withr::with_tempfile(
+    "temp_file",
+    code = {
+      # create a file with no write permission
+      file.create(temp_file)
+      # 444: read-only for owner, group, and others
+      Sys.chmod(temp_file, mode = "444")
+
+      expect_error(
+        is_writeable(temp_file),
+        class = "etn_path_not_writeable"
+      )
+    }
+  )
+})
+
+test_that("is_writeable() returns path invisibly on writeable path", {
+  expect_invisible(
+    is_writeable(tempdir())
+  )
+})
+
 # etn_citation() ----------------------------------------------------------
 
 test_that("etn_citation() returns a character vector", {

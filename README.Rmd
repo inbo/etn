@@ -40,6 +40,14 @@ You can install the development version of etn from [GitHub](https://github.com/
 pak::pak("inbo/etn")
 ```
 
+Or from the INBO R-universe: 
+
+``` r
+install.packages("etn", repos = c(inbo = "https://inbo.r-universe.dev"))
+```
+
+If you are having trouble running the above commands in RStudio, try running them in R directly.
+
 ## Usage
 
 Before you can access data from the European Tracking Network, you need to register for a MarinePass account at the Flanders Marine Institute (VLIZ). See [authentication](https://inbo.github.io/etn/articles/authentication.html#dont-have-an-account-to-etn) for instructions.
