@@ -41,7 +41,7 @@ Imports:
     cachem,
     cli,
     dplyr (>= 1.2.0),
-    frictionless (>= 2.0.0),
+    frictionless (>= 2.0.1),
     glue,
     httr2,
     jsonlite,
