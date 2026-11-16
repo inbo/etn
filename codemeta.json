@@ -497,7 +497,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "113128.926KB",
+  "fileSize": "150197.789KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -546,5 +546,10 @@
       "@id": "https://doi.org/10.5281/zenodo.15235747",
       "sameAs": "https://doi.org/10.5281/zenodo.15235747"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/inbo/etn/blob/main/NEWS.md",
+  "readme": "https://github.com/inbo/etn/blob/main/README.md",
+  "contIntegration": ["https://github.com/inbo/etn/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/inbo/etn"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": ["r", "fish", "animal-movement", "animal-tracking", "biologging", "data-access", "oscibio", "r-package", "rstats"]
 }
