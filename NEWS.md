@@ -20,6 +20,13 @@
 * Error messages now provide suggestions when providing an incorrect value to parameters such as `animal_project_code` or `scientific_name` (#587).
 * etn now relies on R >= 4.2.0 (because of the `{arrow}` dependency) (#611).
 
+## Data Package
+
+* etn now relies on `{frictionless}` >= 2.0.1. When using `get_package()`, `read_package()`, `read_resource()`, `write_package()` or `write_dwc()` it will follow the Data Package [v2](https://datapackage.org/) specification (#650). The main changes in a `datapackage.json` will be:
+    1. `$schema` is added to package, resources and schemas.
+    2. `type` is used instead of `profile` for resources.
+    3. `primaryKey` and `foreignKeys.fields` in resources are always arrays.
+
 # etn 3.0.0
 
 ## Use etn on your computer 🎉
