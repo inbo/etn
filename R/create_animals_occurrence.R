@@ -114,7 +114,7 @@ create_animals_occurrence <- function(animals, tags) {
         ),
         NA_character_
       ),
-      occurrenceStatus = "present",
+      occurrenceStatus = "detected",
       # ORGANISM
       organismID = .data$animal_id,
       organismName = .data$animal_nickname,

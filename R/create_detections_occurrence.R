@@ -58,7 +58,7 @@ create_detections_occurrence <- function(detections, animals,
       # Value at start of deployment might not apply to all records
       lifeStage = NA_character_,
       reproductiveCondition = NA_character_,
-      occurrenceStatus = "present",
+      occurrenceStatus = "detected",
       # ORGANISM
       organismID = .data$animal_id,
       organismName = .data$animal_nickname,
