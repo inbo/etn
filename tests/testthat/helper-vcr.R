@@ -33,7 +33,7 @@ anonymise_cassettes <- function(paths) {
       ext,
       qs2 = qs2::qs_read(path),
       yaml = ,
-      yml = readr::read_linesl(path, progress = FALSE),
+      yml = readr::read_lines(path, progress = FALSE),
       cli::cli_abort("Unsupported file type {tools::file_ext(path)}.")
     )
     key_regex <- "x0[0-9a-f]{13}"
