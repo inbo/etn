@@ -22,7 +22,7 @@
 
 ## Data Package
 
-* etn now relies on `{frictionless}` >= 2.0.1. When using `get_package()`, `read_package()`, `read_resource()`, `write_package()` or `write_dwc()` it will follow the Data Package [v2](https://datapackage.org/) specification (#650). The main changes in a `datapackage.json` will be:
+* etn now relies on `{frictionless}` >= 2.0.1. `get_package()` and `example_dataset()` now return a Data Package following the [v2](https://datapackage.org/) specification (#650). The main changes in a `datapackage.json` will be:
     1. `$schema` is added to package, resources and schemas.
     2. `type` is used instead of `profile` for resources.
     3. `primaryKey` and `foreignKeys.fields` in resources are always arrays.
