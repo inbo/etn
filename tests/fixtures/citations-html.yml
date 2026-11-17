@@ -6,16 +6,15 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:49 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=B5w8YNgLK9x6WBBqonvSatN-rV1TGZxR8dwjHpT1GbGls9va;
+      - SSESSb1decfcf957c461d54e509db58033a53=ttEnPUzlvCsQMl8VZZTS1ACGD7GcAcXiCeopioyT8IAdvUpy;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -41,12 +40,11 @@ http_interactions:
         influenced by river flow.</p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel,
         E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014)
         Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary
-        of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-07-30
-        16:37:25.461633","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
-        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
-        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
-        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
+        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
+        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -174,7 +172,7 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:49
+  recorded_at: 2026-04-23 16:33:38
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6336&show=json
@@ -182,16 +180,15 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:49 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=FfbOIIEpbsbKPBh3tVZurioNtCOgv6qkJitBVexTS%2CL%2COE8g;
+      - SSESSb1decfcf957c461d54e509db58033a53=J18sawEdlQVeHEWor%2CXvnSaTNbWp6g2OCvGCklDCbnfrkByt;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -217,12 +214,11 @@ http_interactions:
         influenced by river flow.</p>","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2015-11-11","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"Bultel,
         E.; Lasne, E.; Acou, .A.; Guillaudeau, J.; Bertier, C.; Feunteun, E.; (2014)
         Migration behaviour of silver eels (<i>Anguilla anguilla</i>) in a large estuary
-        of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-07-30
-        16:37:25.461633","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field experiment","Progress":"Completed","AccessConstraint":"Attribution (CC
-        BY)","AccConstrEN":"Attribution (CC BY)","AccConstrDisplay":"<a rel=\"license\"
-        href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\"><img
-        alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
+        of Western Europe inferred from acoustic telemetry.","AccessConstraints":null,"UDate":"2025-09-01","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-03
+        01:47:42.174469","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Attribution (CC BY)","AccConstrEN":"Attribution
+        (CC BY)","AccConstrDisplay":"<a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
+        target=\"_blank\"><img alt=\"Creative Commons License\" style=\"border:0px;height:15px;width:80px;vertical-align:middle;\"
         src=\"https://www.marinespecies.org/aphia/images/cc/by.png\" /></a> This dataset
         is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\"
         target=\"_blank\">Creative Commons Attribution 4.0 International License</a>.","License":"https://creativecommons.org/licenses/by/4.0/","AccConstrDescription":"This
@@ -350,7 +346,7 @@ http_interactions:
         target=\"_blank\">https://dx.doi.org/10.1016/j.ecss.2013.11.023</a>","10":"https://dx.doi.org/10.1016/j.ecss.2013.11.023","doi":"https://dx.doi.org/10.1016/j.ecss.2013.11.023"}],"urls":[{"URL":"http://www.lifewatch.be/etn/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:50
+  recorded_at: 2026-04-23 16:33:38
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8536&show=json
@@ -358,18 +354,17 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:50 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=CK1SzNjFuzSiD7j%2CSATK2zlxDFS2NQKXy52k-dZjiIrHIP8L;
+      - SSESSb1decfcf957c461d54e509db58033a53=Po0keNBsmfS16ST8ZSXP4kDdZYvdwyhw%2CRE%2Cq7Gbp6aG7prF;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -378,8 +373,8 @@ http_interactions:
         (<i>C. plumbeus</i>) along the Israeli coastline.","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":null,"EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2026-12-31","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":null,"Citation":"Scheinin,
         A., Livne, L., Bigal, E., Zemah-Shamir, Z. (2024): Acoustic telemetry data
         for Dusky (<i>Carcharhinus obscurus</i>) and sandbar shark (<i>C. plumbeus</i>)
-        along the Israeli coastline.","AccessConstraints":null,"UDate":"2025-12-19","CDate":"2024-03-28","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        along the Israeli coastline.","AccessConstraints":null,"UDate":"2025-12-19","CDate":"2024-03-28","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14
+        01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"In Progress","AccessConstraint":"This work is
         licensed under <a target=''_blank'' href=''http://vocab.nerc.ac.uk/collection/L08/current/MO''>http://vocab.nerc.ac.uk/collection/L08/current/MO</a>
         meaning it is under moratorium until 2026-12-31","AccConstrEN":"This work
@@ -445,7 +440,7 @@ http_interactions:
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":[{"URL":"med-lter.haifa.ac.il","externalID":null,"URLTypeCode":null,"URLType":"Institute
         home page","URLTypID":16,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:50
+  recorded_at: 2026-04-23 16:33:39
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8536&show=json
@@ -453,18 +448,17 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:50 GMT
+      date: Thu, 23 Apr 2026 16:33:39 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=bJXDzzxs6yPTAkNHLVA8dgMrgLPPz8IM7ea0XwTSqQ4zqC0G;
+      - SSESSb1decfcf957c461d54e509db58033a53=Nwv4yqMGq7LLw5006W4BvUvjhC5tKBMB3s8cYIgO6d5ls-4l;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -473,8 +467,8 @@ http_interactions:
         (<i>C. plumbeus</i>) along the Israeli coastline.","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":null,"EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":"2026-12-31","OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":null,"Citation":"Scheinin,
         A., Livne, L., Bigal, E., Zemah-Shamir, Z. (2024): Acoustic telemetry data
         for Dusky (<i>Carcharhinus obscurus</i>) and sandbar shark (<i>C. plumbeus</i>)
-        along the Israeli coastline.","AccessConstraints":null,"UDate":"2025-12-19","CDate":"2024-03-28","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        along the Israeli coastline.","AccessConstraints":null,"UDate":"2025-12-19","CDate":"2024-03-28","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-14
+        01:43:53.753124","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":0,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"In Progress","AccessConstraint":"This work is
         licensed under <a target=''_blank'' href=''http://vocab.nerc.ac.uk/collection/L08/current/MO''>http://vocab.nerc.ac.uk/collection/L08/current/MO</a>
         meaning it is under moratorium until 2026-12-31","AccConstrEN":"This work
@@ -540,5 +534,5 @@ http_interactions:
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":[{"URL":"med-lter.haifa.ac.il","externalID":null,"URLTypeCode":null,"URLType":"Institute
         home page","URLTypID":16,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:50
+  recorded_at: 2026-04-23 16:33:39
 recorded_with: VCR-vcr/2.1.0

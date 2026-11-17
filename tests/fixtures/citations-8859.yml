@@ -6,16 +6,15 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:44 GMT
+      date: Thu, 23 Apr 2026 16:33:36 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=KuD5LaMi%2CqTTq-RecsoyfDp1KunU29Z0BC8C1HDEOq2W-7cp;
+      - SSESSb1decfcf957c461d54e509db58033a53=ZwSsV7ZwPm5tWwf9skcwuaCnBetZ48JLXXQT6VdDsJ5KQqJm;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -127,5 +126,5 @@ http_interactions:
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"https://rshiny.vsc.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null},{"URL":"www.gamtostyrimai.lt/en/","externalID":null,"URLTypeCode":null,"URLType":"Project
         home page","URLTypID":9,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:44
+  recorded_at: 2026-04-23 16:33:36
 recorded_with: VCR-vcr/2.1.0

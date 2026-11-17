@@ -17,8 +17,8 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0800271d0cfad1
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0800271d0cfad1/
+      x-ocpu-session: x00000000000001
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x00000000000001/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
@@ -36,18 +36,18 @@ http_interactions:
       set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
-        /ocpu/tmp/x0800271d0cfad1/R/.val
-        /ocpu/tmp/x0800271d0cfad1/R/credentials
-        /ocpu/tmp/x0800271d0cfad1/R/get_acoustic_deployment_logs
-        /ocpu/tmp/x0800271d0cfad1/stdout
-        /ocpu/tmp/x0800271d0cfad1/source
-        /ocpu/tmp/x0800271d0cfad1/console
-        /ocpu/tmp/x0800271d0cfad1/info
-        /ocpu/tmp/x0800271d0cfad1/files/DESCRIPTION
+        /ocpu/tmp/x00000000000001/R/.val
+        /ocpu/tmp/x00000000000001/R/credentials
+        /ocpu/tmp/x00000000000001/R/get_acoustic_deployment_logs
+        /ocpu/tmp/x00000000000001/stdout
+        /ocpu/tmp/x00000000000001/source
+        /ocpu/tmp/x00000000000001/console
+        /ocpu/tmp/x00000000000001/info
+        /ocpu/tmp/x00000000000001/files/DESCRIPTION
   recorded_at: 2026-08-21 09:33:01
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be/tmp/x0800271d0cfad1/R/.val/rds
+    uri: https://opencpu.lifewatch.be/tmp/x00000000000001/R/.val/rds
   response:
     status: 200
     headers:
@@ -105,8 +105,8 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x028d4380c085b7
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x028d4380c085b7/
+      x-ocpu-session: x00000000000002
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x00000000000002/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
@@ -124,18 +124,18 @@ http_interactions:
       set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
-        /ocpu/tmp/x028d4380c085b7/R/.val
-        /ocpu/tmp/x028d4380c085b7/R/credentials
-        /ocpu/tmp/x028d4380c085b7/R/get_acoustic_deployment_logs
-        /ocpu/tmp/x028d4380c085b7/stdout
-        /ocpu/tmp/x028d4380c085b7/source
-        /ocpu/tmp/x028d4380c085b7/console
-        /ocpu/tmp/x028d4380c085b7/info
-        /ocpu/tmp/x028d4380c085b7/files/DESCRIPTION
+        /ocpu/tmp/x00000000000002/R/.val
+        /ocpu/tmp/x00000000000002/R/credentials
+        /ocpu/tmp/x00000000000002/R/get_acoustic_deployment_logs
+        /ocpu/tmp/x00000000000002/stdout
+        /ocpu/tmp/x00000000000002/source
+        /ocpu/tmp/x00000000000002/console
+        /ocpu/tmp/x00000000000002/info
+        /ocpu/tmp/x00000000000002/files/DESCRIPTION
   recorded_at: 2026-08-21 09:33:03
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be/tmp/x028d4380c085b7/R/.val/rds
+    uri: https://opencpu.lifewatch.be/tmp/x00000000000002/R/.val/rds
   response:
     status: 200
     headers:

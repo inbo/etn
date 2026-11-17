@@ -6,18 +6,17 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:50 GMT
+      date: Thu, 23 Apr 2026 16:33:39 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=wlb5YLmfRs3C-niIFVlsfmQrI13ToNrIUXE3N3aNzmJ19WCW;
+      - SSESSb1decfcf957c461d54e509db58033a53=cbmqsUvfgKMEsOdhpPMCHRCkX6OklhxJjSov1MBzetsmWRN6;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc1; path=/
+      - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
@@ -86,7 +85,7 @@ http_interactions:
         > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":13,"DasTheme":"Physical
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":null,"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:50
+  recorded_at: 2026-04-23 16:33:39
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=8853&show=json
@@ -94,16 +93,15 @@ http_interactions:
     status: 200
     headers:
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:50 GMT
+      date: Thu, 23 Apr 2026 16:33:39 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=pOyfCOFHlabBglPet5Owg4X9LAPKTainUGnR%2ClIx%2ChtEE8Id;
+      - SSESSb1decfcf957c461d54e509db58033a53=65NxdmcD0WCo9TrKZGAn572PH2Nxewqt2xZv7VnEXkMPMRoV;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
@@ -174,5 +172,5 @@ http_interactions:
         > Acoustics","DasTheme0":"Acoustics","DutchTerm":"Geluid"},{"DasThemeID":13,"DasTheme":"Physical
         > Underwater acoustics","DasTheme0":"Underwater acoustics","DutchTerm":"Onderwater
         geluidstechniek"}],"projects":null,"refs":null,"urls":null,"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:51
+  recorded_at: 2026-04-23 16:33:39
 recorded_with: VCR-vcr/2.1.0

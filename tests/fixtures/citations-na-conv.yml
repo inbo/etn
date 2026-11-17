@@ -5,18 +5,17 @@ http_interactions:
   response:
     status: 200
     headers:
-      content-length: '6599'
+      content-length: '6595'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:47 GMT
+      date: Thu, 23 Apr 2026 16:33:37 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=vSXtnTMxHYhVUjnv7QkqyGLtQ1mCN2ryXBSemD2VbXvJyxp%2C;
+      - SSESSb1decfcf957c461d54e509db58033a53=sL7o-wP2kuTDB2UTcl0YHp5TeGkOooOptBun5Vj%2CMAVkcCj5;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -25,10 +24,10 @@ http_interactions:
       string: '{"datasetrec":{"DasID":6331,"Acronym":"DZ","StandardTitle":"Delfzijl
         2014-2015","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of silver eel was studied near two pumping stations in Delfzijl,
-        The Netherlands, during 2014-2015","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
-        after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
+        The Netherlands, during 2014-2015","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Unrestricted after
+        moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
         unrestricted once a specified period of time after an event (such as collection,
         publication, completion of QC procedures or project cessation) has elapsed","Lineage":null,"AccConID":8},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
@@ -59,25 +58,24 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10501,"DasGeoTerm":null,"DasID":6331,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Delfzijl","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:47
+  recorded_at: 2026-04-23 16:33:37
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6331&show=json
   response:
     status: 200
     headers:
-      content-length: '6599'
+      content-length: '6595'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:47 GMT
+      date: Thu, 23 Apr 2026 16:33:37 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=7ZYXo1<<<opencpu_key>>>WOkowGy8RGWetjThIoai8ahpN%2Cp;
+      - SSESSb1decfcf957c461d54e509db58033a53=5-3OySEoppsCz-6PEv1DeQD3k4jB2yfOvH-h%2CzSDMhqGIcLF;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -86,10 +84,10 @@ http_interactions:
       string: '{"datasetrec":{"DasID":6331,"Acronym":"DZ","StandardTitle":"Delfzijl
         2014-2015","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of silver eel was studied near two pumping stations in Delfzijl,
-        The Netherlands, during 2014-2015","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2026-07-30","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
-        field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
-        after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
+        The Netherlands, during 2014-2015","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        field survey","Progress":"Completed","AccessConstraint":"Unrestricted after
+        moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
         unrestricted once a specified period of time after an event (such as collection,
         publication, completion of QC procedures or project cessation) has elapsed","Lineage":null,"AccConID":8},"dois":null,"spcols":[{"SpColID":1000,"SpName":"European
@@ -120,7 +118,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10501,"DasGeoTerm":null,"DasID":6331,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Delfzijl","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:47
+  recorded_at: 2026-04-23 16:33:37
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6328&show=json
@@ -129,16 +127,15 @@ http_interactions:
     headers:
       content-length: '6603'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:47 GMT
+      date: Thu, 23 Apr 2026 16:33:37 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=r87fNnarg0QUmzufKNPr7owUyClHza3egQkjWB6OlMNZ%2Cjil;
+      - SSESSb1decfcf957c461d54e509db58033a53=OGtMwlOKWVBk499lAWz1ROjMwuMT-rRjoWTdqcRnT3ckdLP8;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -147,8 +144,8 @@ http_interactions:
       string: '{"datasetrec":{"DasID":6328,"Acronym":"FL","StandardTitle":"Friesland
         2011-2012","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of silver eel was studied near four pumping stations in Friesland,
-        The Netherlands, during 2011-2012","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        The Netherlands, during 2011-2012","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
         after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
@@ -181,7 +178,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10498,"DasGeoTerm":null,"DasID":6328,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Friesland","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:47
+  recorded_at: 2026-04-23 16:33:38
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6328&show=json
@@ -190,26 +187,25 @@ http_interactions:
     headers:
       content-length: '6603'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:47 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=64x-RMsbeGqVJKYS0jsljTHA0pAsOGN-frgZ6QXzDBQVLIIW;
+      - SSESSb1decfcf957c461d54e509db58033a53=nlwSifl0DVqfXdgUoln4U-vfCY-nXpCppYtrvzE9-ZEwoUd%2C;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
-      - vliz_webc=vliz_webc2; path=/
+      - vliz_webc=vliz_webc1; path=/
       strict-transport-security: max-age=31536000
       x-content-type-options: nosniff
     body:
       string: '{"datasetrec":{"DasID":6328,"Acronym":"FL","StandardTitle":"Friesland
         2011-2012","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of silver eel was studied near four pumping stations in Friesland,
-        The Netherlands, during 2011-2012","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        The Netherlands, during 2011-2012","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
         after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
@@ -242,7 +238,7 @@ http_interactions:
         continuous (< 1 min.)","ResolutionNL":"Quasi continu (< 1 min.)","Notes":null,"StartMonth0":null,"StartMonth":null,"StartMonthNL":null,"EndMonth0":null,"EndMonth":null,"EndMonthNL":null,"Progress":"Completed","ProgressNL":"Afgelopen"}],"geographical":[{"GeoTerm":null,"DasGeoID":10498,"DasGeoTerm":null,"DasID":6328,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Friesland","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:47
+  recorded_at: 2026-04-23 16:33:38
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6329&show=json
@@ -251,16 +247,15 @@ http_interactions:
     headers:
       content-length: '6204'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:47 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=7BTweYnVVkcWeFAin-zW9ifYJ79%2C5oaYKL0eoh8AB2psNW5J;
+      - SSESSb1decfcf957c461d54e509db58033a53=j5J4Og0zs1Z8HDIN9QINco2CfIDSH3kx9itIQhFgoCLS9mvj;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -268,8 +263,8 @@ http_interactions:
     body:
       string: '{"datasetrec":{"DasID":6329,"Acronym":"LW","StandardTitle":"Lauwersmeer","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of ide and river lamprey was studied in the Lauwersmeer area, The
-        Netherlands.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        Netherlands.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
         after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
@@ -301,7 +296,7 @@ http_interactions:
         coverage","TaxtID":37865,"TaxTerm":"Lampetra fluviatilis (Linnaeus, 1758)","AphiaID":101172,"DutchTerm":"Rivierprik"}],"frameworks":null,"otherterms":null,"temporal":null,"geographical":[{"GeoTerm":null,"DasGeoID":10499,"DasGeoTerm":null,"DasID":6329,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Lauwersmeer","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:49
+  recorded_at: 2026-04-23 16:33:38
 - request:
     method: GET
     uri: https://vliz.be/en/imis?dasid=6329&show=json
@@ -310,16 +305,15 @@ http_interactions:
     headers:
       content-length: '6204'
       content-security-policy: upgrade-insecure-requests; script-src * 'unsafe-inline'
-        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' localhost:* 127.0.0.1:*
-        www.vliz.be vliz.be www.lifewatch.be lifewatch.be datalab.staging.edito.eu
-        datalab.dive.edito.eu;
+        'unsafe-eval' blob:; object-src *; frame-ancestors 'self' www.vliz.be vliz.be
+        www.lifewatch.be lifewatch.be;
       content-type: application/json; charset=utf-8;
       cross-origin-opener-policy: same-origin
-      date: Fri, 21 Aug 2026 12:39:49 GMT
+      date: Thu, 23 Apr 2026 16:33:38 GMT
       referrer-policy: no-referrer-when-downgrade
-      server: Apache/2.4.67 (Win64)
+      server: Apache/2.4.62 (Win64)
       set-cookie:
-      - SSESSb1decfcf957c461d54e509db58033a53=PSYoss9sTS1ZSKO2kqS5X%2C5ItGGaW6h%2C93SQwBAdu8X9J3AD;
+      - SSESSb1decfcf957c461d54e509db58033a53=lHuHsycAE4EC8FTOu9Xj1vZS%2CqhpkeIIorTKrbnhTuyiBIB5;
         path=/; domain=.vliz.be; secure; HttpOnly; SameSite=Strict
       - vliz_webc=vliz_webc2; path=/
       strict-transport-security: max-age=31536000
@@ -327,8 +321,8 @@ http_interactions:
     body:
       string: '{"datasetrec":{"DasID":6329,"Acronym":"LW","StandardTitle":"Lauwersmeer","OrigTitle":null,"OrigTitleLangID":null,"OrigTitleLangCode":null,"OrigTitleLang":null,"OrigTitleLangNL":null,"VersionName":null,"ContactEmail":null,"VersionDate":null,"VersionDay":null,"VersionMonth":null,"VersionYear":null,"SizeReference":null,"EngAbstract":"The
         migration of ide and river lamprey was studied in the Lauwersmeer area, The
-        Netherlands.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-08-15
-        01:43:57.257074","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
+        Netherlands.","EngDescr":null,"OrigAbstract":null,"OrigDescr":null,"Comments":null,"ReleaseDate":null,"ReleaseDate0":null,"OrigDescrLang":null,"EmbargoDate":null,"OrigDescrLangNL":null,"OrigLangCode":null,"OrigLangCodeExtended":null,"OrigLangID":null,"DescrCompFlag":0,"DescrTransFlag":0,"Citation":"n.a.","AccessConstraints":null,"UDate":"2020-08-27","CDate":"2019-10-07","CurrencyDate":null,"RevisionDate":null,"DateLastModified":{"date":"2026-04-10
+        01:42:12.540544","timezone_type":1,"timezone":"+02:00"},"CheckedFlag":0,"PublicFlag":1,"VlizCoreFlag":1,"MarineFlag":1,"FreshFlag":0,"BrackishFlag":1,"TerrestrialFlag":0,"StatusID":1,"DasType":"Data","DasTypeID":1,"DasOrigin":"Research:
         field experiment","Progress":"Completed","AccessConstraint":"Unrestricted
         after moratorium period","AccConstrEN":"Unrestricted after moratorium period","AccConstrDisplay":null,"License":null,"AccConstrDescription":"Data
         are initially restricted, but the access condition relaxes to academic or
@@ -360,5 +354,5 @@ http_interactions:
         coverage","TaxtID":37865,"TaxTerm":"Lampetra fluviatilis (Linnaeus, 1758)","AphiaID":101172,"DutchTerm":"Rivierprik"}],"frameworks":null,"otherterms":null,"temporal":null,"geographical":[{"GeoTerm":null,"DasGeoID":10499,"DasGeoTerm":null,"DasID":6329,"GeotID":null,"X":null,"Y":null,"MaxX":null,"MaxY":null,"StationName":"Lauwersmeer","Precision":null,"CoordSystID":null,"GeoDatumID":null,"OrigCoordMinX":null,"OrigCoordMinY":null,"OrigCoordMaxX":null,"OrigCoordMaxY":null,"OrderNr":null,"Projection":null,"GeoDatum":null,"GeoObjectID":null,"OrigGeoTerm":null,"DutchTerm":null}],"meastypes":null,"dasthemes":[{"DasThemeID":28,"DasTheme":"Biology
         > Fish","DasTheme0":"Fish","DutchTerm":"Vis"},{"DasThemeID":35,"DasTheme":"Fisheries","DasTheme0":"Fisheries","DutchTerm":"Visserij"}],"projects":null,"refs":null,"urls":[{"URL":"https://rshiny.lifewatch.be/etn-data/","externalID":null,"URLTypeCode":null,"URLType":"Online
         dataset","URLTypID":19,"downloadURL":null,"FileName":null}],"pictures":null,"urlmaps":null,"spatreps":null,"fileformats":null,"resmessage":"","complete":1}'
-  recorded_at: 2026-08-21 12:39:49
+  recorded_at: 2026-04-23 16:33:38
 recorded_with: VCR-vcr/2.1.0
