@@ -91,6 +91,10 @@
 - etn now relies on R \>= 4.2.0 (because of the
   [arrow](https://github.com/apache/arrow/) dependency)
   ([\#611](https://github.com/inbo/etn/issues/611)).
+- [`write_dwc()`](https://inbo.github.io/etn/reference/write_dwc.md) now
+  uses the recommended value `detected` for
+  [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
+  ([\#651](https://github.com/inbo/etn/issues/651)).
 
 ## etn 3.0.0
 
