@@ -55,8 +55,9 @@ anonymise_cassettes <- function(paths) {
               if (length(new_keys) > 0L) {
                 key_lut[new_keys] <<- length(key_lut) + seq_along(new_keys)
               }
-
-              sprintf("x0%013d", key_lut[matches])
+              # Add a non hexidecimal character to the anonymised key, so they
+              # don't match the valid key regex.
+              sprintf("x0Q%012d", key_lut[matches])
             }
           )
         }
