@@ -63,9 +63,9 @@ anonymise_cassettes <- function(paths) {
       )
     switch(
       ext,
-      qs2 = qs2::qs_save(cassette, path),
+      qs2 = qs2::qs_save(anon_cassette, path),
       yaml = ,
-      yml = yaml::write_yaml(cassette, path)
+      yml = yaml::write_yaml(anon_cassette, path)
     )
   })
 }
