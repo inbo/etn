@@ -96,6 +96,22 @@
   [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
   ([\#651](https://github.com/inbo/etn/issues/651)).
 
+### Data Package
+
+- etn now relies on
+  [frictionless](https://github.com/frictionlessdata/frictionless-r) \>=
+  2.0.1.
+  [`get_package()`](https://inbo.github.io/etn/reference/get_package.md)
+  and
+  [`example_dataset()`](https://inbo.github.io/etn/reference/example_dataset.md)
+  now return a Data Package following the [v2](https://datapackage.org/)
+  specification ([\#650](https://github.com/inbo/etn/issues/650)). The
+  main changes in a `datapackage.json` will be:
+  1.  `$schema` is added to package, resources and schemas.
+  2.  `type` is used instead of `profile` for resources.
+  3.  `primaryKey` and `foreignKeys.fields` in resources are always
+      arrays.
+
 ## etn 3.0.0
 
 ### Use etn on your computer 🎉

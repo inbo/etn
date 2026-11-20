@@ -1,7 +1,7 @@
 # Read an example dataset
 
 Reads an example dataset, formatted as a [Frictionless Data
-Package](https://specs.frictionlessdata.io/data-package/).
+Package](https://datapackage.org/standard/data-package/).
 
 ## Usage
 
@@ -39,7 +39,7 @@ manually updated in `datapackage.json`.
 
 ``` r
 example_dataset()
-#> A Data Package (version 1.0) with 6 resources:
+#> A Data Package (version 2.0) with 6 resources:
 #> • animals
 #> • tags
 #> • detections

@@ -69,7 +69,18 @@
 <li>etn now relies on R &gt;= 4.2.0 (because of the <a href="https://github.com/apache/arrow/" class="external-link">arrow</a> dependency) (<a href="https://github.com/inbo/etn/issues/611" class="external-link">#611</a>).</li>
 <li>
 <code><a href="../reference/write_dwc.html">write_dwc()</a></code> now uses the recommended value <code>detected</code> for <a href="https://dwc.tdwg.org/terms/#dwc:occurrenceStatus" class="external-link">occurrenceStatus</a> (<a href="https://github.com/inbo/etn/issues/651" class="external-link">#651</a>).</li>
+</ul><div class="section level3">
+<h3 id="data-package-development-version">Data Package<a class="anchor" aria-label="anchor" href="#data-package-development-version"></a></h3>
+<ul><li>etn now relies on <a href="https://github.com/frictionlessdata/frictionless-r" class="external-link">frictionless</a> &gt;= 2.0.1. <code><a href="../reference/get_package.html">get_package()</a></code> and <code><a href="../reference/example_dataset.html">example_dataset()</a></code> now return a Data Package following the <a href="https://datapackage.org/" class="external-link">v2</a> specification (<a href="https://github.com/inbo/etn/issues/650" class="external-link">#650</a>). The main changes in a <code>datapackage.json</code> will be:
+<ol style="list-style-type: decimal"><li>
+<code>$schema</code> is added to package, resources and schemas.</li>
+<li>
+<code>type</code> is used instead of <code>profile</code> for resources.</li>
+<li>
+<code>primaryKey</code> and <code>foreignKeys.fields</code> in resources are always arrays.</li>
+</ol></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.0.0" id="etn-300">etn 3.0.0<a class="anchor" aria-label="anchor" href="#etn-300"></a></h2>
 <div class="section level3">
