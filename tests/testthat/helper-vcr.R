@@ -66,7 +66,7 @@ anonymise_cassettes <- function(paths) {
       ext,
       qs2 = qs2::qs_save(anon_cassette, path),
       yaml = ,
-      yml = yaml::write_yaml(anon_cassette, path)
+      yml = readr::write_lines(anon_cassette, path)
     )
   })
 }
