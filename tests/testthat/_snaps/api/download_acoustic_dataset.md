@@ -27,9 +27,9 @@
       
       * number of detections:        235809
       
-      * number of deployments:       1060
+      * number of deployments:       1083
       
-      * number of receivers:         140
+      * number of receivers:         143
       
       * first date of detection:     2014-04-18
       
