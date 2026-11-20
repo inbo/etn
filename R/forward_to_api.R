@@ -17,8 +17,7 @@
 #'   authors to not disclose this test url.
 #' @param ... Additional arguments passed to the `get_val` function, such as
 #'  `return_url`.
-#' @return The same return object of the `function_identity` function
-#'
+#' @returns The same return object of the `function_identity` function.
 #' @family helper functions
 #' @noRd
 forward_to_api <- function(
@@ -62,8 +61,9 @@ forward_to_api <- function(
       max_tries = 5,
       is_transient = function(resp) {
         # OpenCPU server side errors, sometimes transient
-        httr2::resp_status(resp) %in% c(502, 503)
-      }
+        httr2::resp_status(resp) %in% c(500, 502, 503)
+      },
+      retry_on_failure = TRUE
     )
 
   # We can actually send a request and immediately fetch the result by requesting

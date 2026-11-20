@@ -4,26 +4,17 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `download_acoustic_dataset()` is deprecated. Please use [get_package()]
-#' instead, which is more versatile, adds field definitions, and returns a
-#' Data Package object that can be passed to other functions. Note that
-#' [get_package()] does not support filtering on `scientific_name` or print
+#' instead, which is more versatile, adds field definition and a bibliography,
+#' and returns a Data Package object that can be passed to other functions. Note
+#' that [get_package()] does not support filtering on `scientific_name` or print
 #' summary statistics.
-#'
-#' ```R
-#' # Before
-#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
-#'
-#' # Now
-#' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
-#' write_package(my_package, directory = "2012_leopoldkanaal")
-#' ```
 #'
 #' This function allows you to download all acoustic data related to an
 #' **animal project** as a data package that can be deposited in a research data
 #' repository. Includes option to filter on scientific names.
 #'
 #' The data are downloaded as a
-#' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
+#' **[Frictionless Data Package](https://datapackage.org/standard/data-package/)**
 #' containing:
 #'
 #' file | description
@@ -33,7 +24,7 @@
 #' `detections.csv` | Acoustic detections for the selected animals, as returned by `get_acoustic_detections()`.
 #' `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by `get_acoustic_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
 #' `receivers.csv` | Acoustic receivers for the selected deployments, as returned by `get_acoustic_receivers()`.
-#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
+#' `datapackage.json` | A [Frictionless Table Schema](https://datapackage.org/standard/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
 #'
 #' The function will report the number of records per csv file, as well as the
 #' included scientific names and acoustic projects. Warnings will be raised for:
@@ -53,6 +44,7 @@
 #' `frictionless validate datapackage.json` on the command line using
 #' [frictionless-py](https://github.com/frictionlessdata/frictionless-py).
 #'
+#' @inheritParams list_animal_ids
 #' @param animal_project_code Character. Animal project you want to download
 #'   data for. Required.
 #' @param scientific_name Character (vector). One or more scientific names.
@@ -60,14 +52,13 @@
 #' @param directory Character. Relative path to local download directory.
 #'   Defaults to creating a directory named after animal project code. Existing
 #'   files of the same name will be overwritten.
-#' @inheritParams list_animal_ids
-#' @return CSV and JSON files written to disk.
+#' @returns CSV and JSON files written to disk.
 #' @family download functions
+#' @keywords internal
 #' @export
 #' @examplesIf etn:::credentials_are_set() & interactive()
-#' # Download data for the 2012_leopoldkanaal animal project (all scientific names)
-#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
-#'                          directory = tempdir())
+#' # Before
+#' download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #' #> Downloading data to directory `2012_leopoldkanaal`:
 #' #> * (1/6): downloading animals.csv
 #' #> * (2/6): downloading tags.csv
@@ -90,6 +81,10 @@
 #' #> Warning message:
 #' #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #' #> Found tags associated with multiple animals: 1145373
+#'
+#' # Now
+#' my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+#' write_package(my_package, directory = "2012_leopoldkanaal")
 download_acoustic_dataset <- function(connection,
                                       animal_project_code,
                                       scientific_name = NULL,

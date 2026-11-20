@@ -1,7 +1,7 @@
 #' Create Darwin Core Occurrence from detections data
 #'
 #' @param detections A data frame derived from a `detections` resource.
-#' @return A data frame with Darwin Core occurrences.
+#' @returns A data frame with Darwin Core occurrences.
 #' @family dwc functions
 #' @noRd
 create_detections_occurrence <- function(detections, animals,
@@ -58,7 +58,7 @@ create_detections_occurrence <- function(detections, animals,
       # Value at start of deployment might not apply to all records
       lifeStage = NA_character_,
       reproductiveCondition = NA_character_,
-      occurrenceStatus = "present",
+      occurrenceStatus = "detected",
       # ORGANISM
       organismID = .data$animal_id,
       organismName = .data$animal_nickname,

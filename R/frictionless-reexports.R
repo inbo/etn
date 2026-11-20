@@ -15,3 +15,12 @@ frictionless::read_package
 #' @rdname write_package
 #' @export
 frictionless::write_package
+
+#' Read data from a Data Resource into a tibble data frame
+#'
+#' @importFrom frictionless read_resource
+#' @inheritParams frictionless::read_resource
+#' @family frictionless functions
+#' @rdname read_resource
+#' @export
+frictionless::read_resource

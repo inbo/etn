@@ -23,8 +23,6 @@
 #' @param progress Logical. Show a progress bar while fetching data. Defaults to
 #'   `TRUE`.
 #' @inheritParams list_animal_ids
-#' @inheritParams get_acoustic_deployments
-#'
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
 #'  and `date_time`.
 #' @family access functions
@@ -257,7 +255,7 @@ get_acoustic_detections <- function(connection,
       # Save the DBI returned data.frame as a feather file
       helper_to_use <- \(..., path) {
         etnservice::get_acoustic_detections_page(...) |>
-          arrow::write_feather(path, compression = "lz4")
+          arrow::write_ipc_file(path, compression = "lz4")
         invisible(path)
       }
     }
@@ -278,13 +276,13 @@ get_acoustic_detections <- function(connection,
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::read_feather(fetched_page_path,
+    fetched_page <- arrow::read_ipc_file(fetched_page_path,
                                         # Only read what we need.
                                         col_select = "detection_id",
                                         # Windows suffers memory allocation
                                         # issues with the arrow::open_dataset()
                                         # call later on. mmap = FALSE and
-                                        # read_feather over open_dataset force
+                                        # read_ipc_file over open_dataset force
                                         # eager read into RAM.
                                         mmap = FALSE)
 
@@ -316,7 +314,7 @@ get_acoustic_detections <- function(connection,
 
   # Combine pages and sort on acoustic_tag_id
   detections <-
-    arrow::open_dataset(tmp_pagedir, format = "feather") |>
+    arrow::open_dataset(tmp_pagedir, format = "ipc") |>
     # perform a natural sort via Arrow C++ mapping
     dplyr::mutate(
       text_part = stringr::str_remove_all(.data$acoustic_tag_id, "[0-9]"),
@@ -346,12 +344,10 @@ get_acoustic_detections <- function(connection,
 #' to count the number of records that would be returned by
 #' [`get_acoustic_detections()`][get_acoustic_detections].
 #'
-#'
-#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
 #' @inheritParams get_acoustic_detections
-#'
-#' @return A numeric value with the number of acoustic detections that match the
-#'     given parameters.
+#' @inheritDotParams get_acoustic_detections start_date end_date detection_id acoustic_tag_id animal_project_code scientific_name acoustic_project_code receiver_id station_name
+#' @returns A numeric value with the number of acoustic detections that match the
+#'   given parameters.
 #' @family helper functions
 #' @noRd
 #' @examples

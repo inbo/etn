@@ -17,7 +17,7 @@
 #' @param license License of the dataset.
 #' @param rights_holder Acronym of the organization owning or managing the
 #'   rights over the data.
-#' @return CSV and `meta.xml` files written to disk.
+#' @returns CSV and `meta.xml` files written to disk.
 #'   And invisibly, a list of data frames with the transformed data.
 #' @family transformation functions
 #' @export
@@ -43,7 +43,7 @@
 #'   Sex, life stage and weight are (additionally) provided in an Extended
 #'   Measurement Or Facts extension, where values are mapped to a controlled
 #'   vocabulary recommended by [OBIS](https://obis.org/).
-#' - Acoustic detections are downsampled to the **first detection per hour**,
+#' - Acoustic detections are subsampled to the **first detection per hour**,
 #'   to reduce the size of high-frequency data.
 #'   The `coordinateUncertaintyInMeters` is set to 1000 m to account for
 #'   imprecise receiver location and acoustic detection range.
@@ -82,7 +82,7 @@ write_dwc <- function(package, directory, dataset_id = package$id,
 
   # Read data from package
   cli::cli_h2("Reading data")
-  if (!"animals" %in% frictionless::resources(package)) {
+  if (!"animals" %in% frictionless::resource_names(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val animals}.",
       class = "etn_error_animals_data_missing"
@@ -90,7 +90,7 @@ write_dwc <- function(package, directory, dataset_id = package$id,
   }
   animals <- frictionless::read_resource(package, "animals")
 
-  if (!"tags" %in% frictionless::resources(package)) {
+  if (!"tags" %in% frictionless::resource_names(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val tags}.",
       class = "etn_error_tags_data_missing"
@@ -98,7 +98,7 @@ write_dwc <- function(package, directory, dataset_id = package$id,
   }
   tags <- frictionless::read_resource(package, "tags")
 
-  if (!"detections" %in% frictionless::resources(package)) {
+  if (!"detections" %in% frictionless::resource_names(package)) {
     cli::cli_abort(
       "{.arg package} must contain resource {.val detections}.",
       class = "etn_error_detections_data_missing"
@@ -106,9 +106,9 @@ write_dwc <- function(package, directory, dataset_id = package$id,
   }
   detections <- frictionless::read_resource(package, "detections")
 
-  if (!"deployments" %in% frictionless::resources(package)) {
+  if (!"deployments" %in% frictionless::resource_names(package)) {
     cli::cli_abort(
-      "{.arg package} must contain resource {.val deployemts}.",
+      "{.arg package} must contain resource {.val deployments}.",
       class = "etn_error_deployments_data_missing"
     )
   }

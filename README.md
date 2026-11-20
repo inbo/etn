@@ -41,6 +41,16 @@ You can install the development version of etn from
 pak::pak("inbo/etn")
 ```
 
+Alternativly you can also install the latest release via the INBO
+R-Universe:
+
+``` r
+install.packages("etn", repos = c(inbo = "https://inbo.r-universe.dev"))
+```
+
+If you are having trouble installing etn in RStudio, it may be easier to
+run the install command in R directly.
+
 ## Usage
 
 Before you can access data from the European Tracking Network, you need
@@ -122,7 +132,7 @@ get_acoustic_detections(
 - We welcome [contributions](.github/CONTRIBUTING.md) including bug
   reports.
 - License: MIT
-- Get citation information for etn in R doing `citation("etn")`.
+- Get citation information for etn in R with `citation("etn")`.
 - Please note that this project is released with a [Contributor Code of
   Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
   you agree to abide by its terms.

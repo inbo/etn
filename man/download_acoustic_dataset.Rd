@@ -33,25 +33,17 @@ CSV and JSON files written to disk.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{download_acoustic_dataset()} is deprecated. Please use \code{\link[=get_package]{get_package()}}
-instead, which is more versatile, adds field definitions, and returns a
-Data Package object that can be passed to other functions. Note that
-\code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
+instead, which is more versatile, adds field definition and a bibliography,
+and returns a Data Package object that can be passed to other functions. Note
+that \code{\link[=get_package]{get_package()}} does not support filtering on \code{scientific_name} or print
 summary statistics.
-
-\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Before
-download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
-
-# Now
-my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
-write_package(my_package, directory = "2012_leopoldkanaal")
-}\if{html}{\out{</div>}}
 
 This function allows you to download all acoustic data related to an
 \strong{animal project} as a data package that can be deposited in a research data
 repository. Includes option to filter on scientific names.
 
 The data are downloaded as a
-\strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
+\strong{\href{https://datapackage.org/standard/data-package/}{Frictionless Data Package}}
 containing:\tabular{ll}{
    file \tab description \cr
    \code{animals.csv} \tab Animals related to an \code{animal_project_code}, optionally filtered on \code{scientific_name}(s), as returned by \code{get_animals()}. \cr
@@ -59,7 +51,7 @@ containing:\tabular{ll}{
    \code{detections.csv} \tab Acoustic detections for the selected animals, as returned by \code{get_acoustic_detections()}. \cr
    \code{deployments.csv} \tab Acoustic deployments for the \code{acoustic_project_code}(s) found in detections, as returned by \code{get_acoustic_deployments()}. This allows users to see when receivers were deployed, even if these did not detect the selected animals. \cr
    \code{receivers.csv} \tab Acoustic receivers for the selected deployments, as returned by \code{get_acoustic_receivers()}. \cr
-   \code{datapackage.json} \tab A \href{https://specs.frictionlessdata.io/table-schema/}{Frictionless Table Schema} metadata file describing the fields and relations of the above csv files. This file is copied from \href{https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json}{here} and can be used to validate the data package. \cr
+   \code{datapackage.json} \tab A \href{https://datapackage.org/standard/table-schema/}{Frictionless Table Schema} metadata file describing the fields and relations of the above csv files. This file is copied from \href{https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json}{here} and can be used to validate the data package. \cr
 }
 
 
@@ -84,9 +76,8 @@ performed by validation tools of the Frictionless Framework, e.g.
 }
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
-# Download data for the 2012_leopoldkanaal animal project (all scientific names)
-download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
-                         directory = tempdir())
+# Before
+download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal")
 #> Downloading data to directory `2012_leopoldkanaal`:
 #> * (1/6): downloading animals.csv
 #> * (2/6): downloading tags.csv
@@ -109,6 +100,11 @@ download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal",
 #> Warning message:
 #> In download_acoustic_dataset(animal_project_code = "2012_leopoldkanaal") :
 #> Found tags associated with multiple animals: 1145373
+
+# Now
+my_package <- get_package(animal_project_code = "2012_leopoldkanaal")
+write_package(my_package, directory = "2012_leopoldkanaal")
 \dontshow{\}) # examplesIf}
 }
 \concept{download functions}
+\keyword{internal}

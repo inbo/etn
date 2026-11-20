@@ -10,12 +10,12 @@
 #'
 #' @inheritParams frictionless::add_resource
 #' @param data Data frame to attach.
-#' @return `package` with one additional resource.
+#' @returns `package` with one additional resource.
 #' @family frictionless functions
 #' @noRd
 add_resource <- function(package, resource_name, data) {
   # Check resource names
-  allowed_names <- c("animals", "deployments", "detections", "receivers", "tags")
+  allowed_names <- c("animals", "deployments", "detections", "receivers", "tags", "bibliography")
   if (!resource_name %in% allowed_names) {
     cli::cli_abort(
       c(
@@ -56,67 +56,67 @@ add_resource <- function(package, resource_name, data) {
 
   # Add keys
   if (resource_name == "animals") {
-    schema$primaryKey <- "animal_id"
+    schema$primaryKey <- list("animal_id")
     schema$foreignKeys <- list(
       list(
-        fields = c("tag_serial_number"),
+        fields = list("tag_serial_number"),
         reference = list(
           resource = "tags",
-          fields = c("tag_serial_number")
+          fields = list("tag_serial_number")
         )
       )
     )
   }
   if (resource_name == "tags") {
-    schema$primaryKey <- "tag_id"
+    schema$primaryKey <- list("tag_id")
   }
   if (resource_name == "detections") {
-    schema$primaryKey <- "detection_id"
+    schema$primaryKey <- list("detection_id")
     schema$foreignKeys <- list(
       list(
-        fields = c("tag_serial_number"),
+        fields = list("tag_serial_number"),
         reference = list(
           resource = "tags",
-          fields = c("tag_serial_number")
+          fields = list("tag_serial_number")
         )
       ),
       list(
-        fields = c("animal_id"),
+        fields = list("animal_id"),
         reference = list(
           resource = "animals",
-          fields = c("animal_id")
+          fields = list("animal_id")
         )
       ),
       list(
-        fields = c("receiver_id"),
+        fields = list("receiver_id"),
         reference = list(
           resource = "receivers",
-          fields = c("receiver_id")
+          fields = list("receiver_id")
         )
       ),
       list(
-        fields = c("deployment_id"),
+        fields = list("deployment_id"),
         reference = list(
           resource = "deployments",
-          fields = c("deployment_id")
+          fields = list("deployment_id")
         )
       )
     )
   }
   if (resource_name == "deployments") {
-    schema$primaryKey <- "deployment_id"
+    schema$primaryKey <- list("deployment_id")
     schema$foreignKeys <- list(
       list(
-        fields = c("receiver_id"),
+        fields = list("receiver_id"),
         reference = list(
           resource = "receivers",
-          fields = c("receiver_id")
+          fields = list("receiver_id")
         )
       )
     )
   }
   if (resource_name == "receivers") {
-    schema$primaryKey <- "receiver_id"
+    schema$primaryKey <- list("receiver_id")
   }
 
   # Add resource to package

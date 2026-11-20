@@ -1,7 +1,7 @@
 #' List all available receiver ids
 #'
 #' @inheritParams list_animal_ids
-#' @return A vector of all unique `receiver` present in `acoustic.receivers`.
+#' @returns A vector of all unique `receiver` present in `acoustic.receivers`.
 #' @family list functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()

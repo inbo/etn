@@ -19,7 +19,8 @@ before being written to disk (e.g. \code{deployments.csv.gz}).}
 Write a Data Package to disk
 }
 \seealso{
-Other frictionless functions: 
-\code{\link{read_package}()}
+Other frictionless functions:
+\code{\link{read_package}},
+\code{\link{read_resource}}
 }
 \concept{frictionless functions}

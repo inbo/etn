@@ -2,16 +2,28 @@
 
 #' Check input value against valid values
 #'
+#' Checks if the input value(s) `x` are present in the valid
+#' values `y`. If any value in `x` is not found in `y`, an error is thrown. If
+#' `lowercase` is set to `TRUE`, the case of the values will be ignored during
+#' the comparison, and the returned values will be converted to lowercase.
+#'
+#' A suggestion will be offered when a value is not found, based on the
+#' Levenshtein distance to the valid values.
+#'
+#' This function was inspired by `rlang:::stop_arg_match()`.
+#'
 #' @param x Value(s) to test.
 #'   `NULL` values will automatically pass.
 #' @param y Value(s) to test against.
 #' @param name Name of the parameter.
 #' @param lowercase If `TRUE`, the case of `x` and `y` values will ignored and
 #'   `x` values will be returned lowercase.
-#' @return Error or (lowercase) `x` values.
+#' @param max_dist Maximum Levenshtein distance to consider a value a typo.
+#'   This variable is used to offer suggestions when a typo is suspected.
+#' @returns Error or (lowercase) `x` values.
 #' @family helper functions
 #' @noRd
-check_value <- function(x, y, name = "value", lowercase = FALSE) {
+check_value <- function(x, y, name = "value", lowercase = FALSE, max_dist = 3) {
   # Remove NA from valid values
   y <- y[!is.na(y)]
 
@@ -20,18 +32,95 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
     x <- tolower(x)
     y <- tolower(y)
   }
-
   # Check value(s) against valid values
-  assertthat::assert_that(
-    all(x %in% y), # Returns TRUE for x = NULL
-    msg = glue::glue(
-      "Can't find {name} `{x}` in: {y}",
-      x = glue::glue_collapse(x, sep = "`, `", last = "` and/or `"),
-      y = glue::glue_collapse(y, sep = ", ", width = 300)
+  if (all(x %in% y)) {
+    return(x)
+  }
+  missing_values <- x[!x %in% y]
+  # If the value is not found, check if it's a typo by calculating the
+  # Levenshtein distance.
+  distances <- utils::adist(missing_values, y) |>
+    # Transpose the matrix so we can get the minimum distance per candidate
+    t() |>
+    as.data.frame() |>
+    purrr::set_names(missing_values)
+  # If any candidate string is less 3 transformations away from the reference,
+  # we can assume it's a typo and suggest it to the user.
+  candidates_col <- cli::cli_vec(y, list("vec-trunc" = 5))
+  if (any(purrr::map_lgl(distances, \(dist_for_value) {
+    any(dist_for_value <= max_dist)
+  }))) {
+    # We need to repeat the candidates so we can get the minimum distance
+    # for each missing value
+    closest_match <-
+      rep(y, length(missing_values))[purrr::map_int(distances, which.min)] |>
+      # If multiple missing values result in the same suggestion, then don't
+      # repeat the suggestion.
+      unique()
+    # If there are many candidates, truncate the list to 5 items for the error
+    # message.
+    cli::cli_abort(
+      c("x" = "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.val {candidates_col}}}",
+        "i" = "Did you mean {.strong {.val {closest_match}}}?"),
+      class = "etn_value_not_found_suggest",
+      call = rlang::caller_env()
     )
-  )
+  } else {
+    # Sort the references so the closest matches are mentioned. Only show 5
+    # members.
+    candidates_col <- purrr::map(distances, \(dist_for_value) {
+      y[order(as.vector(dist_for_value))]
+    }) |>
+      # Convert into a vector and truncate for the error message
+      purrr::reduce(rbind) |>
+      c() |>
+      # Don't repeat yourself
+      unique() |>
+      cli::cli_vec(list("vec-trunc" = 5))
+    cli::cli_abort(
+      "Can't find {.var {name}}: {.val {missing_values}} in: {.or {.str {candidates_col}}}.",
+      class = "etn_value_not_found",
+      call = rlang::caller_env()
+    )
+  }
+}
 
-  return(x)
+#' Prompt the user for confirmation
+#'
+#' This function was inspired by `testthat::ui_yeah()` and duplicates it's
+#' functionality.
+#'
+#' @param x Message to display to the user. Supports `{cli}`/`{glue}` syntax.
+#' @param shuffle Logical. If `TRUE`, the order of the options will be shuffled.
+#' @param .envir Environment in which to evaluate the message. Defaults to the
+#'   parent frame.
+#'
+#' @returns Logical. `TRUE` if the user selected a "yes" option, `FALSE`
+#'   otherwise.
+#'
+#' @family helper functions
+#' @noRd
+cli_yes <- function(x, shuffle = TRUE, .envir = parent.frame()) {
+  yes_options <- c("Yes", "By all means", "Indeed", "Certainly", "Yeah")
+  no_options <- c("No", "Negative", "Nope", "Let's not", "Nah", "Never")
+  choices <- c(sample(yes_options, 1L), sample(no_options, 2L))
+
+  if (shuffle) {
+    choices <- sample(choices)
+  }
+  cli::cli_inform(
+    x,
+    class = "cli_yes_prompt",
+    .envir = .envir
+  )
+  if (!is_interactive()) {
+    cli::cli_abort(
+      "Prompting for confirmation failed, please retry in interactive mode",
+      class = "cli_yes_non_interactive"
+    )
+  }
+  result <- utils::menu(choices)
+  choices[[result]] %in% yes_options && result != 0
 }
 
 #' Get credentials from environment variables, or set them manually
@@ -45,14 +134,14 @@ check_value <- function(x, y, name = "value", lowercase = FALSE) {
 #'   environment, but you can set it manually too.
 #' @param password Password to the ETN database. By default read from the
 #'   environment, but you can set it manually too.
-#' @return A string as it is ingested by other functions that need
+#' @returns A string as it is ingested by other functions that need
 #'   authentication.
 #' @family helper functions
 #' @noRd
 get_credentials <- function(username = Sys.getenv("ETN_USER"),
                             password = Sys.getenv("ETN_PWD")) {
   if (is.na(Sys.getenv("ETN_USER", unset = NA)) ||
-    is.na(Sys.getenv("ETN_PWD", unset = NA))) {
+      is.na(Sys.getenv("ETN_PWD", unset = NA))) {
     if (is_interactive()) {
       cli::cli_alert_info(
         "No credentials stored. See {.vignette etn::authentication} to configure
@@ -99,11 +188,9 @@ deprecate_warn_connection <- function() {
 
 #' Get the name (symbol) of the parent function
 #'
-#' @return A length one Character with the name of the parent function.
-#'
+#' @returns A length one Character with the name of the parent function.
 #' @family helper functions
 #' @noRd
-#'
 #' @examples
 #' child_fn <- function() {
 #'   get_parent_fn_name()
@@ -124,7 +211,7 @@ get_parent_fn_name <- function(depth = 1) {
 #' Copy of testthat::is_testing() implementation to avoid a runtime dependency
 #' on testthat.
 #'
-#' @return `TRUE` inside a test.
+#' @returns `TRUE` inside a test.
 #' @family helper functions
 #' @noRd
 is_testing <- function() {
@@ -180,13 +267,13 @@ localdb_is_available <- function() {
 #' API. Both these protocols use the ETN database as a source.
 #'
 #' @returns Character of length one with one of the available protocols.
-#'
 #' @family helper functions
 #' @noRd
 select_protocol <- function() {
   # ALlow overwriting of protocol logic by environmental variable
   user_selected_protocol <- Sys.getenv("ETN_PROTOCOL",
-                                       unset = "no_protocol_set")
+    unset = "no_protocol_set"
+  )
   if (user_selected_protocol != "no_protocol_set") {
     return(user_selected_protocol)
   }
@@ -197,7 +284,7 @@ select_protocol <- function() {
   }
 
   # Fallback on API
-  return("opencpu")
+  "opencpu"
 }
 
 #' Remove HTML tags from a string
@@ -207,11 +294,9 @@ select_protocol <- function() {
 #'
 #'
 #' @param x Character string with HTML tags.
-#'
 #' @returns Character string without HTML tags.
 #' @family helper functions
 #' @noRd
-#'
 #' @examples
 #' remove_html_tags("<p>This is an <strong>amazing example</strong>.</p>")
 remove_html_tags <- function(x) {
@@ -244,8 +329,89 @@ remove_html_tags <- function(x) {
 #'   environment variables.
 #' @family helper functions
 #' @noRd
-credentials_are_set <- function(){
-    nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+credentials_are_set <- function() {
+  nzchar(Sys.getenv("ETN_USER")) && nzchar(Sys.getenv("ETN_PWD"))
+}
+
+#' Get the citation for the etn package as plain text
+#'
+#' This function retrieves the citation information for the `etn` package and
+#' formats it as plain text.
+#'
+#' @returns A character vector containing the citation information for the `etn`
+#'   package in plain text format.
+#'
+#' @family helper functions
+#' @noRd
+etn_citation <- function() {
+  authors <-
+    "Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S"
+  title <-
+    "etn: Access Data from the European Tracking Network"
+
+  doi_url <- "https://doi.org/10.5281/zenodo.15235747"
+
+  version_str <- paste("R package version", utils::packageVersion("etn"))
+
+  docs_url <- "https://inbo.github.io/etn/"
+
+  sprintf("%s. %s. %s, %s, %s.", authors, title, doi_url, version_str, docs_url)
+}
+
+#' Check if a path is writeable
+#'
+#' @param path Character string of length one with the path to check.
+#' @param call Optional call object to include in the error message. This can be
+#'   used to provide more context in the error message, such as which function
+#'   is calling this helper function.
+#'
+#' @returns The input path invisibly if it is writeable, or an error if it is
+#'   not.
+#'
+#' @family helper functions
+#' @noRd
+#' @examplesIf interactive()
+#'   is_writeable(tempdir())
+is_writeable <- function(path, call = rlang::caller_env()) {
+  if (!is.character(path) || length(path) != 1) {
+    cli::cli_abort("{.arg path} must be a character string of length 1.",
+                   call = call,
+                   class = "etn_path_invalid")
+  }
+  if (!file.exists(path)) {
+    cli::cli_abort("The provided path {.path {path}} does not exist.",
+                   call = call,
+                   class = "etn_path_non-existant")
+  }
+
+  if (file.access(path, mode = 2) != 0) {
+    cli::cli_abort("No write permission for {.path {path}}.",
+                   call = call,
+                   class = "etn_path_not_writeable")
+  }
+
+  invisible(path)
+}
+
+#' Get file sizes for a vector of file paths
+#'
+#' This is a slight variant on the base function file.size. Apart from allowing
+#' a vector of file paths this functon can also be more easily mocked in tests,
+#' allowing the triggering of tests that depend on certain downloaded files
+#' being size 0.
+#'
+#' @param x A character vector of file paths.
+#'
+#' @returns An integer vector of file sizes in bytes, with names corresponding
+#'   to the input file paths.
+#'
+#' @family helper functions
+#' @noRd
+file_size <- function(x) {
+  purrr::map_int(
+    x, file.size
+  ) |>
+    purrr::set_names(x)
 }
 
 # WRAPPER FUNCTIONS ----
@@ -276,15 +442,17 @@ is_interactive <- function(...) {
 
 #' Wrapper for base::readline
 #'
-#' This function is wrapped because I find it easier to read, and so it can be
-#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the prompting
-#' behaviour of `get_credentials()`
+#' This function is wrapped as an easier to read alias, and so it can be
+#' mocked in `testhat::with_mocked_bindings()` and thus allows for testing the
+#' prompting behaviour of `get_credentials()`
 #'
 #' @family wrappers
 #' @noRd
 prompt_user <- function(...) {
   readline(...)
 }
+
+
 
 # rlang null handling -----------------------------------------------------
 #' @importFrom rlang %||%
@@ -298,13 +466,21 @@ NULL
   # Checking this on every call would slow down the package.
   get_etnservice_version <<-
     memoise::memoise(get_etnservice_version,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
+      cache = cachem::cache_mem(max_age = 60 * 15)
     )
   # Memoisation: only validate the login credentials every 15 minutes.
   validate_login <<-
     memoise::memoise(validate_login,
-                     cache = cachem::cache_mem(max_age = 60 * 15)
-  )
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
+
+  # Memoisation: only read the lines of a file every 15 minutes. This is useful
+  # for reading stable lines from a url repeatingly. Such as is the case for
+  # archival data tests.
+  read_lines_cached <<-
+    memoise::memoise(readr::read_lines,
+      cache = cachem::cache_mem(max_age = 60 * 15)
+    )
 }
 
 #' Expand columns
@@ -314,7 +490,7 @@ NULL
 #'
 #' @param df A data frame.
 #' @param colnames A character vector of column names.
-#' @return Data frame expanded with columns that were not yet present.
+#' @returns Data frame expanded with columns that were not yet present.
 #' @family helper functions
 #' @noRd
 expand_cols <- function(df, colnames) {

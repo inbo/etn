@@ -7,18 +7,25 @@ test_that("get_package() errors on invalid animal_project_code length", {
 
 test_that("get_package() returns a valid package", {
   skip_if_no_authentication()
-  vcr::local_cassette("package_demer")
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
 
-  package <- suppressMessages(get_package("2014_demer"))
+  # The PelFish animal project has both archival and detections data
+  vcr::local_cassette("package_pelfish")
+
+  package <- suppressMessages(get_package(animal_project_code = "PelFish"))
   expect_no_error(suppressMessages(frictionless::check_package(package)))
 })
 
 test_that("get_package() creates the expected package", {
   skip_if_no_authentication()
-  vcr::local_cassette("package_demer")
+  skip_if_offline("opencpu.lifewatch.be")
+  skip_if_offline("www.lifewatch.be")
 
-  datapackage_path <- withr::local_tempdir(pattern = "2014_demer")
-  package <- suppressMessages(get_package("2014_demer"))
+  vcr::local_cassette("package_pelfish")
+
+  datapackage_path <- withr::local_tempdir(pattern = "PelFish")
+  package <- suppressMessages(get_package("PelFish"))
   write_package(package, datapackage_path)
   files_to_create <- c(
     "animals.csv",
@@ -26,6 +33,7 @@ test_that("get_package() creates the expected package", {
     "detections.csv",
     "deployments.csv",
     "receivers.csv",
+    "bibliography.csv",
     "datapackage.json"
   )
 
@@ -36,6 +44,7 @@ test_that("get_package() creates the expected package", {
   expect_snapshot_file(file.path(datapackage_path, "tags.csv"))
   expect_snapshot_file(file.path(datapackage_path, "detections.csv"))
   expect_snapshot_file(file.path(datapackage_path, "deployments.csv"))
+  expect_snapshot_file(file.path(datapackage_path, "bibliography.csv"))
   expect_snapshot_file(file.path(datapackage_path, "receivers.csv"),
   # Receiver status values are always changing, we do not want to trigger a
   # snapshot change on this data field change.

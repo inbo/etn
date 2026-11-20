@@ -14,7 +14,7 @@ A Data Package object.
 Write it to disk with \code{\link[=write_package]{write_package()}}.
 }
 \description{
-Gets all data related to an \strong{animal project} as a \href{https://specs.frictionlessdata.io/data-package/}{Data Package}.
+Gets all data related to an \strong{animal project} as a \href{https://datapackage.org/standard/data-package/}{Data Package}.
 }
 \section{Included resources}{
 
@@ -27,11 +27,15 @@ The Data Package will contain and describe the following resources:
 \item \code{detections}: Acoustic detections for the selected animals, as returned by
 \code{\link[=get_acoustic_detections]{get_acoustic_detections()}}.
 \item \code{deployments}: Acoustic deployments for the \code{acoustic_project_code}(s)
-found in detections, as returned by \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}}.
-This allows you to see when receivers were deployed, even if these did
-not detect the selected animals.
+found in detections, as returned by \code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}}, but
+excluding deployments that started after the last detection.
+This allows you to see when and where receivers were deployed, even if
+these did not detect the selected animals.
 \item \code{receivers}: Acoustic receivers for the selected deployments, as returned
 by \code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}}.
+\item \code{bibliography}: Bibliography with references for ETN, the etn R package,
+and animal and acoustic projects associated with the detections.
+It is recommended to cite these when using the dataset.
 }
 }
 
@@ -51,18 +55,24 @@ frictionless validate datapackage.json
 \examples{
 \dontshow{if (etn:::credentials_are_set() & interactive()) withAutoprint(\{ # examplesIf}
 # Get a Data Package for a project
-get_package(animal_project_code = "2014_demer")
+(package <- get_package(animal_project_code = "2014_demer"))
+
+# Read a resource
+read_resource(package, "animals")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other access functions: 
-\code{\link{get_acoustic_deployments}()},
-\code{\link{get_acoustic_detections}()},
-\code{\link{get_acoustic_projects}()},
-\code{\link{get_acoustic_receivers}()},
-\code{\link{get_animal_projects}()},
-\code{\link{get_animals}()},
-\code{\link{get_cpod_projects}()},
-\code{\link{get_tags}()}
+Other access functions:
+\code{\link[=get_acoustic_deployment_logs]{get_acoustic_deployment_logs()}},
+\code{\link[=get_acoustic_deployments]{get_acoustic_deployments()}},
+\code{\link[=get_acoustic_detections]{get_acoustic_detections()}},
+\code{\link[=get_acoustic_projects]{get_acoustic_projects()}},
+\code{\link[=get_acoustic_receivers]{get_acoustic_receivers()}},
+\code{\link[=get_animal_projects]{get_animal_projects()}},
+\code{\link[=get_animals]{get_animals()}},
+\code{\link[=get_archival_data]{get_archival_data()}},
+\code{\link[=get_bibliography]{get_bibliography()}},
+\code{\link[=get_cpod_projects]{get_cpod_projects()}},
+\code{\link[=get_tags]{get_tags()}}
 }
 \concept{access functions}

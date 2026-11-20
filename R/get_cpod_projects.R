@@ -2,11 +2,11 @@
 #'
 #' Get data for cpod projects, with options to filter results.
 #'
-#' @param cpod_project_code Character (vector). One or more cpod project
-#'   codes. Case-insensitive.
 #' @inheritParams list_animal_ids
 #' @inheritParams get_animal_projects
-#' @return A tibble with animal project data, sorted by `project_code`.
+#' @param cpod_project_code Character (vector). One or more cpod project
+#'   codes. Case-insensitive.
+#' @returns A tibble with animal project data, sorted by `project_code`.
 #' @family access functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()

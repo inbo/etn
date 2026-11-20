@@ -33,17 +33,18 @@ License: MIT + file LICENSE
 URL: https://github.com/inbo/etn, https://inbo.github.io/etn/
 BugReports: https://github.com/inbo/etn/issues
 Depends:
-    R (>= 4.1)
+    R (>= 4.2.0)
 Imports:
-    arrow,
+    arrow (>= 12.0.0),
     askpass,
     assertthat,
     cachem,
     cli,
-    dplyr,
-    frictionless,
+    dplyr (>= 1.2.0),
+    frictionless (>= 2.0.1),
     glue,
     httr2,
+    jsonlite,
     lifecycle,
     memoise,
     methods,
@@ -51,18 +52,19 @@ Imports:
     purrr,
     readr,
     rlang,
+    stringi,
     stringr,
     utils,
     withr
 Suggests:
-    etnservice (>= 0.5.0),
+    etnservice (>= 0.7.2),
     formattable,
-    jsonlite,
     kableExtra,
     knitr,
     leaflet,
     lubridate,
     pak,
+    qs2,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
@@ -77,4 +79,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.1.1

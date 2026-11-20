@@ -16,12 +16,10 @@
 #'
 #' @param api Logical, Should the API be used?
 #' @param ignored_arguments Character vector of arguments not to pass to the API
-#'   or SQL helper
+#'   or SQL helper.
 #' @param ... options on how to fetch the response. Forwarded to
-#'   `forward_to_api()`
-#'
-#' @return parsed R object as resulting from the API
-#'
+#'   `forward_to_api()`.
+#' @returns parsed R object as resulting from the API
 #' @family helper functions
 #' @noRd
 conduct_parent_to_helpers <- function(protocol = c("opencpu", "localdb"),

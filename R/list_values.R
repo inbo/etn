@@ -10,7 +10,7 @@
 #' @param split Character (vector). Character or regular expression(s) passed
 #'   to [strsplit()] to split column values before returning unique values.
 #'   Defaults to `,`.
-#' @return A vector of the same type as the given column.
+#' @returns A vector of the same type as the given column.
 #' @family list functions
 #' @export
 #' @examplesIf etn:::credentials_are_set()
