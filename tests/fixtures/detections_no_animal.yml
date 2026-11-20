@@ -17,8 +17,8 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0aa84eed350e63
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0aa84eed350e63/
+      x-ocpu-session: x0Q000000000001
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0Q000000000001/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
@@ -60,8 +60,8 @@ http_interactions:
       x-content-type-options: nosniff
       referrer-policy: no-referrer-when-downgrade
       cache-control: max-age=300, public
-      x-ocpu-session: x0c87992cbbf840
-      location: http://opencpu.lifewatch.be/ocpu/tmp/x0c87992cbbf840/
+      x-ocpu-session: x0Q000000000002
+      location: http://opencpu.lifewatch.be/ocpu/tmp/x0Q000000000002/
       access-control-allow-origin: '*'
       access-control-expose-headers: Location, X-ocpu-session, Content-Type, Cache-Control
       access-control-allow-headers: '*'
@@ -79,18 +79,18 @@ http_interactions:
       set-cookie: vliz_webc=vliz_webc1; path=/
     body:
       string: |
-        /ocpu/tmp/x0c87992cbbf840/R/.val
-        /ocpu/tmp/x0c87992cbbf840/R/credentials
-        /ocpu/tmp/x0c87992cbbf840/R/get_acoustic_detections_page
-        /ocpu/tmp/x0c87992cbbf840/stdout
-        /ocpu/tmp/x0c87992cbbf840/source
-        /ocpu/tmp/x0c87992cbbf840/console
-        /ocpu/tmp/x0c87992cbbf840/info
-        /ocpu/tmp/x0c87992cbbf840/files/DESCRIPTION
+        /ocpu/tmp/x0Q000000000002/R/.val
+        /ocpu/tmp/x0Q000000000002/R/credentials
+        /ocpu/tmp/x0Q000000000002/R/get_acoustic_detections_page
+        /ocpu/tmp/x0Q000000000002/stdout
+        /ocpu/tmp/x0Q000000000002/source
+        /ocpu/tmp/x0Q000000000002/console
+        /ocpu/tmp/x0Q000000000002/info
+        /ocpu/tmp/x0Q000000000002/files/DESCRIPTION
   recorded_at: 2026-04-23 16:44:37
 - request:
     method: GET
-    uri: https://opencpu.lifewatch.be//tmp/x0c87992cbbf840/R/.val/feather
+    uri: https://opencpu.lifewatch.be//tmp/x0Q000000000002/R/.val/feather
   response:
     status: 200
     headers:
