@@ -14,7 +14,7 @@
 #' repository. Includes option to filter on scientific names.
 #'
 #' The data are downloaded as a
-#' **[Frictionless Data Package](https://specs.frictionlessdata.io/data-package/)**
+#' **[Frictionless Data Package](https://datapackage.org/standard/data-package/)**
 #' containing:
 #'
 #' file | description
@@ -24,7 +24,7 @@
 #' `detections.csv` | Acoustic detections for the selected animals, as returned by `get_acoustic_detections()`.
 #' `deployments.csv` | Acoustic deployments for the `acoustic_project_code`(s) found in detections, as returned by `get_acoustic_deployments()`. This allows users to see when receivers were deployed, even if these did not detect the selected animals.
 #' `receivers.csv` | Acoustic receivers for the selected deployments, as returned by `get_acoustic_receivers()`.
-#' `datapackage.json` | A [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
+#' `datapackage.json` | A [Frictionless Table Schema](https://datapackage.org/standard/table-schema/) metadata file describing the fields and relations of the above csv files. This file is copied from [here](https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json) and can be used to validate the data package.
 #'
 #' The function will report the number of records per csv file, as well as the
 #' included scientific names and acoustic projects. Warnings will be raised for:

@@ -21,6 +21,13 @@
 * etn now relies on R >= 4.2.0 (because of the `{arrow}` dependency) (#611).
 * `write_dwc()` now uses the recommended value `detected` for [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus) (#651).
 
+## Data Package
+
+* etn now relies on `{frictionless}` >= 2.0.1. `get_package()` and `example_dataset()` now return a Data Package following the [v2](https://datapackage.org/) specification (#650). The main changes in a `datapackage.json` will be:
+    1. `$schema` is added to package, resources and schemas.
+    2. `type` is used instead of `profile` for resources.
+    3. `primaryKey` and `foreignKeys.fields` in resources are always arrays.
+
 # etn 3.0.0
 
 ## Use etn on your computer 🎉

@@ -14,7 +14,7 @@ available dataset: \code{"2014_DEMER"}.}
 Frictionless data package.
 }
 \description{
-Reads an example dataset, formatted as a \href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}.
+Reads an example dataset, formatted as a \href{https://datapackage.org/standard/data-package/}{Frictionless Data Package}.
 }
 \section{2014_demer}{
 

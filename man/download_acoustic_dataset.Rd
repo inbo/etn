@@ -43,7 +43,7 @@ This function allows you to download all acoustic data related to an
 repository. Includes option to filter on scientific names.
 
 The data are downloaded as a
-\strong{\href{https://specs.frictionlessdata.io/data-package/}{Frictionless Data Package}}
+\strong{\href{https://datapackage.org/standard/data-package/}{Frictionless Data Package}}
 containing:\tabular{ll}{
    file \tab description \cr
    \code{animals.csv} \tab Animals related to an \code{animal_project_code}, optionally filtered on \code{scientific_name}(s), as returned by \code{get_animals()}. \cr
@@ -51,7 +51,7 @@ containing:\tabular{ll}{
    \code{detections.csv} \tab Acoustic detections for the selected animals, as returned by \code{get_acoustic_detections()}. \cr
    \code{deployments.csv} \tab Acoustic deployments for the \code{acoustic_project_code}(s) found in detections, as returned by \code{get_acoustic_deployments()}. This allows users to see when receivers were deployed, even if these did not detect the selected animals. \cr
    \code{receivers.csv} \tab Acoustic receivers for the selected deployments, as returned by \code{get_acoustic_receivers()}. \cr
-   \code{datapackage.json} \tab A \href{https://specs.frictionlessdata.io/table-schema/}{Frictionless Table Schema} metadata file describing the fields and relations of the above csv files. This file is copied from \href{https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json}{here} and can be used to validate the data package. \cr
+   \code{datapackage.json} \tab A \href{https://datapackage.org/standard/table-schema/}{Frictionless Table Schema} metadata file describing the fields and relations of the above csv files. This file is copied from \href{https://github.com/inbo/etn/blob/master/inst/assets/datapackage.json}{here} and can be used to validate the data package. \cr
 }
 
 
