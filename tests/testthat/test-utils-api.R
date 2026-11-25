@@ -9,9 +9,11 @@ test_that("get_etnservice_version() returns package_version object", {
 
 test_that("get_etnservice_version() lists available functions of etnservice", {
   testthat::skip_if_offline()
-# Skip if there is a mismatch between the locally installed version and the deployed version
-  skip_if(utils::packageVersion("etnservice") != get_etnservice_version(),
-          "locally installed version of etnservice does not match")
+  # Skip if there is a mismatch between the locally installed version and the deployed version
+  skip_if(
+    utils::packageVersion("etnservice") != get_etnservice_version(),
+    "locally installed version of etnservice does not match"
+  )
 
   # Test that all functions in the package are listed
   expect_named(
@@ -21,7 +23,6 @@ test_that("get_etnservice_version() lists available functions of etnservice", {
 })
 
 # extract_temp_key() ------------------------------------------------------
-
 
 test_that("extract_temp_key() can extract a key from a httr2 response object", {
   vcr::use_cassette("opencpu_cloud_rnorm", {
@@ -57,28 +58,22 @@ test_that("get_val() can get a value from a temp_key using rds", {
 
 
 test_that("get_val() can get a value from a temp_key using feather", {
-  # NOTE Dependent on the OpenCPU testing API
-  skip_if_offline("cloud.opencpu.org")
-  skip_if_http_error("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid")
+  # Credentials are needed to place a request to the etn opencpu instance
+  skip_if_no_authentication()
+
   response <-
-    httr2::request("https://cloud.opencpu.org/ocpu/library/base/R/expand.grid") |>
-    httr2::req_body_json(
-      list(
-        animal = c("dogs", "cats"), judgement = c("cute", "amazing", "superb")
-      )
+    httr2::request(
+      "https://opencpu.lifewatch.be/library/etnservice/R/get_cpod_projects/"
     ) |>
+    httr2::req_body_json(list(credentials = get_credentials())) |>
     httr2::req_perform()
 
   temp_key <- extract_temp_key(response)
-  domain <- "https://cloud.opencpu.org/ocpu"
-  expect_no_error(api_out <- get_val(temp_key, domain, format = "feather"))
-  expect_type(api_out, "list")
-  expect_s3_class(api_out, "tbl_df")
-  expect_length(api_out, 2)
+  domain <- "https://opencpu.lifewatch.be/"
+  expect_s3_class(get_val(temp_key, domain, format = "feather"), "tbl_df")
 })
 
 # return_parent_arguments() -----------------------------------------------
-
 
 test_that("return_parent_arguments() can return parent function arguments", {
   # Create some nested functions to test in
@@ -120,7 +115,6 @@ test_that("return_parent_arguments() can return higher call function arguments",
 
 # deprecate_warn_connection() ---------------------------------------------
 
-
 test_that("deprecate_warn_connection() returns warning with function symbol", {
   fn_to_test <- function(connection) {
     deprecate_warn_connection()
@@ -137,9 +131,10 @@ test_that("deprecate_warn_connection() is triggered on all functions with connec
   fns_with_connection_arg <-
     getNamespaceExports(etn_namespace) |>
     purrr::keep(\(fn) {
-      "connection" %in% names(
-        formals(get(fn, envir = etn_namespace))
-      )
+      "connection" %in%
+        names(
+          formals(get(fn, envir = etn_namespace))
+        )
     })
 
   # Check that there are still functions with a `connection` argument
@@ -151,27 +146,27 @@ test_that("deprecate_warn_connection() is triggered on all functions with connec
   # downstream helper, the connection warning should fire first. This greatly
   # speeds up the test.
   for (fn in fns_with_connection_arg) {
-    expect_warning(tryCatch(
-      expr = {
-        with_mocked_bindings(
-          code = {
-            do.call(fn,
-              args = list(connection = "not a connection object")
-            )
-          },
-          # Sabotage conduct_parent_to_helpers() so we fail early.
-          select_protocol = function(...) {
-            rlang::abort(class = "etn_no_protocol")
-          }
-        )
-      },
-      # Suppress all errors downstream
-      error = function(e) {
-        NULL
-      }
-    ), class = "lifecycle_warning_deprecated",
-    label = sprintf("`%s()` to warn for connection deprecation",
-                    fn))
+    expect_warning(
+      tryCatch(
+        expr = {
+          with_mocked_bindings(
+            code = {
+              do.call(fn, args = list(connection = "not a connection object"))
+            },
+            # Sabotage conduct_parent_to_helpers() so we fail early.
+            select_protocol = function(...) {
+              rlang::abort(class = "etn_no_protocol")
+            }
+          )
+        },
+        # Suppress all errors downstream
+        error = function(e) {
+          NULL
+        }
+      ),
+      class = "lifecycle_warning_deprecated",
+      label = sprintf("`%s()` to warn for connection deprecation", fn)
+    )
   }
 })
 
