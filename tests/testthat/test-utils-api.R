@@ -58,6 +58,9 @@ test_that("get_val() can get a value from a temp_key using rds", {
 
 
 test_that("get_val() can get a value from a temp_key using feather", {
+  # Credentials are needed to place a request to the etn opencpu instance
+  skip_if_no_authentication()
+
   response <-
     httr2::request(
       "https://opencpu.lifewatch.be/library/etnservice/R/get_cpod_projects/"
