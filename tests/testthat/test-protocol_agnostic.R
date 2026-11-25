@@ -105,6 +105,14 @@ test_that("get_acoustic_detections() returns identical results for multiple args
   )
 })
 
+test_that("get_acoustic_detections() returns identical results when filtering on deployment_id", {
+  expect_protocol_agnostic(
+    get_acoustic_detections(
+      deployment_id = c(1427L, 1432L)
+    )
+  )
+})
+
 # get_cpod_projects -------------------------------------------------------
 
 test_that("get_cpod_projects() returns identical results independent of the used protocol", {
