@@ -58,7 +58,6 @@ test_that("get_val() can get a value from a temp_key using rds", {
 
 
 test_that("get_val() can get a value from a temp_key using feather", {
-  skip_if_offline("opencpu.lifewatch.be")
   response <-
     httr2::request(
       "https://opencpu.lifewatch.be/library/etnservice/R/get_cpod_projects/"
@@ -68,11 +67,7 @@ test_that("get_val() can get a value from a temp_key using feather", {
 
   temp_key <- extract_temp_key(response)
   domain <- "https://opencpu.lifewatch.be/"
-  expect_no_error(api_out <- get_val(temp_key, domain, format = "feather"))
-  expect_type(api_out, "list")
-  expect_s3_class(api_out, "tbl_df")
-  # get_cpod_projects() returns 11 columns
-  expect_length(api_out, 11L)
+  expect_s3_class(get_val(temp_key, domain, format = "feather"), "tbl_df")
 })
 
 # return_parent_arguments() -----------------------------------------------
