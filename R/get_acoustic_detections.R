@@ -247,7 +247,7 @@ get_acoustic_detections <- function(
         )
       # Save the feather file to disk
       helper_to_use <- \(..., path) {
-        forward_to_api(..., return_url = TRUE, compression = "lz4", ) |>
+        forward_to_api(..., return_url = TRUE, compression = "lz4") |>
           httr2::request() |>
           req_perform_opencpu(path = path)
         invisible(path)
