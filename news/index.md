@@ -66,6 +66,10 @@
   - The animal sex, life stage and weight are added to an Extended
     Measurement Or Facts extension file (`emof.csv`), for better support
     with OBIS ([\#555](https://github.com/inbo/etn/issues/555)).
+- Fixed a bug in
+  [`get_acoustic_detections()`](https://inbo.github.io/etn/reference/get_acoustic_detections.md)
+  where the `deployment_id` argument was missing
+  ([\#504](https://github.com/inbo/etn/issues/504)).
 - New
   [`get_archival_data()`](https://inbo.github.io/etn/reference/get_archival_data.md)
   downloads and reads processed tag archival data. The function has
