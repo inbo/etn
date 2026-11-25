@@ -13,6 +13,7 @@
   * [`dc:license`](http://purl.org/dc/terms/license) is set to `"CC-BY-4.0"` or `"CC0-1.0"` rather than a URL. The input for the `license` parameter has been updated accordingly.
   * [`dwc:identificationVerificationStatus`](http://rs.tdwg.org/dwc/terms/identificationVerificationStatus) has been added and is set to `"verified by expert"` for all records, since the taxon is assumed to be well-known before the tag was attached.
   * The animal sex, life stage and weight are added to an Extended Measurement Or Facts extension file (`emof.csv`), for better support with OBIS (#555).
+* Fixed a bug in `get_acoustic_detections()` where the `deployment_id` argument was missing (#504).
 * New `get_archival_data()` downloads and reads processed tag archival data. The function has experimental features to return an out of memory Arrow dataset in order to allow the processing of very large amounts of data (#409).
 * The [function reference](https://inbo.github.io/etn/reference/index.html) has been reorganized (#549)
 * New `get_bibliography()` creates a bibliography from a table of detections, with references for ETN, the etn R package, and animal and acoustic projects associated with the detections (#587).
@@ -27,6 +28,7 @@
     1. `$schema` is added to package, resources and schemas.
     2. `type` is used instead of `profile` for resources.
     3. `primaryKey` and `foreignKeys.fields` in resources are always arrays.
+
 
 # etn 3.0.0
 

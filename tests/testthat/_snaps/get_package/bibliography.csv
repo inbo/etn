@@ -3,10 +3,12 @@ ETN,data platform,"Reubens J, Aarestrup K, Abecasis D et al. (2026) The European
 etn,R package,"Huybrechts P, Desmet P, Govaert S, Oldoni D, Van Hoey S. etn: Access Data from the European Tracking Network. https://doi.org/10.5281/zenodo.15235747, R package version 3.0.0.9000, https://inbo.github.io/etn/."
 PelFish,animal project,"Debusschere, E.; Muñiz, C.; Reubens, J.; Casals, D.; Conings, B.; Deneudt, K.; 2023. Duurzame economische dragers in Vlaamse kustvisserijgemeenschappen post-Brexit (PelFish)"
 2024_Anguilla_bb_Harlingen,acoustic project,"Kroes, R.; Weisbeek, T.; Vriese, F.T.; Peters, B.; Bleile, N.; Van Gent, S; Van Loon, E.E.; Verdonschot, P.F.M; Van der Geest, H.G; (2025); Acoustic telemetry receiver array in the harinxma channel in Harlingen."
+2025-28_NorthSeaNL_MONS_array,acoustic project,"Bleeker, K., Leurs, G., Winter, H.V., De Reus, B.L.J.; WMR; (2025); Acoustic telemetry data for elasmobranchs in the Dutch North Sea region and Eastern Scheldt"
 BTN-IMEDEA,acoustic project,"Alós, Josep; Aspillaga, Eneko; (2021). Balearic Tracking Network (BTN)."
+BTN_LOST_ARRAY,acoustic project,
 COD_OWF,acoustic project,"Baktoft, H.; Olesen, M.; Svendsen, J.; (2023): DTU-Aqua project - Acoustic telemetry data for Atlantic cod (Gadus morhua) in the Horns Rev 2 offshore windmill farm southern North Sea (Denmark)'."
 Danish_Straits,acoustic project,"Aarestrup, A. and Birnie-Gauvin, K. (2023). Danish Straits detection data."
-FISHINTEL,acoustic project,"Sheehan,E.;  Couturier, L.;  Hawkes, L.; Hooper, T.; Horton, T; Laurans, M.; Muñiz, C.; Reubens, J.; Stamp, T.; Witt, M.; Woillez, M.; 2021. Fisheries Innovation for sustainable SHared INTerchannEL resources (FISH INTEL)."
+FISHINTEL,acoustic project,"Sheehan, E.; Couturier, L.; Hawkes, L.; Hooper, T.; Horton, T; Laurans, M.; Muñiz, C.; Reubens, J.; Stamp, T.; Witt, M.; Woillez, M.; 2021. Fisheries Innovation for sustainable SHared INTerchannEL resources (FISHINTEL)."
 FISHOWF,acoustic project,France Energies Marines; 2022; FISHOWF animal tagging program
 FISP,acoustic project,University of Plymouth. 2023. Fisheries Industry Science Partnership (FISP)
 FarmTrack_network,acoustic project,"Arechavala-Lopez, P.; 2022; FarmTrack: Studying species attracted to aquaculture production facilities in the Spanish Mediterranean coast"
@@ -14,6 +16,7 @@ GTN,acoustic project,"Alonso-Fernández, Alexandre; Mucientes, Gonzalo. (2021). 
 KBTN,acoustic project,"Nordahl, O; Flink, H; Larsson, P; Tibblin, P. (2020) Acoustic recevier network in the southern coastal Baltic Sea"
 MMERMAID,acoustic project,France Energies Marines; 2024; Acoustic receiver network for the monitoring of marine megafauna around an Offshore Wind Farm in the English channel
 MOBEIA,acoustic project,"Alexandre Alonso-Fernández, David Villegas-Ríos, Gonzalo Mucientes (2019). Seasonal records of coastal fish species in a marine protected area in Galician waters (NW Spain)"
+MOVE_CCMAR_NETWORK,acoustic project,"Horta e Costa, B.; Bentes, L.; Sousa, I.; Belackova, A. (2026) Acoustic receiver array to study predator movescapes in Southwestern Portugal for the MOVE project"
 SEM_array,acoustic project,"Sjöberg, N. van der Gemert R. Jacobson, P. Stavely, T. Sundin, J. Westerberg,H; (2023): Migration of eels in the Swedish part of the Baltic Sea"
 SW_Oude_Ijssel,acoustic project,"Klaver, M.; Verspui, R.; Acoustic telemetry array in the river Oude IJssel (Germany and the Netherlands)"
 bpns,acoustic project,"Reubens, J.; Hernandez, F; Deneudt, K.; (2017): LifeWatch observatory - Permanent acoustic receiver network in the Belgian Part of the North Sea"
