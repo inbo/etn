@@ -23,6 +23,7 @@
 #' @param progress Logical. Show a progress bar while fetching data. Defaults to
 #'   `TRUE`.
 #' @inheritParams list_animal_ids
+#' @inheritParams get_acoustic_deployments deployment_id
 #' @return A tibble with acoustic detections data, sorted by `acoustic_tag_id`
 #'  and `date_time`.
 #' @family access functions

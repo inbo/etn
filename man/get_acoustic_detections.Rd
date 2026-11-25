@@ -44,6 +44,8 @@ codes. Case-insensitive.}
 \item{acoustic_project_code}{Character (vector). One or more acoustic
 project codes. Case-insensitive.}
 
+\item{deployment_id}{Integer (vector). One or more deployment identifiers.}
+
 \item{receiver_id}{Character (vector). One or more receiver identifiers.}
 
 \item{station_name}{Character (vector). One or more deployment station
