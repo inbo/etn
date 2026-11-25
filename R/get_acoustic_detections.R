@@ -68,19 +68,21 @@
 #'   receiver_id = "VR2W-124070",
 #'   acoustic_project_code = "demer"
 #' )
-get_acoustic_detections <- function(connection,
-                                    start_date = NULL,
-                                    end_date = NULL,
-                                    tag_serial_number = NULL,
-                                    acoustic_tag_id = NULL,
-                                    animal_project_code = NULL,
-                                    scientific_name = NULL,
-                                    acoustic_project_code = NULL,
-                                    deployment_id = NULL,
-                                    receiver_id = NULL,
-                                    station_name = NULL,
-                                    limit = FALSE,
-                                    progress = TRUE) {
+get_acoustic_detections <- function(
+  connection,
+  start_date = NULL,
+  end_date = NULL,
+  tag_serial_number = NULL,
+  acoustic_tag_id = NULL,
+  animal_project_code = NULL,
+  scientific_name = NULL,
+  acoustic_project_code = NULL,
+  deployment_id = NULL,
+  receiver_id = NULL,
+  station_name = NULL,
+  limit = FALSE,
+  progress = TRUE
+) {
   # Check arguments
   # The connection argument has been deprecated
   if (lifecycle::is_present(connection)) {
@@ -105,12 +107,13 @@ get_acoustic_detections <- function(connection,
   # NULL
   arguments_to_pass <-
     return_parent_arguments(depth = 1, compact = TRUE)[
-      !names(return_parent_arguments(depth = 1)) %in% c(
-        "api",
-        "progress",
-        "connection",
-        "limit" # handled client side
-      )
+      !names(return_parent_arguments(depth = 1)) %in%
+        c(
+          "api",
+          "progress",
+          "connection",
+          "limit" # handled client side
+        )
     ]
 
   # Estimate number of pages ------------------------------------------------
@@ -131,16 +134,20 @@ get_acoustic_detections <- function(connection,
     } else {
       # otherwise query the number of records
 
-      do.call(count_acoustic_detections, append(
-        arguments_to_pass,
-        list(protocol = protocol)
-      ))
+      do.call(
+        count_acoustic_detections,
+        append(
+          arguments_to_pass,
+          list(protocol = protocol)
+        )
+      )
     }
 
   # Update progress step with number of records we'll be fetching.
   if (progress) {
     exp_records_msg <-
-      glue::glue(": will fetch {n_records_pretty} detections",
+      glue::glue(
+        ": will fetch {n_records_pretty} detections",
         n_records_pretty = prettyunits::pretty_num(n_records_expected)
       )
   }
@@ -194,7 +201,9 @@ get_acoustic_detections <- function(connection,
 
   # Fetch credentials only once and reuse for every page, if the call is
   # forwarded to openCPU, credentials are appended by default
-  if (protocol != "opencpu") credentials <- get_credentials()
+  if (protocol != "opencpu") {
+    credentials <- get_credentials()
+  }
 
   # Fetch pages -------------------------------------------------------------
   # Path to store pages on disk
@@ -204,8 +213,7 @@ get_acoustic_detections <- function(connection,
   cli::cli_progress_bar(
     name = "Getting detections.",
     total = n_pages_expected,
-    format =
-      "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}"
+    format = "{cli::pb_name}{cli::pb_bar} {cli::pb_percent} [{cli::pb_elapsed}] | {cli::pb_eta_str}"
   )
 
   repeat {
@@ -224,9 +232,7 @@ get_acoustic_detections <- function(connection,
     # Combine arguments to pass to helper function
     payload <- append(arguments_to_pass, pagination_arguments)
 
-
     ## store pages on disk -----------------------------------------------------
-
 
     # Decide what helper to use, add any extra required arguments. Regardless of
     # helper, return temppath where page was written.
@@ -241,10 +247,7 @@ get_acoustic_detections <- function(connection,
         )
       # Save the feather file to disk
       helper_to_use <- \(..., path) {
-        forward_to_api(...,
-          return_url = TRUE,
-          compression = "lz4",
-        ) |>
+        forward_to_api(..., return_url = TRUE, compression = "lz4", ) |>
           httr2::request() |>
           req_perform_opencpu(path = path)
         invisible(path)
@@ -267,25 +270,26 @@ get_acoustic_detections <- function(connection,
       append(
         arguments_for_helper,
         list(
-          path =
-            tempfile(
-              tmpdir = tmp_pagedir,
-              fileext = ".feather"
-            )
+          path = tempfile(
+            tmpdir = tmp_pagedir,
+            fileext = ".feather"
+          )
         )
       )
     )
 
     # Get some metadata on the page we fetched
-    fetched_page <- arrow::read_ipc_file(fetched_page_path,
-                                        # Only read what we need.
-                                        col_select = "detection_id",
-                                        # Windows suffers memory allocation
-                                        # issues with the arrow::open_dataset()
-                                        # call later on. mmap = FALSE and
-                                        # read_ipc_file over open_dataset force
-                                        # eager read into RAM.
-                                        mmap = FALSE)
+    fetched_page <- arrow::read_ipc_file(
+      fetched_page_path,
+      # Only read what we need.
+      col_select = "detection_id",
+      # Windows suffers memory allocation
+      # issues with the arrow::open_dataset()
+      # call later on. mmap = FALSE and
+      # read_ipc_file over open_dataset force
+      # eager read into RAM.
+      mmap = FALSE
+    )
 
     # Break the loop if the page is smaller than the page size, or limit is set
     # to TRUE (always only fetch one page).
@@ -334,7 +338,6 @@ get_acoustic_detections <- function(connection,
 
   # Return single detections table
   dplyr::collect(detections)
-
 }
 
 #' Count acoustic detections
@@ -362,7 +365,8 @@ count_acoustic_detections <- function(...) {
   protocol <- select_protocol()
   # If protocol is opencpu, use forward_to_api()
   if (protocol == "opencpu") {
-    returned_count <- forward_to_api("get_acoustic_detections_page",
+    returned_count <- forward_to_api(
+      "get_acoustic_detections_page",
       payload = append(
         rlang::list2(...),
         list(count = TRUE)
@@ -372,7 +376,8 @@ count_acoustic_detections <- function(...) {
   }
   # If protocol is localdb, use etnservice::get_acoustic_detections_page()
   if (protocol == "localdb") {
-    returned_count <- do.call(etnservice::get_acoustic_detections_page,
+    returned_count <- do.call(
+      etnservice::get_acoustic_detections_page,
       args = append(
         rlang::list2(...),
         list(count = TRUE)
